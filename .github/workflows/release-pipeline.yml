@@ -98,6 +98,9 @@ jobs:
     needs: 
       - new-build
       - new-version
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
 
     env:
       buildVersion: ${{ needs.new-version.outputs.buildVersion }}
