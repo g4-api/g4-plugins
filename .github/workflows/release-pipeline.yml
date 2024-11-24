@@ -1,4 +1,3 @@
-# Workflow to build and release OcrInspector for production
 name: Build, Test & Release
 
 # Permissions for the workflow
@@ -14,8 +13,8 @@ on:
     branches:
       - main
 
-# Set environment variables
 env:
+  #
   # Build and release settings
   artifactStagingDirectory: ${{ github.workspace }}/artifact_staging
   artifactType: 'Production'
@@ -23,9 +22,11 @@ env:
   buildConfiguration: 'Release'
   buildPlatform: 'any cpu'
   projectName: 'G4'
+  #
   # Publish settings
   nugetApiKey: ${{ secrets.NUGET_PUBLIC_KEY }}
   nugetPackageSource: ${{ vars.NUGET_PUBLIC_SOURCE }}
+  #
   # Test settings
   browserStackApiKey: ${{ secrets.BROWSERSTACK_API_KEY }}
   browserStackUser: ${{ secrets.BROWSERSTACK_USER }}
@@ -33,6 +34,11 @@ env:
   gridEndpoint: ${{ secrets.GRID_ENDPOINT }}
   testSettingsFileName: 'Default.runsettings'
   workers: '5'
+
+# Default settings for all run steps
+defaults:
+  run:
+    working-directory: src
 
 jobs:
   new-version:
