@@ -108,11 +108,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Publish Executable Project
+      - name: List files in the repository
+        run: ls -R
+
+      - name: Invoke Unit Tests
         uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
         with:
-          build-version: '${{ env.buildVersion }}'
-          project-name: '${{ env.projectName }}'
-          project-type: '${{ env.projectType }}'
+          build-version: ${{ env.buildVersion }}
+          project-name: ${{ env.projectName }}
+          project-type: ${{ env.projectType }}
           filter: 'TestCategory=ExportData'
           test-settings: Default.runsettings
