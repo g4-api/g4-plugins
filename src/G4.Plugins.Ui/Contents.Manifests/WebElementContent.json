@@ -1,0 +1,207 @@
+{
+	"aliases": [
+		"WebElementContent",
+		"ExtractElementContent",
+		"GetWebElementContent"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataExtraction",
+		"WebAutomation",
+		"UIAutomation"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `WebElementContent` plugin extracts content from web elements in a live browser or application session using a variety of WebDriver locators. It allows users to target specific elements or attributes within a web page or application UI and extract their values, optionally applying regular expressions for precise data retrieval.",
+		"",
+		"This plugin supports all WebDriver locators and works with all WebDriver-compliant drivers, including but not limited to mobile and Windows drivers such as Appium and Windows Application Driver. This enables automation across web browsers and native applications on various platforms.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                                  |",
+		"|----------------------|----------------------------------------------------------------------------------------------|",
+		"| Element Selection    | Selects elements using any WebDriver locator specified in `OnElement` and `Locator`.         |",
+		"| Attribute Extraction | Extracts values from specified attributes or inner text if `OnAttribute` is not provided.    |",
+		"| Regular Expression   | Applies a regular expression to the extracted value for precise data extraction.             |",
+		"| Data Type Conversion | Converts the extracted value to a specified data type using `DataType`.                      |",
+		"| Wide Compatibility   | Works with all WebDriver-compliant drivers, including web, mobile, and desktop applications. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                       | Description                                                                                     |",
+		"|-----------------------------|-------------------------------------------------------------------------------------------------|",
+		"| Web Data Extraction         | Extract specific information from web pages during automated browsing sessions.                 |",
+		"| Application Data Extraction | Extract data from native applications using drivers like Appium and Windows Application Driver. |",
+		"| Dynamic Content Scraping    | Scrape content that is dynamically loaded or requires user interaction.                         |",
+		"| Form Data Retrieval         | Extract values from form fields or other interactive elements on a web page or app.             |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                              |",
+		"|------------------------|------------------------------------------------------------------------------------------|",
+		"| UI Testing             | Automate testing of UI components by extracting and validating their properties.         |",
+		"| Functional Testing     | Verify that applications respond correctly to user interactions by extracting live data. |",
+		"| Cross-Platform Testing | Perform tests across web, mobile, and desktop applications using various drivers.        |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Represents the data extracted by the plugin as a key-value pair.",
+				"",
+				"The entity object contains the following fields:",
+				"",
+				"| Field  | Description                                                                                            |",
+				"|--------|--------------------------------------------------------------------------------------------------------|",
+				"| `name` | The key under which the extracted data is stored. This is specified by the `Key` property in the rule. |",
+				"| `value`| The extracted data obtained by the plugin after applying any specified transformations.                |",
+				"| `type` | The data type of the extracted value, corresponding to the `DataType` property specified in the rule.  |"
+			],
+			"name": "<Key>",
+			"type": "<DataType>",
+			"value": "<ExtractedValue>"
+		}
+	],
+	"examples": [
+		{
+			"description": [
+				"Extract the text content of an element using an ID locator.",
+				"",
+				"The `WebElementContent` plugin selects an element by its `id` and extracts its inner text.",
+				"This allows you to retrieve specific information from the web page or application during an active session."
+			],
+			"rule": {
+				"dataType": "String",
+				"key": "ProductName",
+				"locator": "Id",
+				"onElement": "productName",
+				"pluginName": "WebElementContent"
+			}
+		},
+		{
+			"description": [
+				"Extract the value of an attribute from an element using a locator supported by mobile applications.",
+				"",
+				"The `WebElementContent` plugin selects an element in a mobile application and extracts the value of a specified attribute.",
+				"This is useful for retrieving properties from elements in mobile apps."
+			],
+			"rule": {
+				"dataType": "String",
+				"key": "LoginButtonDescription",
+				"locator": "MobileLocator",
+				"onAttribute": "content-desc",
+				"onElement": "accessibilityId:loginButton",
+				"pluginName": "WebElementContent"
+			}
+		},
+		{
+			"description": [
+				"Extract a numeric value from an element's text in a desktop application using a Windows locator.",
+				"",
+				"The `WebElementContent` plugin extracts the inner text of an element in a Windows application and applies a regular expression to retrieve a numeric value.",
+				"The extracted value is then converted to the specified data type."
+			],
+			"rule": {
+				"dataType": "Decimal",
+				"key": "Price",
+				"locator": "WindowsLocator",
+				"onElement": "AutomationId:priceLabel",
+				"pluginName": "WebElementContent",
+				"regularExpression": "\\d+\\.\\d{2}"
+			}
+		}
+	],
+	"key": "WebElementContent",
+	"manifestVersion": 4,
+	"parameters": [],
+	"pluginType": "Content",
+	"properties": [
+		{
+			"description": [
+				"Specifies the value used to locate the target element, based on the locator type specified in `Locator`.",
+				"Use `.` to select the current element in context.",
+				"Supports all WebDriver locators, including those for web, mobile, and desktop applications."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the type of locator used in `OnElement`. The plugin supports all WebDriver locator strategies.",
+				"This determines how the plugin interprets the selector provided.",
+				"Examples include `Id`, `Name`, `ClassName`, `TagName`, `LinkText`, `PartialLinkText`, `CssSelector`, `XPath`, `AccessibilityId`, `AutomationId`, etc."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the attribute name from which to extract the value.",
+				"If not provided, the plugin will extract the inner text of the element."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the regular expression pattern to apply to the extracted value.",
+				"This allows for precise data extraction from the text or attribute value."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the key under which the extracted data will be stored.",
+				"This key can be used to reference the data in subsequent steps."
+			],
+			"mandatory": true,
+			"name": "Key",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the data type to which the extracted value should be converted.",
+				"Supported data types include `String`, `Number`, `Boolean` and  `DateTime`."
+			],
+			"mandatory": false,
+			"name": "DataType",
+			"type": "String",
+			"values": [
+				{
+					"description": [ "Textual data." ],
+					"name": "String"
+				},
+				{
+					"description": [ "Whole numbers or numeric values with decimal points." ],
+					"name": "Number"
+				},
+				{
+					"description": [ "True or False values." ],
+					"name": "Boolean"
+				},
+				{
+					"description": [ "Date and/or time values." ],
+					"name": "DateTime"
+				}
+			]
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "https://www.w3.org/TR/webdriver/"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"Extracts content from elements in web, mobile, and desktop applications using any WebDriver locator, with optional attribute selection, regular expressions, and data type conversion."
+	]
+}

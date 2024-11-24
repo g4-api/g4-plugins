@@ -1,0 +1,103 @@
+{
+	"aliases": [
+		"Disabled",
+		"Disable"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `ElementDisabled` plugin is designed to assert that a specified web element is currently disabled within a web browser during automated tasks. ",
+		"Its primary goal is to ensure that automation scripts can validate the disabled state of elements, which is crucial for scenarios where specific elements should not be interactable.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                                                |",
+		"|------------------------|--------------------------------------------------------------------------------------------|",
+		"| Disabled Element Check | Validates that the specified web element is currently disabled during execution.           |",
+		"| Seamless Integration   | Integrates smoothly with automation workflows to ensure elements are in the desired state. |",
+		"| Reliable Validation    | Provides reliable assertion to confirm the disabled state of web elements.                 |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                  | Description                                                                                          |",
+		"|------------------------|------------------------------------------------------------------------------------------------------|",
+		"| Interaction Prevention | Confirms that specific elements are disabled, ensuring they are not interactable during automation.  |",
+		"| Process Continuity     | Validates that elements are in the correct state to proceed with the workflow without interruptions. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                                           |",
+		"|------------------------|-------------------------------------------------------------------------------------------------------|",
+		"| Disabled State Testing | Ensures that specific elements are disabled during test scenarios, validating user interaction flows. |",
+		"| Workflow Validation    | Confirms that workflows proceed with the correct elements disabled, ensuring accurate test outcomes.  |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that a specific web element is currently disabled during the execution of automated tasks. ",
+				"This is useful for validating scenarios where the disabled state of elements is expected to prevent interactions."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "ElementDisabled"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure a specific web element is disabled, validating the disabled state of the element during the execution of the automation script. ",
+				"The `Assert` plugin is utilized to check this condition, and if the element is disabled, the assertion passes."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementDisabled}}",
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "ElementDisabled",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the web element that is being validated for its disabled state. ",
+				"This can be a CSS selector, XPath, or other locator strategy to identify the element."
+			],
+			"mandatory": true,
+			"name": "onElement",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy used to identify the element for the disabled state validation. ",
+				"Common strategies include CSS selectors, XPath, ID, and others."
+			],
+			"mandatory": false,
+			"name": "locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#is-element-enabled",
+		"w3c": "GET /session/{session id}/element/{element id}/enabled"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `ElementDisabled` plugin asserts that a specified web element is currently disabled within a web browser during automated tasks, ensuring that automation scripts validate the disabled state of elements.",
+		"In robotic process automation (RPA), it confirms the correct elements are disabled, preventing unwanted interactions and enhancing workflow reliability.",
+		"In automation testing, it validates the disabled state of elements, ensuring accurate user interaction flows and test outcomes."
+	]
+}

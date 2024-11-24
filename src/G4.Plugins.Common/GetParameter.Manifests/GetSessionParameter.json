@@ -1,0 +1,96 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `GetSessionParameter` plugin is to fetch session parameters that are scoped and accessible only within the automation session that is using them. This allows for the use of dynamic parameters with the same name across different sessions without causing conflicts.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                                               |",
+		"|------------------------------- |-----------------------------------------------------------------------------------------------------------|",
+		"| Parameter Retrieval            | Fetches session-specific parameters that are unique to the current automation session.                    |",
+		"| Scoped Parameters              | Ensures that parameters with the same name in different sessions do not interfere with each other.        |",
+		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                          | Description                                                                                     |",
+		"|--------------------------------|------------------------------------------------------------------------------------------------ |",
+		"| Dynamic Configuration          | Retrieve and use session-specific parameters dynamically within the current automation session. |",
+		"| Session-Specific Data Handling | Use session-level parameters for handling data that should be isolated to the current session.  |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                      | Description                                                                                               |",
+		"|----------------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Isolated Test Data         | Retrieve parameters specific to the test session, ensuring data isolation between parallel test sessions. |",
+		"| Dynamic Test Configuration | Simplify test configuration by fetching session-specific parameters directly within test scripts.         |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Session` plugin to fetch a parameter named `UserToken` directly.",
+				"",
+				"| Field      | Description                                                        |",
+				"|------------|--------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Session`. |",
+				"| onElement  | Specifies the name of the parameter to be fetched.                 |"
+			],
+			"rule": {
+				"onElement": "UserToken",
+				"pluginName": "Session"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `UserToken` from the session and use it in a `SendKeys` action.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
+				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
+				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$Get-Parameter --Name:UserToken --Scope:Session}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "SendKeys"
+			}
+		}
+	],
+	"key": "Session",
+	"manifestVersion": 4,
+	"pluginType": "GetParameter",
+	"properties": [
+		{
+			"description": [
+				"Specifies the name of the session parameter to be fetched."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `GetSessionParameter` plugin retrieves session-specific parameters within automation workflows, ensuring data isolation and configuration management.",
+		"Key features include fetching parameters unique to the current automation session, scoped parameters to avoid interference between sessions, and integration with other plugins for dynamic usage in various actions.",
+		"In RPA, it is used for dynamic configuration and session-specific data handling.",
+		"In automation testing, it supports isolated test data and dynamic test configuration."
+	]
+}

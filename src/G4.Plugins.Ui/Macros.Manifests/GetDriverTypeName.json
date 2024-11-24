@@ -1,0 +1,89 @@
+{
+	"aliases": [
+		"gdriver",
+		"GetDriver",
+		"GetDriverTypeName"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `Get-DriverTypeName` plugin is designed for RPA and automation testing workflows, providing the capability to retrieve the type name of the WebDriver instance in use. ",
+		"This plugin is essential for customizing actions or logging details based on the specific WebDriver, enhancing the flexibility and management of automation processes.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                  | Description                                                                                                           |",
+		"|--------------------------|-----------------------------------------------------------------------------------------------------------------------|",
+		"| WebDriver Type Retrieval | Retrieves the type name of the WebDriver instance, providing insight into the WebDriver used in automation workflows. |",
+		"| Dynamic Value Injection  | Enables the insertion of the WebDriver type name into automation steps for customized and adaptable workflows.        |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                  | Description                                                                                                    |",
+		"|------------------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Logging and Reporting  | Logs the WebDriver type used in RPA processes, enhancing visibility and debugging capabilities.                |",
+		"| Workflow Customization | Customizes automation actions based on the WebDriver type, improving adaptability and dynamic behavior in RPA. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage              | Description                                                                                                                |",
+		"|--------------------|----------------------------------------------------------------------------------------------------------------------------|",
+		"| Test Logging       | Logs the WebDriver type during test execution, aiding in debugging and ensuring consistency across different environments. |",
+		"| Test Customization | Customizes test steps based on the WebDriver type, allowing for more flexible and robust testing scenarios.                |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Retrieve the WebDriver type name and log it.",
+				"This example uses the `Get-DriverTypeName` plugin to log the WebDriver type name within the automation workflow."
+			],
+			"rule": {
+				"argument": "The type name of the WebDriver is {{$Get-DriverTypeName}}",
+				"pluginName": "WriteLog"
+			}
+		},
+		{
+			"description": [
+				"Retrieve a specific portion of the WebDriver type name using a regex pattern and log it.",
+				"This example shows how to use the `Get-DriverTypeName` plugin with a custom regex pattern to log a matched portion of the WebDriver type name."
+			],
+			"rule": {
+				"argument": "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:\"^Open\"}}",
+				"pluginName": "WriteLog"
+			}
+		}
+	],
+	"key": "Get-DriverTypeName",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies the regex pattern used to match and extract a portion of the WebDriver type name."
+			],
+			"mandatory": false,
+			"name": "Pattern",
+			"type": "Regex"
+		}
+	],
+	"pluginType": "Macro",
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#new-session",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `Get-DriverTypeName` plugin retrieves the type name of the WebDriver instance used in automation workflows, providing valuable insight for customization and logging purposes.",
+		"In robotic process automation (RPA), it allows dynamic adaptation of workflows based on the WebDriver type.",
+		"In automation testing, it enhances test scripts by enabling logging and decision-making based on the WebDriver in use."
+	]
+}

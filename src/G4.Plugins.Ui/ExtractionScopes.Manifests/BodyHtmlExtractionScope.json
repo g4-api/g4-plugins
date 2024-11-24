@@ -1,0 +1,168 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Extraction"
+	],
+	"description": [
+		"> [!IMPORTANT]  ",
+		"> This scope creates an internal DOM object and only supports XPath expressions.",
+		"",
+		"### Purpose",
+		"",
+		"The `BodyHtml` extraction scope is designed for web scraping tasks focused on collecting data from the fully rendered, static content within the body of an HTML document. ",
+		"It ensures that the extracted data includes all initial dynamic content and represents the web page's state as it appears to the user after all initial client-side processing has completed. ",
+		"This scope is particularly valuable for gathering information from standard web pages, offering performance benefits through element caching and being especially useful when dealing with content-heavy websites.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                             | Description                                                                                                                    |",
+		"|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|",
+		"| Capture Fully Rendered Content      | Extracts data from the web page's main content, including all elements fully rendered after the page has loaded.               |",
+		"| Extraction After Dynamic Processing | Captures data generated or modified by client-side technologies like JavaScript and AJAX during page load.                     |",
+		"| Standard Web Pages                  | Suitable for scraping data from standard web pages with conventional HTML structures within the body.                          |",
+		"| XPath-Based Data Collection         | Uses XPath expressions to pinpoint specific elements within the body of the HTML document for data extraction.                 |",
+		"| Content Parsing and Analysis        | Ideal for parsing and analyzing textual and structural data within the main content, such as articles or product descriptions. |",
+		"| Web Page Snapshot                   | Captures a snapshot of the web page's fully rendered state, allowing work with static data without real-time updates.          |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                   | Description                                                                                                               |",
+		"|-------------------------|---------------------------------------------------------------------------------------------------------------------------|",
+		"| Data Collection         | Used to collect and extract data from fully rendered web pages, ensuring that all dynamic content is included.            |",
+		"| Automated Reporting     | Ideal for scenarios where data from various web pages needs to be aggregated and analyzed for automated reporting tasks.  |",
+		"| Monitoring and Analysis | Suitable for monitoring changes in web content over time, such as tracking updates to a product catalog or news articles. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                 | Description                                                                                                                  |",
+		"|-----------------------|------------------------------------------------------------------------------------------------------------------------------|",
+		"| Page State Validation | Used to validate the final rendered state of a web page in end-to-end tests, ensuring that all content loads as expected.    |",
+		"| Regression Testing    | Helps in regression testing by capturing the HTML body content before and after changes to ensure no unintended alterations. |",
+		"| Load Testing          | Useful in load testing to ensure that the body content remains consistent and performs well under different loads.           |",
+		"",
+		"### Performance Considerations",
+		"",
+		"An advantage of the `BodyHtml` scope is that it often caches fully rendered elements, which can lead to better performance compared to the `Elements` scope. ",
+		"Caching reduces the need to re-fetch or re-render elements, improving data extraction efficiency.",
+		"",
+		"### See Also",
+		"",
+		"- [HTML Agility Pack Documentation](https://html-agility-pack.net/)",
+		"- [HTML Agility Pack GitHub Repository](https://github.com/zzzprojects/html-agility-pack)"
+	],
+	"examples": [
+		{
+			"description": [
+				"Extract the text associated with the `Location` label from the `ExportData.html` web page. ",
+				"This example demonstrates how to call the `BodyHtml` plugin directly, specifying the `onElement`, `contentRules`, and `dataCollector` properties. ",
+				"The `Location` text within a `div` element with the class `hotel` is located, a regular expression is applied to capture the text following the label, and the extracted data is stored in JSON format in the `DataFile.json` file."
+			],
+			"rule": {
+				"contentRules": [
+					{
+						"clearLinesBreak": false,
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\w+:).*",
+						"trim": false
+					}
+				],
+				"dataCollector": {
+					"ForEntity": true,
+					"Source": "DataFile.json",
+					"Type": "JsonDataCollector"
+				},
+				"onElement": "//div[@class='hotel']",
+				"pluginName": "BodyHtml"
+			}
+		},
+		{
+			"description": [
+				"Extract the text associated with the `Location` label from the `ExportData.html` web page as part of an extraction rule within an automation request. ",
+				"This example shows how to use the `BodyHtml` plugin within an extraction rule setup. ",
+				"It locates the `Location` text within a `div` element with the class `hotel`, applies a regular expression to capture the text following the label, and stores the extracted data in JSON format in the `DataFile.json` file."
+			],
+			"rule": {
+				"contentRules": [
+					{
+						"clearLinesBreak": false,
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\w+:).*",
+						"trim": false
+					}
+				],
+				"dataCollector": {
+					"ForEntity": true,
+					"Source": "DataFile.json",
+					"Type": "JsonDataCollector"
+				},
+				"extractionScope": "BodyHtml",
+				"onElement": "//div[@class='hotel']"
+			}
+		}
+	],
+	"key": "BodyHtml",
+	"manifestVersion": 4,
+	"pluginType": "ExtractionScope",
+	"properties": [
+		{
+			"description": [
+				"Specifies the target element within the body of the HTML document from which data is to be extracted. This can be defined using an XPath or other locator strategies."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy used to identify the target elements within the body of the HTML document. The default value is 'Xpath'."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the rules for extracting content from the specified element, such as applying regular expressions or trimming the extracted data."
+			],
+			"mandatory": true,
+			"name": "Rules",
+			"type": "Object"
+		},
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies a regular expression to be applied to the extracted content before further processing. ",
+				"This allows for more flexible data extraction by capturing specific patterns within the content."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		},
+		{
+			"description": [
+				"Specifies how the extracted data will be collected and stored, such as saving it in JSON format or another supported format."
+			],
+			"mandatory": false,
+			"name": "DataCollector",
+			"type": "Object"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://html-agility-pack.net/documentation",
+		"w3c": "POST /session/{session id}/element"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `BodyHtml` plugin extracts fully rendered, static content from the body of an HTML document, focusing on XPath-based data collection.",
+		"In robotic process automation (RPA), it ensures comprehensive data extraction from web pages, including dynamically generated content.",
+		"In automation testing, it validates the final rendered state of a page, supporting regression and load testing scenarios."
+	]
+}

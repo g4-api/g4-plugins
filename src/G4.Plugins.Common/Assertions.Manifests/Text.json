@@ -1,0 +1,184 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `Text` plugin is designed to perform text assertions within automation scripts. ",
+		"Its primary objective is to validate that a given text input, which can be either static or dynamically retrieved from a parameter, meets the expected conditions.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                              |",
+		"|----------------------------|----------------------------------------------------------------------------------------------------------|",
+		"| Static and Dynamic Input   | Supports both static text and text retrieved dynamically from parameters for assertions.                 |",
+		"| Flexible Assertions        | Provides a range of operators to validate text conditions, including equality, inequality, and patterns. |",
+		"| Regular Expression Support | Allows applying regular expressions to the text before performing the assertion.                         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage             | Description                                                                              |",
+		"|-------------------|------------------------------------------------------------------------------------------|",
+		"| Validate Text     | Ensure that a static or dynamic text value matches the expected conditions.              |",
+		"| Data Verification | Verify data integrity by asserting that parameter values meet specified text conditions. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage               | Description                                                                                               |",
+		"|---------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Functional Testing  | Validate that text inputs in various test scenarios meet the expected conditions.                         |",
+		"| Regression Testing  | Ensure that changes in the application do not affect the expected text values in the system.              |",
+		"| Data-Driven Testing | Dynamically retrieve and assert text values from test data parameters to ensure accuracy and consistency. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that the text `{{$Get-Parameter --Name:MyParameter --Scope:Session}}` is equal to the expected value provided by a dynamic parameter."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:ExpectedValue}}",
+				"onElement": "{{$Get-Parameter --Name:MyParameter --Scope:Session}}",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `Static Text` is not equal to the expected value."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:NotEqual --Expected:Static Text}}",
+				"onElement": "Static Text",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `123-45-6789` matches the regular expression `\\d{3}-\\d{2}-\\d{4}`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
+				"onElement": "123-45-6789",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `123-45-6789` does not match the regular expression `\\d{3}-\\d{2}-\\d{4}`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
+				"onElement": "123-45-6789",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `20` is greater than the value `10`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Greater --Expected:10}}",
+				"onElement": "20",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `5` is less than the value `10`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Lower --Expected:10}}",
+				"onElement": "5",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `10` is greater than or equal to the value `10`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:GreaterEqual --Expected:10}}",
+				"onElement": "10",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `10` is less than or equal to the value `10`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:LowerEqual --Expected:10}}",
+				"onElement": "10",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text `1000` matches a regular expression to extract numbers before comparison."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:1000}}",
+				"onElement": "1000",
+				"pluginName": "Text",
+				"regularExpression": "\\d+"
+			}
+		}
+	],
+	"key": "Text",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the value or pattern that the automation script expects to find or match during the execution of a condition."
+			],
+			"mandatory": false,
+			"name": "Expected",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the type of comparison or operation to be performed when evaluating a condition."
+			],
+			"mandatory": false,
+			"name": "Operator",
+			"type": "Operator"
+		}
+	],
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the actual text value that will be compared against the expected value. This can be a static text or a dynamic value retrieved using a CLI expression."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies a regular expression to be applied to the text value before performing the assertion."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `Text` plugin performs text assertions within automation scripts, validating that a given text input, which can be static or dynamically retrieved, meets the expected conditions.",
+		"It supports static and dynamic input for assertions, providing a range of operators for flexible text validation, including equality, inequality, and pattern matching.",
+		"Key features include support for regular expressions, flexible assertions, and handling both static and dynamic text inputs.",
+		"Common use cases include validating text, verifying data integrity in RPA, and performing functional, regression, and data-driven testing in automation testing."
+	]
+}

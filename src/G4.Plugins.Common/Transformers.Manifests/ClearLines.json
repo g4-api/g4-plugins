@@ -1,0 +1,153 @@
+{
+	"aliases": [
+		"RemoveLineBreaks"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"TextProcessing",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `ClearLines` transformer plugin is to remove all line breaks from a given text input.",
+		"This is particularly useful in scenarios where text data needs to be cleaned or normalized by eliminating unnecessary carriage return and newline characters.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                   | Description                                                                                |",
+		"|---------------------------|--------------------------------------------------------------------------------------------|",
+		"| Line Break Removal        | Removes all carriage return (`\\r`) and newline (`\\n`) characters from the input text.    |",
+		"| Regular Expression Usage  | Utilizes regular expressions for efficient pattern matching and text replacement.          |",
+		"| Easy Integration          | Simple to incorporate into automation workflows for text data cleaning and transformation. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                    | Description                                                                                 |",
+		"|--------------------------|---------------------------------------------------------------------------------------------|",
+		"| Data Cleaning            | Preprocess text data by removing line breaks before inputting into systems or databases.    |",
+		"| Formatting Automation    | Normalize text formats when copying or transferring data between applications.              |",
+		"| Logging and Reporting    | Prepare text data for logging or reporting where line breaks might cause formatting issues. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                     | Description                                                                  |",
+		"|---------------------------|------------------------------------------------------------------------------|",
+		"| Test Data Preparation     | Clean test input data to ensure consistency across different test cases.     |",
+		"| Validation Testing        | Verify that applications handle text inputs without line breaks as expected. |",
+		"| Output Normalization      | Normalize outputs before comparing them to expected results in assertions.   |"
+	],
+	"entity": [
+		{
+			"description": [
+				"The result of the transformation after removing all line breaks from the input text.",
+				"This value can be of any type, depending on the context in which the transformer is used."
+			],
+			"name": "TransformerResult",
+			"type": "Any"
+		}
+	],
+	"examples": [
+		{
+			"description": [
+				"Remove all line breaks from a multiline text input.",
+				"",
+				"The `ClearLines` transformer is utilized to remove all carriage return and newline characters from the provided text.",
+				"If line breaks are present, they are removed; otherwise, the text remains unchanged."
+			],
+			"rule": {
+				"onElement": "This is a sample text.\nIt contains multiple lines.\r\nSome lines end with different line breaks.",
+				"pluginName": "ClearLines"
+			}
+		},
+		{
+			"description": [
+				"Clean the `Location` field extracted from content by removing line breaks and trimming whitespace.",
+				"",
+				"The `ClearLines` transformer is applied to the `Location` field to remove any line breaks.",
+				"Subsequently, the `Trim` transformer removes leading and trailing whitespace.",
+				"This ensures the `Location` field is clean and ready for further processing."
+			],
+			"rule": {
+				"$type": "Content",
+				"key": "Location",
+				"onElement": ".//p[starts-with(.,'Location:')]",
+				"pluginName": "contentType",
+				"regularExpression": "(?<=\\w+:).*",
+				"transformers": [
+					{
+						"onElement": "Location",
+						"pluginName": "ClearLines"
+					},
+					{
+						"onElement": "Location",
+						"pluginName": "Trim"
+					}
+				]
+			}
+		}
+	],
+	"key": "ClearLines",
+	"manifestVersion": 4,
+	"outputParameters": [
+		{
+			"description": [
+				"The result of the transformation after trimming leading and trailing whitespace or specified characters from the input text.",
+				"This value can be of any type, depending on the context in which the transformer is used."
+			],
+			"name": "TransformerResult",
+			"type": "Any"
+		}
+	],
+	"parameters": [],
+	"pluginType": "Transformer",
+	"properties": [
+		{
+			"default": "Entity",
+			"description": [
+				"Specifies the scope of the transformation.",
+				"This property allows you to choose whether to transform data from the entity context or the session context."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"The transformer acts on the entity fields created by the previous action.",
+						"This is the default behavior."
+					],
+					"name": "Entity"
+				},
+				{
+					"description": [
+						"The transformer acts on a session parameter whose name is specified in the `OnElement` property."
+					],
+					"name": "Session"
+				}
+			]
+		},
+		{
+			"description": [
+				"Specifies the text content to be processed. The transformer will remove all line breaks from this input.",
+				"In the context of transformers used after a rule execution, `OnElement` refers to the field name from the previous step whose value you want to transform."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"Removes all carriage return and newline characters from a given text input."
+	]
+}

@@ -1,0 +1,178 @@
+{
+	"aliases": [
+		"WindowsCount"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `WindowCount` plugin is designed to validate the number of open browser windows or tabs within automation scripts. ",
+		"It provides a robust mechanism to assert that the number of open windows meets specific conditions, making it essential for scenarios where managing multiple windows or tabs is crucial.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                 |",
+		"|----------------------------|-------------------------------------------------------------------------------------------------------------|",
+		"| Window Count Validation    | Validates that the number of open browser windows or tabs meets the expected condition.                     |",
+		"| Flexible Assertions        | Supports a range of operators, including equality, inequality, and numeric comparisons.                     |",
+		"| Regular Expression Support | Applies regular expressions to the window count before performing assertions, enabling complex validations. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                    | Description                                                                                                                        |",
+		"|--------------------------|------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Multi-Window Management  | Ensures that the expected number of windows or tabs are open, crucial for verifying workflows involving multiple browser contexts. |",
+		"| Dynamic Tab Verification | Validates that dynamically opened or closed windows/tabs match the expected count, ensuring proper browser session management.     |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                        | Description                                                                                                                                  |",
+		"|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| UI Consistency Verification  | Ensures that the expected number of browser windows or tabs are present across different environments and test runs.                         |",
+		"| Regression Testing           | Validates that changes to the application do not affect the expected count of open windows or tabs, ensuring consistency in user interfaces. |",
+		"| Performance Data Validation  | Checks that the number of open browser windows/tabs matches the expected performance metrics, ensuring optimal application behavior.         |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that the count of open browser windows equals `2`. ",
+				"This is useful for scenarios where the script needs to ensure that exactly 2 windows are open in the browser session."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:2}}",
+				"pluginName": "WindowCount"
+			}
+		},
+		{
+			"description": [
+				"Ensure that the number of open browser windows is greater than `3`. ",
+				"This assertion checks if the number of open windows exceeds 3, confirming that additional windows were opened as expected."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Greater --Expected:3}}",
+				"pluginName": "WindowCount"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure that the number of open browser windows is less than or equal to `5`. ",
+				"This is useful for scenarios where the script needs to confirm that the number of open windows does not exceed a specific threshold."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:LowerEqual --Expected:5}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the count of open browser windows, after applying the regular expression '\\d+', is not equal to `0`. ",
+				"This validation ensures that at least one window is open, preventing scenarios where the browser might unexpectedly close all windows."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:0}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure that the number of open browser windows is greater than or equal to `4`. ",
+				"This is useful for validating that the number of open windows meets or exceeds a specific value, confirming correct session management."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:GreaterEqual --Expected:4}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the count of open browser windows is less than `10`. ",
+				"This validation ensures that the number of open windows does not exceed a certain limit, confirming correct session management or resource usage."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:Lower --Expected:10}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Check that the count of open browser windows matches the regular expression '\\d+', ensuring that the count is purely numeric."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:\\d+}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the number of open browser windows is not equal to `0`. ",
+				"This validation is essential for ensuring that at least one window remains open in the browser session."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:0}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "WindowCount",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the type of comparison or operation to be performed when evaluating the window count."
+			],
+			"mandatory": true,
+			"name": "Operator",
+			"type": "Operator"
+		},
+		{
+			"description": [
+				"Specifies the expected count value that the number of open browser windows should meet during the assertion."
+			],
+			"mandatory": true,
+			"name": "Expected",
+			"type": "String"
+		}
+	],
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the condition under which the assertion will pass or fail. ",
+				"This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the window count."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies a regular expression to be applied to the window count before performing the assertion. ",
+				"This allows for more flexible validation of the count values that may require pattern matching."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-window-handles",
+		"w3c": "GET /session/{session id}/window/handles"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `WindowCount` plugin validates the number of open browser windows or tabs, supporting a range of operators for flexible assertions.",
+		"It is commonly used in RPA to verify the presence of multiple windows or tabs and in automation testing to ensure UI consistency, correct session management, and proper dynamic window handling."
+	]
+}

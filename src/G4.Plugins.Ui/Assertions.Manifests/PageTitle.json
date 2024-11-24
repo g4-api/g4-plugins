@@ -1,0 +1,149 @@
+{
+	"aliases": [
+		"Title",
+		"WindowTitle"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `PageTitle` plugin is designed to validate the title of the current web page in automation scripts. ",
+		"It ensures that the title of the page meets specific conditions, such as matching a given text, pattern, or numerical value. ",
+		"This plugin is essential for verifying that the correct page is loaded, especially in scenarios where accurate navigation is critical.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                              |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Title Validation           | Validates that the title of the current web page matches expected conditions, including exact text, patterns, and numerical comparisons. |",
+		"| Flexible Assertions        | Supports various operators like equality, inequality, pattern matching, and more, providing robust validation options.                   |",
+		"| Regular Expression Support | Allows applying regular expressions to the page title before performing assertions, enabling complex title validations.                  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                        | Description                                                                                                                     |",
+		"|------------------------------|---------------------------------------------------------------------------------------------------------------------------------|",
+		"| Page Load Verification       | Ensures that the web page title matches the expected value, verifying that the correct page has been navigated to in workflows. |",
+		"| Dynamic Content Verification | Validates that dynamically generated page titles conform to expected formats, preventing errors in automated processes.         |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                       | Description                                                                                                                          |",
+		"|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|",
+		"| UI Consistency Verification | Verifies that page titles remain consistent across different environments and test scenarios, ensuring a uniform user experience.    |",
+		"| Localization Testing        | Ensures that the page title matches the expected localized version, crucial for testing multi-language support.                      |",
+		"| SEO Testing                 | Confirms that the page title adheres to SEO best practices, such as containing specific keywords and adhering to length constraints. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that the title of the current web page equals 'Welcome to My Site'. ",
+				"This is useful for scenarios where the script needs to validate that the page title exactly matches the expected value."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:Welcome to My Site}}",
+				"pluginName": "PageTitle"
+			}
+		},
+		{
+			"description": [
+				"Ensure that the title of the current web page matches the pattern '.*My Site'. ",
+				"This assertion checks if the title ends with 'My Site', useful for validating dynamic titles."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Match --Expected:.*My Site}}",
+				"pluginName": "PageTitle"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure that the title of the current web page, after applying the regular expression '\\w+', contains only word characters. ",
+				"This is useful for scenarios where the script needs to ensure that the title is alphanumeric."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:\\w+}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\w+"
+			}
+		},
+		{
+			"description": [
+				"Assert that the title of the current web page is not equal to 'Error Page'. ",
+				"This validation ensures that the script does not navigate to an error page during execution."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:NotEqual --Expected:Error Page}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Check that the title of the current web page does not match the regular expression '\\d+', ensuring it does not contain numeric characters."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\\d+}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "PageTitle",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the type of comparison or operation to be performed when evaluating the page title."
+			],
+			"mandatory": true,
+			"name": "Operator",
+			"type": "Operator"
+		},
+		{
+			"description": [
+				"Specifies the expected title value that the page title should meet during the assertion."
+			],
+			"mandatory": true,
+			"name": "Expected",
+			"type": "String"
+		}
+	],
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the condition under which the assertion will pass or fail. ",
+				"This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the page title."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies a regular expression to be applied to the page title before performing the assertion. ",
+				"This allows for more flexible validation of titles that may require pattern matching."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-title",
+		"w3c": "GET /session/{session id}/title"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `PageTitle` plugin validates the title of the current web page against specific conditions, ensuring that it matches expected text, patterns, or numerical values.",
+		"It is commonly used in RPA to verify correct page navigation and in automation testing to ensure UI consistency, localization accuracy, and adherence to SEO best practices."
+	]
+}

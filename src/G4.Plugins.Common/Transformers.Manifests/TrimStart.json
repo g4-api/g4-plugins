@@ -1,0 +1,169 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"TextProcessing",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `TrimStart` transformer plugin is to remove leading whitespace or specified characters from the beginning of a given text input.",
+		"This is particularly useful in scenarios where text data needs to be cleaned or normalized by eliminating unnecessary spaces or specific unwanted characters at the start of the text.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature               | Description                                                                                |",
+		"|-----------------------|--------------------------------------------------------------------------------------------|",
+		"| Leading Whitespace Removal | Removes all leading whitespace characters from the input text.                        |",
+		"| Custom Character Trim | Removes specified characters from the beginning of the input text.                         |",
+		"| Easy Integration      | Simple to incorporate into automation workflows for text data cleaning and transformation. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                 | Description                                                                                                                      |",
+		"|-----------------------|----------------------------------------------------------------------------------------------------------------------------------|",
+		"| Data Cleaning         | Preprocess text data by trimming leading whitespace or specific characters before inputting into systems or databases.           |",
+		"| Formatting Automation | Normalize text formats when copying or transferring data between applications.                                                   |",
+		"| Logging and Reporting | Prepare text data for logging or reporting where extra spaces or specific characters at the start might cause formatting issues. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                                            |",
+		"|------------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Test Data Preparation  | Clean test input data to ensure consistency across different test cases.                               |",
+		"| Validation Testing     | Verify that applications handle text inputs without leading spaces or specific characters as expected. |",
+		"| Output Normalization   | Normalize outputs before comparing them to expected results in assertions.                             |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Remove all leading whitespace from a text input.",
+				"",
+				"The `TrimStart` transformer is utilized to remove all leading whitespace characters from the provided text.",
+				"If whitespace is present at the beginning, it is removed; otherwise, the text remains unchanged."
+			],
+			"rule": {
+				"onElement": "   This is a sample text with spaces at the start.",
+				"pluginName": "TrimStart"
+			}
+		},
+		{
+			"description": [
+				"Trim specific characters from the beginning of the `UserInput` field extracted from content.",
+				"",
+				"The `TrimStart` transformer is applied to the `UserInput` field to remove specified characters from the start of the text.",
+				"This ensures the `UserInput` field is clean and free from unwanted leading characters."
+			],
+			"rule": {
+				"$type": "Content",
+				"key": "UserInput",
+				"onElement": ".//input[@id='UserInput']",
+				"pluginName": "contentType",
+				"regularExpression": ".*",
+				"transformers": [
+					{
+						"argument": "{{$ --TrimChars:123}}",
+						"onElement": "UserInput",
+						"pluginName": "TrimStart"
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				"Remove leading line breaks and whitespace from the `Comment` field.",
+				"",
+				"The `TrimStart` transformer is used to remove any leading whitespace and line breaks from the `Comment` field.",
+				"This ensures the `Comment` field does not have unnecessary blank lines or spaces at the start."
+			],
+			"result": "Cleaned `Comment` field without leading line breaks and spaces.",
+			"rule": {
+				"$type": "Content",
+				"key": "Comment",
+				"onElement": ".//textarea[@id='Comment']",
+				"pluginName": "contentType",
+				"regularExpression": ".*",
+				"transformers": [
+					{
+						"argument": "{{$ --TrimChars:\\n\\r }}",
+						"onElement": "Comment",
+						"pluginName": "TrimStart"
+					}
+				]
+			}
+		}
+	],
+	"key": "TrimStart",
+	"manifestVersion": 4,
+	"outputParameters": [
+		{
+			"description": [
+				"The result of the transformation after trimming leading whitespace or specified characters from the input text.",
+				"This value can be of any type, depending on the context in which the transformer is used."
+			],
+			"name": "TransformerResult",
+			"type": "Any"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Specifies the characters to be trimmed from the beginning of the input text.",
+				"If not provided, the transformer will trim whitespace characters by default."
+			],
+			"mandatory": false,
+			"name": "TrimChars",
+			"type": "String"
+		}
+	],
+	"pluginType": "Transformer",
+	"properties": [
+		{
+			"default": "Entity",
+			"description": [
+				"Specifies the scope of the transformation.",
+				"This property allows you to choose whether to transform data from the entity context or the session context."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"The transformer acts on the entity fields created by the previous action.",
+						"This is the default behavior."
+					],
+					"name": "Entity"
+				},
+				{
+					"description": [
+						"The transformer acts on a session parameter whose name is specified in the `OnElement` property."
+					],
+					"name": "Session"
+				}
+			]
+		},
+		{
+			"description": [
+				"Specifies the text content to be processed. The transformer will trim leading whitespace or specified characters from this input.",
+				"In the context of transformers used after a rule execution, `OnElement` refers to the field name from the previous step whose value you want to transform."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"Removes leading whitespace characters or specified characters from the beginning of a given text input."
+	]
+}

@@ -1,0 +1,108 @@
+{
+	"aliases": [
+		"SwitchToFrame"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `SwitchFrame` plugin is designed to automate the process of switching between different frames or iframes within a web page. ",
+		"It simplifies navigating web content contained in frames, ensuring that automation scripts can interact with elements inside these frames effectively.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature           | Description                                                                   |",
+		"|-------------------|-------------------------------------------------------------------------------|",
+		"| Switch by Index   | Switches to a frame using its index, allowing for straightforward navigation. |",
+		"| Switch by Element | Switches to a frame using a specified web element, enhancing flexibility.     |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage            | Description                                                                        |",
+		"|------------------|------------------------------------------------------------------------------------|",
+		"| Frame Navigation | Automates the process of switching to different frames within a web page.          |",
+		"| Data Extraction  | Facilitates data extraction from content within frames by ensuring accurate focus. |",
+		"| Form Interaction | Allows RPA bots to interact with forms and inputs contained within iframes.        |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                | Description                                                                                       |",
+		"|----------------------|---------------------------------------------------------------------------------------------------|",
+		"| UI Testing           | Enables automated tests to interact with elements inside frames, ensuring comprehensive coverage. |",
+		"| Frame Verification   | Helps in verifying that frame elements are correctly loaded and interactable during tests.        |",
+		"| Multi-Frame Handling | Supports testing scenarios involving multiple frames, ensuring each is tested appropriately.      |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Switch to the frame using its index `0`. ",
+				"This is useful for navigating to the first frame on the page to interact with its content."
+			],
+			"rule": {
+				"argument": "0",
+				"pluginName": "SwitchFrame"
+			}
+		},
+		{
+			"description": [
+				"Switch to a frame using a specified element identified by the CSS selector `#frameElement`. ",
+				"This allows for precise navigation to a frame using an element locator, enhancing flexibility."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#frameElement",
+				"pluginName": "SwitchFrame"
+			}
+		}
+	],
+	"key": "SwitchFrame",
+	"manifestVersion": 4,
+	"parameters": [],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"The `Argument` property allows you to specify the frame to switch to by its index. ",
+				"If an index is provided, the plugin switches to the frame at that index."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the target frame element on the web page where the switching action will be performed."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the locator strategy used to identify the target frame element defined by the `OnElement` property."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"w3c": "POST /session/{session id}/frame",
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#switch-to-frame"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `SwitchFrame` plugin automates the process of switching to different frames or iframes within a web page.",
+		"In robotic process automation (RPA), it simplifies navigating and interacting with frame-contained content.",
+		"In automation testing, it ensures comprehensive test coverage by enabling interactions with elements inside frames."
+	]
+}

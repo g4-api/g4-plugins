@@ -1,0 +1,136 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `GetApplicationParameter` plugin is to fetch application parameters that are shared across all automation instances, providing flexibility in configuration based on different environments. This plugin allows the retrieval of parameters like connection strings, API keys, or other configuration settings essential for automation workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                                               |",
+		"|------------------------------- |-----------------------------------------------------------------------------------------------------------|",
+		"| Parameter Retrieval            | Fetches application parameters from specified environments.                                               |",
+		"| Environment-Based Parameters   | Supports retrieval of parameters specific to different environments (e.g., Prod, Dev).                    |",
+		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                         | Description                                                                                            |",
+		"|------------------------------ |--------------------------------------------------------------------------------------------------------|",
+		"| Dynamic Configuration         | Retrieve and use configuration settings dynamically based on the environment.                          |",
+		"| Centralized Parameter Storage | Use a centralized location for storing and accessing parameters across different automation instances. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                        | Description                                                                                               |",
+		"|------------------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Environment-Specific Testing | Retrieve parameters specific to test environments, enabling more accurate and environment-specific tests. |",
+		"| Configuration Management     | Simplify configuration management by fetching parameters directly within test scripts.                    |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Application` plugin to fetch a parameter named `ConnectionString` from the `Prod` environment and use it directly.",
+				"",
+				"| Field      | Description                                                            |",
+				"|------------|------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Application`. |",
+				"| argument   | Specifies the environment from which to fetch the parameter.           |",
+				"| onElement  | Specifies the name of the parameter to be fetched.                     |"
+			],
+			"rule": {
+				"argument": "{{$ --Environment:Prod}}",
+				"onElement": "ConnectionString",
+				"pluginName": "Application"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `ConnectionString` from the `Prod` environment and use it in a `SendKeys` action.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
+				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
+				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application --Environment:Prod}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `ConnectionString` from the default `SystemParameters` environment and use it in a `SendKeys` action.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
+				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
+				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "SendKeys"
+			}
+		}
+	],
+	"key": "Application",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "SystemParameters",
+			"description": [
+				"Specifies the environment from which to fetch the parameter. If not specified, the `SystemParameters` environment will be used."
+			],
+			"mandatory": false,
+			"name": "Environment",
+			"type": "String"
+		}
+	],
+	"pluginType": "GetParameter",
+	"properties": [
+		{
+			"description": [
+				"The `Argument` property specifies the environment from which to fetch the parameter."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "Expression"
+		},
+		{
+			"description": [
+				"The `OnElement` property specifies the name of the parameter to be retrieved."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `GetApplicationParameter` plugin retrieves application parameters that are shared across all automation instances, enhancing configuration management. ",
+		"It supports fetching parameters specific to different environments, such as connection strings or API keys. ",
+		"Key features include environment-based parameter retrieval, integration with other plugins for dynamic use of parameters, and centralized parameter storage. ",
+		"In RPA, it is used for dynamic configuration and centralized parameter management. ",
+		"In automation testing, it supports environment-specific testing and simplifies configuration management."
+	]
+}

@@ -1,0 +1,98 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Data",
+		"DataCollectors"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of a `CsvDataCollector` is to collect data and organize it in a structured format, typically as CSV. ",
+		"CSV is a human-readable data interchange format, making it suitable for various applications, including automation and data integration.  ",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature          | Description                                                                                                            |",
+		"|------------------|------------------------------------------------------------------------------------------------------------------------|",
+		"| Data Storage     | Storing data collected from various sources in a structured format, making it easier to manage, retrieve, and analyze. |",
+		"| Data Integration | Facilitating the integration of data from multiple systems or sources into a single, consistent format.                |",
+		"| Automation       | Supporting automation and RPA processes by collecting and formatting data for further use in automated workflows.      |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                            | Description                                                                                                                                                                                                                         |",
+		"|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Web Scraping and Data Extraction | CsvDataCollectors are often used in web scraping to collect data from websites and save it in CSV format. Data collected from web pages can include product information, news articles, weather data, or any other structured data. |",
+		"| RPA Data Management              | In the context of Robotic Process Automation (RPA), data collectors can be used to gather data during automated tasks and workflows. The collected data can then be stored as CSV for further processing or reporting.              |",
+		"| Data Aggregation                 | CsvDataCollectors are useful for aggregating data from multiple sources. For example, an e-commerce application might use a CsvDataCollector to gather product details from various suppliers' websites into a single CSV format.   |",
+		"| Data Export and Reporting        | Data collected from various sources can be exported to CSV format for reporting and analysis. CSV is commonly used for transmitting data between systems and for generating reports.                                                |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                | Description                                                                                             |",
+		"|----------------------|---------------------------------------------------------------------------------------------------------|",
+		"| Test Data Collection | Collect test data generated during test execution and store it in a CSV file for review and analysis.   |",
+		"| Result Logging       | Log test results and other relevant information in a structured format for easy access and evaluation.  |",
+		"| Data-Driven Testing  | Utilize collected data to drive subsequent test cases, ensuring dynamic and data-driven test execution. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Defines an extraction rule that extracts location information from a web page. ",
+				"The extracted data is labeled as `Location`, and it is collected using a `CsvDataCollector` into a CSV file named `DataFile.csv`. ",
+				"The extraction process is defined within a specific scope and starts from a `<div>` element with the class `hotel`. ",
+				"The use of regular expressions and XPath expressions allows for precise data extraction and formatting."
+			],
+			"rule": {
+				"$type": "ExtractionRuleModel",
+				"dataCollector": {
+					"ForEntity": true,
+					"Source": "DataFile.csv",
+					"Type": "CsvDataCollector"
+				},
+				"extractionScope": "Elements",
+				"onElement": "//div[@class='hotel']",
+				"rules": [
+					{
+						"$type": "ContentRuleModel",
+						"clearLinesBreak": false,
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\w+:).*",
+						"trim": false
+					}
+				]
+			}
+		}
+	],
+	"key": "CsvDataCollector",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the output destination where the collected data will be saved (e.g., `/Path/To/My/File/DataFile.csv`)."
+			],
+			"mandatory": true,
+			"name": "Source",
+			"type": "String"
+		}
+	],
+	"pluginType": "DataCollector",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `CsvDataCollector` plugin is used to collect, store, and manage data in CSV format. ",
+		"It facilitates data storage, integration, and automation by organizing data from various sources into a structured format.",
+		"Key features include data storage, integration, and support for automation workflows. ",
+		"Common use cases in RPA involve web scraping, data management, aggregation, and reporting. ",
+		"In automation testing, it is used for test data collection, result logging, and data-driven testing."
+	]
+}

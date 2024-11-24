@@ -1,0 +1,198 @@
+{
+	"aliases": [
+		"NewBrowserTab",
+		"OpenBrowserWindow",
+		"OpenBrowserTab"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Browser"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `NewBrowserWindow` plugin is to automate the opening of new browser windows or tabs. ",
+		"This plugin provides a mechanism to programmatically open one or more new browser windows or tabs with specified URLs, which can be part of automated workflows or tests.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                                                     |",
+		"|------------------------|-------------------------------------------------------------------------------------------------|",
+		"| Open New Windows/Tabs  | Automates the opening of new browser windows or tabs using specified URLs.                      |",
+		"| URL Targeting          | Retrieves URLs from specified web elements or attributes for opening new windows.               |",
+		"| Customizable Target    | Allows customization of the target attribute (`_blank`, `_self`, etc.) for new windows or tabs. |",
+		"| Multiple Windows/Tabs  | Supports opening multiple browser windows or tabs in a single action.                           |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                  | Description                                                                               |",
+		"|------------------------|-------------------------------------------------------------------------------------------|",
+		"| Multi-Window Workflows | Automating workflows that require interacting with multiple browser windows or tabs.      |",
+		"| Data Collection        | Opening multiple tabs to collect data from various sources simultaneously.                |",
+		"| Navigation Automation  | Navigating to different URLs in separate windows or tabs as part of an automated process. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                | Description                                                                                |",
+		"|----------------------|--------------------------------------------------------------------------------------------|",
+		"| Multi-Window Testing | Testing web applications that involve multiple browser windows or tabs.                    |",
+		"| UI Testing           | Verifying the behavior of web applications when links open new windows or tabs.            |",
+		"| Functional Testing   | Ensuring that links and buttons correctly open new windows or tabs with specified content. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Open a new browser window or tab with the URL `http://example.com`. ",
+				"The new window or tab will be opened in a new browsing context (`_blank`)."
+			],
+			"rule": {
+				"argument": "{{$ --Url:http://example.com --Amount:1 --Target:_blank}}",
+				"pluginName": "NewBrowserWindow"
+			}
+		},
+		{
+			"description": [
+				"Open three new browser windows or tabs with the URL `http://example.com`. ",
+				"The new windows or tabs will be opened in the same browsing context (`_self`)."
+			],
+			"rule": {
+				"argument": "{{$ --Url:http://example.com --Amount:3 --Target:_self}}",
+				"pluginName": "NewBrowserWindow"
+			}
+		},
+		{
+			"description": [
+				"Open two new browser windows or tabs with the URL `http://example.com`. ",
+				"This can be useful for testing the behavior of web applications when multiple new windows or tabs are opened simultaneously."
+			],
+			"rule": {
+				"argument": "{{$ --Url:http://example.com --Amount:2}}",
+				"pluginName": "NewBrowserWindow"
+			}
+		},
+		{
+			"description": [
+				"Open a new browser window or tab using the URL retrieved from the element identified by the CSS selector `#LinkToOpen`. ",
+				"The new window or tab will be opened in a new browsing context (`_blank`). ",
+				"This example demonstrates the default behavior of opening a single new window or tab."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#LinkToOpen",
+				"pluginName": "NewBrowserWindow"
+			}
+		}
+	],
+	"key": "NewBrowserWindow",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the number of new browser windows or tabs to open."
+			],
+			"mandatory": false,
+			"name": "Amount",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Specifies the target attribute for the new browser windows or tabs. Possible values include `_blank`, `_self`, etc."
+			],
+			"mandatory": false,
+			"name": "Target",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Open the URL in a new tab or window."
+					],
+					"name": "_blank"
+				},
+				{
+					"description": [
+						"Open the URL in the current tab or window."
+					],
+					"name": "_self"
+				},
+				{
+					"description": [
+						"Open the URL in the parent frame."
+					],
+					"name": "_parent"
+				},
+				{
+					"description": [
+						"Open the URL in the topmost frame."
+					],
+					"name": "_top"
+				}
+			]
+		},
+		{
+			"description": [
+				"Specifies the URL to open in the new browser window or tab if no element is provided."
+			],
+			"mandatory": false,
+			"name": "Url",
+			"type": "String|Uri"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Providing additional instructions or parameters to control the behavior of the window opening action."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifying the target element from which the URL should be retrieved for opening the new browser window or tab."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifying the type of locator used to identify the target element defined by the `OnElement` property."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Retrieves the URL from the specified attribute of the target element."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Uses a regular expression to match and extract the desired part of the URL from the target element."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#execute-script",
+		"w3c": "POST /session/{session id}/execute/sync"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `NewBrowserWindow` plugin automates the opening of new browser windows or tabs, enabling the creation of multi-window workflows and testing scenarios. ",
+		"It supports retrieving URLs from specified web elements, customizing the target attribute, and opening multiple windows or tabs simultaneously."
+	]
+}

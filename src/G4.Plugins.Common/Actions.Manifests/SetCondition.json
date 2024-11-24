@@ -1,0 +1,178 @@
+﻿{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Conditional",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `SetCondition` plugin facilitates the conditional execution of sub-actions within automation scripts. ",
+		"It evaluates specified conditions using assertion plugins and decides whether to run the sub-actions based on the evaluation results.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                 |",
+		"|--------------------------- |-------------------------------------------------------------------------------------------------------------|",
+		"| Conditional Execution      | Executes sub-actions only if specified conditions are met, allowing for dynamic control flow in automation. |",
+		"| Assertion-Based Evaluation | Utilizes assertion plugins to evaluate conditions, ensuring accurate and reliable decision-making.          |",
+		"| Meta Plugin                | Creates, sends, and evaluates assertion plugins to determine the execution of sub-actions.                  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage               | Description                                                                                        |",
+		"|---------------------|--------------------------------------------------------------------------------------------------- |",
+		"| Conditional Actions | Perform actions conditionally based on the evaluation of specified conditions.                     |",
+		"| Dynamic Workflows   | Enable dynamic workflows by conditionally executing sub-actions based on runtime conditions.       |",
+		"| Error Handling      | Implement error handling by conditionally executing recovery actions when certain conditions fail. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                       | Description                                                                                                |",
+		"|-----------------------------|----------------------------------------------------------------------------------------------------------- |",
+		"| Conditional Test Execution  | Execute test cases conditionally based on the evaluation of specific conditions.                           |",
+		"| Dynamic Test Scenarios      | Create dynamic test scenarios by conditionally executing steps based on runtime conditions and assertions. |",
+		"| Validation and Verification | Perform validation and verification steps conditionally, ensuring accurate and reliable test outcomes.     |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This configuration evaluates a condition and executes sub-actions if the condition is met."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
+				"locator": "CssSelector",
+				"onElement": "#greeting",
+				"pluginName": "SetCondition",
+				"rules": [
+					{
+						"locator": "CssSelector",
+						"onElement": "#continueButton",
+						"pluginName": "Click"
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				"This configuration checks if an alert exists and executes sub-actions if no alert is present."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:AlertExists}}",
+				"pluginName": "SetCondition",
+				"rules": [
+					{
+						"argument": "Test Input",
+						"locator": "CssSelector",
+						"onElement": "#inputField",
+						"pluginName": "SendKeys"
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				"This configuration checks if the page URL matches a specific pattern and executes sub-actions accordingly."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:https://example.com/*}}",
+				"pluginName": "SetCondition",
+				"rules": [
+					{
+						"locator": "CssSelector",
+						"onElement": "#nextPageButton",
+						"pluginName": "Click"
+					}
+				]
+			}
+		}
+	],
+	"key": "SetCondition",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the condition to be evaluated to decide whether to execute the sub-actions."
+			],
+			"mandatory": true,
+			"name": "Condition",
+			"type": "Assertion"
+		},
+		{
+			"description": [
+				"Specifies the expected value to be compared against the actual value when evaluating the condition."
+			],
+			"name": "Expected",
+			"type": "Any"
+		},
+		{
+			"description": [
+				"Specifies the type of comparison to be performed when evaluating the condition."
+			],
+			"name": "Operator",
+			"type": "Operator"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the condition and parameters for the assertion to be performed by a particular plugin."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "Expression"
+		},
+		{
+			"description": [
+				"Specifies how elements should be located on a webpage or within an application."
+			],
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the attribute of the target element that will be interacted with or evaluated during automation."
+			],
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the target element on which conditions will be evaluated during the automation process."
+			],
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the regular expression to apply on the element/attribute result before the assertion."
+			],
+			"name": "RegularExpression",
+			"type": "Regex"
+		},
+		{
+			"description": [
+				"Define a sequence of actions or instructions to be executed if the condition is met."
+			],
+			"name": "Rules",
+			"type": "Array"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `SetCondition` plugin facilitates the conditional execution of sub-actions within automation scripts by evaluating specified conditions using assertion plugins.",
+		"It dynamically controls the flow of automation by deciding whether to run sub-actions based on the evaluation results of these conditions.",
+		"Key features include conditional execution, assertion-based evaluation, and meta plugin capabilities for creating, sending, and evaluating assertion plugins.",
+		"Common use cases include performing actions conditionally, enabling dynamic workflows, implementing error handling in RPA, and creating conditional test scenarios, validation, and verification in automation testing."
+	]
+}

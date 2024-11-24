@@ -1,0 +1,340 @@
+﻿{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Validation",
+		"General",
+		"Assertions"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `Assert` plugin is a crucial component in the world of Robotic Process Automation (RPA) and automation testing. ",
+		"Its primary purpose is to facilitate the validation of expected conditions during the execution of automation scripts. ",
+		"By asserting specific conditions, it ensures that the application or system under test behaves as anticipated, contributing to the overall reliability and accuracy of automated processes.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                             | Description                                                                                               |",
+		"|-------------------------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Meta Action                         | Creates and sends appropriate assertion plugins based on the provided data.                               |",
+		"| Flexible Assertions                 | Supports various conditions, operators, and expected values for assertions.                               |",
+		"| Data Extraction                     | Can apply regular expressions and handle element attributes for precise data extraction before assertion. |",
+		"| Dynamic Assertion Handling          | Handles dynamic conditions during automation.                                                             |",
+		"| Exception Handling                  | Captures and manages exceptions during the assertion process, preventing script failures.                 |",
+		"| Extractions and Context Information | Captures and manages context information and supports data extractions. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                   | Description                                                                                                                              |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Process Validation         | Ensure automated processes execute successfully by validating key conditions, such as form submission success or expected data presence. |",
+		"| Error Handling and Logging | Captures exceptions and logs relevant information for diagnosing issues and understanding failures.                                      |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case           | Description                                                                                                     |",
+		"|--------------------|---------------------------------------------------------------------------------------------------------------- |",
+		"| Functional Testing | Validate the correctness of application features, such as element presence or data display.                     |",
+		"| Regression Testing | Verify that changes do not adversely impact expected outcomes, ensuring existing functionalities remain intact. |",
+		"| Data Validation    | Assert the correctness of data manipulations, calculations, or transfers within the application.                |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that the Text condition equals 'Success'.",
+				"",
+				"The Assert plugin is utilized to perform this validation, taking the actual value from the 'OnElement' property which can be a parameter, data row, or some other dynamic data. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:Equal --Expected:Success}}",
+				"onElement": "{{$Get-Parameter --Name:MyParam --Scope:Session}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that an alert exists.",
+				"",
+				"The Assert plugin is utilized to perform this validation. ",
+				"If an alert exists, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:AlertExists}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text of the element identified by the CSS selector '#greeting' matches the regular expression '^Hello.*'.",
+				"",
+				"The Assert plugin is utilized to perform this validation, providing a means to check the text content of UI elements. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Hello.*}}",
+				"locator": "CssSelector",
+				"onElement": "#greeting",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the 'class' attribute of the element identified by the CSS selector '#elementId' does not match the regular expression '^hidden$'.",
+				"",
+				"The Assert plugin is utilized to perform this validation, providing a means to check attribute values of UI elements. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^hidden$}}",
+				"locator": "CssSelector",
+				"onAttribute": "class",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the text length of the element identified by the CSS selector '#description' is greater than 5.",
+				"",
+				"The Assert plugin is utilized to perform this validation, providing a means to check the text length of UI elements. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:5}}",
+				"locator": "CssSelector",
+				"onElement": "#description",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the element identified by the CSS selector '#hiddenElement' is visible.",
+				"",
+				"The Assert plugin is utilized to perform this validation, providing a means to check the visibility state of UI elements. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementVisible}}",
+				"locator": "CssSelector",
+				"onElement": "#hiddenElement",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the numeric value of the element identified by the CSS selector '#price' is less than or equal to 100.",
+				"",
+				"The Assert plugin is utilized to perform this validation. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#price",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the numeric value of the element identified by the CSS selector '#score' is greater than or equal to 85.",
+				"",
+				"The Assert plugin is utilized to perform this validation. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:85}}",
+				"locator": "CssSelector",
+				"onElement": "#score",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the value of the `value` attribute of the element with the CSS selector `#ElementActive` is equal to `Foo Bar`.",
+				"",
+				"The Assert plugin is utilized to perform this validation, providing a means to check attribute values of UI elements. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Foo Bar}}",
+				"locator": "CssSelector",
+				"onAttribute": "value",
+				"onElement": "#ElementActive",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the value of the `value` attribute of the element with the CSS selector `#ElementActive` is equal to `Bar`, applying the regular expression `B.*$` before validation.",
+				"",
+				"The Assert plugin is utilized to perform this validation, providing a means to check attribute values with regular expression patterns. ",
+				"If the condition is met post-regular expression application, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Bar}}",
+				"locator": "CssSelector",
+				"onAttribute": "value",
+				"onElement": "#ElementActive",
+				"pluginName": "Assert",
+				"regularExpression": "B.*$"
+			}
+		},
+		{
+			"description": [
+				"Validate the absence of an alert in the current browser session.",
+				"",
+				"The Assert plugin is utilized to perform this validation, ensuring that no alert is currently present. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:AlertNotExists}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Validate that the text content of the element identified by the CSS selector `#ElementText` is equal to the expected value `ElementText`.",
+				"",
+				"The Assert plugin is utilized to perform this validation, providing a means to check the text content of UI elements. ",
+				"If the condition is met, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:ElementText}}",
+				"locator": "CssSelector",
+				"onElement": "#ElementText",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the numeric text content of the element identified by the CSS selector '#amount' matches the extracted numbers using the regular expression '\\d+' and is equal to '100'.",
+				"",
+				"The Assert plugin is utilized to perform this validation, applying a regular expression to extract numbers before asserting the extracted value. ",
+				"If the condition is met after the extraction, the assertion passes; otherwise, it fails."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#amount",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		}
+	],
+	"key": "Assert",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Serves as a dynamic specifier for the type of validation or verification to be executed in automation rules. ",
+				"This parameter is particularly noteworthy for its adaptability, as its available values are dynamically generated based on the plugins of type `Assertion` within G4™ engine.",
+				"",
+				"### Dynamic Condition Values",
+				"",
+				"The `Condition` parameter allows the rule to express various types of assertions or conditions dynamically. ",
+				"These dynamic conditions are derived from the plugins of type `Assertion` available in the G4™ framework. ",
+				"Each assertion plugin contributes unique conditions, reflecting diverse validation scenarios.",
+				"",
+				"### Plugin-Driven Flexibility",
+				"",
+				"As new assertion plugins are introduced or existing ones are updated, the `Condition` parameter seamlessly incorporates these changes. ",
+				"This ensures that automation rules remain adaptable and can leverage the latest assertion capabilities without requiring explicit modifications to the rule structures."
+			],
+			"mandatory": true,
+			"name": "Condition",
+			"type": "Assertion"
+		},
+		{
+			"description": [
+				"Defines the value or condition that the automation rule expects to encounter or validate. This value represents the anticipated state of the UI element or the result of an action."
+			],
+			"mandatory": false,
+			"name": "Expected",
+			"type": "Any"
+		},
+		{
+			"description": [
+				"Serves as a dynamic specifier that defines the type of comparison or action to be executed during automation. ",
+				"This parameter is particularly noteworthy for its adaptability, as its available values are dynamically generated based on the plugins of type `Operator` within G4™ engine.",
+				"",
+				"### Dynamic Operator Values",
+				"",
+				"The `Operator` parameter dynamically incorporates values based on plugins of type `Operator` within the automation framework. ",
+				"Each operator plugin introduces specific operators for use in rule configurations.",
+				"",
+				"### Plugin-Driven Flexibility",
+				"",
+				"As new operator plugins are introduced or existing ones are updated, the `Operator` parameter seamlessly incorporates these changes. ",
+				"This ensures that automation rules remain adaptable and can leverage the latest operator capabilities without requiring explicit modifications to the rule structures."
+			],
+			"mandatory": false,
+			"name": "Operator",
+			"type": "Operator"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the condition and parameters for the assertion to be performed by a particular plugin. ",
+				"It is a key part of the rule definition and influences how the validation or verification is carried out."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "Expression"
+		},
+		{
+			"description": [
+				"Specifies how the automation framework should identify or locate the target element within the UI. ",
+				"It defines the strategy or method for selecting the element on which the assertion or action will be performed."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the attribute of the target element on which the assertion or action should be performed. ",
+				"It defines which attribute of the identified element will be the focus of the validation or manipulation."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the identifier or selector for the element on which the assertion or action should be performed. ",
+				"It essentially points to the target element within the web page or application."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Allows you to apply a regular expression pattern to manipulate or extract specific information from the value of an attribute or the element text before the actual validation or action is performed. ",
+				"It is particularly useful when you want to perform more complex checks or extract specific substrings from attribute values."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `Assert` plugin automates the validation of expected conditions during the execution of automation scripts, ensuring the reliability and accuracy of automated processes.",
+		"It creates and sends appropriate assertion plugins based on provided data, supporting various conditions, operators, and expected values for flexible assertions.",
+		"Key features include data extraction, dynamic assertion handling, and exception handling, capturing and managing context information and supporting data extractions.",
+		"Common use cases include process validation, error handling, and logging in RPA, as well as functional testing, regression testing, and data validation in automation testing."
+	]
+}

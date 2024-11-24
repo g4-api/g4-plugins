@@ -1,0 +1,80 @@
+{
+	"aliases": [
+		"HasAlert",
+		"AlertVisible"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `AlertExists` plugin is designed to perform assertions within automation scripts to check for the presence of alert dialogs.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                                        |",
+		"|---------------------|------------------------------------------------------------------------------------|",
+		"| Alert Detection     | Validates the presence of alert dialogs during the execution of automation tasks.  |",
+		"| Integration Support | Can be seamlessly integrated into automation scripts for efficient alert handling. |",
+		"| Error Handling      | Provides robust error handling to manage scenarios where alerts may not appear.    |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                     | Description                                                                                     |",
+		"|---------------------------|-------------------------------------------------------------------------------------------------|",
+		"| Alert Presence Validation | Ensures that alerts are correctly triggered during automated processes in RPA workflows.        |",
+		"| User Interaction Testing  | Verifies that user-triggered alerts appear as expected, aiding in the validation of user flows. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                                 |",
+		"|------------------------|---------------------------------------------------------------------------------------------|",
+		"| Functional Testing     | Confirms that alerts appear under the correct conditions during functional tests.           |",
+		"| Error Scenario Testing | Validates the handling of alert dialogs in various error scenarios.                         |",
+		"| End-to-End Testing     | Ensures comprehensive test coverage by verifying alert dialogs in end-to-end user journeys. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert the existence of an alert dialog during automated tasks. ",
+				"This is useful for verifying that an alert dialog is correctly triggered during the execution of automation scripts."
+			],
+			"rule": {
+				"pluginName": "AlertExists"
+			}
+		},
+		{
+			"description": [
+				"Use the `Assert` plugin to check if an alert dialog exists. ",
+				"This example ensures that an alert dialog is present during the automation process, called by the `Assert` plugin."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:AlertExists}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "AlertExists",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#user-prompts",
+		"w3c": "None"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb",
+		"MobileNative"
+	],
+	"summary": [
+		"The `AlertExists` plugin performs assertions within automation scripts to check for the presence of alert dialogs.",
+		"In robotic process automation (RPA), it ensures alerts are correctly triggered during processes.",
+		"In automation testing, it validates the presence of alerts during functional, error scenario, and end-to-end testing."
+	]
+}

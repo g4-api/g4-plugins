@@ -1,0 +1,226 @@
+{
+	"aliases": [
+		"Attribute"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `ElementAttribute` plugin is designed to validate the attributes of web elements within automation scripts. ",
+		"It provides a robust mechanism to assert that an element's attribute meets specific conditions, making it an essential tool for ensuring the correctness of element properties in various automation scenarios.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                 |",
+		"|----------------------------|-------------------------------------------------------------------------------------------------------------|",
+		"| Attribute Validation       | Validates that an element's attribute matches expected conditions, supporting both numeric and text values. |",
+		"| Regular Expression Support | Applies regular expressions to attribute values before performing assertions, enabling complex validations. |",
+		"| Flexible Assertions        | Supports a range of operators, including equality, inequality, pattern matching, and numeric comparisons.   |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                      | Description                                                                                                                                 |",
+		"|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Attribute Presence Check   | Verifies that a specific attribute exists on an element and meets the expected value, ensuring accurate data entry in forms.                |",
+		"| Dynamic Content Validation | Ensures that dynamically generated content or attributes on a page match expected criteria, preventing errors in automated workflows.       |",
+		"| Input Value Verification   | Validates attributes like `value` in text boxes and other input controllers, ensuring that user inputs or default values are correctly set. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                        | Description                                                                                                                                                       |",
+		"|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Accessibility Testing        | Validates that accessibility attributes (like `aria-hidden`, `role`, etc.) are correctly set, ensuring compliance with accessibility standards.                   |",
+		"| UI Consistency Verification  | Ensures that visual and functional attributes of elements remain consistent across different environments and test runs.                                          |",
+		"| Version Control in Elements  | Verifies that version-related attributes (like `data-version`, `version`) meet the expected criteria, ensuring compatibility and correctness.                     |",
+		"| Performance Data Validation  | Checks attributes related to performance metrics, like `data-time`, `data-load`, ensuring they fall within acceptable ranges.                                     |",
+		"| Input Field Value Assertions | Validates that the `value` attribute of input fields (like text boxes, drop-downs) matches the expected values, crucial for form validation in testing workflows. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that the 'data-value' attribute of an element, after applying the regular expression '\\d+', equals '123'. ",
+				"This is useful for extracting numeric values from the attribute and ensuring they meet the expected condition."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:123}}",
+				"onAttribute": "data-value",
+				"onElement": "//*[@id='numericElement']",
+				"pluginName": "ElementAttribute",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Ensure that the 'class' attribute of an element contains the text 'active'. ",
+				"This assertion checks if the class attribute matches the exact expected value."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:active}}",
+				"onAttribute": "class",
+				"onElement": "//*[@id='statusElement']",
+				"pluginName": "ElementAttribute"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure that the 'data-percentage' attribute of an element, after extracting the numeric part using the regular expression '\\d+', is greater than '50'. ",
+				"This is useful for scenarios where the script needs to validate that a percentage value extracted from the attribute exceeds a certain threshold."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:50}}",
+				"onAttribute": "data-percentage",
+				"onElement": "//*[@id='percentageElement']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Assert that the 'data-price' attribute of an element, after extracting the numeric part using the regular expression '\\d+\\.\\d{2}', is lower than '100.00'. ",
+				"This validation ensures that the price extracted from the attribute is less than a specific value, confirming that the element meets pricing criteria."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:100.00}}",
+				"onAttribute": "data-price",
+				"onElement": "//*[@id='priceElement']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+\\.\\d{2}"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure the 'version' attribute of an element, after extracting the major version number using the regular expression '\\d+', is greater than or equal to '2'. ",
+				"This is useful for validating that an element's version attribute is at least a certain version."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:2}}",
+				"onAttribute": "version",
+				"onElement": "//*[@id='versionElement']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Assert that the 'data-length' attribute of an element, after applying the regular expression '\\d+', is less than or equal to '50'. ",
+				"This ensures that the length value extracted from the attribute does not exceed a specific threshold, confirming correct element configuration."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:50}}",
+				"onAttribute": "data-length",
+				"onElement": "//*[@id='lengthElement']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Check that the 'data-type' attribute of an element does not match the regular expression '^[A-Za-z]+$', ensuring the value is not purely alphabetical."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:^[A-Za-z]+$}}",
+				"onAttribute": "data-type",
+				"onElement": "//*[@id='typeElement']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Assert that the 'aria-hidden' attribute of an element is set to 'true'. ",
+				"This validation is essential for ensuring the accessibility state of an element is correctly configured."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:true}}",
+				"onAttribute": "aria-hidden",
+				"onElement": "//*[@id='hiddenElement']",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "ElementAttribute",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the type of comparison or operation to be performed when evaluating the element's attribute value."
+			],
+			"mandatory": true,
+			"name": "Operator",
+			"type": "Operator"
+		},
+		{
+			"description": [
+				"Specifies the value or pattern that the element's attribute is expected to match during the assertion."
+			],
+			"mandatory": false,
+			"name": "Expected",
+			"type": "String"
+		}
+	],
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the condition under which the assertion will pass or fail. ",
+				"This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the attribute."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies the web element's attribute to be validated. This attribute will be checked against the expected value."
+			],
+			"mandatory": true,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the web element to be validated. This can be defined using a locator strategy, such as Xpath, CSS Selector, etc."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Defines the locator strategy used to identify the target element on the web page. The default value is 'Xpath'."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies a regular expression to be applied to the attribute value before performing the assertion. ",
+				"This allows for more flexible validation of attribute values that may require pattern matching."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-element-attribute",
+		"w3c": "GET /session/{session id}/element/{element id}/attribute/{name}"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `ElementAttribute` plugin asserts that an element's attribute meets specific conditions, supporting a range of operators for flexible validation. ",
+		"It is commonly used in RPA to validate form inputs, dynamic content, and element properties, and in automation testing to ensure UI consistency, accessibility compliance, correct versioning of elements, and proper input field values."
+	]
+}

@@ -1,0 +1,3 @@
+Location,Price,Contact,Rating,Phone,Description,CheckIn,Amenities,PetFriendly,LastUpdate,CheckOut,Pre
+City A,100,example@example.com,4.5,+123456789,"Lorem ipsum dolor sit ""amet"", consectetur adipiscing elit.",3:00 PM,"Free Wi-Fi, Pool, Restaurant",True,10/28/2023 3:30:00 PM,11:00 AM,"Description:    Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+City B,120,example@example.com,4.8,+123456789,"Nullam et arcu bibendum, ""tristique"" ex in, efficitur libero.",3:00 PM,"Free Parking, Gym, Spa",False,10/28/2023 12:00:00 AM,11:00 AM,"Description:    Nullam et arcu bibendum, tristique ex in, efficitur libero."

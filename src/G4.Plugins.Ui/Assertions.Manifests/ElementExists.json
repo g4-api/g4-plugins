@@ -1,0 +1,102 @@
+{
+	"aliases": [
+		"Exists"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `ElementExists` plugin is designed to assert that a specified web element exists within a web browser during automated tasks. ",
+		"Its primary goal is to ensure that automation scripts can validate the presence of elements, which is crucial for scenarios where specific elements must be present to proceed.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                 | Description                                                                   |",
+		"|-------------------------|-------------------------------------------------------------------------------|",
+		"| Element Existence Check | Validates that the specified web element exists during execution.             |",
+		"| Seamless Integration    | Integrates smoothly with automation workflows to ensure elements are present. |",
+		"| Reliable Validation     | Provides reliable assertion to confirm the existence of web elements.         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                 | Description                                                                                |",
+		"|-----------------------|--------------------------------------------------------------------------------------------|",
+		"| Presence Verification | Confirms that specific elements are present, ensuring they are available for interactions. |",
+		"| Process Continuity    | Validates that elements are present to proceed with the workflow without interruptions.    |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                   | Description                                                                                         |",
+		"|-------------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Existence State Testing | Ensures that specific elements exist during test scenarios, validating user interaction flows.      |",
+		"| Workflow Validation     | Confirms that workflows proceed with the correct elements present, ensuring accurate test outcomes. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that a specific web element exists during the execution of automated tasks. ",
+				"This is useful for validating scenarios where the presence of elements is expected to allow interactions."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "ElementExists"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure a specific web element exists, validating the presence of the element during the execution of the automation script. ",
+				"The `Assert` plugin is utilized to check this condition, and if the element exists, the assertion passes."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementExists}}",
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "ElementExists",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the web element that is being validated for its existence. ",
+				"This can be a CSS selector, XPath, or other locator strategy to identify the element."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy used to identify the element for the existence validation. ",
+				"Common strategies include CSS selectors, XPath, ID, and others."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#find-element",
+		"w3c": "POST /session/{session id}/element"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `ElementExists` plugin asserts that a specified web element exists within a web browser during automated tasks, ensuring that automation scripts validate the presence of elements.",
+		"In robotic process automation (RPA), it confirms the correct elements are present, allowing necessary interactions and enhancing workflow efficiency.",
+		"In automation testing, it validates the presence of elements, ensuring accurate user interaction flows and test outcomes."
+	]
+}

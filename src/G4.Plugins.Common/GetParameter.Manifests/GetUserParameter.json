@@ -1,0 +1,99 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"> [!IMPORTANT]",
+		"> This plugin is supported on Windows machines only.",
+		"",
+		"### Purpose",
+		"",
+		"The primary purpose of the `GetUserParameter` plugin is to fetch user-level parameters that are scoped to the current user's environment. This allows for user-specific configuration settings, such as user preferences or user-specific API keys, to be retrieved and used within automation workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                                               |",
+		"|--------------------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Parameter Retrieval            | Fetches user-specific parameters from the environment variables of the current user.                      |",
+		"| User-Specific Configuration    | Supports retrieval of parameters that are specific to the logged-in user.                                 |",
+		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                   | Description                                                                            |",
+		"|-------------------------|----------------------------------------------------------------------------------------|",
+		"| User Preferences        | Retrieve and apply user-specific preferences within automation workflows.              |",
+		"| Personalized Automation | Use user-level parameters to personalize automation actions based on the current user. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                    | Description                                                                                          |",
+		"|--------------------------|------------------------------------------------------------------------------------------------------|",
+		"| User-Specific Testing    | Retrieve parameters specific to the logged-in user, enabling personalized and user-specific tests.   |",
+		"| Configuration Management | Simplify configuration management by fetching user-specific parameters directly within test scripts. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `User` plugin to fetch a parameter named `UserApiKey` directly.",
+				"",
+				"| Field      | Description                                                     |",
+				"|------------|-----------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `User`. |",
+				"| onElement  | Specifies the name of the parameter to be fetched.              |"
+			],
+			"rule": {
+				"onElement": "UserApiKey",
+				"pluginName": "User"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `UserApiKey` from the user environment and use it in a `SendKeys` action.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
+				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
+				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$Get-Parameter --Name:UserApiKey --Scope:User}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "SendKeys"
+			}
+		}
+	],
+	"key": "User",
+	"manifestVersion": 4,
+	"pluginType": "GetParameter",
+	"properties": [
+		{
+			"description": [
+				"Specifies the name of the user parameter to be fetched."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `GetUserParameter` plugin retrieves user-specific parameters within automation workflows, enhancing personalization and configuration management.",
+		"Key features include fetching parameters from the current user's environment, supporting user-specific configuration, and integrating with other plugins for dynamic usage in various actions.",
+		"In RPA, it is used for retrieving user preferences and personalizing automation actions based on the current user.",
+		"In automation testing, it supports user-specific testing and simplifies configuration management by fetching parameters directly within test scripts."
+	]
+}

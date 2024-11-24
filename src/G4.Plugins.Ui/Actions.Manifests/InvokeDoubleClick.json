@@ -1,0 +1,111 @@
+{
+	"aliases": [
+		"DoubleClick",
+		"DoubleLeftClick"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Ui",
+		"Browser"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `InvokeDoubleClick` plugin is to perform double-click actions on specified web elements.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                     |",
+		"|---------------------|-----------------------------------------------------------------|",
+		"| Double Click Action | Performs a double-click action on the specified web element.    |",
+		"| Element Handling    | Handles web elements based on provided locators and attributes. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage               | Description                                                                                             |",
+		"|---------------------|---------------------------------------------------------------------------------------------------------|",
+		"| Element Interaction | Interact with web elements by performing double-click actions as part of automated workflows.           |",
+		"| Selection Actions   | Automate actions that require double-clicking on elements to trigger selections or open detailed views. |",
+		"| File Management     | Double-click on file icons to open or execute files within a file management system.                    |",
+		"| Form Interactions   | Double-click on form fields to activate editing modes or open additional input options.                 |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                       | Description                                                                                                |",
+		"|-----------------------------|------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing                  | Perform double-click actions on web elements to test user interface interactions.                          |",
+		"| Complex Interaction Testing | Test scenarios where actions depend on double-clicking elements to trigger further interactions.           |",
+		"| Regression Testing          | Ensure that double-click functionalities work as expected after changes or updates to the web application. |",
+		"| Menu Navigation Testing     | Double-click on menu items to test navigation within an application.                                       |",
+		"| Drag and Drop Testing       | Initiate drag and drop actions by double-clicking on draggable elements, ensuring they move as expected.   |",
+		"| Content Selection Testing   | Test text or content selection functionalities that are triggered by double-clicking on the content.       |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Perform a `DoubleClick` action on a web element with the `ID` attribute `DoubleClickButton`, using a CSS selector to locate the element."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#DoubleClickButton",
+				"pluginName": "InvokeDoubleClick"
+			}
+		},
+		{
+			"description": [
+				"Perform a `DoubleClick` action at the last known mouse location. ",
+				"While this approach might be suitable for certain scenarios, it's generally less reliable and less commonly used in automation testing compared to locating and interacting with elements using locators."
+			],
+			"rule": {
+				"pluginName": "InvokeDoubleClick"
+			}
+		},
+		{
+			"description": [
+				"Perform a `DoubleClick` action on a web element with the ID attribute `DoubleClickArea`, using an ID locator to find the element."
+			],
+			"rule": {
+				"locator": "Id",
+				"onElement": "DoubleClickArea",
+				"pluginName": "InvokeDoubleClick"
+			}
+		}
+	],
+	"key": "InvokeDoubleClick",
+	"manifestVersion": 1,
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the locator strategy used to find the target element for the double-click action. The default is `Xpath`."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the target element for the double-click action, located using the specified locator strategy."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `InvokeDoubleClick` plugin facilitates performing double-click actions on web elements, streamlining the process of programmatically controlled interactions.",
+		"Key features include sending double-click actions, supporting dynamic locator strategies, and handling web elements based on provided locators and attributes.",
+		"In RPA, it is used for element interaction, selection actions, file management, and form interactions, automating workflows that require double-clicking on elements.",
+		"In automation testing, it supports UI testing, complex interaction testing, regression testing, menu navigation testing, drag and drop testing, and content selection testing, ensuring double-click functionalities work as expected in various scenarios."
+	]
+}

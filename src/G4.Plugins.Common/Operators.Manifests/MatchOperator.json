@@ -1,0 +1,98 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Operators"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the MatchOperator plugin is to compare a string value against a regular expression pattern to determine if they match.",
+		"",
+		"### Key Features",
+		"",
+		"| Feature                     | Description                                                              |",
+		"|-----------------------------|--------------------------------------------------------------------------|",
+		"| String and Regex Comparison | Performs a comparison between a string and a regular expression pattern. |",
+		"| Integration                 | Can be used under condition expressions by other plugins.                |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                       | Description                                                                          |",
+		"|-----------------------------|--------------------------------------------------------------------------------------|",
+		"| String and Regex Comparison | Validate if a string matches a regular expression pattern.                           |",
+		"| Conditional Logic           | Use in conditional expressions to control workflow logic based on regex comparisons. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage              | Description                                                                          |",
+		"|--------------------|--------------------------------------------------------------------------------------|",
+		"| Validation         | Validate output or state by comparing expected string values against regex patterns. |",
+		"| Dynamic Conditions | Create dynamic conditions based on regex comparisons.                                |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Match` plugin to compare a string value against a regular expression pattern.",
+				"",
+				"| Field      | Description                                                                                                                                     |",
+				"|------------|-------------------------------------------------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Match`. This signifies the action of comparing a string value against a regex pattern. |",
+				"| LeftHand   | Specifies the string value to be compared. For example, `\"hello123\"`.                                                                         |",
+				"| RightHand  | Specifies the regular expression pattern to be compared against. For example, `\"^hello\\d+$\"`.                                                |"
+			],
+			"rule": {
+				"argument": "{{$ --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}",
+				"pluginName": "Match"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `MatchOperator` plugin within another plugin, such as `Assert`, to compare a string value against a regular expression pattern.",
+				"",
+				"| Field     | Description                                                                                                                                               |",
+				"|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|",
+				"| Condition | Identifies the specific operator being utilized, which is `MatchOperator`. This signifies the action of comparing a string value against a regex pattern. |",
+				"| LeftHand  | Specifies the string value to be compared. For example, `\"hello123\"`.                                                                                   |",
+				"| RightHand | Specifies the regular expression pattern to be compared against. For example, `\"^hello\\d+$\"`.                                                          |"
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Match --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "Match",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the string value to be compared in the match check."
+			],
+			"mandatory": true,
+			"name": "LeftHand",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the regular expression pattern to be compared against the string value."
+			],
+			"mandatory": true,
+			"name": "RightHand",
+			"type": "Regex"
+		}
+	],
+	"pluginType": "Operator",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `Match` plugin evaluates whether a string value matches a regular expression pattern, providing essential functionality for conditional logic in automation workflows and testing scenarios."
+	]
+}

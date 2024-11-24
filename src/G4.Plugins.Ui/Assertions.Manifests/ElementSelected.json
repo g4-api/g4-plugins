@@ -1,0 +1,102 @@
+{
+    "aliases": [
+        "Selected"
+    ],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+    "categories": [
+        "Validation",
+        "General"
+    ],
+    "description": [
+        "### Purpose",
+        "",
+        "The `ElementSelected` plugin is designed to assert that a specified web element is selected within an application or web browser during automated tasks. ",
+        "This plugin is essential for scenarios where ensuring an element is selected is necessary for the correct progression of automation workflows.",
+        "",
+        "### Key Features and Functionality",
+        "",
+        "| Feature              | Description                                                                             |",
+        "|----------------------|-----------------------------------------------------------------------------------------|",
+        "| Selection Validation | Validates that the specified web element is selected during execution.                  |",
+        "| Seamless Integration | Integrates smoothly with automation workflows to ensure elements are properly selected. |",
+        "| Reliable Assertion   | Provides a reliable mechanism to confirm the selection state of web elements.           |",
+        "",
+        "### Usages in RPA",
+        "",
+        "| Usage                    | Description                                                                                    |",
+        "|--------------------------|------------------------------------------------------------------------------------------------|",
+        "| Ensure Correct Selection | Confirms that specific elements are selected as required, enabling accurate workflow control.  |",
+        "| Process Flow Control     | Validates that elements are selected to ensure the correct progression of automated processes. |",
+        "",
+        "### Usages in Automation Testing",
+        "",
+        "| Usage                      | Description                                                                                    |",
+        "|----------------------------|------------------------------------------------------------------------------------------------|",
+        "| Selection State Validation | Ensures that specific elements are selected during test scenarios, validating user inputs.     |",
+        "| Workflow Verification      | Confirms that workflows proceed with the correct elements selected, ensuring accurate results. |"
+    ],
+    "examples": [
+        {
+            "description": [
+                "Assert that a specific web element is selected during the execution of automated tasks. ",
+                "This is useful for validating scenarios where an element's selection state is crucial for the workflow's success."
+            ],
+            "rule": {
+                "locator": "CssSelector",
+                "onElement": "#selectedElement",
+                "pluginName": "ElementSelected"
+            }
+        },
+        {
+            "description": [
+                "Perform an assertion to ensure a specific web element is selected, validating that it remains selected during the execution of the automation script. ",
+                "The `Assert` plugin is used to check this condition, and if the element is selected, the assertion passes."
+            ],
+            "rule": {
+                "argument": "{{$ --Condition:ElementSelected}}",
+                "locator": "CssSelector",
+                "onElement": "#selectedElement",
+                "pluginName": "Assert"
+            }
+        }
+    ],
+    "key": "ElementSelected",
+    "manifestVersion": 4,
+    "pluginType": "Assertion",
+    "properties": [
+        {
+            "description": [
+                "Specifies the web element that is being validated for its selection state. ",
+                "This can be a CSS selector, XPath, or other locator strategy to identify the element."
+            ],
+            "mandatory": true,
+            "name": "OnElement",
+            "type": "String|Expression"
+        },
+        {
+            "default": "Xpath",
+            "description": [
+                "Specifies the locator strategy used to identify the element for the selection validation. ",
+                "Common strategies include CSS selectors, XPath, ID, and others."
+            ],
+            "mandatory": false,
+            "name": "Locator",
+            "type": "String"
+        }
+    ],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#is-element-selected",
+		"w3c": "GET /session/{session id}/element/{element id}/selected"
+	},
+    "scope": [
+        "Any"
+    ],
+    "summary": [
+        "The `ElementSelected` plugin asserts that a specified web element is selected within an application or web browser during automated tasks, ensuring that automation scripts validate the selection state of elements.",
+        "In robotic process automation (RPA), it confirms that elements are correctly selected, enabling accurate workflow control and progression.",
+        "In automation testing, it validates the selection state of elements, ensuring accurate user input validation and workflow outcomes."
+    ]
+}

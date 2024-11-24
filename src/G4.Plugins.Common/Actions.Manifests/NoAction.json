@@ -1,0 +1,111 @@
+﻿{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"General",
+		"Utility"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `NoAction` plugin represents a plugin that performs no action. It is used primarily as a placeholder, a container for other plugins, or for testing purposes within automation scripts.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                                                                   |",
+		"|---------------------|---------------------------------------------------------------------------------------------------------------|",
+		"| No Operation        | Executes without performing any action, serving as a placeholder or a test step.                              |",
+		"| Rule Invocation     | Sets the invoke rules to true, allowing the rules under this action to be invoked.                            |",
+		"| Logging             | Logs the execution of the action with its name and argument for debugging and tracking purposes.              |",
+		"| Container for Rules | Can be used as a container to organize other plugins, wrapping multiple steps into a single logical grouping. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage               | Description                                                                                                                                                                          |",
+		"|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Placeholder Step    | Use the `NoAction` plugin as a placeholder step in automation scripts where an action might be added later.                                                                          |",
+		"| Debugging           | Employ the `NoAction` plugin to test the flow of automation scripts without performing any actual operations.                                                                        |",
+		"| Container for Steps | Utilize the `NoAction` plugin to group multiple steps into a single logical unit, such as wrapping all login steps under a single `NoAction` plugin with the argument 'Login Steps'. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage               | Description                                                                                                                                    |",
+		"|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Test Initialization | Use the `NoAction` plugin at the beginning of tests to ensure the setup is correct before performing actual actions.                           |",
+		"| Flow Verification   | Utilize the `NoAction` plugin to verify the logical flow of test scripts without executing real actions.                                       |",
+		"| Grouping Test Steps | Organize related test steps under a single `NoAction` plugin to create a logical grouping, making the test script easier to read and maintain. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This configuration uses the `NoAction` plugin as a placeholder within an automation script."
+			],
+			"rule": {
+				"argument": "Placeholder Argument",
+				"pluginName": "NoAction"
+			}
+		},
+		{
+			"description": [
+				"This configuration uses the `NoAction` plugin for debugging purposes, logging the execution without performing any operations."
+			],
+			"rule": {
+				"argument": "Debugging Argument",
+				"pluginName": "NoAction"
+			}
+		},
+		{
+			"description": [
+				"This configuration uses the `NoAction` plugin as a container to group login steps."
+			],
+			"rule": {
+				"argument": "Login Steps",
+				"pluginName": "NoAction",
+				"rules": [
+					{
+						"argument": "Username",
+						"onElement": "#username",
+						"pluginName": "SendKeys"
+					},
+					{
+						"argument": "Password",
+						"onElement": "#password",
+						"pluginName": "SendKeys"
+					},
+					{
+						"onElement": "#loginButton",
+						"pluginName": "Click"
+					}
+				]
+			}
+		}
+	],
+	"key": "NoAction",
+	"manifestVersion": 4,
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the argument value that will be logged during the execution of the plugin."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `NoAction` plugin executes without performing any actual operations, serving as a placeholder, a container for other plugins, or for testing purposes within automation scripts.",
+		"It is primarily used to fill gaps in automation flows, group related steps, or debug the logical flow of scripts without executing real actions.",
+		"Key features include no operation execution, rule invocation, logging for debugging purposes, and use as a container for organizing other plugins.",
+		"Common use cases include serving as a placeholder step, debugging automation flows, grouping related steps, test initialization, and flow verification in both RPA and automation testing scenarios."
+	]
+}

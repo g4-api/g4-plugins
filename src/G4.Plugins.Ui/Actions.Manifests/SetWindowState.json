@@ -1,0 +1,114 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Ui",
+		"Browser"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SetWindowState` plugin is to control the state of the browser window, providing options to maximize, minimize, or set the window to full screen.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                        |",
+		"|------------------------|--------------------------------------------------------------------|",
+		"| Maximize Window Action | Maximizes the browser window to the screen's full size.            |",
+		"| Minimize Window Action | Minimizes the browser window to the taskbar or dock.               |",
+		"| Full Screen Action     | Sets the browser window to full screen mode for an immersive view. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                   | Description                                                                   |",
+		"|-------------------------|-------------------------------------------------------------------------------|",
+		"| Full View Automation    | Ensures that web elements are fully visible by maximizing the browser window. |",
+		"| Background Processing   | Runs browser-based tasks in the background by minimizing the browser window.  |",
+		"| Screen Space Management | Frees up screen space for other applications while the browser runs minimized.|",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage               | Description                                                                                             |",
+		"|---------------------|---------------------------------------------------------------------------------------------------------|",
+		"| UI Testing          | Ensures that all UI elements are visible and interactable by maximizing the browser window.             |",
+		"| Layout Verification | Verifies that the layout of the web application behaves correctly when the browser window is maximized. |",
+		"| Performance Testing | Verifies that the application continues to function correctly when the browser window is minimized.     |",
+		"| Regression Testing  | Ensures that changes to the application do not affect functionality when the window state is changed.   |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Perform a `MaximizeWindow` action to ensure the browser window is maximized, providing an optimal view for subsequent actions."
+			],
+			"rule": {
+				"argument": "Maximized",
+				"pluginName": "SetWindowState"
+			}
+		},
+		{
+			"description": [
+				"Perform a `MinimizeWindow` action to minimize the browser window, allowing the browser to run in the background without taking up screen space."
+			],
+			"rule": {
+				"argument": "Minimized",
+				"pluginName": "SetWindowState"
+			}
+		},
+		{
+			"description": [
+				"Perform a `FullScreen` action to set the browser window to full screen, providing an immersive view of the web content."
+			],
+			"rule": {
+				"argument": "FullScreen",
+				"pluginName": "SetWindowState"
+			}
+		}
+	],
+	"key": "SetWindowState",
+	"manifestVersion": 4,
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the desired state of the browser window."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Maximizes the browser window to the screen's full size."
+					],
+					"name": "Maximized"
+				},
+				{
+					"description": [
+						"Minimizes the browser window to the taskbar or dock."
+					],
+					"name": "Minimized"
+				},
+				{
+					"description": [
+						"Sets the browser window to full screen mode for an immersive view."
+					],
+					"name": "FullScreen"
+				}
+			]
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#resizing-and-positioning-windows",
+		"w3c": "None"
+	},
+	"scope": [
+		"Web"
+	],
+	"summary": [
+		"The `SetWindowState` plugin controls the state of the browser window, allowing it to be maximized, minimized, or set to full screen.",
+		"In robotic process automation (RPA), it ensures that web elements are fully visible or allows browser-based tasks to run in the background.",
+		"In automation testing, it helps verify that the application functions correctly across different window states, ensuring UI elements are visible and interactable."
+	]
+}

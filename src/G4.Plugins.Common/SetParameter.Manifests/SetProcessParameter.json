@@ -1,0 +1,144 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SetProcessParameter` plugin is to set process-level parameters that are specific to the running automation process. This allows for flexible configuration management within the process scope, enabling dynamic updates to parameters such as process-specific settings or configurations essential for automation workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                                            |",
+		"|--------------------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Parameter Setting              | Sets process-level parameters that persist within the running automation process.                      |",
+		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically set parameters based on automation needs. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                               | Description                                                                                    |",
+		"|-------------------------------------|------------------------------------------------------------------------------------------------|",
+		"| Dynamic Configuration               | Set configuration settings dynamically based on process-specific requirements.                 |",
+		"| Process-Specific Parameter Storage  | Use a centralized location for storing and setting parameters that persist within the process. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                    | Description                                                                                |",
+		"|--------------------------|--------------------------------------------------------------------------------------------|",
+		"| Process-Specific Testing | Set parameters specific to the process, enabling more accurate and process-specific tests. |",
+		"| Configuration Management | Simplify configuration management by setting parameters directly within test scripts.      |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Process` plugin to set a parameter named `ProcessSetting` directly.",
+				"",
+				"| Field      | Description                                                        |",
+				"|------------|--------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Process`. |",
+				"| argument   | Specifies the value to set the parameter.                          |",
+				"| onElement  | Specifies the name of the parameter to be set.                     |"
+			],
+			"rule": {
+				"argument": "{{$ --Value:MyProcessSetting}}",
+				"onElement": "ProcessSetting",
+				"pluginName": "Process"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the macro to set a parameter named `ProcessSetting` and use it in a `RegisterParameter` action, utilizing the `OnAttribute` property.",
+				"",
+				"| Field       | Description                                                                                             |",
+				"|-------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName  | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument    | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement   | Specifies the target element whose attribute content will be saved as the parameter value.              |",
+				"| onAttribute | Specifies the attribute of the element from which the value will be extracted.                          |",
+				"| locator     | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:ProcessSetting --Scope:Process}}",
+				"locator": "CssSelector",
+				"onAttribute": "data-value",
+				"onElement": "#someElement",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates setting a parameter named `ProcessSetting` from the text content of an element identified by its CSS selector.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument   | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement  | Specifies the target element whose text content will be saved as the parameter value.                   |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:ProcessSetting --Scope:Process}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates setting a parameter named `APIKey` from the text content of an element identified by its CSS selector and using a regular expression to extract part of the text.",
+				"",
+				"| Field             | Description                                                                                             |",
+				"|-------------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName        | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument          | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement         | Specifies the target element whose text content will be saved as the parameter value.                   |",
+				"| regularExpression | Specifies the regular expression to apply to the text content before saving the parameter value.        |",
+				"| locator           | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:APIKey --Scope:Process}}",
+				"locator": "CssSelector",
+				"onElement": "#apiElement",
+				"pluginName": "RegisterParameter",
+				"regularExpression": "^.*(?=\\sAPIKey$)"
+			}
+		}
+	],
+	"key": "Process",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the value to be set for the parameter."
+			],
+			"mandatory": false,
+			"name": "Value",
+			"type": "String"
+		}
+	],
+	"pluginType": "SetParameter",
+	"properties": [
+		{
+			"description": [
+				"Specifies the name of the parameter to be set."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `SetProcessParameter` plugin sets process-level parameters within automation workflows, enhancing configuration management."
+	]
+}

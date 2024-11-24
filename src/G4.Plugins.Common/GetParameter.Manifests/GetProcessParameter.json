@@ -1,0 +1,97 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `GetProcessParameter` plugin is to fetch environment variables that are specific to the current process. This allows for the dynamic retrieval of parameters that may vary during the execution of a process, such as temporary paths, session-specific tokens, or other environment-specific settings.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                                               |",
+		"|------------------------------- |-----------------------------------------------------------------------------------------------------------|",
+		"| Parameter Retrieval            | Fetches environment variables specific to the current process.                                            |",
+		"| Dynamic Parameter Handling     | Retrieves process-specific parameters that can change during runtime.                                     |",
+		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                  | Description                                                                                                 |",
+		"|------------------------|-------------------------------------------------------------------------------------------------------------|",
+		"| Dynamic Configuration  | Retrieve and use process-specific environment variables dynamically based on the process execution context. |",
+		"| Temporary Data Storage | Use process-level environment variables for temporary data storage and retrieval within a process.          |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                      | Description                                                                                          |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------|",
+		"| Session-Specific Testing   | Retrieve parameters specific to the test session, enabling more accurate and session-specific tests. |",
+		"| Dynamic Test Configuration | Simplify test configuration by fetching process-specific parameters directly within test scripts.    |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Process` plugin to fetch a parameter named `TempPath` directly.",
+				"",
+				"| Field      | Description                                                        |",
+				"|------------|--------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Process`. |",
+				"| onElement  | Specifies the name of the parameter to be fetched.                 |"
+			],
+			"rule": {
+				"onElement": "TempPath",
+				"pluginName": "Process"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `TempPath` from the process environment and use it in a `SendKeys` action.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
+				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
+				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$Get-Parameter --Name:TempPath --Scope:Process}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "SendKeys"
+			}
+		}
+	],
+	"key": "Process",
+	"manifestVersion": 4,
+	"pluginType": "GetParameter",
+	"properties": [
+		{
+			"description": [
+				"Specifies the name of the environment variable to be fetched from the process environment."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `GetProcessParameter` plugin retrieves process-specific environment variables within automation workflows, enhancing configuration management.",
+		"Key features include fetching environment variables specific to the current process, dynamic parameter handling during runtime, and integration with other plugins for dynamic usage in various actions.",
+		"Process parameters are temporary and can be accessed as long as the process runs; these parameters are not isolated.",
+		"In RPA, it is used for dynamic configuration and temporary data storage within a process.",
+		"In automation testing, it supports session-specific testing and dynamic test configuration."
+	]
+}

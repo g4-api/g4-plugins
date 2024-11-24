@@ -1,0 +1,90 @@
+{
+	"aliases": [
+		"galerttext",
+		"GetAlertText"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `Get-AlertText` plugin is designed for RPA and automation testing workflows, enabling efficient handling of alert dialogs by retrieving the text content within them. ",
+		"It plays a crucial role in capturing alert messages that appear during the execution of automated processes or test scripts, allowing these messages to be validated, responded to, or logged as needed.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                     | Description                                                                                                          |",
+		"|-----------------------------|----------------------------------------------------------------------------------------------------------------------|",
+		"| Alert Text Retrieval        | Captures the text content of alert dialogs encountered during automation workflows.                                  |",
+		"| Integration with Automation | Seamlessly integrates with RPA processes and automation test scripts, enabling dynamic responses to alert messages.  |",
+		"| Enhanced Error Handling     | Improves error recovery by capturing and analyzing alert messages, allowing automated systems to respond correctly.  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage          | Description                                                                                                       |",
+		"|----------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| Alert Handling | Automatically captures and processes alert messages during RPA workflows, enabling informed decisions or actions. |",
+		"| Error Recovery | Supports robust error recovery mechanisms by detecting and handling alert dialogs in real-time.                   |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage              | Description                                                                                                       |",
+		"|--------------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| Alert Validation   | Validates the text content of alert dialogs during test script execution, ensuring expected behavior in web apps. |",
+		"| Exception Handling | Incorporates alert text retrieval into test scripts for handling unexpected conditions or errors.                 |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Retrieve the text content of an alert dialog and register it as a session-scoped parameter named 'AlertText'.",
+				"This example demonstrates using the `Get-AlertText` plugin to capture the alert text for later use in the automation workflow."
+			],
+			"rule": {
+				"argument": "{{$ --Name:AlertText --Value:{{$Get-AlertText}} --Scope:Session}}",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"description": [
+				"Extract specific numeric data from an alert dialog using a regular expression and register it as a session-scoped parameter named 'ExtractedInfo'.",
+				"This example shows how to use the `Get-AlertText` plugin with a regex pattern to capture and store specific alert content for further processing."
+			],
+			"rule": {
+				"argument": "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\\d+}} --Scope:Session}}",
+				"pluginName": "RegisterParameter"
+			}
+		}
+	],
+	"key": "Get-AlertText",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies the regular expression pattern to be used for extracting specific information from the text content of alert dialogs."
+			],
+			"mandatory": false,
+			"name": "Pattern",
+			"type": "Regex"
+		}
+	],
+	"pluginType": "Macro",
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-alert-text",
+		"w3c": "GET /session/{session id}/alert/text"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `Get-AlertText` plugin retrieves the text content of alert dialogs encountered during automation workflows.",
+		"In robotic process automation (RPA), it captures alert text for processing, allowing dynamic responses.",
+		"In automation testing, it validates and handles alert messages to ensure proper application behavior."
+	]
+}

@@ -1,0 +1,116 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"> [!IMPORTANT]",
+		"> This plugin is supported on Windows machines only.",
+		"",
+		"### Purpose",
+		"",
+		"The primary purpose of the GetMachineParameter plugin is to retrieve machine-level environment variables. This allows for the extraction of environment-specific values within automation workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                      |",
+		"|----------------------------|--------------------------------------------------------------------------------------------------|",
+		"| Retrieve Environment Value | Retrieves the value of a specified environment variable from the machine's environment settings. |",
+		"| Integration                | Can be used within other plugins to dynamically fetch machine-specific parameters.               |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                      | Description                                                                            |",
+		"|----------------------------|----------------------------------------------------------------------------------------|",
+		"| Environment Configuration  | Fetch environment-specific configurations for use in automation workflows.             |",
+		"| Dynamic Data Handling      | Retrieve machine-level parameters dynamically during automation execution.             |",
+		"| System Diagnostics         | Use machine parameters to assess and respond to system state or configuration changes. |",
+		"| Security and Compliance    | Access machine environment variables for security settings and compliance checks.      |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                          |",
+		"|------------------------|--------------------------------------------------------------------------------------|",
+		"| Test Environment Setup | Configure test environments dynamically by retrieving environment variable values.   |",
+		"| Parameterized Testing  | Use machine-specific parameters to drive parameterized testing scenarios.            |",
+		"| Automated Monitoring   | Automate monitoring of environment variables to ensure consistency across test runs. |",
+		"| Resource Management    | Manage and allocate resources efficiently based on machine-level parameters.         |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `GetMachineParameter` plugin to retrieve the value of a machine-level environment variable named `MyMachineParam`.",
+				"",
+				"| Field      | Description                                                                                                         |",
+				"|------------|---------------------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Machine`. This signifies the action of getting the parameter. |",
+				"| onElement  | Specifies the name of the environment variable, which is `MyMachineParam`.                                           |"
+			],
+			"rule": {
+				"onElement": "MyMachineParam",
+				"pluginName": "Machine"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `GetMachineParameter` plugin within an automation flow to send the retrieved parameter value as keystrokes to an element.",
+				"",
+				"| Field      | Description                                                                                                          |",
+				"|------------|----------------------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes. |",
+				"| argument   | Specifies the use of the `GetMachineParameter` plugin to fetch the environment variable value dynamically.           |",
+				"| onElement  | Specifies the target element on which the keystrokes will be sent, which is identified by its CSS selector.          |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example.              |"
+			],
+			"rule": {
+				"argument": "{{$Get-Parameter --Name:MyMachineParam --Scope:Machine}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `GetMachineParameter` plugin to retrieve a machine-level environment variable without specifying any additional parameters.",
+				"",
+				"| Field      | Description                                                                                                            |",
+				"|------------|------------------------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Machine`. This signifies the action of getting the parameter. |",
+				"| onElement  | Specifies the name of the environment variable, which is `DefaultMachineParam`.                                        |"
+			],
+			"rule": {
+				"onElement": "DefaultMachineParam",
+				"pluginName": "Machine"
+			}
+		}
+	],
+	"key": "Machine",
+	"manifestVersion": 4,
+	"pluginType": "GetParameter",
+	"properties": [
+		{
+			"description": [
+				"The `OnElement` property specifies the name of the environment variable to be retrieved."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `GetMachineParameter` plugin retrieves machine-level environment variables within automation workflows, enhancing environment-specific configuration management.",
+		"Key features include retrieving specified environment variable values, integration with other plugins for dynamic parameter fetching, and use in system diagnostics and compliance checks.",
+		"In RPA, it is used for environment configuration, dynamic data handling, and system diagnostics.",
+		"In automation testing, it supports environment setup, parameterized testing, automated monitoring, and resource management."
+	]
+}

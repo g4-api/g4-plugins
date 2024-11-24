@@ -1,0 +1,169 @@
+{
+	"aliases": [
+		"DriverType"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `DriverTypeName` plugin is designed to assert the type name of the WebDriver used during automation tasks. ",
+		"This plugin is crucial for validating that the correct driver is in use, ensuring the automation script is running in the expected browser or environment.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                     | Description                                                                                                 |",
+		"|-----------------------------|-------------------------------------------------------------------------------------------------------------|",
+		"| Driver Type Validation      | Validates that the current WebDriver matches the expected driver type, such as Chrome, Firefox, etc.        |",
+		"| Operator Flexibility        | Supports a wide range of operators for flexible validation, including equality, pattern matching, and more. |",
+		"| Regular Expression Support  | Allows applying regular expressions to the driver type name before performing the assertion.                |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                 | Description                                                                             |",
+		"|-----------------------|-----------------------------------------------------------------------------------------|",
+		"| Driver Validation     | Ensures that the correct WebDriver is in use for executing specific tasks or workflows. |",
+		"| Environment Assurance | Confirms that automation scripts are running in the expected environment or browser.    |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                   | Description                                                                                       |",
+		"|-------------------------|---------------------------------------------------------------------------------------------------|",
+		"| Cross-Browser Testing   | Validates that tests are running in the correct browser, ensuring consistency in test coverage.   |",
+		"| Environment Consistency | Ensures that the tests are executed in the intended environment, such as a specific browser type. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that the WebDriver type name equals 'Chrome'. ",
+				"This is useful for scenarios where the script must validate that the test is running in the Chrome browser."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:Chrome}}",
+				"pluginName": "DriverTypeName"
+			}
+		},
+		{
+			"description": [
+				"Assert that the WebDriver type name does not equal 'Firefox'. ",
+				"This is useful for ensuring the script is not running in Firefox, allowing for browser-specific automation flows."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:NotEqual --Expected:Firefox}}",
+				"pluginName": "DriverTypeName"
+			}
+		},
+		{
+			"description": [
+				"Assert that the WebDriver type name matches the regular expression 'Chrome|Firefox'. ",
+				"This is useful for validating that the test is running in either Chrome or Firefox."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Match --Expected:Chrome|Firefox}}",
+				"pluginName": "DriverTypeName"
+			}
+		},
+		{
+			"description": [
+				"Assert that the WebDriver type name matches the regular expression pattern '.*Driver' using a regular expression. ",
+				"This is useful for scenarios where the driver name contains a specific suffix like 'Driver'."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Match --Expected:.*Driver}}",
+				"pluginName": "DriverTypeName",
+				"regularExpression": ".*Driver"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure the WebDriver type name equals 'Chrome' using the `Assert` plugin. ",
+				"The `Assert` plugin is used to check this condition, validating that the test is running in the Chrome browser."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:DriverTypeName --Operator:Equal --Expected:Chrome}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure the WebDriver type name does not equal 'Firefox' using the `Assert` plugin. ",
+				"This validation is crucial for ensuring that the automation is not running in the Firefox browser, allowing for browser-specific workflows."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:DriverTypeName --Operator:NotEqual --Expected:Firefox}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure the WebDriver type name matches the regular expression 'Chrome|Firefox' using the `Assert` plugin. ",
+				"This example validates that the test is running in either Chrome or Firefox, ensuring consistency across browsers."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:DriverTypeName --Operator:Match --Expected:Chrome|Firefox}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure the WebDriver type name does not match the regular expression 'IE|Edge' using the `Assert` plugin. ",
+				"This validation ensures that the automation is not running in Internet Explorer or Edge, useful for workflows that require different handling for these browsers."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:DriverTypeName --Operator:NotMatch --Expected:IE|Edge}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "DriverTypeName",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the type of comparison or operation to be performed when evaluating the WebDriver type name."
+			],
+			"mandatory": true,
+			"name": "Operator",
+			"type": "Operator"
+		},
+		{
+			"description": [
+				"Specifies the value or pattern that the WebDriver type name is expected to match during the assertion."
+			],
+			"mandatory": true,
+			"name": "Expected",
+			"type": "String"
+		}
+	],
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies a regular expression to be applied to the WebDriver type name before performing the assertion. ",
+				"This allows for more flexible validation of driver names that may require pattern matching."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#new-session",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `DriverTypeName` plugin asserts the type name of the WebDriver used in automation tasks, ensuring that the correct driver is in use.",
+		"In robotic process automation (RPA), it confirms the WebDriver type, ensuring that tasks are executed in the intended browser.",
+		"In automation testing, it supports cross-browser testing by validating that tests are running in the correct browser, enhancing test coverage and consistency."
+	]
+}

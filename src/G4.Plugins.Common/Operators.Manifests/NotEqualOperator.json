@@ -1,0 +1,101 @@
+{
+	"aliases": [
+		"Ne"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Operators"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the NotEqualOperator plugin is to compare two string values to determine if they are not equal.",
+		"",
+		"### Key Features",
+		"",
+		"| Feature           | Description                                               |",
+		"|-------------------|-----------------------------------------------------------|",
+		"| String Comparison | Performs a comparison between two string values.          |",
+		"| Integration       | Can be used under condition expressions by other plugins. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage             | Description                                                                           |",
+		"|-------------------|---------------------------------------------------------------------------------------|",
+		"| String Comparison | Validate if two string values are not equal.                                          |",
+		"| Conditional Logic | Use in conditional expressions to control workflow logic based on string comparisons. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage              | Description                                                                                |",
+		"|--------------------|--------------------------------------------------------------------------------------------|",
+		"| Validation         | Validate output or state by comparing expected string values to ensure they are not equal. |",
+		"| Dynamic Conditions | Create dynamic conditions based on string comparisons.                                     |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `NotEqual` plugin to compare two string values.",
+				"",
+				"| Field      | Description                                                                                                                   |",
+				"|------------|-------------------------------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `NotEqual`. This signifies the action of comparing two string values. |",
+				"| LeftHand   | Specifies the first string value to be compared. For example, `\"value1\"`.                                                   |",
+				"| RightHand  | Specifies the second string value to be compared against. For example, `\"value2\"`.                                          |"
+			],
+			"rule": {
+				"argument": "{{$ --LeftHand:\"value1\" --RightHand:\"value2\"}}",
+				"pluginName": "NotEqual"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `NotEqualOperator` plugin within another plugin, such as `Assert`, to compare two string values.",
+				"",
+				"| Field     | Description                                                                                                                             |",
+				"|-----------|-----------------------------------------------------------------------------------------------------------------------------------------|",
+				"| Condition | Identifies the specific operator being utilized, which is `NotEqualOperator`. This signifies the action of comparing two string values. |",
+				"| LeftHand  | Specifies the first string value to be compared. For example, `\"value1\"`.                                                             |",
+				"| RightHand | Specifies the second string value to be compared against. For example, `\"value2\"`.                                                    |"
+			],
+			"rule": {
+				"argument": "{{$ --Condition:NotEqual --LeftHand:\"value1\" --RightHand:\"value2\"}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "NotEqual",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the first string value to be compared in the not equal check."
+			],
+			"mandatory": true,
+			"name": "LeftHand",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the second string value to be compared against the first string value."
+			],
+			"mandatory": true,
+			"name": "RightHand",
+			"type": "String"
+		}
+	],
+	"pluginType": "Operator",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `NotEqual` plugin evaluates whether two string values are not equal, providing essential functionality for conditional logic in automation workflows and testing scenarios."
+	]
+}

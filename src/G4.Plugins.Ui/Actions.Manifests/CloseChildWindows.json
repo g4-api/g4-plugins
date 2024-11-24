@@ -1,0 +1,89 @@
+{
+	"aliases": [
+		"CloseAllChildWindows",
+		"CloseAllTabs",
+		"CloseTabs"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Ui",
+		"Browser"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `CloseChildWindows` plugin is to close all child browser windows while keeping the main window open. This is useful for cleaning up and managing browser sessions that involve multiple windows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                              |",
+		"|----------------------|--------------------------------------------------------------------------|",
+		"| Close Child Windows  | Closes all child browser windows, retaining only the main window.        |",
+		"| Window Management    | Ensures that the main window remains active after closing child windows. |",
+		"| Exception Handling   | Handles any exceptions that occur during the window closing process.     |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage             | Description                                                                        |",
+		"|-------------------|------------------------------------------------------------------------------------|",
+		"| Session Cleanup   | Close all child windows at the end of an automation session to clean up resources. |",
+		"| Window Management | Ensure only the main window remains open during the automation process.            |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage               | Description                                                                                 |",
+		"|---------------------|---------------------------------------------------------------------------------------------|",
+		"| Test Cleanup        | Close all child windows at the end of tests to ensure no windows remain open between tests. |",
+		"| Resource Management | Ensure proper management of browser windows during test execution.                          |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Use the `CloseChildWindows` plugin to close all child browser windows, keeping the main window open."
+			],
+			"rule": {
+				"pluginName": "CloseChildWindows"
+			}
+		},
+		{
+			"description": [
+				"Use the `CloseChildWindows` plugin to close a specified number of child browser windows."
+			],
+			"rule": {
+				"argument": "2",
+				"pluginName": "CloseChildWindows"
+			}
+		}
+	],
+	"key": "CloseChildWindows",
+	"manifestVersion": 4,
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"The `Argument` property specifies the number of child browser windows to close. ",
+				"It accepts a number. If the argument is not provided or is set to a value greater than the number of child windows, all child windows will be closed. ",
+				"Providing a negative value will result in no windows being closed."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "Number"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#close-window",
+		"w3c": "DELETE /session/{session id}/window"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `CloseChildWindows` plugin closes all child browser windows while keeping the main window open and active.",
+		"In robotic process automation (RPA), it ensures a focused workflow by maintaining only the primary window.",
+		"In automation testing, it helps manage window states by removing unnecessary child windows during test execution."
+	]
+}

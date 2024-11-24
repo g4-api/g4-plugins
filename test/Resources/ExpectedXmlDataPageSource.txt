@@ -1,0 +1,22 @@
+<DataRoot>
+  <DataEntry>
+    <Pre>Description:				Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Pre>
+    <Rating>4.5</Rating>
+    <PetFriendly>True</PetFriendly>
+    <Description>Lorem ipsum dolor sit "amet", consectetur adipiscing elit.</Description>
+    <Amenities>Free Wi-Fi, Pool, Restaurant</Amenities>
+    <Location>City A</Location>
+    <LastUpdate>10/28/2023 3:30:00 PM</LastUpdate>
+    <Price>100</Price>
+  </DataEntry>
+  <DataEntry>
+    <Pre>Description:				Nullam et arcu bibendum, tristique ex in, efficitur libero.</Pre>
+    <Rating>4.8</Rating>
+    <PetFriendly>False</PetFriendly>
+    <Description>Nullam et arcu bibendum, "tristique" ex in, efficitur libero.</Description>
+    <Amenities>Free Parking, Gym, Spa</Amenities>
+    <Location>City B</Location>
+    <LastUpdate>10/28/2023 12:00:00 AM</LastUpdate>
+    <Price>120</Price>
+  </DataEntry>
+</DataRoot>

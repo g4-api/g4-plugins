@@ -1,0 +1,103 @@
+{
+    "aliases": [
+        "Stale"
+    ],
+    "author": {
+        "link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+        "name": "Roei Sabag"
+    },
+    "categories": [
+        "Validation",
+        "General"
+    ],
+    "description": [
+        "### Purpose",
+        "",
+        "The `ElementStale` plugin is designed to assert that a specified web element has become stale in the context of a web page during automated tasks. ",
+        "This plugin is essential for scenarios where verifying that an element is no longer attached to the DOM is necessary to ensure accurate automation flows.",
+        "",
+        "### Key Features and Functionality",
+        "",
+        "| Feature              | Description                                                                              |",
+        "|----------------------|------------------------------------------------------------------------------------------|",
+        "| Staleness Validation | Validates that the specified web element is no longer attached to the DOM.               |",
+        "| Workflow Assurance   | Ensures that workflows correctly handle elements that are no longer present on the page. |",
+        "| Reliable Assertion   | Provides a reliable mechanism to confirm the staleness of web elements.                  |",
+        "",
+        "### Usages in RPA",
+        "",
+        "| Usage                  | Description                                                                                          |",
+        "|------------------------|------------------------------------------------------------------------------------------------------|",
+        "| Ensure Element Removal | Confirms that specific elements have been removed from the DOM, enabling accurate workflow control.  |",
+        "| Process Flow Control   | Validates that elements are stale to ensure correct handling of dynamic content in automation flows. |",
+        "",
+        "### Usages in Automation Testing",
+        "",
+        "| Usage                 | Description                                                                                               |",
+        "|-----------------------|-----------------------------------------------------------------------------------------------------------|",
+        "| Staleness Validation  | Ensures that elements become stale as expected during test scenarios, validating dynamic content updates. |",
+        "| Workflow Verification | Confirms that workflows proceed with the correct handling of stale elements, ensuring accurate results.   |"
+    ],
+    "examples": [
+        {
+            "description": [
+                "Assert that a specific web element has become stale during the execution of automated tasks. ",
+                "This is useful for validating scenarios where the element's removal from the DOM is crucial for the workflow's success."
+            ],
+            "rule": {
+                "locator": "CssSelector",
+                "onElement": "#staleElement",
+                "pluginName": "ElementStale"
+            }
+        },
+        {
+            "description": [
+                "Perform an assertion to ensure a specific web element has become stale, validating that it is no longer attached to the DOM during the execution of the automation script. ",
+                "The `Assert` plugin is used to check this condition, and if the element is stale, the assertion passes."
+            ],
+            "rule": {
+                "argument": "{{$ --Condition:ElementStale}}",
+                "locator": "CssSelector",
+                "onElement": "#staleElement",
+                "pluginName": "Assert"
+            }
+        }
+    ],
+    "key": "ElementStale",
+    "manifestVersion": 4,
+    "pluginType": "Assertion",
+    "properties": [
+        {
+            "description": [
+                "Specifies the web element that is being validated for its staleness. ",
+                "This can be a CSS selector, XPath, or other locator strategy to identify the element."
+            ],
+            "mandatory": true,
+            "name": "OnElement",
+            "type": "String|Expression"
+        },
+        {
+            "default": "Xpath",
+            "description": [
+                "Specifies the locator strategy used to identify the element for the staleness validation. ",
+                "Common strategies include CSS selectors, XPath, ID, and others."
+            ],
+            "mandatory": false,
+            "name": "Locator",
+            "type": "String"
+        }
+    ],
+    "protocol": {
+        "apiDocumentation": "https://www.w3.org/TR/webdriver/#find-element",
+        "w3c": "POST /session/{session id}/element"
+    },
+    "scope": [
+        "Web",
+        "MobileWeb"
+    ],
+    "summary": [
+        "The `ElementStale` plugin asserts that a specified web element has become stale within a web page during automated tasks, ensuring that automation scripts validate the removal of elements from the DOM.",
+        "In robotic process automation (RPA), it confirms that elements are correctly removed, enabling accurate workflow control and progression.",
+        "In automation testing, it validates the staleness of elements, ensuring accurate handling of dynamic content and workflow outcomes."
+    ]
+}

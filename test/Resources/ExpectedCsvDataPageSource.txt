@@ -1,0 +1,3 @@
+Pre,Amenities,Description,LastUpdate,PetFriendly,Location,Price,Rating
+"Description:				Lorem ipsum dolor sit amet, consectetur adipiscing elit.","Free Wi-Fi, Pool, Restaurant","Lorem ipsum dolor sit ""amet"", consectetur adipiscing elit.",10/28/2023 3:30:00 PM,True,City A,100,4.5
+"Description:				Nullam et arcu bibendum, tristique ex in, efficitur libero.","Free Parking, Gym, Spa","Nullam et arcu bibendum, ""tristique"" ex in, efficitur libero.",10/28/2023 12:00:00 AM,False,City B,120,4.8

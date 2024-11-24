@@ -1,0 +1,164 @@
+{
+	"aliases": [
+		"Address",
+		"Url"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `PageUrl` plugin is designed to validate the URL of the current web page against specific conditions. ",
+		"It provides a robust mechanism to assert that the page URL meets expected conditions, such as matching a particular pattern, containing specific segments, or being equal to a given URL.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                         |",
+		"|----------------------------|---------------------------------------------------------------------------------------------------------------------|",
+		"| URL Validation             | Validates the current page URL against expected conditions, supporting both exact matches and pattern-based checks. |",
+		"| Regular Expression Support | Applies regular expressions to the URL before performing assertions, enabling complex validations.                  |",
+		"| Flexible Assertions        | Supports a range of operators, including equality, inequality, and pattern matching, for versatile URL validation.  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                   | Description                                                                                                                    |",
+		"|-------------------------|--------------------------------------------------------------------------------------------------------------------------------|",
+		"| Navigation Verification | Ensures that the web page navigates to the correct URL during automation workflows, crucial for verifying link correctness.    |",
+		"| Dynamic URL Validation  | Validates that the dynamically generated or redirected URLs match expected patterns, preventing errors in automated workflows. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                       | Description                                                                                                                                  |",
+		"|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| SEO Compliance Verification | Ensures that page URLs adhere to SEO best practices, including structure, format, and content relevance.                                     |",
+		"| Localization Testing        | Verifies that localized versions of the website navigate to the correct URLs, ensuring consistent behavior across different regions.         |",
+		"| Functional Testing          | Validates that user actions lead to the correct pages by checking the resulting URL, ensuring accuracy in navigation and link functionality. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Ensure that the extracted numeric value from the URL is greater than `100`. ",
+				"The regular expression `\\d+` is used to extract numeric values from the URL, and the assertion checks that the extracted number exceeds `100`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Greater --Expected:100}}",
+				"pluginName": "PageUrl",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Assert that the numeric value extracted from the URL is less than `50`. ",
+				"This validation ensures that the extracted numeric value, identified by the regular expression `\\d+`, is below `50`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Lower --Expected:50}}",
+				"pluginName": "PageUrl",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Validate that the numeric value extracted from the URL is greater than or equal to `200`. ",
+				"The regular expression `\\d+` extracts the numeric part of the URL, and the assertion confirms that it meets or exceeds `200`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:GreaterEqual --Expected:200}}",
+				"pluginName": "PageUrl",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Check that the numeric value extracted from the URL is less than or equal to `300`. ",
+				"The regular expression `\\d+` is applied to extract the number, and the assertion verifies that it does not exceed `300`."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:LowerEqual --Expected:300}}",
+				"pluginName": "PageUrl",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				"Assert that the current page URL is equal to 'https://example.com/home'. ",
+				"This is useful for scenarios where the script needs to confirm that the user has navigated to the correct page."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Equal --Expected:https://example.com/home}}",
+				"pluginName": "PageUrl"
+			}
+		},
+		{
+			"description": [
+				"Check that the current page URL does not match the pattern 'https://example.com/404'. ",
+				"This ensures that the script has not navigated to an error page."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:NotMatch --Expected:https://example.com/404}}",
+				"pluginName": "PageUrl"
+			}
+		},
+		{
+			"description": [
+				"Ensure that the URL contains the text 'dashboard'. ",
+				"This is useful for validating that the user is on the dashboard page or a related section."
+			],
+			"rule": {
+				"argument": "{{$ --Operator:Match --Expected:dashboard}}",
+				"pluginName": "PageUrl"
+			}
+		}
+	],
+	"key": "PageUrl",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the type of comparison or operation to be performed when evaluating the page URL."
+			],
+			"mandatory": true,
+			"name": "Operator",
+			"type": "Operator"
+		},
+		{
+			"description": [
+				"Specifies the expected URL or pattern that the current page URL is expected to match during the assertion."
+			],
+			"mandatory": true,
+			"name": "Expected",
+			"type": "String"
+		}
+	],
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies a regular expression to be applied to the page URL before performing the assertion. ",
+				"This allows for more flexible validation of URL patterns."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-current-url",
+		"w3c": "GET /session/{session id}/url"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `PageUrl` plugin validates the current web page URL against specific conditions, supporting a range of operators for flexible assertions. ",
+		"It is commonly used in RPA to verify correct navigation and dynamic URL validation, and in automation testing to ensure SEO compliance, localization accuracy, and correct URL handling across different scenarios."
+	]
+}

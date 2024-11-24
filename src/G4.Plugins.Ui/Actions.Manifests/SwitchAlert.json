@@ -1,0 +1,174 @@
+{
+	"aliases": [
+		"SwitchToAlert"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"> [!IMPORTANT]",
+		"> This plugin works only for `alert`, `beforeUnload`, `confirm`, `default`, `prompt`.",
+		"",
+		"### Purpose",
+		"",
+		"The `SwitchAlert` plugin serves the purpose of automating the handling of alert dialogs in web-based automation workflows, particularly in the context of RPA (Robotic Process Automation) and automation testing. ",
+		"Its primary goal is to provide a seamless and efficient mechanism for interacting with alert dialogs that may appear during automated processes, ensuring smooth execution and accurate handling of alert messages.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature            | Description                                                                                   |",
+		"|--------------------|-----------------------------------------------------------------------------------------------|",
+		"| Alert Recognition  | Seamlessly identifies and switches to alert dialogs encountered during automation tasks.      |",
+		"| Action Flexibility | Offers flexibility in performing actions on alerts, supporting both acceptance and dismissal. |",
+		"| Argument Handling  | Efficiently handles plugin arguments, specifying actions and keys to send to the alert.       |",
+		"| Error Handling     | Robust error handling mechanisms ensure reliability and resilience of automation processes.   |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                       | Description                                                                                          |",
+		"|-----------------------------|------------------------------------------------------------------------------------------------------|",
+		"| Alert Notification Handling | Automates the handling of alert dialogs during RPA tasks, ensuring alerts are managed automatically. |",
+		"| Error Recovery              | Handles unexpected alerts, allowing graceful error recovery and continued execution.                 |",
+		"| User Notification           | Interacts with alerts similar to human users, facilitating user-driven processes.                    |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                                         |",
+		"|------------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Alert Testing          | Validates alert handling functionality by simulating alert dialogs and verifying correct responses. |",
+		"| Error Scenario Testing | Simulates error conditions triggering alerts for comprehensive testing of application behavior.     |",
+		"| End-to-End Testing     | Automates alert handling in user interaction scenarios, ensuring robust application behavior.       |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Handle alert dialogs during automated tasks by defaulting to **dismiss**. ",
+				"This ensures the automation process continues smoothly without manual intervention, effectively managing alert dialogs encountered during execution."
+			],
+			"rule": {
+				"pluginName": "SwitchAlert"
+			}
+		},
+		{
+			"description": [
+				"Accept any alert dialog that appears during automation, facilitating the seamless execution of tasks by acknowledging the alert."
+			],
+			"rule": {
+				"argument": "Accept",
+				"pluginName": "SwitchAlert"
+			}
+		},
+		{
+			"description": [
+				"Ignore any alert dialog that appears during automation, allowing the process to continue without interacting with the alert."
+			],
+			"rule": {
+				"argument": "Ignore",
+				"pluginName": "SwitchAlert"
+			}
+		},
+		{
+			"description": [
+				"Send specific keys `Foo Bar` to the alert dialog, useful for interacting with alerts that require input, such as entering text or responding to prompts."
+			],
+			"rule": {
+				"argument": "{{$ --Keys:Foo Bar}}",
+				"pluginName": "SwitchAlert"
+			}
+		},
+		{
+			"description": [
+				"Send specific keys `Foo Bar` to the alert dialog and then accept it, useful for scenarios needing input followed by acknowledgment to proceed with tasks."
+			],
+			"rule": {
+				"argument": "{{$ --Keys:Foo Bar --AlertAction:Accept}}",
+				"pluginName": "SwitchAlert"
+			}
+		},
+		{
+			"description": [
+				"Send specific keys `Foo Bar` to the alert dialog and then dismiss it, useful for workflows requiring interaction with the alert followed by its dismissal."
+			],
+			"rule": {
+				"argument": "{{$ --Keys:Foo Bar --AlertAction:Dismiss}}",
+				"pluginName": "SwitchAlert"
+			}
+		}
+	],
+	"key": "SwitchAlert",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Determines the action to be taken when encountering an alert dialog during automation tasks. ",
+				"It specifies whether to accept or dismiss the alert."
+			],
+			"mandatory": false,
+			"name": "AlertAction",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"The plugin will interact with the alert dialog in a way that acknowledges it, typically by clicking the `OK` or `Accept` button, if present. ",
+						"This action allows the automation process to continue smoothly without any interruptions caused by the alert dialog."
+					],
+					"name": "Accept"
+				},
+				{
+					"description": [
+						"The plugin will interact with the alert dialog in a manner that closes it, typically by clicking the `Cancel` or `Dismiss` button, if present. ",
+						"This action enables the automation process to proceed without interruptions caused by the alert dialog."
+					],
+					"name": "Dismiss"
+				},
+				{
+					"description": [
+						"The plugin will interact with the alert dialog by ignoring it, allowing the automation process to continue without taking any action on the alert dialog."
+					],
+					"name": "Ignore"
+				}
+			]
+		},
+		{
+			"description": [
+				"The plugin can use the Keys parameter to send specific text or input to the dialog. ",
+				"This input can be used to interact with the alert in a customized way, such as entering information or responding to prompts within the dialog.  ",
+				"",
+				"For example, if the `Keys` parameter is set to `Username123`, the plugin will send the text `Username123` to the alert dialog, allowing it to interact with any input fields or prompts within the dialog."
+			],
+			"mandatory": false,
+			"name": "Keys",
+			"type": "String"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Dismiss",
+			"description": [
+				"The `Argument` property customizes how the `SwitchAlert` plugin handles alert dialogs. ",
+				"It allows you to specify actions like sending keys to the alert or determining whether to accept or dismiss the alert. "
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#user-prompts",
+		"w3c": "None"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `SwitchAlert` plugin automates the handling of alert dialogs in web-based automation tasks, enabling seamless identification and action upon alert messages.",
+		"In robotic process automation (RPA), it ensures efficient management of alerts, enhancing the reliability of automated workflows.",
+		"In automation testing, it provides comprehensive test coverage by validating alert handling functionality and simulating user interactions with alert dialogs."
+	]
+}

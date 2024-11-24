@@ -1,0 +1,201 @@
+{
+	"aliases": [
+		"Keyboard"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SendKeyboardKey` plugin is to empower automation scripts with the capability to send keyboard inputs to an element in an application. ",
+		"This functionality is vital in scenarios where user interactions involve input fields, and precise control over the keyboard is required to simulate user behavior. ",
+		"The plugin aims to streamline automation workflows by facilitating seamless management of keyboard interactions.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                                                                                                                                                                                               |",
+		"|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Dynamic Configuration  | The plugin supports dynamic configuration through a set of parameters, including `Clear`, `Delay`, `Key`, and `NativeClear`. This flexibility allows precise control over keyboard interactions based on specific automation scenarios.   |",
+		"| Error Handling         | The plugin includes robust error handling mechanisms, ensuring that exceptions are caught and logged appropriately. This enhances the reliability of automation scripts by addressing issues that may arise during keyboard interactions. |",
+		"",
+		"### Usage in RPA",
+		"",
+		"| Usage                       | Description                                                                                                                                                                                                                                                |",
+		"|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Simulating User Inputs      | RPA processes involving web interactions benefit from the `SendKeyboardKey` plugin to simulate user-like inputs. Whether filling out forms or navigating through web elements, the plugin ensures accurate emulation of keyboard interactions.             |",
+		"| Optimizing Automation Flows | Automation flows in RPA often require the simulation of various keyboard inputs. By strategically using the plugin, RPA developers can optimize automation scripts, ensuring precise control over keyboard actions to align with desired user experiences. |",
+		"",
+		"### Usage in Automation Testing",
+		"",
+		"| Usage                        | Description                                                                                                                                                                                                                                          |",
+		"|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Comprehensive Test Scenarios | In automation testing scenarios for applications, the `SendKeyboardKey` plugin is invaluable. It allows scripts to dynamically control keyboard inputs, leading to more comprehensive test coverage, especially in scenarios involving input fields. |",
+		"| Ensuring UI Stability        | Post-user interactions, such as entering text into input fields, the plugin ensures that the UI remains stable for subsequent validations. This is crucial for accurately assessing the impact of keyboard inputs on the application's state.        |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Simulate pressing the `Enter` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
+			],
+			"rule": {
+				"Argument": "Enter",
+				"Locator": "CssSelector",
+				"OnElement": "#KeyboardKeyOutcome",
+				"PluginName": "SendKeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing the `Enter` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
+			],
+			"rule": {
+				"Argument": "{{$ --Key:Enter}}",
+				"Locator": "CssSelector",
+				"OnElement": "#KeyboardKeyOutcome",
+				"PluginName": "SendKeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing the `Enter` key followed by the `Backspace` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
+			],
+			"rule": {
+				"Argument": "{{$ --Key:Enter --Key:Backspace}}",
+				"Locator": "CssSelector",
+				"OnElement": "#KeyboardKeyOutcome",
+				"PluginName": "SendKeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing the `Enter` key, followed by the `Backspace` key, with a delay of 4000 milliseconds between them. ",
+				"This simulated keyboard input is targeted at the HTML element identified by the CSS selector `#KeyboardKeyOutcome` on a web page."
+			],
+			"rule": {
+				"Argument": "{{$ --Key:Enter --Key:Backspace --Delay:4000}}",
+				"Locator": "CssSelector",
+				"OnElement": "#KeyboardKeyOutcome",
+				"PluginName": "SendKeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing the `Enter` key, followed by the `Backspace` key, with a delay of 4000 milliseconds between them. ",
+				"This simulated keyboard input is targeted at the HTML element identified by the CSS selector `#KeyboardKeyOutcome` on a web page."
+			],
+			"rule": {
+				"Argument": "{{$ --Key:Enter --Key:Backspace --Delay:00:00:04}}",
+				"Locator": "CssSelector",
+				"OnElement": "#KeyboardKeyOutcome",
+				"PluginName": "SendKeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"First clear the content of the input element identified by the CSS selector `#KeyboardKeyOutcome` and then simulate pressing the `Enter` key."
+			],
+			"rule": {
+				"Argument": "{{$ --Key:Enter --Clear}}",
+				"Locator": "CssSelector",
+				"OnElement": "#KeyboardKeyOutcome",
+				"PluginName": "SendKeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"First clear the content of the input element identified by the CSS selector `#KeyboardKeyOutcome` using `NativeClear` functionality and then simulate pressing the `Enter` key."
+			],
+			"rule": {
+				"Argument": "{{$ --Key:Enter --NativeClear}}",
+				"Locator": "CssSelector",
+				"OnElement": "#KeyboardKeyOutcome",
+				"PluginName": "SendKeyboardKey"
+			}
+		}
+	],
+	"key": "SendKeyboardKey",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Indicates that a clearing action will consistently be executed before any subsequent keyboard actions on the targeted input element. ",
+				"This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data."
+			],
+			"mandatory": false,
+			"name": "Clear",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Used to introduce a time pause after each simulated keyboard action. ",
+				"This delay ensures a controlled pacing between consecutive key presses during web automation. ",
+				"The purpose is to emulate a more human-like interaction flow by allowing specified intervals between keyboard actions."
+			],
+			"mandatory": false,
+			"name": "Delay",
+			"type": "Time|Number"
+		},
+		{
+			"description": [
+				"Used to specify a keyboard key or a sequence of keyboard keys that should be sent to a targeted element during an automation task."
+			],
+			"mandatory": false,
+			"name": "Key",
+			"type": "Array"
+		},
+		{
+			"description": [
+				"Indicates that a native clearing action will consistently be executed before any subsequent keyboard actions on the targeted input element. ",
+				"This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data."
+			],
+			"mandatory": false,
+			"name": "NativeClear",
+			"type": "Switch"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the set of instructions or parameters for the keyboard actions to be simulated during automation. ",
+				"It allows you to define a sequence of keyboard interactions, including the keys to be pressed and any additional actions."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the strategy or method used to locate the element on which the keyboard actions will be simulated during automation."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the identifier or locator for the element on which the keyboard actions defined in the plugin's `Argument` property will be simulated during web automation. ",
+				"It indicates the target element where the simulated keyboard interactions should take place."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-send-keys",
+		"w3c": "POST /session/{session id}/element/{element id}/value"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `SendKeyboardKey` plugin automates the simulation of keyboard actions during web automation. ",
+		"It supports customizable sequences of key presses, native clearing methods, and time delays, ensuring precise and flexible control over keyboard interactions."
+	]
+}

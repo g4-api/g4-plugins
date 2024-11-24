@@ -1,0 +1,103 @@
+{
+	"aliases": [
+		"Active",
+		"HasFocus"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `ElementActive` plugin is designed to assert that a specified web element is currently active (focused) within a web browser during automated tasks. ",
+		"Its primary goal is to ensure that automation scripts can validate the active state of elements, which is crucial for scenarios where specific elements need to be interacted with or verified for user interactions.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                                |",
+		"|----------------------|--------------------------------------------------------------------------------------------|",
+		"| Active Element Check | Validates that the specified web element is currently active (focused) during execution.   |",
+		"| Seamless Integration | Integrates smoothly with automation workflows to ensure elements are in the desired state. |",
+		"| Reliable Validation  | Provides reliable assertion to confirm the active state of web elements.                   |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                  | Description                                                                                            |",
+		"|------------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Interaction Validation | Confirms that specific elements are active before performing interactions, ensuring smooth automation. |",
+		"| Process Continuity     | Validates that elements are in the correct state to proceed with the workflow without interruptions.   |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                | Description                                                                                         |",
+		"|----------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Active State Testing | Ensures that specific elements are active during test scenarios, validating user interaction flows. |",
+		"| Workflow Validation  | Confirms that workflows proceed with the correct elements active, ensuring accurate test outcomes.  |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that a specific web element is currently active (focused) during the execution of automated tasks. ",
+				"This is useful for validating scenarios where the active state of elements is expected before interaction."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "ElementActive"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure a specific web element is active, validating the active state of the element during the execution of the automation script. ",
+				"The `Assert` plugin is utilized to check this condition, and if the element is active, the assertion passes."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementActive}}",
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "ElementActive",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the web element that is being validated for its active state. ",
+				"This can be a CSS selector, XPath, or other locator strategy to identify the element."
+			],
+			"mandatory": true,
+			"name": "onElement",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy used to identify the element for the active state validation. ",
+				"Common strategies include CSS selectors, XPath, ID, and others."
+			],
+			"mandatory": false,
+			"name": "locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#find-element",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `ElementActive` plugin asserts that a specified web element is currently active (focused) within a web browser during automated tasks, ensuring that automation scripts validate the active state of elements.",
+		"In robotic process automation (RPA), it confirms the correct elements are active before interactions, enhancing the reliability of automated workflows.",
+		"In automation testing, it validates the active state of elements, ensuring accurate user interaction flows and test outcomes."
+	]
+}

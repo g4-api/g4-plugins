@@ -1,0 +1,103 @@
+{
+	"aliases": [
+		"Enabled",
+		"Enable"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `ElementEnabled` plugin is designed to assert that a specified web element is currently enabled within a web browser during automated tasks. ",
+		"Its primary goal is to ensure that automation scripts can validate the enabled state of elements, which is crucial for scenarios where specific elements should be interactable.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature               | Description                                                                                |",
+		"|-----------------------|--------------------------------------------------------------------------------------------|",
+		"| Enabled Element Check | Validates that the specified web element is currently enabled during execution.            |",
+		"| Seamless Integration  | Integrates smoothly with automation workflows to ensure elements are in the desired state. |",
+		"| Reliable Validation   | Provides reliable assertion to confirm the enabled state of web elements.                  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                 | Description                                                                                          |",
+		"|-----------------------|------------------------------------------------------------------------------------------------------|",
+		"| Interaction Readiness | Confirms that specific elements are enabled, ensuring they are interactable during automation.       |",
+		"| Process Continuity    | Validates that elements are in the correct state to proceed with the workflow without interruptions. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                 | Description                                                                                          |",
+		"|-----------------------|------------------------------------------------------------------------------------------------------|",
+		"| Enabled State Testing | Ensures that specific elements are enabled during test scenarios, validating user interaction flows. |",
+		"| Workflow Validation   | Confirms that workflows proceed with the correct elements enabled, ensuring accurate test outcomes.  |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that a specific web element is currently enabled during the execution of automated tasks. ",
+				"This is useful for validating scenarios where the enabled state of elements is expected to allow interactions."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "ElementEnabled"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure a specific web element is enabled, validating the enabled state of the element during the execution of the automation script. ",
+				"The `Assert` plugin is utilized to check this condition, and if the element is enabled, the assertion passes."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementEnabled}}",
+				"locator": "CssSelector",
+				"onElement": "#myElement",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "ElementEnabled",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the web element that is being validated for its enabled state. ",
+				"This can be a CSS selector, XPath, or other locator strategy to identify the element."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String|Expression"
+		},
+		{
+			"defaultValue": "Xpath",
+			"description": [
+				"Specifies the locator strategy used to identify the element for the enabled state validation. ",
+				"Common strategies include CSS selectors, XPath, ID, and others."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#is-element-enabled",
+		"w3c": "GET /session/{session id}/element/{element id}/enabled"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `ElementEnabled` plugin asserts that a specified web element is currently enabled within a web browser during automated tasks, ensuring that automation scripts validate the enabled state of elements.",
+		"In robotic process automation (RPA), it confirms the correct elements are enabled, allowing necessary interactions and enhancing workflow efficiency.",
+		"In automation testing, it validates the enabled state of elements, ensuring accurate user interaction flows and test outcomes."
+	]
+}

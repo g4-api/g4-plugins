@@ -1,0 +1,206 @@
+{
+	"aliases": [
+		"GetScreenshot",
+		"TakeScreenshot"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SaveScreenshot` plugin is to capture and save screenshots during automated test scenarios. ",
+		"This plugin is essential for quality assurance and RPA processes, allowing users to take snapshots of the application's state at specific points in the automation workflow, providing visual confirmation and aiding in debugging.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                                                                                                     |",
+		"|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Verification and Debugging | Screenshots can be used for visual verification, ensuring that the application's interface matches the expected state. This is particularly useful in automated test cases where precise UI details matter.                     |",
+		"| Documentation              | Screenshots serve as valuable documentation, providing a visual record of the application's behavior at different stages of the automation process. This aids in creating comprehensive reports for debugging and analysis.     |",
+		"| Error Identification       | When an error occurs during the automation process, a saved screenshot at the point of failure can provide insights into the issue, making it easier for developers and testers to identify and address problems.               |",
+		"| Visual Regression Testing  | Integral to visual regression testing, where screenshots taken during different test runs are compared to detect any unexpected visual changes in the application.                                                              |",
+		"| Cross-Browser Testing      | For web applications, taking screenshots across different browsers helps ensure consistent rendering and user interface across various browser environments.                                                                    |",
+		"| Historical Tracking        | By saving screenshots at critical steps, users can create a historical timeline of the application's behavior, facilitating a deeper understanding of how changes in the codebase or environment may impact the user interface. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                      | Description                                                                                                                                         |",
+		"|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Verification and Debugging | Screenshots can be used for visual verification, ensuring that the application's interface matches the expected state.                              |",
+		"| Documentation              | Screenshots serve as valuable documentation, providing a visual record of the application's behavior at different stages of the automation process. |",
+		"| Error Identification       | When an error occurs during the automation process, a saved screenshot at the point of failure can provide insights into the issue.                 |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                     | Description                                                                                                                                                                                                                     |",
+		"|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Visual Regression Testing | Integral to visual regression testing, where screenshots taken during different test runs are compared to detect any unexpected visual changes in the application.                                                              |",
+		"| Cross-Browser Testing     | For web applications, taking screenshots across different browsers helps ensure consistent rendering and user interface across various browser environments.                                                                    |",
+		"| Historical Tracking       | By saving screenshots at critical steps, users can create a historical timeline of the application's behavior, facilitating a deeper understanding of how changes in the codebase or environment may impact the user interface. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Capture and save a screenshot with specific parameters. ",
+				"The screenshot is stored in the `Screenshots` directory, and the file is named `PageScreenshot.png`."
+			],
+			"rule": {
+				"argument": "{{$ --Directory:Screenshots --FileName:PageScreenshot.png}}",
+				"pluginName": "SaveScreenshot"
+			}
+		},
+		{
+			"description": [
+				"Capture and save a screenshot without specifying a directory. ",
+				"The screenshot is directly stored in the default or current working directory, and it is named `PageScreenshot.png`."
+			],
+			"rule": {
+				"argument": "{{$ --FileName:PageScreenshot.png}}",
+				"pluginName": "SaveScreenshot"
+			}
+		},
+		{
+			"description": [
+				"Capture and save a screenshot in the `Screenshots` directory without specifying a custom file name. ",
+				"The plugin will generate a unique file name, ensuring each screenshot is uniquely identified within the specified directory. ",
+				"This is useful when a specific file name is not necessary, and the emphasis is on organizing screenshots in a designated folder."
+			],
+			"rule": {
+				"argument": "{{$ --Directory:Screenshots}}",
+				"pluginName": "SaveScreenshot"
+			}
+		},
+		{
+			"description": [
+				"Capture and save a screenshot without specifying a custom directory or file name. ",
+				"When executed, the plugin will save the screenshot in the current working directory with a dynamically generated file name. ",
+				"This is a straightforward way to capture a screenshot without the need for custom naming or directory settings."
+			],
+			"rule": {
+				"pluginName": "SaveScreenshot"
+			}
+		},
+		{
+			"description": [
+				"Capture and save a screenshot of a specific element with the ID `ClickButton`. ",
+				"The screenshot will be saved in the `Screenshots` directory with the specified file name `ElementScreenshot.png`. ",
+				"This allows for targeted screenshot capture based on a specific element's appearance."
+			],
+			"rule": {
+				"argument": "{{$ --Directory:Screenshots --FileName:ElementScreenshot.png}}",
+				"locator": "CssSelector",
+				"onElement": "#ClickButton",
+				"pluginName": "SaveScreenshot"
+			}
+		},
+		{
+			"description": [
+				"Capture and save a screenshot of the element with the ID `ClickButton`. ",
+				"The screenshot will be saved with the specified file name `ElementScreenshot.png`. ",
+				"The absence of the `--Directory` parameter indicates that the screenshot will be saved in the default directory."
+			],
+			"rule": {
+				"argument": "{{$ --FileName:ElementScreenshot.png}}",
+				"locator": "CssSelector",
+				"onElement": "#ClickButton",
+				"pluginName": "SaveScreenshot"
+			}
+		},
+		{
+			"description": [
+				"Capture and save a screenshot of the element with the ID `ClickButton` and save it in the specified directory `Screenshots`. ",
+				"The absence of the `--FileName` parameter indicates that the plugin will generate a default file name for the screenshot."
+			],
+			"rule": {
+				"argument": "{{$ --Directory:Screenshots}}",
+				"locator": "CssSelector",
+				"onElement": "#ClickButton",
+				"pluginName": "SaveScreenshot"
+			}
+		},
+		{
+			"description": [
+				"Capture and save a screenshot of the element with the ID `ClickButton`. ",
+				"The absence of the `--directory` parameter indicates that the screenshot will be saved in the default directory. ",
+				"The absence of the `--fileName` parameter indicates that the plugin will generate a default file name for the screenshot."
+			],
+			"rule": {
+				"argument": "{{$ --directory:Screenshots}}",
+				"locator": "CssSelector",
+				"onElement": "#ClickButton",
+				"pluginName": "SaveScreenshot"
+			}
+		}
+	],
+	"key": "SaveScreenshot",
+	"manifestVersion": 4,
+	"outputParameters": [
+		{
+			"description": [
+				"Serves as a container for maintaining a list of file paths corresponding to screenshots captured during the automation session. ",
+				"Each time the `SaveScreenshot` plugin is invoked, the path of the saved screenshot is added to this list."
+			],
+			"name": "SavedScreenshots",
+			"type": "Array"
+		}
+	],
+	"parameters": [
+		{
+			"default": "Current working directory",
+			"description": [
+				"The directory or folder where the screenshot captured by the `SaveScreenshot` plugin will be saved. ",
+				"If the specified directory does not exist, the plugin may create it, depending on its implementation."
+			],
+			"mandatory": false,
+			"name": "Directory",
+			"type": "Uri"
+		},
+		{
+			"default": "Automatically generated",
+			"description": [
+				"The name of the screenshot file generated by the `SaveScreenshot` plugin."
+			],
+			"mandatory": false,
+			"name": "FileName",
+			"type": "String"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"The type of locator strategy employed when identifying the element specified in the `onElement` property."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies a target HTML element on the page for which a screenshot will be captured. ",
+				"When the `SaveScreenshot` plugin is executed with the `onElement` property, it captures a screenshot specifically focused on the identified HTML element."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"w3c": "GET /session/{session id}/screenshot",
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#take-screenshot"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `SaveScreenshot` plugin captures and saves screenshots during automated test scenarios, providing visual confirmation and aiding in debugging.",
+		"Key features include capturing screenshots of the entire page or specific elements, specifying custom directories and filenames for saved screenshots, and generating unique filenames to avoid overwrites.",
+		"In RPA, it is used for verification and documentation, capturing screenshots at critical steps to ensure the application's interface matches the expected state and providing a visual record for comprehensive reports.",
+		"In automation testing, it supports visual regression testing, cross-browser testing, and historical tracking. It captures screenshots during different test runs to detect unexpected visual changes, ensures consistent rendering across various browsers, and creates a historical timeline of the application's behavior for deeper analysis."
+	]
+}

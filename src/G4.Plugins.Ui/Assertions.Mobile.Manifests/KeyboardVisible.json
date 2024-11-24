@@ -1,0 +1,87 @@
+{
+	"aliases": [
+		"OnScreenKeyboardVisible"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"Mobile"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `KeyboardVisible` plugin is designed to validate that the on-screen keyboard is visible on a mobile device within automation scripts. ",
+		"It ensures that the keyboard is displayed when expected, making it essential for scenarios where the visibility of the on-screen keyboard needs to be confirmed before proceeding with further actions.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                     | Description                                                                                                   |",
+		"|-----------------------------|---------------------------------------------------------------------------------------------------------------|",
+		"| Keyboard Visibility Check   | Validates that the on-screen keyboard is visible, ensuring that it is displayed when required.                |",
+		"| Mobile Device Compatibility | Works across various mobile platforms and devices, making it a versatile tool in mobile automation workflows. |",
+		"| Flexible Assertions         | Supports a range of operators, including equality, inequality, and pattern matching for flexible validations. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                       | Description                                                                                                     |",
+		"|-----------------------------|-----------------------------------------------------------------------------------------------------------------|",
+		"| Pre-Action Validation       | Ensures that the on-screen keyboard is visible before performing actions that require text input.               |",
+		"| Post-Interaction Validation | Confirms that the keyboard is visible after text input or form interactions, ensuring a smooth user experience. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                        | Description                                                                                                                            |",
+		"|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|",
+		"| UI Consistency Verification  | Ensures that the on-screen keyboard is visible during specific test scenarios, validating the correctness of UI behavior.              |",
+		"| Regression Testing           | Confirms that changes to the application do not affect the expected behavior of showing the on-screen keyboard.                        |",
+		"| Performance Testing          | Validates that the keyboard visibility state transitions correctly, ensuring optimal application behavior during input and navigation. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that the on-screen keyboard is visible on the mobile device. ",
+				"This is useful for scenarios where the script needs to ensure that the keyboard is displayed before proceeding with text input actions."
+			],
+			"rule": {
+				"pluginName": "KeyboardVisible"
+			}
+		},
+		{
+			"description": [
+				"Ensure that the on-screen keyboard is visible after interacting with an input field. ",
+				"This assertion checks if the keyboard is displayed, confirming that it has been successfully triggered."
+			],
+			"rule": {
+				"pluginName": "KeyboardVisible"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion using the `Assert` plugin to ensure that the on-screen keyboard is visible on the mobile device. ",
+				"This validation is essential for scenarios where further user interactions require the keyboard to be visible."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:KeyboardVisible}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "KeyboardVisible",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"protocol": {
+		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/is-keyboard-shown/#http-api-specifications",
+		"w3c": "GET /session/{session id}/appium/device/is_keyboard_shown"
+	},
+	"scope": [
+		"MobileNative",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `KeyboardVisible` plugin validates that the on-screen keyboard is visible on a mobile device, ensuring that it is displayed before proceeding with text input or other actions.",
+		"It is commonly used in RPA to verify that the keyboard is visible before user interactions and in automation testing to ensure UI consistency, correct behavior during input, and proper application performance."
+	]
+}

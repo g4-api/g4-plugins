@@ -1,0 +1,133 @@
+{
+	"aliases": [
+		"NavigateForward"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Browser"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `RedoNavigation` plugin is to automate the process of navigating forward within a web browser. ",
+		"It provides a structured and configurable way to perform the `forward` action, enabling automation scripts to simulate user interactions with precision. ",
+		"The plugin caters to scenarios where navigating forward multiple steps with optional delays between actions is a requirement.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                                                                                |",
+		"|---------------------|----------------------------------------------------------------------------------------------------------------------------|",
+		"| Dynamic Repeats     | Allows specifying the number of times the browser should navigate forward, adapting to various automation needs.           |",
+		"| Configurable Delays | Introduces delays between each navigation step, enhancing flexibility and preventing interference with web responsiveness. |",
+		"| Intuitive Logging   | Incorporates logging capabilities, providing insights and transparency into the execution process.                         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                | Description                                                                                                      |",
+		"|----------------------|------------------------------------------------------------------------------------------------------------------|",
+		"| Multi-Step Processes | Streamlines multi-step workflows that involve navigating through multiple pages.                                 |",
+		"| Error Handling       | Navigates forward to a known state for retrying or taking alternative actions if certain conditions are not met. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                    | Description                                                                           |",
+		"|--------------------------|---------------------------------------------------------------------------------------|",
+		"| Browser State Management | Manages the state of the browser in end-to-end tests involving complex user journeys. |",
+		"| Performance Testing      | Simulates realistic user interactions with controlled navigation forward and delays.  |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Perform a default browser forward navigation. ",
+				"This is useful for simple scenarios where returning to the previous web page is required without specifying additional parameters."
+			],
+			"rule": {
+				"pluginName": "RedoNavigation"
+			}
+		},
+		{
+			"description": [
+				"Navigate the web browser forward by three steps. ",
+				"The provided argument, `3`, specifies the number of repeats for the navigation action."
+			],
+			"rule": {
+				"argument": "3",
+				"pluginName": "RedoNavigation"
+			}
+		},
+		{
+			"description": [
+				"Command the `RedoNavigation` plugin to conduct a series of forward navigations in the web browser. ",
+				"The provided argument, `{{$ --Repeat:3 --Delay:1000}}`, precisely dictates three repetitions with a `1000-millisecond` delay between each step. ",
+				"This configuration grants meticulous control over the forward navigation process, including the number of repeats and inter-step delays."
+			],
+			"rule": {
+				"argument": "{{$ --Repeat:3 --Delay:1000}}",
+				"pluginName": "RedoNavigation"
+			}
+		},
+		{
+			"description": [
+				"Command the `RedoNavigation` plugin to execute a sequence of forward navigations in the web browser. ",
+				"The provided argument, `{{$ --Repeat:3 --Delay:00:00:01}}`, dictates three repetitions with a `1-second` delay between each step. ",
+				"This example showcases how the plugin can be configured with supplementary parameters, offering precise control over the navigation process."
+			],
+			"rule": {
+				"argument": "{{$ --Repeat:3 --Delay:00:00:01}}",
+				"pluginName": "RedoNavigation"
+			}
+		}
+	],
+	"key": "RedoNavigation",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "0",
+			"description": [
+				"Specifies the pause or waiting period between each step of the forward navigation process. ",
+				"This parameter allows users to specify a duration, either in milliseconds or a formatted time expression, to control the pace of the navigation."
+			],
+			"mandatory": false,
+			"name": "Delay",
+			"type": "Number|Time"
+		},
+		{
+			"default": "1",
+			"description": [
+				"The number of iterations for the forward navigation process. ",
+				"It is instrumental in scenarios where repetitive navigation actions are essential for achieving specific automation objectives."
+			],
+			"mandatory": false,
+			"name": "Repeat",
+			"type": "Number"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "1",
+			"description": [
+				"Allow users to customize the behavior of the plugin by providing supplementary information or instructions. ",
+				"It acts as a configurable parameter, enabling users to tailor the plugin's action to meet specific requirements."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "Number|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#forward",
+		"w3c": "POST /session/{session id}/forward"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `RedoNavigation` plugin automates the forward navigation in a web browser, allowing users to revisit previous pages or states. ",
+		"It offers options for specifying the number of repeats and introducing delays between steps for controlled navigation."
+	]
+}

@@ -1,0 +1,148 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SetSessionParameter` plugin is to set session-level parameters that are specific to the running automation session. ",
+		"This allows for flexible configuration management within the session scope, enabling dynamic updates to parameters such as session-specific settings ",
+		"or configurations essential for automation workflows. Session parameters are scoped and accessible only within the automation session that is using ",
+		"them, allowing for the use of dynamic parameters with the same name across different sessions without conflicts.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                                            |",
+		"|--------------------------------|------------------------------------------------------------------------------------------------------- |",
+		"| Parameter Setting              | Sets session-level parameters that persist within the running automation session.                      |",
+		"| Isolation of Parameters        | Allows for dynamic parameters with the same name across different sessions without conflicts.          |",
+		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically set parameters based on automation needs. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                              | Description                                                                                    |",
+		"|------------------------------------|------------------------------------------------------------------------------------------------|",
+		"| Dynamic Configuration              | Set configuration settings dynamically based on session-specific requirements.                 |",
+		"| Session-Specific Parameter Storage | Use a centralized location for storing and setting parameters that persist within the session. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                    | Description                                                                                |",
+		"|--------------------------|--------------------------------------------------------------------------------------------|",
+		"| Session-Specific Testing | Set parameters specific to the session, enabling more accurate and session-specific tests. |",
+		"| Configuration Management | Simplify configuration management by setting parameters directly within test scripts.      |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Session` plugin to set a parameter named `SessionSetting` directly.",
+				"",
+				"| Field      | Description                                                              |",
+				"|------------|--------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Session`.       |",
+				"| argument   | Specifies the value to set the parameter.                                |",
+				"| onElement  | Specifies the name of the parameter to be set.                           |"
+			],
+			"rule": {
+				"argument": "{{$ --Value:MySessionSetting}}",
+				"onElement": "SessionSetting",
+				"pluginName": "Session"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the macro to set a parameter named `SessionSetting` and use it in a `RegisterParameter` action, utilizing the `OnAttribute` property.",
+				"",
+				"| Field       | Description                                                                                             |",
+				"|-------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName  | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument    | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement   | Specifies the target element whose attribute content will be saved as the parameter value.              |",
+				"| onAttribute | Specifies the attribute of the element from which the value will be extracted.                          |",
+				"| locator     | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:SessionSetting --Scope:Session}}",
+				"locator": "CssSelector",
+				"onAttribute": "data-value",
+				"onElement": "#someElement",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates setting a parameter named `SessionSetting` from the text content of an element identified by its CSS selector.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument   | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement  | Specifies the target element whose text content will be saved as the parameter value.                   |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:SessionSetting --Scope:Session}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates setting a parameter named `APIKey` from the text content of an element identified by its CSS selector and using a regular expression to extract part of the text.",
+				"",
+				"| Field             | Description                                                                                             |",
+				"|-------------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName        | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument          | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement         | Specifies the target element whose text content will be saved as the parameter value.                   |",
+				"| regularExpression | Specifies the regular expression to apply to the text content before saving the parameter value.        |",
+				"| locator           | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:APIKey --Scope:Session}}",
+				"locator": "CssSelector",
+				"onElement": "#apiElement",
+				"pluginName": "RegisterParameter",
+				"regularExpression": "^.*(?=\\sAPIKey$)"
+			}
+		}
+	],
+	"key": "Session",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the value to be set for the parameter."
+			],
+			"mandatory": false,
+			"name": "Value",
+			"type": "String"
+		}
+	],
+	"pluginType": "SetParameter",
+	"properties": [
+		{
+			"description": [
+				"Specifies the name of the parameter to be set."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `SetSessionParameter` plugin sets session-level parameters within automation workflows, enhancing configuration management."
+	]
+}

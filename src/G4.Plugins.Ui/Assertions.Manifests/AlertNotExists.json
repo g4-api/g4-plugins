@@ -1,0 +1,78 @@
+{
+	"aliases": [
+		"HasNoAlert",
+		"NoAlert"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `AlertNotExists` plugin is designed to assert that no alert dialog is present within a web browser during automated tasks. ",
+		"Its primary goal is to ensure that automation scripts can validate the absence of alert dialogs, which is crucial for scenarios where the presence of alerts would indicate an issue or interruption.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                               |",
+		"|----------------------|-------------------------------------------------------------------------------------------|",
+		"| Alert Absence Check  | Validates that no alert dialog is present during the execution of automated tasks.        |",
+		"| Seamless Integration | Integrates smoothly with automation workflows to ensure the absence of unexpected alerts. |",
+		"| Reliable Validation  | Provides reliable assertion to confirm the non-existence of alert dialogs.                |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage              | Description                                                                                             |",
+		"|--------------------|---------------------------------------------------------------------------------------------------------|",
+		"| Error Detection    | Confirms the absence of alert dialogs to ensure smooth execution of RPA processes.                      |",
+		"| Process Continuity | Validates that no alerts are disrupting the workflow, ensuring continuous and uninterrupted automation. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                 |",
+		"|------------------------|-----------------------------------------------------------------------------|",
+		"| Alert Absence Testing  | Ensures that no unexpected alert dialogs are present during test scenarios. |",
+		"| Workflow Validation    | Confirms that workflows proceed without interruption from alert dialogs.    |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that no alert dialog is present during the execution of automated tasks. ",
+				"This is useful for validating scenarios where the absence of alert dialogs is expected."
+			],
+			"rule": {
+				"pluginName": "AlertNotExists"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure no alert dialog exists, validating the absence of alerts during the execution of the automation script. ",
+				"The `Assert` plugin is utilized to check this condition, and if no alert dialog is found, the assertion passes."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:AlertNotExists}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "AlertNotExists",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#user-prompts",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `AlertNotExists` plugin asserts that no alert dialog is present within a web browser during automated tasks, ensuring that automation scripts validate the absence of alerts.",
+		"In robotic process automation (RPA), it confirms the smooth execution of processes by validating the absence of alert dialogs.",
+		"In automation testing, it ensures workflows proceed without interruption from alerts, validating the absence of unexpected alert dialogs."
+	]
+}

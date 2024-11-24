@@ -1,0 +1,113 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Mobile",
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SetGeolocation` plugin is to allow automation scripts to set the geographical location of a mobile device. ",
+		"This functionality is essential in scenarios where location-based features or services need to be tested under various conditions. ",
+		"The plugin aims to streamline mobile automation by providing precise control over the device's geolocation.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                                                                           |",
+		"|----------------------|---------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Geolocation Control  | Allows setting the device's latitude, longitude, and altitude, providing comprehensive control over its location.                     |",
+		"| Compatibility Check  | Verifies if the WebDriver in use supports geolocation, ensuring the plugin's functionality is invoked only in supported environments. |",
+		"| Seamless Integration | Integrates with WebDriver's geolocation capabilities, enabling precise configuration of the device's location.                        |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                     | Description                                                                                                       |",
+		"|---------------------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| Location-Based Automation | Automates tasks that require the device to be at a specific location, such as testing location-based services.    |",
+		"| Testing Geofencing        | Ensures that geofencing features trigger correctly by simulating the device entering or leaving predefined areas. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                          | Description                                                                                                                        |",
+		"|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Comprehensive Location Testing | Enables testing of location-based features by setting the device to various coordinates and validating the application's response. |",
+		"| UI Stability Validation        | Ensures that the application's UI remains stable and functions correctly when the device's location changes.                       |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Set the geolocation to specific coordinates with default altitude.",
+				"This is useful for testing location-based features by setting the device to a specific latitude and longitude."
+			],
+			"rule": {
+				"argument": "{{$ --Latitude:37.7749 --Longitude:-122.4194}}",
+				"pluginName": "SetGeolocation"
+			}
+		},
+		{
+			"description": [
+				"Set the geolocation to specific coordinates with a specified altitude.",
+				"This configuration is useful for testing features that depend on both location and altitude, such as elevation-based services."
+			],
+			"rule": {
+				"argument": "{{$ --Latitude:37.7749 --Longitude:-122.4194 --Altitude:30}}",
+				"pluginName": "SetGeolocation"
+			}
+		}
+	],
+	"key": "SetGeolocation",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"The latitude coordinate to set for the device's geolocation. It represents the north-south position on the Earth's surface."
+			],
+			"mandatory": true,
+			"name": "Latitude",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"The longitude coordinate to set for the device's geolocation. It represents the east-west position on the Earth's surface."
+			],
+			"mandatory": true,
+			"name": "Longitude",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"The altitude value to set for the device's geolocation. It represents the height above the Earth's surface."
+			],
+			"mandatory": true,
+			"name": "Altitude",
+			"type": "Number"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Used to pass additional information or instructions to the `SetGeolocation` plugin, such as specifying coordinates or altitude."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/session/geolocation/set-geolocation/#http-api-specifications",
+		"w3c": "POST /session/{session id}/location"
+	},
+	"scope": [
+		"MobileNative",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `SetGeolocation` plugin automates the process of setting the geolocation on a mobile device.",
+		"In robotic process automation (RPA), it facilitates location-based automation by programmatically setting the device's coordinates.",
+		"In automation testing, it enables comprehensive testing of location-based features and ensures UI stability when the device's location changes."
+	]
+}

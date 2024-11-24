@@ -1,0 +1,65 @@
+{
+	"aliases": [
+		"CloseSession",
+		"QuitSession"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Ui",
+		"Browser"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `CloseBrowser` plugin is to close the currently active browser window. This is useful for ending browser sessions cleanly and ensuring that resources are properly released.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                                |",
+		"|---------------------|----------------------------------------------------------------------------|",
+		"| Browser Control     | Closes the currently active browser window.                                |",
+		"| Resource Management | Ensures that the WebDriver instance is properly disposed of after closing. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                      | Description                                                                       |",
+		"|----------------------------|-----------------------------------------------------------------------------------|",
+		"| End of Automation Session  | Close the browser at the end of an automation session to clean up resources.      |",
+		"| Error Handling             | Use to close the browser in case of errors or exceptions to ensure a clean state. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                          | Description                                                                                   |",
+		"|--------------------------------|-----------------------------------------------------------------------------------------------|",
+		"| Test Cleanup                   | Close the browser at the end of tests to ensure no browser windows remain open between tests. |",
+		"| Resource Management in Testing | Ensures that the WebDriver instance is disposed of properly after each test run.              |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Use the `CloseBrowser` plugin to close the currently active browser window."
+			],
+			"rule": {
+				"pluginName": "CloseBrowser"
+			}
+		}
+	],
+	"key": "CloseBrowser",
+	"manifestVersion": 4,
+	"pluginType": "Action",
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#delete-session",
+		"w3c": "DELETE /session/{session id}"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `CloseBrowser` plugin closes the currently active browser window and disposes of the WebDriver instance to ensure proper resource management.",
+		"In robotic process automation (RPA), it helps maintain system efficiency by releasing resources when a browser session is no longer needed.",
+		"In automation testing, it ensures clean test execution by properly closing browser instances after tests are completed."
+	]
+}

@@ -1,0 +1,159 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"General",
+		"DataManagement"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `CopyParameter` plugin facilitates the copying of parameters within automation scripts.",
+		"Its primary objective is to enable efficient and controlled copying of parameter values from a source to a target across different scopes.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature               | Description                                                                                                                    |",
+		"|-----------------------|--------------------------------------------------------------------------------------------------------------------------------|",
+		"| Source to Target Copy | Copies the value of a parameter from a defined source to a defined target across different scopes.                             |",
+		"| Scope Management      | Allows for the specification of scopes for both source and target parameters, with default values if not specified.            |",
+		"| Dynamic Environment   | Supports the retrieval and setting of parameters within different environments, particularly when using the Application scope. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                     | Description                                                                                                                                                                           |",
+		"|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Data Transfer             | Utilize the `CopyParameter` plugin to transfer data between different parts of an automation script. This can help in processes where data needs to be shared across different steps. |",
+		"| Session Management        | Efficiently handle session parameters by copying values as needed, ensuring that session-specific data is correctly propagated.                                                       |",
+		"| Parameter Synchronization | Synchronize parameters between different automation components or systems to maintain data consistency.                                                                               |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                     | Description                                                                                                                                                |",
+		"|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Test Data Management      | Use the `CopyParameter` plugin to manage test data by copying values between different test cases or test steps.                                           |",
+		"| Environment Configuration | Facilitate the setup of test environments by copying configuration parameters to the required locations.                                                   |",
+		"| Dynamic Test Execution    | Enable dynamic test execution by copying runtime parameters that are needed for various test scenarios, ensuring tests are executed with the correct data. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This configuration copies a parameter from a source within the session scope to a target within the same session scope."
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:targetParam --TargetScope:Session}}",
+				"onAttribute": "Session",
+				"onElement": "sourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				"This configuration copies a parameter from a source within the application scope to a target within the user scope, using the system parameters environment."
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:targetParam --Environment:SystemParameters --TargetScope:User}}",
+				"onAttribute": "Application",
+				"onElement": "sourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				"This configuration copies a parameter from a source within the machine scope to a target within the process scope."
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:targetParam --TargetScope:Process}}",
+				"onAttribute": "Machine",
+				"onElement": "sourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				"This configuration copies a parameter from a source within the user scope to a target within the application scope, using the custom environment."
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:targetParam --Environment:CustomEnvironment --TargetScope:Application}}",
+				"onAttribute": "User",
+				"onElement": "sourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				"This configuration copies a parameter from a source within the process scope to a target within the machine scope."
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:targetParam --TargetScope:Machine}}",
+				"onAttribute": "Process",
+				"onElement": "sourceParam",
+				"pluginName": "CopyParameter"
+			}
+		}
+	],
+	"key": "CopyParameter",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "SystemParameters",
+			"description": [
+				"Specifies the environment in which the parameters are managed. It allows for defining different contexts or environments where the parameters are stored and retrieved from.",
+				"This parameter is relevant only when using the Application scope. It allows managing multiple environments that can hold different values while using the same parameter names or a completely different parameter set."
+			],
+			"mandatory": false,
+			"name": "Environment",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the target parameter to which the value will be copied. This is the parameter that will receive the value from the source parameter."
+			],
+			"mandatory": true,
+			"name": "TargetParameter",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the scope of the target parameter. The scope defines where the parameter is stored and can be one of several predefined scopes such as 'Session', 'UserScope', etc."
+			],
+			"mandatory": false,
+			"name": "TargetScope",
+			"type": "SetParameter"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Session",
+			"description": [
+				"Specifies the scope of the source parameter. The scope defines where the parameter is stored and can be one of several predefined scopes such as 'Session', 'SystemScope', etc."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "GetParameter"
+		},
+		{
+			"description": [
+				"Specifies the source parameter whose value will be copied."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `CopyParameter` plugin facilitates the copying of parameter values across different scopes within automation scripts.",
+		"Its core functionality includes copying parameter values from a source to a target scope, managing parameter scopes dynamically, and supporting environment-specific parameter retrieval and setting.",
+		"It is particularly useful for data transfer, session management, and parameter synchronization in both RPA and automation testing scenarios, ensuring efficient and controlled propagation of parameter values across different parts of an automation process."
+	]
+}

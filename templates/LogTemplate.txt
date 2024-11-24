@@ -1,0 +1,29 @@
+Error: An exception occurred while executing the 'InvokePythonClick' plugin.
+
+Timestamp      : 2024-10-26T18:49:27.187432Z
+Machine        : MSI
+Logger         : G4.Api
+Log Level      : Error
+
+Plugin Details:
+    Name            : InvokePythonClick
+    Alias           : InvokePythonClick
+    Type            : Action
+    Argument        : [Not Provided]
+    Runtime ID      : cb032c93-8bdb-4496-9ea8-662febe1ebee_0
+
+Context:
+    On Element      : //NoElement
+    Locator         : [Not Provided]
+    Attribute       : [Not Provided]
+    Regular Expr    : (?s).*
+    Automation ID   : cb032c93-8bdb-4496-9ea8-662febe1ebee
+    Group ID        : 953920aa-4c05-4416-bdef-7abcc597f78b
+    Iteration       : 0
+    Rule Reference  : e20ca119-121e-438d-8de9-ac6c12327770
+
+Exception Message:
+    [Include the exception message here]
+
+Stack Trace:
+    [Include the stack trace here]

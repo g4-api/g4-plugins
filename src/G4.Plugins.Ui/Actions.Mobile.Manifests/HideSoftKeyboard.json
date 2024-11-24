@@ -1,0 +1,192 @@
+{
+	"aliases": [
+		"HideKeyboard"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Mobile",
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `HideSoftKeyboard` plugin is to provide automation scripts with the capability to hide the on-screen keyboard on a mobile device. ",
+		"This functionality is crucial in scenarios where user interactions involve input fields, and a clear view of the application's interface is required post-input. ",
+		"The plugin aims to optimize mobile automation flows by seamlessly managing the visibility of the on-screen keyboard.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                                           | Description                                                                                                                                                                                                                                       |",
+		"|---------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Dynamic Configuration                             | Allows dynamic configuration through a `HideKeyboardModel`, which includes parameters such as `key`, `key code`, `key name`, and `strategy`. This ensures precise control over how the keyboard is hidden based on specific automation scenarios. |",
+		"| Compatibility Check                               | Verifies if the WebDriver in use supports hiding the keyboard as a mobile device, ensuring the plugin's functionality is invoked only in supported environments.                                                                                  |",
+		"| Integration with Mobile Device Keyboard Interface | Integrates with the `HideKeyboard` method if the WebDriver supports hiding the keyboard as a mobile device, enabling precise configuration for hiding the keyboard.                                                                               |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                             | Description                                                                                                                |",
+		"|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------|",
+		"| Enhancing Human-Like Interactions | Simulates human-like interactions by hiding the on-screen keyboard after data entry, aligning with natural user behavior.  |",
+		"| Optimizing Automation Flows       | Ensures a clear view of the application interface post-input, optimizing automation flows by managing keyboard visibility. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                        | Description                                                                                                                                                        |",
+		"|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Comprehensive Test Scenarios | Controls keyboard visibility dynamically, leading to comprehensive test coverage, especially in scenarios involving input fields.                                  |",
+		"| Ensuring UI Stability        | Ensures UI remains stable and visible for subsequent validations post-user interactions, accurately assessing the impact of user input on the application's state. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Hide the on-screen keyboard in a mobile automation scenario. ",
+				"The absence of specific arguments implies that the plugin will use default strategies or configurations to hide the keyboard."
+			],
+			"rule": {
+				"pluginName": "HideSoftKeyboard"
+			}
+		},
+		{
+			"description": [
+				"Hide the on-screen keyboard using the `swipeDown` strategy. ",
+				"This tailored approach provides flexibility in adapting the automation script to the desired user interaction patterns."
+			],
+			"rule": {
+				"argument": "{{$ --Strategy:swipeDown}}",
+				"pluginName": "HideSoftKeyboard"
+			}
+		},
+		{
+			"description": [
+				"Hide the on-screen keyboard using the `pressKey` strategy with `KeyCode:4`. ",
+				"This configuration simulates pressing a specific key (key code 4) to hide the on-screen keyboard after interacting with an input field."
+			],
+			"rule": {
+				"argument": "{{$ --Strategy:pressKey --KeyCode:4}}",
+				"pluginName": "HideSoftKeyboard"
+			}
+		},
+		{
+			"description": [
+				"Hide the on-screen keyboard using the `pressKey` strategy with `KeyName:Back`. ",
+				"This configuration simulates pressing the `Back` key to hide the on-screen keyboard after interacting with an input field."
+			],
+			"rule": {
+				"argument": "{{$ --Strategy:pressKey --KeyName:Back}}",
+				"pluginName": "HideSoftKeyboard"
+			}
+		},
+		{
+			"description": [
+				"Hide the on-screen keyboard using the `pressKey` strategy with `Key:Back`. ",
+				"This configuration simulates pressing the `Back` key to hide the on-screen keyboard after interacting with an input field."
+			],
+			"rule": {
+				"argument": "{{$ --Strategy:pressKey --Key:Back}}",
+				"pluginName": "HideSoftKeyboard"
+			}
+		}
+	],
+	"key": "HideSoftKeyboard",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"The method or strategy employed to hide the on-screen keyboard on a mobile device. It supports different strategies to accommodate variations in mobile platforms and environments.  ",
+				"",
+				"If the `Strategy` parameter is not explicitly specified, the plugin may employ a default strategy for hiding the keyboard. ",
+				"The default strategy can vary based on the implementation, and it is recommended to consult the plugin documentation or source code for details."
+			],
+			"name": "Strategy",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"This strategy simulates a downward swipe gesture on the screen. ",
+						"The swipe action triggers the dismissal of the on-screen keyboard."
+					],
+					"name": "SwipeDown"
+				},
+				{
+					"description": [
+						"This strategy involves pressing a specific key to hide the keyboard. ",
+						"The key to be pressed can be specified using either the `KeyCode` or `KeyName` parameter."
+					],
+					"name": "PressKey"
+				},
+				{
+					"description": [
+						"This strategy simulates a tap outside the current input field or keyboard area. ",
+						"The tap action triggers the keyboard to hide."
+					],
+					"name": "TapOutside"
+				},
+				{
+					"description": [
+						"Similar to the `PressKey` strategy, the `Press` strategy involves pressing a specific key to hide the keyboard. ",
+						"It provides an alternative to specifying the key using either the `KeyCode` or `KeyName` parameter."
+					],
+					"name": "Press"
+				},
+				{
+					"description": [
+						"Similar to the `TapOutside` strategy, the `TapOut` strategy simulates tapping outside the current input field or keyboard area to hide the keyboard. ",
+						"It provides an alternative term for the same action."
+					],
+					"name": "TapOut"
+				}
+			]
+		},
+		{
+			"description": [
+				"A specific [key code](https://www.temblast.com/ref/akeyscode.htm) on the device's keyboard that should be pressed to trigger the action of hiding the on-screen keyboard."
+			],
+			"mandatory": false,
+			"name": "KeyCode",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"A specific key name on the device's keyboard that should be pressed to trigger the action of hiding the on-screen keyboard."
+			],
+			"mandatory": false,
+			"name": "KeyName",
+			"type": "String"
+		},
+		{
+			"description": [
+				"A specific key on the device's keyboard that should be pressed to trigger the action of hiding the on-screen keyboard."
+			],
+			"mandatory": false,
+			"name": "Key",
+			"type": "String"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Used to pass additional information or instructions to the `HideSoftKeyboard` plugin beyond what may be specified by default or through other properties."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/hide-keyboard/#http-api-specifications",
+		"w3c": "POST /session/{session id}/appium/device/hide_keyboard"
+	},
+	"scope": [
+		"MobileNative",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `HideSoftKeyboard` plugin automates the hiding of the on-screen keyboard on a mobile device.",
+		"In robotic process automation (RPA), it simulates human-like interactions by managing the keyboard visibility after data entry, optimizing the automation flows.",
+		"In automation testing, it ensures UI stability by dynamically controlling the keyboard visibility, leading to comprehensive test coverage, especially in input scenarios."
+	]
+}

@@ -1,0 +1,102 @@
+{
+	"aliases": [
+		"NotSelected"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `ElementNotSelected` plugin is designed to assert that a specified web element is not selected within an application or web browser during automated tasks. ",
+		"This plugin is crucial for scenarios where ensuring an element is not selected is necessary before proceeding with automation workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                  | Description                                                                         |",
+		"|--------------------------|-------------------------------------------------------------------------------------|",
+		"| Non-Selection Validation | Validates that the specified web element is not selected during execution.          |",
+		"| Seamless Integration     | Integrates smoothly with automation workflows to ensure elements remain unselected. |",
+		"| Reliable Assertion       | Provides a reliable mechanism to confirm the non-selection of web elements.         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                   | Description                                                                                         |",
+		"|-------------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Ensure Unselected State | Confirms that specific elements are not selected, preventing unintended actions in workflows.       |",
+		"| Process Flow Control    | Validates that elements remain unselected to ensure the correct progression of automated processes. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                         | Description                                                                                            |",
+		"|-------------------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Non-Selected State Validation | Ensures that specific elements are not selected during test scenarios, validating user interactions.   |",
+		"| Workflow Verification         | Confirms that workflows proceed with the correct elements unselected, ensuring accurate test outcomes. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that a specific web element is not selected during the execution of automated tasks. ",
+				"This is useful for validating scenarios where an element should remain unselected to prevent unwanted interactions."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#checkboxElement",
+				"pluginName": "ElementNotSelected"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure a specific web element is not selected, validating that it remains unselected during the execution of the automation script. ",
+				"The `Assert` plugin is used to check this condition, and if the element is not selected, the assertion passes."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"locator": "CssSelector",
+				"onElement": "#checkboxElement",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "ElementNotSelected",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the web element that is being validated for its non-selection. ",
+				"This can be a CSS selector, XPath, or other locator strategy to identify the element."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy used to identify the element for the non-selection validation. ",
+				"Common strategies include CSS selectors, XPath, ID, and others."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#is-element-selected",
+		"w3c": "GET /session/{session id}/element/{element id}/selected"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `ElementNotSelected` plugin asserts that a specified web element is not selected within an application or web browser during automated tasks, ensuring that automation scripts validate the non-selection of elements.",
+		"In robotic process automation (RPA), it confirms that elements remain unselected, preventing unintended actions and enhancing workflow accuracy.",
+		"In automation testing, it validates the non-selection of elements, ensuring accurate user interaction flows and test outcomes."
+	]
+}

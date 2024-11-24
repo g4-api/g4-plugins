@@ -1,0 +1,86 @@
+# Workflow to build and release OcrInspector for production
+name: Build, Test & Release
+
+# Permissions for the workflow
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+  statuses: write
+
+# Trigger workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+# Set environment variables
+env:
+  # Build and release settings
+  artifactStagingDirectory: ${{ github.workspace }}/artifact_staging
+  artifactType: 'Production'
+  binariesDirectory: ${{ github.workspace }}/binaries
+  buildConfiguration: 'Release'
+  buildPlatform: 'any cpu'
+  projectName: 'G4'
+  # Publish settings
+  nugetApiKey: ${{ secrets.NUGET_PUBLIC_KEY }}
+  nugetPackageSource: ${{ vars.NUGET_PUBLIC_SOURCE }}
+  # Test settings
+  browserStackApiKey: ${{ secrets.BROWSERSTACK_API_KEY }}
+  browserStackUser: ${{ secrets.BROWSERSTACK_USER }}
+  g4ApiKey: ${{ secrets.G4_API_KEY }}
+  gridEndpoint: ${{ secrets.GRID_ENDPOINT }}
+  testSettingsFileName: 'Default.runsettings'
+  workers: '5'
+
+jobs:
+  new-version:
+    name: New Version
+    runs-on: ubuntu-latest
+    outputs:
+      buildVersion: ${{ steps.parse-version.outputs.version }}
+      validVersion: ${{ steps.validate-version.outputs.valid }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    
+    - name: Parse Build Version for GitHub Tag
+      id: parse-version
+      shell: pwsh
+      run: echo "version=$(Get-Date -UFormat '%Y.%m.%d').${{ github.run_number }}" >> $env:GITHUB_OUTPUT
+
+    - name: Validate Version ${{ steps.parse-version.outputs.version }}
+      id: validate-version
+      shell: pwsh
+      run: |
+        $version = "${{ steps.parse-version.outputs.version }}"
+        echo "valid=$($version -match '^\d+(\.\d+){3}$')" >> $env:GITHUB_OUTPUT
+
+  new-build:
+    name: Restore & Build
+    runs-on: ubuntu-latest
+    if: ${{ needs.new-version.result == 'success' && needs.new-version.outputs.validVersion == 'True' }}
+    needs: 
+      - new-version
+
+    env:
+      buildVersion: ${{ needs.new-version.outputs.buildVersion }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore Dependencies
+      shell: pwsh 
+      run: dotnet restore
+
+    - name: Build ${{ env.projectName }} v${{ env.buildVersion }}
+      shell: pwsh
+      run: dotnet build

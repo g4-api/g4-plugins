@@ -1,0 +1,108 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SetFocus` plugin is to automate the process of setting focus on specific web elements. ",
+		"This functionality is crucial in scenarios where user interactions involve input fields or other elements that need to be active for subsequent actions. ",
+		"The plugin aims to streamline automation workflows by ensuring that the necessary elements are focused before further interactions.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature           | Description                                                                  |",
+		"|-------------------|------------------------------------------------------------------------------|",
+		"| Element Focusing  | Automates the process of setting focus on specified web elements.            |",
+		"| Dynamic Targeting | Supports dynamic targeting of elements using various locators and selectors. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                   | Description                                                                                |",
+		"|-------------------------|--------------------------------------------------------------------------------------------|",
+		"| Form Filling Automation | Ensures input fields are focused before entering data, improving accuracy in form filling. |",
+		"| Interactive Workflows   | Automates focus setting for elements in complex interactive workflows.                     |",
+		"| Event Triggering        | Sets focus on elements to trigger associated events, such as onfocus or onblur events.     |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                       | Description                                                                                     |",
+		"|-----------------------------|-------------------------------------------------------------------------------------------------|",
+		"| UI Interaction Testing      | Verifies that elements can be focused programmatically, ensuring proper UI behavior.            |",
+		"| Form Field Validation       | Ensures that input fields can be focused and interacted with during automated tests.            |",
+		"| Event Handling Verification | Tests if focus-related events (e.g., onfocus, onblur) are correctly handled by the application. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Set focus on the HTML element identified by the CSS selector `#TextInput`. ",
+				"This is useful for scenarios where focus needs to be set on a specific input field before performing further actions."
+			],
+			"rule": {
+				"Locator": "CssSelector",
+				"OnElement": "#TextInput",
+				"PluginName": "SetFocus"
+			}
+		},
+		{
+			"description": [
+				"Set focus on the HTML element identified by the XPath `//input[@name='username']`. ",
+				"This configuration is useful for scenarios where the element needs to be focused using an XPath locator."
+			],
+			"rule": {
+				"OnElement": "//input[@name='username']",
+				"PluginName": "SetFocus"
+			}
+		},
+		{
+			"description": [
+				"Set focus on the HTML element identified by the CSS selector `#EventElement` to trigger the `onfocus` event. ",
+				"This is useful for scenarios where focusing on an element is required to trigger associated events for testing or interaction purposes."
+			],
+			"rule": {
+				"Locator": "CssSelector",
+				"OnElement": "#EventElement",
+				"PluginName": "SetFocus"
+			}
+		}
+	],
+	"key": "SetFocus",
+	"manifestVersion": 4,
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the strategy or method used to locate the element on which focus will be set."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the identifier or locator for the element on which the focus action will be performed. ",
+				"It indicates the target element where the focus should be set."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#execute-script",
+		"w3c": "POST /session/{session id}/execute/sync"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `SetFocus` plugin automates the process of setting focus on specified web elements. ",
+		"It ensures that elements are focused before performing further interactions, which is crucial for form filling, interactive workflows, and event triggering in both RPA and automation testing scenarios."
+	]
+}

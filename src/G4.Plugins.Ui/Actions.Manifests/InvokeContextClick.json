@@ -1,0 +1,108 @@
+{
+	"aliases": [
+		"ContextClick",
+		"RightClick",
+		"RightMouseClick"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Ui",
+		"Browser"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `InvokeContextClick` plugin is to perform context-click (right-click) actions on specified web elements.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                     |",
+		"|----------------------|-----------------------------------------------------------------|",
+		"| Context Click Action | Performs a context-click action on the specified web element.   |",
+		"| Element Handling     | Handles web elements based on provided locators and attributes. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage               | Description                                                                                    |",
+		"|---------------------|------------------------------------------------------------------------------------------------|",
+		"| Element Interaction | Interact with web elements by performing context-click actions as part of automated workflows. |",
+		"| Context Menus       | Automate the opening of context menus by right-clicking on specific elements.                  |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                | Description                                                                                                 |",
+		"|----------------------|-------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing           | Perform context-click actions on web elements to test user interface interactions.                          |",
+		"| Context Menu Testing | Test scenarios where actions depend on context menus being triggered by a right-click.                      |",
+		"| Regression Testing   | Ensure that context-click functionalities work as expected after changes or updates to the web application. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Perform a `ContextClick` action on a web element with the `ID` attribute `RightClickButton`, using a CSS selector to locate the element."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#RightClickButton",
+				"pluginName": "InvokeContextClick"
+			}
+		},
+		{
+			"description": [
+				"Perform a `ContextClick` action at the last known mouse location. ",
+				"While this approach might be suitable for certain scenarios, it's generally less reliable and less commonly used in automation testing compared to locating and interacting with elements using locators."
+			],
+			"rule": {
+				"pluginName": "InvokeContextClick"
+			}
+		},
+		{
+			"description": [
+				"Perform a `ContextClick` action on a web element with the ID attribute `RightClickArea`. ",
+				"This configuration is useful for scenarios where a context menu needs to be triggered by right-clicking on a specific area of the web page."
+			],
+			"rule": {
+				"locator": "Id",
+				"onElement": "RightClickArea",
+				"pluginName": "InvokeContextClick"
+			}
+		}
+	],
+	"key": "InvokeContextClick",
+	"manifestVersion": 4,
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy to find the web element to be context-clicked. Supported locator types include `CssSelector`, `XPath`, `LinkText`, etc."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the actual element identifier using the locator strategy defined. For example, if the locator is `CssSelector`, this would be a CSS selector string."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `InvokeContextClick` plugin is designed to facilitate the interaction with web elements through context-click (right-click) actions. It can perform simple context-clicks as well as handle complex interactions with context menus.",
+		"In robotic process automation (RPA), it is used for automating user interactions such as opening context menus and performing actions within those menus.",
+		"In automation testing, it is invaluable for verifying user interface interactions, testing dynamic behaviors triggered by context-clicks, and ensuring that context-click functionalities remain consistent across different versions of the application."
+	]
+}

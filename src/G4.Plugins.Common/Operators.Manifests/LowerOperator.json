@@ -1,0 +1,101 @@
+{
+	"aliases": [
+		"Lt"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Operators"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the LowerOperator plugin is to compare two numeric values and determine if the first value is less than the second value, using a numerical comparison.",
+		"",
+		"### Key Features",
+		"",
+		"| Feature              | Description                                               |",
+		"|----------------------|-----------------------------------------------------------|",
+		"| Numerical Comparison | Performs a numerical comparison of two values.            |",
+		"| Integration          | Can be used under condition expressions by other plugins. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage              | Description                                                                            |",
+		"|--------------------|----------------------------------------------------------------------------------------|",
+		"| Numeric Comparison | Validate if one numeric value is less than another numeric value.                      |",
+		"| Conditional Logic  | Use in conditional expressions to control workflow logic based on numeric comparisons. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage              | Description                                                               |",
+		"|--------------------|---------------------------------------------------------------------------|",
+		"| Validation         | Validate output or state by comparing expected and actual numeric values. |",
+		"| Dynamic Conditions | Create dynamic conditions based on numeric comparisons.                   |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Lower` plugin to compare two numeric values and determine if the first value is less than the second value.",
+				"",
+				"| Field      | Description                                                                                                                 |",
+				"|------------|-----------------------------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Lower`. This signifies the action of comparing two numeric values. |",
+				"| LeftHand   | Specifies the first numeric value to be compared. For example, `5`.                                                         |",
+				"| RightHand  | Specifies the second numeric value to be compared. For example, `10`.                                                       |"
+			],
+			"rule": {
+				"argument": "{{$ --LeftHand:5 --RightHand:10}}",
+				"pluginName": "Lower"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the `LowerOperator` plugin within another plugin, such as `Assert`, to compare two numeric values and determine if the first value is less than the second value.",
+				"",
+				"| Field     | Description                                                                                                                           |",
+				"|-----------|---------------------------------------------------------------------------------------------------------------------------------------|",
+				"| Condition | Identifies the specific operator being utilized, which is `LowerOperator`. This signifies the action of comparing two numeric values. |",
+				"| LeftHand  | Specifies the first numeric value to be compared. For example, `5`.                                                                   |",
+				"| RightHand | Specifies the second numeric value to be compared. For example, `10`.                                                                 |"
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Lower --LeftHand:5 --RightHand:10}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "Lower",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the first numeric value to be compared in the less than check."
+			],
+			"mandatory": true,
+			"name": "LeftHand",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Specifies the second numeric value to be compared in the less than check."
+			],
+			"mandatory": true,
+			"name": "RightHand",
+			"type": "Number"
+		}
+	],
+	"pluginType": "Operator",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `Lower` plugin evaluates whether one numeric value is less than another numeric value, providing essential functionality for conditional logic in automation workflows and testing scenarios."
+	]
+}

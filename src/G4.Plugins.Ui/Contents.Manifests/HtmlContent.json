@@ -1,0 +1,189 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataExtraction",
+		"WebAutomation"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `HtmlContent` plugin extracts content from HTML documents using XPath selectors. It allows users to target specific elements or attributes within an HTML structure and extract their values, optionally applying regular expressions for precise data retrieval.",
+		"",
+		"This plugin works with HTML content from various scopes, such as the page source, outer HTML of an element, or raw HTML, depending on the extraction context.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                               |",
+		"|----------------------|-------------------------------------------------------------------------------------------|",
+		"| XPath Selection      | Selects HTML elements using XPath selectors specified in `OnElement`.                     |",
+		"| Attribute Extraction | Extracts values from specified attributes or inner text if `OnAttribute` is not provided. |",
+		"| Regular Expression   | Applies a regular expression to the extracted value for precise data extraction.          |",
+		"| Data Type Conversion | Converts the extracted value to a specified data type using `DataType`.                   |",
+		"| Flexible Integration | Easily integrates into automation workflows for data extraction from web content.         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                | Description                                                                    |",
+		"|----------------------|--------------------------------------------------------------------------------|",
+		"| Web Data Extraction  | Extract specific information from web pages for processing or storage.         |",
+		"| Content Scraping     | Scrape content from websites by targeting elements and attributes using XPath. |",
+		"| Form Data Retrieval  | Extract values from form fields or other interactive elements on a web page.   |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage            | Description                                                                               |",
+		"|------------------|-------------------------------------------------------------------------------------------|",
+		"| DOM Verification | Validate the presence and content of specific elements within the HTML structure.         |",
+		"| Data Validation  | Verify that web applications render content correctly by extracting and asserting values. |",
+		"| UI Testing       | Automate testing of UI components by extracting and validating their properties.          |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Represents the data extracted by the plugin as a key-value pair.",
+				"",
+				"The entity object contains the following fields:",
+				"",
+				"| Field  | Description                                                                                            |",
+				"|--------|--------------------------------------------------------------------------------------------------------|",
+				"| `name` | The key under which the extracted data is stored. This is specified by the `Key` property in the rule. |",
+				"| `value`| The extracted data obtained by the plugin after applying any specified transformations.                |",
+				"| `type` | The data type of the extracted value, corresponding to the `DataType` property specified in the rule.  |"
+			],
+			"name": "<Key>",
+			"type": "<DataType>",
+			"value": "<ExtractedValue>"
+		}
+	],
+	"examples": [
+		{
+			"description": [
+				"Extract the text content of an element using an XPath selector.",
+				"",
+				"The `HtmlContent` plugin is used to select an element by its XPath and extract its inner text.",
+				"This allows you to retrieve specific information from the HTML document."
+			],
+			"rule": {
+				"dataType": "String",
+				"key": "ProductName",
+				"onElement": "//div[@class='product-name']",
+				"pluginName": "HtmlContent"
+			}
+		},
+		{
+			"description": [
+				"Extract the value of an attribute from an element using an XPath selector.",
+				"",
+				"The `HtmlContent` plugin selects an element using an XPath selector and extracts the value of a specified attribute.",
+				"This is useful for retrieving properties like URLs from links or source paths from images."
+			],
+			"rule": {
+				"argument": "{{$}}",
+				"dataType": "String",
+				"key": "DownloadLink",
+				"onAttribute": "href",
+				"onElement": "//a[@class='download-link']",
+				"pluginName": "HtmlContent"
+			}
+		},
+		{
+			"description": [
+				"Extract a numeric value from an element's text using a regular expression.",
+				"",
+				"The `HtmlContent` plugin extracts the inner text of an element and applies a regular expression to retrieve a numeric value.",
+				"The extracted value is then converted to the specified data type."
+			],
+			"rule": {
+				"argument": "{{$}}",
+				"dataType": "Decimal",
+				"key": "Price",
+				"onElement": "//span[@id='price']",
+				"pluginName": "HtmlContent",
+				"regularExpression": "\\d+\\.\\d{2}"
+			}
+		}
+	],
+	"key": "HtmlContent",
+	"manifestVersion": 4,
+	"parameters": [],
+	"pluginType": "Content",
+	"properties": [
+		{
+			"description": [
+				"Specifies the XPath selector to locate the target HTML element.",
+				"Use `.` to select the first child of the current node."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the attribute name from which to extract the value.",
+				"If not provided, the plugin will extract the inner text of the element."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies the regular expression pattern to apply to the extracted value.",
+				"This allows for precise data extraction from the text or attribute value."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the key under which the extracted data will be stored.",
+				"This key can be used to reference the data in subsequent steps."
+			],
+			"mandatory": true,
+			"name": "Key",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the data type to which the extracted value should be converted.",
+				"Supported data types include `String`, `Number`, `Boolean` and  `DateTime`."
+			],
+			"mandatory": false,
+			"name": "DataType",
+			"type": "String",
+			"values": [
+				{
+					"description": [ "Textual data." ],
+					"name": "String"
+				},
+				{
+					"description": [ "Whole numbers or numeric values with decimal points." ],
+					"name": "Number"
+				},
+				{
+					"description": [ "True or False values." ],
+					"name": "Boolean"
+				},
+				{
+					"description": [ "Date and/or time values." ],
+					"name": "DateTime"
+				}
+			]
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"Extracts content from HTML documents using XPath selectors, with optional attribute selection, regular expressions, and data type conversion."
+	]
+}

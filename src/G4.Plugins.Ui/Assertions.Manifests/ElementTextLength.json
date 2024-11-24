@@ -1,0 +1,182 @@
+{
+    "aliases": [
+        "TextLength"
+    ],
+    "author": {
+        "link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+        "name": "Roei Sabag"
+    },
+    "categories": [
+        "Validation",
+        "UserInterface"
+    ],
+    "description": [
+        "### Purpose",
+        "",
+        "The `ElementTextLength` plugin is designed to validate the length of the text content of web elements within automation scripts. ",
+        "It provides a robust mechanism to assert that the length of an element's text meets specific conditions, making it essential for scenarios where text length is critical to the workflow.",
+        "",
+        "### Key Features and Functionality",
+        "",
+        "| Feature                    | Description                                                                                                              |",
+        "|----------------------------|--------------------------------------------------------------------------------------------------------------------------|",
+        "| Text Length Validation     | Validates that the length of the text content of an element matches expected conditions, supporting numeric comparisons. |",
+        "| Regular Expression Support | Applies regular expressions to the text content before calculating its length, enabling complex validations.             |",
+        "| Flexible Assertions        | Supports a range of operators, including equality, inequality, and numeric comparisons.                                  |",
+        "",
+        "### Usages in RPA",
+        "",
+        "| Usage                       | Description                                                                                                                                      |",
+        "|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|",
+        "| Content Length Verification | Ensures that the length of the text content of specific elements meets the expected value, crucial for verifying dynamic content or form inputs. |",
+        "| Form Validation             | Validates that the length of text fields is within acceptable limits before submission, ensuring accuracy in automated form submissions.         |",
+        "",
+        "### Usages in Automation Testing",
+        "",
+        "| Usage                       | Description                                                                                                                                  |",
+        "|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|",
+        "| UI Consistency Verification | Ensures that the length of text content in UI elements remains consistent across different environments and test runs.                       |",
+        "| Localization Testing        | Validates that the length of text content in elements matches the expected length for localized text in various languages.                   |",
+        "| Error Message Length Check  | Checks that error messages or notifications displayed to the user have the correct length, ensuring they are neither too short nor too long. |"
+    ],
+    "examples": [
+        {
+            "description": [
+                "Assert that the length of the text content of an element, after applying the regular expression '\\d+', equals '3'. ",
+                "This is useful for scenarios where the script needs to extract numeric values from the element's text and validate their length against expected criteria."
+            ],
+            "rule": {
+                "argument": "{{$ --Operator:Equal --Expected:3}}",
+                "onElement": "//*[@id='numericTextElement']",
+                "pluginName": "ElementTextLength",
+                "regularExpression": "\\d+"
+            }
+        },
+        {
+            "description": [
+                "Ensure that the length of the text content of an element matches the exact value '11'. ",
+                "This assertion checks if the length of the text content of the specified element is exactly as expected."
+            ],
+            "rule": {
+                "argument": "{{$ --Operator:Equal --Expected:11}}",
+                "onElement": "//*[@id='textLengthElement']",
+                "pluginName": "ElementTextLength"
+            }
+        },
+        {
+            "description": [
+                "Perform an assertion to ensure that the length of the text content of an element using the CSS selector `.price`, after extracting the numeric part using the regular expression '\\d+', is greater than '2'. ",
+                "This is useful for scenarios where the script needs to validate that a numeric value extracted from the text content has a length greater than a certain threshold."
+            ],
+            "rule": {
+                "argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:2}}",
+                "locator": "CssSelector",
+                "onElement": ".price",
+                "pluginName": "Assert",
+                "regularExpression": "\\d+"
+            }
+        },
+        {
+            "description": [
+                "Assert that the length of the text content of an element is less than or equal to '50'. ",
+                "This validation ensures that the text content length does not exceed a specific upper limit."
+            ],
+            "rule": {
+                "argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:50}}",
+                "onElement": "//*[@id='lengthTextElement']",
+                "pluginName": "Assert"
+            }
+        },
+        {
+            "description": [
+                "Check that the length of the text content of an element matches the regular expression '\\d{2}', ensuring it is exactly two digits long."
+            ],
+            "rule": {
+                "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\\d{2}}}",
+                "onElement": "//*[@id='twoDigitTextElement']",
+                "pluginName": "Assert"
+            }
+        },
+        {
+            "description": [
+                "Assert that the length of the text content of an element is greater than or equal to '5'. ",
+                "This validation ensures that the text content length meets or exceeds a specific minimum threshold."
+            ],
+            "rule": {
+                "argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:5}}",
+                "onElement": "//*[@id='minLengthTextElement']",
+                "pluginName": "Assert"
+            }
+        }
+    ],
+    "key": "ElementTextLength",
+    "manifestVersion": 4,
+    "parameters": [
+        {
+            "description": [
+                "Specifies the type of comparison or operation to be performed when evaluating the length of the element's text content."
+            ],
+            "mandatory": true,
+            "name": "Operator",
+            "type": "Operator"
+        },
+        {
+            "description": [
+                "Specifies the expected length value that the element's text content should meet during the assertion."
+            ],
+            "mandatory": true,
+            "name": "Expected",
+            "type": "String"
+        }
+    ],
+    "pluginType": "Assertion",
+    "properties": [
+        {
+            "description": [
+                "Specifies the condition under which the assertion will pass or fail. ",
+                "This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected length for the text content."
+            ],
+            "mandatory": true,
+            "name": "Argument",
+            "type": "String|Expression"
+        },
+        {
+            "description": [
+                "Specifies the web element whose text content length will be validated. This can be defined using a locator strategy, such as Xpath, CSS Selector, etc."
+            ],
+            "mandatory": true,
+            "name": "OnElement",
+            "type": "String|Expression"
+        },
+        {
+            "default": "Xpath",
+            "description": [
+                "Specifies the locator strategy used to identify the target element on the web page. The default value is 'Xpath'."
+            ],
+            "mandatory": false,
+            "name": "Locator",
+            "type": "String"
+        },
+        {
+            "default": "(?s).*",
+            "description": [
+                "Specifies a regular expression to be applied to the text content before calculating its length. ",
+                "This allows for more flexible validation of text lengths that may require pattern matching."
+            ],
+            "mandatory": false,
+            "name": "RegularExpression",
+            "type": "Regex"
+        }
+    ],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-element-text",
+		"w3c": "GET /session/{session id}/element/{element id}/text"
+	},
+    "scope": [
+        "Any"
+    ],
+    "summary": [
+        "The `ElementTextLength` plugin validates the length of the text content of web elements, supporting a range of operators for flexible assertion. ",
+        "It is commonly used in RPA to verify content length, form inputs, and dynamic content, and in automation testing to ensure UI consistency, localization accuracy, and proper error message length."
+    ]
+}

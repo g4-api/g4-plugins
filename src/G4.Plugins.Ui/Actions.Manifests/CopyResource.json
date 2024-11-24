@@ -1,0 +1,168 @@
+{
+	"aliases": [
+		"CopyResources",
+		"DownloadResource",
+		"DownloadResources"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Ui",
+		"Browser",
+		"Http"
+	],
+	"description": [
+		"> [!IMPORTANT]",
+		"> When interacting with web resources, it's crucial to consider security aspects, such as handling sensitive data, authentication, and secure communication.",
+		"",
+		"### Purpose",
+		"",
+		"The primary purpose of the `CopyResource` plugin is to download data from a specified endpoint and save it to a local file. This can be used to retrieve resources like images, documents, or any other file types from web elements during automated workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                               |",
+		"|---------------------|---------------------------------------------------------------------------|",
+		"| Data Download       | Downloads data from specified endpoints and saves it to local files.      |",
+		"| Parallel Processing | Supports parallel processing to download multiple resources concurrently. |",
+		"| Custom Paths        | Allows specification of custom paths for saving downloaded resources.     |",
+		"| Regular Expression  | Uses regular expressions to extract and match URLs from web elements.     |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage               | Description                                                                                  |",
+		"|---------------------|----------------------------------------------------------------------------------------------|",
+		"| Data Collection     | Collect resources like images or documents from web pages for further processing or storage. |",
+		"| Workflow Automation | Automate the process of downloading necessary resources as part of a larger workflow.        |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage               | Description                                                                                                    |",
+		"|---------------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Resource Validation | Download and validate resources to ensure they are correctly served by the web application.                    |",
+		"| Performance Testing | Assess the performance of resource download times under different conditions.                                  |",
+		"| Regression Testing  | Ensure that resource download functionality works as expected after changes or updates to the web application. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Use the `CopyResource` plugin to download images from a webpage and save them to a specified directory. The images' URLs are extracted from the `src` attribute of `img` elements matching the provided regular expression."
+			],
+			"rule": {
+				"argument": "{{$ --Path:/home/user/downloaded_resources --Parallel:true}}",
+				"locator": "CssSelector",
+				"onAttribute": "src",
+				"onElement": "img",
+				"pluginName": "CopyResource",
+				"regularExpression": "https?:\\/\\/.*"
+			}
+		},
+		{
+			"description": [
+				"Use the `CopyResource` plugin to download documents from a webpage in a sequential manner. The URLs are extracted from the `href` attribute of `a` elements."
+			],
+			"rule": {
+				"argument": "{{$ --Path:/home/user/downloaded_documents}}",
+				"locator": "CssSelector",
+				"onAttribute": "href",
+				"onElement": "a",
+				"pluginName": "CopyResource",
+				"regularExpression": "https?:\\/\\/.*"
+			}
+		},
+		{
+			"description": [
+				"Use the `CopyResource` plugin to download all resources from `a` tags on a webpage. The URLs are extracted directly from the text content of the `a` tags."
+			],
+			"rule": {
+				"argument": "{{$ --Path:/home/user/all_resources}}",
+				"locator": "CssSelector",
+				"onElement": "a",
+				"pluginName": "CopyResource",
+				"regularExpression": "https?:\\/\\/.*"
+			}
+		}
+	],
+	"key": "CopyResource",
+	"manifestVersion": 4,
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the list of file paths for the resources that were successfully downloaded. This allows further processing or validation within the workflow."
+			],
+			"name": "DownloadedFiles"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Specifies the path to the directory where the downloaded resources should be saved. If not provided, the current directory is used."
+			],
+			"mandatory": false,
+			"name": "Path",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Indicates whether to process the downloads in parallel. This can significantly speed up the process when downloading multiple resources."
+			],
+			"mandatory": false,
+			"name": "Parallel",
+			"type": "Switch"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the details for the `CopyResource` request. ",
+				"It includes a template or variable structure `{{$...}}` to allow dynamic values. This allows passing parameters such as `Path` and `Parallel`."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "Uri|Expression"
+		},
+		{
+			"description": [
+				"Used for pattern matching and extraction of specific data from a text response. ",
+				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		},
+		{
+			"description": [
+				"Used to specify and extract a specific attribute value from an HTML element. ",
+				"This is particularly relevant when dealing with web data, where elements can have associated attributes containing URLs or other relevant information."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Used to target elements using either XPath or CSS selectors, allowing the rule to locate and process specific elements within the HTML content."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#find-elements",
+		"w3c": "None"
+	},
+	"scope": [
+		"MobileWeb",
+		"Web"
+	],
+	"summary": [
+		"The `CopyResource` plugin automates the process of downloading resources from web elements and saving them to specified directories. It supports parallel processing for efficient downloads and uses regular expressions to match and extract URLs.",
+		"Key features include downloading data from specified endpoints, supporting parallel processing to handle multiple resources concurrently, allowing custom paths for saving resources, and using regular expressions for URL extraction.",
+		"In RPA, it is used for data collection, automating the download of necessary resources as part of a larger workflow. It helps in collecting resources like images or documents from web pages for further processing or storage.",
+		"In automation testing, it supports resource validation, performance testing, and regression testing. It allows downloading and validating resources to ensure they are correctly served by the web application, assessing the performance of resource download times under different conditions, and ensuring resource download functionality works as expected after changes or updates to the web application."
+	]
+}

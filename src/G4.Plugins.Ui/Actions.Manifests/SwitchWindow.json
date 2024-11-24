@@ -1,0 +1,88 @@
+{
+	"aliases": [
+		"SwitchToWindow"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `SwitchWindow` plugin automates the process of switching between different browser windows or tabs during web-based automation tasks. ",
+		"This functionality is essential for workflows that involve multiple windows or tabs, ensuring that the correct window is focused and interacted with as needed.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                                                        |",
+		"|------------------------|----------------------------------------------------------------------------------------------------|",
+		"| Index-based Switching  | Allows switching to a window using its index, facilitating navigation among multiple open windows. |",
+		"| Handle-based Switching | Enables switching to a window using its handle, providing flexibility in window management.        |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                                 | Description                                                                                   |",
+		"|---------------------------------------|-----------------------------------------------------------------------------------------------|",
+		"| Multi-Window Workflows                | Automates the process of switching between multiple windows or tabs during complex workflows. |",
+		"| Data Collection from Multiple Sources | Facilitates the collection of data from different windows or tabs simultaneously.             |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage              | Description                                                                                               |",
+		"|--------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| UI Testing         | Validates the behavior of applications across multiple windows or tabs by switching context as needed.    |",
+		"| End-to-End Testing | Ensures comprehensive test coverage by automating window switching as part of user interaction scenarios. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Switch to the window with index `1`. ",
+				"This is useful for navigating to a specific window when multiple windows are open."
+			],
+			"rule": {
+				"argument": "1",
+				"pluginName": "SwitchWindow"
+			}
+		},
+		{
+			"description": [
+				"Switch to the window with the handle `CDwindow-1234`. ",
+				"This is useful for switching to a window with a known handle, ensuring the correct window is focused."
+			],
+			"rule": {
+				"argument": "CDwindow-1234",
+				"pluginName": "SwitchWindow"
+			}
+		}
+	],
+	"key": "SwitchWindow",
+	"manifestVersion": 4,
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the identifier for the window to switch to. ",
+				"It can be either an index (e.g., `1`) or a window handle (e.g., `CDwindow-1234`)."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#switch-to-window",
+		"w3c": "POST /session/{session id}/window"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `SwitchWindow` plugin automates the process of switching between different browser windows or tabs during automation tasks.",
+		"In robotic process automation (RPA), it facilitates navigation and interaction across multiple windows or tabs within workflows.",
+		"In automation testing, it enables comprehensive test coverage by allowing the automation scripts to switch context as needed."
+	]
+}

@@ -1,0 +1,161 @@
+{
+	"aliases": [
+		"GoToUrl"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Browser",
+		"Navigation"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `OpenUrl` plugin is to automate the navigation to a specified URL within the browser. ",
+		"This plugin provides a mechanism to programmatically navigate to a new URL, which can be part of automated workflows or tests.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature           | Description                                                                             |",
+		"|-------------------|-----------------------------------------------------------------------------------------|",
+		"| URL Navigation    | Automates the process of navigating to a specified URL in the browser.                  |",
+		"| Element-Based URL | Retrieves URLs from specified web elements or attributes to navigate.                   |",
+		"| Regex Extraction  | Supports extracting URLs using regular expressions from the element text or attributes. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                | Description                                                                     |",
+		"|----------------------|---------------------------------------------------------------------------------|",
+		"| Data Collection      | Navigate to different URLs to collect data from multiple sources automatically. |",
+		"| Multi-Page Workflows | Automate workflows that require navigation across multiple pages.               |",
+		"| Form Submissions     | Navigate to specific URLs after form submissions or other interactions.         |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                 | Description                                                                         |",
+		"|-----------------------|-------------------------------------------------------------------------------------|",
+		"| Functional Testing    | Verify that web applications correctly navigate to specified URLs.                  |",
+		"| Link Verification     | Ensure that links and buttons direct to the correct URLs.                           |",
+		"| Multi-Page UI Testing | Test the UI and functionality across multiple pages by navigating programmatically. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Navigate to the URL `http://example.com`. ",
+				"This example demonstrates how to open a specific URL directly without relying on any web element."
+			],
+			"rule": {
+				"argument": "http://example.com",
+				"pluginName": "OpenUrl"
+			}
+		},
+		{
+			"description": [
+				"Navigate to the URL specified by the element identified by the CSS selector `#LinkToOpen`. ",
+				"This example shows how to retrieve the URL from the text content or attribute of a specified web element."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#LinkToOpen",
+				"pluginName": "OpenUrl"
+			}
+		},
+		{
+			"description": [
+				"Navigate to the URL specified in the `href` attribute of the element identified by the CSS selector `#LinkToOpen`. ",
+				"This example demonstrates how to retrieve the URL from a specific attribute of a web element."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onAttribute": "href",
+				"onElement": "#LinkToOpen",
+				"pluginName": "OpenUrl"
+			}
+		},
+		{
+			"description": [
+				"Navigate to the URL extracted from the `href` attribute of the element identified by the CSS selector `#LinkToOpen`, using a regular expression to match and extract the desired URL pattern. ",
+				"This example highlights how to use a regular expression to precisely match and extract the URL from an attribute."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onAttribute": "href",
+				"onElement": "#LinkToOpen",
+				"pluginName": "OpenUrl",
+				"regularExpression": "https?://.*"
+			}
+		},
+		{
+			"description": [
+				"Navigate to the URL extracted from the text content of the element identified by the CSS selector `#LinkToOpen`, using a regular expression to match and extract the desired URL pattern. ",
+				"This example demonstrates how to use a regular expression to retrieve the URL directly from the text content of a web element without specifying an attribute."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#LinkToOpen",
+				"pluginName": "OpenUrl",
+				"regularExpression": "https?://.*"
+			}
+		}
+	],
+	"key": "OpenUrl",
+	"manifestVersion": 4,
+	"parameters": [],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the URL to navigate to if no element is provided or if a direct URL is needed."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifying the target element from which the URL should be retrieved for navigation."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifying the type of locator used to identify the target element defined by the `OnElement` property."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Retrieves the URL from the specified attribute of the target element."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Uses a regular expression to match and extract the desired part of the URL from the target element."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#navigate-to",
+		"w3c": "POST /session/{session id}/url"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `OpenUrl` plugin automates the navigation to specified URLs within the browser, enabling seamless integration into multi-page workflows and testing scenarios. ",
+		"It supports retrieving URLs from web elements, extracting with regular expressions, and navigating directly to specified URLs."
+	]
+}

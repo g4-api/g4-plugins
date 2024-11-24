@@ -1,0 +1,69 @@
+{
+	"aliases": [
+		"SwitchToParentFrame"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `SwitchParentFrame` plugin is designed to automate the process of switching from a child frame back to its parent frame within a web page. ",
+		"It streamlines navigation in web automation workflows, ensuring that scripts can efficiently interact with elements outside of nested frames.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature          | Description                                                               |",
+		"|------------------|---------------------------------------------------------------------------|",
+		"| Switch to Parent | Switches from a child frame to the parent frame, facilitating navigation. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage            | Description                                                                                   |",
+		"|------------------|-----------------------------------------------------------------------------------------------|",
+		"| Frame Navigation | Automates the process of switching back to the parent frame within a web page.                |",
+		"| Data Extraction  | Facilitates data extraction from multiple frames by allowing movement to parent frame.        |",
+		"| Form Interaction | Allows RPA bots to interact with elements in the parent frame after working in a child frame. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                | Description                                                                                                       |",
+		"|----------------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing           | Enables automated tests to navigate back to the parent frame, ensuring comprehensive coverage.                    |",
+		"| Frame Verification   | Helps in verifying the functionality of switching back to parent frames during tests.                             |",
+		"| Multi-Frame Handling | Supports testing scenarios involving multiple frames, ensuring each frame and parent frame interaction is tested. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Switch from the current child frame back to its parent frame. ",
+				"This is useful for navigating out of a nested frame to continue interactions with elements in the parent frame."
+			],
+			"rule": {
+				"pluginName": "SwitchParentFrame"
+			}
+		}
+	],
+	"key": "SwitchParentFrame",
+	"manifestVersion": 4,
+	"parameters": [],
+	"pluginType": "Action",
+	"properties": [],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#switch-to-parent-frame",
+		"w3c": "POST /session/{session id}/frame/parent"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `SwitchParentFrame` plugin automates the process of switching from a child frame back to its parent frame within a web page.",
+		"In robotic process automation (RPA), it facilitates efficient navigation and interaction with elements outside of nested frames.",
+		"In automation testing, it ensures comprehensive test coverage by enabling interactions with elements in the parent frame after navigating through child frames."
+	]
+}

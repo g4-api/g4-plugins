@@ -1,0 +1,183 @@
+{
+	"aliases": [
+		"MoveToElement"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"UserInterface"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `MoveMouseCursor` plugin is to automate mouse cursor movements on web pages. ",
+		"This plugin provides a mechanism to move the mouse cursor programmatically to specific coordinates or web elements as part of automated workflows or tests.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                                                                                                                           |",
+		"|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Element Targeting    | Moves the mouse cursor to specified web elements using locators.                                                                                                                      |",
+		"| Coordinate Targeting | Moves the mouse cursor to specific X and Y coordinates on the page.                                                                                                                   |",
+		"| Versatility          | Handles both web elements and coordinate-based cursor movements, making it suitable for various scenarios.                                                                            |",
+		"| Precision            | Enables precise control over cursor positioning for interactive web elements and dynamic content.                                                                                     |",
+		"| Origin Parameter     | Specifies the reference point for the cursor movement. Options include 'Pointer' (relative to the current position) and 'Viewport' (relative to the top-left corner of the viewport). |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage               | Description                                                                          |",
+		"|---------------------|--------------------------------------------------------------------------------------|",
+		"| UI Interaction      | Automating mouse movements to interact with specific elements on web pages.          |",
+		"| Workflow Navigation | Navigating through workflows by moving the cursor to specific positions or elements. |",
+		"| Data Extraction     | Hovering over elements to reveal hidden data or tooltips for extraction.             |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                       | Description                                                                                                |",
+		"|-----------------------------|------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing                  | Performing mouse movements to test interactions with dynamic web elements.                                 |",
+		"| Hover Actions               | Testing hover actions and verifying the display of tooltips, dropdowns, or other hover-triggered elements. |",
+		"| Interactive Element Testing | Ensuring that interactive elements respond correctly to cursor movements and positioning.                  |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Move the mouse cursor to a web element identified by the CSS selector `#TargetElement`. ",
+				"This can be used to interact with or highlight the specified element."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#TargetElement",
+				"pluginName": "MoveMouseCursor"
+			}
+		},
+		{
+			"description": [
+				"Move the mouse cursor to the coordinates (100, 200) on the page. ",
+				"This can be useful for scenarios where precise cursor positioning is required for interacting with specific areas of the page."
+			],
+			"rule": {
+				"argument": "{{$ --X:100 --Y:200}}",
+				"pluginName": "MoveMouseCursor"
+			}
+		},
+		{
+			"description": [
+				"Move the mouse cursor to the top-left corner of the page (coordinates 0, 0). ",
+				"This can be used to reset the cursor position or interact with elements located at the top-left corner of the page."
+			],
+			"rule": {
+				"argument": "{{$ --X:0 --Y:0}}",
+				"pluginName": "MoveMouseCursor"
+			}
+		},
+		{
+			"description": [
+				"Move the mouse cursor to the coordinates (300, 400) with the origin set to 'Pointer'. ",
+				"This can be useful for scenarios where the movement should be relative to the current pointer position."
+			],
+			"rule": {
+				"argument": "{{$ --X:300 --Y:400 --Origin:Pointer}}",
+				"pluginName": "MoveMouseCursor"
+			}
+		},
+		{
+			"description": [
+				"Move the mouse cursor to the coordinates (300, 400) with the origin set to 'Viewport'. ",
+				"This ensures that the movement is relative to the top-left corner of the viewport."
+			],
+			"rule": {
+				"argument": "{{$ --X:300 --Y:400 --Origin:Viewport}}",
+				"pluginName": "MoveMouseCursor"
+			}
+		}
+	],
+	"key": "MoveMouseCursor",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the origin point for the mouse movement. Can be either 'Pointer' or 'Viewport'."
+			],
+			"mandatory": false,
+			"name": "Origin",
+			"type": "Array",
+			"values": [
+				{
+					"description": [
+						"The origin is the current position of the pointer."
+					],
+					"mandatory": false,
+					"name": "Pointer",
+					"type": "String"
+				},
+				{
+					"description": [
+						"The origin is the top-left corner of the viewport."
+					],
+					"mandatory": false,
+					"name": "Viewport",
+					"type": "String"
+				}
+			]
+		},
+		{
+			"description": [
+				"Specifies the horizontal coordinate (X) to move the mouse cursor to on the page."
+			],
+			"mandatory": false,
+			"name": "X",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Specifies the vertical coordinate (Y) to move the mouse cursor to on the page."
+			],
+			"mandatory": false,
+			"name": "Y",
+			"type": "Number"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Provides additional instructions or parameters to control the behavior of the mouse movement action."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies the target element to which the mouse cursor should be moved."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the type of locator used to identify the target element defined by the `OnElement` property."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"scope": [
+		"MobileWeb",
+		"NativeOs",
+		"Web"
+	],
+	"summary": [
+		"The `MoveMouseCursor` plugin automates mouse cursor movements, providing precise control over cursor positioning for interacting with specific elements or coordinates. ",
+		"It supports element targeting, coordinate-based movements, and the use of the 'Origin' parameter to define the reference point, which can be set to either 'Pointer' (relative to the current position) or 'Viewport' (relative to the top-left corner of the viewport)."
+	]
+}

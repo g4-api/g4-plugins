@@ -1,0 +1,105 @@
+{
+	"aliases": [
+		"Hidden",
+		"NotDisplayed",
+		"NotVisible"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Validation",
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `ElementNotVisible` plugin is designed to assert that a specified web element is not visible within a web browser during automated tasks. ",
+		"This plugin is essential for scenarios where ensuring an element is not visible is necessary before proceeding with automation workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature               | Description                                                                     |",
+		"|-----------------------|---------------------------------------------------------------------------------|",
+		"| Visibility Validation | Validates that the specified web element is not visible during execution.       |",
+		"| Seamless Integration  | Integrates smoothly with automation workflows to ensure elements remain hidden. |",
+		"| Reliable Assertion    | Provides a reliable mechanism to confirm the non-visibility of web elements.    |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                | Description                                                                                     |",
+		"|----------------------|-------------------------------------------------------------------------------------------------|",
+		"| Ensure Hidden State  | Confirms that specific elements are not visible, preventing unintended actions in workflows.    |",
+		"| Process Flow Control | Validates that elements remain hidden to ensure the correct progression of automated processes. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                     | Description                                                                                         |",
+		"|---------------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Non-Visibility Validation | Ensures that specific elements are not visible during test scenarios, validating user interactions. |",
+		"| Workflow Verification     | Confirms that workflows proceed with the correct elements hidden, ensuring accurate test outcomes.  |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Assert that a specific web element is not visible during the execution of automated tasks. ",
+				"This is useful for validating scenarios where an element should remain hidden to prevent unwanted interactions."
+			],
+			"rule": {
+				"locator": "CssSelector",
+				"onElement": "#hiddenElement",
+				"pluginName": "ElementNotVisible"
+			}
+		},
+		{
+			"description": [
+				"Perform an assertion to ensure a specific web element is not visible, validating that it remains hidden during the execution of the automation script. ",
+				"The `Assert` plugin is used to check this condition, and if the element is not visible, the assertion passes."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotVisible}}",
+				"locator": "CssSelector",
+				"onElement": "#hiddenElement",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "ElementNotVisible",
+	"manifestVersion": 4,
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"Specifies the web element that is being validated for its non-visibility. ",
+				"This can be a CSS selector, XPath, or other locator strategy to identify the element."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy used to identify the element for the non-visibility validation. ",
+				"Common strategies include CSS selectors, XPath, ID, and others."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#find-element",
+		"w3c": "None"
+	},
+	"scope": [
+		"Web",
+		"MobileWeb"
+	],
+	"summary": [
+		"The `ElementNotVisible` plugin asserts that a specified web element is not visible within a web browser during automated tasks, ensuring that automation scripts validate the non-visibility of elements.",
+		"In robotic process automation (RPA), it confirms that elements remain hidden, preventing unintended actions and enhancing workflow accuracy.",
+		"In automation testing, it validates the non-visibility of elements, ensuring accurate user interaction flows and test outcomes."
+	]
+}

@@ -1,0 +1,154 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"General"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SetApplicationParameter` plugin is to set application parameters that are shared across all automation instances. This allows for flexible configuration management, enabling dynamic updates to parameters such as connection strings, API keys, or other configuration settings essential for automation workflows.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                                            |",
+		"|------------------------------- |--------------------------------------------------------------------------------------------------------|",
+		"| Parameter Setting              | Sets application parameters in a specified environment.                                                |",
+		"| Environment-Based Parameters   | Supports setting parameters specific to different environments (e.g., Prod, Dev).                      |",
+		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically set parameters based on automation needs. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                         | Description                                                                                          |",
+		"|------------------------------ |----------------------------------------------------------------------------------------------------- |",
+		"| Dynamic Configuration         | Set configuration settings dynamically based on the environment.                                     |",
+		"| Centralized Parameter Storage | Use a centralized location for storing and setting parameters across different automation instances. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                        | Description                                                                                          |",
+		"|------------------------------|------------------------------------------------------------------------------------------------------|",
+		"| Environment-Specific Testing | Set parameters specific to test environments, enabling more accurate and environment-specific tests. |",
+		"| Configuration Management     | Simplify configuration management by setting parameters directly within test scripts.                |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example demonstrates the usage of the `Application` plugin to set a parameter named `ConnectionString` in the `Prod` environment directly.",
+				"",
+				"| Field      | Description                                                              |",
+				"|------------|--------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `Application`.   |",
+				"| argument   | Specifies the environment and value to set the parameter.                |",
+				"| onElement  | Specifies the name of the parameter to be set.                           |"
+			],
+			"rule": {
+				"argument": "{{$ --Environment:Prod --Value:MyConnectionString}}",
+				"onElement": "ConnectionString",
+				"pluginName": "Application"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates the usage of the macro to set a parameter named `ConnectionString` in the `Prod` environment and use it in a `RegisterParameter` action, utilizing the `OnAttribute` property.",
+				"",
+				"| Field        | Description                                                                                             |",
+				"|------------- |---------------------------------------------------------------------------------------------------------|",
+				"| pluginName   | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument     | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement    | Specifies the target element whose attribute content will be saved as the parameter value.              |",
+				"| onAttribute  | Specifies the attribute of the element from which the value will be extracted.                          |",
+				"| locator      | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:ConnectionString --Scope:Application --Environment:Prod}}",
+				"locator": "CssSelector",
+				"onAttribute": "data-value",
+				"onElement": "#someElement",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates setting a parameter named `ConnectionString` from the text content of an element identified by its CSS selector, using the default `SystemParameters` environment.",
+				"",
+				"| Field      | Description                                                                                             |",
+				"|------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument   | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement  | Specifies the target element whose text content will be saved as the parameter value.                   |",
+				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:ConnectionString --Scope:Application}}",
+				"locator": "CssSelector",
+				"onElement": "#someElement",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"description": [
+				"This example demonstrates setting a parameter named `APIKey` from the text content of an element identified by its CSS selector and using a regular expression to extract part of the text.",
+				"",
+				"| Field             | Description                                                                                             |",
+				"|-------------------|---------------------------------------------------------------------------------------------------------|",
+				"| pluginName        | Identifies the specific plugin being utilized, which is `RegisterParameter`.                            |",
+				"| argument          | Specifies the use of the macro to set the parameter value dynamically.                                  |",
+				"| onElement         | Specifies the target element whose text content will be saved as the parameter value.                   |",
+				"| regularExpression | Specifies the regular expression to apply to the text content before saving the parameter value.        |",
+				"| locator           | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
+			],
+			"rule": {
+				"argument": "{{$ --Name:APIKey --Scope:Application}}",
+				"locator": "CssSelector",
+				"onElement": "#apiElement",
+				"pluginName": "RegisterParameter",
+				"regularExpression": "^.*(?=\\sAPIKey$)"
+			}
+		}
+	],
+	"key": "Application",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "SystemParameters",
+			"description": [
+				"Specifies the environment in which to set the parameter. If not specified, the `SystemParameters` environment will be used."
+			],
+			"mandatory": false,
+			"name": "Environment",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the value to be set for the parameter."
+			],
+			"mandatory": false,
+			"name": "Value",
+			"type": "String"
+		}
+	],
+	"pluginType": "SetParameter",
+	"properties": [
+		{
+			"description": [
+				"Specifies the name of the parameter to be set."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scope": [
+		"Any"
+	],
+	"summary": [
+		"The `SetApplicationParameter` plugin sets application parameters within automation workflows, enhancing configuration management."
+	]
+}
