@@ -122,7 +122,7 @@ jobs:
             # read test settings
             $runSettingsFileName  = "${{ env.testSettingsFileName }}"
             $runSettingsFile      = (Get-ChildItem -Path . -Filter $runSettingsFileName -Recurse).FullName
-            [xml]$runSettings     = Get-Content "$runSettingsFile"
+            [xml]$runSettings     = Get-Content -Path $runSettingsFile
             #
             # setup
             $gridEndpoint         = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
