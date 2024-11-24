@@ -119,7 +119,7 @@ jobs:
         shell: pwsh
         run: |
             # read test settings
-            [xml]$runSettings = Get-Content '../test/Settings/${{ env.testSettingsFileName }}'
+            [xml]$runSettings = Get-Content './test/Settings/${{ env.testSettingsFileName }}'
             #
             # setup
             $gridEndpoint         = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
@@ -136,7 +136,7 @@ jobs:
             $workers.InnerText          = '${{ env.workers }}'
             #
             # save settings
-            $runSettings.Save('../test/Settings/${{ env.testSettingsFileName }}')
+            $runSettings.Save('./test/Settings/${{ env.testSettingsFileName }}')
 
       - name: Invoke Unit Tests
         uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
