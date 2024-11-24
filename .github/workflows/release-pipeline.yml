@@ -90,3 +90,29 @@ jobs:
     - name: Build ${{ env.projectName }} v${{ env.buildVersion }}
       shell: pwsh
       run: dotnet build
+
+  invoke-unit-tests:
+    name: Invoke Unit Tests & Artifact Results
+    runs-on: ubuntu-latest
+    if: ${{ needs.new-version.result == 'success' && needs.new-version.outputs.validVersion == 'True' }}
+    needs: 
+      - new-build
+      - new-version
+
+    env:
+      buildVersion: ${{ needs.new-version.outputs.buildVersion }}
+      projectName: 'G4.UnitTests'
+      projectType: 'csproj'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Publish Executable Project
+        uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
+        with:
+          build_version: '${{ env.buildVersion }}'
+          project_name: '${{ env.projectName }}'
+          project_type: '${{ env.projectType }}'
+          filter: 'TestCategory=ExportData'
+          test_settings: ./test/Settings/Default.runsettings
