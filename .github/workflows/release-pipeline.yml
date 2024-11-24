@@ -139,6 +139,7 @@ jobs:
             $workers.InnerText          = '${{ env.workers }}'
             #
             # save settings
+            Write-Host $runSettings
             $runSettings.Save($runSettingsFile)
 
       - name: Invoke Unit Tests
