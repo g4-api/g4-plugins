@@ -106,6 +106,7 @@ jobs:
       buildVersion: ${{ needs.new-version.outputs.buildVersion }}
       projectName: 'G4.UnitTests'
       projectType: 'csproj'
+      testSettingsFileName: 'Default.runsettings'
     
     steps:
       - name: Checkout repository
@@ -115,10 +116,11 @@ jobs:
         run: ls -R
 
       - name: Set the Default Test Settings File
+        id: test-settings
         shell: pwsh
         run: |
             # read test settings
-            $runSettingsFileName  = "Default.runsettings"
+            $runSettingsFileName  = "${{ env.testSettingsFileName }}"
             $runSettingsFile      = (Get-ChildItem -Path . -Filter $runSettingsFileName -Recurse).FullName
             [xml]$runSettings     = Get-Content "$runSettingsFile"
             #
@@ -137,13 +139,14 @@ jobs:
             $workers.InnerText          = '${{ env.workers }}'
             #
             # save settings
-            $runSettings.Save("$runSettingsFile")
+            $runSettings.Save($runSettingsFile)
 
       - name: Invoke Unit Tests
         uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
+        if: steps.test-settings.outcome == 'success'
         with:
           build-version: ${{ env.buildVersion }}
           project-name: ${{ env.projectName }}
           project-type: ${{ env.projectType }}
           filter: 'TestCategory=ExportData'
-          test-settings: Default.runsettings
+          test-settings: ${{ env.testSettingsFileName }}
