@@ -115,7 +115,6 @@ jobs:
         run: ls -R
 
       - name: Set the Default Test Settings File
-        working-directory: src
         shell: pwsh
         run: |
             # read test settings
