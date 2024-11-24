@@ -114,6 +114,30 @@ jobs:
       - name: List files in the repository
         run: ls -R
 
+      - name: Set the Default Test Settings File
+        working-directory: src
+        shell: pwsh
+        run: |
+            # read test settings
+            [xml]$runSettings = Get-Content '../test/Settings/${{ env.testSettingsFileName }}'
+            #
+            # setup
+            $gridEndpoint         = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
+            $browserStackUsername = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Username']")
+            $browserStackApiKey   = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Password']")
+            $g4ApiKey             = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
+            $workers              = $runSettings.SelectSingleNode("//MSTest//Workers")
+            #
+            # override with deployment settings
+            $gridEndpoint.Value         = '${{ env.gridEndpoint }}'
+            $browserStackUsername.Value = '${{ env.browserStackUser }}'
+            $browserStackApiKey.Value   = '${{ env.browserStackApiKey }}'
+            $g4ApiKey.Value             = '${{ env.g4ApiKey }}'
+            $workers.InnerText          = '${{ env.workers }}'
+            #
+            # save settings
+            $runSettings.Save('../test/Settings/${{ env.testSettingsFileName }}')
+
       - name: Invoke Unit Tests
         uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
         with:
