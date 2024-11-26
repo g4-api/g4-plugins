@@ -107,6 +107,7 @@ jobs:
       projectName: 'G4.UnitTests'
       projectType: 'csproj'
       testSettingsFileName: 'Default.runsettings'
+      resultsArtifactName: unit-test-results-${{ needs.new-version.outputs.buildVersion }}
     
     steps:
       - name: Checkout repository
@@ -151,3 +152,36 @@ jobs:
           project-type: ${{ env.projectType }}
           filter: 'TestCategory=ExportData'
           test-settings: ${{ env.testSettingsFileName }}
+          results-artifact-name: ${{ env.resultsArtifactName }}
+
+  publish-test-results:
+    name: Publish Test Results
+    runs-on: ubuntu-latest
+    if: always()
+    needs: invoke-unit-tests
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List Downloadable Artifacts
+        run: gh api -X GET /repos/${{ github.repository }}/actions/artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Download Test Results Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: unit-test-results-${{ needs.new-version.outputs.buildVersion }}
+          path: ${{ env.artifactStagingDirectory }}
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          check_name: Unit Tests Results
+          files: |
+            ${{ env.artifactStagingDirectory }}/*.xml
