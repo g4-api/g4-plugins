@@ -195,8 +195,8 @@ if ($AddDetails) {
 
         $mdContent += "`n## Test Class: $class`n`n"
 
-        $mdContent += "| Test Name | Result | Runtime | Error Message | Stack Trace |`n"
-        $mdContent += "|-----------|--------|---------|---------------|-------------|`n"
+        $mdContent += "| Test Scenario | Result | Runtime | Error Message | Stack Trace |`n"
+        $mdContent += "|---------------|--------|---------|---------------|-------------|`n"
 
         foreach ($test in $filteredTests) {
             $testName     = Format-MarkdownPipes $test.TestName
