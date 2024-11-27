@@ -229,6 +229,7 @@ jobs:
           path: ${{ steps.invoke-unit-tests.outputs.testReportFile }}
 
       - name: Copy Coverage File to Artifact Staging Directory
+        id: copy-coverage-report
         shell: pwsh
         run: |
           $coverageFile = Get-ChildItem `
@@ -244,6 +245,18 @@ jobs:
           }
 
           Copy-Item -Path $coverageFile -Destination $destinationPath
+          Write-Host "Coverage File: $destinationPath"
+            
+          $OutputString = "coverageFile=$destinationPath"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Upload Code Coverage Results
+        env:
+          ARTIFACT_NAME: code-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ steps.copy-coverage-report.outputs.coverageFile }}
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
       #   if: steps.test-settings.outcome == 'success'
