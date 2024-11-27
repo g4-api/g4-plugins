@@ -237,7 +237,7 @@ jobs:
 
           .\scripts/Convert-TrxToMarkdown.ps1 `
               -TrxPath $testReportFile `
-              -MdPath $testSummaryFile `
+              -MarkdownPath $testSummaryFile `
               -AddDetails `
               -Level Pass
 
