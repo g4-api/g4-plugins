@@ -399,6 +399,18 @@ jobs:
   
           # Write the markdown content to the output file
           $markdown | Out-File -FilePath $outputFile -Encoding utf8
+          Write-Host "Coverage Summary: $outputFile"
+            
+          $OutputString = "coverageSummaryFile=$outputFile"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Upload Code Coverage Summary
+        env:
+          ARTIFACT_NAME: code-coverage-summary-v${{ needs.NewVersion.outputs.buildVersion }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-tests-coverage-summary
+          path: ${{ steps.new-coverage-file.outputs.coverageSummaryFile }}
   
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
