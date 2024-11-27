@@ -203,7 +203,7 @@ if ($AddDetails) {
             $result       = $test.Result
             $runtime      = $test.Runtime
             $errorMessage = if ($result -eq "Failed") { $test.ErrorMessage } else { "N/A" }
-            $stackTrace   = if ($result -eq "Failed") { $test.StackTrace) }  else { "N/A" }
+            $stackTrace   = if ($result -eq "Failed") { $test.StackTrace }  else { "N/A" }
 
             # Format the result with emojis for better readability
             switch ($result) {
