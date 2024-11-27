@@ -115,7 +115,6 @@ jobs:
       BUILD_VERSION    : ${{ needs.NewVersion.outputs.buildVersion }}
       PROJECT_NAME     : 'G4.UnitTests'
       PROJECT_TYPE     : 'csproj'
-      TEST_REPORT_FILE : ${{ env.STAGE_DIRECTORY }}/TestOutput.G4.UnitTests.${{ needs.NewVersion.outputs.buildVersion }}.xml
 
     steps:
       - name: Checkout repository
@@ -166,6 +165,7 @@ jobs:
             $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
       - name: Unit Tests and Code Coverage
+        id: invoke-unit-tests
         shell: pwsh
         env:
           TEST_SETTINGS_FILE_PATH: ${{ steps.set-test-settings.outputs.testSettingsFilePath }}
@@ -177,7 +177,7 @@ jobs:
           $testSettingsFilePath = "${{ env.TEST_SETTINGS_FILE_PATH }}"
           $testDirectory        = [System.IO.Path]::GetDirectoryName($projectFile)
           $testFilterExpression = "${{ env.TEST_FILTER }}"
-          $testReportFile       = "${{ env.TEST_REPORT_FILE }}"
+          $testReportFile       = "${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.v${{ env.BUILD_VERSION }}.xml"
       
           Write-Host "Project File Name             : $projectFileName"
           Write-Host "Project File                  : $projectFile"
@@ -217,12 +217,16 @@ jobs:
           Write-Host "Changed directory to : $testDirectory"
       
           Start-Process -FilePath "dotnet" -ArgumentList $arguments -NoNewWindow -Wait
+          Write-Host "Settings File: $testSettingsFilePath"
+            
+          $OutputString = "testReportFile=$testReportFile"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
   
       - name: Upload Unit Tests Results
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ env.TEST_REPORT_FILE }}
+          path: ${{ steps.invoke-unit-tests.outputs.testReportFile }}
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
       #   if: steps.test-settings.outcome == 'success'
