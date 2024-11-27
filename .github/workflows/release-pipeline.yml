@@ -411,6 +411,16 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.new-coverage-file.outputs.coverageSummaryFile }}
+
+      - name: Collect Job Summary
+        working-directory: ${{ env.STAGE_DIRECTORY }}  
+        shell: pwsh
+        run: |
+          # Read the content of the coverage report file
+          $content = Get-Content -Path "${{ steps.new-coverage-file.outputs.coverageSummaryFile }}"
+      
+          # Append the content to the GitHub Actions job summary to display it in the workflow run details
+          $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
   
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
