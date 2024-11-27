@@ -257,6 +257,149 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.copy-coverage-report.outputs.coverageFile }}
+
+      - name: New Code Coverage Summary
+        env:
+          COVERAGE_FILE: ${{ steps.copy-coverage-report.outputs.coverageFile }}
+        id: new-coverage-file
+        shell: pwsh
+        run: |
+          $xmlSource        = "${{ env.COVERAGE_FILE }}"
+          $outputFile       = "${{ env.COVERAGE_FILE }}".Replace(".xml", ".md")
+          $showBadges       = $true
+          $showPackages     = $true
+          $showClassSummary = $false
+          $showClassDetails = $false
+  
+          # Determine if the source is a URL or a file path
+          if ($xmlSource -match "^http(s)?://") {
+              # Load XML from URL
+              $xml = [xml](Invoke-WebRequest -Uri $xmlSource).Content
+          } else {
+              # Load XML from file
+              [xml]$xml = Get-Content -Path $xmlSource
+          }
+  
+          # Extract coverage rates
+          $lineCoverage = [math]::Round($xml.coverage.'line-rate', 2) * 100
+          $branchCoverage = [math]::Round($xml.coverage.'branch-rate', 2) * 100
+  
+          # Start building the markdown content
+          $markdown = @"
+          # Unit Tests Code Coverage Report
+          "@
+  
+          if ($showBadges) {
+              $markdown += @"
+  
+  
+          ![Line Coverage](https://img.shields.io/badge/Line%20Coverage-$lineCoverage%25-success?style=flat) ![Branch Coverage](https://img.shields.io/badge/Branch%20Coverage-$branchCoverage%25-success?style=flat)
+  
+          "@
+          }
+  
+          $markdown += @"
+  
+          ## Overview
+  
+          - **Lines Covered**: $($xml.coverage.'lines-covered')
+          - **Valid Lines**: $($xml.coverage.'lines-valid')
+          - **Branches Covered**: $($xml.coverage.'branches-covered')
+          - **Valid Branches**: $($xml.coverage.'branches-valid')
+  
+          "@
+  
+          if ($showPackages) {
+              $markdown += @"
+  
+          ## Packages
+  
+          "@
+  
+              foreach ($package in $xml.coverage.packages.package) {
+                  $packageName = $package.name
+                  $packageLineRate = [math]::Round($package.'line-rate', 2) * 100
+                  $packageBranchRate = [math]::Round($package.'branch-rate', 2) * 100
+                  $packageComplexity = $package.complexity
+  
+                  $markdown += @"
+  
+          ### Package: $packageName
+  
+          - **Line Coverage Rate**: $packageLineRate%
+          - **Branch Coverage Rate**: $packageBranchRate%
+          - **Complexity**: $packageComplexity
+  
+          "@
+  
+                  if ($showClassSummary) {
+                      $markdown += @"
+  
+          #### Classes Summary
+  
+          | Class Name                            | Filename            | Line Coverage Rate | Branch Coverage Rate | Complexity |
+          |---------------------------------------|---------------------|--------------------|----------------------|------------|
+  
+          "@
+  
+                      foreach ($class in $package.classes.class) {
+                          $className = $class.name
+                          $classFilename = $class.filename
+                          $classLineRate = [math]::Round($class.'line-rate', 2) * 100
+                          $classBranchRate = [math]::Round($class.'branch-rate', 2) * 100
+                          $classComplexity = $class.complexity
+  
+                          $markdown += @"
+          | $className | $classFilename | $classLineRate% | $classBranchRate% | $classComplexity |
+  
+          "@
+                      }
+                  }
+  
+                  if ($showClassDetails) {
+                      $markdown += "`n#### Class Details`n"
+  
+                      foreach ($class in $package.classes.class) {
+                          $className = $class.name
+                          $classFilename = $class.filename
+                          $classLineRate = [math]::Round($class.'line-rate', 2) * 100
+                          $classBranchRate = [math]::Round($class.'branch-rate', 2) * 100
+                          $classComplexity = $class.complexity
+  
+                          $markdown += @"
+  
+          ##### $className
+  
+          - **Filename**: `$classFilename`
+          - **Line Coverage Rate**: $classLineRate%
+          - **Branch Coverage Rate**: $classBranchRate%
+          - **Complexity**: $classComplexity
+  
+          ###### Lines
+  
+          | Line Number | Hits | Branch |
+          |-------------|------|--------|
+  
+          "@
+  
+                          foreach ($line in $class.lines.line) {
+                              $lineNumber = $line.number
+                              $hits = $line.hits
+                              $branch = $line.branch
+  
+                              $markdown += @"
+          | $lineNumber | $hits | $branch |
+  
+          "@
+                          }
+                      }
+                  }
+              }
+          }
+  
+          # Write the markdown content to the output file
+          $markdown | Out-File -FilePath $outputFile -Encoding utf8
+  
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
       #   if: steps.test-settings.outcome == 'success'
