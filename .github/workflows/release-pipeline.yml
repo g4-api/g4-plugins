@@ -235,7 +235,7 @@ jobs:
           $testReportFile  = "${{ steps.invoke-unit-tests.outputs.testReportFile }}"
           $testSummaryFile = "${{ steps.invoke-unit-tests.outputs.testReportFile }}".Replace(".xml", ".md")
 
-          ./scripts/aa.ps1 `
+          .\scripts/Convert-TrxToMarkdown.ps1 `
               -TrxPath $testReportFile `
               -MdPath $testSummaryFile `
               -AddDetails `
