@@ -111,10 +111,11 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     env:
-      ARTIFACT_NAME: unit-test-results-${{ needs.NewVersion.outputs.buildVersion }}
-      BUILD_VERSION: ${{ needs.NewVersion.outputs.buildVersion }}
-      PROJECT_NAME : 'G4.UnitTests'
-      PROJECT_TYPE : 'csproj'
+      ARTIFACT_NAME    : unit-test-results-${{ needs.NewVersion.outputs.buildVersion }}
+      BUILD_VERSION    : ${{ needs.NewVersion.outputs.buildVersion }}
+      PROJECT_NAME     : 'G4.UnitTests'
+      PROJECT_TYPE     : 'csproj'
+      TEST_REPORT_FILE : ${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.${{ env.BUILD_VERSION }}.xml
 
     steps:
       - name: Checkout repository
@@ -176,7 +177,7 @@ jobs:
           $testSettingsFilePath = "${{ env.TEST_SETTINGS_FILE_PATH }}"
           $testDirectory        = [System.IO.Path]::GetDirectoryName($projectFile)
           $testFilterExpression = "${{ env.TEST_FILTER }}"
-          $testReportFile       = "${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.${{ env.BUILD_VERSION }}.xml"
+          $testReportFile       = "${{ env.TEST_REPORT_FILE }}"
       
           Write-Host "Project File Name             : $projectFileName"
           Write-Host "Project File                  : $projectFile"
@@ -217,6 +218,11 @@ jobs:
       
           Start-Process -FilePath "dotnet" -ArgumentList $arguments -NoNewWindow -Wait
   
+      - name: Upload Unit Tests Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.TEST_REPORT_FILE }}
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
       #   if: steps.test-settings.outcome == 'success'
