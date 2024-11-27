@@ -252,6 +252,16 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.new-unit-test-summary.outputs.testSummaryFile }}
 
+      - name: Collect Job Summary
+        working-directory: ${{ env.STAGE_DIRECTORY }}
+        shell: pwsh
+        run: |
+          # Read the content of the summary file
+          $content = Get-Content -Path "${{ steps.new-unit-test-summary.outputs.testSummaryFile }}"
+      
+          # Append the content to the GitHub Actions job summary to display it in the workflow run details
+          $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
+
       - name: Copy Coverage File to Artifact Staging Directory
         id: copy-coverage-report
         shell: pwsh
