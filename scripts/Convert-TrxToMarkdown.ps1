@@ -215,7 +215,7 @@ if ($AddDetails) {
 
             # Replace newlines in errorMessage and stackTrace with <br> for Markdown
             $errorMessage = $errorMessage -replace "`r`n|`n|`r", "\n"
-            $stackTrace   = $stackTrace -replace "`r`n|`n|`r", "\n"
+            $stackTrace   = $stackTrace   -replace "`r`n|`n|`r", "\n"
 
             $mdContent += "| $testName | $resultDisplay | $runtime | $errorMessage | $stackTrace |`n"
         }
