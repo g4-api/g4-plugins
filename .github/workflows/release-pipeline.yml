@@ -602,7 +602,7 @@ jobs:
           $testSummaryFile = "${{ steps.invoke-integration-tests.outputs.testReportFile }}".Replace(".xml", ".md")
 
           .\scripts/Convert-TrxToMarkdown.ps1 `
-              -Title "Unit Tests Results" `
+              -Title "Integration Tests Results" `
               -TrxPath $testReportFile `
               -MarkdownPath $testSummaryFile `
               -AddDetails `
