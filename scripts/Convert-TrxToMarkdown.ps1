@@ -203,7 +203,7 @@ if ($AddDetails) {
             $result       = $test.Result
             $runtime      = $test.Runtime
             $errorMessage = if ($result -eq "Failed") { $test.ErrorMessage } else { "N/A" }
-            $stackTrace   = if ($result -eq "Failed") { ('```' + $test.StackTrace + '```') } else { "N/A" }
+            $stackTrace   = if ($result -eq "Failed") { $test.StackTrace) }  else { "N/A" }
 
             # Format the result with emojis for better readability
             switch ($result) {
@@ -214,8 +214,8 @@ if ($AddDetails) {
             }
 
             # Replace newlines in errorMessage and stackTrace with <br> for Markdown
-            $errorMessage = $errorMessage -replace "`r`n|`n|`r", "\n"
-            $stackTrace   = $stackTrace   -replace "`r`n|`n|`r", "\n"
+            $errorMessage = $errorMessage -replace "`r`n|`n|`r", "<br>"
+            $stackTrace   = $stackTrace   -replace "`r`n|`n|`r", "<br>"
 
             $mdContent += "| $testName | $resultDisplay | $runtime | $errorMessage | $stackTrace |`n"
         }
