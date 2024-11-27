@@ -228,6 +228,30 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.invoke-unit-tests.outputs.testReportFile }}
 
+      - name: New Unit Test Summary File
+        id: new-unit-test-summary
+        shell: pwsh
+        run: |
+          $testReportFile  = "${{ steps.invoke-unit-tests.outputs.testReportFile }}"
+          $testSummaryFile = "${{ steps.invoke-unit-tests.outputs.testReportFile }}".Replace(".xml", ".md")
+
+          ./scripts/aa.ps1 `
+              -TrxPath $testReportFile `
+              -MdPath $testSummaryFile `
+              -AddDetails `
+              -Level Pass
+
+          $OutputString = "testSummaryFile=$testSummaryFile"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Upload Test Results Summary
+        env:
+          ARTIFACT_NAME: unit-test-sumarry-v${{ needs.NewVersion.outputs.buildVersion }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ steps.new-unit-test-summary.outputs.testSummaryFile }}
+
       - name: Copy Coverage File to Artifact Staging Directory
         id: copy-coverage-report
         shell: pwsh
@@ -413,7 +437,7 @@ jobs:
           path: ${{ steps.new-coverage-file.outputs.coverageSummaryFile }}
 
       - name: Collect Job Summary
-        working-directory: ${{ env.STAGE_DIRECTORY }}  
+        working-directory: ${{ env.STAGE_DIRECTORY }}
         shell: pwsh
         run: |
           # Read the content of the coverage report file

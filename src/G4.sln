@@ -35,6 +35,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{AB40
 		..\.github\workflows\release-pipeline.yml = ..\.github\workflows\release-pipeline.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".scripts", ".scripts", "{7E0B569F-5141-45D7-8DC8-86ABA19C1B0A}"
+	ProjectSection(SolutionItems) = preProject
+		..\scripts\Convert-TrxToMarkdown.ps1 = ..\scripts\Convert-TrxToMarkdown.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
