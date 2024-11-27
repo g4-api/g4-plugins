@@ -111,7 +111,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     env:
-      ARTIFACT_NAME    : unit-test-results-${{ needs.NewVersion.outputs.buildVersion }}
+      ARTIFACT_NAME    : unit-test-results-v${{ needs.NewVersion.outputs.buildVersion }}
       BUILD_VERSION    : ${{ needs.NewVersion.outputs.buildVersion }}
       PROJECT_NAME     : 'G4.UnitTests'
       PROJECT_TYPE     : 'csproj'
@@ -227,6 +227,23 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.invoke-unit-tests.outputs.testReportFile }}
+
+      - name: Copy Coverage File to Artifact Staging Directory
+        shell: pwsh
+        run: |
+          $coverageFile = Get-ChildItem `
+              -Path '.' `
+              -Recurse -Filter 'coverage.cobertura.xml' `
+              -File | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1 -ExpandProperty FullName
+    
+          $newFileName     = 'coverage.cobertura.${{ env.PROJECT_NAME }}.v${{ env.BUILD_VERSION }}.xml'
+          $destinationPath = Join-Path -Path ${{ env.STAGE_DIRECTORY }} -ChildPath $newFileName
+    
+          if (-not (Test-Path -Path ${{ env.STAGE_DIRECTORY }})) {
+              New-Item -ItemType Directory -Path ${{ env.STAGE_DIRECTORY }}
+          }
+
+          Copy-Item -Path $coverageFile -Destination $destinationPath
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
       #   if: steps.test-settings.outcome == 'success'
