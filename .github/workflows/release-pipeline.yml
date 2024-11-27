@@ -409,7 +409,7 @@ jobs:
           ARTIFACT_NAME: code-coverage-summary-v${{ needs.NewVersion.outputs.buildVersion }}
         uses: actions/upload-artifact@v4
         with:
-          name: unit-tests-coverage-summary
+          name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.new-coverage-file.outputs.coverageSummaryFile }}
   
       # - name: Invoke Unit Tests
