@@ -232,7 +232,7 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.invoke-unit-tests.outputs.testReportFile }}
 
-      - name: New Unit Test Summary File
+      - name: New Unit Tests Summary File
         id: new-unit-tests-summary
         shell: pwsh
         run: |
@@ -251,7 +251,7 @@ jobs:
 
       - name: Upload Test Results Summary
         env:
-          ARTIFACT_NAME: unit-test-sumarry-v${{ needs.NewVersion.outputs.buildVersion }}
+          ARTIFACT_NAME: unit-tests-sumarry-v${{ needs.NewVersion.outputs.buildVersion }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
@@ -291,7 +291,7 @@ jobs:
 
       - name: Upload Code Coverage Results
         env:
-          ARTIFACT_NAME: code-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}
+          ARTIFACT_NAME: unit-tests-code-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
@@ -445,7 +445,7 @@ jobs:
 
       - name: Upload Code Coverage Summary
         env:
-          ARTIFACT_NAME: code-coverage-summary-v${{ needs.NewVersion.outputs.buildVersion }}
+          ARTIFACT_NAME: unit-tests-code-coverage-summary-v${{ needs.NewVersion.outputs.buildVersion }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
@@ -461,19 +461,6 @@ jobs:
           # Append the content to the GitHub Actions job summary to display it in the workflow run details
           $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
   
-
-
-
-
-
-
-
-
-
-
-
-
-
   InvokeIntegrationTests:
     name: Invoke Integration Tests & Artifact Results
     runs-on: ubuntu-latest
@@ -607,7 +594,7 @@ jobs:
           name: ${{ env.ARTIFACT_NAME }}
           path: ${{ steps.invoke-integration-tests.outputs.testReportFile }}
 
-      - name: New Unit Test Summary File
+      - name: New Integration Tests Summary File
         id: new-integration-tests-summary
         shell: pwsh
         run: |
@@ -626,7 +613,7 @@ jobs:
 
       - name: Upload Test Results Summary
         env:
-          ARTIFACT_NAME: unit-test-sumarry-v${{ needs.NewVersion.outputs.buildVersion }}
+          ARTIFACT_NAME: integration-tests-sumarry-v${{ needs.NewVersion.outputs.buildVersion }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
@@ -666,7 +653,7 @@ jobs:
 
       - name: Upload Code Coverage Results
         env:
-          ARTIFACT_NAME: code-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}
+          ARTIFACT_NAME: integration-tests-code-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
@@ -700,7 +687,7 @@ jobs:
   
           # Start building the markdown content
           $markdown = @"
-          # Unit Tests Code Coverage Report
+          # Integration Tests Code Coverage Report
           "@
   
           if ($showBadges) {
@@ -820,7 +807,7 @@ jobs:
 
       - name: Upload Code Coverage Summary
         env:
-          ARTIFACT_NAME: code-coverage-summary-v${{ needs.NewVersion.outputs.buildVersion }}
+          ARTIFACT_NAME: integration-tests-code-coverage-summary-v${{ needs.NewVersion.outputs.buildVersion }}
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
@@ -871,11 +858,11 @@ jobs:
   #     - name: Download Test Results Artifact
   #       uses: actions/download-artifact@v4
   #       with:
-  #         name: unit-test-results-${{ needs.NewVersion.outputs.buildVersion }}
+  #         name: unit-tests-results-${{ needs.NewVersion.outputs.buildVersion }}
   #         path: ${{ env.STAGE_DIRECTORY }}
 
   #     - name: Publish Test Results
-  #       uses: EnricoMi/publish-unit-test-result-action@v2
+  #       uses: EnricoMi/publish-unit-tests-result-action@v2
   #       if: always()
   #       with:
   #         check_name: Unit Tests Results
