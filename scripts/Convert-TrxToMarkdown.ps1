@@ -21,8 +21,11 @@
     - Skip: Show only Failed and Skipped test details.
     - Fail: Show only Failed test details.
 
+.PARAMETER Title
+    The title of the Markdown report. Defaults to "Test Results Summary" if not specified.
+
 .EXAMPLE
-    .\Convert-TrxToMd.ps1 -TrxPath "C:\Tests\Results.trx" -MarkdownPath "C:\Tests\Results.md" -AddDetails -Level Fail
+    .\Convert-TrxToMd.ps1 -TrxPath "C:\Tests\Results.trx" -MarkdownPath "C:\Tests\Results.md" -AddDetails -Level Fail -Title "My Custom Test Report"
 #>
 param(
     [Parameter(Mandatory = $true, HelpMessage = "Path to the input .trx file.")]
@@ -36,7 +39,10 @@ param(
 
     [Parameter(Mandatory = $false, HelpMessage = "Level of detail to include: Pass, Skip, Fail.")]
     [ValidateSet("Pass", "Skip", "Fail", IgnoreCase = $true)]
-    [string]$Level = "Fail"
+    [string]$Level = "Fail",
+
+    [Parameter(Mandatory = $false, HelpMessage = "Title of the Markdown report.")]
+    [string]$Title = "Test Results Summary"
 )
 
 # Function to escape pipe characters in Markdown table cells
@@ -97,8 +103,8 @@ $summaryData = @{
     "Skipped"       = $summary.notExecuted
 }
 
-# Initialize Markdown Content
-$mdContent = "# Test Results Summary`n`n"
+# Initialize Markdown Content with the specified Title
+$mdContent = "# $Title`n`n"
 
 # Create Summary Table
 $mdContent += "| Metric        | Count |`n"
@@ -214,13 +220,12 @@ if ($AddDetails) {
             $mdContent += "| $testName | $resultDisplay | $runtime | $errorMessage | $stackTrace |`n"
         }
 
-        # Modify this line to ensure only one empty line at the end
+        # Append the separator with only one empty line
         $mdContent += "`n---`n"
     }
 
-    # After the loop, remove the extra newline if present
-    $mdContent = $mdContent.TrimEnd("`n")
-    $mdContent += "`n"
+    # After the loop, remove any trailing newlines and ensure only one empty line
+    $mdContent = $mdContent.TrimEnd("`n") + "`n"
 }
 
 # Write the Markdown content to the specified file

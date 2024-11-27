@@ -111,10 +111,10 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     env:
-      ARTIFACT_NAME    : unit-test-results-v${{ needs.NewVersion.outputs.buildVersion }}
-      BUILD_VERSION    : ${{ needs.NewVersion.outputs.buildVersion }}
-      PROJECT_NAME     : 'G4.UnitTests'
-      PROJECT_TYPE     : 'csproj'
+      ARTIFACT_NAME: unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}
+      BUILD_VERSION: ${{ needs.NewVersion.outputs.buildVersion }}
+      PROJECT_NAME : 'G4.UnitTests'
+      PROJECT_TYPE : 'csproj'
 
     steps:
       - name: Checkout repository
@@ -133,7 +133,7 @@ jobs:
           $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
       - name: Set the Default Test Settings File
-        id: set-test-settings
+        id: set-run-settings
         shell: pwsh
         run: |
             # read test settings
@@ -168,7 +168,7 @@ jobs:
         id: invoke-unit-tests
         shell: pwsh
         env:
-          TEST_SETTINGS_FILE_PATH: ${{ steps.set-test-settings.outputs.testSettingsFilePath }}
+          TEST_SETTINGS_FILE_PATH: ${{ steps.set-run-settings.outputs.testSettingsFilePath }}
           TEST_FILTER: 'TestCategory=Logger'
         working-directory: ${{ steps.set-working-directory.outputs.workingDirectory }}
         run: |
@@ -186,11 +186,15 @@ jobs:
           Write-Host "Test Directory                : $testDirectory"
           Write-Host "Initial Test Filter Expression: $testFilterExpression"
           Write-Host "Test Report File              : $testReportFile"
-                 
+          Write-Host ""
+          Write-Host ""
+
           Write-Host "Executing dotnet test command with the following parameters:"
           Write-Host "Test Filter Expression        : $testFilterExpression"
           Write-Host "Run Settings File Argument    : $runSettingsFile"
           Write-Host "Test Report File              : $testReportFile"
+          Write-Host ""
+          Write-Host ""
           
           $filterToken         = $testFilterExpression
           $settingsToken       = $runSettingsFile
@@ -229,13 +233,14 @@ jobs:
           path: ${{ steps.invoke-unit-tests.outputs.testReportFile }}
 
       - name: New Unit Test Summary File
-        id: new-unit-test-summary
+        id: new-unit-tests-summary
         shell: pwsh
         run: |
           $testReportFile  = "${{ steps.invoke-unit-tests.outputs.testReportFile }}"
           $testSummaryFile = "${{ steps.invoke-unit-tests.outputs.testReportFile }}".Replace(".xml", ".md")
 
           .\scripts/Convert-TrxToMarkdown.ps1 `
+              -Title "Unit Tests Results" `
               -TrxPath $testReportFile `
               -MarkdownPath $testSummaryFile `
               -AddDetails `
@@ -250,14 +255,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ steps.new-unit-test-summary.outputs.testSummaryFile }}
+          path: ${{ steps.new-unit-tests-summary.outputs.testSummaryFile }}
 
       - name: Collect Job Summary
         working-directory: ${{ env.STAGE_DIRECTORY }}
         shell: pwsh
         run: |
           # Read the content of the summary file
-          $content = Get-Content -Path "${{ steps.new-unit-test-summary.outputs.testSummaryFile }}"
+          $content = Get-Content -Path "${{ steps.new-unit-tests-summary.outputs.testSummaryFile }}"
       
           # Append the content to the GitHub Actions job summary to display it in the workflow run details
           $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
@@ -456,16 +461,394 @@ jobs:
           # Append the content to the GitHub Actions job summary to display it in the workflow run details
           $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
   
-      # - name: Invoke Unit Tests
-      #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
-      #   if: steps.test-settings.outcome == 'success'
-      #   with:
-      #     build-version: ${{ env.buildVersion }}
-      #     project-name: ${{ env.PROJECT_NAME }}
-      #     project-type: ${{ env.projectType }}
-      #     filter: 'TestCategory=ExportData'
-      #     test-settings: ${{ env.TEST_SETTINGS_FILE }}
-      #     results-artifact-name: ${{ env.resultsArtifactName }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  InvokeIntegrationTests:
+    name: Invoke Integration Tests & Artifact Results
+    runs-on: ubuntu-latest
+    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
+    needs: 
+      - NewBuild
+      - NewVersion
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    env:
+      ARTIFACT_NAME: integration-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}
+      BUILD_VERSION: ${{ needs.NewVersion.outputs.buildVersion }}
+      PROJECT_NAME : 'G4.IntegrationTests'
+      PROJECT_TYPE : 'csproj'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set Working Directory
+        id: set-working-directory
+        shell: pwsh
+        run: |
+          $projectFileName  = "${{ env.PROJECT_NAME }}.${{ env.PROJECT_TYPE }}"
+          $projectFile      = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
+          $workingDirectory = [System.IO.Path]::GetDirectoryName($projectFile)
+          Write-Host "Working Directory: $workingDirectory"
+      
+          $OutputString = "workingDirectory=$workingDirectory"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Set the Default Test Settings File
+        id: set-run-settings
+        shell: pwsh
+        run: |
+            # read test settings
+            $testSettingsFile      = "${{ env.TEST_SETTINGS_FILE }}"
+            $testSettingsFilePath  = (Get-ChildItem -Path . -Filter $testSettingsFile -Recurse).FullName
+            [xml]$runSettings      = Get-Content -Path $testSettingsFilePath
+            #
+            # setup
+            $browserStackBuildname = $runSettings.SelectSingleNode("//Parameter[@name='Build.Name']")
+            $browserStackUsername  = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Username']")
+            $browserStackPassword  = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Password']")
+            $g4Username            = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
+            $gridEndpoint          = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
+            $workers               = $runSettings.SelectSingleNode("//MSTest//Workers")
+            #
+            # override with deployment settings
+            $browserStackBuildname.Value = 'G4™ Plugins v${{ env.BUILD_VERSION }}'
+            $browserStackUsername.Value  = '${{ env.BROWSERSTACK_USER }}'
+            $browserStackPassword.Value  = '${{ env.BROWSERSTACK_API_KEY }}'
+            $g4Username.Value            = '${{ env.G4_API_KEY }}'
+            $gridEndpoint.Value          = '${{ env.GRID_ENDPOINT }}'
+            $workers.InnerText           = '${{ env.TEST_WORKERS }}'
+            #
+            # save settings
+            $runSettings.Save($testSettingsFilePath)
+            Write-Host "Settings File: $testSettingsFilePath"
+            
+            $OutputString = "runSettingsFilePath=$testSettingsFilePath"
+            $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Integration Tests and Code Coverage
+        id: invoke-integration-tests
+        shell: pwsh
+        env:
+          TEST_SETTINGS_FILE_PATH: ${{ steps.set-run-settings.outputs.testSettingsFilePath }}
+          TEST_FILTER: 'TestCategory=InvokeDoubleClick'
+        working-directory: ${{ steps.set-working-directory.outputs.workingDirectory }}
+        run: |
+          $projectFileName      = "${{ env.PROJECT_NAME }}.${{ env.PROJECT_TYPE }}"
+          $projectFile          = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
+          $testSettingsFilePath = "${{ env.TEST_SETTINGS_FILE_PATH }}"
+          $testDirectory        = [System.IO.Path]::GetDirectoryName($projectFile)
+          $testFilterExpression = "${{ env.TEST_FILTER }}"
+          $testReportFile       = "${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.v${{ env.BUILD_VERSION }}.xml"
+      
+          Write-Host "Project File Name             : $projectFileName"
+          Write-Host "Project File                  : $projectFile"
+          Write-Host "Run Settings File Name        : $runSettingsFileName"
+          Write-Host "Run Settings File             : $runSettingsFile"
+          Write-Host "Test Directory                : $testDirectory"
+          Write-Host "Initial Test Filter Expression: $testFilterExpression"
+          Write-Host "Test Report File              : $testReportFile"
+          Write-Host ""
+          Write-Host ""
+
+          Write-Host "Executing dotnet test command with the following parameters:"
+          Write-Host "Test Filter Expression        : $testFilterExpression"
+          Write-Host "Run Settings File Argument    : $runSettingsFile"
+          Write-Host "Test Report File              : $testReportFile"
+          Write-Host ""
+          Write-Host ""
+          
+          $filterToken         = $testFilterExpression
+          $settingsToken       = $runSettingsFile
+          $loggerToken         = ('"trx;LogFileName=' + $testReportFile + '"')
+          $collectToken        = '"Xplat Code Coverage"'
+          $argumentsCollection = @(
+              "test"
+          )
+          
+          if(![string]::IsNullOrEmpty($testFilterExpression)) {
+              $argumentsCollection += ('--filter "' + $testFilterExpression + '"')
+          }
+          
+          if(![string]::IsNullOrEmpty($runSettingsFileName)) {
+              $argumentsCollection += ('--settings "' + $runSettingsFile + '"')
+          }
+          
+          $argumentsCollection += "-l:" + ('"trx;LogFileName=' + $testReportFile + '"')
+          $argumentsCollection += "--collect:" + '"Xplat Code Coverage"'
+          
+          $arguments = $argumentsCollection -join " "
+          
+          Set-Location $testDirectory
+          Write-Host "Changed directory to : $testDirectory"
+      
+          Start-Process -FilePath "dotnet" -ArgumentList $arguments -NoNewWindow -Wait
+          Write-Host "Settings File: $testSettingsFilePath"
+            
+          $OutputString = "testReportFile=$testReportFile"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+  
+      - name: Upload Integration Tests Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ steps.invoke-integration-tests.outputs.testReportFile }}
+
+      - name: New Unit Test Summary File
+        id: new-integration-tests-summary
+        shell: pwsh
+        run: |
+          $testReportFile  = "${{ steps.invoke-integration-tests.outputs.testReportFile }}"
+          $testSummaryFile = "${{ steps.invoke-integration-tests.outputs.testReportFile }}".Replace(".xml", ".md")
+
+          .\scripts/Convert-TrxToMarkdown.ps1 `
+              -Title "Unit Tests Results" `
+              -TrxPath $testReportFile `
+              -MarkdownPath $testSummaryFile `
+              -AddDetails `
+              -Level Pass
+
+          $OutputString = "testSummaryFile=$testSummaryFile"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Upload Test Results Summary
+        env:
+          ARTIFACT_NAME: unit-test-sumarry-v${{ needs.NewVersion.outputs.buildVersion }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ steps.new-integration-tests-summary.outputs.testSummaryFile }}
+
+      - name: Collect Job Summary
+        working-directory: ${{ env.STAGE_DIRECTORY }}
+        shell: pwsh
+        run: |
+          # Read the content of the summary file
+          $content = Get-Content -Path "${{ steps.new-integration-tests-summary.outputs.testSummaryFile }}"
+      
+          # Append the content to the GitHub Actions job summary to display it in the workflow run details
+          $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
+
+      - name: Copy Coverage File to Artifact Staging Directory
+        id: copy-coverage-report
+        shell: pwsh
+        run: |
+          $coverageFile = Get-ChildItem `
+              -Path '.' `
+              -Recurse -Filter 'coverage.cobertura.xml' `
+              -File | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 1 -ExpandProperty FullName
+    
+          $newFileName     = 'coverage.cobertura.${{ env.PROJECT_NAME }}.v${{ env.BUILD_VERSION }}.xml'
+          $destinationPath = Join-Path -Path ${{ env.STAGE_DIRECTORY }} -ChildPath $newFileName
+    
+          if (-not (Test-Path -Path ${{ env.STAGE_DIRECTORY }})) {
+              New-Item -ItemType Directory -Path ${{ env.STAGE_DIRECTORY }}
+          }
+
+          Copy-Item -Path $coverageFile -Destination $destinationPath
+          Write-Host "Coverage File: $destinationPath"
+            
+          $OutputString = "coverageFile=$destinationPath"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Upload Code Coverage Results
+        env:
+          ARTIFACT_NAME: code-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ steps.copy-coverage-report.outputs.coverageFile }}
+
+      - name: New Code Coverage Summary
+        env:
+          COVERAGE_FILE: ${{ steps.copy-coverage-report.outputs.coverageFile }}
+        id: new-coverage-file
+        shell: pwsh
+        run: |
+          $xmlSource        = "${{ env.COVERAGE_FILE }}"
+          $outputFile       = "${{ env.COVERAGE_FILE }}".Replace(".xml", ".md")
+          $showBadges       = $true
+          $showPackages     = $true
+          $showClassSummary = $false
+          $showClassDetails = $false
+  
+          # Determine if the source is a URL or a file path
+          if ($xmlSource -match "^http(s)?://") {
+              # Load XML from URL
+              $xml = [xml](Invoke-WebRequest -Uri $xmlSource).Content
+          } else {
+              # Load XML from file
+              [xml]$xml = Get-Content -Path $xmlSource
+          }
+  
+          # Extract coverage rates
+          $lineCoverage = [math]::Round($xml.coverage.'line-rate', 2) * 100
+          $branchCoverage = [math]::Round($xml.coverage.'branch-rate', 2) * 100
+  
+          # Start building the markdown content
+          $markdown = @"
+          # Unit Tests Code Coverage Report
+          "@
+  
+          if ($showBadges) {
+              $markdown += @"
+  
+  
+          ![Line Coverage](https://img.shields.io/badge/Line%20Coverage-$lineCoverage%25-success?style=flat) ![Branch Coverage](https://img.shields.io/badge/Branch%20Coverage-$branchCoverage%25-success?style=flat)
+  
+          "@
+          }
+  
+          $markdown += @"
+  
+          ## Overview
+  
+          - **Lines Covered**: $($xml.coverage.'lines-covered')
+          - **Valid Lines**: $($xml.coverage.'lines-valid')
+          - **Branches Covered**: $($xml.coverage.'branches-covered')
+          - **Valid Branches**: $($xml.coverage.'branches-valid')
+  
+          "@
+  
+          if ($showPackages) {
+              $markdown += @"
+  
+          ## Packages
+  
+          "@
+  
+              foreach ($package in $xml.coverage.packages.package) {
+                  $packageName = $package.name
+                  $packageLineRate = [math]::Round($package.'line-rate', 2) * 100
+                  $packageBranchRate = [math]::Round($package.'branch-rate', 2) * 100
+                  $packageComplexity = $package.complexity
+  
+                  $markdown += @"
+  
+          ### Package: $packageName
+  
+          - **Line Coverage Rate**: $packageLineRate%
+          - **Branch Coverage Rate**: $packageBranchRate%
+          - **Complexity**: $packageComplexity
+  
+          "@
+  
+                  if ($showClassSummary) {
+                      $markdown += @"
+  
+          #### Classes Summary
+  
+          | Class Name                            | Filename            | Line Coverage Rate | Branch Coverage Rate | Complexity |
+          |---------------------------------------|---------------------|--------------------|----------------------|------------|
+  
+          "@
+  
+                      foreach ($class in $package.classes.class) {
+                          $className = $class.name
+                          $classFilename = $class.filename
+                          $classLineRate = [math]::Round($class.'line-rate', 2) * 100
+                          $classBranchRate = [math]::Round($class.'branch-rate', 2) * 100
+                          $classComplexity = $class.complexity
+  
+                          $markdown += @"
+          | $className | $classFilename | $classLineRate% | $classBranchRate% | $classComplexity |
+  
+          "@
+                      }
+                  }
+  
+                  if ($showClassDetails) {
+                      $markdown += "`n#### Class Details`n"
+  
+                      foreach ($class in $package.classes.class) {
+                          $className = $class.name
+                          $classFilename = $class.filename
+                          $classLineRate = [math]::Round($class.'line-rate', 2) * 100
+                          $classBranchRate = [math]::Round($class.'branch-rate', 2) * 100
+                          $classComplexity = $class.complexity
+  
+                          $markdown += @"
+  
+          ##### $className
+  
+          - **Filename**: `$classFilename`
+          - **Line Coverage Rate**: $classLineRate%
+          - **Branch Coverage Rate**: $classBranchRate%
+          - **Complexity**: $classComplexity
+  
+          ###### Lines
+  
+          | Line Number | Hits | Branch |
+          |-------------|------|--------|
+  
+          "@
+  
+                          foreach ($line in $class.lines.line) {
+                              $lineNumber = $line.number
+                              $hits = $line.hits
+                              $branch = $line.branch
+  
+                              $markdown += @"
+          | $lineNumber | $hits | $branch |
+  
+          "@
+                          }
+                      }
+                  }
+              }
+          }
+  
+          # Write the markdown content to the output file
+          $markdown | Out-File -FilePath $outputFile -Encoding utf8
+          Write-Host "Coverage Summary: $outputFile"
+            
+          $OutputString = "coverageSummaryFile=$outputFile"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Upload Code Coverage Summary
+        env:
+          ARTIFACT_NAME: code-coverage-summary-v${{ needs.NewVersion.outputs.buildVersion }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ steps.new-coverage-file.outputs.coverageSummaryFile }}
+
+      - name: Collect Job Summary
+        working-directory: ${{ env.STAGE_DIRECTORY }}
+        shell: pwsh
+        run: |
+          # Read the content of the coverage report file
+          $content = Get-Content -Path "${{ steps.new-coverage-file.outputs.coverageSummaryFile }}"
+      
+          # Append the content to the GitHub Actions job summary to display it in the workflow run details
+          $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   # publish-test-results:
   #   name: Publish Test Results
