@@ -173,9 +173,9 @@ jobs:
         run: |
           $projectFileName      = "${{ env.PROJECT_NAME }}.${{ env.PROJECT_TYPE }}"
           $projectFile          = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
-          $testSettingsFilePath = ${{ env.TEST_SETTINGS_FILE_PATH }}
+          $testSettingsFilePath = "${{ env.TEST_SETTINGS_FILE_PATH }}"
           $testDirectory        = [System.IO.Path]::GetDirectoryName($projectFile)
-          $testFilterExpression = ${{ env.TEST_FILTER }}
+          $testFilterExpression = "${{ env.TEST_FILTER }}"
           $testReportFile       = "${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.${{ env.BUILD_VERSION }}.xml"
       
           Write-Host "Project File Name             : $projectFileName"
