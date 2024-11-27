@@ -137,28 +137,86 @@ jobs:
         shell: pwsh
         run: |
             # read test settings
-            $runSettingsFileName  = "${{ env.TEST_SETTINGS_FILE }}"
-            $runSettingsFile      = (Get-ChildItem -Path . -Filter $runSettingsFileName -Recurse).FullName
-            [xml]$runSettings     = Get-Content -Path $runSettingsFile
+            $testSettingsFile      = "${{ env.TEST_SETTINGS_FILE }}"
+            $testSettingsFilePath  = (Get-ChildItem -Path . -Filter $testSettingsFile -Recurse).FullName
+            [xml]$runSettings      = Get-Content -Path $testSettingsFilePath
             #
             # setup
-            $browserStackUsername = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Username']")
-            $browserStackPassword = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Password']")
-            $g4Username           = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
-            $gridEndpoint         = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
-            $workers              = $runSettings.SelectSingleNode("//MSTest//Workers")
+            $browserStackBuildname = $runSettings.SelectSingleNode("//Parameter[@name='Build.Name']")
+            $browserStackUsername  = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Username']")
+            $browserStackPassword  = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Password']")
+            $g4Username            = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
+            $gridEndpoint          = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
+            $workers               = $runSettings.SelectSingleNode("//MSTest//Workers")
             #
             # override with deployment settings
-            $browserStackUsername.Value = '${{ env.BROWSERSTACK_USER }}'
-            $browserStackPassword.Value = '${{ env.BROWSERSTACK_API_KEY }}'
-            $g4Username.Value           = '${{ env.G4_API_KEY }}'
-            $gridEndpoint.Value         = '${{ env.GRID_ENDPOINT }}'
-            $workers.InnerText          = '${{ env.TEST_WORKERS }}'
+            $browserStackBuildname.Value = 'G4™ Plugins v${{ env.BUILD_VERSION }}'
+            $browserStackUsername.Value  = '${{ env.BROWSERSTACK_USER }}'
+            $browserStackPassword.Value  = '${{ env.BROWSERSTACK_API_KEY }}'
+            $g4Username.Value            = '${{ env.G4_API_KEY }}'
+            $gridEndpoint.Value          = '${{ env.GRID_ENDPOINT }}'
+            $workers.InnerText           = '${{ env.TEST_WORKERS }}'
             #
             # save settings
-            Write-Host $runSettings.OuterXml
-            $runSettings.Save($runSettingsFile)
+            $runSettings.Save($testSettingsFilePath)
+            Write-Host "Settings File: $testSettingsFilePath"
+            
+            $OutputString = "runSettingsFilePath=$testSettingsFilePath"
+            $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
+      - name: Unit Tests and Code Coverage
+        shell: pwsh
+        env:
+          TEST_SETTINGS_FILE_PATH: ${{ steps.set-test-settings.outputs.testSettingsFilePath }}
+          TEST_FILTER: 'TestCategory=Logger'
+        working-directory: ${{ steps.set-working-directory.outputs.workingDirectory }}
+        run: |
+          $projectFileName      = "${{ env.PROJECT_NAME }}.${{ env.PROJECT_TYPE }}"
+          $projectFile          = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
+          $testSettingsFilePath = ${{ env.TEST_SETTINGS_FILE_PATH }}
+          $testDirectory        = [System.IO.Path]::GetDirectoryName($projectFile)
+          $testFilterExpression = ${{ env.TEST_FILTER }}
+          $testReportFile       = "${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.${{ env.BUILD_VERSION }}.xml"
+      
+          Write-Host "Project File Name             : $projectFileName"
+          Write-Host "Project File                  : $projectFile"
+          Write-Host "Run Settings File Name        : $runSettingsFileName"
+          Write-Host "Run Settings File             : $runSettingsFile"
+          Write-Host "Test Directory                : $testDirectory"
+          Write-Host "Initial Test Filter Expression: $testFilterExpression"
+          Write-Host "Test Report File              : $testReportFile"
+                 
+          Write-Host "Executing dotnet test command with the following parameters:"
+          Write-Host "Test Filter Expression        : $testFilterExpression"
+          Write-Host "Run Settings File Argument    : $runSettingsFile"
+          Write-Host "Test Report File              : $testReportFile"
+          
+          $filterToken         = $testFilterExpression
+          $settingsToken       = $runSettingsFile
+          $loggerToken         = ('"trx;LogFileName=' + $testReportFile + '"')
+          $collectToken        = '"Xplat Code Coverage"'
+          $argumentsCollection = @(
+              "test"
+          )
+          
+          if(![string]::IsNullOrEmpty($testFilterExpression)) {
+              $argumentsCollection += ('--filter "' + $testFilterExpression + '"')
+          }
+          
+          if(![string]::IsNullOrEmpty($runSettingsFileName)) {
+              $argumentsCollection += ('--settings "' + $runSettingsFile + '"')
+          }
+          
+          $argumentsCollection += "-l:" + ('"trx;LogFileName=' + $testReportFile + '"')
+          $argumentsCollection += "--collect:" + '"Xplat Code Coverage"'
+          
+          $arguments = $argumentsCollection -join " "
+          
+          Set-Location $testDirectory
+          Write-Host "Changed directory to : $testDirectory"
+      
+          Start-Process -FilePath "dotnet" -ArgumentList $arguments -NoNewWindow -Wait
+  
       # - name: Invoke Unit Tests
       #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
       #   if: steps.test-settings.outcome == 'success'
