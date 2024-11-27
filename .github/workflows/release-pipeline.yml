@@ -115,7 +115,7 @@ jobs:
       BUILD_VERSION    : ${{ needs.NewVersion.outputs.buildVersion }}
       PROJECT_NAME     : 'G4.UnitTests'
       PROJECT_TYPE     : 'csproj'
-      TEST_REPORT_FILE : ${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.${{ env.BUILD_VERSION }}.xml
+      TEST_REPORT_FILE : ${{ env.STAGE_DIRECTORY }}/TestOutput.G4.UnitTests.${{ needs.NewVersion.outputs.buildVersion }}.xml
 
     steps:
       - name: Checkout repository
