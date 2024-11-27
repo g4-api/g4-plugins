@@ -28,7 +28,7 @@ env:
   BINARIES_DIRECTORY  : ${{ github.workspace }}/binaries
   BUILD_CONFIGURATION : 'Release'
   BUILD_PLATFORM      : 'any cpu'
-  PROJECT_NAME        : 'G4'
+  SOLUTION_NAME       : 'G4'
   STAGE_DIRECTORY     : ${{ github.workspace }}/artifact_staging
   #
   # Publish settings
@@ -95,90 +95,86 @@ jobs:
       shell: pwsh 
       run: dotnet restore
 
-    - name: Build ${{ env.PROJECT_NAME }} v${{ env.BUILD_VERSION }}
+    - name: Build ${{ env.SOLUTION_NAME }} v${{ env.BUILD_VERSION }}
       shell: pwsh
       run: dotnet build
 
-  # invoke-unit-tests:
-  #   name: Invoke Unit Tests & Artifact Results
-  #   runs-on: ubuntu-latest
-  #   if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
-  #   needs: 
-  #     - NewBuild
-  #     - NewVersion
-  #   defaults:
-  #     run:
-  #       working-directory: ${{ github.workspace }}
+  InvokeUnitTests:
+    name: Invoke Unit Tests & Artifact Results
+    runs-on: ubuntu-latest
+    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
+    needs: 
+      - NewBuild
+      - NewVersion
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
 
-  #   env:
-  #     buildVersion: ${{ needs.NewVersion.outputs.buildVersion }}
-  #     PROJECT_NAME: 'G4.UnitTests'
-  #     projectType: 'csproj'
-  #     TEST_SETTINGS_FILE: 'Default.runsettings'
-  #     resultsArtifactName: unit-test-results-${{ needs.NewVersion.outputs.buildVersion }}
-    
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
+    env:
+      ARTIFACT_NAME: unit-test-results-${{ needs.NewVersion.outputs.buildVersion }}
+      BUILD_VERSION: ${{ needs.NewVersion.outputs.buildVersion }}
+      PROJECT_NAME : 'G4.UnitTests'
+      PROJECT_TYPE : 'csproj'
 
-  #     - name: Set Working Directory
-  #       id: set-working-directory
-  #       shell: pwsh
-  #       run: |
-  #         $projectFileName  = "${{ env.PROJECT_NAME }}.${{ env.projectType }}"
-  #         $projectFile      = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
-  #         $workingDirectory = [System.IO.Path]::GetDirectoryName($projectFile)
-  #         Write-Host "Working Directory: $workingDirectory"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set Working Directory
+        id: set-working-directory
+        shell: pwsh
+        run: |
+          $projectFileName  = "${{ env.PROJECT_NAME }}.${{ env.PROJECT_TYPE }}"
+          $projectFile      = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
+          $workingDirectory = [System.IO.Path]::GetDirectoryName($projectFile)
+          Write-Host "Working Directory: $workingDirectory"
       
-  #         $OutputString = "working-directory=$workingDirectory"
-  #         $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          $OutputString = "workingDirectory=$workingDirectory"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
-  #     - name: List files in the repository
-  #       run: ls -R
+      - name: Set the Default Test Settings File
+        id: set-test-settings
+        shell: pwsh
+        run: |
+            # read test settings
+            $runSettingsFileName  = "${{ env.TEST_SETTINGS_FILE }}"
+            $runSettingsFile      = (Get-ChildItem -Path . -Filter $runSettingsFileName -Recurse).FullName
+            [xml]$runSettings     = Get-Content -Path $runSettingsFile
+            #
+            # setup
+            $browserStackUsername = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Username']")
+            $browserStackPassword = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Password']")
+            $g4Username           = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
+            $gridEndpoint         = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
+            $workers              = $runSettings.SelectSingleNode("//MSTest//Workers")
+            #
+            # override with deployment settings
+            $browserStackUsername.Value = '${{ env.BROWSERSTACK_USER }}'
+            $browserStackPassword.Value = '${{ env.BROWSERSTACK_API_KEY }}'
+            $g4Username.Value           = '${{ env.G4_API_KEY }}'
+            $gridEndpoint.Value         = '${{ env.GRID_ENDPOINT }}'
+            $workers.InnerText          = '${{ env.TEST_WORKERS }}'
+            #
+            # save settings
+            Write-Host $runSettings.OuterXml
+            $runSettings.Save($runSettingsFile)
 
-  #     - name: Set the Default Test Settings File
-  #       id: test-settings
-  #       shell: pwsh
-  #       run: |
-  #           # read test settings
-  #           $runSettingsFileName  = "${{ env.TEST_SETTINGS_FILE }}"
-  #           $runSettingsFile      = (Get-ChildItem -Path . -Filter $runSettingsFileName -Recurse).FullName
-  #           [xml]$runSettings     = Get-Content -Path $runSettingsFile
-  #           #
-  #           # setup
-  #           $GRID_ENDPOINT         = $runSettings.SelectSingleNode("//Parameter[@name='Grid.Endpoint']")
-  #           $BROWSERSTACK_USERname = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Username']")
-  #           $BROWSERSTACK_API_KEY   = $runSettings.SelectSingleNode("//Parameter[@name='BrowserStack.Password']")
-  #           $G4_API_KEY             = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
-  #           $TEST_WORKERS              = $runSettings.SelectSingleNode("//MSTest//Workers")
-  #           #
-  #           # override with deployment settings
-  #           $GRID_ENDPOINT.Value         = '${{ env.GRID_ENDPOINT }}'
-  #           $BROWSERSTACK_USERname.Value = '${{ env.BROWSERSTACK_USER }}'
-  #           $BROWSERSTACK_API_KEY.Value   = '${{ env.BROWSERSTACK_API_KEY }}'
-  #           $G4_API_KEY.Value             = '${{ env.G4_API_KEY }}'
-  #           $TEST_WORKERS.InnerText          = '${{ env.TEST_WORKERS }}'
-  #           #
-  #           # save settings
-  #           Write-Host $runSettings
-  #           $runSettings.Save($runSettingsFile)
-
-  #     - name: Invoke Unit Tests
-  #       uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
-  #       if: steps.test-settings.outcome == 'success'
-  #       with:
-  #         build-version: ${{ env.buildVersion }}
-  #         project-name: ${{ env.PROJECT_NAME }}
-  #         project-type: ${{ env.projectType }}
-  #         filter: 'TestCategory=ExportData'
-  #         test-settings: ${{ env.TEST_SETTINGS_FILE }}
-  #         results-artifact-name: ${{ env.resultsArtifactName }}
+      # - name: Invoke Unit Tests
+      #   uses: g4-api/g4-github-actions/actions/test-dotnet-project@v1
+      #   if: steps.test-settings.outcome == 'success'
+      #   with:
+      #     build-version: ${{ env.buildVersion }}
+      #     project-name: ${{ env.PROJECT_NAME }}
+      #     project-type: ${{ env.projectType }}
+      #     filter: 'TestCategory=ExportData'
+      #     test-settings: ${{ env.TEST_SETTINGS_FILE }}
+      #     results-artifact-name: ${{ env.resultsArtifactName }}
 
   # publish-test-results:
   #   name: Publish Test Results
   #   runs-on: ubuntu-latest
   #   if: always()
-  #   needs: invoke-unit-tests
+  #   needs: InvokeUnitTests
   #   defaults:
   #     run:
   #       working-directory: ${{ github.workspace }}
