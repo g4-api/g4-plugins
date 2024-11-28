@@ -117,6 +117,7 @@ jobs:
           - name         : 'G4.UnitTests'
             type         : 'csproj'
             filter       : 'TestCategory=Logger'
+            prefix       : 'unit-tests'
             artifact     : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
             report       : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
             coverage     : 'unit-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
@@ -234,19 +235,24 @@ jobs:
           $coverageSummaryFile = "${{ steps.invoke-tests.outputs.coverageReportFile }}".Replace(".xml", ".md")
 
           .\scripts/Convert-TrxToMarkdown.ps1 `
-              -Title "${{ matrix.test-project.summary-title }}" `
-              -TrxPath $testReportFile `
+              -Title        "${{ matrix.test-project.summary-title }}" `
+              -TrxPath      $testReportFile `
               -MarkdownPath $testSummaryFile `
               -AddDetails `
               -Level Pass
 
           .\scripts/Convert-CoberturaToMarkdown.ps1 `
               -CoberturaXmlPath $coverageReportFile `
-              -MarkdownPath $coverageSummaryFile `
+              -MarkdownPath     $coverageSummaryFile `
               -AddBadges `
               -AddPackages
 
           "testSummaryFile=$testSummaryFile"         | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
           "coverageSummaryFile=$coverageSummaryFile" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
-          ls "${{ env.STAGE_DIRECTORY }}"
+      - name: Publish ${{ matrix.test-project.step-title }} Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.test-project.artifact }}
+          path: ${{ env.STAGE_DIRECTORY }}/${{ matrix.test-project.prefix }}*.*
