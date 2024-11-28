@@ -114,12 +114,14 @@ jobs:
     strategy:
       matrix:
         test-project:
-          - name    : 'G4.UnitTests'
-            type    : 'csproj'
-            filter  : 'TestCategory=Logger'
-            artifact: 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
-            report  : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
-            coverage: 'unit-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+          - name         : 'G4.UnitTests'
+            type         : 'csproj'
+            filter       : 'TestCategory=Logger'
+            artifact     : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
+            report       : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            coverage     : 'unit-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            step-title   : 'Unit Tests & Code Coverage'
+            summary-title: 'Unit Tests Results'
 
     steps:
       - name: Checkout repository
@@ -156,8 +158,8 @@ jobs:
 
             "runSettingsFilePath=$runSettingsFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
-      - name: Unit Tests and Code Coverage
-        id: invoke-unit-tests
+      - name: Invoke ${{ matrix.test-project.step-title }}
+        id: invoke-tests
         shell: pwsh
         env:
           RUN_SETTINGS_FILE_PATH: ${{ steps.set-run-settings.outputs.runSettingsFilePath }}
@@ -222,28 +224,22 @@ jobs:
           "testReportFile=$testReportFilePath"         | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
           "coverageReportFile=$coverageReportFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
-  #     - name: Upload Unit Tests Results
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: ${{ env.ARTIFACT_NAME }}
-  #         path: ${{ steps.invoke-unit-tests.outputs.testReportFile }}
+      - name: New ${{ matrix.test-project.step-title }} Summary File
+        id: new-unit-tests-summary
+        shell: pwsh
+        run: |
+          $testReportFile  = "${{ steps.invoke-unit-tests.outputs.testReportFile }}"
+          $testSummaryFile = "${{ steps.invoke-unit-tests.outputs.testReportFile }}".Replace(".xml", ".md")
 
-  #     - name: New Unit Tests Summary File
-  #       id: new-unit-tests-summary
-  #       shell: pwsh
-  #       run: |
-  #         $testReportFile  = "${{ steps.invoke-unit-tests.outputs.testReportFile }}"
-  #         $testSummaryFile = "${{ steps.invoke-unit-tests.outputs.testReportFile }}".Replace(".xml", ".md")
+          .\scripts/Convert-TrxToMarkdown.ps1 `
+              -Title "${{ matrix.test-project.summary-title }}" `
+              -TrxPath $testReportFile `
+              -MarkdownPath $testSummaryFile `
+              -AddDetails `
+              -Level Pass
 
-  #         .\scripts/Convert-TrxToMarkdown.ps1 `
-  #             -Title "Unit Tests Results" `
-  #             -TrxPath $testReportFile `
-  #             -MarkdownPath $testSummaryFile `
-  #             -AddDetails `
-  #             -Level Pass
-
-  #         $OutputString = "testSummaryFile=$testSummaryFile"
-  #         $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          $OutputString = "testSummaryFile=$testSummaryFile"
+          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
   #         $coverageFile = Get-ChildItem `
   #             -Path '.' `
