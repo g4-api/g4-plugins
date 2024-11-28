@@ -99,8 +99,8 @@ jobs:
       shell: pwsh
       run: dotnet build
 
-  InvokeUnitTests:
-    name: Invoke Unit Tests & Artifact Results
+  InvokeTests:
+    name: Invoke Tests & Publish Results
     runs-on: ubuntu-latest
     if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
 
