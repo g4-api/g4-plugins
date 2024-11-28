@@ -241,7 +241,6 @@ jobs:
               -Level Pass
 
           .\scripts/Convert-CoberturaToMarkdown.ps1 `
-              #-Title "${{ matrix.test-project.summary-title }}" `
               -CoberturaXmlPath $coverageReportFile `
               -MarkdownPath $coverageSummaryFile `
               -AddBadges `
