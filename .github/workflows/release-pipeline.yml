@@ -170,10 +170,10 @@ jobs:
           $projectDirectoryPath   = [System.IO.Path]::GetDirectoryName($projectFilePath)
           $runSettingsFilePath    = "${{ env.RUN_SETTINGS_FILE_PATH }}"
           $testFilterExpression   = "${{ matrix.test-project.filter }}"
-          $testReportFilePath     = "${{ matrix.test-project.report }}"
-          $coverageReportFilePath = "${{ matrix.test-project.coverage }}"
           $dropPath               = "${{ env.STAGE_DIRECTORY }}"
-      
+          $testReportFilePath     = "$dropPath/${{ matrix.test-project.report }}"
+          $coverageReportFilePath = "$dropPath/${{ matrix.test-project.coverage }}"
+          
           Write-Host "Project Name                  : $projectName"
           Write-Host "Project File Path             : $projectFilePath"
           Write-Host "Run Settings File Path        : $runSettingsFilePath"
