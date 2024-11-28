@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{AB40
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".scripts", ".scripts", "{7E0B569F-5141-45D7-8DC8-86ABA19C1B0A}"
 	ProjectSection(SolutionItems) = preProject
+		..\scripts\Convert-CoberturaToMarkdown.ps1 = ..\scripts\Convert-CoberturaToMarkdown.ps1
 		..\scripts\Convert-TrxToMarkdown.ps1 = ..\scripts\Convert-TrxToMarkdown.ps1
 	EndProjectSection
 EndProject
