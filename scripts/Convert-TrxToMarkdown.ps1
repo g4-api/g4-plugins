@@ -114,7 +114,7 @@ foreach ($key in $summaryData.Keys) {
     $mdContent += "| $key | $($summaryData[$key]) |`n"
 }
 
-$mdContent += "`n---`n"
+$mdContent += "`n`n"
 
 # Only proceed to add detailed test class results if AddDetails switch is set
 if ($AddDetails) {
@@ -221,7 +221,7 @@ if ($AddDetails) {
         }
 
         # Append the separator with only one empty line
-        $mdContent += "`n---`n"
+        $mdContent += "`n`n"
     }
 
     # After the loop, remove any trailing newlines and ensure only one empty line
