@@ -40,7 +40,7 @@ env:
   BROWSERSTACK_USER   : ${{ secrets.BROWSERSTACK_USER }}
   G4_API_KEY          : ${{ secrets.G4_API_KEY }}
   GRID_ENDPOINT       : ${{ secrets.GRID_ENDPOINT }}
-  TEST_SETTINGS_FILE  : 'Default.runsettings'
+  RUN_SETTINGS_FILE   : 'Default.runsettings'
   TEST_WORKERS        : '5'
 
 # Default settings for all run steps
@@ -125,26 +125,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # - name: Set Working Directory
-      #   id: set-working-directory
-      #   shell: pwsh
-      #   run: |
-      #     $projectFileName  = "${{ env.PROJECT_NAME }}.${{ env.PROJECT_TYPE }}"
-      #     $projectFile      = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
-      #     $workingDirectory = [System.IO.Path]::GetDirectoryName($projectFile)
-      #     Write-Host "Working Directory: $workingDirectory"
-      
-      #     $OutputString = "workingDirectory=$workingDirectory"
-      #     $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
-
       - name: Set the Default Test Settings File
         id: set-run-settings
         shell: pwsh
         run: |
             # read test settings
-            $testSettingsFile      = "${{ env.TEST_SETTINGS_FILE }}"
-            $testSettingsFilePath  = (Get-ChildItem -Path . -Filter $testSettingsFile -Recurse).FullName
-            [xml]$runSettings      = Get-Content -Path $testSettingsFilePath
+            $runSettingsFile       = "${{ env.RUN_SETTINGS_FILE }}"
+            $runSettingsFilePath   = (Get-ChildItem -Path . -Filter $runSettingsFile -Recurse).FullName
+            [xml]$runSettings      = Get-Content -Path $runSettingsFilePath
             #
             # setup
             $browserStackBuildname = $runSettings.SelectSingleNode("//Parameter[@name='Build.Name']")
@@ -163,22 +151,22 @@ jobs:
             $workers.InnerText           = '${{ env.TEST_WORKERS }}'
             #
             # save settings
-            $runSettings.Save($testSettingsFilePath)
-            Write-Host "Settings File: $testSettingsFilePath"
+            $runSettings.Save($runSettingsFilePath)
+            Write-Host "Settings File: $runSettingsFilePath"
 
-            "runSettingsFilePath=$testSettingsFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+            "runSettingsFilePath=$runSettingsFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
       - name: Unit Tests and Code Coverage
         id: invoke-unit-tests
         shell: pwsh
         env:
-          TEST_SETTINGS_FILE_PATH: ${{ steps.set-run-settings.outputs.testSettingsFilePath }}
+          RUN_SETTINGS_FILE_PATH: ${{ steps.set-run-settings.outputs.runSettingsFilePath }}
 
         run: |
           $projectName            = "${{ matrix.test-project.name }}.${{ matrix.test-project.type }}"
           $projectFilePath        = (Get-ChildItem -Path . -Filter $projectName -Recurse).FullName
           $projectDirectoryPath   = [System.IO.Path]::GetDirectoryName($projectFilePath)
-          $runSettingsFilePath    = "${{ env.TEST_SETTINGS_FILE_PATH }}"
+          $runSettingsFilePath    = "${{ env.RUN_SETTINGS_FILE_PATH }}"
           $testFilterExpression   = "${{ matrix.test-project.filter }}"
           $testReportFilePath     = "${{ matrix.test-project.report }}"
           $coverageReportFilePath = "${{ matrix.test-project.coverage }}"
@@ -557,13 +545,13 @@ jobs:
   #       id: invoke-integration-tests
   #       shell: pwsh
   #       env:
-  #         TEST_SETTINGS_FILE_PATH: ${{ steps.set-run-settings.outputs.testSettingsFilePath }}
+  #         RUN_SETTINGS_FILE_PATH: ${{ steps.set-run-settings.outputs.testSettingsFilePath }}
   #         TEST_FILTER: 'TestCategory=InvokeDoubleClick'
   #       working-directory: ${{ steps.set-working-directory.outputs.workingDirectory }}
   #       run: |
   #         $projectFileName      = "${{ env.PROJECT_NAME }}.${{ env.PROJECT_TYPE }}"
   #         $projectFile          = (Get-ChildItem -Path . -Filter $projectFileName -Recurse).FullName
-  #         $testSettingsFilePath = "${{ env.TEST_SETTINGS_FILE_PATH }}"
+  #         $testSettingsFilePath = "${{ env.RUN_SETTINGS_FILE_PATH }}"
   #         $testDirectory        = [System.IO.Path]::GetDirectoryName($projectFile)
   #         $testFilterExpression = "${{ env.TEST_FILTER }}"
   #         $testReportFile       = "${{ env.STAGE_DIRECTORY }}/TestOutput.${{ env.PROJECT_NAME }}.v${{ env.BUILD_VERSION }}.xml"
