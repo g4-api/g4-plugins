@@ -118,15 +118,16 @@ jobs:
     strategy:
       matrix:
         test-project:
-          - name         : 'G4.UnitTests'
-            type         : 'csproj'
-            filter       : 'TestCategory=Logger'
-            prefix       : 'unit-tests'
-            artifact     : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
-            report       : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
-            coverage     : 'unit-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
-            step-title   : 'Unit Tests & Code Coverage'
-            summary-title: 'Unit Tests Results'
+          - name                  : 'G4.UnitTests'
+            type                  : 'csproj'
+            filter                : 'TestCategory=Logger'
+            prefix                : 'unit-tests'
+            artifact              : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
+            report                : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            coverage              : 'unit-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            step-title            : 'Unit Tests & Code Coverage'
+            tests-summary-title   : 'Unit Tests Results'
+            coverage-summary-title: 'Unit Tests Code Coverage Results'
 
     steps:
       - name: Checkout repository
@@ -239,13 +240,14 @@ jobs:
           $coverageSummaryFile = "${{ steps.invoke-tests.outputs.coverageReportFile }}".Replace(".xml", ".md")
 
           .\scripts/Convert-TrxToMarkdown.ps1 `
-              -Title        "${{ matrix.test-project.summary-title }}" `
+              -Title        "${{ matrix.test-project.tests-summary-title }}" `
               -TrxPath      $testReportFile `
               -MarkdownPath $testSummaryFile `
               -AddDetails `
               -Level Pass
 
           .\scripts/Convert-CoberturaToMarkdown.ps1 `
+              -Title            "${{ matrix.test-project.coverage-summary-title }}" `
               -CoberturaXmlPath $coverageReportFile `
               -MarkdownPath     $coverageSummaryFile `
               -AddBadges `

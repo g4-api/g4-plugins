@@ -5,6 +5,9 @@
 .DESCRIPTION
     This script reads a Cobertura XML coverage report from a specified file path or URL and generates a comprehensive Markdown report. The report includes overall coverage statistics and, optionally, detailed information about packages, classes, and individual lines of code. Additionally, badges representing line and branch coverage can be included.
 
+.PARAMETER Title
+    The title to be used as the Markdown report's main heading.
+
 .PARAMETER CoberturaXmlPath
     Path or URL to the input Cobertura XML file.
 
@@ -24,12 +27,15 @@
     Include detailed information for each class, including line-by-line coverage.
 
 .EXAMPLE
-    .\GenerateCoverageReport.ps1 -CoberturaXmlPath "coverage.xml" -MarkdownPath "Report.md" -AddBadges -AddPackages -AddClassSummary -AddClassDetails
+    .\GenerateCoverageReport.ps1 -Title "My Coverage Report" -CoberturaXmlPath "coverage.xml" -MarkdownPath "Report.md" -AddBadges -AddPackages -AddClassSummary -AddClassDetails
 
 .NOTES
     Ensure that the Cobertura XML file is accessible and properly formatted.
 #>
 param(
+    [Parameter(Mandatory = $false, HelpMessage = "The title to be used as the Markdown report's main heading.")]
+    [string]$Title = "Tests Coverage Summary",
+
     [Parameter(Mandatory = $true, HelpMessage = "Path or URL to the input Cobertura XML file.")]
     [string]$CoberturaXmlPath,
 
@@ -62,23 +68,23 @@ if ($CoberturaXmlPath -match "^http(s)?://") {
 $lineCoverage   = [math]::Round($xml.coverage.'line-rate', 2) * 100
 $branchCoverage = [math]::Round($xml.coverage.'branch-rate', 2) * 100
 
-# Initialize the Markdown content with the report title
+# Initialize the Markdown content with the custom report title
 $markdown = @"
-# Integration Tests Code Coverage Report
+# $Title
 "@
 
 # Optionally add coverage badges to the report
 if ($AddBadges) {
     $markdown += @"
-
+    
 ![Line Coverage](https://img.shields.io/badge/Line%20Coverage-$lineCoverage%25-success?style=flat) ![Branch Coverage](https://img.shields.io/badge/Branch%20Coverage-$branchCoverage%25-success?style=flat)
-
+    
 "@
 }
 
 # Add the overview section with basic coverage statistics
 $markdown += @"
-
+    
 ## Overview
 
 - **Lines Covered**: $($xml.coverage.'lines-covered')
@@ -91,7 +97,7 @@ $markdown += @"
 # Optionally include detailed package information
 if ($AddPackages) {
     $markdown += @"
-
+    
 ## Packages
 
 "@
@@ -103,7 +109,7 @@ if ($AddPackages) {
         $packageComplexity = $package.complexity
 
         $markdown += @"
-
+    
 ### Package: $packageName
 
 - **Line Coverage Rate**: $packageLineRate%
@@ -115,7 +121,7 @@ if ($AddPackages) {
         # Optionally include a summary of classes within the package
         if ($AddClassSummary) {
             $markdown += @"
-
+    
 #### Classes Summary
 
 | Class Name                            | Filename            | Line Coverage Rate | Branch Coverage Rate | Complexity |
@@ -149,7 +155,7 @@ if ($AddPackages) {
                 $classComplexity = $class.complexity
 
                 $markdown += @"
-
+    
 ##### $className
 
 - **Filename**: `$classFilename`
