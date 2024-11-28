@@ -117,8 +117,8 @@ jobs:
           - name    : 'G4.UnitTests'
             type    : 'csproj'
             filter  : 'TestCategory=Logger'
-            artifact: 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}'
-            report  : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            artifact: 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
+            report  : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
             coverage: 'unit-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
 
     steps:
@@ -203,9 +203,8 @@ jobs:
 
           $arguments = $argumentsCollection -join " "
 
-      
           Start-Process -FilePath "dotnet" -ArgumentList $arguments -NoNewWindow -Wait
-          Write-Host "Settings File: $testSettingsFilePath"
+          Write-Host "Settings File: $testReportFilePath"
 
           $coverageXmlPath = Get-ChildItem `
               -Path $projectDirectoryPath `
