@@ -230,8 +230,8 @@ jobs:
         run: |
           $testReportFile      = "${{ steps.invoke-tests.outputs.testReportFile }}"
           $testSummaryFile     = "${{ steps.invoke-tests.outputs.testReportFile }}".Replace(".xml", ".md")
-          $coverageReportFile  = "${{ steps.invoke-tests.outputs.testReportFile }}"
-          $coverageSummaryFile = "${{ steps.invoke-tests.outputs.testReportFile }}".Replace(".xml", ".md")
+          $coverageReportFile  = "${{ steps.invoke-tests.outputs.coverageReportFile }}"
+          $coverageSummaryFile = "${{ steps.invoke-tests.outputs.coverageReportFile }}".Replace(".xml", ".md")
 
           .\scripts/Convert-TrxToMarkdown.ps1 `
               -Title "${{ matrix.test-project.summary-title }}" `
