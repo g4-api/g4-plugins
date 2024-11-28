@@ -129,6 +129,17 @@ jobs:
             tests-summary-title   : 'Unit Tests Results'
             coverage-summary-title: 'Unit Tests Code Coverage Results'
 
+          - name                  : 'G4.IntegrationTests'
+            type                  : 'csproj'
+            filter                : 'TestCategory=ExportData'
+            prefix                : 'integration-tests'
+            artifact              : 'integration-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
+            report                : 'integration-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            coverage              : 'integration-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            step-title            : 'integration Tests & Code Coverage'
+            tests-summary-title   : 'integration Tests Results'
+            coverage-summary-title: 'integration Tests Code Coverage Results'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
