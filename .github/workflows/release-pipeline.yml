@@ -266,7 +266,7 @@ jobs:
         shell: pwsh
         run: |
           # Find all .md files that start with '${{ matrix.test-project.prefix }}'
-          $unitTestFiles = Get-ChildItem -Path . -Filter "${{ matrix.test-project.prefix }}*.md" -File
+          $unitTestFiles = Get-ChildItem -Path . -Filter "${{ matrix.test-project.prefix }}*.md" -File | Sort-Object -Property Name -Descending
           
           # Iterate over each file and output its content
           foreach ($file in $unitTestFiles) {
