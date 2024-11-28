@@ -228,8 +228,8 @@ jobs:
         id: new-unit-tests-summary
         shell: pwsh
         run: |
-          $testReportFile  = "${{ steps.invoke-unit-tests.outputs.testReportFile }}"
-          $testSummaryFile = "${{ steps.invoke-unit-tests.outputs.testReportFile }}".Replace(".xml", ".md")
+          $testReportFile  = "${{ steps.invoke-tests.outputs.testReportFile }}"
+          $testSummaryFile = "${{ steps.invoke-tests.outputs.testReportFile }}".Replace(".xml", ".md")
 
           .\scripts/Convert-TrxToMarkdown.ps1 `
               -Title "${{ matrix.test-project.summary-title }}" `
@@ -238,8 +238,7 @@ jobs:
               -AddDetails `
               -Level Pass
 
-          $OutputString = "testSummaryFile=$testSummaryFile"
-          $OutputString | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "testSummaryFile=$testSummaryFile" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
   #         $coverageFile = Get-ChildItem `
   #             -Path '.' `
