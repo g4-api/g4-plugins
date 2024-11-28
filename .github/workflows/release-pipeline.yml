@@ -103,14 +103,18 @@ jobs:
     name: Invoke Unit Tests & Artifact Results
     runs-on: ubuntu-latest
     if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
+
     needs: 
       - NewBuild
       - NewVersion
+
     defaults:
       run:
         working-directory: ${{ github.workspace }}
+
     env:
       BUILD_VERSION: ${{ needs.NewVersion.outputs.buildVersion }}
+
     strategy:
       matrix:
         test-project:
@@ -256,3 +260,19 @@ jobs:
         with:
           name: ${{ matrix.test-project.artifact }}
           path: ${{ env.STAGE_DIRECTORY }}/${{ matrix.test-project.prefix }}*.*
+
+      - name: Publish ${{ matrix.test-project.step-title }} Summary
+        working-directory: ${{ env.STAGE_DIRECTORY }}
+        shell: pwsh
+        run: |
+          # Find all .md files that start with '${{ matrix.test-project.prefix }}'
+          $unitTestFiles = Get-ChildItem -Path . -Filter "${{ matrix.test-project.prefix }}*.md" -File
+          
+          # Iterate over each file and output its content
+          foreach ($file in $unitTestFiles) {
+              # Read the content of the coverage report file
+              $content = (Get-Content -Path $file.FullName -Raw)
+
+              # Append the content to the GitHub Actions job summary to display it in the workflow run details
+              $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
+          }
