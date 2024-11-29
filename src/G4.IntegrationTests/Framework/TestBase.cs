@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -49,14 +50,21 @@ namespace G4.IntegrationTests.Framework
                 ? $"{context.Properties["Grid.Endpoint"]}"
                 : string.Empty;
 
+            // Determine if the test is local
             var isLocal = $"{context.Properties["Integration.Local"]}".Equals("true", StringComparison.OrdinalIgnoreCase);
 
+            // Start the BrowserStack local agent if the grid endpoint contains "browserstack" and the test is not local
             if (remoteEndpoint.Contains("browserstack", StringComparison.OrdinalIgnoreCase) && !isLocal)
             {
+                // Get the file name based on the operating system
+                var fileName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                    ? "BrowserStackLocal.exe"
+                    : "BrowserStackLocal";
+
                 // Start the BrowserStack local agent process
                 var info = new ProcessStartInfo
                 {
-                    FileName = Path.Combine(Directory.GetCurrentDirectory(), "Binaries", "BrowserStackLocal.exe"),
+                    FileName = Path.Combine(Directory.GetCurrentDirectory(), "Binaries", fileName),
                     Arguments = $"--force --key {context.Properties["BrowserStack.Password"]}"
                 };
                 Process.Start(info);
