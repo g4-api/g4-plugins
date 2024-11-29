@@ -101,7 +101,7 @@ jobs:
 
   InvokeTests:
     name: Invoke Tests & Publish Results
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
 
     needs: 
