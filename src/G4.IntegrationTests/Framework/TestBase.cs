@@ -75,6 +75,9 @@ namespace G4.IntegrationTests.Framework
             context.WriteLine("New test server created successfully.");
         }
 
+        /// <summary>
+        /// Releases resources used by the test assembly after all tests have run.
+        /// </summary>
         [AssemblyCleanup]
         public static void OneTimeTearDown()
         {

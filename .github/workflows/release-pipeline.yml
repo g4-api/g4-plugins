@@ -120,13 +120,14 @@ jobs:
         test-project:
           - name                  : 'G4.UnitTests'
             type                  : 'csproj'
-            filter                : 'TestCategory=Logger'
+            filter                : ''
             prefix                : 'unit-tests'
             artifact              : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
             report                : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
             coverage              : 'unit-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
             step-title            : 'Unit Tests & Code Coverage'
             tests-summary-title   : 'Unit Tests Results'
+            tests-summary-level   : 'Skip'
             coverage-summary-title: 'Unit Tests Code Coverage Results'
 
           - name                  : 'G4.IntegrationTests'
@@ -138,6 +139,7 @@ jobs:
             coverage              : 'integration-tests-edge-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
             step-title            : 'Microsoft Edge Integration Tests & Code Coverage'
             tests-summary-title   : 'Microsoft Edge Integration Tests Results'
+            tests-summary-level   : 'Skip'
             coverage-summary-title: 'Microsoft Edge Integration Tests Code Coverage Results'
 
     steps:
@@ -255,7 +257,7 @@ jobs:
               -TrxPath      $testReportFile `
               -MarkdownPath $testSummaryFile `
               -AddDetails `
-              -Level Pass
+              -Level ${{ matrix.tests-project.test-summary-level }}
 
           .\scripts/Convert-CoberturaToMarkdown.ps1 `
               -Title            "${{ matrix.test-project.coverage-summary-title }}" `
