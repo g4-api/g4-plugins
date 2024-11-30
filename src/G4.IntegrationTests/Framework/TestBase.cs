@@ -75,6 +75,21 @@ namespace G4.IntegrationTests.Framework
             context.WriteLine("New test server created successfully.");
         }
 
+        [AssemblyCleanup]
+        public static void OneTimeTearDown()
+        {
+            // Stop the local static files server
+            WebServer.RemoveWebHost();
+            Console.WriteLine("Web server stopped successfully.");
+
+            // Stop the BrowserStack local agent
+            foreach (var process in Process.GetProcessesByName("BrowserStackLocal"))
+            {
+                Console.WriteLine($"Stopping BrowserStackLocal process '{process.ProcessName}'...");
+                process.Kill(entireProcessTree: true);
+            }
+        }
+
         /// <summary>
         /// Invokes a test case with the specified test options.
         /// </summary>
