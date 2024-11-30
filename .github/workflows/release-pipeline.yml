@@ -257,7 +257,7 @@ jobs:
               -TrxPath      $testReportFile `
               -MarkdownPath $testSummaryFile `
               -AddDetails `
-              -Level ${{ matrix.tests-project.test-summary-level }}
+              -Level ${{ matrix.tests-project.tests-summary-level }}
 
           .\scripts/Convert-CoberturaToMarkdown.ps1 `
               -Title            "${{ matrix.test-project.coverage-summary-title }}" `
