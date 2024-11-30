@@ -131,14 +131,14 @@ jobs:
 
           - name                  : 'G4.IntegrationTests'
             type                  : 'csproj'
-            filter                : 'TestCategory=ExportData'
-            prefix                : 'integration-tests'
-            artifact              : 'integration-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
-            report                : 'integration-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
-            coverage              : 'integration-tests-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
-            step-title            : 'integration Tests & Code Coverage'
-            tests-summary-title   : 'integration Tests Results'
-            coverage-summary-title: 'integration Tests Code Coverage Results'
+            filter                : 'TestCategory=MicrosoftEdge&TestCategory=GetPageUrl'
+            prefix                : 'integration-tests-edge'
+            artifact              : 'integration-tests-edge-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
+            report                : 'integration-tests-edge-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            coverage              : 'integration-tests-edge-coverage-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
+            step-title            : 'Microsoft Edge Integration Tests & Code Coverage'
+            tests-summary-title   : 'Microsoft Edge Integration Tests Results'
+            coverage-summary-title: 'Microsoft Edge Integration Tests Code Coverage Results'
 
     steps:
       - name: Checkout repository
