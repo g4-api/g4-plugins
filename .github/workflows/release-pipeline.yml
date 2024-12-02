@@ -334,7 +334,7 @@ jobs:
 
           "projectFilePath=$projectFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
-      - name: Restore Packages
+      - name: Restore Packages for '${{ matrix.utilitiy-project.name }}'
         shell: pwsh
         run: |
           $projectFilePath = "${{ steps.find-project-file.outputs.projectFilePath }}"
@@ -345,11 +345,11 @@ jobs:
         shell: pwsh
         run: |
           $projectFilePath = "${{ steps.find-project-file.outputs.projectFilePath }}"
-          $publishDir      = "${{ env.BINARIES_DIRECTORY }}"
+          $publishDir      = "${{ env.BINARIES_DIRECTORY }}/${{ matrix.utilitiy-project.name }}"
 
           dotnet publish $projectFilePath --configuration Release --output $publishDir
 
-      - name: Create Build Artifact
+      - name: Create Build Artifact for '${{ matrix.utilitiy-project.name }}'
         shell: pwsh
         run: |
           $artifactDir = "${{ env.STAGE_DIRECTORY }}"
@@ -361,7 +361,7 @@ jobs:
               -DestinationPath $zipPath `
               -Force
 
-      - name: Upload a Build Artifact
+      - name: Upload a Build Artifact for '${{ matrix.utilitiy-project.name }}'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.utilitiy-project.artifact }}
