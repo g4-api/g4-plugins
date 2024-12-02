@@ -27,7 +27,6 @@ env:
   DOTNET_VERSION      : '8.0.x'
   BINARIES_DIRECTORY  : ${{ github.workspace }}/binaries
   BUILD_CONFIGURATION : 'Release'
-  BUILD_PLATFORM      : 'any cpu'
   SOLUTION_NAME       : 'G4'
   STAGE_DIRECTORY     : ${{ github.workspace }}/artifact_staging
   #
@@ -310,7 +309,7 @@ jobs:
 
     - name: New Packages v${{ env.BUILD_VERSION }}
       shell: pwsh
-      run: dotnet pack -o ${{ env.STAGE_DIRECTORY }} -c Release /p:Version=${{ env.BUILD_VERSION }}
+      run: dotnet pack -o ${{ env.STAGE_DIRECTORY }} -c ${{ env.BUILD_CONFIGURATION }} /p:Version=${{ env.BUILD_VERSION }}
       working-directory: src
 
     - name: Publish Build Artifacts to NuGet Feed
@@ -344,19 +343,17 @@ jobs:
         utilitiy-project:
           - name                  : 'G4.DocumentsGenerator'
             type                  : 'csproj'
-            dotnet-version        : '8'
             artifact              : 'g4-documents-generator-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
 
           - name                  : 'G4.ManifestValidator'
             type                  : 'csproj'
-            dotnet-version        : '8'
             artifact              : 'g4-manifest-validator-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
 
     steps:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.utilitiy-project.dotnet-version }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
       
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -383,7 +380,7 @@ jobs:
           $projectFilePath  = "${{ steps.find-project-file.outputs.projectFilePath }}"
           $publishDirectory = "${{ env.BINARIES_DIRECTORY }}/publish/${{ matrix.utilitiy-project.name }}"
 
-          dotnet publish $projectFilePath --configuration Release --output $publishDirectory
+          dotnet publish $projectFilePath --configuration ${{ env.BUILD_CONFIGURATION }} --output $publishDirectory
           Write-Host "Project File Path: $projectFilePath"
 
           "projectFilePath=$projectFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
