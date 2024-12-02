@@ -338,6 +338,7 @@ jobs:
         shell: pwsh
         run: |
           $projectFilePath = "${{ steps.find-project-file.outputs.projectFilePath }}"
+
           dotnet restore $projectFilePath
 
       - name: Publish
@@ -345,6 +346,7 @@ jobs:
         run: |
           $projectFilePath = "${{ steps.find-project-file.outputs.projectFilePath }}"
           $publishDir      = "${{ env.BINARIES_DIRECTORY }}"
+
           dotnet publish $projectFilePath --configuration Release --output $publishDir
 
       - name: Create Build Artifact
