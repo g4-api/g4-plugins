@@ -293,7 +293,7 @@ jobs:
   publish-nuget-packages:
     name: Publish & Push NuGet Packages
     runs-on: ubuntu-latest
-    if: ${{ needs.InvokeTests.result == 'success' }}
+    #if: ${{ needs.InvokeTests.result == 'success' }}
     needs: 
       #- InvokeTests
       - NewVersion
