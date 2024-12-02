@@ -289,7 +289,7 @@ jobs:
               $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
           }
 
-  publish-nuget-packages:
+  PublishNugetPackages:
     name: Publish & Push NuGet Packages v${{ needs.NewVersion.outputs.buildVersion }}
     runs-on: ubuntu-latest
     if: ${{ needs.InvokeTests.result == 'success' }}
