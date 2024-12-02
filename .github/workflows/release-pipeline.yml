@@ -429,6 +429,10 @@ jobs:
       with:
         path: ${{ env.STAGE_DIRECTORY }}
 
+    - name: List Downloaded Files
+      run: |
+        ls -R ${{ env.STAGE_DIRECTORY }}
+
     - name: Create GitHub Release & Tag v${{ env.BUILD_VERSION }}
       uses: softprops/action-gh-release@v2
       with:
