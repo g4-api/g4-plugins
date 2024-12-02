@@ -313,8 +313,12 @@ jobs:
           - name                  : 'G4.DocumentsGenerator'
             type                  : 'csproj'
             dotnet-version        : '8'
-            prefix                : 'unit-tests'
             artifact              : 'g4-documents-generator-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
+
+          - name                  : 'G4.ManifestValidator'
+            type                  : 'csproj'
+            dotnet-version        : '8'
+            artifact              : 'g4-manifest-validator-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
 
     steps:
       - name: Setup .NET Core SDK
@@ -341,19 +345,22 @@ jobs:
 
           dotnet restore $projectFilePath
 
-      - name: Publish
+      - name: Publish ${{ matrix.utilitiy-project.name }}.v${{ env.BUILD_VERSION }}
         shell: pwsh
         run: |
-          $projectFilePath = "${{ steps.find-project-file.outputs.projectFilePath }}"
-          $publishDir      = "${{ env.BINARIES_DIRECTORY }}/publish/${{ matrix.utilitiy-project.name }}"
+          $projectFilePath  = "${{ steps.find-project-file.outputs.projectFilePath }}"
+          $publishDirectory = "${{ env.BINARIES_DIRECTORY }}/publish/${{ matrix.utilitiy-project.name }}"
 
-          dotnet publish $projectFilePath --configuration Release --output $publishDir
+          dotnet publish $projectFilePath --configuration Release --output $publishDirectory
+          Write-Host "Project File Path: $projectFilePath"
+
+          "projectFilePath=$projectFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
       - name: Create Build Artifact for '${{ matrix.utilitiy-project.name }}'
         shell: pwsh
         run: |
           $artifactDir = "${{ env.STAGE_DIRECTORY }}"
-          $zipPath     = "$artifactDir/${{ matrix.utilitiy-project.name }}.${{ env.BUILD_VERSION }}-win-linux-x64.zip"
+          $zipPath     = "$artifactDir/${{ matrix.utilitiy-project.name }}.v${{ env.BUILD_VERSION }}-win-linux-x64.zip"
       
           New-Item -Path $artifactDir -ItemType Directory -Force
           Compress-Archive `
