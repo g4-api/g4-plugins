@@ -437,8 +437,8 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          ./*.zip
-          ./*.nupkg
+          **/*.zip
+          **/*.nupkg
         tag_name: v${{ env.BUILD_VERSION }}
         name: ${{ env.ARTIFACT_TYPE }} v${{ env.BUILD_VERSION }}
         generate_release_notes: true
