@@ -345,7 +345,7 @@ jobs:
         shell: pwsh
         run: |
           $projectFilePath = "${{ steps.find-project-file.outputs.projectFilePath }}"
-          $publishDir      = "${{ env.BINARIES_DIRECTORY }}/${{ matrix.utilitiy-project.name }}"
+          $publishDir      = "${{ env.BINARIES_DIRECTORY }}/publish/${{ matrix.utilitiy-project.name }}"
 
           dotnet publish $projectFilePath --configuration Release --output $publishDir
 
@@ -357,7 +357,7 @@ jobs:
       
           New-Item -Path $artifactDir -ItemType Directory -Force
           Compress-Archive `
-              -Path ${{ env.BINARIES_DIRECTORY }}/publish/* `
+              -Path ${{ env.BINARIES_DIRECTORY }}/publish/${{ matrix.utilitiy-project.name }}/* `
               -DestinationPath $zipPath `
               -Force
 
