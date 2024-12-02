@@ -335,6 +335,7 @@ jobs:
         shell: pwsh
         run: |
           $projectFilePath = (Get-ChildItem -Path . -Filter "${{ matrix.utilitiy-project.name }}.${{ matrix.utilitiy-project.type }}" -Recurse).FullName
+          Write-Host "Project File Path: $projectFilePath"
           "projectFilePath=$projectFilePath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
       - name: Restore Packages
