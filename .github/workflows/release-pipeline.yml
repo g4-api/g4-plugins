@@ -410,6 +410,7 @@ jobs:
     needs:
       - NewVersion
       - InvokeTests
+      - PublishNugetPackages
       - PublishTools
 
     env:
