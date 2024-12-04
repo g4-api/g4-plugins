@@ -1,11 +1,14 @@
 ﻿{
+	"aliases": [
+		"Container",
+		"NewContainer"
+	],
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 	},
 	"categories": [
-		"General",
-		"Utility"
+		"Containers"
 	],
 	"description": [
 		"### Purpose",
