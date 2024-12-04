@@ -102,7 +102,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#resizing-and-positioning-windows",
 		"w3c": "None"
 	},
-	"scope": [
+	"scopes": [
 		"Web"
 	],
 	"summary": [

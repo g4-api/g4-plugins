@@ -167,7 +167,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-window-handles",
 		"w3c": "GET /session/{session id}/window/handles"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

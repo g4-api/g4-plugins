@@ -191,7 +191,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-send-keys",
 		"w3c": "POST /session/{session id}/element/{element id}/value"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

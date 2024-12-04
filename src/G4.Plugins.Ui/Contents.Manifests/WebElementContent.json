@@ -197,7 +197,7 @@
 		"apiDocumentation": "None",
 		"w3c": "https://www.w3.org/TR/webdriver/"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

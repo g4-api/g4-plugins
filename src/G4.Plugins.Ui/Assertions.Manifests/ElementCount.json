@@ -194,7 +194,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#find-elements",
 		"w3c": "POST /session/{session id}/elements"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

@@ -111,7 +111,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#new-window",
 		"w3c": "POST /session/{session id}/window/new"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

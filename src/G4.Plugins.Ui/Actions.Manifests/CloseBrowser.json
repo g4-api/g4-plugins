@@ -53,7 +53,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#delete-session",
 		"w3c": "DELETE /session/{session id}"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

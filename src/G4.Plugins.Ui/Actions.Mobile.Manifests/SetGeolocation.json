@@ -100,7 +100,7 @@
 		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/session/geolocation/set-geolocation/#http-api-specifications",
 		"w3c": "POST /session/{session id}/location"
 	},
-	"scope": [
+	"scopes": [
 		"MobileNative",
 		"MobileWeb"
 	],

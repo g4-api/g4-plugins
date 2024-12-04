@@ -86,7 +86,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#close-window",
 		"w3c": "DELETE /session/{session id}/window"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

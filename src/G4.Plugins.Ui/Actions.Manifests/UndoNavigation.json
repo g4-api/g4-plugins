@@ -130,7 +130,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#back",
 		"w3c": "POST /session/{session id}/back"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

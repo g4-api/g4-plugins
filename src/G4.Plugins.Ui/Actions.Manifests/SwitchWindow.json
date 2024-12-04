@@ -76,7 +76,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#switch-to-window",
 		"w3c": "POST /session/{session id}/window"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

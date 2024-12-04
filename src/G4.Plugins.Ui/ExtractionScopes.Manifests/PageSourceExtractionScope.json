@@ -150,7 +150,7 @@
 		"apiDocumentation": "https://html-agility-pack.net/documentation",
 		"w3c": "GET /session/{session id}/source"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

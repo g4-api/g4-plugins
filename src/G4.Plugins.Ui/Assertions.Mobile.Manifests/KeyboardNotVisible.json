@@ -76,7 +76,7 @@
 		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/is-keyboard-shown/#http-api-specifications",
 		"w3c": "GET /session/{session id}/appium/device/is_keyboard_shown"
 	},
-	"scope": [
+	"scopes": [
 		"MobileNative",
 		"MobileWeb"
 	],

@@ -132,7 +132,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-clear",
 		"w3c": "POST /session/{session id}/element/{element id}/clear"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb",
 		"OsNative"

@@ -179,7 +179,7 @@
 		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/hide-keyboard/#http-api-specifications",
 		"w3c": "POST /session/{session id}/appium/device/hide_keyboard"
 	},
-	"scope": [
+	"scopes": [
 		"MobileNative",
 		"MobileWeb"
 	],

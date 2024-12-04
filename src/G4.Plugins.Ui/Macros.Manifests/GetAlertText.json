@@ -78,7 +78,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#get-alert-text",
 		"w3c": "GET /session/{session id}/alert/text"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

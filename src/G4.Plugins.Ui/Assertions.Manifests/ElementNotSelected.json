@@ -91,7 +91,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#is-element-selected",
 		"w3c": "GET /session/{session id}/element/{element id}/selected"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

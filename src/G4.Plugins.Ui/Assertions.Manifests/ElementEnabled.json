@@ -92,7 +92,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#is-element-enabled",
 		"w3c": "GET /session/{session id}/element/{element id}/enabled"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

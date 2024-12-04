@@ -514,7 +514,7 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

@@ -67,7 +67,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#user-prompts",
 		"w3c": "None"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb",
 		"MobileNative"

@@ -158,7 +158,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#new-session",
 		"w3c": "None"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [

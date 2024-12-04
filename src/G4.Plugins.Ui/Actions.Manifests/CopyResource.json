@@ -153,7 +153,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#find-elements",
 		"w3c": "None"
 	},
-	"scope": [
+	"scopes": [
 		"MobileWeb",
 		"Web"
 	],

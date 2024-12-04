@@ -122,7 +122,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#forward",
 		"w3c": "POST /session/{session id}/forward"
 	},
-	"scope": [
+	"scopes": [
 		"Web",
 		"MobileWeb"
 	],

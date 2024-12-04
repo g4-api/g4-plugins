@@ -194,7 +194,7 @@
 		"w3c": "GET /session/{session id}/screenshot",
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#take-screenshot"
 	},
-	"scope": [
+	"scopes": [
 		"Any"
 	],
 	"summary": [
