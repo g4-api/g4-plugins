@@ -173,7 +173,7 @@
 	},
 	"scopes": [
 		"MobileWeb",
-		"NativeOs",
+		"OsNative",
 		"Web"
 	],
 	"summary": [
