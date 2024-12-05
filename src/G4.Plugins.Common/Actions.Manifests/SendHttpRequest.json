@@ -473,24 +473,24 @@
 				"It allows for the dynamic inclusion of URLs, request bodies, content types, HTTP methods, headers, and other parameters."
 			],
 			"mandatory": true,
-			"name": "argument"
+			"name": "Argument"
 		},
 		{
-			"name": "onAttribute",
+			"name": "OnAttribute",
 			"description": [
 				"Used to specify and extract a specific attribute value from an XML element. ",
 				"This is particularly relevant when dealing with XML data, where elements can have associated attributes containing additional information."
 			]
 		},
 		{
-			"name": "onElement",
+			"name": "OnElement",
 			"description": [
 				"Used to target elements using either XPath or JSONPath expressions, depending on the type of response the API returns (XML or JSON). ",
 				"This flexibility allows the rule to handle different response formats appropriately."
 			]
 		},
 		{
-			"name": "regularExpression",
+			"name": "RegularExpression",
 			"description": [
 				"Used for pattern matching and extraction of specific data from a text response. ",
 				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request."
