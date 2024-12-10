@@ -104,7 +104,7 @@
 			],
 			"mandatory": false,
 			"name": "Condition",
-			"type": "Assert"
+			"type": "Assertion"
 		},
 		{
 			"description": [
