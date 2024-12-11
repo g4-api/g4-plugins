@@ -141,6 +141,7 @@
 			"type": "Number|Expression"
 		},
 		{
+			"default": "Xpath",
 			"description": [
 				"Specifies how elements should be located on a webpage or within an application."
 			],
