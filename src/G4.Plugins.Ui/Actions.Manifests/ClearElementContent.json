@@ -111,6 +111,7 @@
 			"type": "String|Expression"
 		},
 		{
+			"default": "Xpath",
 			"description": [
 				"Specifies the strategy or method used to locate the element whose content will be cleared during automation."
 			],
