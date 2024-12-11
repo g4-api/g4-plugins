@@ -286,6 +286,7 @@
 			"type": "Expression"
 		},
 		{
+			"default": "Xpath",
 			"description": [
 				"Specifies how the automation framework should identify or locate the target element within the UI. ",
 				"It defines the strategy or method for selecting the element on which the assertion or action will be performed."
