@@ -150,14 +150,6 @@
 	"properties": [
 		{
 			"description": [
-				"Specifies the web element from which the parameter value can be obtained if not directly provided."
-			],
-			"mandatory": false,
-			"name": "OnElement",
-			"type": "String"
-		},
-		{
-			"description": [
 				"Specifies the argument value that will be logged and used as the parameter name during the execution of the plugin. This can be a parameter name or a CLI expression."
 			],
 			"mandatory": true,
@@ -165,11 +157,27 @@
 			"type": "String|Expression"
 		},
 		{
+			"default": "Xpath",
+			"description": [
+				"Specifies how elements should be located on a webpage or within an application."
+			],
+			"name": "Locator",
+			"type": "String"
+		},
+		{
 			"description": [
 				"Specifies the attribute of the web element from which the value should be extracted."
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the web element from which the parameter value can be obtained if not directly provided."
+			],
+			"mandatory": false,
+			"name": "OnElement",
 			"type": "String"
 		},
 		{
