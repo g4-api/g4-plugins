@@ -490,6 +490,7 @@
 			]
 		},
 		{
+			"default": "(?s).*",
 			"name": "RegularExpression",
 			"description": [
 				"Used for pattern matching and extraction of specific data from a text response. ",
