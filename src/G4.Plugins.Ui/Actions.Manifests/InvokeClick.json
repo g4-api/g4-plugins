@@ -134,7 +134,13 @@
 			],
 			"mandatory": false,
 			"name": "Condition",
-			"type": "String"
+			"type": "String",
+			"values": [
+				{
+					"key": "NoAlert",
+					"value": "Continue clicking on the specified element and dismissing the alert until it no longer appears."
+				}
+			]
 		}
 	],
 	"pluginType": "Action",

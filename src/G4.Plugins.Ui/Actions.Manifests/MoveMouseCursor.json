@@ -103,7 +103,7 @@
 			],
 			"mandatory": false,
 			"name": "Origin",
-			"type": "Array",
+			"type": "String",
 			"values": [
 				{
 					"description": [
@@ -151,19 +151,20 @@
 			"type": "String|Expression"
 		},
 		{
-			"description": [
-				"Specifies the target element to which the mouse cursor should be moved."
-			],
-			"mandatory": false,
-			"name": "OnElement",
-			"type": "String"
-		},
-		{
+			"default": "Xpath",
 			"description": [
 				"Specifies the type of locator used to identify the target element defined by the `OnElement` property."
 			],
 			"mandatory": false,
 			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the target element to which the mouse cursor should be moved."
+			],
+			"mandatory": false,
+			"name": "OnElement",
 			"type": "String"
 		}
 	],

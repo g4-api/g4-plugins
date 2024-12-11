@@ -96,6 +96,7 @@
 	"manifestVersion": 4,
 	"parameters": [
 		{
+			"default": "0",
 			"description": [
 				"Specifies the pause or waiting period between each step of the page refresh process. ",
 				"This parameter allows users to specify a duration, either in milliseconds or a formatted time expression, to control the pace of the refresh."
@@ -105,6 +106,7 @@
 			"type": "Number|Time"
 		},
 		{
+			"default": "1",
 			"description": [
 				"The number of iterations for the page refresh process. ",
 				"It is instrumental in scenarios where repetitive refresh actions are essential for achieving specific automation objectives."

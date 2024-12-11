@@ -106,6 +106,7 @@
 			"type": "String"
 		},
 		{
+			"default": "Xpath",
 			"description": [
 				"Specifies the type of locator used to identify the target dropdown menu element on the web page."
 			],

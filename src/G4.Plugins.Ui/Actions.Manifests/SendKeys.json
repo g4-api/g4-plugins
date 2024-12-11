@@ -177,6 +177,7 @@
 			"type": "String|Expression"
 		},
 		{
+			"default": "Xpath",
 			"description": [
 				"Specifies the strategy or method used to locate the element on which the text inputs will be simulated during automation."
 			],

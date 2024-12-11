@@ -110,17 +110,10 @@
 			],
 			"mandatory": false,
 			"name": "Argument",
-			"type": "String"
+			"type": "String|Uri|Expression"
 		},
 		{
-			"description": [
-				"Specifying the target element from which the URL should be retrieved for navigation."
-			],
-			"mandatory": false,
-			"name": "OnElement",
-			"type": "String"
-		},
-		{
+			"default": "Xpath",
 			"description": [
 				"Specifying the type of locator used to identify the target element defined by the `OnElement` property."
 			],
@@ -134,6 +127,14 @@
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifying the target element from which the URL should be retrieved for navigation."
+			],
+			"mandatory": false,
+			"name": "OnElement",
 			"type": "String"
 		},
 		{

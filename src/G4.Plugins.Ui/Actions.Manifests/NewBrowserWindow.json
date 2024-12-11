@@ -98,6 +98,7 @@
 			"type": "Number"
 		},
 		{
+			"default": "_blank",
 			"description": [
 				"Specifies the target attribute for the new browser windows or tabs. Possible values include `_blank`, `_self`, etc."
 			],
@@ -151,14 +152,7 @@
 			"type": "String"
 		},
 		{
-			"description": [
-				"Specifying the target element from which the URL should be retrieved for opening the new browser window or tab."
-			],
-			"mandatory": false,
-			"name": "OnElement",
-			"type": "String"
-		},
-		{
+			"default": "Xpath",
 			"description": [
 				"Specifying the type of locator used to identify the target element defined by the `OnElement` property."
 			],
@@ -172,6 +166,14 @@
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifying the target element from which the URL should be retrieved for opening the new browser window or tab."
+			],
+			"mandatory": false,
+			"name": "OnElement",
 			"type": "String"
 		},
 		{

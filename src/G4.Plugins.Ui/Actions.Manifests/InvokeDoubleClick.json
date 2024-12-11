@@ -78,6 +78,7 @@
 	"pluginType": "Action",
 	"properties": [
 		{
+			"default": "Xpath",
 			"description": [
 				"Specifies the locator strategy used to find the target element for the double-click action. The default is `Xpath`."
 			],

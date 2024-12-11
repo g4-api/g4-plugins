@@ -71,8 +71,11 @@
 	],
 	"key": "NewWindow",
 	"manifestVersion": 4,
-	"parameters": [
+	"parameters": [],
+	"pluginType": "Action",
+	"properties": [
 		{
+			"default": "tab",
 			"description": [
 				"Specifies the type of new window to open (`tab` or `window`)."
 			],
@@ -93,18 +96,6 @@
 					"name": "window"
 				}
 			]
-		}
-	],
-	"pluginType": "Action",
-	"properties": [
-		{
-			"default": "tab",
-			"description": [
-				"Providing additional instructions or parameters to control the behavior of the window opening action."
-			],
-			"mandatory": false,
-			"name": "Argument",
-			"type": "String"
 		}
 	],
 	"protocol": {

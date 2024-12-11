@@ -170,6 +170,7 @@
 			"type": "String"
 		},
 		{
+			"default": "Xpath",
 			"description": [
 				"Specifies the strategy or method used to locate the element on which the keyboard actions will be simulated during automation."
 			],

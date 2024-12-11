@@ -76,19 +76,20 @@
 			"type": "String"
 		},
 		{
-			"description": [
-				"Specifies the target frame element on the web page where the switching action will be performed."
-			],
-			"mandatory": false,
-			"name": "OnElement",
-			"type": "String"
-		},
-		{
+			"default": "Xpath",
 			"description": [
 				"Specifies the locator strategy used to identify the target frame element defined by the `OnElement` property."
 			],
 			"mandatory": false,
 			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the target frame element on the web page where the switching action will be performed."
+			],
+			"mandatory": false,
+			"name": "OnElement",
 			"type": "String"
 		}
 	],
