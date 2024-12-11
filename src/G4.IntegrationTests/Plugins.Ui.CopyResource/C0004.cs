@@ -1,6 +1,7 @@
 ﻿using G4.Extensions;
 using G4.IntegrationTests.Framework;
 using G4.Models;
+using G4.WebDriver.Remote;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +22,8 @@ namespace G4.IntegrationTests.Plugins.Ui.CopyResource
                 {
                     Argument = "TestImages",
                     OnAttribute = "src",
-                    PluginName = environment.TestParameters.Get(key: "pluginName", defaultValue: "CopyResource")
+                    PluginName = environment.TestParameters.Get(key: "pluginName", defaultValue: "CopyResource"),
+                    Locator = Locators.Xpath
                 }
             ];
         }

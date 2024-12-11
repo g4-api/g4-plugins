@@ -127,7 +127,7 @@
 			"description": [
 				"Specifies the strategy or method used to locate the elements to use for downloading sources."
 			],
-			"mandatory": true,
+			"mandatory": false,
 			"name": "Locator",
 			"type": "String"
 		},

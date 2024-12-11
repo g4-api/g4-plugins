@@ -1,6 +1,7 @@
 ﻿using G4.Extensions;
 using G4.IntegrationTests.Framework;
 using G4.Models;
+using G4.WebDriver.Remote;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +23,8 @@ namespace G4.IntegrationTests.Plugins.Ui.CopyResource
                     Argument = "{{$ --Path:TestImages --Parallel}}",
                     OnElement = "//div[not(@class)]/p",
                     PluginName = environment.TestParameters.Get(key: "pluginName", defaultValue: "CopyResource"),
-                    RegularExpression = "(?!(.*: ))\\w+.*"
+                    RegularExpression = "(?!(.*: ))\\w+.*",
+                    Locator = Locators.Xpath
                 }
             ];
         }
