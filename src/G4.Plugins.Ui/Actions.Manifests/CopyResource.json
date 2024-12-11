@@ -123,13 +123,13 @@
 			"type": "Uri|Expression"
 		},
 		{
+			"default": "Xpath",
 			"description": [
-				"Used for pattern matching and extraction of specific data from a text response. ",
-				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request."
+				"Specifies the strategy or method used to locate the elements to use for downloading sources."
 			],
-			"mandatory": false,
-			"name": "RegularExpression",
-			"type": "Regex"
+			"mandatory": true,
+			"name": "Locator",
+			"type": "String"
 		},
 		{
 			"description": [
@@ -147,6 +147,16 @@
 			"mandatory": false,
 			"name": "OnElement",
 			"type": "String"
+		},
+		{
+			"default": "(?s).*",
+			"description": [
+				"Used for pattern matching and extraction of specific data from a text response. ",
+				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
 		}
 	],
 	"protocol": {
