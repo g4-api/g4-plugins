@@ -5,6 +5,50 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Dual Pagination Example</title>
 	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 40px;
+		}
+
+		.links-container {
+			margin-bottom: 20px;
+		}
+
+			.links-container a {
+				display: block;
+				margin: 5px 0;
+				text-decoration: none;
+				color: #3498db;
+				font-size: 18px;
+			}
+
+				.links-container a:hover {
+					text-decoration: underline;
+				}
+
+		.input-container {
+			margin-top: 20px;
+		}
+
+			.input-container input {
+				padding: 8px;
+				font-size: 16px;
+				width: 300px;
+			}
+
+		.back-link {
+			display: inline-block;
+			margin-top: 20px;
+			text-decoration: none;
+			color: #e74c3c;
+			font-size: 16px;
+		}
+
+			.back-link:hover {
+				text-decoration: underline;
+			}
+	</style>
+	<style>
 		.pagination {
 			display: flex;
 			list-style: none;
@@ -40,40 +84,69 @@
 	<button id="FirstBtn1"
 			type="button"
 			onclick="switchToFirstPage(1)"
-			disabled>&lt;&lt; First</button>
-	
+			disabled>
+		&lt;&lt; First
+	</button>
+
 	<button id="PrevBtn1"
 			type="button"
 			onclick="switchPage(1, -1)"
-			disabled>&lt; Previous</button>
+			disabled>
+		&lt; Previous
+	</button>
 
 	<button id="NextBtn1"
 			type="button"
-			onclick="switchPage(1, 1)">Next &gt;</button>
+			onclick="switchPage(1, 1)">
+		Next &gt;
+	</button>
 
 	<button id="LastBtn1"
 			type="button"
-			onclick="switchToLastPage(1)">Last &gt;&gt;</button>
+			onclick="switchToLastPage(1)">
+		Last &gt;&gt;
+	</button>
 
 	<ul class="pagination" id="Pagination2"></ul>
 
 	<button id="FirstBtn2"
 			type="button"
 			onclick="switchToFirstPage(2)"
-			disabled>&lt;&lt; First</button>
+			disabled>
+		&lt;&lt; First
+	</button>
 
 	<button id="PrevBtn2"
 			type="button"
 			onclick="switchPage(2, -1)"
-			disabled>&lt; Previous</button>
+			disabled>
+		&lt; Previous
+	</button>
 
 	<button id="NextBtn2"
 			type="button"
-			onclick="switchPage(2, 1)">Next &gt;</button>
+			onclick="switchPage(2, 1)">
+		Next &gt;
+	</button>
 
 	<button id="LastBtn2"
 			type="button"
-			onclick="switchToLastPage(2)">Last &gt;&gt;</button>
+			onclick="switchToLastPage(2)">
+		Last &gt;&gt;
+	</button>
+
+	<h1>InvokeForEachLoop Test Page</h1>
+
+	<div class="links-container" id="linksContainer">
+		<!-- Links will be dynamically inserted here -->
+	</div>
+
+	<div class="input-container" id="inputContainer" style="display: none;">
+		<label for="inputBox">Selected Link Text:</label><br>
+		<input type="text" id="inputBox" readonly>
+	</div>
+
+	<a href="Loops.html" class="back-link" id="backLink" style="display: none;">&#8592; Go Back</a>
 
 	<script>
 		// Current page number for pagination set 1
@@ -196,6 +269,68 @@
 
 		// Update pagination UI for pagination set 2
 		updatePagination(2);
+	</script>
+
+	<script>
+		// Function to parse query parameters
+		function getQueryParams() {
+			const params = {};
+			const queryString = window.location.search.substring(1);
+			const pairs = queryString.split("&");
+			for (let pair of pairs) {
+				if (pair === "") continue;
+				const [key, value] = pair.split("=");
+				params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+			}
+			return params;
+		}
+
+		// Function to create links
+		function createLinks() {
+			const links = [
+				"Link1",
+				"Link2",
+				"Link3",
+				"Link4",
+				"Link5"
+			];
+
+			const linksContainer = document.getElementById("linksContainer");
+
+			links.forEach(linkText => {
+				const link = document.createElement("a");
+				link.href = `Loops.html?link=${encodeURIComponent(linkText)}`;
+				link.textContent = linkText;
+				linksContainer.appendChild(link);
+			});
+		}
+
+		// Function to show input box based on query parameter
+		function showInputBox(linkText) {
+			const inputContainer = document.getElementById("inputContainer");
+			const inputBox = document.getElementById("inputBox");
+			const backLink = document.getElementById("backLink");
+
+			inputBox.value = linkText;
+			inputContainer.style.display = "block";
+			backLink.style.display = "inline-block";
+		}
+
+		// Initialize the page
+		function init() {
+			const params = getQueryParams();
+
+			if (params.link) {
+				// If 'link' parameter is present, show the input box
+				showInputBox(params.link);
+			} else {
+				// Otherwise, create and display the links
+				createLinks();
+			}
+		}
+
+		// Execute initialization on page load
+		window.onload = init;
 	</script>
 </body>
 </html>
