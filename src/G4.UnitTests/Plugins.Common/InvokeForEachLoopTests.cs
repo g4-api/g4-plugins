@@ -15,52 +15,52 @@ using Stubs = G4.UnitTests.Framework.ActionRuleStubs;
 namespace G4.UnitTests.Plugins.Common
 {
     [TestClass]
-    [TestCategory("InvokeForLoop")]
+    [TestCategory("InvokeForEachLoop")]
     [TestCategory("UnitTest")]
-    public class InvokeForLoopTests : TestBase
+    public class InvokeForEachLoopTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin is correctly " +
+        [TestMethod(displayName: "Verify that the InvokeForEachLoop plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
-            AssertPlugin<InvokeForLoop>();
+            AssertPlugin<InvokeForEachLoop>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin complies with " +
+        [TestMethod(displayName: "Verify that the InvokeForEachLoop plugin complies with " +
             "the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
-            AssertManifest<InvokeForLoop>();
+            AssertManifest<InvokeForEachLoop>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin performs the loop " +
+        [TestMethod(displayName: "Verify that the InvokeForEachLoop plugin performs the loop " +
             "correctly and awards the expected performance points.")]
-        public void InvokeForLoopPositiveTest()
+        public void InvokeForEachLoopPositiveTest()
         {
             Invoke(
                 testBase: this,
-                ruleJson: Stubs.RuleJsonInvokeForLoop,
-                expectedPerformancePoints: 4);
+                ruleJson: Stubs.RuleJsonInvokeForEachLoop,
+                expectedPerformancePoints: 3);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin performs nested " +
+        [TestMethod(displayName: "Verify that the InvokeForEachLoop plugin performs nested " +
             "loops correctly and awards the expected performance points.")]
-        public void InvokeForLoopWithNestedLoopPositiveTest()
+        public void InvokeForEachLoopWithNestedLoopPositiveTest()
         {
             Invoke(
                 testBase: this,
-                ruleJson: Stubs.RuleJsonInvokeForLoopWithNestedLoop,
-                expectedPerformancePoints: 13);
+                ruleJson: Stubs.RuleJsonInvokeForEachLoopWithNestedLoop,
+                expectedPerformancePoints: 7);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin performs triple " +
+        [TestMethod(displayName: "Verify that the InvokeForEachLoop plugin performs triple " +
             "nested loops correctly and awards the expected performance points.")]
-        public void InvokeForLoopTripleLoopPositiveTest()
+        public void InvokeForEachLoopTripleLoopPositiveTest()
         {
             Invoke(
                 testBase: this,
-                ruleJson: Stubs.RuleJsonInvokeForLoopTripleLoop,
-                expectedPerformancePoints: 40);
+                ruleJson: Stubs.RuleJsonInvokeForEachLoopTripleLoop,
+                expectedPerformancePoints: 15);
         }
 
         // Invokes the test with the specified rule JSON and checks the expected performance points.

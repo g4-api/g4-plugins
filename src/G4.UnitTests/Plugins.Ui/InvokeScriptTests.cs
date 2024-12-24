@@ -72,15 +72,15 @@ namespace G4.UnitTests.Plugins.Ui
         [TestMethod(displayName: "Verify the behavior of invoking a script with a script block, " +
             "arguments, and an element.")]
         #region *** Data Set ***
-        [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --scriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --scriptblock:return document.readyState; --arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//negative"",""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//negative"",""argument"":""{{$ --scriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//negative"",""argument"":""{{$ --scriptblock:return document.readyState; --arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//null"",""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//null"",""argument"":""{{$ --scriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
-        [DataRow(@"{""onElement"":""//null"",""argument"":""{{$ --scriptblock:return document.readyState; --arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//positive"",""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//positive"",""argument"":""{{$ --scriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//positive"",""argument"":""{{$ --scriptblock:return document.readyState; --arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//negative"",""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//negative"",""argument"":""{{$ --scriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//negative"",""argument"":""{{$ --scriptblock:return document.readyState; --arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//null"",""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//null"",""argument"":""{{$ --scriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
+        [DataRow(@"{""onElement"":"".//null"",""argument"":""{{$ --scriptblock:return document.readyState; --arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
         #endregion
         public void InvokeScriptScriptBlockWithArgumentsAndElementTest(string ruleJson)
         {
