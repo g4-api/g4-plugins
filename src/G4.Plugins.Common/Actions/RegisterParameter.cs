@@ -2,6 +2,7 @@
 using G4.Extensions;
 using G4.Models;
 using G4.WebDriver.Exceptions;
+using G4.WebDriver.Extensions;
 using G4.WebDriver.Remote;
 
 using System;
@@ -66,6 +67,9 @@ namespace G4.Plugins.Common.Actions
             }
             finally
             {
+                // Normalize the value to an empty string if it is null.
+                value ??= string.Empty;
+
                 // Using Regex to match the value based on the regular expression defined in the 'action' object
                 value = Regex.Match(value, pluginData.Rule.RegularExpression).Value.ConvertToBase64();
 
@@ -106,8 +110,15 @@ namespace G4.Plugins.Common.Actions
                 return element.Text;
             }
 
+            var value = element.GetAttribute(rule.OnAttribute);
+
+            if(rule.OnAttribute.Equals( "value", StringComparison.OrdinalIgnoreCase) && value == null)
+            {
+                value = element.GetValue();
+            }
+
             // Otherwise, return the value of the specified attribute.
-            return element.GetAttribute(rule.OnAttribute);
+            return value;
         }
 
         // Creates a new scope action rule based on the provided data model, name, value, scope, and environment.

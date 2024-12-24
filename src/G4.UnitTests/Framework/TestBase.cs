@@ -15,7 +15,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -721,92 +720,6 @@ namespace G4.UnitTests.Framework
             // Initialize and return the automation model.
             return automation.Initialize();
         }
-
-        // Invokes an action for a specified plugin and returns the plugin instance and response model.
-        private static (PluginBase Plugin, PluginResponseModel ResponseModel) Invoke<T>(
-            TestBase testBase,
-            SimulatorDriver driver,
-            By by,
-            IDictionary<string, object> capabilities,
-            string ruleJson) where T : PluginBase
-        {
-            testBase.ClassSetup();
-
-            // Create a plugin instance with specified capabilities
-            var plugin = NewPlugin<T>(driver: driver, testBase.Automation, capabilities);
-
-            var onActionRule = (G4RuleModelBase)JsonSerializer.Deserialize<ActionRuleModel>(ruleJson, JsonOptions);
-
-            // Set the plugin name in the action rule
-            onActionRule.PluginName = string.IsNullOrEmpty(onActionRule.PluginName)
-                ? plugin.GetManifest().Key
-                : onActionRule.PluginName;
-
-            // Get the action rule
-            onActionRule = InitializeRule(testBase.Automation, onActionRule);
-
-            // Create an empty response model
-            var responseModel = new PluginResponseModel();
-
-            // Start measuring execution time
-            testBase.Stopwatch.Restart();
-            testBase.Stopwatch.Start();
-
-            try
-            {
-                // Invoke the plugin with the provided action rule, locator, and action type
-                responseModel = InvokeWebDriverPlugin(testBase, plugin, ruleJson: (ActionRuleModel)onActionRule, by);
-            }
-            finally
-            {
-                // Stop measuring execution time
-                testBase.Stopwatch.Stop();
-            }
-
-            // Return a tuple containing the plugin and response model
-            return (plugin, responseModel);
-        }
-
-        // Invokes a WebDriver-specific PluginBase-derived method.
-        private static PluginResponseModel InvokeWebDriverPlugin(TestBase testBase, PluginBase plugin, ActionRuleModel ruleJson, By by)
-        {
-            // Find the web element using the provided By locator or set it to default if not needed.
-            var element = by == default ? default : testBase.WebDriver.FindElement(by);
-
-            // Create a PluginDataModel with the action rule and web element.
-            var pluginData = new PluginDataModel
-            {
-                Rule = ruleJson,
-                Element = element
-            };
-
-            // Invoke the generic InvokePlugin method to execute the action or macro.
-            return InvokePlugin(plugin, pluginData);
-        }
-
-        // Invokes a method of a PluginBase-derived class.
-        private static PluginResponseModel InvokePlugin(PluginBase plugin, PluginDataModel pluginData)
-        {
-            // Define the binding flags to access public, instance, and non-public methods.
-            const BindingFlags Binding = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
-
-            try
-            {
-                // Get all methods of the plugin class.
-                var methods = plugin.GetType().GetMethods(Binding);
-
-                // Find the method with the specified name that is part of PluginBase.
-                var method = Array.Find(methods, i => i.Name.Equals("Send", Comparison));
-
-                // Invoke the method with the provided PluginDataModel and cast the result to PluginResponseModel.
-                return method.Invoke(plugin, [pluginData]) as PluginResponseModel;
-            }
-            catch (Exception e)
-            {
-                // If an exception occurs, throw the base exception.
-                throw e.GetBaseException();
-            }
-        }
         #endregion
 
         #region *** Tests: Common  ***
@@ -1227,52 +1140,6 @@ namespace G4.UnitTests.Framework
         #endregion
 
         #region *** Utilities      ***
-        /// <summary>
-        /// Deletes a database specified by the connection string.
-        /// </summary>
-        /// <param name="connectionString">The connection string to the database to be deleted.</param>
-        public static void DeleteDatabase(string connectionString)
-        {
-            // Check if the connection string is empty or null
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                return; // Nothing to delete, return early
-            }
-
-            // Extract the database name from the connection string
-            var builder = new SqlConnectionStringBuilder(connectionString);
-            var databaseName = builder.InitialCatalog;
-
-            // SQL command to delete the database using SQL Server Management Studio syntax
-            var command =
-                " USE [master]; " +
-                $"IF EXISTS (SELECT [name] FROM sys.databases WHERE [name] = '{databaseName}')" +
-                " BEGIN" +
-                $"    ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;" +
-                $"    DROP DATABASE [{databaseName}];" +
-                " END";
-
-            // Remove the "Initial Catalog" attribute from the connection string
-            builder.Remove("Initial Catalog");
-
-            try
-            {
-                using var connection = new SqlConnection(connectionString: builder.ConnectionString.Replace(@"\\", @"\"));
-                connection.Open();
-
-                // Execute the SQL command to delete the database
-                var sqlCommand = new SqlCommand(cmdText: "EXEC sp_executesql @script", connection);
-                sqlCommand.Parameters.AddWithValue(parameterName: "script", value: command);
-
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                // Handle and log any exceptions that occur during database deletion
-                Console.WriteLine(e.Message);
-            }
-        }
-
         /// <summary>
         /// Constructs an <see cref="G4AutomationModel"/> with a single action using the provided macro.
         /// </summary>

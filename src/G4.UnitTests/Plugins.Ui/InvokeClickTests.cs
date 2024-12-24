@@ -69,7 +69,7 @@ namespace G4.UnitTests.Plugins.Ui
             "NoSuchElementException for non-existing elements.")]
         [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
-        [DataRow(@"{""onElement"":""//none""}")]
+        [DataRow(@"{""onElement"":"".//none""}")]
         #endregion
         public void ClickOnElementInsideElementNoElementExceptionTest(string ruleJson)
         {
@@ -81,7 +81,7 @@ namespace G4.UnitTests.Plugins.Ui
             "StaleElementReferenceException for stale elements inside other elements.")]
         [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
-        [DataRow(@"{""onElement"":""//stale""}")]
+        [DataRow(@"{""onElement"":"".//stale""}")]
         #endregion
         public void ClickOnElementInsideElementStaleExceptionTest(string ruleJson)
         {
@@ -93,7 +93,7 @@ namespace G4.UnitTests.Plugins.Ui
             "for elements that cause exceptions inside other elements.")]
         [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
-        [DataRow(@"{""onElement"":""//exception""}")]
+        [DataRow(@"{""onElement"":"".//exception""}")]
         #endregion
         public void ClickOnElementInsideElementExceptionTest(string ruleJson)
         {

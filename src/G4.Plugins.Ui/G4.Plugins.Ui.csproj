@@ -30,10 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Plugins" Version="2024.11.14.75" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
 	</ItemGroup>
 

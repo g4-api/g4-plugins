@@ -190,6 +190,69 @@
             "    ]" +
             "}";
 
+        public const string RuleJsonInvokeForEachLoop =
+            "{" +
+            "    \"$type\": \"Action\"," +
+            "    \"pluginName\": \"InvokeForEachLoop\"," +
+            "    \"onElement\": \"//positive\"," +
+            "    \"rules\": [" +
+            "        {" +
+            "            \"$type\": \"Action\"," +
+            "            \"pluginName\": \"RegisterParameter\"," +
+            "            \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "        }" +
+            "    ]" +
+            "}";
+
+        public const string RuleJsonInvokeForEachLoopWithNestedLoop =
+            "{" +
+            "    \"$type\": \"Action\"," +
+            "    \"pluginName\": \"InvokeForEachLoop\"," +
+            "    \"onElement\": \"//positive\"," +
+            "    \"rules\": [" +
+            "       {" +
+            "           \"$type\": \"Action\"," +
+            "           \"pluginName\": \"InvokeForEachLoop\"," +
+            "           \"onElement\": \"//positive\"," +
+            "           \"rules\": [" +
+            "               {" +
+            "                   \"$type\": \"Action\"," +
+            "                   \"pluginName\": \"RegisterParameter\"," +
+            "                   \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "               }" +
+            "           ]" +
+            "       }" +
+            "    ]" +
+            "}";
+
+        public const string RuleJsonInvokeForEachLoopTripleLoop =
+            "{" +
+            "    \"$type\": \"Action\"," +
+            "    \"pluginName\": \"InvokeForEachLoop\"," +
+            "    \"onElement\": \"//positive\"," +
+            "    \"rules\": [" +
+            "       {" +
+            "           \"$type\": \"Action\"," +
+            "           \"pluginName\": \"InvokeForEachLoop\"," +
+            "           \"onElement\": \"//positive\"," +
+            "           \"rules\": [" +
+            "               {" +
+            "                  \"$type\": \"Action\"," +
+            "                  \"pluginName\": \"InvokeForEachLoop\"," +
+            "                  \"onElement\": \"//positive\"," +
+            "                  \"rules\": [" +
+            "                      {" +
+            "                          \"$type\": \"Action\"," +
+            "                          \"pluginName\": \"RegisterParameter\"," +
+            "                          \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "                      }" +
+            "                  ]" +
+            "               }" +
+            "           ]" +
+            "       }" +
+            "    ]" +
+            "}";
+
         public const string RuleJsonInvokeForLoop =
             "{" +
             "    \"$type\": \"Action\"," +
@@ -225,7 +288,7 @@
             "    ]" +
             "}";
 
-        public const string RuleJsonInvokeForTripleLoop =
+        public const string RuleJsonInvokeForLoopTripleLoop =
             "{" +
             "    \"$type\": \"Action\"," +
             "    \"pluginName\": \"InvokeForLoop\"," +

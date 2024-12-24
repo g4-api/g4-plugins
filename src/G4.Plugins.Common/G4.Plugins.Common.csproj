@@ -26,19 +26,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="G4.Extensions" Version="2024.11.14.75" />
-		<PackageReference Include="G4.Plugins" Version="2024.11.14.75" />
+		<PackageReference Include="G4.Plugins" Version="2024.12.24.11" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Include="*.Manifests\**\*.*" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="Transformers.Manifests\ClearLines.json" />
-	  <None Remove="Transformers.Manifests\ClearTabs.json" />
-	  <None Remove="Transformers.Manifests\Trim.json" />
-	  <None Remove="Transformers.Manifests\TrimEnd.json" />
-	  <None Remove="Transformers.Manifests\TrimStart.json" />
 	</ItemGroup>
 
 </Project>
