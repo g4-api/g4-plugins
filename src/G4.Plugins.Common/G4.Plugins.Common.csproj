@@ -33,12 +33,4 @@
 		<EmbeddedResource Include="*.Manifests\**\*.*" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Remove="Transformers.Manifests\ClearLines.json" />
-	  <None Remove="Transformers.Manifests\ClearTabs.json" />
-	  <None Remove="Transformers.Manifests\Trim.json" />
-	  <None Remove="Transformers.Manifests\TrimEnd.json" />
-	  <None Remove="Transformers.Manifests\TrimStart.json" />
-	</ItemGroup>
-
 </Project>
