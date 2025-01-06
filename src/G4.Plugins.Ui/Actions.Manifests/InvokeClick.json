@@ -137,10 +137,10 @@
 			"type": "String",
 			"values": [
 				{
-					"name": "NoAlert",
 					"description": [
 						"Continue clicking on the specified element and dismissing the alert until it no longer appears."
-					]
+					],
+					"name": "NoAlert"
 				}
 			]
 		}
