@@ -29,7 +29,7 @@ namespace G4.IntegrationTests.Plugins.Common.InvokeForEachLoop
                             PluginName = "NewBrowserWindow",
                             Argument = "{{$ --Target:_blank}}",
                             OnAttribute = "href",
-                            Locator = Locators.CssSelector
+                            OnElement = "."
                         },
                         // Wait action: Waits for the wndow count to be equal to 2
                         new ActionRuleModel()
