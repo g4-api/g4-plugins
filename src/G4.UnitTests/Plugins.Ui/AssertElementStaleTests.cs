@@ -58,9 +58,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is false
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is true (redundant check for emphasis)
-            Assert.IsTrue(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the ElementStale plugin handles NoSuchElementException correctly.")]
@@ -81,9 +78,6 @@ namespace G4.UnitTests.Plugins.Ui
             // Assert that a NoSuchElementException was thrown
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is NoSuchElementException));
 
-            // Assert that the evaluation of the plugin is false
-            Assert.IsTrue(!session.ResponseData.Extractions.GetEvaluation());
-
             // Assert that the evaluation of the plugin is false (redundant check for emphasis)
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
@@ -102,9 +96,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Invoke the action rule and retrieve the session from the test result.
             var session = Invoke(ruleJson).Response.First().Value.Sessions.First().Value;
-
-            // Assert that the evaluation of the plugin is false
-            Assert.IsTrue(!session.ResponseData.Extractions.GetEvaluation());
 
             // Assert that the evaluation of the plugin is false (redundant check for emphasis)
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
@@ -128,9 +119,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is true (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
     }
 }

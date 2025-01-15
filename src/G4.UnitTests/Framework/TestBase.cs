@@ -795,10 +795,10 @@ namespace G4.UnitTests.Framework
             }
 
             // Assert that the plugin has a description
-            Assert.IsTrue(attribute.Description?.Any() == true, "Plugin must have a description.");
+            Assert.IsTrue(attribute.Description.Any(), "Plugin must have a description.");
 
             // Assert that the plugin has a summary
-            Assert.IsTrue(attribute.Summary?.Any() == true, "Plugin must have a summary.");
+            Assert.IsTrue(attribute.Summary.Any(), "Plugin must have a summary.");
 
             // If a custom plugin name is provided, check if it matches the plugin's key
             if (pluginName != null)
@@ -831,91 +831,37 @@ namespace G4.UnitTests.Framework
             var webDriver = action.GetType().GetProperty("WebDriver");
 
             // Assert that the plugin object is not the default value (null)
-            Assert.IsTrue(action != default, "Plugin was not generated correctly.");
+            Assert.AreNotEqual(notExpected: default, actual: action, message: "Plugin was not generated correctly.");
 
             // Assert that plugin types have been loaded into the cache manager
-            Assert.IsTrue(CacheManager.Types.Count != 0, "Plugin types were not loaded.");
+            Assert.AreNotEqual(notExpected: 0, actual: CacheManager.Types.Count, message: "Plugin types were not loaded.");
 
             // If the action is derived from PluginBase, assert that its WebDriver property is not null
             if (action is PluginBase)
             {
-                Assert.IsTrue(webDriver?.GetValue(action) != null, "Plugin WebDriver was not generated correctly.");
+                Assert.IsNotNull(value: webDriver?.GetValue(action), message: "Plugin WebDriver was not generated correctly.");
             }
         }
         #endregion
 
         #region *** Action Rule    ***
-        ///// <summary>
-        ///// Generates a new ActionRuleModel based on the provided action rule string.
-        ///// </summary>
-        ///// <param name="rules">A JSON string representing the action rule, or null/empty to generate a new rule.</param>
-        ///// <returns>A populated ActionRuleModel object.</returns>
-        //public static IEnumerable<G4RuleModelBase> InitializeRulesCollection(G4AutomationModel automation, IEnumerable<G4RuleModelBase> rules)
-        //{
-        //    // Create a new automation reference model with random values
-        //    var automationReference = new G4AutomationReferenceModel
-        //    {
-        //        Description = NewRandomString(55),
-        //        Id = Guid.NewGuid().ToString(),
-        //        Name = NewRandomString(10)
-        //    };
-
-        //    // Set the automation reference for the action rule
-        //    automation.Reference = automationReference;
-
-        //    // Create a new stage reference model with the automation reference and random values
-        //    var stageReference = new G4StageReferenceModel
-        //    {
-        //        AutomationReference = automationReference,
-        //        Description = NewRandomString(55),
-        //        Id = Guid.NewGuid().ToString(),
-        //        Name = NewRandomString(10)
-        //    };
-
-        //    // Create a new job reference model with the stage reference and random values
-        //    var jobReference = new G4JobReferenceModel
-        //    {
-        //        Description = NewRandomString(55),
-        //        Id = Guid.NewGuid().ToString(),
-        //        Name = NewRandomString(10),
-        //        StageReference = stageReference
-        //    };
-
-        //    // Iterate through each action rule in the collection
-        //    foreach (var rule in rules)
-        //    {
-        //        rule.Reference = rule.NewReference(jobReference);
-        //    }
-
-        //    // Return the populated action rule model
-        //    return rules;
-        //}
-
-        ///// <summary>
-        ///// Generates a new ActionRuleModel based on the provided action rule string.
-        ///// </summary>
-        ///// <param name="ruleJson">A JSON string representing the action rule, or null/empty to generate a new rule.</param>
-        ///// <returns>A populated ActionRuleModel object.</returns>
-        //public static G4RuleModelBase InitializeRule(G4AutomationModel automation, string ruleJson)
-        //{
-        //    // Deserialize the action rule JSON string if it is not null or empty
-        //    var ruleModel = string.IsNullOrEmpty(ruleJson)
-        //        ? new ActionRuleModel()
-        //        : JsonSerializer.Deserialize<ActionRuleModel>(ruleJson, JsonOptions);
-
-        //    // Return the populated action rule model
-        //    return InitializeRule(automation, ruleModel);
-        //}
-
+        /// <summary>
+        /// Initializes a new rule model with a unique reference based on the first job reference found in automation.
+        /// </summary>
+        /// <param name="automation">The automation model containing necessary data, including a cache of jobs.</param>
+        /// <param name="ruleModel">The rule model instance to be initialized with a new reference.</param>
+        /// <returns>The initialized rule model with a new reference linked to a job.</returns>
         public static G4RuleModelBase InitializeRule(G4AutomationModel automation, G4RuleModelBase ruleModel)
         {
-            // Create a new job reference model with the stage reference and random values
+            // Extract the job reference from the first job available in the automation's job cache.
+            // This uses the First() LINQ method, which will throw an exception if there are no jobs.
             var jobReference = automation.Cache.Jobs.First().Value.Reference;
 
-            // Generate a new reference for the action rule model using the job reference
+            // Generate a new unique reference for the rule model using the extracted job reference.
+            // This method, NewReference, should logically link the rule to the job via the reference.
             ruleModel.Reference = ruleModel.NewReference(jobReference);
 
-            // Return the populated action rule model
+            // Return the rule model now initialized with a reference that ties it to a specific job within the automation system.
             return ruleModel;
         }
         #endregion
@@ -1013,14 +959,6 @@ namespace G4.UnitTests.Framework
 
             // Create an instance of the AutomationInvoker with the provided automation model
             var invoker = new AutomationInvoker(automation);
-
-            // Set the WebDriver property of the plugin factory to the provided WebDriver
-            // This is necessary for the plugin to interact with the WebDriver
-            // Unit tests does not trigger the WebDriver initialization, so we need to set it manually
-            foreach (var factory in invoker.PluginFactoryAdapter.Factories.Values)
-            {
-                //factory.WebDriver = driver;
-            }
 
             // Define the target parameters for the constructor
             var targetParameters = new G4PluginSetupModel

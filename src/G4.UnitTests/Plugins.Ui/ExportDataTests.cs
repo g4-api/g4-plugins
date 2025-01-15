@@ -82,7 +82,7 @@ namespace G4.UnitTests.Plugins.Ui
             var extractions = session.ResponseData.Extractions.First().Entities.ToList();
 
             // Assert that the number of extractions is 2
-            Assert.IsTrue(condition: extractions.Count == 2);
+            Assert.AreEqual(expected: 2, actual: extractions.Count);
         }
     }
 }

@@ -141,8 +141,8 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var response = Invoke<C0003>(testOptions);
 
             // Assert that the "CopiedResources" key does not exist in the session parameters
-            Assert.IsTrue(
-                condition: !response.Environment.SessionParameters.ContainsKey("CopiedResources"),
+            Assert.IsFalse(
+                condition: response.Environment.SessionParameters.ContainsKey("CopiedResources"),
                 message: "Unexpected CopiedResources found. The action must not copy any resources.");
         }
 
@@ -181,8 +181,8 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var response = Invoke<C0004>(testOptions);
 
             // Assert that the "CopiedResources" key does not exist in the session parameters
-            Assert.IsTrue(
-                condition: !response.Environment.SessionParameters.ContainsKey("CopiedResources"),
+            Assert.IsFalse(
+                condition: response.Environment.SessionParameters.ContainsKey("CopiedResources"),
                 message: "Unexpected CopiedResources found. The action must not copy any resources.");
         }
 

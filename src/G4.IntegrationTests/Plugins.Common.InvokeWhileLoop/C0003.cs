@@ -23,7 +23,7 @@ namespace G4.IntegrationTests.Plugins.Common.InvokeWhileLoop
                 new ActionRuleModel()
                 {
                     PluginName = "InvokeWhileLoop",
-                    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)foo --Timeout:" + timeout + "}}",
+                    Argument = "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)foo --Timeout:" + timeout + "}}",
                     OnElement = "//ul[@id='Pagination1']/li/button[.='6']",
                     OnAttribute = "class",
                     // Rules for the InvokeWhileLoop action

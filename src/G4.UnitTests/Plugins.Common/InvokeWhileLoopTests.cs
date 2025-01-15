@@ -90,8 +90,8 @@ namespace G4.UnitTests.Plugins.Common
         [TestMethod(displayName: "Verify that the InvokeWhileLoop plugin respects the timeout " +
             "settings and the runtime exceeds the specified duration.")]
         #region *** Data Set ***
-        [DataRow(Stubs.RuleJsonInvokeWhileLoopWithTimeout, "Match", "Negative", "ElementText", ".//positive", "5000")]
-        [DataRow(Stubs.RuleJsonInvokeWhileLoopWithTimeout, "Match", "Negative", "ElementText", ".//positive", "00:00:05")]
+        [DataRow(Stubs.RuleJsonInvokeWhileLoopWithTimeout, "NotMatch", "Negative", "ElementText", ".//positive", "5000")]
+        [DataRow(Stubs.RuleJsonInvokeWhileLoopWithTimeout, "NotMatch", "Negative", "ElementText", ".//positive", "00:00:05")]
         #endregion
         public void InvokeWhileLoopTimeoutPositiveTest(
             string ruleJson,
@@ -215,7 +215,6 @@ namespace G4.UnitTests.Plugins.Common
                     // if argument exception occurs during the test
                     // invocation, set pass to false and throw the
                     // exception to fail the test case
-                    pass = false;
                     throw;
                 }
                 catch (Exception)
@@ -246,7 +245,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: "Foo Bar", actual);
 
             // Assert that the number of performance points matches the expected count.
-            Assert.IsTrue(performancePoints.Count() == expectedPerformancePoints);
+            Assert.AreEqual(expected: expectedPerformancePoints, actual: performancePoints.Count());
         }
     }
 }

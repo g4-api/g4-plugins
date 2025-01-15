@@ -357,7 +357,8 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(evaluation);
 
             // Assert that the plugin's exceptions are empty
-            Assert.IsTrue(session.ResponseData.Exceptions?.Any() == false);
+            Assert.IsNotNull(value: session.ResponseData.Exceptions);
+            Assert.AreEqual(expected: 0, actual: session.ResponseData.Exceptions.Count());
         }
     }
 }

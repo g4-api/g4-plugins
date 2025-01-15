@@ -14,7 +14,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
     [TestCategory("UnitTest")]
     public class GetParameterTests : TestBase
     {
-        [ClassCleanup]
+        [ClassCleanup(ClassCleanupBehavior.EndOfClass)]
         public static void ClearEnvironments()
         {
             // Remove the environment variable "MyParam" from the Machine target.

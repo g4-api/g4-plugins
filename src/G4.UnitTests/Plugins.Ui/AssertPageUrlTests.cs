@@ -75,9 +75,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL inequality.")]
@@ -126,9 +123,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions .GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL greater than.")]
@@ -177,9 +171,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL greater or equal.")]
@@ -228,9 +219,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL less or equal.")]
@@ -279,9 +267,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL less than.")]
@@ -330,9 +315,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL match.")]
@@ -363,9 +345,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL not match.")]
@@ -396,9 +375,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
     }
 }

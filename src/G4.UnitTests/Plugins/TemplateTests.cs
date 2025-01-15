@@ -18,7 +18,7 @@ namespace G4.UnitTests.Plugins
         [TestMethod]
         public void Test()
         {
-            var json = File.ReadAllText($"Resources/LoginTemplate.txt").Trim();
+            var json = File.ReadAllText("Resources/LoginTemplate.txt").Trim();
             var manifest = JsonSerializer.Deserialize<G4PluginAttribute>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true

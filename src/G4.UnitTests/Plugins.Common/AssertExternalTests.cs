@@ -125,9 +125,6 @@ namespace G4.UnitTests.Plugins.Common
 
             // Assert that the plugin evaluation is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the plugin evaluation is not false
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
     }
 }

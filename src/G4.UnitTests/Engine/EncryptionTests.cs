@@ -27,13 +27,13 @@ namespace G4.UnitTests.Engine
             var encrypted = StringUnderTest.Encrypt(Key);
 
             // Assert that the encrypted string is not equal to the original string
-            Assert.IsTrue(encrypted != StringUnderTest);
+            Assert.AreNotEqual(notExpected: StringUnderTest, actual: encrypted);
 
             // Decrypt the encrypted string
             var decrypted = encrypted.Decrypt(Key);
 
             // Assert that the decrypted string is equal to the original string
-            Assert.IsTrue(decrypted == StringUnderTest);
+            Assert.AreEqual(expected: StringUnderTest, actual: decrypted);
         }
     }
 }

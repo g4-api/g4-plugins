@@ -1,6 +1,5 @@
 ﻿using G4.IntegrationTests.Framework;
 using G4.Models;
-using G4.WebDriver.Remote;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

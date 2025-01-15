@@ -20,7 +20,7 @@ namespace G4.IntegrationTests.Plugins.Common.InvokeWhileLoop
                 new ActionRuleModel()
                 {
                     PluginName = "InvokeWhileLoop",
-                    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}",
+                    Argument = "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
                     OnElement = "//ul[@id='Pagination1']/li/button[.='3']",
                     OnAttribute = "class",
                     // Rules for the outer InvokeWhileLoop action
@@ -31,7 +31,7 @@ namespace G4.IntegrationTests.Plugins.Common.InvokeWhileLoop
                         new ActionRuleModel()
                         {
                             PluginName = "InvokeWhileLoop",
-                            Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}",
+                            Argument = "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
                             OnElement = "//ul[@id='Pagination2']/li/button[.='3']",
                             OnAttribute = "class",
                             // Rules for the inner InvokeWhileLoop action

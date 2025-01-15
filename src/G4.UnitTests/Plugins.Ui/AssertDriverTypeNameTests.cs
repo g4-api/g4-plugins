@@ -74,7 +74,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation result is true.
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the DriverTypeName plugin correctly evaluates " +
@@ -113,7 +112,6 @@ namespace G4.UnitTests.Plugins.Ui
             var session = Invoke([ruleModel]).Response.First().Value.Sessions.First().Value;
 
             // Assert that the evaluation result is false.
-            Assert.IsTrue(!session.ResponseData.Extractions.GetEvaluation());
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
     }

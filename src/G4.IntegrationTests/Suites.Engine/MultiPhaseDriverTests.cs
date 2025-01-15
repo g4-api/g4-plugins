@@ -1,10 +1,14 @@
-﻿using G4.Extensions;
+﻿using G4.Api;
+using G4.Extensions;
 using G4.IntegrationTests.Engine;
 using G4.IntegrationTests.Extensions;
 using G4.IntegrationTests.Framework;
+using G4.Models;
+using G4.WebDriver.Models;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using System.Collections.Generic;
 using System.Linq;
 
 namespace G4.IntegrationTests.Suites.Engine
@@ -44,16 +48,16 @@ namespace G4.IntegrationTests.Suites.Engine
             var sessions = driverSessions.Concat([automationDriverSession]).Distinct().ToArray();
 
             // Assert that exactly two unique driver sessions were created
-            Assert.IsTrue(
-                condition: sessions.Length == 2,
+            Assert.AreEqual(
+                expected: 2,
+                actual: sessions.Length,
                 message: "Expected two distinct WebDriver sessions to be initiated.");
 
             // Assert that none of the plugins within the job are using the automation driver
             // They must be using the driver created by the stage instead
             Assert.IsTrue(
                 condition: response.ResponseData.PerformancePoints.All(i => i.DriverSession != automationDriverSession),
-                message: "All plugins within the job must use the stage driver, not the automation driver."
-            );
+                message: "All plugins within the job must use the stage driver, not the automation driver.");
 
             // Assert that the 'TestParameter' has the expected value after base64 decoding
             Assert.AreEqual(
@@ -91,22 +95,21 @@ namespace G4.IntegrationTests.Suites.Engine
             var sessions = driverSessions.Concat([automationDriverSession]).Distinct().ToArray();
 
             // Assert that exactly two unique driver sessions were created
-            Assert.IsTrue(
-                condition: sessions.Length == 2,
-                message: "Expected two distinct WebDriver sessions to be initiated."
-            );
+            Assert.AreEqual(
+                expected: 2,
+                actual: sessions.Length,
+                message: "Expected two distinct WebDriver sessions to be initiated.");
 
             // Assert that the environment's session parameters count is exactly two
-            Assert.IsTrue(
-                condition: response.Environment.SessionParameters.Count == 2,
-                message: "Expected exactly two session parameters to be present."
-            );
+            Assert.AreEqual(
+                expected: 2,
+                actual: response.Environment.SessionParameters.Count,
+                message: "Expected exactly two session parameters to be present.");
 
             // Assert that all session parameters have the expected decoded value "Foo Bar"
             Assert.IsTrue(
                 condition: response.Environment.SessionParameters.All(i => $"{i.Value}".ConvertFromBase64() == "Foo Bar"),
-                message: "All session parameters should have the decoded value 'Foo Bar'."
-            );
+                message: "All session parameters should have the decoded value 'Foo Bar'.");
         }
 
         [TestMethod(displayName: "Verify that the automation driver is correctly retrieved " +

@@ -24,7 +24,7 @@ namespace G4.Plugins.Ui.Actions
             }
 
             // Get the action to be performed on the alert (ACCEPT or DISMISS) from plugin arguments
-            var alertAction = pluginData.Parameters.Get("AlertAction", string.Empty);
+            var alertAction = pluginData.Parameters.Get("AlertAction", pluginData.Rule.Argument);
 
             // Get the keys to be sent to the alert, if any, from plugin arguments
             var keys = pluginData.Parameters.Get("Keys", string.Empty);
