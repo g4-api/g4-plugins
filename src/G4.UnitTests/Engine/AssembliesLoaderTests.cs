@@ -24,7 +24,7 @@ namespace G4.UnitTests.Engine
             var actual = loader.ImportAssemblies();
 
             // Assert that the count of imported assemblies is not zero
-            Assert.IsTrue(actual.Count != 0);
+            Assert.AreNotEqual(notExpected: 0, actual: actual.Count);
 
             // Assert that the count of unique assemblies is greater than 5
             Assert.IsTrue(actual.Select(i => i.Value.Assembly).Count() > 5);
@@ -51,8 +51,8 @@ namespace G4.UnitTests.Engine
 
             // Assert that the event arguments contain information about loaded files, directories, and the base directory
             Assert.IsTrue(actual.Files.Any());
-            Assert.IsTrue(!actual.Directories.Any());
-            Assert.IsTrue(!string.IsNullOrEmpty(actual.Directory));
+            Assert.IsFalse(actual.Directories.Any());
+            Assert.IsFalse(string.IsNullOrEmpty(actual.Directory));
         }
     }
 }

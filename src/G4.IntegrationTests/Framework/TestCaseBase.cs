@@ -404,9 +404,7 @@ namespace G4.IntegrationTests.Framework
             var testParameters = environment.TestParameters;
 
             // Determine the path to the driver binaries based on the execution context.
-            var binariesPath = $"{properties["Integration.Local"]}".Equals("true", StringComparison.OrdinalIgnoreCase)
-                ? $"{properties["Grid.Endpoint"]}"
-                : $"{properties["Grid.Endpoint"]}";
+            var binariesPath = $"{properties["Grid.Endpoint"]}";
 
             // Get the desired driver capabilities for the automation.
             var capabilities = NewCapabilities(environment);

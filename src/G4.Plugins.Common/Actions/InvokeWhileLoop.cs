@@ -47,7 +47,7 @@ namespace G4.Plugins.Common.Actions
             var continueLoop = AssertLoopCondition(plugin: this, pluginData, timeout);
 
             // Set the invocation rules based on the inverse of the loop condition.
-            pluginData.Rule.SetInvokeRules(!continueLoop);
+            pluginData.Rule.SetInvokeRules(continueLoop);
 
             // Execute the loop as long as the condition evaluates to true.
             while (continueLoop)
@@ -74,7 +74,7 @@ namespace G4.Plugins.Common.Actions
         private static bool AssertLoopCondition(PluginBase plugin, PluginDataModel pluginData, DateTime timeout)
         {
             // Evaluate the plugin's condition. If the condition is not met, continue the loop.
-            var isInvoke = !AssertPluginCondition(plugin, pluginData);
+            var isInvoke = AssertPluginCondition(plugin, pluginData);
 
             // Determine if a timeout has been specified.
             var isTimeout = timeout != default;

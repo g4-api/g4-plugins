@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.IsTrue(testResult.Response.Entity.ContainsKey(MacroResultKey));
 
             // Assert that the macro result length is 4
-            Assert.IsTrue($"{testResult.Response.Entity[MacroResultKey]}".Length == 4);
+            Assert.AreEqual(expected: 4, actual: $"{testResult.Response.Entity[MacroResultKey]}".Length);
         }
 
         [TestMethod(displayName: "Verify that the GetAlertText macro plugin can be " +

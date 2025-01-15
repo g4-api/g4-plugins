@@ -31,8 +31,8 @@ namespace G4.UnitTests.Engine
             var headers = JsonSerializer.Deserialize<string[]>(arguments["header"]);
 
             // Assert that there are two headers and a total of four arguments in the dictionary.
-            Assert.IsTrue(headers.Length == 2);
-            Assert.IsTrue(arguments.Count == 4);
+            Assert.AreEqual(expected: 2, actual: headers.Length);
+            Assert.AreEqual(expected: 4, actual: arguments.Count);
         }
 
         [TestMethod(displayName: "Verify that the conversion of a nested CLI expression " +
@@ -55,7 +55,7 @@ namespace G4.UnitTests.Engine
             Assert.AreEqual(expected, arguments["nested"]);
 
             // Assert that there are a total of three arguments in the dictionary.
-            Assert.IsTrue(arguments.Count == 3);
+            Assert.AreEqual(expected: 3, actual: arguments.Count);
         }
     }
 }

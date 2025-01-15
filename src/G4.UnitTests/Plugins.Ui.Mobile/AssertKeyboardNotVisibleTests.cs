@@ -13,21 +13,17 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
     [TestClass]
     public class AssertKeyboardNotVisibleTests : TestBase
     {
-        #region *** Tests: Common   ***
-        /// <inheritdoc />
         [TestMethod]
         public override void NewPluginTest()
         {
             AssertPlugin<KeyboardVisible>();
         }
 
-        /// <inheritdoc />
         [TestMethod]
         public override void ManifestComplianceTest()
         {
             AssertManifest<KeyboardVisible>();
         }
-        #endregion
 
         [DataTestMethod]
         [DataRow(Stubs.RuleJsonBoolean, null, "KeyboardNotVisible", "(Fail | KeyboardVisible)")]
@@ -51,9 +47,6 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
             // Assert that the plugin evaluation is true.
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
 
-            // Assert that the negation of the plugin evaluation is false.
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
-
             // Assert that the actual message does not contain the specified message.
             Assert.IsFalse(actualMessage.Contains(message));
 
@@ -66,7 +59,7 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
         [DataRow(Stubs.RuleJsonBoolean, null, "keyboardNotVisible", "(Fail | KeyboardVisible)")]
         [DataRow(Stubs.RuleJsonBoolean, null, "OnScreenKeyboardNotVisible", "(Fail | KeyboardVisible)")]
         [DataRow(Stubs.RuleJsonBoolean, null, "onScreenKeyboardNotVisible", "(Fail | KeyboardVisible)")]
-        public void KeyboardVisibleTest(string ruleJson, string onElement, string assertion, string message)
+        public void KeyboardNotVisibleTest(string ruleJson, string onElement, string assertion, string message)
         {
             // Replace placeholders in the action rule with specific values.
             ruleJson = ruleJson
@@ -82,9 +75,6 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
 
             // Assert that the plugin evaluation is true.
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the negation of the plugin evaluation is false.
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
 
             // Assert that the actual message does not contain the specified message.
             Assert.IsFalse(actualMessage.Contains(message));

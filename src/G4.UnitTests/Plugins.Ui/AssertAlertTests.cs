@@ -58,7 +58,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation result is false.
             Assert.IsFalse(actual);
-            Assert.IsTrue(!actual);
         }
 
         [TestMethod(displayName: "Verify that the AlertExists condition evaluates to " +
@@ -90,7 +89,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation result is true.
             Assert.IsTrue(actual);
-            Assert.IsFalse(!actual);
         }
 
         [TestMethod(displayName: "Verify that the AlertNotExists condition evaluates to " +
@@ -122,7 +120,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation result is false.
             Assert.IsFalse(actual);
-            Assert.IsTrue(!actual);
         }
 
         [TestMethod(displayName: "Verify that the AlertNotExists condition evaluates to " +
@@ -148,7 +145,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation result is true.
             Assert.IsTrue(actual);
-            Assert.IsFalse(!actual);
         }
     }
 }

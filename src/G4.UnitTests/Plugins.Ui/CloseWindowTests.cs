@@ -62,7 +62,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin;
 
             // Assert that the first window handle is no longer present
-            Assert.IsTrue(!plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
+            Assert.IsFalse(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
         }
 
         [TestMethod(displayName: "Verify that the CloseWindow plugin correctly closes a window by index.")]
@@ -87,7 +87,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin;
 
             // Assert that the window handle at index 2 is no longer present
-            Assert.IsTrue(!plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
+            Assert.IsFalse(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
         }
 
         [TestMethod(displayName: "Verify that the CloseWindow plugin throws an exception when " +
@@ -114,7 +114,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin;
 
             // This will throw an exception as the index 200 does not exist
-            Assert.IsTrue(!plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
+            Assert.IsTrue(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
         }
 
         [TestMethod(displayName: "Verify that the CloseWindow plugin throws an exception when " +
@@ -141,7 +141,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin;
 
             // This will throw an exception as the handle NO-SUCH-HANDLE does not exist
-            Assert.IsTrue(!plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
+            Assert.IsTrue(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
         }
 
         [TestMethod(displayName: "Verify that the CloseWindow plugin correctly closes a window by handle.")]
@@ -169,7 +169,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin;
 
             // Assert that the window handle at index 2 is no longer present
-            Assert.IsTrue(!plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
+            Assert.IsFalse(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
         }
     }
 }

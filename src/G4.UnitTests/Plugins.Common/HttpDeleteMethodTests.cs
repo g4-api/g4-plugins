@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Common
             var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
 
             // Assert that the status code is as expected
-            Assert.AreEqual(statusCode, expectedStatusCode);
+            Assert.AreEqual(expected: expectedStatusCode, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
             Assert.IsTrue($"{response}".ConvertFromBase64().Contains(expectedMessage));
@@ -81,7 +81,7 @@ namespace G4.UnitTests.Plugins.Common
             var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
 
             // Assert that the status code is as expected
-            Assert.AreEqual(statusCode, expectedStatusCode);
+            Assert.AreEqual(expected: expectedStatusCode, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
             Assert.IsTrue($"{response}".ConvertFromBase64().Contains(expectedMessage));

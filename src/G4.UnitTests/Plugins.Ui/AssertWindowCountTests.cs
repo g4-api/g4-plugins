@@ -105,9 +105,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true (positive scenario)
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (negative scenario)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
@@ -257,9 +254,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true (positive scenario)
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (negative scenario)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
@@ -337,9 +331,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true (positive scenario)
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (negative scenario)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
@@ -417,9 +408,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true (positive scenario)
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (negative scenario)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
@@ -497,9 +485,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true (positive scenario)
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (negative scenario)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
@@ -561,9 +546,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true (positive scenario)
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is false (negative scenario)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
 
         [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
@@ -633,9 +615,6 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the evaluation of the plugin is true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Assert that the evaluation of the plugin is true (redundant check for emphasis)
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
     }
 }

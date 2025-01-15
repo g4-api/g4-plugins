@@ -46,7 +46,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseBrowser>(rulesJson, By.Custom.Positive());
 
             // Assert that the final window count is 0
-            Assert.IsTrue(response.Plugin.WebDriver.WindowHandles.Count == 0);
+            Assert.AreEqual(expected: 0, actual: response.Plugin.WebDriver.WindowHandles.Count);
         }
 
         [TestMethod(displayName: "Verify that the CloseBrowser plugin throws an exception " +

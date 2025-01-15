@@ -49,7 +49,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseChildWindows>(rulesJson, By.Custom.Positive(), capabilities);
 
             // Assert that the final window count is 1 (only the main window remains open)
-            Assert.IsTrue(response.Plugin.WebDriver.WindowHandles.Count == 1);
+            Assert.AreEqual(expected: 1, actual: response.Plugin.WebDriver.WindowHandles.Count);
         }
     }
 }

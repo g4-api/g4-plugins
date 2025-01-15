@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -1250,6 +1251,11 @@ namespace G4.IntegrationTests.Framework
         /// Configures services for the application.
         /// </summary>
         /// <param name="services">The collection of services to configure.</param>
+        [SuppressMessage(
+            category: "Minor Code Smell",
+            checkId: "S2325:Methods and properties that don't access instance data should be static",
+            Justification = "This method configures services through dependency injection and must interact with the application's service collection instance. " +
+            "Making this method static would prevent it from being overridden in derived classes if customization or extension is needed, thereby reducing flexibility and violating the principles of extensible software design.")]
         public void ConfigureServices(IServiceCollection services)
         {
             // Configure JSON options for controllers
