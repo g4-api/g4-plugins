@@ -11,6 +11,15 @@
 	"categories": [
 		"WebDriver"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "data",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"> [!IMPORTANT]",
 		"> When interacting with web resources, it's crucial to consider security aspects, such as handling sensitive data, authentication, and secure communication.",

@@ -12,6 +12,15 @@
 		"DataExtraction",
 		"WebDriver"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "content-dom",
+				"model": "ContentRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

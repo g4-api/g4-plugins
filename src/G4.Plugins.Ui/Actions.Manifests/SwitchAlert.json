@@ -9,6 +9,15 @@
 	"categories": [
 		"WebDriver"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "switch",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"> [!IMPORTANT]",
 		"> This plugin works only for `alert`, `beforeUnload`, `confirm`, `default`, `prompt`.",

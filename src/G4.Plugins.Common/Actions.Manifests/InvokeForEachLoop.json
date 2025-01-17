@@ -3,6 +3,15 @@
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 	},
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "container",
+				"iconProvider": "loop",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"categories": [
 		"Loops"
 	],

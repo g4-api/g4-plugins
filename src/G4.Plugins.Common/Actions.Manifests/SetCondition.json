@@ -6,6 +6,15 @@
 	"categories": [
 		"Conditions"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "switch",
+				"iconProvider": "if",
+				"model": "ConditionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
