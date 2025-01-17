@@ -6,6 +6,15 @@
 	"categories": [
 		"DataExtraction"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "content-html",
+				"model": "ContentRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

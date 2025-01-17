@@ -6,6 +6,15 @@
 	"categories": [
 		"TextProcessing"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "transformer",
+				"model": "TransformerRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

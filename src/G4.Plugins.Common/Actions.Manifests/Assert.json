@@ -6,6 +6,15 @@
 	"categories": [
 		"Validations"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "assert",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

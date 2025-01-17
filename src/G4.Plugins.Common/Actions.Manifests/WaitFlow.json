@@ -10,6 +10,15 @@
 	"categories": [
 		"FlowControl"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "wait",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

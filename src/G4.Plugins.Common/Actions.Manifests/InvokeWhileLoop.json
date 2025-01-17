@@ -6,6 +6,15 @@
 	"categories": [
 		"Loops"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "container",
+				"iconProvider": "loop",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

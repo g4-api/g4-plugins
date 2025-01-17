@@ -9,6 +9,15 @@
 	"categories": [
 		"Logging"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "text",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

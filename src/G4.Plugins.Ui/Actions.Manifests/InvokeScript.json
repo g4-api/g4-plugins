@@ -9,6 +9,15 @@
 	"categories": [
 		"WebDriver"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "task",
+				"iconProvider": "script",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",

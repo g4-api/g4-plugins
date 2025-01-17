@@ -12,6 +12,16 @@
 	"categories": [
 		"Containers"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"componentType": "container",
+				"iconProvider": "container",
+				"label": "Actions Group",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
