@@ -9,6 +9,7 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
+				"$type": "Condition",
 				"branches": [
 					"false",
 					"true"

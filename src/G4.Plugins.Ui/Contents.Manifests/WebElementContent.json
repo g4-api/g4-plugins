@@ -15,6 +15,7 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
+				"$type": "Content",
 				"componentType": "task",
 				"iconProvider": "content-dom",
 				"model": "ContentRuleModel"

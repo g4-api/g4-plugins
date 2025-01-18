@@ -9,6 +9,7 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
+				"$type": "Content",
 				"componentType": "task",
 				"iconProvider": "content-html",
 				"model": "ContentRuleModel"
