@@ -6,6 +6,7 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
+				"$type": "Action",
 				"componentType": "container",
 				"iconProvider": "loop",
 				"model": "ActionRuleModel"

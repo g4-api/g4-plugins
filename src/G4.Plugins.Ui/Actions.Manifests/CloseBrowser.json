@@ -13,6 +13,7 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
+				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": "close",
 				"model": "ActionRuleModel"

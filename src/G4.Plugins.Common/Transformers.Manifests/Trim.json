@@ -9,6 +9,7 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
+				"$type": "Transformer",
 				"componentType": "task",
 				"iconProvider": "transformer",
 				"model": "TransformerRuleModel"
