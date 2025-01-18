@@ -9,6 +9,10 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
+				"branches": [
+					"false",
+					"true"
+				],
 				"componentType": "switch",
 				"iconProvider": "if",
 				"model": "ConditionRuleModel"
