@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Plugins.Common.GetParameter
 {
     internal class C0003(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Define expected value and plugin name based on environment test parameters
             const string expected = "Foo Bar";

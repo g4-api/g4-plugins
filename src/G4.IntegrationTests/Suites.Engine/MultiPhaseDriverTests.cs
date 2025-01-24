@@ -1,11 +1,16 @@
-﻿using G4.Extensions;
+﻿using G4.Api;
+using G4.Extensions;
 using G4.IntegrationTests.Engine;
 using G4.IntegrationTests.Extensions;
 using G4.IntegrationTests.Framework;
+using G4.Models;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using System;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace G4.IntegrationTests.Suites.Engine
 {
@@ -135,6 +140,27 @@ namespace G4.IntegrationTests.Suites.Engine
 
             // Assert that no exceptions were captured in the response's response data.
             Assert.IsFalse(response.ResponseData.Exceptions.Any(), "Exceptions were found during the GetStateDriver invocation.");
+        }
+
+        [TestMethod]
+        public void A()
+        {
+            var j = File.ReadAllText(@"E:\Garbage\id-g4.txt");
+            var a = JsonSerializer.Deserialize<G4AutomationModel>(j, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            var client = new G4Client();
+            client.Automation.RuleInvoking += (sender, e) =>
+            {
+                Console.WriteLine(e.Rule.PluginName);
+            };
+            var r = client.Automation.Invoke(a);
+
+
+
+            var s = "";
         }
     }
 }

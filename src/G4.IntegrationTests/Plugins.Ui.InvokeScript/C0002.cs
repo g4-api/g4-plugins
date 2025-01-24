@@ -11,7 +11,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeScript
 {
     internal class C0002(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Defines a sequence of action rule models to return
             return

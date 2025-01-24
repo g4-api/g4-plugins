@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeScroll
 {
     internal class C0002(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Retrieves necessary parameters from the environment
             var argument = environment.TestParameters["argument"];

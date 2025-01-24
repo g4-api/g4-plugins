@@ -11,7 +11,7 @@ namespace G4.IntegrationTests.Plugins.Common.WaitFlow
 {
     internal class C0014(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Gets the operator from the environment parameters, with a default value
             // of "Eq" if not provided.

@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
 {
     internal class C0016(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Retrieve the expected message from the test parameters, defaulting to an empty string if not found
             var expectedMessage = environment.TestParameters.Get(key: "expectedMessage", defaultValue: string.Empty);

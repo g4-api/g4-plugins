@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
 {
     internal class C0021(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Retrieve the value of "assertionOperation" from the test parameters
             // The default value is "Match" if the key is not found

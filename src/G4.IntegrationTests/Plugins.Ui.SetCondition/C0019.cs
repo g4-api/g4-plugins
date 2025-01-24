@@ -9,27 +9,30 @@ namespace G4.IntegrationTests.Plugins.Ui.SetCondition
 {
     internal class C0019(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Return a collection of action rule models
             return
             [
                 // SetCondition action: Sets a condition based on whether the page URL matches
                 // the regular expression "(?i)conditions".
-                new ActionRuleModel
+                new SwitchRuleModel
                 {
                     PluginName = "SetCondition",
                     Argument = "{{$ --Condition:PageUrl --Operator:Match --Expected:(?i)conditions}}",
-                    Rules =
-                    [
-                        // RegisterParameter action: Registers a test parameter named "TestParameter"
-                        // with the value "Foo Bar".
-                        new ActionRuleModel
-                        {
-                            PluginName = "RegisterParameter",
-                            Argument = "{{$ --Name:TestParameter --Value:Foo Bar}}"
-                        }
-                    ]
+                    Branches = new Dictionary<string, IEnumerable<G4RuleModelBase>>()
+                    {
+                        ["true"] =
+                            [
+                                // RegisterParameter action: Registers a test parameter named "TestParameter"
+                                // with the value "Foo Bar".
+                                new ActionRuleModel
+                                {
+                                    PluginName = "RegisterParameter",
+                                    Argument = "{{$ --Name:TestParameter --Value:Foo Bar}}"
+                                }
+                            ]
+                    }
                 },
                 // Assert action: Asserts that the text retrieved using the "TestParameter" equals "Foo Bar".
                 new ActionRuleModel

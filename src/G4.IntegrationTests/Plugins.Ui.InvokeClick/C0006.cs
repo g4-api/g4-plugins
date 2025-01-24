@@ -11,7 +11,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeClick
 {
     internal class C0006(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Gets the condition from the environment parameters
             var condition = environment.TestParameters.Get(key: "condition", defaultValue: "ElementDisabled");

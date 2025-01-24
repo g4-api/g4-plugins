@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Plugins.Common.InvokeWhileLoop
 {
     internal class C0003(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Retrieve the timeout value from the test parameters
             var timeout = environment.TestParameters["timeout"];

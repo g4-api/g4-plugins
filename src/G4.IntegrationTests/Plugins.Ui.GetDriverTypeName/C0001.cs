@@ -11,7 +11,7 @@ namespace G4.IntegrationTests.Plugins.Ui.GetDriverTypeName
 {
     internal class C0001(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Gets the expected value from the environment parameters
             var expected = environment.TestParameters["expected"];
