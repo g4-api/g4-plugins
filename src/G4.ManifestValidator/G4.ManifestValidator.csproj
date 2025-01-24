@@ -16,7 +16,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Attributes" Version="2025.1.18.15" />
+		<PackageReference Include="G4.Attributes" Version="2025.1.24.16" />
 	</ItemGroup>
 
 </Project>
