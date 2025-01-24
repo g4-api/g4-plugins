@@ -9,14 +9,14 @@
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
-				"$type": "Condition",
+				"$type": "Switch",
 				"branches": [
 					"false",
 					"true"
 				],
 				"componentType": "switch",
 				"iconProvider": "if",
-				"model": "ConditionRuleModel"
+				"model": "SwitchRuleModel"
 			}
 		}
 	},
@@ -56,17 +56,21 @@
 				"This configuration evaluates a condition and executes sub-actions if the condition is met."
 			],
 			"rule": {
+				"$type": "Switch",
 				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
+				"branches": {
+					"true": [
+						{
+							"$type": "Action",
+							"locator": "CssSelector",
+							"onElement": "#continueButton",
+							"pluginName": "Click"
+						}
+					]
+				},
 				"locator": "CssSelector",
 				"onElement": "#greeting",
-				"pluginName": "SetCondition",
-				"rules": [
-					{
-						"locator": "CssSelector",
-						"onElement": "#continueButton",
-						"pluginName": "Click"
-					}
-				]
+				"pluginName": "SetCondition"
 			}
 		},
 		{
@@ -74,32 +78,40 @@
 				"This configuration checks if an alert exists and executes sub-actions if no alert is present."
 			],
 			"rule": {
+				"$type": "Switch",
 				"argument": "{{$ --Condition:AlertExists}}",
-				"pluginName": "SetCondition",
-				"rules": [
-					{
-						"argument": "Test Input",
-						"locator": "CssSelector",
-						"onElement": "#inputField",
-						"pluginName": "SendKeys"
-					}
-				]
+				"branches": {
+					"true": [
+						{
+							"$type": "Action",
+							"argument": "Test Input",
+							"locator": "CssSelector",
+							"onElement": "#inputField",
+							"pluginName": "SendKeys"
+						}
+					]
+				},
+				"pluginName": "SetCondition"
 			}
 		},
 		{
 			"description": [
-				"This configuration checks if the page URL matches a specific pattern and executes sub-actions accordingly."
+				"This configuration checks if the page URL does not matche a specific pattern and executes sub-actions accordingly."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:https://example.com/*}}",
-				"pluginName": "SetCondition",
-				"rules": [
-					{
-						"locator": "CssSelector",
-						"onElement": "#nextPageButton",
-						"pluginName": "Click"
-					}
-				]
+				"$type": "Switch",
+				"argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}",
+				"branches": {
+					"false": [
+						{
+							"$type": "Action",
+							"locator": "CssSelector",
+							"onElement": "#nextPageButton",
+							"pluginName": "Click"
+						}
+					]
+				},
+				"pluginName": "SetCondition"
 			}
 		}
 	],
@@ -173,8 +185,8 @@
 			"description": [
 				"Define a sequence of actions or instructions to be executed if the condition is met."
 			],
-			"name": "Rules",
-			"type": "Array"
+			"name": "Branches",
+			"type": "Object"
 		}
 	],
 	"protocol": {
