@@ -2,6 +2,8 @@
 using G4.Extensions;
 using G4.Models;
 
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace G4.Plugins.Common.Actions
@@ -44,27 +46,42 @@ namespace G4.Plugins.Common.Actions
         }
 
         /// <summary>
-        /// Retrieves the positive and negative actions from the plugin data.
+        /// Retrieves the positive (TRUE) and negative (FALSE) actions from the given plugin data.
         /// </summary>
-        /// <param name="pluginData">The plugin data model containing the rule information.</param>
+        /// <param name="pluginData">The plugin data model containing rule information.</param>
         /// <returns>
-        /// A tuple containing arrays of positive actions and negative actions (<see cref="G4RuleModelBase"/>[]).
+        /// A tuple containing two arrays of <see cref="G4RuleModelBase"/>.
+        /// One for the positive (TRUE) actions and one for the negative (FALSE) actions.
         /// </returns>
         private static (G4RuleModelBase[] PositiveActions, G4RuleModelBase[] NegativeActions) GetActions(PluginDataModel pluginData)
         {
-            // Check if the rule in the plugin data is a condition rule.
-            var isConditionRule = pluginData.Rule is ConditionRuleModel;
+            // Use a case-insensitive string comparer for branch keys.
+            var comparer = StringComparer.OrdinalIgnoreCase;
 
-            // If it is a condition rule, get the negative rules; otherwise, use an empty array.
-            var negativeRules = isConditionRule
-                ? ((ConditionRuleModel)pluginData.Rule).NegativeRules?.ToArray() ?? []
-                : [];
+            // Determine if the plugin data rule is a SwitchRuleModel.
+            var isSwitchRule = pluginData.Rule is SwitchRuleModel;
 
-            // Get the positive actions from the rule's 'Rules' property, or use an empty array if null.
-            var positiveActions = pluginData.Rule.Rules?.ToArray() ?? [];
+            // If it's a SwitchRuleModel, ensure its Branches dictionary is initialized.
+            if (isSwitchRule)
+            {
+                ((SwitchRuleModel)pluginData.Rule).Branches
+                    ??= new Dictionary<string, IEnumerable<G4RuleModelBase>>(comparer);
+            }
 
-            // Return the positive and negative actions as a tuple.
-            return (PositiveActions: positiveActions, NegativeActions: negativeRules);
+            // Create a local copy of the branches dictionary (or an empty one if not a SwitchRuleModel).
+            var branches = isSwitchRule
+                ? new Dictionary<string, IEnumerable<G4RuleModelBase>>(((SwitchRuleModel)pluginData.Rule).Branches, comparer)
+                : new Dictionary<string, IEnumerable<G4RuleModelBase>>(comparer);
+
+            // Retrieve the rules for FALSE and TRUE branches; defaults to an empty collection if not found.
+            var falseRules = branches.Get(key: "FALSE", defaultValue: Enumerable.Empty<G4RuleModelBase>());
+            var trueRules = branches.Get(key: "TRUE", defaultValue: Enumerable.Empty<G4RuleModelBase>());
+
+            // Return the positive (TRUE) and negative (FALSE) actions as arrays.
+            return (
+                PositiveActions: trueRules.ToArray(),
+                NegativeActions: falseRules.ToArray()
+            );
         }
     }
 }

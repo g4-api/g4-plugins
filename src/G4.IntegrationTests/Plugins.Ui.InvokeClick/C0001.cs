@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeClick
 {
     internal class C0001(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Determine the expected value based on the 'negative' parameter
             var expected = IsNegativeTest ? "element click on" : "click on element";

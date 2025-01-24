@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeClick
 {
     internal class C0005(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Gets the condition, operator, expected value, and number of clicks from
             // the environment parameters

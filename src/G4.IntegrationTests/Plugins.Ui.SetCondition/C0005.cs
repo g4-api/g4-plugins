@@ -9,30 +9,33 @@ namespace G4.IntegrationTests.Plugins.Ui.SetCondition
 {
     internal class C0005(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Return a collection of action rule models
             return
             [
                 // SetCondition action: Sets a condition based on the attribute "title" of the
                 // element with the CSS selector "#ElementAttribute".
-                new ActionRuleModel
+                new SwitchRuleModel
                 {
                     PluginName = "SetCondition",
                     Argument = "{{$ --Condition:ElementAttribute --Operator:Eq --Expected:ElementAttribute}}",
                     OnElement = "#ElementAttribute",
                     OnAttribute = "title",
                     Locator = "CssSelector",
-                    Rules =
-                    [
-                        // RegisterParameter action: Registers a test parameter named "TestParameter"
-                        // with the value "Foo Bar".
-                        new ActionRuleModel
-                        {
-                            PluginName = "RegisterParameter",
-                            Argument = "{{$ --Name:TestParameter --Value:Foo Bar}}"
-                        }
-                    ]
+                    Branches = new Dictionary<string, IEnumerable<G4RuleModelBase>>()
+                    {
+                        ["true"] =
+                            [
+                                // RegisterParameter action: Registers a test parameter named "TestParameter"
+                                // with the value "Foo Bar".
+                                new ActionRuleModel
+                                {
+                                    PluginName = "RegisterParameter",
+                                    Argument = "{{$ --Name:TestParameter --Value:Foo Bar}}"
+                                }
+                            ]
+                    }
                 },
                 // Assert action: Asserts that the text retrieved using the "TestParameter" equals "Foo Bar".
                 new ActionRuleModel

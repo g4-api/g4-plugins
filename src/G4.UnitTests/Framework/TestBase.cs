@@ -556,7 +556,7 @@ namespace G4.UnitTests.Framework
         public TestResultModel<IDictionary<string, G4AutomationResponseModel>> Invoke([StringSyntax(StringSyntaxAttribute.Json)] string ruleJson)
         {
             // Deserialize the rules JSON string into an ActionRuleModel object.
-            var ruleModel = (G4RuleModelBase)JsonSerializer.Deserialize<ActionRuleModel>(ruleJson, JsonOptions);
+            var ruleModel = JsonSerializer.Deserialize<G4RuleModelBase>(ruleJson, JsonOptions);
 
             // Invoke the automation process with the specified rule models and capabilities.
             return Invoke([ruleModel], capabilities: new Dictionary<string, object>());

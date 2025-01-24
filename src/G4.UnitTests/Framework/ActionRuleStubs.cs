@@ -106,74 +106,82 @@
 
         public const string RuleJsonConditionDynamicFailOnException =
             "{" +
-            "    \"$type\": \"Action\"," +
+            "    \"$type\": \"Switch\"," +
             "    \"pluginName\": \"SetCondition\"," +
             "    \"argument\": \"{{$ --FailOnException --Condition:" + OnCondition + " --Operator:" + OnOperator + " --Expected:" + OnOperatorExpected + "}}\"," +
             "    \"locator\": \"Id\"," +
             "    \"onElement\": \"" + OnElement + "\"," +
             "    \"onAttribute\":\"" + OnAttribute + "\"," +
             "    \"regularExpression\":\"" + OnRegularExpression + "\"," +
-            "    \"rules\": [" +
-            "        {" +
-            "            \"$type\": \"Action\"," +
-            "            \"pluginName\": \"RegisterParameter\"," +
-            "            \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
-            "        }" +
-            "    ]" +
+            "    \"branches\": {" +
+            "        \"true\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "             }" +
+            "         ]" +
+            "    }" +
             "}";
 
         public const string RuleJsonConditionDynamic =
             "{" +
-            "    \"$type\": \"Action\"," +
+            "    \"$type\": \"Switch\"," +
             "    \"pluginName\": \"SetCondition\"," +
             "    \"argument\": \"{{$ --Condition:" + OnCondition + " --Operator:" + OnOperator + " --Expected:" + OnOperatorExpected + "}}\"," +
             "    \"locator\": \"Id\"," +
             "    \"onElement\": \"" + OnElement + "\"," +
             "    \"onAttribute\":\"" + OnAttribute + "\"," +
             "    \"regularExpression\":\"" + OnRegularExpression + "\"," +
-            "    \"rules\": [" +
-            "        {" +
-            "            \"$type\": \"Action\"," +
-            "            \"pluginName\": \"RegisterParameter\"," +
-            "            \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
-            "        }" +
-            "    ]" +
+            "    \"branches\": {" +
+            "        \"true\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "             }" +
+            "         ]" +
+            "    }" +
             "}";
 
         public const string RuleJsonConditionDynamicNegativeRules =
             "{" +
-            "    \"$type\": \"Condition\"," +
+            "    \"$type\": \"Switch\"," +
             "    \"pluginName\": \"SetCondition\"," +
             "    \"argument\": \"{{$ --Condition:" + OnCondition + " --Operator:" + OnOperator + " --Expected:" + OnOperatorExpected + "}}\"," +
             "    \"locator\": \"Id\"," +
             "    \"onElement\": \"" + OnElement + "\"," +
             "    \"onAttribute\":\"" + OnAttribute + "\"," +
             "    \"regularExpression\":\"" + OnRegularExpression + "\"," +
-            "    \"negativeRules\": [" +
-            "        {" +
-            "            \"$type\": \"Action\"," +
-            "            \"pluginName\": \"RegisterParameter\"," +
-            "            \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
-            "        }" +
-            "    ]" +
+            "    \"branches\": {" +
+            "        \"false\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "             }" +
+            "         ]" +
+            "    }" +
             "}";
 
         public const string RuleJsonConditionBoolean =
             "{" +
-            "    \"$type\": \"Action\"," +
+            "    \"$type\": \"Switch\"," +
             "    \"pluginName\": \"SetCondition\"," +
             "    \"argument\": \"{{$ --Condition:" + OnCondition + "}}\"," +
             "    \"locator\": \"Id\"," +
             "    \"onElement\": \"" + OnElement + "\"," +
             "    \"onAttribute\":\"" + OnAttribute + "\"," +
             "    \"regularExpression\":\"" + OnRegularExpression + "\"," +
-            "    \"rules\": [" +
-            "        {" +
-            "            \"$type\": \"Action\"," +
-            "            \"pluginName\": \"RegisterParameter\"," +
-            "            \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
-            "        }" +
-            "    ]" +
+            "    \"branches\": {" +
+            "        \"true\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "             }" +
+            "         ]" +
+            "    }" +
             "}";
 
         public const string RuleJsonRepeatWithIterations =

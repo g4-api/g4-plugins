@@ -9,7 +9,7 @@ namespace G4.IntegrationTests.Plugins.Ui.NewBrowserWindow
 {
     internal class C0002(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Retrieves the URL from test parameters
             var url = environment.TestParameters["url"];

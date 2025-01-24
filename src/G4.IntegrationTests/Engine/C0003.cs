@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Engine
 {
     internal class C0003(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // No action rules are defined for this test case
             return [];
@@ -41,7 +41,7 @@ namespace G4.IntegrationTests.Engine
 
         public class C0003A(TestContext context) : TestCaseBase(context)
         {
-            protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+            protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
             {
                 // No action rules are defined for this test case
                 return [];

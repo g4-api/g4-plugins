@@ -11,7 +11,7 @@ namespace G4.IntegrationTests.Plugins.Ui.SetWindowRectangle
 {
     internal class C0001(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Get the argument from the test parameters
             var argument = environment.TestParameters.Get(key: "argument", defaultValue: string.Empty);

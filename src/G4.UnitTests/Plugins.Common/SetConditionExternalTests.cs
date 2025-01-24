@@ -125,7 +125,7 @@ namespace G4.UnitTests.Plugins.Common
             });
 
             // Deserialize the modified rule JSON into an ActionRuleModel object.
-            var ruleModel = JsonSerializer.Deserialize<ActionRuleModel>(ruleJson, JsonOptions);
+            var ruleModel = JsonSerializer.Deserialize<G4RuleModelBase>(ruleJson, JsonOptions);
 
             // Invoke the action rule and get the response.
             var responseModel = Invoke([ruleModel]);

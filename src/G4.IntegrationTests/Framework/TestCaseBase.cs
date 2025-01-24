@@ -342,7 +342,7 @@ namespace G4.IntegrationTests.Framework
 
             // Retrieve a list of actions specified by the test case.
             var actions = testCase.OnActions(environment).ToArray();
-            var actionsList = new List<ActionRuleModel>();
+            var actionsList = new List<G4RuleModelBase>();
 
             // For web tests, add a "GoToUrl" action to navigate to the application URL.
             if (testCase.IsWebTest)
@@ -520,7 +520,7 @@ namespace G4.IntegrationTests.Framework
         /// </summary>
         /// <param name="environment">The automation environment used for action retrieval.</param>
         /// <returns>An enumerable of action rules to be executed during automation.</returns>
-        protected abstract IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment);
+        protected abstract IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment);
 
         /// <summary>
         /// Retrieves the authentication model for the automation environment.

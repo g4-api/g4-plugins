@@ -11,7 +11,7 @@ namespace G4.IntegrationTests.Plugins.Ui.SaveScreenshot
 {
     internal class C0003(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Get directory from test parameters or use default value Environment.CurrentDirectory
             var directory = environment.TestParameters.Get(key: "directory", defaultValue: Environment.CurrentDirectory);

@@ -9,7 +9,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
 {
     internal class C0002(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Define a sequence of action rule models
             return

@@ -9,7 +9,7 @@ namespace G4.IntegrationTests.Plugins.Ui.UndoNavigation
 {
     internal class C0003(TestContext context) : TestCaseBase(context)
     {
-        protected override IEnumerable<ActionRuleModel> OnActions(AutomationEnvironment environment)
+        protected override IEnumerable<G4RuleModelBase> OnActions(AutomationEnvironment environment)
         {
             // Return a collection of action rule models
             return
