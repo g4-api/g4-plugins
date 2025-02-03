@@ -1,6 +1,5 @@
 ﻿using G4.Api;
 using G4.Attributes;
-using G4.Models;
 using G4.UnitTests.Framework;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

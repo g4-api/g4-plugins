@@ -43,9 +43,9 @@
 				"This is useful for scenarios where the script needs to extract numeric values from the element's text and validate them against expected criteria."
 			],
 			"rule": {
-				"argument": "{{$ --Operator:Equal --Expected:123}}",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
 				"onElement": "//*[@id='numericTextElement']",
-				"pluginName": "ElementText",
+				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
 		},
@@ -55,9 +55,9 @@
 				"This assertion checks if the text content of the specified element is exactly as expected."
 			],
 			"rule": {
-				"argument": "{{$ --Operator:Equal --Expected:Hello World}}",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
 				"onElement": "//*[@id='textElement']",
-				"pluginName": "ElementText"
+				"pluginName": "Assert"
 			}
 		},
 		{
