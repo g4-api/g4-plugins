@@ -29,13 +29,10 @@ namespace G4.UnitTests.Plugins
             client.Templates.AddTemplate(manifest);
             templates = client.Templates.GetTemplates();
 
-            var rule = new ActionRuleModel
-            {
-                PluginName = manifest.Key,
-                Argument = "{{$ --Username:Foo --Password:Bar}}"
-            };
-
-            var ruleJson = JsonSerializer.Serialize(rule);
+            var ruleJson = "{" +
+                "\"$type\":\"Action\"," +
+                "\"pluginName\":\"" + manifest.Key + "\"," +
+                "\"argument\":\"{{$ --Username:Foo --Password:Bar}}\"}";
 
             var a = Invoke(ruleJson);
         }
