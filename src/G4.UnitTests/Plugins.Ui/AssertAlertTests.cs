@@ -135,7 +135,7 @@ namespace G4.UnitTests.Plugins.Ui
         public void AlertNotExistsTest(string condition)
         {
             // Initialize the rule JSON for the test case.
-            var ruleJson = "{\"pluginName\":\"Assert\",\"argument\":\"{{$ --Condition:" + condition + "}}\"}";
+            var ruleJson = "{\"$type\":\"Action\", \"pluginName\":\"Assert\",\"argument\":\"{{$ --Condition:" + condition + "}}\"}";
 
             // Invoke the action rule and retrieve the session from the test result.
             var session = Invoke(ruleJson).Response.First().Value.Sessions.First().Value;

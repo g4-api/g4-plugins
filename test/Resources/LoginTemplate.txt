@@ -81,13 +81,13 @@
             "locator": "CssSelector",
             "onElement": "#positive",
             "pluginName": "SendKeys",
-            "argument": "${{ Username }}"
+            "argument": "{{$ parameters.Username }}"
         },
         {
             "$type": "Action",
             "onElement": "//positive",
             "pluginName": "SendKeys",
-            "argument": "${{ Password }}"
+            "argument": "{{$ parameters.Password }}"
         },
         {
             "$type": "Action",
