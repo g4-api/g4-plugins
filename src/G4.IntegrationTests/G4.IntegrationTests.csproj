@@ -11,7 +11,7 @@
 		<LangVersion>latest</LangVersion>
 
 		<!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/syslib-diagnostics/syslib1040-1049 -->
-		<NoWarn>$(NoWarn);SYSLIB1045;S4144;MSTEST0015</NoWarn>
+		<NoWarn>$(NoWarn);SYSLIB1045;S4144;MSTEST0015;MSTEST0016</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -32,9 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Api" Version="2025.1.24.24" />
-		<PackageReference Include="G4.Plugins" Version="2025.2.3.20" />
-		<PackageReference Include="G4.Converters" Version="2025.2.3.20" />
+		<PackageReference Include="G4.Api" Version="2025.2.3.25" />
+		<PackageReference Include="G4.Plugins" Version="2025.2.4.21" />
+		<PackageReference Include="G4.Converters" Version="2025.2.4.21" />
 		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="8.0.10" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.7.3" />
