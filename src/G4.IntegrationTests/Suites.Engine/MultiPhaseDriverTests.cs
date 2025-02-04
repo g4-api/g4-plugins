@@ -1,4 +1,5 @@
-﻿using G4.Api;
+﻿using G4.Abstraction.WebDriver;
+using G4.Api;
 using G4.Extensions;
 using G4.IntegrationTests.Engine;
 using G4.IntegrationTests.Extensions;
@@ -8,6 +9,7 @@ using G4.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -75,7 +77,7 @@ namespace G4.IntegrationTests.Suites.Engine
         [DataRow(null)]
         [DataRow("")]
         #endregion
-        public void GetStageDriver(string stageDriver)
+        public void GetStageDriverTest(string stageDriver)
         {
             // Initialize the automation environment with the current test context and add the stageDriver parameter
             var environment = new AutomationEnvironment(TestContext).AddTestParameter(key: "stageDriver", stageDriver);
@@ -115,7 +117,7 @@ namespace G4.IntegrationTests.Suites.Engine
 
         [TestMethod(displayName: "Verify that the automation driver is correctly retrieved " +
             "and no exceptions occur during GetStateDriver invocation.")]
-        public void GetStateDriver()
+        public void GetStateDriverTest()
         {
             // Initialize the automation environment with the current test context.
             var environment = new AutomationEnvironment(TestContext);
@@ -142,25 +144,65 @@ namespace G4.IntegrationTests.Suites.Engine
             Assert.IsFalse(response.ResponseData.Exceptions.Any(), "Exceptions were found during the GetStateDriver invocation.");
         }
 
-        [TestMethod]
-        public void A()
-        {
-            var j = File.ReadAllText(@"E:\Garbage\id-g4.txt");
-            var a = JsonSerializer.Deserialize<G4AutomationModel>(j, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+        //[TestMethod]
+        //public void ReadFromFileTest()
+        //{
+        //    // Read the JSON content from the specified file path.
+        //    var json = File.ReadAllText(@"E:\Garbage\id-g4.txt");
 
-            var client = new G4Client();
-            client.Automation.RuleInvoking += (sender, e) =>
-            {
-                Console.WriteLine(e.Rule.PluginName);
-            };
-            var r = client.Automation.Invoke(a);
+        //    // Deserialize the JSON content into a G4AutomationModel object using the provided options.
+        //    var automation = JsonSerializer.Deserialize<G4AutomationModel>(json, JsonSerializerOptions);
 
+        //    // Create a new G4Client instance.
+        //    var client = new G4Client();
 
+        //    // Subscribe to the RuleInvoking event to output the PluginName of each rule as it is invoked.
+        //    client.Automation.RuleInvoking += (sender, e) => Console.WriteLine(e.Rule.PluginName);
 
-            var s = "";
-        }
+        //    // Invoke the automation process with the deserialized model and store the results.
+        //    var result = client.Automation.Invoke(automation);
+
+        //    // Assert that the result collection is not empty.
+        //    Assert.AreNotEqual(0, result.Count);
+        //}
+
+        //[TestMethod]
+        //public void NewDriverTest()
+        //{
+        //    // Create a dictionary containing driver parameters for initializing the driver.
+        //    var driverParameters = new Dictionary<string, object>
+        //    {
+        //        // Specify the driver type to use (e.g., Microsoft Edge).
+        //        ["driver"] = "MicrosoftEdgeDriver",
+        //        // Specify the URL for the driver binaries (e.g., WebDriver server endpoint).
+        //        ["driverBinaries"] = "http://localhost:4444/wd/hub",
+        //        // Define capabilities for the driver.
+        //        ["capabilities"] = new Dictionary<string, object>
+        //        {
+        //            // 'alwaysMatch' specifies capabilities that must be met.
+        //            ["alwaysMatch"] = new Dictionary<string, object>
+        //            {
+        //                // Set Edge-specific options.
+        //                ["ms:edgeOptions"] = new Dictionary<string, object>
+        //                {
+        //                    // Pass arguments to the driver; here, running in headless mode.
+        //                    ["args"] = new[]
+        //                    {
+        //                        "--headless"
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    };
+
+        //    // Initialize a new driver instance using the DriverFactory with the specified parameters.
+        //    var driver = new DriverFactory(driverParameters).NewDriver();
+
+        //    // Dispose of the driver instance to clean up resources.
+        //    driver.Dispose();
+
+        //    // Assert that the driver is not null, ensuring that it was created successfully.
+        //    Assert.IsNotNull(driver);
+        //}
     }
 }
