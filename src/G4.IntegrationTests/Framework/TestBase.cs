@@ -9,14 +9,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace G4.IntegrationTests.Framework
 {
-    /// <summary>
-    /// Base class for test classes in the test suite.
-    /// </summary>
     [TestClass]
     [DeploymentItem("Binaries/", "Binaries")]
     [DeploymentItem("Pages/", "Pages")]
@@ -25,6 +23,16 @@ namespace G4.IntegrationTests.Framework
     public abstract class TestBase
     {
         #region *** Properties   ***
+        /// <summary>
+        /// Gets the JSON serializer options for the test suite.
+        /// </summary>
+        public JsonSerializerOptions JsonSerializerOptions { get; } = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+            WriteIndented = true
+        };
+
         /// <summary>
         /// Gets or sets the context of the TestClass.
         /// </summary>
