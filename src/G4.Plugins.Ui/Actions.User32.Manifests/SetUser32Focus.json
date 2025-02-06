@@ -1,0 +1,93 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"User32"
+	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "pointer",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SetUser32Focus` plugin is to set focus on a UI element using the Windows User32 API. ",
+		"This ensures that the target element becomes active and ready for subsequent user interactions or automated actions.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature          | Description                                                                                    |",
+		"|------------------|------------------------------------------------------------------------------------------------|",
+		"| Set Focus Action | Activates the target UI element by setting focus on it, preparing it for further interactions. |",
+		"",
+		"### Usage in RPA",
+		"",
+		"| Usage              | Description                                                                                         |",
+		"|--------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Element Activation | Use the plugin to ensure a specific UI element is focused before executing further automated tasks. |",
+		"",
+		"### Usage in Automation Testing",
+		"",
+		"| Usage              | Description                                                                           |",
+		"|--------------------|---------------------------------------------------------------------------------------|",
+		"| Focus Verification | Confirm that the desired UI element receives focus as expected during test execution. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin is designed to work on **Windows** only."
+	],
+	"examples": [
+		{
+			"description": [
+				"Set focus on a UI element identified by the XPath `//input[@id='Username']`."
+			],
+			"rule": {
+				"Locator": "Xpath",
+				"OnElement": "//input[@id='Username']",
+				"PluginName": "SetUser32Focus"
+			}
+		}
+	],
+	"key": "SetUser32Focus",
+	"manifestVersion": 4,
+	"parameters": [],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the XPath for the target UI element on which focus will be set. This property is required to identify the element."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scopes": [
+		"WindowsNative"
+	],
+	"summary": [
+		"The `SetUser32Focus` plugin sets focus on a UI element using the Windows User32 API. ",
+		"It ensures that the target element is activated and ready for subsequent interactions, making it ideal for desktop UI automation and testing on Windows platforms."
+	]
+}

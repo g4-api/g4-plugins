@@ -1,0 +1,223 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"User32",
+		"UIAutomation"
+	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "pointer",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The `MoveUser32Mouse` plugin moves the mouse pointer using the Windows User32 API. ",
+		"This plugin supports both absolute movement to specified viewport coordinates and relative movement within a UI element or viewport using customizable offsets and alignment.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                 | Description                                                                                                                           |",
+		"|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Absolute Movement       | Moves the mouse cursor to specific (X, Y) coordinates on the viewport when absolute coordinates are provided.                         |",
+		"| Relative Movement       | Moves the mouse cursor relative to a target UI element or last known mouse pointer location using configurable offsets and alignment. |",
+		"| Dynamic Decision Making | Automatically determines whether to use absolute coordinates or element-relative offsets based on provided parameters.                |",
+		"",
+		"### Usage in RPA",
+		"",
+		"| Usage                    | Description                                                                                                             |",
+		"|--------------------------|-------------------------------------------------------------------------------------------------------------------------|",
+		"| Desktop Automation       | Integrate with RPA workflows to control the mouse position for native desktop applications using the User32 API.        |",
+		"| Precise Pointer Movement | Use absolute coordinates or element-relative offsets to precisely position the mouse cursor as required by the process. |",
+		"",
+		"### Usage in Automation Testing",
+		"",
+		"| Usage               | Description                                                                                                           |",
+		"|---------------------|-----------------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing          | Simulate user interactions by moving the mouse to specific areas of the screen or within UI elements.                 |",
+		"| Regression Testing  | Validate UI layouts and behavior by verifying consistent mouse pointer movements across different application states. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin is designed to work on **Windows** only."
+	],
+	"examples": [
+		{
+			"description": [
+				"Move the mouse cursor to absolute viewport coordinates (X: 300, Y: 400) without targeting any UI element."
+			],
+			"rule": {
+				"Argument": "{{$ --X:300 --Y:400}}",
+				"PluginName": "MoveUser32Mouse"
+			}
+		},
+		{
+			"description": [
+				"Move the mouse cursor relative to a UI element identified by the XPath `//div[@id='InteractiveArea']` with an offset of 15 pixels horizontally and 25 pixels vertically, aligned to the BottomCenter of the element."
+			],
+			"rule": {
+				"Argument": "{{$ --OffsetX:15 --OffsetY:25 --Alignment:BottomCenter}}",
+				"Locator": "Xpath",
+				"OnElement": "//div[@id='InteractiveArea']",
+				"PluginName": "MoveUser32Mouse"
+			}
+		},
+		{
+			"description": [
+				"Move the mouse cursor relative to the last know mouse pointer location with an offset of 15 pixels horizontally and 25 pixels vertically."
+			],
+			"rule": {
+				"Argument": "{{$ --OffsetX:15 --OffsetY:25}}",
+				"Locator": "Xpath",
+				"PluginName": "MoveUser32Mouse"
+			}
+		}
+	],
+	"key": "MoveUser32Mouse",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "0",
+			"description": [
+				"Specifies the horizontal offset (in pixels) to adjust the mouse position relative to the target UI element or to the last known mouse pointer location if the element was not provided."
+			],
+			"mandatory": false,
+			"name": "OffsetX",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Specifies the vertical offset (in pixels) to adjust the mouse position relative to the target UI element or to the last known mouse pointer location if the element was not provided."
+			],
+			"mandatory": false,
+			"name": "OffsetY",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Specifies the absolute X coordinate for moving the mouse when no UI element is targeted."
+			],
+			"mandatory": false,
+			"name": "X",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Specifies the absolute Y coordinate for moving the mouse when no UI element is targeted."
+			],
+			"mandatory": false,
+			"name": "Y",
+			"type": "Number"
+		},
+		{
+			"default": "MiddleCenter",
+			"description": [
+				"Defines the alignment for positioning the mouse relative to the target UI element.",
+				"Select an alignment option that best matches the desired click area within the element."
+			],
+			"mandatory": false,
+			"name": "Alignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Align the mouse to the top left corner of the element."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"Align the mouse to the top center of the element."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"Align the mouse to the top right corner of the element."
+					],
+					"name": "TopRight"
+				},
+				{
+					"description": [
+						"Align the mouse to the middle left side of the element."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"Align the mouse to the center of the element."
+					],
+					"name": "MiddleCenter"
+				},
+				{
+					"description": [
+						"Align the mouse to the middle right side of the element."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"Align the mouse to the bottom left corner of the element."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"Align the mouse to the bottom center of the element."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"Align the mouse to the bottom right corner of the element."
+					],
+					"name": "BottomRight"
+				}
+			]
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the XPath for the target UI element to which the mouse pointer will be moved.",
+				"This property is used when the movement should be relative to a specific UI element."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scopes": [
+		"WindowsNative"
+	],
+	"summary": [
+		"The `MoveUser32Mouse` plugin moves the mouse pointer using the Windows User32 API. ",
+		"It supports moving to absolute coordinates on the viewport as well as relative movement within a target UI element using configurable offsets and alignment. ",
+		"This plugin is ideal for desktop UI automation and testing on Windows platforms."
+	]
+}

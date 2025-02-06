@@ -1,0 +1,221 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"User32"
+	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "pointer",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `InvokeUser32Click` plugin is to perform click actions using the Windows User32 API. ",
+		"This allows automation scripts to interact with native UI elements in desktop applications, either by clicking at specific coordinates or on a target element with configurable offsets and alignment.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                   | Description                                                                                              |",
+		"|---------------------------|----------------------------------------------------------------------------------------------------------|",
+		"| Native Click Action       | Executes click actions using the User32 API for native Windows UI elements.                              |",
+		"| Coordinate-based Clicking | Supports clicking at specific (X, Y) coordinates when no target element is provided.                     |",
+		"| Element-specific Clicking | Moves the mouse to a target element with configurable offsets and alignment before performing the click. |",
+		"",
+		"### Usage in RPA",
+		"",
+		"| Usage                | Description                                                                                                       |",
+		"|----------------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| Desktop Automation   | Integrate with RPA workflows to perform click actions on native desktop UI elements using the Windows User32 API. |",
+		"| Flexible Interaction | Automate complex scenarios by specifying exact click coordinates or targeting specific UI elements with offsets.  |",
+		"",
+		"### Usage in Automation Testing",
+		"",
+		"| Usage              | Description                                                                                                           |",
+		"|--------------------|-----------------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing         | Verify the functionality of native UI components by simulating click actions with configurable offsets and alignment. |",
+		"| Regression Testing | Ensure consistent behavior of UI elements after updates by automating click sequences using the User32 API.           |",
+		"",
+		"### Platform",
+		"",
+		"This plugin is designed to work on **Windows** only."
+	],
+	"examples": [
+		{
+			"description": [
+				"Perform a click action at specific coordinates (X: 100, Y: 200) without targeting any element."
+			],
+			"rule": {
+				"Argument": "{{$ -X:100 --Y:200}}",
+				"PluginName": "InvokeUser32Click"
+			}
+		},
+		{
+			"description": [
+				"Perform a click action on a UI element identified by the XPath `//button[@id='SubmitButton']`, with an offset of 10 pixels horizontally and 20 pixels vertically, aligned to the TopLeft of the element."
+			],
+			"rule": {
+				"Argument": "{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}",
+				"Locator": "Xpath",
+				"OnElement": "//button[@id='SubmitButton']",
+				"PluginName": "InvokeUser32Click"
+			}
+		}
+	],
+	"key": "InvokeUser32Click",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "0",
+			"description": [
+				"Specifies the horizontal offset (in pixels) to adjust the click position relative to the target element."
+			],
+			"mandatory": false,
+			"name": "OffsetX",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Specifies the vertical offset (in pixels) to adjust the click position relative to the target element."
+			],
+			"mandatory": false,
+			"name": "OffsetY",
+			"type": "Number"
+		},
+		{
+			"default": "MiddleCenter",
+			"description": [
+				"Defines the alignment of the click relative to the target element. Choose an alignment that best fits your UI layout.",
+				"For example, 'MiddleCenter' will click at the center of the element, while 'TopLeft' will click at the upper left corner."
+			],
+			"mandatory": false,
+			"name": "Alignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Click at the top left corner of the element."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"Click at the top center of the element."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"Click at the top right corner of the element."
+					],
+					"name": "TopRight"
+				},
+				{
+					"description": [
+						"Click at the middle left side of the element."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"Click at the middle right side of the element."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"Click at the bottom left corner of the element."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"Click at the bottom center of the element."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"Click at the bottom right corner of the element."
+					],
+					"name": "BottomRight"
+				},
+				{
+					"description": [
+						"Click at the center of the element."
+					],
+					"name": "MiddleCenter"
+				}
+			]
+		},
+		{
+			"default": "0",
+			"description": [
+				"Specifies the X coordinate for a click action when no target element is provided."
+			],
+			"mandatory": false,
+			"name": "X",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Specifies the Y coordinate for a click action when no target element is provided."
+			],
+			"mandatory": false,
+			"name": "Y",
+			"type": "Number"
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Xpath",
+			"description": [
+				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the XPath for the target UI element where the click will be performed. ",
+				"This property is used when an element is targeted for the click action."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the parameters expression for the click action. ",
+				"Use this expression to dynamically set values such as offsets, alignment, and coordinates."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scopes": [
+		"WindowsNative"
+	],
+	"summary": [
+		"The `InvokeUser32Click` plugin performs click actions using the Windows User32 API. ",
+		"It supports both coordinate-based clicks when no target element is provided and element-specific clicks with configurable offsets and alignment. ",
+		"This plugin is designed for desktop UI automation and testing on Windows platforms."
+	]
+}
