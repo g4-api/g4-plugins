@@ -412,8 +412,7 @@ namespace G4.IntegrationTests.Framework
             // Create a CapabilitiesModel to encapsulate the driver capabilities.
             var capabilitiesModel = new CapabilitiesModel
             {
-                AlwaysMatch = capabilities,
-                FirstMatch = [new Dictionary<string, object>()]
+                AlwaysMatch = capabilities
             };
 
             // Build and return a dictionary of driver parameters.
@@ -422,7 +421,8 @@ namespace G4.IntegrationTests.Framework
             {
                 ["driver"] = $"{driver}",
                 ["driverBinaries"] = binariesPath,
-                ["capabilities"] = capabilitiesModel
+                ["capabilities"] = capabilitiesModel,
+                ["firstMatch"] = new[] { new Dictionary<string, object>() }
             };
         }
 
