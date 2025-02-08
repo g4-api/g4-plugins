@@ -385,6 +385,8 @@ namespace G4.UnitTests.Plugins.Common
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"3000\"}")]
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"00:00:03\"}")]
+        [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Timeout:3000}}\"}")]
+        [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Timeout:00:00:03}}\"}")]
         #endregion
         public void WaitFlowTimeoutTest(string ruleJson)
         {

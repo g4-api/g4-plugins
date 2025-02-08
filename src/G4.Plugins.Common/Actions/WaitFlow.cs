@@ -3,6 +3,7 @@ using G4.Extensions;
 using G4.Models;
 
 using System;
+using System.Linq;
 using System.Threading;
 
 namespace G4.Plugins.Common.Actions
@@ -15,7 +16,7 @@ namespace G4.Plugins.Common.Actions
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Check if the plugin data contains a condition
-            var isCondition = pluginData.Parameters.Count > 0;
+            var isCondition = pluginData.Parameters.Keys.Any(i => i.Equals("Condition", StringComparison.OrdinalIgnoreCase));
 
             // Determine whether to wait based on a condition or timeout
             return isCondition
@@ -26,11 +27,19 @@ namespace G4.Plugins.Common.Actions
         // Executes a wait timeout for the specified duration.
         private static PluginResponseModel WaitTimeout(PluginBase plugin, PluginDataModel pluginData)
         {
+            // Determine the timeout duration, either from plugin arguments or using the default timeout
+            var timeout = pluginData.Parameters.Keys.Any(i => i.Equals("Timeout", StringComparison.OrdinalIgnoreCase))
+                ? pluginData.Parameters.Get(key: "Timeout", defaultValue: "0").ConvertToTimeSpan()
+                : TimeSpan.FromSeconds(0);
+
             // Extract the timeout duration from the plugin data rule argument and convert it to a TimeSpan
-            var timeout = pluginData
-                .Rule
-                .Argument
-                .ConvertToTimeSpan(defaultValue: TimeSpan.FromSeconds(0));
+            if (timeout == TimeSpan.FromSeconds(0))
+            {
+                timeout = pluginData
+                    .Rule
+                    .Argument
+                    .ConvertToTimeSpan(defaultValue: TimeSpan.FromSeconds(0));
+            }
 
             // Pause execution for the specified timeout duration
             Thread.Sleep(timeout);
