@@ -47,7 +47,14 @@ namespace G4.Plugins.Ui.Actions.User32
             }
 
             // Send the keys to the element.
-            driver.SendKeys(text, delay);
+            if(delay == TimeSpan.Zero)
+            {
+                driver.SendKeys(text);
+            }
+            else
+            {
+                driver.SendKeys(text, delay);
+            }
 
             // Return new plugin response.
             return this.NewPluginResponse();
