@@ -33,7 +33,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
         public void NewDateAddTimeTest()
         {
             // Invoke the action and retrieve the response model.
-            var macroResult = Invoke<NewDate>(ruleJson: "{\"argument\":\"{{$New-Date --AddTime:24:00:00}}\"}")
+            var macroResult = Invoke<NewDate>(ruleJson: "{\"argument\":\"{{$New-Date --AddTime:24.00:00:00}}\"}")
                 .Response
                 .Entity[MacroResultKey]
                 .ToString();
@@ -67,7 +67,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
         public void NewDateSubtractTimeTest()
         {
             // Invoke the action and retrieve the response model.
-            var macroResult = Invoke<NewDate>(ruleJson: "{\"argument\":\"{{$New-Date --SubtructTime:24:00:00}}\"}")
+            var macroResult = Invoke<NewDate>(ruleJson: "{\"argument\":\"{{$New-Date --SubtructTime:24.00:00:00}}\"}")
                 .Response
                 .Entity[MacroResultKey]
                 .ToString();
