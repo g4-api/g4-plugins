@@ -98,6 +98,12 @@ namespace G4.Extensions
             // Initialize the IWebElement to null.
             IWebElement element = null;
 
+            // Check if the rule's OnElement property is empty.
+            if (string.IsNullOrEmpty(pluginData.Rule.OnElement))
+            {
+                return null;
+            }
+
             // Create a locator using the rule's locator type and value.
             var by = ByFactory.Get(locator: pluginData.Rule.Locator, locatorValue: pluginData.Rule.OnElement);
 
