@@ -9,6 +9,16 @@
 	"categories": [
 		"WebDriver"
 	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "keyboard",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
@@ -37,16 +47,6 @@
 		"| Comprehensive Test Scenarios | In automation testing scenarios for applications, the `SendKeyboardKey` plugin is invaluable. It allows scripts to dynamically control keyboard inputs, leading to more comprehensive test coverage, especially in scenarios involving input fields. |",
 		"| Ensuring UI Stability        | Post-user interactions, such as entering text into input fields, the plugin ensures that the UI remains stable for subsequent validations. This is crucial for accurately assessing the impact of keyboard inputs on the application's state.        |"
 	],
-	"context": {
-		"integration": {
-			"sequentialWorkflow": {
-				"$type": "Action",
-				"componentType": "task",
-				"iconProvider": "keyboard",
-				"model": "ActionRuleModel"
-			}
-		}
-	},
 	"examples": [
 		{
 			"description": [
