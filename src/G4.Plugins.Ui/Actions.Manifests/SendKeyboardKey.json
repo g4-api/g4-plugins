@@ -53,10 +53,10 @@
 				"Simulate pressing the `Enter` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
 			],
 			"rule": {
-				"Argument": "Enter",
-				"Locator": "CssSelector",
-				"OnElement": "#KeyboardKeyOutcome",
-				"PluginName": "SendKeyboardKey"
+				"argument": "Enter",
+				"locator": "CssSelector",
+				"onElement": "#KeyboardKeyOutcome",
+				"pluginName": "SendKeyboardKey"
 			}
 		},
 		{
@@ -64,10 +64,10 @@
 				"Simulate pressing the `Enter` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
 			],
 			"rule": {
-				"Argument": "{{$ --Key:Enter}}",
-				"Locator": "CssSelector",
-				"OnElement": "#KeyboardKeyOutcome",
-				"PluginName": "SendKeyboardKey"
+				"argument": "{{$ --Key:Enter}}",
+				"locator": "CssSelector",
+				"onElement": "#KeyboardKeyOutcome",
+				"pluginName": "SendKeyboardKey"
 			}
 		},
 		{
@@ -75,10 +75,10 @@
 				"Simulate pressing the `Enter` key followed by the `Backspace` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
 			],
 			"rule": {
-				"Argument": "{{$ --Key:Enter --Key:Backspace}}",
-				"Locator": "CssSelector",
-				"OnElement": "#KeyboardKeyOutcome",
-				"PluginName": "SendKeyboardKey"
+				"argument": "{{$ --Key:Enter --Key:Backspace}}",
+				"locator": "CssSelector",
+				"onElement": "#KeyboardKeyOutcome",
+				"pluginName": "SendKeyboardKey"
 			}
 		},
 		{
@@ -87,10 +87,10 @@
 				"This simulated keyboard input is targeted at the HTML element identified by the CSS selector `#KeyboardKeyOutcome` on a web page."
 			],
 			"rule": {
-				"Argument": "{{$ --Key:Enter --Key:Backspace --Delay:4000}}",
-				"Locator": "CssSelector",
-				"OnElement": "#KeyboardKeyOutcome",
-				"PluginName": "SendKeyboardKey"
+				"argument": "{{$ --Key:Enter --Key:Backspace --Delay:4000}}",
+				"locator": "CssSelector",
+				"onElement": "#KeyboardKeyOutcome",
+				"pluginName": "SendKeyboardKey"
 			}
 		},
 		{
@@ -99,10 +99,10 @@
 				"This simulated keyboard input is targeted at the HTML element identified by the CSS selector `#KeyboardKeyOutcome` on a web page."
 			],
 			"rule": {
-				"Argument": "{{$ --Key:Enter --Key:Backspace --Delay:00:00:04}}",
-				"Locator": "CssSelector",
-				"OnElement": "#KeyboardKeyOutcome",
-				"PluginName": "SendKeyboardKey"
+				"argument": "{{$ --Key:Enter --Key:Backspace --Delay:00:00:04}}",
+				"locator": "CssSelector",
+				"onElement": "#KeyboardKeyOutcome",
+				"pluginName": "SendKeyboardKey"
 			}
 		},
 		{
@@ -110,10 +110,10 @@
 				"First clear the content of the input element identified by the CSS selector `#KeyboardKeyOutcome` and then simulate pressing the `Enter` key."
 			],
 			"rule": {
-				"Argument": "{{$ --Key:Enter --Clear}}",
-				"Locator": "CssSelector",
-				"OnElement": "#KeyboardKeyOutcome",
-				"PluginName": "SendKeyboardKey"
+				"argument": "{{$ --Key:Enter --Clear}}",
+				"locator": "CssSelector",
+				"onElement": "#KeyboardKeyOutcome",
+				"pluginName": "SendKeyboardKey"
 			}
 		},
 		{
@@ -121,10 +121,10 @@
 				"First clear the content of the input element identified by the CSS selector `#KeyboardKeyOutcome` using `NativeClear` functionality and then simulate pressing the `Enter` key."
 			],
 			"rule": {
-				"Argument": "{{$ --Key:Enter --NativeClear}}",
-				"Locator": "CssSelector",
-				"OnElement": "#KeyboardKeyOutcome",
-				"PluginName": "SendKeyboardKey"
+				"argument": "{{$ --Key:Enter --NativeClear}}",
+				"locator": "CssSelector",
+				"onElement": "#KeyboardKeyOutcome",
+				"pluginName": "SendKeyboardKey"
 			}
 		}
 	],
@@ -176,7 +176,7 @@
 				"It allows you to define a sequence of keyboard interactions, including the keys to be pressed and any additional actions."
 			],
 			"mandatory": true,
-			"name": "Argument",
+			"name": "argument",
 			"type": "String"
 		},
 		{
@@ -185,7 +185,7 @@
 				"Specifies the strategy or method used to locate the element on which the keyboard actions will be simulated during automation."
 			],
 			"mandatory": false,
-			"name": "Locator",
+			"name": "locator",
 			"type": "String"
 		},
 		{
@@ -194,7 +194,7 @@
 				"It indicates the target element where the simulated keyboard interactions should take place."
 			],
 			"mandatory": true,
-			"name": "OnElement",
+			"name": "onElement",
 			"type": "String"
 		}
 	],

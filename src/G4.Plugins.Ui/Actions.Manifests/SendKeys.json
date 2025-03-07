@@ -53,10 +53,10 @@
 				"Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput`."
 			],
 			"rule": {
-				"Argument": "Hello World",
-				"Locator": "CssSelector",
-				"OnElement": "#TextInput",
-				"PluginName": "SendKeys"
+				"argument": "Hello World",
+				"locator": "CssSelector",
+				"onElement": "#TextInput",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
@@ -64,10 +64,10 @@
 				"Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput` using a parameterized argument."
 			],
 			"rule": {
-				"Argument": "{{$ --Keys:Hello World}}",
-				"Locator": "CssSelector",
-				"OnElement": "#TextInput",
-				"PluginName": "SendKeys"
+				"argument": "{{$ --Keys:Hello World}}",
+				"locator": "CssSelector",
+				"onElement": "#TextInput",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
@@ -75,10 +75,10 @@
 				"First clear the content of the input element identified by the CSS selector `#TextInput` and then send the text `Hello World`."
 			],
 			"rule": {
-				"Argument": "{{$ --Keys:Hello World --Clear}}",
-				"Locator": "CssSelector",
-				"OnElement": "#TextInput",
-				"PluginName": "SendKeys"
+				"argument": "{{$ --Keys:Hello World --Clear}}",
+				"locator": "CssSelector",
+				"onElement": "#TextInput",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
@@ -86,10 +86,10 @@
 				"First clear the content of the input element identified by the CSS selector `#TextInput` using `NativeClear` functionality and then send the text `Hello World`."
 			],
 			"rule": {
-				"Argument": "{{$ --Keys:Hello World --NativeClear}}",
-				"Locator": "CssSelector",
-				"OnElement": "#TextInput",
-				"PluginName": "SendKeys"
+				"argument": "{{$ --Keys:Hello World --NativeClear}}",
+				"locator": "CssSelector",
+				"onElement": "#TextInput",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
@@ -97,10 +97,10 @@
 				"Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput` with a delay of 2000 milliseconds between each character."
 			],
 			"rule": {
-				"Argument": "{{$ --Keys:Hello World --Delay:2000}}",
-				"Locator": "CssSelector",
-				"OnElement": "#TextInput",
-				"PluginName": "SendKeys"
+				"argument": "{{$ --Keys:Hello World --Delay:2000}}",
+				"locator": "CssSelector",
+				"onElement": "#TextInput",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
@@ -108,10 +108,10 @@
 				"Send the text `Hello` while holding down the `Shift` key to the HTML element identified by the CSS selector `#TextInput`. This will send the text `Hello` with the `Shift` key pressed, resulting in `HELLO` being typed."
 			],
 			"rule": {
-				"Argument": "{{$ --Keys:Hello --Modifier:Shift}}",
-				"Locator": "CssSelector",
-				"OnElement": "#TextInput",
-				"PluginName": "SendKeys"
+				"argument": "{{$ --Keys:Hello --Modifier:Shift}}",
+				"locator": "CssSelector",
+				"onElement": "#TextInput",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
@@ -119,10 +119,10 @@
 				"Send the text `Hello` while holding down both the `Ctrl` and `Alt` keys to the HTML element identified by the CSS selector `#TextInput`. This demonstrates sending text with multiple modifier keys pressed simultaneously."
 			],
 			"rule": {
-				"Argument": "{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}",
-				"Locator": "CssSelector",
-				"OnElement": "#TextInput",
-				"PluginName": "SendKeys"
+				"argument": "{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}",
+				"locator": "CssSelector",
+				"onElement": "#TextInput",
+				"pluginName": "SendKeys"
 			}
 		}
 	],
@@ -183,7 +183,7 @@
 				"It allows you to define a sequence of text interactions, including the text to be entered and any additional actions."
 			],
 			"mandatory": true,
-			"name": "Argument",
+			"name": "argument",
 			"type": "String|Expression"
 		},
 		{
@@ -192,7 +192,7 @@
 				"Specifies the strategy or method used to locate the element on which the text inputs will be simulated during automation."
 			],
 			"mandatory": false,
-			"name": "Locator",
+			"name": "locator",
 			"type": "String"
 		},
 		{
@@ -201,7 +201,7 @@
 				"It indicates the target element where the simulated text interactions should take place."
 			],
 			"mandatory": true,
-			"name": "OnElement",
+			"name": "onElement",
 			"type": "String"
 		}
 	],
