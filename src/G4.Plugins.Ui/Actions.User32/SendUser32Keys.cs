@@ -33,27 +33,20 @@ namespace G4.Plugins.Ui.Actions.User32
             var delayData = pluginData.Parameters.Get("Delay", "0");
             var delay = delayData.ConvertToTimeSpan(defaultValue: TimeSpan.Zero);
 
-            // Get the element using provided plugin data.
-            var element = this.GetUser32Element(pluginData);
+            // Get the element to send keys to. If no element is specified, set the element to null.
+            var element = string.IsNullOrEmpty(pluginData.Rule.OnElement)
+                ? null
+                : this.GetUser32Element(pluginData);
 
             // If the element found, set focus to the element.
             try
             {
                 element?.SetFocus();
+                driver.SendKeys(text, delay);
             }
             catch
             {
                 // Silently ignore the exception.
-            }
-
-            // Send the keys to the element.
-            if(delay == TimeSpan.Zero)
-            {
-                driver.SendKeys(text);
-            }
-            else
-            {
-                driver.SendKeys(text, delay);
             }
 
             // Return new plugin response.
