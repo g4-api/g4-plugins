@@ -1,6 +1,7 @@
 using G4.Models;
 using G4.Plugins;
 using G4.WebDriver.Extensions;
+using G4.WebDriver.Models;
 using G4.WebDriver.Remote;
 using G4.WebDriver.Remote.Uia;
 
@@ -137,5 +138,11 @@ namespace G4.Extensions
             // Return the element cast as IUser32Element.
             return element as IUser32Element;
         }
+
+        //public static void SendCommand(this IWebDriver driver, WebDriverCommandModel command)
+        //{
+        //    string absoluteUri = driver.Invoker.WebDriverService.ServerAddress.AbsoluteUri;
+        //    command.Send(absoluteUri);
+        //}
     }
 }
