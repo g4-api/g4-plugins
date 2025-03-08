@@ -128,7 +128,7 @@
 		"w3c": "POST /session/{session id}/user32/layouts"
 	},
 	"scopes": [
-		"Any"
+		"WindowsNative"
 	],
 	"summary": [
 		"The `SwitchKeyboardLayout` plugin switches the active keyboard layout through User32 API interactions, enabling automation and testing workflows to accurately simulate multilingual keyboard inputs in native Windows applications."

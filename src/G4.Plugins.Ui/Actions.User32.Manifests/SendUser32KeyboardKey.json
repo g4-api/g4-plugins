@@ -515,7 +515,7 @@
 		"w3c": "POST /session/{session id}/actions"
 	},
 	"scopes": [
-		"Any"
+		"WindowsNative"
 	],
 	"summary": [
 		"The `SendUser32KeyboardKey` plugin simulates keyboard inputs using User32 API interactions, targeting native application elements.",
