@@ -138,11 +138,5 @@ namespace G4.Extensions
             // Return the element cast as IUser32Element.
             return element as IUser32Element;
         }
-
-        //public static void SendCommand(this IWebDriver driver, WebDriverCommandModel command)
-        //{
-        //    string absoluteUri = driver.Invoker.WebDriverService.ServerAddress.AbsoluteUri;
-        //    command.Send(absoluteUri);
-        //}
     }
 }
