@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 
 namespace G4.Plugins.Ui.Actions.User32
@@ -99,7 +100,7 @@ namespace G4.Plugins.Ui.Actions.User32
             var json = JsonSerializer.Serialize(body, s_jsonOptions);
 
             // Create the content of the HTTP request with proper encoding and content type.
-            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
             request.Content = content;
 
             // Send the HTTP request synchronously and wait for the response.
