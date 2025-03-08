@@ -1,0 +1,136 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"User32"
+	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "keyboard",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The `SwitchKeyboardLayout` plugin switches the keyboard layout using the User32 API. It's essential for automation scenarios that require precise control over input languages in native Windows applications.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                 | Description                                                             |",
+		"|-------------------------|-------------------------------------------------------------------------|",
+		"| Dynamic Switching       | Dynamically switches keyboard layouts based on automation requirements. |",
+		"| User32 Integration      | Utilizes User32 API calls to reliably change layouts at the OS level.   |",
+		"| Supports Custom Layouts | Supports specifying different keyboard layouts dynamically.             |",
+		"",
+		"### Usage in RPA",
+		"",
+		"| Usage                          | Description                                                    |",
+		"|--------------------------------|----------------------------------------------------------------|",
+		"| Multilingual Automation        | Facilitates automation scenarios involving multiple languages. |",
+		"| Legacy Application Integration | Enables precise keyboard layout control in legacy apps.        |",
+		"",
+		"### Usage in Automation Testing",
+		"",
+		"| Usage               | Description                                                            |",
+		"|---------------------|------------------------------------------------------------------------|",
+		"| UI Language Testing | Ensures correct keyboard layout during UI tests.                       |",
+		"| Input Validation    | Validates multilingual input scenarios with accurate layout switching. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Switch keyboard layout to Hebrew Standard."
+			],
+			"rule": {
+				"argument": "{{$ --KeyboardLayout:he-IL}}",
+				"pluginName": "SwitchKeyboardLayout"
+			}
+		},
+		{
+			"description": [
+				"Switch keyboard layout to English (US)."
+			],
+			"rule": {
+				"argument": "{{$ --KeyboardLayout:en-US}}",
+				"pluginName": "SwitchKeyboardLayout"
+			}
+		},
+		{
+			"description": [
+				"Switch keyboard layout to English (US)."
+			],
+			"rule": {
+				"argument": "en-US",
+				"pluginName": "SwitchKeyboardLayout"
+			}
+		},
+		{
+			"description": [
+				"Switch keyboard layout to Hebrew Standard."
+			],
+			"rule": {
+				"argument": "he-IL",
+				"pluginName": "SwitchKeyboardLayout"
+			}
+		},
+		{
+			"description": [
+				"Switch keyboard layout to English (US)."
+			],
+			"rule": {
+				"pluginName": "SwitchKeyboardLayout"
+			}
+		}
+	],
+	"key": "SwitchKeyboardLayout",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"default": "en-US",
+			"description": [
+				"Specifies the keyboard layout to activate."
+			],
+			"mandatory": false,
+			"name": "KeyboardLayout",
+			"type": "String",
+			"values": [
+				{
+					"description": [ "English (US) keyboard layout." ],
+					"name": "en-US"
+				},
+				{
+					"description": [ "Hebrew Standard keyboard layout." ],
+					"name": "he-IL"
+				}
+			]
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Defines the keyboard layout identifier to switch to."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadkeyboardlayoutw",
+		"w3c": "POST /session/{session id}/user32/layouts"
+	},
+	"scopes": [
+		"WindowsNative"
+	],
+	"summary": [
+		"The `SwitchKeyboardLayout` plugin switches the active keyboard layout through User32 API interactions, enabling automation and testing workflows to accurately simulate multilingual keyboard inputs in native Windows applications."
+	]
+}
