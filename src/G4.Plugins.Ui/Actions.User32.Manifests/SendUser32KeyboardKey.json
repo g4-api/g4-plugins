@@ -1,0 +1,524 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"User32"
+	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "keyboard",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `SendUser32KeyboardKey` plugin is to simulate keyboard inputs using the User32 API, targeting native application elements. This capability is useful for automation scenarios where interactions with native or legacy applications are required.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                       |",
+		"|----------------------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| Native Application Support | Supports sending keyboard inputs to elements in native Windows applications using User32 interactions.            |",
+		"| Dynamic Configuration      | Enables dynamic control over keyboard inputs with parameters like `Key`, `Delay`, `Sticky`, and `KeyboardLayout`. |",
+		"| Robust Interaction         | Ensures accurate simulation of keyboard presses at the OS level, providing reliability in various scenarios.      |",
+		"",
+		"### Usage in RPA",
+		"",
+		"| Usage                 | Description                                                                                                   |",
+		"|-----------------------|---------------------------------------------------------------------------------------------------------------|",
+		"| Native App Automation | Enables RPA workflows to interact seamlessly with native application UI components via simulated key presses. |",
+		"| Legacy Systems        | Facilitates automation interactions with legacy systems that lack direct WebDriver support.                   |",
+		"",
+		"### Usage in Automation Testing",
+		"",
+		"| Usage                   | Description                                                                                                           |",
+		"|-------------------------|-----------------------------------------------------------------------------------------------------------------------|",
+		"| Application UI Testing  | Enhances test automation by simulating realistic keyboard interactions with native application elements.              |",
+		"| Comprehensive Scenarios | Provides broader test coverage by supporting keyboard actions typically inaccessible through standard WebDriver APIs. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Simulate pressing `Alt + Shift` to switch keyboard layout to Hebrew Standard."
+			],
+			"rule": {
+				"argument": "{{$ --Key:Alt --Key:Shift --Sticky --KeyboardLayout:he-IL}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing `Tab` key three times to navigate through input fields in a native application form, with a delay of 300 milliseconds between each press."
+			],
+			"rule": {
+				"argument": "{{$ --Key:Tab --Key:Tab --Key:Tab --Delay:300}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing `Ctrl + Shift + Esc` simultaneously to open Windows Task Manager."
+			],
+			"rule": {
+				"argument": "{{$ --Key:Ctrl --Key:Shift --Key:Esc --Sticky}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing `Alt + F4` to close the currently active native application window using sticky keys mode."
+			],
+			"rule": {
+				"argument": "{{$ --Key:Alt --Key:F4 --Sticky}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing `Ctrl + C` to copy selected text using User32 interactions."
+			],
+			"rule": {
+				"argument": "{{$ --Key:Control --Key:C}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing the sequence `Alt`, `F`, `F` to open the 'Save As' dialog in a Windows application, with a delay of 300 milliseconds between each key."
+			],
+			"rule": {
+				"argument": "{{$ --Key:Control --Key:Alt --Key:S --Delay:300}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing the `Arrow Down` key five times with a 150-millisecond delay to scroll through menu items in a native application."
+			],
+			"rule": {
+				"argument": "{{$ --Key:ArrowDown --Key:ArrowDown --Key:ArrowDown --Key:ArrowDown --Key:ArrowDown --Delay:150}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing `Windows + R` to open the Run dialog box using sticky keys."
+			],
+			"rule": {
+				"argument": "{{$ --Key:Meta --Key:r --Sticky}}",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		},
+		{
+			"description": [
+				"Simulate pressing `F5` to refresh the active native application or window."
+			],
+			"rule": {
+				"argument": "F5",
+				"pluginName": "SendUser32KeyboardKey"
+			}
+		}
+	],
+	"key": "SendUser32KeyboardKey",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Introduces a pause between consecutive keyboard inputs, allowing realistic simulation of user interactions."
+			],
+			"mandatory": false,
+			"name": "Delay",
+			"type": "Time|Number"
+		},
+		{
+			"description": [
+				"Specifies keyboard keys to simulate pressing. Supports multiple sequential keys."
+			],
+			"mandatory": false,
+			"name": "Key",
+			"type": "Array",
+			"values": [
+				{
+					"name": " ",
+					"description": [ "Represents the Spacebar key." ]
+				},
+				{
+					"name": "'",
+					"description": [ "Represents the Apostrophe (`'`) key." ]
+				},
+				{
+					"name": ",",
+					"description": [ "Represents the Comma (`,`) key." ]
+				},
+				{
+					"name": "-",
+					"description": [ "Represents the Hyphen (`-`) key." ]
+				},
+				{
+					"name": ".",
+					"description": [ "Represents the Period (`.`) key." ]
+				},
+				{
+					"name": "/",
+					"description": [ "Represents the Slash (`/`) key." ]
+				},
+				{
+					"name": "0",
+					"description": [ "Represents the `0` key." ]
+				},
+				{
+					"name": "1",
+					"description": [ "Represents the `1` key." ]
+				},
+				{
+					"name": "2",
+					"description": [ "Represents the `2` key." ]
+				},
+				{
+					"name": "3",
+					"description": [ "Represents the `3` key." ]
+				},
+				{
+					"name": "4",
+					"description": [ "Represents the `4` key." ]
+				},
+				{
+					"name": "5",
+					"description": [ "Represents the `5` key." ]
+				},
+				{
+					"name": "6",
+					"description": [ "Represents the `6` key." ]
+				},
+				{
+					"name": "7",
+					"description": [ "Represents the `7` key." ]
+				},
+				{
+					"name": "8",
+					"description": [ "Represents the `8` key." ]
+				},
+				{
+					"name": "9",
+					"description": [ "Represents the `9` key." ]
+				},
+				{
+					"name": ";",
+					"description": [ "Represents the Semicolon (`;`) key." ]
+				},
+				{
+					"name": "=",
+					"description": [ "Represents the Equals (`=`) key." ]
+				},
+				{
+					"name": "[",
+					"description": [ "Represents the Open bracket (`[`) key." ]
+				},
+				{
+					"name": "\\",
+					"description": [ "Represents the Backslash (`\\`) key." ]
+				},
+				{
+					"name": "]",
+					"description": [ "Represents the Close bracket (`]`) key." ]
+				},
+				{
+					"name": "`",
+					"description": [ "Represents the Grave accent (`` ` ``) key." ]
+				},
+
+				{
+					"name": "A",
+					"description": [ "Represents the `A` key." ]
+				},
+				{
+					"name": "B",
+					"description": [ "Represents the `B` key." ]
+				},
+				{
+					"name": "C",
+					"description": [ "Represents the `C` key." ]
+				},
+				{
+					"name": "D",
+					"description": [ "Represents the `D` key." ]
+				},
+				{
+					"name": "E",
+					"description": [ "Represents the `E` key." ]
+				},
+				{
+					"name": "F",
+					"description": [ "Represents the `F` key." ]
+				},
+				{
+					"name": "G",
+					"description": [ "Represents the `G` key." ]
+				},
+				{
+					"name": "H",
+					"description": [ "Represents the `H` key." ]
+				},
+				{
+					"name": "I",
+					"description": [ "Represents the `I` key." ]
+				},
+				{
+					"name": "J",
+					"description": [ "Represents the `J` key." ]
+				},
+				{
+					"name": "K",
+					"description": [ "Represents the `K` key." ]
+				},
+				{
+					"name": "L",
+					"description": [ "Represents the `L` key." ]
+				},
+				{
+					"name": "M",
+					"description": [ "Represents the `M` key." ]
+				},
+				{
+					"name": "N",
+					"description": [ "Represents the `N` key." ]
+				},
+				{
+					"name": "O",
+					"description": [ "Represents the `O` key." ]
+				},
+				{
+					"name": "P",
+					"description": [ "Represents the `P` key." ]
+				},
+				{
+					"name": "Q",
+					"description": [ "Represents the `Q` key." ]
+				},
+				{
+					"name": "R",
+					"description": [ "Represents the `R` key." ]
+				},
+				{
+					"name": "S",
+					"description": [ "Represents the `S` key." ]
+				},
+				{
+					"name": "T",
+					"description": [ "Represents the `T` key." ]
+				},
+				{
+					"name": "U",
+					"description": [ "Represents the `U` key." ]
+				},
+				{
+					"name": "V",
+					"description": [ "Represents the `V` key." ]
+				},
+				{
+					"name": "W",
+					"description": [ "Represents the `W` key." ]
+				},
+				{
+					"name": "X",
+					"description": [ "Represents the `X` key." ]
+				},
+				{
+					"name": "Y",
+					"description": [ "Represents the `Y` key." ]
+				},
+				{
+					"name": "Z",
+					"description": [ "Represents the `Z` key." ]
+				},
+				{
+					"name": "Alt",
+					"description": [ "Represents the Alt key." ]
+				},
+				{
+					"name": "Backspace",
+					"description": [ "Represents the Backspace key." ]
+				},
+				{
+					"name": "CapsLock",
+					"description": [ "Represents the Caps Lock key." ]
+				},
+				{
+					"name": "Center",
+					"description": [ "Represents the Center key." ]
+				},
+				{
+					"name": "Ctrl",
+					"description": [ "Represents the Control (Ctrl) key." ]
+				},
+				{
+					"name": "Del",
+					"description": [ "Represents the Delete key." ]
+				},
+				{
+					"name": "Down",
+					"description": [ "Represents the Down arrow key." ]
+				},
+				{
+					"name": "End",
+					"description": [ "Represents the End key." ]
+				},
+				{
+					"name": "Enter",
+					"description": [ "Represents the Enter key." ]
+				},
+				{
+					"name": "Esc",
+					"description": [ "Represents the Escape (Esc) key." ]
+				},
+				{
+					"name": "F1",
+					"description": [ "Represents the F1 key." ]
+				},
+				{
+					"name": "F2",
+					"description": [ "Represents the F2 key." ]
+				},
+				{
+					"name": "F3",
+					"description": [ "Represents the F3 key." ]
+				},
+				{
+					"name": "F4",
+					"description": [ "Represents the F4 key." ]
+				},
+				{
+					"name": "F5",
+					"description": [ "Represents the F5 key." ]
+				},
+				{
+					"name": "F6",
+					"description": [ "Represents the F6 key." ]
+				},
+				{
+					"name": "F7",
+					"description": [ "Represents the F7 key." ]
+				},
+				{
+					"name": "F8",
+					"description": [ "Represents the F8 key." ]
+				},
+				{
+					"name": "F9",
+					"description": [ "Represents the F9 key." ]
+				},
+				{
+					"name": "F10",
+					"description": [ "Represents the F10 key." ]
+				},
+				{
+					"name": "Home",
+					"description": [ "Represents the Home key." ]
+				},
+				{
+					"name": "Ins",
+					"description": [ "Represents the Insert key." ]
+				},
+				{
+					"name": "Left",
+					"description": [ "Represents the Left arrow key." ]
+				},
+				{
+					"name": "LShift",
+					"description": [ "Represents the Left Shift key." ]
+				},
+				{
+					"name": "Num",
+					"description": [ "Represents the Num Lock key." ]
+				},
+				{
+					"name": "PgDn",
+					"description": [ "Represents the Page Down key." ]
+				},
+				{
+					"name": "PgUp",
+					"description": [ "Represents the Page Up key." ]
+				},
+				{
+					"name": "PrtSc",
+					"description": [ "Represents the Print Screen key." ]
+				},
+				{
+					"name": "Right",
+					"description": [ "Represents the Right arrow key." ]
+				},
+				{
+					"name": "RShift",
+					"description": [ "Represents the Right Shift key." ]
+				},
+				{
+					"name": "Scroll",
+					"description": [ "Represents the Scroll Lock key." ]
+				},
+				{
+					"name": "Tab",
+					"description": [ "Represents the Tab key." ]
+				},
+				{
+					"name": "Up",
+					"description": [ "Represents the Up arrow key." ]
+				}
+			]
+		},
+		{
+			"description": [
+				"If enabled, keys are held down (sticky mode) until all specified keys are pressed, and then released together. Useful for combinations like shortcuts."
+			],
+			"mandatory": false,
+			"name": "Sticky",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Specifies the keyboard layout used to interpret keys when sending scan codes."
+			],
+			"mandatory": false,
+			"name": "KeyboardLayout",
+			"type": "String",
+			"values": [
+				{
+					"name": "en-US",
+					"description": [ "English (United States) keyboard layout." ]
+				},
+				{
+					"name": "he-IL",
+					"description": [ "Hebrew Standard keyboard layout." ]
+				}
+			]
+		}
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Defines the instructions for keyboard interactions to simulate through User32 API."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendinput",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"scopes": [
+		"Any"
+	],
+	"summary": [
+		"The `SendUser32KeyboardKey` plugin simulates keyboard inputs using User32 API interactions, targeting native application elements.",
+		"It supports dynamic key sequences, delays, sticky (shortcut) combinations, and specific keyboard layouts, enhancing automation scenarios for native Windows applications."
+	]
+}
