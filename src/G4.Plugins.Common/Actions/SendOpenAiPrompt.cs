@@ -1,5 +1,4 @@
-﻿using G4.Attributes;
-using G4.Extensions;
+﻿using G4.Extensions;
 using G4.Models;
 
 using System.Net.Http;

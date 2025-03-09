@@ -1,7 +1,6 @@
 using G4.Models;
 using G4.Plugins;
 using G4.WebDriver.Extensions;
-using G4.WebDriver.Models;
 using G4.WebDriver.Remote;
 using G4.WebDriver.Remote.Uia;
 
