@@ -19,32 +19,36 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `SendUser32Keys` plugin is to simulate keyboard input using the Windows User32 API. This enables automation scripts to interact with native UI elements in desktop applications where standard WebDriver interactions may not apply.",
+		"The `SendUser32Keys` plugin simulates typing text character-by-character into native Windows application elements using the Windows User32 API. It is designed for scenarios requiring realistic text input automation.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature       | Description                                                                                                        |",
-		"|---------------|--------------------------------------------------------------------------------------------------------------------|",
-		"| User32 API    | Utilizes the Windows User32 API to send keys directly to UI elements, ensuring compatibility with native controls. |",
-		"| Delay Support | Allows configurable delays between key presses, enabling simulation of realistic typing speeds.                    |",
+		"| Feature                | Description                                                                                                          |",
+		"|------------------------|----------------------------------------------------------------------------------------------------------------------|",
+		"| Character-by-Character | Sends each character individually, mimicking human typing behavior.                                                  |",
+		"| Configurable Delay     | Supports delays between each character to simulate realistic typing speed.                                           |",
+		"| Keyboard Layout        | Supports specifying keyboard layouts to ensure correct character representation, especially for multilingual inputs. |",
+		"",
+		"### Limitations",
+		"",
+		"- Does not support sending special keyboard keys like `Tab`, `Escape`, etc. Use `SendUser32KeyboardKey` plugin for those scenarios.",
+		"- Does not support sticky keys or simultaneous key presses.",
 		"",
 		"### Usage in RPA",
 		"",
-		"| Usage                 | Description                                                                                               |",
-		"|-----------------------|-----------------------------------------------------------------------------------------------------------|",
-		"| Desktop Automation    | Integrate with RPA workflows to send key inputs to native UI elements in desktop applications.            |",
-		"| Complex Key Sequences | Automate scenarios requiring custom key sequences with delays, such as form filling and data entry tasks. |",
+		"| Usage                 | Description                                                                                |",
+		"|-----------------------|--------------------------------------------------------------------------------------------|",
+		"| Text Input Automation | Ideal for automating realistic text entry in forms or input fields in native applications. |",
 		"",
 		"### Usage in Automation Testing",
 		"",
-		"| Usage              | Description                                                                                                  |",
-		"|--------------------|--------------------------------------------------------------------------------------------------------------|",
-		"| UI Testing         | Verify the behavior and response of native UI elements by sending simulated key inputs.                      |",
-		"| Regression Testing | Ensure consistent application behavior after updates by automating key press sequences using the User32 API. |",
+		"| Usage                     | Description                                                                                  |",
+		"|---------------------------|----------------------------------------------------------------------------------------------|",
+		"| Native UI Text Validation | Facilitates accurate testing of text input handling by simulating realistic typing behavior. |",
 		"",
-		"### Platform",
+		"### Supported Platform",
 		"",
-		"This plugin is designed to work on **Windows** only."
+		"This plugin is specifically designed for **Windows OS** environments."
 	],
 	"examples": [
 		{
@@ -52,19 +56,28 @@
 				"Send the text `Hello User32` to the UI element identified by the XPath `//input[@id='User32Input']`."
 			],
 			"rule": {
-				"Argument": "Hello User32",
-				"OnElement": "//input[@id='User32Input']",
-				"PluginName": "SendUser32Keys"
+				"argument": "Hello User32",
+				"onElement": "//input[@id='User32Input']",
+				"pluginName": "SendUser32Keys"
 			}
 		},
 		{
 			"description": [
-				"Send the text `Hello User32` with a delay of 1000 milliseconds between each key press to the UI element identified by the XPath `//input[@id='User32Input']`."
+				"Send the text `Hello User32` with a delay of 500 milliseconds between each character to the UI element identified by XPath `//input[@id='User32Input']`."
 			],
 			"rule": {
-				"Argument": "{{$ --Keys:Hello User32 --Delay:1000}}",
-				"OnElement": "//input[@id='User32Input']",
-				"PluginName": "SendUser32Keys"
+				"argument": "{{$ --Keys:Hello User32 --Delay:500}}",
+				"onElement": "//input[@id='User32Input']",
+				"pluginName": "SendUser32Keys"
+			}
+		},
+		{
+			"description": [
+				"Send the Hebrew text `שלום` ('Hello') using the Hebrew Standard keyboard layout."
+			],
+			"rule": {
+				"argument": "{{$ --Keys:שלום --KeyboardLayout:he-IL}}",
+				"pluginName": "SendUser32Keys"
 			}
 		}
 	],
@@ -73,7 +86,7 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the text or key sequence to be sent to the target UI element. If not provided, the plugin will use the value from the rule's Argument."
+				"Specifies the text to be typed into the target UI element. If not provided, the plugin uses the rule's Argument."
 			],
 			"mandatory": false,
 			"name": "Keys",
@@ -81,18 +94,36 @@
 		},
 		{
 			"description": [
-				"Defines the delay between key presses. The delay can be specified in milliseconds or as a time expression."
+				"Specifies the delay between typing each character, simulating realistic human typing speed."
 			],
 			"mandatory": false,
 			"name": "Delay",
 			"type": "Time|Number"
+		},
+		{
+			"description": [
+				"Specifies the keyboard layout used to interpret characters, essential for multilingual inputs."
+			],
+			"mandatory": false,
+			"name": "KeyboardLayout",
+			"type": "String",
+			"values": [
+				{
+					"name": "en-US",
+					"description": [ "English (US) keyboard layout." ]
+				},
+				{
+					"name": "he-IL",
+					"description": [ "Hebrew Standard keyboard layout." ]
+				}
+			]
 		}
 	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the key sequence or text to send to the UI element. This can be provided as a literal string or as an expression."
+				"Defines the text to send character-by-character to the UI element. Can be a literal string or expression."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -101,7 +132,7 @@
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+				"Specifies the locator strategy for the target UI element."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -109,7 +140,7 @@
 		},
 		{
 			"description": [
-				"Specifies the XPath for the target UI element where the keys will be sent."
+				"Specifies the XPath locator for the UI element to type text into. If omitted, text is sent to the currently focused element."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -117,13 +148,13 @@
 		}
 	],
 	"protocol": {
-		"apiDocumentation": "None",
-		"w3c": "None"
+		"apiDocumentation": "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendinput",
+		"w3c": "POST /session/{session id}/user32/value"
 	},
 	"scopes": [
-		"WindowsNative"
+		"Any"
 	],
 	"summary": [
-		"The `SendUser32Keys` plugin sends keyboard input to UI elements using the Windows User32 API. It supports custom key sequences with configurable delays and is designed to work on Windows only, making it ideal for desktop UI automation tasks where native Windows interactions are required."
+		"The `SendUser32Keys` plugin simulates realistic typing of text into native Windows application elements using the User32 API, sending characters individually with configurable delays and keyboard layouts."
 	]
 }
