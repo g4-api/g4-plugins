@@ -446,7 +446,7 @@ action_rule = {
 
 ## Properties
 
-### Argument (Argument)
+### Argument (argument)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -459,11 +459,11 @@ action_rule = {
 Specifies the set of instructions or parameters for the keyboard actions to be simulated during automation. 
 It allows you to define a sequence of keyboard interactions, including the keys to be pressed and any additional actions.
 
-### Locator (Locator)
+### Locator (locator)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -471,7 +471,7 @@ It allows you to define a sequence of keyboard interactions, including the keys 
 
 Specifies the strategy or method used to locate the element on which the keyboard actions will be simulated during automation.
 
-### On Element (OnElement)
+### On Element (onElement)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -538,6 +538,9 @@ Used to specify a keyboard key or a sequence of keyboard keys that should be sen
 Indicates that a native clearing action will consistently be executed before any subsequent keyboard actions on the targeted input element. 
 This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-send-keys](https://www.w3.org/TR/webdriver/#element-send-keys)

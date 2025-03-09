@@ -166,3 +166,7 @@ action_rule = {
 | **Value Type**    | String            |
 
 Specifies the name of the session parameter to be fetched.
+
+## Scope
+
+* Any

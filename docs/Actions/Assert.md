@@ -8,8 +8,8 @@
 
 ### Purpose
 
-The `Assert` plugin is a crucial component in the world of Robotic Process Automation (RPA) and automation testing.
-Its primary purpose is to facilitate the validation of expected conditions during the execution of automation scripts.
+The `Assert` plugin is a crucial component in the world of Robotic Process Automation (RPA) and automation testing. 
+Its primary purpose is to facilitate the validation of expected conditions during the execution of automation scripts. 
 By asserting specific conditions, it ensures that the application or system under test behaves as anticipated, contributing to the overall reliability and accuracy of automated processes.
 
 ### Key Features and Functionality
@@ -96,7 +96,6 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:MyParam --Scope:Session}}"
 }
 ```
-
 ### Example No.2
 
 Assert that an alert exists.
@@ -148,7 +147,6 @@ action_rule = {
     "argument": "{{$ --Condition:AlertExists}}"
 }
 ```
-
 ### Example No.3
 
 Assert that the text of the element identified by the CSS selector '#greeting' matches the regular expression '^Hello.*'.
@@ -210,7 +208,6 @@ action_rule = {
     "onElement": "#greeting"
 }
 ```
-
 ### Example No.4
 
 Assert that the 'class' attribute of the element identified by the CSS selector '#elementId' does not match the regular expression '^hidden$'.
@@ -277,7 +274,6 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
-
 ### Example No.5
 
 Assert that the text length of the element identified by the CSS selector '#description' is greater than 5.
@@ -339,7 +335,6 @@ action_rule = {
     "onElement": "#description"
 }
 ```
-
 ### Example No.6
 
 Assert that the element identified by the CSS selector '#hiddenElement' is visible.
@@ -401,7 +396,6 @@ action_rule = {
     "onElement": "#hiddenElement"
 }
 ```
-
 ### Example No.7
 
 Assert that the numeric value of the element identified by the CSS selector '#price' is less than or equal to 100.
@@ -463,7 +457,6 @@ action_rule = {
     "onElement": "#price"
 }
 ```
-
 ### Example No.8
 
 Assert that the numeric value of the element identified by the CSS selector '#score' is greater than or equal to 85.
@@ -525,7 +518,6 @@ action_rule = {
     "onElement": "#score"
 }
 ```
-
 ### Example No.9
 
 Assert that the value of the `value` attribute of the element with the CSS selector `#ElementActive` is equal to `Foo Bar`.
@@ -592,7 +584,6 @@ action_rule = {
     "onElement": "#ElementActive"
 }
 ```
-
 ### Example No.10
 
 Assert that the value of the `value` attribute of the element with the CSS selector `#ElementActive` is equal to `Bar`, applying the regular expression `B.*$` before validation.
@@ -664,7 +655,6 @@ action_rule = {
     "regularExpression": "B.*$"
 }
 ```
-
 ### Example No.11
 
 Validate the absence of an alert in the current browser session.
@@ -716,7 +706,6 @@ action_rule = {
     "argument": "{{$ --Condition:AlertNotExists}}"
 }
 ```
-
 ### Example No.12
 
 Validate that the text content of the element identified by the CSS selector `#ElementText` is equal to the expected value `ElementText`.
@@ -864,7 +853,7 @@ It is a key part of the rule definition and influences how the validation or ver
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -972,3 +961,7 @@ Each operator plugin introduces specific operators for use in rule configuration
 
 As new operator plugins are introduced or existing ones are updated, the `Operator` parameter seamlessly incorporates these changes. 
 This ensures that automation rules remain adaptable and can leverage the latest operator capabilities without requiring explicit modifications to the rule structures.
+
+## Scope
+
+* Any

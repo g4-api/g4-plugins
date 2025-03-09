@@ -556,6 +556,9 @@ Specifies the type of comparison or operation to be performed when evaluating th
 
 Specifies the expected count value that the elements matching the locator should meet during the assertion.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#find-elements](https://www.w3.org/TR/webdriver/#find-elements)

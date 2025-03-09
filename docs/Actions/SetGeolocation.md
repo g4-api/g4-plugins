@@ -187,6 +187,10 @@ The longitude coordinate to set for the device's geolocation. It represents the 
 
 The altitude value to set for the device's geolocation. It represents the height above the Earth's surface.
 
+## Scope
+
+* Mobile Native
+* Mobile Web
 ## See Also
 
 apiDocumentation: [https://appium.readthedocs.io/en/latest/en/commands/session/geolocation/set-geolocation/#http-api-specifications](https://appium.readthedocs.io/en/latest/en/commands/session/geolocation/set-geolocation/#http-api-specifications)

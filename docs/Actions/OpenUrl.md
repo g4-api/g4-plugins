@@ -327,33 +327,21 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
+| Attribute             | Value                 |
+|-----------------------|-----------------------|
+| **Default Value**     | Null                  |
+| **Depends On**        | None                  |
+| **Mandatory**         | No                    |
+| **Multiple**          | No                    |
+| **Value Type**        | String|Uri|Expression |
 
 Specifies the URL to navigate to if no element is provided or if a direct URL is needed.
-
-### On Element (OnElement)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Specifying the target element from which the URL should be retrieved for navigation.
 
 ### Locator (Locator)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -373,6 +361,18 @@ Specifying the type of locator used to identify the target element defined by th
 
 Retrieves the URL from the specified attribute of the target element.
 
+### On Element (OnElement)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifying the target element from which the URL should be retrieved for navigation.
+
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
@@ -385,6 +385,10 @@ Retrieves the URL from the specified attribute of the target element.
 
 Uses a regular expression to match and extract the desired part of the URL from the target element.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#navigate-to](https://www.w3.org/TR/webdriver/#navigate-to)

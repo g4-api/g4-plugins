@@ -300,7 +300,7 @@ It acts as a configurable parameter, enabling users to tailor the plugin's actio
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -313,7 +313,7 @@ This parameter allows users to specify a duration, either in milliseconds or a f
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | 1                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -322,6 +322,10 @@ This parameter allows users to specify a duration, either in milliseconds or a f
 The number of iterations for the backward navigation process. 
 It is instrumental in scenarios where repetitive navigation actions are essential for achieving specific automation objectives.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#back](https://www.w3.org/TR/webdriver/#back)

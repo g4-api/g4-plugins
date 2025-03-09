@@ -317,6 +317,9 @@ True or False values.
 
 Date and/or time values.
 
+## Scope
+
+* Any
 ## See Also
 
 w3c: [https://www.w3.org/TR/webdriver/](https://www.w3.org/TR/webdriver/)

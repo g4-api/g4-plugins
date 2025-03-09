@@ -155,6 +155,18 @@ action_rule = {
 The `Argument` property allows you to specify the frame to switch to by its index. 
 If an index is provided, the plugin switches to the frame at that index.
 
+### Locator (Locator)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Xpath             |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifies the locator strategy used to identify the target frame element defined by the `OnElement` property.
+
 ### On Element (OnElement)
 
 | Attribute         | Value             |
@@ -167,18 +179,10 @@ If an index is provided, the plugin switches to the frame at that index.
 
 Specifies the target frame element on the web page where the switching action will be performed.
 
-### Locator (Locator)
+## Scope
 
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Specifies the locator strategy used to identify the target frame element defined by the `OnElement` property.
-
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#switch-to-frame](https://www.w3.org/TR/webdriver/#switch-to-frame)

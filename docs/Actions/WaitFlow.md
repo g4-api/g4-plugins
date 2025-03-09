@@ -327,7 +327,7 @@ Defines the duration to wait or the condition to evaluate, based on the type of 
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -369,7 +369,7 @@ Specifies the target element on which conditions will be evaluated during the au
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Assert            |
+| **Value Type**    | Assertion         |
 
 Specifies the criteria or state that must be evaluated or met during the execution of a plugin or action.
 
@@ -408,3 +408,7 @@ Specifies the type of comparison or operation to be performed when evaluating a 
 | **Value Type**    | Number|Time       |
 
 Specifies the maximum duration the automation script should wait for a condition to be met before proceeding with the next step, after which it will terminate.
+
+## Scope
+
+* Any

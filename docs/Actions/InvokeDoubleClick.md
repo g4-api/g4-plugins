@@ -196,7 +196,7 @@ action_rule = {
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -216,6 +216,9 @@ Specifies the locator strategy used to find the target element for the double-cl
 
 Specifies the target element for the double-click action, located using the specified locator strategy.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#actions](https://www.w3.org/TR/webdriver/#actions)

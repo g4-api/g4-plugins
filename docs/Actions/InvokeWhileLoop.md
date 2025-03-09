@@ -477,7 +477,7 @@ Defines a condition or criteria that guides the behavior of a plugin during exec
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -570,3 +570,7 @@ Specifies the type of comparison or operation to be performed when evaluating a 
 | **Value Type**    | Number|Time       |
 
 Specifies the maximum duration the automation script should wait for a condition to be met before proceeding with the next step, after which it will terminate.
+
+## Scope
+
+* Any

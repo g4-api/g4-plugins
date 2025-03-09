@@ -308,7 +308,7 @@ Depending on the specified `OnAttribute` property, the `Argument` can represent 
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -357,6 +357,10 @@ It will search for an option whose value attribute matches the specified argumen
 Specifies the target dropdown menu element on the web page where the selection action will be performed. 
 It indicates the HTML element that contains the options within the dropdown menu.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-click](https://www.w3.org/TR/webdriver/#element-click)

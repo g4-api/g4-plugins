@@ -385,6 +385,10 @@ This input can be used to interact with the alert in a customized way, such as e
 
 For example, if the `Keys` parameter is set to `Username123`, the plugin will send the text `Username123` to the alert dialog, allowing it to interact with any input fields or prompts within the dialog.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#user-prompts](https://www.w3.org/TR/webdriver/#user-prompts)

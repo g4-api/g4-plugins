@@ -474,6 +474,9 @@ Specifies the type of comparison or operation to be performed when evaluating th
 
 Specifies the value or pattern that the WebDriver type name is expected to match during the assertion.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#new-session](https://www.w3.org/TR/webdriver/#new-session)

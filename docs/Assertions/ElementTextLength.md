@@ -453,6 +453,9 @@ Specifies the type of comparison or operation to be performed when evaluating th
 
 Specifies the expected length value that the element's text content should meet during the assertion.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-element-text](https://www.w3.org/TR/webdriver/#get-element-text)

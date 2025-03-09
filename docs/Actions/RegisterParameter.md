@@ -385,18 +385,6 @@ action_rule = {
 
 ## Properties
 
-### On Element (OnElement)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Specifies the web element from which the parameter value can be obtained if not directly provided.
-
 ### Argument (Argument)
 
 | Attribute         | Value             |
@@ -409,6 +397,18 @@ Specifies the web element from which the parameter value can be obtained if not 
 
 Specifies the argument value that will be logged and used as the parameter name during the execution of the plugin. This can be a parameter name or a CLI expression.
 
+### Locator (Locator)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Xpath             |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifies how elements should be located on a webpage or within an application.
+
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
@@ -420,6 +420,18 @@ Specifies the argument value that will be logged and used as the parameter name 
 | **Value Type**    | String            |
 
 Specifies the attribute of the web element from which the value should be extracted.
+
+### On Element (OnElement)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifies the web element from which the parameter value can be obtained if not directly provided.
 
 ### Regular Expression (RegularExpression)
 
@@ -482,3 +494,7 @@ Specifies the environment in which the parameters are managed. It allows for def
 | **Value Type**    | String            |
 
 Specifies the value of the parameter to be registered.
+
+## Scope
+
+* Any

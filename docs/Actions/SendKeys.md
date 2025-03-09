@@ -447,7 +447,7 @@ action_rule = {
 
 ## Properties
 
-### Argument (Argument)
+### Argument (argument)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -460,11 +460,11 @@ action_rule = {
 Specifies the set of instructions or parameters for the text inputs to be simulated during automation. 
 It allows you to define a sequence of text interactions, including the text to be entered and any additional actions.
 
-### Locator (Locator)
+### Locator (locator)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -472,7 +472,7 @@ It allows you to define a sequence of text interactions, including the text to b
 
 Specifies the strategy or method used to locate the element on which the text inputs will be simulated during automation.
 
-### On Element (OnElement)
+### On Element (onElement)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -552,6 +552,9 @@ This flag ensures that the content of the input field is emptied or cleared, sim
 Used to specify modifier keys (such as `Shift`, `Ctrl`, `Alt`) to be held down while sending the text inputs. 
 This allows for complex text entry scenarios where modifiers are required.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-send-keys](https://www.w3.org/TR/webdriver/#element-send-keys)

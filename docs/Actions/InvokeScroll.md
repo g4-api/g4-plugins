@@ -494,6 +494,18 @@ action_rule = {
 
 Provides additional instructions or parameters to control the behavior of the scrolling action.
 
+### Locator (Locator)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Xpath             |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifies the type of locator used to identify the target element defined by the `OnElement` property.
+
 ### On Element (OnElement)
 
 | Attribute         | Value             |
@@ -505,18 +517,6 @@ Provides additional instructions or parameters to control the behavior of the sc
 | **Value Type**    | String            |
 
 Specifies the target element to which the scrolling action should be applied.
-
-### Locator (Locator)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Specifies the type of locator used to identify the target element defined by the `OnElement` property.
 
 ## Parameters
 
@@ -568,6 +568,10 @@ Specifies the horizontal scrolling offset from the left edge of the overflow ele
 
 Specifies the vertical scrolling offset from the top of the overflow element or top of the page to which the scrolling action is applied.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#execute-script](https://www.w3.org/TR/webdriver/#execute-script)

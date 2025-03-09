@@ -174,6 +174,10 @@ action_rule = {
 }
 ```
 
+## Scope
+
+* Mobile Native
+* Mobile Web
 ## See Also
 
 apiDocumentation: [https://appium.readthedocs.io/en/latest/en/commands/device/keys/is-keyboard-shown/#http-api-specifications](https://appium.readthedocs.io/en/latest/en/commands/device/keys/is-keyboard-shown/#http-api-specifications)

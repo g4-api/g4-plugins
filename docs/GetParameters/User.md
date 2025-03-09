@@ -169,3 +169,7 @@ action_rule = {
 | **Value Type**    | String            |
 
 Specifies the name of the user parameter to be fetched.
+
+## Scope
+
+* Any

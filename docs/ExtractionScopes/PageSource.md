@@ -211,6 +211,10 @@ Specifies how the extracted data will be collected and stored, such as saving it
 Specifies a regular expression to be applied to the extracted content before it is processed. 
 This allows for more flexible validation and extraction of text that may require pattern matching.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://html-agility-pack.net/documentation](https://html-agility-pack.net/documentation)

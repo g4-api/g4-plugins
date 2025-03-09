@@ -2479,3 +2479,7 @@ A 64-bit signed integer.
 ##### S Byte
 
 An 8-bit signed integer.
+
+## Scope
+
+* Any

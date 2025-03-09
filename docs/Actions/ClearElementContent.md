@@ -230,7 +230,7 @@ Options include introducing a delay between key presses or using native clear ac
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
@@ -279,6 +279,11 @@ This delay helps to simulate a more realistic user interaction during the cleari
 Indicates that the content should be cleared by simulating backspace key presses, mimicking a manual clear action. 
 This approach is useful for scenarios where a more human-like interaction is needed.
 
+## Scope
+
+* Mobile Web
+* Os Native
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-clear](https://www.w3.org/TR/webdriver/#element-clear)

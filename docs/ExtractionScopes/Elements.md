@@ -202,6 +202,9 @@ This allows for more flexible data extraction by capturing specific patterns wit
 
 Specifies how the extracted data will be collected and stored, such as saving it in JSON format or another supported format.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#find-elements](https://www.w3.org/TR/webdriver/#find-elements)

@@ -138,3 +138,7 @@ action_rule = {
 | **Value Type**    | String            |
 
 Specifies the output destination where the collected data will be saved (e.g., `/Path/To/My/File/DataFile.csv`).
+
+## Scope
+
+* Any

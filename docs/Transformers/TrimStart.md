@@ -258,3 +258,7 @@ In the context of transformers used after a rule execution, `OnElement` refers t
 
 Specifies the characters to be trimmed from the beginning of the input text.
 If not provided, the transformer will trim whitespace characters by default.
+
+## Scope
+
+* Any

@@ -570,3 +570,7 @@ Specifies the value or pattern that the automation script expects to find or mat
 | **Value Type**    | Operator          |
 
 Specifies the type of comparison or operation to be performed when evaluating a condition.
+
+## Scope
+
+* Any

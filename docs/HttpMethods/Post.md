@@ -698,3 +698,7 @@ Multiple headers can be added using the syntax `{{$ --Header:header1name=header1
 | **Value Type**    | String            |
 
 Specifies the target URL for the HTTP POST request.
+
+## Scope
+
+* Any

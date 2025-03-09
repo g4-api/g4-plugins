@@ -151,6 +151,10 @@ action_rule = {
 
 Specifies the regex pattern used to match and extract the desired portion of the URL.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-current-url](https://www.w3.org/TR/webdriver/#get-current-url)

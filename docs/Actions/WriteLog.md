@@ -146,3 +146,7 @@ action_rule = {
 | **Value Type**    | String|Expression |
 
 Specifies the message or information to be logged. This can be a static message or a dynamic value retrieved from parameters.
+
+## Scope
+
+* Any

@@ -18,7 +18,9 @@ permissions:
 on:
   push:
     branches:
-      - main
+      - none
+    paths:
+      - 'src/**'
 
 env:
   #

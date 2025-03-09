@@ -167,3 +167,7 @@ Specifies the string value to be compared in the not match check.
 | **Value Type**    | Regex             |
 
 Specifies the regular expression to be compared against the string value.
+
+## Scope
+
+* Any

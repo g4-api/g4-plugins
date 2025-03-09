@@ -194,20 +194,6 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Providing additional instructions or parameters to control the behavior of the window opening action.
-
-## Parameters
-
-### Argument (Argument)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
 Specifies the type of new window to open (`tab` or `window`).
 
 #### Values
@@ -219,6 +205,10 @@ Open a new browser tab.
 
 Open a new browser window.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#new-window](https://www.w3.org/TR/webdriver/#new-window)

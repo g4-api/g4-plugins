@@ -626,6 +626,10 @@ Specifies the type of comparison or operation to be performed when evaluating th
 
 Specifies the value or pattern that the element's attribute is expected to match during the assertion.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-element-attribute](https://www.w3.org/TR/webdriver/#get-element-attribute)

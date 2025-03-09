@@ -225,3 +225,7 @@ action_rule = {
 | **Value Type**    | String            |
 
 The `OnElement` property specifies the name of the environment variable to be retrieved.
+
+## Scope
+
+* Any

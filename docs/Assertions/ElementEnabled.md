@@ -177,6 +177,9 @@ This can be a CSS selector, XPath, or other locator strategy to identify the ele
 Specifies the locator strategy used to identify the element for the enabled state validation. 
 Common strategies include CSS selectors, XPath, ID, and others.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#is-element-enabled](https://www.w3.org/TR/webdriver/#is-element-enabled)

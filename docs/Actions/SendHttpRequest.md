@@ -1174,7 +1174,7 @@ The HTTP status code is a three-digit numeric code returned by the server indica
 
 ## Properties
 
-### Argument (argument)
+### Argument (Argument)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -1187,7 +1187,7 @@ The HTTP status code is a three-digit numeric code returned by the server indica
 Provides a comprehensive and adaptable way to configure an HTTP request. 
 It allows for the dynamic inclusion of URLs, request bodies, content types, HTTP methods, headers, and other parameters.
 
-### On Attribute (onAttribute)
+### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -1200,7 +1200,7 @@ It allows for the dynamic inclusion of URLs, request bodies, content types, HTTP
 Used to specify and extract a specific attribute value from an XML element. 
 This is particularly relevant when dealing with XML data, where elements can have associated attributes containing additional information.
 
-### On Element (onElement)
+### On Element (OnElement)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -1213,11 +1213,11 @@ This is particularly relevant when dealing with XML data, where elements can hav
 Used to target elements using either XPath or JSONPath expressions, depending on the type of response the API returns (XML or JSON). 
 This flexibility allows the rule to handle different response formats appropriately.
 
-### Regular Expression (regularExpression)
+### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -1362,3 +1362,7 @@ The default behavior assumes a `GET` request if the method is not explicitly pro
 | **Value Type**    | String            |
 
 Specifies the target URL for the HTTP POST request.
+
+## Scope
+
+* Any

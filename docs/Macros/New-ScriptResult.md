@@ -306,6 +306,9 @@ Specifies the custom script to be executed.
 
 Specifies a regex pattern used to match and extract the desired portion of the script result.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#execute-script](https://www.w3.org/TR/webdriver/#execute-script)
