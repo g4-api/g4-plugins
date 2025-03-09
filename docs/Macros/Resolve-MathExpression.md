@@ -999,3 +999,7 @@ The `X` parameter represents one of the numerical values used in a mathematical 
 | **Value Type**    | Number            |
 
 The `Y` parameter represents one of the numerical values used in a mathematical expression. It serves as the second operand in arithmetic operations such as addition, subtraction, multiplication, division, exponentiation, and modulus.
+
+## Scope
+
+* Any

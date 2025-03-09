@@ -167,3 +167,7 @@ Specifies the string value to be compared in the match check.
 | **Value Type**    | Regex             |
 
 Specifies the regular expression pattern to be compared against the string value.
+
+## Scope
+
+* Any

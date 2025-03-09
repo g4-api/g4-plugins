@@ -148,6 +148,10 @@ action_rule = {
 
 Specifies the regular expression pattern to be used for extracting specific information from the text content of alert dialogs.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-alert-text](https://www.w3.org/TR/webdriver/#get-alert-text)

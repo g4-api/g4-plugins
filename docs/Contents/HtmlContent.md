@@ -295,3 +295,7 @@ True or False values.
 ##### Date Time
 
 Date and/or time values.
+
+## Scope
+
+* Any

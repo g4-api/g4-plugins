@@ -1677,3 +1677,7 @@ Generates random integer values.
 ##### Long
 
 Generates random long integer values.
+
+## Scope
+
+* Any

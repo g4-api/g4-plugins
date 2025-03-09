@@ -249,3 +249,7 @@ The transformer acts on a session parameter whose name is specified in the `OnEl
 
 Specifies the text content to be processed. The transformer will remove all tab characters from this input.
 In the context of transformers, `OnElement` refers to the field name from the previous step whose value you want to transform, or a session parameter if `OnAttribute` is set to 'Session'.
+
+## Scope
+
+* Any

@@ -212,6 +212,9 @@ Specifies the locator strategy to find the web element to be context-clicked. Su
 
 Specifies the actual element identifier using the locator strategy defined. For example, if the locator is `CssSelector`, this would be a CSS selector string.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#actions](https://www.w3.org/TR/webdriver/#actions)

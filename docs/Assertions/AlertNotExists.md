@@ -129,6 +129,9 @@ action_rule = {
 }
 ```
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#user-prompts](https://www.w3.org/TR/webdriver/#user-prompts)

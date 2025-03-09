@@ -255,23 +255,11 @@ action_rule = {
 
 Providing additional instructions or parameters to control the behavior of the window opening action.
 
-### On Element (OnElement)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Specifying the target element from which the URL should be retrieved for opening the new browser window or tab.
-
 ### Locator (Locator)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -290,6 +278,18 @@ Specifying the type of locator used to identify the target element defined by th
 | **Value Type**    | String            |
 
 Retrieves the URL from the specified attribute of the target element.
+
+### On Element (OnElement)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifying the target element from which the URL should be retrieved for opening the new browser window or tab.
 
 ### Regular Expression (RegularExpression)
 
@@ -321,7 +321,7 @@ Specifies the number of new browser windows or tabs to open.
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | _blank            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -356,6 +356,10 @@ Open the URL in the topmost frame.
 
 Specifies the URL to open in the new browser window or tab if no element is provided.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#execute-script](https://www.w3.org/TR/webdriver/#execute-script)

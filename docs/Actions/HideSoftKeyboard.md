@@ -367,6 +367,10 @@ A specific key name on the device's keyboard that should be pressed to trigger t
 
 A specific key on the device's keyboard that should be pressed to trigger the action of hiding the on-screen keyboard.
 
+## Scope
+
+* Mobile Native
+* Mobile Web
 ## See Also
 
 apiDocumentation: [https://appium.readthedocs.io/en/latest/en/commands/device/keys/hide-keyboard/#http-api-specifications](https://appium.readthedocs.io/en/latest/en/commands/device/keys/hide-keyboard/#http-api-specifications)

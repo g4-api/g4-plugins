@@ -166,3 +166,7 @@ action_rule = {
 | **Value Type**    | String            |
 
 Specifies the name of the environment variable to be fetched from the process environment.
+
+## Scope
+
+* Any

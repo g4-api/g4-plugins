@@ -167,3 +167,7 @@ Specifies the first numeric value to be compared in the greater than check.
 | **Value Type**    | Number            |
 
 Specifies the second numeric value to be compared in the greater than check.
+
+## Scope
+
+* Any

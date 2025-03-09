@@ -46,8 +46,8 @@ _**CSharp**_
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "ElementText",
-    Argument = "{{$ --Operator:Equal --Expected:123}}",
+    PluginName = "Assert",
+    Argument = "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     OnElement = "//*[@id='numericTextElement']",
     RegularExpression = "\d+"
 };
@@ -57,8 +57,8 @@ _**Java**_
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("ElementText")
-    .setArgument("{{$ --Operator:Equal --Expected:123}}")
+    .setPluginName("Assert")
+    .setArgument("{{$ --Condition:ElementText --Operator:Equal --Expected:123}}")
     .setOnElement("//*[@id='numericTextElement']")
     .setRegularExpression("\d+");
 ```
@@ -67,8 +67,8 @@ _**Javascript**_
 
 ```js
 var actionRule = {
-    pluginName: "ElementText",
-    argument: "{{$ --Operator:Equal --Expected:123}}",
+    pluginName: "Assert",
+    argument: "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     onElement: "//*[@id='numericTextElement']",
     regularExpression: "\d+"
 };
@@ -78,8 +78,8 @@ _**JSON**_
 
 ```js
 {
-    "pluginName": "ElementText",
-    "argument": "{{$ --Operator:Equal --Expected:123}}",
+    "pluginName": "Assert",
+    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     "onElement": "//*[@id='numericTextElement']",
     "regularExpression": "\d+"
 }
@@ -89,8 +89,8 @@ _**Python**_
 
 ```python
 action_rule = {
-    "pluginName": "ElementText",
-    "argument": "{{$ --Operator:Equal --Expected:123}}",
+    "pluginName": "Assert",
+    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     "onElement": "//*[@id='numericTextElement']",
     "regularExpression": "\d+"
 }
@@ -105,8 +105,8 @@ _**CSharp**_
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "ElementText",
-    Argument = "{{$ --Operator:Equal --Expected:Hello World}}",
+    PluginName = "Assert",
+    Argument = "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     OnElement = "//*[@id='textElement']"
 };
 ```
@@ -115,8 +115,8 @@ _**Java**_
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("ElementText")
-    .setArgument("{{$ --Operator:Equal --Expected:Hello World}}")
+    .setPluginName("Assert")
+    .setArgument("{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}")
     .setOnElement("//*[@id='textElement']");
 ```
 
@@ -124,8 +124,8 @@ _**Javascript**_
 
 ```js
 var actionRule = {
-    pluginName: "ElementText",
-    argument: "{{$ --Operator:Equal --Expected:Hello World}}",
+    pluginName: "Assert",
+    argument: "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     onElement: "//*[@id='textElement']"
 };
 ```
@@ -134,8 +134,8 @@ _**JSON**_
 
 ```js
 {
-    "pluginName": "ElementText",
-    "argument": "{{$ --Operator:Equal --Expected:Hello World}}",
+    "pluginName": "Assert",
+    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     "onElement": "//*[@id='textElement']"
 }
 ```
@@ -144,8 +144,8 @@ _**Python**_
 
 ```python
 action_rule = {
-    "pluginName": "ElementText",
-    "argument": "{{$ --Operator:Equal --Expected:Hello World}}",
+    "pluginName": "Assert",
+    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     "onElement": "//*[@id='textElement']"
 }
 ```
@@ -614,6 +614,9 @@ Specifies the type of comparison or operation to be performed when evaluating th
 
 Specifies the expected value or pattern that the element's text content should match during the assertion.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-element-text](https://www.w3.org/TR/webdriver/#get-element-text)

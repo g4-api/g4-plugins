@@ -147,6 +147,9 @@ action_rule = {
 
 Specifies the regex pattern used to match and extract a portion of the WebDriver type name.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#new-session](https://www.w3.org/TR/webdriver/#new-session)

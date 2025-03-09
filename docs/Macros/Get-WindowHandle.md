@@ -166,6 +166,9 @@ Specifies the index of the window handle to retrieve. If not provided, the curre
 
 Specifies the regex pattern used to match and extract the desired portion of the window handle.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-window-handle](https://www.w3.org/TR/webdriver/#get-window-handle)

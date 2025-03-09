@@ -167,3 +167,7 @@ Specifies the first string value to be compared in the not equal check.
 | **Value Type**    | String            |
 
 Specifies the second string value to be compared against the first string value.
+
+## Scope
+
+* Any

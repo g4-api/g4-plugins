@@ -80,6 +80,10 @@ action_rule = {
 }
 ```
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#switch-to-parent-frame](https://www.w3.org/TR/webdriver/#switch-to-parent-frame)

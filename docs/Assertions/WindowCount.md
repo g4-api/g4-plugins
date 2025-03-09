@@ -487,6 +487,10 @@ Specifies the type of comparison or operation to be performed when evaluating th
 
 Specifies the expected count value that the number of open browser windows should meet during the assertion.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-window-handles](https://www.w3.org/TR/webdriver/#get-window-handles)

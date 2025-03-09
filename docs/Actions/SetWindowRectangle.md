@@ -348,6 +348,10 @@ Specifies the X coordinate of the browser window's position.
 
 Specifies the Y coordinate of the browser window's position.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#set-window-rect](https://www.w3.org/TR/webdriver/#set-window-rect)

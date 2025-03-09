@@ -49,16 +49,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SetCondition",
     Argument = "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     Locator = "CssSelector",
-    OnElement = "#greeting",
-    Rules = new[]
-    {
-        new ActionRuleModel
-        {
-            PluginName = "Click",
-            Locator = "CssSelector",
-            OnElement = "#continueButton"
-        }
-    }
+    OnElement = "#greeting"
 };
 ```
 
@@ -69,12 +60,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SetCondition")
     .setArgument("{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}")
     .setLocator("CssSelector")
-    .setOnElement("#greeting")
-    .setActions()
-        new ActionRuleModel()        
-            .setPluginName("Click")
-            .setLocator("CssSelector")
-            .setOnElement("#continueButton");
+    .setOnElement("#greeting");
 ```
 
 _**Javascript**_
@@ -84,14 +70,7 @@ var actionRule = {
     pluginName: "SetCondition",
     argument: "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     locator: "CssSelector",
-    onElement: "#greeting",
-    rules: [
-        {
-            pluginName: "Click",
-            locator: "CssSelector",
-            onElement: "#continueButton"
-        }
-    ]
+    onElement: "#greeting"
 };
 ```
 
@@ -102,14 +81,7 @@ _**JSON**_
     "pluginName": "SetCondition",
     "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     "locator": "CssSelector",
-    "onElement": "#greeting",
-    "rules": [
-        {
-            "pluginName": "Click",
-            "locator": "CssSelector",
-            "onElement": "#continueButton"
-        }
-    ]
+    "onElement": "#greeting"
 }
 ```
 
@@ -120,14 +92,7 @@ action_rule = {
     "pluginName": "SetCondition",
     "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
     "locator": "CssSelector",
-    "onElement": "#greeting",
-    "rules": [
-        {
-            "pluginName": "Click",
-            "locator": "CssSelector",
-            "onElement": "#continueButton"
-        }
-    ]
+    "onElement": "#greeting"
 }
 ```
 ### Example No.2
@@ -140,17 +105,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SetCondition",
-    Argument = "{{$ --Condition:AlertExists}}",
-    Rules = new[]
-    {
-        new ActionRuleModel
-        {
-            PluginName = "SendKeys",
-            Argument = "Test Input",
-            Locator = "CssSelector",
-            OnElement = "#inputField"
-        }
-    }
+    Argument = "{{$ --Condition:AlertExists}}"
 };
 ```
 
@@ -159,13 +114,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SetCondition")
-    .setArgument("{{$ --Condition:AlertExists}}")
-    .setActions()
-        new ActionRuleModel()        
-            .setPluginName("SendKeys")
-            .setArgument("Test Input")
-            .setLocator("CssSelector")
-            .setOnElement("#inputField");
+    .setArgument("{{$ --Condition:AlertExists}}");
 ```
 
 _**Javascript**_
@@ -173,15 +122,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SetCondition",
-    argument: "{{$ --Condition:AlertExists}}",
-    rules: [
-        {
-            pluginName: "SendKeys",
-            argument: "Test Input",
-            locator: "CssSelector",
-            onElement: "#inputField"
-        }
-    ]
+    argument: "{{$ --Condition:AlertExists}}"
 };
 ```
 
@@ -190,15 +131,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "SetCondition",
-    "argument": "{{$ --Condition:AlertExists}}",
-    "rules": [
-        {
-            "pluginName": "SendKeys",
-            "argument": "Test Input",
-            "locator": "CssSelector",
-            "onElement": "#inputField"
-        }
-    ]
+    "argument": "{{$ --Condition:AlertExists}}"
 }
 ```
 
@@ -207,20 +140,12 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SetCondition",
-    "argument": "{{$ --Condition:AlertExists}}",
-    "rules": [
-        {
-            "pluginName": "SendKeys",
-            "argument": "Test Input",
-            "locator": "CssSelector",
-            "onElement": "#inputField"
-        }
-    ]
+    "argument": "{{$ --Condition:AlertExists}}"
 }
 ```
 ### Example No.3
 
-This configuration checks if the page URL matches a specific pattern and executes sub-actions accordingly.
+This configuration checks if the page URL does not matche a specific pattern and executes sub-actions accordingly.
 
 _**CSharp**_
 
@@ -228,16 +153,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SetCondition",
-    Argument = "{{$ --Condition:PageUrl --Operator:Match --Expected:https://example.com/*}}",
-    Rules = new[]
-    {
-        new ActionRuleModel
-        {
-            PluginName = "Click",
-            Locator = "CssSelector",
-            OnElement = "#nextPageButton"
-        }
-    }
+    Argument = "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}"
 };
 ```
 
@@ -246,12 +162,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SetCondition")
-    .setArgument("{{$ --Condition:PageUrl --Operator:Match --Expected:https://example.com/*}}")
-    .setActions()
-        new ActionRuleModel()        
-            .setPluginName("Click")
-            .setLocator("CssSelector")
-            .setOnElement("#nextPageButton");
+    .setArgument("{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}");
 ```
 
 _**Javascript**_
@@ -259,14 +170,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SetCondition",
-    argument: "{{$ --Condition:PageUrl --Operator:Match --Expected:https://example.com/*}}",
-    rules: [
-        {
-            pluginName: "Click",
-            locator: "CssSelector",
-            onElement: "#nextPageButton"
-        }
-    ]
+    argument: "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}"
 };
 ```
 
@@ -275,14 +179,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "SetCondition",
-    "argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:https://example.com/*}}",
-    "rules": [
-        {
-            "pluginName": "Click",
-            "locator": "CssSelector",
-            "onElement": "#nextPageButton"
-        }
-    ]
+    "argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}"
 }
 ```
 
@@ -291,14 +188,7 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SetCondition",
-    "argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:https://example.com/*}}",
-    "rules": [
-        {
-            "pluginName": "Click",
-            "locator": "CssSelector",
-            "onElement": "#nextPageButton"
-        }
-    ]
+    "argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}"
 }
 ```
 
@@ -320,7 +210,7 @@ Specifies the condition and parameters for the assertion to be performed by a pa
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -356,7 +246,7 @@ Specifies the target element on which conditions will be evaluated during the au
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -364,7 +254,7 @@ Specifies the target element on which conditions will be evaluated during the au
 
 Specifies the regular expression to apply on the element/attribute result before the assertion.
 
-### Rules (Rules)
+### Branches (Branches)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -372,7 +262,7 @@ Specifies the regular expression to apply on the element/attribute result before
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Array             |
+| **Value Type**    | Object            |
 
 Define a sequence of actions or instructions to be executed if the condition is met.
 
@@ -413,3 +303,7 @@ Specifies the expected value to be compared against the actual value when evalua
 | **Value Type**    | Operator          |
 
 Specifies the type of comparison to be performed when evaluating the condition.
+
+## Scope
+
+* Any

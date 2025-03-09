@@ -277,3 +277,19 @@ action_rule = {
 | **Value Type**    | String            |
 
 Specifies the argument value that will be logged during the execution of the plugin.
+
+### Rules (Rules)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | Yes               |
+| **Multiple**      | No                |
+| **Value Type**    | Array             |
+
+Specifies an array of rules (steps) that will be invoked by this plugin. Each rule can represent an action or a sequence of actions. When the `NoAction` plugin executes, it can serve as a container for these defined rules, organizing multiple steps under a single logical grouping.
+
+## Scope
+
+* Any

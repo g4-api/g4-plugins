@@ -142,6 +142,10 @@ The `Argument` property specifies the number of child browser windows to close.
 It accepts a number. If the argument is not provided or is set to a value greater than the number of child windows, all child windows will be closed. 
 Providing a negative value will result in no windows being closed.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#close-window](https://www.w3.org/TR/webdriver/#close-window)

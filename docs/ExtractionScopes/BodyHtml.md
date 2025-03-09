@@ -218,6 +218,9 @@ This allows for more flexible data extraction by capturing specific patterns wit
 
 Specifies how the extracted data will be collected and stored, such as saving it in JSON format or another supported format.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://html-agility-pack.net/documentation](https://html-agility-pack.net/documentation)

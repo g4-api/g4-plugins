@@ -329,3 +329,7 @@ Each action defined within the loop will be executed for the specified number of
 | **Value Type**    | Array             |
 
 Define a sequence of actions or instructions to be executed within a loop or under specific conditions.
+
+## Scope
+
+* Any

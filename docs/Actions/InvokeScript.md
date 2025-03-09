@@ -363,6 +363,9 @@ Specifies the arguments to be passed to the script as a JSON array.
 
 Specifies the script code block to be executed.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#executing-script](https://www.w3.org/TR/webdriver/#executing-script)

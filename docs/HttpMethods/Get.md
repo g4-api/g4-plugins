@@ -589,3 +589,7 @@ Multiple headers can be added using the syntax `{{$ --Header:header1name=header1
 | **Value Type**    | Uri|String        |
 
 Specifies the target URL for the HTTP GET request.
+
+## Scope
+
+* Any

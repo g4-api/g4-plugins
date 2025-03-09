@@ -208,6 +208,9 @@ Minimizes the browser window to the taskbar or dock.
 
 Sets the browser window to full screen mode for an immersive view.
 
+## Scope
+
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#resizing-and-positioning-windows](https://www.w3.org/TR/webdriver/#resizing-and-positioning-windows)

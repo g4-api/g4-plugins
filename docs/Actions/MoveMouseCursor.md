@@ -304,6 +304,18 @@ action_rule = {
 
 Provides additional instructions or parameters to control the behavior of the mouse movement action.
 
+### Locator (Locator)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Xpath             |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifies the type of locator used to identify the target element defined by the `OnElement` property.
+
 ### On Element (OnElement)
 
 | Attribute         | Value             |
@@ -316,18 +328,6 @@ Provides additional instructions or parameters to control the behavior of the mo
 
 Specifies the target element to which the mouse cursor should be moved.
 
-### Locator (Locator)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Specifies the type of locator used to identify the target element defined by the `OnElement` property.
-
 ## Parameters
 
 ### Origin (Origin)
@@ -338,7 +338,7 @@ Specifies the type of locator used to identify the target element defined by the
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Array             |
+| **Value Type**    | String            |
 
 Specifies the origin point for the mouse movement. Can be either 'Pointer' or 'Viewport'.
 
@@ -375,6 +375,11 @@ Specifies the horizontal coordinate (X) to move the mouse cursor to on the page.
 
 Specifies the vertical coordinate (Y) to move the mouse cursor to on the page.
 
+## Scope
+
+* Mobile Web
+* Os Native
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#actions](https://www.w3.org/TR/webdriver/#actions)

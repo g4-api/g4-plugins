@@ -208,3 +208,7 @@ The transformer acts on a session parameter whose name is specified in the `OnEl
 
 Specifies the text content to be processed. The transformer will remove all line breaks from this input.
 In the context of transformers used after a rule execution, `OnElement` refers to the field name from the previous step whose value you want to transform.
+
+## Scope
+
+* Any

@@ -77,6 +77,9 @@ action_rule = {
 }
 ```
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#delete-session](https://www.w3.org/TR/webdriver/#delete-session)

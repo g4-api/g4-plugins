@@ -268,18 +268,17 @@ Stores the list of file paths for the resources that were successfully downloade
 Specifies the details for the `CopyResource` request. 
 It includes a template or variable structure `{{$...}}` to allow dynamic values. This allows passing parameters such as `Path` and `Parallel`.
 
-### Regular Expression (RegularExpression)
+### Locator (Locator)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Regex             |
+| **Value Type**    | String            |
 
-Used for pattern matching and extraction of specific data from a text response. 
-It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request.
+Specifies the strategy or method used to locate the elements to use for downloading sources.
 
 ### On Attribute (OnAttribute)
 
@@ -305,6 +304,19 @@ This is particularly relevant when dealing with web data, where elements can hav
 | **Value Type**    | String            |
 
 Used to target elements using either XPath or CSS selectors, allowing the rule to locate and process specific elements within the HTML content.
+
+### Regular Expression (RegularExpression)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | (?s).*            |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Regex             |
+
+Used for pattern matching and extraction of specific data from a text response. 
+It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request.
 
 ## Parameters
 
@@ -332,6 +344,10 @@ Specifies the path to the directory where the downloaded resources should be sav
 
 Indicates whether to process the downloads in parallel. This can significantly speed up the process when downloading multiple resources.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#find-elements](https://www.w3.org/TR/webdriver/#find-elements)

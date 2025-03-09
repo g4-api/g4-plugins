@@ -1275,3 +1275,7 @@ Indicates whether to retrieve the day of the year.
 | **Value Type**    | Switch            |
 
 Indicates whether to retrieve the day of the week.
+
+## Scope
+
+* Any

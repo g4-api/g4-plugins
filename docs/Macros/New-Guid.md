@@ -456,3 +456,7 @@ Specifies the format of the generated GUID. If not specified, the default format
 | **Value Type**    | Regex             |
 
 Specifies the regex pattern used to match and extract the desired portion of the generated GUID.
+
+## Scope
+
+* Any

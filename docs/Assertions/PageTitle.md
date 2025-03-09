@@ -341,6 +341,9 @@ Specifies the type of comparison or operation to be performed when evaluating th
 
 Specifies the expected title value that the page title should meet during the assertion.
 
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-title](https://www.w3.org/TR/webdriver/#get-title)

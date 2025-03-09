@@ -129,6 +129,11 @@ action_rule = {
 }
 ```
 
+## Scope
+
+* Mobile Native
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#user-prompts](https://www.w3.org/TR/webdriver/#user-prompts)

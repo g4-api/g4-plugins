@@ -404,6 +404,15 @@ Specifies the polling interval in milliseconds for conditional clicks. If not sp
 
 Specifies the condition that must be met for the click action to be considered successful. If not specified, the click action will be performed once.
 
+#### Values
+
+##### No Alert
+
+Continue clicking on the specified element and dismissing the alert until it no longer appears.
+
+## Scope
+
+* Any
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-click](https://www.w3.org/TR/webdriver/#element-click)

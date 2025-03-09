@@ -148,6 +148,10 @@ action_rule = {
 Specifies the identifier for the window to switch to. 
 It can be either an index (e.g., `1`) or a window handle (e.g., `CDwindow-1234`).
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#switch-to-window](https://www.w3.org/TR/webdriver/#switch-to-window)

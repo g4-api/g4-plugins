@@ -273,6 +273,10 @@ This parameter allows users to specify a duration, either in milliseconds or a f
 The number of iterations for the forward navigation process. 
 It is instrumental in scenarios where repetitive navigation actions are essential for achieving specific automation objectives.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#forward](https://www.w3.org/TR/webdriver/#forward)

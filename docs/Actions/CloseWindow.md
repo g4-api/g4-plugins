@@ -196,6 +196,10 @@ It accepts either an index (number) or a window handle (string).
 If no argument is provided, the active window will be closed. 
 Providing an invalid index or handle will result in an exception.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#close-window](https://www.w3.org/TR/webdriver/#close-window)

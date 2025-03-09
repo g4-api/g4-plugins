@@ -167,3 +167,7 @@ Specifies the first string to be compared in the equality check.
 | **Value Type**    | String            |
 
 Specifies the second string to be compared in the equality check.
+
+## Scope
+
+* Any

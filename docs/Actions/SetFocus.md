@@ -222,6 +222,10 @@ Specifies the strategy or method used to locate the element on which focus will 
 Specifies the identifier or locator for the element on which the focus action will be performed. 
 It indicates the target element where the focus should be set.
 
+## Scope
+
+* Mobile Web
+* Web
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#execute-script](https://www.w3.org/TR/webdriver/#execute-script)

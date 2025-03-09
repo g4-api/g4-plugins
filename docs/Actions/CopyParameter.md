@@ -392,3 +392,7 @@ Specifies the target parameter to which the value will be copied. This is the pa
 | **Value Type**    | SetParameter      |
 
 Specifies the scope of the target parameter. The scope defines where the parameter is stored and can be one of several predefined scopes such as 'Session', 'UserScope', etc.
+
+## Scope
+
+* Any
