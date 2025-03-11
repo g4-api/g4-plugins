@@ -56,8 +56,11 @@ namespace G4.Plugins.Ui.Actions.User32
         // Sends a request to switch the keyboard layout.
         private static void SwitchLayout(IWebDriver driver, string keyboardLayout)
         {
+            // Retrieve the session opaque key from the WebDriver instance.
+            var session = ((IWebDriverSession)driver).Session.OpaqueKey;
+
             // Define the endpoint route for switching keyboard layouts.
-            const string route = "/user32/layouts";
+            var route = $"/session/{session}/user32/layouts";
 
             // Construct the full URL by combining the server address and the route.
             var url = driver.Invoker.ServerAddress.AbsoluteUri.TrimEnd('/') + route;

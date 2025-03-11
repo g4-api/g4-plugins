@@ -152,7 +152,7 @@
 		"w3c": "POST /session/{session id}/user32/value"
 	},
 	"scopes": [
-		"Any"
+		"WindowsNative"
 	],
 	"summary": [
 		"The `SendUser32Keys` plugin simulates realistic typing of text into native Windows application elements using the User32 API, sending characters individually with configurable delays and keyboard layouts."
