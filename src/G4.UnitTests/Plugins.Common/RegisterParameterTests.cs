@@ -75,7 +75,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue("Bar Foo".Equals(actual.ConvertFromBase64(), Comparison));
         }
 
-        [TestMethod(displayName: "Verify that the application parameter is registered " +
+        [TestMethod(displayName: "Verify that the encrypted application parameter is registered " +
             "correctly with a specific environment name.")]
         public void RegisterApplicationEncryptedParameterTest()
         {
@@ -100,11 +100,8 @@ namespace G4.UnitTests.Plugins.Common
                 parameterName: "MyParam",
                 scope: "Application");
 
-            // Assert that the actual value (Base64 encoded) matches the expected value (Base64 encoded).
-            Assert.IsTrue(actual.Equals("Bar Foo".Decrypt("g4").ConvertToBase64(), Comparison));
-
             // Assert that the expected value matches the actual value (decoded from Base64).
-            Assert.IsTrue("Bar Foo".Equals(actual.ConvertFromBase64(), Comparison));
+            Assert.IsTrue("Bar Foo".Equals(actual.ConvertFromBase64().Decrypt("g4"), Comparison));
         }
 
         [TestMethod(displayName: "Verify that the machine parameter is registered correctly.")]
