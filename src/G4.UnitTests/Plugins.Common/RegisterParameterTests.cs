@@ -44,6 +44,7 @@ namespace G4.UnitTests.Plugins.Common
             AssertManifest<RegisterParameter>();
         }
 
+        [DoNotParallelize]
         [TestMethod(displayName: "Verify that the application parameter is registered " +
             "correctly with a specific environment name.")]
         public void RegisterApplicationParameterTest()
@@ -75,6 +76,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue("Bar Foo".Equals(actual.ConvertFromBase64(), Comparison));
         }
 
+        [DoNotParallelize]
         [TestMethod(displayName: "Verify that the encrypted application parameter is registered " +
             "correctly with a specific environment name.")]
         public void RegisterApplicationEncryptedParameterTest()
