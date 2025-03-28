@@ -31,10 +31,11 @@ namespace G4.Plugins.Common.Actions
             var isValue = arguments.ContainsKey(Value);
 
             // Get the parameter name, value, and scope from the formatted arguments or use defaults.
-            var name = arguments.Get(Name, defaultValue: pluginData.Rule.Argument);
-            var value = arguments.Get(Value, defaultValue: string.Empty);
-            var scope = arguments.Get(Scope, defaultValue: "Session");
-            var environment = arguments.Get(Environment, "SystemParameters");
+            var name = arguments.Get(key: Name, defaultValue: pluginData.Rule.Argument);
+            var value = arguments.Get(key: Value, defaultValue: string.Empty);
+            var encryptionKey = arguments.Get(key: "EncryptionKey", defaultValue: string.Empty);
+            var scope = arguments.Get(key: Scope, defaultValue: "Session");
+            var environment = arguments.Get(key: Environment, "SystemParameters");
 
             try
             {
@@ -71,7 +72,12 @@ namespace G4.Plugins.Common.Actions
                 value ??= string.Empty;
 
                 // Using Regex to match the value based on the regular expression defined in the 'action' object
-                value = Regex.Match(value, pluginData.Rule.RegularExpression).Value.ConvertToBase64();
+                value = Regex.Match(value, pluginData.Rule.RegularExpression).Value;
+
+                // Encrypt the value if the 'Encrypt' parameter is set to true and the value is not empty.
+                value = !string.IsNullOrEmpty(encryptionKey)
+                    ? value.Encrypt(encryptionKey).ConvertToBase64()
+                    : value.ConvertToBase64();
 
                 // Creating a new scope action with the specified name, value, and scope
                 var scopeRule = NewScopeAction(pluginData, name, value, scope, environment);

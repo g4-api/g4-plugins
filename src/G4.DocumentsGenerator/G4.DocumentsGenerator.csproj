@@ -16,7 +16,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>		<PackageReference Include="G4.Abstraction.Cli" Version="2025.3.7.16" />
-		<PackageReference Include="G4.Converters" Version="2025.3.7.34" />
+		<PackageReference Include="G4.Converters" Version="2025.3.28.36" />
 	</ItemGroup>
 
 	<ItemGroup>

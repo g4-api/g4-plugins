@@ -77,5 +77,43 @@ namespace G4.UnitTests.Plugins.Common.Macros
             // Assert that the actual value (Base64 encoded) matches the expected value.
             Assert.AreEqual(expected: "Rm9vIEJhcg==", actual);
         }
+
+        [TestMethod(displayName: "Verify that the GetParameter plugin retrieves the correct " +
+            "parameter value for different scopes with encryption.")]
+        #region *** Data Set ***
+        [DataRow("Session")]
+        [DataRow("Application")]
+        [DataRow("Process")]
+        [DataRow("Machine")]
+        [DataRow("User")]
+        #endregion
+        public void GetParameterNegativeTest(string scope)
+        {
+            // Define the rules for registering and retrieving the parameter.
+            var rules = new[]
+            {
+                // Rule for registering the parameter with the specified scope.
+                new ActionRuleModel
+                {
+                    PluginName = "RegisterParameter",
+                    Argument = "{{$ --Name:MyParam --Value:Foo Bar --Scope:" + scope + " --EncryptionKey:g4}}",
+                },
+                // Rule for retrieving the parameter with the specified scope.
+                new ActionRuleModel
+                {
+                    PluginName = "RegisterParameter",
+                    Argument = "{{$ --Name:MyDecryptedParam --Value:{{$Get-Parameter --Name:MyParam --Scope:" + scope + " --EncryptionKey:g4}} --Scope:" + scope + "}}"
+                }
+            };
+
+            // Invoke the action rules and get the response.
+            var response = Invoke(rules);
+
+            // Retrieve the actual value of the parameter from the response.
+            var actual = response.GetParameterValue(parameterName: "MyDecryptedParam", scope);
+
+            // Assert that the actual value (Base64 encoded) matches the expected value.
+            Assert.AreEqual(expected: "Rm9vIEJhcg==", actual);
+        }
     }
 }

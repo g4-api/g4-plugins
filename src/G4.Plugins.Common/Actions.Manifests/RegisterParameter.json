@@ -35,6 +35,7 @@
 		"| Environment Handling        | Allows specifying different environments where the parameters are managed.                                          |",
 		"| Regular Expression Matching | Can apply a regular expression to the value and encode the result in Base64.                                        |",
 		"| Meta Action                 | Converts user input into the appropriate `SetParameter` plugin rule and sends it.                                   |",
+		"| Encryption Support          | Optionally encrypts the parameter value using the provided EncryptionKey.                                           |",
 		"",
 		"### Usages in RPA",
 		"",
@@ -46,11 +47,11 @@
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                     | Description                                                                                                                                                   |",
-		"|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Test Data Management      | Use the `RegisterParameter` plugin to manage test data by registering values to different scopes.                                                             |",
-		"| Environment Configuration | Facilitate the setup of test environments by registering configuration parameters to the required locations.                                                  |",
-		"| Dynamic Test Execution    | Enable dynamic test execution by registering runtime parameters that are needed for various test scenarios, ensuring tests are executed with the correct data.|"
+		"| Usage                     | Description                                                                                                                                                    |",
+		"|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Test Data Management      | Use the `RegisterParameter` plugin to manage test data by registering values to different scopes.                                                              |",
+		"| Environment Configuration | Facilitate the setup of test environments by registering configuration parameters to the required locations.                                                   |",
+		"| Dynamic Test Execution    | Enable dynamic test execution by registering runtime parameters that are needed for various test scenarios, ensuring tests are executed with the correct data. |"
 	],
 	"examples": [
 		{
@@ -117,6 +118,15 @@
 				"pluginName": "RegisterParameter",
 				"regularExpression": "\\d+"
 			}
+		},
+		{
+			"description": [
+				"This configuration registers a parameter with an encryption key provided for encrypting the parameter value within the session scope."
+			],
+			"rule": {
+				"argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Session --EncryptionKey:myEncryptionKey}}",
+				"pluginName": "RegisterParameter"
+			}
 		}
 	],
 	"key": "RegisterParameter",
@@ -153,6 +163,14 @@
 			],
 			"mandatory": false,
 			"name": "Value",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the encryption key to be used to encrypt the parameter value."
+			],
+			"mandatory": false,
+			"name": "EncryptionKey",
 			"type": "String"
 		}
 	],
@@ -210,7 +228,7 @@
 	"summary": [
 		"The `RegisterParameter` plugin facilitates the registration and storage of parameters within automation scripts by saving values to a specified scope.",
 		"It converts user input into the appropriate `SetParameter` plugin rule and sends it, supporting parameter registration from direct input or web elements.",
-		"Key features include parameter registration, scope management, environment handling, regular expression matching, and meta action capabilities.",
+		"Key features include parameter registration, scope management, environment handling, regular expression matching, meta action capabilities, and encryption support when an EncryptionKey is provided.",
 		"Common use cases include registering values from web elements, managing parameters across sessions or environments, and handling complex data with regular expressions in both RPA and automation testing scenarios."
 	]
 }
