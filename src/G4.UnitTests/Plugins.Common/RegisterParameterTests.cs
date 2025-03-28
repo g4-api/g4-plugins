@@ -17,7 +17,7 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class RegisterParameterTests : TestBase
     {
-        [ClassCleanup]
+        [ClassCleanup(ClassCleanupBehavior.EndOfClass)]
         public static void ClearEnvironments()
         {
             // Remove the environment variable "MyParam" from the Machine target.
@@ -70,6 +70,38 @@ namespace G4.UnitTests.Plugins.Common
 
             // Assert that the actual value (Base64 encoded) matches the expected value (Base64 encoded).
             Assert.IsTrue(actual.Equals("Bar Foo".ConvertToBase64(), Comparison));
+
+            // Assert that the expected value matches the actual value (decoded from Base64).
+            Assert.IsTrue("Bar Foo".Equals(actual.ConvertFromBase64(), Comparison));
+        }
+
+        [TestMethod(displayName: "Verify that the application parameter is registered " +
+            "correctly with a specific environment name.")]
+        public void RegisterApplicationEncryptedParameterTest()
+        {
+            // Create a new action rule model for registering a parameter.
+            var rule = new ActionRuleModel
+            {
+                PluginName = "RegisterParameter",
+                Argument = "{{$ " +
+                    "--Environment:UnitTestsApplication " +
+                    "--Name:MyParam " +
+                    "--Value:Bar Foo " +
+                    "--Scope:Application " +
+                    "--EncryptionKey:g4}}"
+            };
+
+            // Invoke the RegisterParameter plugin with the action rule.
+            var responseModel = Invoke([rule]);
+
+            // Retrieve the actual value of the parameter from the application parameters.
+            var actual = responseModel.GetParameterValue(
+                environmentName: "UnitTestsApplication",
+                parameterName: "MyParam",
+                scope: "Application");
+
+            // Assert that the actual value (Base64 encoded) matches the expected value (Base64 encoded).
+            Assert.IsTrue(actual.Equals("Bar Foo".Decrypt("g4").ConvertToBase64(), Comparison));
 
             // Assert that the expected value matches the actual value (decoded from Base64).
             Assert.IsTrue("Bar Foo".Equals(actual.ConvertFromBase64(), Comparison));
