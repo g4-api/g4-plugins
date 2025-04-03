@@ -455,10 +455,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is inactive",
+						"Element not found",
+						"Incorrect Id usage",
+						"Multiple elements with same Id",
+						"Unexpected DOM changes"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Id `ElementActive` is active based on the ElementActive condition.",
+					"test_case": "element_active_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"ActiveCheck",
+					"Assert",
+					"ElementActive",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Active Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specific element is active using the Id locator.",
+				"It asserts that the condition `ElementActive` is applied to the element with the Id `ElementActive`.",
+				"If the element is active, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementActive}}",
 				"locator": "Id",
 				"onElement": "ElementActive",
@@ -466,10 +492,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect CSS selector",
+						"Unexpected attribute format",
+						"Value is not a number"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is exactly equal to `0` using the Equal operator.",
+					"test_case": "element_attribute_equality_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"EqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Equality Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element equals a given value.",
+				"It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is equal to `0` using the Equal operator.",
+				"If the attribute value exactly equals `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:0}}",
 				"locator": "CssSelector",
 				"onAttribute": "index",
