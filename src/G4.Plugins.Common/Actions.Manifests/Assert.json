@@ -418,13 +418,39 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is inactive",
+						"Element not found",
+						"Multiple elements matching selector",
+						"Unexpected DOM changes",
+						"XPath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element identified by the given Xpath selector is active based on the ElementActive condition.",
+					"test_case": "element_active_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"ActiveCheck",
+					"Assert",
+					"ElementActive",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Active Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specific element is active.",
+				"The condition `ElementActive` is applied to the element identified by the Xpath selector `//*[@id='ElementActive']`.",
+				"If the element is active, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementActive}}",
 				"locator": "Xpath",
-				"onElement": "//*[@id='ElementActive']'",
+				"onElement": "//*[@id='ElementActive']",
 				"pluginName": "Assert"
 			}
 		},
