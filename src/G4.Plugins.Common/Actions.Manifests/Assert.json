@@ -604,10 +604,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect CSS selector",
+						"Unexpected attribute format",
+						"Value unexpectedly equals 0"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is not equal to `0` using the NotEqual operator.",
+					"test_case": "element_attribute_not_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"NotEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is not equal to a given value using the NotEqual operator.",
+				"It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is not equal to `0`.",
+				"If the attribute value does not equal `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:NotEqual --Expected:0}}",
 				"locator": "CssSelector",
 				"onAttribute": "index",
@@ -616,10 +642,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Unexpected attribute format",
+						"Value unexpectedly equals 0",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is not equal to `0` using the NotEqual operator.",
+					"test_case": "element_attribute_not_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"NotEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is not equal to a given value using the NotEqual operator.",
+				"It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is not equal to `0`.",
+				"If the attribute value does not equal `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:NotEqual --Expected:0}}",
 				"locator": "Xpath",
 				"onAttribute": "index",
@@ -628,10 +680,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected attribute format",
+						"Value unexpectedly equals 0"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is not equal to `0` using the NotEqual operator.",
+					"test_case": "element_attribute_not_equal_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"NotEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute NotEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is not equal to a given value using the NotEqual operator.",
+				"It asserts that the attribute `index` of the element with Id `elementId` is not equal to `0`.",
+				"If the attribute value does not equal `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:NotEqual --Expected:0}}",
 				"locator": "Id",
 				"onAttribute": "index",
