@@ -718,10 +718,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect CSS selector",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Value is not greater than 0"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is greater than `0` using the Greater operator.",
+					"test_case": "element_attribute_greater_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Greater Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is greater than a given value.",
+				"It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is greater than `0` using the Greater operator.",
+				"If the attribute value is greater than `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:0}}",
 				"locator": "CssSelector",
 				"onAttribute": "index",
@@ -730,10 +757,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Value is not greater than 0",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is greater than `0` using the Greater operator.",
+					"test_case": "element_attribute_greater_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Greater Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is greater than a given value using the Xpath locator.",
+				"It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is greater than `0` using the Greater operator.",
+				"If the attribute value is greater than `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:0}}",
 				"locator": "Xpath",
 				"onAttribute": "index",
@@ -742,10 +796,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Value is not greater than 0"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is greater than `0` using the Greater operator.",
+					"test_case": "element_attribute_greater_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Greater Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is greater than a given value using the Id locator.",
+				"It asserts that the attribute `index` of the element with Id `elementId` is greater than `0` using the Greater operator.",
+				"If the attribute value is greater than `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:0}}",
 				"locator": "Id",
 				"onAttribute": "index",
