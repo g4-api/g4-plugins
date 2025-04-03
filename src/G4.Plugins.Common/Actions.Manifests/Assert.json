@@ -498,8 +498,7 @@
 						"Attribute missing",
 						"Element not found",
 						"Incorrect CSS selector",
-						"Unexpected attribute format",
-						"Value is not a number"
+						"Unexpected attribute format"
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is exactly equal to `0` using the Equal operator.",
@@ -568,10 +567,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected attribute format"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is exactly equal to `0` using the Equal operator.",
+					"test_case": "element_attribute_equality_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"EqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Equality Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element equals a given value using the Id locator.",
+				"It asserts that the attribute `index` of the element with Id `elementId` is equal to `0` using the Equal operator.",
+				"If the attribute value exactly equals `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:0}}",
 				"locator": "Id",
 				"onAttribute": "index",
