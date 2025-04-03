@@ -530,10 +530,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath is exactly equal to `0` using the Equal operator.",
+					"test_case": "element_attribute_equality_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"EqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Equality Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element equals a given value using the Xpath locator.",
+				"It asserts that the attribute `index` of the element identified by the Xpath `//*[@id='elementId']` is equal to `0` using the Equal operator.",
+				"If the attribute value exactly equals `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:0}}",
 				"locator": "Xpath",
 				"onAttribute": "index",
