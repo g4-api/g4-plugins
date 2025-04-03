@@ -108,6 +108,38 @@
 					{
 						"question": "How can I troubleshoot assertion failures effectively?",
 						"answer": "Review your configuration by verifying the conditions, selectors, and expected values. Utilize logging or error messages provided by the plugin to identify mismatches, and adjust parameters as necessary to resolve discrepancies."
+					},
+					{
+						"question": "What is the assert rule schema?",
+						"answer": "The assert rule schema defines the structure for specifying validation rules used by the Assert plugin. It outlines fields such as 'argument', 'onElement', 'onAttribute', 'locator', 'regularExpression', and 'pluginName' to clearly describe how an assertion should be performed."
+					},
+					{
+						"question": "What is the role of the 'argument' field in an assert rule?",
+						"answer": "The 'argument' field holds the expression that defines the condition to be validated. It specifies the condition type, operator, and expected value, forming the core logic of the assertion."
+					},
+					{
+						"question": "How does the 'onElement' field contribute to an assert rule?",
+						"answer": "The 'onElement' field identifies the target UI element from which the value is extracted for validation. It can reference a specific element directly or through a dynamic parameter, ensuring the assertion applies to the correct component."
+					},
+					{
+						"question": "When should the 'onAttribute' field be used in an assert rule?",
+						"answer": "Use the 'onAttribute' field when you need to validate a specific attribute of an element—such as 'class' or 'value'—rather than the element's entire content."
+					},
+					{
+						"question": "What is the purpose of the 'regularExpression' field in the assert rule schema?",
+						"answer": "The 'regularExpression' field allows you to apply a regex pattern to transform or extract part of a value before performing the assertion. This is useful when the raw value needs manipulation to match the expected format."
+					},
+					{
+						"question": "How do operator values within the assert rule affect its functionality?",
+						"answer": "Operator values determine the type of comparison applied in the assertion (e.g., equal, greater than, less than, match, not match). They control how the actual value is compared to the expected one, ensuring precise and appropriate validation."
+					},
+					{
+						"question": "Can you provide an example of an assert rule and explain its components?",
+						"answer": "Consider the following example:\n\n{\n  \"$type\": \"Action\",\n  \"argument\": \"{{$ --Condition:Text --Operator:Equal --Expected:Success}}\",\n  \"onElement\": \"{{$Get-Parameter --Name:MyParam --Scope:Session}}\",\n  \"pluginName\": \"Assert\"\n}\n\nIn this rule, the '$type' field specifies the action type. The 'argument' defines that the text condition must equal 'Success'. The 'onElement' field indicates the source of the text value (which may be dynamically retrieved), and 'pluginName' confirms that this rule applies to the Assert plugin."
+					},
+					{
+						"question": "How is the assert rule schema used in practice?",
+						"answer": "In practice, the assert rule schema enables automation users to define clear and precise validation checks within their workflows. By configuring each field appropriately, users can ensure that the plugin accurately validates UI elements and data against expected conditions, thus maintaining process integrity."
 					}
 				]
 			}
@@ -148,183 +180,3452 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No alert present",
+						"Multiple alerts present"
+					],
+					"expected_result": true,
+					"notes": "Confirms alert detection when present. Should also consider cases with no or multiple alerts.",
+					"test_case": "alert_existence_positive",
+					"version": "1.0"
+				},
+				"labels": [
+					"Alert",
+					"Assert",
+					"ExistenceCheck",
+					"PositiveTest"
+				]
+			},
 			"description": [
-				"Assert that the Text condition equals 'Success'.",
+				"### Alert Existence Check",
 				"",
-				"The Assert plugin is utilized to perform this validation, taking the actual value from the 'OnElement' property which can be a parameter, data row, or some other dynamic data. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				"This example shows how the Assert plugin verifies that an alert is present.",
+				"If an alert is detected, the assert evaluates to `true`."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:Text --Operator:Equal --Expected:Success}}",
-				"onElement": "{{$Get-Parameter --Name:MyParam --Scope:Session}}",
-				"pluginName": "Assert"
-			}
-		},
-		{
-			"description": [
-				"Assert that an alert exists.",
-				"",
-				"The Assert plugin is utilized to perform this validation. ",
-				"If an alert exists, the assertion passes; otherwise, it fails."
-			],
-			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:AlertExists}}",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Alert present when none expected"
+					],
+					"expected_result": true,
+					"notes": "Confirms that no alert is present. Should also consider cases where an alert appears unexpectedly.",
+					"test_case": "alert_absence_positive",
+					"version": "1.0"
+				},
+				"labels": [
+					"AbsenceCheck",
+					"Alert",
+					"Assert",
+					"PositiveTest"
+				]
+			},
 			"description": [
-				"Assert that the text of the element identified by the CSS selector '#greeting' matches the regular expression '^Hello.*'.",
+				"### Alert Absence Check",
 				"",
-				"The Assert plugin is utilized to perform this validation, providing a means to check the text content of UI elements. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				"This example shows how the Assert plugin verifies that no alert is present.",
+				"If no alert is detected, the assert evaluates to `true`."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Hello.*}}",
-				"locator": "CssSelector",
-				"onElement": "#greeting",
+				"$type": "Action",
+				"argument": "{{$ --Condition:AlertNotExists}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Mismatch in driver type",
+						"Driver type is null or undefined",
+						"Driver type string contains extra whitespace",
+						"Case sensitivity issues in driver type",
+						"Driver type contains unexpected characters or formatting"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the actual driver's type exactly matches the expected value using an equality operator.",
+					"test_case": "driver_type_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"DriverType",
+					"EqualCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Driver Type Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies the driver's type using an equality check.",
+				"It asserts that the actual driver's type exactly matches the expected value 'G4.WebDriver.Simulator.SimulatorDriver'.",
+				"If the actual value exactly equals the expected value, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:DriverTypeName --Expected:G4.WebDriver.Simulator.SimulatorDriver --Operator:Equal}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Case sensitivity issues in driver type",
+						"Driver type contains unexpected characters or formatting",
+						"Driver type is null or undefined",
+						"Driver type string contains extra whitespace",
+						"Driver type unexpectedly matches the expected value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the actual driver's type does not match the expected value using a not-equal operator.",
+					"test_case": "driver_type_mismatch_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"DriverType",
+					"NotEqualCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Driver Type Mismatch Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the driver's type does not match the expected value using a not-equal operator.",
+				"It asserts that the actual driver's type is different from 'G4.WebDriver.Simulator.SimulatorDriver'.",
+				"If the actual value does not equal the expected value, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:DriverTypeName --Expected:G4.WebDriver.Simulator.SimulatorDriver --Operator:NotEqual}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Case sensitivity issues in driver type",
+						"Driver type is null or undefined",
+						"Driver type string contains extra whitespace",
+						"Unexpected format in driver type",
+						"Regex pattern does not match intended driver type"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the actual driver's type matches the expected regular expression pattern `.*SimulatorDriver` using the Match operator.",
+					"test_case": "driver_type_regex_match_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"DriverType",
+					"MatchCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Driver Type Regex Match Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the driver's type matches a regular expression pattern.",
+				"It asserts that the actual driver's type conforms to the regex pattern `.*SimulatorDriver` using the Match operator.",
+				"If the actual value matches the regular expression, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:DriverTypeName --Expected:.*SimulatorDriver --Operator:Match}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Case sensitivity issues in driver type",
+						"Driver type is null or undefined",
+						"Driver type string contains extra whitespace",
+						"Regex pattern unexpectedly matches driver type",
+						"Unexpected format in driver type"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the actual driver's type does not match the expected regular expression pattern `.*ChromeDriver` using the NotMatch operator.",
+					"test_case": "driver_type_regex_notmatch_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"DriverType",
+					"NotMatchCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Driver Type Regex NotMatch Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the driver's type does not match a regular expression pattern.",
+				"It asserts that the actual driver's type does not conform to the regex pattern `.*ChromeDriver` using the NotMatch operator.",
+				"If the actual value does not match the regular expression, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:DriverTypeName --Expected:.*ChromeDriver --Operator:NotMatch}}",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the 'class' attribute of the element identified by the CSS selector '#elementId' does not match the regular expression '^hidden$'.",
-				"",
-				"The Assert plugin is utilized to perform this validation, providing a means to check attribute values of UI elements. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^hidden$}}",
+				"argument": "{{$ --Condition:ElementActive}}",
 				"locator": "CssSelector",
-				"onAttribute": "class",
+				"onElement": "#ElementActive",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementActive}}",
+				"locator": "Xpath",
+				"onElement": "//*[@id='ElementActive']'",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementActive}}",
+				"locator": "Id",
+				"onElement": "ElementActive",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:0}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
 				"onElement": "#elementId",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the text length of the element identified by the CSS selector '#description' is greater than 5.",
-				"",
-				"The Assert plugin is utilized to perform this validation, providing a means to check the text length of UI elements. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:5}}",
-				"locator": "CssSelector",
-				"onElement": "#description",
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:0}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the element identified by the CSS selector '#hiddenElement' is visible.",
-				"",
-				"The Assert plugin is utilized to perform this validation, providing a means to check the visibility state of UI elements. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:0}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:NotEqual --Expected:0}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:NotEqual --Expected:0}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:NotEqual --Expected:0}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:0}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:0}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:0}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:0}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:0}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:0}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:0}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:0}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:0}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:0}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:0}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:0}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:^[a-zA-Z]+$}}",
+				"locator": "CssSelector",
+				"onAttribute": "index",
+				"onElement": "#elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:^[a-zA-Z]+$}}",
+				"locator": "Xpath",
+				"onAttribute": "index",
+				"onElement": "//*[@id='elementId']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:^[a-zA-Z]+$}}",
+				"locator": "Id",
+				"onAttribute": "index",
+				"onElement": "elementId",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Equal --Expected:2}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Equal --Expected:2}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:2}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:2}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Greater --Expected:2}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Greater --Expected:2}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Lower --Expected:2}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Lower --Expected:2}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:GreaterEqual --Expected:2}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:GreaterEqual --Expected:2}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:LowerEqual --Expected:2}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:LowerEqual --Expected:2}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:^[1-9]+$}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:^[1-9]+$}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:NotMatch --Expected:[a-zA-Z]}}",
+				"locator": "CssSelector",
+				"onElement": ".primary-button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:NotMatch --Expected:[a-zA-Z]}}",
+				"locator": "Xpath",
+				"onElement": "//button",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementDisabled}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementDisabled}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementDisabled}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementEnabled}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementEnabled}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementEnabled}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementExists}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementExists}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementExists}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotActive}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotActive}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotActive}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotExists}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotExists}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotExists}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotVisible}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotVisible}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementNotVisible}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementSelected}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementSelected}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementSelected}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementStale}}",
+				"locator": "CssSelector",
+				"onElement": "#username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementStale}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementStale}}",
+				"locator": "Id",
+				"onElement": "username",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:255}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:255}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:255}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:150}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:150}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:150}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:255}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:255}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:255}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:150}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:150}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:150}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:255}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:255}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:255}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:150}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:150}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:150}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:255}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:255}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:255}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:150}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:150}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:150}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:255}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:255}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:255}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:150}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:150}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:150}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:255}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:255}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:255}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:150}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:150}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:150}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,100})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+		{
+			"description": [
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Condition:ElementVisible}}",
 				"locator": "CssSelector",
-				"onElement": "#hiddenElement",
+				"onElement": "#username",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the numeric value of the element identified by the CSS selector '#price' is less than or equal to 100.",
-				"",
-				"The Assert plugin is utilized to perform this validation. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:100}}",
-				"locator": "CssSelector",
-				"onElement": "#price",
+				"argument": "{{$ --Condition:ElementVisible}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the numeric value of the element identified by the CSS selector '#score' is greater than or equal to 85.",
-				"",
-				"The Assert plugin is utilized to perform this validation. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:85}}",
-				"locator": "CssSelector",
-				"onElement": "#score",
+				"argument": "{{$ --Condition:ElementVisible}}",
+				"locator": "Id",
+				"onElement": "username",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the value of the `value` attribute of the element with the CSS selector `#ElementActive` is equal to `Foo Bar`.",
-				"",
-				"The Assert plugin is utilized to perform this validation, providing a means to check attribute values of UI elements. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Foo Bar}}",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"locator": "CssSelector",
-				"onAttribute": "value",
-				"onElement": "#ElementActive",
+				"onElement": "div#content",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the value of the `value` attribute of the element with the CSS selector `#ElementActive` is equal to `Bar`, applying the regular expression `B.*$` before validation.",
-				"",
-				"The Assert plugin is utilized to perform this validation, providing a means to check attribute values with regular expression patterns. ",
-				"If the condition is met post-regular expression application, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Bar}}",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsu}}",
 				"locator": "CssSelector",
-				"onAttribute": "value",
-				"onElement": "#ElementActive",
+				"onElement": "div#content",
 				"pluginName": "Assert",
-				"regularExpression": "B.*$"
+				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
 			"description": [
-				"Validate the absence of an alert in the current browser session.",
-				"",
-				"The Assert plugin is utilized to perform this validation, ensuring that no alert is currently present. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:AlertNotExists}}",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsu}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsu}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsu}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Validate that the text content of the element identified by the CSS selector `#ElementText` is equal to the expected value `ElementText`.",
-				"",
-				"The Assert plugin is utilized to perform this validation, providing a means to check the text content of UI elements. ",
-				"If the condition is met, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:ElementText}}",
-				"locator": "CssSelector",
-				"onElement": "#ElementText",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
 				"pluginName": "Assert"
 			}
 		},
 		{
 			"description": [
-				"Assert that the numeric text content of the element identified by the CSS selector '#amount' matches the extracted numbers using the regular expression '\\d+' and is equal to '100'.",
-				"",
-				"The Assert plugin is utilized to perform this validation, applying a regular expression to extract numbers before asserting the extracted value. ",
-				"If the condition is met after the extraction, the assertion passes; otherwise, it fails."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:100}}",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsu}}",
 				"locator": "CssSelector",
-				"onElement": "#amount",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsu}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsu}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsu$}}",
+				"locator": "CssSelector",
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsu$}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsu$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsu$}}",
+				"locator": "CssSelector",
+				"onElement": "textarea#content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsu$}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@id='content']",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementText --Operator:NotMatch --Expected:^Lorem ipsu$}}",
+				"locator": "Id",
+				"onElement": "content",
+				"onAttribute": "value",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:Equal --Expected:Lorem ipsu}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:NotEqual --Expected:Lorem ipsu}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:Greater --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:GreaterEqual --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:Lower --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:LowerEqual --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:^Lorem ipsu$}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:^Lorem ipsu$}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:Equal --Expected:https://example42.com/page/}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:Equal --Expected:https://ex}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:NotEqual --Expected:https://example42.com/page/}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:NotEqual --Expected:https://ex}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:GreaterEqual --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:Lower --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:LowerEqual --Expected:42}}",
+				"pluginName": "Assert",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:^https://example42.com/page/$}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:^https://ex$}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:^https://example42.com/page/$}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:^https://ex$}}",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:Equal --Expected:1}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:1}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:Greater --Expected:1}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:GreaterEqual --Expected:1}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:LowerEqual --Expected:1}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:Lower --Expected:1}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\\d+?$}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\\d+?$}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:Equal --Expected:ExpectedValue}}",
+				"onElement": "{{$Get-Parameter --Name:MyParameter --Scope:Session}}",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:NotEqual --Expected:Static Text}}",
+				"onElement": "Static Text",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
+				"onElement": "123-45-6789",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
+				"onElement": "123-45-6789",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:Greater --Expected:10}}",
+				"onElement": "20",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:Lower --Expected:10}}",
+				"onElement": "5",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:GreaterEqual --Expected:10}}",
+				"onElement": "10",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:LowerEqual --Expected:10}}",
+				"onElement": "10",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:Text --Operator:Equal --Expected:1000}}",
+				"onElement": "1000",
 				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
