@@ -2523,10 +2523,32 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that an element with the CSS selector `#username` exists in the DOM using the ElementExists condition.",
+					"test_case": "element_exists_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementExists",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Exists Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element identified by the CSS selector `#username` exists in the DOM.",
+				"If the element exists, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementExists}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
@@ -2534,10 +2556,33 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that an element with the Xpath selector `//input[@id='username']` exists in the DOM using the ElementExists condition.",
+					"test_case": "element_exists_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementExists",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Exists Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element identified by the Xpath selector `//input[@id='username']` exists in the DOM.",
+				"If the element exists, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementExists}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -2545,16 +2590,39 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that an element with the Id `username` exists in the DOM using the ElementExists condition.",
+					"test_case": "element_exists_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementExists",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Exists Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element with the Id `username` exists in the DOM.",
+				"If the element exists, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementExists}}",
 				"locator": "Id",
 				"onElement": "username",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
