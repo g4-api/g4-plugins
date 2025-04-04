@@ -2936,10 +2936,35 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is visible when it should not be",
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Element hidden by parent overflow: hidden"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the CSS selector `#username` is not visible in the DOM using the ElementNotVisible condition. Visibility may be affected by CSS properties like `display: none`, `visibility: hidden`, or off-screen positioning.",
+					"test_case": "element_not_visible_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotVisible",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Visible Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the CSS selector `#username` is not visible in the DOM.",
+				"Visibility may be determined by properties such as `display: none`, `visibility: hidden`, or off-screen positioning.",
+				"If the element is not visible, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotVisible}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
@@ -2947,10 +2972,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is visible when it should not be",
+						"Element not found",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Element hidden by parent overflow: hidden"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is not visible in the DOM using the ElementNotVisible condition. Visibility may be affected by CSS properties like `display: none`, `visibility: hidden`, or off-screen positioning.",
+					"test_case": "element_not_visible_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotVisible",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Visible Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the Xpath selector `//input[@id='username']` is not visible in the DOM.",
+				"Visibility may be determined by properties such as `display: none`, `visibility: hidden`, or off-screen positioning.",
+				"If the element is not visible, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotVisible}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -2958,10 +3009,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is visible when it should not be",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Element hidden by parent overflow: hidden"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Id `username` is not visible in the DOM using the ElementNotVisible condition. Visibility may be affected by CSS properties like `display: none`, `visibility: hidden`, or off-screen positioning.",
+					"test_case": "element_not_visible_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotVisible",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Visible Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element with the Id `username` is not visible in the DOM.",
+				"Visibility may be determined by properties such as `display: none`, `visibility: hidden`, or off-screen positioning.",
+				"If the element is not visible, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotVisible}}",
 				"locator": "Id",
 				"onElement": "username",
