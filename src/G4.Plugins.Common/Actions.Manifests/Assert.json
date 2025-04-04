@@ -1653,10 +1653,35 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is equal to expected",
+						"Element count is less than expected",
+						"Incorrect CSS selector usage",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the selector `.primary-button` is greater than 2 using the Greater operator.",
+					"test_case": "element_count_greater_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count Greater Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the CSS selector `.primary-button` is greater than 2.",
+				"If the element count exceeds 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:Greater --Expected:2}}",
 				"locator": "CssSelector",
 				"onElement": ".primary-button",
@@ -1664,16 +1689,80 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is equal to expected",
+						"Element count is less than expected",
+						"No elements found",
+						"Unexpected DOM structure",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is greater than 2 using the Greater operator.",
+					"test_case": "element_count_greater_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count Greater Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the Xpath selector `//button` is greater than 2.",
+				"If the element count exceeds 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:Greater --Expected:2}}",
 				"locator": "Xpath",
 				"onElement": "//button",
 				"pluginName": "Assert"
 			}
 		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is equal to expected",
+						"Element count is less than expected",
+						"Incorrect or misspelled TagName",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements with the tag name `button` is greater than 2 using the Greater operator.",
+					"test_case": "element_count_greater_validation_tagname",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Count Greater Validation Using TagName",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements with the tag name `button` is greater than 2.",
+				"If the element count exceeds 2, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementCount --Operator:Greater --Expected:2}}",
+				"locator": "TagName",
+				"onElement": "button",
+				"pluginName": "Assert"
+			}
+		},
+
+
 		{
 			"description": [
 				""
@@ -1696,6 +1785,19 @@
 				"pluginName": "Assert"
 			}
 		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:Lower --Expected:2}}",
+				"locator": "TagName",
+				"onElement": "button",
+				"pluginName": "Assert"
+			}
+		},
+
+
 		{
 			"description": [
 				""
