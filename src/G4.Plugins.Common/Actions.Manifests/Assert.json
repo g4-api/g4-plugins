@@ -3370,10 +3370,38 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is not equal to expected",
+						"Incorrect CSS selector usage",
+						"Regular expression fails to extract correct text",
+						"Unexpected DOM structure",
+						"Whitespace or inner text nodes affecting length calculation"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text length of the element with the CSS selector `#content` is exactly 100 characters. The text length excludes HTML tags and is based on the visible text from the WebDriver Get Element Text endpoint. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters, and the assertion passes only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.",
+					"test_case": "element_text_length_equal_with_regex_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"MatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Equal with Regex Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text length of the element identified by the CSS selector `#content` is exactly 100 characters.",
+				"The text length is computed by excluding HTML tags and counting only the visible text as returned by the WebDriver Get Element Text endpoint.",
+				"A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the visible text.",
+				"The assertion evaluates to `true` only if the length of the extracted string is exactly 100. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
@@ -3382,10 +3410,39 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is not equal to expected",
+						"Incorrect XPath indexing or attribute usage",
+						"Regular expression fails to extract correct text",
+						"Unexpected DOM structure",
+						"Whitespace or inner text nodes affecting length calculation",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text length of the element with the Xpath selector `//div[@id='content']` is exactly 100 characters. The length excludes HTML tags and is determined by the visible text from the WebDriver Get Element Text endpoint. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters, and the assertion passes only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.",
+					"test_case": "element_text_length_equal_with_regex_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"MatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Equal with Regex Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text length of the element identified by the Xpath selector `//div[@id='content']` is exactly 100 characters.",
+				"The computed text length excludes HTML tags and counts only the visible text as provided by the WebDriver Get Element Text endpoint.",
+				"A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the visible text.",
+				"The assertion evaluates to `true` only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -3394,10 +3451,38 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is not equal to expected",
+						"Incorrect Id usage",
+						"Regular expression fails to extract correct text",
+						"Unexpected DOM structure",
+						"Whitespace or inner text nodes affecting length calculation"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text length of the element with the Id `content` is exactly 100 characters. The computed text length excludes HTML tags and is based on the visible text from the WebDriver Get Element Text endpoint. The regular expression `(?s)^(.{0,100})` extracts up to 100 characters, and the assertion passes only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.",
+					"test_case": "element_text_length_equal_with_regex_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"MatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Equal with Regex Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text length of the element with the Id `content` is exactly 100 characters.",
+				"The text length is calculated by excluding HTML tags and considering only the visible text as returned by the WebDriver Get Element Text endpoint.",
+				"A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the visible text.",
+				"The assertion evaluates to `true` only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
 				"locator": "Id",
 				"onElement": "content",
@@ -3405,6 +3490,7 @@
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
+
 		{
 			"description": [
 				""
