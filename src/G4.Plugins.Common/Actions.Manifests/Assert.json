@@ -2728,10 +2728,33 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is found when it should not exist",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Element temporarily rendered"
+					],
+					"expected_result": true,
+					"notes": "Verifies that an element with the CSS selector `#username` is not present in the DOM using the ElementNotExists condition.",
+					"test_case": "element_not_exists_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotExists",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Exists Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element identified by the CSS selector `#username` does not exist in the DOM.",
+				"If the element is absent, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotExists}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
@@ -2739,10 +2762,34 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is found when it should not exist",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Element temporarily rendered"
+					],
+					"expected_result": true,
+					"notes": "Verifies that an element with the Xpath selector `//input[@id='username']` is not present in the DOM using the ElementNotExists condition.",
+					"test_case": "element_not_exists_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotExists",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Exists Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element identified by the Xpath selector `//input[@id='username']` does not exist in the DOM.",
+				"If the element is absent, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotExists}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -2750,16 +2797,40 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is found when it should not exist",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Element temporarily rendered"
+					],
+					"expected_result": true,
+					"notes": "Verifies that an element with the Id `username` is not present in the DOM using the ElementNotExists condition.",
+					"test_case": "element_not_exists_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotExists",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Exists Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element with the Id `username` does not exist in the DOM.",
+				"If the element is absent, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotExists}}",
 				"locator": "Id",
 				"onElement": "username",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
