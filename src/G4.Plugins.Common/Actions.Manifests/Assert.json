@@ -1303,10 +1303,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect locator usage",
+						"Regex pattern unexpectedly matches value",
+						"Unexpected attribute format",
+						"Value contains numeric or special characters"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` does not match the regex pattern `^[a-zA-Z]+$` using the NotMatch operator.",
+					"test_case": "element_attribute_not_match_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"NotMatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute NotMatch Regex Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the attribute `index` of an element does not match the regex pattern `^[a-zA-Z]+$`.",
+				"It asserts that the attribute value fails to conform to the pattern using the NotMatch operator.",
+				"If the attribute value does not match the regex pattern, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:^[a-zA-Z]+$}}",
 				"locator": "CssSelector",
 				"onAttribute": "index",
@@ -1315,10 +1342,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Unexpected attribute format",
+						"Regex pattern unexpectedly matches value",
+						"Value contains numeric or special characters",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector does not match the regex pattern `^[a-zA-Z]+$` using the NotMatch operator.",
+					"test_case": "element_attribute_not_match_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"NotMatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute NotMatch Regex Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the attribute `index` of an element does not match the regex pattern `^[a-zA-Z]+$`.",
+				"It asserts that the attribute value fails to conform to the pattern using the NotMatch operator with an Xpath locator.",
+				"If the attribute value does not match the regex pattern, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:^[a-zA-Z]+$}}",
 				"locator": "Xpath",
 				"onAttribute": "index",
@@ -1327,10 +1381,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected attribute format",
+						"Regex pattern unexpectedly matches value",
+						"Value contains numeric or special characters"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element with Id `elementId` does not match the regex pattern `^[a-zA-Z]+$` using the NotMatch operator.",
+					"test_case": "element_attribute_not_match_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"NotMatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute NotMatch Regex Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the attribute `index` of an element does not match the regex pattern `^[a-zA-Z]+$`.",
+				"It asserts that the attribute value for the element with Id `elementId` fails to conform to the pattern using the NotMatch operator.",
+				"If the attribute value does not match the regex pattern, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:^[a-zA-Z]+$}}",
 				"locator": "Id",
 				"onAttribute": "index",
