@@ -2624,10 +2624,33 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is active unexpectedly",
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the CSS selector `#username` is not active using the ElementNotActive condition.",
+					"test_case": "element_not_active_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotActive",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Active Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the CSS selector `#username` is not active.",
+				"If the element is not active, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotActive}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
@@ -2635,10 +2658,34 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is active unexpectedly",
+						"Element not found",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is not active using the ElementNotActive condition.",
+					"test_case": "element_not_active_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotActive",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Active Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the Xpath selector `//input[@id='username']` is not active.",
+				"If the element is not active, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotActive}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -2646,16 +2693,40 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is active unexpectedly",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Id `username` is not active using the ElementNotActive condition.",
+					"test_case": "element_not_active_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotActive",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Not Active Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element with the Id `username` is not active.",
+				"If the element is not active, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementNotActive}}",
 				"locator": "Id",
 				"onElement": "username",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
