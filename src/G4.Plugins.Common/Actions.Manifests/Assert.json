@@ -1186,10 +1186,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect CSS selector",
+						"Regex pattern does not match value",
+						"Unexpected attribute format",
+						"Value is not a number"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by the CSS selector `#elementId` matches the regex pattern `^\\d+$` using the Match operator.",
+					"test_case": "element_attribute_regex_match_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"MatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Regex Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the attribute `index` of an element matches the regex pattern `^\\d+$`.",
+				"It asserts that the attribute value conforms to the pattern using the Match operator.",
+				"If the attribute value matches the regex pattern, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
 				"locator": "CssSelector",
 				"onAttribute": "index",
@@ -1198,10 +1225,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Regex pattern does not match value",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` matches the regex pattern `^\\d+$` using the Match operator.",
+					"test_case": "element_attribute_regex_match_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"MatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Regex Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the attribute `index` of an element matches the regex pattern `^\\d+$`.",
+				"It asserts that the attribute value conforms to the pattern using the Match operator with an Xpath locator.",
+				"If the attribute value matches the regex pattern, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
 				"locator": "Xpath",
 				"onAttribute": "index",
@@ -1210,10 +1264,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex pattern does not match value",
+						"Unexpected attribute format",
+						"Value is not a number"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element with Id `elementId` matches the regex pattern `^\\d+$` using the Match operator.",
+					"test_case": "element_attribute_regex_match_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"MatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute Regex Match Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the attribute `index` of an element matches the regex pattern `^\\d+$`.",
+				"It asserts that the attribute value for the element with Id `elementId` conforms to the pattern using the Match operator.",
+				"If the attribute value matches the regex pattern, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
 				"locator": "Id",
 				"onAttribute": "index",
