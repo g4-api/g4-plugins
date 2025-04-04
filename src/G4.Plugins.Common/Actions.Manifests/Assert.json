@@ -3156,10 +3156,33 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not stale when it should be",
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the CSS selector `#username` is stale using the ElementStale condition. An element is considered stale if it was once attached to the DOM but has since been removed or replaced. This typically applies after a dynamic DOM change, such as an AJAX update or DOM refresh.",
+					"test_case": "element_stale_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementStale",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Stale Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the CSS selector `#username` is stale.",
+				"If the element is stale, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementStale}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
@@ -3167,10 +3190,34 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not stale when it should be",
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is stale using the ElementStale condition. An element is considered stale if it was once attached to the DOM but has since been removed or replaced. This typically applies after a dynamic DOM change, such as an AJAX update or DOM refresh.",
+					"test_case": "element_stale_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementStale",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Stale Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the Xpath selector `//input[@id='username']` is stale.",
+				"If the element is stale, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementStale}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -3178,16 +3225,40 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not stale when it should be",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Id `username` is stale using the ElementStale condition. An element is considered stale if it was once attached to the DOM but has since been removed or replaced. This typically applies after a dynamic DOM change, such as an AJAX update or DOM refresh.",
+					"test_case": "element_stale_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementStale",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Stale Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element with the Id `username` is stale.",
+				"If the element is stale, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementStale}}",
 				"locator": "Id",
 				"onElement": "username",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
