@@ -2832,11 +2832,115 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is selected unexpectedly",
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the CSS selector `#acceptTerms` is not selected using the ElementNotSelected condition. The selector is semantically appropriate for elements like checkboxes or radio buttons.",
+					"test_case": "element_not_selected_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotSelected",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Not Selected Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the CSS selector `#acceptTerms` is not selected.",
+				"If the element is not selected, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"locator": "CssSelector",
+				"onElement": "#acceptTerms",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is selected unexpectedly",
+						"Element not found",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Xpath selector `//input[@id='acceptTerms']` is not selected using the ElementNotSelected condition. This is appropriate for elements like checkboxes or radio buttons.",
+					"test_case": "element_not_selected_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotSelected",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Not Selected Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the Xpath selector `//input[@id='acceptTerms']` is not selected.",
+				"If the element is not selected, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='acceptTerms']",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is selected unexpectedly",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Id `acceptTerms` is not selected using the ElementNotSelected condition, which is semantically appropriate for input elements like checkboxes or radio buttons.",
+					"test_case": "element_not_selected_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementNotSelected",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Not Selected Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element with the Id `acceptTerms` is not selected.",
+				"If the element is not selected, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"locator": "Id",
+				"onElement": "acceptTerms",
+				"pluginName": "Assert"
+			}
+		},
+
+		{
 			"description": [
 				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementNotSelected}}",
+				"argument": "{{$ --Condition:ElementNotVisible}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
 				"pluginName": "Assert"
@@ -2847,39 +2951,6 @@
 				""
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementNotSelected}}",
-				"locator": "Xpath",
-				"onElement": "//input[@id='username']",
-				"pluginName": "Assert"
-			}
-		},
-		{
-			"description": [
-				""
-			],
-			"rule": {
-				"argument": "{{$ --Condition:ElementNotSelected}}",
-				"locator": "Id",
-				"onElement": "username",
-				"pluginName": "Assert"
-			}
-		},
-		{
-			"description": [
-				""
-			],
-			"rule": {
-				"argument": "{{$ --Condition:ElementNotVisible}}",
-				"locator": "CssSelector",
-				"onElement": "#username",
-				"pluginName": "Assert"
-			}
-		},
-		{
-			"description": [
-				""
-			],
-			"rule": {
 				"argument": "{{$ --Condition:ElementNotVisible}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -2897,6 +2968,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
