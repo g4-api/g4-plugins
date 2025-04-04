@@ -275,6 +275,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -380,6 +381,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -491,6 +493,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -603,6 +606,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -717,6 +721,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -834,6 +839,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -951,6 +957,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -1068,6 +1075,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -1185,6 +1193,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -1302,6 +1311,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"context": {
 				"annotations": {
@@ -1419,11 +1429,37 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is greater than expected",
+						"Element count is less than expected",
+						"Incorrect CSS selector usage",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that exactly 2 elements are found for the selector `.primary-button` using an equality check on element count.",
+					"test_case": "element_count_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"EqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count Equal Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the CSS selector `.primary-button` is exactly 2.",
+				"If the element count equals 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:Equal --Expected:2}}",
 				"locator": "CssSelector",
 				"onElement": ".primary-button",
@@ -1431,10 +1467,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is greater than expected",
+						"Element count is less than expected",
+						"No elements found",
+						"Unexpected DOM structure",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that exactly 2 elements are found for the given Xpath selector `//button` using an equality check on element count.",
+					"test_case": "element_count_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"EqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count Equal Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the Xpath selector `//button` is exactly 2.",
+				"If the element count equals 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:Equal --Expected:2}}",
 				"locator": "Xpath",
 				"onElement": "//button",
@@ -1442,10 +1503,74 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is greater than expected",
+						"Element count is less than expected",
+						"Incorrect or misspelled TagName",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that exactly 2 elements with the tag name `button` are found using an equality check on element count.",
+					"test_case": "element_count_equal_validation_tagname",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"EqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count Equal Validation Using TagName",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the TagName selector is exactly 2.",
+				"It asserts that the element count for elements with tag name `button` equals 2.",
+				"If the element count equals 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementCount --Operator:Equal --Expected:2}}",
+				"locator": "TagName",
+				"onElement": "button",
+				"pluginName": "Assert"
+			}
+		},
+
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count equals expected",
+						"Element count is greater than expected",
+						"Element count is less than expected",
+						"Incorrect CSS selector usage",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the selector `.primary-button` is not equal to 2 using a not-equal check on element count.",
+					"test_case": "element_count_not_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"NotEqualCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Count NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the CSS selector `.primary-button` is not equal to 2.",
+				"If the element count is different from 2, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:2}}",
 				"locator": "CssSelector",
 				"onElement": ".primary-button",
@@ -1453,16 +1578,80 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count equals expected",
+						"Element count is greater than expected",
+						"Element count is less than expected",
+						"No elements found",
+						"Unexpected DOM structure",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is not equal to 2 using a not-equal check on element count.",
+					"test_case": "element_count_not_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"NotEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the Xpath selector `//button` is not equal to 2.",
+				"If the element count is different from 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:2}}",
 				"locator": "Xpath",
 				"onElement": "//button",
 				"pluginName": "Assert"
 			}
 		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count equals expected",
+						"Element count is greater than expected",
+						"Element count is less than expected",
+						"Incorrect or misspelled TagName",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements with the tag name `button` is not equal to 2 using a not-equal check on element count.",
+					"test_case": "element_count_not_equal_validation_tagname",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"NotEqualCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Count NotEqual Validation Using TagName",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the TagName selector for `button` is not equal to 2.",
+				"If the element count is different from 2, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:2}}",
+				"locator": "TagName",
+				"onElement": "button",
+				"pluginName": "Assert"
+			}
+		},
+
 		{
 			"description": [
 				""
