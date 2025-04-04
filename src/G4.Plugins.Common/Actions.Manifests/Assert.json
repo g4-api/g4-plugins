@@ -1069,10 +1069,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect CSS selector",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Value is not lower than 0"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is lower than or equal to `0` using the LowerEqual operator.",
+					"test_case": "element_attribute_lower_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"LowerEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute LowerEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is lower than or equal to a given value.",
+				"It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is lower than or equal to `0` using the LowerEqual operator.",
+				"If the attribute value is lower than or equal to `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:0}}",
 				"locator": "CssSelector",
 				"onAttribute": "index",
@@ -1081,10 +1108,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Value is not lower than 0",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is lower than or equal to `0` using the LowerEqual operator.",
+					"test_case": "element_attribute_lower_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"LowerEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute LowerEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is lower than or equal to a given value using the Xpath locator.",
+				"It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is lower than or equal to `0` using the LowerEqual operator.",
+				"If the attribute value is lower than or equal to `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:0}}",
 				"locator": "Xpath",
 				"onAttribute": "index",
@@ -1093,10 +1147,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute missing",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected attribute format",
+						"Value is not a number",
+						"Value is not lower than 0"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is lower than or equal to `0` using the LowerEqual operator.",
+					"test_case": "element_attribute_lower_equal_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttribute",
+					"LowerEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Attribute LowerEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that a specified attribute of an element is lower than or equal to a given value using the Id locator.",
+				"It asserts that the attribute `index` of the element with Id `elementId` is lower than or equal to `0` using the LowerEqual operator.",
+				"If the attribute value is lower than or equal to `0`, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:0}}",
 				"locator": "Id",
 				"onAttribute": "index",
