@@ -3046,38 +3046,115 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is disabled but still marked as selected",
+						"Element is not selected when it should be",
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the CSS selector `#acceptTerms` is selected using the ElementSelected condition. The condition only applies to checkboxes, radio buttons, or options.",
+					"test_case": "element_selected_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementSelected",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Selected Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the CSS selector `#acceptTerms` is selected.",
+				"The ElementSelected condition only applies to elements such as `<input type=\"checkbox\">`, `<input type=\"radio\">`, or `<option selected>`.",
+				"If the element is selected, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementSelected}}",
 				"locator": "CssSelector",
-				"onElement": "#username",
+				"onElement": "#acceptTerms",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is disabled but still marked as selected",
+						"Element is selected unexpectedly",
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Xpath selector `//input[@id='acceptTerms']` is selected using the ElementSelected condition. The condition only applies to checkboxes, radio buttons, or options.",
+					"test_case": "element_selected_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementSelected",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Selected Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the Xpath selector `//input[@id='acceptTerms']` is selected.",
+				"The ElementSelected condition only applies to elements such as `<input type=\"checkbox\">`, `<input type=\"radio\">`, or `<option selected>`.",
+				"If the element is selected, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementSelected}}",
 				"locator": "Xpath",
-				"onElement": "//input[@id='username']",
+				"onElement": "//input[@id='acceptTerms']",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is disabled but still marked as selected",
+						"Element is not selected when it should be",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Id `acceptTerms` is selected using the ElementSelected condition. The condition only applies to checkboxes, radio buttons, or options.",
+					"test_case": "element_selected_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementSelected",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Selected Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element with the Id `acceptTerms` is selected.",
+				"The ElementSelected condition only applies to elements such as `<input type=\"checkbox\">`, `<input type=\"radio\">`, or `<option selected>`.",
+				"If the element is selected, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementSelected}}",
 				"locator": "Id",
-				"onElement": "username",
+				"onElement": "acceptTerms",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
