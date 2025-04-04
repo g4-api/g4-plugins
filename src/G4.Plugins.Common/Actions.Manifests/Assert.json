@@ -1076,8 +1076,8 @@
 						"Element not found",
 						"Incorrect CSS selector",
 						"Unexpected attribute format",
-						"Value is not a number",
-						"Value is not lower than 0"
+						"Value is greater than 0",
+						"Value is not a number"
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is lower than or equal to `0` using the LowerEqual operator.",
@@ -1114,8 +1114,8 @@
 						"Attribute missing",
 						"Element not found",
 						"Unexpected attribute format",
+						"Value is greater than 0",
 						"Value is not a number",
-						"Value is not lower than 0",
 						"Xpath syntax errors"
 					],
 					"expected_result": true,
@@ -1154,8 +1154,8 @@
 						"Element not found",
 						"Incorrect Id usage",
 						"Unexpected attribute format",
-						"Value is not a number",
-						"Value is not lower than 0"
+						"Value is greater than 0",
+						"Value is not a number"
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is lower than or equal to `0` using the LowerEqual operator.",
