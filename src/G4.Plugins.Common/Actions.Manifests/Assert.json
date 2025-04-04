@@ -2419,10 +2419,33 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Element is disabled unexpectedly",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the CSS selector `#username` is enabled using the ElementEnabled condition.",
+					"test_case": "element_enabled_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementEnabled",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Enabled Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the CSS selector `#username` is enabled.",
+				"If the element is enabled, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementEnabled}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
@@ -2430,10 +2453,34 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage",
+						"Element is disabled unexpectedly",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is enabled using the ElementEnabled condition.",
+					"test_case": "element_enabled_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementEnabled",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Enabled Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element identified by the Xpath selector `//input[@id='username']` is enabled.",
+				"If the element is enabled, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementEnabled}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -2441,16 +2488,40 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Element is disabled unexpectedly",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the element with the Id `username` is enabled using the ElementEnabled condition.",
+					"test_case": "element_enabled_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementEnabled",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Enabled Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element with the Id `username` is enabled.",
+				"If the element is enabled, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementEnabled}}",
 				"locator": "Id",
 				"onElement": "username",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
