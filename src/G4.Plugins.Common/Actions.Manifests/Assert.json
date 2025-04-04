@@ -1982,13 +1982,36 @@
 			}
 		},
 
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is equal to expected",
+						"Element count is greater than expected",
+						"Incorrect CSS selector usage",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the selector `.primary-button` is lower than or equal to 2 using the LowerEqual operator.",
+					"test_case": "element_count_lower_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"LowerEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count LowerEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the CSS selector `.primary-button` is lower than or equal to 2.",
+				"If the element count is lower than or equal to 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:LowerEqual --Expected:2}}",
 				"locator": "CssSelector",
 				"onElement": ".primary-button",
@@ -1996,10 +2019,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is equal to expected",
+						"Element count is greater than expected",
+						"No elements found",
+						"Unexpected DOM structure",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is lower than or equal to 2 using the LowerEqual operator.",
+					"test_case": "element_count_lower_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"LowerEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count LowerEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements matching the Xpath selector `//button` is lower than or equal to 2.",
+				"If the element count is lower than or equal to 2, the assert evaluates to `true`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementCount --Operator:LowerEqual --Expected:2}}",
 				"locator": "Xpath",
 				"onElement": "//button",
@@ -2007,27 +2056,158 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count is equal to expected",
+						"Element count is greater than expected",
+						"Incorrect or misspelled TagName",
+						"No elements found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements with the tag name `button` is lower than or equal to 2 using the LowerEqual operator.",
+					"test_case": "element_count_lower_equal_validation_tagname",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"LowerEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count LowerEqual Validation Using TagName",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the number of elements with the tag name `button` is lower than or equal to 2.",
+				"If the element count is lower than or equal to 2, the assert evaluates to `true`."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:^[1-9]+$}}",
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementCount --Operator:LowerEqual --Expected:2}}",
+				"locator": "TagName",
+				"onElement": "button",
+				"pluginName": "Assert"
+			}
+		},
+
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count does not match regex pattern",
+						"No elements found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Value is not composed solely of digits representing a positive integer"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the selector `.primary-button` matches the regex pattern `^[1-9][0-9]*$`, ensuring the count is a positive integer.",
+					"test_case": "element_count_regex_match_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"MatchCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Count Regex Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element count for the selector `.primary-button` matches the regex pattern `^[1-9][0-9]*$`.",
+				"It asserts that the element count is a positive integer using the Match operator.",
+				"If the element count matches the regex pattern, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:^[1-9][0-9]*$}}",
 				"locator": "CssSelector",
 				"onElement": ".primary-button",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count does not match regex pattern",
+						"No elements found",
+						"Xpath syntax errors",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements for the given Xpath selector `//button` matches the regex pattern `^[1-9][0-9]*$`, ensuring the count is a positive integer.",
+					"test_case": "element_count_regex_match_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"MatchCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Count Regex Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element count for the Xpath selector `//button` matches the regex pattern `^[1-9][0-9]*$`.",
+				"It asserts that the element count is a positive integer using the Match operator.",
+				"If the element count matches the regex pattern, the assert evaluates to `true`."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:^[1-9]+$}}",
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:^[1-9][0-9]*$}}",
 				"locator": "Xpath",
 				"onElement": "//button",
 				"pluginName": "Assert"
 			}
 		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element count does not match regex pattern",
+						"No elements found",
+						"Incorrect or misspelled TagName",
+						"Unexpected DOM structure",
+						"Value is not composed solely of digits representing a positive integer"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the number of elements with the tag name `button` matches the regex pattern `^[1-9][0-9]*$`, ensuring the count is a positive integer.",
+					"test_case": "element_count_regex_match_validation_tagname",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementCount",
+					"MatchCheck",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Element Count Regex Match Validation Using TagName",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the element count for elements with the tag name `button` matches the regex pattern `^[1-9][0-9]*$`.",
+				"It asserts that the element count is a positive integer using the Match operator.",
+				"If the element count matches the regex pattern, the assert evaluates to `true`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:^[1-9][0-9]*$}}",
+				"locator": "TagName",
+				"onElement": "button",
+				"pluginName": "Assert"
+			}
+		},
+
+
+
+
+
 		{
 			"description": [
 				""
@@ -2050,6 +2230,18 @@
 				"pluginName": "Assert"
 			}
 		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Condition:ElementCount --Operator:NotMatch --Expected:[a-zA-Z]}}",
+				"locator": "TagName",
+				"onElement": "button",
+				"pluginName": "Assert"
+			}
+		},
+
 		{
 			"description": [
 				""
