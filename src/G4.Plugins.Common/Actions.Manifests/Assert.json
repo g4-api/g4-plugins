@@ -3739,10 +3739,35 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length equals expected",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Whitespace or nested text nodes affecting length calculation"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text content of the element with the CSS selector `#content` does not equal 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_not_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the CSS selector `#content` does not equal 255 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is different from 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:255}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
@@ -3750,10 +3775,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length equals expected",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Whitespace or nested text nodes affecting length calculation",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text content of the element with the Xpath selector `//div[@id='content']` does not equal 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_not_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the Xpath selector `//div[@id='content']` does not equal 255 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is different from 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:255}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -3761,16 +3812,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length equals expected",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Whitespace or nested text nodes affecting length calculation"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text content of the element with the Id `content` does not equal 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_not_equal_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element with the Id `content` does not equal 255 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is different from 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:255}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
