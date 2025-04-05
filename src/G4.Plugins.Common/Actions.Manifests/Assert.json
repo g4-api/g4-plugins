@@ -3611,44 +3611,133 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is not equal to expected",
+						"Incorrect CSS selector usage",
+						"Regular expression fails to extract correct text",
+						"Unexpected DOM structure",
+						"Whitespace or inner text nodes affecting length calculation"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` is exactly 100 characters. The length is determined solely from the attribute value, excluding HTML markup. A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured; otherwise, it fails.",
+					"test_case": "element_text_length_equal_validation_css_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"InputField",
+					"ValueLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Equal Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) identified by the CSS selector `input#content` is exactly 100 characters.",
+				"The text length is computed solely from the attribute value, excluding any HTML markup.",
+				"A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured.",
+				"If the extracted match is shorter than 100 characters, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "input#content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is not equal to expected",
+						"Incorrect XPath indexing or attribute usage",
+						"Regular expression fails to extract correct text",
+						"Unexpected DOM structure",
+						"Whitespace or inner text nodes affecting length calculation",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` is exactly 100 characters. The length is determined solely from the attribute value, excluding HTML markup. A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured; otherwise, it fails.",
+					"test_case": "element_text_length_equal_validation_xpath_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"InputField",
+					"ValueLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Equal Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) identified by the Xpath selector `//input[@id='content']` is exactly 100 characters.",
+				"The text length is computed solely from the attribute value, excluding any HTML markup.",
+				"A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured.",
+				"If the extracted match is shorter than 100 characters, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//input[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is not equal to expected",
+						"Incorrect Id usage",
+						"Regular expression fails to extract correct text",
+						"Unexpected DOM structure",
+						"Whitespace or inner text nodes affecting length calculation"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` is exactly 100 characters. The length is determined solely from the attribute value, excluding HTML markup. A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured; otherwise, it fails.",
+					"test_case": "element_text_length_equal_validation_id_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"InputField",
+					"ValueLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Equal Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) with the Id `content` is exactly 100 characters.",
+				"The text length is computed solely from the attribute value, excluding any HTML markup.",
+				"A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured.",
+				"If the extracted match is shorter than 100 characters, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Equal --Expected:100}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
+
 		{
 			"description": [
 				""
