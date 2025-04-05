@@ -4453,41 +4453,131 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Visible text length is not greater than expected"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the textarea with the CSS selector `textarea#content` is greater than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,200})` is applied to extract up to 200 characters into a capture group; the assertion passes only if the computed length is greater than 150.",
+					"test_case": "element_text_length_greater_validation_css_textarea",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"Textarea",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Textarea Value Text Length Greater Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of a textarea with the CSS selector `textarea#content` is greater than 150 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,200})` is applied to the `value` attribute to extract up to 200 characters into a capture group.",
+				"The assertion passes only if the computed length is greater than 150; if exactly 150 characters are captured or fewer, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:150}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
-				"pluginName": "Assert"
+				"onElement": "textarea#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,200})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the textarea with the Xpath selector `//textarea[@id='content']` is greater than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,200})` is applied to extract up to 200 characters into a capture group; the assertion passes only if the computed length is greater than 150.",
+					"test_case": "element_text_length_greater_validation_xpath_textarea",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"Textarea",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Textarea Value Text Length Greater Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of a textarea with the Xpath selector `//textarea[@id='content']` is greater than 150 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,200})` is applied to the `value` attribute to extract up to 200 characters into a capture group.",
+				"The assertion passes only if the computed length is greater than 150; if exactly 150 characters are captured or fewer, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:150}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
-				"pluginName": "Assert"
+				"onElement": "//textarea[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,200})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the textarea with the Id `content` is greater than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,200})` is applied to extract up to 200 characters into a capture group; the assertion passes only if the computed length is greater than 150.",
+					"test_case": "element_text_length_greater_validation_id_textarea",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"Textarea",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Textarea Value Text Length Greater Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of a textarea with the Id `content` is greater than 150 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,200})` is applied to the `value` attribute to extract up to 200 characters into a capture group.",
+				"The assertion passes only if the computed length is greater than 150; if exactly 150 characters are captured or fewer, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:150}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
-				"pluginName": "Assert"
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,200})"
 			}
 		},
+
 		{
 			"description": [
 				""
