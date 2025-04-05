@@ -3965,38 +3965,123 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length equals expected",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` does not equal 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_not_equal_validation_css_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) identified by the CSS selector `input#content` does not equal 150 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is not exactly 150 characters."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:150}}",
 				"locator": "CssSelector",
-				"onElement": "input#content",
 				"onAttribute": "value",
+				"onElement": "input#content",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length equals expected",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` does not equal 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_not_equal_validation_xpath_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) identified by the Xpath selector `//input[@id='content']` does not equal 150 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is not exactly 150 characters."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:150}}",
 				"locator": "Xpath",
-				"onElement": "//input[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//input[@id='content']",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length equals expected",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` does not equal 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_not_equal_validation_id_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length NotEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) with the Id `content` does not equal 150 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is not exactly 150 characters."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:150}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
