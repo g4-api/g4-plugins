@@ -4707,10 +4707,35 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is less than expected",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the CSS selector `#content` is greater than or equal to 255 characters. The length is computed from the visible text only, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_greater_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"GreaterEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length GreaterEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the CSS selector `#content` is greater than or equal to 255 characters.",
+				"The length is computed from the visible text only, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is greater than or equal to 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:255}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
@@ -4718,10 +4743,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is less than expected",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` is greater than or equal to 255 characters. The length is computed from the visible text only, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_greater_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"GreaterEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length GreaterEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the Xpath selector `//div[@id='content']` is greater than or equal to 255 characters.",
+				"The length is computed from the visible text only, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is greater than or equal to 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:255}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -4729,16 +4780,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element text length is less than expected",
+						"Incorrect Id usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Id `content` is greater than or equal to 255 characters. The length is computed from the visible text only, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_greater_equal_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"GreaterEqualCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length GreaterEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element with the Id `content` is greater than or equal to 255 characters.",
+				"The length is computed from the visible text only, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is greater than or equal to 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:GreaterEqual --Expected:255}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
