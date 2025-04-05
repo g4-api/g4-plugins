@@ -4215,10 +4215,35 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Visible text length is less than or equal to expected"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the CSS selector `#content` is greater than 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_greater_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Greater Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the CSS selector `#content` is greater than 255 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is greater than 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:255}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
@@ -4226,10 +4251,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Visible text length is less than or equal to expected",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` is greater than 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_greater_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Greater Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the Xpath selector `//div[@id='content']` is greater than 255 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is greater than 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:255}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -4237,16 +4288,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Visible text length is less than or equal to expected"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Id `content` is greater than 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_greater_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"GreaterCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Greater Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element with the Id `content` is greater than 255 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is greater than 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:255}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
