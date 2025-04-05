@@ -4087,44 +4087,133 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex captures exactly 100 characters",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` does not equal 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion fails if exactly 100 characters are captured.",
+					"test_case": "element_text_length_not_equal_validation_css_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"ValueLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) identified by the CSS selector `input#content` is not exactly 100 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.",
+				"The assertion passes only if the length of the regex capture group is not exactly 100; if exactly 100 characters are captured, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "input#content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,110})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex captures exactly 100 characters",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` does not equal 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion fails if exactly 100 characters are captured.",
+					"test_case": "element_text_length_not_equal_validation_xpath_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"ValueLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) identified by the Xpath selector `//input[@id='content']` is not exactly 100 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.",
+				"The assertion passes only if the length of the regex capture group is not exactly 100; if exactly 100 characters are captured, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
-				"pluginName": "Assert",
-				"regularExpression": "(?s)^(.{0,100})"
-			}
-		},
-		{
-			"description": [
-				""
-			],
-			"rule": {
-				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
-				"locator": "Id",
-				"onElement": "content",
-				"onAttribute": "value",
+				"onElement": "//input[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,110})"
 			}
 		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex captures exactly 100 characters",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` does not equal 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion fails if exactly 100 characters are captured.",
+					"test_case": "element_text_length_not_equal_validation_id_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"ValueLength",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Input Value Text Length NotEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text length of the value attribute of an input element (of type text) with the Id `content` is not exactly 100 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.",
+				"The assertion passes only if the length of the regex capture group is not exactly 100; if exactly 100 characters are captured, the assertion fails."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementTextLength --Operator:NotEqual --Expected:100}}",
+				"locator": "Id",
+				"onAttribute": "value",
+				"onElement": "content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,110})"
+			}
+		},
+
 		{
 			"description": [
 				""
