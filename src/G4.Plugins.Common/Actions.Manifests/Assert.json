@@ -5175,10 +5175,34 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Visible text length is greater than expected"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the CSS selector `#content` does not exceed 255 characters. The length is computed solely from the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_lower_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length LowerEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the CSS selector `#content` is less than or equal to 255 characters.",
+				"The length is determined solely from the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is less than or equal to 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:255}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
@@ -5186,10 +5210,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Visible text length is greater than expected",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` does not exceed 255 characters. The length is computed solely from the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_lower_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length LowerEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element identified by the Xpath selector `//div[@id='content']` is less than or equal to 255 characters.",
+				"The length is determined solely from the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is less than or equal to 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:255}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -5197,52 +5246,154 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Visible text length is greater than expected"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Id `content` does not exceed 255 characters. The length is computed solely from the visible text, excluding any HTML markup or tags.",
+					"test_case": "element_text_length_lower_equal_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length LowerEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text content of the element with the Id `content` is less than or equal to 255 characters.",
+				"The length is determined solely from the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length is less than or equal to 255."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:255}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the CSS selector `#content` does not exceed 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, no capture occurs and the assertion fails.",
+					"test_case": "element_text_length_lower_equal_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length LowerEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text of the element identified by the CSS selector `#content` is less than or equal to 100 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to the visible text to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, the regex fails to match.",
+				"The assertion passes only if the regex successfully captures text and the computed length is less than or equal to 100 characters."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
 				"pluginName": "Assert",
-				"regularExpression": "(?s)^(.{0,100})"
+				"regularExpression": "(?s)^(?=.{0,100}$)(.*)$"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` does not exceed 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, no capture occurs and the assertion fails.",
+					"test_case": "element_text_length_lower_equal_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length LowerEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text of the element identified by the Xpath selector `//div[@id='content']` is less than or equal to 100 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to the visible text to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, the regex fails to match.",
+				"The assertion passes only if the regex successfully captures text and the computed length is less than or equal to 100 characters."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
 				"pluginName": "Assert",
-				"regularExpression": "(?s)^(.{0,100})"
+				"regularExpression": "(?s)^(?=.{0,100}$)(.*)$"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Id `content` does not exceed 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, no capture occurs and the assertion fails.",
+					"test_case": "element_text_length_lower_equal_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length LowerEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text of the element with the Id `content` is less than or equal to 100 characters.",
+				"The length is based solely on the visible text, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to the visible text to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, the regex fails to match.",
+				"The assertion passes only if the regex successfully captures text and the computed length is less than or equal to 100 characters."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:LowerEqual --Expected:100}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert",
-				"regularExpression": "(?s)^(.{0,100})"
+				"regularExpression": "(?s)^(?=.{0,100}$)(.*)$"
 			}
 		},
+
 		{
 			"description": [
 				""
