@@ -7845,85 +7845,272 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any discrepancies, including extra whitespace or formatting differences, will cause the assertion to pass if the texts are not identical.",
+					"test_case": "element_text_notequal_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the CssSelector `div#content` is not equal to the expected text 'Lorem ipsu'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.",
+				"The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
-				"onAttribute": "value",
-				"pluginName": "Assert"
+				"onElement": "div#content",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression is used to extract up to 10 characters for comparison. Any discrepancies, such as extra whitespace or unexpected formatting, will cause the assertion to pass when there is a non-exact match.",
+					"test_case": "element_text_notequal_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the XPath locator `//div[@id='content']` is not equal to the expected text 'Lorem ipsu'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.",
+				"The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
-				"onAttribute": "value",
-				"pluginName": "Assert"
+				"onElement": "//div[@id='content']",
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any differences such as additional whitespace or formatting anomalies will cause the assertion to pass if the texts are not identical.",
+					"test_case": "element_text_notequal_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the Id `content` is not equal to the expected text 'Lorem ipsu'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.",
+				"The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
 				"locator": "Id",
 				"onElement": "content",
-				"onAttribute": "value",
-				"pluginName": "Assert"
+				"pluginName": "Assert",
+				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
+
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any discrepancies, including extra whitespace or formatting differences, will cause the assertion to pass when there is a non-exact match.",
+					"test_case": "element_text_notequal_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the CssSelector `div#content` is not equal to the expected text 'Lorem ipsu'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.",
+				"The assertion passes if the extracted text does not exactly match the expected value; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
-				"onAttribute": "value",
+				"onElement": "div#content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression is used to extract up to 10 characters for comparison. Any discrepancies, such as extra whitespace or unexpected formatting, will cause the assertion to pass when there is a non-exact match.",
+					"test_case": "element_text_notequal_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the XPath locator `//div[@id='content']` is not equal to the expected text 'Lorem ipsu'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.",
+				"The assertion passes if the extracted text does not exactly match the expected value; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
-				"onAttribute": "value",
+				"onElement": "//div[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any differences such as additional whitespace or formatting anomalies will cause the assertion to pass if the texts are not identical.",
+					"test_case": "element_text_notequal_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the Id `content` is not equal to the expected text 'Lorem ipsu'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.",
+				"The assertion passes if the extracted text does not exactly match the expected value; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsu}}",
 				"locator": "Id",
 				"onElement": "content",
-				"onAttribute": "value",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
+
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than 42.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion compares this number against the expected threshold 42. If the extracted numeric value is not greater than 42, the assertion fails.",
+					"test_case": "element_text_greater_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Greater Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the CssSelector `div#content` is greater than the expected value 42.",
+				"The visible text content is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
 				"locator": "CssSelector",
 				"onElement": "div#content",
@@ -7932,10 +8119,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than 42.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression is applied to extract a numeric value from the text, and the assertion compares this value to the expected threshold of 42. The assertion fails if the extracted number is not greater than 42.",
+					"test_case": "element_text_greater_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Greater Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the XPath locator `//div[@id='content']` is greater than the expected value 42.",
+				"The visible text content is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -7944,10 +8157,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than 42.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion verifies that this value is greater than the threshold 42. The assertion fails if the extracted numeric value does not exceed 42.",
+					"test_case": "element_text_greater_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Greater Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the Id `content` is greater than the expected value 42.",
+				"The visible text content is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
 				"locator": "Id",
 				"onElement": "content",
@@ -7955,6 +8194,7 @@
 				"regularExpression": "\\d+"
 			}
 		},
+
 		{
 			"description": [
 				""
