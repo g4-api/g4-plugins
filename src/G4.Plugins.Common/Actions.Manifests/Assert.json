@@ -7167,10 +7167,34 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the computed text of the element exactly matches the expected string.",
+					"notes": "Validation is based solely on the element's visible text content. Any additional whitespace or formatting differences will cause the assertion to fail.",
+					"test_case": "element_text_equal_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Equal Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the CssSelector `div#content` is equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"The assertion passes if the element text exactly matches the expected value; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"locator": "CssSelector",
 				"onElement": "div#content",
@@ -7178,10 +7202,34 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the computed text of the element exactly matches the expected string.",
+					"notes": "Validation is based solely on the element's visible text content. Any extraneous whitespace or formatting differences will result in a failure.",
+					"test_case": "element_text_equal_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Equal Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the XPath locator `//div[@id='content']` is equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"The assertion passes if the element text exactly matches the expected value; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -7189,16 +7237,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the computed text of the element exactly matches the expected string.",
+					"notes": "Validation is based solely on the element's visible text content. Any discrepancies in whitespace or formatting will cause the assertion to fail.",
+					"test_case": "element_text_equal_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Equal Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the Id `content` is equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"The assertion passes if the element text exactly matches the expected value; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
