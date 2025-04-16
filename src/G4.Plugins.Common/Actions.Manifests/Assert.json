@@ -6465,44 +6465,130 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the CSS selector `input#content`, when converted to a string, matches the pattern `^1\\d+$`. The regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters from the attribute, and the test passes only if the resulting length meets the expected pattern.",
+					"test_case": "element_text_length_match_validation_css_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element, identified by the CSS selector `input#content`, matches the expected pattern `^1\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group. The computed length, when converted to a string, must match the pattern `^1\\d+$` (for example, '10', '11', '150', etc.).",
+				"The assertion passes only if the computed length matches this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "input#content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Xpath selector `//input[@id='content']`, when converted to a string, matches the pattern `^1\\d+$`. The regular expression `(?s)^(.{0,100})` extracts up to 100 characters from the attribute, and the assertion passes only if the resulting length meets the expected pattern.",
+					"test_case": "element_text_length_match_validation_xpath_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element, identified by the Xpath selector `//input[@id='content']`, matches the expected pattern `^1\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group. The computed length, when converted to a string, must match the pattern `^1\\d+$` (for example, '10', '11', '150', etc.).",
+				"The assertion passes only if the computed length matches this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//input[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Id `content`, when converted to a string, matches the expected pattern `^1\\d+$`. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the attribute, and the assertion passes only if the resulting length meets the expected pattern.",
+					"test_case": "element_text_length_match_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Match Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element with the Id `content` matches the expected pattern `^1\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group. The computed length, when converted to a string, must match the pattern `^1\\d+$` (for example, '10', '11', '150', etc.).",
+				"The assertion passes only if the computed length matches this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert",
-				"regularExpression": "(?s)^(.{0,110})"
+				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
+
 		{
 			"description": [
 				""
