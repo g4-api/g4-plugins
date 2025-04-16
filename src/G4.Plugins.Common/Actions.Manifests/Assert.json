@@ -6832,7 +6832,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
 					"notes": "Validation is based solely on text from the value attribute. The regular expression is applied to extract up to 100 characters, and the assertion checks that the resulting computed length does not match the expected pattern.",
-					"test_case": "Validate textarea content (using CSS selector) does not match regex pattern",
+					"test_case": "element_attribute_text_length_not_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6871,7 +6871,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
 					"notes": "Validation is based solely on text from the value attribute. The regular expression is used to extract up to 100 characters, ensuring that the computed length does not conform to the prohibited pattern.",
-					"test_case": "Validate textarea content (using XPath) does not match regex pattern",
+					"test_case": "element_attribute_text_length_not_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6910,7 +6910,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
 					"notes": "Validation is based solely on text from the value attribute. The regular expression extracts up to 100 characters, and the computed length is checked against the prohibited pattern.",
-					"test_case": "Validate textarea content (using Id) does not match regex pattern",
+					"test_case": "element_attribute_text_length_not_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6951,7 +6951,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^1\\d+$`; it fails if it matches exactly.",
 					"notes": "Validation is based solely on the text from the value attribute. The regular expression is applied to extract up to 100 characters, and the computed length is then compared to the prohibited pattern.",
-					"test_case": "Validate input content (using CSS selector) does not match regex pattern",
+					"test_case": "element_attribute_text_length_not_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6992,7 +6992,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^1\\d+$`; it fails if it matches exactly.",
 					"notes": "Validation is based solely on the text from the value attribute. The regular expression is used to extract up to 100 characters, ensuring that the computed length does not conform to the prohibited pattern.",
-					"test_case": "Validate input content (using XPath) does not match regex pattern",
+					"test_case": "element_attribute_text_length_not_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7033,7 +7033,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^1\\d+$`; it fails if it matches exactly.",
 					"notes": "Validation is based solely on the text from the value attribute. The regular expression is applied to extract up to 100 characters, and the computed length is then compared to the prohibited pattern.",
-					"test_case": "Validate input content (using Id) does not match regex pattern",
+					"test_case": "element_attribute_text_length_not_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7064,10 +7064,33 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The assertion passes if the element with the provided CSS selector is visible in the DOM.",
+					"notes": "Validation is based solely on the element's visibility status as determined by the CSS selector. If the element is not visible or not found, the assertion fails.",
+					"test_case": "element_visible_validation_css_username",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementVisible",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Visible Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element identified by the CSS selector `#username` is visible in the DOM.",
+				"Visibility is determined solely based on the element's presence and rendering state, excluding any hidden or collapsed styling.",
+				"The assertion passes if the element is visible; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementVisible}}",
 				"locator": "CssSelector",
 				"onElement": "#username",
@@ -7075,10 +7098,33 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The assertion passes if the element with the provided XPath locator is visible in the DOM.",
+					"notes": "Validation is based solely on the element's visibility status as determined by the XPath locator. If the element is not visible or not found, the assertion fails.",
+					"test_case": "element_visible_validation_xpath_username",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementVisible",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Visible Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element identified by the XPath locator `//input[@id='username']` is visible in the DOM.",
+				"Visibility is determined solely based on the element's presence and rendering state, excluding any hidden or collapsed styling.",
+				"The assertion passes if the element is visible; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementVisible}}",
 				"locator": "Xpath",
 				"onElement": "//input[@id='username']",
@@ -7086,10 +7132,33 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The assertion passes if the element with the provided Id is visible in the DOM.",
+					"notes": "Validation is based solely on the element's visibility status as determined by the Id locator. If the element is not visible or not found, the assertion fails.",
+					"test_case": "element_visible_validation_id_username",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementVisible",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Visible Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that an element identified by the Id `username` is visible in the DOM.",
+				"Visibility is determined solely based on the element's presence and rendering state, excluding any hidden or collapsed styling.",
+				"The assertion passes if the element is visible; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementVisible}}",
 				"locator": "Id",
 				"onElement": "username",
