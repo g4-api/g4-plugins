@@ -8553,10 +8553,36 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than 42.",
+					"notes": "Validation is based solely on the visible text content of the element. The regular expression extracts a numeric value, and the assertion verifies that this value is lower than 42. If no valid number is extracted or if the extracted number is 42 or greater, the assertion fails.",
+					"test_case": "element_text_lower_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexExtraction",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Lower Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the CssSelector `div#content` is lower than the expected value 42.",
+				"The visible text is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
 				"locator": "CssSelector",
 				"onElement": "div#content",
@@ -8565,10 +8591,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than 42.",
+					"notes": "Validation is based solely on the visible text content of the element. The regular expression extracts a numeric value from the text, and the assertion confirms that this number is lower than 42. Failure to extract a valid number or extraction of a value that is 42 or greater will cause the assertion to fail.",
+					"test_case": "element_text_lower_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexExtraction",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Lower Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the XPath locator `//div[@id='content']` is lower than the expected value 42.",
+				"The visible text is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -8577,10 +8629,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than 42.",
+					"notes": "Validation is based solely on the visible text content of the element. The regular expression is used to extract a numeric value from the text, and the assertion verifies that this number is lower than 42. If extraction fails or the value is not lower than 42, the assertion fails.",
+					"test_case": "element_text_lower_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexExtraction",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Lower Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the Id `content` is lower than the expected value 42.",
+				"The visible text is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
 				"locator": "Id",
 				"onElement": "content",
@@ -8588,6 +8666,7 @@
 				"regularExpression": "\\d+"
 			}
 		},
+
 		{
 			"description": [
 				""
