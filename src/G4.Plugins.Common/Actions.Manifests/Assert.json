@@ -6340,41 +6340,130 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Computed length does not match expected pattern",
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the CSS selector `input#content` matches the expected pattern `^15\\d+$`. In other words, when converted to a string, the length must start with '15' (e.g., '150', '151').",
+					"test_case": "element_text_length_match_validation_css_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element (of type text) identified by the CSS selector `input#content` matches the pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"The expected outcome is that the computed length, when converted to a string, will begin with '15' (for example, '150', '151', etc.).",
+				"The assertion passes only if the computed length meets this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "input#content",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Computed length does not match expected pattern",
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Xpath selector `//input[@id='content']` matches the expected pattern `^15\\d+$`. In other words, when converted to a string, the length must begin with '15' (e.g., '150', '151').",
+					"test_case": "element_text_length_match_validation_xpath_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element (of type text) identified by the Xpath selector `//input[@id='content']` matches the pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"The expected outcome is that the computed length, when converted to a string, will start with '15' (for example, '150', '151', etc.).",
+				"The assertion passes only if the computed length meets this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//input[@id='content']",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Computed length does not match expected pattern",
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Id `content` matches the expected pattern `^15\\d+$`. In other words, when converted to a string, the length must begin with '15' (e.g., '150', '151').",
+					"test_case": "element_text_length_match_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Match Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element with the Id `content` matches the pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"The expected outcome is that the computed length, when converted to a string, will start with '15' (for example, '150', '151', etc.).",
+				"The assertion passes only if the computed length meets this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
