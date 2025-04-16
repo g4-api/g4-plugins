@@ -9025,10 +9025,37 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the element's visible text matches the regular expression `^Lorem ipsum dolor.*`; it fails otherwise.",
+					"notes": "Validation is based solely on the element's visible text content. A regular expression is applied to test for the expected pattern. If the text does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the CssSelector `div#content` matches the expected pattern `^Lorem ipsum dolor.*`.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a match.",
+				"The assertion passes only if the element text matches the pattern; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
 				"locator": "CssSelector",
 				"onElement": "div#content",
@@ -9036,10 +9063,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the element's visible text matches the regular expression `^Lorem ipsum dolor.*`; it fails otherwise.",
+					"notes": "Validation is based solely on the element's visible text content. A regular expression is applied to test for the expected pattern. Failure to match the pattern causes the assertion to fail.",
+					"test_case": "element_text_match_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the XPath locator `//div[@id='content']` matches the expected pattern `^Lorem ipsum dolor.*`.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a match.",
+				"The assertion passes only if the element text matches the pattern; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -9047,16 +9101,44 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the element's visible text matches the regular expression `^Lorem ipsum dolor.*`; it fails otherwise.",
+					"notes": "Validation is based solely on the element's visible text content. A regular expression is applied to test for the expected pattern. If the pattern does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the Id `content` matches the expected pattern `^Lorem ipsum dolor.*`.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a match.",
+				"The assertion passes only if the element text matches the pattern; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
