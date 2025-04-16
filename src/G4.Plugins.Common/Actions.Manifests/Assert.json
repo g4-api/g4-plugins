@@ -7621,10 +7621,34 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the computed text from the element is not equal to 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+					"notes": "Validation is based solely on the element's visible text content. Any variations, including differences in whitespace or formatting that result in a non-exact match, will cause the assertion to pass.",
+					"test_case": "element_text_notequal_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the CssSelector `div#content` is not equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"The assertion passes if the element text does not match the expected value exactly; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"locator": "CssSelector",
 				"onElement": "div#content",
@@ -7632,10 +7656,34 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the computed text from the element is not equal to 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+					"notes": "Validation is based solely on the element's visible text content. Any discrepancies, including subtle differences in whitespace or formatting, will result in a successful assertion if the texts are not identical.",
+					"test_case": "element_text_notequal_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the XPath locator `//div[@id='content']` is not equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"The assertion passes if the element text does not match the expected value exactly; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -7643,16 +7691,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the computed text from the element is not equal to 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+					"notes": "Validation is based solely on the element's visible text content. Any differences, including extra spaces or formatting variations leading to a non-exact match, will cause the assertion to pass.",
+					"test_case": "element_text_notequal_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text NotEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the Id `content` is not equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"The assertion passes if the element text does not exactly match the expected value; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
