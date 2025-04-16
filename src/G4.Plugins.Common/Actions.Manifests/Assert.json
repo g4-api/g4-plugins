@@ -6822,41 +6822,123 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
+					"notes": "Validation is based solely on text from the value attribute. The regular expression is applied to extract up to 100 characters, and the assertion checks that the resulting computed length does not match the expected pattern.",
+					"test_case": "Validate textarea content (using CSS selector) does not match regex pattern",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotMatch Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of a textarea element with the CssSelector `textarea#content` does not match the expected pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.",
+				"The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\\d+$`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "textarea#content",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
+					"notes": "Validation is based solely on text from the value attribute. The regular expression is used to extract up to 100 characters, ensuring that the computed length does not conform to the prohibited pattern.",
+					"test_case": "Validate textarea content (using XPath) does not match regex pattern",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotMatch Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of a textarea element with the XPath locator `//textarea[@id='content']` does not match the expected pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.",
+				"The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\\d+$`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//textarea[@id='content']",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
+					"notes": "Validation is based solely on text from the value attribute. The regular expression extracts up to 100 characters, and the computed length is checked against the prohibited pattern.",
+					"test_case": "Validate textarea content (using Id) does not match regex pattern",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotMatch Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of a textarea element with the Id `content` does not match the expected pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.",
+				"The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\\d+$`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
