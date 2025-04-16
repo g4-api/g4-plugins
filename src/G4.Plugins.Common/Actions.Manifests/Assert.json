@@ -6590,10 +6590,34 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the visible text of the element with the CSS selector `#content`, when converted to a string, does not match the pattern `^2\\d+$`. In other words, the length should not start with the digit '2'.",
+					"test_case": "element_text_length_not_match_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotMatch Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the visible text of the element identified by the CSS selector `#content` does not match the pattern `^2\\d+$`.",
+				"The length is determined solely from the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length, when converted to a string, does not begin with the digit '2'."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
@@ -6601,10 +6625,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the visible text of the element with the Xpath selector `//div[@id='content']`, when converted to a string, does not match the pattern `^2\\d+$`. In other words, the length should not start with the digit '2'.",
+					"test_case": "element_text_length_not_match_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotMatch Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the visible text of the element identified by the Xpath selector `//div[@id='content']` does not match the pattern `^2\\d+$`.",
+				"The length is determined solely from the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length, when converted to a string, does not begin with the digit '2'."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -6612,16 +6661,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the computed length of the visible text of the element with the Id `content`, when converted to a string, does not match the pattern `^2\\d+$`. In other words, the length should not start with the digit '2'.",
+					"test_case": "element_text_length_not_match_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length NotMatch Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the visible text of the element with the Id `content` does not match the pattern `^2\\d+$`.",
+				"The length is determined solely from the visible text, excluding any HTML markup or tags.",
+				"The assertion passes only if the computed length, when converted to a string, does not begin with the digit '2'."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
