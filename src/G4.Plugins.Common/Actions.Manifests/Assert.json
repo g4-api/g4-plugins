@@ -8196,49 +8196,157 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the attribute value"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than 42.",
+					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this value is greater than 42. Any failure to extract a number or a numeric value less than or equal to 42 will result in assertion failure.",
+					"test_case": "element_text_greater_validation_css_textarea",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Greater Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the text of the `value` attribute of the textarea element identified by the CssSelector `textarea#content` is greater than the expected value 42.",
+				"The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `\\d+` is applied to the text content to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "textarea#content",
 				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the attribute value"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than 42.",
+					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression is applied to extract a numeric value from the attribute text, and the assertion verifies that this number is greater than 42. Inability to extract a valid number or a number less than or equal to 42 causes assertion failure.",
+					"test_case": "element_text_greater_validation_xpath_textarea",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Greater Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the text of the `value` attribute of the textarea element identified by the XPath locator `//textarea[@id='content']` is greater than the expected value 42.",
+				"The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `\\d+` is applied to the text content to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//textarea[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the attribute value"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than 42.",
+					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this value is greater than 42. If a valid numeric value is not extracted or the value is not greater than 42, the assertion fails.",
+					"test_case": "element_text_greater_validation_id_textarea",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Greater Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the text of the `value` attribute of the textarea element identified by the Id `content` is greater than the expected value 42.",
+				"The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `\\d+` is applied to the text content to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
 		},
+
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than or equal to 42.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion verifies that this value is greater than or equal to 42. If extraction fails or the value is less than 42, the assertion fails.",
+					"test_case": "element_text_greaterequal_validation_css_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text GreaterEqual Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the CssSelector `div#content` is greater than or equal to the expected value 42.",
+				"The visible text content is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
 				"locator": "CssSelector",
 				"onElement": "div#content",
@@ -8247,10 +8355,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than or equal to 42.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression is applied to extract a numeric value from the text, and the assertion verifies that this value meets or exceeds 42. Failure to extract a valid number or a value less than 42 will result in assertion failure.",
+					"test_case": "element_text_greaterequal_validation_xpath_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text GreaterEqual Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the XPath locator `//div[@id='content']` is greater than or equal to the expected value 42.",
+				"The visible text content is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -8259,10 +8393,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex extraction failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than or equal to 42.",
+					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion confirms that this number is at least 42. If a valid number cannot be extracted or it is less than 42, the assertion fails.",
+					"test_case": "element_text_greaterequal_validation_id_div",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text GreaterEqual Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the visible text content of the element identified by the Id `content` is greater than or equal to the expected value 42.",
+				"The visible text content is processed using the regular expression `\\d+` to extract a numeric value.",
+				"The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
 				"locator": "Id",
 				"onElement": "content",
@@ -8270,6 +8430,7 @@
 				"regularExpression": "\\d+"
 			}
 		},
+
 		{
 			"description": [
 				""
