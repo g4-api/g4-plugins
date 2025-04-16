@@ -5979,49 +5979,161 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Visible text length equals or exceeds expected"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text from the `value` attribute of the input element with the CSS selector `input#content` is less than 100 characters. The text length is determined solely from the attribute value, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters into a capture group; the assertion passes only if the computed length is less than 100.",
+					"test_case": "element_text_length_lower_validation_css_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Lower Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text from the `value` attribute of an input element identified by the CSS selector `input#content` is less than 100 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.",
+				"The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "input#content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text from the `value` attribute of the input element with the Xpath selector `//input[@id='content']` is less than 100 characters. The text length is determined solely from the attribute value, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters into a capture group; the assertion passes only if the computed length is less than 100.",
+					"test_case": "element_text_length_lower_validation_xpath_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Lower Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text from the `value` attribute of an input element identified by the Xpath selector `//input[@id='content']` is less than 100 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.",
+				"The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//input[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the text from the `value` attribute of the input element with the Id `content` is less than 100 characters. The text length is determined solely from the attribute value, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters into a capture group; the assertion passes only if the computed length is less than 100.",
+					"test_case": "element_text_length_lower_validation_id_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Lower Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text from the `value` attribute of an input element with the Id `content` is less than 100 characters.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.",
+				"The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Lower --Expected:100}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert",
-				"regularExpression": "(?s)^(.{0,110})"
+				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
+
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the CSS selector `#content` has a length that matches the pattern `^2\\d+$`. The length is determined solely from the visible text, excluding HTML markup or tags. The regular expression is applied to the computed length (as a string) and must match the expected pattern for the assertion to pass.",
+					"test_case": "element_text_length_match_validation_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text of the element identified by the CSS selector `#content` has a length that matches the regular expression pattern `^2\\d+$`.",
+				"The length is computed from the visible text only, excluding any HTML markup or tags.",
+				"The regular expression is used to validate that the computed length (converted to a string) begins with the digit 2 and is followed by one or more digits.",
+				"The assertion passes only if the computed length exactly matches this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
 				"locator": "CssSelector",
 				"onElement": "#content",
@@ -6029,10 +6141,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text",
+						"Xpath syntax errors"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` has a length that matches the pattern `^2\\d+$`. The length is determined solely from the visible text, excluding HTML markup or tags. The regular expression is applied to the computed length (as a string) and must match the expected pattern for the assertion to pass.",
+					"test_case": "element_text_length_match_validation_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text of the element identified by the Xpath selector `//div[@id='content']` has a length that matches the regular expression pattern `^2\\d+$`.",
+				"The length is computed from the visible text only, excluding any HTML markup or tags.",
+				"The regular expression is used to validate that the computed length (as a string) begins with the digit 2 and is followed by one or more digits.",
+				"The assertion passes only if the computed length exactly matches this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -6040,52 +6178,167 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": true,
+					"notes": "Verifies that the visible text of the element with the Id `content` has a length that matches the pattern `^2\\d+$`. The length is determined solely from the visible text, excluding HTML markup or tags. The regular expression is applied to the computed length (as a string) and must match the expected pattern for the assertion to pass.",
+					"test_case": "element_text_length_match_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementTextLength",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Match Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the visible text of the element with the Id `content` has a length that matches the regular expression pattern `^2\\d+$`.",
+				"The length is computed from the visible text only, excluding any HTML markup or tags.",
+				"The regular expression is used to confirm that the computed length (converted to a string) starts with the digit 2 followed by one or more digits.",
+				"The assertion passes only if the computed length exactly matches this pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
 				"locator": "Id",
 				"onElement": "content",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CssSelector usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": false,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the CSS selector `input#content` matches the pattern `^15\\d+$`. Since the extraction regex `(?s)^(.{0,100})` limits the capture to at most 100 characters, the expected pattern cannot be met. Note: This test case is designed to fail because the computed length will never begin with '15'.",
+					"test_case": "element_text_length_match_failure_validation_css_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Match Validation (Failure Expected) Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element, identified by the CSS selector `input#content`, matches the pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.",
+				"Because the regex limits the extraction to 100 characters, the computed length will never begin with '15', and therefore the assertion is expected to fail."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
 				"locator": "CssSelector",
-				"onElement": "#content",
+				"onAttribute": "value",
+				"onElement": "input#content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value",
+						"Xpath syntax errors"
+					],
+					"expected_result": false,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Xpath selector `//input[@id='content']` matches the pattern `^15\\d+$`. Since the regular expression `(?s)^(.{0,100})` limits extraction to 100 characters, the expected pattern cannot be fulfilled. Note: This test case is intended to fail because the computed length will never begin with '15'.",
+					"test_case": "element_text_length_match_failure_validation_xpath_input",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Input Value Text Length Match Validation (Failure Expected) Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element, identified by the Xpath selector `//input[@id='content']`, matches the pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.",
+				"Because the regex restricts the capture to 100 characters, the computed length will never meet the expected pattern, and the assertion is designed to fail."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
 				"locator": "Xpath",
-				"onElement": "//div[@id='content']",
+				"onAttribute": "value",
+				"onElement": "//input[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": false,
+					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Id `content` matches the pattern `^15\\d+$`. The regular expression `(?s)^(.{0,100})` limits extraction to at most 100 characters, making it impossible to meet the expected pattern. Note: This test case is designed to fail because the computed length will never begin with '15'.",
+					"test_case": "element_text_length_match_failure_validation_id",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementTextLength",
+					"InputField",
+					"Validation",
+					"ValueLength"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Length Match Validation (Failure Expected) Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed length of the text from the value attribute of an input element with the Id `content` matches the pattern `^15\\d+$`.",
+				"The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.",
+				"Given that the extraction is capped at 100 characters, the computed length will never fulfill the pattern, causing the assertion to fail."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
 				"locator": "Id",
+				"onAttribute": "value",
 				"onElement": "content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,100})"
 			}
 		},
+
 		{
 			"description": [
 				""
