@@ -9388,44 +9388,138 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute 'value' empty",
+						"Attribute 'value' not found",
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`.",
+					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_css_content_value",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the `value` attribute of the textarea element identified by the CssSelector `textarea#content` matches the expected pattern `^Lorem ipsu$`.",
+				"The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to extract up to 10 characters into a capture group.",
+				"A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.",
+				"The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
 				"locator": "CssSelector",
-				"onElement": "textarea#content",
 				"onAttribute": "value",
+				"onElement": "textarea#content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute 'value' empty",
+						"Attribute 'value' not found",
+						"Element not found",
+						"Incorrect Xpath indexing or attribute usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`.",
+					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_xpath_content_value",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the `value` attribute of the textarea element identified by the Xpath locator `//textarea[@id='content']` matches the expected pattern `^Lorem ipsu$`.",
+				"The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to extract up to 10 characters into a capture group.",
+				"A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.",
+				"The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
 				"locator": "Xpath",
-				"onElement": "//textarea[@id='content']",
 				"onAttribute": "value",
+				"onElement": "//textarea[@id='content']",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute 'value' empty",
+						"Attribute 'value' not found",
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`.",
+					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_id_content_value",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementAttributeCheck",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the `value` attribute of the textarea element identified by the Id `content` matches the expected pattern `^Lorem ipsu$`.",
+				"The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to extract up to 10 characters into a capture group.",
+				"A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.",
+				"The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
 				"locator": "Id",
-				"onElement": "content",
 				"onAttribute": "value",
+				"onElement": "content",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
+
 		{
 			"description": [
 				""
@@ -9437,6 +9531,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
