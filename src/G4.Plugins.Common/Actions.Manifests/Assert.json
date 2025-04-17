@@ -11101,14 +11101,40 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Multiple windows open unexpectedly",
+						"No windows open",
+						"Unexpected browser modal windows",
+						"Unexpected popup windows",
+						"Window handle retrieval failure"
+					],
+					"expected_result": "The assertion passes only if the number of open windows is lower than 1.",
+					"notes": "Validation is based solely on the count of open browser windows. If the window count is greater than or equal to 1, the assertion fails.",
+					"test_case": "window_count_lower_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation",
+					"WindowCount"
+				]
+			},
 			"description": [
-				""
+				"### Window Count Lower Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed number of open browser windows is lower than the expected value 1.",
+				"The validation is based solely on the count of open browser windows.",
+				"The assertion passes only if the number of open windows is lower than 1; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:WindowCount --Operator:Lower --Expected:1}}",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
