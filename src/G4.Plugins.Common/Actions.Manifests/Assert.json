@@ -148,35 +148,32 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `Assert` plugin is a crucial component in the world of Robotic Process Automation (RPA) and automation testing. ",
-		"Its primary purpose is to facilitate the validation of expected conditions during the execution of automation scripts. ",
-		"By asserting specific conditions, it ensures that the application or system under test behaves as anticipated, contributing to the overall reliability and accuracy of automated processes.",
+		"The Assert plugin checks that values or page elements match your expectations during automated runs. It highlights any differences and records them so you can review and fix issues later. All assertion results appear in the extractions section of the automation response. This helps teams catch and resolve problems quickly.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                             | Description                                                                                               |",
-		"|-------------------------------------|-----------------------------------------------------------------------------------------------------------|",
-		"| Meta Action                         | Creates and sends appropriate assertion plugins based on the provided data.                               |",
-		"| Flexible Assertions                 | Supports various conditions, operators, and expected values for assertions.                               |",
-		"| Data Extraction                     | Can apply regular expressions and handle element attributes for precise data extraction before assertion. |",
-		"| Dynamic Assertion Handling          | Handles dynamic conditions during automation.                                                             |",
-		"| Exception Handling                  | Captures and manages exceptions during the assertion process, preventing script failures.                 |",
-		"| Extractions and Context Information | Captures and manages context information and supports data extractions. |",
+		"| Feature          | Description                                                                       |",
+		"|------------------|-----------------------------------------------------------------------------------|",
+		"| Meta Action      | Automatically builds and runs the correct assertion steps based on your settings. |",
+		"| Condition Types  | Checks text, numbers, or element properties against expected values.              |",
+		"| Regex Extraction | Uses patterns to find and verify specific parts of text.                          |",
+		"| Dynamic Checks   | Repeats checks when data or page content changes during a run.                    |",
+		"| Error Logging    | Saves failure details and error messages for easy debugging.                      |",
+		"| Context Capture  | Records element locators and related details to help diagnose issues.             |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Use Case                   | Description                                                                                                                              |",
-		"|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Process Validation         | Ensure automated processes execute successfully by validating key conditions, such as form submission success or expected data presence. |",
-		"| Error Handling and Logging | Captures exceptions and logs relevant information for diagnosing issues and understanding failures.                                      |",
+		"| Use Case          | Description                                                         |",
+		"|-------------------|---------------------------------------------------------------------|",
+		"| Data Verification | Checks that required information or fields are present and correct. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Use Case           | Description                                                                                                     |",
-		"|--------------------|-----------------------------------------------------------------------------------------------------------------|",
-		"| Functional Testing | Validate the correctness of application features, such as element presence or data display.                     |",
-		"| Regression Testing | Verify that changes do not adversely impact expected outcomes, ensuring existing functionalities remain intact. |",
-		"| Data Validation    | Assert the correctness of data manipulations, calculations, or transfers within the application.                |"
+		"| Use Case                | Description                                             |",
+		"|-------------------------|---------------------------------------------------------|",
+		"| Functional Verification | Checks that UI elements and workflows work as intended. |",
+		"| Regression Verification | Verifies that updates have not introduced new errors.   |",
+		"| Data Integrity Checks   | Ensures calculations and data transfers are accurate.   |"
 	],
 	"examples": [
 		{
@@ -11413,19 +11410,10 @@
 	"parameters": [
 		{
 			"description": [
-				"Serves as a dynamic specifier for the type of validation or verification to be executed in automation rules. ",
-				"This parameter is particularly noteworthy for its adaptability, as its available values are dynamically generated based on the plugins of type `Assertion` within G4™ engine.",
-				"",
-				"### Dynamic Condition Values",
-				"",
-				"The `Condition` parameter allows the rule to express various types of assertions or conditions dynamically. ",
-				"These dynamic conditions are derived from the plugins of type `Assertion` available in the G4™ framework. ",
-				"Each assertion plugin contributes unique conditions, reflecting diverse validation scenarios.",
-				"",
-				"### Plugin-Driven Flexibility",
-				"",
-				"As new assertion plugins are introduced or existing ones are updated, the `Condition` parameter seamlessly incorporates these changes. ",
-				"This ensures that automation rules remain adaptable and can leverage the latest assertion capabilities without requiring explicit modifications to the rule structures."
+				"Tells the system which type of assertion to run.",
+				"This list updates itself when new assertions become available.",
+				"You do not need to make changes by hand.",
+				"This keeps your setup up to date with the latest assertions."
 			],
 			"mandatory": true,
 			"name": "Condition",
@@ -11433,7 +11421,10 @@
 		},
 		{
 			"description": [
-				"Defines the value or condition that the automation rule expects to encounter or validate. This value represents the anticipated state of the UI element or the result of an action."
+				"Holds the value you expect the system to find.",
+				"The system asserts this against what really happened.",
+				"Matching values make the assertion pass.",
+				"Different values make the assertion fail."
 			],
 			"mandatory": false,
 			"name": "Expected",
@@ -11441,18 +11432,9 @@
 		},
 		{
 			"description": [
-				"Serves as a dynamic specifier that defines the type of comparison or action to be executed during automation. ",
-				"This parameter is particularly noteworthy for its adaptability, as its available values are dynamically generated based on the plugins of type `Operator` within G4™ engine.",
-				"",
-				"### Dynamic Operator Values",
-				"",
-				"The `Operator` parameter dynamically incorporates values based on plugins of type `Operator` within the automation framework. ",
-				"Each operator plugin introduces specific operators for use in rule configurations.",
-				"",
-				"### Plugin-Driven Flexibility",
-				"",
-				"As new operator plugins are introduced or existing ones are updated, the `Operator` parameter seamlessly incorporates these changes. ",
-				"This ensures that automation rules remain adaptable and can leverage the latest operator capabilities without requiring explicit modifications to the rule structures."
+				"Chooses which comparison the system uses in an assertion.",
+				"It pulls all options automatically, so you never have to update it yourself.",
+				"Common comparisons include Lower, Equal, and NotEqual."
 			],
 			"mandatory": false,
 			"name": "Operator",
@@ -11463,8 +11445,9 @@
 	"properties": [
 		{
 			"description": [
-				"Specifies the condition and parameters for the assertion to be performed by a particular plugin. ",
-				"It is a key part of the rule definition and influences how the validation or verification is carried out."
+				"Specifies the exact expression to use when asserting a result.",
+				"It tells the system what value or pattern to evaluate.",
+				"This expression guides whether the assertion passes or fails."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -11473,8 +11456,9 @@
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies how the automation framework should identify or locate the target element within the UI. ",
-				"It defines the strategy or method for selecting the element on which the assertion or action will be performed."
+				"Defines how to locate the element on the screen before running the assertion.",
+				"Choices include Xpath, CSS, or ID.",
+				"Xpath is used by default."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -11482,8 +11466,9 @@
 		},
 		{
 			"description": [
-				"Specifies the attribute of the target element on which the assertion or action should be performed. ",
-				"It defines which attribute of the identified element will be the focus of the validation or manipulation."
+				"Specifies which part of the element to assert.",
+				"Examples include the element's text, link address, or stored value.",
+				"The assertion focuses on only that part."
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
@@ -11491,8 +11476,9 @@
 		},
 		{
 			"description": [
-				"Specifies the identifier or selector for the element on which the assertion or action should be performed. ",
-				"It essentially points to the target element within the web page or application."
+				"Specifies which element to use in the assertion.",
+				"It identifies where that element is located in the page or app.",
+				"The assertion then runs on that element."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -11500,8 +11486,9 @@
 		},
 		{
 			"description": [
-				"Allows you to apply a regular expression pattern to manipulate or extract specific information from the value of an attribute or the element text before the actual validation or action is performed. ",
-				"It is particularly useful when you want to perform more complex checks or extract specific substrings from attribute values."
+				"Applies a pattern to element values to test or extract specific parts.",
+				"Use it to focus on a substring before the assertion runs.",
+				"This makes checks easier by narrowing down to the exact text you need."
 			],
 			"mandatory": false,
 			"name": "RegularExpression",
@@ -11516,9 +11503,8 @@
 		"Any"
 	],
 	"summary": [
-		"The `Assert` plugin automates the validation of expected conditions during the execution of automation scripts, ensuring the reliability and accuracy of automated processes.",
-		"It creates and sends appropriate assertion plugins based on provided data, supporting various conditions, operators, and expected values for flexible assertions.",
-		"Key features include data extraction, dynamic assertion handling, and exception handling, capturing and managing context information and supporting data extractions.",
-		"Common use cases include process validation, error handling, and logging in RPA, as well as functional testing, regression testing, and data validation in automation testing."
+		"The Assert plugin checks that each automated step gives the results you expect and tells you when it doesn't.",
+		"It applies simple rules to compare values or parts of a page and keeps track of any mismatches.",
+		"This makes your automated tasks more reliable and helps you catch problems early."
 	]
 }
