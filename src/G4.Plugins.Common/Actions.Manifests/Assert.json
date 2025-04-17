@@ -11247,15 +11247,38 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty text value",
+						"Unexpected whitespace or formatting in provided text"
+					],
+					"expected_result": "The assertion passes only if the provided text value differs from `Static Text`.",
+					"notes": "Validation is based solely on the full provided text string. If the provided text exactly matches the expected value, the assertion fails.",
+					"test_case": "text_not_equal_validation_static_text",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"TextValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Text NotEqual Validation With Static Text",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the provided text value `Static Text` does not equal the expected value `Static Text`.",
+				"The validation uses the full provided text string, including any whitespace or formatting.",
+				"The assertion passes only if the provided text value differs from `Static Text`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:Text --Operator:NotEqual --Expected:Static Text}}",
 				"onElement": "Static Text",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
