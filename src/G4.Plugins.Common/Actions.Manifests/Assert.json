@@ -11454,15 +11454,39 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Provided text empty",
+						"Provided text not numeric",
+						"Unexpected whitespace or formatting in provided text"
+					],
+					"expected_result": "The assertion passes only if the numeric value of the provided text is lower than or equal to 10.",
+					"notes": "Validation is based solely on the provided text string, converted to a number. If the text cannot be parsed as a number or if the number is greater than 10, the assertion fails.",
+					"test_case": "text_lower_equal_validation_static_text",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"TextValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Text LowerEqual Validation With Static Text",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the provided text value `10` is lower than or equal to the expected value 10.",
+				"The validation uses the full provided text string, interpreting it as a numeric value.",
+				"The assertion passes only if that numeric value is lower than or equal to 10; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:Text --Operator:LowerEqual --Expected:10}}",
 				"onElement": "10",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
