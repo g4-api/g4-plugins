@@ -10768,14 +10768,43 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Page URL missing",
+						"Regex match failure",
+						"Unexpected page load issues",
+						"Unexpected query parameters",
+						"Unexpected URL fragments",
+						"Unexpected URL redirect"
+					],
+					"expected_result": "The assertion passes only if the page URL matches the pattern `^https://example42.com/page/$`.",
+					"notes": "Validation is based solely on the full page URL string. A regular expression `^https://example42.com/page/$` is applied directly to this string to test for a match. If the pattern does not match, the assertion fails.",
+					"test_case": "page_url_match_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageUrl",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page URL Match Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the current page URL matches the expected pattern `^https://example42.com/page/$`.",
+				"The validation is based solely on the page URL, excluding any URL fragments or query parameters unless explicitly part of the expected pattern.",
+				"A regular expression `^https://example42.com/page/$` is applied to the page URL to test for a match.",
+				"The assertion passes only if the page URL matches the pattern `^https://example42.com/page/$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:^https://example42.com/page/$}}",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
