@@ -11280,15 +11280,41 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Provided text empty",
+						"Regex match failure",
+						"Unexpected whitespace or formatting in provided text"
+					],
+					"expected_result": "The assertion passes only if the provided text value matches the pattern `\\d{3}-\\d{2}-\\d{4}`.",
+					"notes": "Validation is based solely on the full provided text string. A regular expression `\\d{3}-\\d{2}-\\d{4}` is applied directly to this text to test for a match. If the pattern does not match, the assertion fails.",
+					"test_case": "text_match_validation_regex_static_text",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"RegexValidation",
+					"TextValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Text Match Validation With Static Text",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the provided text value `123-45-6789` matches the expected pattern `\\d{3}-\\d{2}-\\d{4}`.",
+				"The validation uses the full provided text string, including any whitespace or formatting.",
+				"A regular expression `\\d{3}-\\d{2}-\\d{4}` is applied to the provided text to test for a match.",
+				"The assertion passes only if the provided text value matches the pattern `\\d{3}-\\d{2}-\\d{4}`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:Text --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
 				"onElement": "123-45-6789",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
@@ -11299,6 +11325,7 @@
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
