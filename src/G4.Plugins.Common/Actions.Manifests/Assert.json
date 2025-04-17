@@ -10728,15 +10728,45 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No numeric content in page URL",
+						"Page URL missing",
+						"Regex extraction failure",
+						"Unexpected page load issues",
+						"Unexpected query parameters",
+						"Unexpected URL fragments"
+					],
+					"expected_result": "The assertion passes only if the extracted number is lower than or equal to 42.",
+					"notes": "Validation is based solely on the full page URL string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is greater than 42, the assertion fails.",
+					"test_case": "page_url_lower_equal_validation_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageUrl",
+					"RegexExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page URL LowerEqual Validation With Extraction",
+				"",
+				"The validation is based solely on the page URL, excluding any URL fragments or query parameters unless explicitly part of the expected value.",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the page URL is lower than or equal to the expected value 42.",
+				"A regular expression `\\d+` is applied to the page URL to extract the first numeric sequence into a capture group.",
+				"The assertion passes only if the extracted number is lower than or equal to 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageUrl --Operator:LowerEqual --Expected:42}}",
 				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
 		},
+
 		{
 			"description": [
 				""
