@@ -10495,15 +10495,44 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Page URL missing",
+						"Regex extraction failure",
+						"Unexpected page load issues",
+						"Unexpected query parameters",
+						"Unexpected URL fragments"
+					],
+					"expected_result": "The assertion passes only if the extracted 10-character capture group exactly matches `https://ex`.",
+					"notes": "Validation is based solely on the full page URL string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string and compared to the expected value. If extraction fails or the strings differ, the assertion fails.",
+					"test_case": "page_url_equal_validation_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageUrl",
+					"RegexExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page URL Equal Validation With Extraction",
+				"",
+				"The validation is based solely on the page URL, excluding any URL fragments or query parameters unless explicitly part of the expected value.",
+				"This example demonstrates how the Assert plugin verifies that the current page URL, after extracting up to 10 characters, matches the expected value `https://ex`.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the page URL to extract up to 10 characters into a capture group.",
+				"The assertion passes only if that extracted 10-character capture group exactly matches `https://ex`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageUrl --Operator:Equal --Expected:https://ex}}",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
+
 		{
 			"description": [
 				""
