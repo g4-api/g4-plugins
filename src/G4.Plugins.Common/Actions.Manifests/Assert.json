@@ -10345,15 +10345,44 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Page title missing",
+						"Regex extraction failure",
+						"Unexpected page load issues",
+						"Unexpected whitespace or formatting in the page title"
+					],
+					"expected_result": "The assertion passes only if the extracted 10-character capture group matches the pattern `^Lorem ipsu$`.",
+					"notes": "Validation is based solely on the page title string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string. A second regular expression `^Lorem ipsu$` is applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
+					"test_case": "page_title_match_validation_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageTitle",
+					"RegexExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page Title Match Validation With Extraction",
+				"",
+				"The validation is based solely on the page title, excluding any HTML markup or tags.",
+				"This example demonstrates how the Assert plugin verifies that the computed page title, after extracting up to 10 characters, matches the expected pattern `^Lorem ipsu$`.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the page title to extract up to 10 characters into a capture group.",
+				"A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.",
+				"The assertion passes only if the extracted 10-character capture group matches the pattern `^Lorem ipsu$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:^Lorem ipsu$}}",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
+
 		{
 			"description": [
 				""
@@ -10373,6 +10402,7 @@
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
+
 		{
 			"description": [
 				""
