@@ -10460,14 +10460,40 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Incorrect protocol",
+						"Page URL missing",
+						"Unexpected query parameters",
+						"Unexpected URL fragments",
+						"Unexpected URL redirect"
+					],
+					"expected_result": "The assertion passes only if the page URL exactly matches `https://example42.com/page/`.",
+					"notes": "Validation is based solely on the full page URL string. Any deviation, including differences in protocol, trailing slashes, query parameters, or fragments, causes the assertion to fail.",
+					"test_case": "page_url_equal_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageUrl",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page URL Equal Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the current page URL is equal to the expected URL `https://example42.com/page/`.",
+				"The validation is based solely on the page URL, excluding any URL fragments or query parameters unless explicitly part of the expected value.",
+				"The assertion passes only if the page URL exactly matches `https://example42.com/page/`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageUrl --Operator:Equal --Expected:https://example42.com/page/}}",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
