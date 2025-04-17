@@ -9140,10 +9140,38 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`.",
+					"notes": "Validation is based solely on the element's visible text content. The first regular expression extracts up to 10 characters into a capture group, which is converted to a string. The second regular expression `^Lorem ipsu$` is then applied to this string to test for an exact match. If the pattern does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_css_content",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using CssSelector",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the CssSelector `div#content` matches the expected pattern `^Lorem ipsu$`.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract up to 10 characters into a capture group.",
+				"A regular expression `^Lorem ipsu$` is then applied to the extracted text to test for an exact match.",
+				"The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
 				"locator": "CssSelector",
 				"onElement": "div#content",
@@ -9152,10 +9180,38 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`.",
+					"notes": "Validation is based solely on the element's visible text content. The first regular expression extracts up to 10 characters into a capture group, which is converted to a string. The second regular expression `^Lorem ipsu$` is then applied to this string to test for an exact match. If the pattern does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_xpath_content",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using Xpath",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the Xpath locator `//div[@id='content']` matches the expected pattern `^Lorem ipsu$`.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract up to 10 characters into a capture group.",
+				"A regular expression `^Lorem ipsu$` is then applied to the extracted text to test for an exact match.",
+				"The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
 				"locator": "Xpath",
 				"onElement": "//div[@id='content']",
@@ -9164,10 +9220,38 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect Id usage",
+						"Regex match failure",
+						"Unexpected DOM structure",
+						"Whitespace or formatting differences in the element text"
+					],
+					"expected_result": "The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`.",
+					"notes": "Validation is based solely on the element's visible text content. The first regular expression extracts up to 10 characters into a capture group, which is converted to a string. The second regular expression `^Lorem ipsu$` is then applied to this string to test for an exact match. If the pattern does not match, the assertion fails.",
+					"test_case": "element_text_match_validation_id_content",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Element Text Match Validation Using Id",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed text from the element identified by the Id `content` matches the expected pattern `^Lorem ipsu$`.",
+				"The validation is based solely on the element's visible text content, excluding any HTML markup or tags.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract up to 10 characters into a capture group.",
+				"A regular expression `^Lorem ipsu$` is then applied to the extracted text to test for an exact match.",
+				"The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:ElementText --Operator:Match --Expected:^Lorem ipsu$}}",
 				"locator": "Id",
 				"onElement": "content",
@@ -9175,6 +9259,7 @@
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
+
 		{
 			"description": [
 				""
