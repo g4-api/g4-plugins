@@ -11488,14 +11488,42 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Provided text empty",
+						"Provided text shorter than expected extraction length",
+						"Provided text not matching extraction pattern",
+						"Regex extraction failure",
+						"Unexpected whitespace or formatting in provided text"
+					],
+					"expected_result": "The assertion passes only if the extracted capture group matches `100`.",
+					"notes": "Validation is based solely on the provided text string. A regular expression `\\d{3}` extracts the three‑digit numeric sequence into a capture group, converted to a string and compared to the expected value. If extraction fails or the values differ, the assertion fails.",
+					"test_case": "text_equal_validation_static_text_regex_3digits",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"RegexExtraction",
+					"RegexValidation",
+					"TextValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Text Equal Validation With Extraction",
+				"",
+				"The validation uses the full provided text string, including any whitespace or formatting.",
+				"This example demonstrates how the Assert plugin verifies that the provided text value `1000`, after applying a regular expression, exactly matches the expected value `100`.",
+				"A regular expression `\\d{3}` is applied to the provided text to extract a three‑digit numeric sequence into a capture group.",
+				"The assertion passes only if that extracted capture group matches the pattern `100`; otherwise, it fails."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:Text --Operator:Equal --Expected:1000}}",
+				"$type": "Action",
+				"argument": "{{$ --Condition:Text --Operator:Equal --Expected:100}}",
 				"onElement": "1000",
 				"pluginName": "Assert",
-				"regularExpression": "\\d+"
+				"regularExpression": "\\d{3}"
 			}
 		}
 	],
