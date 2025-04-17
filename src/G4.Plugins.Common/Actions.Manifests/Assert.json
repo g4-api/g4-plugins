@@ -11211,15 +11211,41 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Incorrect parameter usage",
+						"Parameter not found",
+						"Parameter value empty",
+						"Unexpected whitespace or formatting in the parameter value"
+					],
+					"expected_result": "The assertion passes only if the text value returned by the session parameter matches `ExpectedValue`.",
+					"notes": "Validation is based solely on the full string returned by the session parameter. If the parameter value differs in any way, including whitespace or embedded formatting, the assertion fails.",
+					"test_case": "text_equal_validation_parameter_myparameter",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"SessionParameter",
+					"TextValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Text Equal Validation Using Session Parameter Value",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the text value returned by the session parameter `MyParameter` matches the expected value `ExpectedValue`.",
+				"The validation uses the full text value returned by the session parameter, including any whitespace or formatting.",
+				"The assertion passes only if that parameter value exactly matches `ExpectedValue`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:Text --Operator:Equal --Expected:ExpectedValue}}",
 				"onElement": "{{$Get-Parameter --Name:MyParameter --Scope:Session}}",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
