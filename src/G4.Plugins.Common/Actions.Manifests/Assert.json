@@ -11136,14 +11136,43 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No windows open",
+						"Regex match failure",
+						"Unexpected browser modal windows",
+						"Unexpected popup windows",
+						"Window handle retrieval failure"
+					],
+					"expected_result": "The assertion passes only if the string representation of the window count matches the pattern `^1\\d+?$`.",
+					"notes": "Validation is based solely on the count of open browser windows, converted to a string. A regular expression `^1\\d+?$` is applied to that string to test for a match. If the pattern does not match, the assertion fails.",
+					"test_case": "window_count_match_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"RegexValidation",
+					"Validation",
+					"WindowCount"
+				]
+			},
 			"description": [
-				""
+				"### Window Count Match Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed number of open browser windows, when converted to a string, matches the expected pattern `^1\\d+?$`.",
+				"The validation is based solely on the count of open browser windows, converted to a string.",
+				"A regular expression `^1\\d+?$` is applied to the string representation of the window count to test for a match.",
+				"The assertion passes only if the string representation of the window count matches the pattern `^1\\d+?$`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\\d+?$}}",
-				"pluginName": "Assert"
+				"pluginName": "Assert",
+				"regularExpression": "^1\\d+?$"
 			}
 		},
+
 		{
 			"description": [
 				""
