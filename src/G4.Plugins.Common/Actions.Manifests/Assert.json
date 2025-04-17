@@ -10963,14 +10963,40 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Multiple windows open unexpectedly",
+						"No windows open",
+						"Unexpected browser modal windows",
+						"Unexpected popup windows",
+						"Window handle retrieval failure"
+					],
+					"expected_result": "The assertion passes only if the number of open windows differs from 1.",
+					"notes": "Validation is based solely on the count of open browser windows. If exactly 1 window is open, the assertion fails; any other number of windows causes it to pass.",
+					"test_case": "window_count_not_equal_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation",
+					"WindowCount"
+				]
+			},
 			"description": [
-				""
+				"### Window Count NotEqual Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed number of open browser windows is not equal to the expected value 1.",
+				"The validation is based solely on the count of open browser windows.",
+				"The assertion passes only if the number of open windows differs from 1; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:1}}",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
