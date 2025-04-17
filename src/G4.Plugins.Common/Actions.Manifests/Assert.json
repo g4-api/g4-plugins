@@ -10233,34 +10233,117 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No numeric content in page title",
+						"Page title missing",
+						"Regex extraction failure",
+						"Unexpected page load issues",
+						"Unexpected whitespace or formatting in the page title"
+					],
+					"expected_result": "The assertion passes only if the extracted number is lower than 42.",
+					"notes": "Validation is based solely on the page title string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is not lower than 42, the assertion fails.",
+					"test_case": "page_title_lower_validation_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageTitle",
+					"RegexExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page Title Lower Validation With Extraction",
+				"",
+				"The validation is based solely on the page title, excluding any HTML markup or tags.",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the page title is lower than the expected value 42.",
+				"A regular expression `\\d+` is applied to the page title to extract the first numeric sequence into a capture group.",
+				"The assertion passes only if that extracted number is lower than 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageTitle --Operator:Lower --Expected:42}}",
 				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No numeric content in page title",
+						"Page title missing",
+						"Regex extraction failure",
+						"Unexpected page load issues",
+						"Unexpected whitespace or formatting in the page title"
+					],
+					"expected_result": "The assertion passes only if the extracted number is lower than or equal to 42.",
+					"notes": "Validation is based solely on the page title string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is greater than 42, the assertion fails.",
+					"test_case": "page_title_lower_equal_validation_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageTitle",
+					"RegexExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page Title Lower Equal Validation With Extraction",
+				"",
+				"The validation is based solely on the page title, excluding any HTML markup or tags.",
+				"This example demonstrates how the Assert plugin verifies that the numeric value extracted from the page title is lower than or equal to the expected value 42.",
+				"A regular expression `\\d+` is applied to the page title to extract the first numeric sequence into a capture group.",
+				"The assertion passes only if that extracted number is lower than or equal to 42; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageTitle --Operator:LowerEqual --Expected:42}}",
 				"pluginName": "Assert",
 				"regularExpression": "\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Page title missing",
+						"Regex match failure",
+						"Unexpected page load issues",
+						"Unexpected whitespace or formatting in the page title"
+					],
+					"expected_result": "The assertion passes only if the page title matches the pattern `^Lorem ipsum dolor.*`.",
+					"notes": "Validation is based solely on the page title string. A regular expression `^Lorem ipsum dolor.*` is applied directly to the full title to test for a match. If the pattern does not match, the assertion fails.",
+					"test_case": "page_title_match_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageTitle",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page Title Match Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed page title matches the expected pattern `^Lorem ipsum dolor.*`.",
+				"The validation is based solely on the page title, excluding any HTML markup or tags.",
+				"A regular expression `^Lorem ipsum dolor.*` is applied to the page title to test for a match.",
+				"The assertion passes only if the page title matches the pattern `^Lorem ipsum dolor.*`; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:^Lorem ipsum dolor.*}}",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
