@@ -10017,33 +10017,107 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Page title missing",
+						"Unexpected page load issues",
+						"Unexpected whitespace or formatting in the page title"
+					],
+					"expected_result": "The assertion passes only if the page title exactly matches 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+					"notes": "Validation is based solely on the page title string. If the title differs in any way, including whitespace or formatting, the assertion fails.",
+					"test_case": "page_title_equal_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageTitle",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page Title Equal Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed page title is equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the page title, excluding any HTML markup or tags.",
+				"The assertion passes only if the page title exactly matches the expected text; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageTitle --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"pluginName": "Assert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Page title missing",
+						"Regex extraction failure",
+						"Unexpected page load issues",
+						"Unexpected whitespace or formatting in the page title"
+					],
+					"expected_result": "The assertion passes only if the extracted 10-character capture group exactly matches 'Lorem ipsu'.",
+					"notes": "Validation is based solely on the page title string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string and compared to the expected value. If extraction fails or the texts differ, the assertion fails.",
+					"test_case": "page_title_equal_validation_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageTitle",
+					"RegexExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page Title Equal Validation With Extraction",
+				"",
+				"The validation is based solely on the page title, excluding any HTML markup or tags.",
+				"This example demonstrates how the Assert plugin verifies that the computed page title, after extracting up to 10 characters, matches the expected text 'Lorem ipsu'.",
+				"A regular expression `(?s)^(.{0,10})` is applied to the page title to extract up to 10 characters into a capture group.",
+				"The assertion passes only if the extracted 10-character capture group exactly matches 'Lorem ipsu'; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageTitle --Operator:Equal --Expected:Lorem ipsu}}",
 				"pluginName": "Assert",
 				"regularExpression": "(?s)^(.{0,10})"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Page title missing",
+						"Unexpected page load issues",
+						"Unexpected whitespace or formatting in the page title"
+					],
+					"expected_result": "The assertion passes only if the page title differs from 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+					"notes": "Validation is based solely on the page title string. Any difference in content, whitespace, or formatting causes the assertion to pass; exact match causes failure.",
+					"test_case": "page_title_not_equal_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"PageTitle",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Page Title NotEqual Validation",
+				"",
+				"This example demonstrates how the Assert plugin verifies that the computed page title is not equal to the expected text 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
+				"The validation is based solely on the page title, excluding any HTML markup or tags.",
+				"The assertion passes only if the page title differs from the expected text; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Condition:PageTitle --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}",
 				"pluginName": "Assert"
 			}
 		},
+
 		{
 			"description": [
 				""
