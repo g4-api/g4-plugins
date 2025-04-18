@@ -1275,7 +1275,10 @@
 		{
 			"default": "Session",
 			"description": [
-				"Specifies the scope of the source parameter. The scope defines where the parameter is stored and can be one of several predefined scopes such as 'Session', 'SystemScope', etc."
+				"Sets where to find the original value.",
+				"Options include Session, User, and others.",
+				"New options appear automatically when they are added.",
+				"No manual updates are needed to keep the list current."
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
@@ -1283,7 +1286,9 @@
 		},
 		{
 			"description": [
-				"Specifies the source parameter whose value will be copied."
+				"Names the source parameter for the value copy.",
+				"The system uses this name to locate and copy the value.",
+				"Missing this setting stops the operation from running."
 			],
 			"mandatory": true,
 			"name": "OnElement",
