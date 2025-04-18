@@ -267,10 +267,35 @@
 
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parameter value empty",
+						"Source parameter not found",
+						"Target parameter write failure"
+					],
+					"expected_result": "The session‑scoped parameter `TargetParam` is set to the full text value of the application‑scoped parameter `SourceParam`.",
+					"notes": "Copies the full string from the application parameter, including any whitespace or formatting. Fails if the source parameter does not exist or if writing to the session parameter fails.",
+					"test_case": "parameter_copy_application_to_session",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApplicationParameter",
+					"CopyParameter",
+					"ParameterOperation",
+					"SessionParameter"
+				]
+			},
 			"description": [
-				""
+				"### Application to Session Parameter Copy Action",
+				"",
+				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
+				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
+				"No value transformation occurs; the entire text is copied as‑is.",
+				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
 				"onAttribute": "Application",
 				"onElement": "SourceParam",
@@ -278,10 +303,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Environment not found",
+						"Parameter value empty",
+						"Source parameter not found",
+						"Target parameter write failure"
+					],
+					"expected_result": "The application‑scoped parameter `TargetParam` in `BotRepository` is set to the full text value of `SourceParam`.",
+					"notes": "Copies the full string from the application parameter, including any whitespace or formatting. Fails if the source parameter does not exist, if the environment is invalid, or if writing to the target parameter fails.",
+					"test_case": "parameter_copy_application_to_application_botrepository",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApplicationParameter",
+					"CopyParameter",
+					"ParameterOperation"
+				]
+			},
 			"description": [
-				""
+				"### Application to Application Parameter Copy Action in BotRepository",
+				"",
+				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
+				"No value transformation occurs; the entire text is copied as‑is.",
+				"The action succeeds only if `SourceParam` exists and the target environment is valid; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
 				"onAttribute": "Application",
 				"onElement": "SourceParam",
@@ -289,16 +339,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parameter value empty",
+						"Source parameter not found",
+						"Target parameter write failure"
+					],
+					"expected_result": "The application‑scoped parameter `TargetParam` is set to the full text value of `SourceParam`.",
+					"notes": "Copies the full string from the application parameter, including any whitespace or formatting. When no environment is specified, the default application environment `SystemParameters` is used. Fails if the source parameter does not exist or if writing to the target parameter fails.",
+					"test_case": "parameter_copy_application_to_application",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApplicationParameter",
+					"CopyParameter",
+					"ParameterOperation"
+				]
+			},
 			"description": [
-				""
+				"### Application to Application Parameter Copy Action",
+				"",
+				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into another application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
+				"No value transformation occurs; the entire text is copied as‑is.",
+				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
 				"onAttribute": "Application",
 				"onElement": "SourceParam",
 				"pluginName": "CopyParameter"
 			}
 		},
+
 		{
 			"description": [
 				""
@@ -332,6 +407,7 @@
 				"pluginName": "CopyParameter"
 			}
 		},
+
 		{
 			"description": [
 				""
@@ -399,6 +475,7 @@
 				"pluginName": "CopyParameter"
 			}
 		},
+
 		{
 			"description": [
 				""
