@@ -13,6 +13,59 @@
 				"componentType": "task",
 				"iconProvider": "data",
 				"model": "ActionRuleModel"
+			},
+			"rag": {
+				"description": "The CopyParameter plugin facilitates efficient and controlled transfer of parameter values between different scopes in automation scripts. It supports dynamic scope management and environment-specific settings, ensuring data consistency and reliable workflow execution.",
+				"qa": [
+					{
+						"question": "What is the CopyParameter plugin?",
+						"answer": "The CopyParameter plugin moves values from one parameter to another across defined scopes within automation scripts, simplifying data exchange between steps."
+					},
+					{
+						"question": "Why is the CopyParameter plugin important?",
+						"answer": "It ensures that automation workflows have the correct data in the right context, reducing errors and improving reliability."
+					},
+					{
+						"question": "What are the main parameters of the CopyParameter plugin?",
+						"answer": "Its main parameters include TargetParameter, which names the destination parameter; TargetScope, which sets the scope for the target; and Environment, which specifies the application environment when using application scope."
+					},
+					{
+						"question": "How does the plugin manage parameter scopes?",
+						"answer": "It dynamically populates scope options via SetParameter plugins and uses OnAttribute and OnElement properties to locate source parameters within the specified scope."
+					},
+					{
+						"question": "How do you embed the plugin in external tools like a workflow designer?",
+						"answer": "The manifest includes a sequentialWorkflow integration under context.integration that maps the plugin to a task model with an ActionRuleModel component."
+					},
+					{
+						"question": "What best practices should be followed when using CopyParameter?",
+						"answer": "Define explicit scopes, verify source parameter existence, handle edge cases such as empty or missing source values, and test environment settings to prevent failures."
+					},
+					{
+						"question": "What fields define a CopyParameter rule schema?",
+						"answer": "A rule schema includes $type, pluginName, argument, onElement, onAttribute, and optional Environment fields to fully describe the copy action."
+					},
+					{
+						"question": "What is the manifestVersion of this plugin?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "Who authored the CopyParameter plugin?",
+						"answer": "The plugin was authored by Roei Sabag."
+					},
+					{
+						"question": "Which categories and scopes does the plugin support?",
+						"answer": "It is categorized under DataManagement and supports Any scope, with optional application environment settings."
+					},
+					{
+						"question": "How does environment support work in CopyParameter?",
+						"answer": "The Environment parameter lets you specify an application context (for example BotRepository), with a default of SystemParameters, to retrieve and store parameters in different environments."
+					},
+					{
+						"question": "How does the plugin handle failures such as a missing source parameter?",
+						"answer": "It adds an exception to the response and log stream; by default the workflow continues unless it is explicitly configured to stop on errors."
+					}
+				]
 			}
 		}
 	},
