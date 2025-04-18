@@ -48,26 +48,94 @@
 	"examples": [
 		{
 			"description": [
-				"This configuration copies a parameter from a source within the session scope to a target within the same session scope."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --TargetParameter:targetParam --TargetScope:Session}}",
+				"argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
 				"onAttribute": "Session",
-				"onElement": "sourceParam",
+				"onElement": "SourceParam",
 				"pluginName": "CopyParameter"
 			}
 		},
 		{
 			"description": [
-				"This configuration copies a parameter from a source within the application scope to a target within the user scope, using the system parameters environment."
+				""
 			],
 			"rule": {
-				"argument": "{{$ --TargetParameter:targetParam --Environment:SystemParameters --TargetScope:User}}",
+				"argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+				"onAttribute": "Session",
+				"onElement": "SourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+				"onAttribute": "Session",
+				"onElement": "SourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+				"onAttribute": "Session",
+				"onElement": "SourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+				"onAttribute": "Session",
+				"onElement": "SourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+				"onAttribute": "Session",
+				"onElement": "SourceParam",
+				"pluginName": "CopyParameter"
+			}
+		},
+
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --TargetParameter:targetParam --Environment:BotRepository --TargetScope:Application}}",
 				"onAttribute": "Application",
 				"onElement": "sourceParam",
 				"pluginName": "CopyParameter"
 			}
 		},
+
+
+
+
+
+
+
+
+
+
+
+
 		{
 			"description": [
 				"This configuration copies a parameter from a source within the machine scope to a target within the process scope."
