@@ -1239,8 +1239,10 @@
 		{
 			"default": "SystemParameters",
 			"description": [
-				"Specifies the environment in which the parameters are managed. It allows for defining different contexts or environments where the parameters are stored and retrieved from.",
-				"This parameter is relevant only when using the Application scope. It allows managing multiple environments that can hold different values while using the same parameter names or a completely different parameter set."
+				"Determines where parameters are stored and retrieved.",
+				"Each environment represents a different context for parameter values.",
+				"Only applies when Application scope is used.",
+				"No manual updates are needed when contexts change."
 			],
 			"mandatory": false,
 			"name": "Environment",
@@ -1248,7 +1250,9 @@
 		},
 		{
 			"description": [
-				"Specifies the target parameter to which the value will be copied. This is the parameter that will receive the value from the source parameter."
+				"Names the parameter that will receive the copied value.",
+				"The system copies the source value into this parameter.",
+				"Copy operation cannot run without this parameter."
 			],
 			"mandatory": true,
 			"name": "TargetParameter",
@@ -1256,7 +1260,10 @@
 		},
 		{
 			"description": [
-				"Specifies the scope of the target parameter. The scope defines where the parameter is stored and can be one of several predefined scopes such as 'Session', 'UserScope', etc."
+				"Automatically gathers available scope options from SetParameter plugins.",
+				"Each plugin adds a new scope like Session or User scope.",
+				"Options update on their own when plugins change.",
+				"This keeps your list of scopes current without manual updates."
 			],
 			"mandatory": false,
 			"name": "TargetScope",
