@@ -81,7 +81,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -119,7 +118,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -264,8 +262,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
-
 		{
 			"context": {
 				"annotations": {
@@ -373,7 +369,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -484,7 +479,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -594,7 +588,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -703,7 +696,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -811,7 +803,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -921,7 +912,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -1027,7 +1017,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -1136,7 +1125,6 @@
 				"pluginName": "CopyParameter"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
