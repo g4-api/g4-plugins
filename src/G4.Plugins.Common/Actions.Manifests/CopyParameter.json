@@ -160,8 +160,8 @@
 		"Any"
 	],
 	"summary": [
-		"The `CopyParameter` plugin facilitates the copying of parameter values across different scopes within automation scripts.",
-		"Its core functionality includes copying parameter values from a source to a target scope, managing parameter scopes dynamically, and supporting environment-specific parameter retrieval and setting.",
-		"It is particularly useful for data transfer, session management, and parameter synchronization in both RPA and automation testing scenarios, ensuring efficient and controlled propagation of parameter values across different parts of an automation process."
+		"The CopyParameter plugin automatically moves values from one part of an automation to another.",
+		"It takes a value from one step and makes it available where it’s needed next.",
+		"This keeps your automated tasks in sync and cuts down on manual work."
 	]
 }
