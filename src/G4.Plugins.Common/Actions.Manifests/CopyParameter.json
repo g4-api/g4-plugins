@@ -211,6 +211,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -230,6 +231,7 @@
 			"description": [
 				"### Session to Machine Parameter Copy Action",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -247,6 +249,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -266,6 +269,7 @@
 			"description": [
 				"### Session to User Parameter Copy Action",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -427,6 +431,7 @@
 				"annotations": {
 					"edge_cases": [
 						"Environment not found",
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -446,6 +451,7 @@
 			"description": [
 				"### Application to Machine Parameter Copy Action in BotRepository",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -463,6 +469,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -482,6 +489,7 @@
 			"description": [
 				"### Application to Machine Parameter Copy Action",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -499,7 +507,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Environment not found",
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -519,6 +527,7 @@
 			"description": [
 				"### Application to User Parameter Copy Action in BotRepository",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -536,12 +545,13 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
 					],
 					"expected_result": "The user‑scoped parameter `TargetParam` is set to the full text value of `SourceParam`.",
-					"notes": "Copies the full string from the application parameter, including any whitespace or formatting. When no environment is specified, the default application environment `SystemParameters` is used. Fails if the source parameter does not exist or if writing to the target parameter fails.",
+					"notes": "Copies the full string from the application parameter, including any whitespace or formatting. Fails if the source parameter does not exist or if writing to the target parameter fails.",
 					"test_case": "parameter_copy_application_to_user",
 					"version": "1.0"
 				},
@@ -555,7 +565,8 @@
 			"description": [
 				"### Application to User Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"User scopes are only valid on Windows environments.",
+				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -645,6 +656,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -664,6 +676,7 @@
 			"description": [
 				"### Machine to Session Parameter Copy Action",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -681,6 +694,8 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Environment not found",
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -700,6 +715,7 @@
 			"description": [
 				"### Machine to Application Parameter Copy Action in BotRepository",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -717,6 +733,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -736,6 +753,7 @@
 			"description": [
 				"### Machine to Application Parameter Copy Action",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -753,6 +771,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -771,6 +790,7 @@
 			"description": [
 				"### Machine to Machine Parameter Copy Action",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into another machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -788,6 +808,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -807,6 +828,7 @@
 			"description": [
 				"### Machine to User Parameter Copy Action",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -824,6 +846,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -860,6 +883,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -879,6 +903,7 @@
 			"description": [
 				"### User to Session Parameter Copy Action",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -897,6 +922,7 @@
 				"annotations": {
 					"edge_cases": [
 						"Environment not found",
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -916,6 +942,7 @@
 			"description": [
 				"### User to Application Parameter Copy Action in BotRepository",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -933,12 +960,13 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
 					],
 					"expected_result": "The application‑scoped parameter `TargetParam` is set to the full text value of `SourceParam`.",
-					"notes": "Copies the full string from the user parameter, including any whitespace or formatting. When no environment is specified, the default application environment `SystemParameters` is used. Fails if the source parameter does not exist or if writing to the target parameter fails.",
+					"notes": "Copies the full string from the user parameter, including any whitespace or formatting. Fails if the source parameter does not exist or if writing to the target parameter fails.",
 					"test_case": "parameter_copy_user_to_application",
 					"version": "1.0"
 				},
@@ -952,7 +980,8 @@
 			"description": [
 				"### User to Application Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into another application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"User scopes are only valid on Windows environments.",
+				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -969,6 +998,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -987,6 +1017,7 @@
 			"description": [
 				"### User to Machine Parameter Copy Action",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -1004,6 +1035,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -1022,6 +1054,7 @@
 			"description": [
 				"### User to User Parameter Copy Action",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into another user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -1039,6 +1072,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -1057,6 +1091,7 @@
 			"description": [
 				"### User to Process Parameter Copy Action",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -1110,6 +1145,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Environment not found",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -1182,6 +1218,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -1201,6 +1238,7 @@
 			"description": [
 				"### Process to Machine Parameter Copy Action",
 				"",
+				"Machine scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
@@ -1218,6 +1256,7 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"Non-Windows environment unsupported scope",
 						"Parameter value empty",
 						"Source parameter not found",
 						"Target parameter write failure"
@@ -1237,6 +1276,7 @@
 			"description": [
 				"### Process to User Parameter Copy Action",
 				"",
+				"User scopes are only valid on Windows environments.",
 				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
