@@ -1363,6 +1363,9 @@
 			"type": "SetParameter"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -1392,9 +1395,6 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
 		"The CopyParameter plugin automatically moves values from one part of an automation to another.",
 		"It takes a value from one step and makes it available where it's needed next."
