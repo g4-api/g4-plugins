@@ -8,11 +8,9 @@
 	],
 	"context": {
 		"integration": {
-			"sequentialWorkflow": {
-				"$type": "Action",
-				"componentType": "container",
-				"iconProvider": "loop",
-				"model": "ActionRuleModel"
+			"github": {
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs",
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md"
 			},
 			"rag": {
 				"description": "The InvokeForLoop plugin executes a defined sequence of actions a fixed number of times in automation scripts. It supports controlled and parameterized iteration, sequential execution of child rules, and exception logging without halting by default, ensuring predictable and reliable workflows in RPA and test automation.",
@@ -72,8 +70,18 @@
 					{
 						"question": "How does InvokeForLoop support batch processing?",
 						"answer": "You define rules that process each item in a dataset, and the loop runs through the entire batch a fixed number of times for consistent data handling."
+					},
+					{
+						"question": "Where can I find the source code and documentation for InvokeForLoop?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md"
 					}
 				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "container",
+				"iconProvider": "loop",
+				"model": "ActionRuleModel"
 			}
 		}
 	},
