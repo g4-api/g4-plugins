@@ -11441,6 +11441,9 @@
 			"type": "Operator"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -11499,9 +11502,6 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"platforms": [
-		"Any"
-	],
 	"summary": [
 		"The Assert plugin checks that each automated step gives the results you expect and tells you when it doesn't.",
 		"It applies simple rules to compare values or parts of a page and keeps track of any mismatches.",
