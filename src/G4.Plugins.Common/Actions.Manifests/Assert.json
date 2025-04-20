@@ -8,11 +8,9 @@
 	],
 	"context": {
 		"integration": {
-			"sequentialWorkflow": {
-				"$type": "Action",
-				"componentType": "task",
-				"iconProvider": "assert",
-				"model": "ActionRuleModel"
+			"github": {
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/Assert.cs",
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/Assert.md"
 			},
 			"rag": {
 				"description": "The Assert plugin automates the validation of expected conditions during automation to ensure reliable and accurate process execution. It supports dynamic assertion handling, regex-based data extraction, and robust exception management.",
@@ -140,8 +138,18 @@
 					{
 						"question": "How is the assert rule schema used in practice?",
 						"answer": "In practice, the assert rule schema enables automation users to define clear and precise validation checks within their workflows. By configuring each field appropriately, users can ensure that the plugin accurately validates UI elements and data against expected conditions, thus maintaining process integrity."
+					},
+					{
+						"question": "Where can I find the source code and documentation for Assert?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/Assert.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/Assert.md"
 					}
 				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "assert",
+				"model": "ActionRuleModel"
 			}
 		}
 	},
