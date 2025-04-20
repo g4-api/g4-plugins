@@ -35,27 +35,31 @@
 					},
 					{
 						"question": "How do nested loops work in InvokeForEachLoop?",
-						"answer": "Each InvokeForEachLoop always processes its own collection of elements based on its locator; an inner loop does not inherit or filter the outer loop's elements."
+						"answer": "Each InvokeForEachLoop processes its own element set independently; inner loops do not filter or inherit the outer loop’s results."
 					},
 					{
 						"question": "Can I pass the current element from the outer loop into the inner loop?",
-						"answer": "No. Each loop independently queries the DOM and does not maintain a reference to another loop's current element. Sharing that context would require additional state management and element reference handling, which is beyond the plugin's design."
+						"answer": "No. Each loop independently queries the DOM and does not maintain a reference to another loop’s current element. Sharing that context would require additional state management and element reference handling, which is beyond the plugin’s design."
 					},
 					{
-						"question": "How is InvokeForEachLoop integrated in external workflow designers?",
-						"answer": "The manifest defines a sequentialWorkflow integration under context.integration, mapping it to a container component with an ActionRuleModel for task execution."
+						"question": "How do I use CSS versus XPath locators with InvokeForEachLoop?",
+						"answer": "Specify \"locator\": \"CssSelector\" or omit it for Xpath (the default). Then set onElement to the matching selector string for each strategy."
 					},
 					{
-						"question": "What best practices improve loop reliability?",
-						"answer": "Use precise locators, test nested loops separately, handle edge cases where no elements are found, and configure stop-on-error only when necessary."
+						"question": "What happens if onElement is set to \".\" without a locator?",
+						"answer": "The plugin treats \".\" as the current context and processes all elements passed in from a previous action or the root context when no locator is provided."
 					},
 					{
-						"question": "How does InvokeForEachLoop handle exceptions during execution?",
-						"answer": "It adds an exception entry to the response and log stream for each failure but continues the loop by default unless the workflow is explicitly set to stop on error."
+						"question": "Where are exceptions recorded when an action within the loop fails?",
+						"answer": "Exceptions are added to the response payload and the log stream under the extractions or errors section, but the loop continues by default."
 					},
 					{
-						"question": "What fields define an InvokeForEachLoop rule schema?",
-						"answer": "A rule includes $type, pluginName, locator (optional), onElement, and rules (an array of child action definitions)."
+						"question": "How do I configure the loop to stop on error?",
+						"answer": "You must set the workflow’s stop-on-error flag in the parent container or action settings, as the plugin itself does not stop execution by default."
+					},
+					{
+						"question": "How do I define a Click action inside the InvokeForEachLoop?",
+						"answer": "Add a child rule with \"$type\": \"Action\", \"pluginName\": \"Click\", and set onElement to \".\" to act on the current loop item."
 					},
 					{
 						"question": "Which categories and platforms does this plugin support?",
@@ -63,7 +67,7 @@
 					},
 					{
 						"question": "How can you run the plugin on the entire collection without a locator?",
-						"answer": "Set onElement to \".\" and remove the locator entry so that actions apply to every item found by the loop rule."
+						"answer": "Set onElement to \".\" and remove the locator entry so that actions apply to every item found by the parent rule."
 					}
 				]
 			}
