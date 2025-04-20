@@ -545,8 +545,7 @@
 		"Any"
 	],
 	"summary": [
-		"The `InvokeForEachLoop` plugin enables efficient iteration over elements identified by a specified locator.",
-		"It allows automation scripts to execute a series of actions on each element sequentially, supporting complex workflows with nested loops.",
-		"Key use cases include data processing, dynamic UI interactions in RPA, and comprehensive automation testing scenarios."
+		"The InvokeForEachLoop tool finds each item you specify and runs the steps you choose on every one.",
+		"It can also run steps inside other steps to tackle more complex tasks."
 	]
 }
