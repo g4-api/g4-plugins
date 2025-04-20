@@ -8,80 +8,84 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs",
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md"
+			},
+			"rag": {
+				"description": "The InvokeWhileLoop plugin automates conditional looping by repeating defined actions while a specified condition remains true. It adapts to runtime changes, handles timeouts, and logs performance data each iteration to ensure reliable and adaptive automation workflows.",
+				"qa": [
+					{
+						"question": "What is the InvokeWhileLoop plugin?",
+						"answer": "It is an automation action that runs its child rules repeatedly while a specified condition evaluates to true."
+					},
+					{
+						"question": "How does InvokeWhileLoop handle changing conditions?",
+						"answer": "It evaluates the condition before each iteration and stops automatically when the condition becomes false."
+					},
+					{
+						"question": "What happens when a loop exceeds its timeout?",
+						"answer": "InvokeWhileLoop checks the Timeout parameter along with the condition and will gracefully exit the loop when the specified timeout is reached; if no timeout is set, the loop may run indefinitely."
+					},
+					{
+						"question": "What is the risk of not specifying a timeout?",
+						"answer": "Without a Timeout parameter, the loop can continue indefinitely if the condition never becomes false, potentially causing hung workflows or excessive resource use."
+					},
+					{
+						"question": "What insights does InvokeWhileLoop record?",
+						"answer": "It captures iteration counts, execution duration, and exception details for each iteration in the log stream."
+					},
+					{
+						"question": "Can you describe InvokeWhileLoop in a short sentence?",
+						"answer": "InvokeWhileLoop repeats defined actions while a condition remains true and stops automatically when the condition changes or when a timeout occurs."
+					},
+					{
+						"question": "What is the manifestVersion of this plugin?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "Under which categories is this plugin listed?",
+						"answer": "It is listed under the Loops category."
+					},
+					{
+						"question": "What pluginType is defined?",
+						"answer": "The pluginType is Action."
+					},
+					{
+						"question": "Which platforms does InvokeWhileLoop support?",
+						"answer": "It supports Any platform."
+					},
+					{
+						"question": "What parameters are defined for InvokeWhileLoop?",
+						"answer": "Parameters include Condition, Expected, Operator, and Timeout to control loop exit criteria and duration."
+					},
+					{
+						"question": "What properties are available in InvokeWhileLoop?",
+						"answer": "Properties include Argument, Locator, OnAttribute, OnElement, RegularExpression, and Rules to define assertion details and nested actions."
+					},
+					{
+						"question": "What API documentation is provided for InvokeWhileLoop?",
+						"answer": "Unfortunately, no API documentation is available for InvokeWhileLoop plugin."
+					},
+					{
+						"question": "What W3C protocol support is declared?",
+						"answer": "No formal W3C protocol specification is declared for InvokeWhileLoop."
+					},
+					{
+						"question": "Where can I find the source code and documentation for InvokeWhileLoop?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md"
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "container",
 				"iconProvider": "loop",
 				"model": "ActionRuleModel"
-			},
-			"context": {
-				"integration": {
-					"rag": {
-						"description": "The InvokeWhileLoop plugin automates conditional looping by repeating defined actions while a specified condition remains true. It adapts to runtime changes, handles timeouts, and logs performance data each iteration to ensure reliable and adaptive automation workflows.",
-						"qa": [
-							{
-								"question": "What is the InvokeWhileLoop plugin?",
-								"answer": "It is an automation action that runs its child rules repeatedly while a specified condition evaluates to true."
-							},
-							{
-								"question": "How does InvokeWhileLoop handle changing conditions?",
-								"answer": "It evaluates the condition before each iteration and stops automatically when the condition becomes false."
-							},
-							{
-								"question": "What happens when a loop exceeds its timeout?",
-								"answer": "InvokeWhileLoop checks the Timeout parameter along with the condition and will gracefully exit the loop when the specified timeout is reached; if no timeout is set, the loop may run indefinitely."
-							},
-							{
-								"question": "What is the risk of not specifying a timeout?",
-								"answer": "Without a Timeout parameter, the loop can continue indefinitely if the condition never becomes false, potentially causing hung workflows or excessive resource use."
-							},
-							{
-								"question": "What insights does InvokeWhileLoop record?",
-								"answer": "It captures iteration counts, execution duration, and exception details for each iteration in the log stream."
-							},
-							{
-								"question": "Can you describe InvokeWhileLoop in a short sentence?",
-								"answer": "InvokeWhileLoop repeats defined actions while a condition remains true and stops automatically when the condition changes or when a timeout occurs."
-							},
-							{
-								"question": "What is the manifestVersion of this plugin?",
-								"answer": "The manifestVersion is 4."
-							},
-							{
-								"question": "Who is the author of this plugin?",
-								"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
-							},
-							{
-								"question": "Under which categories is this plugin listed?",
-								"answer": "It is listed under the Loops category."
-							},
-							{
-								"question": "What pluginType is defined?",
-								"answer": "The pluginType is Action."
-							},
-							{
-								"question": "Which platforms does InvokeWhileLoop support?",
-								"answer": "It supports Any platform."
-							},
-							{
-								"question": "What parameters are defined for InvokeWhileLoop?",
-								"answer": "Parameters include Condition, Expected, Operator, and Timeout to control loop exit criteria and duration."
-							},
-							{
-								"question": "What properties are available in InvokeWhileLoop?",
-								"answer": "Properties include Argument, Locator, OnAttribute, OnElement, RegularExpression, and Rules to define assertion details and nested actions."
-							},
-							{
-								"question": "What API documentation is provided for InvokeWhileLoop?",
-								"answer": "Unfortunately, no API documentation is available for InvokeWhileLoop plugin."
-							},
-							{
-								"question": "What W3C protocol support is declared?",
-								"answer": "No formal W3C protocol specification is declared for InvokeWhileLoop."
-							}
-						]
-					}
-				}
 			}
 		}
 	},
