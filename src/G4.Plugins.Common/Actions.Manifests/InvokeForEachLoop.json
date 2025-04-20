@@ -35,11 +35,11 @@
 					},
 					{
 						"question": "How do nested loops work in InvokeForEachLoop?",
-						"answer": "Each InvokeForEachLoop processes its own element set independently; inner loops do not filter or inherit the outer loop’s results."
+						"answer": "Each InvokeForEachLoop processes its own element set independently; inner loops do not filter or inherit the outer loop's results."
 					},
 					{
 						"question": "Can I pass the current element from the outer loop into the inner loop?",
-						"answer": "No. Each loop independently queries the DOM and does not maintain a reference to another loop’s current element. Sharing that context would require additional state management and element reference handling, which is beyond the plugin’s design."
+						"answer": "No. Each loop independently queries the DOM and does not maintain a reference to another loop's current element. Sharing that context would require additional state management and element reference handling, which is beyond the plugin's design."
 					},
 					{
 						"question": "How do I use CSS versus XPath locators with InvokeForEachLoop?",
@@ -55,7 +55,7 @@
 					},
 					{
 						"question": "How do I configure the loop to stop on error?",
-						"answer": "You must set the workflow’s stop-on-error flag in the parent container or action settings, as the plugin itself does not stop execution by default."
+						"answer": "You must set the workflow's stop-on-error flag in the parent container or action settings, as the plugin itself does not stop execution by default."
 					},
 					{
 						"question": "How do I define a Click action inside the InvokeForEachLoop?",
@@ -68,6 +68,10 @@
 					{
 						"question": "How can you run the plugin on the entire collection without a locator?",
 						"answer": "Set onElement to \".\" and remove the locator entry so that actions apply to every item found by the parent rule."
+					},
+					{
+						"question": "Who authored the CopyParameter plugin?",
+						"answer": "The plugin was authored by Roei Sabag."
 					}
 				]
 			}
