@@ -62,10 +62,8 @@
 					"version": "1.0"
 				},
 				"labels": [
-					"Click",
 					"InvokeForEachLoop",
-					"Loop",
-					"WebAutomation"
+					"Loop"
 				]
 			},
 			"description": [
@@ -105,10 +103,8 @@
 					"version": "1.0"
 				},
 				"labels": [
-					"Click",
 					"InvokeForEachLoop",
-					"Loop",
-					"WebAutomation"
+					"Loop"
 				]
 			},
 			"description": [
@@ -136,73 +132,169 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"test_case": "invoke_foreach_click_pagination_li_xpath_inner_xpath",
+					"expected_result": "Each `<li>` matching `//ul[@class='pagination']/li` has its child button clicked; exceptions are recorded but do not halt execution.",
+					"notes": "InvokeForEachLoop locates each `<li>` via XPath and performs a Click on its child via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loop.",
+					"edge_cases": [
+						"Empty elements list",
+						"Incorrect XPath usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Click Each Pagination Button Using XPath and Relative XPath",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the XPath selector `//ul[@class='pagination']/li` and performs a Click action on its child button element selected via relative XPath `./button`.",
+				"The inner rule uses the XPath `./button` to reference the button within the current list item.",
+				"If no elements are found, an exception is logged and the loop is skipped. ",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"onElement": "//ul[@class='pagination']/li",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "Click",
-						"onElement": "./button"
+						"onElement": "./button",
+						"pluginName": "Click"
 					}
 				]
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty elements list",
+						"Incorrect XPath usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "Each `<li>` matching `//ul[@class='pagination']/li` has its child button clicked; exceptions are recorded but do not halt execution.",
+					"notes": "InvokeForEachLoop locates each `<li>` via XPath and performs a Click on its child via CSS selector. Exceptions for missing elements or click failures are logged without stopping the loop.",
+					"test_case": "invoke_foreach_click_pagination_li_xpath_inner_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Click Each Pagination Button Using XPath and CSS Selector",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the XPath selector `//ul[@class='pagination']/li` and performs a Click action on its child button element selected via CSS selector `button`.",
+				"The inner rule uses the CSS selector `button` to reference the button within the current list item.",
+				"If no elements are found, an exception is logged and the loop is skipped. ",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"onElement": "//ul[@class='pagination']/li",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "Click",
 						"locator": "CssSelector",
-						"onElement": "button"
+						"onElement": "button",
+						"pluginName": "Click"
 					}
 				]
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty elements list",
+						"Incorrect CSS selector usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "Each `<li>` matching `.pagination > li` has its child button clicked; exceptions are recorded but do not halt execution.",
+					"notes": "InvokeForEachLoop locates each `<li>` via CSS selector and performs a Click on its child via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loop.",
+					"test_case": "invoke_foreach_click_pagination_li_css_inner_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Click Each Pagination Button Using CSS Selector and Relative XPath",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the CSS selector `.pagination > li` and performs a Click action on its child button element selected via relative XPath `./button`.",
+				"The inner rule uses the XPath `./button` to reference the button within the current list item.",
+				"If no elements are found, an exception is logged and the loop is skipped. ",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"locator": "CssSelector",
 				"onElement": ".pagination > li",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "Click",
-						"onElement": "./button"
+						"onElement": "./button",
+						"pluginName": "Click"
 					}
 				]
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty elements list",
+						"Incorrect CSS selector usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "Each `<li>` matching `.pagination > li` has its child button clicked; exceptions are recorded but do not halt execution.",
+					"notes": "InvokeForEachLoop locates each `<li>` via CSS selector and performs a Click on its child via CSS selector. Exceptions for missing elements or click failures are logged without stopping the loop.",
+					"test_case": "invoke_foreach_click_pagination_li_css_inner_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Click Each Pagination Button Using CSS Selector",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the CSS selector `.pagination > li` and performs a Click action on its child button element selected via CSS selector `button`.",
+				"The inner rule uses the CSS selector `button` to reference the button within the current list item.",
+				"If no elements are found, an exception is logged and the loop is skipped. ",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"locator": "CssSelector",
 				"onElement": ".pagination > li",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "Click",
 						"locator": "CssSelector",
-						"onElement": "button"
+						"onElement": "button",
+						"pluginName": "Click"
 					}
 				]
 			}
