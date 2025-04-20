@@ -19,80 +19,234 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `InvokeForEachLoop` plugin is a powerful tool designed for both Robotic Process Automation (RPA) and automation testing. ",
-		"Its primary function is to locate multiple elements using a specified locator, iterate through each found element, and execute a predefined collection of actions on them. ",
-		"By default, actions are performed on the located elements, but the plugin also offers the flexibility to specify an alternative locator for action execution.",
+		"The InvokeForEachLoop plugin finds all elements matching your locator and runs a set of actions on each one. By default, nested actions apply to those found elements, so you do not need to specify `locator` or `onElement` on each rule. To target different elements inside the loop, include `locator` and `onElement` in the action's rule. It also supports nested loops for multi‑level workflows, making repetitive RPA and testing tasks straightforward to automate.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                     | Description                                                                                                                                      |",
-		"|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Element-Based Iteration     | Finds all elements matching the provided locator and iterates through each one to perform actions.                                               |",
-		"| Sequential Execution        | Ensures that actions are executed in order on each element, maintaining a predictable and orderly workflow.                                      |",
-		"| Alternative Locator Support | Allows specifying a different locator for performing actions, providing flexibility to target different elements based on the iteration context. |",
-		"| Nested Loop Capability      | Supports nested `InvokeForEachLoop` instances, enabling complex automation workflows with multiple layers of iteration and action execution.     |",
+		"| Feature                     | Description                                                                                       |",
+		"|-----------------------------|---------------------------------------------------------------------------------------------------|",
+		"| Element Iteration           | Finds all elements matching the locator and loops through each one without extra configuration.   |",
+		"| Default Context Binding     | Applies all nested actions to the loop's element set by default, so you can omit locator details. |",
+		"| Alternative Locator Support | Lets you specify a different locator and onElement to run actions on other elements.              |",
+		"| Sequential Execution        | Runs actions in order on each element for a clear, predictable workflow.                          |",
+		"| Nested Loop Capability      | Allows loops inside loops for multi‑level, hierarchical processing.                               |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Use Case            | Description                                                                                                                                             |",
-		"|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Data Processing     | Iterate over a collection of data elements, performing actions such as data entry, validation, or transformation on each item.                          |",
-		"| Batch Operations    | Execute a series of actions on each element within a batch, such as processing multiple files, records, or transactions sequentially.                   |",
-		"| Dynamic Interaction | Interact with dynamically generated UI elements by iterating through them and performing necessary actions like clicking, typing, or verifying content. |",
+		"| Use Case           | Description                                                                                           |",
+		"|--------------------|-------------------------------------------------------------------------------------------------------|",
+		"| Data Processing    | Process each item in a list by running data entry, validation, or transformation without extra setup. |",
+		"| Batch Operations   | Perform ordered tasks on groups of files, records, or transactions using a single loop definition.    |",
+		"| Dynamic Interaction| Automate UI items created at runtime by clicking, typing, or checking content on each found element.  |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Use Case               | Description                                                                                                                                                 |",
-		"|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Element Verification   | Iterate through UI elements to verify properties, states, or values, ensuring each element meets the expected criteria.                                     |",
-		"| Data-Driven Testing    | Perform actions on multiple data sets by iterating through input elements, enabling comprehensive testing across various scenarios and data configurations. |",
-		"| UI Interaction Testing | Simulate user interactions on a series of UI components by iterating through them and executing actions like clicks, hovers, or form submissions.           |"
+		"| Use Case             | Description                                                                                             |",
+		"|----------------------|---------------------------------------------------------------------------------------------------------|",
+		"| Element Verification | Check each UI element's state or value against expectations without repeating locator settings.         |",
+		"| Data‑Driven Testing  | Loop through data sets and run tests with varying inputs by only defining the loop once.                |",
+		"| UI Interaction       | Simulate user workflows like clicks or form entries on each element in a consistent, repeatable manner. |"
 	],
 	"examples": [
 		{
 			"description": [
-				"Instructs the automation script to execute the `Click` action on the HTML element with the XPath `//positive` five times in sequential order."
+				""
 			],
 			"rule": {
 				"$type": "Action",
 				"pluginName": "InvokeForEachLoop",
-				"onElement": "//positive",
+				"onElement": "//ul[@id='Pagination1']/li/button",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "Click",
-						"locator": "CssSelector",
-						"onElement": "#NextBtn1"
+						"pluginName": "Click"
 					}
 				]
 			}
 		},
 		{
 			"description": [
-				"This configuration demonstrates a nested `InvokeForEachLoop` within another `InvokeForEachLoop`, allowing for complex iteration scenarios.",
-				"",
-				"1. **Outer ForEach Loop:**",
-				"   - Initiated by the first `InvokeForEachLoop` plugin.",
-				"   - Locates all elements matching the XPath `//positive`.",
-				"",
-				"2. **Inner ForEach Loop:**",
-				"   - Nested within the outer loop, it also locates elements matching the XPath `//positive`.",
-				"   - Performs a `RegisterParameter` action on each nested element."
+				""
 			],
 			"rule": {
 				"$type": "Action",
 				"pluginName": "InvokeForEachLoop",
-				"onElement": "//positive",
+				"locator": "CssSelector",
+				"onElement": "#Pagination1 > li > button",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "Click"
+					}
+				]
+			}
+		},
+
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"onElement": "//ul[@class='pagination']/li",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "Click",
+						"onElement": "./button"
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"onElement": "//ul[@class='pagination']/li",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "Click",
+						"locator": "CssSelector",
+						"onElement": "button"
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"locator": "CssSelector",
+				"onElement": ".pagination > li",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "Click",
+						"onElement": "./button"
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"locator": "CssSelector",
+				"onElement": ".pagination > li",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "Click",
+						"locator": "CssSelector",
+						"onElement": "button"
+					}
+				]
+			}
+		},
+
+
+
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"onElement": "//ul[@class='pagination']",
 				"rules": [
 					{
 						"$type": "Action",
 						"pluginName": "InvokeForEachLoop",
-						"onElement": "//positive",
+						"onElement": "./li/button",
 						"rules": [
 							{
 								"$type": "Action",
-								"pluginName": "RegisterParameter",
-								"argument": "{{$ --Name:TestParameter --Value:Foo Bar}}"
+								"pluginName": "Click"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"onElement": "//ul[@class='pagination']",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "InvokeForEachLoop",
+						"locator": "CssSelector",
+						"onElement": "li > button",
+						"rules": [
+							{
+								"$type": "Action",
+								"pluginName": "Click"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"locator": "CssSelector",
+				"onElement": ".pagination",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "InvokeForEachLoop",
+						"onElement": "./li/button",
+						"rules": [
+							{
+								"$type": "Action",
+								"pluginName": "Click"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeForEachLoop",
+				"locator": "CssSelector",
+				"onElement": ".pagination",
+				"rules": [
+					{
+						"$type": "Action",
+						"pluginName": "InvokeForEachLoop",
+						"locator": "CssSelector",
+						"onElement": "li > button",
+						"rules": [
+							{
+								"$type": "Action",
+								"pluginName": "Click"
 							}
 						]
 					}
@@ -100,6 +254,12 @@
 			}
 		}
 	],
+
+
+
+
+
+
 	"key": "InvokeForEachLoop",
 	"manifestVersion": 4,
 	"pluginType": "Action",
