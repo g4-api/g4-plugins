@@ -303,18 +303,44 @@
 
 
 		{
+			"context": {
+				"annotations": {
+					"test_case": "invoke_foreach_nested_xpath_xpath",
+					"expected_result": "Each `button` under each matching `<ul>` is clicked; exceptions are recorded but do not halt execution.",
+					"notes": "Uses nested InvokeForEachLoop: outer selects `<ul>` via XPath, inner selects buttons via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loops.",
+					"edge_cases": [
+						"Empty elements list",
+						"Empty inner elements list",
+						"Incorrect XPath usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Nested InvokeForEachLoop With XPath Selectors",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin first locates the `<ul>` element matching the XPath selector `//ul[@class='pagination']`, then within each such `<ul>`, iterates over each child `<li>/button` via `./li/button` and performs a Click action.",
+				"The inner loop uses `./li/button` to reference the buttons relative to the current `<ul>` element.",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
+				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"onElement": "//ul[@class='pagination']",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "InvokeForEachLoop",
 						"onElement": "./li/button",
+						"pluginName": "InvokeForEachLoop",
 						"rules": [
 							{
 								"$type": "Action",
@@ -326,19 +352,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty elements list",
+						"Empty inner elements list",
+						"Incorrect CSS selector usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "Each `button` under each matching `<ul>` is clicked; exceptions are recorded but do not halt execution.",
+					"notes": "Uses nested InvokeForEachLoop: outer selects `<ul>` via XPath, inner selects buttons via CSS selector. Exceptions for missing elements or click failures are logged without stopping the loops.",
+					"test_case": "invoke_foreach_nested_xpath_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Nested InvokeForEachLoop With XPath and CSS Selectors",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin first locates the `<ul>` element matching the XPath selector `//ul[@class='pagination']`, then within each such `<ul>`, iterates over each child `li > button` via CSS selector and performs a Click action.",
+				"The inner loop uses the CSS selector `li > button` to reference the button within the current list item.",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
+				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"onElement": "//ul[@class='pagination']",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "InvokeForEachLoop",
 						"locator": "CssSelector",
 						"onElement": "li > button",
+						"pluginName": "InvokeForEachLoop",
 						"rules": [
 							{
 								"$type": "Action",
@@ -350,19 +402,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty elements list",
+						"Empty inner elements list",
+						"Incorrect CSS selector usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "Each `button` under each matching container is clicked; exceptions are recorded but do not halt execution.",
+					"notes": "Uses nested InvokeForEachLoop: outer selects containers via CSS selector, inner selects buttons via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loops.",
+					"test_case": "invoke_foreach_nested_css_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Nested InvokeForEachLoop With CSS Selector and Relative XPath",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin first locates the container matching the CSS selector `.pagination`, then within each container, iterates over child buttons via relative XPath `./li/button` and performs a Click action.",
+				"The inner loop uses `./li/button` to reference the buttons relative to the current container.",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
+				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"locator": "CssSelector",
 				"onElement": ".pagination",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "InvokeForEachLoop",
 						"onElement": "./li/button",
+						"pluginName": "InvokeForEachLoop",
 						"rules": [
 							{
 								"$type": "Action",
@@ -374,20 +452,46 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty elements list",
+						"Empty inner elements list",
+						"Incorrect CSS selector usage",
+						"Loop action or rule failure",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "Each `button` under each matching container is clicked; exceptions are recorded but do not halt execution.",
+					"notes": "Uses nested InvokeForEachLoop: outer selects containers and inner selects buttons both via CSS selectors. Exceptions for missing elements or click failures are logged without stopping the loops.",
+					"test_case": "invoke_foreach_nested_css_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForEachLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				""
+				"### Nested InvokeForEachLoop With CSS Selectors",
+				"",
+				"This example demonstrates how the InvokeForEachLoop plugin first locates the container matching the CSS selector `.pagination`, then within each container, iterates over child buttons via CSS selector `li > button` and performs a Click action.",
+				"The inner loop uses the CSS selector `li > button` scoped to the current container.",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
+				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
 				"$type": "Action",
-				"pluginName": "InvokeForEachLoop",
 				"locator": "CssSelector",
 				"onElement": ".pagination",
+				"pluginName": "InvokeForEachLoop",
 				"rules": [
 					{
 						"$type": "Action",
-						"pluginName": "InvokeForEachLoop",
 						"locator": "CssSelector",
 						"onElement": "li > button",
+						"pluginName": "InvokeForEachLoop",
 						"rules": [
 							{
 								"$type": "Action",
