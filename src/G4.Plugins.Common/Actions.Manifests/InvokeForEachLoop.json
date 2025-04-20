@@ -3,6 +3,9 @@
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 	},
+	"categories": [
+		"Loops"
+	],
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
@@ -13,9 +16,6 @@
 			}
 		}
 	},
-	"categories": [
-		"Loops"
-	],
 	"description": [
 		"### Purpose",
 		"",
@@ -499,20 +499,19 @@
 			}
 		}
 	],
-
-
-
-
-
-
 	"key": "InvokeForEachLoop",
 	"manifestVersion": 4,
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the web elements to be iterated. Supported locator types include `CssSelector`, `XPath`, `LinkText`, etc."
+				"Chooses the method to find items in the user interface.",
+				"Common options include Xpath, CSS, link text, and others.",
+				"Default is Xpath unless another method is chosen."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -520,8 +519,9 @@
 		},
 		{
 			"description": [
-				"Specifies the locator used to find the elements that the loop will iterate over.",
-				"This property is mandatory and defines how the plugin identifies the collection of elements to process."
+				"Specifies which element to use in the assertion.",
+				"It tells the system where to find that element in the user interface.",
+				"The assertion then runs on that element."
 			],
 			"mandatory": true,
 			"name": "OnElement",
@@ -529,8 +529,9 @@
 		},
 		{
 			"description": [
-				"Defines a sequence of actions or instructions to be executed on each element found by the locator.",
-				"Each action can interact with the current element or use an alternative locator as needed."
+				"List of steps to run on each item.",
+				"Each step applies to the current item or uses another method to find it if needed.",
+				"The process follows these steps for every item."
 			],
 			"mandatory": true,
 			"name": "Rules",
@@ -541,9 +542,6 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
 		"The InvokeForEachLoop tool finds each item you specify and runs the steps you choose on every one.",
 		"It can also run steps inside other steps to tackle more complex tasks."
