@@ -1261,19 +1261,42 @@
 				"pluginName": "RegisterParameter"
 			}
 		},
-
-
-
-
-
-
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty element text or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Process scope.",
+					"notes": "Registers a parameter from an element without encryption.",
+					"test_case": "register_parameter_process_scope_css_elementid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"ProcessScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: Process Scope via CSS Selector",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope.",
+				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Process}}",
 				"locator": "CssSelector",
 				"onElement": "#elementId",
@@ -1281,10 +1304,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty element text or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
+					"notes": "Registers a parameter from an element with encryption.",
+					"test_case": "register_parameter_process_scope_css_elementid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"ProcessScope",
+					"Encryption"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: Process Scope via CSS Selector with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
 				"locator": "CssSelector",
 				"onElement": "#elementId",
@@ -1292,10 +1347,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty element text or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Process scope.",
+					"notes": "Registers a parameter from an element without encryption.",
+					"test_case": "register_parameter_process_scope_xpath_elementid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"ProcessScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: Process Scope via XPath",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope.",
+				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Process}}",
 				"locator": "Xpath",
 				"onElement": "//a[@id='elementId']",
@@ -1303,10 +1389,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty element text or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
+					"notes": "Registers a parameter from an element with encryption.",
+					"test_case": "register_parameter_process_scope_xpath_elementid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"ProcessScope",
+					"Encryption"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: Process Scope via XPath with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
 				"locator": "Xpath",
 				"onElement": "//a[@id='elementId']",
@@ -1314,10 +1431,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty element text or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Process scope.",
+					"notes": "Registers a parameter from an element without encryption.",
+					"test_case": "register_parameter_process_scope_id_elementid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"ProcessScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: Process Scope via Id Locator",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope.",
+				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Process}}",
 				"locator": "Id",
 				"onElement": "elementId",
@@ -1325,20 +1473,48 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty element text or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
+					"notes": "Registers a parameter from an element with encryption.",
+					"test_case": "register_parameter_process_scope_id_elementid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"ProcessScope",
+					"Encryption"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: Process Scope via Id Locator with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
 				"locator": "Id",
 				"onElement": "elementId",
 				"pluginName": "RegisterParameter"
 			}
 		},
-
-
-
-
 
 
 
@@ -1366,7 +1542,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter obtained from a web element within the Session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Session}}",
@@ -1377,7 +1553,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter obtained from a web element within the Session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
@@ -1388,7 +1564,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter obtained from a web element within the Session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Session}}",
@@ -1399,7 +1575,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter obtained from a web element within the Session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
@@ -1408,6 +1584,15 @@
 				"pluginName": "RegisterParameter"
 			}
 		},
+
+
+
+
+
+
+
+
+
 		{
 			"description": [
 				"This configuration registers a parameter obtained from a web element within the User scope."
