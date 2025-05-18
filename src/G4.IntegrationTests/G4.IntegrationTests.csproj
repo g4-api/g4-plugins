@@ -32,9 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Api" Version="2025.3.11.34" />
-		<PackageReference Include="G4.Plugins" Version="2025.3.28.36" />
-		<PackageReference Include="G4.Converters" Version="2025.3.28.36" />
+		<PackageReference Include="G4.Api" Version="2025.3.29.35" />
+		<PackageReference Include="G4.Plugins" Version="2025.3.30.37" />
+		<PackageReference Include="G4.Converters" Version="2025.3.30.37" />
 		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="8.0.10" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.8.3" />
@@ -43,7 +43,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
