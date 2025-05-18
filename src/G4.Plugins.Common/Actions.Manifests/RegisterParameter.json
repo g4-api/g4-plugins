@@ -3087,16 +3087,43 @@
 				"pluginName": "RegisterParameter"
 			}
 		},
-
-
-
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty attribute value or whitespace-only content",
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Session scope.",
+					"notes": "Registers a parameter from an element attribute without encryption.",
+					"test_case": "register_parameter_session_scope_css_linkid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				"### RegisterParameter: Session Scope via CSS Selector (href attribute)",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope.",
+				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Session}}",
 				"locator": "CssSelector",
 				"onAttribute": "href",
@@ -3105,10 +3132,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty attribute value or whitespace-only content",
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
+					"notes": "Registers a parameter from an element attribute with encryption.",
+					"test_case": "register_parameter_session_scope_css_linkid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"SessionScope",
+					"Encryption"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				"### RegisterParameter: Session Scope via CSS Selector (href attribute) with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
 				"locator": "CssSelector",
 				"onAttribute": "href",
@@ -3117,10 +3177,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty attribute value or whitespace-only content",
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Session scope.",
+					"notes": "Registers a parameter from an element attribute without encryption.",
+					"test_case": "register_parameter_session_scope_xpath_linkid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				"### RegisterParameter: Session Scope via XPath (href attribute)",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope.",
+				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Session}}",
 				"locator": "Xpath",
 				"onAttribute": "href",
@@ -3129,10 +3221,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty attribute value or whitespace-only content",
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
+					"notes": "Registers a parameter from an element attribute with encryption.",
+					"test_case": "register_parameter_session_scope_xpath_linkid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"SessionScope",
+					"Encryption"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				"### RegisterParameter: Session Scope via XPath (href attribute) with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
 				"locator": "Xpath",
 				"onAttribute": "href",
@@ -3141,10 +3266,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty attribute value or whitespace-only content",
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Session scope.",
+					"notes": "Registers a parameter from an element attribute without encryption.",
+					"test_case": "register_parameter_session_scope_id_linkid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				"### RegisterParameter: Session Scope via Id Locator (href attribute)",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope.",
+				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Session}}",
 				"locator": "Id",
 				"onAttribute": "href",
@@ -3153,10 +3310,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty attribute value or whitespace-only content",
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
+					"notes": "Registers a parameter from an element attribute with encryption.",
+					"test_case": "register_parameter_session_scope_id_linkid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"SessionScope",
+					"Encryption"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				"### RegisterParameter: Session Scope via Id Locator (href attribute) with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
 				"locator": "Id",
 				"onAttribute": "href",
@@ -3164,9 +3354,12 @@
 				"pluginName": "RegisterParameter"
 			}
 		},
+
+
+
 		{
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:User}}",
@@ -3178,7 +3371,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
@@ -3190,7 +3383,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:User}}",
@@ -3202,7 +3395,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
@@ -3214,7 +3407,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:User}}",
@@ -3226,7 +3419,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by extracting the href attribute from a web element within the session scope."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
@@ -3236,6 +3429,16 @@
 				"pluginName": "RegisterParameter"
 			}
 		},
+
+
+
+
+
+
+
+
+
+
 		{
 			"description": [
 				"This configuration registers a parameter by applying a regular expression to the extracted value."
