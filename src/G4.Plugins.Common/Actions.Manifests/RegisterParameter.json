@@ -4191,36 +4191,45 @@
 				"regularExpression": "\\d+"
 			}
 		},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"Regex match occurs when it shouldn't",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Machine scope.",
+					"notes": "Registers a numeric parameter from an element without encryption.",
+					"test_case": "register_parameter_machine_scope_css_elementid_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"MachineScope",
+					"ParameterRegistration",
+					"RegexValidation",
+					"ScopeManagement"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				"### RegisterParameter: Machine Scope via CSS Selector with Regex",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope.",
+				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
+				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Machine}}",
 				"locator": "CssSelector",
 				"onElement": "#elementId",
@@ -4229,10 +4238,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Missing regularExpression argument",
+						"Regex match occurs when it shouldn't",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Machine scope.",
+					"notes": "Registers a numeric parameter from an element with encryption.",
+					"test_case": "register_parameter_machine_scope_css_elementid_with_regex_and_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"Encryption",
+					"MachineScope",
+					"ParameterRegistration",
+					"RegexValidation",
+					"ScopeManagement"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				"### RegisterParameter: Machine Scope via CSS Selector with Regex and Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
+				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
 				"locator": "CssSelector",
 				"onElement": "#elementId",
@@ -4241,10 +4285,44 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"Regex match occurs when it shouldn't",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Machine scope.",
+					"notes": "Registers a numeric parameter from an element without encryption.",
+					"test_case": "register_parameter_machine_scope_xpath_elementid_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"MachineScope",
+					"ParameterRegistration",
+					"RegexValidation",
+					"ScopeManagement"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				"### RegisterParameter: Machine Scope via XPath with Regex",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope.",
+				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
+				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Machine}}",
 				"locator": "Xpath",
 				"onElement": "//a[@id='elementId']",
@@ -4253,10 +4331,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"Regex match occurs when it shouldn't",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Machine scope.",
+					"notes": "Registers a numeric parameter from an element with encryption.",
+					"test_case": "register_parameter_machine_scope_xpath_elementid_with_regex_and_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"Encryption",
+					"MachineScope",
+					"ParameterRegistration",
+					"RegexValidation",
+					"ScopeManagement"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				"### RegisterParameter: Machine Scope via XPath with Regex and Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
+				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
 				"locator": "Xpath",
 				"onElement": "//a[@id='elementId']",
@@ -4265,10 +4378,44 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"Regex match occurs when it shouldn't",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Machine scope.",
+					"notes": "Registers a numeric parameter from an element without encryption.",
+					"test_case": "register_parameter_machine_scope_id_elementid_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"MachineScope",
+					"ParameterRegistration",
+					"RegexValidation",
+					"ScopeManagement"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				"### RegisterParameter: Machine Scope via Id Locator with Regex",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope.",
+				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
+				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Machine}}",
 				"locator": "Id",
 				"onElement": "elementId",
@@ -4277,10 +4424,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Regex match occurs when it shouldn't",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Machine scope.",
+					"notes": "Registers a numeric parameter from an element with encryption.",
+					"test_case": "register_parameter_machine_scope_id_elementid_with_regex_and_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"Encryption",
+					"MachineScope",
+					"ParameterRegistration",
+					"RegexValidation",
+					"ScopeManagement"
+				]
+			},
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				"### RegisterParameter: Machine Scope via Id Locator with Regex and Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
+				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
 				"locator": "Id",
 				"onElement": "elementId",
@@ -4288,9 +4470,32 @@
 				"regularExpression": "\\d+"
 			}
 		},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		{
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Process}}",
@@ -4302,7 +4507,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
@@ -4314,7 +4519,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Process}}",
@@ -4326,7 +4531,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
@@ -4338,7 +4543,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Process}}",
@@ -4350,7 +4555,7 @@
 		},
 		{
 			"description": [
-				"This configuration registers a parameter by applying a regular expression to the extracted value."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
@@ -4360,6 +4565,14 @@
 				"regularExpression": "\\d+"
 			}
 		},
+
+
+
+
+
+
+
+
 		{
 			"description": [
 				"This configuration registers a parameter by applying a regular expression to the extracted value."
