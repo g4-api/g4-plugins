@@ -12,6 +12,79 @@
 	],
 	"context": {
 		"integration": {
+			"rag": {
+				"description": "The RegisterParameter plugin enables automation workflows to enforce consistent data registration by capturing values from inputs or elements, applying pattern-based extraction or transformations, and securely storing results in configurable scopes. It supports dynamic parameter labels and optional encryption, ensuring flexible and reliable execution with built-in exception logging.",
+				"qa": [
+					{
+						"question": "What is the RegisterParameter plugin and why does it matter?",
+						"answer": "The RegisterParameter plugin captures values from inputs or elements and stores them under a specified name and scope, which is essential for passing data between automation steps and maintaining workflow state."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "It offers features like parameter capture, scope selection, environment targeting, regex filtering, and encryption. Main parameters include Name for the label, Scope to define storage location, Value for input data, RegularExpression for filtering, and EncryptionKey for secure storage."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows or external tools?",
+						"answer": "It embeds as an action rule component in workflow designers under context.integration.sequentialWorkflow, making it available in low-code or RPA platforms as a task for data handling."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use clear, descriptive Names to label data, apply RegularExpression patterns to filter unwanted content, specify the correct Scope for visibility, secure sensitive values with EncryptionKey, and review exception logs to troubleshoot failures."
+					},
+					{
+						"question": "What is the structure of the plugin rule definition?",
+						"answer": "Each rule includes $type set to Action, pluginName RegisterParameter, and fields like argument, onElement, onAttribute, locator, regularExpression, encryptionKey, plus environment and scope properties to define behavior."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On failure it records exceptions to the log stream and includes error details in the response, while by default allowing workflows to continue unless configured to stop on error."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the version of the manifest schema the plugin follows."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What are the aliases for this plugin?",
+						"answer": "The plugin can also be referenced as SaveParameter or SetParameter."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It belongs to the DataManagement category, indicating its role in data handling operations."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports any platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What type of plugin is this?",
+						"answer": "It is an Action plugin, designed to perform operations within automation workflows."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is RegisterParameter, which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What does the summary describe?",
+						"answer": "It highlights that the RegisterParameter plugin captures values from user input or elements, supports storage in various locations, filtering or transforming values, and keeps data organized to ensure smooth task execution."
+					},
+					{
+						"question": "What parameters does the plugin accept?",
+						"answer": "Parameters include Name for label text, Scope for storage location, Environment for target context, Value for the data to save, and EncryptionKey to secure the stored data."
+					},
+					{
+						"question": "What properties define how data is extracted and stored?",
+						"answer": "Properties include Argument for naming saved data, Locator to find elements, OnAttribute for attribute-based extraction, OnElement to specify element directly, and RegularExpression to filter and prepare values."
+					},
+					{
+						"question": "What protocol settings are specified?",
+						"answer": "Protocol settings show apiDocumentation as None and w3c as None, indicating it does not require external API standards or W3C validation."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
