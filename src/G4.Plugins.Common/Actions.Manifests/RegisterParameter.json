@@ -3354,14 +3354,43 @@
 				"pluginName": "RegisterParameter"
 			}
 		},
-
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty attribute value or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the User scope.",
+					"notes": "Registers a parameter from an element attribute without encryption.",
+					"test_case": "register_parameter_user_scope_css_linkid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"UserScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: User Scope via CSS Selector (href attribute)",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope.",
+				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:User}}",
 				"locator": "CssSelector",
 				"onAttribute": "href",
@@ -3370,10 +3399,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty attribute value or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
+					"notes": "Registers a parameter from an element attribute with encryption.",
+					"test_case": "register_parameter_user_scope_css_linkid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"Encryption",
+					"ParameterRegistration",
+					"ScopeManagement",
+					"UserScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: User Scope via CSS Selector (href attribute) with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
 				"locator": "CssSelector",
 				"onAttribute": "href",
@@ -3382,10 +3444,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty attribute value or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the User scope.",
+					"notes": "Registers a parameter from an element attribute without encryption.",
+					"test_case": "register_parameter_user_scope_xpath_linkid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"UserScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: User Scope via XPath (href attribute)",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope.",
+				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:User}}",
 				"locator": "Xpath",
 				"onAttribute": "href",
@@ -3394,10 +3488,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty attribute value or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
+					"notes": "Registers a parameter from an element attribute with encryption.",
+					"test_case": "register_parameter_user_scope_xpath_linkid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"Encryption",
+					"ParameterRegistration",
+					"ScopeManagement",
+					"UserScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: User Scope via XPath (href attribute) with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
 				"locator": "Xpath",
 				"onAttribute": "href",
@@ -3406,10 +3533,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty attribute value or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Unexpected --EncryptionKey flag when encryption isn’t configured",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the User scope.",
+					"notes": "Registers a parameter from an element attribute without encryption.",
+					"test_case": "register_parameter_user_scope_id_linkid",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"ScopeManagement",
+					"UserScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: User Scope via Id Locator (href attribute)",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope.",
+				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:User}}",
 				"locator": "Id",
 				"onAttribute": "href",
@@ -3418,10 +3577,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty attribute value or whitespace-only content",
+						"Extra/unrecognized flag present",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Misplaced braces in CLI expression (e.g. `{ $ --Name…}`)",
+						"Missing --Name argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing or invalid --EncryptionKey argument",
+						"Unescaped spaces in argument values (e.g. `--Name:\"param Name\"`)",
+						"Unsupported locator type (e.g. \"CssPath\")",
+						"Unsupported --Scope value (e.g. \"FooScope\")",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
+					"notes": "Registers a parameter from an element attribute with encryption.",
+					"test_case": "register_parameter_user_scope_id_linkid_with_encryption",
+					"version": "1.0"
+				},
+				"labels": [
+					"Encryption",
+					"ParameterRegistration",
+					"ScopeManagement",
+					"UserScope"
+				]
+			},
 			"description": [
-				""
+				"### RegisterParameter: User Scope via Id Locator (href attribute) with Encryption",
+				"",
+				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
 				"locator": "Id",
 				"onAttribute": "href",
