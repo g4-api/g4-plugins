@@ -25,9 +25,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2025.3.30.37" />
-		<PackageReference Include="G4.Extensions" Version="2025.3.30.37" />
-		<PackageReference Include="G4.Plugins" Version="2025.3.30.37" />
+		<PackageReference Include="G4.Converters" Version="2025.5.19.38" />
+		<PackageReference Include="G4.Extensions" Version="2025.5.19.38" />
+		<PackageReference Include="G4.Plugins" Version="2025.5.19.38" />
 	</ItemGroup>
 
 	<ItemGroup>
