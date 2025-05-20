@@ -1,10 +1,11 @@
-﻿using G4.Attributes;
+﻿using System.Linq;
+
+using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
 
 namespace G4.Plugins.Common.Actions
 {
-    // TODO: send the method action using Invoker.Invoke() and not directly to "Send"
     [G4Plugin(
         assembly: "G4.Plugins.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Common.Actions.Manifests.{nameof(SendHttpRequest)}.json")]
@@ -21,28 +22,23 @@ namespace G4.Plugins.Common.Actions
             var url = pluginData.Parameters.Get(key: Url, defaultValue: pluginData.Rule.Argument);
 
             // Create a new action rule model for the HTTP method.
-            var methodRule = new ActionRuleModel
+            var httpMethodRule = new ActionRuleModel
             {
+                Argument = pluginData.Rule.Argument,
+                Iteration = pluginData.Rule.Iteration,
+                Locator = pluginData.Rule.Locator,
+                OnAttribute = pluginData.Rule.OnAttribute,
+                OnElement = pluginData.Rule.OnElement,
                 PluginName = method,
-                Iteration = pluginData.Rule.Iteration
+                RegularExpression = pluginData.Rule.RegularExpression
             };
 
             // Set the reference for the action rule, linking it to the job reference and parent reference.
-            methodRule.Reference = methodRule.NewReference(jobReference: pluginData.Rule.Reference.JobReference);
-            methodRule.Reference.ParentReference = pluginData.Rule.Reference;
-
-            // Create an instance of the appropriate HTTP method plugin based on the specified method.
-            var httpMethodPlugin = Invoker
-                .PluginFactoryAdapter
-                .HttpMethodFactory
-                .NewPlugin(driver: WebDriver, invoker: Invoker, rule: methodRule);
-
-            // Update the plugin data with the resolved HTTP method and URL.
-            pluginData.Parameters[Method] = method;
-            pluginData.Parameters[Url] = url;
+            httpMethodRule.Reference = httpMethodRule.NewReference(jobReference: pluginData.Rule.Reference.JobReference);
+            httpMethodRule.Reference.ParentReference = pluginData.Rule.Reference;
 
             // Send the HTTP request using the chosen HTTP method plugin and return the response.
-            return httpMethodPlugin.Send(pluginData);
+            return Invoker.Invoke(httpMethodRule).First();
         }
     }
 }
