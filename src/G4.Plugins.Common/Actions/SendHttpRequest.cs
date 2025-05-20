@@ -14,12 +14,10 @@ namespace G4.Plugins.Common.Actions
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Constants for keys in the plugin data.
-            const string Url = "Url";
             const string Method = "Method";
 
             // Retrieve the HTTP method and URL from the plugin data.
             var method = pluginData.Parameters.Get(key: Method, defaultValue: "Get");
-            var url = pluginData.Parameters.Get(key: Url, defaultValue: pluginData.Rule.Argument);
 
             // Create a new action rule model for the HTTP method.
             var httpMethodRule = new ActionRuleModel
