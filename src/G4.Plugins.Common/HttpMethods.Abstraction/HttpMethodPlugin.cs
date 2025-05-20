@@ -21,8 +21,10 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
     /// <summary>
     /// Plugin that handles sending HTTP requests using the provided setup configuration.
     /// </summary>
-    internal class HttpMethodPlugin(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+    internal class HttpMethodPlugin(PluginBase plugin)
     {
+        private readonly PluginBase _plugin = plugin;
+
         /// <summary>
         /// Sends an HTTP request based on the provided <paramref name="pluginData"/> and 
         /// pre-constructed <paramref name="requestMessage"/>, then processes and returns the response.
@@ -42,7 +44,7 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             AddHeaders(requestMessage, headers);
 
             // Send the HTTP request and receive the response.
-            var responseMessage = HttpClient.Send(requestMessage);
+            var responseMessage = PluginBase.HttpClient.Send(requestMessage);
 
             // Read the response body.
             var responseBody = responseMessage.Content.ReadAsStringAsync().Result;
@@ -54,22 +56,22 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             // If no specific element is specified, create a plugin response with the entire response.
             if (!isElement)
             {
-                return NewPluginResponse(plugin: this, pluginData, responseMessage, input);
+                return NewPluginResponse(plugin: _plugin, pluginData, responseMessage, input);
             }
 
             // If the response body confirms JSON format, extract the specified element.
             if (responseBody.AssertJson())
             {
-                input = GetJsonData(plugin: this, responseBody, pluginData.Rule);
+                input = GetJsonData(plugin: _plugin, responseBody, pluginData.Rule);
             }
             // If the response body confirms XML format, extract the specified element.
             else if (responseBody.AssertXml())
             {
-                input = GetXmlData(plugin: this, responseBody, pluginData.Rule);
+                input = GetXmlData(plugin: _plugin, responseBody, pluginData.Rule);
             }
 
             // Create and return a new plugin response with the processed data.
-            return NewPluginResponse(plugin: this, pluginData, responseMessage, input);
+            return NewPluginResponse(plugin: _plugin, pluginData, responseMessage, input);
         }
 
         #region *** Methods: Protected ***
@@ -237,7 +239,7 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             var encoding = GetEncoding(encodingName);
 
             // Get media type from plugin data
-            var mediaType = GetMediaType(plugin: this, pluginData);
+            var mediaType = GetMediaType(plugin: _plugin, pluginData);
 
             // Create and return a new instance of HttpContent
             return NewContent(pluginData, encoding, mediaType);

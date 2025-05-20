@@ -12,14 +12,11 @@ namespace G4.Plugins.Common.HttpMethods
         manifest: $"G4.Plugins.Common.HttpMethods.Manifests.{nameof(HttpPutMethod)}.json")]
     public class HttpPutMethod(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
-        // Store the injected setup model for later use
-        private readonly G4PluginSetupModel _pluginSetup = pluginSetup;
-
         // This method is called when the plugin is invoked to send a request
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Create a helper that wraps HTTP method logic, passing along configuration
-            var methodBase = new HttpMethodPlugin(_pluginSetup);
+            var methodBase = new HttpMethodPlugin(plugin: this);
 
             // Determine the URL: use the "Url" parameter if provided, otherwise fall back to the rule's argument
             var requestUri = pluginData.Parameters.Get(
