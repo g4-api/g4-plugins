@@ -23,6 +23,7 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
     /// </summary>
     internal class HttpMethodPlugin(PluginBase plugin)
     {
+        // Store the injected PluginBase instance to access shared services, configuration, and helper methods
         private readonly PluginBase _plugin = plugin;
 
         /// <summary>
