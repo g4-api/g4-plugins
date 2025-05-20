@@ -1,9 +1,4 @@
-﻿using G4.Extensions;
-using G4.Models;
-
-using Microsoft.Extensions.Logging;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -16,19 +11,29 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
+using G4.Extensions;
+using G4.Models;
+
+using Microsoft.Extensions.Logging;
+
 namespace G4.Plugins.Common.HttpMethods.Abstraction
 {
-    public abstract class HttpMethodBase(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+    /// <summary>
+    /// Plugin that handles sending HTTP requests using the provided setup configuration.
+    /// </summary>
+    internal class HttpMethodPlugin(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
-        #region *** Methods: Protected ***
-        protected override PluginResponseModel OnSend(PluginDataModel pluginData)
+        /// <summary>
+        /// Sends an HTTP request based on the provided <paramref name="pluginData"/> and 
+        /// pre-constructed <paramref name="requestMessage"/>, then processes and returns the response.
+        /// </summary>
+        /// <param name="pluginData">Data and parameters provided to the plugin for this invocation.</param>
+        /// <param name="requestMessage">An <see cref="HttpRequestMessage"/> configured with method and URL.</param>
+        /// <returns>A <see cref="PluginResponseModel"/> containing status, headers, and extracted content.</returns>
+        public PluginResponseModel SendMessage(PluginDataModel pluginData, HttpRequestMessage requestMessage)
         {
             // Extract URL and headers from plugin data.
-            var url = pluginData.Parameters.Get(key: "Url", defaultValue: pluginData.Rule.Argument);
             var headers = FormatFields(fieldName: "Header", pluginData);
-
-            // Create a new HTTP request message.
-            var requestMessage = NewRequestMessage(pluginData, url, headers);
 
             // Add authorization header to the request message.
             AddAuthorizationHeader(requestMessage, headers);
@@ -67,6 +72,7 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             return NewPluginResponse(plugin: this, pluginData, responseMessage, input);
         }
 
+        #region *** Methods: Protected ***
         /// <summary>
         /// Adds an authorization header to the HTTP request message.
         /// </summary>
@@ -114,8 +120,11 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
         /// <param name="url">The URL to which the HTTP request should be sent.</param>
         /// <param name="headers">An enumeration of header name-value pairs to include in the request.</param>
         /// <returns>An instance of <see cref="HttpRequestMessage"/> representing the HTTP request.</returns>
-        protected abstract HttpRequestMessage NewRequestMessage(
-            PluginDataModel pluginData, string url, IDictionary<string, string> headers);
+        protected virtual HttpRequestMessage NewRequestMessage(
+            PluginDataModel pluginData, string url, IDictionary<string, string> headers)
+        {
+            return null;
+        }
         #endregion
 
         #region *** Methods: Public    ***
