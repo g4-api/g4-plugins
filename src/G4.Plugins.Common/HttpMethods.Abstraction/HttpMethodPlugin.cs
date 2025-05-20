@@ -115,19 +115,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
                 }
             }
         }
-
-        /// <summary>
-        /// Creates an HTTP request based on the provided plugin data, URL, and headers.
-        /// </summary>
-        /// <param name="pluginData">The data containing information for creating the HTTP request.</param>
-        /// <param name="url">The URL to which the HTTP request should be sent.</param>
-        /// <param name="headers">An enumeration of header name-value pairs to include in the request.</param>
-        /// <returns>An instance of <see cref="HttpRequestMessage"/> representing the HTTP request.</returns>
-        protected virtual HttpRequestMessage NewRequestMessage(
-            PluginDataModel pluginData, string url, IDictionary<string, string> headers)
-        {
-            return null;
-        }
         #endregion
 
         #region *** Methods: Public    ***
@@ -227,10 +214,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
         /// </summary>
         /// <param name="pluginData">The plugin data model containing the data for the HTTP content.</param>
         /// <returns>A new <see cref="HttpContent"/> instance.</returns>
-        /// <remarks>
-        /// This method supports various media types, including XML, JSON, plain text, and form URL-encoded.
-        /// It creates the appropriate <see cref="HttpContent"/> based on the specified media type and plugin data.
-        /// </remarks>
         public HttpContent NewContent(PluginDataModel pluginData)
         {
             // Extract encoding from plugin data
@@ -253,10 +236,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
         /// <param name="pluginData">The plugin data model containing the data for the HTTP content.</param>
         /// <param name="mediaType">The media type of the HTTP content.</param>
         /// <returns>A new <see cref="HttpContent"/> instance.</returns>
-        /// <remarks>
-        /// This method supports various media types, including XML, JSON, plain text, and form URL-encoded.
-        /// It creates the appropriate <see cref="HttpContent"/> based on the specified media type and plugin data.
-        /// </remarks>
         public static HttpContent NewContent(PluginDataModel pluginData, string mediaType)
         {
             // Extract encoding from plugin data
@@ -277,10 +256,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
         /// <param name="encoding">The encoding to be used for the HTTP content.</param>
         /// <param name="mediaType">The media type of the HTTP content.</param>
         /// <returns>A new <see cref="HttpContent"/> instance.</returns>
-        /// <remarks>
-        /// This method supports various media types, including XML, JSON, plain text, and form URL-encoded.
-        /// It creates the appropriate <see cref="HttpContent"/> based on the specified media type and plugin data.
-        /// </remarks>
         public static HttpContent NewContent(PluginDataModel pluginData, Encoding encoding, string mediaType)
         {
             // Extract the body and fields from the plugin data
