@@ -4213,171 +4213,747 @@
 
 		{
 			"description": [
-				""
+				"### SendHttpRequest: POST Form-URLencoded Fields with ASCII Encoding and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget` and `Price=99.99`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent` to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_full_response_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "An HTTP POST with form-urlencoded fields, ASCII encoding, and multiple headers is sent and the full response is returned.",
+					"notes": "Sends a form-urlencoded POST with ASCII encoding and multiple headers, returning the raw response.",
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Unsupported pluginName value",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				""
+				"### SendHttpRequest: Extract Status Code via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget` and `Price=99.99`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
+				"After execution, the extracted status code is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=Status: )\\d{3}"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_status_code_regex_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "A three-digit status code is extracted via regex from the plain-text response.",
+					"notes": "Applies a regex to extract the status code from a form-urlencoded ASCII response.",
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				""
+				"### SendHttpRequest: Select updatedItem via JSONPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the JSONPath `$.updatedItem` to select the updated item object from the response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_select_updateditem_jsonpath_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "The `updatedItem` object is selected from the JSON response via JSONPath.",
+					"notes": "Selects the updated item using JSONPath.",
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching path in JSON response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				""
+				"### SendHttpRequest: Extract updatedItem ID via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_id_regex_jsonpath_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "The numeric `id` field is extracted from `updatedItem` via regex.",
+					"notes": "Applies a regex to extract the `id` field from the updated item.",
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				""
+				"### SendHttpRequest: Extract <Status> Text via XPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the XPath `//Status` to select the `<Status>` element text from the response.",
+				"After execution, that text is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_status_text_xpath_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "The `<Status>` element text is returned from the response.",
+					"notes": "Selects the `<Status>` element using XPath.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				""
+				"### SendHttpRequest: Extract <Status> Text via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_status_text_regex_xpath_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "The `<Status>` element text is extracted via regex from the response.",
+					"notes": "Applies a regex to extract the `<Status>` element text.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				""
+				"### SendHttpRequest: Extract Response status Attribute via XPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_response_status_attribute_xpath_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "The `status` attribute of `<Response>` is returned from the response.",
+					"notes": "Extracts an attribute from the `<Response>` element.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				""
+				"### SendHttpRequest: Extract and Validate Response status via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
+				"After execution, the extracted status is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "success|error"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_response_status_regex_attribute_xpath_form_urlencoded_ascii_and_multiple_headers",
+					"expected_result": "The `status` attribute is extracted and validated against `success|error`.",
+					"notes": "Applies a regex to validate the `status` attribute of `<Response>`.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Field argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"EncodingManagement",
+					"FieldManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 
 		{
 			"description": [
-				"Send a Post request with a plain-text payload to update the item's name and price."
+				"### SendHttpRequest: POST XML Body with ASCII Encoding and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent` to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_full_response_xml_body_ascii_and_multiple_headers",
+					"expected_result": "An HTTP POST with XML body, ASCII encoding, and multiple headers is sent and the full response is returned.",
+					"notes": "Sends an XML POST with ASCII encoding and multiple headers, returning the raw response.",
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Unsupported pluginName value",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+				"### SendHttpRequest: Extract Status Code via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
+				"After execution, the extracted status code is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=Status: )\\d{3}"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_status_code_regex_xml_body_ascii_and_multiple_headers",
+					"expected_result": "A three-digit status code is extracted via regex from the plain-text response.",
+					"notes": "Applies a regex to extract the status code from an XML ASCII response.",
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+				"### SendHttpRequest: Select updatedItem via JSONPath with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the JSONPath `$.updatedItem` to select the updated item object from the JSON response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_select_updateditem_jsonpath_xml_body_ascii_and_multiple_headers",
+					"expected_result": "The `updatedItem` object is selected from the JSON response via JSONPath.",
+					"notes": "Selects the updated item using JSONPath.",
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching path in JSON response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+				"### SendHttpRequest: Extract updatedItem ID via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_id_regex_jsonpath_xml_body_ascii_and_multiple_headers",
+					"expected_result": "The numeric `id` field is extracted from `updatedItem` via regex.",
+					"notes": "Applies a regex to extract the `id` field from the updated item.",
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Select the <Status> element from an XML response after the Post."
+				"### SendHttpRequest: Extract <Status> Text via XPath with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the XPath `//Status` to select the `<Status>` element text from the response.",
+				"After execution, that text is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_status_text_xpath_xml_body_ascii_and_multiple_headers",
+					"expected_result": "The `<Status>` element text is returned from the response.",
+					"notes": "Selects the `<Status>` element using XPath.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+				"### SendHttpRequest: Extract <Status> Text via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_status_text_regex_xpath_xml_body_ascii_and_multiple_headers",
+					"expected_result": "The `<Status>` element text is extracted via regex from the response.",
+					"notes": "Applies a regex to extract the `<Status>` element text.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				"Get the status attribute from the <Response> element in the XML reply."
+				"### SendHttpRequest: Extract Response status Attribute via XPath with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_response_status_attribute_xpath_xml_body_ascii_and_multiple_headers",
+					"expected_result": "The `status` attribute of `<Response>` is returned from the response.",
+					"notes": "Extracts an attribute from the `<Response>` element.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				"Validate that the status attribute is either \"success\" or \"error\"."
+				"### SendHttpRequest: Extract and Validate Response status via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
+				"After execution, the extracted status is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "success|error"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_post_response_status_regex_attribute_xpath_xml_body_ascii_and_multiple_headers",
+					"expected_result": "The `status` attribute is extracted and validated against `success|error`.",
+					"notes": "Applies a regex to validate the `status` attribute of `<Response>`.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Body argument",
+						"Missing --ContentType argument",
+						"Missing --Encoding argument",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"BodyManagement",
+					"EncodingManagement",
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 
