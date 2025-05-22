@@ -1,6 +1,7 @@
 ﻿{
 	"aliases": [
-		"InvokeWebRequest"
+		"InvokeWebRequest",
+		"SendWebRequest"
 	],
 	"author": {
 		"name": "Roei Sabag",
@@ -3385,8 +3386,8 @@
 			}
 		}
 	],
-	"manifestVersion": 4,
 	"key": "SendHttpRequest",
+	"manifestVersion": 4,
 	"outputParameters": [
 		{
 			"name": "HttpResponse",
@@ -3558,6 +3559,9 @@
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -3596,13 +3600,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `SendHttpRequest` plugin automates the process of sending flexible and configurable HTTP requests, making it essential for interacting with web services, RESTful APIs, or any HTTP-based communication.",
-		"It supports dynamic configuration of HTTP methods, URLs, and parameterized requests, allowing customization of payloads, headers, and other request parameters.",
-		"Key features include dynamic HTTP method selection, URL configuration, and parameterized requests, which are valuable for API testing, web service integration, data retrieval, and load testing.",
-		"Common use cases include web service integration, workflow orchestration in RPA, API testing, data retrieval and verification, and load testing in automation testing scenarios."
+		"The SendHttpRequest plugin lets automation workflows send HTTP GET, POST, PUT, DELETE, or custom method requests to any URL at runtime.",
+		"It allows configuring headers, body content, and query parameters on the fly for precise API interactions.",
+		"It captures response status codes, headers, and body content to feed into subsequent automation steps."
 	]
 }
