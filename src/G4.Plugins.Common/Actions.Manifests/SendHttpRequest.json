@@ -51,254 +51,971 @@
 		"| Load Testing      | Send many requests at once to see how the system handles traffic.   |"
 	],
 	"examples": [
-		// GET
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Unsupported pluginName value",
+						"Unsupported or missing JSONPath/XPath expression",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "An HTTP GET request is sent to `https://api.example.com/v1/items/search?category=Electronics` and the full JSON response is returned.",
+					"notes": "Sends an HTTP GET request and returns the raw response.",
+					"test_case": "send_http_request_get_full_response",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Send a GET request to search for electronics items."
+				"### SendHttpRequest: GET Full Response",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` using the `SendHttpRequest` plugin to retrieve the full JSON response.",
+				"After execution, the entire JSON payload is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `resultCount` field is extracted from the JSON response and returned as a numeric value.",
+					"notes": "Applies a regex to the JSON response body to extract the `resultCount` value.",
+					"test_case": "send_http_request_get_resultcount_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Extract the total number of returned items from the JSON response."
+				"### SendHttpRequest: Extract resultCount via Regex",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` and apply the regex `(?<=\\\"resultCount\\\":)\\d+` to the response body to extract the `resultCount` value.",
+				"After execution, the extracted count is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid onElement expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The first `<Item>` element with `stockAvailable='true'` is returned.",
+					"notes": "Selects the first in-stock item element from the XML response.",
+					"test_case": "send_http_request_get_first_instock_xml_element",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Select the first in-stock item element from the XML response."
+				"### SendHttpRequest: Extract First In-Stock XML Element",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` and use the XPath `(//Item[@stockAvailable='true'])[1]` to select the first in-stock `<Item>` element from the XML response.",
+				"After execution, that element is available for further attribute or content extraction."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid onElement expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `name` attribute of the first in-stock `<Item>` element is extracted.",
+					"notes": "Applies a regex to the XML element string to extract the item name.",
+					"test_case": "send_http_request_get_first_instock_name_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the name attribute of the first in-stock item from the XML."
+				"### SendHttpRequest: Extract In-Stock Item Name via Regex",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and apply the regex `(?<=name=\")[^\"]+` to extract its `name` attribute.",
+				"After execution, the extracted name is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=name=\")[^\"]+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching items in JSON response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "All items with `stockAvailable==true` are returned as a JSON array.",
+					"notes": "Selects in-stock items using a JSONPath filter.",
+					"test_case": "send_http_request_get_all_instock_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Select all in-stock item objects in the JSON response."
+				"### SendHttpRequest: Extract All In-Stock Items via JSONPath",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` and use the JSONPath `$.items[?(@.stockAvailable==true)]` to select all in-stock items from the JSON response.",
+				"After execution, the filtered array is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"onElement": "$.items[?(@.stockAvailable==true)]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Index out of bounds",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The first item in the `items` array is returned.",
+					"notes": "Selects the first item using JSONPath index.",
+					"test_case": "send_http_request_get_first_item_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Take only the very first item object from the JSON results array."
+				"### SendHttpRequest: Extract First Item via JSONPath",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` and use the JSONPath `$.items[0]` to select the first item from the JSON response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"onElement": "$.items[0]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Missing onAttribute argument",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `price` attribute of the first in-stock `<Item>` element is returned.",
+					"notes": "Extracts an attribute from an XML element.",
+					"test_case": "send_http_request_get_first_instock_price_attribute",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Get the price attribute of the first in-stock item from the XML response."
+				"### SendHttpRequest: Extract First In-Stock Item Price Attribute",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and extract its `price` attribute.",
+				"After execution, the price value is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
-				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"onAttribute": "price",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The numeric `id` attribute of the first in-stock `<Item>` element is extracted.",
+					"notes": "Applies a regex to an attribute value to extract digits.",
+					"test_case": "send_http_request_get_first_instock_id_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the numeric item ID of the first in-stock item from the XML response."
+				"### SendHttpRequest: Extract First In-Stock Item ID via Regex",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and apply the regex `\\d+` to its `id` attribute to extract digits.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
-				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"onAttribute": "id",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "\\d+"
 			}
 		},
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Unsupported pluginName value",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "An HTTP GET request with Basic authentication is sent to `https://api.example.com/v1/items/search?category=Electronics` and the full JSON response is returned.",
+					"notes": "Sends an authenticated HTTP GET request and returns the raw response.",
+					"test_case": "send_http_request_get_full_response_with_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Send a GET request to search for electronics items with basic authentication."
+				"### SendHttpRequest: GET Full Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` using the `SendHttpRequest` plugin with the header `Authorization: Basic username:password` to retrieve the full JSON response.",
+				"After execution, the entire JSON payload is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `resultCount` field is extracted from the authenticated JSON response and returned as a numeric value.",
+					"notes": "Applies a regex to the JSON response body to extract the `resultCount` value.",
+					"test_case": "send_http_request_get_resultcount_with_regex_and_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Extract the total number of returned items from the JSON response."
+				"### SendHttpRequest: Extract resultCount via Regex with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with the header `Authorization: Basic username:password` and apply the regex `(?<=\\\"resultCount\\\":)\\d+` to the response body to extract the `resultCount` value.",
+				"After execution, the extracted count is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid onElement expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The first `<Item>` element with `stockAvailable='true'` is returned from the authenticated XML response.",
+					"notes": "Selects the first in-stock item element from the XML response.",
+					"test_case": "send_http_request_get_first_instock_xml_element_with_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Select the first in-stock item element from the XML response."
+				"### SendHttpRequest: Extract First In-Stock XML Element with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with the header `Authorization: Basic username:password` and use the XPath `(//Item[@stockAvailable='true'])[1]` to select the first in-stock `<Item>` element from the XML response.",
+				"After execution, that element is available for further attribute or content extraction."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid onElement expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `name` attribute of the first in-stock `<Item>` element is extracted from the authenticated XML response.",
+					"notes": "Applies a regex to the XML element string to extract the item name.",
+					"test_case": "send_http_request_get_first_instock_name_with_regex_and_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the name attribute of the first in-stock item from the XML."
+				"### SendHttpRequest: Extract In-Stock Item Name via Regex with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with the header `Authorization: Basic username:password`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and apply the regex `(?<=name=\")[^\"]+` to extract its `name` attribute.",
+				"After execution, the extracted name is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=name=\")[^\"]+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching items in JSON response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "All items with `stockAvailable==true` are returned as a JSON array from the authenticated response.",
+					"notes": "Selects in-stock items using a JSONPath filter.",
+					"test_case": "send_http_request_get_all_instock_jsonpath_with_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Select all in-stock item objects in the JSON response."
+				"### SendHttpRequest: Extract All In-Stock Items via JSONPath with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with the header `Authorization: Basic username:password` and use the JSONPath `$.items[?(@.stockAvailable==true)]` to select all in-stock items from the JSON response.",
+				"After execution, the filtered array is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"onElement": "$.items[?(@.stockAvailable==true)]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Index out of bounds",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The first item in the `items` array is returned from the authenticated JSON response.",
+					"notes": "Selects the first item using JSONPath index.",
+					"test_case": "send_http_request_get_first_item_jsonpath_with_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Take only the very first item object from the JSON results array."
+				"### SendHttpRequest: Extract First Item via JSONPath with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with the header `Authorization: Basic username:password` and use the JSONPath `$.items[0]` to select the first item from the JSON response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"onElement": "$.items[0]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Missing onAttribute argument",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `price` attribute of the first in-stock `<Item>` element is returned from the authenticated XML response.",
+					"notes": "Extracts an attribute from an XML element.",
+					"test_case": "send_http_request_get_first_instock_price_attribute_with_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Get the price attribute of the first in-stock item from the XML response."
+				"### SendHttpRequest: Extract First In-Stock Item Price Attribute with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with the header `Authorization: Basic username:password`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and extract its `price` attribute.",
+				"After execution, the price value is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
-				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"onAttribute": "price",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The numeric `id` attribute of the first in-stock `<Item>` element is extracted from the authenticated XML response.",
+					"notes": "Applies a regex to an attribute value to extract digits.",
+					"test_case": "send_http_request_get_first_instock_id_with_regex_and_header",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the numeric item ID of the first in-stock item from the XML response."
+				"### SendHttpRequest: Extract First In-Stock Item ID via Regex with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with the header `Authorization: Basic username:password`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and apply the regex `\\d+` to its `id` attribute to extract digits.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
-				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
 				"onAttribute": "id",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "\\d+"
 			}
 		},
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Unsupported pluginName value",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "An HTTP GET request with Bearer token and custom UserAgent header is sent to `https://api.example.com/v1/items/search?category=Electronics` and the full JSON response is returned.",
+					"notes": "Sends an authenticated HTTP GET request with multiple headers and returns the raw response.",
+					"test_case": "send_http_request_get_full_response_with_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Send a GET request to search for electronics items with bearer authentication and custom user agent."
+				"### SendHttpRequest: GET Full Response with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` using the `SendHttpRequest` plugin with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent` to retrieve the full JSON response.",
+				"After execution, the entire JSON payload is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `resultCount` field is extracted from the authenticated JSON response and returned as a numeric value.",
+					"notes": "Applies a regex to the JSON response body to extract the `resultCount` value.",
+					"test_case": "send_http_request_get_resultcount_with_regex_and_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Extract the total number of returned items from the JSON response."
+				"### SendHttpRequest: Extract resultCount via Regex with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent`, and apply the regex `(?<=\\\"resultCount\\\":)\\d+` to the response body to extract the `resultCount` value.",
+				"After execution, the extracted count is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid onElement expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The first `<Item>` element with `stockAvailable='true'` is returned from the authenticated XML response.",
+					"notes": "Selects the first in-stock item element from the XML response.",
+					"test_case": "send_http_request_get_first_instock_xml_element_with_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Select the first in-stock item element from the XML response."
+				"### SendHttpRequest: Extract First In-Stock XML Element with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent`, and use the XPath `(//Item[@stockAvailable='true'])[1]` to select the first in-stock `<Item>` element from the XML response.",
+				"After execution, that element is available for further attribute or content extraction."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid onElement expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `name` attribute of the first in-stock `<Item>` element is extracted from the authenticated XML response.",
+					"notes": "Applies a regex to the XML element string to extract the item name.",
+					"test_case": "send_http_request_get_first_instock_name_with_regex_and_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the name attribute of the first in-stock item from the XML."
+				"### SendHttpRequest: Extract In-Stock Item Name via Regex with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and apply the regex `(?<=name=\")[^\"]+` to extract its `name` attribute.",
+				"After execution, the extracted name is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=name=\")[^\"]+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching items in JSON response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "All items with `stockAvailable==true` are returned as a JSON array from the authenticated response.",
+					"notes": "Selects in-stock items using a JSONPath filter.",
+					"test_case": "send_http_request_get_all_instock_jsonpath_with_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Select all in-stock item objects in the JSON response."
+				"### SendHttpRequest: Extract All In-Stock Items via JSONPath with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent`, and use the JSONPath `$.items[?(@.stockAvailable==true)]` to select all in-stock items from the JSON response.",
+				"After execution, the filtered array is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"onElement": "$.items[?(@.stockAvailable==true)]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Index out of bounds",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The first item in the `items` array is returned from the authenticated JSON response.",
+					"notes": "Selects the first item using JSONPath index.",
+					"test_case": "send_http_request_get_first_item_jsonpath_with_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Take only the very first item object from the JSON results array."
+				"### SendHttpRequest: Extract First Item via JSONPath with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent`, and use the JSONPath `$.items[0]` to select the first item from the JSON response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"onElement": "$.items[0]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Missing onAttribute argument",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `price` attribute of the first in-stock `<Item>` element is returned from the authenticated XML response.",
+					"notes": "Extracts an attribute from an XML element.",
+					"test_case": "send_http_request_get_first_instock_price_attribute_with_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Get the price attribute of the first in-stock item from the XML response."
+				"### SendHttpRequest: Extract First In-Stock Item Price Attribute with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and extract its `price` attribute.",
+				"After execution, the price value is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
-				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"onAttribute": "price",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The numeric `id` attribute of the first in-stock `<Item>` element is extracted from the authenticated XML response.",
+					"notes": "Applies a regex to an attribute value to extract digits.",
+					"test_case": "send_http_request_get_first_instock_id_with_regex_and_multiple_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the numeric item ID of the first in-stock item from the XML response."
+				"### SendHttpRequest: Extract First In-Stock Item ID via Regex with Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP GET request to `https://api.example.com/v1/items/search?category=Electronics` with headers `Authorization: Bearer YourAccessToken` and `UserAgent: MyCustomUserAgent`, select the first in-stock `<Item>` element using XPath `(//Item[@stockAvailable='true'])[1]`, and apply the regex `\\d+` to its `id` attribute to extract digits.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
-				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
 				"onAttribute": "id",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "\\d+"
 			}
@@ -3390,170 +4107,190 @@
 	"manifestVersion": 4,
 	"outputParameters": [
 		{
+			"description": [
+				"Extracted content from the HTTP response body after applying element, attribute, or pattern rules.",
+				"When no extraction rules are set, the full response body is available.",
+				"Processed content returned by the HTTP call is available through this parameter."
+			],
 			"name": "HttpResponse",
-			"description": [
-				"Holds the results of the HTTP request after `onElement`, `onAttribute`, and `regularExpression` have been applied. ",
-				"If none of these properties are provided, then the entire response body is stored in the `HttpResponse` parameter.  ",
-				"",
-				"This means that the `HttpResponse` parameter captures the content resulting from any data extraction or processing performed by the specified properties (`onElement`, `onAttribute`, `regularExpression`). ",
-				"It provides a way to access the modified or processed content of the HTTP response within the automation workflow."
-			]
+			"type": "Any"
 		},
 		{
+			"description": [
+				"Headers returned by the HTTP response as name–value pairs.",
+				"Metadata such as content type, cache directives, and server information included.",
+				"Values available as a key–value map within the workflow."
+			],
 			"name": "HttpResponseHeaders",
-			"description": [
-				"Holds the HTTP response headers obtained from the HTTP POST request. ",
-				"These headers provide additional information about the server's response and are sent along with the actual content of the response."
-			]
+			"type": "Any"
 		},
 		{
-			"name": "HttpStatusCode",
 			"description": [
-				"Holds the HTTP status code obtained from the HTTP POST request. ",
-				"The HTTP status code is a three-digit numeric code returned by the server indicating the outcome of the request."
-			]
+				"Numeric HTTP status code returned by the server.",
+				"Common codes include success (200), redirection (3xx), client errors (4xx), and server errors (5xx).",
+				"Status code values guide decision flow based on request outcome."
+			],
+			"name": "HttpStatusCode",
+			"type": "Any"
 		}
 	],
 	"parameters": [
 		{
 			"description": [
-				"Specifies the payload or data that you want to include in the body of the request. ",
-				"The request body is typically used to send data to the server when making HTTP requests, especially for operations like `POST` or `PUT`."
+				"Data sent in the body of POST or PUT requests to the server.",
+				"It carries information like form entries or JSON payloads.",
+				"Correct body content ensures the server receives the intended data."
 			],
 			"name": "Body",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the type of data that is included in the body of the request. ",
-				"It indicates the format or encoding of the content being sent, allowing the server to interpret and process the data appropriately.  ",
-				"",
-				"The ContentType parameter is crucial because it tells the server how to parse and handle the incoming data. ",
-				"Different types of data, such as JSON, XML, form-urlencoded, or plain text, have different syntax and structures. ",
-				"By specifying the content type, you inform the server about the expected format of the data in the request body."
+				"Defines how the server should interpret the request body format.",
+				"Formats include JSON, XML, plain text, or binary data.",
+				"Correct content type ensures the server parses the data correctly."
 			],
 			"name": "ContentType",
 			"type": "String",
 			"values": [
 				{
-					"name": "application/json",
 					"description": [
-						"JavaScript Object Notation (JSON) is a lightweight data interchange format. ",
-						"It is easy for humans to read and write and easy for machines to parse and generate. ",
-						"JSON is often used for representing structured data in web applications."
-					]
+						"JavaScript Object Notation is a lightweight format for structured data.",
+						"It is easy for people to read and machines to parse.",
+						"APIs often use JSON for data exchange."
+					],
+					"name": "application/json"
 				},
 				{
-					"name": "application/octet-stream",
 					"description": [
-						"This content type is a generic binary format. ",
-						"It is often used when the content type is not known or when transferring arbitrary binary data that doesn't fit into other more specific categories."
-					]
+						"A generic binary format for data without a specific type.",
+						"It allows transferring any arbitrary binary content.",
+						"Use it when the data format is unknown or varied."
+					],
+					"name": "application/octet-stream"
 				},
 				{
-					"name": "application/pdf",
 					"description": [
-						"Portable Document Format (PDF) is a file format that captures all the elements of a printed document as an electronic image. ",
-						"It is widely used for documents intended for printing, such as brochures, manuals, and forms."
-					]
+						"Portable Document Format preserves document layout and appearance.",
+						"It is ideal for forms, manuals, and print-ready documents.",
+						"Readers display PDFs consistently across devices."
+					],
+					"name": "application/pdf"
 				},
 				{
-					"name": "application/xml",
 					"description": [
-						"Extensible Markup Language (XML) is a markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable. ",
-						"It is often used for representing structured data in a generic way."
-					]
+						"Extensible Markup Language represents structured data with tags.",
+						"It works for both human reading and machine processing.",
+						"XML is common for web services and configuration files."
+					],
+					"name": "application/xml"
 				},
 				{
-					"name": "audio/mpeg",
 					"description": [
-						"MP3 is a widely used audio compression format that allows for the storage of music and audio files with relatively high audio quality in a compact size."
-					]
+						"MPEG audio format compresses sound files with good quality.",
+						"It is widely used for music and spoken audio online.",
+						"MP3 files play on most devices without extra software."
+					],
+					"name": "audio/mpeg"
 				},
 				{
-					"name": "image/jpeg",
 					"description": [
-						"JPEG (Joint Photographic Experts Group) is a commonly used method of lossy compression for digital images. ",
-						"It is suitable for photographs and images with complex colors."
-					]
+						"JPEG image format compresses photos with small file sizes.",
+						"It works best for complex images with many colors.",
+						"Most web photos use JPEG for balance between quality and size."
+					],
+					"name": "image/jpeg"
 				},
 				{
-					"name": "image/png",
 					"description": [
-						"PNG (Portable Network Graphics) is a raster graphics file format that supports lossless data compression. ",
-						"It is commonly used for images on the web and supports transparent backgrounds."
-					]
+						"PNG image format uses lossless compression for clear graphics.",
+						"It supports transparency for layered designs.",
+						"Web icons and logos often use PNG for sharp detail."
+					],
+					"name": "image/png"
 				},
 				{
-					"name": "multipart/form-data",
 					"description": [
-						"This content type is used when submitting forms that contain files or binary data along with other text form fields. ",
-						"It allows for the encapsulation of multiple sets of data in a single body."
-					]
+						"Multipart form data allows uploading files with form fields.",
+						"It bundles text entries and binary files in one request.",
+						"Web forms use it to send images, documents, and text together."
+					],
+					"name": "multipart/form-data"
 				},
 				{
-					"name": "text/css",
 					"description": [
-						"Cascading Style Sheets (CSS) is a style sheet language used for describing the look and formatting of a document written in HTML. ",
-						"It defines styles for elements, including layout, colors, and fonts."
-					]
+						"CSS style sheets describe how HTML content looks on a page.",
+						"They control layout, colors, fonts, and spacing.",
+						"Web pages use CSS to maintain a consistent design."
+					],
+					"name": "text/css"
 				},
 				{
-					"name": "text/html",
 					"description": [
-						"Hypertext Markup Language (HTML) is used to structure content on the web. ",
-						"It provides a way to create structured documents by denoting structural semantics for text such as headings, paragraphs, lists, links, quotes, and other items."
-					]
+						"HTML documents structure web content with tags.",
+						"They mark headings, paragraphs, links, and lists.",
+						"Browsers render HTML to display web pages."
+					],
+					"name": "text/html"
 				},
 				{
-					"name": "text/plain",
 					"description": [
-						"This content type is used for plain, unformatted text. ",
-						"It is often used for simple textual data that doesn't require any special formatting or styling."
-					]
+						"Plain text format contains unformatted characters only.",
+						"It works for simple messages or logs without styling.",
+						"Any device or program can read plain text files."
+					],
+					"name": "text/plain"
 				},
 				{
-					"name": "application/x-www-form-urlencoded",
 					"description": [
-						"This content type is used for sending form data in the body of an HTTP request. ",
-						"Data is URL-encoded, where special characters are replaced with `%` followed by two hexadecimal digits."
-					]
+						"URL-encoded form data sends key-value pairs in the request body.",
+						"Special characters become percent-encoded codes.",
+						"Browsers use it when submitting HTML forms."
+					],
+					"name": "application/x-www-form-urlencoded"
 				},
 				{
-					"name": "video/mp4",
 					"description": [
-						"MP4 (MPEG-4 Part 14) is a multimedia container format commonly used for storing video and audio, as well as other data such as subtitles and still images."
-					]
+						"MP4 container holds video, audio, subtitles, and images.",
+						"It is compatible with most players and devices.",
+						"Online platforms use MP4 for smooth video streaming."
+					],
+					"name": "video/mp4"
 				}
 			]
 		},
 		{
 			"description": [
-				"Specifies a form field that you include in the body of the request when making a `POST` or `PUT` request with `form-urlencoded` data."
+				"Field name included in form-encoded POST or PUT requests.",
+				"It pairs a field name with its value in the request body.",
+				"Correct field entries ensure servers receive each form item."
 			],
 			"name": "Field",
-			"type": "Key/Value"
+			"type": "KeyValue"
 		},
 		{
 			"description": [
-				"Allows the inclusion of multiple headers in the HTTP POST request. ",
-				"Each header is specified as a key-value pair, separated by an equal sign. ",
-				"Multiple headers can be added using the syntax `{{$ --Header:header1name=header1value --Header:header2name=header2value ...}}`."
+				"Key-value pairs that carry extra information in the request.",
+				"Each header uses a name and value separated by an equals sign.",
+				"Multiple headers let you pass options like authentication or format."
 			],
 			"name": "Header",
-			"type": "Key/Value"
+			"type": "KeyValue"
 		},
 		{
 			"description": [
-				"Provides a way to dynamically configure and specify the HTTP method for requests made by the `SendHttpRequest` plugin, offering flexibility and adaptability in interacting with diverse APIs. ",
-				"The default behavior assumes a `GET` request if the method is not explicitly provided."
+				"A list of available HTTP actions like GET, POST, or custom methods.",
+				"Values come from HttpMethod plugins and update automatically when new methods are added.",
+				"Correct method choice ensures the server handles the request as intended."
 			],
 			"name": "Method",
 			"type": "HttpMethod"
 		},
 		{
 			"description": [
-				"Specifies the target URL for the HTTP POST request."
+				"The address where the HTTP request is sent.",
+				"It tells the plugin which server and resource to contact.",
+				"Accurate URLs ensure requests reach the intended endpoint."
 			],
 			"name": "Url",
 			"type": "String"
@@ -3566,33 +4303,43 @@
 	"properties": [
 		{
 			"description": [
-				"Provides a comprehensive and adaptable way to configure an HTTP request. ",
-				"It allows for the dynamic inclusion of URLs, request bodies, content types, HTTP methods, headers, and other parameters."
+				"A single string or expression that covers address, method, headers, body, and other settings for a web request.",
+				"It can be a fixed string or an expression that runs at execution time."
 			],
 			"mandatory": true,
-			"name": "Argument"
+			"name": "Argument",
+			"type": "String|Expression"
 		},
 		{
+			"description": [
+				"An attribute name used to get information from an XML element.",
+				"It only applies to XML data and works alongside element location.",
+				"Accurate naming ensures you capture the right value."
+			],
+			"mandatory": false,
 			"name": "OnAttribute",
-			"description": [
-				"Used to specify and extract a specific attribute value from an XML element. ",
-				"This is particularly relevant when dealing with XML data, where elements can have associated attributes containing additional information."
-			]
+			"type": "String"
 		},
 		{
-			"name": "OnElement",
 			"description": [
-				"Used to target elements using either XPath or JSONPath expressions, depending on the type of response the API returns (XML or JSON). ",
-				"This flexibility allows the rule to handle different response formats appropriately."
-			]
+				"A path expression that finds the right part of XML or JSON data.",
+				"XPath works for XML and JSONPath works for JSON responses.",
+				"Correct path choice ensures you target the intended data."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
 		},
 		{
 			"default": "(?s).*",
-			"name": "RegularExpression",
 			"description": [
-				"Used for pattern matching and extraction of specific data from a text response. ",
-				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request."
+				"A text pattern that refines data after extraction.",
+				"It keeps only the parts that match the pattern.",
+				"Refined data makes following steps more accurate.",
+				"Pattern matching helps parse or check specific text."
 			],
+			"mandatory": false,
+			"name": "RegularExpression",
 			"type": "Regex"
 		}
 	],
