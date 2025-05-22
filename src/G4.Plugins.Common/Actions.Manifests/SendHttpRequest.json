@@ -22,284 +22,3367 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `SendHttpRequest` plugin is to automate the process of sending HTTP requests. ",
-		"This is essential for interacting with web services, RESTful APIs, or any other HTTP-based communication.  ",
-		"",
-		"The plugin allows for dynamic configuration of the HTTP method (GET, POST, PUT, DELETE, etc.) and the URL. ",
-		"This flexibility is crucial in automation scenarios where the target endpoints or the nature of the requests may vary.  ",
-		"",
-		"The plugin supports parameterized requests, enabling users to customize the payload, headers, and other parameters of the HTTP request. ",
-		"This is valuable when dealing with APIs that require specific data inputs.",
+		"The SendHttpRequest plugin automates sending HTTP requests to web services and REST APIs. ",
+		"It lets users choose the HTTP method (GET, POST, PUT, DELETE, PATCH, or any other supported method) and set the request URL at run time. ",
+		"It also lets users customize headers, body content, and query parameters. ",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                  | Description                                                                                                        |",
-		"|--------------------------|--------------------------------------------------------------------------------------------------------------------|",
-		"| Dynamic HTTP Method      | Allows configuration of HTTP methods such as GET, POST, PUT, DELETE, etc.                                          |",
-		"| URL Configuration        | Supports dynamic URL specification.                                                                                |",
-		"| Parameterized Requests   | Enables customization of payload, headers, and other request parameters.                                           |",
+		"| Feature                  | Description                                                                                   |",
+		"|--------------------------|-----------------------------------------------------------------------------------------------|",
+		"| HTTP Method Selection    | Choose methods like GET, POST, PUT, DELETE, PATCH, or any HttpMethod plugin type at run time. |",
+		"| URL Configuration        | Set the request URL dynamically during execution.                                             |",
+		"| Custom Headers & Payload | Define headers, body content, and query parameters for each request.                          |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Use Case                | Description                                                                                                                                           |",
-		"|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Web Service Integration | Facilitate integration with external systems or web services by allowing robots to communicate with APIs, retrieve data, or trigger specific actions. |",
-		"| Workflow Orchestration  | Part of a larger workflow where data is fetched from web services, processed locally, and then used for subsequent automation steps.                  |",
+		"| Use Case                | Description                                                 |",
+		"|-------------------------|-------------------------------------------------------------|",
+		"| Web Service Integration | Let robots connect to external APIs to get or send data.    |",
+		"| Workflow Orchestration  | Use API calls alongside other automation steps in one flow. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Use Case                        | Description                                                                                                                        |",
-		"|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------|",
-		"| API Testing                     | Automate API testing by sending various types of requests (GET, POST, etc.) with different data payloads and validating responses. |",
-		"| Data Retrieval and Verification | Fetch data from web services to validate the correctness of a system or to compare it against expected results.                    |",
-		"| Load Testing                    | Simulate multiple concurrent HTTP requests to evaluate the system's behavior under load.                                           |"
+		"| Use Case          | Description                                                         |",
+		"|-------------------|---------------------------------------------------------------------|",
+		"| API Testing       | Send different requests to check API behavior and validate results. |",
+		"| Data Verification | Fetch data from services and compare it with expected values.       |",
+		"| Load Testing      | Send many requests at once to see how the system handles traffic.   |"
 	],
 	"examples": [
+		// GET
 		{
-			"rule": {
-				"argument": "http://localhost:9002/api/hotels/find",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send a default `GET` request to the specified API endpoint `http://localhost:9002/api/hotels/find`."
-			]
+				"Send a GET request to search for electronics items."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/connect --Header:Authorization=Basic username:password}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP `GET` request to the URL `http://localhost:9002/api/hotels/connect` with an Authorization header using Basic authentication."
-			]
-		},
-		{
+				"Extract the total number of returned items from the JSON response."
+			],
 			"rule": {
-				"argument": "{{$ --Url: http://localhost:9002/api/hotels/headers --Header:Authorization=Bearer YourAccessToken --Header:ContentType=application/json --Header:UserAgent=MyCustomUserAgent}}",
-				"pluginName": "SendHttpRequest"
-			},
-			"description": [
-				"Send an HTTP request to `http://localhost:9002/api/hotels/headers`. ",
-				"The request includes runtime parameters for dynamic configuration, such as an Authorization header with a Bearer token (`YourAccessToken`), a Content-Type header set to `application/json`, and a User-Agent header set to `MyCustomUserAgent`. ",
-				"This configuration allows for sending a flexible HTTP request with specified headers, facilitating scenarios like authenticated requests with a custom user agent and a specific content type. ",
-				"If the HTTP method is not explicitly provided, the default behavior is assumed to be a `GET` request."
-			]
-		},
-		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/find}}",
-				"onElement": "$.hotels[?(@.name=='Luxury Hotel')].pricePerNight",
-				"pluginName": "SendHttpRequest"
-			},
-			"description": [
-				"Send an HTTP request to the specified URL `http://localhost:9002/api/hotels/find`. ",
-				"The argument includes runtime parameters for dynamic configuration. Additionally, the response is processed with a specified element, extracting the `pricePerNight` of the hotel with the name `Luxury Hotel`. ",
-				"The configuration facilitates a flexible HTTP request with the ability to extract specific data from the response, providing valuable information about a particular hotel. ",
-				"If the HTTP method is not explicitly provided, the default behavior is assumed to be a `GET` request."
-			]
-		},
-		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/find}}",
-				"onElement": "$.hotels[?(@.name=='Luxury Hotel')].pricePerNight",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "\\d{2}"
-			},
-			"description": [
-				"Send an HTTP request to the specified URL `http://localhost:9002/api/hotels/find`. ",
-				"The argument includes runtime parameters for dynamic configuration. ",
-				"Additionally, the response is processed with a specified element, extracting the `pricePerNight` of the hotel with the name `Luxury Hotel`. ",
-				"The configured regular expression `\\d{2}` is applied to the extracted data, to match two consecutive digits. ",
-				"This configuration facilitates a flexible HTTP request with the ability to extract and process specific data from the response, applying a regular expression for further refinement. ",
-				"If the HTTP method is not explicitly provided, the default behavior is assumed to be a `GET` request."
-			]
+				"regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/find/xml}}",
-				"onAttribute": "PricePerNight",
-				"onElement": "//HotelResult[./Name[.='Luxury Hotel']]",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP request to the specified URL `http://localhost:9002/api/hotels/find/xml`. ",
-				"The argument includes runtime parameters for dynamic configuration, indicating an XML response format. ",
-				"Additionally, the response is processed with specified instructions, extracting the `PricePerNight` attribute from the XML element identified by the XPath expression '//HotelResult[./Name[.='Luxury Hotel']]'. ",
-				"This configuration allows for a flexible HTTP request and extraction of specific data from the XML response, useful for scenarios involving XML-based APIs or services. ",
-				"If the HTTP method is not explicitly provided, the default behavior is assumed to be a `GET` request."
-			]
+				"Select the first in-stock item element from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/connect --Header:Authorization=Basic username:password --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP `POST` request to the specified URL `http://localhost:9002/api/hotels/connect`. ",
-				"The argument includes runtime parameters for dynamic configuration, such as an Authorization header with a Basic authentication scheme, and the HTTP method is explicitly set to `POST`. ",
-				"This configuration allows for flexible and authenticated HTTP requests, with runtime values for the URL and credentials. ",
-				"If the HTTP method is not explicitly provided, the default behavior is assumed to be a `GET` request."
-			]
+				"Extract the name attribute of the first in-stock item from the XML."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=name=\")[^\"]+"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP `POST` request to the specified URL `http://localhost:9002/api/hotels/book`. ",
-				"The argument includes runtime parameters for dynamic configuration, such as the request body containing JSON data with details like the hotel name and room type, and the HTTP method is explicitly set to `POST`. ",
-				"This configuration allows for flexible and customizable HTTP requests, particularly useful for scenarios that necessitate sending a payload in the request body, as exemplified by booking a hotel room through an API."
-			]
+				"Select all in-stock item objects in the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"onElement": "$.items[?(@.stockAvailable==true)]",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/text --Body:HotelName=Luxury Hotel;RoomType=Suite --ContentType:text/plain --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP `POST` request to `http://localhost:9002/api/hotels/book/text`. ",
-				"The request body is formatted as plain text, containing parameters like HotelName and RoomType separated by semicolons. ",
-				"The content type is set to `text/plain`, emphasizing the configuration's focus on sending a specific payload structure in the HTTP request. ",
-				"This is particularly useful for scenarios requiring plain text payload, such as booking a hotel room through an API."
-			]
+				"Take only the very first item object from the JSON results array."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"onElement": "$.items[0]",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/text --Body:HotelName=Luxury Hotel;RoomType=Suite --ContentType:text/plain --Encoding:ASCII --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP `POST` request to `http://localhost:9002/api/hotels/book/text`. ",
-				"The request body is formatted as plain text with parameters like HotelName and RoomType separated by semicolons. ",
-				"The content type is set to `text/plain`, emphasizing the configuration's focus on sending a specific payload structure. ",
-				"The character encoding is specified as `ASCII`. This configuration is particularly useful for scenarios requiring plain text payload with a specific encoding in the HTTP request, as exemplified by booking a hotel room through an API."
-			]
+				"Get the price attribute of the first in-stock item from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"onAttribute": "price",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/encoded --ContentType:x-www-form-urlencoded --Field:HotelName=Luxury Hotel --Field:RoomType=Suite --Field:Rating=4.5 --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP POST request to `http://localhost:9002/api/hotels/book/encoded`. ",
-				"The content type is set to `x-www-form-urlencoded`, indicating that the request body is formatted as URL-encoded form data. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying form fields such as `HotelName`, `RoomType`, and `Rating` with their corresponding values. ",
-				"This configuration is particularly useful for scenarios requiring the submission of form data, as exemplified by booking a hotel room through an API."
-			]
+				"Extract the numeric item ID of the first in-stock item from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"onAttribute": "id",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "\\d+"
+			}
+		},
+
+		{
+			"description": [
+				"Send a GET request to search for electronics items with basic authentication."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/xml --Body:<HotelBookingRequest><HotelName>Luxury Hotel</HotelName><RoomType>Suite</RoomType></HotelBookingRequest> --ContentType:text/xml --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP POST request to `http://localhost:9002/api/hotels/book/xml`. ",
-				"The request body is formatted as XML data, encapsulated in a `HotelBookingRequest` element with child elements specifying details like `HotelName` and `RoomType`. ",
-				"The content type is set to `text/xml`, indicating the XML format of the request. ",
-				"The argument includes runtime parameters for dynamic configuration, facilitating scenarios requiring XML payload in the HTTP request, as exemplified by booking a hotel room through an API."
-			]
+				"Extract the total number of returned items from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/1 --Method:Delete}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP DELETE request to `http://localhost:9002/api/hotels/delete/1`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for the resource deletion and the HTTP method as `DELETE`. ",
-				"This configuration is particularly useful for scenarios requiring the deletion of a specific resource identified by its ID, as exemplified by the API endpoint for deleting a hotel with ID `1`."
-			]
+				"Select the first in-stock item element from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/edit --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Method:Put}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PUT request to `http://localhost:9002/api/hotels/edit`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for editing, the request body containing JSON data with details like the new hotel name and room type, and the HTTP method as `PUT`. ",
-				"This configuration is particularly useful for scenarios requiring the modification or update of resource details, as exemplified by the API endpoint for editing hotel information."
-			]
+				"Extract the name attribute of the first in-stock item from the XML."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=name=\")[^\"]+"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/edit/text --Body:HotelName=Luxury Hotel;RoomType=Suite --ContentType:text/plain --Method:Put}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PUT request to `http://localhost:9002/api/hotels/edit/text`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for editing, the request body formatted as plain text with parameters like `HotelName` and `RoomType` separated by semicolons, the content type as `text/plain`, and the HTTP method as `PUT`. ",
-				"This configuration is particularly useful for scenarios requiring the modification or update of resource details with a plain text payload, as exemplified by the API endpoint for editing hotel information."
-			]
+				"Select all in-stock item objects in the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"onElement": "$.items[?(@.stockAvailable==true)]",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/edit/encoded --Field:HotelName=Luxury Hotel --Field:NewInfo=Foo Bar --Method:Put}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PUT request to `http://localhost:9002/api/hotels/edit/encoded`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for editing, form fields such as `HotelName` and `NewInfo` with their corresponding values. ",
-				"This configuration is particularly useful for scenarios requiring the modification or update of resource details using URL-encoded form data, as exemplified by the API endpoint for editing hotel information."
-			]
+				"Take only the very first item object from the JSON results array."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"onElement": "$.items[0]",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Body:<HotelUpdateRequest><HotelName>Luxury Hotel</HotelName><NewInfo>Foo Bar</NewInfo></HotelUpdateRequest> --Url:http://localhost:9002/api/hotels/edit/xml --Method:Put}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PUT request to `http://localhost:9002/api/hotels/edit/xml`. ",
-				"The request body is formatted as XML data, encapsulated in a `HotelUpdateRequest` element with child elements specifying details like `HotelName` and `NewInfo`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for editing, the XML data in the request body, and the HTTP method as PUT. ",
-				"This configuration is particularly useful for scenarios requiring the modification or update of resource details using XML payload, as exemplified by the API endpoint for editing hotel information."
-			]
+				"Get the price attribute of the first in-stock item from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"onAttribute": "price",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/update --Body:{\"hotelName\":\"Luxury Hotel\",\"review\":\"Suite\"} --Method:Patch}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PATCH request to `http://localhost:9002/api/hotels/update`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for updating, the request body containing `JSON` data with details like the new hotel name and review, and the HTTP method as `PATCH`. ",
-				"This configuration is particularly useful for scenarios requiring a partial update of resource details, as exemplified by the API endpoint for updating hotel information."
-			]
+				"Extract the numeric item ID of the first in-stock item from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"onAttribute": "id",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "\\d+"
+			}
+		},
+
+		{
+			"description": [
+				"Send a GET request to search for electronics items with bearer authentication and custom user agent."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/update/text --Body:HotelName=Luxury Hotel;Review=Suite --ContentType:text/plain --Method:Patch}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PATCH request to `http://localhost:9002/api/hotels/update/text`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for updating, the request body formatted as plain text with parameters like `HotelName` and `Review` separated by semicolons, the content type as `text/plain`, and the HTTP method as `PATCH`. ",
-				"This configuration is particularly useful for scenarios requiring a partial update of resource details with a plain text payload, as exemplified by the API endpoint for updating hotel information."
-			]
+				"Extract the total number of returned items from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/update/encoded --Field:HotelName=Luxury Hotel --Field:Review=Foo Bar --Method:Patch}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PATCH request to `http://localhost:9002/api/hotels/update/encoded`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for updating, form fields such as `HotelName` and `Review` with their corresponding values. ",
-				"This configuration is particularly useful for scenarios requiring a partial update of resource details using URL-encoded form data, as exemplified by the API endpoint for updating hotel information."
-			]
+				"Select the first in-stock item element from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"pluginName": "SendHttpRequest"
+			}
 		},
 		{
-			"rule": {
-				"argument": "{{$ --Body:<HotelReviewRequest><HotelName>Luxury Hotel</HotelName><Review>Foo Bar</Review></HotelReviewRequest> --Url:http://localhost:9002/api/hotels/update/xml --Method:Patch}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"description": [
-				"Send an HTTP PATCH request to `http://localhost:9002/api/hotels/update/xml`. ",
-				"The request body is formatted as XML data, encapsulated in a `HotelReviewRequest` element with child elements specifying details like `HotelName` and `Review`. ",
-				"The argument includes runtime parameters for dynamic configuration, specifying the URL for updating, the XML data in the request body, and the HTTP method as PATCH. ",
-				"This configuration is particularly useful for scenarios requiring a partial update of resource details using XML payload, as exemplified by the API endpoint for updating hotel information."
-			]
+				"Extract the name attribute of the first in-stock item from the XML."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=name=\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select all in-stock item objects in the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"onElement": "$.items[?(@.stockAvailable==true)]",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Take only the very first item object from the JSON results array."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"onElement": "$.items[0]",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Get the price attribute of the first in-stock item from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"onAttribute": "price",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID of the first in-stock item from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
+				"onElement": "(//Item[@stockAvailable='true'])[1]",
+				"onAttribute": "id",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "\\d+"
+			}
+		},
+
+		// POST
+		{
+			"description": [
+				"Send a Post request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Post request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Post."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		// DELETE
+		{
+			"description": [
+				"Delete the item with ID 567 using bearer authentication."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the API's confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML delete-response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Select the deleted record object from a JSON array of results."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"onElement": "$.results[?(@.deleted==true)]",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Take only the first object from the JSON results array."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"onElement": "$.results[0]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Item> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"onElement": "//Item",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric ID from the <Item> element's id attribute."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"onElement": "//Item",
+				"onAttribute": "id",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "\\d+"
+			}
+		},
+
+		{
+			"description": [
+				"Delete the item with ID 567 using bearer authentication."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the API's confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML delete-response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Select the deleted record object from a JSON array of results."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"onElement": "$.results[?(@.deleted==true)]",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Take only the first object from the JSON results array."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"onElement": "$.results[0]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Item> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"onElement": "//Item",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric ID from the <Item> element's id attribute."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
+				"onElement": "//Item",
+				"onAttribute": "id",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "\\d+"
+			}
+		},
+
+		{
+			"description": [
+				"Delete the item with ID 567 using bearer authentication."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the API's confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML delete-response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Select the deleted record object from a JSON array of results."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"onElement": "$.results[?(@.deleted==true)]",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Take only the first object from the JSON results array."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"onElement": "$.results[0]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Item> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"onElement": "//Item",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric ID from the <Item> element's id attribute."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"onElement": "//Item",
+				"onAttribute": "id",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "\\d+"
+			}
+		},
+
+		// PUT
+		{
+			"description": [
+				"Send a Put request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Put request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Put."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		// PATCH
+		{
+			"description": [
+				"Send a Patch request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the confirmation message from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the item ID from the JSON response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag from the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML response."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute value is either 'success' or 'failure'."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|failure"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the ",
+				"updatedItem\" key.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON ",
+				"updatedItem.id\" field.\""
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
+		},
+
+		{
+			"description": [
+				"Send a Patch request with a plain-text payload to update the item's name and price."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
+			"description": [
+				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"description": [
+				"Select the <Status> element from an XML response after the Patch."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"description": [
+				"Get the status attribute from the <Response> element in the XML reply."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"description": [
+				"Validate that the status attribute is either \"success\" or \"error\"."
+			],
+			"rule": {
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
+			}
 		}
 	],
 	"manifestVersion": 4,
