@@ -3839,17 +3839,6 @@
 		},
 
 		{
-			"description": [
-				"### SendHttpRequest: POST Plain-Text Body with ASCII Encoding and Basic Auth",
-				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99`, encoding `ASCII`, and the header `Authorization: Basic username:password` to retrieve the full response.",
-				"After execution, the raw response payload is available for subsequent extraction or validation."
-			],
-			"rule": {
-				"$type": "Action",
-				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -3879,21 +3868,20 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract Status Code via Regex from Plain-Text ASCII Response",
+				"### SendHttpRequest: POST Plain-Text Body with ASCII Encoding and Basic Auth",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
-				"After execution, the extracted status code is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99`, encoding `ASCII`, and the header `Authorization: Basic username:password` to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=Status: )\\d{3}"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -3925,21 +3913,21 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Select updatedItem via JSONPath from Plain-Text ASCII Response",
+				"### SendHttpRequest: Extract Status Code via Regex from Plain-Text ASCII Response",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then use the JSONPath `$.updatedItem` to select the updated item object from the JSON response.",
-				"After execution, that object is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
+				"After execution, the extracted status code is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-				"onElement": "$.updatedItem",
-				"pluginName": "SendHttpRequest"
-			},
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -3970,22 +3958,21 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract updatedItem ID via Regex from Plain-Text ASCII Response",
+				"### SendHttpRequest: Select updatedItem via JSONPath from Plain-Text ASCII Response",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
-				"After execution, the extracted ID is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then use the JSONPath `$.updatedItem` to select the updated item object from the JSON response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
 				"onElement": "$.updatedItem",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\\\"id\\\":)\\d+"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -4018,21 +4005,22 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Status> Text via XPath from Plain-Text ASCII Response",
+				"### SendHttpRequest: Extract updatedItem ID via Regex from Plain-Text ASCII Response",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then use the XPath `//Status` to select the `<Status>` element text from the XML response.",
-				"After execution, that text is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-				"onElement": "//Status",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -4063,22 +4051,21 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Status> Text via Regex from Plain-Text ASCII Response",
+				"### SendHttpRequest: Extract <Status> Text via XPath from Plain-Text ASCII Response",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
-				"After execution, the extracted text is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then use the XPath `//Status` to select the `<Status>` element text from the XML response.",
+				"After execution, that text is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
 				"onElement": "//Status",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -4111,22 +4098,22 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract Response status Attribute from Plain-Text ASCII Response",
+				"### SendHttpRequest: Extract <Status> Text via Regex from Plain-Text ASCII Response",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
-				"After execution, the attribute value is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-				"onAttribute": "status",
-				"onElement": "//Response",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -4158,23 +4145,22 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract and Validate Response status via Regex from Plain-Text ASCII Response",
+				"### SendHttpRequest: Extract Response status Attribute from Plain-Text ASCII Response",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
-				"After execution, the extracted status is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
 				"onAttribute": "status",
 				"onElement": "//Response",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "success|error"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -4208,21 +4194,24 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
+			},
+			"description": [
+				"### SendHttpRequest: Extract and Validate Response status via Regex from Plain-Text ASCII Response",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/plain`, the body `Name=PremiumWidget;Price=99.99;Stock=150`, encoding `ASCII`, and the header `Authorization: Basic username:password`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
+				"After execution, the extracted status is available for subsequent actions."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
+				"onAttribute": "status",
+				"onElement": "//Response",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
 			}
 		},
 
 		{
-			"description": [
-				"### SendHttpRequest: POST Form-URLencoded Fields with ASCII Encoding and Multiple Headers",
-				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget` and `Price=99.99`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent` to retrieve the full response.",
-				"After execution, the raw response payload is available for subsequent extraction or validation."
-			],
-			"rule": {
-				"$type": "Action",
-				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_full_response_form_urlencoded_ascii_and_multiple_headers",
@@ -4252,21 +4241,20 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract Status Code via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: POST Form-URLencoded Fields with ASCII Encoding and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget` and `Price=99.99`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
-				"After execution, the extracted status code is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget` and `Price=99.99`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent` to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=Status: )\\d{3}"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_status_code_regex_form_urlencoded_ascii_and_multiple_headers",
@@ -4298,21 +4286,21 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Select updatedItem via JSONPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract Status Code via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the JSONPath `$.updatedItem` to select the updated item object from the response.",
-				"After execution, that object is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget` and `Price=99.99`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
+				"After execution, the extracted status code is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "$.updatedItem",
-				"pluginName": "SendHttpRequest"
-			},
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_select_updateditem_jsonpath_form_urlencoded_ascii_and_multiple_headers",
@@ -4343,22 +4331,21 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract updatedItem ID via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Select updatedItem via JSONPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
-				"After execution, the extracted ID is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the JSONPath `$.updatedItem` to select the updated item object from the response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "$.updatedItem",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\\\"id\\\":)\\d+"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_id_regex_jsonpath_form_urlencoded_ascii_and_multiple_headers",
@@ -4391,21 +4378,22 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Status> Text via XPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract updatedItem ID via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the XPath `//Status` to select the `<Status>` element text from the response.",
-				"After execution, that text is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "//Status",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_status_text_xpath_form_urlencoded_ascii_and_multiple_headers",
@@ -4436,22 +4424,21 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Status> Text via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract <Status> Text via XPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
-				"After execution, the extracted text is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the XPath `//Status` to select the `<Status>` element text from the response.",
+				"After execution, that text is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "//Status",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_status_text_regex_xpath_form_urlencoded_ascii_and_multiple_headers",
@@ -4484,22 +4471,22 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract Response status Attribute via XPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract <Status> Text via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
-				"After execution, the attribute value is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onAttribute": "status",
-				"onElement": "//Response",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_response_status_attribute_xpath_form_urlencoded_ascii_and_multiple_headers",
@@ -4531,23 +4518,22 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract and Validate Response status via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract Response status Attribute via XPath with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
-				"After execution, the extracted status is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onAttribute": "status",
 				"onElement": "//Response",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "success|error"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_response_status_regex_attribute_xpath_form_urlencoded_ascii_and_multiple_headers",
@@ -4581,21 +4567,24 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
+			},
+			"description": [
+				"### SendHttpRequest: Extract and Validate Response status via Regex with Form-URLencoded Fields, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `x-www-form-urlencoded`, fields `Name=PremiumWidget`, `Price=99.99`, and `Stock=150`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
+				"After execution, the extracted status is available for subsequent actions."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onAttribute": "status",
+				"onElement": "//Response",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
 			}
 		},
 
 		{
-			"description": [
-				"### SendHttpRequest: POST XML Body with ASCII Encoding and Multiple Headers",
-				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent` to retrieve the full response.",
-				"After execution, the raw response payload is available for subsequent extraction or validation."
-			],
-			"rule": {
-				"$type": "Action",
-				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_full_response_xml_body_ascii_and_multiple_headers",
@@ -4625,21 +4614,20 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract Status Code via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: POST XML Body with ASCII Encoding and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
-				"After execution, the extracted status code is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` using the `SendHttpRequest` plugin with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent` to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=Status: )\\d{3}"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_status_code_regex_xml_body_ascii_and_multiple_headers",
@@ -4671,21 +4659,21 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Select updatedItem via JSONPath with XML Body, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract Status Code via Regex with XML Body, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the JSONPath `$.updatedItem` to select the updated item object from the JSON response.",
-				"After execution, that object is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then apply the regex `(?<=Status: )\\d{3}` to extract the three-digit status code from the response.",
+				"After execution, the extracted status code is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "$.updatedItem",
-				"pluginName": "SendHttpRequest"
-			},
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=Status: )\\d{3}"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_select_updateditem_jsonpath_xml_body_ascii_and_multiple_headers",
@@ -4716,22 +4704,21 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract updatedItem ID via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Select updatedItem via JSONPath with XML Body, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
-				"After execution, the extracted ID is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the JSONPath `$.updatedItem` to select the updated item object from the JSON response.",
+				"After execution, that object is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "$.updatedItem",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\\\"id\\\":)\\d+"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_id_regex_jsonpath_xml_body_ascii_and_multiple_headers",
@@ -4764,21 +4751,22 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Status> Text via XPath with XML Body, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract updatedItem ID via Regex with XML Body, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the XPath `//Status` to select the `<Status>` element text from the response.",
-				"After execution, that text is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the updated item via JSONPath `$.updatedItem` and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its numeric ID.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onElement": "//Status",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "$.updatedItem",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_status_text_xpath_xml_body_ascii_and_multiple_headers",
@@ -4809,22 +4797,21 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Status> Text via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract <Status> Text via XPath with XML Body, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
-				"After execution, the extracted text is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then use the XPath `//Status` to select the `<Status>` element text from the response.",
+				"After execution, that text is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onElement": "//Status",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_status_text_regex_xpath_xml_body_ascii_and_multiple_headers",
@@ -4857,22 +4844,22 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract Response status Attribute via XPath with XML Body, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract <Status> Text via Regex with XML Body, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
-				"After execution, the attribute value is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Status>` element using XPath `//Status` and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-				"onAttribute": "status",
-				"onElement": "//Response",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_response_status_attribute_xpath_xml_body_ascii_and_multiple_headers",
@@ -4904,23 +4891,22 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract and Validate Response status via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"### SendHttpRequest: Extract Response status Attribute via XPath with XML Body, ASCII Encoding, and Multiple Headers",
 				"",
-				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
-				"After execution, the extracted status is available for subsequent actions."
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
 				"onAttribute": "status",
 				"onElement": "//Response",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "success|error"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_post_response_status_regex_attribute_xpath_xml_body_ascii_and_multiple_headers",
@@ -4954,22 +4940,25 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
+			},
+			"description": [
+				"### SendHttpRequest: Extract and Validate Response status via Regex with XML Body, ASCII Encoding, and Multiple Headers",
+				"",
+				"This example demonstrates how to send an HTTP POST request to `https://api.example.com/v1/items` with content type `text/xml`, the body `<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, encoding `ASCII`, and headers `Authorization: Basic username:password` and `UserAgent: MyCustomUserAgent`, then select the `<Response>` element using XPath `//Response` and apply the regex `success|error` to its `status` attribute for validation.",
+				"After execution, the extracted status is available for subsequent actions."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
+				"onAttribute": "status",
+				"onElement": "//Response",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "success|error"
 			}
 		},
 
 		// DELETE
 		{
-			"description": [
-				"### SendHttpRequest: DELETE Full Response",
-				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with no additional parameters to retrieve the full response.",
-				"After execution, the raw response payload is available for subsequent extraction or validation."
-			],
-			"rule": {
-				"$type": "Action",
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-				"pluginName": "SendHttpRequest"
-			},
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_delete_full_response",
@@ -4992,21 +4981,20 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract message via Regex from DELETE Response",
+				"### SendHttpRequest: DELETE Full Response",
 				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then apply the regex `(?<=\\\"message\\\":\\\")[^\\\"]+` to extract the `message` field from the JSON response.",
-				"After execution, the extracted message is available for subsequent actions."
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with no additional parameters to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"message\":\")[^\"]+"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_delete_message_regex",
@@ -5031,21 +5019,21 @@
 					"ResponseRetrieval",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Select <Status> Element via XPath from DELETE Response",
+				"### SendHttpRequest: Extract message via Regex from DELETE Response",
 				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Status` to select the `<Status>` element from the XML response.",
-				"After execution, that element is available for subsequent extraction or validation."
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then apply the regex `(?<=\\\"message\\\":\\\")[^\\\"]+` to extract the `message` field from the JSON response.",
+				"After execution, the extracted message is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-				"onElement": "//Status",
-				"pluginName": "SendHttpRequest"
-			},
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_delete_status_xpath",
@@ -5070,22 +5058,21 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Status> Text via Regex from DELETE Response",
+				"### SendHttpRequest: Select <Status> Element via XPath from DELETE Response",
 				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, select the `<Status>` element via XPath `//Status`, and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
-				"After execution, the extracted text is available for subsequent actions."
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Status` to select the `<Status>` element from the XML response.",
+				"After execution, that element is available for subsequent extraction or validation."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onElement": "//Status",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_delete_status_regex_xpath",
@@ -5112,21 +5099,22 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Select deleted Results via JSONPath from DELETE Response",
+				"### SendHttpRequest: Extract <Status> Text via Regex from DELETE Response",
 				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the JSONPath `$.results[?(@.deleted==true)]` to select all items marked as deleted in the JSON response.",
-				"After execution, the filtered array is available for subsequent actions."
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, select the `<Status>` element via XPath `//Status`, and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-				"onElement": "$.results[?(@.deleted==true)]",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_delete_deleted_results_jsonpath",
@@ -5150,22 +5138,21 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract First Result ID via Regex from DELETE Response JSONPath",
+				"### SendHttpRequest: Select deleted Results via JSONPath from DELETE Response",
 				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, select the first element via JSONPath `$.results[0]`, and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its `id`.",
-				"After execution, the extracted ID is available for subsequent actions."
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the JSONPath `$.results[?(@.deleted==true)]` to select all items marked as deleted in the JSON response.",
+				"After execution, the filtered array is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-				"onElement": "$.results[0]",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"id\":)\\d+"
-			},
+				"onElement": "$.results[?(@.deleted==true)]",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_delete_first_result_id_regex_jsonpath",
@@ -5191,22 +5178,22 @@
 					"ResponseElementExtraction",
 					"SendHttpRequest"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract status Attribute from <Item> via XPath in DELETE Response",
+				"### SendHttpRequest: Extract First Result ID via Regex from DELETE Response JSONPath",
 				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Item` to select the first `<Item>` element and extract its `status` attribute.",
-				"After execution, the attribute value is available for subsequent actions."
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, select the first element via JSONPath `$.results[0]`, and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its `id`.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-				"onAttribute": "status",
-				"onElement": "//Item",
-				"pluginName": "SendHttpRequest"
-			},
+				"onElement": "$.results[0]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\"id\":)\\d+"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
 					"test_case": "send_http_request_delete_item_status_attribute_xpath",
@@ -5232,28 +5219,24 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-		{
+			},
 			"description": [
-				"### SendHttpRequest: Extract <Item> ID via Regex from Attribute in DELETE Response",
+				"### SendHttpRequest: Extract status Attribute from <Item> via XPath in DELETE Response",
 				"",
-				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Item` to select the first `<Item>` element and apply the regex `\\d+` to its `id` attribute to extract digits.",
-				"After execution, the extracted ID is available for subsequent actions."
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Item` to select the first `<Item>` element and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-				"onAttribute": "id",
+				"onAttribute": "status",
 				"onElement": "//Item",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "\\d+"
-			},
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
 			"context": {
 				"annotations": {
-					"test_case": "send_http_request_delete_item_id_regex_attribute_xpath",
-					"expected_result": "The numeric `id` attribute of the first `<Item>` is extracted via regex.",
-					"notes": "Applies a regex to extract digits from an attribute value.",
 					"edge_cases": [
 						"Invalid XPath expression",
 						"Malformed CLI expression (missing `{{$` or `}}`)",
@@ -5267,6 +5250,9 @@
 						"Unexpected HTTP status code",
 						"Version mismatch between plugin and engine"
 					],
+					"expected_result": "The numeric `id` attribute of the first `<Item>` is extracted via regex.",
+					"notes": "Applies a regex to extract digits from an attribute value.",
+					"test_case": "send_http_request_delete_item_id_regex_attribute_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5276,174 +5262,631 @@
 					"SendHttpRequest",
 					"XPathExtraction"
 				]
-			}
-		},
-
-		{
+			},
 			"description": [
-				"Delete the item with ID 567 using bearer authentication."
+				"### SendHttpRequest: Extract <Item> ID via Regex from Attribute in DELETE Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Item` to select the first `<Item>` element and apply the regex `\\d+` to its `id` attribute to extract digits.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"pluginName": "SendHttpRequest"
-			}
-		},
-		{
-			"description": [
-				"Extract the API's confirmation message from the JSON response."
-			],
-			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"message\":\")[^\"]+"
-			}
-		},
-		{
-			"description": [
-				"Select the <Status> element from an XML delete-response."
-			],
-			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"onElement": "//Status",
-				"pluginName": "SendHttpRequest"
-			}
-		},
-		{
-			"description": [
-				"Extract the text inside the <Status> tag from the XML response."
-			],
-			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"onElement": "//Status",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
-			}
-		},
-		{
-			"description": [
-				"Select the deleted record object from a JSON array of results."
-			],
-			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"onElement": "$.results[?(@.deleted==true)]",
-				"pluginName": "SendHttpRequest"
-			}
-		},
-		{
-			"description": [
-				"Take only the first object from the JSON results array."
-			],
-			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"onElement": "$.results[0]",
-				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"id\":)\\d+"
-			}
-		},
-		{
-			"description": [
-				"Get the status attribute from the <Item> element in the XML response."
-			],
-			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"onElement": "//Item",
-				"onAttribute": "status",
-				"pluginName": "SendHttpRequest"
-			}
-		},
-		{
-			"description": [
-				"Extract the numeric ID from the <Item> element's id attribute."
-			],
-			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-				"onElement": "//Item",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onAttribute": "id",
+				"onElement": "//Item",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "\\d+"
 			}
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Unsupported pluginName value",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "An HTTP DELETE with authorization header is sent and the full response is returned.",
+					"notes": "Sends a DELETE with an Authorization header and returns the raw response.",
+					"test_case": "send_http_request_delete_auth_full_response",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Delete the item with ID 567 using bearer authentication."
+				"### SendHttpRequest: DELETE Full Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password` to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `message` field is extracted via regex from the JSON DELETE response.",
+					"notes": "Applies a regex to extract the `message` field.",
+					"test_case": "send_http_request_delete_auth_message_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Extract the API's confirmation message from the JSON response."
+				"### SendHttpRequest: Extract message via Regex from DELETE Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password`, then apply the regex `(?<=\\\"message\\\":\\\")[^\\\"]+` to extract the `message` field from the JSON response.",
+				"After execution, the extracted message is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\"message\":\")[^\"]+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onElement argument",
+						"Network error or timeout",
+						"No matching element in response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `<Status>` element is selected from the DELETE response.",
+					"notes": "Selects the `<Status>` element using XPath.",
+					"test_case": "send_http_request_delete_auth_status_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Select the <Status> element from an XML delete-response."
+				"### SendHttpRequest: Select <Status> Element via XPath from DELETE Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password`, then use the XPath `//Status` to select the `<Status>` element from the response.",
+				"After execution, that element is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `<Status>` element text is extracted via regex from the DELETE response.",
+					"notes": "Applies a regex to extract the `<Status>` element text.",
+					"test_case": "send_http_request_delete_auth_status_regex_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the text inside the <Status> tag from the XML response."
+				"### SendHttpRequest: Extract <Status> Text via Regex from DELETE Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password`, select the `<Status>` element via XPath `//Status`, and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching path in response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "All items with `deleted==true` are returned as a JSON array.",
+					"notes": "Selects deleted results using JSONPath.",
+					"test_case": "send_http_request_delete_auth_deleted_results_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Select the deleted record object from a JSON array of results."
+				"### SendHttpRequest: Select deleted Results via JSONPath from DELETE Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password`, then use the JSONPath `$.results[?(@.deleted==true)]` to select all items marked as deleted in the JSON response.",
+				"After execution, the filtered array is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"onElement": "$.results[?(@.deleted==true)]",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `id` of the first result is extracted via regex.",
+					"notes": "Applies a regex to extract the `id` from the first JSONPath result.",
+					"test_case": "send_http_request_delete_auth_first_result_id_regex_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"JsonPathExtraction",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
+			},
 			"description": [
-				"Take only the first object from the JSON results array."
+				"### SendHttpRequest: Extract First Result ID via Regex from JSONPath in DELETE Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password`, select the first element via JSONPath `$.results[0]`, and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its `id`.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"onElement": "$.results[0]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\"id\":)\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Network error or timeout",
+						"No matching element in response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The `status` attribute of the first `<Item>` element is returned.",
+					"notes": "Extracts an attribute from an XML element.",
+					"test_case": "send_http_request_delete_auth_item_status_attribute_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Get the status attribute from the <Item> element in the XML response."
+				"### SendHttpRequest: Extract status Attribute from <Item> via XPath in DELETE Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password`, then use the XPath `//Item` to select the first `<Item>` element and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
-				"onElement": "//Item",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"onAttribute": "status",
+				"onElement": "//Item",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Header argument",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"expected_result": "The numeric `id` attribute of the first `<Item>` is extracted via regex.",
+					"notes": "Applies a regex to extract digits from an attribute value.",
+					"test_case": "send_http_request_delete_auth_item_id_regex_attribute_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HeaderManagement",
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
+			},
 			"description": [
-				"Extract the numeric ID from the <Item> element's id attribute."
+				"### SendHttpRequest: Extract <Item> ID via Regex from Attribute in DELETE Response with Authorization Header",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with header `Authorization: Basic username:password`, then use the XPath `//Item` to select the first `<Item>` element and apply the regex `\\d+` to its `id` attribute to extract digits.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Delete}}",
-				"onElement": "//Item",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
 				"onAttribute": "id",
+				"onElement": "//Item",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "\\d+"
+			}
+		},
+
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected status code",
+						"Unexpected whitespace in response"
+					],
+					"expected_result": "The full response body of the HTTP DELETE request is returned.",
+					"notes": "Returns the complete response body. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "send_delete_full_response",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Delete Full Response",
+				"",
+				"This example returns the complete response body of an HTTP DELETE request to `https://api.example.com/v1/items/567` by specifying `onElement: responseBody` and using `--Method=DELETE` with the URL and headers.",
+				"No extraction options are applied so downstream steps can process the raw response data."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onElement": "responseBody",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in response"
+					],
+					"expected_result": "The `message` field value is extracted from the response body.",
+					"notes": "Applies a regular expression to the full response body. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_message_from_body",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Extract Message Field",
+				"",
+				"This example extracts the `message` field value by applying the regular expression `(?<=\\\"message\\\":\\\")[^\\\"]+` to the full response body with `onElement: responseBody`.",
+				"Conversion to string ensures reliable pattern matching."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onElement": "responseBody",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in element text",
+						"XPath evaluation error"
+					],
+					"expected_result": "The text content of the `<Status>` element is returned.",
+					"notes": "Locates `<Status>` via XPath and returns its inner text. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_text_via_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Extract Status Element Text",
+				"",
+				"This example retrieves the text content of the `<Status>` element from an XML response using XPath locator `//Status`.",
+				"Extracted text enables validation or processing of status values."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in element text"
+					],
+					"expected_result": "The inner text of the `<Status>` element is extracted after applying the regex.",
+					"notes": "Applies a regular expression to the `<Status>` element text to extract core content without tags. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_content_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Extract Status Element Content with Regex",
+				"",
+				"This example retrieves the inner text of the `<Status>` element from an XML response using XPath locator `//Status` and applies the regular expression `(?<=<Status>).*?(?=</Status>)` to capture its content without surrounding tags.",
+				"Regex improves performance by focusing on core content and conversion to string ensures reliable pattern matching."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onElement": "//Status",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"JSONPath evaluation error",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in JSON value"
+					],
+					"expected_result": "All objects in the `results` array with `deleted` equal to true are returned.",
+					"notes": "Selects JSON objects where `deleted` is true using JSONPath. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "select_deleted_items_via_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Select Deleted Items with JSONPath",
+				"",
+				"This example selects all objects in the `results` array with `deleted` equal to true from a JSON response using JSONPath locator `$.results[?(@.deleted==true)]`.",
+				"This enables direct retrieval of relevant items for further processing."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onElement": "$.results[?(@.deleted==true)]",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"JSONPath evaluation error",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in JSON value"
+					],
+					"expected_result": "The `id` value is extracted from the first object in the `results` array.",
+					"notes": "Selects the first object with JSONPath and applies a regular expression to its JSON string. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_id_from_first_result_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Extract ID from First Result with Regex",
+				"",
+				"This example selects the first object in the `results` array using JSONPath locator `$.results[0]` and applies the regular expression `(?<=\\\"id\\\":)\\d+` to its JSON string to extract the `id` value.",
+				"Conversion to string ensures reliable pattern matching."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onElement": "$.results[0]",
+				"pluginName": "SendHttpRequest",
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in attribute value",
+						"XPath evaluation error"
+					],
+					"expected_result": "The `status` attribute value is extracted from each `<Item>` element.",
+					"notes": "Extracts the `status` attribute from `<Item>` elements using XPath. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_attribute_from_item",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Extract Status Attribute from Item Element",
+				"",
+				"This example retrieves the value of the `status` attribute from each `<Item>` element in an XML response using XPath locator `//Item` with `onAttribute: status`.",
+				"Extracted attribute values can drive validation or conditional logic."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onAttribute": "status",
+				"onElement": "//Item",
+				"pluginName": "SendHttpRequest"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in attribute value"
+					],
+					"expected_result": "The numeric portion of the `id` attribute is extracted from each `<Item>` element.",
+					"notes": "Applies a regular expression to the `id` attribute text of `<Item>` elements. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_id_attribute_with_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Extract Item ID Attribute with Regex",
+				"",
+				"This example retrieves the `id` attribute text from each `<Item>` element in an XML response using XPath locator `//Item` with `onAttribute: id` and applies the regular expression `\\d+` to capture numeric characters.",
+				"Conversion to string ensures reliable pattern matching."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
+				"onAttribute": "id",
+				"onElement": "//Item",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "\\d+"
 			}
@@ -5451,85 +5894,276 @@
 
 		// PUT
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected status code",
+						"Unexpected whitespace in response"
+					],
+					"expected_result": "The full response body of the HTTP PUT request is returned.",
+					"notes": "Returns the complete response body. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "return_put_full_response",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Send a Put request to update the item's name and price."
+				"### Update Item Full Response",
+				"",
+				"This example returns the complete response body of an HTTP PUT request to `https://api.example.com/v1/items/567` using `--Method=PUT` and `--Body:{\"name\":\"Premium Widget\",\"price\":99.99}` with `onElement: responseBody`, allowing downstream steps to process raw data."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
+				"onElement": "responseBody",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in response"
+					],
+					"expected_result": "The `message` field is extracted from the response body.",
+					"notes": "Applies a regular expression to the full response body. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_message_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the confirmation message from the JSON response."
+				"### Extract Message via Regex",
+				"",
+				"This example applies the regular expression `(?<=\\\"message\\\":\\\")[^\\\"]+` to the full response body using `onElement: responseBody` to extract the `message` field reliably without parsing the entire JSON."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
+				"onElement": "responseBody",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"message\":\")[^\"]+"
+				"regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"JSONPath evaluation error",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in JSON value"
+					],
+					"expected_result": "The `updatedItem` object is returned from the JSON response.",
+					"notes": "Selects the `updatedItem` object using JSONPath. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "select_updated_item_via_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the updated item object from the JSON response."
+				"### Select Updated Item via JSONPath",
+				"",
+				"This example locates the `updatedItem` object in the JSON response using JSONPath locator `$.updatedItem` with `onElement: $.updatedItem`, enabling direct access to the updated data for further processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"JSONPath evaluation error",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in JSON value"
+					],
+					"expected_result": "The `id` value is extracted from the `updatedItem` object.",
+					"notes": "Selects `updatedItem` via JSONPath and applies a regular expression to its JSON string. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_updated_item_id_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the item ID from the JSON response."
+				"### Extract Updated Item ID via Regex",
+				"",
+				"This example selects `updatedItem` using JSONPath locator `$.updatedItem` with `onElement: $.updatedItem` and applies the regular expression `(?<=\\\"id\\\":)\\d+` to its JSON string to extract the `id` value for validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"id\":)\\d+"
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in element text",
+						"XPath evaluation error"
+					],
+					"expected_result": "The text content of the `<Status>` element is returned.",
+					"notes": "Locates `<Status>` via XPath and returns its inner text. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_text_via_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the <Status> element from an XML response."
+				"### Extract Status Element Text via XPath",
+				"",
+				"This example retrieves the text content of the `<Status>` element from an XML response using XPath locator `//Status` with `onElement: //Status`, enabling evaluation of status values."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in element text"
+					],
+					"expected_result": "The inner content of the `<Status>` element is extracted.",
+					"notes": "Applies a regular expression to the `<Status>` element text to extract core content without tags. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_content_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the text inside the <Status> tag from the XML response."
+				"### Extract Status Content via Regex",
+				"",
+				"This example selects the `<Status>` element using XPath locator `//Status` with `onElement: //Status` and applies the regular expression `(?<=<Status>).*?(?=</Status>)` to capture its inner content without tags for performance."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in attribute value",
+						"XPath evaluation error"
+					],
+					"expected_result": "The `status` attribute value is extracted from the `<Response>` element.",
+					"notes": "Extracts the `status` attribute from `<Response>` elements using XPath. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_response_status_attribute_via_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Get the status attribute from the <Response> element in the XML response."
+				"### Extract Response Status Attribute via XPath",
+				"",
+				"This example retrieves the `status` attribute from each `<Response>` element in an XML response using XPath locator `//Response` with `onElement: //Response` and `onAttribute: status`, enabling conditional logic based on attribute values."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in attribute value"
+					],
+					"expected_result": "The `status` attribute value is validated against `success|failure`.",
+					"notes": "Applies a regular expression to the `status` attribute of `<Response>` elements to validate outcome. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_response_status_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Validate that the status attribute value is either 'success' or 'failure'."
+				"### Extract Response Status via Regex",
+				"",
+				"This example locates the `status` attribute on `<Response>` elements using XPath locator `//Response` with `onElement: //Response` and `onAttribute: status`, then applies the regular expression `success|failure` to validate outcome values."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Put}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "success|failure"
 			}
@@ -5537,7 +6171,7 @@
 
 		{
 			"description": [
-				"Send a Put request to update the item's name and price."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
@@ -5546,7 +6180,7 @@
 		},
 		{
 			"description": [
-				"Extract the confirmation message from the JSON response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
@@ -5556,7 +6190,7 @@
 		},
 		{
 			"description": [
-				"Select the updated item object from the JSON response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
@@ -5566,7 +6200,7 @@
 		},
 		{
 			"description": [
-				"Extract the item ID from the JSON response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
@@ -5577,7 +6211,7 @@
 		},
 		{
 			"description": [
-				"Select the <Status> element from an XML response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
@@ -5587,7 +6221,7 @@
 		},
 		{
 			"description": [
-				"Extract the text inside the <Status> tag from the XML response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
@@ -5598,7 +6232,7 @@
 		},
 		{
 			"description": [
-				"Get the status attribute from the <Response> element in the XML response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
@@ -5609,7 +6243,7 @@
 		},
 		{
 			"description": [
-				"Validate that the status attribute value is either 'success' or 'failure'."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Put}}",
