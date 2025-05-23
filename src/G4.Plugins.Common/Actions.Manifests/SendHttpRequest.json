@@ -6994,87 +6994,270 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed response body",
+						"Network timeout",
+						"Response too large",
+						"Unexpected status code",
+						"Unexpected whitespace in response"
+					],
+					"expected_result": "The full response body of the HTTP PUT request is returned.",
+					"notes": "Returns the complete response body. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "return_put_plaintext_full_response",
+					"version": "1.0"
+				},
+				"labels": [
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Send a Put request with a plain-text payload to update the item's name and price."
+				"### Update Item with Plain-Text Payload",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99`, and `--Header:Authorization=Basic username:password`, then returns the complete response body with `onElement: responseBody` for downstream processing to ensure raw text parsing works even when the service returns non-JSON data."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method=PUT}}",
+				"onElement": "responseBody",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed response body",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in response"
+					],
+					"expected_result": "The numeric status code is extracted from the response body.",
+					"notes": "Applies a regular expression to the full response body. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_code_plaintext_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				""
+				"### Extract Status Code via Regex",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99`, and `--Header:Authorization=Basic username:password`, then applies the regular expression `(?<=Status: )\\d{3}` to the full response body with `onElement: responseBody` to extract the numeric status code, using regex to avoid full payload parsing and focus only on the status line."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method=PUT}}",
+				"onElement": "responseBody",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=Status: )\\d{3}"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"JSONPath evaluation error",
+						"Malformed JSON body",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in JSON value"
+					],
+					"expected_result": "The `updatedItem` object is returned from the response.",
+					"notes": "Selects the `updatedItem` object using JSONPath locator `$.updatedItem`. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "select_updated_item_plaintext_via_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the updated item object in the JSON response under the ",
-				"updatedItem\" key.\""
+				"### Select Updated Item via JSONPath",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Authorization=Basic username:password`, then locates the `updatedItem` object via JSONPath locator `$.updatedItem` with `onElement: $.updatedItem`, using JSONPath to directly target the relevant node without manual string manipulation."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"JSONPath evaluation error",
+						"Malformed JSON body",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in JSON value"
+					],
+					"expected_result": "The numeric `id` value is extracted from the `updatedItem` object.",
+					"notes": "Selects `updatedItem` via JSONPath and applies a regular expression to its JSON string to extract the numeric `id` value. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_updated_item_id_plaintext_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the numeric item ID from the JSON ",
-				"updatedItem.id\" field.\""
+				"### Extract Updated Item ID via Regex",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Authorization=Basic username:password`, then applies the regular expression `(?<=\\\"id\\\":)\\d+` to the `updatedItem` object via `onElement: $.updatedItem` to extract its numeric `id` value, avoiding full JSON parsing and focusing on the identifier."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"id\\\":)\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in element text",
+						"XPath evaluation error"
+					],
+					"expected_result": "The text content of the `<Status>` element is returned.",
+					"notes": "Locates `<Status>` via XPath locator `//Status` and returns its inner text. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_text_plaintext_via_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the <Status> element from an XML response after the Put."
+				"### Extract Status Element Text via XPath",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Authorization=Basic username:password`, then retrieves the text content of the `<Status>` element via XPath locator `//Status` with `onElement: //Status`, using XPath to directly target the relevant element for validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in element text",
+						"XPath evaluation error"
+					],
+					"expected_result": "The inner content of the `<Status>` element is extracted.",
+					"notes": "Applies a regular expression to the `<Status>` element text to extract core content without tags. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_status_content_plaintext_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+				"### Extract Status Content via Regex",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Authorization=Basic username:password`, then applies the regular expression `(?<=<Status>).*?(?=</Status>)` to the `<Status>` element via `onElement: //Status` to capture its inner content without tags, avoiding capturing surrounding tags and improving performance by focusing on core content."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Response too large",
+						"Unexpected whitespace in attribute value",
+						"XPath evaluation error"
+					],
+					"expected_result": "The `status` attribute value is extracted from the `<Response>` element.",
+					"notes": "Extracts the `status` attribute from `<Response>` elements using XPath. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_response_status_attribute_plaintext_via_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Get the status attribute from the <Response> element in the XML reply."
+				"### Extract Response Status Attribute via XPath",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Authorization=Basic username:password`, then retrieves the `status` attribute from the `<Response>` element via XPath locator `//Response` with `onElement: //Response` and `onAttribute: status`, using XPath to extract the attribute directly for conditional logic."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid XML format",
+						"Network timeout",
+						"Regex match occurs when it shouldn't",
+						"Response too large",
+						"Unexpected whitespace in attribute value",
+						"XPath evaluation error"
+					],
+					"expected_result": "The `status` attribute value is validated against `success|error`.",
+					"notes": "Applies a regular expression to the `status` attribute of `<Response>` elements to validate outcome. All extracted values are converted to a string before regex validation to ensure pattern matching operates on string data.",
+					"test_case": "extract_response_status_plaintext_via_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"RegexValidation",
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Validate that the status attribute is either \"success\" or \"error\"."
+				"### Extract Response Status via Regex",
+				"",
+				"This example sends an HTTP PUT to `https://api.example.com/v1/items/567` using `--Method=PUT`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Authorization=Basic username:password`, then applies the regular expression `success|error` to the `status` attribute of the `<Response>` element via `onElement: //Response` and `onAttribute: status` to validate outcome values without manual parsing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Put}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "success|error"
 			}
@@ -7082,7 +7265,7 @@
 
 		{
 			"description": [
-				"Send a Put request with a plain-text payload to update the item's name and price."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
