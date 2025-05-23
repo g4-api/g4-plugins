@@ -4960,86 +4960,322 @@
 		// DELETE
 		{
 			"description": [
-				"Delete the item with ID 567 using bearer authentication."
+				"### SendHttpRequest: DELETE Full Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin with no additional parameters to retrieve the full response.",
+				"After execution, the raw response payload is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_full_response",
+					"expected_result": "An HTTP DELETE request is sent and the full response is returned.",
+					"notes": "Sends a DELETE request with no extra headers or body, returning the raw response.",
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Unsupported pluginName value",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Extract the API's confirmation message from the JSON response."
+				"### SendHttpRequest: Extract message via Regex from DELETE Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then apply the regex `(?<=\\\"message\\\":\\\")[^\\\"]+` to extract the `message` field from the JSON response.",
+				"After execution, the extracted message is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\"message\":\")[^\"]+"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_message_regex",
+					"expected_result": "The `message` field is extracted from the JSON DELETE response via regex.",
+					"notes": "Applies a regex to extract the `message` field.",
+					"edge_cases": [
+						"Invalid URL format",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseRetrieval",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Select the <Status> element from an XML delete-response."
+				"### SendHttpRequest: Select <Status> Element via XPath from DELETE Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Status` to select the `<Status>` element from the XML response.",
+				"After execution, that element is available for subsequent extraction or validation."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_status_xpath",
+					"expected_result": "The `<Status>` element is returned from the DELETE response.",
+					"notes": "Selects the `<Status>` element using XPath.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onElement argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				"Extract the text inside the <Status> tag from the XML response."
+				"### SendHttpRequest: Extract <Status> Text via Regex from DELETE Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, select the `<Status>` element via XPath `//Status`, and apply the regex `(?<=<Status>).*?(?=</Status>)` to extract its text.",
+				"After execution, the extracted text is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_status_regex_xpath",
+					"expected_result": "The `<Status>` element text is extracted via regex from the DELETE response.",
+					"notes": "Applies a regex to extract the `<Status>` element text.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				"Select the deleted record object from a JSON array of results."
+				"### SendHttpRequest: Select deleted Results via JSONPath from DELETE Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the JSONPath `$.results[?(@.deleted==true)]` to select all items marked as deleted in the JSON response.",
+				"After execution, the filtered array is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onElement": "$.results[?(@.deleted==true)]",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_deleted_results_jsonpath",
+					"expected_result": "All items with `deleted==true` are returned as a JSON array.",
+					"notes": "Selects deleted results using JSONPath.",
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Network error or timeout",
+						"No matching path in JSON response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"JsonPathExtraction",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Take only the first object from the JSON results array."
+				"### SendHttpRequest: Extract First Result ID via Regex from DELETE Response JSONPath",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, select the first element via JSONPath `$.results[0]`, and apply the regex `(?<=\\\"id\\\":)\\d+` to extract its `id`.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onElement": "$.results[0]",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\"id\":)\\d+"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_first_result_id_regex_jsonpath",
+					"expected_result": "The `id` of the first result is extracted via regex.",
+					"notes": "Applies a regex to extract the `id` from the first JSONPath result.",
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"JsonPathExtraction",
+					"RegexValidation",
+					"ResponseElementExtraction",
+					"SendHttpRequest"
+				]
 			}
 		},
 		{
 			"description": [
-				"Get the status attribute from the <Item> element in the XML response."
+				"### SendHttpRequest: Extract status Attribute from <Item> via XPath in DELETE Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Item` to select the first `<Item>` element and extract its `status` attribute.",
+				"After execution, the attribute value is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
-				"onElement": "//Item",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onAttribute": "status",
+				"onElement": "//Item",
 				"pluginName": "SendHttpRequest"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_item_status_attribute_xpath",
+					"expected_result": "The `status` attribute of the first `<Item>` element is returned.",
+					"notes": "Extracts an attribute from an XML element.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Network error or timeout",
+						"No matching element in XML response",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 		{
 			"description": [
-				"Extract the numeric ID from the <Item> element's id attribute."
+				"### SendHttpRequest: Extract <Item> ID via Regex from Attribute in DELETE Response",
+				"",
+				"This example demonstrates how to send an HTTP DELETE request to `https://api.example.com/v1/items/567` using the `SendHttpRequest` plugin, then use the XPath `//Item` to select the first `<Item>` element and apply the regex `\\d+` to its `id` attribute to extract digits.",
+				"After execution, the extracted ID is available for subsequent actions."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --Method:Delete}}",
-				"onElement": "//Item",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
 				"onAttribute": "id",
+				"onElement": "//Item",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "\\d+"
+			},
+			"context": {
+				"annotations": {
+					"test_case": "send_http_request_delete_item_id_regex_attribute_xpath",
+					"expected_result": "The numeric `id` attribute of the first `<Item>` is extracted via regex.",
+					"notes": "Applies a regex to extract digits from an attribute value.",
+					"edge_cases": [
+						"Invalid XPath expression",
+						"Malformed CLI expression (missing `{{$` or `}}`)",
+						"Missing --Method argument",
+						"Missing --Url argument",
+						"Missing onAttribute argument",
+						"Missing onElement argument",
+						"Missing regularExpression argument",
+						"No regex match",
+						"Network error or timeout",
+						"Unexpected HTTP status code",
+						"Version mismatch between plugin and engine"
+					],
+					"version": "1.0"
+				},
+				"labels": [
+					"HttpRequest",
+					"RegexValidation",
+					"ResponseAttributeExtraction",
+					"SendHttpRequest",
+					"XPathExtraction"
+				]
 			}
 		},
 
