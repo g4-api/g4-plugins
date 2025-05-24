@@ -8113,89 +8113,284 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed plain-text response",
+						"missing Status line",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The complete HTTP response body from the PUT request is captured as a string for downstream processing.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_plaintext_full_response",
+					"version": "1.0"
+				},
+				"labels": [
+					"Validation"
+				]
+			},
 			"description": [
-				"Send a Put request with a plain-text payload to update the item's name and price."
+				"### Update Item – Plain-Text PUT with ASCII Encoding and Custom Headers",
+				"",
+				"This example demonstrates how to update an item's name and price by sending an HTTP PUT request with an ASCII-encoded, plain-text body and custom authorization and user-agent headers.",
+				"It uses `--Method:Put`, `--ContentType:text/plain`, `--Encoding:ASCII`, `--Header:Authorization:Basic username:password`, and `--Header:UserAgent:MyCustomUserAgent`, then returns the full response body unchanged.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed plain-text response",
+						"missing Status line",
+						"regex match occurs when it shouldn't",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The first three-digit status code is extracted from the response body and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_plaintext_status_code_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+				"### Extract Status Code with Regex and ASCII Encoding",
+				"",
+				"This example demonstrates how to extract the three-digit HTTP status code from a plain-text response line after sending an ASCII-encoded PUT request.",
+				"A regular expression `(?<=Status: )\\d{3}` is applied to the response body; the assertion passes only if the extracted string matches this three-digit pattern."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=Status: )\\d{3}"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"missing `updatedItem` node",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The `updatedItem` object from the JSON response is selected and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_jsonpath_updated_item_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+				"### Extract updatedItem via JSONPath with ASCII Encoding",
+				"",
+				"This example demonstrates how to select the `updatedItem` object from a JSON response after sending an ASCII-encoded PUT request.",
+				"It uses a JSONPath expression `$.updatedItem` to retrieve the node.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"missing `id` field",
+						"missing `updatedItem` node",
+						"regex match occurs when it shouldn't",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The numeric `id` value under `updatedItem` in the JSON response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_jsonpath_updated_item_id_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+				"### Extract id with Regex from JSONPath with ASCII Encoding",
+				"",
+				"This example demonstrates how to extract the numeric `id` value from the `updatedItem` object in a JSON response after sending an ASCII-encoded PUT request.",
+				"It uses a JSONPath expression `$.updatedItem` and applies a regular expression `(?<=\\\"id\\\":)\\d+` to capture the ID.",
+				"A regular expression `(?<=\\\"id\\\":)\\d+` is applied to the JSON text; the assertion passes only if the extracted string matches this numeric pattern."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"id\\\":)\\d+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The text content of the `<Status>` XML element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_xpath_status_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the <Status> element from an XML response after the Put."
+				"### Extract Status Element via XPath with ASCII Encoding",
+				"",
+				"This example demonstrates how to select the `<Status>` element from an XML response after sending an ASCII-encoded PUT request.",
+				"It applies an XPath expression `//Status` and retrieves the element's text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The inner text of the `<Status>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_xpath_status_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+				"### Extract Status Text with Regex via XPath with ASCII Encoding",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element in an XML response after sending an ASCII-encoded PUT request.",
+				"It applies an XPath expression `//Status` and then a regular expression `(?<=<Status>)(success|error)(?=</Status>)` to capture the content.",
+				"A regular expression `(?<=<Status>)(success|error)(?=</Status>)` is applied to the element's visible text; the assertion passes only if it matches one of the allowed values."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
+				"regularExpression": "(?<=<Status>)(success|error)(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_xpath_response_attribute_status_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				"Get the status attribute from the <Response> element in the XML reply."
+				"### Extract status Attribute via XPath with ASCII Encoding",
+				"",
+				"This example demonstrates how to retrieve the `status` attribute from the `<Response>` element in an XML response after sending an ASCII-encoded PUT request.",
+				"It applies an XPath expression `//Response` and reads the `status` attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element matching the allowed pattern is validated and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_put_xpath_response_attribute_status_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Validate that the status attribute is either \"success\" or \"error\"."
+				"### Validate status Attribute with Regex via XPath with ASCII Encoding",
+				"",
+				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an ASCII-encoded PUT request.",
+				"It applies an XPath expression `//Response` and then a regular expression `success|error` to assert the attribute value.",
+				"A regular expression `success|error` is applied to the attribute; the assertion passes only if it matches one of the allowed values."
 			],
 			"rule": {
-				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "success|error"
 			}
-		},
+		}
+
 
 		{
 			"description": [
