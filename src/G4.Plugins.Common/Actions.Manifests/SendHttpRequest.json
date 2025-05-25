@@ -1021,7 +1021,7 @@
 			}
 		},
 
-		// POST
+
 		{
 			"context": {
 				"annotations": {
@@ -8390,7 +8390,6 @@
 				"regularExpression": "success|error"
 			}
 		}
-
 
 		{
 			"description": [
