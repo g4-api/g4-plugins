@@ -9663,45 +9663,144 @@
 				"regularExpression": "(?<=\\\"id\\\":)\\d+"
 			}
 		},
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The `<Status>` element text from the XML response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_status_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the <Status> element from an XML response."
+				"### Extract `<Status>` Element Text via XPath from XML Response after JSON-Body PATCH",
+				"",
+				"This example demonstrates how to extract the `<Status>` element text from an XML response (with `Accept: application/xml`) after sending an HTTP PATCH request with a JSON body and custom headers.",
+				"It uses `--Method:Patch`, `--ContentType:application/json`, `--Body:{\"name\":\"Premium Widget\",\"price\":99.99}`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, and `--Header:Accept:application/xml`, then applies an XPath expression `//Status` to extract the element's text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The inner text of the `<Status>` element matching the allowed values is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_status_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the text inside the <Status> tag from the XML response."
+				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after JSON-Body PATCH",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response (with `Accept: application/xml`) after sending an HTTP PATCH request with a JSON body and custom headers.",
+				"It applies an XPath expression `//Status` and then a regular expression `(?<=<Status>).*?(?=</Status>)` to extract the content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_response_attribute_status_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				"Get the status attribute from the <Response> element in the XML response."
+				"### Extract `status` Attribute via XPath from XML Response after JSON-Body PATCH",
+				"",
+				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response (with `Accept: application/xml`) after sending an HTTP PATCH request with a JSON body and custom headers.",
+				"It applies an XPath expression `//Response` to retrieve the `status` attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Response",
 				"onAttribute": "status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element matching the allowed pattern is validated and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_response_attribute_status_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Validate that the status attribute value is either 'success' or 'failure'."
+				"### Validate `status` Attribute with Regex via XPath from XML Response after JSON-Body PATCH",
+				"",
+				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response (with `Accept: application/xml`) matches either `success` or `failure` after sending an HTTP PATCH request with a JSON body and custom headers.",
+				"It applies an XPath expression `//Response` and then a regular expression `success|failure` to assert the attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Response",
 				"onAttribute": "status",
 				"pluginName": "SendHttpRequest",
