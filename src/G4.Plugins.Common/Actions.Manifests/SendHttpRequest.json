@@ -11080,45 +11080,144 @@
 				"regularExpression": "(?<=\\\"id\\\":)\\d+"
 			}
 		},
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The `<Status>` element text from the XML response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_status_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the <Status> element from an XML response after the Patch."
+				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The inner text of the `<Status>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_status_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_response_attribute_status_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				"Get the status attribute from the <Response> element in the XML reply."
+				"### Extract `status` Attribute via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` to retrieve the attribute.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Response",
 				"onAttribute": "status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element matching the allowed pattern is validated and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_response_attribute_status_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Validate that the status attribute is either \"success\" or \"error\"."
+				"### Validate `status` Attribute with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` and a regex `success|error` to assert the attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Response",
 				"onAttribute": "status",
 				"pluginName": "SendHttpRequest",
@@ -11127,45 +11226,149 @@
 		},
 
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The `<Status>` element text from the XML response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_status_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				"Send a Patch request with a plain-text payload to update the item's name and price."
+				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent` and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
+				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the element text"
+					],
+					"expected_result": "The inner text of the `<Status>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_xml_xpath_status_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent` and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
+				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=Status: )\\d{3}"
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"missing `updatedItem` node",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The `updatedItem` object from the JSON response is selected and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_jsonpath_updated_item_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"JsonPathExtraction",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+				"### Extract updatedItem via JSONPath from Plain-Text PATCH with ASCII Encoding",
+				"",
+				"This example demonstrates how to select the `updatedItem` object from a JSON response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/json`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/json`, and `--Method:Patch`, then applies a JSONPath expression `$.updatedItem` to retrieve the node.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"missing `id` field",
+						"missing `updatedItem` node",
+						"regex match occurs when it shouldn't",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The numeric `id` value under `updatedItem` in the JSON response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_jsonpath_updated_item_id_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"JsonPathExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+				"### Extract Item ID with Regex from JSONPath via Plain-Text PATCH with ASCII Encoding",
+				"",
+				"This example demonstrates how to extract the numeric `id` value from the `updatedItem` object in a JSON response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/json`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/json`, and `--Method:Patch`, then applies a JSONPath expression `$.updatedItem` and a regex `(?<=\\\"id\\\":)\\d+` to capture the ID; the assertion passes only if the extracted string matches this numeric pattern.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=\\\"id\\\":)\\d+"
 			}
 		},
+
 		{
 			"description": [
 				"Select the <Status> element from an XML response after the Patch."
