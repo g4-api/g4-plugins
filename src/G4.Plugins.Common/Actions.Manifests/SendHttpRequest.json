@@ -11369,13 +11369,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
-				"",
-				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11395,6 +11388,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
@@ -11403,13 +11403,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
-				"",
-				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11431,6 +11424,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
@@ -11440,13 +11440,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract `status` Attribute via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
-				"",
-				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` to retrieve the `status` attribute value.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11466,6 +11459,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract `status` Attribute via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` to retrieve the `status` attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
@@ -11475,13 +11475,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Validate `status` Attribute with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
-				"",
-				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` and a regex `success|error` to assert the attribute value.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11503,6 +11496,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Validate `status` Attribute with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
+				"",
+				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` and a regex `success|error` to assert the attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
@@ -11514,13 +11514,6 @@
 		},
 
 		{
-			"description": [
-				"### Update Item – Form-URL-Encoded PATCH with Custom Headers",
-				"",
-				"This example demonstrates how to update an item's name and price by sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, and `--Method:Patch`, then returns the full HTTP response body unchanged.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11538,6 +11531,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Update Item – Form-URL-Encoded PATCH with Custom Headers",
+				"",
+				"This example demonstrates how to update an item's name and price by sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, and `--Method:Patch`, then returns the full HTTP response body unchanged.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
@@ -11545,13 +11545,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract Status Code with Regex via Form-URL-Encoded PATCH with ASCII Encoding",
-				"",
-				"This example demonstrates how to extract the three-digit HTTP status code from a plain-text response line after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, and `--Method:Patch`, then applies a regular expression `(?<=Status: )\\d{3}` to the response body; the assertion passes only if the extracted string matches this three-digit pattern.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11571,6 +11564,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract Status Code with Regex via Form-URL-Encoded PATCH with ASCII Encoding",
+				"",
+				"This example demonstrates how to extract the three-digit HTTP status code from a plain-text response line after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, and `--Method:Patch`, then applies a regular expression `(?<=Status: )\\d{3}` to the response body; the assertion passes only if the extracted string matches this three-digit pattern.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
@@ -11579,13 +11579,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract updatedItem via JSONPath from Form-URL-Encoded PATCH with ASCII Encoding",
-				"",
-				"This example demonstrates how to select the `updatedItem` object from a JSON response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/json`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/json`, and `--Method:Patch`, then applies a JSONPath expression `$.updatedItem` to retrieve the node.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11604,6 +11597,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract updatedItem via JSONPath from Form-URL-Encoded PATCH with ASCII Encoding",
+				"",
+				"This example demonstrates how to select the `updatedItem` object from a JSON response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/json`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/json`, and `--Method:Patch`, then applies a JSONPath expression `$.updatedItem` to retrieve the node.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
@@ -11612,13 +11612,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract Item ID with Regex from JSONPath via Form-URL-Encoded PATCH with ASCII Encoding",
-				"",
-				"This example demonstrates how to extract the numeric `id` value from the `updatedItem` object in a JSON response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/json`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/json`, and `--Method:Patch`, then applies a JSONPath expression `$.updatedItem` and a regular expression `(?<=\\\"id\\\":)\\d+` to capture the ID; the assertion passes only if the extracted string matches this numeric pattern.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11640,6 +11633,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract Item ID with Regex from JSONPath via Form-URL-Encoded PATCH with ASCII Encoding",
+				"",
+				"This example demonstrates how to extract the numeric `id` value from the `updatedItem` object in a JSON response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/json`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/json`, and `--Method:Patch`, then applies a JSONPath expression `$.updatedItem` and a regular expression `(?<=\\\"id\\\":)\\d+` to capture the ID; the assertion passes only if the extracted string matches this numeric pattern.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
@@ -11649,13 +11649,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract `<Status>` Element Text via XPath from XML Response after Form-URL-Encoded PATCH",
-				"",
-				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11675,6 +11668,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract `<Status>` Element Text via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
@@ -11683,13 +11683,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
-				"",
-				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11711,6 +11704,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
@@ -11720,13 +11720,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Extract `status` Attribute via XPath from XML Response after Form-URL-Encoded PATCH",
-				"",
-				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` to retrieve the `status` attribute value.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11746,6 +11739,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Extract `status` Attribute via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` to retrieve the `status` attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
@@ -11755,13 +11755,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Validate `status` Attribute with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
-				"",
-				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` and a regex `success|error` to assert the attribute value.",
-				"Values are converted to strings to ensure consistent downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -11783,6 +11776,13 @@
 					"Validation"
 				]
 			},
+			"description": [
+				"### Validate `status` Attribute with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` and a regex `success|error` to assert the attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
