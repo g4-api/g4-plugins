@@ -1020,7 +1020,6 @@
 				"regularExpression": "\\d+"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -1353,7 +1352,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -1702,7 +1700,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -2051,7 +2048,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -2392,7 +2388,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -2749,7 +2744,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -3106,7 +3100,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -3463,7 +3456,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -3836,7 +3828,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -4209,7 +4200,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -4582,7 +4572,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -4955,7 +4944,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -5276,7 +5264,6 @@
 				"regularExpression": "\\d+"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -5605,7 +5592,6 @@
 				"regularExpression": "\\d+"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -5889,7 +5875,6 @@
 				"regularExpression": "\\d+"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -6165,7 +6150,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -6441,7 +6425,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -6719,7 +6702,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -6989,7 +6971,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -7259,7 +7240,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -7542,7 +7522,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -7825,7 +7804,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -8108,7 +8086,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -8387,7 +8364,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -8667,7 +8643,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -8948,8 +8923,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
-		// PATCH
 		{
 			"context": {
 				"annotations": {
@@ -9232,7 +9205,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -9521,7 +9493,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -9804,7 +9775,6 @@
 				"regularExpression": "success|failure"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -10088,7 +10058,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -10372,7 +10341,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -10656,7 +10624,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -10940,7 +10907,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -11224,7 +11190,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -11512,7 +11477,6 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
 			"context": {
 				"annotations": {
@@ -11792,63 +11756,216 @@
 				"regularExpression": "success|error"
 			}
 		},
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `<Status>` element text from the XML response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_text_extraction_xpath_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Validation"
+				]
+			},
 			"description": [
-				"Send a Patch request with a plain-text payload to update the item's name and price."
+				"### Extract `<Status>` Element Text via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
+				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The inner text of the `<Status>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_text_regex_extraction_xpath_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the HTTP status code from a plain-text response line like \"Status: 200 OK\"."
+				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regular expression `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
+				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=Status: )\\d{3}"
+				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_attribute_extraction_xpath_response_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the updated item object in the JSON response under the \"updatedItem\" key."
+				"### Extract `status` Attribute via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` to retrieve the `status` attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
-				"onElement": "$.updatedItem",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
+				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element matching the allowed pattern is validated and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_attribute_regex_validation_xpath_response_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the numeric item ID from the JSON \"updatedItem.id\" field."
+				"### Validate `status` Attribute with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
+				"",
+				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` and a regular expression `success|error` to assert the attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
-				"onElement": "$.updatedItem",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
+				"onElement": "//Response",
+				"onAttribute": "status",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\\\"id\\\":)\\d+"
+				"regularExpression": "success|error"
 			}
 		},
 		{
 			"description": [
-				"Select the <Status> element from an XML response after the Patch."
+				"### Extract `<Status>` Element Text via XPath from XML Response after PATCH",
+				"",
+				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an XML payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `<Status>` element text from the XML response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_text_extraction_xpath_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Validation"
+				]
+			},
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
 			"description": [
-				"Extract the text inside the <Status> tag, e.g. \"Success\" or \"Failure\"."
+				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after PATCH",
+				"",
+				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an XML payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regular expression `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The inner text of the `<Status>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_text_regex_extraction_xpath_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Status",
 				"pluginName": "SendHttpRequest",
 				"regularExpression": "(?<=<Status>).*?(?=</Status>)"
@@ -11856,21 +11973,71 @@
 		},
 		{
 			"description": [
-				"Get the status attribute from the <Response> element in the XML reply."
+				"### Extract `status` Attribute via XPath from XML Response after PATCH",
+				"",
+				"This example demonstrates how to extract the `status` attribute value from the `<Response>` element in an XML response after sending an HTTP PATCH request with an XML payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` to retrieve the `status` attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_attribute_extraction_xpath_response_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"Validation"
+				]
+			},
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
-				"onElement": "//Response",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onAttribute": "status",
+				"onElement": "//Response",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
 			"description": [
-				"Validate that the status attribute is either \"success\" or \"error\"."
+				"### Validate `status` Attribute with Regex via XPath from XML Response after PATCH",
+				"",
+				"This example demonstrates how to validate that the `status` attribute of the `<Response>` element in an XML response matches either `success` or `error` after sending an HTTP PATCH request with an XML payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
+				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Response` and a regular expression `success|error` to assert the attribute value.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed XML response",
+						"Regex match occurs when it shouldn't",
+						"Unexpected DOM structure",
+						"Unexpected whitespace or formatting in the attribute value"
+					],
+					"expected_result": "The `status` attribute value of the `<Response>` element matching the allowed pattern is validated and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"use_case": "element_attribute_regex_validation_xpath_response_status",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/xml --Method:Patch}}",
 				"onElement": "//Response",
 				"onAttribute": "status",
 				"pluginName": "SendHttpRequest",
