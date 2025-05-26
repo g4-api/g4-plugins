@@ -8954,48 +8954,147 @@
 
 		// PATCH
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The complete HTTP response body from the PATCH request is captured as a string for downstream processing.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_json_full_response",
+					"version": "1.0"
+				},
+				"labels": [
+					"ResponseRetrieval",
+					"Validation"
+				]
+			},
 			"description": [
-				"Send a Patch request to update the item's name and price."
+				"### Update Item – JSON Body PATCH",
+				"",
+				"This example demonstrates how to update an item's name and price by sending an HTTP PATCH request with a JSON body.",
+				"It uses `--Method:Patch`, `--ContentType:application/json`, and `--Body:{\"name\":\"Premium Widget\",\"price\":99.99}`, then returns the full response body unchanged.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"regex match occurs when it shouldn't",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The `message` field is extracted from the JSON response and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_json_message_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the confirmation message from the JSON response."
+				"### Extract Message with Regex",
+				"",
+				"This example demonstrates how to extract the `message` field from a JSON response after sending an HTTP PATCH request with a JSON body.",
+				"A regular expression `(?<=\\\"message\\\":\\\")[^\\\"]+` is applied to the response body; the assertion passes only if the extracted string matches this pattern.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"message\":\")[^\"]+"
+				"regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"missing `updatedItem` node",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The `updatedItem` object from the JSON response is selected and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_jsonpath_updated_item_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"JsonPathExtraction",
+					"Validation"
+				]
+			},
 			"description": [
-				"Select the updated item object from the JSON response."
+				"### Extract updatedItem via JSONPath",
+				"",
+				"This example demonstrates how to select the `updatedItem` object from a JSON response after sending an HTTP PATCH request with a JSON body.",
+				"It uses a JSONPath expression `$.updatedItem` to retrieve the node.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"5xx server error",
+						"malformed JSON response",
+						"missing `id` field",
+						"missing `updatedItem` node",
+						"regex match occurs when it shouldn't",
+						"unexpected HTTP 3xx redirect",
+						"unexpected whitespace or formatting in the response body"
+					],
+					"expected_result": "The numeric `id` value under `updatedItem` in the JSON response is extracted and returned as a string.",
+					"notes": "All returned values are converted to strings so validation and logging remain robust across data types.",
+					"test_case": "send_http_request_patch_jsonpath_updated_item_id_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"JsonPathExtraction",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Extract the item ID from the JSON response."
+				"### Extract id with Regex from JSONPath",
+				"",
+				"This example demonstrates how to extract the numeric `id` value from the `updatedItem` object in a JSON response after sending an HTTP PATCH request with a JSON body.",
+				"It uses a JSONPath expression `$.updatedItem` and applies a regular expression `(?<=\\\"id\\\":)\\d+` to capture the ID; the assertion passes only if the extracted string matches this numeric pattern.",
+				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
-				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
 				"onElement": "$.updatedItem",
 				"pluginName": "SendHttpRequest",
-				"regularExpression": "(?<=\"id\":)\\d+"
+				"regularExpression": "(?<=\\\"id\\\":)\\d+"
 			}
 		},
+
 		{
 			"description": [
-				"Select the <Status> element from an XML response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
@@ -9005,7 +9104,7 @@
 		},
 		{
 			"description": [
-				"Extract the text inside the <Status> tag from the XML response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
@@ -9016,7 +9115,7 @@
 		},
 		{
 			"description": [
-				"Get the status attribute from the <Response> element in the XML response."
+				""
 			],
 			"rule": {
 				"argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
@@ -9037,6 +9136,14 @@
 				"regularExpression": "success|failure"
 			}
 		},
+
+
+
+
+
+
+
+
 
 		{
 			"description": [
