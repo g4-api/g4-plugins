@@ -1,0 +1,97 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"DataManagement"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The primary purpose of the `XmlDataCollector` is to collect data and organize it in a structured format, typically as XML (Extensible Markup Language). ",
+		"XML is a flexible and widely-used data interchange format, making it suitable for various applications, including automation and data integration.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature               | Description                                                                                                            |",
+		"|-----------------------|------------------------------------------------------------------------------------------------------------------------|",
+		"| Data Storage          | Storing data collected from various sources in a structured format, making it easier to manage, retrieve, and analyze. |",
+		"| Data Integration      | Facilitating the integration of data from multiple systems or sources into a single, consistent format.                |",
+		"| Automation            | Supporting automation and RPA processes by collecting and formatting data for further use in automated workflows.      |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                            | Description                                                                                                                                                             |",
+		"|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Web Scraping and Data Extraction | Collect data from websites and save it in XML format. Data collected can include product information, news articles, weather data, etc.                                 |",
+		"| RPA Data Management              | Gather data during automated tasks and workflows, storing it as XML for further processing or reporting.                                                                |",
+		"| Data Aggregation                 | Aggregate data from multiple sources into a single XML format.                                                                                                          |",
+		"| Data Export and Reporting        | Export data collected from various sources to XML format for reporting and analysis. XML is commonly used for transmitting data between systems and generating reports. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                                                                                    |",
+		"|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Data-Driven Testing    | Use the `XmlDataCollector` plugin to collect test data during test execution and save it in XML format for further analysis.                   |",
+		"| Test Data Management   | Manage and store test data in a structured XML format, facilitating easy retrieval and use in various test scenarios.                          |",
+		"| Dynamic Test Execution | Enable dynamic test execution by collecting and storing runtime data in XML format, allowing for flexible test configurations and validations. |"
+	],
+	"examples": [
+		{
+			"description": [
+				"Defines an extraction rule that extracts location information from a web page. ",
+				"The extracted data is labeled as `Location`, and it is collected using an `XmlDataCollector` into an XML file named `DataFile.xml`. ",
+				"The extraction process is defined within a specific scope and starts from a `<div>` element with the class `hotel`. ",
+				"The use of regular expressions and XPath expressions allows for precise data extraction and formatting."
+			],
+			"rule": {
+				"$type": "ExtractionRuleModel",
+				"dataCollector": {
+					"ForEntity": true,
+					"Source": "DataFile.xml",
+					"Type": "XmlDataCollector"
+				},
+				"extractionScope": "Elements",
+				"onElement": "//div[@class='hotel']",
+				"rules": [
+					{
+						"$type": "ContentRuleModel",
+						"clearLinesBreak": false,
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\w+:).*",
+						"trim": false
+					}
+				]
+			}
+		}
+	],
+	"key": "SqlLite",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies the output destination where the collected data will be saved (e.g., `/Path/To/My/File/DataFile.xml`)."
+			],
+			"mandatory": false,
+			"name": "Source",
+			"type": "String"
+		}
+	],
+	"pluginType": "DataCollector",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scopes": [
+		"Any"
+	],
+	"summary": [
+		"The `XmlDataCollector` plugin is used to collect, store, and manage data in XML format. ",
+		"It facilitates data storage, integration, and automation by organizing data from various sources into a structured XML format.",
+		"Key features include data storage, integration, and support for automation workflows. ",
+		"Common use cases in RPA involve web scraping, data management, aggregation, and reporting. ",
+		"In automation testing, it is used for data-driven testing, test data management, and dynamic test execution."
+	]
+}
