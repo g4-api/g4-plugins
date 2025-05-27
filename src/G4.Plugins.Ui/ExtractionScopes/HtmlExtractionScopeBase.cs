@@ -282,7 +282,7 @@ namespace G4.Plugins.Ui.ExtractionScopes
             ];
 
             // Update the associated elements using the scraping rule and the provided element.
-            _elements = this.GetElements(pluginData.Rule, pluginData.Element).ToArray();
+            _elements = [.. this.GetElements(pluginData.Rule, pluginData.Element)];
         }
 
         // Method to write content using a plugin and data collector
