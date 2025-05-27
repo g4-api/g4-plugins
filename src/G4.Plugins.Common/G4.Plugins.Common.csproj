@@ -28,17 +28,11 @@
 		<PackageReference Include="G4.Converters" Version="2025.5.19.38" />
 		<PackageReference Include="G4.Extensions" Version="2025.5.19.38" />
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.16" />
-		<!--
 		<PackageReference Include="G4.Plugins" Version="2025.5.19.38" />
-		-->
 	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Include="*.Manifests\**\*.*" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\g4-engine\src\G4.Plugins\G4.Plugins.csproj" />
 	</ItemGroup>
 
 </Project>
