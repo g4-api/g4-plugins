@@ -601,7 +601,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.AreEqual(expected, actual, message: "CSV data does not match the expected data.");
         }
 
-        [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
+        //[Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
         [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements, invokes actions under each ContentRule " +

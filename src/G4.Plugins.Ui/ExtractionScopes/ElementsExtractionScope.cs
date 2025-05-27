@@ -160,22 +160,19 @@ namespace G4.Plugins.Ui.ExtractionScopes
             var content = new ConcurrentDictionary<string, object>();
 
             // Iterate through content rules and extract content.
-            foreach (var contentRule in pluginData.Rule.Rules)
+            foreach (var rule in pluginData.Rule.Rules)
             {
                 // Set the iteration number for the content rule.
-                contentRule.SetIteration(iteration);
+                rule.SetIteration(iteration);
 
                 // Ensure content rule reference is initialized.
-                contentRule.Reference = contentRule.NewReference(pluginData.Rule.Reference.JobReference);
+                rule.Reference = rule.NewReference(pluginData.Rule.Reference.JobReference);
 
                 // Set the parent reference for the content rule.
-                contentRule.Reference.ParentReference = pluginData.Rule.Reference;
-
-                // Convert the content rule to ContentRuleModel for further processing.
-                var onContentRule = (ContentRuleModel)contentRule;
+                rule.Reference.ParentReference = pluginData.Rule.Reference;
 
                 // Extract content based on the content rule.
-                var (key, value) = ReadContent(this, onContentRule, element);
+                var (key, value) = ReadContent(this, rule, element);
 
                 // Add the extracted content to the concurrent dictionary.
                 if (!string.IsNullOrEmpty(key))
@@ -196,17 +193,17 @@ namespace G4.Plugins.Ui.ExtractionScopes
 
         // Reads content based on the specified plugin, content rule, and web element.
         private static (string Key, object Value) ReadContent(
-            PluginBase plugin, ContentRuleModel contentRule, IWebElement element)
+            PluginBase plugin, G4RuleModelBase ruleModel, IWebElement element)
         {
             // Set the WebElement and HtmlNode in the context based on the current iteration.
-            contentRule.Context[RuleProperties.WebElement] = element;
-            contentRule.Context[RuleProperties.HtmlNode] = default;
+            ruleModel.Context[RuleProperties.WebElement] = element;
+            ruleModel.Context[RuleProperties.HtmlNode] = default;
 
             // Prevent redundant invocation of rules.
-            contentRule.SetInvokeRules(false);
+            ruleModel.SetInvokeRules(false);
 
             // Invoke the content rule and retrieve the first entity's data, if any.
-            var entity = plugin.Invoker.Invoke(contentRule).FirstOrDefault()?.Entity;
+            var entity = plugin.Invoker.Invoke(ruleModel).FirstOrDefault()?.Entity;
 
             // If no entity is found or the entity is empty, return an empty key and null value.
             if (entity == null || entity.Count == 0)
@@ -215,16 +212,16 @@ namespace G4.Plugins.Ui.ExtractionScopes
             }
 
             // If the content rule has child rules, process them as needed.
-            if (contentRule.Rules?.Any() == true)
+            if (ruleModel.Rules?.Any() == true)
             {
                 // Filter out content rules, leaving other rule types for further processing.
-                var rules = contentRule.Rules.Where(i => i is not ContentRuleModel).ToArray();
+                var rules = ruleModel.Rules.Where(i => i is not ContentRuleModel).ToArray();
 
                 // Set context for each rule and update references based on the content rule's reference.
                 foreach (var rule in rules)
                 {
-                    rule.Reference = rule.NewReference(contentRule.Reference.JobReference);
-                    rule.Reference.ParentReference = contentRule.Reference;
+                    rule.Reference = rule.NewReference(ruleModel.Reference.JobReference);
+                    rule.Reference.ParentReference = ruleModel.Reference;
                     rule.Context[RuleProperties.WebElement] = element;
                 }
 

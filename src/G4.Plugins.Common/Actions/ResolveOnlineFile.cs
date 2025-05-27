@@ -16,53 +16,104 @@ namespace G4.Plugins.Common.Actions
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Parse the file URI from the rule argument
-            var uri = new Uri(pluginData.Rule.Argument);
+            // Initialize the parameters for the HTTP client
+            Uri uri;
+            HttpRequestMessage request;
+            HttpResponseMessage response;
 
-            // Create and send the GET request synchronously
-            var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            var response = HttpClient.SendAsync(request).Result;
+            try
+            {
+                // Parse the URI from the rule argument (must be a valid absolute URI)
+                uri = new Uri(pluginData.Rule.Argument);
 
-            // Extract HTTP status code
+                // Prepare an HTTP GET request for the parsed URI
+                request = new HttpRequestMessage(HttpMethod.Get, uri);
+
+                // Send the request synchronously and capture the response
+                response = HttpClient.SendAsync(request).Result;
+            }
+            catch (Exception e)
+            {
+                // Remove any previously set session parameters related to file resolution
+                Invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileData", out _);
+                Invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileExtension", out _);
+                Invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileName", out _);
+                Invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileSize", out _);
+                Invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileStatusCode", out _);
+                Invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileUri", out _);
+
+                // If an exception occurs while sending the request, log it as a G4ExceptionModel.
+                Exceptions.Add(new G4ExceptionModel(rule: pluginData.Rule, exception: e.GetBaseException()));
+
+                // Return the populated response back to the caller
+                return NewPluginResponse(
+                    plugin: this,
+                    data: string.Empty,
+                    extension: string.Empty,
+                    fullName: string.Empty,
+                    name: string.Empty,
+                    size: 0,
+                    statusCode: 400,
+                    uri: string.Empty);
+            }
+
+            // Convert status code to integer
             var statusCode = (int)response.StatusCode;
 
-            // Read the response content as a byte array
+            // Read the entire response content as a byte array
             var bytes = response.Content.ReadAsByteArrayAsync().Result;
 
-            // Convert the file bytes to a Base64 string
-            var fileData = Convert.ToBase64String(bytes);
+            // Encode the byte array as a Base64 string
+            var data = Convert.ToBase64String(bytes);
 
-            // Extract file metadata: full name, name without extension, and extension
-            var fileFullName = Path.GetFileName(uri.LocalPath);
-            var fileName = Path.GetFileNameWithoutExtension(fileFullName);
-            var fileExtension = Path.GetExtension(fileFullName).TrimStart('.');
+            // Extract file name components from the URI's local path
+            var fullName = Path.GetFileName(uri.LocalPath);
+            var name = Path.GetFileNameWithoutExtension(fullName);
+            var extension = Path.GetExtension(fullName).TrimStart('.');
 
             // Determine the file size in bytes
-            var fileSize = bytes.LongLength;
+            var size = bytes.LongLength;
 
-            // Store processed values in session parameters (sorted by key)
-            Invoker.Context.SessionParameters["ResolvedFileData"] = fileData.ConvertToBase64();
-            Invoker.Context.SessionParameters["ResolvedFileExtension"] = fileExtension.ConvertToBase64();
-            Invoker.Context.SessionParameters["ResolvedFileName"] = fileName.ConvertToBase64();
-            Invoker.Context.SessionParameters["ResolvedFileSize"] = fileSize;
+            // Store the processed values in session parameters (keys in alphabetical order)
+            Invoker.Context.SessionParameters["ResolvedFileData"] = data.ConvertToBase64();
+            Invoker.Context.SessionParameters["ResolvedFileExtension"] = extension.ConvertToBase64();
+            Invoker.Context.SessionParameters["ResolvedFileName"] = name.ConvertToBase64();
+            Invoker.Context.SessionParameters["ResolvedFileSize"] = size;
             Invoker.Context.SessionParameters["ResolvedFileStatusCode"] = statusCode;
-            Invoker.Context.SessionParameters["ResolvedFileUri"] = uri.AbsolutePath.ConvertToBase64();
-            Invoker.Context.SessionParameters["ResolvedFileUri"] = fileFullName.ConvertToBase64();
+            Invoker.Context.SessionParameters["ResolvedFileUri"] = uri.AbsoluteUri.ConvertToBase64();
 
-            // Build and return the plugin response with entity data (sorted by key)
-            var pluginResponse = this.NewPluginResponse();
+            // Return the populated response back to the caller
+            return NewPluginResponse(
+                plugin: this,
+                data,
+                extension,
+                fullName,
+                name,
+                size,
+                statusCode,
+                uri: uri.AbsoluteUri);
+        }
+
+        // Creates a new PluginResponseModel with the provided parameters.
+        private static PluginResponseModel NewPluginResponse(
+            PluginBase plugin, string data, string extension, string fullName, string name, long size, int statusCode, string uri)
+        {
+            // Build the plugin response
+            var pluginResponse = plugin.NewPluginResponse();
+
+            // Populate the Entity dictionary with the provided parameters
             pluginResponse.Entity = new Dictionary<string, object>
             {
-                ["Data"] = fileData,       // Raw Base64 data
-                ["Extension"] = fileExtension,
-                ["FullName"] = fileFullName,
-                ["Name"] = fileName,
-                ["Size"] = fileSize,
+                ["Data"] = data,
+                ["Extension"] = extension,
+                ["FullName"] = fullName,
+                ["Name"] = name,
+                ["Size"] = size,
                 ["StatusCode"] = statusCode,
-                ["Uri"] = uri.AbsolutePath
+                ["Uri"] = uri
             };
 
-            // return the plugin response
+            // Return the populated response back to the caller
             return pluginResponse;
         }
     }
