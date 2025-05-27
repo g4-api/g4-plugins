@@ -225,6 +225,7 @@ namespace G4.Plugins.Ui.ExtractionScopes
                 {
                     rule.Reference = rule.NewReference(contentRule.Reference.JobReference);
                     rule.Reference.ParentReference = contentRule.Reference;
+                    rule.Context[RuleProperties.WebElement] = element;
                 }
 
                 // Invoke the filtered rules.
