@@ -1,9 +1,4 @@
-﻿using G4.Extensions;
-using G4.Models;
-
-using Microsoft.Extensions.Logging;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -16,19 +11,32 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
+using G4.Extensions;
+using G4.Models;
+
+using Microsoft.Extensions.Logging;
+
 namespace G4.Plugins.Common.HttpMethods.Abstraction
 {
-    public abstract class HttpMethodBase(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+    /// <summary>
+    /// Plugin that handles sending HTTP requests using the provided setup configuration.
+    /// </summary>
+    internal class HttpMethodPlugin(PluginBase plugin)
     {
-        #region *** Methods: Protected ***
-        protected override PluginResponseModel OnSend(PluginDataModel pluginData)
+        // Store the injected PluginBase instance to access shared services, configuration, and helper methods
+        private readonly PluginBase _plugin = plugin;
+
+        /// <summary>
+        /// Sends an HTTP request based on the provided <paramref name="pluginData"/> and 
+        /// pre-constructed <paramref name="requestMessage"/>, then processes and returns the response.
+        /// </summary>
+        /// <param name="pluginData">Data and parameters provided to the plugin for this invocation.</param>
+        /// <param name="requestMessage">An <see cref="HttpRequestMessage"/> configured with method and URL.</param>
+        /// <returns>A <see cref="PluginResponseModel"/> containing status, headers, and extracted content.</returns>
+        public PluginResponseModel SendMessage(PluginDataModel pluginData, HttpRequestMessage requestMessage)
         {
             // Extract URL and headers from plugin data.
-            var url = pluginData.Parameters.Get(key: "Url", defaultValue: pluginData.Rule.Argument);
             var headers = FormatFields(fieldName: "Header", pluginData);
-
-            // Create a new HTTP request message.
-            var requestMessage = NewRequestMessage(pluginData, url, headers);
 
             // Add authorization header to the request message.
             AddAuthorizationHeader(requestMessage, headers);
@@ -37,7 +45,7 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             AddHeaders(requestMessage, headers);
 
             // Send the HTTP request and receive the response.
-            var responseMessage = HttpClient.Send(requestMessage);
+            var responseMessage = PluginBase.HttpClient.Send(requestMessage);
 
             // Read the response body.
             var responseBody = responseMessage.Content.ReadAsStringAsync().Result;
@@ -49,24 +57,25 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             // If no specific element is specified, create a plugin response with the entire response.
             if (!isElement)
             {
-                return NewPluginResponse(plugin: this, pluginData, responseMessage, input);
+                return NewPluginResponse(plugin: _plugin, pluginData, responseMessage, input);
             }
 
             // If the response body confirms JSON format, extract the specified element.
             if (responseBody.AssertJson())
             {
-                input = GetJsonData(plugin: this, responseBody, pluginData.Rule);
+                input = GetJsonData(plugin: _plugin, responseBody, pluginData.Rule);
             }
             // If the response body confirms XML format, extract the specified element.
             else if (responseBody.AssertXml())
             {
-                input = GetXmlData(plugin: this, responseBody, pluginData.Rule);
+                input = GetXmlData(plugin: _plugin, responseBody, pluginData.Rule);
             }
 
             // Create and return a new plugin response with the processed data.
-            return NewPluginResponse(plugin: this, pluginData, responseMessage, input);
+            return NewPluginResponse(plugin: _plugin, pluginData, responseMessage, input);
         }
 
+        #region *** Methods: Protected ***
         /// <summary>
         /// Adds an authorization header to the HTTP request message.
         /// </summary>
@@ -106,16 +115,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
                 }
             }
         }
-
-        /// <summary>
-        /// Creates an HTTP request based on the provided plugin data, URL, and headers.
-        /// </summary>
-        /// <param name="pluginData">The data containing information for creating the HTTP request.</param>
-        /// <param name="url">The URL to which the HTTP request should be sent.</param>
-        /// <param name="headers">An enumeration of header name-value pairs to include in the request.</param>
-        /// <returns>An instance of <see cref="HttpRequestMessage"/> representing the HTTP request.</returns>
-        protected abstract HttpRequestMessage NewRequestMessage(
-            PluginDataModel pluginData, string url, IDictionary<string, string> headers);
         #endregion
 
         #region *** Methods: Public    ***
@@ -215,10 +214,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
         /// </summary>
         /// <param name="pluginData">The plugin data model containing the data for the HTTP content.</param>
         /// <returns>A new <see cref="HttpContent"/> instance.</returns>
-        /// <remarks>
-        /// This method supports various media types, including XML, JSON, plain text, and form URL-encoded.
-        /// It creates the appropriate <see cref="HttpContent"/> based on the specified media type and plugin data.
-        /// </remarks>
         public HttpContent NewContent(PluginDataModel pluginData)
         {
             // Extract encoding from plugin data
@@ -228,7 +223,7 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             var encoding = GetEncoding(encodingName);
 
             // Get media type from plugin data
-            var mediaType = GetMediaType(plugin: this, pluginData);
+            var mediaType = GetMediaType(plugin: _plugin, pluginData);
 
             // Create and return a new instance of HttpContent
             return NewContent(pluginData, encoding, mediaType);
@@ -241,10 +236,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
         /// <param name="pluginData">The plugin data model containing the data for the HTTP content.</param>
         /// <param name="mediaType">The media type of the HTTP content.</param>
         /// <returns>A new <see cref="HttpContent"/> instance.</returns>
-        /// <remarks>
-        /// This method supports various media types, including XML, JSON, plain text, and form URL-encoded.
-        /// It creates the appropriate <see cref="HttpContent"/> based on the specified media type and plugin data.
-        /// </remarks>
         public static HttpContent NewContent(PluginDataModel pluginData, string mediaType)
         {
             // Extract encoding from plugin data
@@ -265,10 +256,6 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
         /// <param name="encoding">The encoding to be used for the HTTP content.</param>
         /// <param name="mediaType">The media type of the HTTP content.</param>
         /// <returns>A new <see cref="HttpContent"/> instance.</returns>
-        /// <remarks>
-        /// This method supports various media types, including XML, JSON, plain text, and form URL-encoded.
-        /// It creates the appropriate <see cref="HttpContent"/> based on the specified media type and plugin data.
-        /// </remarks>
         public static HttpContent NewContent(PluginDataModel pluginData, Encoding encoding, string mediaType)
         {
             // Extract the body and fields from the plugin data

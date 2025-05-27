@@ -17,10 +17,11 @@ namespace G4.Plugins.Common.Actions
     public class RegisterParameter(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         // Define constants for the plugin parameters.
-        private const string Name = "Name";
-        private const string Value = "Value";
-        private const string Scope = "Scope";
+        private const string EncryptionKey = "EncryptionKey";
         private const string Environment = "Environment";
+        private const string Name = "Name";       
+        private const string Scope = "Scope";
+        private const string Value = "Value";
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
@@ -33,7 +34,7 @@ namespace G4.Plugins.Common.Actions
             // Get the parameter name, value, and scope from the formatted arguments or use defaults.
             var name = arguments.Get(key: Name, defaultValue: pluginData.Rule.Argument);
             var value = arguments.Get(key: Value, defaultValue: string.Empty);
-            var encryptionKey = arguments.Get(key: "EncryptionKey", defaultValue: string.Empty);
+            var encryptionKey = arguments.Get(key: EncryptionKey, defaultValue: string.Empty);
             var scope = arguments.Get(key: Scope, defaultValue: "Session");
             var environment = arguments.Get(key: Environment, "SystemParameters");
 

@@ -8,6 +8,75 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs",
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md"
+			},
+			"rag": {
+				"description": "The InvokeForLoop plugin executes a defined sequence of actions a fixed number of times in automation scripts. It supports controlled and parameterized iteration, sequential execution of child rules, and exception logging without halting by default, ensuring predictable and reliable workflows in RPA and test automation.",
+				"qa": [
+					{
+						"question": "What is the InvokeForLoop plugin?",
+						"answer": "It is an automation action that runs its child actions a specified number of times, automating predictable repetition in scripts."
+					},
+					{
+						"question": "Why use InvokeForLoop in automation?",
+						"answer": "It removes manual repetition by looping actions automatically, saving time and eliminating scripting errors in repetitive tasks."
+					},
+					{
+						"question": "Which property sets the number of loop iterations?",
+						"answer": "The Argument property defines how many times the loop runs."
+					},
+					{
+						"question": "What value types does the Argument property accept?",
+						"answer": "Argument accepts a numeric literal or an expression that evaluates to a number."
+					},
+					{
+						"question": "How do you specify actions to run inside the loop?",
+						"answer": "You list child rules in the Rules array, each with its own pluginName and locator or onElement settings."
+					},
+					{
+						"question": "What is parameterized iteration?",
+						"answer": "It lets you adjust the loop count dynamically based on input values or conditions evaluated at runtime."
+					},
+					{
+						"question": "How do you integrate InvokeForLoop into a workflow designer?",
+						"answer": "The manifest under context.integration defines a sequentialWorkflow entry mapping it to a container componentType and ActionRuleModel for external tools."
+					},
+					{
+						"question": "What best practices improve loop reliability?",
+						"answer": "Use valid positive counts, test rules independently, handle edge cases like zero iterations, and scope selectors precisely."
+					},
+					{
+						"question": "How does InvokeForLoop handle failures during execution?",
+						"answer": "It logs exceptions to the response and log stream for each iteration but continues looping unless the workflow is configured to stop on error."
+					},
+					{
+						"question": "How do nested InvokeForLoop loops work?",
+						"answer": "Each loop independently runs its own iteration count and rules; inner loops do not inherit the outer loop's context."
+					},
+					{
+						"question": "How can you configure the loop to stop on error?",
+						"answer": "Enable the stop-on-error flag in the parent workflow or action settings, since the plugin itself does not halt by default."
+					},
+					{
+						"question": "What fields define an InvokeForLoop rule schema?",
+						"answer": "A rule includes $type, pluginName, argument, and rules (an array of nested action definitions)."
+					},
+					{
+						"question": "How can InvokeForLoop be used for load testing?",
+						"answer": "Set a high iteration count and include user interaction actions inside the loop to simulate repeated load on the system."
+					},
+					{
+						"question": "How does InvokeForLoop support batch processing?",
+						"answer": "You define rules that process each item in a dataset, and the loop runs through the entire batch a fixed number of times for consistent data handling."
+					},
+					{
+						"question": "Where can I find the source code and documentation for InvokeForLoop?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md"
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "container",
@@ -19,43 +88,66 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `InvokeForLoop` plugin serves as a fundamental tool in both Robotic Process Automation (RPA) and automation testing contexts. ",
-		"Its primary objective is to enable efficient and controlled iteration over a predefined set of actions within automation scripts, providing a flexible solution for handling repetitive tasks with a specified number of iterations.",
+		"The InvokeForLoop plugin runs a set of actions a specified number of times in your automation scripts. It makes repeating tasks simple by letting you define exactly how many loops to perform. This saves time and effort when you need predictable, repeated steps. It works equally well in RPA workflows and automated tests.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                 | Description                                                                                                                                                                 |",
-		"|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Controlled Iteration    | Allows for controlled iteration over a series of actions, executing a predefined number of iterations as specified by the user.                                             |",
-		"| Sequential Execution    | Executes actions sequentially within the loop, ensuring orderly and predictable execution of tasks.                                                                         |",
-		"| Parameterized Iteration | Employ parameterized iteration to dynamically control loop variables based on changing conditions or input values, enhancing adaptability and flexibility in RPA solutions. |",
+		"| Feature                 | Description                                                             |",
+		"|-------------------------|-------------------------------------------------------------------------|",
+		"| Controlled Iteration    | Runs actions for a fixed number of loops as defined by the user.        |",
+		"| Sequential Execution    | Executes each step in order within the loop for consistent outcomes.    |",
+		"| Parameterized Iteration | Adjusts loop variables dynamically based on input values or conditions. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Use Case                | Description                                                                                                                                                                 |",
-		"|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Data Processing         | Utilize the `InvokeForLoop` plugin for processing datasets with a fixed number of iterations, performing actions on each data entry or record.                              |",
-		"| Batch Processing        | Automate batch processing tasks within RPA workflows by leveraging the for loop to execute a series of actions on a predefined set of data or inputs.                       |",
-		"| Parameterized Iteration | Employ parameterized iteration to dynamically control loop variables based on changing conditions or input values, enhancing adaptability and flexibility in RPA solutions. |",
+		"| Use Case                | Description                                                           |",
+		"|-------------------------|-----------------------------------------------------------------------|",
+		"| Data Processing         | Iterate over records or items to enter, validate, or transform data.  |",
+		"| Batch Processing        | Perform a series of tasks on a predefined data set within a workflow. |",
+		"| Parameterized Iteration | Change loop values at runtime to handle varying input automatically.  |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Use Case            | Description                                                                                                                                                                                                         |",
-		"|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Test Case Iteration | In automated testing, leverage the `InvokeForLoop` plugin to iteratively execute test cases with a specified number of iterations, ensuring comprehensive test coverage.                                            |",
-		"| Data-Driven Testing | Utilize parameterized iteration to perform data-driven testing, iterating over datasets or input values to validate application behavior under various conditions.                                                  |",
-		"| Load Testing        | Employ the for loop to simulate concurrent user interactions or load scenarios in automation testing, executing a series of actions with a predefined number of iterations to assess system performance under load. |"
+		"| Use Case            | Description                                                                          |",
+		"|---------------------|--------------------------------------------------------------------------------------|",
+		"| Test Case Iteration | Run test steps repeatedly to cover multiple scenarios.                               |",
+		"| Data-Driven Testing | Loop through different data sets to verify application behavior under varied inputs. |",
+		"| Load Testing        | Simulate repeated user actions to measure system performance under load.             |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Click action throws exception",
+						"Invalid iteration count (zero or negative)",
+						"Loop action or rule failure",
+						"Target element not found"
+					],
+					"expected_result": "The Click action on `#NextBtn1` is executed 5 times; exceptions are recorded but do not halt execution.",
+					"notes": "InvokeForLoop repeats the inner Click action 5 times. Click failures log exceptions without stopping the loop.",
+					"test_case": "invoke_for_loop_5_click_css_nextbtn1",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				"Instructs the automation script to execute the `Click` action on the HTML element with the CSS selector `#NextBtn1` five times in sequential order."
+				"### Click Next Button 5 Times Using CSS Selector",
+				"",
+				"This example demonstrates how the InvokeForLoop plugin runs a loop 5 times and performs a Click action on the element matching the CSS selector `#NextBtn1` each iteration.",
+				"The inner rule uses `#NextBtn1` scoped by CssSelector to locate the target button.",
+				"If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "5",
 				"pluginName": "InvokeForLoop",
 				"rules": [
 					{
+						"$type": "Action",
 						"locator": "CssSelector",
 						"onElement": "#NextBtn1",
 						"pluginName": "Click"
@@ -64,34 +156,122 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Click action throws exception",
+						"Invalid iteration count (zero or negative)",
+						"Loop action or rule failure",
+						"Target element not found"
+					],
+					"expected_result": "The Click action on `//button[@id='NextBtn1']` is executed 5 times; exceptions are recorded but do not halt execution.",
+					"notes": "InvokeForLoop repeats the inner Click action 5 times. Click failures log exceptions without stopping the loop.",
+					"test_case": "invoke_for_loop_5_click_xpath_nextbtn1",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForLoop",
+					"Loop"
+				]
+			},
 			"description": [
-				"This configuration represents a usage of the `InvokeForLoop` plugin along with other actions in an automation scenario.",
+				"### Click Next Button 5 Times Using XPath",
 				"",
-				"1. **For Loop:**",
-				"   - The loop is initiated by the `InvokeForLoop` plugin.",
-				"   - It specifies that the enclosed actions will be executed a total of 2 times.",
-				"",
-				"2. **Nested Actions:**",
-				"   - Within the loop, three actions are defined.",
-				"   - The first action is another instance of the `InvokeForLoop` plugin, creating a nested loop.",
-				"   - This nested loop also specifies 2 iterations and contains a single action to click on the element with the CSS selector `#NextBtn2`.",
-				"",
-				"3. **Next Actions:**",
-				"   - After the nested loop completes its iterations, the script proceeds to the next action outside the loop, which is to click on the element with the CSS selector `#FirstBtn2`.",
-				"   - Following this, another action is performed to click on the element with the CSS selector `#NextBtn1`.",
-				"",
-				"In summary, this configuration orchestrates a scenario where a set of actions is repeated a specific number of times within a loop structure created by the `InvokeForLoop` plugin. ",
-				"The nested usage of the plugin demonstrates the flexibility to create complex automation workflows with repetitive actions executed in a controlled manner."
+				"This example demonstrates how the InvokeForLoop plugin runs a loop 5 times and performs a Click action on the element matching the XPath selector `//button[@id='NextBtn1']` each iteration.",
+				"The inner rule uses the XPath `//button[@id='NextBtn1']` to locate the target button.",
+				"If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error."
 			],
 			"rule": {
+				"$type": "Action",
+				"argument": "5",
+				"pluginName": "InvokeForLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"onElement": "//button[@id='NextBtn1']",
+						"pluginName": "Click"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Click action throws exception",
+						"Invalid iteration count (zero or negative)",
+						"Loop action or rule failure",
+						"Target element not found"
+					],
+					"expected_result": "The Click action on element Id `NextBtn1` is executed 5 times; exceptions are recorded but do not halt execution.",
+					"notes": "InvokeForLoop repeats the inner Click action 5 times. Click failures log exceptions without stopping the loop.",
+					"test_case": "invoke_for_loop_5_click_id_nextbtn1",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Click Next Button 5 Times Using Id Locator",
+				"",
+				"This example demonstrates how the InvokeForLoop plugin runs a loop 5 times and performs a Click action on the element with Id `NextBtn1` each iteration.",
+				"The inner rule uses `NextBtn1` scoped by Id to locate the target button.",
+				"If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "5",
+				"pluginName": "InvokeForLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"locator": "Id",
+						"onElement": "NextBtn1",
+						"pluginName": "Click"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Click action throws exception",
+						"Invalid iteration count (zero or negative)",
+						"Loop action or rule failure",
+						"Target element not found"
+					],
+					"expected_result": "Outer loop runs twice; inner loop clicks `#NextBtn2` twice each iteration, then clicks `FirstBtn2` and `NextBtn1` once per outer iteration; exceptions are recorded but do not halt execution.",
+					"notes": "Demonstrates nested InvokeForLoop with mixed selectors. Click failures log exceptions without stopping loops.",
+					"test_case": "invoke_for_loop_nested_click_buttons",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Nested InvokeForLoop With Mixed Actions",
+				"",
+				"This example demonstrates how the InvokeForLoop plugin runs an outer loop 2 times, then within each outer iteration runs an inner loop 2 times to Click `#NextBtn2`, followed by a Click on `//button[@Id='FirstBtn2']`, then a Click on the element with Id `NextBtn1`.",
+				"Inner loops use their own argument and selectors as specified.",
+				"If any element is missing, an exception is logged and that iteration continues. Click failures record exceptions without stopping the outer loop. The overall process only stops if configured to stop on error."
+			],
+			"rule": {
+				"$type": "Action",
 				"argument": "2",
 				"pluginName": "InvokeForLoop",
 				"rules": [
 					{
+						"$type": "Action",
 						"argument": "2",
 						"pluginName": "InvokeForLoop",
 						"rules": [
 							{
+								"$type": "Action",
 								"locator": "CssSelector",
 								"onElement": "#NextBtn2",
 								"pluginName": "Click"
@@ -99,13 +279,14 @@
 						]
 					},
 					{
-						"locator": "CssSelector",
-						"onElement": "#FirstBtn2",
+						"$type": "Action",
+						"onElement": "//button[@Id='FirstBtn2']",
 						"pluginName": "Click"
 					},
 					{
-						"locator": "CssSelector",
-						"onElement": "#NextBtn1",
+						"$type": "Action",
+						"locator": "Id",
+						"onElement": "NextBtn1",
 						"pluginName": "Click"
 					}
 				]
@@ -114,13 +295,17 @@
 	],
 	"key": "InvokeForLoop",
 	"manifestVersion": 4,
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the number of iterations the loop will execute. ",
-				"This property indicates the fixed number of times the loop will iterate, providing control over the repetitive execution of actions within the loop. ",
-				"Each action defined within the loop will be executed for the specified number of iterations, allowing for controlled and predictable automation workflows."
+				"Sets how many times the loop repeats.",
+				"Each step inside the loop runs that many times.",
+				"This gives you control over repeated work.",
+				"It ensures tasks run the exact number of times you want."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -128,7 +313,8 @@
 		},
 		{
 			"description": [
-				"Define a sequence of actions or instructions to be executed within a loop or under specific conditions."
+				"Lists the steps to run in a loop or when conditions apply.",
+				"Each step runs in order to complete the task."
 			],
 			"mandatory": true,
 			"name": "Rules",
@@ -139,13 +325,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `InvokeForLoop` plugin enables efficient and controlled iteration over a predefined set of actions within automation scripts.",
-		"It facilitates repetitive task automation by executing a specified number of iterations, making it essential for handling loops in RPA and automation testing.",
-		"Key functionalities include controlled iteration, sequential execution of tasks, and parameterized iteration, enhancing flexibility and adaptability in automation workflows.",
-		"Use cases include data processing, batch processing, parameterized iteration, test case iteration, data-driven testing, and load testing, ensuring comprehensive coverage and performance assessment."
+		"The InvokeForLoop tool repeats a series of steps a set number of times.",
+		"You simply specify how many times to run your tasks, and it handles the rest.",
+		"This makes your automation more reliable and cuts out manual repetition."
 	]
 }

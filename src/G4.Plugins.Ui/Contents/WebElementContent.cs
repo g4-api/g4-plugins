@@ -20,13 +20,24 @@ namespace G4.Plugins.Ui.Contents
                 throw new NotSupportedException("Only ContentRuleModel is supported in WebElementContent plugin.");
             }
 
-            // Retrieve the web element based on the content rule's "OnElement" XPath or CSS selector.
-            var onElement = this.GetElement(contentRule, pluginData.Element);
+            // Initialize an empty string to hold the extracted value from the web element.
+            var value = string.Empty;
 
-            // Extract the value from the specified attribute or the inner text of the element.
-            var value = !string.IsNullOrEmpty(contentRule.OnAttribute)
-                ? onElement.GetAttribute(contentRule.OnAttribute)
-                : onElement.Text;
+            try
+            {
+                // Retrieve the web element based on the content rule's "OnElement" XPath or CSS selector.
+                var onElement = this.GetElement(contentRule, pluginData.Element);
+
+                // Extract the value from the specified attribute or the inner text of the element.
+                value = !string.IsNullOrEmpty(contentRule.OnAttribute)
+                    ? onElement.GetAttribute(contentRule.OnAttribute)
+                    : onElement.Text;
+            }
+            catch (Exception e)
+            {
+                // If an exception occurs while retrieving the element or its value, log it as a G4ExceptionModel.
+                Exceptions.Add(new G4ExceptionModel(rule: pluginData.Rule, exception: e.GetBaseException()));
+            }
 
             // Apply the regular expression defined in the content rule to extract the desired value.
             value = Regex.Match(value, contentRule.RegularExpression).Value;
