@@ -146,13 +146,6 @@
 			}
 		},
 		{
-			"description": [
-				"### Resolve an Online File URL and Extract a Link via XPath",
-				"",
-				"This example demonstrates how to resolve an online file URL and extract a specific link from the file content using an XPath expression.",
-				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf` and applies the XPath `//a[.='G4 Tutorial Guide']` to locate the desired link.",
-				"Values are returned as strings (e.g. \"G4 Tutorial Guide\") for downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -168,24 +161,25 @@
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText"
+					"ElementText",
+					"FileRetrieval",
+					"LinkExtraction"
 				]
 			},
+			"description": [
+				"### Resolve an Online File URL and Extract a Link via XPath",
+				"",
+				"This example demonstrates how to resolve an online file at `http://io.files/g4.pdf` and extract a specific link from its content using an XPath expression.",
+				"It uses the `ResolveOnlineFile` plugin to download the file, then applies the XPath `//a[@data-automation-id='direct-url-link']` to locate the desired link.",
+				"Values are returned as strings (e.g. \"G4 Tutorial Guide\") for downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
-				"argument": "http://io.files/g4.pdf",
-				"onElement": "//a[.='G4 Tutorial Guide']",
+				"onElement": "//a[@data-automation-id='direct-url-link']",
 				"pluginName": "ResolveOnlineFile"
 			}
 		},
 		{
-			"description": [
-				"### Resolve an Online File URL and Extract a Link via CSS Selector",
-				"",
-				"This example demonstrates how to resolve an online file URL and extract a specific element from the file content using a CSS selector.",
-				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf` and applies the CSS selector `a.tutorial-link` to locate the desired link.",
-				"Values are returned as strings (e.g. link URL or text) for downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -195,31 +189,32 @@
 						"Resolver timeout",
 						"Unexpected content type"
 					],
-					"expected_result": "The PDF file is downloaded, and the element matching the CSS selector is extracted and returned.",
+					"expected_result": "The file at the URL is downloaded, and the link text matching the CSS selector is extracted and returned.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing.",
 					"use_case": "file_resolution_element_css",
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText"
+					"ElementText",
+					"FileRetrieval",
+					"LinkExtraction"
 				]
 			},
+			"description": [
+				"### Resolve an Online File URL and Extract a Link via CSS Selector",
+				"",
+				"This example demonstrates how to resolve an online file and extract a specific element from its content using a CSS selector.",
+				"It uses the `ResolveOnlineFile` plugin to download the file from `http://io.files/g4.pdf`, then applies the CSS selector `a.tutorial-link` to locate the desired link.",
+				"Values are returned as strings (e.g. link text `G4 Tutorial Guide`) for downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
-				"argument": "http://io.files/g4.pdf",
 				"locator": "CssSelector",
 				"onElement": "a.tutorial-link",
 				"pluginName": "ResolveOnlineFile"
 			}
 		},
 		{
-			"description": [
-				"### Resolve an Online File URL and Extract a Matching URL with Regex via XPath",
-				"",
-				"This example demonstrates how to resolve an online file URL and extract a specific URL from its content using an XPath expression and a regular expression.",
-				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf`, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, and then applies the regex `https?://[^\\s\"']+?/g4\\.pdf` to extract the precise PDF URL.",
-				"Values are returned as strings for downstream processing, and the regex removes extraneous prefixes to ensure only the core PDF URL is captured."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -230,7 +225,7 @@
 						"Unexpected content type",
 						"Regex match occurs when it shouldn't"
 					],
-					"expected_result": "The PDF file is downloaded, the link element matching the XPath is selected, and the URL matching the regex is returned as a string.",
+					"expected_result": "The file is downloaded, the link element matching the XPath is selected, and the URL matching the regex is returned as a string.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing and filtering.",
 					"use_case": "file_resolution_element_xpath_regex_extraction",
 					"version": "1.0"
@@ -241,14 +236,37 @@
 					"RegexValidation"
 				]
 			},
+			"description": [
+				"### Resolve an Online File URL and Extract a Matching URL with Regex via XPath",
+				"",
+				"This example demonstrates how to resolve an online file URL and extract a specific URL from its content using an XPath expression and a regular expression.",
+				"It uses the `ResolveOnlineFile` plugin to download the file, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, then applies the regular expression `https?://[^\\s\"']+?/g4\\.pdf` to extract the precise PDF URL (e.g. `http://io.files/g4.pdf`).",
+				"Values are returned as strings for downstream processing.",
+				"The `?` quantifier makes the `s` optional in `https`, and the non-greedy `+?` match avoids capturing extra characters."
+			],
 			"rule": {
 				"$type": "Action",
-				"argument": "http://io.files/g4.pdf",
 				"onElement": "//a[contains(.,'g4.pdf')]",
 				"pluginName": "ResolveOnlineFile",
 				"regularExpression": "https?://[^\\s\"']+?/g4\\.pdf"
 			}
 		},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		{
 			"description": [
 				"### Resolve an Online File URL and Extract an Attribute via XPath",
