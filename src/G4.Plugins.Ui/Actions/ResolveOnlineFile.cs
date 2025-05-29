@@ -10,11 +10,11 @@ using System.IO;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 
-namespace G4.Plugins.Common.Actions
+namespace G4.Plugins.Ui.Actions
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Common.Actions.Manifests.{nameof(ResolveOnlineFile)}.json")]
+        assembly: "G4.Plugins.Ui, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        manifest: $"G4.Plugins.Ui.Actions.Manifests.{nameof(ResolveOnlineFile)}.json")]
     public class ResolveOnlineFile(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
