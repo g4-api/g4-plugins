@@ -1,17 +1,17 @@
 ﻿{
 	"author": {
-		"name": "Roei Sabag",
-		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
 	},
 	"categories": [
-		"Logging"
+		"DataManagement"
 	],
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "text",
+				"iconProvider": "import",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -19,63 +19,430 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `WriteLog` plugin is designed to write log messages during the execution of automation scripts. ",
-		"It is particularly useful for debugging, tracking the flow of execution, and recording important information.",
+		"The ResolveOnlineFile plugin finds and downloads files from a URL or web element, then makes the file data available for later steps. It takes a URL from a rule argument or a UI element, optionally filters it with a regular expression, and fetches the file via HTTP GET. It converts the file into Base64, gathers metadata (filename, extension, size, status code), and stores all details in session parameters. On any error, it clears stored data and logs the exception to keep the workflow consistent.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                                                     |",
-		"|---------------------|-------------------------------------------------------------------------------------------------|",
-		"| Logging Information | Logs the content of the `Argument` property to the log using the logging framework.             |",
-		"| Debugging Aid       | Helps in understanding the flow of automation, capturing important events, or debugging issues. |",
+		"| Feature                       | Description                                                                      |",
+		"|-------------------------------|----------------------------------------------------------------------------------|",
+		"| UI Element URL Resolution     | Locate URL from a web element’s text or specified attribute.                     |",
+		"| Regular Expression Extraction | Extract or filter the exact URL using a provided regex.                          |",
+		"| HTTP File Download            | Download the file content via an HTTP GET request.                               |",
+		"| Base64 Encoding & Metadata    | Convert file bytes to Base64 and extract name, extension, size, and status code. |",
+		"| Session Parameter Management  | Store file data and metadata in session parameters for downstream use.           |",
+		"| Error Cleanup & Logging       | Clear session parameters and log exceptions to maintain a clean state.           |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage               | Description                                                            |",
-		"|---------------------|------------------------------------------------------------------------|",
-		"| Execution Tracking  | Track the flow of execution by logging key points in the automation.   |",
-		"| Debugging           | Capture log messages to help debug issues in the automation process.   |",
-		"| Information Logging | Record important information during the execution of automation tasks. |",
+		"| Use Case                       | Description                                                           |",
+		"|--------------------------------|-----------------------------------------------------------------------|",
+		"| UI-Driven File Download        | Download files linked in web apps by resolving elements at runtime.   |",
+		"| Dynamic URL Extraction         | Fetch resources when URLs are embedded in element text or attributes. |",
+		"| Regex-Based Resource Filtering | Use a regex to isolate and download specific URL segments.            |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage               | Description                                                                             |",
-		"|---------------------|-----------------------------------------------------------------------------------------|",
-		"| Test Execution Logs | Capture logs during test execution to understand the flow and state of tests.           |",
-		"| Debugging Tests     | Log messages to help debug test failures or unexpected behavior during automated tests. |",
-		"| Recording Test Data | Log test data and results for analysis and verification purposes.                       |"
+		"| Use Case               | Description                                                           |",
+		"|------------------------|-----------------------------------------------------------------------|",
+		"| Test Asset Retrieval   | Retrieve test documents or binaries from UI elements for validation.  |",
+		"| Content Verification   | Download and inspect file contents returned by the system under test. |",
+		"| Data-Driven Test Input | Supply downloaded files as inputs for parameterized test runs.        |"
+	],
+	"entity": [
+		{
+			"description": [
+				"File content converted into a text format so it can travel safely through systems that handle only text.",
+				"Encoded data can be converted back into the original file for use or storage.",
+				"Keeping file data in text form helps scripts move it without breaking."
+			],
+			"name": "Data",
+			"type": "String"
+		},
+		{
+			"description": [
+				"File extension without a dot, like “pdf” or “jpg”, that tells you the file type.",
+				"Knowing the extension helps scripts choose the right way to open or save the file.",
+				"It determines how the file can be processed or displayed."
+			],
+			"name": "Extension",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Complete file name including its extension, for example “report.pdf”.",
+				"Use this name when saving or displaying the file to keep it recognizable.",
+				"It comes directly from the resource’s address."
+			],
+			"name": "FullName",
+			"type": "String"
+		},
+		{
+			"description": [
+				"File name without its extension, for example “report” from “report.pdf”.",
+				"Using the base name helps when you need a label separate from the file format.",
+				"It makes it easier to organize files by name only."
+			],
+			"name": "Name",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Size of the downloaded file in bytes as a text number like “102400”.",
+				"Knowing the file size helps workflows decide if the file is too large or small.",
+				"Scripts can use this value to enforce limits or display progress information."
+			],
+			"name": "Size",
+			"type": "String"
+		},
+		{
+			"description": [
+				"HTTP status code from the download request, such as “200” for success or “404” if not found.",
+				"Using the status code lets workflows handle errors or confirm success.",
+				"Scripts can check this value to decide what to do next."
+			],
+			"name": "StatusCode",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Full address of the requested resource after any filtering or lookup.",
+				"Logging the exact address helps track which resource was used or retried.",
+				"Using the URI makes auditing and debugging more reliable."
+			],
+			"name": "Uri",
+			"type": "String"
+		}
 	],
 	"examples": [
 		{
 			"description": [
-				"Logs a simple message during the execution of the automation script."
+				"### Resolve an Online File URL",
+				"",
+				"This example demonstrates how to resolve an online file URL to retrieve its contents.",
+				"It uses the `ResolveOnlineFile` plugin with the argument set to the file URL `http://io.files/g4.pdf`.",
+				"Values are returned as binary data (e.g. PDF bytes) for downstream processing."
 			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File not found",
+						"Malformed URL",
+						"Resolver timeout",
+						"Unexpected content type"
+					],
+					"expected_result": "The PDF file at the specified URL is downloaded and made available for further processing.",
+					"notes": "Binary file contents are returned unchanged to ensure fidelity.",
+					"use_case": "file_resolution_full",
+					"version": "1.0"
+				},
+				"labels": [
+					"FileRetrieval"
+				]
+			},
 			"rule": {
-				"argument": "Logging a simple message",
-				"pluginName": "WriteLog"
+				"$type": "Action",
+				"argument": "http://io.files/g4.pdf",
+				"pluginName": "ResolveOnlineFile"
 			}
 		},
 		{
 			"description": [
-				"Logs the value of a dynamic parameter during the execution of the automation script."
+				"### Resolve an Online File URL and Extract a Link via XPath",
+				"",
+				"This example demonstrates how to resolve an online file URL and extract a specific link from the file content using an XPath expression.",
+				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf` and applies the XPath `//a[.='G4 Tutorial Guide']` to locate the desired link.",
+				"Values are returned as strings (e.g. \"G4 Tutorial Guide\") for downstream processing."
 			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed URL",
+						"Resolver timeout",
+						"Unexpected content type"
+					],
+					"expected_result": "The PDF file is downloaded, and the link text matching the XPath is extracted and returned.",
+					"notes": "Extracted values are converted to strings to ensure consistent processing.",
+					"use_case": "file_resolution_element_xpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText"
+				]
+			},
 			"rule": {
-				"argument": "{{$Get-Parameter --Name:MyParam --Scope:Session}}",
-				"pluginName": "WriteLog"
+				"$type": "Action",
+				"argument": "http://io.files/g4.pdf",
+				"onElement": "//a[.='G4 Tutorial Guide']",
+				"pluginName": "ResolveOnlineFile"
+			}
+		},
+		{
+			"description": [
+				"### Resolve an Online File URL and Extract a Link via CSS Selector",
+				"",
+				"This example demonstrates how to resolve an online file URL and extract a specific element from the file content using a CSS selector.",
+				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf` and applies the CSS selector `a.tutorial-link` to locate the desired link.",
+				"Values are returned as strings (e.g. link URL or text) for downstream processing."
+			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File not found",
+						"Incorrect CSS selector usage",
+						"Malformed URL",
+						"Resolver timeout",
+						"Unexpected content type"
+					],
+					"expected_result": "The PDF file is downloaded, and the element matching the CSS selector is extracted and returned.",
+					"notes": "Extracted values are converted to strings to ensure consistent processing.",
+					"use_case": "file_resolution_element_css",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText"
+				]
+			},
+			"rule": {
+				"$type": "Action",
+				"argument": "http://io.files/g4.pdf",
+				"locator": "CssSelector",
+				"onElement": "a.tutorial-link",
+				"pluginName": "ResolveOnlineFile"
+			}
+		},
+		{
+			"description": [
+				"### Resolve an Online File URL and Extract a Matching URL with Regex via XPath",
+				"",
+				"This example demonstrates how to resolve an online file URL and extract a specific URL from its content using an XPath expression and a regular expression.",
+				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf`, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, and then applies the regex `https?://[^\\s\"']+?/g4\\.pdf` to extract the precise PDF URL.",
+				"Values are returned as strings for downstream processing, and the regex removes extraneous prefixes to ensure only the core PDF URL is captured."
+			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed URL",
+						"Resolver timeout",
+						"Unexpected content type",
+						"Regex match occurs when it shouldn't"
+					],
+					"expected_result": "The PDF file is downloaded, the link element matching the XPath is selected, and the URL matching the regex is returned as a string.",
+					"notes": "Extracted values are converted to strings to ensure consistent processing and filtering.",
+					"use_case": "file_resolution_element_xpath_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"FileRetrieval",
+					"LinkExtraction",
+					"RegexValidation"
+				]
+			},
+			"rule": {
+				"$type": "Action",
+				"argument": "http://io.files/g4.pdf",
+				"onElement": "//a[contains(.,'g4.pdf')]",
+				"pluginName": "ResolveOnlineFile",
+				"regularExpression": "https?://[^\\s\"']+?/g4\\.pdf"
+			}
+		},
+		{
+			"description": [
+				"### Resolve an Online File URL and Extract an Attribute via XPath",
+				"",
+				"This example demonstrates how to resolve an online file URL and extract a specific attribute value from its content using an XPath expression.",
+				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf` and applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, then retrieves its `href` attribute.",
+				"Values are returned as strings for downstream processing."
+			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed URL",
+						"Resolver timeout",
+						"Unexpected content type"
+					],
+					"expected_result": "The PDF file is downloaded, and the href attribute of the link matching the XPath is extracted and returned as a string.",
+					"notes": "Extracted values are converted to strings to ensure consistent processing.",
+					"use_case": "file_resolution_element_xpath_attribute_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"AttributeExtraction",
+					"FileRetrieval",
+					"LinkExtraction"
+				]
+			},
+			"rule": {
+				"$type": "Action",
+				"argument": "http://io.files/g4.pdf",
+				"onAttribute": "href",
+				"onElement": "//a[contains(.,'g4.pdf')]",
+				"pluginName": "ResolveOnlineFile"
+			}
+		},
+		{
+			"description": [
+				"### Resolve an Online File URL and Clean an Attribute with Regex via XPath",
+				"",
+				"This example demonstrates how to resolve an online file URL and clean an attribute value from its content using an XPath expression and a regular expression.",
+				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf`, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, retrieves its `href` attribute, and then applies a regex `(?<=href=\")[^\"]+\\.pdf` to strip any query parameters.",
+				"Values are returned as strings for downstream processing."
+			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed URL",
+						"Resolver timeout",
+						"Unexpected content type",
+						"Regex match occurs when it shouldn't"
+					],
+					"expected_result": "The PDF file is downloaded, the href attribute of the link matching the XPath is extracted, and the regex is applied to strip query parameters, returning the cleaned value.",
+					"notes": "Extracted values are converted to strings to ensure consistent processing and filtering.",
+					"use_case": "file_resolution_element_xpath_attribute_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"FileRetrieval",
+					"LinkExtraction",
+					"RegexValidation"
+				]
+			},
+			"rule": {
+				"$type": "Action",
+				"argument": "http://io.files/g4.pdf",
+				"onAttribute": "href",
+				"onElement": "//a[contains(.,'g4.pdf')]",
+				"pluginName": "ResolveOnlineFile",
+				"regularExpression": "(?<=href=\")[^\"]+\\.pdf"
 			}
 		}
 	],
 	"key": "ResolveOnlineFile",
 	"manifestVersion": 4,
+	"outputParameters": [
+		{
+			"description": [
+				"File content converted into a text format so it can travel safely through systems that handle only text.",
+				"Encoded data can be converted back into the original file for use or storage.",
+				"Keeping file data in text form helps scripts move it without breaking."
+			],
+			"name": "ResolvedFileData",
+			"type": "String"
+		},
+		{
+			"description": [
+				"File extension without a dot, like “pdf” or “jpg”, that tells you the file type.",
+				"Knowing the extension helps scripts choose the right way to open or save the file.",
+				"It determines how the file can be processed or displayed."
+			],
+			"name": "ResolvedFileExtension",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Complete file name including its extension, for example “report.pdf”.",
+				"Use this name when saving or displaying the file to keep it recognizable.",
+				"It comes directly from the resource’s address."
+			],
+			"name": "ResolvedFileFullName",
+			"type": "String"
+		},
+		{
+			"description": [
+				"File name without its extension, for example “report” from “report.pdf”.",
+				"Using the base name helps when you need a label separate from the file format.",
+				"It makes it easier to organize files by name only."
+			],
+			"name": "ResolvedFileName",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Size of the downloaded file in bytes as a text number like “102400”.",
+				"Knowing the file size helps workflows decide if the file is too large or small.",
+				"Scripts can use this value to enforce limits or display progress information."
+			],
+			"name": "ResolvedFileSize",
+			"type": "String"
+		},
+		{
+			"description": [
+				"HTTP status code from the download request, such as “200” for success or “404” if not found.",
+				"Using the status code lets workflows handle errors or confirm success.",
+				"Scripts can check this value to decide what to do next."
+			],
+			"name": "ResolvedFileStatusCode",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Full address of the requested resource after any filtering or lookup.",
+				"Logging the exact address helps track which resource was used or retried.",
+				"Using the URI makes auditing and debugging more reliable."
+			],
+			"name": "ResolvedFileUri",
+			"type": "String"
+		}
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the message or information to be logged. This can be a static message or a dynamic value retrieved from parameters."
+				"Defines the address used to download the file, which can be text, a web link, or a dynamic expression.",
+				"The plugin uses this address when no page element provides the link.",
+				"Explicit URLs make file downloads more reliable."
 			],
 			"mandatory": false,
 			"name": "Argument",
-			"type": "String|Expression"
+			"type": "String|Uri|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Defines how to find the element that holds the download link.",
+				"XPath is the default method when no other locator is provided.",
+				"Choosing the right locator ensures the correct element is used."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Reads the link from a specific attribute on the chosen element.",
+				"Use the attribute name to pick which part of the element holds the URL.",
+				"Correct attribute selection ensures the right address is captured."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Identifies the element that contains the download link.",
+				"The plugin reads the link from that element when no explicit URL is given.",
+				"Accurate element selection ensures the correct URL is used."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Filters the element’s text using a pattern to extract the needed link portion.",
+				"Only matching parts are kept before download.",
+				"Pattern matching leads to more precise URL extraction."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
 		}
 	],
 	"protocol": {
@@ -86,9 +453,9 @@
 		"Any"
 	],
 	"summary": [
-		"The `WriteLog` plugin logs information during the execution of automation scripts, aiding in debugging, tracking the flow of execution, and recording important information.",
-		"It captures the content of the `Argument` property and logs it using the logging framework, providing valuable insights into the automation process.",
-		"Key features include logging information, serving as a debugging aid, and helping in understanding the flow of automation by capturing important events.",
-		"Common use cases include execution tracking, debugging, and information logging in RPA, as well as capturing test execution logs, debugging test failures, and recording test data in automation testing."
+		"The ResolveOnlineFile tool grabs a file link you give it or finds it on a page and downloads the file.",
+		"It can pull out just the correct link even if there’s extra text around it.",
+		"It turns the file into text, records its name, type, size, and whether it downloaded successfully, and saves this info for use later.",
+		"If the download fails, it wipes out any saved info and notes the problem so nothing gets mixed up."
 	]
 }
