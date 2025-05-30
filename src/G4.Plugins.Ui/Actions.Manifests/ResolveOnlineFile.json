@@ -13,6 +13,79 @@
 				"componentType": "task",
 				"iconProvider": "import",
 				"model": "ActionRuleModel"
+			},
+			"rag": {
+				"description": "The ResolveOnlineFile plugin enables automation workflows to reliably locate and download files from a URL or web element, apply optional regex filtering, convert file data to Base64, and store content plus metadata in session parameters with automatic cleanup and error logging to preserve workflow integrity.",
+				"qa": [
+					{
+						"question": "What is the ResolveOnlineFile plugin and why does it matter?",
+						"answer": "It finds and downloads files from a given URL or UI element, making the file data and metadata available for later automation steps, which is critical for dynamic file handling."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "It offers UI element URL resolution, regex extraction, HTTP GET download, Base64 encoding, and session parameter management. Primary parameters include Argument for the URL, Locator, OnElement, OnAttribute, and RegularExpression."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows?",
+						"answer": "It appears under context.integration.sequentialWorkflow as an ActionRuleModel task, making it available in workflow designers and low-code platforms as a file-download action."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use clear locators or direct URLs, apply regex patterns to filter unwanted parts, verify session parameters after download, and check logs on failure to troubleshoot quickly."
+					},
+					{
+						"question": "What is the structure of its rule or schema definition?",
+						"answer": "Each rule has $type set to Action, pluginName ResolveOnlineFile, and may include fields like argument, onElement, onAttribute, locator, and regularExpression."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "It clears any stored session data on error, logs the exception to the workflow log stream, and by default allows the rest of the workflow to continue unless explicitly configured to stop."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the version of the manifest schema this plugin follows."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It is listed under the DataManagement category, reflecting its role in handling and storing file data."
+					},
+					{
+						"question": "What is the unique key for this plugin?",
+						"answer": "The key is ResolveOnlineFile, which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What outputParameters does this plugin return?",
+						"answer": "It returns ResolvedFileData, ResolvedFileExtension, ResolvedFileFullName, ResolvedFileName, ResolvedFileSize, ResolvedFileStatusCode, and ResolvedFileUri as session parameters."
+					},
+					{
+						"question": "What does the entity section define?",
+						"answer": "The entity section lists output fields Data, Extension, FullName, Name, Size, StatusCode, and Uri, describing the file data and metadata returned by the plugin."
+					},
+					{
+						"question": "What type of plugin is this?",
+						"answer": "It is an Action plugin, designed to perform a file-download and data-capture operation within automation workflows."
+					},
+					{
+						"question": "What properties control how data is extracted and stored?",
+						"answer": "Properties include Argument for the download source, Locator method, OnElement selector, OnAttribute field, and RegularExpression for filtering the extracted value."
+					},
+					{
+						"question": "What protocol settings does the manifest specify?",
+						"answer": "Protocol settings show apiDocumentation as None and w3c as None, meaning it does not rely on external API docs or W3C standards."
+					},
+					{
+						"question": "What scopes does this plugin support?",
+						"answer": "The scopes field lists Any, indicating it can run in any execution context or platform."
+					},
+					{
+						"question": "What summary is provided for this plugin?",
+						"answer": "The summary explains that the tool grabs a file link or finds it on a page, downloads and encodes the file, records its name, type, size, and download status, and clears data on failure."
+					}
+				]
 			}
 		}
 	},
@@ -251,30 +324,7 @@
 				"regularExpression": "https?://[^\\s\"']+?/g4\\.pdf"
 			}
 		},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		{
-			"description": [
-				"### Resolve an Online File URL and Extract an Attribute via XPath",
-				"",
-				"This example demonstrates how to resolve an online file URL and extract a specific attribute value from its content using an XPath expression.",
-				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf` and applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, then retrieves its `href` attribute.",
-				"Values are returned as strings for downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -284,7 +334,7 @@
 						"Resolver timeout",
 						"Unexpected content type"
 					],
-					"expected_result": "The PDF file is downloaded, and the href attribute of the link matching the XPath is extracted and returned as a string.",
+					"expected_result": "The file is downloaded, and the href attribute of the link matching the XPath is extracted and returned as a string.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing.",
 					"use_case": "file_resolution_element_xpath_attribute_extraction",
 					"version": "1.0"
@@ -295,22 +345,21 @@
 					"LinkExtraction"
 				]
 			},
+			"description": [
+				"### Resolve an Online File URL and Extract an Attribute via XPath",
+				"",
+				"This example demonstrates how to resolve an online file and extract a specific attribute value from its content using an XPath expression.",
+				"It uses the `ResolveOnlineFile` plugin, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, then retrieves its `href` attribute.",
+				"Values are returned as strings for downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
-				"argument": "http://io.files/g4.pdf",
 				"onAttribute": "href",
 				"onElement": "//a[contains(.,'g4.pdf')]",
 				"pluginName": "ResolveOnlineFile"
 			}
 		},
 		{
-			"description": [
-				"### Resolve an Online File URL and Clean an Attribute with Regex via XPath",
-				"",
-				"This example demonstrates how to resolve an online file URL and clean an attribute value from its content using an XPath expression and a regular expression.",
-				"It uses the `ResolveOnlineFile` plugin with the argument set to `http://io.files/g4.pdf`, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, retrieves its `href` attribute, and then applies a regex `(?<=href=\")[^\"]+\\.pdf` to strip any query parameters.",
-				"Values are returned as strings for downstream processing."
-			],
 			"context": {
 				"annotations": {
 					"edge_cases": [
@@ -321,7 +370,7 @@
 						"Unexpected content type",
 						"Regex match occurs when it shouldn't"
 					],
-					"expected_result": "The PDF file is downloaded, the href attribute of the link matching the XPath is extracted, and the regex is applied to strip query parameters, returning the cleaned value.",
+					"expected_result": "The file is downloaded, the href attribute of the link matching the XPath is extracted, and the regex is applied to strip query parameters, returning the cleaned value.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing and filtering.",
 					"use_case": "file_resolution_element_xpath_attribute_regex_extraction",
 					"version": "1.0"
@@ -332,13 +381,19 @@
 					"RegexValidation"
 				]
 			},
+			"description": [
+				"### Resolve an Online File URL and Clean an Attribute with Regex via XPath",
+				"",
+				"This example demonstrates how to resolve an online file URL and clean an attribute value from its content using an XPath expression and a regular expression.",
+				"It uses the `ResolveOnlineFile` plugin to download the file, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, retrieves its `href` attribute, and then applies the regex `[^?\\\"]+\\.pdf` to strip any query parameters (in JSON the quote is double-escaped, but at runtime the pattern is `[^?\"]+\\.pdf`).",
+				"Values are returned as strings for downstream processing."
+			],
 			"rule": {
 				"$type": "Action",
-				"argument": "http://io.files/g4.pdf",
 				"onAttribute": "href",
 				"onElement": "//a[contains(.,'g4.pdf')]",
 				"pluginName": "ResolveOnlineFile",
-				"regularExpression": "(?<=href=\")[^\"]+\\.pdf"
+				"regularExpression": "[^?\\\"]+\\.pdf"
 			}
 		}
 	],
