@@ -3,6 +3,7 @@ using G4.IntegrationTests.Framework;
 using G4.IntegrationTests.Framework.Attributes;
 using G4.IntegrationTests.Plugins.Common.ExportData;
 
+using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
@@ -45,6 +46,13 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             ["Elements", "WebElementContent", "ExpectedJsonDataElements.txt"],
             ["PageSource", "HtmlContent", "ExpectedJsonDataPageSource.txt"],
             ["BodyHtml", "HtmlContent", "ExpectedJsonDataPageSource.txt"]
+        ];
+
+        private static IEnumerable<object[]> DataSetWriteSqlLight =>
+        [
+            ["Elements", "WebElementContent", "ExpectedSqLightDataElements.txt"],
+            ["PageSource", "HtmlContent", "ExpectedSqLightDataPageSource.txt"],
+            ["BodyHtml", "HtmlContent", "ExpectedSqLightDataPageSource.txt"]
         ];
 
         private static IEnumerable<object[]> DataSetWriteXml =>
@@ -796,6 +804,154 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(
                 condition: "Description:    Lorem ipsum dolor sit amet, consectetur adipiscing elit.".Equals(entity["Pre"]) || "Description:\t\t\t\tLorem ipsum dolor sit amet, consectetur adipiscing elit.".Equals(entity["Pre"]),
                 message: "Pre field mismatch.");
+        }
+
+        [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
+        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+            "SqlLiteDataCollector plugin, when run with specific parameters, accurately extracts hotel information " +
+            "from webpage elements and writes each record into a SQLite database in real-time.")]
+        #region *** Criteria ***
+        [AcceptanceCriteria(criteria: "Plugin Integration: The SqlLiteDataCollector plugin seamlessly integrates into the G4™ Engine framework.")]
+        [AcceptanceCriteria(criteria: "Parameterized Invocation: When run with parameters like 'clearLinesBreak', 'trim', and 'forEntity', the plugin correctly extracts hotel information from webpage elements.")]
+        [AcceptanceCriteria(criteria: "Extraction Accuracy: The extracted hotel information—location, price, rating, amenities, description, pet-friendly status, last update timestamp, and additional details—is validated for accuracy before insertion.")]
+        [AcceptanceCriteria(criteria: "Extraction Scope: The extraction scope can be customized via test parameters, ensuring flexible data collection.")]
+        [AcceptanceCriteria(criteria: "Real-Time Data Writing: Each extracted entity is inserted into the SQLite database table immediately upon extraction.")]
+        [AcceptanceCriteria(criteria: "Error Handling: The plugin handles extraction and database errors gracefully and provides informative messages.")]
+        #endregion
+        #region *** Data     ***
+        [DynamicData(dynamicDataSourceName: nameof(DataSetWriteSqlLight))]
+        #endregion
+        public void T0006A(string extractionScope, string contentType, string expectedData)
+        {
+            // Initialize the test environment and set core parameters
+            var environment = new AutomationEnvironment(TestContext);
+            environment.TestParameters["clearLinesBreak"] = true;
+            environment.TestParameters["trim"] = true;
+            environment.TestParameters["forEntity"] = true;
+            environment.TestParameters["fileName"] = Guid.NewGuid();
+            environment.TestParameters["extractionScope"] = extractionScope;
+            environment.TestParameters["contentType"] = contentType;
+
+            // Prepare browser and page settings
+            var testOptions = new EdgeTestOptions(environment, sut: "ExportData.html");
+
+            // Run the extraction and immediate insertion scenario
+            Invoke<C0006>(testOptions);
+
+            // Locate the generated SQLite database file
+            var dbFile = $"{environment.TestParameters["fileName"]}.db";
+
+            // Read back all rows from the "TestData" table as JSON
+            var actualData = ReadAsJson(dbFile, "TestData").Replace("\\t", " ");
+
+            // Load expected JSON text for comparison
+            var expectedDataJson = File
+                .ReadAllText($"Resources/{expectedData}")
+                .Replace("\\t", " ");
+
+            // Deserialize JSON into a list of dictionaries
+            var entities = JsonSerializer
+                .Deserialize<IEnumerable<IDictionary<string, object>>>(actualData);
+
+            // Sort and flatten both actual and expected JSON strings for reliable comparison
+            var expected = string.Concat(expectedDataJson.Order());
+            var actual = string.Concat(actualData.Order());
+
+            // Verify two records were inserted
+            Assert.AreEqual(
+                expected: 2,
+                actual: entities.Count(),
+                message: "Expected two records in the SQLite database table.");
+
+            // Verify stored data matches the expected payload
+            Assert.AreEqual(
+                expected,
+                actual,
+                message: "Data read from SQLite does not match the expected JSON payload.");
+        }
+
+        [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
+        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+            "SqlLiteDataCollector plugin, when triggered with specific parameters, accurately extracts hotel information " +
+            "from webpage elements and writes the extracted data into a SQLite database at the end of the extraction.")]
+        #region *** Criteria ***
+        [AcceptanceCriteria(criteria: "Plugin Integration: The SqlLiteDataCollector plugin seamlessly integrates into the G4™ Engine framework.")]
+        [AcceptanceCriteria(criteria: "Parameterized Invocation: When triggered with appropriate parameters, such as 'clearLinesBreak' and 'trim', the plugin correctly extracts hotel information from webpage elements and prepares it for storage.")]
+        [AcceptanceCriteria(criteria: "Extraction Accuracy: The extracted hotel information—location, price, rating, amenities, description, pet-friendly status, last update timestamp, and additional details—is validated for accuracy before insertion.")]
+        [AcceptanceCriteria(criteria: "Extraction Scope: The extraction scope can be customized using test parameters, ensuring flexibility in data collection.")]
+        [AcceptanceCriteria(criteria: "Data Writing: The extracted data is written to a SQLite database file at the end of the extraction.")]
+        [AcceptanceCriteria(criteria: "Error Handling: The plugin handles extraction or database errors gracefully and provides informative error messages.")]
+        #endregion
+        #region *** Data     ***
+        [DynamicData(dynamicDataSourceName: nameof(DataSetWriteSqlLight))]
+        #endregion
+        public void T0006B(string extractionScope, string contentType, string expectedData)
+        {
+            // Set up an automation environment with the needed test parameters
+            var environment = new AutomationEnvironment(TestContext);
+            environment.TestParameters["clearLinesBreak"] = true;
+            environment.TestParameters["trim"] = true;
+            environment.TestParameters["fileName"] = Guid.NewGuid();
+            environment.TestParameters["extractionScope"] = extractionScope;
+            environment.TestParameters["contentType"] = contentType;
+
+            // Configure browser and page under test
+            var testOptions = new EdgeTestOptions(environment, sut: "ExportData.html");
+
+            // Execute the extraction scenario
+            Invoke<C0006>(testOptions);
+
+            // Read rows back from the SQLite database table "TestData"
+            var dbFile = $"{environment.TestParameters["fileName"]}.db";
+            var actualData = ReadAsJson(dbFile, "TestData").Replace("\\t", " ");
+
+            // Load the expected data from a JSON resource file for comparison
+            var expectedDataJson = File
+                .ReadAllText($"Resources/{expectedData}")
+                .Replace("\\t", " ");
+
+            // Deserialize the JSON-formatted rows into dictionaries
+            var entities = JsonSerializer
+                .Deserialize<IEnumerable<IDictionary<string, object>>>(actualData);
+
+            // Sort and flatten both actual and expected JSON strings for a reliable comparison
+            var expected = string.Concat(expectedDataJson.Order());
+            var actual = string.Concat(actualData.Order());
+
+            // Verify that two records were written into the SQLite table
+            Assert.AreEqual(
+                expected: 2,
+                actual: entities.Count(),
+                message: "Expected two records in the SQLite database table.");
+
+            // Verify that the stored data matches exactly what was expected
+            Assert.AreEqual(
+                expected,
+                actual,
+                message: "Data read from SQLite does not match the expected JSON payload.");
+        }
+
+        public static string ReadAsJson(string dbFile, string tableName)
+        {
+            using var connection = new SqliteConnection($"Data Source={dbFile}");
+            connection.Open();
+
+            using var command = new SqliteCommand($"SELECT * FROM {tableName}", connection);
+            using var reader = command.ExecuteReader();
+
+            var results = new List<Dictionary<string, object>>();
+
+            while (reader.Read())
+            {
+                var row = new Dictionary<string, object>();
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    row[reader.GetName(i)] = reader.GetValue(i) is DBNull ? null : reader.GetValue(i);
+                }
+                results.Add(row);
+            }
+
+            return JsonSerializer.Serialize(results);
         }
     }
 }

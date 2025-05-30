@@ -1,7 +1,6 @@
 ﻿using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
-using G4.Plugins.Utilities;
 
 using Microsoft.Data.Sqlite;
 
@@ -14,53 +13,55 @@ namespace G4.Plugins.Common.DataCollectors
 {
     [G4Plugin(
         assembly: "G4.Plugins.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Common.DataCollectors.Manifests.{nameof(SqlLiteDataCollector)}.json")]
-    public class SqlLiteDataCollector(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+        manifest: $"G4.Plugins.Common.DataCollectors.Manifests.{nameof(SqLiteDataCollector)}.json")]
+    public class SqLiteDataCollector(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            var tempPath = $"{Path.GetTempPath()}";
-            var defaultDbName = Path.Combine(tempPath, "g4-data-collector.db");
+            // Determine temporary folder and default database file path
+            var tempPath = Path.GetTempPath();
+            var defaultDbPath = Path.Combine(tempPath, "G4DataCollector.db");
 
+            // Read the 'Source' parameter, falling back to the default database path if missing
+            var dbPath = pluginData.Parameters.Get(
+                key: "Source",
+                defaultValue: defaultDbPath);
 
-            var dbName = pluginData.Parameters.Get(key: "Source", defaultValue: defaultDbName);
-            var tableName = pluginData.Parameters.Get(key: "Repository", defaultValue: "default-warehouse");
-            var connectionString = $"Data Source={dbName}";
+            // Read the 'Repository' parameter to use as the table name, defaulting if absent
+            var tableName = pluginData.Parameters.Get(
+                key: "Repository",
+                defaultValue: "default-warehouse");
 
-            var content = pluginData.Extraction.Entities.Select(entity => entity.Content);
+            // Build the SQLite connection string using the resolved file path
+            var connectionString = $"Data Source={dbPath}";
+
+            // Extract the content dictionaries from the plugin's entity extraction results
+            var content = pluginData
+                .Extraction
+                .Entities
+                .Select(entity => entity.Content);
+
+            // Peek at the first entity (if any) to infer table schema
             var entity = content.FirstOrDefault();
+
+            // Generate the CREATE TABLE SQL statement based on the table name and sample entity
             var createCommandSql = GetCreateStatement(tableName, entity);
 
+            // Open a connection to the SQLite database file
             using var connection = new SqliteConnection(connectionString);
             connection.Open();
 
+            // Create the table if it does not already exist
             using (var createCommand = connection.CreateCommand())
             {
                 createCommand.CommandText = createCommandSql;
                 createCommand.ExecuteNonQuery();
             }
 
+            // Insert all extracted rows into the newly created (or existing) table
+            WriteContent(connection, tableName, content);
 
-            // 2. Build INSERT statement
-            foreach (var data in content)
-            {
-                var columns = string.Join(", ", data.Keys.Select(FormatDataEntry));
-                var parameters = string.Join(", ", data.Keys.Select(col => $"@{col}"));
-                var insertSql = $"INSERT INTO {FormatDataEntry(tableName)} ({columns}) VALUES ({parameters});";
-
-                using var insertCmd = connection.CreateCommand();
-                insertCmd.CommandText = insertSql;
-
-                // Add parameter values
-                foreach (var kv in data)
-                {
-                    insertCmd.Parameters.AddWithValue($"@{kv.Key}", kv.Value ?? DBNull.Value);
-                }
-
-                insertCmd.ExecuteNonQuery();
-            }
-
-            // Return default PluginResponseModel as the result.
+            // Return a fresh PluginResponseModel to indicate completion
             return this.NewPluginResponse();
         }
 
@@ -144,39 +145,38 @@ namespace G4.Plugins.Common.DataCollectors
                 $"({string.Join(", ", columnDefinition)});";
         }
 
-        // Writes content to a XML file, appending it to the end of the file.
-        private static void WriteContent(string filePath, IEnumerable<IDictionary<string, object>> content)
+        // Inserts a batch of row data into the specified SQLite table.
+        private static void WriteContent(SqliteConnection connection, string tableName, IEnumerable<IDictionary<string, object>> content)
         {
-            // Iterate through each entity in the 'content' collection.
-            foreach (var entity in content)
+            // Iterate over each row's data dictionary
+            foreach (var contentEntries in content)
             {
-                // If the entity is null or empty, skip to the next entity.
-                if (entity?.Any() != true)
+                // Build comma-separated list of column names, properly formatted
+                var columns = string.Join(", ", contentEntries.Keys.Select(FormatDataEntry));
+
+                // Build comma-separated list of parameter placeholders (@ColumnName)
+                var parameters = string.Join(", ", contentEntries.Keys.Select(key => $"@{key}"));
+
+                // Compose the INSERT SQL statement
+                var insertSql =
+                    $"INSERT INTO {FormatDataEntry(tableName)} " +
+                    $"({columns}) VALUES ({parameters});";
+
+                // Create a command to execute the INSERT
+                using var insertCommand = connection.CreateCommand();
+                insertCommand.CommandText = insertSql;
+
+                // Add each column value as a parameter to prevent SQL injection
+                foreach (var contentEntry in contentEntries)
                 {
-                    continue;
+                    // If the value is null, use DBNull for the parameter
+                    insertCommand
+                        .Parameters
+                        .AddWithValue($"@{contentEntry.Key}", contentEntry.Value ?? DBNull.Value);
                 }
 
-                // Create a new 'FileConfiguration' for the DataFilesWriter.
-                var fileConfiguration = new DataFilesWriter.FileConfiguration
-                {
-                    // Specify the closing bytes for the data.
-                    CloseBytes = "</DataRoot>",
-
-                    // Convert the entity to XML format and store it in the 'Data' property.
-                    Data = entity.ConvertToXml().ToString(),
-
-                    // Specify the placeholder for an empty file.
-                    EmptyFilePlaceholder = "<DataRoot></DataRoot>",
-
-                    // Set the file path for writing the data.
-                    File = filePath,
-
-                    // Define a separator (if any) for the data.
-                    Separator = string.Empty
-                };
-
-                // Enqueue the 'fileConfiguration' for writing by the DataFilesWriter.
-                DataFilesWriter.Enqueue(fileConfiguration);
+                // Execute the INSERT and advance to the next row
+                insertCommand.ExecuteNonQuery();
             }
         }
     }

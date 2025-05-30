@@ -1,0 +1,89 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"DataManagement"
+	],
+	"description": [
+		"### Purpose",
+		"",
+		"The `SqLiteDataCollector` plugin writes extracted entity data into a SQLite database file. It opens (or creates) the specified `.db` file, creates a table whose schema is inferred from your data, and inserts each record reliably and securely.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                               |",
+		"|----------------------------|---------------------------------------------------------------------------------------------------------------------------|",
+		"| Automatic Table Creation   | Generates `CREATE TABLE IF NOT EXISTS` based on the first entity’s fields and their CLR types.                            |",
+		"| CLR-to-SQLite Type Mapping | Maps .NET types (e.g. `int`, `double`, `bool`, `DateTime`, `byte[]`) to SQLite types (`INTEGER`, `REAL`, `TEXT`, `BLOB`). |",
+		"| Parameterized Inserts      | Uses parameterized `INSERT` statements (`@ColumnName`) to prevent SQL injection and handle NULL values.                   |",
+		"| Schema Inference           | Quotes identifiers and escapes names to support special characters in table and column names.                             |"
+	],
+	"examples": [
+		{
+			"description": [
+				"This example extracts a `Location` value from each `<div class=\"hotel\">` element and writes it into a SQLite table named `Hotels` in `DataCollector.db`.",
+				"If the database or table does not exist, the plugin will create them automatically.",
+				"",
+				"The `regularExpression` strips the leading label (e.g. “Location: Paris”) so only “Paris” is stored."
+			],
+			"rule": {
+				"$type": "ExtractionRuleModel",
+				"dataCollector": {
+					"ForEntity": true,
+					"Source": "DataCollector.db",
+					"Repository": "Hotels",
+					"Type": "SqlLite"
+				},
+				"extractionScope": "Elements",
+				"onElement": "//div[@class='hotel']",
+				"rules": [
+					{
+						"$type": "ContentRuleModel",
+						"clearLinesBreak": false,
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=Location:).*",
+						"trim": true
+					}
+				]
+			}
+		}
+	],
+	"key": "SqLiteDataCollector",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"name": "Source",
+			"type": "String",
+			"mandatory": false,
+			"description": [
+				"The file path to the SQLite database (e.g. `C:/Data/MyCollector.db`).",
+				"If the file does not exist, it will be created under the specified path."
+			]
+		},
+		{
+			"name": "Repository",
+			"type": "String",
+			"mandatory": false,
+			"description": [
+				"The name of the table in the SQLite database where data will be inserted.",
+				"If the table does not exist, it will be created using your data’s schema."
+			]
+		}
+	],
+	"pluginType": "DataCollector",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"scopes": [
+		"Any"
+	],
+	"summary": [
+		"The `SqLiteDataCollector` plugin stores extracted data into a SQLite `.db` file, creating the database and table as needed.",
+		"It infers column names and types from your data, maps CLR types to SQLite types, and uses parameterized inserts to ensure safety.",
+		"Configure `Source` for the database path and `Repository` for the table name."
+	]
+}
