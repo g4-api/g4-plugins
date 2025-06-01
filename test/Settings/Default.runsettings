@@ -2,10 +2,14 @@
 <RunSettings>
 	<TestRunParameters>
 		<!-- Settings: Selenium Grid -->
-		<Parameter name="Grid.Endpoint" value="E:\Binaries\Automation\WebDrivers" />
+		<Parameter name="Grid.Endpoint" value="" />
 		<Parameter name="BrowserStack.Username" value="" />
 		<Parameter name="BrowserStack.Password" value="" />
 
+		<!-- Settings: OpenAi & Open WebUi -->
+		<Parameter name="OpenAi.ApiKey" value="" />
+		<Parameter name="OpenWebUi.ApiKey" value="" />
+		
 		<!-- Settings -->
 		<Parameter name="G4.Username" value="" />
 		<Parameter name="Integration" value="BrowserStack" />

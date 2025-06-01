@@ -98,7 +98,7 @@
 		"",
 		"| Feature                       | Description                                                                      |",
 		"|-------------------------------|----------------------------------------------------------------------------------|",
-		"| UI Element URL Resolution     | Locate URL from a web element’s text or specified attribute.                     |",
+		"| UI Element URL Resolution     | Locate URL from a web element's text or specified attribute.                     |",
 		"| Regular Expression Extraction | Extract or filter the exact URL using a provided regex.                          |",
 		"| HTTP File Download            | Download the file content via an HTTP GET request.                               |",
 		"| Base64 Encoding & Metadata    | Convert file bytes to Base64 and extract name, extension, size, and status code. |",
@@ -144,7 +144,7 @@
 			"description": [
 				"Complete file name including its extension, for example “report.pdf”.",
 				"Use this name when saving or displaying the file to keep it recognizable.",
-				"It comes directly from the resource’s address."
+				"It comes directly from the resource's address."
 			],
 			"name": "FullName",
 			"type": "String"
@@ -422,7 +422,7 @@
 			"description": [
 				"Complete file name including its extension, for example “report.pdf”.",
 				"Use this name when saving or displaying the file to keep it recognizable.",
-				"It comes directly from the resource’s address."
+				"It comes directly from the resource's address."
 			],
 			"name": "ResolvedFileFullName",
 			"type": "String"
@@ -509,7 +509,7 @@
 		},
 		{
 			"description": [
-				"Filters the element’s text using a pattern to extract the needed link portion.",
+				"Filters the element's text using a pattern to extract the needed link portion.",
 				"Only matching parts are kept before download.",
 				"Pattern matching leads to more precise URL extraction."
 			],
@@ -527,7 +527,7 @@
 	],
 	"summary": [
 		"The ResolveOnlineFile tool grabs a file link you give it or finds it on a page and downloads the file.",
-		"It can pull out just the correct link even if there’s extra text around it.",
+		"It can pull out just the correct link even if there's extra text around it.",
 		"It turns the file into text, records its name, type, size, and whether it downloaded successfully, and saves this info for use later.",
 		"If the download fails, it wipes out any saved info and notes the problem so nothing gets mixed up."
 	]

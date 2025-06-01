@@ -15,7 +15,7 @@
 		"",
 		"| Feature                    | Description                                                                                                               |",
 		"|----------------------------|---------------------------------------------------------------------------------------------------------------------------|",
-		"| Automatic Table Creation   | Generates `CREATE TABLE IF NOT EXISTS` based on the first entity’s fields and their CLR types.                            |",
+		"| Automatic Table Creation   | Generates `CREATE TABLE IF NOT EXISTS` based on the first entity's fields and their CLR types.                            |",
 		"| CLR-to-SQLite Type Mapping | Maps .NET types (e.g. `int`, `double`, `bool`, `DateTime`, `byte[]`) to SQLite types (`INTEGER`, `REAL`, `TEXT`, `BLOB`). |",
 		"| Parameterized Inserts      | Uses parameterized `INSERT` statements (`@ColumnName`) to prevent SQL injection and handle NULL values.                   |",
 		"| Schema Inference           | Quotes identifiers and escapes names to support special characters in table and column names.                             |"
@@ -69,7 +69,7 @@
 			"mandatory": false,
 			"description": [
 				"The name of the table in the SQLite database where data will be inserted.",
-				"If the table does not exist, it will be created using your data’s schema."
+				"If the table does not exist, it will be created using your data's schema."
 			]
 		}
 	],

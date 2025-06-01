@@ -112,15 +112,15 @@ namespace G4.IntegrationTests.Plugins.Common.ExportData
                         Transformers = NewTransformers("Description", trim, clearLinesBreak)
                     },
                     // Content rule for extracting 'Pet Friendly' information
-                    //new ContentRuleModel
-                    //{
-                    //    OnElement = ".",
-                    //    OnAttribute = "data-pet-friendly",
-                    //    Key = "PetFriendly",
-                    //    PluginName = contentType,
-                    //    DataType = "bool",
-                    //    Transformers = NewTransformers("PetFriendly", trim, clearLinesBreak)
-                    //},
+                    new ContentRuleModel
+                    {
+                        OnElement = ".",
+                        OnAttribute = "data-pet-friendly",
+                        Key = "PetFriendly",
+                        PluginName = contentType,
+                        DataType = "bool",
+                        Transformers = NewTransformers("PetFriendly", trim, clearLinesBreak)
+                    },
                     // Content rule for extracting 'Last Update' information
                     new ContentRuleModel
                     {

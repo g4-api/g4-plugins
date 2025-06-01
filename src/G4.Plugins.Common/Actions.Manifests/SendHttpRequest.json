@@ -9938,7 +9938,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response (with `Accept: application/xml`) after sending an HTTP PATCH request with a plain-text body.",
-				"It uses `--Method:Patch`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Accept:application/xml`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"It uses `--Method:Patch`, `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, and `--Header:Accept:application/xml`, then applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -10540,7 +10540,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response (with `Accept: application/xml`) after sending an HTTP PATCH request with a plain-text payload and the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent`.",
-				"It applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -10787,7 +10787,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload and an `Accept: application/xml` header.",
-				"It applies an XPath expression `//Status` to extract the element’s text content.",
+				"It applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -10823,7 +10823,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload and an `Accept: application/xml` header.",
-				"It applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11070,7 +11070,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11106,7 +11106,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11214,7 +11214,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent` and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11250,7 +11250,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password` and `UserAgent:MyCustomUserAgent` and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11357,7 +11357,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11393,7 +11393,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after ASCII-Encoded Plain-Text PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an ASCII-encoded, plain-text payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It uses `--ContentType:text/plain`, `--Body:Name=PremiumWidget;Price=99.99;Stock=150`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11636,7 +11636,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after Form-URL-Encoded PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11672,7 +11672,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regex `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11780,7 +11780,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after Form-URL-Encoded PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11816,7 +11816,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after Form-URL-Encoded PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with a form-url-encoded payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regular expression `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It uses `--ContentType:application/x-www-form-urlencoded`, `--Field:Name=PremiumWidget`, `--Field:Price=99.99`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regular expression `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"rule": {
@@ -11905,7 +11905,7 @@
 				"### Extract `<Status>` Element Text via XPath from XML Response after PATCH",
 				"",
 				"This example demonstrates how to extract the `<Status>` element text from an XML response after sending an HTTP PATCH request with an XML payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element’s text content.",
+				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` to extract the element's text content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"context": {
@@ -11939,7 +11939,7 @@
 				"### Extract `<Status>` Element Inner Text with Regex via XPath from XML Response after PATCH",
 				"",
 				"This example demonstrates how to extract the inner text of the `<Status>` element from an XML response after sending an HTTP PATCH request with an XML payload with the headers `Authorization:Basic username:password`, `UserAgent:MyCustomUserAgent`, and `Accept:application/xml`.",
-				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regular expression `(?<=<Status>).*?(?=</Status>)` to extract the element’s inner content.",
+				"It uses `--ContentType:text/xml`, `--Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item>`, `--Header:Authorization:Basic username:password`, `--Header:UserAgent:MyCustomUserAgent`, `--Encoding:ASCII`, `--Header:Accept:application/xml`, and `--Method:Patch`, then applies an XPath expression `//Status` and a regular expression `(?<=<Status>).*?(?=</Status>)` to extract the element's inner content.",
 				"Values are converted to strings to ensure consistent downstream processing."
 			],
 			"context": {

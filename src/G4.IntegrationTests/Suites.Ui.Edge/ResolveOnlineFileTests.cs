@@ -11,9 +11,11 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     [TestCategory("Integration")]
     [TestCategory("MicrosoftEdge")]
     [TestCategory("ResolveOnlineFile")]
-    [UserStory(story: "As a G4™ user, specifically an automation engineer or RPA developer, I want a plugin within the G4™ framework that can resolve a file link from a URL or page element, apply optional filtering, download the file, and extract its metadata, so that I can automate file retrieval and downstream processing.")]
+    [UserStory(story: "As a G4™ user, specifically an automation engineer or RPA developer, I want a plugin within the G4™ framework that " +
+        "can resolve a file link from a URL or page element, apply optional filtering, download the file, and extract its metadata, " +
+        "so that I can automate file retrieval and downstream processing.")]
     #region *** Criteria ***
-    [AcceptanceCriteria(criteria: "Plugin Accessibility: The ResolveOnlineFile plugin is available in the G4™ platform’s plugin set for file resolution tasks.")]
+    [AcceptanceCriteria(criteria: "Plugin Accessibility: The ResolveOnlineFile plugin is available in the G4™ platform's plugin set for file resolution tasks.")]
     [AcceptanceCriteria(criteria: "Argument-Based Invocation: The plugin supports downloading files directly from a provided URL argument.")]
     [AcceptanceCriteria(criteria: "Element-Based Invocation: The plugin supports resolving file URLs from page elements by selector and attribute.")]
     [AcceptanceCriteria(criteria: "Regex Filtering: The plugin can apply an optional regular expression to filter or extract the correct file link.")]
