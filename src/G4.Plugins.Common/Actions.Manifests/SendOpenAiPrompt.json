@@ -1,205 +1,452 @@
 ﻿{
 	"author": {
-		"name": "Roei Sabag",
-		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
 	},
 	"categories": [
-		"Conditions"
+		"OpenAI"
 	],
 	"context": {
 		"integration": {
 			"sequentialWorkflow": {
-				"$type": "Switch",
-				"branches": [
-					"false",
-					"true"
-				],
-				"componentType": "switch",
-				"iconProvider": "if",
-				"model": "SwitchRuleModel"
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "chat",
+				"model": "ActionRuleModel"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `SetCondition` plugin facilitates the conditional execution of sub-actions within automation scripts. ",
-		"It evaluates specified conditions using assertion plugins and decides whether to run the sub-actions based on the evaluation results.",
+		"The SendOpenAiPrompt plugin sends user messages to the OpenAI chat API and returns the assistant’s reply. It keeps track of conversation history for each session and lets you set a custom starting message if needed. It also records token usage and any internal reasoning steps so you can use those details later.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                                 |",
-		"|--------------------------- |-------------------------------------------------------------------------------------------------------------|",
-		"| Conditional Execution      | Executes sub-actions only if specified conditions are met, allowing for dynamic control flow in automation. |",
-		"| Assertion-Based Evaluation | Utilizes assertion plugins to evaluate conditions, ensuring accurate and reliable decision-making.          |",
-		"| Meta Plugin                | Creates, sends, and evaluates assertion plugins to determine the execution of sub-actions.                  |",
+		"| Feature                | Description                                                                                          |",
+		"|------------------------|------------------------------------------------------------------------------------------------------|",
+		"| Conversation History   | Keep track of user and system messages for each session.                                             |",
+		"| Custom System Prompt   | Let users supply a starting instruction, or default to a helpful assistant message.                  |",
+		"| Completion Settings    | Control response length and behavior with parameters like MaxTokens, Model, Temperature, TopK, TopP. |",
+		"| New Conversation Reset | Clear all past messages when a new chat is requested.                                                |",
+		"| Response Processing    | Pull out and store any hidden “think” steps or parts of the response for later use.                  |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage               | Description                                                                                        |",
-		"|---------------------|--------------------------------------------------------------------------------------------------- |",
-		"| Conditional Actions | Perform actions conditionally based on the evaluation of specified conditions.                     |",
-		"| Dynamic Workflows   | Enable dynamic workflows by conditionally executing sub-actions based on runtime conditions.       |",
-		"| Error Handling      | Implement error handling by conditionally executing recovery actions when certain conditions fail. |",
+		"| Use Case               | Description                                                                                 |",
+		"|------------------------|---------------------------------------------------------------------------------------------|",
+		"| User Support Chatbot   | Let a robot chat with people, answer questions, or gather information in real time.         |",
+		"| Dynamic Form Filling   | Ask the API how to fill web forms and use that guidance in an automated workflow.           |",
+		"| Email Draft Generation | Automatically generate or suggest email drafts based on user prompts.                       |",
+		"| Content Summarization  | Send text to the API to get a quick summary and feed that back into other automation steps. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                       | Description                                                                                                |",
-		"|-----------------------------|----------------------------------------------------------------------------------------------------------- |",
-		"| Conditional Test Execution  | Execute test cases conditionally based on the evaluation of specific conditions.                           |",
-		"| Dynamic Test Scenarios      | Create dynamic test scenarios by conditionally executing steps based on runtime conditions and assertions. |",
-		"| Validation and Verification | Perform validation and verification steps conditionally, ensuring accurate and reliable test outcomes.     |"
+		"| Use Case                  | Description                                                                                 |",
+		"|---------------------------|---------------------------------------------------------------------------------------------|",
+		"| Test Data Generation      | Ask the API to create sample inputs (names, addresses, etc.) for use in automated tests.    |",
+		"| Response Validation       | Compare the API’s reply to expected patterns to check if the integration works correctly.   |",
+		"| Error Handling Simulation | Trigger error messages from the API to test how the system handles bad or unexpected input. |",
+		"| Performance Tracking      | Track token usage over time to make sure API calls stay within expected limits.             |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Count of tokens produced by the AI’s response.",
+				"It shows how long the reply is in token units.",
+				"Monitoring completion token usage helps manage resource consumption."
+			],
+			"name": "CompletionTokens",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Count of tokens included in all messages sent as the prompt.",
+				"It shows how many token units the request consumed.",
+				"Tracking prompt token usage helps control input size."
+			],
+			"name": "PromptTokens",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Final response after applying pattern filtering.",
+				"Filtered content ensures only the intended output is returned."
+			],
+			"name": "SystemResponse",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Total tokens used for both the request prompt and the response.",
+				"It indicates combined token usage for the API call.",
+				"Monitoring total tokens helps manage costs and limits."
+			],
+			"name": "TotalTokens",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Base64-encoded content extracted from internal reasoning notes.",
+				"Decoding reveals the AI’s hidden annotations and thought steps.",
+				"These insights help understand how the AI arrived at its answer."
+			],
+			"name": "Think",
+			"type": "String"
+		}
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"API key missing",
+						"Malformed API response",
+						"Network timeout",
+						"OpenAI service error",
+						"Unexpected response format"
+					],
+					"expected_result": "A new chat is initialized with the specified system prompt, and the tutor’s explanation is returned as text.",
+					"notes": "Responses are returned as JSON so downstream logic can parse and display the tutor’s explanation.",
+					"use_case": "openai_newchat_system_prompt",
+					"version": "1.0"
+				},
+				"labels": [
+					"ChatInitialization",
+					"OpenAIRequest"
+				]
+			},
 			"description": [
-				"This configuration evaluates a condition and executes sub-actions if the condition is met."
+				"### Start a New Chat with a Custom System Prompt",
+				"",
+				"This example demonstrates how to start a new conversation with a custom system prompt and then send a user prompt.",
+				"It uses the `SendOpenAiPrompt` plugin with the flags `--NewChat`, `--SystemPrompt:You are a math tutor.`, and `--Prompt:Explain the Pythagorean theorem.`.",
+				"Values are returned as JSON for downstream processing."
 			],
 			"rule": {
-				"$type": "Switch",
-				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
-				"branches": {
-					"true": [
-						{
-							"$type": "Action",
-							"locator": "CssSelector",
-							"onElement": "#continueButton",
-							"pluginName": "Click"
-						}
-					]
-				},
-				"locator": "CssSelector",
-				"onElement": "#greeting",
-				"pluginName": "SetCondition"
+				"$type": "Action",
+				"argument": "{{$ --NewChat --SystemPrompt:You are a math tutor. --Prompt:Explain the Pythagorean theorem. --ApiKey:YOUR_API_KEY}}",
+				"pluginName": "SendOpenAiPrompt"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"API key missing",
+						"Malformed API response",
+						"Network timeout",
+						"OpenAI service error",
+						"Unexpected response format"
+					],
+					"expected_result": "A joke is generated with the specified temperature and token limit, and returned as text.",
+					"notes": "Responses are returned as JSON so downstream logic can parse and display the joke.",
+					"use_case": "openai_prompt_custom_parameters",
+					"version": "1.0"
+				},
+				"labels": [
+					"OpenAIRequest",
+					"ParameterSetting"
+				]
+			},
 			"description": [
-				"This configuration checks if an alert exists and executes sub-actions if no alert is present."
+				"### Send a Prompt with Custom Temperature and Token Limits",
+				"",
+				"This example demonstrates how to send a prompt with specific parameters for temperature and token limits.",
+				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Tell a joke.`, `--Temperature:0.7`, `--MaxTokens:100`, and `--Model:gpt-3.5-turbo`.",
+				"Values are returned as JSON for downstream processing."
 			],
 			"rule": {
-				"$type": "Switch",
-				"argument": "{{$ --Condition:AlertExists}}",
-				"branches": {
-					"true": [
-						{
-							"$type": "Action",
-							"argument": "Test Input",
-							"locator": "CssSelector",
-							"onElement": "#inputField",
-							"pluginName": "SendKeys"
-						}
-					]
-				},
-				"pluginName": "SetCondition"
+				"$type": "Action",
+				"argument": "{{$ --Prompt:Tell a joke. --Temperature:0.7 --MaxTokens:100 --Model:gpt-3.5-turbo --ApiKey:YOUR_API_KEY}}",
+				"pluginName": "SendOpenAiPrompt"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"API key missing",
+						"Malformed API response",
+						"Network timeout",
+						"OpenAI service error",
+						"Regex match occurs when it shouldn't",
+						"Unexpected response format"
+					],
+					"expected_result": "The AI response is filtered so that only the text before any `<think>` tag is extracted and returned as a string.",
+					"notes": "Extracted values are converted to strings so downstream logic can handle only the relevant portion of the response.",
+					"use_case": "openai_response_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"OpenAIRequest",
+					"RegexValidation"
+				]
+			},
 			"description": [
-				"This configuration checks if the page URL does not matche a specific pattern and executes sub-actions accordingly."
+				"### Extract Content Before `<think>` Tag from AI Response",
+				"",
+				"This example demonstrates how to send a prompt to an AI endpoint and use a regular expression to extract only the content appearing before a `<think>` tag in the response.",
+				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Analyze the following data.` and `--ApiKey:YOUR_API_KEY`, then applies the regular expression `^[^<]*` to the response text.",
+				"A regular expression `^[^<]*` is applied to capture all characters up to (but not including) the first `<` character, ensuring that only the text preceding `<think>` is returned.",
+				"Values are returned as strings for downstream processing."
 			],
 			"rule": {
-				"$type": "Switch",
-				"argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}",
-				"branches": {
-					"false": [
-						{
-							"$type": "Action",
-							"locator": "CssSelector",
-							"onElement": "#nextPageButton",
-							"pluginName": "Click"
-						}
-					]
+				"$type": "Action",
+				"argument": "{{$ --Prompt:Analyze the following data. --ApiKey:YOUR_API_KEY }}",
+				"pluginName": "SendOpenAiPrompt",
+				"regularExpression": "^[^<]*"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"API key missing",
+						"Malformed API response",
+						"Network timeout",
+						"OpenAI service error",
+						"Unexpected response format"
+					],
+					"expected_result": "A movie recommendation is generated with candidate tokens limited by TopK, and returned as JSON.",
+					"notes": "Responses are returned as JSON so downstream logic can parse and display the recommendation.",
+					"use_case": "openai_prompt_topk",
+					"version": "1.0"
 				},
-				"pluginName": "SetCondition"
+				"labels": [
+					"OpenAIRequest",
+					"ParameterSetting"
+				]
+			},
+			"description": [
+				"### Send a Prompt with TopK to Limit Candidate Tokens",
+				"",
+				"This example demonstrates how to send a prompt with a TopK parameter to limit candidate tokens in the AI response.",
+				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Recommend a movie.`, `--TopK:3`, and `--ApiKey:YOUR_API_KEY`.",
+				"Values are returned as JSON for downstream processing."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Prompt:Recommend a movie. --TopK:3 --ApiKey:YOUR_API_KEY }}",
+				"pluginName": "SendOpenAiPrompt"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"API key missing",
+						"Malformed API response",
+						"Network timeout",
+						"OpenAI service error",
+						"Unexpected response format"
+					],
+					"expected_result": "A summary is generated by the Open-WebUI endpoint with TopP applied, and returned as JSON.",
+					"notes": "Responses are returned as JSON so downstream logic can parse and display the summary.",
+					"use_case": "openai_prompt_topp",
+					"version": "1.0"
+				},
+				"labels": [
+					"OpenAIRequest",
+					"ParameterSetting"
+				]
+			},
+			"description": [
+				"### Send a Prompt with TopP to a Custom Open-WebUI Endpoint",
+				"",
+				"This example demonstrates how to send a prompt with a TopP parameter to a custom Open-WebUI endpoint rather than the OpenAI API.",
+				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Summarize this article.`, `--CompletionsUri:http://localhost:3000/api/chat/completions`, `--TopP:0.8`, and `--ApiKey:YOUR_API_KEY`.",
+				"Values are returned as JSON for downstream processing."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Prompt:Summarize this article. --CompletionsUri:http://localhost:3000/api/chat/completions --TopP:0.8 --ApiKey:YOUR_API_KEY}}",
+				"pluginName": "SendOpenAiPrompt"
 			}
 		}
 	],
 	"key": "SendOpenAiPrompt",
 	"manifestVersion": 4,
+	"outputParameters": [
+		{
+			"description": [
+				"Count of tokens produced by the AI’s response.",
+				"It shows how long the reply is in token units.",
+				"Monitoring completion token usage helps manage resource consumption."
+			],
+			"name": "OpenAiCompletionTokens",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Count of tokens included in all messages sent as the prompt.",
+				"It shows how many token units the request consumed.",
+				"Tracking prompt token usage helps control input size."
+			],
+			"name": "OpenAiPromptTokens",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Base64-encoded final response after applying pattern filtering.",
+				"Decoding yields the clean reply that the AI generated.",
+				"Filtered content ensures only the intended output is returned."
+			],
+			"name": "OpenAiSystemResponse",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Total tokens used for both the request prompt and the response.",
+				"It indicates combined token usage for the API call.",
+				"Monitoring total tokens helps manage costs and limits."
+			],
+			"name": "OpenAiTotalTokens",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Base64-encoded content extracted from internal reasoning notes.",
+				"Decoding reveals the AI’s hidden annotations and thought steps.",
+				"These insights help understand how the AI arrived at its answer."
+			],
+			"name": "OpenAiThink",
+			"type": "String"
+		}
+	],
 	"parameters": [
 		{
 			"description": [
-				"Specifies the condition to be evaluated to decide whether to execute the sub-actions."
+				"A secret value that lets you authenticate requests to OpenAI.",
+				"It ensures the system can perform actions on your behalf.",
+				"Keeping a valid key protects your account."
+			],
+			"mandatory": true,
+			"name": "ApiKey",
+			"type": "String"
+		},
+		{
+			"default": "https://api.openai.com/v1/chat/completions",
+			"description": [
+				"Address used for sending chat completion requests.",
+				"The default points to OpenAI’s official chat endpoint."
 			],
 			"mandatory": false,
-			"name": "Condition",
-			"type": "Assertion"
+			"name": "CompletionsUri",
+			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the expected value to be compared against the actual value when evaluating the condition."
+				"A number that limits how long the response can be.",
+				"It controls how many tokens the reply can include."
 			],
-			"name": "Expected",
-			"type": "Any"
+			"mandatory": false,
+			"name": "MaxTokens",
+			"type": "Number"
+		},
+		{
+			"default": "gpt-4.1-mini",
+			"description": [
+				"Specifies which version of OpenAI to generate responses.",
+				"Defaults to gpt-4.1-mini when not provided.",
+				"Choosing a higher-capability model can produce more detailed answers."
+			],
+			"mandatory": false,
+			"name": "Model",
+			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the type of comparison to be performed when evaluating the condition."
+				"Clears past messages and starts a fresh conversation when enabled.",
+				"Use this to avoid carrying over context from previous interactions.",
+				"Turning it on makes each prompt treated independently."
 			],
-			"name": "Operator",
-			"type": "Operator"
+			"mandatory": false,
+			"name": "NewChat",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Text sent to the assistant for generating a response.",
+				"The content guides the assistant on what to reply.",
+				"Providing a clear message leads to more relevant answers."
+			],
+			"mandatory": false,
+			"name": "Prompt",
+			"type": "String"
+		},
+		{
+			"description": [
+				"A starting instruction that guides the conversation’s tone and focus.",
+				"It appears before any user messages to set context for the AI.",
+				"Using a clear prompt helps the AI understand what style or information to prioritize."
+			],
+			"mandatory": false,
+			"name": "SystemPrompt",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Adjusts how creative or predictable the AI’s response will be.",
+				"Higher values produce more varied and unexpected outputs.",
+				"Lower values keep replies more focused and consistent."
+			],
+			"mandatory": false,
+			"name": "Temperature",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Limits token choices to the top candidates when generating a reply.",
+				"Smaller values make the AI pick from fewer options, making output more deterministic.",
+				"Larger values allow more variety in word selection."
+			],
+			"mandatory": false,
+			"name": "TopK",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Not available directly from OpenAI and used by other tools to control which words the AI picks.",
+				"It sets a limit so words are chosen only until their combined chances reach this value.",
+				"Lower numbers force the AI to pick only the most likely words, making output more predictable.",
+				"Higher numbers let the AI include more word options, making responses more varied."
+			],
+			"mandatory": false,
+			"name": "TopP",
+			"type": "Number"
 		}
 	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the condition and parameters for the assertion to be performed by a particular plugin."
+				"Template expression to pass parameters and prompt text."
 			],
 			"mandatory": false,
-			"name": "Argument",
-			"type": "Expression"
-		},
-		{
-			"default": "Xpath",
-			"description": [
-				"Specifies how elements should be located on a webpage or within an application."
-			],
-			"name": "Locator",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Specifies the attribute of the target element that will be interacted with or evaluated during automation."
-			],
-			"name": "OnAttribute",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Specifies the target element on which conditions will be evaluated during the automation process."
-			],
-			"name": "OnElement",
-			"type": "String"
+			"name": "argument",
+			"type": "String|Expression"
 		},
 		{
 			"default": "(?s).*",
 			"description": [
-				"Specifies the regular expression to apply on the element/attribute result before the assertion."
+				"Regular expression to extract the desired portion of the system response."
 			],
-			"name": "RegularExpression",
+			"mandatory": false,
+			"name": "regularExpression",
 			"type": "Regex"
-		},
-		{
-			"description": [
-				"Define a sequence of actions or instructions to be executed if the condition is met."
-			],
-			"name": "Branches",
-			"type": "Object"
 		}
 	],
 	"protocol": {
-		"apiDocumentation": "None",
+		"apiDocumentation": "https://platform.openai.com/docs/api-reference/chat/create",
 		"w3c": "None"
 	},
 	"scopes": [
 		"Any"
 	],
 	"summary": [
-		"The `SetCondition` plugin facilitates the conditional execution of sub-actions within automation scripts by evaluating specified conditions using assertion plugins.",
-		"It dynamically controls the flow of automation by deciding whether to run sub-actions based on the evaluation results of these conditions.",
-		"Key features include conditional execution, assertion-based evaluation, and meta plugin capabilities for creating, sending, and evaluating assertion plugins.",
-		"Common use cases include performing actions conditionally, enabling dynamic workflows, implementing error handling in RPA, and creating conditional test scenarios, validation, and verification in automation testing."
+		"SendOpenAiPrompt sends your messages to OpenAI's chat service and shows the replies while keeping track of each person's past messages.",
+		"You can give it a custom starting instruction, set options like how long the answer should be, which version to use, and how creative it should be, and start a new chat when you want.",
+		"It also picks out any hidden `think` notes in the reply and saves both those notes and the final answer for later use."
 	]
 }

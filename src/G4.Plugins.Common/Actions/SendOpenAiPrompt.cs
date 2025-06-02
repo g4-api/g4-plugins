@@ -23,8 +23,10 @@ namespace G4.Plugins.Common.Actions
     public class SendOpenAiPrompt(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         #region *** Fields             ***
+        // Static dictionary to hold conversation histories for each user session, keyed by user ID.
         private static readonly ConcurrentDictionary<string, List<Message>> s_conversationHistories = new(StringComparer.OrdinalIgnoreCase);
 
+        // Static JSON serializer options for consistent serialization/deserialization of API requests and responses.
         private static readonly JsonSerializerOptions s_jsonOptions = new()
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
