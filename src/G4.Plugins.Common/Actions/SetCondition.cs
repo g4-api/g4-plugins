@@ -13,11 +13,6 @@ namespace G4.Plugins.Common.Actions
         manifest: $"G4.Plugins.Common.Actions.Manifests.{nameof(SetCondition)}.json")]
     public class SetCondition(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
-        /// <summary>
-        /// Executes the plugin's main logic when a send action is performed.
-        /// </summary>
-        /// <param name="pluginData">The plugin data model containing execution context.</param>
-        /// <returns>A <see cref="PluginResponseModel"/> representing the result of the execution.</returns>
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Perform an assertion based on the plugin data and get the result.
@@ -45,14 +40,7 @@ namespace G4.Plugins.Common.Actions
             return this.NewPluginResponse();
         }
 
-        /// <summary>
-        /// Retrieves the positive (TRUE) and negative (FALSE) actions from the given plugin data.
-        /// </summary>
-        /// <param name="pluginData">The plugin data model containing rule information.</param>
-        /// <returns>
-        /// A tuple containing two arrays of <see cref="G4RuleModelBase"/>.
-        /// One for the positive (TRUE) actions and one for the negative (FALSE) actions.
-        /// </returns>
+        // Retrieves the positive (TRUE) and negative (FALSE) actions from the given plugin data.
         private static (G4RuleModelBase[] PositiveActions, G4RuleModelBase[] NegativeActions) GetActions(PluginDataModel pluginData)
         {
             // Use a case-insensitive string comparer for branch keys.

@@ -17,65 +17,185 @@
 				"componentType": "switch",
 				"iconProvider": "if",
 				"model": "SwitchRuleModel"
+			},
+			"rag": {
+				"description": "The SetCondition plugin enables automation workflows to reliably branch into true or false paths by evaluating assertions against element values, alerts, or page URLs. It supports flexible parameters for conditions, element locators, and regex filtering, and logs any exceptions while clearing state on error to maintain consistent workflow reliability.",
+				"qa": [
+					{
+						"question": "What is the SetCondition plugin and why does it matter?",
+						"answer": "SetCondition acts like a switch that checks whether a specified condition is true or false, then runs one group of steps if true or another if false, making it essential for handling decisions and controlling workflow flow."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include true/false branching, assertion-based checks, and meta plugin creation. Primary parameters are Condition (the assertion to evaluate), Expected (the value to compare), and Operator (how to compare actual and expected)."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows or external tools?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined as a Switch component with model SwitchRuleModel and iconProvider `if`, making it available as a conditional switch task in low-code or RPA platforms."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use clear and precise Condition, Expected, and Operator values, select accurate locators or attributes to target elements reliably, apply RegularExpression only when needed for filtering, and review logs when exceptions occur to troubleshoot issues."
+					},
+					{
+						"question": "What is the structure of the plugin rule definition?",
+						"answer": "Each rule uses \"$type\": \"Switch\", includes a pluginName \"SetCondition\", an argument string specifying condition details, a branches object with true and/or false arrays of actions, and optional fields locator, onElement, onAttribute, and regularExpression."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On error it clears any stored data related to the condition, logs the exception to the workflow log stream, and allows the rest of the workflow to continue unless explicitly configured to stop."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version this plugin follows."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It is listed under the `Conditions` category, reflecting its role in conditional workflow branching."
+					},
+					{
+						"question": "What is the unique key for this plugin?",
+						"answer": "The key is `SetCondition`, which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What does the description section contain?",
+						"answer": "The description explains the purpose of SetCondition, its key features like branching and assertion checks, and usage examples in RPA and automation testing scenarios."
+					},
+					{
+						"question": "What examples are provided in the manifest?",
+						"answer": "Examples include checking a welcome message and clicking proceed, detecting a cookie consent alert and typing accept, clicking Go to Dashboard based on URL, and either searching or clicking checkout depending on the page URL."
+					},
+					{
+						"question": "What parameters does the plugin accept?",
+						"answer": "It accepts three parameters: Condition (an assertion type), Expected (the value to compare), and Operator (the comparison operator)."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include Argument (expression with condition details), Branches (actions to run on true or false), Locator (method to find elements), OnAttribute (attribute to read), OnElement (element selector), and RegularExpression (pattern to filter values)."
+					},
+					{
+						"question": "What protocol settings does the manifest specify?",
+						"answer": "Protocol settings show apiDocumentation as None and w3c as None, indicating no external API docs or W3C validation are required."
+					},
+					{
+						"question": "What scopes does this plugin support?",
+						"answer": "The scopes field lists Any, meaning this plugin can run in any execution context or platform."
+					},
+					{
+						"question": "What does the summary describe?",
+						"answer": "The summary states that SetCondition checks a situation and runs one set of steps if true or another if false, helping workflows run tasks only when needed and handle errors or test dependencies."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is Action, meaning it performs an operation in the automation workflow."
+					}
+				]
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `SetCondition` plugin facilitates the conditional execution of sub-actions within automation scripts. ",
-		"It evaluates specified conditions using assertion plugins and decides whether to run the sub-actions based on the evaluation results.",
+		"The SetCondition plugin lets automation scripts choose between two paths based on a condition, similar to an if/else. It checks a condition using an assertion plugin and then runs one set of actions if the condition is true or another set if it is false. This makes it easy to handle decisions and control flow without extra steps.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                                 |",
-		"|--------------------------- |-------------------------------------------------------------------------------------------------------------|",
-		"| Conditional Execution      | Executes sub-actions only if specified conditions are met, allowing for dynamic control flow in automation. |",
-		"| Assertion-Based Evaluation | Utilizes assertion plugins to evaluate conditions, ensuring accurate and reliable decision-making.          |",
-		"| Meta Plugin                | Creates, sends, and evaluates assertion plugins to determine the execution of sub-actions.                  |",
+		"| Feature                | Description                                                            |",
+		"|------------------------|------------------------------------------------------------------------|",
+		"| True/False Branching   | Run one group of actions when a condition is true, another when false. |",
+		"| Assertion-Based Checks | Use assertion plugins to evaluate expressions reliably.                |",
+		"| Meta Plugin Creation   | Build and send assertion actions to decide which branch to execute.    |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage               | Description                                                                                        |",
-		"|---------------------|--------------------------------------------------------------------------------------------------- |",
-		"| Conditional Actions | Perform actions conditionally based on the evaluation of specified conditions.                     |",
-		"| Dynamic Workflows   | Enable dynamic workflows by conditionally executing sub-actions based on runtime conditions.       |",
-		"| Error Handling      | Implement error handling by conditionally executing recovery actions when certain conditions fail. |",
+		"| Use Case            | Description                                                                      |",
+		"|---------------------|----------------------------------------------------------------------------------|",
+		"| Conditional Actions | Perform steps under one branch if data meets criteria, else run alternate steps. |",
+		"| Dynamic Workflows   | Direct workflow into different paths based on real-time checks.                  |",
+		"| Error Handling      | Run recovery actions when an error flag is set, skip them otherwise.             |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                       | Description                                                                                                |",
-		"|-----------------------------|----------------------------------------------------------------------------------------------------------- |",
-		"| Conditional Test Execution  | Execute test cases conditionally based on the evaluation of specific conditions.                           |",
-		"| Dynamic Test Scenarios      | Create dynamic test scenarios by conditionally executing steps based on runtime conditions and assertions. |",
-		"| Validation and Verification | Perform validation and verification steps conditionally, ensuring accurate and reliable test outcomes.     |"
+		"| Use Case              | Description                                                                   |",
+		"|-----------------------|-------------------------------------------------------------------------------|",
+		"| Conditional Test Runs | Execute one set of tests when prerequisites are met, else run fallback tests. |",
+		"| Dynamic Test Flows    | Switch between test steps based on the outcome of prior assertions.           |",
+		"| Validation Branching  | Perform extra checks if initial assertions pass, or log issues if they fail.  |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect CSS selector usage",
+						"Unexpected DOM structure",
+						"Welcome message text mismatch"
+					],
+					"expected_result": "If the welcome message equals “Welcome back!”, the “Proceed” button is clicked; otherwise, no action is taken.",
+					"notes": "The condition checks the visible text of the element before performing the click action.",
+					"use_case": "element_text_condition_click_css_proceedButton",
+					"version": "1.0"
+				},
+				"labels": [
+					"ClickAction",
+					"ConditionCheck"
+				]
+			},
 			"description": [
-				"This configuration evaluates a condition and executes sub-actions if the condition is met."
+				"### Check Welcome Message and Click “Proceed” if Present",
+				"",
+				"This example demonstrates how to verify that the welcome message displays “Welcome back!” and, if it does, click the “Proceed” button.",
+				"It uses a `SetCondition` step with `ElementText` comparison against `Welcome back!` on the element located by CSS selector `#welcomeMessage`. If the condition is true, it executes a `Click` action on the element `#proceedButton`.",
+				"Values are returned as strings for downstream processing."
 			],
 			"rule": {
 				"$type": "Switch",
-				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Hello World}}",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Welcome back!}}",
 				"branches": {
 					"true": [
 						{
 							"$type": "Action",
 							"locator": "CssSelector",
-							"onElement": "#continueButton",
+							"onElement": "#proceedButton",
 							"pluginName": "Click"
 						}
 					]
 				},
 				"locator": "CssSelector",
-				"onElement": "#greeting",
+				"onElement": "#welcomeMessage",
 				"pluginName": "SetCondition"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Alert not present",
+						"Incorrect plugin response",
+						"Network timeout",
+						"Unexpected dialog format"
+					],
+					"expected_result": "If a cookie consent banner appears, “Accept” is typed into the consent field; otherwise, no action is taken.",
+					"notes": "The condition checks for the existence of an alert before sending keys.",
+					"use_case": "alert_exists_sendkeys_cookieConsentInput",
+					"version": "1.0"
+				},
+				"labels": [
+					"ConditionCheck",
+					"SendKeysAction"
+				]
+			},
 			"description": [
-				"This configuration checks if an alert exists and executes sub-actions if no alert is present."
+				"### Check for Cookie Consent Banner and Type “Accept” if Present",
+				"",
+				"This example demonstrates how to detect whether a cookie consent banner is displayed and, if so, type “Accept” into the consent input field.",
+				"It uses a `SetCondition` step with `AlertExists`. If true, it executes a `SendKeys` action with argument “Accept” on the element located by CSS selector `#cookieConsentInput`.",
+				"Values are returned as strings for downstream processing."
 			],
 			"rule": {
 				"$type": "Switch",
@@ -84,9 +204,9 @@
 					"true": [
 						{
 							"$type": "Action",
-							"argument": "Test Input",
+							"argument": "Accept",
 							"locator": "CssSelector",
-							"onElement": "#inputField",
+							"onElement": "#cookieConsentInput",
 							"pluginName": "SendKeys"
 						}
 					]
@@ -95,19 +215,91 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Incorrect URL format",
+						"Network timeout",
+						"Page not loaded",
+						"Unexpected URL structure"
+					],
+					"expected_result": "If the user is on the dashboard page (the NotMatch operator causes the ‘false’ branch when matched), the “Go to Dashboard” button is clicked; otherwise, no action is taken.",
+					"notes": "The condition checks the page URL before performing the click action.",
+					"use_case": "page_url_condition_click_dashboard",
+					"version": "1.0"
+				},
+				"labels": [
+					"ClickAction",
+					"ConditionCheck"
+				]
+			},
 			"description": [
-				"This configuration checks if the page URL does not matche a specific pattern and executes sub-actions accordingly."
+				"### Check Dashboard Page and Click “Go to Dashboard” if Present",
+				"",
+				"This example demonstrates how to verify whether the current page URL matches the dashboard page, and if it does, click the “Go to Dashboard” button.",
+				"It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://myapp.com/dashboard/*` (the `NotMatch` operator causes the `false` branch to run when there is a match). If the condition is false, it executes a `Click` action on the element located by XPath `//a[@id='goToDashboard']`.",
+				"Values are returned as strings for downstream processing."
 			],
 			"rule": {
 				"$type": "Switch",
-				"argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://example.com/*}}",
+				"argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://myapp.com/dashboard/*}}",
 				"branches": {
 					"false": [
 						{
 							"$type": "Action",
-							"locator": "CssSelector",
-							"onElement": "#nextPageButton",
+							"onElement": "//a[@id='goToDashboard']",
 							"pluginName": "Click"
+						}
+					]
+				},
+				"pluginName": "SetCondition"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Incorrect URL format",
+						"Network timeout",
+						"Page not loaded",
+						"Unexpected URL structure"
+					],
+					"expected_result": "If the user is not on the shopping cart page, “laptop” is entered in the search box; if the user is on the shopping cart page, the “Checkout” button is clicked.",
+					"notes": "The condition checks the page URL before performing the appropriate action.",
+					"use_case": "page_url_condition_search_or_click_checkout",
+					"version": "1.0"
+				},
+				"labels": [
+					"ClickAction",
+					"ConditionCheck",
+					"SendKeysAction"
+				]
+			},
+			"description": [
+				"### Check Shopping Cart Page and Search or Click “Checkout”",
+				"",
+				"This example demonstrates how to verify whether the current page URL matches the shopping cart page and, if it does not, type “laptop” into the search box; otherwise, click the “Checkout” button.",
+				"It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://shop.example.com/cart`. If the condition is true, it executes a `SendKeys` action with argument “laptop” on the element located by ID `searchBox`; if the condition is false, it executes a `Click` action on the element located by XPath `//button[@id='checkoutButton']`.",
+				"Values are returned as strings for downstream processing."
+			],
+			"rule": {
+				"$type": "Switch",
+				"argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://shop.example.com/cart}}",
+				"branches": {
+					"false": [
+						{
+							"$type": "Action",
+							"onElement": "//button[@id='checkoutButton']",
+							"pluginName": "Click"
+						}
+					],
+					"true": [
+						{
+							"$type": "Action",
+							"argument": "laptop",
+							"locator": "Id",
+							"onElement": "searchBox",
+							"pluginName": "SendKeys"
 						}
 					]
 				},
@@ -120,7 +312,10 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the condition to be evaluated to decide whether to execute the sub-actions."
+				"The list of conditions updates automatically when new ones are added.",
+				"A rule that tells the system what must be true before running additional steps.",
+				"It decides whether the next actions will execute.",
+				"Clear conditions help keep the automation on the right path."
 			],
 			"mandatory": true,
 			"name": "Condition",
@@ -128,14 +323,19 @@
 		},
 		{
 			"description": [
-				"Specifies the expected value to be compared against the actual value when evaluating the condition."
+				"The value used to check against the actual result.",
+				"It defines what outcome counts as correct.",
+				"Precise expected values help avoid errors."
 			],
 			"name": "Expected",
 			"type": "Any"
 		},
 		{
 			"description": [
-				"Specifies the type of comparison to be performed when evaluating the condition."
+				"The list of comparison types updates automatically when new ones are added.",
+				"The way the system compares actual results to the expected value.",
+				"It can check for equality, greater than, or other comparisons.",
+				"Choosing the right comparison type ensures proper decision making."
 			],
 			"name": "Operator",
 			"type": "Operator"
@@ -145,30 +345,47 @@
 	"properties": [
 		{
 			"description": [
-				"Specifies the condition and parameters for the assertion to be performed by a particular plugin."
+				"A rule that tells the plugin what to check and how to check it.",
+				"It includes the condition and any settings needed for that check.",
+				"Clear instructions help the plugin determine if the check passes."
 			],
 			"mandatory": true,
 			"name": "Argument",
 			"type": "Expression"
 		},
 		{
+			"description": [
+				"A set of steps or instructions that run when the check succeeds.",
+				"These steps define what happens after the condition is met.",
+				"Organized actions ensure the plugin follows the correct flow."
+			],
+			"name": "Branches",
+			"type": "Object"
+		},
+		{
 			"default": "Xpath",
 			"description": [
-				"Specifies how elements should be located on a webpage or within an application."
+				"How the plugin finds items on a webpage or in an app.",
+				"XPath is used by default when no other method is given.",
+				"Picking the right method makes sure the plugin targets the correct item."
 			],
 			"name": "Locator",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the attribute of the target element that will be interacted with or evaluated during automation."
+				"A property of the element that the system will read or use during the process.",
+				"It tells the system which part of the element holds the needed information.",
+				"Choosing the correct property ensures the right data is captured."
 			],
 			"name": "OnAttribute",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the target element on which conditions will be evaluated during the automation process."
+				"The element where the system will check conditions or perform actions.",
+				"It tells the system which part of the page or app to focus on.",
+				"Pointing to the right element ensures accurate results."
 			],
 			"name": "OnElement",
 			"type": "String"
@@ -176,17 +393,12 @@
 		{
 			"default": "(?s).*",
 			"description": [
-				"Specifies the regular expression to apply on the element/attribute result before the assertion."
+				"A pattern that filters the element or attribute value before it is checked.",
+				"Only text that matches the pattern will be kept for evaluation.",
+				"Using a clear pattern helps the system work with the exact text needed."
 			],
 			"name": "RegularExpression",
 			"type": "Regex"
-		},
-		{
-			"description": [
-				"Define a sequence of actions or instructions to be executed if the condition is met."
-			],
-			"name": "Branches",
-			"type": "Object"
 		}
 	],
 	"protocol": {
@@ -197,9 +409,8 @@
 		"Any"
 	],
 	"summary": [
-		"The `SetCondition` plugin facilitates the conditional execution of sub-actions within automation scripts by evaluating specified conditions using assertion plugins.",
-		"It dynamically controls the flow of automation by deciding whether to run sub-actions based on the evaluation results of these conditions.",
-		"Key features include conditional execution, assertion-based evaluation, and meta plugin capabilities for creating, sending, and evaluating assertion plugins.",
-		"Common use cases include performing actions conditionally, enabling dynamic workflows, implementing error handling in RPA, and creating conditional test scenarios, validation, and verification in automation testing."
+		"SetCondition checks a situation and runs one group of steps when it’s true, or a different group when it’s not true.",
+		"It uses simple checks to decide which steps to run.",
+		"This helps you do things only when needed and handle errors or set up tests that depend on earlier results."
 	]
 }
