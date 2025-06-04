@@ -12,6 +12,103 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendHttpRequest.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendHttpRequest.cs"
+			},
+			"rag": {
+				"description": "The SendHttpRequest plugin enables automation workflows to send HTTP requests dynamically by selecting method, URL, headers, body, and query parameters at runtime. It captures response body, headers, and status code as output parameters, and logs any exceptions to maintain workflow reliability.",
+				"qa": [
+					{
+						"question": "What is the SendHttpRequest plugin and why does it matter?",
+						"answer": "The SendHttpRequest plugin automates sending HTTP requests to web services and REST APIs from within automation scripts, enabling workflows to interact with external systems and retrieve or send data."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include HTTP method selection, dynamic URL configuration, and custom headers and payload support. Primary parameters are Body for request content, ContentType for the data format, Field for form-encoded fields, Header for HTTP headers, Method for selecting GET/POST/PUT/DELETE/PATCH or custom methods, and Url for the request address."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows or external tools?",
+						"answer": "It appears under context.integration.sequentialWorkflow as an ActionRuleModel task with iconProvider http, making it available as a web request action in low-code or RPA platforms. It also provides GitHub links for documentation and source code under context.integration.github."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use precise Url and Method values to target the correct endpoint, set ContentType to match the server expectations, include necessary headers and fields for authentication or data format, validate HttpStatusCode on response, and implement retries or timeouts to handle transient failures."
+					},
+					{
+						"question": "What is the structure of the plugin rule definition?",
+						"answer": "Each rule uses \"$type\": \"Action\", includes pluginName \"SendHttpRequest\", and provides an Argument string or expression that covers URL, Method, headers, body, and query parameters. Optional fields include OnAttribute, OnElement, and RegularExpression for response extraction."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On error it logs exceptions to the workflow log stream and includes error details in the response. By default, workflows continue executing unless explicitly configured to stop on error."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the version of the manifest schema this plugin follows."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What are the aliases for this plugin?",
+						"answer": "The aliases are InvokeWebRequest and SendWebRequest."
+					},
+					{
+						"question": "Which categories is this plugin listed under?",
+						"answer": "It is listed under the Http category, reflecting its role in web requests and API integration."
+					},
+					{
+						"question": "What is the unique key for this plugin?",
+						"answer": "The key is SendHttpRequest, which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What outputParameters does this plugin return?",
+						"answer": "It returns HttpResponse (the extracted response body), HttpResponseHeaders (response headers as key–value pairs), and HttpStatusCode (numeric HTTP status code returned by the server)."
+					},
+					{
+						"question": "What parameters does this plugin accept?",
+						"answer": "It accepts Body (request payload), ContentType (data format such as application/json or text/plain), Field (form-encoded fields), Header (custom HTTP headers), Method (HTTP methods like GET or POST), and Url (request address)."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports Any platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is Action, indicating it performs an operation in the automation workflow."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include Argument (a string or expression covering URL, method, headers, body, and other settings), OnAttribute (XML attribute for extracting response data), OnElement (XPath or JSONPath expression for response extraction), and RegularExpression (pattern to refine extracted data)."
+					},
+					{
+						"question": "What protocol settings does the manifest specify?",
+						"answer": "Protocol settings show apiDocumentation as None and w3c as None, indicating no external API documentation or W3C validation is required."
+					},
+					{
+						"question": "What summary is provided for this plugin?",
+						"answer": "The summary states that the SendHttpRequest plugin lets automation workflows send HTTP GET, POST, PUT, DELETE, or custom method requests to any URL at runtime, configure headers and payloads on the fly, and capture response status codes, headers, and body content for downstream processing."
+					},
+					{
+						"question": "What is the GitHub documentation link for this plugin?",
+						"answer": "The GitHub documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendHttpRequest.md."
+					},
+					{
+						"question": "What is the GitHub source link for this plugin?",
+						"answer": "The GitHub source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendHttpRequest.cs."
+					},
+					{
+						"question": "How is this plugin defined in the integration context?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined with \"$type\": \"Action\", componentType \"task\", iconProvider \"http\", and model \"ActionRuleModel\"."
+					},
+					{
+						"question": "What does the description section contain?",
+						"answer": "The description highlights the plugin’s purpose of automating HTTP requests, its key features such as HTTP method selection and dynamic URL configuration, and lists use cases in RPA and automation testing like API testing and data verification."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
