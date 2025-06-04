@@ -9,8 +9,8 @@
 	"context": {
 		"integration": {
 			"github": {
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs",
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs"
 			},
 			"rag": {
 				"description": "The InvokeWhileLoop plugin automates conditional looping by repeating defined actions while a specified condition remains true. It adapts to runtime changes, handles timeouts, and logs performance data each iteration to ensure reliable and adaptive automation workflows.",
