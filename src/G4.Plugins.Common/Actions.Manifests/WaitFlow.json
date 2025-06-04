@@ -87,8 +87,8 @@
 					"answer": "Protocol settings show apiDocumentation as \"None\" and w3c as \"None\", indicating no external API docs or W3C validation are required."
 				},
 				{
-					"question": "What scopes does this plugin support?",
-					"answer": "The scopes field lists \"Any\", meaning it can run in any execution context or platform."
+					"question": "What platforms does this plugin support?",
+					"answer": "The platforms field lists \"Any\", meaning it can run in any execution context or platform."
 				},
 				{
 					"question": "What summary is provided for this plugin?",
@@ -387,6 +387,9 @@
 			"type": "Number|Time"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -435,9 +438,6 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
 		"WaitFlow pauses a task until something you’re watching for happens or until a set time is up.",
 		"It waits for simple checks to pass or stops waiting after a timer so everything happens at the right moment.",
