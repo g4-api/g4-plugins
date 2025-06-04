@@ -12,93 +12,109 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WaitFlow.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WaitFlow.cs"
+			},
+			"rag": {
+				"description": "The WaitFlow plugin enables automation workflows to pause execution until a specified condition is met or a timeout occurs. By integrating assertion checks with optional time-based delays, it ensures that steps run in the correct order and prevents race conditions. Errors clear the waiting state and log exceptions to maintain workflow consistency and reliability.",
+				"qa": [
+					{
+						"question": "What is the WaitFlow plugin and why does it matter?",
+						"answer": "WaitFlow pauses an automation script until a condition is true or a timeout occurs, ensuring that subsequent steps execute correctly and preventing errors when waiting for elements or data."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include conditional waiting based on assertions, timeout handling in milliseconds or HH:MM:SS format, and dynamic creation of assertion actions. Primary parameters are Condition (an assertion to evaluate), Expected (value or pattern to match), Operator (comparison type), and Timeout (maximum wait duration)."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined as an ActionRuleModel task with iconProvider \"wait\", making it available as a wait or synchronization action in low-code or RPA platforms."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use precise Condition, Expected, and Operator values to define when to proceed, choose accurate locators or attributes for element checks, specify Timeout in the correct format (milliseconds or HH:MM:SS), and review logs on exceptions to troubleshoot delays or failures."
+					},
+					{
+						"question": "What is the structure of the plugin rule definition?",
+						"answer": "Each rule uses \"$type\": \"Action\", includes pluginName \"WaitFlow\", and may specify an argument string containing flags like --Condition, --Operator, --Expected, and --Timeout. Optional fields include locator, onElement, and onAttribute to target specific elements or attributes."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On error it clears any stored wait state, logs the exception to the workflow log stream, and by default allows the remainder of the workflow to continue unless explicitly configured to stop."
+					},
+					{
+						"question": "What are the aliases for this plugin?",
+						"answer": "The aliases are \"Wait\" and \"WaitForCondition\"."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It is listed under the \"FlowControl\" category, reflecting its role in controlling execution flow and synchronization."
+					},
+					{
+						"question": "What GitHub documentation link is provided?",
+						"answer": "The GitHub documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WaitFlow.md."
+					},
+					{
+						"question": "What GitHub source link is provided?",
+						"answer": "The GitHub source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WaitFlow.cs."
+					},
+					{
+						"question": "What does the context.integration.sequentialWorkflow section define?",
+						"answer": "It defines \"$type\": \"Action\", componentType \"task\", iconProvider \"wait\", and model \"ActionRuleModel\", making WaitFlow available as a task in workflow designers."
+					},
+					{
+						"question": "What is defined in the description section?",
+						"answer": "The description explains the purpose of WaitFlow, its key features such as conditional waiting and timeout handling, and its usage in RPA and automation testing scenarios."
+					},
+					{
+						"question": "What examples are provided in the manifest?",
+						"answer": "Examples include waiting for an element to be visible with CSS selector and millisecond timeout, using HH:MM:SS timeouts, pausing execution for a fixed duration, waiting for an attribute match via XPath, waiting for specific text via CSS selector, and pausing for a specified number of milliseconds."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is \"WaitFlow\", which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version used for this plugin."
+					},
+					{
+						"question": "What parameters does this plugin accept?",
+						"answer": "It accepts Condition (Assertion type, optional), Expected (Any type for comparison, optional), Operator (Operator type, optional), and Timeout (Number|Time type, optional) to define what to wait for and how long."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports \"Any\" platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is \"Action\", indicating it performs an operation within the automation workflow."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include Argument (Number or Expression specifying wait settings), Locator (String for finding elements, default \"Xpath\"), OnAttribute (String for attribute checks), and OnElement (String for element selectors)."
+					},
+					{
+						"question": "What protocol settings does the manifest specify?",
+						"answer": "Protocol settings show apiDocumentation as \"None\" and w3c as \"None\", indicating no external API documentation or W3C validation is required."
+					},
+					{
+						"question": "What summary is provided for this plugin?",
+						"answer": "The summary states that WaitFlow pauses a task until a watched condition is met or until a set time expires, helping synchronize steps when elements appear or events complete."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": "wait",
 				"model": "ActionRuleModel"
 			}
-		},
-		"rag": {
-			"description": "The WaitFlow plugin enables automation workflows to pause execution until specified conditions are met or a timeout occurs. It supports assertion integration, timeout handling, and dynamic control, ensuring reliable synchronization of steps by monitoring element visibility, attribute values, or fixed delays. Any exceptions are logged and state is cleared on error to maintain workflow stability.",
-			"qa": [
-				{
-					"question": "What is the WaitFlow plugin and why does it matter?",
-					"answer": "WaitFlow pauses an automation script until a condition is true or a timeout occurs, which is essential for ensuring steps run in the correct order and avoiding errors when waiting for elements or data."
-				},
-				{
-					"question": "What are the key features and primary parameters of this plugin?",
-					"answer": "Key features include conditional waiting based on assertions, timeout handling, and dynamic meta action creation. Primary parameters are Condition for the assertion to check, Expected for the value to match, Operator for comparison type, and Timeout for the maximum wait duration."
-				},
-				{
-					"question": "How does this plugin integrate into automation workflows or external tools?",
-					"answer": "It appears under context.integration.sequentialWorkflow as an ActionRuleModel task with iconProvider wait, making it available as a wait or synchronization action in low-code or RPA platforms."
-				},
-				{
-					"question": "What are best practices for configuring and using this plugin?",
-					"answer": "Use clear Condition, Expected, and Operator values to define when to proceed, choose precise locators or attributes for element checks, specify Timeout in milliseconds or HH:MM:SS format as needed, and review logs on exceptions to troubleshoot delays or failures."
-				},
-				{
-					"question": "What is the structure of the plugin rule definition?",
-					"answer": "Each rule uses \"$type\": \"Action\", includes pluginName \"WaitFlow\", and may specify argument with condition and timeout settings, plus optional fields locator, onElement, and onAttribute to target elements."
-				},
-				{
-					"question": "How does the plugin handle errors during execution?",
-					"answer": "On error it clears any stored wait state, logs the exception to the workflow log stream, and allows the workflow to continue unless explicitly configured to stop."
-				},
-				{
-					"question": "What are the aliases for this plugin?",
-					"answer": "The aliases are \"Wait\" and \"WaitForCondition\"."
-				},
-				{
-					"question": "Who is the author of this plugin?",
-					"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
-				},
-				{
-					"question": "What categories is this plugin listed under?",
-					"answer": "It is listed under the FlowControl category, reflecting its role in controlling workflow timing and synchronization."
-				},
-				{
-					"question": "What is the unique key for this plugin?",
-					"answer": "The key is WaitFlow, which uniquely identifies this plugin in the system."
-				},
-				{
-					"question": "What description does the manifest provide?",
-					"answer": "The description explains that WaitFlow pauses execution until a condition is met or a timeout occurs, details key features like conditional waiting, timeout handling, assertion integration, and lists RPA and automation testing use cases."
-				},
-				{
-					"question": "What examples are included in the manifest?",
-					"answer": "Examples cover waiting for an element to become visible with CSS selector, using millisecond or HH:MM:SS timeouts, pausing execution for fixed durations, waiting for attribute matches via XPath, and waiting for specific text via CSS selector."
-				},
-				{
-					"question": "What is the manifestVersion?",
-					"answer": "The manifestVersion is 4, indicating the schema version used."
-				},
-				{
-					"question": "What parameters does this plugin accept?",
-					"answer": "It accepts Condition (Assertion type), Expected (value or pattern), Operator (comparison type), and Timeout (Number or Time format)."
-				},
-				{
-					"question": "What properties define how the plugin operates?",
-					"answer": "Properties include Argument (Number or Expression specifying wait settings), Locator (method for finding elements, default \"Xpath\"), OnAttribute (element attribute to check), and OnElement (element selector for condition checks)."
-				},
-				{
-					"question": "What protocol settings does the manifest specify?",
-					"answer": "Protocol settings show apiDocumentation as \"None\" and w3c as \"None\", indicating no external API docs or W3C validation are required."
-				},
-				{
-					"question": "What platforms does this plugin support?",
-					"answer": "The platforms field lists \"Any\", meaning it can run in any execution context or platform."
-				},
-				{
-					"question": "What summary is provided for this plugin?",
-					"answer": "The summary states that WaitFlow pauses a task until a specified condition is met or until a set time expires, helping synchronize steps when elements appear or events complete."
-				},
-				{
-					"question": "What is the pluginType?",
-					"answer": "The pluginType is Action, which means it performs an operation within the automation workflow."
-				}
-			]
 		}
 	},
 	"description": [
