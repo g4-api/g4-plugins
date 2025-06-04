@@ -12,6 +12,10 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RegisterParameter.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/RegisterParameter.cs"
+			},
 			"rag": {
 				"description": "The RegisterParameter plugin enables automation workflows to enforce consistent data registration by capturing values from inputs or elements, applying pattern-based extraction or transformations, and securely storing results in configurable scopes. It supports dynamic parameter labels and optional encryption, ensuring flexible and reliable execution with built-in exception logging.",
 				"qa": [
