@@ -82,8 +82,8 @@
 						"answer": "Protocol settings show apiDocumentation as None and w3c as None, indicating no external API docs or W3C validation are required."
 					},
 					{
-						"question": "What scopes does this plugin support?",
-						"answer": "The scopes field lists Any, meaning this plugin can run in any execution context or platform."
+						"question": "What platforms does this plugin support?",
+						"answer": "The platforms field lists Any, meaning this plugin can run in any execution context or platform."
 					},
 					{
 						"question": "What does the summary describe?",
@@ -341,6 +341,9 @@
 			"type": "Operator"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -405,9 +408,6 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
 		"SetCondition checks a situation and runs one group of steps when it’s true, or a different group when it’s not true.",
 		"It uses simple checks to decide which steps to run.",
