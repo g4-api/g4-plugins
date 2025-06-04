@@ -8,6 +8,10 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SetCondition.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SetCondition.cs"
+			},
 			"sequentialWorkflow": {
 				"$type": "Switch",
 				"branches": [
