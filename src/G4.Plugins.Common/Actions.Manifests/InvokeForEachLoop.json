@@ -9,8 +9,8 @@
 	"context": {
 		"integration": {
 			"github": {
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForEachLoop.cs",
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForEachLoop.md"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForEachLoop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForEachLoop.cs"
 			},
 			"rag": {
 				"description": "The InvokeForEachLoop plugin automates repetitive tasks by finding collections of elements with a specified locator and executing defined actions on each item. It supports alternative locators, nested loops, and exception logging to maintain reliable workflows in RPA and automated testing.",
