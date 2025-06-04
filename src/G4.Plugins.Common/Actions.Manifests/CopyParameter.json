@@ -9,8 +9,8 @@
 	"context": {
 		"integration": {
 			"github": {
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/CopyParameter.cs",
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CopyParameter.md"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CopyParameter.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/CopyParameter.cs"
 			},
 			"rag": {
 				"description": "The CopyParameter plugin facilitates efficient and controlled transfer of parameter values between different scopes in automation scripts. It supports dynamic scope management and environment-specific settings, ensuring data consistency and reliable workflow execution.",
