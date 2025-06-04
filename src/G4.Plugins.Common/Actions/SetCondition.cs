@@ -67,8 +67,8 @@ namespace G4.Plugins.Common.Actions
 
             // Return the positive (TRUE) and negative (FALSE) actions as arrays.
             return (
-                PositiveActions: trueRules.ToArray(),
-                NegativeActions: falseRules.ToArray()
+                PositiveActions: [.. trueRules],
+                NegativeActions: [.. falseRules]
             );
         }
     }
