@@ -11,6 +11,95 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WriteLog.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WriteLog.cs"
+			},
+			"rag": {
+				"description": "The WriteLog plugin records informational messages during automation execution by taking a provided argument and writing it to the system log. It ensures clear progress tracking and aids troubleshooting without requiring log level configuration, and logs exceptions to preserve workflow reliability.",
+				"qa": [
+					{
+						"question": "What is the WriteLog plugin and why does it matter?",
+						"answer": "The WriteLog plugin records informational messages during automation runs so users can track execution steps and diagnose issues, making debugging and analysis easier."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include writing the content of the Argument property as a log entry and capturing key events for debugging. The primary parameter is Argument, which specifies the text or expression to log."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined as an ActionRuleModel task with iconProvider text, making it available as a logging action in low-code or RPA platforms."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Provide clear, descriptive messages in the Argument field, use expressions to include dynamic values, and review logs regularly to identify and resolve issues quickly."
+					},
+					{
+						"question": "What is the structure of its rule definition?",
+						"answer": "Each rule uses \"$type\": \"Action\", includes pluginName \"WriteLog\", and provides an argument string or expression under the Argument property."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On error it logs the exception to the workflow log stream and continues execution unless the workflow is explicitly configured to stop on failure."
+					},
+					{
+						"question": "What are the aliases for this plugin?",
+						"answer": "The aliases are \"Log\"."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It belongs to the Logging category, indicating its role in recording execution details."
+					},
+					{
+						"question": "What GitHub documentation link is provided?",
+						"answer": "The GitHub documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WriteLog.md."
+					},
+					{
+						"question": "What GitHub source link is provided?",
+						"answer": "The GitHub source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WriteLog.cs."
+					},
+					{
+						"question": "How is this plugin defined in the integration context?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined with \"$type\": \"Action\", componentType \"task\", iconProvider \"text\", and model \"ActionRuleModel\"."
+					},
+					{
+						"question": "What is described in the description section?",
+						"answer": "The description explains that WriteLog records informational messages during automation execution for display and analysis, highlights key features like informational logging and debugging aid, and lists usages in RPA and automation testing."
+					},
+					{
+						"question": "What examples are provided in the manifest?",
+						"answer": "Examples include writing a static log message and writing a dynamic session-scoped parameter value to the log, demonstrating both fixed and expression-based logging."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is \"WriteLog\", which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version used for this plugin."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports Any platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is Action, meaning it performs an operation within the automation workflow."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include Argument of type String|Expression, which provides the text or expression to record in the log."
+					},
+					{
+						"question": "What does the summary describe?",
+						"answer": "The summary states that WriteLog writes messages while a task runs so you can see what happened, puts the message into the system log, and makes it easy to follow steps, spot problems, and save important notes."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -22,47 +111,88 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `WriteLog` plugin is designed to write log messages during the execution of automation scripts. ",
-		"It is particularly useful for debugging, tracking the flow of execution, and recording important information.",
+		"The WriteLog plugin records informational messages during automation execution for display and analysis. It takes a given argument and writes it into the system log so users can see what happened at each step. This helps track progress and diagnose issues without worrying about different log levels.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                                                     |",
-		"|---------------------|-------------------------------------------------------------------------------------------------|",
-		"| Logging Information | Logs the content of the `Argument` property to the log using the logging framework.             |",
-		"| Debugging Aid       | Helps in understanding the flow of automation, capturing important events, or debugging issues. |",
+		"| Feature           | Description                                                             |",
+		"|-------------------|-------------------------------------------------------------------------|",
+		"| Informational Log | Write the content of the `Argument` property as an informational entry. |",
+		"| Debugging Aid     | Capture key events and details to help diagnose and fix issues.         |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage               | Description                                                            |",
-		"|---------------------|------------------------------------------------------------------------|",
-		"| Execution Tracking  | Track the flow of execution by logging key points in the automation.   |",
-		"| Debugging           | Capture log messages to help debug issues in the automation process.   |",
-		"| Information Logging | Record important information during the execution of automation tasks. |",
+		"| Use Case            | Description                                                                |",
+		"|---------------------|----------------------------------------------------------------------------|",
+		"| Execution Tracking  | Log key points to see the flow of an automated task and confirm steps ran. |",
+		"| Debugging           | Capture messages that help identify where and why a process failed.        |",
+		"| Information Logging | Record important data or status updates during automation.                 |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage               | Description                                                                             |",
-		"|---------------------|-----------------------------------------------------------------------------------------|",
-		"| Test Execution Logs | Capture logs during test execution to understand the flow and state of tests.           |",
-		"| Debugging Tests     | Log messages to help debug test failures or unexpected behavior during automated tests. |",
-		"| Recording Test Data | Log test data and results for analysis and verification purposes.                       |"
+		"| Use Case            | Description                                                                            |",
+		"|---------------------|----------------------------------------------------------------------------------------|",
+		"| Test Execution Logs | Record messages during test runs to understand test flow and state.                    |",
+		"| Debugging Tests     | Log details that help pinpoint failures or unexpected behavior in automated tests.     |",
+		"| Recording Test Data | Save test inputs, outputs, and results to the log for later analysis and verification. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid message format",
+						"Log write failure"
+					],
+					"expected_result": "The message \"Logging a simple message\" is written to the log.",
+					"notes": "Log entries are returned as strings for downstream processing.",
+					"use_case": "write_log_static_message",
+					"version": "1.0"
+				},
+				"labels": [
+					"Logging"
+				]
+			},
 			"description": [
-				"Logs a simple message during the execution of the automation script."
+				"### Write a Static Log Message",
+				"",
+				"This example demonstrates how to write a simple, static message to the log during automation execution.",
+				"It uses the `WriteLog` plugin with the argument set to \"Logging a simple message\".",
+				"Values are returned as strings for downstream processing."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Logging a simple message",
 				"pluginName": "WriteLog"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Log write failure",
+						"Parameter not found",
+						"Scope invalid"
+					],
+					"expected_result": "The value of the session-scoped parameter \"MyParam\" is retrieved and written to the log.",
+					"notes": "Log entries are returned as strings for downstream processing.",
+					"use_case": "write_log_dynamic_parameter",
+					"version": "1.0"
+				},
+				"labels": [
+					"Logging",
+					"ParameterRetrieval"
+				]
+			},
 			"description": [
-				"Logs the value of a dynamic parameter during the execution of the automation script."
+				"### Write a Dynamic Parameter Value to Log",
+				"",
+				"This example demonstrates how to retrieve a dynamic, session-scoped parameter and write its value to the log.",
+				"It uses the `WriteLog` plugin with the argument set to `{{$Get-Parameter --Name:MyParam --Scope:Session}}`.",
+				"Values are returned as strings for downstream processing."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:MyParam --Scope:Session}}",
 				"pluginName": "WriteLog"
 			}
@@ -70,11 +200,16 @@
 	],
 	"key": "WriteLog",
 	"manifestVersion": 4,
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the message or information to be logged. This can be a static message or a dynamic value retrieved from parameters."
+				"Text or information to record in the log.",
+				"It can be a fixed phrase or a value that changes at runtime.",
+				"Clear log messages help track what the system does."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -85,13 +220,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `WriteLog` plugin logs information during the execution of automation scripts, aiding in debugging, tracking the flow of execution, and recording important information.",
-		"It captures the content of the `Argument` property and logs it using the logging framework, providing valuable insights into the automation process.",
-		"Key features include logging information, serving as a debugging aid, and helping in understanding the flow of automation by capturing important events.",
-		"Common use cases include execution tracking, debugging, and information logging in RPA, as well as capturing test execution logs, debugging test failures, and recording test data in automation testing."
+		"`WriteLog` writes messages while a task runs so you can see what happened.",
+		"It takes your message and puts it into the system’s records.",
+		"This makes it easy to follow steps, spot problems, and save important notes."
 	]
 }
