@@ -9,8 +9,8 @@
 	"context": {
 		"integration": {
 			"github": {
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs",
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs"
 			},
 			"rag": {
 				"description": "The InvokeForLoop plugin executes a defined sequence of actions a fixed number of times in automation scripts. It supports controlled and parameterized iteration, sequential execution of child rules, and exception logging without halting by default, ensuring predictable and reliable workflows in RPA and test automation.",
