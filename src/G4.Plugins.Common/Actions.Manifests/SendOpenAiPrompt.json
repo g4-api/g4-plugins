@@ -8,6 +8,103 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendOpenAiPrompt.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendOpenAiPrompt.cs"
+			},
+			"rag": {
+				"description": "The SendOpenAiPrompt plugin enables automation workflows to send messages to the OpenAI chat API, track conversation history per session, and retrieve the assistant’s reply. It supports custom system prompts, dynamic completion settings such as model selection, temperature, TopK, and TopP, and can reset to a new chat. It records token usage and extracts internal reasoning notes, ensuring detailed insights and reliable error logging for consistent workflow execution.",
+				"qa": [
+					{
+						"question": "What is the SendOpenAiPrompt plugin and why does it matter?",
+						"answer": "The SendOpenAiPrompt plugin sends user prompts to the OpenAI chat API and returns the AI response, which is essential for integrating conversational AI into automated workflows."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include conversation history tracking, custom system prompts, completion settings (MaxTokens, Model, Temperature, TopK, TopP), new conversation reset, and response processing. Primary parameters include ApiKey for authentication, CompletionsUri for endpoint, MaxTokens to limit response length, Model selection, NewChat to reset history, Prompt for user text, SystemPrompt for custom instructions, Temperature, TopK, and TopP."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows or external tools?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined as an ActionRuleModel task with iconProvider chat, making it available as a conversational AI action in low-code or RPA platforms. GitHub links for documentation and source code are provided under context.integration.github."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use a valid ApiKey and correct CompletionsUri, set Model and MaxTokens based on desired response length, adjust Temperature or TopK/TopP for desired creativity, use NewChat to clear history when needed, and monitor token output parameters to manage costs."
+					},
+					{
+						"question": "What is the structure of the plugin rule definition?",
+						"answer": "Each rule uses \"$type\": \"Action\", includes pluginName \"SendOpenAiPrompt\", and passes an argument string containing flags like --Prompt, --SystemPrompt, --NewChat, and optional completion settings. Optionally, a regularExpression property can filter the response."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On error it logs exceptions to the workflow log stream, clears any partial state, and continues the workflow unless explicitly configured to stop on failure."
+					},
+					{
+						"question": "What are the aliases for this plugin?",
+						"answer": "The aliases are \"Wait\" and \"WaitForCondition\"."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It is listed under the OpenAI category, reflecting its role in interacting with OpenAI services."
+					},
+					{
+						"question": "What GitHub documentation link is provided?",
+						"answer": "The GitHub documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendOpenAiPrompt.md."
+					},
+					{
+						"question": "What GitHub source link is provided?",
+						"answer": "The GitHub source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendOpenAiPrompt.cs."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is SendOpenAiPrompt, which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the version of the manifest schema used."
+					},
+					{
+						"question": "What outputParameters does this plugin return?",
+						"answer": "It returns OpenAiCompletionTokens (number of response tokens), OpenAiPromptTokens (number of prompt tokens), OpenAiSystemResponse (filtered AI reply as Base64 string), OpenAiTotalTokens (total tokens used), and OpenAiThink (Base64-encoded internal reasoning notes)."
+					},
+					{
+						"question": "What parameters does this plugin accept?",
+						"answer": "It accepts ApiKey (string, required), CompletionsUri (string, default OpenAI endpoint), MaxTokens (number), Model (string, default gpt-4.1-mini), NewChat (switch), Prompt (string), SystemPrompt (string), Temperature (number), TopK (number), and TopP (number)."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports Any platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is Action, indicating it performs an operation within the automation workflow."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include argument (string or expression for flags and prompt text) and regularExpression (regex for filtering the response)."
+					},
+					{
+						"question": "What protocol settings does the manifest specify?",
+						"answer": "Protocol settings show apiDocumentation as https://platform.openai.com/docs/api-reference/chat/create and w3c as None, indicating use of the OpenAI API reference."
+					},
+					{
+						"question": "What summary is provided for this plugin?",
+						"answer": "The summary describes that SendOpenAiPrompt sends messages to OpenAI’s chat service, tracks conversation history, supports custom prompts and completion options, and extracts hidden \"think\" notes along with the final answer."
+					},
+					{
+						"question": "What does the entity section define?",
+						"answer": "The entity section defines output fields: CompletionTokens (number), PromptTokens (number), SystemResponse (string), TotalTokens (number), and Think (Base64-encoded string)."
+					},
+					{
+						"question": "What examples are provided in the manifest?",
+						"answer": "Examples include starting a new chat with a custom system prompt, sending a prompt with custom temperature and token limits, extracting content before a <think> tag using regex, sending a prompt with TopK, and sending a prompt with TopP to a custom Open-WebUI endpoint."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -417,6 +514,9 @@
 			"type": "Number"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -441,9 +541,6 @@
 		"apiDocumentation": "https://platform.openai.com/docs/api-reference/chat/create",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
 		"SendOpenAiPrompt sends your messages to OpenAI's chat service and shows the replies while keeping track of each person's past messages.",
 		"You can give it a custom starting instruction, set options like how long the answer should be, which version to use, and how creative it should be, and start a new chat when you want.",
