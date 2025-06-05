@@ -17,9 +17,6 @@ namespace G4.Plugins.Common.Actions
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Use an OrdinalIgnoreCase comparer for branch keys
-            var comparer = StringComparer.OrdinalIgnoreCase;
-
             // Determine if the current rule is a SwitchRuleModel
             var isSwitchRule = pluginData.Rule is SwitchRuleModel;
 
@@ -27,14 +24,14 @@ namespace G4.Plugins.Common.Actions
             {
                 // Ensure that the Branches dictionary is initialized (if null) for the switch rule
                 ((SwitchRuleModel)pluginData.Rule).Branches
-                    ??= new Dictionary<string, IEnumerable<G4RuleModelBase>>(comparer);
+                    ??= new Dictionary<string, IEnumerable<G4RuleModelBase>>();
             }
 
             // Prepare a local copy of branches with case-insensitive keys if it's a switch rule,
             // or an empty dictionary otherwise
             var branches = isSwitchRule
-                ? new Dictionary<string, IEnumerable<G4RuleModelBase>>(((SwitchRuleModel)pluginData.Rule).Branches, comparer)
-                : new Dictionary<string, IEnumerable<G4RuleModelBase>>(comparer);
+                ? new Dictionary<string, IEnumerable<G4RuleModelBase>>(((SwitchRuleModel)pluginData.Rule).Branches)
+                : [];
 
             // Retrieve the element associated with this rule invocation
             var element = this.GetElement(pluginData.Rule, pluginData.Element);
@@ -50,16 +47,25 @@ namespace G4.Plugins.Common.Actions
                 ? key
                 : GetKey(rule: pluginData.Rule, element);
 
+            // If the key is null or empty, default it to "Default" to ensure a valid lookup
+            key = string.IsNullOrEmpty(key) ? "Default" : key;
+
             // Lookup any child rules (branches) for the computed key; default to empty if none exist
             var rulesToInvoke = ignoreCase
-                ? branches.Get(key, defaultValue: Enumerable.Empty<G4RuleModelBase>()).ToArray()
-                : [.. branches.FirstOrDefault(i => i.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).Value ?? []];
+                ? branches.FirstOrDefault(i => i.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).Value
+                : branches.Get(key, defaultValue: Enumerable.Empty<G4RuleModelBase>());
+
+            // If no rules are found for the key, check if a "Default" branch exists
+            if (rulesToInvoke?.Any() != true)
+            {
+                rulesToInvoke = branches.Get("Default", defaultValue: Enumerable.Empty<G4RuleModelBase>());
+            }
 
             // Disable further invocation of child rules on the original rule node
             pluginData.Rule.SetInvokeRules(false);
 
             // Invoke all retrieved child rules in order
-            Invoker.Invoke(rulesToInvoke);
+            Invoker.Invoke([.. rulesToInvoke]);
 
             // Return a new, empty plugin response indicating successful execution
             return this.NewPluginResponse();
