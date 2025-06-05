@@ -198,6 +198,84 @@
             "    ]" +
             "}";
 
+        public const string RuleJsonSwitchCaseNoElement =
+            "{" +
+            "    \"$type\": \"Switch\"," +
+            "    \"pluginName\": \"SetSwitchCase\"," +
+            "    \"argument\": \""+ OnArgument +"\"," +
+            "    \"branches\": {" +
+            "        \"Foo Bar\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "             }" +
+            "         ]," +
+            "        \"Bar Foo\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Bar Foo}}\"" +
+            "             }" +
+            "         ]," +
+            "        \"" + OnArgument + "\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:" + OnArgument + "}}\"" +
+            "             }" +
+            "         ]," +
+            "        \"Bar Bar\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Bar Bar}}\"" +
+            "             }" +
+            "         ]" +
+            "    }" +
+            "}";
+
+        public const string RuleJsonSwitchCaseWithElement =
+            "{" +
+            "    \"$type\": \"Switch\"," +
+            "    \"pluginName\": \"SetSwitchCase\"," +
+            "    \"argument\": \"\"," +
+            "    \"locator\": \"Id\"," +
+            "    \"onElement\": \"" + OnElement + "\"," +
+            "    \"onAttribute\":\"" + OnAttribute + "\"," +
+            "    \"regularExpression\":\"" + OnRegularExpression + "\"," +
+            "    \"branches\": {" +
+            "        \"Foo Bar\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Foo Bar}}\"" +
+            "             }" +
+            "         ]," +
+            "        \"Bar Foo\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:Bar Foo}}\"" +
+            "             }" +
+            "         ]," +
+            "        \"OnArgument\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:OnArgument}}\"" +
+            "             }" +
+            "         ]," +
+            "        \"http://m.from-href.io/\": [" +
+            "             {" +
+            "                 \"$type\": \"Action\"," +
+            "                 \"pluginName\": \"RegisterParameter\"," +
+            "                 \"argument\": \"{{$ --Name:TestParameter --Value:http://m.from-href.io/}}\"" +
+            "             }" +
+            "         ]" +
+            "    }" +
+            "}";
+
         public const string RuleJsonInvokeForEachLoop =
             "{" +
             "    \"$type\": \"Action\"," +
