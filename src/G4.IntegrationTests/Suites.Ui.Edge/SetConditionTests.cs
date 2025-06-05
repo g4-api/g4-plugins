@@ -1,7 +1,7 @@
 ﻿using G4.IntegrationTests.Extensions;
 using G4.IntegrationTests.Framework;
 using G4.IntegrationTests.Framework.Attributes;
-using G4.IntegrationTests.Plugins.Ui.SetCondition;
+using G4.IntegrationTests.Plugins.Common.SetCondition;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
