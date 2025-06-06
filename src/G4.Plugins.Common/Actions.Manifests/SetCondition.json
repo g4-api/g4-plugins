@@ -15,8 +15,8 @@
 			"sequentialWorkflow": {
 				"$type": "Switch",
 				"branches": [
-					"false",
-					"true"
+					"False",
+					"True"
 				],
 				"canEditBranches": false,
 				"componentType": "switch",
