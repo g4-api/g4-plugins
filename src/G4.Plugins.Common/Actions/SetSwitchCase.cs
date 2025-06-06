@@ -17,6 +17,9 @@ namespace G4.Plugins.Common.Actions
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
+            // Constants for string comparison to ensure case-insensitive matching
+            const StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+
             // Determine if the current rule is a SwitchRuleModel
             var isSwitchRule = pluginData.Rule is SwitchRuleModel;
 
@@ -52,13 +55,13 @@ namespace G4.Plugins.Common.Actions
 
             // Lookup any child rules (branches) for the computed key; default to empty if none exist
             var rulesToInvoke = ignoreCase
-                ? branches.FirstOrDefault(i => i.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).Value
+                ? branches.FirstOrDefault(i => i.Key.Equals(key, comparison)).Value
                 : branches.Get(key, defaultValue: Enumerable.Empty<G4RuleModelBase>());
 
             // If no rules are found for the key, check if a "Default" branch exists
             if (rulesToInvoke?.Any() != true)
             {
-                rulesToInvoke = branches.Get("Default", defaultValue: Enumerable.Empty<G4RuleModelBase>());
+                rulesToInvoke = branches.FirstOrDefault(i => i.Key.Equals("Default", comparison)).Value ?? [];
             }
 
             // Disable further invocation of child rules on the original rule node
