@@ -1,7 +1,4 @@
 ﻿{
-	"aliases": [
-		"SetSwitchCase"
-	],
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -11,11 +8,112 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SetSwitchCase.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SetSwitchCase.cs"
+			},
+			"rag": {
+				"description": "The SetSwitchCase plugin enables automation workflows to evaluate a key—either static or extracted from an element’s text or attribute—and execute the matching branch of steps. It supports regular-expression extraction, case-insensitive matching, and a default fallback branch when no match is found. By facilitating flexible conditional paths and clear fallback logic, it helps maintain reliable and data-driven workflow execution.",
+				"qa": [
+					{
+						"question": "What is the SetSwitchCase plugin and why does it matter?",
+						"answer": "SetSwitchCase checks a key from a rule argument or an element’s text or attribute, then runs the matching branch of steps. If no branch matches, it uses the Default branch. This is important for automating workflows that need to follow different paths based on data at runtime."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include key source selection (static or element-based), regular-expression extraction, case-insensitive matching, and default branch fallback. Primary parameters include SwitchOn (static key), IgnoreCase (flag for case-insensitive matching), Locator (how to find element), OnElement (element selector), OnAttribute (attribute name), and RegularExpression (pattern for extracting the key)."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined as a Switch component with componentType \"switch\", iconProvider \"switch-case\", and model \"SwitchRuleModel\", making it available as a conditional switch task in low-code or RPA platforms."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use a clear default Argument when no element is present, choose precise locators and attribute names, apply RegularExpression to extract only the needed substring, enable IgnoreCase if branch keys may vary in letter case, and always include a Default branch to handle unmatched cases."
+					},
+					{
+						"question": "What is the structure of the plugin rule definition?",
+						"answer": "Each rule uses \"$type\": \"Switch\", includes pluginName \"SetSwitchCase\", may specify argument or SwitchOn for a static key, and defines branches as a map of keys to arrays of child actions. Optional fields include Locator, OnElement, OnAttribute, IgnoreCase, and RegularExpression."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On error, it logs the exception to the workflow log stream and clears any partial state. By default, the workflow continues unless explicitly configured to stop on failure, ensuring consistency."
+					},
+					{
+						"question": "What are the aliases for this plugin?",
+						"answer": "The aliases are \"SetSwitchCase\" itself appears under key but there is no dedicated aliases array; this manifest does not list aliases."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "Which categories is this plugin listed under?",
+						"answer": "It is listed under the \"FlowControl\" category, indicating its role in directing workflow logic based on conditions."
+					},
+					{
+						"question": "What GitHub documentation link is provided?",
+						"answer": "The GitHub documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SetSwitchCase.md."
+					},
+					{
+						"question": "What GitHub source link is provided?",
+						"answer": "The GitHub source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SetSwitchCase.cs."
+					},
+					{
+						"question": "What does the context.integration.sequentialWorkflow section define?",
+						"answer": "It defines \"$type\": \"Switch\", componentType \"switch\", iconProvider \"switch-case\", model \"SwitchRuleModel\", and branches [\"Default\"], making SetSwitchCase available as a switch task with editable branches in workflow designers."
+					},
+					{
+						"question": "What is described in the description section?",
+						"answer": "The description explains that SetSwitchCase evaluates a key (static or element-based), supports regex extraction and case-insensitive matching, and executes a matching branch or the Default branch if no match is found."
+					},
+					{
+						"question": "What examples are provided in the manifest?",
+						"answer": "Examples include selecting a random discount tier, checking a user’s role text, determining cart action via onclick attribute (exact match and case-insensitive regex), determining storage quota by subscription level, and determining a department-specific support email with fallback."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is \"SetSwitchCase\", which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the version of the manifest schema used for this plugin."
+					},
+					{
+						"question": "What parameters does this plugin accept?",
+						"answer": "It accepts two parameters: SwitchOn (a static key value of type String|Expression) and IgnoreCase (a Switch flag for case-insensitive matching)."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports Any platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is \"Action\", indicating it performs an operation within the automation workflow."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include Argument (String|Expression for default key), Locator (String for finding element, default \"Xpath\"), OnElement (String selector for element), OnAttribute (String for attribute name), and RegularExpression (Regex pattern for extracting the key)."
+					},
+					{
+						"question": "What protocol settings does the manifest specify?",
+						"answer": "Protocol settings show apiDocumentation as \"None\" and w3c as \"None\", indicating no external API documentation or W3C validation is required."
+					},
+					{
+						"question": "What summary is provided for this plugin?",
+						"answer": "The summary states: \"SetSwitchCase checks a value you give or finds on a page and runs the matching set of steps. If nothing matches, it runs a fallback set of steps. This lets your tasks follow different paths based on the information they see.\""
+					}
+				]
+			},
 			"sequentialWorkflow": {
-				"$type": "Action",
-				"componentType": "task",
-				"iconProvider": "task",
-				"model": "ActionRuleModel"
+				"$type": "Switch",
+				"branches": [
+					"Default"
+				],
+				"canEditBranches": true,
+				"componentType": "switch",
+				"iconProvider": "switch-case",
+				"model": "SwitchRuleModel"
 			}
 		}
 	},
@@ -49,289 +147,468 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parameter registration failure",
+						"Random number out of range",
+						"Session storage error"
+					],
+					"expected_result": "A random discount percentage (10, 20, 30, or 40) is stored as a session parameter named DiscountPercent.",
+					"notes": "A random number between 1 and 4 is generated at runtime to select the branch.",
+					"use_case": "random_discount_switchcase",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"Randomization",
+					"SwitchCase"
+				]
+			},
+			"description": [
+				"### Select Random Discount Tier and Store as Session Parameter",
+				"",
+				"This example demonstrates how to select a random discount tier (10%, 20%, 30%, or 40%) and store it as a session parameter for pricing logic.",
+				"It uses the `SetSwitchCase` plugin with a random number generated by `{{$New-RandomNumber --MinValue:1 --MaxValue:4 --NumberType:Byte}}`, which returns a numeric value at runtime. Depending on that value, it registers the session parameter `DiscountPercent` with 10, 20, 30, or 40.",
+				"No values are returned; the discount percentage is saved in session storage for subsequent steps."
+			],
 			"rule": {
-				"pluginName": "RegisterParameter",
-				"argument": "{{$ --Value:{{$New-RandomNumber --MinValue:1 --MaxValue:4 --NumberType:Byte}} --Name:TestParameter --Scope:Session}}"
-			}
-		},
-		{
-			"rule": {
-				"pluginName": "SetSwitchCase",
-				"argument": "{{$Get-Parameter --Name:TestParameter --Scope:Session}}",
+				"$type": "Switch",
+				"argument": "{{$New-RandomNumber --MinValue:1 --MaxValue:4 --NumberType:Byte}}",
 				"branches": {
 					"1": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:1 --Scope:Session}}"
+							"argument": "{{$ --Name:DiscountPercent --Value:10 --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
 					"2": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:2 --Scope:Session}}"
+							"argument": "{{$ --Name:DiscountPercent --Value:20 --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
 					"3": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:3 --Scope:Session}}"
+							"argument": "{{$ --Name:DiscountPercent --Value:30 --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
 					"4": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:4 --Scope:Session}}"
+							"argument": "{{$ --Name:DiscountPercent --Value:40 --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					]
-				}
+				},
+				"pluginName": "SetSwitchCase"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Parameter registration failure",
+						"Session storage error",
+						"Unexpected text value"
+					],
+					"expected_result": "The session parameter `UserRole` is registered with the text of the `userRoleLabel` element (Administrator, Manager, Employee, or Guest).",
+					"notes": "The switch uses the element’s text at runtime to decide which branch to execute.",
+					"use_case": "user_role_switchcase",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementTextExtraction",
+					"ParameterRegistration",
+					"SwitchCase"
+				]
+			},
+			"description": [
+				"### Check User Role and Register Session Parameter",
+				"",
+				"This example demonstrates how to check the user role displayed in the element with ID `userRoleLabel` and register a session parameter named `UserRole` based on its value.",
+				"It uses the `SetSwitchCase` plugin to read the text of `userRoleLabel` at runtime and then registers `UserRole` with the corresponding value: Administrator, Manager, Employee, or Guest.",
+				"No values are returned; the user role is saved in session storage for subsequent steps."
+			],
 			"rule": {
-				"pluginName": "SetSwitchCase",
+				"$type": "Switch",
 				"locator": "Id",
-				"onElement": "ElementText",
+				"onElement": "userRoleLabel",
 				"branches": {
-					"1": [
+					"Administrator": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:1 --Scope:Session}}"
+							"argument": "{{$ --Name:UserRole --Value:Administrator --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
-					"2": [
+					"Employee": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:2 --Scope:Session}}"
+							"argument": "{{$ --Name:UserRole --Value:Employee --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
-					"ElementText": [
+					"Guest": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:3 --Scope:Session}}"
+							"argument": "{{$ --Name:UserRole --Value:Guest --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
-					"4": [
+					"Manager": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:4 --Scope:Session}}"
+							"argument": "{{$ --Name:UserRole --Value:Manager --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					]
-				}
+				},
+				"pluginName": "SetSwitchCase"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Parameter registration failure",
+						"Session storage error",
+						"Unexpected attribute value"
+					],
+					"expected_result": "The session parameter `CartAction` is registered with the correct action based on the `onclick` attribute value of the `cartActionButton` element.",
+					"notes": "The switch uses the exact `onclick` attribute value at runtime to select the branch.",
+					"use_case": "element_attribute_switchcase_cartAction_exact",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"ParameterRegistration",
+					"SwitchCase"
+				]
+			},
+			"description": [
+				"### Determine Cart Action via `onclick` Attribute and Register Session Parameter",
+				"",
+				"This example demonstrates how to use the `onclick` attribute of the `<button id=\"cartActionButton\">` element to determine the cart operation (Add, Remove, Coupon, or Checkout) and register it as a session parameter named `CartAction`.",
+				"It uses the `SetSwitchCase` plugin to read the `onclick` attribute value at runtime and then registers `CartAction` with the corresponding value:",
+				"- `addToCart()` → Add",
+				"- `removeItem()` → Remove",
+				"- `applyCoupon()` → Coupon",
+				"- `checkout()` → Checkout.",
+				"No values are returned; the cart action is saved in session storage for subsequent steps."
+			],
 			"rule": {
-				"pluginName": "SetSwitchCase",
-				"onElement": "//input[@id='SetStaleElement']",
+				"$type": "Switch",
+				"branches": {
+					"addToCart()": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Add --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					],
+					"removeItem()": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Remove --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					],
+					"applyCoupon()": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Coupon --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					],
+					"checkout()": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Checkout --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					]
+				},
 				"onAttribute": "onclick",
-				"branches": {
-					"1": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:1 --Scope:Session}}"
-						}
-					],
-					"2": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:2 --Scope:Session}}"
-						}
-					],
-					"setStaleElement()": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:3 --Scope:Session}}"
-						}
-					],
-					"4": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:4 --Scope:Session}}"
-						}
-					]
-				}
+				"onElement": "//button[@id='cartActionButton']",
+				"pluginName": "SetSwitchCase"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Incorrect XPath indexing or attribute usage",
+						"Parameter registration failure",
+						"Regex match occurs when it shouldn't",
+						"Session storage error",
+						"Unexpected attribute value"
+					],
+					"expected_result": "The session parameter `CartAction` is registered with the correct action based on the case-insensitive match of the `onclick` attribute of the `cartActionButton` element.",
+					"notes": "The switch uses a case-insensitive regex to match the attribute value at runtime and select the appropriate branch.",
+					"use_case": "element_attribute_switchcase_cartAction_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementAttributeCheck",
+					"ParameterRegistration",
+					"RegexValidation",
+					"SwitchCase"
+				]
+			},
+			"description": [
+				"### Determine Cart Action via Case-Insensitive Regex on `onclick` Attribute and Register Session Parameter",
+				"",
+				"This example demonstrates how to match the `onclick` attribute of the `<button id=\"cartActionButton\">` element using a case-insensitive regular expression and register the cart action type as a session parameter named `CartAction`.",
+				"It uses the `SetSwitchCase` plugin with the `--IgnoreCase` flag and applies the regex `([A-Z])\\w+` (case-insensitive) to the `onclick` attribute value. Depending on the match:",
+				"- `additem` → Add",
+				"- `removeitem` → Remove",
+				"- `applycoupon` → Coupon",
+				"- `checkout` → Checkout.",
+				"No values are returned; the cart action is saved in session storage for subsequent steps."
+			],
 			"rule": {
-				"pluginName": "SetSwitchCase",
+				"$type": "Switch",
 				"argument": "{{$ --IgnoreCase}}",
-				"onElement": "//input[@id='SetStaleElement']",
+				"branches": {
+					"additem": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Add --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					],
+					"removeitem": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Remove --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					],
+					"applycoupon": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Coupon --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					],
+					"checkout": [
+						{
+							"argument": "{{$ --Name:CartAction --Value:Checkout --Scope:Session}}",
+							"pluginName": "RegisterParameter"
+						}
+					]
+				},
 				"onAttribute": "onclick",
-				"regularExpression": "([A-Z])\\w+",
-				"branches": {
-					"1": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:1 --Scope:Session}}"
-						}
-					],
-					"2": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:2 --Scope:Session}}"
-						}
-					],
-					"staleelement": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:3 --Scope:Session}}"
-						}
-					],
-					"4": [
-						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:4 --Scope:Session}}"
-						}
-					]
-				}
+				"onElement": "//button[@id='cartActionButton']",
+				"pluginName": "SetSwitchCase",
+				"regularExpression": "([A-Z])\\w+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid subscription level value",
+						"Parameter registration failure",
+						"Session storage error",
+						"SubscriptionLevel parameter missing"
+					],
+					"expected_result": "A session parameter `StorageQuota` is registered based on the stored `SubscriptionLevel` value (5GB, 50GB, 200GB, or Unlimited).",
+					"notes": "The switch uses the runtime value of `SubscriptionLevel` to select the appropriate quota branch.",
+					"use_case": "subscription_storage_quota_switchcase",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"SwitchCase"
+				]
+			},
+			"description": [
+				"### Determine Storage Quota Based on Subscription Level",
+				"",
+				"This example demonstrates how to determine the storage quota based on the user's subscription level stored in the session parameter `SubscriptionLevel`.",
+				"It uses the `SetSwitchCase` plugin with `--SwitchOn:{{$Get-Parameter --Name:SubscriptionLevel --Scope:Session}}` to retrieve the subscription level at runtime. Depending on the value (1, 2, 3, or 4), it registers the session parameter `StorageQuota` with 5GB, 50GB, 200GB, or Unlimited.",
+				"No return values; the quota is saved in session storage for subsequent steps."
+			],
 			"rule": {
-				"pluginName": "SetSwitchCase",
-				"argument": "{{$ --SwitchOn:{{$Get-Parameter --Name:TestParameter --Scope:Session}}}}",
+				"$type": "Switch",
+				"argument": "{{$ --SwitchOn:{{$Get-Parameter --Name:SubscriptionLevel --Scope:Session}}}}",
 				"branches": {
 					"1": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:1 --Scope:Session}}"
+							"argument": "{{$ --Name:StorageQuota --Value:5GB --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
 					"2": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:2 --Scope:Session}}"
+							"argument": "{{$ --Name:StorageQuota --Value:50GB --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
 					"3": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:3 --Scope:Session}}"
+							"argument": "{{$ --Name:StorageQuota --Value:200GB --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
 					"4": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:4 --Scope:Session}}"
+							"argument": "{{$ --Name:StorageQuota --Value:Unlimited --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					]
-				}
+				},
+				"pluginName": "SetSwitchCase"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Department parameter missing",
+						"Invalid department value",
+						"Parameter registration failure",
+						"Session storage error"
+					],
+					"expected_result": "A session parameter `SupportEmail` is registered with the department-specific email (sales@company.com, hr@company.com, eng@company.com, mkt@company.com) or default `support@company.com`.",
+					"notes": "The switch uses the runtime value of `Department` to select the appropriate email branch, with a fallback for unrecognized values.",
+					"use_case": "department_support_email_switchcase",
+					"version": "1.0"
+				},
+				"labels": [
+					"ParameterRegistration",
+					"SwitchCase"
+				]
+			},
+			"description": [
+				"### Determine Department-Specific Support Email with Fallback",
+				"",
+				"This example demonstrates how to determine the department-specific support email based on the user's department stored in the session parameter `Department`.",
+				"It uses the `SetSwitchCase` plugin with `--SwitchOn:{{$Get-Parameter --Name:Department --Scope:Session}}` to retrieve the department at runtime. Depending on the value (Sales, HR, Engineering, or Marketing), it registers the session parameter `SupportEmail` with the corresponding email. If none match, it registers `support@company.com` as a default.",
+				"No return values; the support email is saved in session storage for subsequent steps."
+			],
 			"rule": {
-				"pluginName": "SetSwitchCase",
-				"argument": "{{$ --SwitchOn:{{$Get-Parameter --Name:TestParameter --Scope:Session}}}}",
+				"$type": "Switch",
+				"argument": "{{$ --SwitchOn:{{$Get-Parameter --Name:Department --Scope:Session}}}}",
 				"branches": {
-					"1": [
+					"Sales": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:1 --Scope:Session}}"
+							"argument": "{{$ --Name:SupportEmail --Value:sales@company.com --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
-					"2": [
+					"HR": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:2 --Scope:Session}}"
+							"argument": "{{$ --Name:SupportEmail --Value:hr@company.com --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
-					"3": [
+					"Engineering": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:3 --Scope:Session}}"
+							"argument": "{{$ --Name:SupportEmail --Value:eng@company.com --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
-					"4": [
+					"Marketing": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:4 --Scope:Session}}"
+							"argument": "{{$ --Name:SupportEmail --Value:mkt@company.com --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					],
 					"Default": [
 						{
-							"pluginName": "RegisterParameter",
-							"argument": "{{$ --Name:TestResult --Value:5 --Scope:Session}}"
+							"argument": "{{$ --Name:SupportEmail --Value:support@company.com --Scope:Session}}",
+							"pluginName": "RegisterParameter"
 						}
 					]
-				}
+				},
+				"pluginName": "SetSwitchCase"
 			}
 		}
 	],
 	"key": "SetSwitchCase",
 	"manifestVersion": 4,
-	"pluginType": "Action",
 	"parameters": [
 		{
-			"name": "SwitchOn",
-			"type": "String|Expression",
-			"mandatory": false,
 			"description": [
-				"Specifies a static key value to switch on if no `OnElement` is provided. If omitted, the plugin uses the rule’s `Argument` value."
-			]
+				"A static value used to pick a branch when no element provides a key.",
+				"If missing, the plugin uses the main argument value to decide."
+			],
+			"mandatory": false,
+			"name": "SwitchOn",
+			"type": "String|Expression"
 		},
 		{
-			"name": "IgnoreCase",
-			"type": "Switch",
-			"mandatory": false,
 			"description": [
-				"When present, branch lookup is performed case-insensitively."
-			]
+				"A switch that makes branch lookup ignore uppercase and lowercase differences.",
+				"This helps match keys regardless of letter case and avoid missed matches."
+			],
+			"mandatory": false,
+			"name": "IgnoreCase",
+			"type": "Switch"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
 	"properties": [
 		{
-			"name": "Argument",
-			"type": "String|Expression",
-			"mandatory": false,
 			"description": [
-				"Provides the default key to switch on. If `SwitchOn` parameter is not set, this `Argument` is used as the key."
-			]
+				"Holds a fixed value or a dynamic expression to set the switch key or options.",
+				"It can use a simple text key or pull a value from parameters at runtime.",
+				"Use it to enable case-insensitive matching or specify an exact key when switching."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
 		},
 		{
-			"name": "Locator",
-			"type": "String",
-			"mandatory": false,
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to identify the target element when extracting the switch key."
-			]
+				"Method used to find the element that holds the switch key on a page.",
+				"Common methods include XPath or CSS selectors.",
+				"Choosing the correct method ensures the right element is located.",
+				"XPath is used when no other method is specified."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
 		},
 		{
+			"description": [
+				"Selector that points to the element containing the switch key.",
+				"Paths can use formats like XPath or CSS selectors.",
+				"Accurate selectors make sure the correct key is extracted."
+			],
+			"mandatory": false,
 			"name": "OnElement",
-			"type": "String",
-			"mandatory": false,
-			"description": [
-				"Identifies the selector (XPath, CSS selector, etc.) of the web element from which to extract the switch key."
-			]
+			"type": "String"
 		},
 		{
+			"description": [
+				"Name of the element’s attribute to read, such as text or value.",
+				"It tells the system which part of the element holds the key.",
+				"If no attribute is given, the element’s text content is used.",
+				"Correct choices ensure the right data is captured."
+			],
+			"mandatory": false,
 			"name": "OnAttribute",
-			"type": "String",
-			"mandatory": false,
-			"description": [
-				"Specifies the attribute name (e.g., `text` or `value`) to extract from the web element. If omitted, the element’s text content is used."
-			]
+			"type": "String"
 		},
 		{
-			"name": "RegularExpression",
-			"type": "Regex",
-			"mandatory": false,
 			"description": [
-				"Applies a regular expression to the element’s text or attribute value to extract a substring to use as the switch key."
-			]
+				"Pattern used to pull out the key from the element’s text or attribute.",
+				"Only the matching portion is kept for use as the switch key.",
+				"Applying a clear pattern ensures the correct substring is extracted."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
 		}
 	],
 	"protocol": {
-		"apiDocumentation": "",
+		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"MobileWeb",
-		"Web"
-	],
 	"summary": [
-		"The `SetSwitchCase` plugin evaluates a key (static or extracted from an element) and invokes child branches matching that key. It supports regular-expression extraction and case-insensitive matching, falling back to a `Default` branch when no match is found.",
-		"Use this plugin to implement data-driven or conditional branching logic within RPA workflows and automated tests."
+		"SetSwitchCase checks a value you give or finds on a page and runs the matching set of steps.",
+		"If nothing matches, it runs a fallback set of steps.",
+		"This lets your tasks follow different paths based on the information they see."
 	]
 }
