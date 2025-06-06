@@ -12,17 +12,6 @@
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SetCondition.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SetCondition.cs"
 			},
-			"sequentialWorkflow": {
-				"$type": "Switch",
-				"branches": [
-					"False",
-					"True"
-				],
-				"canEditBranches": false,
-				"componentType": "switch",
-				"iconProvider": "if",
-				"model": "SwitchRuleModel"
-			},
 			"rag": {
 				"description": "The SetCondition plugin enables automation workflows to reliably branch into true or false paths by evaluating assertions against element values, alerts, or page URLs. It supports flexible parameters for conditions, element locators, and regex filtering, and logs any exceptions while clearing state on error to maintain consistent workflow reliability.",
 				"qa": [
@@ -99,6 +88,17 @@
 						"answer": "The pluginType is Action, meaning it performs an operation in the automation workflow."
 					}
 				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Switch",
+				"branches": [
+					"False",
+					"True"
+				],
+				"canEditBranches": false,
+				"componentType": "switch",
+				"iconProvider": "if",
+				"model": "SwitchRuleModel"
 			}
 		}
 	},
