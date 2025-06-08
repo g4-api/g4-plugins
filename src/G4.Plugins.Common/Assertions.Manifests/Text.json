@@ -9,122 +9,365 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `Text` plugin is designed to perform text assertions within automation scripts. ",
-		"Its primary objective is to validate that a given text input, which can be either static or dynamically retrieved from a parameter, meets the expected conditions.",
+		"The Text plugin returns a piece of text—either a fixed value or one built at run time—for use in assertion workflows. It supplies the ‘Actual’ value that assertion plugins compare against an expected value. As an assertion-type plugin, it can be passed as a parameter to other plugins that perform checks.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                              |",
-		"|----------------------------|----------------------------------------------------------------------------------------------------------|",
-		"| Static and Dynamic Input   | Supports both static text and text retrieved dynamically from parameters for assertions.                 |",
-		"| Flexible Assertions        | Provides a range of operators to validate text conditions, including equality, inequality, and patterns. |",
-		"| Regular Expression Support | Allows applying regular expressions to the text before performing the assertion.                         |",
+		"| Feature                 | Description                                                                                         |",
+		"|-------------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Static and Dynamic Text | Provide a fixed text string or build text on the fly using macros or data provider values.          |",
+		"| Macro Support           | Use macro expressions (e.g., `{{$Get-Parameter ...}}`) to assemble or modify text at run time.      |",
+		"| Data Provider Binding   | Pull values directly from data provider columns (e.g., `{{$ Columns.ColumnName }}`) for text input. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage             | Description                                                                              |",
-		"|-------------------|------------------------------------------------------------------------------------------|",
-		"| Validate Text     | Ensure that a static or dynamic text value matches the expected conditions.              |",
-		"| Data Verification | Verify data integrity by asserting that parameter values meet specified text conditions. |",
+		"| Use Case          | Description                                                                       |",
+		"|-------------------|-----------------------------------------------------------------------------------|",
+		"| Provide Assertion | Supply a static or generated text value as the Actual parameter for an assertion. |",
+		"| Parameter Binding | Return a parameter’s value as text so other plugins can feed it into assertions.  |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage               | Description                                                                                               |",
-		"|---------------------|-----------------------------------------------------------------------------------------------------------|",
-		"| Functional Testing  | Validate that text inputs in various test scenarios meet the expected conditions.                         |",
-		"| Regression Testing  | Ensure that changes in the application do not affect the expected text values in the system.              |",
-		"| Data-Driven Testing | Dynamically retrieve and assert text values from test data parameters to ensure accuracy and consistency. |"
+		"| Use Case            | Description                                                                                                   |",
+		"|---------------------|---------------------------------------------------------------------------------------------------------------|",
+		"| Assertion Input     | Provide the Actual text value that assertion plugins will compare to an Expected value.                       |",
+		"| Data-Driven Testing | Feed text from macros or data provider into assertion steps so tests validate different inputs automatically. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Value produced by the action or extracted from the element.",
+				"The system uses it as the result to check.",
+				"Comparisons will use this value against the expected value."
+			],
+			"name": "Actual",
+			"type": "Any"
+		},
+		{
+			"default": "Text",
+			"description": [
+				"Assertion type used to check the actual value.",
+				"Available options define different kinds of checks like text or attribute.",
+				"The default setting is Text to compare simple text values."
+			],
+			"name": "Condition",
+			"type": "Assertion"
+		},
+		{
+			"description": [
+				"Value or pattern to compare against the actual value.",
+				"It sets the target for the assertion to pass.",
+				"Accurate expected values ensure correct comparison results."
+			],
+			"name": "Expected",
+			"type": "Any"
+		},
+		{
+			"description": [
+				"Operation used to compare the actual and expected values.",
+				"Options include equals, contains, greater than, or less than.",
+				"Choosing the correct operator ensures the right comparison is made."
+			],
+			"name": "Operator",
+			"type": "Operator"
+		}
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parameter not found",
+						"Test data missing",
+						"Type mismatch",
+						"Unexpected parameter value"
+					],
+					"expected_result": "The assertion passes if the session parameter `ActualOrderID` equals the expected value from test data (`Columns.ExpectedOrderID`).",
+					"notes": "Values are compared as strings for consistency.",
+					"use_case": "session_parameter_equal_validation_actualorderid",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation"
+				]
+			},
 			"description": [
-				"Assert that the text `{{$Get-Parameter --Name:MyParameter --Scope:Session}}` is equal to the expected value provided by a dynamic parameter."
+				"### Assert Order Confirmation Number Equals Expected Value",
+				"",
+				"This example demonstrates how to assert that the order confirmation number retrieved from the session parameter `ActualOrderID` matches the expected order ID from test data.",
+				"It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:ActualOrderID --Scope:Session}}` and argument `{{$ --Operator:Equal --Expected:{{$ Columns.ExpectedOrderID }}}}`.",
+				"The assertion passes only if the session parameter value, when compared as a string, equals the expected value."
 			],
 			"rule": {
-				"argument": "{{$ --Operator:Equal --Expected:ExpectedValue}}",
-				"onElement": "{{$Get-Parameter --Name:MyParameter --Scope:Session}}",
+				"$type": "Action",
+				"argument": "{{$ --Operator:Equal --Expected:{{$ Columns.ExpectedOrderID }}}}",
+				"onElement": "{{$Get-Parameter --Name:ActualOrderID --Scope:Session}}",
 				"pluginName": "Text"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parameter not found",
+						"Session parameter missing",
+						"Unexpected parameter value",
+						"Value equals placeholder"
+					],
+					"expected_result": "The assertion passes if the session parameter `LastErrorMessage` does not equal the default placeholder `Error occurred`.",
+					"notes": "Values are compared as strings for consistency.",
+					"use_case": "session_parameter_not_equal_validation_lasterrormessage",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation"
+				]
+			},
 			"description": [
-				"Assert that the text `Static Text` is not equal to the expected value."
+				"### Assert Error Message Is Not Default Placeholder",
+				"",
+				"This example demonstrates how to assert that the error message stored in the session parameter `LastErrorMessage` is not the default placeholder value `Error occurred`.",
+				"It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:LastErrorMessage --Scope:Session}}` and argument `{{$ --Operator:NotEqual --Expected:Error occurred}}`.",
+				"The assertion passes only if the session parameter value, when compared as a string, does not equal the placeholder."
 			],
 			"rule": {
-				"argument": "{{$ --Operator:NotEqual --Expected:Static Text}}",
-				"onElement": "Static Text",
+				"$type": "Action",
+				"argument": "{{$ --Operator:NotEqual --Expected:Error occurred}}",
+				"onElement": "{{$Get-Parameter --Name:LastErrorMessage --Scope:Session}}",
 				"pluginName": "Text"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parameter not found",
+						"Unexpected parameter format",
+						"Value does not match pattern"
+					],
+					"expected_result": "The assertion passes if the session parameter `UserSSN` matches the SSN format XXX-XX-XXXX.",
+					"notes": "Values are compared as strings using a regex to ensure valid SSN formatting.",
+					"use_case": "session_parameter_match_validation_userssn",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Assert that the text `123-45-6789` matches the regular expression `\\d{3}-\\d{2}-\\d{4}`."
+				"### Assert Session Parameter SSN Matches Valid Format",
+				"",
+				"This example demonstrates how to assert that the Social Security Number stored in the session parameter `UserSSN` matches the valid SSN format (XXX-XX-XXXX).",
+				"It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:UserSSN --Scope:Session}}` and applies the operator `Match` with the regular expression `\\d{3}-\\d{2}-\\d{4}` to extract and validate the SSN format.",
+				"A regular expression `\\d{3}-\\d{2}-\\d{4}` is applied to the parameter value to ensure it conforms to the expected pattern.",
+				"The assertion passes only if the session parameter value, when compared as a string, matches the pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
-				"onElement": "123-45-6789",
+				"onElement": "{{$Get-Parameter --Name:UserSSN --Scope:Session}}",
 				"pluginName": "Text"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parameter not found",
+						"Unexpected parameter format",
+						"Value does not match pattern"
+					],
+					"expected_result": "The assertion passes if the literal value `000-00-0000` does not match the SSN pattern XXX-XX-XXXX.",
+					"notes": "Values are compared as strings using a regex to verify the placeholder is not accepted as valid SSN data.",
+					"use_case": "session_parameter_not_match_validation_userssn",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Assert that the text `123-45-6789` does not match the regular expression `\\d{3}-\\d{2}-\\d{4}`."
+				"### Assert Placeholder SSN Does Not Match Valid Format",
+				"",
+				"This example demonstrates how to assert that the placeholder SSN value `000-00-0000` does not match the valid SSN format (XXX-XX-XXXX).",
+				"It uses the `Text` plugin with `onElement` set to `000-00-0000` and applies the operator `NotMatch` with the regular expression `\\d{3}-\\d{2}-\\d{4}` to validate that the placeholder is rejected.",
+				"A regular expression `\\d{3}-\\d{2}-\\d{4}` is applied to the literal value to ensure it does not conform to the SSN pattern.",
+				"The assertion passes only if the value, when compared as a string, does not match the pattern."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
-				"onElement": "123-45-6789",
+				"onElement": "000-00-0000",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-numeric parameter value",
+						"Parameter not found",
+						"Unexpected parameter value"
+					],
+					"expected_result": "The assertion passes if `TotalOrderAmount` is greater than 50.",
+					"notes": "Values are compared as numbers for accuracy.",
+					"use_case": "session_parameter_greater_validation_totalorderamount",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Assert Total Order Amount Exceeds Free-Shipping Threshold",
+				"",
+				"This example demonstrates how to assert that the total order amount stored in the session parameter `TotalOrderAmount` exceeds the minimum free-shipping threshold of 50.",
+				"It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}` and argument `{{$ --Operator:Greater --Expected:50}}`.",
+				"The assertion passes only if the session parameter value, when compared as a number, is greater than 50."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Operator:Greater --Expected:50}}",
+				"onElement": "{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}",
 				"pluginName": "Text"
 			}
 		},
 		{
 			"description": [
-				"Assert that the text `20` is greater than the value `10`."
+				"### Assert Available Stock Is Below Reorder Threshold",
+				"",
+				"This example demonstrates how to assert that the available stock level stored in the session parameter `AvailableStock` is below the reorder threshold of 20 units.",
+				"It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:AvailableStock --Scope:Session}}` and argument `{{$ --Operator:Lower --Expected:20}}`.",
+				"The assertion passes only if the session parameter value, when compared as a number, is less than 20."
 			],
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-numeric parameter value",
+						"Parameter not found",
+						"Unexpected parameter value"
+					],
+					"expected_result": "The assertion passes if `AvailableStock` is less than 20.",
+					"notes": "Values are compared as numbers for accuracy.",
+					"use_case": "session_parameter_lower_validation_availablestock",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation"
+				]
+			},
 			"rule": {
-				"argument": "{{$ --Operator:Greater --Expected:10}}",
-				"onElement": "20",
+				"$type": "Action",
+				"argument": "{{$ --Operator:Lower --Expected:20}}",
+				"onElement": "{{$Get-Parameter --Name:AvailableStock --Scope:Session}}",
 				"pluginName": "Text"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-numeric parameter value",
+						"Parameter not found",
+						"Unexpected parameter value"
+					],
+					"expected_result": "The assertion passes if `TotalOrderAmount` is greater than or equal to the free shipping threshold from test data (`Columns.FreeShippingThreshold`).",
+					"notes": "Values are compared as numbers for accuracy.",
+					"use_case": "session_parameter_greater_equal_validation_totalorderamount",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation"
+				]
+			},
 			"description": [
-				"Assert that the text `5` is less than the value `10`."
+				"### Assert Total Order Amount Meets Free-Shipping Threshold",
+				"",
+				"This example demonstrates how to assert that the total order amount stored in the session parameter `TotalOrderAmount` is at least the free shipping threshold defined in test data.",
+				"It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}` and argument `{{$ --Operator:GreaterEqual --Expected:{{$ Columns.FreeShippingThreshold }}}}`.",
+				"The assertion passes only if the session parameter value, when compared as a number, is greater than or equal to the expected threshold."
 			],
 			"rule": {
-				"argument": "{{$ --Operator:Lower --Expected:10}}",
-				"onElement": "5",
+				"$type": "Action",
+				"argument": "{{$ --Operator:GreaterEqual --Expected:{{$ Columns.FreeShippingThreshold }}}}",
+				"onElement": "{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}",
 				"pluginName": "Text"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-numeric parameter value",
+						"Parameter not found",
+						"Unexpected parameter value"
+					],
+					"expected_result": "The assertion passes if `AvailableStock` is less than or equal to the warehouse capacity from test data (`Columns.WarehouseCapacity`).",
+					"notes": "Values are compared as numbers for accuracy.",
+					"use_case": "session_parameter_lower_equal_validation_availablestock",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"Validation"
+				]
+			},
 			"description": [
-				"Assert that the text `10` is greater than or equal to the value `10`."
+				"### Assert Available Stock Does Not Exceed Warehouse Capacity",
+				"",
+				"This example demonstrates how to assert that the available stock level stored in the session parameter `AvailableStock` does not exceed the warehouse capacity defined in test data.",
+				"It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:AvailableStock --Scope:Session}}` and argument `{{$ --Operator:LowerEqual --Expected:{{$ Columns.WarehouseCapacity }}}}`.",
+				"The assertion passes only if the session parameter value, when compared as a number, is less than or equal to the expected capacity."
 			],
 			"rule": {
-				"argument": "{{$ --Operator:GreaterEqual --Expected:10}}",
-				"onElement": "10",
+				"$type": "Action",
+				"argument": "{{$ --Operator:LowerEqual --Expected:{{$ Columns.WarehouseCapacity }}}}",
+				"onElement": "{{$Get-Parameter --Name:AvailableStock --Scope:Session}}",
 				"pluginName": "Text"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed price string",
+						"Missing numeric value",
+						"Regex match occurs when it shouldn't",
+						"Unexpected formatting"
+					],
+					"expected_result": "The assertion passes if the numeric value extracted from `$1,000.00` equals 1000.",
+					"notes": "A regular expression defined in the `regularExpression` field is applied to extract the numeric portion before comparison.",
+					"use_case": "static_price_regex_equal_validation",
+					"version": "1.0"
+				},
+				"labels": [
+					"Assert",
+					"RegexValidation",
+					"Validation"
+				]
+			},
 			"description": [
-				"Assert that the text `10` is less than or equal to the value `10`."
+				"### Extract Numeric Value from Price and Assert Equality",
+				"",
+				"This example demonstrates how to extract the numeric value from the static price string `$1,000.00` using a regular expression and then assert that it equals `1000`.",
+				"It uses the `Text` plugin with `onElement` set to `$1,000.00`, applies the regex `\\d+(?:,\\d{3})*` (configured in the rule’s `regularExpression` field) to extract the numeric portion (ignoring commas), and then uses the operator `Equal` against the expected value `1000`.",
+				"The assertion passes only if the extracted numeric value, when compared as a string, equals `1000`."
 			],
 			"rule": {
-				"argument": "{{$ --Operator:LowerEqual --Expected:10}}",
-				"onElement": "10",
-				"pluginName": "Text"
-			}
-		},
-		{
-			"description": [
-				"Assert that the text `1000` matches a regular expression to extract numbers before comparison."
-			],
-			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Operator:Equal --Expected:1000}}",
-				"onElement": "1000",
+				"onElement": "$1,000.00",
 				"pluginName": "Text",
-				"regularExpression": "\\d+"
+				"regularExpression": "\\d+(?:,\\d{3})*"
 			}
 		}
 	],
@@ -133,7 +376,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the value or pattern that the automation script expects to find or match during the execution of a condition."
+				"Value or pattern the script looks for when checking a condition.",
+				"Defines what result counts as a match.",
+				"Clear expected values help avoid missed matches or false positives."
 			],
 			"mandatory": false,
 			"name": "Expected",
@@ -141,18 +386,25 @@
 		},
 		{
 			"description": [
-				"Specifies the type of comparison or operation to be performed when evaluating a condition."
+				"Method the system uses to compare actual results to expected values.",
+				"Operators include checks like equals, greater than, or less than.",
+				"Choosing the right operator ensures accurate decision making."
 			],
 			"mandatory": false,
 			"name": "Operator",
 			"type": "Operator"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Assertion",
 	"properties": [
 		{
 			"description": [
-				"Specifies the actual text value that will be compared against the expected value. This can be a static text or a dynamic value retrieved using a CLI expression."
+				"Text value that will be compared to the expected result.",
+				"It can be a fixed phrase or a value provided by an expression at runtime.",
+				"Accurate values ensure the comparison works correctly."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -160,7 +412,9 @@
 		},
 		{
 			"description": [
-				"Specifies a regular expression to be applied to the text value before performing the assertion."
+				"Pattern used to process the text before comparison.",
+				"Only the parts that match the pattern are kept for checking.",
+				"Pattern matching helps focus the comparison on relevant text."
 			],
 			"mandatory": false,
 			"name": "RegularExpression",
@@ -171,13 +425,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `Text` plugin performs text assertions within automation scripts, validating that a given text input, which can be static or dynamically retrieved, meets the expected conditions.",
-		"It supports static and dynamic input for assertions, providing a range of operators for flexible text validation, including equality, inequality, and pattern matching.",
-		"Key features include support for regular expressions, flexible assertions, and handling both static and dynamic text inputs.",
-		"Common use cases include validating text, verifying data integrity in RPA, and performing functional, regression, and data-driven testing in automation testing."
+		"Text plugin returns a piece of text you give it or that it makes from other information.",
+		"It can use fixed words, values saved earlier, or items from a list to make that text.",
+		"That text can then be used to check results or for tests with different inputs."
 	]
 }
