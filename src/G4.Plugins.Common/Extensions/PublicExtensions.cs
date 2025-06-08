@@ -62,7 +62,7 @@ namespace G4.Extensions
                 else
                 {
                     // Add any exceptions from the assertion response to the plugin
-                    plugin.AddExceptions(response.Exceptions.ToArray());
+                    plugin.AddExceptions([.. response.Exceptions]);
 
                     // Create an operator rule from the assertion response entity
                     var operatorRule = assertRule.NewOperatorRule(response.Entity);
@@ -101,7 +101,7 @@ namespace G4.Extensions
             }
 
             // Add all collected exceptions to the plugin's exception list
-            plugin.AddExceptions(assertion.Exceptions.ToArray());
+            plugin.AddExceptions([.. assertion.Exceptions]);
 
             // Store the assertion response model in the action context for reference
             action.Context["PluginResponseModel"] = assertion;
