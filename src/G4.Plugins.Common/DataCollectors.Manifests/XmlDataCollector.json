@@ -6,47 +6,154 @@
 	"categories": [
 		"DataManagement"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/XmlDataCollector.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/XmlDataCollector.cs"
+			},
+			"rag": {
+				"description": "XmlDataCollector serializes extraction outputs into an XML file, supporting real-time streaming and bulk writes. It hooks into extraction rules, manages file creation or appending, and ensures reliable integration with XML-based services while preserving workflow stability and flexibility.",
+				"qa": [
+					{
+						"question": "What is the XmlDataCollector plugin and why does it matter?",
+						"answer": "XmlDataCollector converts extracted data items into XML elements and writes them to a file, enabling seamless integration with XML-based systems, reporting tools, and downstream workflows."
+					},
+					{
+						"question": "How do its main capabilities work and what are its primary parameters?",
+						"answer": "It embeds into extraction rules via a dataCollector object. The main parameters are ForEntity (true for streaming each record, false for bulk write), Source (the XML file path), and Type (must be XmlDataCollector)."
+					},
+					{
+						"question": "How does XmlDataCollector embed into external tools or workflow designers?",
+						"answer": "In workflow definitions it appears as a DataCollector step. You specify it under an extraction rule with dataCollector settings, allowing low-code design tools to configure file path and streaming mode without custom coding."
+					},
+					{
+						"question": "What are recommended configuration patterns and troubleshooting tips?",
+						"answer": "Use ForEntity=true for large or continuous streams to avoid high memory use. For smaller batches, set ForEntity=false to reduce I/O calls. Verify XPath and regex rules to prevent missing or malformed records, and ensure file paths are writable."
+					},
+					{
+						"question": "How are action or rule definitions structured for this plugin?",
+						"answer": "You define an Extraction rule ($type “Extraction”) with a dataCollector object containing ForEntity, Source, and Type fields. Nested rule entries ($type “Content”) include key, onElement, and regularExpression to shape each XML element."
+					},
+					{
+						"question": "How does the plugin record failures and control workflow behavior on error?",
+						"answer": "On errors it adds an exception to the response and log stream. By default the workflow continues unless you configure it to stop on error in your automation designer."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema iteration the plugin adheres to for property and parameter definitions."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What are the categories?",
+						"answer": "This plugin is categorized under DataManagement, reflecting its role in collecting and organizing data."
+					},
+					{
+						"question": "What platforms does it support?",
+						"answer": "The plugin supports Any platform, making it compatible with Windows, Linux, and other environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is DataCollector, indicating it focuses on gathering and writing data outputs."
+					},
+					{
+						"question": "What scopes does it use?",
+						"answer": "The defined scope is Any, meaning it can operate in any context or isolation level within the automation engine."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is XmlDataCollector, which is used to reference this plugin in workflow definitions."
+					},
+					{
+						"question": "What is the summary?",
+						"answer": "“XmlDataCollector serializes extraction outputs into an XML file, wrapping records under a default root element. Supports streaming writes for large data sets or bulk writes for smaller runs. Ideal for integration with XML-based systems and reporting tools.”"
+					},
+					{
+						"question": "What properties are defined?",
+						"answer": "Properties include ForEntity (Boolean, optional, toggles streaming vs buffered write), Source (String, mandatory, file path), and Type (DataCollector, mandatory, must be XmlDataCollector)."
+					},
+					{
+						"question": "What parameters are defined?",
+						"answer": "This plugin does not define a separate parameters array and relies on its properties section for configuration."
+					},
+					{
+						"question": "What protocol information is included?",
+						"answer": "Protocol settings are apiDocumentation: None and w3c: None, indicating no external API or W3C schema references."
+					},
+					{
+						"question": "Where can I find the GitHub documentation?",
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/XmlDataCollector.md"
+					},
+					{
+						"question": "Where can I find the source code?",
+						"answer": "Source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/XmlDataCollector.cs"
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `XmlDataCollector` is to collect data and organize it in a structured format, typically as XML (Extensible Markup Language). ",
-		"XML is a flexible and widely-used data interchange format, making it suitable for various applications, including automation and data integration.",
+		"XmlDataCollector takes your extraction-rule outputs and saves them into an XML file. It opens or creates the specified file, wraps records in a default root element, and either appends each record element as it’s extracted or writes the full document at the end of the run. This format simplifies integration with XML-based services and tools.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature               | Description                                                                                                            |",
-		"|-----------------------|------------------------------------------------------------------------------------------------------------------------|",
-		"| Data Storage          | Storing data collected from various sources in a structured format, making it easier to manage, retrieve, and analyze. |",
-		"| Data Integration      | Facilitating the integration of data from multiple systems or sources into a single, consistent format.                |",
-		"| Automation            | Supporting automation and RPA processes by collecting and formatting data for further use in automated workflows.      |",
+		"| Feature                | Description                                                                             |",
+		"|------------------------|-----------------------------------------------------------------------------------------|",
+		"| Extraction Integration | Hooks into your extraction rules so every item becomes an XML element.                  |",
+		"| Write Modes            | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                            | Description                                                                                                                                                             |",
-		"|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Web Scraping and Data Extraction | Collect data from websites and save it in XML format. Data collected can include product information, news articles, weather data, etc.                                 |",
-		"| RPA Data Management              | Gather data during automated tasks and workflows, storing it as XML for further processing or reporting.                                                                |",
-		"| Data Aggregation                 | Aggregate data from multiple sources into a single XML format.                                                                                                          |",
-		"| Data Export and Reporting        | Export data collected from various sources to XML format for reporting and analysis. XML is commonly used for transmitting data between systems and generating reports. |",
+		"| Use Case           | Description                                                                |",
+		"|--------------------|----------------------------------------------------------------------------|",
+		"| Web Scraping       | Serializes scraped items into XML for legacy system ingestion or analysis. |",
+		"| Real-Time Capture  | Streams each record as an XML element for live dashboards.                 |",
+		"| Data Aggregation   | Collects outputs from multiple sources into a single XML document.         |",
+		"| System Interchange | Produces XML files consumable by other services or microservices.          |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                  | Description                                                                                                                                    |",
-		"|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Data-Driven Testing    | Use the `XmlDataCollector` plugin to collect test data during test execution and save it in XML format for further analysis.                   |",
-		"| Test Data Management   | Manage and store test data in a structured XML format, facilitating easy retrieval and use in various test scenarios.                          |",
-		"| Dynamic Test Execution | Enable dynamic test execution by collecting and storing runtime data in XML format, allowing for flexible test configurations and validations. |"
+		"| Use Case           | Description                                                           |",
+		"|--------------------|-----------------------------------------------------------------------|",
+		"| Test Result Export | Records pass/fail status as XML elements for CI systems or reporting. |",
+		"| Metrics Collection | Captures timing and resource usage in XML for downstream analysis.    |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element missing",
+						"XPath mismatch",
+						"Regex failure",
+						"Malformed DOM",
+						"Unexpected whitespace"
+					],
+					"expected_result": "Each record is appended as an XML element under the default root in real time.",
+					"notes": "Streaming writes avoid high memory use for large data sets. The plugin writes the opening `<Records>` once, then each record element, and closes the root at completion.",
+					"use_case": "hotel_to_xml_streaming",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Extraction",
+					"FileWrite",
+					"XmlExtraction"
+				]
+			},
 			"description": [
-				"Defines an extraction rule that extracts location information from a web page. ",
-				"The extracted data is labeled as `Location`, and it is collected using an `XmlDataCollector` into an XML file named `DataFile.xml`. ",
-				"The extraction process is defined within a specific scope and starts from a `<div>` element with the class `hotel`. ",
-				"The use of regular expressions and XPath expressions allows for precise data extraction and formatting."
+				"### Stream Hotel Locations to XML",
+				"",
+				"This example extracts the `Location` text from each `<div class='hotel'>` and streams it as an XML element into `DataFile.xml` immediately.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested Content rule to the `<p>` starting with `Location:`, and sets `ForEntity: true` for streaming."
 			],
 			"rule": {
-				"$type": "ExtractionRuleModel",
+				"$type": "Extraction",
 				"dataCollector": {
 					"ForEntity": true,
 					"Source": "DataFile.xml",
@@ -56,12 +163,57 @@
 				"onElement": "//div[@class='hotel']",
 				"rules": [
 					{
-						"$type": "ContentRuleModel",
-						"clearLinesBreak": false,
+						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*",
-						"trim": false
+						"regularExpression": "(?<=\\w+:).*"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element missing",
+						"XPath mismatch",
+						"Regex failure",
+						"Malformed DOM",
+						"Unexpected whitespace"
+					],
+					"expected_result": "All records are collected and written as a single XML document at the end.",
+					"notes": "Bulk write minimizes I/O calls by buffering records in memory until completion.",
+					"use_case": "hotel_to_xml_bulk",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementText",
+					"Extraction",
+					"FileWrite",
+					"XmlExtraction"
+				]
+			},
+			"description": [
+				"### Bulk Hotel Locations to XML",
+				"",
+				"This example extracts all `Location` values from `<div class='hotel'>` elements and writes them in one XML document to `DataFile.xml` at the end.",
+				"It sets `ForEntity: false` so the plugin buffers all record elements and writes them under the default `<Records>` root."
+			],
+			"rule": {
+				"$type": "Extraction",
+				"dataCollector": {
+					"ForEntity": false,
+					"Source": "DataFile.xml",
+					"Type": "XmlDataCollector"
+				},
+				"extractionScope": "Elements",
+				"onElement": "//div[@class='hotel']",
+				"rules": [
+					{
+						"$type": "Content",
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\w+:).*"
 					}
 				]
 			}
@@ -69,29 +221,43 @@
 	],
 	"key": "XmlDataCollector",
 	"manifestVersion": 4,
-	"parameters": [
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "DataCollector",
+	"properties": [
 		{
 			"description": [
-				"Specifies the output destination where the collected data will be saved (e.g., `/Path/To/My/File/DataFile.xml`)."
+				"Determines whether each record is streamed immediately (`true`) or buffered until the end (`false`)."
+			],
+			"mandatory": false,
+			"name": "ForEntity",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Path to the XML file to write. The file is created if it does not exist."
 			],
 			"mandatory": true,
 			"name": "Source",
 			"type": "String"
+		},
+		{
+			"description": [
+				"Must be set to `XmlDataCollector` for this plugin."
+			],
+			"mandatory": true,
+			"name": "Type",
+			"type": "DataCollector"
 		}
 	],
-	"pluginType": "DataCollector",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `XmlDataCollector` plugin is used to collect, store, and manage data in XML format. ",
-		"It facilitates data storage, integration, and automation by organizing data from various sources into a structured XML format.",
-		"Key features include data storage, integration, and support for automation workflows. ",
-		"Common use cases in RPA involve web scraping, data management, aggregation, and reporting. ",
-		"In automation testing, it is used for data-driven testing, test data management, and dynamic test execution."
+		"The XmlDataCollector plugin serializes extraction outputs into an XML file, wrapping records under a default root element.",
+		"Supports streaming writes for large data sets or bulk writes for smaller runs.",
+		"Ideal for integration with XML-based systems and reporting tools."
 	]
 }
