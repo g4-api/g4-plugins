@@ -13,78 +13,79 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/JsonDataCollector.cs"
 			},
 			"rag": {
+				"description": "JsonDataCollector captures extraction-rule outputs and writes them into a JSON file wrapped in an array, supporting both streaming and bulk modes. It hooks into extraction rules, automates file creation and array management, and provides flexible parameters to ensure reliable data integration with JSON-based APIs, databases, and downstream workflows.",
 				"qa": [
 					{
 						"question": "What is the JsonDataCollector plugin and why does it matter?",
-						"answer": "JsonDataCollector serializes extraction-rule outputs into JSON—either streaming each record as a JSON object in an array or writing the complete array at the end—making data exchange and downstream processing more flexible."
+						"answer": "JsonDataCollector converts extracted data items into JSON objects and writes them to a file, enabling seamless integration with APIs, databases, and other JSON-based consumers."
 					},
 					{
-						"question": "What are the key features and primary parameters of JsonDataCollector?",
-						"answer": "It supports `ForEntity` for streaming versus bulk writes, `Source` for output file path, `Indentation` for pretty-printing, and automatic wrapping of records in a JSON array."
+						"question": "How do its main capabilities work and what are its primary parameters?",
+						"answer": "It embeds into extraction rules via a dataCollector object. The main parameters are ForEntity (true for streaming each object, false for bulk write), Source (the JSON file path), and Type (must be JsonDataCollector)."
 					},
 					{
-						"question": "How does JsonDataCollector integrate into automation workflows?",
-						"answer": "You specify it under the `dataCollector` property in your extraction rule. It then captures each extracted item and writes it according to your streaming or batch configuration."
+						"question": "How does JsonDataCollector embed into external tools or workflow designers?",
+						"answer": "In workflow definitions it appears as a DataCollector step. You specify it under an extraction rule with dataCollector settings, allowing low-code design tools to configure file path, streaming mode, and array management without custom coding."
 					},
 					{
-						"question": "What are best practices for configuring and troubleshooting JsonDataCollector?",
-						"answer": "Use `ForEntity=true` for large streams to reduce memory footprint; set `Indentation` to 2 or 4 for human-readable output; ensure write permissions on `Source`; and validate the JSON after run if downstream systems require strict schemas."
+						"question": "What are recommended configuration patterns and troubleshooting tips?",
+						"answer": "Use ForEntity=true for large or continuous streams to avoid high memory use. For smaller batches, set ForEntity=false to reduce I/O calls. Verify XPath and regex rules to prevent missing or malformed objects, and ensure file paths are writable."
 					},
 					{
-						"question": "What is the structure of a JsonDataCollector rule definition?",
-						"answer": "An extraction rule with `$type`: `Extraction`, a `dataCollector` object containing `ForEntity`, `Source`, `Type`, and optionally `Indentation`, followed by `extractionScope`, `onElement`, and nested `rules` arrays."
+						"question": "How are action or rule definitions structured for this plugin?",
+						"answer": "You define an Extraction rule ($type “Extraction”) with a dataCollector object containing ForEntity, Source, and Type fields. Nested rule entries ($type “Content”) include key, onElement, and regularExpression to shape each JSON object."
 					},
 					{
-						"question": "What does the description section cover?",
-						"answer": "It describes the plugin’s Purpose, Key Features, Usages in RPA, and Usages in Automation Testing, illustrating common JSON-based data-collection scenarios."
+						"question": "How does the plugin record failures and control workflow behavior on error?",
+						"answer": "On errors it adds an exception to the response and log stream. By default the workflow continues unless you configure it to stop on error in your automation designer."
 					},
 					{
 						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating this follows the schema version 4 conventions."
+						"answer": "The manifestVersion is 4, indicating the schema iteration the plugin adheres to for property and parameter definitions."
 					},
 					{
 						"question": "Who is the author?",
 						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
 					},
 					{
-						"question": "What categories does the plugin belong to?",
-						"answer": "It belongs to “DataManagement”, reflecting its role in capturing and exporting data."
+						"question": "What are the categories?",
+						"answer": "This plugin is categorized under DataManagement, reflecting its role in collecting and organizing data."
 					},
 					{
-						"question": "What platforms are supported?",
-						"answer": "All platforms (`Any`)."
+						"question": "What platforms does it support?",
+						"answer": "The plugin supports Any platform, making it compatible with Windows, Linux, and other environments."
 					},
 					{
 						"question": "What is the pluginType?",
-						"answer": "DataCollector."
+						"answer": "The pluginType is DataCollector, indicating it focuses on gathering and writing data outputs."
 					},
 					{
-						"question": "What is the plugin key?",
-						"answer": "`JsonDataCollector`, the unique identifier for this plugin."
+						"question": "What is the key for this plugin?",
+						"answer": "The key is JsonDataCollector, which is used to reference this plugin in workflow definitions."
 					},
 					{
-						"question": "What summary is provided for the plugin?",
-						"answer": "It streams or batches JSON objects into a file, automatically managing array wrappers and optional pretty-printing."
+						"question": "What is the summary?",
+						"answer": "“The JsonDataCollector plugin serializes extraction outputs into a JSON file, wrapping records in an array. Supports streaming writes for large data sets or bulk writes for smaller runs. Ideal for downstream JSON-based systems, APIs, and analytics.”"
 					},
 					{
-						"question": "What properties does JsonDataCollector define?",
-						"answer": "It defines `ForEntity` (Boolean, optional), `Source` (String, mandatory), `Type` (DataCollector, mandatory), and `Indentation` (Integer, optional)."
+						"question": "What properties are defined?",
+						"answer": "Properties include ForEntity (Boolean, optional, toggles streaming vs buffered write), Source (String, mandatory, file path), and Type (DataCollector, mandatory, must be JsonDataCollector)."
 					},
 					{
-						"question": "Where can I find the plugin documentation?",
-						"answer": "The documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/JsonDataCollector.md"
+						"question": "What parameters are defined?",
+						"answer": "This plugin does not define a separate parameters array and relies on its properties section for configuration."
 					},
 					{
-						"question": "Where is the plugin source code located?",
-						"answer": "The source code is hosted at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/JsonDataCollector.cs"
+						"question": "What protocol information is included?",
+						"answer": "Protocol settings are apiDocumentation: None and w3c: None, indicating no external API or W3C schema references."
 					},
 					{
-						"question": "What protocol settings are specified?",
-						"answer": "`apiDocumentation`: None, `w3c`: None."
+						"question": "Where can I find the GitHub documentation?",
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/JsonDataCollector.md"
 					},
 					{
-						"question": "How does JsonDataCollector handle errors?",
-						"answer": "Exceptions are logged and added to the workflow response; by default the run continues unless configured otherwise."
+						"question": "Where can I find the source code?",
+						"answer": "Source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/JsonDataCollector.cs"
 					}
 				]
 			}
@@ -93,14 +94,14 @@
 	"description": [
 		"### Purpose",
 		"",
-		"JsonDataCollector captures the output of your extraction rules and writes it into a JSON file. It will open or create your specified file, wrap records in a JSON array, and either append each object as it’s extracted or serialize the full array at the end of the run. This format simplifies integration with APIs, databases, or other JSON-based consumers.",
+		"JsonDataCollector captures the output of your extraction rules and writes it into a JSON file. It opens or creates the specified file, wraps records in a JSON array, and either appends each object as it’s extracted or writes the full array at the end of the run. This format simplifies integration with APIs, databases, and other JSON-based consumers.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                 | Description                                                                                |",
-		"|-------------------------|--------------------------------------------------------------------------------------------|",
+		"| Feature                 | Description                                                                                 |",
+		"|-------------------------|---------------------------------------------------------------------------------------------|",
 		"| Extraction Integration  | Hooks into your extraction rules so every item is automatically turned into a JSON object. |",
-		"| Write Modes             | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false` at end).           |",
+		"| Write Modes             | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run.     |",
 		"| Array Management        | Automatically opens and closes the JSON array wrapper, ensuring valid JSON output.         |",
 		"",
 		"### Usages in RPA",
@@ -146,16 +147,14 @@
 				"### Stream Hotel Locations to JSON",
 				"",
 				"This example extracts the `Location` text from each `<div class='hotel'>` and streams it as a JSON object into `DataFile.json` immediately.",
-				"It uses `extractionScope: Elements` with XPath `//div[@class='hotel']`, applies a nested Content rule to the `<p>` starting with `Location:`, and sets `ForEntity:true` for streaming.",
-				"The output file becomes a valid JSON array of objects without loading all records into memory."
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested Content rule to the `<p>` starting with `Location:`, and sets `ForEntity: true` for streaming."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
 					"ForEntity": true,
 					"Source": "DataFile.json",
-					"Type": "JsonDataCollector",
-					"Indentation": 2
+					"Type": "JsonDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -180,7 +179,7 @@
 						"Unexpected whitespace"
 					],
 					"expected_result": "All records are collected and written as a single JSON array at the end.",
-					"notes": "Bulk write minimizes I/O calls. Records are buffered in memory then serialized together with pretty-printing.",
+					"notes": "Bulk write minimizes I/O calls by buffering records in memory until completion.",
 					"use_case": "hotel_to_json_bulk",
 					"version": "1.0"
 				},
@@ -195,15 +194,14 @@
 				"### Bulk Hotel Locations to JSON",
 				"",
 				"This example extracts all `Location` values from `<div class='hotel'>` elements and writes them in one JSON array to `DataFile.json` at the end.",
-				"It sets `ForEntity:false` so the plugin buffers all objects then writes a pretty-printed array using `Indentation:4`."
+				"It sets `ForEntity: false` so the plugin buffers all objects and writes them in one operation."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
 					"ForEntity": false,
 					"Source": "DataFile.json",
-					"Type": "JsonDataCollector",
-					"Indentation": 4
+					"Type": "JsonDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
