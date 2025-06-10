@@ -125,37 +125,46 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Invalid connection string",
-						"Table name conflicts",
 						"Database file locked",
+						"Element missing",
+						"Invalid connection string",
 						"Malformed DOM",
-						"Unexpected whitespace"
+						"Multiple elements found",
+						"Regex failure",
+						"SQL syntax error",
+						"Table name conflicts",
+						"Transaction failure",
+						"Unexpected whitespace",
+						"XPath mismatch",
+						"XPath syntax error"
 					],
-					"expected_result": "Each record is inserted as a new row in the table immediately.",
-					"notes": "Streaming inserts avoid high memory usage. The plugin opens or creates `Data.db`, creates `HotelLocations` if needed, then issues INSERT for each entity.",
-					"use_case": "hotel_to_sqlite_stream",
+					"expected_result": "Each hotel-location string is extracted and inserted as a new row in the HotelLocations table in Data.db in real time.",
+					"notes": "Opens Data.db, creates HotelLocations if needed, then for each match writes INSERT statements (stringified, trimmed, regex-extracted up to 100 chars).",
+					"use_case": "element_text_extraction_streaming_sqlite",
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText",
+					"ElementTextExtraction",
 					"Extraction",
-					"DatabaseWrite",
-					"SqliteExtraction"
+					"SqliteDatabaseWrite",
+					"Streaming"
 				]
 			},
 			"description": [
 				"### Stream Hotel Locations to SQLite",
 				"",
-				"This example extracts the `Location` text from each `<div class='hotel'>` and streams it into the `HotelLocations` table in `Data.db` immediately.",
-				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested Content rule to the `<p>` starting with `Location:`, and sets `ForEntity: true` for streaming inserts."
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and stream each as an INSERT into the `HotelLocations` table in `Data.db` in real time.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming inserts.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
-					"ForEntity": true,
-					"Source": "Data Source=Data.db;Version=3;",
-					"Repository": "HotelLocations",
-					"Type": "SqLightDataCollector"
+					"forEntity": true,
+					"repository": "HotelLocations",
+					"source": "Data Source=Data.db;Version=3;",
+					"type": "SqLightDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -164,7 +173,7 @@
 						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*"
+						"regularExpression": "(?<=\\\\w+:).*"
 					}
 				]
 			}
@@ -173,37 +182,46 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Invalid connection string",
-						"Table name conflicts",
 						"Database file locked",
+						"Element missing",
+						"Invalid connection string",
 						"Malformed DOM",
-						"Unexpected whitespace"
+						"Multiple elements found",
+						"Regex failure",
+						"SQL syntax error",
+						"Table name conflicts",
+						"Transaction failure",
+						"Unexpected whitespace",
+						"XPath mismatch",
+						"XPath syntax error"
 					],
-					"expected_result": "All records are collected and inserted in one transaction at the end.",
-					"notes": "Bulk inserts improve performance for small to medium datasets. Records are buffered then committed in a single transaction.",
-					"use_case": "hotel_to_sqlite_bulk",
+					"expected_result": "Each hotel-location string is extracted, collected, and inserted as rows in a single transaction to the HotelLocations table in Data.db upon completion.",
+					"notes": "Opens Data.db, buffers each '{\"Location\": \"…\"}' (stringified, trimmed, regex-extracted up to 100 chars) in memory, then executes a single transaction to INSERT all buffered records.",
+					"use_case": "element_text_extraction_bulk_sqlite",
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText",
+					"BulkWrite",
+					"ElementTextExtraction",
 					"Extraction",
-					"DatabaseWrite",
-					"SqliteExtraction"
+					"SqliteDatabaseWrite"
 				]
 			},
 			"description": [
 				"### Bulk Hotel Locations to SQLite",
 				"",
-				"This example extracts all `Location` values from `<div class='hotel'>` elements and writes them into the `HotelLocations` table in `Data.db` at the end.",
-				"It sets `ForEntity: false` so the plugin buffers all records and commits them in one transaction."
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and insert them all in one transaction into the `HotelLocations` table in `Data.db` upon completion.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
-					"ForEntity": false,
-					"Source": "Data Source=Data.db;Version=3;",
-					"Repository": "HotelLocations",
-					"Type": "SqLightDataCollector"
+					"forEntity": false,
+					"repository": "HotelLocations",
+					"source": "Data Source=Data.db;Version=3;",
+					"type": "SqLightDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -212,7 +230,7 @@
 						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*"
+						"regularExpression": "(?<=\\\\w+:).*"
 					}
 				]
 			}
@@ -227,7 +245,8 @@
 	"properties": [
 		{
 			"description": [
-				"Determines whether each record is inserted immediately (`true`) or buffered until the end (`false`)."
+				"Set to “true” to save each entry as soon as it arrives so you can see results right away.",
+				"Set to “false” to save all entries at the end so you can review everything together without delays."
 			],
 			"mandatory": false,
 			"name": "ForEntity",
@@ -235,7 +254,8 @@
 		},
 		{
 			"description": [
-				"Name of the SQLite table to insert into. Created if it does not exist."
+				"Type the name of the table where your data will be stored so you can find it later.",
+				"A new table is created automatically if it does not exist so you do not have to prepare it yourself."
 			],
 			"mandatory": true,
 			"name": "Repository",
@@ -243,7 +263,8 @@
 		},
 		{
 			"description": [
-				"SQLite connection string (e.g., `Data Source=MyDb.db;Version=3;`)."
+				"Enter the details the system uses to open your data file so it can access your information.",
+				"A correct entry makes sure your information is read and written without issues."
 			],
 			"mandatory": true,
 			"name": "Source",
@@ -251,7 +272,9 @@
 		},
 		{
 			"description": [
-				"Must be set to `SqLightDataCollector` for this plugin."
+				"Enter “SqLightDataCollector” so the system knows how to handle your data correctly and save it here.",
+				"Choosing a different option will make the system use something else and may keep your data from saving in this place.",
+				"The list of options updates automatically when you add new ones so you always have the latest choices."
 			],
 			"mandatory": true,
 			"name": "Type",
