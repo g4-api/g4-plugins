@@ -128,36 +128,42 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"CSS selector syntax error",
 						"Element missing",
-						"XPath mismatch",
-						"Regex failure",
 						"Malformed DOM",
-						"Unexpected whitespace"
+						"Multiple elements found",
+						"Regex failure",
+						"TagName typo",
+						"Unexpected whitespace",
+						"XPath mismatch",
+						"XPath syntax error"
 					],
-					"expected_result": "Each record is appended as an XML element under the default root in real time.",
-					"notes": "Streaming writes avoid high memory use for large data sets. The plugin writes the opening `<Records>` once, then each record element, and closes the root at completion.",
-					"use_case": "hotel_to_xml_streaming",
+					"expected_result": "Each hotel-location string is extracted and appended as an XML element under the <Records> root in real time.",
+					"notes": "Writes '<Records>' once, then for each match writes '<Record><Location>…</Location></Record>' (text trimmed, converted to string, regex-extracted up to 100 chars), and closes with '</Records>'.",
+					"use_case": "element_text_extraction_streaming_xml",
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText",
-					"Extraction",
-					"FileWrite",
-					"XmlExtraction"
+					"ElementTextExtraction",
+					"Streaming",
+					"XmlExtraction",
+					"XmlFileWrite"
 				]
 			},
 			"description": [
 				"### Stream Hotel Locations to XML",
 				"",
-				"This example extracts the `Location` text from each `<div class='hotel'>` and streams it as an XML element into `DataFile.xml` immediately.",
-				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested Content rule to the `<p>` starting with `Location:`, and sets `ForEntity: true` for streaming."
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and stream each as an XML element into `DataFile.xml` in real time.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming writes.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
-					"ForEntity": true,
-					"Source": "DataFile.xml",
-					"Type": "XmlDataCollector"
+					"forEntity": true,
+					"source": "DataFile.xml",
+					"type": "XmlDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -166,7 +172,7 @@
 						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*"
+						"regularExpression": "(?<=\\\\w+:).*"
 					}
 				]
 			}
@@ -175,36 +181,42 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"CSS selector syntax error",
 						"Element missing",
-						"XPath mismatch",
-						"Regex failure",
 						"Malformed DOM",
-						"Unexpected whitespace"
+						"Multiple elements found",
+						"Regex failure",
+						"TagName typo",
+						"Unexpected whitespace",
+						"XPath mismatch",
+						"XPath syntax error"
 					],
-					"expected_result": "All records are collected and written as a single XML document at the end.",
-					"notes": "Bulk write minimizes I/O calls by buffering records in memory until completion.",
-					"use_case": "hotel_to_xml_bulk",
+					"expected_result": "Each hotel-location string is extracted, collected, and written as XML elements under a <Records> root in a single document upon completion.",
+					"notes": "Writes '<Records>' once, then for each match buffers '<Record><Location>…</Location></Record>' (text trimmed, converted to string, regex-extracted up to 100 chars) in memory, and closes with '</Records>'.",
+					"use_case": "element_text_extraction_bulk_xml",
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText",
-					"Extraction",
-					"FileWrite",
-					"XmlExtraction"
+					"BulkWrite",
+					"ElementTextExtraction",
+					"XmlExtraction",
+					"XmlFileWrite"
 				]
 			},
 			"description": [
 				"### Bulk Hotel Locations to XML",
 				"",
-				"This example extracts all `Location` values from `<div class='hotel'>` elements and writes them in one XML document to `DataFile.xml` at the end.",
-				"It sets `ForEntity: false` so the plugin buffers all record elements and writes them under the default `<Records>` root."
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and write them all as XML elements under a `<Records>` root in `DataFile.xml` upon completion.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
-					"ForEntity": false,
-					"Source": "DataFile.xml",
-					"Type": "XmlDataCollector"
+					"forEntity": false,
+					"source": "DataFile.xml",
+					"type": "XmlDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -213,7 +225,7 @@
 						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*"
+						"regularExpression": "(?<=\\\\w+:).*"
 					}
 				]
 			}
@@ -228,7 +240,8 @@
 	"properties": [
 		{
 			"description": [
-				"Determines whether each record is streamed immediately (`true`) or buffered until the end (`false`)."
+				"Set to “true” to write each record as soon as it is ready so you can see results right away and start using them without waiting.",
+				"Set to “false” to wait until all records are ready before writing so you can view everything at once and keep your file complete."
 			],
 			"mandatory": false,
 			"name": "ForEntity",
@@ -236,7 +249,8 @@
 		},
 		{
 			"description": [
-				"Path to the XML file to write. The file is created if it does not exist."
+				"Enter the path where your XML file will be saved so you know where to find it later and keep your files organized.",
+				"If the file does not exist, a new one is created at that location so you do not have to set it up yourself."
 			],
 			"mandatory": true,
 			"name": "Source",
@@ -244,7 +258,9 @@
 		},
 		{
 			"description": [
-				"Must be set to `XmlDataCollector` for this plugin."
+				"Use the value “XmlDataCollector” so the system writes your file in the correct format and avoids errors.",
+				"Choosing a different value will use another process and may store your data in the wrong place.",
+				"The list of values updates on its own when new options are added so you always have the latest choices."
 			],
 			"mandatory": true,
 			"name": "Type",
