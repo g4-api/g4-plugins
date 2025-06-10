@@ -69,7 +69,7 @@
 					},
 					{
 						"question": "What is the summary?",
-						"answer": "“XmlDataCollector serializes extraction outputs into an XML file, wrapping records under a default root element. Supports streaming writes for large data sets or bulk writes for smaller runs. Ideal for integration with XML-based systems and reporting tools.”"
+						"answer": "XmlDataCollector serializes extraction outputs into an XML file, wrapping records under a default root element. Supports streaming writes for large data sets or bulk writes for smaller runs. Ideal for integration with XML-based systems and reporting tools."
 					},
 					{
 						"question": "What properties are defined?",
