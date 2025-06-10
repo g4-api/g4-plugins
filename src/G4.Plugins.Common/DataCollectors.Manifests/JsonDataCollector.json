@@ -98,11 +98,11 @@
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                 | Description                                                                                 |",
-		"|-------------------------|---------------------------------------------------------------------------------------------|",
-		"| Extraction Integration  | Hooks into your extraction rules so every item is automatically turned into a JSON object. |",
-		"| Write Modes             | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run.     |",
-		"| Array Management        | Automatically opens and closes the JSON array wrapper, ensuring valid JSON output.         |",
+		"| Feature                | Description                                                                                |",
+		"|------------------------|--------------------------------------------------------------------------------------------|",
+		"| Extraction Integration | Hooks into your extraction rules so every item is automatically turned into a JSON object. |",
+		"| Write Modes            | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run.    |",
+		"| Array Management       | Automatically opens and closes the JSON array wrapper, ensuring valid JSON output.         |",
 		"",
 		"### Usages in RPA",
 		"",
@@ -125,36 +125,41 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"CSS selector syntax error",
 						"Element missing",
-						"XPath mismatch",
-						"Regex failure",
 						"Malformed DOM",
-						"Unexpected whitespace"
+						"Multiple elements found",
+						"Regex failure",
+						"TagName typo",
+						"Unexpected whitespace",
+						"XPath mismatch"
 					],
-					"expected_result": "Each record is appended as a JSON object in the array in real time.",
-					"notes": "Streaming writes avoid high memory use for large pages. The plugin opens the file, writes `[` once, then for each entity writes `<object>,`, and finally closes with `]` on completion.",
-					"use_case": "hotel_to_json_streaming",
+					"expected_result": "Each hotel-location string is extracted and appended as an object to DataFile.json in real time.",
+					"notes": "Opens DataFile.json, writes '[' once, then for each match writes '{\"Location\": \"…\"},' (stringified, trimmed, regex-extracted up to 100 chars), and closes with ']'.",
+					"use_case": "element_text_extraction_streaming_json",
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText",
-					"Extraction",
-					"FileWrite",
-					"JsonExtraction"
+					"ElementTextExtraction",
+					"JsonExtraction",
+					"JsonFileWrite",
+					"Streaming"
 				]
 			},
 			"description": [
 				"### Stream Hotel Locations to JSON",
 				"",
-				"This example extracts the `Location` text from each `<div class='hotel'>` and streams it as a JSON object into `DataFile.json` immediately.",
-				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested Content rule to the `<p>` starting with `Location:`, and sets `ForEntity: true` for streaming."
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and stream each as a JSON object into `DataFile.json` in real time.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming writes.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
-					"ForEntity": true,
-					"Source": "DataFile.json",
-					"Type": "JsonDataCollector"
+					"forEntity": true,
+					"source": "DataFile.json",
+					"type": "JsonDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -163,7 +168,7 @@
 						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*"
+						"regularExpression": "(?<=\\\\w+:).*"
 					}
 				]
 			}
@@ -172,36 +177,41 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"CSS selector syntax error",
 						"Element missing",
-						"XPath mismatch",
-						"Regex failure",
 						"Malformed DOM",
-						"Unexpected whitespace"
+						"Multiple elements found",
+						"Regex failure",
+						"TagName typo",
+						"Unexpected whitespace",
+						"XPath mismatch"
 					],
-					"expected_result": "All records are collected and written as a single JSON array at the end.",
-					"notes": "Bulk write minimizes I/O calls by buffering records in memory until completion.",
-					"use_case": "hotel_to_json_bulk",
+					"expected_result": "Each hotel-location string is extracted, collected, and written as objects in a single JSON array to DataFile.json upon completion.",
+					"notes": "Opens DataFile.json, buffers each '{\"Location\": \"…\"}' (stringified, trimmed, regex-extracted up to 100 chars) in memory, then writes '[' + joined objects + ']' upon completion.",
+					"use_case": "element_text_extraction_bulk_json",
 					"version": "1.0"
 				},
 				"labels": [
-					"ElementText",
-					"Extraction",
-					"FileWrite",
-					"JsonExtraction"
+					"BulkWrite",
+					"ElementTextExtraction",
+					"JsonExtraction",
+					"JsonFileWrite"
 				]
 			},
 			"description": [
 				"### Bulk Hotel Locations to JSON",
 				"",
-				"This example extracts all `Location` values from `<div class='hotel'>` elements and writes them in one JSON array to `DataFile.json` at the end.",
-				"It sets `ForEntity: false` so the plugin buffers all objects and writes them in one operation."
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and write them all in one JSON array to `DataFile.json` upon completion.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
 			],
 			"rule": {
 				"$type": "Extraction",
 				"dataCollector": {
-					"ForEntity": false,
-					"Source": "DataFile.json",
-					"Type": "JsonDataCollector"
+					"forEntity": false,
+					"source": "DataFile.json",
+					"type": "JsonDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -210,7 +220,7 @@
 						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*"
+						"regularExpression": "(?<=\\\\w+:).*"
 					}
 				]
 			}
@@ -225,7 +235,8 @@
 	"properties": [
 		{
 			"description": [
-				"Determines whether each record is streamed immediately (`true`) or buffered until the end (`false`)."
+				"Turning this on sends each item as it happens so you see results sooner and can start working right away.",
+				"Keeping it off waits until everything is ready so you review all items at once and avoid partial updates."
 			],
 			"mandatory": false,
 			"name": "ForEntity",
@@ -233,7 +244,8 @@
 		},
 		{
 			"description": [
-				"Path to the JSON file to write. The file is created if it does not exist."
+				"Setting this path tells the system where to save your file so you can find it easily later.",
+				"Using a new location creates the file automatically and prevents errors from missing files."
 			],
 			"mandatory": true,
 			"name": "Source",
@@ -241,7 +253,9 @@
 		},
 		{
 			"description": [
-				"Must be set to `JsonDataCollector` for this plugin."
+				"Use the value “JsonDataCollector” to write your file in JSON format so it matches what this system expects and prevents errors.",
+				"Picking a different option starts a different process and may give you results you cannot use.",
+				"The list of options updates on its own when you add new ones so you always have the latest choices."
 			],
 			"mandatory": true,
 			"name": "Type",
