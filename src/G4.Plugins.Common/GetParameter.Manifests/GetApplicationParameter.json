@@ -89,25 +89,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid parameter name",
+						"Missing argument",
+						"Plugin not available",
+						"Unexpected whitespace"
+					],
+					"expected_result": "The value of the 'ConnectionString' parameter is retrieved using the default SystemParameters environment.",
+					"notes": "Invokes the Application plugin’s GetParameter action without an explicit environment argument, defaulting to the SystemParameters environment to retrieve the ConnectionString value.",
+					"use_case": "parameter_retrieval_getparameter_default",
+					"version": "1.0"
+				},
+				"labels": [
+					"GetParameter",
+					"ParameterRetrieval",
+					"PluginAction"
+				]
+			},
 			"description": [
-				""
+				"### Retrieve ConnectionString Parameter with Default Environment",
+				"",
+				"The retrieved ConnectionString value is trimmed to remove whitespace.",
+				"This example demonstrates how to retrieve the 'ConnectionString' parameter using the Application plugin’s GetParameter action, defaulting to the SystemParameters environment.",
+				"It targets the `ConnectionString` parameter name without specifying an environment argument, relying on the default environment."
 			],
 			"rule": {
-				"argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application --Environment:Prod}}",
-				"locator": "CssSelector",
-				"onElement": "#someElement",
-				"pluginName": "SendKeys"
-			}
-		},
-		{
-			"description": [
-				""
-			],
-			"rule": {
-				"argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application}}",
-				"locator": "CssSelector",
-				"onElement": "#someElement",
-				"pluginName": "SendKeys"
+				"$type": "Action",
+				"onElement": "ConnectionString",
+				"pluginName": "Application"
 			}
 		}
 	],
