@@ -11,6 +11,91 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Application.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetApplicationParameter.cs"
+			},
+			"rag": {
+				"description": "GetApplicationParameter centralizes retrieval of shared settings such as connection strings and API keys, supports environment-specific contexts, hooks into workflows to ensure correct configuration, and preserves consistency and reliability across automation runs.",
+				"qa": [
+					{
+						"question": "What is the GetApplicationParameter plugin and why does it matter?",
+						"answer": "GetApplicationParameter fetches shared configuration values (for example connection strings or API keys) and ensures each workflow uses the correct environment-specific settings, reducing errors and setup complexity."
+					},
+					{
+						"question": "How do its main capabilities work and what are its primary parameters?",
+						"answer": "It connects to a central parameter store and retrieves values based on the Environment parameter (default SystemParameters). Main parameters are Environment (optional, selects which values to use), OnElement (the parameter name), and Argument (optional expression to refine retrieval)."
+					},
+					{
+						"question": "How does GetApplicationParameter embed into external tools or workflow designers?",
+						"answer": "It exposes an Application scope in UI designers, letting users pick the environment scope from a dropdown when configuring the GetParameter action."
+					},
+					{
+						"question": "Can GetApplicationParameter be used directly in a flow?",
+						"answer": "No, it functions as a Component plugin and is not invoked directly. Other plugins or custom implementations integrate it seamlessly to retrieve parameters under the hood."
+					},
+					{
+						"question": "What are recommended configuration patterns and troubleshooting tips?",
+						"answer": "Specify Environment explicitly for nondefault contexts. Trim retrieved values to remove whitespace. Verify parameter names to avoid missing results, and handle null or empty values in subsequent steps."
+					},
+					{
+						"question": "How are action or rule definitions structured for this plugin?",
+						"answer": "You define an Action rule ($type “Action”) with pluginName “Application”, OnElement set to the parameter name, and optional Argument for environment selection (for example \"{{$ --Environment:Prod}}\")."
+					},
+					{
+						"question": "How does the plugin record failures and control workflow behavior on error?",
+						"answer": "On error it adds an exception to the response and log stream. By default the workflow continues unless you configure it to stop on error in your automation designer."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the version of the manifest schema this plugin adheres to."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What are the categories?",
+						"answer": "This plugin is categorized under DataManagement, reflecting its role in retrieving and managing configuration data."
+					},
+					{
+						"question": "What platforms does it support?",
+						"answer": "The plugin supports Any platform, making it compatible with Windows, Linux, and other environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is GetParameter, indicating its focus on parameter retrieval actions."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is Application, which identifies this plugin in workflow definitions."
+					},
+					{
+						"question": "What is the summary?",
+						"answer": "“GetApplicationParameter gets settings that apps share across all runs. It grabs the right values for each setup, like server addresses or access codes. It helps teams keep settings in one place and make sure each run has the right information.”"
+					},
+					{
+						"question": "What parameters are defined?",
+						"answer": "Parameters include Environment (String, optional, defaults to SystemParameters), which selects which set of values to use."
+					},
+					{
+						"question": "What properties are defined?",
+						"answer": "Properties include Argument (String|Expression, optional, refines lookup), and OnElement (String, mandatory, the parameter name to retrieve)."
+					},
+					{
+						"question": "What entities are defined?",
+						"answer": "An entity named Parameter (type Any, mandatory) holds the retrieved value or null for later steps."
+					},
+					{
+						"question": "What protocol information is included?",
+						"answer": "Protocol settings are apiDocumentation: None and w3c: None, indicating no external API documentation or W3C schema."
+					},
+					{
+						"question": "Where can I find the GitHub documentation?",
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Application.md"
+					},
+					{
+						"question": "Where can I find the source code?",
+						"answer": "Source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetApplicationParameter.cs"
+					}
+				]
 			}
 		}
 	},
