@@ -93,7 +93,8 @@
 		{
 			"default": "SystemParameters",
 			"description": [
-				"Specifies the environment from which to fetch the parameter. If not specified, the `SystemParameters` environment will be used."
+				"Environment sets which list of values to use so you get parameters from the right place and avoid missing information.",
+				"Leaving it blank picks SystemParameters so you still get a basic set of values and avoid surprises."
 			],
 			"mandatory": false,
 			"name": "Environment",
@@ -107,15 +108,19 @@
 	"properties": [
 		{
 			"description": [
-				"The `Argument` property specifies the environment from which to fetch the parameter."
+				"Argument tells the system where to look for your setting so it finds the correct value.",
+				"Picking the right location helps you avoid missing or wrong information.",
+				"A wrong location can cause errors when the system tries to retrieve your data."
 			],
 			"mandatory": false,
 			"name": "Argument",
-			"type": "Expression"
+			"type": "String|Expression"
 		},
 		{
 			"description": [
-				"The `OnElement` property specifies the name of the parameter to be retrieved."
+				"OnElement tells the system which parameter you want so it can provide you with the right value.",
+				"Choosing the correct name helps you get accurate data.",
+				"A wrong name can lead to missing or incorrect results."
 			],
 			"mandatory": true,
 			"name": "OnElement",
