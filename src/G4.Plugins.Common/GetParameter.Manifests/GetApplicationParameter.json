@@ -100,6 +100,9 @@
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "GetParameter",
 	"properties": [
 		{
@@ -123,14 +126,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `GetApplicationParameter` plugin retrieves application parameters that are shared across all automation instances, enhancing configuration management. ",
-		"It supports fetching parameters specific to different environments, such as connection strings or API keys. ",
-		"Key features include environment-based parameter retrieval, integration with other plugins for dynamic use of parameters, and centralized parameter storage. ",
-		"In RPA, it is used for dynamic configuration and centralized parameter management. ",
-		"In automation testing, it supports environment-specific testing and simplifies configuration management."
+		"GetApplicationParameter gets settings that apps share across all runs.",
+		"It grabs the right values for each setup, like server addresses or access codes.",
+		"It helps teams keep settings in one place and make sure each run has the right information."
 	]
 }
