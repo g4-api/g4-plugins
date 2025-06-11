@@ -6,6 +6,14 @@
 	"categories": [
 		"DataManagement"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Application.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetApplicationParameter.cs"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
