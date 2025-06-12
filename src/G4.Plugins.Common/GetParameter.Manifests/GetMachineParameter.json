@@ -11,6 +11,75 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Machine.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetMachineParameter.cs"
+			},
+			"rag": {
+				"description": "The Machine plugin's GetParameter action lets workflows dynamically retrieve and verify machine-level environment variables at runtime, enforcing critical pre-run checks and preserving reliability with built-in empty value handling and exception logging. It supports flexible configuration by allowing any variable name via the OnElement property and delivers up-to-date global settings for downstream workflow steps.",
+				"qa": [
+					{
+						"question": "What is the Machine plugin GetParameter action and why does it matter?",
+						"answer": "It is an automation action that retrieves system-wide environment variables at runtime, ensuring workflows can adapt to global settings and maintain reliability by validating critical parameters before execution."
+					},
+					{
+						"question": "What are the key features and parameters of this plugin?",
+						"answer": "Key features include reading machine-level environment variables, handling missing values by returning an empty string, and exposing the result for downstream use. The primary parameter is OnElement, which specifies the name of the environment variable to retrieve."
+					},
+					{
+						"question": "How does this plugin embed into external tools or workflow designers?",
+						"answer": "It appears as an Action step named GetParameter within the Machine plugin in low-code designers and workflow editors. Users select the Machine plugin, set the OnElement property, and the action integrates seamlessly into the workflow definition."
+					},
+					{
+						"question": "What are some best practices for using this plugin?",
+						"answer": "Validate that OnElement names match existing environment variables and handle empty strings to avoid errors. Include pre-run checks to confirm required variables exist, and configure workflows to log exceptions for troubleshooting."
+					},
+					{
+						"question": "What is the rule schema for this plugin’s action definitions?",
+						"answer": "Actions use a JSON schema with a $type value of Action, pluginName set to Machine, and an onElement field specifying the variable name. This simple structure ensures clear parameter mapping and consistent execution behavior."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version used to define this plugin manifest."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/), who developed the GetMachineParameter plugin."
+					},
+					{
+						"question": "What categories does this plugin belong to?",
+						"answer": "It belongs to the DataManagement category, indicating its use for managing and retrieving data within automation workflows."
+					},
+					{
+						"question": "What is the key field?",
+						"answer": "The key field is Machine, which serves as the unique identifier for the plugin within the automation platform."
+					},
+					{
+						"question": "What platforms does this plugin support?",
+						"answer": "This plugin supports Windows, as it retrieves environment variables defined in the Windows registry."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is GetParameter, indicating that this plugin is used for retrieving parameter values from the environment."
+					},
+					{
+						"question": "What properties does this plugin define?",
+						"answer": "It defines a property named OnElement of type String, which specifies the name of the environment variable to retrieve."
+					},
+					{
+						"question": "What is the summary of this plugin?",
+						"answer": "The plugin gets shared settings from the computer, like folder paths or feature switches. If a setting is missing, it returns an empty string so workflows know it is not set. It makes the setting available for later steps and helps workflows and tests set up or check settings before they run."
+					},
+					{
+						"question": "How does the plugin handle errors?",
+						"answer": "The plugin records failures by adding an exception to the response and log stream. By default, workflows continue execution unless explicitly configured to stop on error."
+					},
+					{
+						"question": "What is the Git document link?",
+						"answer": "The document link is https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Machine.md"
+					},
+					{
+						"question": "What is the Git source link?",
+						"answer": "The source link is https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetMachineParameter.cs"
+					}
+				]
 			}
 		}
 	},
