@@ -124,6 +124,17 @@
 		"| Isolated test sessions | Uses session values to keep data separate during parallel runs. |",
 		"| Dynamic test setup     | Fetches session values to configure tests on the fly.           |"
 	],
+	"entity": [
+		{
+			"description": [
+				"Holds the string value returned from the session-level environment variable retrieved by the plugin.",
+				"Returns an empty string if the variable is not defined or has no value, allowing downstream steps to detect and handle missing process parameters."
+			],
+			"mandatory": true,
+			"name": "Parameter",
+			"type": "Any"
+		}
+	],
 	"examples": [
 		{
 			"context": {
