@@ -3,77 +3,173 @@
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
 		"name": "Roei Sabag"
 	},
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Session.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetSessionParameter.cs"
+			},
+			"rag": {
+				"description": "The Session plugin's GetParameter action lets each automation run fetch and isolate session-scoped parameters for use in downstream steps, enforcing per-run data isolation and immediate updates while logging exceptions and handling missing values. It supports flexible use of any parameter name via the OnElement property and ensures workflows run without conflicts across parallel sessions.",
+				"qa": [
+					{
+						"question": "What is the Session plugin GetParameter action and why does it matter?",
+						"answer": "It is an automation action that retrieves values specific to the current run session, ensuring each run uses the right data without interfering with parallel runs."
+					},
+					{
+						"question": "What are the key features and parameters of this plugin?",
+						"answer": "Key features include session-level variable access, live updates at runtime, and empty-value handling. The primary parameter OnElement specifies the name of the session parameter to retrieve."
+					},
+					{
+						"question": "How does this plugin embed into external tools or workflow designers?",
+						"answer": "It appears as an Action step named GetParameter under the Session plugin in low-code designers. Users select the Session plugin, set the OnElement property, and the action integrates seamlessly into workflow definitions."
+					},
+					{
+						"question": "What are some best practices for using this plugin?",
+						"answer": "Use consistent OnElement names matching session parameters, include pre-run checks for required values, handle empty strings to avoid errors, and review logs for exceptions during execution."
+					},
+					{
+						"question": "What is the rule schema for this plugin’s action definitions?",
+						"answer": "Actions use a JSON schema with $type set to Action, pluginName set to Session, and onElement specifying the parameter name. This structure ensures clear mapping and predictable behavior."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version used to define this plugin manifest."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/), who developed the GetSessionParameter plugin."
+					},
+					{
+						"question": "What categories does this plugin belong to?",
+						"answer": "It belongs to the DataManagement category, indicating its role in managing and retrieving data within automation workflows."
+					},
+					{
+						"question": "What is the key field?",
+						"answer": "The key field is Session, which serves as the unique identifier for the plugin within the automation platform."
+					},
+					{
+						"question": "What platforms does this plugin support?",
+						"answer": "This plugin supports Any platform, as it operates at the session level without OS restrictions."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is GetParameter, indicating that this plugin retrieves parameter values from the session environment."
+					},
+					{
+						"question": "What properties does this plugin define?",
+						"answer": "It defines a property named OnElement of type String, which specifies the name of the session parameter to retrieve."
+					},
+					{
+						"question": "What output entity does this plugin return?",
+						"answer": "It returns an entity named Parameter of type Any, holding the string value fetched from the session scope or an empty string if the value is missing."
+					},
+					{
+						"question": "What is the summary of this plugin?",
+						"answer": "GetSessionParameter fetches run-specific settings so each run keeps its own information. It returns an empty value if the setting is not set, and helps workflows and tests keep session data separate."
+					},
+					{
+						"question": "What is the Git document link?",
+						"answer": "The document link is https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Session.md"
+					},
+					{
+						"question": "What is the Git source link?",
+						"answer": "The source link is https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetSessionParameter.cs"
+					},
+					{
+						"question": "How does the plugin handle errors?",
+						"answer": "The plugin records failures by adding an exception to the response and log stream. By default, workflows continue execution unless explicitly configured to stop on error."
+					},
+					{
+						"question": "What is the apiDocumentation protocol setting?",
+						"answer": "The apiDocumentation setting is None, indicating there is no external API documentation for this plugin."
+					},
+					{
+						"question": "What is the w3c protocol setting?",
+						"answer": "The w3c setting is None, indicating there is no W3C standard reference for this plugin."
+					}
+				]
+			}
+		}
+	},
 	"categories": [
 		"DataManagement"
 	],
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `GetSessionParameter` plugin is to fetch session parameters that are scoped and accessible only within the automation session that is using them. This allows for the use of dynamic parameters with the same name across different sessions without causing conflicts.",
+		"This plugin lets each automation run fetch values that belong only to its own session, such as temporary paths or tokens.",
+		"It keeps these values separate so that parallel runs do not interfere with each other.",
+		"This makes sure every run uses the right data without conflicts.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                        | Description                                                                                               |",
-		"|------------------------------- |-----------------------------------------------------------------------------------------------------------|",
-		"| Parameter Retrieval            | Fetches session-specific parameters that are unique to the current automation session.                    |",
-		"| Scoped Parameters              | Ensures that parameters with the same name in different sessions do not interfere with each other.        |",
-		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |",
+		"| Feature             | Description                                                          |",
+		"|---------------------|----------------------------------------------------------------------|",
+		"| Parameter retrieval | Reads values specific to the current automation session.             |",
+		"| Live updates        | Picks up changes to session parameters during the run.               |",
+		"| Plugin integration  | Works with other plugins to pass session values into workflow steps. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                          | Description                                                                                     |",
-		"|--------------------------------|------------------------------------------------------------------------------------------------ |",
-		"| Dynamic Configuration          | Retrieve and use session-specific parameters dynamically within the current automation session. |",
-		"| Session-Specific Data Handling | Use session-level parameters for handling data that should be isolated to the current session.  |",
+		"| Use Case               | Description                                                     |",
+		"|------------------------|-----------------------------------------------------------------|",
+		"| Dynamic configuration  | Loads session values so workflows adapt to each run’s settings. |",
+		"| Session data isolation | Keeps each session’s data separate to avoid mixing values.      |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                      | Description                                                                                               |",
-		"|----------------------------|-----------------------------------------------------------------------------------------------------------|",
-		"| Isolated Test Data         | Retrieve parameters specific to the test session, ensuring data isolation between parallel test sessions. |",
-		"| Dynamic Test Configuration | Simplify test configuration by fetching session-specific parameters directly within test scripts.         |"
+		"| Use Case               | Description                                                     |",
+		"|------------------------|-----------------------------------------------------------------|",
+		"| Isolated test sessions | Uses session values to keep data separate during parallel runs. |",
+		"| Dynamic test setup     | Fetches session values to configure tests on the fly.           |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Access denied to session environment",
+						"Empty or null value returned",
+						"Parameter not found"
+					],
+					"expected_result": "The value of the `UserToken` environment variable is retrieved and made available in the `Result` output field for downstream actions.",
+					"notes": "Retrieves the raw string value of `UserToken` from the session scope. If the parameter is missing or returns an empty value, downstream actions must handle the null or empty case explicitly.",
+					"use_case": "parameter_retrieval_session_environment",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"EnvironmentAccess",
+					"ParameterRetrieval"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `Session` plugin to fetch a parameter named `UserToken` directly.",
+				"### Retrieve Session-Level Environment Variable",
 				"",
-				"| Field      | Description                                                        |",
-				"|------------|--------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `Session`. |",
-				"| onElement  | Specifies the name of the parameter to be fetched.                 |"
+				"This example demonstrates how to retrieve a session-level environment variable named `UserToken` using the Session plugin’s GetParameter action.",
+				"It retrieves the raw value of `UserToken` from the session scope for use in downstream workflows.",
+				"The retrieved value is available in the `Result` output field for subsequent steps."
 			],
 			"rule": {
+				"$type": "Action",
 				"onElement": "UserToken",
 				"pluginName": "Session"
-			}
-		},
-		{
-			"description": [
-				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `UserToken` from the session and use it in a `SendKeys` action.",
-				"",
-				"| Field      | Description                                                                                             |",
-				"|------------|---------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
-				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
-				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
-				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
-			],
-			"rule": {
-				"argument": "{{$Get-Parameter --Name:UserToken --Scope:Session}}",
-				"locator": "CssSelector",
-				"onElement": "#someElement",
-				"pluginName": "SendKeys"
 			}
 		}
 	],
 	"key": "Session",
 	"manifestVersion": 4,
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "GetParameter",
 	"properties": [
 		{
 			"description": [
-				"Specifies the name of the session parameter to be fetched."
+				"OnElement names the session parameter to fetch.",
+				"Workflows use this name to load the correct session value.",
+				"Using the right name ensures that workflows get the intended data every time."
 			],
 			"mandatory": true,
 			"name": "OnElement",
@@ -84,13 +180,10 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `GetSessionParameter` plugin retrieves session-specific parameters within automation workflows, ensuring data isolation and configuration management.",
-		"Key features include fetching parameters unique to the current automation session, scoped parameters to avoid interference between sessions, and integration with other plugins for dynamic usage in various actions.",
-		"In RPA, it is used for dynamic configuration and session-specific data handling.",
-		"In automation testing, it supports isolated test data and dynamic test configuration."
+		"GetSessionParameter gets a setting that only belongs to the current run so each run keeps its own information.",
+		"It gives back nothing if that setting is not set so you know when it’s missing.",
+		"Use it when you want each run to have its own settings without mixing things up across runs.",
+		"When tests run at the same time, it helps each test keep its own data separate."
 	]
 }
