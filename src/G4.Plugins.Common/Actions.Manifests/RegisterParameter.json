@@ -148,7 +148,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is stored in the Application scope with the value 'parameterValue'.",
 					"notes": "Stores a parameter in the Application scope without encryption.",
-					"test_case": "register_parameter_application_scope",
+					"use_case": "register_parameter_application_scope",
 					"version": "1.0"
 				},
 				"labels": [
@@ -184,7 +184,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is encrypted using 'myEncryptionKey' and stored in the Application scope.",
 					"notes": "Stores a parameter in the Application scope with encryption.",
-					"test_case": "register_parameter_application_scope_with_encryption",
+					"use_case": "register_parameter_application_scope_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -222,7 +222,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is stored in the Application scope for the Development environment with the value 'parameterValue'.",
 					"notes": "Stores a parameter in the Application scope for the Development environment without encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development",
+					"use_case": "register_parameter_application_scope_with_environment_development",
 					"version": "1.0"
 				},
 				"labels": [
@@ -260,7 +260,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is encrypted using 'myEncryptionKey' and stored in the Application scope for the Development environment.",
 					"notes": "Stores a parameter in the Application scope for the Development environment with encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development_and_encryption",
+					"use_case": "register_parameter_application_scope_with_environment_development_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -297,7 +297,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is stored in the Machine scope with the value 'parameterValue'.",
 					"notes": "Stores a parameter in the Machine scope without encryption.",
-					"test_case": "register_parameter_machine_scope",
+					"use_case": "register_parameter_machine_scope",
 					"version": "1.0"
 				},
 				"labels": [
@@ -333,7 +333,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is encrypted using 'myEncryptionKey' and stored in the Machine scope.",
 					"notes": "Stores a parameter in the Machine scope with encryption.",
-					"test_case": "register_parameter_machine_scope_with_encryption",
+					"use_case": "register_parameter_machine_scope_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -370,7 +370,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is stored in the Process scope with the value 'parameterValue'.",
 					"notes": "Stores a parameter in the Process scope without encryption.",
-					"test_case": "register_parameter_process_scope",
+					"use_case": "register_parameter_process_scope",
 					"version": "1.0"
 				},
 				"labels": [
@@ -406,7 +406,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is encrypted using 'myEncryptionKey' and stored in the Process scope.",
 					"notes": "Stores a parameter in the Process scope with encryption.",
-					"test_case": "register_parameter_process_scope_with_encryption",
+					"use_case": "register_parameter_process_scope_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -443,7 +443,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is stored in the Session scope with the value 'parameterValue'.",
 					"notes": "Stores a parameter in the Session scope without encryption.",
-					"test_case": "register_parameter_session_scope",
+					"use_case": "register_parameter_session_scope",
 					"version": "1.0"
 				},
 				"labels": [
@@ -479,7 +479,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is encrypted using 'myEncryptionKey' and stored in the Session scope.",
 					"notes": "Stores a parameter in the Session scope with encryption.",
-					"test_case": "register_parameter_session_scope_with_encryption",
+					"use_case": "register_parameter_session_scope_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -516,7 +516,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is stored in the User scope with the value 'parameterValue'.",
 					"notes": "Stores a parameter in the User scope without encryption.",
-					"test_case": "register_parameter_user_scope",
+					"use_case": "register_parameter_user_scope",
 					"version": "1.0"
 				},
 				"labels": [
@@ -552,7 +552,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is encrypted using 'myEncryptionKey' and stored in the User scope.",
 					"notes": "Stores a parameter in the User scope with encryption.",
-					"test_case": "register_parameter_user_scope_with_encryption",
+					"use_case": "register_parameter_user_scope_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -591,7 +591,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_application_scope_css_elementId",
+					"use_case": "register_parameter_application_scope_css_elementId",
 					"version": "1.0"
 				},
 				"labels": [
@@ -632,7 +632,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted with 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_application_scope_css_elementId_with_encryption",
+					"use_case": "register_parameter_application_scope_css_elementId_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -673,7 +673,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_application_scope_xpath_elementId",
+					"use_case": "register_parameter_application_scope_xpath_elementId",
 					"version": "1.0"
 				},
 				"labels": [
@@ -714,7 +714,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted with 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_application_scope_xpath_elementId_with_encryption",
+					"use_case": "register_parameter_application_scope_xpath_elementId_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -755,7 +755,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_application_scope_id_elementId",
+					"use_case": "register_parameter_application_scope_id_elementId",
 					"version": "1.0"
 				},
 				"labels": [
@@ -796,7 +796,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted with 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_application_scope_id_elementId_with_encryption",
+					"use_case": "register_parameter_application_scope_id_elementId_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -840,7 +840,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Application scope for the Development environment.",
 					"notes": "Registers a parameter from an element for the Development environment without encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development_css_elementid",
+					"use_case": "register_parameter_application_scope_with_environment_development_css_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -884,7 +884,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Application scope for the Development environment.",
 					"notes": "Registers a parameter from an element for the Development environment with encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development_css_elementid_with_encryption",
+					"use_case": "register_parameter_application_scope_with_environment_development_css_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -928,7 +928,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Application scope for the Development environment.",
 					"notes": "Registers a parameter from an element for the Development environment without encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development_xpath_elementid",
+					"use_case": "register_parameter_application_scope_with_environment_development_xpath_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -972,7 +972,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Application scope for the Development environment.",
 					"notes": "Registers a parameter from an element for the Development environment with encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development_xpath_elementid_with_encryption",
+					"use_case": "register_parameter_application_scope_with_environment_development_xpath_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1016,7 +1016,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Application scope for the Development environment.",
 					"notes": "Registers a parameter from an element for the Development environment without encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development_id_elementid",
+					"use_case": "register_parameter_application_scope_with_environment_development_id_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1060,7 +1060,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Application scope for the Development environment.",
 					"notes": "Registers a parameter from an element for the Development environment with encryption.",
-					"test_case": "register_parameter_application_scope_with_environment_development_id_elementid_with_encryption",
+					"use_case": "register_parameter_application_scope_with_environment_development_id_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1104,7 +1104,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_machine_scope_css_elementid",
+					"use_case": "register_parameter_machine_scope_css_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1146,7 +1146,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_machine_scope_css_elementid_with_encryption",
+					"use_case": "register_parameter_machine_scope_css_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1188,7 +1188,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_machine_scope_xpath_elementid",
+					"use_case": "register_parameter_machine_scope_xpath_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1230,7 +1230,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_machine_scope_xpath_elementid_with_encryption",
+					"use_case": "register_parameter_machine_scope_xpath_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1272,7 +1272,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_machine_scope_id_elementid",
+					"use_case": "register_parameter_machine_scope_id_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1314,7 +1314,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_machine_scope_id_elementid_with_encryption",
+					"use_case": "register_parameter_machine_scope_id_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1357,7 +1357,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Process scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_process_scope_css_elementid",
+					"use_case": "register_parameter_process_scope_css_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1399,7 +1399,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_process_scope_css_elementid_with_encryption",
+					"use_case": "register_parameter_process_scope_css_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1442,7 +1442,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Process scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_process_scope_xpath_elementid",
+					"use_case": "register_parameter_process_scope_xpath_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1483,7 +1483,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_process_scope_xpath_elementid_with_encryption",
+					"use_case": "register_parameter_process_scope_xpath_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1526,7 +1526,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Process scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_process_scope_id_elementid",
+					"use_case": "register_parameter_process_scope_id_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1568,7 +1568,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_process_scope_id_elementid_with_encryption",
+					"use_case": "register_parameter_process_scope_id_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1611,7 +1611,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Session scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_session_scope_css_elementid",
+					"use_case": "register_parameter_session_scope_css_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1653,7 +1653,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_session_scope_css_elementid_with_encryption",
+					"use_case": "register_parameter_session_scope_css_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1696,7 +1696,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Session scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_session_scope_xpath_elementid",
+					"use_case": "register_parameter_session_scope_xpath_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1738,7 +1738,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_session_scope_xpath_elementid_with_encryption",
+					"use_case": "register_parameter_session_scope_xpath_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1781,7 +1781,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the Session scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_session_scope_id_elementid",
+					"use_case": "register_parameter_session_scope_id_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1823,7 +1823,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_session_scope_id_elementid_with_encryption",
+					"use_case": "register_parameter_session_scope_id_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1866,7 +1866,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the User scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_user_scope_css_elementid",
+					"use_case": "register_parameter_user_scope_css_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1908,7 +1908,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_user_scope_css_elementid_with_encryption",
+					"use_case": "register_parameter_user_scope_css_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1951,7 +1951,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the User scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_user_scope_xpath_elementid",
+					"use_case": "register_parameter_user_scope_xpath_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1993,7 +1993,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_user_scope_xpath_elementid_with_encryption",
+					"use_case": "register_parameter_user_scope_xpath_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2036,7 +2036,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element and stored in the User scope.",
 					"notes": "Registers a parameter from an element without encryption.",
-					"test_case": "register_parameter_user_scope_id_elementid",
+					"use_case": "register_parameter_user_scope_id_elementid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2078,7 +2078,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a parameter from an element with encryption.",
-					"test_case": "register_parameter_user_scope_id_elementid_with_encryption",
+					"use_case": "register_parameter_user_scope_id_elementid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2121,7 +2121,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_application_scope_css_linkid",
+					"use_case": "register_parameter_application_scope_css_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2164,7 +2164,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_application_scope_css_linkid_with_encryption",
+					"use_case": "register_parameter_application_scope_css_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2208,7 +2208,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_application_scope_xpath_linkid",
+					"use_case": "register_parameter_application_scope_xpath_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2251,7 +2251,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_application_scope_xpath_linkid_with_encryption",
+					"use_case": "register_parameter_application_scope_xpath_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2295,7 +2295,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_application_scope_id_linkid",
+					"use_case": "register_parameter_application_scope_id_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2338,7 +2338,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_application_scope_id_linkid_with_encryption",
+					"use_case": "register_parameter_application_scope_id_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2383,7 +2383,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_application_scope_css_linkid",
+					"use_case": "register_parameter_application_scope_css_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2427,7 +2427,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_application_scope_css_linkid_with_encryption",
+					"use_case": "register_parameter_application_scope_css_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2472,7 +2472,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_application_scope_xpath_linkid",
+					"use_case": "register_parameter_application_scope_xpath_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2516,7 +2516,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_application_scope_xpath_linkid_with_encryption",
+					"use_case": "register_parameter_application_scope_xpath_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2561,7 +2561,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_application_scope_id_linkid",
+					"use_case": "register_parameter_application_scope_id_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2605,7 +2605,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_application_scope_id_linkid_with_encryption",
+					"use_case": "register_parameter_application_scope_id_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2650,7 +2650,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_machine_scope_css_linkid",
+					"use_case": "register_parameter_machine_scope_css_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2694,7 +2694,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_machine_scope_css_linkid_with_encryption",
+					"use_case": "register_parameter_machine_scope_css_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2739,7 +2739,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_machine_scope_xpath_linkid",
+					"use_case": "register_parameter_machine_scope_xpath_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2783,7 +2783,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_machine_scope_xpath_linkid_with_encryption",
+					"use_case": "register_parameter_machine_scope_xpath_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2828,7 +2828,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_machine_scope_id_linkid",
+					"use_case": "register_parameter_machine_scope_id_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2872,7 +2872,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_machine_scope_id_linkid_with_encryption",
+					"use_case": "register_parameter_machine_scope_id_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2917,7 +2917,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Process scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_process_scope_css_linkid",
+					"use_case": "register_parameter_process_scope_css_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2961,7 +2961,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_process_scope_css_linkid_with_encryption",
+					"use_case": "register_parameter_process_scope_css_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3006,7 +3006,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Process scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_process_scope_xpath_linkid",
+					"use_case": "register_parameter_process_scope_xpath_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3050,7 +3050,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_process_scope_xpath_linkid_with_encryption",
+					"use_case": "register_parameter_process_scope_xpath_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3095,7 +3095,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Process scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_process_scope_id_linkid",
+					"use_case": "register_parameter_process_scope_id_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3139,7 +3139,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_process_scope_id_linkid_with_encryption",
+					"use_case": "register_parameter_process_scope_id_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3184,7 +3184,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Session scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_session_scope_css_linkid",
+					"use_case": "register_parameter_session_scope_css_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3228,7 +3228,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_session_scope_css_linkid_with_encryption",
+					"use_case": "register_parameter_session_scope_css_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3273,7 +3273,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Session scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_session_scope_xpath_linkid",
+					"use_case": "register_parameter_session_scope_xpath_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3317,7 +3317,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_session_scope_xpath_linkid_with_encryption",
+					"use_case": "register_parameter_session_scope_xpath_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3362,7 +3362,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the Session scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_session_scope_id_linkid",
+					"use_case": "register_parameter_session_scope_id_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3406,7 +3406,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_session_scope_id_linkid_with_encryption",
+					"use_case": "register_parameter_session_scope_id_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3451,7 +3451,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the User scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_user_scope_css_linkid",
+					"use_case": "register_parameter_user_scope_css_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3495,7 +3495,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_user_scope_css_linkid_with_encryption",
+					"use_case": "register_parameter_user_scope_css_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3540,7 +3540,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the User scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_user_scope_xpath_linkid",
+					"use_case": "register_parameter_user_scope_xpath_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3584,7 +3584,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_user_scope_xpath_linkid_with_encryption",
+					"use_case": "register_parameter_user_scope_xpath_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3629,7 +3629,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element and stored in the User scope.",
 					"notes": "Registers a parameter from an element attribute without encryption.",
-					"test_case": "register_parameter_user_scope_id_linkid",
+					"use_case": "register_parameter_user_scope_id_linkid",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3673,7 +3673,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the href attribute of the element, encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a parameter from an element attribute with encryption.",
-					"test_case": "register_parameter_user_scope_id_linkid_with_encryption",
+					"use_case": "register_parameter_user_scope_id_linkid_with_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3718,7 +3718,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Application scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_application_scope_css_elementid_with_regex",
+					"use_case": "register_parameter_application_scope_css_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3764,7 +3764,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_application_scope_css_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_application_scope_css_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3811,7 +3811,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Application scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_application_scope_xpath_elementid_with_regex",
+					"use_case": "register_parameter_application_scope_xpath_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3857,7 +3857,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_application_scope_xpath_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_application_scope_xpath_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3904,7 +3904,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Application scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_application_scope_id_elementid_with_regex",
+					"use_case": "register_parameter_application_scope_id_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3950,7 +3950,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Application scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_application_scope_id_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_application_scope_id_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3998,7 +3998,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Application scope for the Development environment.",
 					"notes": "Registers a numeric parameter from an element without encryption for the Development environment.",
-					"test_case": "register_parameter_application_scope_with_environment_development_css_elementid_with_regex",
+					"use_case": "register_parameter_application_scope_with_environment_development_css_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4046,7 +4046,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Application scope for the Development environment.",
 					"notes": "Registers a numeric parameter from an element with encryption for the Development environment.",
-					"test_case": "register_parameter_application_scope_with_environment_development_css_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_application_scope_with_environment_development_css_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4095,7 +4095,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Application scope for the Development environment.",
 					"notes": "Registers a numeric parameter from an element without encryption for the Development environment.",
-					"test_case": "register_parameter_application_scope_with_environment_development_xpath_elementid_with_regex",
+					"use_case": "register_parameter_application_scope_with_environment_development_xpath_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4143,7 +4143,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Application scope for the Development environment.",
 					"notes": "Registers a numeric parameter from an element with encryption for the Development environment.",
-					"test_case": "register_parameter_application_scope_with_environment_development_xpath_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_application_scope_with_environment_development_xpath_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4192,7 +4192,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Application scope for the Development environment.",
 					"notes": "Registers a numeric parameter from an element without encryption for the Development environment.",
-					"test_case": "register_parameter_application_scope_with_environment_development_id_elementid_with_regex",
+					"use_case": "register_parameter_application_scope_with_environment_development_id_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4240,7 +4240,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Application scope for the Development environment.",
 					"notes": "Registers a numeric parameter from an element with encryption for the Development environment.",
-					"test_case": "register_parameter_application_scope_with_environment_development_id_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_application_scope_with_environment_development_id_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4288,7 +4288,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Machine scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_machine_scope_css_elementid_with_regex",
+					"use_case": "register_parameter_machine_scope_css_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4334,7 +4334,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_machine_scope_css_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_machine_scope_css_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4381,7 +4381,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Machine scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_machine_scope_xpath_elementid_with_regex",
+					"use_case": "register_parameter_machine_scope_xpath_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4427,7 +4427,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_machine_scope_xpath_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_machine_scope_xpath_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4474,7 +4474,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Machine scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_machine_scope_id_elementid_with_regex",
+					"use_case": "register_parameter_machine_scope_id_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4520,7 +4520,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Machine scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_machine_scope_id_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_machine_scope_id_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4567,7 +4567,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Process scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_process_scope_css_elementid_with_regex",
+					"use_case": "register_parameter_process_scope_css_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4613,7 +4613,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_process_scope_css_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_process_scope_css_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4660,7 +4660,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Process scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_process_scope_xpath_elementid_with_regex",
+					"use_case": "register_parameter_process_scope_xpath_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4706,7 +4706,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_process_scope_xpath_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_process_scope_xpath_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4753,7 +4753,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Process scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_process_scope_id_elementid_with_regex",
+					"use_case": "register_parameter_process_scope_id_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4799,7 +4799,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Process scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_process_scope_id_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_process_scope_id_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4846,7 +4846,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Session scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_session_scope_css_elementid_with_regex",
+					"use_case": "register_parameter_session_scope_css_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4892,7 +4892,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_session_scope_css_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_session_scope_css_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4939,7 +4939,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Session scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_session_scope_xpath_elementid_with_regex",
+					"use_case": "register_parameter_session_scope_xpath_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4985,7 +4985,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_session_scope_xpath_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_session_scope_xpath_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5032,7 +5032,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+' and stored in the Session scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_session_scope_id_elementid_with_regex",
+					"use_case": "register_parameter_session_scope_id_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5078,7 +5078,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from the inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the Session scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_session_scope_id_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_session_scope_id_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5127,7 +5127,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from inner text matching the pattern '\\d+' and stored in the User scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_user_scope_css_elementid_with_regex",
+					"use_case": "register_parameter_user_scope_css_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5174,7 +5174,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_user_scope_css_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_user_scope_css_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5222,7 +5222,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from inner text matching the pattern '\\d+' and stored in the User scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_user_scope_xpath_elementid_with_regex",
+					"use_case": "register_parameter_user_scope_xpath_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5269,7 +5269,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_user_scope_xpath_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_user_scope_xpath_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5317,7 +5317,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from inner text matching the pattern '\\d+' and stored in the User scope.",
 					"notes": "Registers a numeric parameter from an element without encryption.",
-					"test_case": "register_parameter_user_scope_id_elementid_with_regex",
+					"use_case": "register_parameter_user_scope_id_elementid_with_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5364,7 +5364,7 @@
 					],
 					"expected_result": "The parameter 'parameterName' is extracted from inner text matching the pattern '\\d+', encrypted using 'myEncryptionKey', and stored in the User scope.",
 					"notes": "Registers a numeric parameter from an element with encryption.",
-					"test_case": "register_parameter_user_scope_id_elementid_with_regex_and_encryption",
+					"use_case": "register_parameter_user_scope_id_elementid_with_regex_and_encryption",
 					"version": "1.0"
 				},
 				"labels": [

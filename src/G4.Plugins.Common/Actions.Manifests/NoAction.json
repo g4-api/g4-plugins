@@ -153,7 +153,7 @@
 					],
 					"expected_result": "Execution is logged with no operations performed.",
 					"notes": "NoAction plugin logs the execution point defined by the argument. Useful as a placeholder or checkpoint.",
-					"test_case": "placeholder_action_noaction",
+					"use_case": "placeholder_action_noaction",
 					"version": "1.0"
 				},
 				"labels": [
@@ -184,7 +184,7 @@
 					],
 					"expected_result": "Execution is logged at the debugging point with no operations performed.",
 					"notes": "NoAction plugin logs the specified debugging point. Useful for tracking execution flow without side effects.",
-					"test_case": "debugging_point_noaction",
+					"use_case": "debugging_point_noaction",
 					"version": "1.0"
 				},
 				"labels": [
@@ -215,7 +215,7 @@
 					],
 					"expected_result": "Username and password are entered and the login button is clicked in sequence.",
 					"notes": "NoAction plugin groups the contained login actions. Inner actions send keys to username and password fields, then click the login button.",
-					"test_case": "login_steps_grouping_noaction",
+					"use_case": "login_steps_grouping_noaction",
 					"version": "1.0"
 				},
 				"labels": [

@@ -126,7 +126,7 @@
 					],
 					"expected_result": "The Click action on `#NextBtn1` is executed 5 times; exceptions are recorded but do not halt execution.",
 					"notes": "InvokeForLoop repeats the inner Click action 5 times. Click failures log exceptions without stopping the loop.",
-					"test_case": "invoke_for_loop_5_click_css_nextbtn1",
+					"use_case": "invoke_for_loop_5_click_css_nextbtn1",
 					"version": "1.0"
 				},
 				"labels": [
@@ -166,7 +166,7 @@
 					],
 					"expected_result": "The Click action on `//button[@id='NextBtn1']` is executed 5 times; exceptions are recorded but do not halt execution.",
 					"notes": "InvokeForLoop repeats the inner Click action 5 times. Click failures log exceptions without stopping the loop.",
-					"test_case": "invoke_for_loop_5_click_xpath_nextbtn1",
+					"use_case": "invoke_for_loop_5_click_xpath_nextbtn1",
 					"version": "1.0"
 				},
 				"labels": [
@@ -205,7 +205,7 @@
 					],
 					"expected_result": "The Click action on element Id `NextBtn1` is executed 5 times; exceptions are recorded but do not halt execution.",
 					"notes": "InvokeForLoop repeats the inner Click action 5 times. Click failures log exceptions without stopping the loop.",
-					"test_case": "invoke_for_loop_5_click_id_nextbtn1",
+					"use_case": "invoke_for_loop_5_click_id_nextbtn1",
 					"version": "1.0"
 				},
 				"labels": [
@@ -245,7 +245,7 @@
 					],
 					"expected_result": "Outer loop runs twice; inner loop clicks `#NextBtn2` twice each iteration, then clicks `FirstBtn2` and `NextBtn1` once per outer iteration; exceptions are recorded but do not halt execution.",
 					"notes": "Demonstrates nested InvokeForLoop with mixed selectors. Click failures log exceptions without stopping loops.",
-					"test_case": "invoke_for_loop_nested_click_buttons",
+					"use_case": "invoke_for_loop_nested_click_buttons",
 					"version": "1.0"
 				},
 				"labels": [
