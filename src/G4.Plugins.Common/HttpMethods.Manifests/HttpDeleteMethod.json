@@ -696,7 +696,7 @@
 			],
 			"mandatory": false,
 			"name": "Url",
-			"type": "String"
+			"type": "Uri|String"
 		}
 	],
 	"platforms": [
