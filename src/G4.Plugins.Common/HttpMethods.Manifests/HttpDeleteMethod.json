@@ -11,6 +11,67 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Delete.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpDeleteMethod.cs"
+			},
+			"rag": {
+				"description": "The Delete HTTP-method plugin streamlines automated resource removal. It validates inputs, supports dynamic URLs, headers, bodies, and extraction rules, and surfaces status codes and headers so workflows stay reliable across any platform.",
+				"qa": [
+					{
+						"question": "What does the Delete plugin do?",
+						"answer": "It sends HTTP DELETE requests so your automations can remove resources from servers or APIs."
+					},
+					{
+						"question": "What are its key features and parameters?",
+						"answer": "Dynamic URLs, headers, bodies, content types, encodings, form fields, and XPath / JSONPath / regex extraction of response data."
+					},
+					{
+						"question": "Where can I find the code and docs?",
+						"answer": "Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Delete.md, Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpDeleteMethod.cs"
+					},
+					{
+						"question": "Any best practices for using it?",
+						"answer": "Validate URLs, set reasonable timeouts, and add error handling so deletes run safely in production and clean up test data reliably."
+					},
+					{
+						"question": "What schema rules should I know?",
+						"answer": "Examples must include \"$type\":\"Action\" and may use {{$…}} templates; unknown flags are not allowed."
+					},
+					{
+						"question": "Who authored this plugin?",
+						"answer": "Roei Sabag — https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "4"
+					},
+					{
+						"question": "Which category does it belong to?",
+						"answer": "Http"
+					},
+					{
+						"question": "What is the plugin type?",
+						"answer": "HttpMethod"
+					},
+					{
+						"question": "Which platforms are supported?",
+						"answer": "Any"
+					},
+					{
+						"question": "What is the key identifier?",
+						"answer": "Delete"
+					},
+					{
+						"question": "What does the summary say?",
+						"answer": "The plugin removes data by sending delete requests and verifying the outcome."
+					},
+					{
+						"question": "What do the source descriptions highlight?",
+						"answer": "They emphasise data deletion, dynamic request construction, and response handling for RPA and testing scenarios."
+					},
+					{
+						"question": "How is error handling addressed?",
+						"answer": "Edge cases cover invalid URLs, 4xx/5xx responses, timeouts, and network failures so you can plan retries or conditional flows."
+					}
+				]
 			}
 		}
 	},
