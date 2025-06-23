@@ -80,7 +80,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "http://localhost:9002/api/hotels/delete/12345",
+				"argument": "http://api.example.com/v1/delete/12345",
 				"pluginName": "Delete"
 			}
 		},
@@ -120,7 +120,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}",
 				"pluginName": "Delete"
 			}
 		},
@@ -164,7 +164,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete --Body:{\"id\":12345} --ContentType:application/json}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete --Body:{\"id\":12345} --ContentType:application/json}}",
 				"pluginName": "Delete"
 			}
 		},
@@ -204,7 +204,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345 --Encoding:UTF8}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345 --Encoding:UTF8}}",
 				"pluginName": "Delete"
 			}
 		},
@@ -249,7 +249,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete --Field:id=12345}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete --Field:id=12345}}",
 				"pluginName": "Delete"
 			}
 		},
@@ -294,7 +294,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345}}",
 				"onAttribute": "status",
 				"onElement": "//response",
 				"pluginName": "Delete"
@@ -341,24 +341,54 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345}}",
 				"onElement": "$.data.id",
 				"pluginName": "Delete"
 			}
 		},
-
-
-
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid regex pattern",
+						"Invalid URL format",
+						"Missing argument",
+						"Multiple regex matches",
+						"Network failure",
+						"No regex match",
+						"Non-JSON response",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL, applies the regex to extract the number of deleted records from the JSON response, and returns the first matching count.",
+					"notes": "The `argument` sets the target URL for the DELETE request. The `regularExpression` field specifies a pattern to extract the deletion count from the JSON response (e.g., `\"deletedCount\":\\s*(\\d+)`). The plugin returns the first regex match; if multiple substrings match, later matches are ignored. For more complex JSON structures, consider using JSONPath extraction via `onElement`. This example assumes the response content type is `application/json`.",
+					"use_case": "delete_and_extract_deleted_count",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"HTTPRequest",
+					"JSON",
+					"RegexExtraction",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request and apply a regular expression to extract specific data from the response."
+				"### DELETE request with regex extraction for deleted count",
+				"",
+				"Send an HTTP DELETE request to the specified hotel-booking endpoint.",
+				"Extract the number of deleted records from the JSON response using the regular expression `\"deletedCount\":\\s*(\\d+)`.",
+				"Return the first matching count; ignore any additional matches."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345}}",
 				"pluginName": "Delete",
-				"regularExpression": "\\d{3}"
+				"regularExpression": "\\\"deletedCount\\\":\\s*(\\d+)"
 			}
 		}
 	],
