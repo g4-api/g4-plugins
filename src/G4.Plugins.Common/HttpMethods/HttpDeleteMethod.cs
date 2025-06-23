@@ -12,7 +12,6 @@ namespace G4.Plugins.Common.HttpMethods
         manifest: $"G4.Plugins.Common.HttpMethods.Manifests.{nameof(HttpDeleteMethod)}.json")]
     public class HttpDeleteMethod(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
-        // This method is called when the plugin is invoked to send a request
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Create a helper that wraps HTTP method logic, passing along configuration
