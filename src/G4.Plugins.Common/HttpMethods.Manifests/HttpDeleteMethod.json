@@ -6,12 +6,20 @@
 	"categories": [
 		"Http"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Delete.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpDeleteMethod.cs"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `Delete` plugin is to remove data from a server or API endpoint by sending an HTTP DELETE request. ",
-		"This request is a standard method in the HTTP protocol for requesting the removal of a specified resource on the server. ",
-		"The `Delete` plugin streamlines the process of making programmatically controlled DELETE requests.",
+		"The Delete plugin lets automation workflows remove data from servers or APIs by sending HTTP DELETE requests.",
+		"It follows the standard HTTP protocol to request the removal of specified resources on a server.",
+		"This plugin simplifies programmatic data deletion and ensures consistency in automation processes.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -19,71 +27,241 @@
 		"|----------------------------|--------------------------------------------------------------------------|",
 		"| Data Deletion              | Sends HTTP DELETE requests to remove data from servers or APIs.          |",
 		"| Dynamic Requests           | Supports dynamic URL construction and payload handling.                  |",
-		"| Custom Headers             | Allows inclusion of multiple custom headers in the request.              |",
+		"| Custom Headers             | Allows inclusion of custom headers in the request.                       |",
 		"| Content Types and Encoding | Supports various content types and encoding methods for payloads.        |",
 		"| Response Handling          | Captures HTTP response, headers, and status code for further processing. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                | Description                                                                                                                |",
-		"|----------------------|----------------------------------------------------------------------------------------------------------------------------|",
-		"| Data Management      | Remove outdated or unnecessary data from external systems or APIs, such as outdated customer records or redundant entries. |",
-		"| Workflow Adjustments | Dynamically adjust actions based on the need to remove specific data, triggering subsequent workflow steps.                |",
+		"| Use Case            | Description                                                                                                                |",
+		"|---------------------|----------------------------------------------------------------------------------------------------------------------------|",
+		"| Data Management     | Remove outdated or unnecessary data from external systems or APIs, such as outdated customer records or redundant entries. |",
+		"| Workflow Adjustments| Dynamically adjust subsequent workflow actions based on deletion requirements.                                             |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                                | Description                                                                                                                                                                                                                                                          |",
-		"|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| API Cleanup in Testing               | Automated test scripts can leverage the `Delete` rule to send DELETE requests to API endpoints, cleaning up data created during testing scenarios. This ensures a clean and controlled environment for each test iteration.                                          |",
-		"| Data Integrity Checks                | Automation tests often involve verifying the impact of data removal on the server. The `Delete` rule, combined with appropriate validation techniques, allows for precise confirmation that the specified data has been accurately removed, ensuring data integrity. |",
-		"| Regression Testing for Data Deletion | Ensuring that data deletion functionalities continue to work as expected after updates or changes to external systems.                                                                                                                                               |"
+		"| Use Case                         | Description                                                                                                                                      |",
+		"|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| API Cleanup in Testing           | Use DELETE requests in automated tests to clean up data created during test execution, ensuring a controlled environment for each test run.      |",
+		"| Data Integrity Checks            | Combine deletion requests with validation steps to confirm that specified data has been accurately removed, ensuring system consistency.         |",
+		"| Regression Testing for Deletion  | Verify that deletion functionality remains intact after system updates or changes by replaying delete requests and confirming expected outcomes. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL and returns the HTTP response.",
+					"notes": "The `argument` field specifies the target URL for the DELETE request. The plugin performs a standard HTTP DELETE method and exposes the response for further processing.",
+					"use_case": "delete_resource_by_url",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send a simple HTTP DELETE request to a specified URL."
+				"### Simple DELETE request",
+				"",
+				"Use the `Delete` plugin to send an HTTP DELETE request to a specific URL.",
+				"Delete the resource at that URL and capture the response."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "http://localhost:9002/api/hotels/delete/12345",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate header names",
+						"Invalid header format",
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request with the specified headers and returns the response.",
+					"notes": "The `argument` uses `--Url` to set the target URL and multiple `--Header` flags to include custom headers in the request.",
+					"use_case": "delete_resource_with_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"Headers",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with specified headers."
+				"### DELETE request with custom headers",
+				"",
+				"Use the `Delete` plugin to send an HTTP DELETE request to a specific URL with custom headers.",
+				"Delete the resource at that URL and capture the response."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Body too large",
+						"Duplicate header names",
+						"Invalid JSON body",
+						"Invalid URL format",
+						"Missing argument",
+						"Missing body",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request with the given JSON body and Content-Type header, then returns the response.",
+					"notes": "The `argument` uses `--Url` to set the target URL, `--Body` to provide a JSON payload, and `--ContentType` to specify the request's Content-Type header.",
+					"use_case": "delete_resource_with_body",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Body",
+					"ContentType",
+					"Delete",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with a request body and content type."
+				"### DELETE request with JSON body and content type",
+				"",
+				"Send an HTTP DELETE request to the specified URL with a JSON payload in the request body and the appropriate Content-Type header.",
+				"Return the response from the server."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete --Body:{\"id\":12345} --ContentType:application/json}}",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Encoding mismatch",
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"Unsupported encoding"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request to the specified URL using the specified encoding and returns the HTTP response.",
+					"notes": "The `argument` uses `--Url` to set the target URL and `--Encoding` to specify the request encoding.",
+					"use_case": "delete_resource_with_encoding",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"Encoding",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with a specified encoding."
+				"### DELETE request with specified encoding",
+				"",
+				"Send an HTTP DELETE request to the specified URL using the given encoding for the request.",
+				"Return the response from the server."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345 --Encoding:UTF8}}",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate field names",
+						"Invalid field format",
+						"Invalid form encoding",
+						"Invalid URL format",
+						"Missing argument",
+						"Missing field values",
+						"Network failure",
+						"Payload ignored by server",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"Unsupported form field name"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request with the specified form fields and returns the HTTP response.",
+					"notes": "The `argument` uses `--Url` to set the target URL and `--Field` to include form fields in the request. If no `--ContentType` flag is provided, the plugin defaults to `application/json`. Some servers may ignore or reject bodies in DELETE requests.",
+					"use_case": "delete_resource_with_form_fields",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"FormFields",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with form fields."
+				"### DELETE request with form fields",
+				"",
+				"Send an HTTP DELETE request to the specified URL with form fields.",
+				"If no `--ContentType` flag is provided, the request defaults to `application/json`.",
+				"Return the response from the server."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete --Field:id=12345}}",
 				"pluginName": "Delete"
 			}
 		},
+
+
+
+
+
+
+
+
+
 		{
 			"description": [
 				"Use the `Delete` plugin to send an HTTP DELETE request and extract a specific attribute from the response."
@@ -91,9 +269,15 @@
 			"rule": {
 				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
 				"onAttribute": "status",
+				"onElement": "//response",
 				"pluginName": "Delete"
 			}
 		},
+
+
+
+
+
 		{
 			"description": [
 				"Use the `Delete` plugin to send an HTTP DELETE request and target elements using XPath."
@@ -120,27 +304,31 @@
 	"outputParameters": [
 		{
 			"description": [
-				"Holds the results of the HTTP request after `OnElement`, `OnAttribute`, and `RegularExpression` have been applied. ",
-				"If none of these properties are provided, then the entire response body is stored in the `HttpResponse` parameter.  ",
-				"",
-				"This means that the `HttpResponse` parameter captures the content resulting from any data extraction or processing performed by the specified properties (`OnElement`, `OnAttribute`, `RegularExpression`). ",
-				"It provides a way to access the modified or processed content of the HTTP response within the automation workflow."
+				"Holds the content returned from an HTTP request after any specified extraction or processing rules have been applied.",
+				"Provides a way to work with the processed response data instead of the raw body.",
+				"Enables automation workflows to access the exact information they need from the HTTP response."
 			],
-			"name": "HttpResponse"
+			"name": "HttpResponse",
+			"type": "Any"
 		},
 		{
 			"description": [
-				"Holds the HTTP response headers obtained from the HTTP DELETE request. ",
-				"These headers provide additional information about the server's response and are sent along with the actual content of the response."
+				"Holds the HTTP response headers returned from an HTTP request.",
+				"Contains key-value pairs that provide metadata about the response such as content type, date, and length.",
+				"Enables workflows to inspect response details for logging or conditional logic."
 			],
-			"name": "HttpResponseHeaders"
+			"name": "HttpResponseHeaders",
+			"type": "Any"
 		},
 		{
 			"description": [
-				"Holds the HTTP status code obtained from the HTTP DELETE request. ",
-				"The HTTP status code is a three-digit numeric code returned by the server indicating the outcome of the request."
+				"Holds the HTTP status code returned from an HTTP request.",
+				"Represents the outcome of the request using a three-digit numeric code.",
+				"Enables automation flows to check for success or failure of the HTTP operation.",
+				"Supports error handling in workflows based on the status code value."
 			],
-			"name": "HttpStatusCode"
+			"name": "HttpStatusCode",
+			"type": "Any"
 		}
 	],
 	"parameters": [
