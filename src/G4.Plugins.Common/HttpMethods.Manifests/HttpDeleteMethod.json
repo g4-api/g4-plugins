@@ -253,20 +253,47 @@
 				"pluginName": "Delete"
 			}
 		},
-
-
-
-
-
-
-
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute not found",
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Non-XML/HTML response",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"XPath evaluation error"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL, extracts the specified attribute from the matching element in the XML or HTML response, and returns its value.",
+					"notes": "The `argument` sets the target URL for the DELETE request. `onElement` uses an XPath expression to locate the element in an XML or HTML response, and `onAttribute` specifies which attribute to extract.",
+					"use_case": "delete_and_extract_attribute",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"AttributeExtraction",
+					"Delete",
+					"ElementExtraction",
+					"HTML",
+					"HTTPRequest",
+					"ResourceDeletion",
+					"XML"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request and extract a specific attribute from the response."
+				"### DELETE request with attribute extraction",
+				"",
+				"Send an HTTP DELETE request to the specified URL.",
+				"Extract the `status` attribute from the element identified by the XPath `//response` in the XML or HTML response.",
+				"Return the extracted attribute value."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
 				"onAttribute": "status",
 				"onElement": "//response",
