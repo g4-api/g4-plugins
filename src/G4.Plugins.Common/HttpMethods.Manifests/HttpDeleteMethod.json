@@ -300,21 +300,57 @@
 				"pluginName": "Delete"
 			}
 		},
-
-
-
-
-
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Invalid URL format",
+						"JSONPath evaluation error",
+						"JSONPath expression returns no results",
+						"Missing argument",
+						"Network failure",
+						"Non-JSON response",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL, extracts the value at the given JSONPath from the JSON response using the onElement property, and returns it.",
+					"notes": "The `argument` sets the target URL for the DELETE request. When the response is JSON, `onElement` accepts JSONPath expressions (e.g., `$.data.id`). If the response isn’t valid JSON or the path matches no data, extraction will error or return null. This behavior follows the JSONPath specification (RFC 9535).",
+					"use_case": "delete_and_extract_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"HTTPRequest",
+					"JSON",
+					"JSONExtraction",
+					"JSONPath",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request and target elements using XPath."
+				"### DELETE request with JSONPath extraction",
+				"",
+				"Send an HTTP DELETE request to the specified URL.",
+				"Extract the value at the JSONPath `$.data.id` from the JSON response using the onElement property.",
+				"Return the extracted value."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
-				"onElement": "//response/status",
+				"onElement": "$.data.id",
 				"pluginName": "Delete"
 			}
 		},
+
+
+
+
+
 		{
 			"description": [
 				"Use the `Delete` plugin to send an HTTP DELETE request and apply a regular expression to extract specific data from the response."
