@@ -115,8 +115,8 @@
 			}
 		}
 	],
-	"manifestVersion": 4,
 	"key": "Delete",
+	"manifestVersion": 4,
 	"outputParameters": [
 		{
 			"description": [
@@ -351,12 +351,16 @@
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "HttpMethod",
 	"properties": [
 		{
 			"description": [
-				"Specifies the details for the HTTP DELETE request. ",
-				"It includes a template or variable structure `{{$...}}` to allow dynamic values."
+				"Specifies where to send the HTTP DELETE request and what data to include.",
+				"Allows dynamic values through templates or variable placeholders in the format {{$...}}.",
+				"Makes it possible to customize the request URL or payload at runtime."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -364,8 +368,10 @@
 		},
 		{
 			"description": [
-				"Used to target elements using either XPath or JSONPath expressions, depending on the type of response the API returns (XML or JSON). ",
-				"This flexibility allows the rule to handle different response formats appropriately."
+				"Targets specific parts of an API response by using XPath or JSONPath expressions.",
+				"Works with both XML and JSON responses.",
+				"Adapts to the response format to locate the right element.",
+				"Helps ensure the correct data is extracted regardless of the API’s output format."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -373,8 +379,10 @@
 		},
 		{
 			"description": [
-				"Used for pattern matching and extraction of specific data from a text response. ",
-				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP DELETE request."
+				"Defines a pattern for capturing and extracting specific data from a text response.",
+				"Uses standard regular expression syntax to match and retrieve the parts you need.",
+				"Enables precise extraction of values embedded in the response.",
+				"Helps automate parsing of complex text outputs."
 			],
 			"mandatory": false,
 			"name": "RegularExpression",
@@ -385,13 +393,10 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `Delete` plugin facilitates the removal of data from servers or APIs by sending HTTP DELETE requests, streamlining the process of programmatically controlled data deletion.",
-		"Key features include sending HTTP DELETE requests, supporting dynamic URL construction and payload handling, allowing custom headers, supporting various content types and encoding methods, and capturing HTTP responses for further processing.",
-		"In RPA, it is used for data management by removing outdated or unnecessary data from external systems or APIs and for dynamically adjusting actions based on the need to remove specific data.",
-		"In automation testing, it supports API cleanup by sending DELETE requests to endpoints, verifying data removal, and ensuring data deletion functionalities work as expected in regression testing."
+		"The Delete plugin removes data from servers by sending delete requests.",
+		"It lets you choose where to send the request and what information to include.",
+		"It helps keep systems tidy by removing old or unwanted information.",
+		"It can also check that data removal works correctly during testing."
 	]
 }
