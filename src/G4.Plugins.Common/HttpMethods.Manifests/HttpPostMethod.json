@@ -49,20 +49,75 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Network failure",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error"
+					],
+					"expected_result": "The plugin sends an HTTP POST request to the specified URL and returns the server's response.",
+					"notes": "Use the `argument` field to specify the target URL. This example does not include a request body or custom headers.",
+					"use_case": "post_plugin_simple_request",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"Http",
+					"Post"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send a simple HTTP POST request to a specified URL."
+				"### Simple HTTP POST Request",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL using the `argument` field.",
+				"This example does not include a request body or custom headers."
 			],
 			"rule": {
-				"argument": "http://localhost:9002/api/hotels/connect",
+				"$type": "Action",
+				"argument": "http://api.example.com/v1/connect",
 				"pluginName": "Post"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Authentication failure",
+						"Header injection",
+						"Invalid header format",
+						"Invalid URL format",
+						"Missing header parameter",
+						"Network failure",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error"
+					],
+					"expected_result": "The plugin sends an HTTP POST request with the specified Authorization header and returns the server's response.",
+					"notes": "Use the `argument` field with placeholder syntax `{{$ ... }}` to wrap flags. Include headers using the `--Header:Key=Value` flag. Authentication uses the Basic scheme with credentials separated by a colon (`username:password`).",
+					"use_case": "post_plugin_request_with_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"Authentication",
+					"Automation",
+					"Headers",
+					"Http",
+					"Post"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send an HTTP POST request with specified headers."
+				"### HTTP POST Request with Headers",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL and includes headers defined in the `argument` field.",
+				"It sets the `Authorization` header using the Basic scheme with credentials formatted as `username:password`.",
+				"This example does not include a request body."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/connect --Header:Authorization=Basic username:password}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/connect --Header:Authorization=Basic username:password}}",
 				"pluginName": "Post"
 			}
 		},
@@ -71,7 +126,7 @@
 				"Use the `Post` plugin to send an HTTP POST request with a request body and content type."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}",
 				"pluginName": "Post"
 			}
 		},
@@ -80,7 +135,7 @@
 				"Use the `Post` plugin to send an HTTP POST request with a specified encoding."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book --Encoding:UTF8}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Encoding:UTF8}}",
 				"pluginName": "Post"
 			}
 		},
@@ -89,7 +144,7 @@
 				"Use the `Post` plugin to send an HTTP POST request with form fields."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/encoded --ContentType:application/x-www-form-urlencoded --Field:HotelName=Luxury Hotel --Field:RoomType=Suite}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded --ContentType:application/x-www-form-urlencoded --Field:HotelName=Luxury Hotel --Field:RoomType=Suite}}",
 				"pluginName": "Post"
 			}
 		},
@@ -98,7 +153,7 @@
 				"Use the `Post` plugin to send an HTTP POST request and extract a specific attribute from the response."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/encoded}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded}}",
 				"onAttribute": "HotelName",
 				"pluginName": "Post"
 			}
@@ -108,7 +163,7 @@
 				"Use the `Post` plugin to send an HTTP POST request and target elements using XPath."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/encoded}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded}}",
 				"onElement": "//response/HotelName",
 				"pluginName": "Post"
 			}
@@ -118,7 +173,7 @@
 				"Use the `Post` plugin to send an HTTP POST request and apply a regular expression to extract specific data from the response."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/book/encoded}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded}}",
 				"pluginName": "Post",
 				"regularExpression": "\\d{3}"
 			}
