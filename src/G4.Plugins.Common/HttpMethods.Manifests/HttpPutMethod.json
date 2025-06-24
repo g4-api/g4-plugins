@@ -48,78 +48,227 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty or missing body",
+						"Invalid or malformed JSON body",
+						"Invalid URL format",
+						"Network failure",
+						"Non-2xx HTTP response",
+						"Request timeout",
+						"Resource not found",
+						"Unprocessable entity",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP PUT request with the specified body and content type to the specified URL and returns the raw response.",
+					"notes": "This example uses only the `argument` field to specify URL, body, and content type. It does not include response extraction rules.",
+					"use_case": "send_put_request_with_body_and_content_type",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ContentType",
+					"HttpBody",
+					"HttpMethod",
+					"Json",
+					"Put",
+					"RestfulApi"
+				]
+			},
 			"description": [
-				"Use the `Put` plugin to send a simple HTTP PUT request to a specified URL."
+				"### PUT request with request body and content type",
+				"",
+				"Use the `Put` plugin to send an HTTP PUT request with a request body and content type.",
+				"Specify the endpoint URL via the `--Url` option in the `argument` field.",
+				"Provide the request body with the `--Body` option containing a JSON object.",
+				"Set the content type header with the `--ContentType` option."
 			],
 			"rule": {
-				"argument": "http://localhost:9002/api/hotels/12345",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}",
 				"pluginName": "Put"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty or missing body",
+						"Invalid or malformed JSON body",
+						"Invalid URL format",
+						"Network failure",
+						"Non-2xx HTTP response",
+						"Request timeout",
+						"Resource not found",
+						"Unprocessable entity",
+						"Unsupported content type",
+						"Unsupported encoding"
+					],
+					"expected_result": "The plugin sends an HTTP PUT request with the specified body, content type, and encoding to the specified URL and returns the raw response.",
+					"notes": "This example uses only the `argument` field to specify URL, body, content type, and encoding. It does not include response extraction rules.",
+					"use_case": "send_put_request_with_encoding",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ContentType",
+					"Encoding",
+					"HttpBody",
+					"HttpMethod",
+					"Json",
+					"Put",
+					"RestfulApi"
+				]
+			},
 			"description": [
-				"Use the `Put` plugin to send an HTTP PUT request with specified headers."
+				"### PUT request with encoding",
+				"",
+				"Use the `Put` plugin to send an HTTP PUT request with a specified encoding.",
+				"Specify the endpoint URL via the `--Url` option in the `argument` field.",
+				"Provide the request body with the `--Body` option containing a JSON object.",
+				"Set the content type header with the `--ContentType` option.",
+				"Set the request encoding using the `--Encoding` option."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json --Encoding:UTF8}}",
 				"pluginName": "Put"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate form fields",
+						"Empty form field value",
+						"Invalid or malformed form field",
+						"Invalid URL format",
+						"Network failure",
+						"Non-2xx HTTP response",
+						"Request timeout",
+						"Resource not found",
+						"Unprocessable entity",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP PUT request with form fields to the specified URL and returns the raw response.",
+					"notes": "This example uses only the `argument` field to specify URL and form fields. It does not include response extraction rules.",
+					"use_case": "send_put_request_with_form_fields",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"FormFields",
+					"HttpBody",
+					"HttpMethod",
+					"Put",
+					"RestfulApi"
+				]
+			},
 			"description": [
-				"Use the `Put` plugin to send an HTTP PUT request with a request body and content type."
+				"### PUT request with form fields",
+				"",
+				"Use the `Put` plugin to send an HTTP PUT request with form fields.",
+				"Specify the endpoint URL via the `--Url` option in the `argument` field.",
+				"Provide form fields using the `--Field` option with key=value pairs.",
+				"Include multiple form fields by repeating the `--Field` option."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
 				"pluginName": "Put"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute not found",
+						"Element not found",
+						"Empty or missing body",
+						"Extraction failure",
+						"Invalid element path",
+						"Invalid or malformed JSON body",
+						"Invalid URL format",
+						"Network failure",
+						"Non-2xx HTTP response",
+						"Request timeout",
+						"Resource not found",
+						"Unprocessable entity",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP PUT request with the specified body and content type to the specified URL and extracts the value of the specified attribute from the matching response element.",
+					"notes": "This example uses the `argument`, `onElement`, and `onAttribute` fields.",
+					"use_case": "send_put_request_with_response_extraction",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Extraction",
+					"HttpBody",
+					"HttpMethod",
+					"Json",
+					"Put",
+					"RestfulApi"
+				]
+			},
 			"description": [
-				"Use the `Put` plugin to send an HTTP PUT request with a specified encoding."
+				"### PUT request with response extraction",
+				"",
+				"Use the `Put` plugin to send an HTTP PUT request and extract a specific attribute from the response.",
+				"Specify the endpoint URL via the `--Url` option in the `argument` field.",
+				"Provide the request body with the `--Body` option containing a JSON object.",
+				"Set the content type header with the `--ContentType` option.",
+				"Extract the attribute by setting `onElement` to the target element path and `onAttribute` to the attribute name."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Encoding:UTF8}}",
-				"pluginName": "Put"
-			}
-		},
-		{
-			"description": [
-				"Use the `Put` plugin to send an HTTP PUT request with form fields."
-			],
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Field:status=updated}}",
-				"pluginName": "Put"
-			}
-		},
-		{
-			"description": [
-				"Use the `Put` plugin to send an HTTP PUT request and extract a specific attribute from the response."
-			],
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}",
 				"onAttribute": "status",
+				"onElement": "//response",
 				"pluginName": "Put"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate form fields",
+						"Element not found",
+						"Empty form field value",
+						"Extraction failure",
+						"Invalid element path",
+						"Invalid or malformed form field",
+						"Invalid URL format",
+						"Network failure",
+						"Non-2xx HTTP response",
+						"Request timeout",
+						"Resource not found",
+						"Unprocessable entity",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP PUT request with form fields to the specified URL and returns the matching elements from the response using the specified XPath expression.",
+					"notes": "This example uses the `argument` field to specify URL and form fields, and the `onElement` field for element targeting.",
+					"use_case": "send_put_request_targeting_elements",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Extraction",
+					"FormFields",
+					"HttpBody",
+					"HttpMethod",
+					"Put",
+					"RestfulApi"
+				]
+			},
 			"description": [
-				"Use the `Put` plugin to send an HTTP PUT request and target elements using XPath."
+				"### PUT request targeting elements",
+				"",
+				"Use the `Put` plugin to send an HTTP PUT request and target response elements using an XPath expression.",
+				"Specify the endpoint URL and form fields via the `--Url` and `--Field` options in the `argument` field.",
+				"Set the XPath expression for element targeting with the `onElement` field."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
 				"onElement": "//response/status",
 				"pluginName": "Put"
-			}
-		},
-		{
-			"description": [
-				"Use the `Put` plugin to send an HTTP PUT request and apply a regular expression to extract specific data from the response."
-			],
-			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-				"pluginName": "Put",
-				"regularExpression": "\\d{3}"
 			}
 		}
 	],
