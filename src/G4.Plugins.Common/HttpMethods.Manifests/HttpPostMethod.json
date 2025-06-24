@@ -351,6 +351,9 @@
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "HttpMethod",
 	"properties": [
 		{
@@ -385,13 +388,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `Post` plugin facilitates the automation of submitting data to servers or API endpoints through HTTP POST requests, streamlining the process of programmatically controlled data submissions.",
-		"Key features include sending HTTP POST requests, supporting dynamic URL construction and payload handling, allowing custom headers, supporting various content types and encoding methods, and capturing HTTP responses for further processing.",
-		"In RPA, it is used for submitting data to external systems or APIs, dynamically adjusting actions based on the data submitted, and triggering subsequent workflow steps.",
-		"In automation testing, it supports API data creation for testing scenarios, verifying the accuracy of data submissions on the server, and ensuring data submission functionalities work as expected in regression testing."
+		"The Post plugin lets automation workflows submit data to servers or APIs using HTTP POST requests for consistent data submission.",
+		"It supports dynamic URL construction, custom headers, and different content types to handle various payloads easily.",
+		"It captures response details to guide subsequent workflow steps in robotic process automation and to verify data submission in automated tests."
 	]
 }
