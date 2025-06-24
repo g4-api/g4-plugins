@@ -580,6 +580,16 @@
 		},
 		{
 			"description": [
+				"Specifies the attribute whose value should be extracted from an element identified by the `OnElement` expression.",
+				"Works with XML or HTML responses, returning the value of the given attribute.",
+				"Enables precise retrieval of metadata embedded in tags for downstream workflow processing."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		}
+		{
+			"description": [
 				"Targets specific parts of an API response by using XPath or JSONPath expressions.",
 				"Works with both XML and JSON responses.",
 				"Adapts to the response format to locate the right element.",
