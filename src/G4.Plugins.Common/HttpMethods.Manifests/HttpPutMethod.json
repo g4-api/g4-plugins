@@ -270,6 +270,99 @@
 				"onElement": "//response/status",
 				"pluginName": "Put"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate form fields",
+						"Empty form field value",
+						"Invalid JSONPath expression",
+						"Invalid or malformed form field",
+						"Invalid URL format",
+						"JSONPath no match",
+						"Network failure",
+						"Non-2xx HTTP response",
+						"Request timeout",
+						"Resource not found",
+						"Unprocessable entity",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP PUT request with form fields to the specified URL and returns the matching elements from the response JSON using the specified JSONPath expression.",
+					"notes": "This example uses the `argument` field to specify URL and form fields, and the `onJsonPath` field for element targeting.",
+					"use_case": "send_put_request_targeting_elements_jsonpath",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Extraction",
+					"FormFields",
+					"HttpBody",
+					"HttpMethod",
+					"JsonPath",
+					"Put",
+					"RestfulApi"
+				]
+			},
+			"description": [
+				"### PUT request targeting elements with JSONPath",
+				"",
+				"Use the `Put` plugin to send an HTTP PUT request and target response elements using a JSONPath expression.",
+				"Specify the endpoint URL and form fields via the `--Url` and `--Field` options in the `argument` field.",
+				"Set the JSONPath expression for element targeting with the `onJsonPath` field."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
+				"onJsonPath": "$.response.status",
+				"pluginName": "Put"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate form fields",
+						"Empty form field value",
+						"Invalid or malformed form field",
+						"Invalid regular expression",
+						"Invalid URL format",
+						"Network failure",
+						"No regex match",
+						"Non-2xx HTTP response",
+						"Request timeout",
+						"Resource not found",
+						"Unprocessable entity",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP PUT request with form fields to the specified URL and extracts data from the response using the specified regular expression.",
+					"notes": "This example uses the `argument` and `regularExpression` fields.",
+					"use_case": "send_put_request_with_regex_extraction",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Extraction",
+					"FormFields",
+					"HttpBody",
+					"HttpMethod",
+					"Put",
+					"RegExp",
+					"RestfulApi"
+				]
+			},
+			"description": [
+				"### PUT request with regex extraction",
+				"",
+				"Use the `Put` plugin to send an HTTP PUT request and apply a regular expression to extract specific data from the response.",
+				"Specify the endpoint URL and form fields via the `--Url` and `--Field` options in the `argument` field.",
+				"Set the regular expression for data extraction with the `regularExpression` field.",
+				"The regex `\"id\":\\s*\"(\\d+)\"` extracts the numeric ID value from a JSON response."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
+				"pluginName": "Put",
+				"regularExpression": "\\\"id\\\":\\s*\\\"(\\d+)\\\""
+			}
 		}
 	],
 	"key": "Put",
