@@ -6,37 +6,45 @@
 	"categories": [
 		"Http"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Put.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPutMethod.cs"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `Put` plugin is to update or create data on a server or API endpoint by sending an HTTP PUT request. ",
-		"This request is a standard method in the HTTP protocol for making complete updates to a specified resource on the server. ",
-		"The `Put` plugin streamlines the process of making programmatically controlled PUT requests.",
+		"The Put plugin lets automation workflows update or create an entire resource on a server or API with a single HTTP PUT request.",
+		"It follows the standard HTTP protocol for full resource replacement or creation.",
+		"The plugin makes these updates reliable and repeatable in any workflow.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                              |",
-		"|----------------------------|--------------------------------------------------------------------------|",
-		"| Data Update                | Sends HTTP PUT requests to update or create data on servers or APIs.     |",
-		"| Dynamic Requests           | Supports dynamic URL construction and payload handling.                  |",
-		"| Custom Headers             | Allows inclusion of multiple custom headers in the request.              |",
-		"| Content Types and Encoding | Supports various content types and encoding methods for payloads.        |",
-		"| Response Handling          | Captures HTTP response, headers, and status code for further processing. |",
+		"| Feature                  | Description                                                                     |",
+		"|--------------------------|---------------------------------------------------------------------------------|",
+		"| Data Update or Creation  | Sends HTTP PUT requests to fully update or create resources in servers or APIs. |",
+		"| Dynamic Requests         | Builds URLs and request bodies at runtime for flexible integrations.            |",
+		"| Custom Headers           | Adds any number of headers, such as authentication tokens or content types.     |",
+		"| Content Types & Encoding | Supports JSON, XML, form-encoded, and other media types.                        |",
+		"| Response Handling        | Returns status code, headers, and body so workflows can branch on results.      |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                | Description                                                                                                  |",
-		"|----------------------|--------------------------------------------------------------------------------------------------------------|",
-		"| Data Management      | Update or create data in external systems or APIs, such as updating customer records or product information. |",
-		"| Workflow Adjustments | Dynamically adjust actions based on the data updated, triggering subsequent workflow steps.                  |",
+		"| Use Case             | Description                                                                          |",
+		"|----------------------|--------------------------------------------------------------------------------------|",
+		"| Data Management      | Update customer records, product information, or other entities in external systems. |",
+		"| Workflow Adjustments | Trigger next steps based on the outcome of the PUT request or data returned.         |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                              | Description                                                                                                                                                                                                                                                         |",
-		"|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| API Data Update                    | Automated test scripts can leverage the `Put` rule to send PUT requests to API endpoints, updating or creating data needed for testing scenarios. This ensures accurate and up-to-date test data for each test iteration.                                           |",
-		"| Data Integrity Checks              | Automation tests often involve verifying the accuracy of data updates on the server. The `Put` rule, combined with appropriate validation techniques, allows for precise confirmation that the specified data has been accurately updated, ensuring data integrity. |",
-		"| Regression Testing for Data Update | Ensuring that data update functionalities continue to work as expected after updates or changes to external systems.                                                                                                                                                |"
+		"| Use Case              | Description                                                                     |",
+		"|-----------------------|---------------------------------------------------------------------------------|",
+		"| API Data Setup        | Create or update test data with PUT requests before executing test suites.      |",
+		"| Data Integrity Checks | Verify that a PUT request correctly replaced the target resource on the server. |",
+		"| Regression Testing    | Ensure update operations continue to behave after system changes.               |"
 	],
 	"examples": [
 		{
@@ -120,34 +128,39 @@
 	"outputParameters": [
 		{
 			"description": [
-				"Holds the results of the HTTP request after `OnElement`, `OnAttribute`, and `RegularExpression` have been applied. ",
-				"If none of these properties are provided, then the entire response body is stored in the `HttpResponse` parameter.  ",
-				"",
-				"This means that the `HttpResponse` parameter captures the content resulting from any data extraction or processing performed by the specified properties (`OnElement`, `OnAttribute`, `RegularExpression`). ",
-				"It provides a way to access the modified or processed content of the HTTP response within the automation workflow."
+				"Holds the content returned from an HTTP request after any specified extraction or processing rules have been applied.",
+				"Provides a way to work with the processed response data instead of the raw body.",
+				"Enables automation workflows to access the exact information they need from the HTTP response."
 			],
-			"name": "HttpResponse"
+			"name": "HttpResponse",
+			"type": "Any"
 		},
 		{
 			"description": [
-				"Holds the HTTP response headers obtained from the HTTP PUT request. ",
-				"These headers provide additional information about the server's response and are sent along with the actual content of the response."
+				"Holds the HTTP response headers returned from an HTTP request.",
+				"Contains key-value pairs that provide metadata about the response such as content type, date, and length.",
+				"Enables workflows to inspect response details for logging or conditional logic."
 			],
-			"name": "HttpResponseHeaders"
+			"name": "HttpResponseHeaders",
+			"type": "Any"
 		},
 		{
 			"description": [
-				"Holds the HTTP status code obtained from the HTTP PUT request. ",
-				"The HTTP status code is a three-digit numeric code returned by the server indicating the outcome of the request."
+				"Holds the HTTP status code returned from an HTTP request.",
+				"Represents the outcome of the request using a three-digit numeric code.",
+				"Enables automation flows to check for success or failure of the HTTP operation.",
+				"Supports error handling in workflows based on the status code value."
 			],
-			"name": "HttpStatusCode"
+			"name": "HttpStatusCode",
+			"type": "Any"
 		}
 	],
 	"parameters": [
 		{
 			"description": [
-				"Specifies the payload or data that you want to include in the body of the request. ",
-				"The request body is typically used to send data to the server when making HTTP requests, especially for operations like `POST` or `PUT`."
+				"Defines the data payload sent with a DELETE request.",
+				"Includes extra details the server may need to carry out the deletion.",
+				"Helps ensure the API has the context required to process the delete operation."
 			],
 			"mandatory": false,
 			"name": "Body",
@@ -155,12 +168,9 @@
 		},
 		{
 			"description": [
-				"Specifies the type of data that is included in the body of the request. ",
-				"It indicates the format or encoding of the content being sent, allowing the server to interpret and process the data appropriately.  ",
-				"",
-				"The ContentType parameter is crucial because it tells the server how to parse and handle the incoming data. ",
-				"Different types of data, such as JSON, XML, form-urlencoded, or plain text, have different syntax and structures. ",
-				"By specifying the content type, you inform the server about the expected format of the data in the request body."
+				"Indicates the format of data sent in the request body.",
+				"Helps the server understand how to parse and handle the payload.",
+				"Supports formats such as JSON, XML, form data, and plain text."
 			],
 			"mandatory": false,
 			"name": "ContentType",
@@ -168,91 +178,92 @@
 			"values": [
 				{
 					"description": [
-						"JavaScript Object Notation (JSON) is a lightweight data interchange format. ",
-						"It is easy for humans to read and write and easy for machines to parse and generate. ",
-						"JSON is often used for representing structured data in web applications."
+						"Represents JSON data encoded as JavaScript Object Notation.",
+						"Allows for structured data that is easy to read and parse."
 					],
 					"name": "application/json"
 				},
 				{
 					"description": [
-						"This content type is a generic binary format. ",
-						"It is often used when the content type is not known or when transferring arbitrary binary data that doesn't fit into other more specific categories."
+						"Denotes a generic binary data stream when the format is unknown.",
+						"Enables transferring files or data without predefined structure."
 					],
 					"name": "application/octet-stream"
 				},
 				{
 					"description": [
-						"Portable Document Format (PDF) is a file format that captures all the elements of a printed document as an electronic image. ",
-						"It is widely used for documents intended for printing, such as brochures, manuals, and forms."
+						"Identifies Portable Document Format files for documents and forms.",
+						"Ensures consistent rendering of printable content."
 					],
 					"name": "application/pdf"
 				},
 				{
 					"description": [
-						"Extensible Markup Language (XML) is a markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable. ",
-						"It is often used for representing structured data in a generic way."
+						"Marks XML data formatted with Extensible Markup Language.",
+						"Provides a generic way to represent structured data."
 					],
 					"name": "application/xml"
 				},
 				{
 					"description": [
-						"MP3 is a widely used audio compression format that allows for the storage of music and audio files with relatively high audio quality in a compact size."
+						"Specifies MPEG audio encoded in MP3 format.",
+						"Offers compressed audio suitable for music and podcasts."
 					],
 					"name": "audio/mpeg"
 				},
 				{
 					"description": [
-						"JPEG (Joint Photographic Experts Group) is a commonly used method of lossy compression for digital images. ",
-						"It is suitable for photographs and images with complex colors."
+						"Indicates JPEG images compressed for photographs.",
+						"Balances image quality with file size."
 					],
 					"name": "image/jpeg"
 				},
 				{
 					"description": [
-						"PNG (Portable Network Graphics) is a raster graphics file format that supports lossless data compression. ",
-						"It is commonly used for images on the web and supports transparent backgrounds."
+						"Signals PNG images with lossless compression.",
+						"Supports transparent backgrounds for web graphics."
 					],
 					"name": "image/png"
 				},
 				{
 					"description": [
-						"This content type is used when submitting forms that contain files or binary data along with other text form fields. ",
-						"It allows for the encapsulation of multiple sets of data in a single body."
+						"Used for form submissions that include files and text fields.",
+						"Allows combining different data types in one request."
 					],
 					"name": "multipart/form-data"
 				},
 				{
 					"description": [
-						"Cascading Style Sheets (CSS) is a style sheet language used for describing the look and formatting of a document written in HTML. ",
-						"It defines styles for elements, including layout, colors, and fonts."
+						"Defines stylesheet content for web page styling in CSS.",
+						"Controls layout, colors, and fonts of HTML documents."
 					],
 					"name": "text/css"
 				},
 				{
 					"description": [
-						"Hypertext Markup Language (HTML) is used to structure content on the web. ",
-						"It provides a way to create structured documents by denoting structural semantics for text such as headings, paragraphs, lists, links, quotes, and other items."
+						"Represents HTML content to structure web pages.",
+						"Defines elements like headings, paragraphs, and links."
 					],
 					"name": "text/html"
 				},
 				{
 					"description": [
-						"This content type is used for plain, unformatted text. ",
-						"It is often used for simple textual data that doesn't require any special formatting or styling."
+						"Denotes plain text without special formatting.",
+						"Serves simple messages or logs in text form."
 					],
 					"name": "text/plain"
 				},
 				{
 					"description": [
-						"This content type is used for sending form data in the body of an HTTP request. ",
-						"Data is URL-encoded, where special characters are replaced with `%` followed by two hexadecimal digits."
+						"Encodes URL-encoded form data in key-value pairs.",
+						"Pairs are separated by ampersands and percent-encoded if needed."
 					],
 					"name": "application/x-www-form-urlencoded"
 				},
 				{
 					"description": [
-						"MP4 (MPEG-4 Part 14) is a multimedia container format commonly used for storing video and audio, as well as other data such as subtitles and still images."
+						"Specifies MP4 multimedia container for video and audio.",
+						"Supports subtitles and still images within the file."
 					],
 					"name": "video/mp4"
 				}
@@ -260,65 +271,66 @@
 		},
 		{
 			"description": [
-				"Specifies how text data in the request body is represented as binary code, ensuring accurate interpretation by both the sender and receiver."
+				"Explains how text characters are converted to binary code for transmission.",
+				"Ensures the data is encoded and decoded correctly by both sender and receiver.",
+				"Allows different encoding standards to maintain compatibility across systems."
 			],
 			"name": "Encoding",
 			"type": "String",
 			"values": [
 				{
 					"description": [
-						"ASCII is a basic character encoding standard that represents characters using 7 bits, providing codes for 128 characters.",
-						"It includes standard English letters, digits, and some special characters.",
-						"ASCII is a subset of UTF-8, and UTF-8 is designed to be backward-compatible with ASCII.",
-						"It forms the foundation for many character encodings and is widely used, especially in English-language content."
+						"Uses 7-bit codes to represent 128 common characters such as letters, digits, and symbols.",
+						"Forms the basis for many modern text encoding systems.",
+						"Remains compatible with Unicode formats like UTF-8."
 					],
 					"name": "ASCII"
 				},
 				{
 					"description": [
-						"BigEndianUnicode is a specific form of UTF-16 where the most significant byte is stored first.",
-						"It is used in specific platforms, particularly those employing big-endian byte order.",
-						"Represents characters using 16-bit code units, with a specific byte order in storage."
+						"Stores each character in 16 bits with the most significant byte first.",
+						"Commonly used on platforms that follow big-endian byte ordering.",
+						"Ensures consistent decoding when big-endian formats are required."
 					],
 					"name": "BigEndianUnicode"
 				},
 				{
 					"description": [
-						"ISO-8859-1, also known as Latin-1, covers a subset of characters from the Latin alphabet, including many Western European languages.",
-						"It uses a fixed single-byte encoding.",
-						"While not as versatile as UTF-8 for handling diverse character sets, it is used in certain contexts, especially when compatibility with legacy systems is a concern."
+						"Also called ISO-8859-1 and covers many Western European languages.",
+						"Uses one byte per character for a total of 256 symbols.",
+						"Often used for legacy data but supports fewer characters than Unicode."
 					],
 					"name": "Latin1"
 				},
 				{
 					"description": [
-						"Unicode is a comprehensive character encoding standard assigning a unique code point to every character.",
-						"It provides a universal representation of characters from diverse languages and scripts.",
-						"Enables global character representation, fostering internationalization and multilingual content in various applications."
+						"Assigns a unique code point to every character in most writing systems.",
+						"Supports global text representation in a single standard.",
+						"Forms the foundation for encodings like UTF-8 and UTF-16."
 					],
 					"name": "Unicode"
 				},
 				{
 					"description": [
-						"UTF-7 is a variable-length encoding designed for environments restricting the use of 8-bit data.",
-						"Although less common today, it finds applications in email.",
-						"Utilizes a 7-bit code, making it suitable for environments with limitations on 8-bit data transmission."
+						"Encodes text using only 7-bit ASCII characters for safe transmission in restricted systems.",
+						"Was originally designed for email use where 8-bit data could be problematic.",
+						"Rarely used today because it is less efficient than modern encodings."
 					],
 					"name": "UTF7"
 				},
 				{
 					"description": [
-						"UTF-8 is the most widely used character encoding on the web.",
-						"It can represent virtually all characters in the Unicode character set, making it suitable for internationalization and multilingual content.",
-						"Each character is represented by a variable number of bytes, with ASCII characters represented by a single byte."
+						"Variable-length encoding that uses one to four bytes per character.",
+						"Covers all Unicode code points and is backward-compatible with ASCII.",
+						"Widely adopted as the standard text format on the web."
 					],
 					"name": "UTF8"
 				},
 				{
 					"description": [
-						"UTF-32 uses a fixed 32-bit code point to represent each character.",
-						"It offers a straightforward mapping of characters but may be less space-efficient compared to UTF-8 and UTF-16.",
-						"Provides a direct correspondence between code points and characters, ensuring simplicity in character representation."
+						"Uses a fixed four bytes for each character’s code point.",
+						"Simplifies text processing by providing a constant width per character.",
+						"Consumes more memory but offers straightforward character indexing."
 					],
 					"name": "UTF32"
 				}
@@ -326,37 +338,47 @@
 		},
 		{
 			"description": [
-				"Specifies a form field that you include in the body of the request when making a `POST` or `PUT` request with `form-urlencoded` data."
+				"Defines a form field to include in the request body using key=value pairs.",
+				"Encodes each field correctly so the server can read the data.",
+				"Lets you send extra parameters when the server requires them during a delete operation."
 			],
 			"mandatory": false,
 			"name": "Field",
-			"type": "Key/Value"
+			"type": "KeyValue"
 		},
 		{
 			"description": [
-				"Allows the inclusion of multiple headers in the HTTP PUT request. ",
-				"Each header is specified as a key-value pair, separated by an equal sign. ",
-				"Multiple headers can be added using the syntax `{{$ --Header:header1name=header1value --Header:header2name=header2value ...}}`."
+				"Enables adding custom headers to an HTTP DELETE request.",
+				"Each header uses a name=value format so the server can read it correctly.",
+				"Allows you to repeat the parameter to include multiple headers.",
+				"Custom headers let you send extra information like authentication tokens or tracing data."
 			],
 			"mandatory": false,
 			"name": "Header",
-			"type": "Key/Value"
+			"type": "KeyValue"
 		},
 		{
 			"description": [
-				"Specifies the target URL for the HTTP PUT request."
+				"Defines the web address where the delete request is sent.",
+				"Tells the server which resource should be removed.",
+				"Ensures the correct endpoint is targeted for deletion.",
+				"Using an accurate URL helps prevent errors or deleting the wrong resource."
 			],
 			"mandatory": false,
 			"name": "Url",
-			"type": "String"
+			"type": "Uri|String"
 		}
+	],
+	"platforms": [
+		"Any"
 	],
 	"pluginType": "HttpMethod",
 	"properties": [
 		{
 			"description": [
-				"Specifies the details for the HTTP PUT request. ",
-				"It includes a template or variable structure `{{$...}}` to allow dynamic values."
+				"Specifies where to send the HTTP PUT request and what data to include.",
+				"Allows dynamic values through templates or variable placeholders in the format {{$...}}.",
+				"Makes it possible to customize the request URL or payload at runtime."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -364,8 +386,20 @@
 		},
 		{
 			"description": [
-				"Used to target elements using either XPath or JSONPath expressions, depending on the type of response the API returns (XML or JSON). ",
-				"This flexibility allows the rule to handle different response formats appropriately."
+				"Specifies the attribute whose value should be extracted from an element identified by the `OnElement` expression.",
+				"Works with XML or HTML responses, returning the value of the given attribute.",
+				"Enables precise retrieval of metadata embedded in tags for downstream workflow processing."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Targets specific parts of an API response by using XPath or JSONPath expressions.",
+				"Works with both XML and JSON responses.",
+				"Adapts to the response format to locate the right element.",
+				"Helps ensure the correct data is extracted regardless of the API’s output format."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -373,8 +407,10 @@
 		},
 		{
 			"description": [
-				"Used for pattern matching and extraction of specific data from a text response. ",
-				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP PUT request."
+				"Defines a pattern for capturing and extracting specific data from a text response.",
+				"Uses standard regular expression syntax to match and retrieve the parts you need.",
+				"Enables precise extraction of values embedded in the response.",
+				"Helps automate parsing of complex text outputs."
 			],
 			"mandatory": false,
 			"name": "RegularExpression",
@@ -385,13 +421,8 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `Put` plugin facilitates data updates or creation on servers or APIs by sending HTTP PUT requests, streamlining the process of programmatically controlled updates or creations.",
-		"Key features include sending HTTP PUT requests, supporting dynamic URL construction and payload handling, allowing custom headers, supporting various content types and encoding methods, and capturing HTTP responses for further processing.",
-		"In RPA, it is used for updating or creating data in external systems or APIs, such as updating customer records or product information, and for dynamically adjusting actions based on the data updated.",
-		"In automation testing, it supports API data updates or creation for testing scenarios, verifying the accuracy of data updates on the server, and ensuring data update functionalities work as expected in regression testing."
+		"The Put plugin lets automation workflows create or replace data on any endpoint with an HTTP PUT request.",
+		"It builds URLs and payloads on the fly, adds custom headers, and returns status, headers, and body so other steps can react."
 	]
 }
