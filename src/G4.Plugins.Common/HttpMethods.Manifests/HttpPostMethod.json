@@ -6,6 +6,14 @@
 	"categories": [
 		"Http"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Post.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPostMethod.cs"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
