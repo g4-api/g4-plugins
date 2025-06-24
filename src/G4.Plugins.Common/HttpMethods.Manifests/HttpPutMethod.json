@@ -11,6 +11,67 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Put.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPutMethod.cs"
+			},
+			"rag": {
+				"description": "The Put HTTP-method plugin validates payloads, supports dynamic URLs, headers, encodings, and extraction rules, then surfaces status codes, headers, and parsed content so automations can reliably update or create resources and react to any API response without manual checks.",
+				"qa": [
+					{
+						"question": "What core function does the Put plugin provide?",
+						"answer": "It sends HTTP PUT requests so your automation can create or fully replace data on any API endpoint."
+					},
+					{
+						"question": "What key features and parameters does the Put plugin support?",
+						"answer": "Dynamic URLs, body, headers, content-type selection, encoding options, form fields, and response extraction via XPath, JSONPath, or regex."
+					},
+					{
+						"question": "How does the Put plugin integrate into a G4 automation workflow?",
+						"answer": "It runs as an HttpMethod step; later steps branch on its outputs (HttpStatusCode, HttpResponseHeaders, HttpResponse) to continue, roll back, or retry."
+					},
+					{
+						"question": "What are best practices for using the Put plugin in workflows?",
+						"answer": "Validate URLs, set explicit content types, handle non-2xx status codes with conditional logic, and log the three response outputs for audit and retries."
+					},
+					{
+						"question": "Which rule fields allow data extraction after a PUT request?",
+						"answer": "Use OnElement (XPath or JSONPath) for nodes, OnAttribute for attribute values, and RegularExpression for text pattern captures."
+					},
+					{
+						"question": "Who authored the Put plugin?",
+						"answer": "Roei Sabag — https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What manifest version does this plugin use?",
+						"answer": "4"
+					},
+					{
+						"question": "What plugin type is declared?",
+						"answer": "HttpMethod"
+					},
+					{
+						"question": "Which category is listed for this plugin?",
+						"answer": "Http"
+					},
+					{
+						"question": "What is the unique key of this plugin?",
+						"answer": "Put"
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "Any"
+					},
+					{
+						"question": "What does the manifest summary say about the Put plugin?",
+						"answer": "It lets workflows create or replace data on any endpoint with an HTTP PUT request."
+					},
+					{
+						"question": "Where can I find the Put plugin’s code and documentation?",
+						"answer": "Code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPutMethod.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Put.md"
+					},
+					{
+						"question": "How does the Put plugin surface errors or unusual responses?",
+						"answer": "It returns HttpStatusCode, HttpResponseHeaders, and parsed HttpResponse so workflows can branch or retry on timeouts, network failures, or server errors."
+					}
+				]
 			}
 		}
 	},
