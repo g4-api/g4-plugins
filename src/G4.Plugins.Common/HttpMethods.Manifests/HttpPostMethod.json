@@ -122,19 +122,80 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Content type unsupported",
+						"Invalid JSON format",
+						"Invalid URL format",
+						"Large payload",
+						"Network failure",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error"
+					],
+					"expected_result": "The plugin sends an HTTP POST request with the specified JSON body and Content-Type header, then returns the server's response.",
+					"notes": "Wrap flags in `{{$ ... }}`. Use `--Body:<JSON>` to supply a JSON-formatted request body. Use `--ContentType:<type>` to set the Content-Type header.",
+					"use_case": "post_plugin_request_with_body_and_content_type",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"ContentType",
+					"Http",
+					"Json",
+					"Post",
+					"RequestBody"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send an HTTP POST request with a request body and content type."
+				"### HTTP POST Request with Body and Content Type",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL using the `argument` field.",
+				"It includes a JSON-formatted request body and sets the `Content-Type` header accordingly.",
+				"This example does not include additional custom headers."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}",
 				"pluginName": "Post"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument encoding unsupported",
+						"Invalid JSON format",
+						"Invalid URL format",
+						"Network failure",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error"
+					],
+					"expected_result": "The plugin sends an HTTP POST request to the specified URL with the given JSON body and encoding, then returns the server's response.",
+					"notes": "Wrap flags in `{{$ ... }}`. Use `--Url:<url>` to set the URL, `--Body:<JSON>` to specify the JSON body, and `--Encoding:<encoding>` to set the request encoding (e.g., UTF8).",
+					"use_case": "post_plugin_request_with_encoding",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"Encoding",
+					"Http",
+					"Json",
+					"Post",
+					"RequestBody"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send an HTTP POST request with a specified encoding."
+				"### HTTP POST Request with Specified Encoding",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL using the flags in the `argument` field.",
+				"It includes a JSON-formatted request body and uses the specified text encoding for the request.",
+				"This example sets the encoding to UTF8 and does not include custom headers."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Encoding:UTF8}}",
 				"pluginName": "Post"
 			}
