@@ -287,23 +287,86 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Extraction path not found",
+						"Invalid JSON format",
+						"Invalid URL format",
+						"Multiple matching elements",
+						"Network failure",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error",
+						"Unsupported XPath expression"
+					],
+					"expected_result": "The plugin sends an HTTP POST request with the specified JSON body, selects the element(s) matching the XPath, and returns their text content.",
+					"notes": "Wrap flags in `{{$ ... }}`. Use `--Url:<url>` to set the URL and `--Body:<JSON>` to supply the JSON body. Use `onElement` to specify the XPath selector for targeting elements.",
+					"use_case": "post_plugin_request_with_element_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"ElementExtraction",
+					"Http",
+					"Post",
+					"ResponseParsing",
+					"XPath"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send an HTTP POST request and target elements using XPath."
+				"### HTTP POST Request with XPath Element Targeting",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL with the provided JSON body.",
+				"It selects elements matching the XPath `//response/HotelName` using the `onElement` setting and returns their text content.",
+				"This example uses no custom headers or content type flags."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
 				"onElement": "//response/HotelName",
 				"pluginName": "Post"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSON format",
+						"Invalid regex pattern",
+						"Invalid URL format",
+						"Multiple matches in response",
+						"Network failure",
+						"No regex match found",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error"
+					],
+					"expected_result": "The plugin sends an HTTP POST request with the given JSON body, applies the regex to the response text, and returns the first captured booking reference.",
+					"notes": "Wrap flags in `{{$ ... }}`. Use `regularExpression` to specify a regex with one capturing group. The plugin returns the first group match.",
+					"use_case": "post_plugin_request_with_regex_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"Http",
+					"Post",
+					"RegexExtraction",
+					"ResponseParsing"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send an HTTP POST request and apply a regular expression to extract specific data from the response."
+				"### HTTP POST Request with Regex Extraction",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL with the provided JSON body.",
+				"It applies the regular expression `<bookingReference>([A-Z0-9]{6})</bookingReference>` to the response text and returns the first captured group, which represents the booking reference code.",
+				"This example does not include custom headers or content type flags."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
 				"pluginName": "Post",
-				"regularExpression": "\\d{3}"
+				"regularExpression": "<bookingReference>([A-Z0-9]{6})</bookingReference>"
 			}
 		}
 	],
