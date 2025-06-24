@@ -11,6 +11,67 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Post.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPostMethod.cs"
+			},
+			"rag": {
+				"description": "The Post HTTP-method plugin validates payloads, supports dynamic URLs, headers, encodings, and extraction rules, then surfaces status codes, headers, and parsed content so automations can reliably submit data and react to any API response without manual checks.",
+				"qa": [
+					{
+						"question": "What core function does the Post plugin provide?",
+						"answer": "It sends HTTP POST requests so your automation can create or update data on any API endpoint."
+					},
+					{
+						"question": "What key features and parameters does the Post plugin support?",
+						"answer": "Dynamic URLs, body, headers, content-type selection, encoding options, form fields, and response extraction via XPath, JSONPath, or regex."
+					},
+					{
+						"question": "Where can I find the Post plugin’s code and documentation?",
+						"answer": "Code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPostMethod.cs  •  Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Post.md"
+					},
+					{
+						"question": "What are best practices for using the Post plugin in workflows?",
+						"answer": "Validate URLs, set explicit content types, handle non-200 status codes, and log HttpResponse, HttpResponseHeaders, and HttpStatusCode for audit and retries."
+					},
+					{
+						"question": "Which rule fields allow data extraction after a POST request?",
+						"answer": "Use OnElement for XPath/JSONPath targeting, OnAttribute for attribute values, and RegularExpression for text pattern captures."
+					},
+					{
+						"question": "What purpose does the manifest description section specify for the plugin?",
+						"answer": "The Post plugin lets your automation workflows send data to a server or API with an HTTP POST request. It uses the standard POST method to transmit information for processing by a specified resource."
+					},
+					{
+						"question": "What manifest version does this plugin use?",
+						"answer": "4"
+					},
+					{
+						"question": "Who authored the plugin?",
+						"answer": "Roei Sabag — https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What plugin type is declared?",
+						"answer": "HttpMethod"
+					},
+					{
+						"question": "Which category is listed for this plugin?",
+						"answer": "Http"
+					},
+					{
+						"question": "What is the unique key of this plugin?",
+						"answer": "Post"
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "Any"
+					},
+					{
+						"question": "What does the manifest summary highlight about the plugin?",
+						"answer": "It lets workflows submit data via HTTP POST, supports dynamic URLs, custom headers, various content types, and captures response details to guide subsequent steps and verify data submission."
+					},
+					{
+						"question": "How does the Post plugin surface errors or unusual responses?",
+						"answer": "It returns HttpStatusCode, HttpResponseHeaders, and parsed HttpResponse so workflows can branch or retry on timeouts, network failures, or server errors."
+					}
+				]
 			}
 		}
 	},
