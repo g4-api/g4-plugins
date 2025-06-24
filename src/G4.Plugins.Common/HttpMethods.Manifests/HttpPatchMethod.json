@@ -11,6 +11,67 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Patch.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPatchMethod.cs"
+			},
+			"rag": {
+				"description": "The Patch plugin enables automation workflows to apply partial updates using HTTP PATCH requests. It enforces parameter and payload validation, supports dynamic URL, header, body, and encoding configurations, and maintains workflow reliability through built-in response extraction and comprehensive error handling.",
+				"qa": [
+					{
+						"question": "What does the Patch plugin do?",
+						"answer": "The Patch plugin applies partial updates to resources by sending HTTP PATCH requests, allowing workflows to update only necessary fields rather than entire data payloads."
+					},
+					{
+						"question": "What are the key features and configurable parameters of the Patch plugin?",
+						"answer": "It supports dynamic URL building, customizable headers, various body formats, encoding options, and response extraction rules, enabling flexible partial updates. Key parameters include Argument, Body, ContentType, Encoding, Field, Header, Url, OnElement, OnAttribute, OnJsonPath, and RegularExpression."
+					},
+					{
+						"question": "How is the Patch plugin integrated into automation workflows?",
+						"answer": "It installs under the HttpMethod plugin type in G4's automation engine and is invoked with Action rules specifying pluginName \"Patch\" and options like --Url and --Body in the Argument. Source code is in HttpPatchMethod.cs and documentation is in docs/HttpMethods/Patch.md on GitHub."
+					},
+					{
+						"question": "What are the best practices for using the Patch plugin?",
+						"answer": "Use precise endpoint URLs, validate JSON or form payloads before sending, handle edge cases like invalid data or network errors, capture HTTP status codes and headers, and apply extraction rules only when needed to maintain workflow reliability and clarity."
+					},
+					{
+						"question": "What is the rule/schema structure for defining a Patch action?",
+						"answer": "Actions use a JSON object with \"$type\": \"Action\", pluginName: \"Patch\", and an Argument property containing options like --Url, --Body, --ContentType, etc. Optional properties OnElement, OnAttribute, OnJsonPath, and RegularExpression enable response data extraction per manifestVersion 4 schema."
+					},
+					{
+						"question": "Who is the author of the Patch plugin?",
+						"answer": "The plugin author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What categories is the Patch plugin listed under?",
+						"answer": "It is categorized under \"Http\"."
+					},
+					{
+						"question": "What is the key identifier for the Patch plugin?",
+						"answer": "The plugin key is \"Patch\"."
+					},
+					{
+						"question": "Which manifest version does the Patch plugin use?",
+						"answer": "It uses manifestVersion 4."
+					},
+					{
+						"question": "What pluginType is specified for the Patch plugin?",
+						"answer": "The pluginType is \"HttpMethod\"."
+					},
+					{
+						"question": "Which platforms does the Patch plugin support?",
+						"answer": "It supports the \"Any\" platform."
+					},
+					{
+						"question": "What is the summary of the Patch plugin?",
+						"answer": "The summary explains that it applies partial updates via HTTP PATCH, supports dynamic URL building, content handling, and custom headers, and enables workflows to confirm updates without replacing entire records."
+					},
+					{
+						"question": "Where can I find the source code and documentation for the Patch plugin?",
+						"answer": "Source code is in HttpPatchMethod.cs at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpPatchMethod.cs and documentation is in docs/HttpMethods/Patch.md at https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Patch.md."
+					},
+					{
+						"question": "How does the Patch plugin handle errors and edge cases?",
+						"answer": "It includes built-in handling for edge cases like empty or invalid bodies, malformed URLs, network failures, non-2xx responses, timeouts, resource not found, and unsupported content types or encodings. Workflows can inspect HttpStatusCode and HttpResponseHeaders to implement custom error logic."
+					}
+				]
 			}
 		}
 	},
