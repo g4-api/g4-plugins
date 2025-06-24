@@ -201,21 +201,88 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty field values",
+						"Form encoding errors",
+						"Invalid content type",
+						"Invalid field format",
+						"Invalid URL format",
+						"Large form data",
+						"Network failure",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error"
+					],
+					"expected_result": "The plugin sends an HTTP POST request with form fields encoded as application/x-www-form-urlencoded and returns the server's response.",
+					"notes": "Wrap flags in `{{$ ... }}`. Use `--Url:<url>` to set the URL, `--ContentType:<type>` to set the Content-Type header, and `--Field:<key>=<value>` to add form fields.",
+					"use_case": "post_plugin_request_with_form_fields",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"FormFields",
+					"Http",
+					"Post",
+					"RequestBody",
+					"UrlEncoded"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send an HTTP POST request with form fields."
+				"### HTTP POST Request with Form Fields",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL with form fields encoded in the request body.",
+				"It sets the `Content-Type` header to application/x-www-form-urlencoded and adds fields with the `--Field` flag.",
+				"This example does not include a JSON body."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded --ContentType:application/x-www-form-urlencoded --Field:HotelName=Luxury Hotel --Field:RoomType=Suite}}",
 				"pluginName": "Post"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Extraction path not found",
+						"Invalid JSON format",
+						"Invalid URL format",
+						"Missing attribute",
+						"Multiple matching elements",
+						"Network failure",
+						"Non-200 HTTP response",
+						"Request timeout",
+						"Server error"
+					],
+					"expected_result": "The plugin sends an HTTP POST request with the specified JSON body, extracts the \"status\" attribute from the <response> element using XPath, and returns its value.",
+					"notes": "Use `onElement` to set the XPath selector (e.g. `//response`) and `onAttribute` to specify which attribute to extract. Wrap flags in `{{$ ... }}` and supply the JSON body with `--Body:`.",
+					"use_case": "post_plugin_request_with_attribute_extraction",
+					"version": "1.0"
+				},
+				"labels": [
+					"AttributeExtraction",
+					"Automation",
+					"Http",
+					"Post",
+					"ResponseParsing",
+					"XPath"
+				]
+			},
 			"description": [
-				"Use the `Post` plugin to send an HTTP POST request and extract a specific attribute from the response."
+				"### HTTP POST Request with Attribute Extraction",
+				"",
+				"The `Post` plugin sends an HTTP POST request to the specified URL with the provided JSON body.",
+				"It extracts the `status` attribute from the element selected by the XPath `//response` using the `onElement` and `onAttribute` settings.",
+				"It returns the value of that attribute.",
+				"This example uses no custom headers or content type flags."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded}}",
-				"onAttribute": "HotelName",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
+				"onAttribute": "status",
+				"onElement": "//response",
 				"pluginName": "Post"
 			}
 		},
@@ -224,7 +291,7 @@
 				"Use the `Post` plugin to send an HTTP POST request and target elements using XPath."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
 				"onElement": "//response/HotelName",
 				"pluginName": "Post"
 			}
@@ -234,7 +301,7 @@
 				"Use the `Post` plugin to send an HTTP POST request and apply a regular expression to extract specific data from the response."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded}}",
+				"argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
 				"pluginName": "Post",
 				"regularExpression": "\\d{3}"
 			}
