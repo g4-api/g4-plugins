@@ -546,7 +546,7 @@
 	"platforms": [
 		"Any"
 	],
-	"pluginType": "Action",
+	"pluginType": "Switch",
 	"properties": [
 		{
 			"description": [
