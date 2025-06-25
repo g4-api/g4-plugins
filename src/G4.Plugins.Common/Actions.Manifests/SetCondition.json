@@ -349,7 +349,7 @@
 	"platforms": [
 		"Any"
 	],
-	"pluginType": "Switch",
+	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
