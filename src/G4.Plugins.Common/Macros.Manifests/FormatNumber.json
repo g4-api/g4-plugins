@@ -1053,8 +1053,16 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the culture used for formatting the number. If not specified, defaults to InvariantCulture.",
-				"For a list of .NET culture codes, refer to: [List of .NET Culture Country Codes](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)"
+				"Culture determines how numbers are formatted according to regional settings.",
+				"Different culture codes change decimal and group separators to match local conventions.",
+				"Using the correct culture code helps ensure numbers appear correctly for users in various regions.",
+				"If no culture is specified, the system uses the invariant culture to provide a consistent format."
+			],
+			"links": [
+				{
+					"link": "https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/",
+					"title": "List of .NET Culture Country Codes"
+				}
 			],
 			"mandatory": false,
 			"name": "Culture",
@@ -1062,7 +1070,9 @@
 		},
 		{
 			"description": [
-				"Specifies the number to be formatted."
+				"Number specifies the numeric value to be formatted into a displayable string.",
+				"Formatting the number ensures it appears correctly for end users.",
+				"Valid numeric input prevents errors during the formatting process."
 			],
 			"mandatory": true,
 			"name": "Number",
@@ -1071,10 +1081,20 @@
 		{
 			"default": "None",
 			"description": [
-				"Specifies the format string used for formatting the number.",
-				"If not specified or set to 'None', the original number is returned.",
-				"For more information on standard numeric format strings, refer to [this link](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings).",
-				"For more information on custom numeric format strings, refer to [this link](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings)."
+				"Format defines how numeric values are represented as text.",
+				"Using a format string lets you control decimal places, grouping separators, and overall layout.",
+				"Applying the correct format string ensures numbers appear in the expected style for users.",
+				"If no format string is provided, the original numeric value is returned without alteration."
+			],
+			"links": [
+				{
+					"title": "Standard Numeric Format Strings",
+					"link": "https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings"
+				},
+				{
+					"title": "Custom Numeric Format Strings",
+					"link": "https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings"
+				}
 			],
 			"mandatory": false,
 			"name": "Format",
@@ -1083,8 +1103,10 @@
 		{
 			"default": "Integer",
 			"description": [
-				"Specifies the type of the number (e.g., 'Byte', 'Double', 'Integer', 'Long', 'SByte'). ",
-				"If not specified, defaults to 'Integer'."
+				"NumberType determines the numeric data type used for processing and storage.",
+				"Selecting the appropriate type ensures values have the correct range and precision.",
+				"Preventing errors during conversion improves reliability when handling numeric inputs.",
+				"Leaving it unset uses Integer by default to handle whole numbers safely."
 			],
 			"mandatory": false,
 			"name": "NumberType",
@@ -1092,46 +1114,54 @@
 			"values": [
 				{
 					"description": [
-						"An 8-bit unsigned integer."
+						"Byte represents an 8-bit unsigned integer that holds values from 0 to 255.",
+						"Using Byte reduces memory usage when only small positive whole numbers are needed."
 					],
 					"name": "Byte"
 				},
 				{
 					"description": [
-						"A double-precision floating point number."
+						"Double provides a 64-bit floating point number with high precision for decimal values.",
+						"It supports large and fractional numbers for calculations requiring detail."
 					],
 					"name": "Double"
 				},
 				{
 					"description": [
-						"A 32-bit signed integer."
+						"Integer stores a 32-bit signed whole number between -2,147,483,648 and 2,147,483,647.",
+						"It suits counting, indexing, and scenarios where decimal precision is not required."
 					],
 					"name": "Integer"
 				},
 				{
 					"description": [
-						"A 64-bit signed integer."
+						"Long uses 64 bits to represent signed whole numbers in a very large range.",
+						"It prevents overflow when Integer cannot hold large values."
 					],
 					"name": "Long"
 				},
 				{
 					"description": [
-						"An 8-bit signed integer."
+						"SByte represents an 8-bit signed whole number with a range from -128 to 127.",
+						"It saves memory when small integers including negatives are expected."
 					],
 					"name": "SByte"
 				}
 			]
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Macro",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"Formats numbers based on culture and specified format within automation workflows, providing flexibility in numeric representation."
+		"The FormaNumber plugin formats numeric values into strings using specified culture settings and format patterns.",
+		"It supports locale-based formatting and custom patterns to ensure numbers display correctly in different regions.",
+		"This plugin makes automation workflows produce consistent, readable numbers in reports, logs, and interfaces.",
+		"It reduces manual formatting work and minimizes errors in numeric representation across diverse locales."
 	]
 }
