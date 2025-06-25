@@ -13,112 +13,119 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `FormatNumber` macro plugin is to format numbers according to specific culture and format requirements. ",
-		"This enables precise numeric representation in various automation tasks.",
+		"The FormatNumber macro plugin formats numbers based on culture settings and custom formats for precise numeric representation.",
+		"It ensures consistent number output across automation tasks.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                     | Description                                                                          |",
-		"|-----------------------------|--------------------------------------------------------------------------------------|",
-		"| Culture-specific Formatting | Formats numbers based on the specified culture, ensuring accurate representation.    |",
-		"| Custom Format               | Supports custom format strings to format numbers according to specific requirements. |",
+		"| Feature                     | Description                                                                     |",
+		"|-----------------------------|---------------------------------------------------------------------------------|",
+		"| Culture-specific Formatting | Formats numbers according to the specified culture for accurate representation. |",
+		"| Custom Format               | Applies custom format strings to meet specific formatting requirements.         |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                 | Description                                                                              |",
-		"|-----------------------|------------------------------------------------------------------------------------------|",
-		"| Financial Automation  | Format currency values based on local conventions and culture-specific formatting rules. |",
-		"| Data Reporting        | Format numeric data for consistent presentation in reports or dashboards.                |",
+		"| Use Case             | Description                                                                 |",
+		"|----------------------|-----------------------------------------------------------------------------|",
+		"| Financial Automation | Formats currency values using local conventions and culture-specific rules. |",
+		"| Data Reporting       | Standardizes numeric data presentation in reports and dashboards.           |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage             | Description                                                                                    |",
-		"|-------------------|------------------------------------------------------------------------------------------------|",
-		"| Data Validation   | Ensure consistency in numeric data representation during testing by applying specific formats. |",
-		"| Result Formatting | Format test results for clear and standardized reporting.                                      |",
+		"| Use Case          | Description                                                                 |",
+		"|-------------------|-----------------------------------------------------------------------------|",
+		"| Data Validation   | Applies specific formats to verify numeric data consistency during testing. |",
+		"| Result Formatting | Structures test results in a clear and standardized numeric format.         |",
 		"",
-		"For more information on standard and custom numeric format strings, please refer to the following links:",
+		"### Additional Resources",
 		"",
 		"- [Standard Numeric Format Strings](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings)",
-		"- [Custom Numeric Format Strings](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings)"
+		"- [Custom Numeric Format Strings](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings)",
+		"- [List of .NET Culture Country Codes](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture set to invariant",
+						"Empty number string",
+						"Extremely small decimal value",
+						"Large integer part",
+						"Non-numeric input",
+						"Null element reference",
+						"Unsupported format specifier",
+						"Value exceeds Double precision"
+					],
+					"expected_result": "The FormatNumber macro evaluates to a round-trip formatted string for 123456789.12345678, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Illustrates how a macro supplies a runtime value to an action; the macro itself performs no UI interaction.",
+					"use_case": "format_number_round_trip_sendkeys",
+					"version": "1.0.1"
+				},
+				"labels": [
+					"CssSelector",
+					"FormatNumber",
+					"Macro",
+					"NumericFormatting",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `R` format.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `R` format within an automation workflow.",
-				"Here`s the breakdown:",
+				"### Format a decimal number with the round-trip (`R`) specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:123456789.12345678 --Format:R}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `123456789.12345678` ",
-				"using the `R` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `R` format specifier attempts to ensure that a numeric value, when converted to a string, is parsed back into the same numeric value. ",
-				"This format is supported only for the Half, Single, Double, and BigInteger types. ",
-				"For both Double and Single values, the `R` format specifier offers relatively poor performance. ",
-				"We recommend using the `G17` format specifier for Double values and the `G9` format specifier to successfully round-trip Single values. ",
-				"When a BigInteger value is formatted using this specifier, its string representation contains all the significant digits. ",
-				"Although you can include a precision specifier, it is ignored, and round trips take precedence over precision. ",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object.",
-				"",
-				"The following table lists the NumberFormatInfo properties that control the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                            |",
-				"|---------------------------|------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.           |",
-				"| NumberDecimalSeparator    | Defines the string that separates integral digits from decimal digits. |",
-				"| PositiveSign              | Defines the string that indicates that an exponent is positive.        |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#RFormatString)."
+				"The `FormatNumber` macro evaluates `123456789.12345678` with the `R` format specifier.",
+				"The resulting text is inserted where the macro token appears, providing a precise string to the `SendKeys` plugin, which then types it into the element selected by the CSS selector `#inputField`.",
+				"Macros do not perform actions; they only generate values. Their output can be reused wherever a literal value is accepted, not just with `SendKeys`.",
+				"While `R` preserves exact precision, you may prefer `G17` for `Double` or `G9` for `Single` values when performance is critical."
 			],
 			"rule": {
-				"argument": "{{$Format-Number --Number:123456789.12345678 --Format:R}}",
+				"$type": "Action",
+				"argument": "{{$FormatNumber --Number:123456789.12345678 --Format:R}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture set to invariant",
+						"Negative integer input",
+						"Non-integral input",
+						"Null element reference",
+						"Precision specifier longer than digits",
+						"Precision specifier shorter than digits",
+						"Unsupported .NET version",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces the binary string for 42, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Demonstrates a macro that generates a binary-formatted value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_integer_binary_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"BinaryFormatting",
+					"CssSelector",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format an integer number using the `B` format. ",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format an integer number with the `B` format within an automation workflow. ",
-				"Here`s the breakdown:  ",
+				"### Format an integer with the binary (`B`) specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:42 --Format:B}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted integer number `42` using the `B` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The binary (`B`) format specifier converts a number to a string of binary digits.",
-				"This format is supported only for integral types and only on .NET 8+.",
-				"The precision specifier indicates the minimum number of digits desired in the resulting string.",
-				"If required, the number is padded with zeros to its left to produce the number of digits given by the precision specifier.",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object.",
-				"",
-				"The following table lists the NumberFormatInfo properties that control the formatting of the returned string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                                                                           |",
-				"|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| CurrencyPositivePattern   | Defines the placement of the currency symbol for positive values.                                                                                                     |",
-				"| CurrencyNegativePattern   | Defines the placement of the currency symbol for negative values, and specifies whether the negative sign is represented by parentheses or the NegativeSign property. |",
-				"| NegativeSign              | Defines the negative sign used if CurrencyNegativePattern indicates that parentheses are not used.                                                                    |",
-				"| CurrencySymbol            | Defines the currency symbol.                                                                                                                                          |",
-				"| CurrencyDecimalDigits     | Defines the default number of decimal digits in a currency value.This value can be overridden by using the precision specifier.                                       |",
-				"| CurrencyDecimalSeparator  | Defines the string that separates integral and decimal digits.                                                                                                        |",
-				"| CurrencyGroupSeparator    | Defines the string that separates groups of integral numbers.                                                                                                         |",
-				"| CurrencyGroupSizes        | Defines the number of integer digits that appear in a group.                                                                                                          |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#BFormatString)."
+				"The `Format-Number` macro evaluates the value `42` using the `B` format specifier, producing its binary representation.",
+				"That binary string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros do not perform actions; they only supply values and can be reused anywhere a literal value is accepted.",
+				"The `B` format specifier converts integral numbers to binary digits and is supported on .NET 8 and later.",
+				"When a precision specifier is provided, the result is padded with leading zeros to reach the requested length, following the current `NumberFormatInfo` settings."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:42 --Format:B}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -126,44 +133,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture set to invariant",
+						"Negative integer input",
+						"Non-integral input",
+						"Null element reference",
+						"Precision specifier longer than digits",
+						"Precision specifier shorter than digits",
+						"Unsupported .NET version",
+						"Value exceeds 16 bits",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces the 16-digit binary string for 255, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Shows a macro that generates a binary-formatted value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_integer_binary16_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"BinaryFormatting",
+					"CssSelector",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format an integer number using the `b16` format.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format an integer number with the `b16` format within an automation workflow.",
-				"Here`s the breakdown:",
+				"### Format an integer with a 16-digit binary (`b16`) specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:255 --Format:b16}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted integer number `255` using the `b16` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The binary (`b16`) format specifier converts a number to a string of binary digits, with a precision specifier indicating the minimum number of digits desired in the resulting string.",
-				"If required, the number is padded with zeros to its left to produce the number of digits given by the precision specifier.",
-				"",
-				"The binary (`b`) format specifier converts a number to a string of binary digits.",
-				"This format is supported only for integral types and only on .NET 8+.",
-				"The precision specifier indicates the minimum number of digits desired in the resulting string.",
-				"If required, the number is padded with zeros to its left to produce the number of digits given by the precision specifier.",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object.",
-				"",
-				"The following table lists the NumberFormatInfo properties that control the formatting of the returned string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                                                                           |",
-				"|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| CurrencyPositivePattern   | Defines the placement of the currency symbol for positive values.                                                                                                     |",
-				"| CurrencyNegativePattern   | Defines the placement of the currency symbol for negative values, and specifies whether the negative sign is represented by parentheses or the NegativeSign property. |",
-				"| NegativeSign              | Defines the negative sign used if CurrencyNegativePattern indicates that parentheses are not used.                                                                    |",
-				"| CurrencySymbol            | Defines the currency symbol.                                                                                                                                          |",
-				"| CurrencyDecimalDigits     | Defines the default number of decimal digits in a currency value.This value can be overridden by using the precision specifier.                                       |",
-				"| CurrencyDecimalSeparator  | Defines the string that separates integral and decimal digits.                                                                                                        |",
-				"| CurrencyGroupSeparator    | Defines the string that separates groups of integral numbers.                                                                                                         |",
-				"| CurrencyGroupSizes        | Defines the number of integer digits that appear in a group.                                                                                                          |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#BFormatString)."
+				"The `Format-Number` macro evaluates the value `255` with the `b16` format specifier, producing its 16-digit binary representation.",
+				"That binary string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"The binary (`b`) format converts integral numbers to binary digits and is supported on .NET 8 and later.",
+				"When a precision specifier is provided, the result is padded with leading zeros to reach the requested length, following the current `NumberFormatInfo` settings."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:255 --Format:b16}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -171,30 +179,44 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture set to invariant",
+						"Negative integer input",
+						"Non-integral input",
+						"Null element reference",
+						"Precision specifier longer than digits",
+						"Precision specifier shorter than digits",
+						"Unsupported type",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces the decimal string for 1234, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Illustrates a macro that generates a decimal-formatted value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_integer_decimal_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DecimalFormatting",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format an integer number using the `D` format.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format an integer number with the `D` format within an automation workflow.",
-				"Here`s the breakdown:",
+				"### Format an integer with the decimal (`D`) specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:1234 --Format:D}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted integer number `1234` using the `D` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `D` (or decimal) format specifier converts a number to a string of decimal digits (0-9), prefixed by a minus sign if the number is negative. This format is supported only for integral types.",
-				"The precision specifier indicates the minimum number of digits desired in the resulting string. If required, the number is padded with zeros to its left to produce the number of digits given by the precision specifier. If no precision specifier is specified, the default is the minimum value required to represent the integer without leading zeros.",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, a single property affects the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                  |",
-				"|---------------------------|--------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#DFormatString)."
+				"The `Format-Number` macro evaluates the value `1234` using the `D` format specifier, producing its decimal representation.",
+				"That string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"The `D` specifier converts integral numbers to decimal digits and is supported for integral types only.",
+				"A precision specifier pads the number with leading zeros to reach the requested length, according to the current `NumberFormatInfo` settings."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:1234 --Format:D}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -202,32 +224,44 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture set to invariant",
+						"Negative integer input",
+						"Non-integral input",
+						"Null element reference",
+						"Precision specifier longer than digits",
+						"Precision specifier shorter than digits",
+						"Unsupported type",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces a zero-padded decimal string for -1234 with the D6 specifier, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Shows a macro that generates a padded decimal value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_integer_decimal6_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DecimalFormatting",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format an integer number using the `D6` format.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format an integer number with the `D6` format within an automation workflow.",
-				"Here`s the breakdown:",
+				"### Format an integer with the `D6` decimal specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:-1234 --Format:D6}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted integer number `-1234` using the `D6` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `D6` format specifier converts a number to a string of decimal digits (0-9), prefixed by a minus sign if the number is negative. This format is supported only for integral types.",
-				"The precision specifier indicates the minimum number of digits desired in the resulting string. If required, the number is padded with zeros to its left to produce the number of digits given by the precision specifier. If no precision specifier is specified, the default is the minimum value required to represent the integer without leading zeros.",
-				"In this example, `D6` specifies that the resulting string should have a minimum length of 6 digits, padding with zeros if necessary.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, a single property affects the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                  |",
-				"|---------------------------|--------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#DFormatString)."
+				"The `Format-Number` macro evaluates the value `-1234` using the `D6` format specifier, producing a six-digit decimal string padded with leading zeros.",
+				"That string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"The `D` specifier converts integral numbers to decimal digits and is supported for integral types only.",
+				"A precision specifier pads the number with leading zeros to reach the requested length, according to the current `NumberFormatInfo` settings."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:-1234 --Format:D6}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -235,63 +269,88 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture set to invariant",
+						"Negative input for Byte type",
+						"Non-integral input",
+						"Null element reference",
+						"Precision specifier longer than digits",
+						"Unsupported .NET version",
+						"Value exceeds byte range",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces the hexadecimal string for 255, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Demonstrates a macro that generates a hexadecimal value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_byte_hex_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ByteFormatting",
+					"CssSelector",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format an integer number as a byte using the `X` format.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format an integer number as a byte with the `X` format within an automation workflow.",
-				"Here`s the breakdown:",
+				"### Format an unsigned byte with the hexadecimal (`X`) specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and number type to be used for formatting. For example, `{{$Format-Number --Number:255 --Format:X --NumberType:Byte}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted integer number `255` as a byte using the `X` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted byte number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `X` format specifier converts a number to a string of hexadecimal digits (0-9, A-F).",
-				"The number type `Byte` specifies that the input number should be treated as an unsigned byte (8-bit integer).",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, a single property affects the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                  |",
-				"|---------------------------|--------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#XFormatString)."
+				"The `Format-Number` macro evaluates the value `255` as an unsigned byte (`Byte`) using the `X` format specifier, producing its two-digit hexadecimal representation (`FF`).",
+				"That hex string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"The `X` specifier converts integral numbers to hexadecimal digits (0-9, A-F).",
+				"Formatting respects the current `NumberFormatInfo` settings."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:255 --Format:X --NumberType:Byte}}",
-				"pluginName": "SendKeys",
 				"locator": "CssSelector",
-				"onElement": "#inputField"
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture set to invariant",
+						"Negative integer input",
+						"Non-integral input",
+						"Null element reference",
+						"Precision specifier longer than digits",
+						"Precision specifier shorter than digits",
+						"Unsupported type",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces an eight-digit hexadecimal string for 132190, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Shows a macro that generates a padded hexadecimal value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_integer_hex8_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"FormatNumber",
+					"HexadecimalFormatting",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format an integer number using the `X8` format.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format an integer number with the `X8` format within an automation workflow.",
-				"Here`s the breakdown:",
+				"### Format an integer with the `X8` hexadecimal specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:132190 --Format:X8}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted integer number `132190` using the `X8` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `X8` format specifier converts a number to a string of hexadecimal digits (0-9, A-F).",
-				"The precision specifier `8` indicates that the resulting string should have a minimum length of 8 digits, padding with zeros if necessary.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, a single property affects the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                  |",
-				"|---------------------------|--------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#XFormatString)."
+				"The `Format-Number` macro evaluates the value `132190` using the `X8` format specifier, producing an eight-digit hexadecimal string padded with leading zeros.",
+				"That string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"The `X` specifier converts integral numbers to hexadecimal digits (0-9, A-F), and a precision specifier pads the result to the requested length according to the current `NumberFormatInfo` settings."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:132190 --Format:X8}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -299,39 +358,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Rounding differences for currency",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces a French currency string for 123.456 and the SendKeys plugin types that string into #inputField.",
+					"notes": "Demonstrates a macro that generates a culture-specific currency value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_decimal_currency_fr_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CurrencyFormatting",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `C` format and French culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `C` format and French culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a decimal with the currency (`C`) specifier and French culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:123.456 --Format:C --Culture:fr-FR}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `123.456` using the `C` format and French culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `C` format specifier converts a number to a string that represents the currency format for the specified culture. The currency symbol, decimal separator, and group separator are based on the culture.",
-				"In this example, the French culture (`fr-FR`) is used to format the number.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, several properties affect the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                       |",
-				"|---------------------------|-----------------------------------------------------------------------------------|",
-				"| CurrencyPositivePattern   | Defines the placement of the currency symbol for positive values.                 |",
-				"| CurrencyNegativePattern   | Defines the placement of the currency symbol for negative values.                 |",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                      |",
-				"| CurrencySymbol            | Defines the currency symbol.                                                      |",
-				"| CurrencyDecimalDigits     | Defines the default number of decimal digits in a currency value.                 |",
-				"| CurrencyDecimalSeparator  | Defines the string that separates integral and decimal digits in currency values. |",
-				"| CurrencyGroupSeparator    | Defines the string that separates groups of integral numbers in currency values.  |",
-				"| CurrencyGroupSizes        | Defines the number of integer digits that appear in a group in currency values.   |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#CFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro evaluates the value `123.456` with the `C` format specifier and the `fr-FR` culture, producing a currency string such as `123,46 €`.",
+				"That string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"The `C` specifier formats numbers according to the currency pattern of the chosen culture, including the proper symbol, decimal separator, and grouping."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:123.456 --Format:C --Culture:fr-FR}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -339,39 +402,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Rounding differences for currency",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces a Japanese currency string with three decimal places for -123.456, and the SendKeys plugin types that string into #inputField.",
+					"notes": "Demonstrates a macro that generates a culture-specific currency value consumed by an action; the macro itself has no UI side-effects. The `C3` precision specifier overrides the ja-JP default of zero currency-decimal digits and rounds the value to three decimals. The Japanese CurrencyNegativePattern places the minus sign before the yen symbol (\"-¥n\").",
+					"use_case": "format_decimal_currency3_ja_sendkeys",
+					"version": "1.0.2"
+				},
+				"labels": [
+					"CssSelector",
+					"CurrencyFormatting",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a negative decimal number using the `C3` format and Japanese culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a negative decimal number with the `C3` format and Japanese culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a negative decimal with the currency (`C3`) specifier and Japanese culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:-123.456 --Format:C3 --Culture:ja-JP}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted negative decimal number `-123.456` using the `C3` format and Japanese culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `C3` format specifier converts a number to a string that represents the currency format with three decimal places for the specified culture. The currency symbol, decimal separator, and group separator are based on the culture.",
-				"In this example, the Japanese culture (`ja-JP`) is used to format the number.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, several properties affect the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                       |",
-				"|---------------------------|-----------------------------------------------------------------------------------|",
-				"| CurrencyPositivePattern   | Defines the placement of the currency symbol for positive values.                 |",
-				"| CurrencyNegativePattern   | Defines the placement of the currency symbol for negative values.                 |",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                      |",
-				"| CurrencySymbol            | Defines the currency symbol.                                                      |",
-				"| CurrencyDecimalDigits     | Defines the default number of decimal digits in a currency value.                 |",
-				"| CurrencyDecimalSeparator  | Defines the string that separates integral and decimal digits in currency values. |",
-				"| CurrencyGroupSeparator    | Defines the string that separates groups of integral numbers in currency values.  |",
-				"| CurrencyGroupSizes        | Defines the number of integer digits that appear in a group in currency values.   |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#CFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro evaluates the value `-123.456` with the `C3` format specifier and the `ja-JP` culture.",
+				"The `C3` precision specifier **overrides** Japan's default of zero currency-decimal digits and rounds the value to three fractional places before formatting.",
+				"The resulting string is `-¥123.456`, where the minus sign precedes the yen symbol as defined by the Japanese `CurrencyNegativePattern`.",
+				"That string replaces the macro token at runtime.",
+				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"If the source number contains more than three fractional digits (for example, `-123.4567`), it is first rounded to three decimals (`-123.457`) before being formatted."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:-123.456 --Format:C3 --Culture:ja-JP}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -379,36 +448,44 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Precision specifier mismatch",
+						"Rounding differences for exponential",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro produces a scientific-notation string for 1052.0329112756 and the SendKeys plugin types that string into #inputField.",
+					"notes": "Illustrates a macro that generates a culture-specific scientific (E) notation value consumed by an action; the macro itself has no UI side-effects.",
+					"use_case": "format_decimal_scientific_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"FormatNumber",
+					"Macro",
+					"ScientificFormatting",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `E` format and English (United States) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `E` format and English (United States) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a decimal with the scientific (E) specifier and US culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:1052.0329112756 --Format:E --Culture:en-US}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `1052.0329112756` using the `E` format and English (United States) culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `E` format specifier converts a number to a string of the form '-d.ddd...E+ddd' or '-d.ddd...e+ddd', where each 'd' indicates a digit (0-9).",
-				"The number is rounded to seven digits if it has more than five digits, and the format specifier includes six or more '0' characters after the decimal point.",
-				"",
-				"In this example, the English (United States) culture (`en-US`) is used to format the number.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, several properties affect the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                        |",
-				"|---------------------------|----------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative for both the coefficient and exponent. |",
-				"| NumberDecimalSeparator    | Defines the string that separates the integral digit from decimal digits in the coefficient.       |",
-				"| PositiveSign              | Defines the string that indicates that an exponent is positive.                                    |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#EFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The Format-Number macro evaluates the value 1052.0329112756 with the E format specifier and the en-US culture, producing a scientific-notation string such as 1.052033E+003.",
+				"That string replaces the macro token at runtime.",
+				"The SendKeys plugin then types the generated string into the element identified by the CSS selector #inputField.",
+				"Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.",
+				"The E specifier expresses numbers in scientific notation (d.dddE±ddd), rounding to the appropriate number of significant digits when necessary, and follows the formatting rules of the specified culture."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:1052.0329112756 --Format:E --Culture:en-US}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -416,36 +493,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Exponent padding inconsistency",
+						"Lowercase exponential specifier",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Rounding behavior for two decimals",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts -1052.0329112756 into an exponential-format string like -1.05e+03 and the SendKeys plugin types it into #inputField.",
+					"notes": "Demonstrates using the `e2` format with a negative number; output respects culture-specific formatting and decimal rounding.",
+					"use_case": "format_negative_decimal_e2_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"FormatNumber",
+					"Macro",
+					"ScientificFormatting",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a negative decimal number using the `e2` format and English (United States) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a negative decimal number with the `e2` format and English (United States) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a negative decimal with the `e2` specifier and US culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:-1052.0329112756 --Format:e2 --Culture:en-US}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted negative decimal number `-1052.0329112756` using the `e2` format and English (United States) culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `e2` format specifier converts a number to a string of the form '-d.dddde±dd', where each 'd' indicates a digit (0-9) and '±' indicates either a positive or negative exponent symbol.",
-				"The number is rounded to two decimal places and formatted using exponential notation with two digits in the exponent.",
-				"",
-				"In this example, the English (United States) culture (`en-US`) is used to format the number.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, several properties affect the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                        |",
-				"|---------------------------|----------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative for both the coefficient and exponent. |",
-				"| NumberDecimalSeparator    | Defines the string that separates the integral digit from decimal digits in the coefficient.       |",
-				"| PositiveSign              | Defines the string that indicates that an exponent is positive.                                    |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#EFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats the value `-1052.0329112756` using the `e2` format and the `en-US` culture.",
+				"This produces a scientific-notation string such as `-1.05e+03`, with two decimal places and a two-digit exponent.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused in any context where literal values are allowed.",
+				"The `e2` specifier formats numbers in exponential form (`d.dddde±dd`) with two digits after the decimal point and two digits in the exponent."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:-1052.0329112756 --Format:e2 --Culture:en-US}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -453,35 +539,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Decimal truncation",
+						"Fixed-point rounding errors",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Thousand separator mismatch",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro formats 1234.567 as a fixed-point string using German culture, and the SendKeys plugin types it into #inputField.",
+					"notes": "Demonstrates formatting with the `F` specifier and the `de-DE` culture; the macro output includes localized decimal and thousand separators.",
+					"use_case": "format_fixedpoint_de_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `F` format and German (Germany) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `F` format and German (Germany) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a decimal with the `F` specifier and German culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:1234.567 --Format:F --Culture:de-DE}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `1234.567` using the `F` format and German (Germany) culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `F` format specifier converts a number to a string of the form '-dddd.dddd', where each 'd' indicates a digit (0-9).",
-				"The number is rounded to two decimal places and formatted using fixed-point notation.",
-				"",
-				"In this example, the German (Germany) culture (`de-DE`) is used to format the number.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, several properties affect the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                  |",
-				"|---------------------------|--------------------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                                                 |",
-				"| NumberDecimalSeparator    | Defines the string that separates integral digits from decimal digits.                                       |",
-				"| NumberDecimalDigits       | Defines the default number of decimal digits. This value can be overridden by using the precision specifier. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#FFormatString) and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats the value `1234.567` using the `F` specifier and the `de-DE` culture.",
+				"This produces a fixed-point string like `1.234,57`, using a comma as the decimal separator and a period as the thousands separator.",
+				"The result string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types the generated string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `F` format specifier formats numbers using fixed-point notation and rounds to two decimal places by default."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:1234.567 --Format:F --Culture:de-DE}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -489,36 +585,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Decimal truncation",
+						"Fixed-point rounding errors",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Thousand separator mismatch",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro formats -1234.56 as a fixed-point string with four decimal places using US culture, and the SendKeys plugin types it into #inputField.",
+					"notes": "Demonstrates the `F4` specifier with a negative number; output shows localized thousand and decimal separators and pads to four decimal places.",
+					"use_case": "format_fixedpoint_f4_en_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `F4` format and English (United States) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `F4` format and English (United States) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a negative decimal with the `F4` specifier and US culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:-1234.56 --Format:F4 --Culture:en-US}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `-1234.56` using the `F4` format and English (United States) culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `F4` format specifier converts a number to a string of the form '-dddd.dddd', where each 'd' indicates a digit (0-9).",
-				"The number is rounded to four decimal places and formatted using fixed-point notation.",
-				"",
-				"In this example, the English (United States) culture (`en-US`) is used to format the number.",
-				"",
-				"The result string is affected by the formatting information of the current NumberFormatInfo object. As the following table shows, several properties affect the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                  |",
-				"|---------------------------|--------------------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                                                 |",
-				"| NumberDecimalSeparator    | Defines the string that separates integral digits from decimal digits.                                       |",
-				"| NumberDecimalDigits       | Defines the default number of decimal digits. This value can be overridden by using the precision specifier. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#FFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats the value `-1234.56` using the `F4` specifier and the `en-US` culture.",
+				"This produces a fixed-point string like `-1,234.5600`, with a comma as the thousands separator and four digits after the decimal point.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `F4` specifier formats numbers using fixed-point notation and pads to four decimal places."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:-1234.56 --Format:F4 --Culture:en-US}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -526,44 +631,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Precision specifier applied",
+						"Rounding behavior",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts -123.456 into a compact general-format string (e.g., -123.456) and the SendKeys plugin types it into #inputField.",
+					"notes": "Demonstrates the `G` (general) format with its automatic choice of fixed-point or scientific notation.",
+					"use_case": "format_general_negative_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"FormatNumber",
+					"GeneralFormatting",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `G` format.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `G` format within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a decimal with the `G` specifier",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:-123.456 --Format:G}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `-123.456` ",
-				"using the `G` format as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `G` format specifier converts a number to a more compact representation of either fixed-point or scientific notation, ",
-				"depending on the type of the number and whether a precision specifier is present. ",
-				"The precision specifier defines the maximum number of significant digits that can appear in the result string.",
-				"",
-				"If the precision specifier is omitted or zero, the type of the number determines the default precision.",
-				"The following table shows the default precision for each numeric type:",
-				"",
-				"| Numeric type     | Default precision                                                                                         |",
-				"|------------------|-----------------------------------------------------------------------------------------------------------|",
-				"|  BigInteger      |  Unlimited(same as `R`)                                                                                   |",
-				"|  Byte or SByte   |  3 digits                                                                                                 |",
-				"|  Decimal         |  Smallest round-trippable number of digits to represent the number                                        |",
-				"|  Double          |  Smallest round-trippable number of digits to represent the number(in .NET Framework, G15 is the default) |",
-				"|  Half            |  Smallest round-trippable number of digits to represent the number                                        |",
-				"|  Int16 or UInt16 |  5 digits                                                                                                 |",
-				"|  Int32 or UInt32 |  10 digits                                                                                                |",
-				"|  Int64           |  19 digits                                                                                                |",
-				"|  Single          |  Smallest round-trippable number of digits to represent the number(in .NET Framework, G7 is the default)  |",
-				"|  UInt64          |  20 digits                                                                                                |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#GFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats the value `-123.456` using the `G` (general) specifier.",
+				"This produces a compact string such as `-123.456`, automatically choosing fixed-point or scientific notation based on the value’s magnitude and precision.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `G` specifier returns either fixed-point or exponential notation, preserving up to 15–17 significant digits when no precision specifier is supplied."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:-123.456 --Format:G}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -571,83 +677,92 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Precision specifier mismatch",
+						"Rounding behavior",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts 123.4546 into `123,5` (general-format string) and the SendKeys plugin types it into #inputField.",
+					"notes": "Shows the `G4` specifier with Swedish culture; output uses a comma decimal separator and four significant digits.",
+					"use_case": "format_general_precision_sv_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"FormatNumber",
+					"GeneralFormatting",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `G` format with a specific precision and culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `G` format, a precision specifier, and a specific culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a decimal with the `G4` specifier and Swedish culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, precision, and culture to be used for formatting. For example, `{{$Format-Number --Number:123.4546 --Format:G4™ --Culture:sv-SE}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `123.4546` ",
-				"using the `G` format with a precision of 4 and the Swedish culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `G` format specifier converts a number to a more compact representation of either fixed-point or scientific notation, ",
-				"depending on the type of the number and the precision specifier provided. ",
-				"If the precision specifier is omitted or zero, the type of the number determines the default precision.",
-				"",
-				"The following table shows the default precision for each numeric type:",
-				"",
-				"| Numeric type     | Default precision                                                                                         |",
-				"|------------------|-----------------------------------------------------------------------------------------------------------|",
-				"|  BigInteger      |  Unlimited(same as `R`)                                                                                   |",
-				"|  Byte or SByte   |  3 digits                                                                                                 |",
-				"|  Decimal         |  Smallest round-trippable number of digits to represent the number                                        |",
-				"|  Double          |  Smallest round-trippable number of digits to represent the number(in .NET Framework, G15 is the default) |",
-				"|  Half            |  Smallest round-trippable number of digits to represent the number                                        |",
-				"|  Int16 or UInt16 |  5 digits                                                                                                 |",
-				"|  Int32 or UInt32 |  10 digits                                                                                                |",
-				"|  Int64           |  19 digits                                                                                                |",
-				"|  Single          |  Smallest round-trippable number of digits to represent the number(in .NET Framework, G7 is the default)  |",
-				"|  UInt64          |  20 digits                                                                                                |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#GFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats `123.4546` using the `G4` specifier and the `sv-SE` culture.",
+				"This produces a compact string such as `123,5`, choosing fixed-point notation with four significant digits and a comma as the decimal separator.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `G` specifier returns either fixed-point or exponential notation depending on the number’s magnitude; the precision specifier (`4`) limits the output to four significant digits."
 			],
 			"rule": {
-				"argument": "{{$Format-Number --Number:123.4546 --Format:G4™ --Culture:sv-SE}}",
+				"$type": "Action",
+				"argument": "{{$Format-Number --Number:123.4546 --Format:G4 --Culture:sv-SE}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Rounding behavior",
+						"Thousand separator mismatch",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts 1234.567 into `1 234,57` and the SendKeys plugin types it into #inputField.",
+					"notes": "Uses the `N` specifier with Russian culture; output applies a space as the thousands separator and a comma as the decimal separator.",
+					"use_case": "format_numeric_ru_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a decimal number using the `N` format with a specific culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a decimal number with the `N` format and a specific culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a decimal with the `N` specifier and Russian culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:1234.567 --Format:N --Culture:ru-RU}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted decimal number `1234.567` ",
-				"using the `N` format with the Russian culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `N` format specifier converts a number to a string that represents the number in a specific culture's numeric format. ",
-				"It includes commas as thousands separators and a period as the decimal separator, with optional negative sign.",
-				"",
-				"The result string is affected by the formatting information of the current `NumberFormatInfo` object.",
-				"The following table lists the `NumberFormatInfo` properties that control the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                                                |",
-				"|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                                                                               |",
-				"| NumberDecimalDigits       | Defines the default number of decimal digits.This value can be overridden by using a precision specifier.                                  |",
-				"| NumberDecimalSeparator    | Defines the string that separates integral and decimal digits.                                                                             |",
-				"| NumberGroupSeparator      | Defines the string that separates groups of integral numbers.                                                                              |",
-				"| NumberGroupSizes          | Defines the number of integral digits that appear between group separators.                                                                |",
-				"| NumberNegativePattern     | Defines the format of negative values, and specifies whether the negative sign is represented by parentheses or the NegativeSign property. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#NFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats the value `1234.567` using the `N` specifier and the `ru-RU` culture.",
+				"This produces a localized string such as `1 234,57`, with a space as the thousands separator and a comma as the decimal separator.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `N` specifier formats numbers with thousands separators and two decimal places by default, following the rules of the specified culture."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:1234.567 --Format:N --Culture:ru-RU}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -655,38 +770,47 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Precision specifier mismatch",
+						"Rounding behavior",
+						"Thousand separator mismatch",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts -1234.56 into `-1,234.560` and the SendKeys plugin types it into #inputField.",
+					"notes": "Uses the `N3` specifier with US culture; output shows a comma thousands separator, a period decimal separator, three decimal digits, and a leading minus sign.",
+					"use_case": "format_negative_numeric_n3_en_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"FormatNumber",
+					"Macro",
+					"NumericFormatting",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format a negative decimal number using the `N3` format with the English (United States) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format a negative decimal number with the `N3` format and the English (United States) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a negative decimal with the `N3` specifier and US culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:-1234.56 --Format:N3 --Culture:en-US}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted negative decimal number `-1,234.560` ",
-				"using the `N3` format with the English (United States) culture as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `N3` format specifier converts a number to a string that represents the number in a specific culture's numeric format with three decimal digits.",
-				"",
-				"The result string is affected by the formatting information of the current `NumberFormatInfo` object.",
-				"The following table lists the `NumberFormatInfo` properties that control the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                                                |",
-				"|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                                                                               |",
-				"| NumberDecimalDigits       | Defines the default number of decimal digits. This value can be overridden by using a precision specifier.                                 |",
-				"| NumberDecimalSeparator    | Defines the string that separates integral and decimal digits.                                                                             |",
-				"| NumberGroupSeparator      | Defines the string that separates groups of integral numbers.                                                                              |",
-				"| NumberGroupSizes          | Defines the number of integral digits that appear between group separators.                                                                |",
-				"| NumberNegativePattern     | Defines the format of negative values, and specifies whether the negative sign is represented by parentheses or the NegativeSign property. |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#NFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats `-1234.56` using the `N3` specifier and the `en-US` culture.",
+				"This produces a localized string such as `-1,234.560`, with a comma as the thousands separator, a period as the decimal separator, and three digits after the decimal point.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `N3` specifier formats numbers with thousands separators and exactly three decimal digits, following the rules of the specified culture."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:-1234.56 --Format:N3 --Culture:en-US}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -694,40 +818,46 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Percent scaling errors",
+						"Rounding behavior",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts 1 into `100,00 %` and the SendKeys plugin types it into #inputField.",
+					"notes": "Demonstrates the `P` specifier with French culture; the value is multiplied by 100 and formatted with a comma decimal separator, a non-breaking space, and a trailing percent sign.",
+					"use_case": "format_percentage_fr_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"FormatNumber",
+					"Macro",
+					"PercentageFormatting",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format the number 1 as a percentage with the French (France) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 1 as a percentage with the French (France) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format the number 1 as a percentage with French culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:1 --Format:P --Culture:fr-FR}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `100,00 %` ",
-				"as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `P` format specifier converts a number to a string representing a percentage.",
-				"",
-				"The result string is affected by the formatting information of the current `NumberFormatInfo` object.",
-				"The following table lists the `NumberFormatInfo` properties that control the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                                       |",
-				"|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                                                                      |",
-				"| PercentDecimalDigits      | Defines the default number of decimal digits in a percentage value. This value can be overridden by using the precision specifier. |",
-				"| PercentDecimalSeparator   | Defines the string that separates integral and decimal digits.                                                                    |",
-				"| PercentGroupSeparator     | Defines the string that separates groups of integral numbers.                                                                     |",
-				"| PercentGroupSizes         | Defines the number of integer digits that appear in a group.                                                                      |",
-				"| PercentNegativePattern    | Defines the placement of the percent symbol and the negative symbol for negative values.                                          |",
-				"| PercentPositivePattern    | Defines the placement of the percent symbol for positive values.                                                                  |",
-				"| PercentSymbol             | Defines the percent symbol.                                                                                                       |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#PFormatString) and ",
-				"[this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats the value `1` using the `P` (percentage) specifier and the `fr-FR` culture.",
+				"This produces a string such as `100,00 %`, where the number is scaled by 100, rounded to two decimal places, uses a comma as the decimal separator, and inserts a non-breaking space before the percent sign.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `P` specifier multiplies the input by 100 and formats it as a localized percentage string according to the specified culture."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:1 --Format:P --Culture:fr-FR}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -735,39 +865,46 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Percent scaling errors",
+						"Rounding behavior",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts -0.39678 into `-39.7 %` and the SendKeys plugin types it into #inputField.",
+					"notes": "Uses the `P1` specifier with US culture; the value is multiplied by 100, rounded to one decimal digit, uses a comma thousands separator (none needed here), a period decimal separator, a trailing space, and a percent sign.",
+					"use_case": "format_negative_percentage_p1_en_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"FormatNumber",
+					"Macro",
+					"PercentageFormatting",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format the number -0.39678 as a percentage with one decimal place and the English (United States) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number -0.39678 as a percentage with one decimal place and the English (United States) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a negative decimal with the `P1` specifier and US culture",
 				"",
-				"- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.",
-				"- **argument**: Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:-0.39678 --Format:P1 --Culture:en-US}}`.",
-				"- **locator**: Specifies the locator mechanism to identify the target element. For example, `CssSelector`.",
-				"- **onElement**: Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `-39.7 %` ",
-				"as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `P1` format specifier converts a number to a string representing a percentage with one decimal place.",
-				"",
-				"The result string is affected by the formatting information of the current `NumberFormatInfo` object.",
-				"The following table lists the `NumberFormatInfo` properties that control the formatting of the result string.",
-				"",
-				"| NumberFormatInfo property | Description                                                                                                                       |",
-				"|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------|",
-				"| NegativeSign              | Defines the string that indicates that a number is negative.                                                                      |",
-				"| PercentDecimalDigits      | Defines the default number of decimal digits in a percentage value. This value can be overridden by using the precision specifier. |",
-				"| PercentDecimalSeparator   | Defines the string that separates integral and decimal digits.                                                                    |",
-				"| PercentGroupSeparator     | Defines the string that separates groups of integral numbers.                                                                     |",
-				"| PercentGroupSizes         | Defines the number of integer digits that appear in a group.                                                                      |",
-				"| PercentNegativePattern    | Defines the placement of the percent symbol and the negative symbol for negative values.                                          |",
-				"| PercentPositivePattern    | Defines the placement of the percent symbol for positive values.                                                                  |",
-				"| PercentSymbol             | Defines the percent symbol.                                                                                                       |",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#PFormatString) and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats `-0.39678` using the `P1` (percentage, one decimal) specifier and the `en-US` culture.",
+				"This produces a string such as `-39.7 %`, where the number is scaled by 100, rounded to one decimal place, and formatted with a space before the percent sign.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"The `P1` specifier multiplies the input by 100 and formats it as a localized percentage string with exactly one decimal digit."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:-0.39678 --Format:P1 --Culture:en-US}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
