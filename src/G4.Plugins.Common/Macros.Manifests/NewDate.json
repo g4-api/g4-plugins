@@ -126,29 +126,78 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid date format",
+						"Log file inaccessible",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"Plugin not installed",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The WriteLog plugin writes a log entry with the message 'Log entry created at YYYY-MM-DD' to the logging system.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to produce a date string, then passes the inline message `Log entry created at {{$New-Date --Format:yyyy-MM-dd}}` (containing the macro call itself) directly to the WriteLog plugin.",
+					"use_case": "writelog_with_newdate_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"DateTime",
+					"Log",
+					"Macro",
+					"NewDate",
+					"WriteLog"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `WriteLog` plugin to log a meaningful message including the current date obtained from the `NewDate` macro plugin.",
-				"This example instructs the automation system to utilize the `WriteLog` plugin to write a log entry including the current date obtained from the `NewDate` macro plugin."
+				"### WriteLog Plugin with NewDate Macro",
+				"",
+				"Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to generate the current date string in `yyyy-MM-dd` format.",
+				"Pass the message `Log entry created at {{$New-Date --Format:yyyy-MM-dd}}` to the `WriteLog` plugin to write a log entry that includes the generated date."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Log entry created at {{$New-Date --Format:yyyy-MM-dd}}",
 				"pluginName": "WriteLog"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid date format",
+						"Locator not matching",
+						"Macro execution failure",
+						"Missing argument",
+						"SendKeys failure",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The plugin sends the current UTC date in yyyy-MM-dd format as keystrokes to the element matching the CSS selector `.example-element`.",
+					"notes": "This example first evaluates the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd --Utc}}`) to produce a UTC date string, then passes that string as the argument to the `SendKeys` plugin.",
+					"use_case": "sendkeys_with_newdate_macro_utc",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"Utc"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin with the `{{$New-Date --Format:yyyy-MM-dd --Utc}}` macro as the argument.",
+				"### SendKeys Plugin with NewDate Macro in UTC",
 				"",
-				"| Field      | Description                                                                                                                                                                                               |",
-				"|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.                                                                        |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element where the keystrokes will be sent.                                                                            |",
-				"| onElement  | Indicates the value of the locator, representing the element where the keystrokes will be sent.                                                                                                           |",
-				"| argument   | The macro token `{{$New-Date --Format:yyyy-MM-dd --Utc}}` represents the usage of the `NewDate` macro plugin to retrieve the current date in the format `yyyy-MM-dd` in UTC (Coordinated Universal Time). |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the current date obtained from the `NewDate` macro plugin in UTC format to the specified element."
+				"Use the `SendKeys` plugin to send the current UTC date to the element matching the CSS selector `.example-element`.",
+				"Generate the argument by applying the `NewDate` macro with format and UTC flag (`{{$New-Date --Format:yyyy-MM-dd --Utc}}`)."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --Format:yyyy-MM-dd --Utc}}",
 				"locator": "CssSelector",
 				"onElement": ".example-element",
@@ -156,75 +205,168 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid XPath expression",
+						"Invalid year format",
+						"Locator not matching",
+						"Macro execution failure",
+						"Multiple matching elements",
+						"Nested macro syntax error",
+						"No matching element",
+						"Plugin failure",
+						"Unexpected whitespace in locator"
+					],
+					"expected_result": "The Click plugin evaluates the inline NewDate macro at runtime and clicks the button whose text matches the current year.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --Format:yyyy}}`) to produce the current year string, then passes the inline locator `//button[contains(text(), '{{$New-Date --Format:yyyy}}')]` (containing the macro call itself) directly to the Click plugin.",
+					"use_case": "click_button_current_year_xpath",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Click",
+					"Macro",
+					"NewDate",
+					"Xpath"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `Click` plugin to click on a button containing the current year as its value, using the `{{$New-Date --Format:yyyy}}` macro as part of the XPath locator.",
+				"### Click Plugin with NewDate Macro for Year",
 				"",
-				"| Field      | Description                                                                                                                                |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `Click`. This plugin is used to perform a click action on a specified element.     |",
-				"| locator    | Specifies the locating mechanism, which is XPath in this case, for the target element where the click action will be performed.            |",
-				"| onElement  | Indicates the value of the locator, representing the XPath expression that identifies the button containing the current year as its value. |",
-				"",
-				"This example instructs the automation system to utilize the `Click` plugin to click on a button containing the current year as its value, using the `{{$New-Date --Format:yyyy}}` macro to dynamically construct the XPath locator."
+				"Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy}}`) to generate the current year string.",
+				"Use the `Click` plugin with the XPath locator string `//button[contains(text(), '{{$New-Date --Format:yyyy}}')]` so that the plugin evaluates the inline macro call at runtime and clicks the matching button."
 			],
 			"rule": {
+				"$type": "Action",
 				"locator": "Xpath",
 				"onElement": "//button[contains(text(), '{{$New-Date --Format:yyyy}}')]",
 				"pluginName": "Click"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid epoch value",
+						"Log file inaccessible",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"Plugin not installed",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The WriteLog plugin writes a log entry containing the current date and time in Unix epoch format to the logging system.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --UnixEpoch}}`) to produce a Unix epoch timestamp, then passes the inline argument `{{$New-Date --UnixEpoch}}` (containing the macro call) directly to the WriteLog plugin.",
+					"use_case": "writelog_with_unixepoch_newdate_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Log",
+					"Macro",
+					"NewDate",
+					"UnixEpoch",
+					"WriteLog"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `WriteLog` plugin to log the current date and time in Unix epoch format, obtained from the `NewDate` macro plugin.",
+				"### WriteLog Plugin with NewDate Macro for Unix Epoch",
 				"",
-				"| Field      | Description                                                                                                                                                |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `WriteLog`. This plugin is used to write information to the host console.                           |",
-				"| argument   | The macro token `{{$New-Date --UnixEpoch}}` represents the usage of the `NewDate` macro plugin to retrieve the current date and time in Unix epoch format. |",
-				"",
-				"This example instructs the automation system to utilize the `WriteLog` plugin to log the current date and time in Unix epoch format."
+				"Evaluate the `NewDate` macro (`{{$New-Date --UnixEpoch}}`) to generate the current Unix epoch timestamp.",
+				"Pass the argument `{{$New-Date --UnixEpoch}}` to the `WriteLog` plugin so that the plugin evaluates the macro call at runtime and writes a log entry containing the generated timestamp."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --UnixEpoch}}",
 				"pluginName": "WriteLog"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Date outside valid OLE range",
+						"Empty macro output",
+						"Floating point precision error",
+						"Invalid CSS selector",
+						"Invalid OLE Automation date value",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current date and time as an OLE Automation date value into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --OaDate}}`) to produce an OLE Automation date floating-point value, then passes the inline argument `{{$New-Date --OaDate}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_ole_automation_date_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"OaDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current date and time in OLE Automation Date format, obtained from the `NewDate` macro plugin, into a text field.",
+				"### SendKeys Plugin with NewDate Macro for OLE Automation Date",
 				"",
-				"| Field      | Description                                                                                                                                                      |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.                               |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                                    |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                                               |",
-				"| argument   | The macro token `{{$New-Date --OaDate}}` represents the usage of the `NewDate` macro plugin to retrieve the current date and time in OLE Automation Date format. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current date and time in OLE Automation Date format into a text field.",
-				"",
-				"In OLE Automation, dates are represented as floating-point numbers, where the integer part represents the number of days since December 30, 1899, and the fractional part represents the time of day."
+				"Evaluate the `NewDate` macro (`{{$New-Date --OaDate}}`) to generate the current date and time as an OLE Automation date value.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --OaDate}}` so that the plugin inputs the generated OLE Automation date value into the text field."
 			],
 			"rule": {
+				"$type": "Action",
+				"argument": "{{$New-Date --OaDate}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
-				"argument": "{{$New-Date --OaDate}}",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current year into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Year}}`) to produce the current year string, then passes the inline argument `{{$New-Date --DatePart:Year}}` (containing the macro call) directly to the SendKeys plugin to input into the element matching the CSS selector `.text-field`.",
+					"use_case": "sendkeys_with_newdate_year_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current year obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Year",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Year}}` represents the usage of the `NewDate` macro plugin to retrieve the current year.   |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current year obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Year}}`) to generate the current year string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Year}}` so that the plugin inputs the generated year into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Year}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -232,19 +374,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current month into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Month}}`) to produce the current month string, then passes the inline argument `{{$New-Date --DatePart:Month}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_month_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current month obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Month",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Month}}` represents the usage of the `NewDate` macro plugin to retrieve the current month. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current month obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Month}}`) to generate the current month string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Month}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated month into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Month}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -252,19 +418,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current day into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Day}}`) to produce the current day string, then passes the inline argument `{{$New-Date --DatePart:Day}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_day_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current day obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Day",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Day}}` represents the usage of the `NewDate` macro plugin to retrieve the current day.     |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current day obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Day}}`) to generate the current day string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Day}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated day into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Day}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -274,14 +464,6 @@
 		{
 			"description": [
 				"This example demonstrates the usage of the `SendKeys` plugin to input the current hour obtained from the `NewDate` macro plugin into a text field.",
-				"",
-				"| Field       | Description                                                                                                                        |",
-				"|-------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName  | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |",
-				"| locator     | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |",
-				"| onElement   | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |",
-				"| argument    | The macro token `{{$New-Date --DatePart:Hour}}` represents the usage of the `NewDate` macro plugin to retrieve the current hour.   |",
-				"",
 				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current hour obtained from the `NewDate` macro plugin into a text field."
 			],
 			"rule": {
