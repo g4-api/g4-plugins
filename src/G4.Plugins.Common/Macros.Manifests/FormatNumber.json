@@ -912,30 +912,49 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Large decimal value",
+						"Leading zero padding mismatch",
+						"Negative decimal input",
+						"Non-numeric input",
+						"Null element reference",
+						"Rounding behavior",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts 0.45678 into `00.4568` and the SendKeys plugin types it into #inputField.",
+					"notes": "Demonstrates a custom format string (`00.0000`) that pads with leading zeros and forces exactly four digits after the decimal point using US culture.",
+					"use_case": "format_custom_leading_zero_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CultureFormatting",
+					"CustomNumberFormat",
+					"FormatNumber",
+					"Macro",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format the number 0.45678 with the custom format specifier 00.0000 and the English (United States) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 0.45678 with the custom format specifier 00.0000 and the English (United States) culture within an automation workflow.",
-				"Here's the breakdown:",
+				"### Format a decimal with a custom `00.0000` specifier and US culture",
 				"",
-				"| Field      | Description                                                                                                                                               |",
-				"|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument   | Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:0.45678 --Format:00.0000 --Culture:en-US}}`. |",
-				"| locator    | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                                               |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                                             |",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.                        |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `00.4568` ",
-				"as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `0` custom format specifier serves as a zero-placeholder symbol. If the value being formatted has a digit in the position where the zero appears in the format string, that digit is copied to the result string; otherwise, a zero appears in the result string. The position of the leftmost zero before the decimal point and the rightmost zero after the decimal point determines the range of digits that are always present in the result string.",
-				"",
-				"The result string is affected by the formatting information of the current `NumberFormatInfo` object.",
-				"",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the-0-custom-specifier) ",
-				"and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"The `Format-Number` macro formats `0.45678` with the custom format string `00.0000` and the `en-US` culture.",
+				"This produces `00.4568`, padding the integer part with leading zeros and rounding the fractional part to four digits.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"In the format pattern `00.0000`, each `0` is a zero-placeholder symbol:",
+				"- Digits appear where present; zeros are inserted where digits are absent.",
+				"- Two zeros before the decimal ensure at least two integer digits, padded with leading zeros.",
+				"- Four zeros after the decimal guarantee exactly four fractional digits, rounding as needed."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:0.45678 --Format:00.0000 --Culture:en-US}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -943,26 +962,45 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture fallback to invariant",
+						"Digit count mismatch",
+						"Leading zero phone numbers",
+						"Negative numeric input",
+						"Non-numeric input",
+						"Null element reference",
+						"Unsupported culture tag",
+						"Zero value"
+					],
+					"expected_result": "The Format-Number macro converts 1234567890 into `(123) 456-7890` and the SendKeys plugin types it into #inputField.",
+					"notes": "Uses a custom pattern `(###) ###-####` to insert literal punctuation and map digits to placeholders; the macro has no UI side-effects.",
+					"use_case": "format_phone_number_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"CustomNumberFormat",
+					"FormatNumber",
+					"Macro",
+					"PhoneNumberFormatting",
+					"SendKeys",
+					"UiAutomation"
+				]
+			},
 			"description": [
-				"Format the number 1234567890 using the `#` format specifier to display it as a phone number in the format `(###) ###-####`.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 1234567890 as a phone number with the format `(###) ###-####`.",
-				"Here's the breakdown:",
+				"### Format a phone number with the `(###) ###-####` pattern",
 				"",
-				"| Field       | Description                                                                                                                               |",
-				"|-------------|-------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument    | Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:1234567890 --Format:(###) ###-####}}`. |",
-				"| locator     | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                               |",
-				"| onElement   | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                             |",
-				"| pluginName  | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.        |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `(123) 456-7890` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted phone number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `#` custom format specifier serves as a digit-placeholder symbol, where a digit in the position of the `#` symbol in the format string is copied to the result string.",
-				"The `##` format string causes the value to be rounded to the nearest digit preceding the decimal, where rounding away from zero is always used.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier)."
+				"The `Format-Number` macro formats the value `1234567890` using the custom format string `(###) ###-####`.",
+				"This produces a string such as `(123) 456-7890`, where each `#` copies one digit from the source number and the literal characters `(`, `)`, space, and `-` appear unchanged.",
+				"The resulting string replaces the macro token at runtime.",
+				"The `SendKeys` plugin types this string into the element identified by the CSS selector `#inputField`.",
+				"Macros only generate values and can be reused anywhere literal values are accepted.",
+				"In the pattern `(###) ###-####`, digit-placeholder symbols (`#`) map the first ten digits of the input to their respective positions, while any extra digits are dropped."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:1234567890 --Format:(###) ###-####}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -970,107 +1008,155 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with non-standard decimal separator",
+						"Input number with more than two decimals",
+						"Large magnitude numbers",
+						"Negative numbers",
+						"Very small decimal number",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '0,46' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro to apply fr-FR culture and a two-decimal precision format before sending the result using the SendKeys plugin. Ensures the macro remains purely value-generating.",
+					"use_case": "format_number_with_decimal_precision_and_french_culture",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Formatting",
+					"Localization",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 0.45678 using the `.` format specifier to insert a localized decimal separator into the result string with a precision of two decimal places and the French (France) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 0.45678 with a precision of two decimal places and the French (France) culture using the `.` format specifier.",
-				"Here's the breakdown:",
+				"### Format and send a number localized for French (France)",
 				"",
-				"| Field     | Description                                                                                                                                            |",
-				"|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:0.45678 --Format:0.00 --Culture:fr-FR}}`. |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                                            |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                                          |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.                     |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `0,46` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `.` custom format specifier inserts a localized decimal separator into the result string, and the precision of two decimal places is specified by `0.00`.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-1) ",
-				"and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"Convert the number `0.45678` to a string with two decimal places using the French (France) culture, then send it via keystrokes to the specified element.",
+				"The `Format-Number` macro uses the format string `0.00` and culture `fr-FR` to produce `0,46`; .NET always requires `.` in the format pattern, which it replaces with the culture-specific decimal separator (`,` for fr-FR).",
+				"If the original number were `-0.45678`, the output would be `-0,46`, showing that negative values are handled correctly.",
+				"The macro remains side-effect-free, purely outputting the formatted string.",
+				"The automation then passes that value to the `SendKeys` plugin, which sends the keystrokes to the element identified by the `CssSelector` locator."
 			],
 			"rule": {
 				"argument": "{{$Format-Number --Number:0.45678 --Format:0.00 --Culture:fr-FR}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
-				"pluginName": "SendKeys"
+				"pluginName": "SendKeys",
+				"$type": "Action"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with non-standard decimal separator",
+						"Input number with more than three group levels",
+						"Large magnitude numbers",
+						"Negative numbers",
+						"Very small decimal number",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '2.147.483.647' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro to apply es-ES culture and the #,# pattern to insert thousands separators before sending the result with the SendKeys plugin. The macro itself is side-effect-free.",
+					"use_case": "format_number_with_group_separators_spanish_culture",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Formatting",
+					"Localization",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 2,147,483,647 using the `,` format specifier to insert group separators and number scaling with the Spanish (Spain) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 2,147,483,647 using the `,` format specifier to insert group separators and number scaling with the Spanish (Spain) culture.",
-				"Here's the breakdown:",
+				"### Format and send a grouped number localized for Spanish (Spain)",
 				"",
-				"| Field     | Description                                                                                                                                                |",
-				"|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:2147483647 --Format:#,#,, --Culture:es-ES}}`. |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                                                |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                                              |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `2.147.483.647` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `,` format specifier is used to insert group separators and number scaling. In this example, the number is formatted as `2,147,483.647`.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-2) ",
-				"and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"Convert the number `2147483647` to a string that inserts thousands separators using the Spanish (Spain) culture, then send it via keystrokes to the specified element.",
+				"The `Format-Number` macro applies the pattern `#,#` with culture `es-ES`, so .NET inserts periods (`.`) as group separators, producing `2.147.483.647`.",
+				"Using `#,#` avoids the ×1 000 scaling that an extra comma (for example `#,#,,`) would trigger, as documented in the custom numeric format string rules.",
+				"The macro remains side-effect-free, only outputting the formatted string.",
+				"Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
 			"rule": {
-				"argument": "{{$Format-Number --Number:2147483647 --Format:#,#,, --Culture:es-ES}}",
+				"$type": "Action",
+				"argument": "{{$Format-Number --Number:2147483647 --Format:#,# --Culture:es-ES}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with non-standard percent symbol",
+						"Input number greater than one (e.g., 1.25 → 125.00%)",
+						"Large magnitude numbers (e.g., 123456 → 12 345 600.00%)",
+						"Negative numbers",
+						"Very small decimal number",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '36.97%' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro to apply en-US culture and the #0.00% pattern to multiply by 100 and append the percent symbol before sending the result with the SendKeys plugin. The macro itself is side-effect-free.",
+					"use_case": "format_decimal_as_percentage_en_us",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Formatting",
+					"Localization",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 0.3697 as a percentage with two decimal places using the `%` format specifier with the English (United States) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 0.3697 as a percentage with two decimal places using the `%` format specifier with the English (United States) culture.",
-				"Here's the breakdown:",
+				"### Format and send a percentage localized for English (United States)",
 				"",
-				"| Field     | Description                                                                                                                                             |",
-				"|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:0.3697 --Format:%#0.00 --Culture:en-US}}`. |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                                             |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                                           |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.                      |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `36.97%` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `%` format specifier is used to multiply the number by 100 and format it as a percentage with two decimal places. In this example, the number is formatted as `36.97%`.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-3) ",
-				"and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"Convert the number `0.3697` to a percentage string with two decimal places using the English (United States) culture, then send it via keystrokes to the specified element.",
+				"The `Format-Number` macro applies the pattern `#0.00%` with culture `en-US`, multiplying the value by 100 and adding a percent symbol, producing `36.97%`.",
+				"The macro remains side-effect-free, only outputting the formatted string.",
+				"Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
 			"rule": {
-				"argument": "{{$Format-Number --Number:0.3697 --Format:%#0.00 --Culture:en-US}}",
+				"$type": "Action",
+				"argument": "{{$Format-Number --Number:0.3697 --Format:#0.00% --Culture:en-US}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with non-standard per mille symbol",
+						"Input number greater than one (e.g., 1.25 → 1 250,00‰)",
+						"Large magnitude numbers (e.g., 123456 → 123 456 000,00‰)",
+						"Negative numbers",
+						"Very small decimal number",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '36,97‰' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro to apply ru-RU culture and the #0.00‰ pattern to multiply by 1000 and append the per-mille symbol before sending the result with the SendKeys plugin. The macro itself is side-effect-free.",
+					"use_case": "format_decimal_as_per_mille_ru_ru",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Formatting",
+					"Localization",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 0.03697 as a per mille with two decimal places using the `‰` format specifier with the Russian (Russia) culture.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 0.03697 as a per mille with two decimal places using the `‰` format specifier with the Russian (Russia) culture.",
-				"Here's the breakdown:",
+				"### Format and send a per-mille value localized for Russian (Russia)",
 				"",
-				"| Field     | Description                                                                                                                                                                     |",
-				"|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number, format, and culture to be used for formatting. For example, `{{$Format-Number --Number:0.03697 --Format:#0.00‰ --Culture:ru-RU}}`.                          |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                                                                     |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                                                                   |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.                                             |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `36.97‰` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `‰` format specifier is used to multiply the number by 1000 and format it as a per mille with two decimal places. In this example, the number is formatted as `36.97‰`.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-4) ",
-				"and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"Convert the number `0.03697` to a per-mille string with two decimal places using the Russian (Russia) culture, then send it via keystrokes to the specified element.",
+				"The `Format-Number` macro applies the pattern `#0.00‰` with culture `ru-RU`, multiplying the value by 1000 and adding the per-mille symbol, producing `36,97‰`.",
+				"The format string still uses a period (`.`); .NET automatically replaces it with the culture-specific decimal separator (a comma for Russian).",
+				"The per-mille sign (`‰`) is supplied by the culture’s `NumberFormatInfo.PerMilleSymbol` setting.",
+				"The macro remains side-effect-free, only outputting the formatted string.",
+				"Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:0.03697 --Format:#0.00‰ --Culture:ru-RU}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -1078,52 +1164,80 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with alternative exponent symbol",
+						"Input number less than one (e.g., 0.00042 → 4.2e-04)",
+						"Large magnitude numbers (e.g., 9.46e+15)",
+						"Negative exponent values",
+						"Negative numbers",
+						"Very small decimal number",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '1.5e+03' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro with pattern 0.0e+00 to force one decimal place and pad the exponent to two digits while always showing a plus sign for positive values. The macro is purely value-generating.",
+					"use_case": "format_number_scientific_notation_with_two_digit_exponent",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Formatting",
+					"Localization",
+					"ScientificNotation",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 1503.92311 using scientific notation with one decimal place and the exponent displayed with at least two digits and a plus sign if positive.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 1503.92311 using scientific notation with one decimal place and the exponent displayed with at least two digits and a plus sign if positive.",
-				"Here's the breakdown:",
+				"### Format and send a scientific-notation value",
 				"",
-				"| Field     | Description                                                                                                                          |",
-				"|-----------|--------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:1503.92311 --Format:0.0##e+00}}`. |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                          |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                        |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.   |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `1.5e+03` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The `0.0##e+00` format specifier is used to format the number using scientific notation with one decimal place and the exponent displayed with at least two digits and a plus sign if positive. In this example, the number is formatted as `1.5e+03`.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the-e-and-e-custom-specifiers).",
-				"and [this resource](https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/)."
+				"Convert the number `1503.92311` to scientific notation with exactly one decimal place, a plus sign, and at least two digits in the exponent, then send it via keystrokes to the specified element.",
+				"The `Format-Number` macro applies the pattern `0.0e+00`, where `0.0` forces a single decimal digit, and `e+00` pads the exponent to two digits while always displaying a `+` for positive exponents.",
+				"When formatted, the value becomes `1.5e+03`, since 1503.92311 equals 1.5 × 10³ after rounding.",
+				"The macro remains side-effect-free, only outputting the formatted string.",
+				"Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
 			"rule": {
-				"argument": "{{$Format-Number --Number:1503.92311 --Format:0.0##e+00}}",
+				"$type": "Action",
+				"argument": "{{$Format-Number --Number:1503.92311 --Format:0.0e+00}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with alternative literal-symbol rules",
+						"Input number shorter than pattern",
+						"Large magnitude numbers",
+						"Negative numbers",
+						"Very small decimal number",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '#987654#' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro with a custom pattern that escapes literal characters (\\#) to wrap the value in hash symbols. No --Culture flag is supplied; therefore, any locale setting affects parsing only—this pattern contains no group or decimal placeholders, so the output is culture-agnostic. The macro is purely value-generating.",
+					"use_case": "format_number_with_literal_characters_escape_char",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Formatting",
+					"LiteralCharacters",
+					"Localization",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 987654 with a custom format string that includes literal characters using the escape character.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 987654 with a custom format string that includes literal characters using the escape character.",
-				"Here's the breakdown:",
+				"### Format and send a number with literal characters",
 				"",
-				"| Field     | Description                                                                                                                        |",
-				"|-----------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:987654 --Format:\\###00\\#}}`.  |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                        |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                      |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `\\#987654\\#` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The format string `\\###00\\#` includes literal characters `987654` with the escape character (`\\`) before each character to ensure they are included in the result string unchanged. In this example, the number is formatted as `\\#987654\\#`.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--escape-character)."
+				"Convert the number `987654` to a string that embeds literal hash symbols using the escape character (`\\`) in the custom format string, then send it via keystrokes to the specified element.",
+				"The `Format-Number` macro applies the pattern `\\###00\\#` in JSON. Because JSON doubles backslashes, .NET receives the runtime format string `\\###00\\#`; each \\# escapes the hash so it appears literally in the output. The `###00` portion allows up to three optional digits followed by two required digits, padding with zeros if necessary (for example, `12` formats as `#0012#`).",
+				"The pattern contains no group or decimal placeholders, so the output remains the same across cultures; only numeric parsing would respect the current thread culture.",
+				"The macro remains side-effect-free, outputting only the formatted string.",
+				"Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:987654 --Format:\\###00\\#}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -1131,53 +1245,78 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with alternative group separator",
+						"Large magnitude numbers",
+						"Negative numbers",
+						"Positive numbers",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '**Zero**' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro with a three-section format string separated by semicolons: positive; negative; zero. The third section formats the value 0 as the literal **Zero**. The macro is purely value-generating.",
+					"use_case": "conditional_number_formatting_with_zero_literal",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ConditionalFormatting",
+					"Formatting",
+					"LiteralCharacters",
+					"Localization",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 0 with a custom format string that includes conditional formatting using the semicolon separator.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 0 with a custom format string that includes conditional formatting using the semicolon separator.",
-				"Here's the breakdown:",
+				"### Format and send a number with conditional formatting",
 				"",
-				"| Field     | Description                                                                                                                        |",
-				"|-----------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:0 --Format:##;(##);**Zero**}}`. |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                        |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                      |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `**Zero**` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The format string `##;(##);**Zero**` contains three sections separated by semicolons. ",
-				"The first section applies to positive values, the second section applies to negative values, and the third section applies to zeros. In this example, the number is formatted as `**Zero**` since it is zero.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--section-separator)."
+				"Convert the number `0` to a string using a three-section custom format (`##;(##);**Zero**`), then send it via keystrokes to the specified element.",
+				"The format string sections are separated by semicolons: the first (`##`) applies to positive numbers, the second (`(##)`) to negatives, and the third (`**Zero**`) to zero values. For an input of `0`, the macro outputs the literal string `**Zero**`.",
+				"The macro remains side-effect-free, outputting only the formatted string.",
+				"Automation passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:0 --Format:##;(##);**Zero**}}",
-				"pluginName": "SendKeys",
 				"locator": "CssSelector",
-				"onElement": "#inputField"
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Culture with alternative decimal separator",
+						"Input number requiring thousands separator (e.g., 1234.5 → 1,234.5K)",
+						"Large magnitude numbers",
+						"Negative numbers",
+						"Very small decimal number",
+						"Zero as input"
+					],
+					"expected_result": "The formatted string '123.8K' is sent as keystrokes to the element with the specified CSS selector.",
+					"notes": "Uses the Format-Number macro with a custom format string `#,##0.0K`, where `K` is a literal character. No --Culture flag is supplied; any locale setting affects group or decimal separators, but the literal `K` remains unchanged. The macro is purely value-generating.",
+					"use_case": "format_number_with_k_literal_suffix",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Formatting",
+					"LiteralCharacters",
+					"Localization",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Format the number 123.8 with a custom format string that includes character literals.",
-				"This example demonstrates the usage of the `Format-Number` macro plugin to format the number 123.8 with a custom format string that includes character literals.",
-				"Here's the breakdown:",
+				"### Format and send a number with a literal suffix",
 				"",
-				"| Field     | Description                                                                                                                                                       |",
-				"|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| argument  | Specifies the number and format to be used for formatting. For example, `{{$Format-Number --Number:123.8 --Format:#,##0.0K}}`.                                  |",
-				"| locator   | Specifies the locator mechanism to identify the target element. For example, `CssSelector`.                                                                           |",
-				"| onElement | Specifies the value of the locator mechanism used to identify the target element. For example, `#inputField`.                                                         |",
-				"| pluginName| Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.                                 |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the formatted number `123.8K` as keystrokes to the element specified by the `CssSelector` value.",
-				"The formatted number will be sent to the targeted element within the automation workflow.",
-				"",
-				"The format string `#,##0.0K` includes the character literal `K`, which is interpreted as a literal character and included in the result string unchanged.",
-				"Character literals cannot be `0`, `#`, `%`, `‰`, `'`, `\\`, `.`, `,`, or `E` or `e`, depending on their position in the format string, unless escaped.",
-				"For more details, refer to the [official documentation](https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#character-literals)."
+				"Convert the number `123.8` to a string using the custom format `#,##0.0K`, then send it via keystrokes to the specified element.",
+				"The format string components are: `#,##0` (forces at least one digit, adds group separators), `.0` (one decimal place), and `K` (a literal character that is emitted unchanged). For the input `123.8`, the macro outputs `123.8K`.",
+				"Literal characters cannot be `0`, `#`, `%`, `‰`, `'`, `\\`, `.`, `,`, or `E/e` unless escaped, so `K` may be used without escaping.",
+				"The macro remains side-effect-free, outputting only the formatted string.",
+				"Automation passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Format-Number --Number:123.8 --Format:#,##0.0K}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
