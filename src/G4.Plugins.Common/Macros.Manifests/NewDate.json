@@ -462,11 +462,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current hour into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Hour}}`) to produce the current hour string, then passes the inline argument `{{$New-Date --DatePart:Hour}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_hour_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current hour obtained from the `NewDate` macro plugin into a text field.",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current hour obtained from the `NewDate` macro plugin into a text field."
+				"### SendKeys Plugin with NewDate Macro for Hour",
+				"",
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Hour}}`) to generate the current hour string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Hour}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated hour into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Hour}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -474,19 +506,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current minute into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Minute}}`) to produce the current minute string, then passes the inline argument `{{$New-Date --DatePart:Minute}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_minute_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current minute obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Minute",
 				"",
-				"| Field      | Description                                                                                                                          |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.   |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                        |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                   |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Minute}}` represents the usage of the `NewDate` macro plugin to retrieve the current minute. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current minute obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Minute}}`) to generate the current minute string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Minute}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated minute into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Minute}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -494,19 +550,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current second into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Second}}`) to produce the current second string, then passes the inline argument `{{$New-Date --DatePart:Second}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_second_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current second obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Second",
 				"",
-				"| Field      | Description                                                                                                                          |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.   |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                        |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                   |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Second}}` represents the usage of the `NewDate` macro plugin to retrieve the current second. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current second obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Second}}`) to generate the current second string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Second}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated second into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Second}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -514,19 +594,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current millisecond string into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Millisecond}}`) to produce the current millisecond string, then passes the inline argument `{{$New-Date --DatePart:Millisecond}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_millisecond_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current millisecond obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Millisecond",
 				"",
-				"| Field      | Description                                                                                                                                    |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.             |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                  |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                             |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Millisecond}}` represents the usage of the `NewDate` macro plugin to retrieve the current millisecond. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current millisecond obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Millisecond}}`) to generate the current millisecond string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Millisecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated millisecond into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Millisecond}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -534,19 +638,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current nanosecond string into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Nanosecond}}`) to produce the current nanosecond string, then passes the inline argument `{{$New-Date --DatePart:Nanosecond}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_nanosecond_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current nanosecond obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Nanosecond",
 				"",
-				"| Field      | Description                                                                                                                                  |",
-				"|------------|----------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.           |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                           |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Nanosecond}}` represents the usage of the `NewDate` macro plugin to retrieve the current nanosecond. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current nanosecond obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Nanosecond}}`) to generate the current nanosecond string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Nanosecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated nanosecond into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Nanosecond}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -554,19 +682,43 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid DatePart parameter",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current microsecond string into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Microsecond}}`) to produce the current microsecond string, then passes the inline argument `{{$New-Date --DatePart:Microsecond}}` (containing the macro call) directly to the SendKeys plugin to input into the element matching the CSS selector `.text-field`.",
+					"use_case": "sendkeys_with_newdate_microsecond_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current microsecond obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Microsecond",
 				"",
-				"| Field      | Description                                                                                                                                    |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.             |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                  |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                             |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Microsecond}}` represents the usage of the `NewDate` macro plugin to retrieve the current microsecond. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current microsecond obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Microsecond}}`) to generate the current microsecond string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Microsecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated microsecond into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Microsecond}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
@@ -574,19 +726,46 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid CSS selector",
+						"Invalid tick value",
+						"Locator not matching",
+						"Macro execution failure",
+						"Nested macro syntax error",
+						"No argument provided",
+						"Plugin failure",
+						"SendKeys plugin not installed",
+						"Text field non-editable",
+						"Tick conversion error",
+						"Tick value out of range",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The SendKeys plugin inputs the current tick count into the text field matching the CSS selector `.text-field`.",
+					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Ticks}}`) to produce the current tick count string, then passes the inline argument `{{$New-Date --DatePart:Ticks}}` (containing the macro call) directly to the SendKeys plugin.",
+					"use_case": "sendkeys_with_newdate_ticks_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys",
+					"TextField",
+					"Ticks"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin to input the current ticks obtained from the `NewDate` macro plugin into a text field.",
+				"### SendKeys Plugin with NewDate Macro for Ticks",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |",
-				"| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |",
-				"| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |",
-				"| argument   | The macro token `{{$New-Date --DatePart:Ticks}}` represents the usage of the `NewDate` macro plugin to retrieve the current ticks. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to input the current ticks obtained from the `NewDate` macro plugin into a text field."
+				"Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Ticks}}`) to generate the current tick count string.",
+				"Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Ticks}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated tick count into the text field."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date --DatePart:Ticks}}",
 				"locator": "CssSelector",
 				"onElement": ".text-field",
