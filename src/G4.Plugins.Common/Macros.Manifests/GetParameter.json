@@ -53,10 +53,41 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Environment not found",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'AppVersion' parameter and types its value into the input element located by the CSS selector #appVersionInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_appversion_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ApplicationScope",
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'AppVersion' from SystemParameters in Application scope; use SendKeys to target #appVersionInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the AppVersion parameter stored in the Application scope of the SystemParameters environment.",
+				"A macro invocation {{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}} is applied to the argument attribute.",
+				"The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #appVersionInput.",
+				"The action passes when the input receives the expected version string."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
 				"locator": "CssSelector",
 				"onElement": "#appVersionInput",
@@ -64,21 +95,83 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Environment not found",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'AppVersion' parameter and types its value into the input element located by the CSS selector #appVersionInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_appversion_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ApplicationScope",
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'AppVersion' from default SystemParameters in Application scope; use SendKeys to target #appVersionInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the `AppVersion` parameter stored in the *Application* scope of the `SystemParameters` environment.",
+				"A macro invocation `{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}` is applied to the `argument` attribute.",
+				"The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#appVersionInput`.",
+				"The action passes when the input receives the expected version string."
 			],
 			"rule": {
-				"argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application}}",
+				"$type": "Action",
+				"argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
 				"locator": "CssSelector",
 				"onElement": "#appVersionInput",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Invalid email format",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'Email' parameter and types its value into the input element located by the CSS selector #emailInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_email_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"SendKeys",
+					"UserScope"
+				]
+			},
 			"description": [
-				"Retrieve 'Email' from User scope; use SendKeys to target #emailInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the Email parameter stored in the User scope.",
+				"A macro invocation {{$Get-Parameter --Name:Email --Scope:User}} is applied to the argument attribute.",
+				"The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #emailInput.",
+				"The action passes when the input receives the expected email address."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:Email --Scope:User}}",
 				"locator": "CssSelector",
 				"onElement": "#emailInput",
@@ -86,10 +179,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Invalid scope value",
+						"Machine not identified",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'MachineName' parameter and types its value into the input element located by the CSS selector #machineNameInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_machinename_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"MachineScope",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'MachineName' from Machine scope; use SendKeys to target #machineNameInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the `MachineName` parameter stored in the *Machine* scope.",
+				"A macro invocation `{{$Get-Parameter --Name:MachineName --Scope:Machine}}` is applied to the `argument` attribute.",
+				"The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#machineNameInput`.",
+				"The action passes when the input receives the expected machine name."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:MachineName --Scope:Machine}}",
 				"locator": "CssSelector",
 				"onElement": "#machineNameInput",
@@ -97,10 +221,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Invalid process ID format",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found",
+						"Process context not available"
+					],
+					"expected_result": "The automation retrieves the 'ProcessId' parameter and types its value into the input element located by the CSS selector #processIdInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_processid_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"ProcessScope",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'ProcessId' from Process scope; use SendKeys to target #processIdInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the ProcessId parameter stored in the Process scope.",
+				"A macro invocation {{$Get-Parameter --Name:ProcessId --Scope:Process}} is applied to the argument attribute.",
+				"The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #processIdInput.",
+				"The action passes when the input receives the expected process ID."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:ProcessId --Scope:Process}}",
 				"locator": "CssSelector",
 				"onElement": "#processIdInput",
@@ -108,10 +264,46 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Decryption failure",
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Environment not found",
+						"Invalid encryption key",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'SecretParam' parameter, decrypts it with the provided key, and types the plaintext value into the input element located by the CSS selector #secretInput.",
+					"notes": "The Get-Parameter macro returns a decrypted string at runtime, while the SendKeys action performs the UI interaction using that string.",
+					"use_case": "send_secretparam_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ApplicationScope",
+					"CssSelector",
+					"DataEntry",
+					"Decryption",
+					"EncryptionKey",
+					"GetParameter",
+					"Macro",
+					"Secret",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'SecretParam' from SystemParameters in Application scope using EncryptionKey for decryption; use SendKeys to target #secretInput."
+				"### Retrieve and decrypt parameter value, then inject it into an input",
+				"",
+				"The example fetches the encrypted text from the SecretParam parameter stored in the Application scope of the SystemParameters environment.",
+				"A macro invocation {{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}} is applied to the argument attribute.",
+				"The macro evaluates to the decrypted secret string, which the SendKeys plugin consumes and sends to the element located by the CSS selector #secretInput.",
+				"The action passes when the input receives the expected secret value."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}}",
 				"locator": "CssSelector",
 				"onElement": "#secretInput",
