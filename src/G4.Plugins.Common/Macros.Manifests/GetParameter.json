@@ -15,6 +15,67 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Get-Parameter.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/GetParameter.cs"
+			},
+			"rag": {
+				"description": "GetParameter retrieves configuration or secret values at run-time from multiple scopes and environments, transparently decoding base-64 or decrypting data with an optional key. It enforces scope rules, fall-back defaults, and validation checks, keeping automations secure, current, and reliable.",
+				"qa": [
+					{
+						"question": "What does the GetParameter plugin do in one sentence?",
+						"answer": "It fetches a named parameter at run-time—decoding or decrypting it if needed—and swaps the placeholder with the live value so the workflow continues without manual edits."
+					},
+					{
+						"question": "Which core features and input parameters does GetParameter support?",
+						"answer": "Scope-aware look-ups, environment targeting, on-the-fly base-64 decoding, optional decryption with EncryptionKey, and four inputs: Name (required), Scope, Environment, and EncryptionKey."
+					},
+					{
+						"question": "Where can I find the plugin’s source code and documentation?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/GetParameter.cs – Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Get-Parameter.md"
+					},
+					{
+						"question": "How should I configure scope, environment, and encryption key for reliable runs?",
+						"answer": "Store each value in the correct scope, supply Environment only when you have multiple parameter sets, and pass an EncryptionKey only for secrets encrypted by RegisterParameter."
+					},
+					{
+						"question": "What is the rule/schema for the Name, Scope, Environment, and EncryptionKey fields?",
+						"answer": "Name is mandatory. Scope accepts Application, User, Machine, Process, or Session (default). Environment defaults to SystemParameters. EncryptionKey is optional for decrypting protected values."
+					},
+					{
+						"question": "What is the manifestVersion declared in the plugin manifest?",
+						"answer": "4"
+					},
+					{
+						"question": "Who is listed as the author of GetParameter?",
+						"answer": "Roei Sabag – https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What summary does the manifest provide for GetParameter?",
+						"answer": "It retrieves parameters from various scopes, substitutes live values during execution, and can decode or decrypt them when needed."
+					},
+					{
+						"question": "Which aliases can invoke this plugin?",
+						"answer": "\"getparam\" and \"GetParameter\""
+					},
+					{
+						"question": "Which category does the plugin belong to?",
+						"answer": "DataManagement"
+					},
+					{
+						"question": "What pluginType is declared?",
+						"answer": "Macro"
+					},
+					{
+						"question": "Which platforms are supported?",
+						"answer": "Any"
+					},
+					{
+						"question": "What key message does the long description emphasize about GetParameter?",
+						"answer": "Secure, environment-aware retrieval and seamless placeholder substitution, with support for base-64 decoding and encrypted secrets."
+					},
+					{
+						"question": "How does GetParameter handle missing parameters or invalid scope values?",
+						"answer": "It returns an empty string or explicit error, enabling the calling step to log, branch, or retry so the workflow can react gracefully."
+					}
+				]
 			}
 		}
 	},
