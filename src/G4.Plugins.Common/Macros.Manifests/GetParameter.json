@@ -10,38 +10,46 @@
 	"categories": [
 		"DataManagement"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Get-Parameter.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/GetParameter.cs"
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `GetParameter` plugin retrieves parameter values from designated storage scopes within controlled environments. ",
-		"It supports rapid access to configuration data, real-time substitution of dynamic values, and decoding of encoded parameters. ",
-		"Additionally, it can decrypt secure values using a provided EncryptionKey when the parameter was encrypted by the RegisterParameter plugin. ",
-		"This capability is essential for maintaining secure and efficient automation workflows in diverse deployment scenarios.",
+		"The GetParameter plugin fetches configuration and secret values from defined storage scopes at runtime.",
+		"It instantly substitutes placeholders with live data so automation flows keep moving without manual edits.",
+		"It can safely decode or decrypt values that were stored in base-64 or encrypted form by the RegisterParameter plugin.",
+		"This keeps configuration handling secure, consistent, and environment-aware across robots, tests, and services.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature                                  | Description                                                                                                                                                                                                                                          |",
-		"|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Environment Parameter Retrieval          | Extracts parameter values from specified scopes (Application, User, Machine, Process, Session) while supporting multi-environment setups. This ensures accurate retrieval even in complex, dynamically changing runtime conditions.                  |",
-		"| Dynamic Value Injection                  | Integrates with automation workflows by replacing placeholders with live parameter values in real-time, supporting both synchronous and asynchronous execution paths to maintain workflow continuity.                                                |",
-		"| Encoding Support                         | Implements robust base64 encoding and decoding processes to maintain data integrity and compatibility across various systems and communication channels.                                                                                             |",
-		"| Environment-Specific Parameter Retrieval | Leverages explicit environment identifiers (e.g., test, prod) to target distinct parameter repositories, defaulting to 'SystemParameters' when not specified, thus ensuring that the correct configuration data is isolated and retrieved as needed. |",
-		"| Encryption Support                       | Uses a provided EncryptionKey to decrypt parameter values that were encrypted by the RegisterParameter plugin, ensuring that sensitive data remains secure while being accessible for authorized automation tasks.                                   |",
+		"| Feature                     | Description                                                                             |",
+		"|-----------------------------|-----------------------------------------------------------------------------------------|",
+		"| Environment-Scope Retrieval | Pulls parameters from Application, User, Machine, Process, or Session scopes.           |",
+		"| Environment Targeting       | Directs lookups to specific stores such as test, staging, or prod for clean separation. |",
+		"| Dynamic Injection           | Replaces tokens in workflow inputs or outputs on the fly to keep data current.          |",
+		"| Encoding Support            | Decodes or encodes base-64 strings to ensure safe transport and storage.                |",
+		"| Encryption Support          | Decrypts values protected by RegisterParameter when given a valid EncryptionKey.        |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                           | Description                                                                                                                                                                                     |",
-		"|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Task Orchestration              | Retrieves critical configuration parameters to coordinate multi-stage automation tasks, ensuring that each workflow step is executed with the correct runtime data.                             |",
-		"| Environment-Specific Automation | Adapts automation bots to operate across multiple environments by dynamically sourcing parameters specific to each context, thereby enhancing consistency and reliability in process execution. |",
+		"| Use Case                        | Description                                                                          |",
+		"|---------------------------------|--------------------------------------------------------------------------------------|",
+		"| Task Orchestration              | Supplies critical runtime parameters so multi-step bots execute with the right data. |",
+		"| Environment-Specific Automation | Adapts bots to different environments by pulling the matching configuration set.     |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                           | Description                                                                                                                                                                     |",
-		"|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Data-Driven Testing             | Dynamically retrieves test data parameters to support a data-driven testing approach, allowing test scenarios to be generated and adjusted based on current parameter values.   |",
-		"| Configuration Management        | Extracts and integrates runtime configuration parameters, enabling testing frameworks to automatically adjust to evolving conditions, thus ensuring robustness and scalability. |",
-		"| Environment-Based Customization | Retrieves environment-specific parameters to tailor test cases, providing precise control over test execution and improving overall test coverage.                              |"
+		"| Use Case                        | Description                                                                            |",
+		"|---------------------------------|----------------------------------------------------------------------------------------|",
+		"| Data-Driven Testing             | Retrieves test data parameters to generate scenarios on demand.                        |",
+		"| Configuration Management        | Injects current runtime settings so tests adjust automatically to changing conditions. |",
+		"| Environment-Based Customization | Pulls environment-specific values to tailor test runs for accurate coverage.           |"
 	],
 	"examples": [
 		{
