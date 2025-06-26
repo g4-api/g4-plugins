@@ -10,9 +10,15 @@
 	"categories": [
 		"Utilities"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Date.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewDate.cs"
+			}
+		}
+	},
 	"description": [
-		"The NewDate macro plugin serves as a versatile tool for manipulating date and time within automation workflows and testing scenarios.",
-		"",
 		"### Purpose",
 		"",
 		"The primary purpose of the NewDate macro plugin is to provide functionalities for date and time manipulation, including adding or subtracting time, extracting specific date parts, and formatting dates according to custom formats.",
@@ -43,19 +49,37 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty macro output",
+						"Incorrect date format",
+						"Invalid CSS selector",
+						"Locator not matching",
+						"SendKeys failure"
+					],
+					"expected_result": "The plugin sends the current date and time as keystrokes to the element matching the CSS selector `.example-element`.",
+					"notes": "This example uses the `NewDate` macro (`{{$New-Date}}`) to generate the argument for the `SendKeys` plugin.",
+					"use_case": "sendkeys_with_newdate_macro",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `SendKeys` plugin with the `{{$New-Date}}` macro as the argument.",
+				"### SendKeys Plugin with NewDate Macro",
 				"",
-				"| Field      | Description                                                                                                                                                                       |",
-				"|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to a specified element.                                       |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element where the keystrokes will be sent.                                                    |",
-				"| onElement  | Indicates the value of the locator, representing the element where the keystrokes will be sent.                                                                                   |",
-				"| argument   | The macro token `{{$NewDate}}` represents the default usage of the `NewDate` macro plugin, which retrieves the current date and time in the format `yyyy-MM-ddTHH:mm:ss.ffffffK`. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the current date and time obtained from the `NewDate` macro to the specified element."
+				"Use the `SendKeys` plugin to send the current date and time to the specified element matching the CSS selector `.example-element`.",
+				"Generate the argument by applying the `NewDate` macro (`{{$New-Date}}`), which returns the current local date and time as a string."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Date}}",
 				"locator": "CssSelector",
 				"onElement": ".example-element",
@@ -63,17 +87,40 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid date format",
+						"Missing parameter name",
+						"Nested macro syntax error",
+						"Parameter name conflict",
+						"Plugin failure",
+						"Session scope unsupported",
+						"Unexpected whitespace in argument"
+					],
+					"expected_result": "The RegisterParameter plugin registers a session-scoped parameter named DataParameter with the current date in yyyy-MM-dd format.",
+					"notes": "This example first evaluates the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to produce the date string, then passes that string verbatim in the argument (`--Name:DataParameter --Value:<date string> --Scope:Session`) to the `RegisterParameter` plugin.",
+					"use_case": "register_parameter_current_date_session",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"DateTime",
+					"Macro",
+					"NewDate",
+					"Parameter",
+					"RegisterParameter",
+					"Session"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `RegisterParameter` plugin to register a parameter named `DataParameter` with the current date obtained from the `NewDate` macro plugin in the format `yyyy-MM-dd`.",
+				"### RegisterParameter Plugin with NewDate Macro",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                                                                                                                         |",
-				"|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This plugin is used to register a parameter for later use in the automation workflow.                                                                                                                                                                                                                  |",
-				"| argument   | The macro token `{{$ --Name:DataParameter --Value:{{$New-Date --Format:yyyy-MM-dd}} --Scope:Session}}` represents the registration of a parameter named `DataParameter` with the current date obtained from the `NewDate` macro plugin in the format `yyyy-MM-dd`. The parameter's scope is set to `Session`, indicating that it will be available for the duration of the session. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register the current date with the format `yyyy-MM-dd` as a parameter named `DataParameter` for later use within the session."
+				"Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to produce a date string in `yyyy-MM-dd` format.",
+				"Pass the verbatim argument string (`{{$ --Name:DataParameter --Value:<date string> --Scope:Session}}`) to the `RegisterParameter` plugin to register a session-scoped parameter named `DataParameter` with the generated date string."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:DataParameter --Value:{{$New-Date --Format:yyyy-MM-dd}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
@@ -81,12 +128,6 @@
 		{
 			"description": [
 				"This example demonstrates the usage of the `WriteLog` plugin to log a meaningful message including the current date obtained from the `NewDate` macro plugin.",
-				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                      |",
-				"|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `WriteLog`. This plugin is used to write information to the host console.                                                                                                                                                 |",
-				"| argument   | The macro token `{{$New-Date --Format:yyyy-MM-dd}}` represents the usage of the `NewDate` macro plugin to retrieve the current date in the format `yyyy-MM-dd`. In this example, the argument is used to write a log entry with a meaningful message including the current date. |",
-				"",
 				"This example instructs the automation system to utilize the `WriteLog` plugin to write a log entry including the current date obtained from the `NewDate` macro plugin."
 			],
 			"rule": {
@@ -376,7 +417,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the duration to add to or subtract from the current date and time."
+				"Amount of time to add to the current date and time.",
+				"Use positive or negative values to move the timestamp forward or backward.",
+				"Supports durations such as days, hours, minutes, and seconds."
 			],
 			"mandatory": false,
 			"name": "AddTime",
@@ -384,15 +427,30 @@
 		},
 		{
 			"description": [
-				"Specifies the duration to subtract from the current date and time."
+				"Amount of time to subtract from the current date and time.",
+				"Define the duration in units like days, hours, minutes, or seconds.",
+				"Creates a past timestamp relative to now."
 			],
 			"mandatory": false,
 			"name": "SubtructTime",
 			"type": "Time"
 		},
 		{
+			"default": "yyyy-MM-ddTHH:mm:ss.ffffffK",
 			"description": [
-				"Specifies the custom format for formatting the date and time. If not provided, the default format is used."
+				"Custom pattern that dictates how the date and time are displayed.",
+				"Uses standard .NET format tokens for precise control over order, separators, and precision.",
+				"Defaults to `yyyy-MM-ddTHH:mm:ss.ffffffK` when no format is provided."
+			],
+			"links": [
+				{
+					"link": "https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings",
+					"title": "Custom Date and Time Format Strings"
+				},
+				{
+					"link": "https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings",
+					"title": "Standard Date and Time Format Strings"
+				}
 			],
 			"mandatory": false,
 			"name": "Format",
@@ -400,7 +458,10 @@
 		},
 		{
 			"description": [
-				"Specifies the specific part of the date and time to extract, such as year, month, day, etc."
+				"Choose one element of the date and time, like year, month, or day, when you need only part of the full timestamp.",
+				"Selecting 'Hour' or 'Minute' lets you work with the exact time of day for scheduling or logging.",
+				"Using 'Second', 'Millisecond', or smaller units helps when you need precise timing in your application.",
+				"Specifying 'Ticks' returns the raw tick count for very fine measurements and analysis."
 			],
 			"mandatory": false,
 			"name": "DatePart",
@@ -408,61 +469,81 @@
 			"values": [
 				{
 					"description": [
-						"The year component of the date and time."
+						"Extracts the year from the date and time input.",
+						"Using the year value helps group or filter data by calendar year.",
+						"Value appears as a four-digit number like 2025."
 					],
 					"name": "Year"
 				},
 				{
 					"description": [
-						"The month component of the date and time, where January is represented as 1 and December is represented as 12."
+						"Extracts the month number from the date and time, where January is 1 and December is 12.",
+						"Month values help sort events or data within a single year.",
+						"Useful for generating monthly reports or determining seasonal patterns."
 					],
 					"name": "Month"
 				},
 				{
 					"description": [
-						"The day component of the date and time."
+						"Extracts the day of the month from the date and time.",
+						"Day values range from 1 to 31 depending on the month.",
+						"Scheduling or tracking tasks on specific dates becomes easier."
 					],
 					"name": "Day"
 				},
 				{
 					"description": [
-						"The hour component of the time."
+						"Extracts the hour part of the time using a 24-hour clock.",
+						"Hour values range from 0 to 23.",
+						"This is useful when you need to trigger actions at a specific hour."
 					],
 					"name": "Hour"
 				},
 				{
 					"description": [
-						"The minute component of the time."
+						"Extracts the minute part of the time, ranging from 0 to 59.",
+						"Using minutes allows finer-grained time schedules or logs.",
+						"Combining with hours defines precise times like 14:30."
 					],
 					"name": "Minute"
 				},
 				{
 					"description": [
-						"The second component of the time."
+						"Extracts the second part of the time, ranging from 0 to 59.",
+						"Seconds allow tracking events at a one-second resolution.",
+						"Useful for timestamping or measuring short delays."
 					],
 					"name": "Second"
 				},
 				{
 					"description": [
-						"The millisecond component of the time."
+						"Extracts the millisecond part of the time, ranging from 0 to 999.",
+						"Milliseconds help measure short intervals with high precision.",
+						"Essential for applications that record or analyze rapid events."
 					],
 					"name": "Millisecond"
 				},
 				{
 					"description": [
-						"The nanosecond component of the time."
+						"Extracts the nanosecond component, measuring one billionth of a second.",
+						"Nanoseconds provide extremely fine timing for specialized scenarios.",
+						"Useful for high-resolution timestamps in scientific or performance analysis."
 					],
 					"name": "Nanosecond"
 				},
 				{
 					"description": [
-						"The microsecond component of the time."
+						"Extracts the microsecond component, measuring one millionth of a second.",
+						"Microseconds allow very precise time calculations below the millisecond level.",
+						"Helpful for profiling code performance or detailed logging."
 					],
 					"name": "Microsecond"
 				},
 				{
 					"description": [
-						"The number of ticks representing the time interval."
+						"Extracts the total number of ticks from the time value, where each tick is 100 nanoseconds.",
+						"Ticks provide the raw count of time intervals for maximum precision.",
+						"Useful for comparing or calculating time spans at the lowest resolution."
 					],
 					"name": "Ticks"
 				}
@@ -470,7 +551,9 @@
 		},
 		{
 			"description": [
-				"Indicates whether the date and time should be in UTC (Coordinated Universal Time). If not specified, local time is used."
+				"Records date and time values using Coordinated Universal Time instead of the local time zone.",
+				"Standardizing on UTC helps avoid errors caused by time zone differences.",
+				"A universal time reference improves consistency when processing timestamps across regions."
 			],
 			"mandatory": false,
 			"name": "Utc",
@@ -478,7 +561,9 @@
 		},
 		{
 			"description": [
-				"Indicates whether the date and time should be converted to Unix epoch time."
+				"Converts date and time values into the number of seconds that have elapsed since January 1, 1970 (the Unix epoch).",
+				"Epoch time is a common format for storing and comparing timestamps across systems.",
+				"Using a numeric timestamp simplifies interoperability across platforms and languages."
 			],
 			"mandatory": false,
 			"name": "UnixEpoch",
@@ -486,7 +571,9 @@
 		},
 		{
 			"description": [
-				"Indicates whether the date and time should be converted to OLE Automation Date format."
+				"Transforms date and time values into OLE Automation Date format, which represents dates as floating-point numbers.",
+				"The integer part counts days since December 30, 1899 and the fractional part represents the time of day.",
+				"Many Microsoft automation tools use this format to maintain compatibility."
 			],
 			"mandatory": false,
 			"name": "OaDate",
@@ -494,7 +581,9 @@
 		},
 		{
 			"description": [
-				"Indicates whether to retrieve the day of the year."
+				"Returns the day number within the year for the given date and time.",
+				"Day-of-year values help compute spans and filter data across an annual period.",
+				"Continuous day counts support features like annual reports and milestone tracking."
 			],
 			"mandatory": false,
 			"name": "DayOfYear",
@@ -502,22 +591,26 @@
 		},
 		{
 			"description": [
-				"Indicates whether to retrieve the day of the week."
+				"Retrieves the day of the week for the provided date and time.",
+				"Weekday information helps schedule tasks and enforce business rules.",
+				"Calendar views and weekly summaries depend on accurate weekday values."
 			],
 			"mandatory": false,
 			"name": "DayOfWeek",
 			"type": "Switch"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Macro",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The NewDate macro plugin serves as a versatile tool for manipulating date and time within automation workflows and testing scenarios."
+		"The NewDate plugin instantly creates date and time values, including the current moment or a value shifted by an amount you choose.",
+		"It can return full timestamps, individual parts such as year or minute, or special formats like Unix epoch and OLE Automation numbers.",
+		"Custom formatting and a UTC switch help automations stamp logs, fill inputs, and schedule tasks without hand-written date math."
 	]
 }
