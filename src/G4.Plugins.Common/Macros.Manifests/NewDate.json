@@ -15,6 +15,71 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Date.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewDate.cs"
+			},
+			"rag": {
+				"description": "NewDate provides automated date and time manipulation for workflows, enforcing input validation, format checks, and dynamic runtime evaluations. It supports custom formats, partial extraction of date parts, time shifts, and epoch conversions through flexible parameters. Built-in reliability mechanisms preserve workflow continuity across time zones and execution contexts.",
+				"qa": [
+					{
+						"question": "What is the NewDate plugin used for?",
+						"answer": "NewDate offers date and time manipulation in automation flows, enabling you to add or subtract intervals, extract specific parts like year or minute, and apply custom formatting without manual date math."
+					},
+					{
+						"question": "What key features and parameters does the NewDate plugin support?",
+						"answer": "It supports time adjustments via AddTime/SubtructTime, custom output with the Format pattern using .NET format strings (Custom: https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings; Standard: https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings), part extraction through DatePart (Year, Month, Day, Hour, Minute, Second, Millisecond, Nanosecond, Microsecond, Ticks), and switches for Utc, UnixEpoch, OaDate, DayOfYear, and DayOfWeek."
+					},
+					{
+						"question": "Where can I find the NewDate plugin’s code and documentation?",
+						"answer": "Code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewDate.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Date.md"
+					},
+					{
+						"question": "What are some best practices for using the NewDate plugin in automation workflows?",
+						"answer": "Validate input patterns to avoid format errors, explicitly set Utc when coordinating across time zones, choose appropriate DatePart values to prevent invalid parameter errors, and test epoch or OLE outputs to ensure downstream compatibility."
+					},
+					{
+						"question": "How do you invoke the NewDate plugin and what is its parameter schema?",
+						"answer": "Invoke as a macro: {{$New-Date [--AddTime:<duration>] [--SubtructTime:<duration>] [--Format:<pattern>] [--DatePart:<unit>] [--Utc] [--UnixEpoch] [--OaDate] [--DayOfYear] [--DayOfWeek]}}. Parameter types are Time and String, and switches for boolean flags."
+					},
+					{
+						"question": "What common errors should be handled when using the NewDate plugin?",
+						"answer": "Handle empty macro output, invalid date format patterns, nested macro syntax errors, unsupported DatePart values, and plugin invocation failures by validating inputs and catching exceptions before runtime."
+					},
+					{
+						"question": "What detailed capabilities does the manifest description highlight?",
+						"answer": "The manifest description details purpose (date/time manipulation including add/subtract, part extraction, formatting), RPA usages (calculations, logging, data processing), and automation testing usages (date verification, test data generation, test scheduling)."
+					},
+					{
+						"question": "Who is the author of the NewDate plugin?",
+						"answer": "The plugin is authored by Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What manifest version does the NewDate plugin use?",
+						"answer": "The NewDate plugin uses manifestVersion 4."
+					},
+					{
+						"question": "What aliases does the NewDate plugin define?",
+						"answer": "It can be invoked using the aliases \"date\" and \"NewDate\"."
+					},
+					{
+						"question": "What categories is the NewDate plugin listed under?",
+						"answer": "The plugin is listed under the \"Utilities\" category."
+					},
+					{
+						"question": "What is the key of the NewDate plugin?",
+						"answer": "The plugin’s key is \"New-Date\"."
+					},
+					{
+						"question": "Which platforms does the NewDate plugin support?",
+						"answer": "The plugin supports the \"Any\" platform."
+					},
+					{
+						"question": "What type of plugin is NewDate?",
+						"answer": "NewDate is a Macro plugin."
+					},
+					{
+						"question": "What is the summary of the NewDate plugin?",
+						"answer": "The NewDate plugin instantly creates date and time values, including the current moment or a shifted timestamp. It can return full timestamps, individual parts like year or minute, or special formats such as Unix epoch and OLE Automation dates, with custom formatting and a UTC switch to streamline workflows."
+					}
+				]
 			}
 		}
 	},
