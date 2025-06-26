@@ -116,17 +116,19 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the name of the parameter from which to retrieve the value."
+				"Identifies the parameter whose value you want to fetch.",
+				"Accurate naming ensures the plugin locates the correct stored value."
 			],
 			"mandatory": true,
 			"name": "Name",
 			"type": "String"
 		},
 		{
+			"default": "Session",
 			"description": [
-				"Specifies the scope from which to retrieve the parameter value.",
-				"The scope can be 'Application', 'User', 'Machine', 'Process', or 'Session'.",
-				"If not specified, the default scope 'Session' will be used."
+				"Indicates the storage scope to search for the parameter.",
+				"Accepts 'Application', 'User', 'Machine', 'Process', or 'Session'.",
+				"Omit this property to fall back to the 'Session' scope."
 			],
 			"mandatory": false,
 			"name": "Scope",
@@ -134,8 +136,8 @@
 		},
 		{
 			"description": [
-				"Specifies the environment name from which to retrieve the parameter value.",
-				"If not specified, the default environment name 'SystemParameters' will be used."
+				"Designates the environment collection that holds the parameter.",
+				"Defaults to 'SystemParameters' when the property is not supplied."
 			],
 			"mandatory": false,
 			"name": "Environment",
@@ -143,24 +145,25 @@
 		},
 		{
 			"description": [
-				"Specifies the encryption key used to decrypt the parameter value in case it was encrypted by the RegisterParameter plugin."
+				"Provides the symmetric key used to decrypt secure parameter values.",
+				"Include this key only when the value was encrypted by the RegisterParameter plugin."
 			],
 			"mandatory": false,
 			"name": "EncryptionKey",
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Macro",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `GetParameter` plugin retrieves parameter values from the environment for use within automation workflows. ",
-		"It allows automation scripts to adapt dynamically based on environmental configurations, enhancing flexibility and versatility.",
-		"It also supports decryption using an EncryptionKey if the parameter was encrypted by the RegisterParameter plugin, ensuring secure handling of sensitive data."
+		"The GetParameter plugin fetches a named parameter from application, user, machine, process, or session scopes in any environment.",
+		"It swaps placeholders with the live value during execution, letting automation steps adjust instantly to current settings.",
+		"The plugin also decodes base64 and, with an EncryptionKey, decrypts secrets saved by RegisterParameter, keeping sensitive data secure yet usable."
 	]
 }
