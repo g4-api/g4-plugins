@@ -10,6 +10,71 @@
 	"categories": [
 		"Utilities"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Format-Number.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/FormatNumber.cs"
+			},
+			"rag": {
+				"description": "Formats numbers safely and consistently for any locale. The macro validates inputs, supports dynamic culture, type, and pattern parameters, and produces side-effect-free, correctly formatted strings so downstream actions operate reliably across diverse automation workflows.",
+				"qa": [
+					{
+						"question": "What does the FormatNumber macro plugin do?",
+						"answer": "It converts numeric values into locale-aware strings using standard or custom format patterns, without performing any UI actions."
+					},
+					{
+						"question": "Which main features and parameters can I configure?",
+						"answer": "You can set Number (mandatory), Format, Culture, and NumberType to control pattern, regional separators, and underlying data type."
+					},
+					{
+						"question": "Where are the plugin’s source code and documentation?",
+						"answer": "Code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/FormatNumber.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Format-Number.md"
+					},
+					{
+						"question": "What’s a recommended best practice when using FormatNumber?",
+						"answer": "Always specify the Culture parameter explicitly in multi-regional workflows to avoid unexpected decimal and grouping symbols."
+					},
+					{
+						"question": "How are parameters validated by the plugin schema?",
+						"answer": "The manifest marks Number as required, sets default values for optional properties, and restricts NumberType to predefined enum values such as Byte, Integer, or Double."
+					},
+					{
+						"question": "Who authored the FormatNumber plugin?",
+						"answer": "Roei Sabag, https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What manifest version does FormatNumber use?",
+						"answer": "ManifestVersion 4."
+					},
+					{
+						"question": "What does the manifest summary say about FormatNumber?",
+						"answer": "It formats numbers into strings using culture settings and patterns, ensuring consistent, readable output across locales."
+					},
+					{
+						"question": "According to the description, what problem does the plugin solve?",
+						"answer": "It guarantees consistent numeric representation across automation tasks by applying culture-specific rules and custom patterns."
+					},
+					{
+						"question": "How does FormatNumber handle invalid input or configuration errors?",
+						"answer": "If Number is non-numeric or an unsupported NumberType or Format is supplied, the macro throws a descriptive runtime error to prevent silent data corruption."
+					},
+					{
+						"question": "Where can I find a complete list of .NET culture codes for the Culture parameter?",
+						"answer": "See https://azuliadesigns.com/c-sharp-tutorials/list-net-culture-country-codes/ for a comprehensive list of culture and region codes."
+					},
+					{
+						"question": "Where can I learn about standard numeric format strings for the Format parameter?",
+						"answer": "Microsoft’s reference for standard numeric format strings is available at https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings."
+					},
+					{
+						"question": "Where can I learn about custom numeric format strings for advanced formatting?",
+						"answer": "Microsoft’s guide to custom numeric format strings is available at https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings."
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
