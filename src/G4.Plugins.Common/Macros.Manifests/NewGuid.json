@@ -93,14 +93,6 @@
 		{
 			"description": [
 				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `B` format and send it as keystrokes to an element within an automation workflow.",
-				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `B` format. For example, `{{$New-Guid --Format:B}}`.                                         |",
-				"",
 				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `B` format (32 digits separated by hyphens, enclosed in braces) as keystrokes to the element specified by the CssSelector value."
 			],
 			"rule": {
@@ -111,19 +103,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"Malformed parentheses",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in P format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `P` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_parenthesized_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"GUID",
+					"Macro",
+					"PFormat",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `P` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Parenthesized GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `P` format. For example, `{{$New-Guid --Format:P}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `P` format (32 digits separated by hyphens, enclosed in parentheses) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `P` format (32 digits separated by hyphens, enclosed in parentheses) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:P}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -131,19 +141,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in X format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `X` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_formatted_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"GUID",
+					"Macro",
+					"SendKeys",
+					"XFormat"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `X` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Formatted GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `X` format. For example, `{{$New-Guid --Format:X}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `X` format (four hexadecimal values enclosed in braces) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `X` format (four hexadecimal values enclosed in braces) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:X}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -151,18 +178,39 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty GUID value",
+						"Generation failure",
+						"Invalid regex pattern",
+						"Log write failure",
+						"No regex match",
+						"Pattern produces incorrect length"
+					],
+					"expected_result": "The WriteLog plugin logs the first eight alphanumeric characters extracted from the generated GUID.",
+					"notes": "This example combines the `NewGuid` macro plugin's `Pattern` parameter with the `WriteLog` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `WriteLog` action.",
+					"use_case": "log_extracted_guid_prefix",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Extraction",
+					"Logging",
+					"NewGuid",
+					"Regex",
+					"WriteLog"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin with a custom regex pattern to extract the first 8 alphanumeric characters of the GUID.",
+				"### Extract and Log GUID Prefix",
 				"",
-				"| Field      | Description                                                                                                                                                                           |",
-				"|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `WriteLog`. This signifies the action of writing information to the host.                                                      |",
-				"| argument   | Specifies the log message, including the matched pattern of the GUID retrieved by the `NewGuid` plugin with the custom regex pattern. For example, `{{$New-Guid --Pattern:^\\w{8}}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `WriteLog` plugin to write information about the matched pattern of the GUID being used to the host.",
-				"The retrieved matched pattern, which consists of the first 8 alphanumeric characters of the GUID, will be dynamically inserted into the log message, providing valuable insight into the automation workflow."
+				"Invoke the `NewGuid` macro plugin to obtain a new GUID value at runtime.",
+				"Apply the regular expression `^\\w{8}` to the GUID value in the `argument` attribute.",
+				"Extract the first eight alphanumeric characters of the GUID.",
+				"Log the extracted GUID prefix using the `WriteLog` plugin."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\\w{8}}}",
 				"pluginName": "WriteLog"
 			}
