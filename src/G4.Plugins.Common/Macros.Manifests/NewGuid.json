@@ -51,19 +51,36 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in N format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `N` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_plain_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"GUID",
+					"Macro",
+					"NFormat",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `N` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Plain GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `N` format. For example, `{{$New-Guid --Format:N}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `N` format (32 digits) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `N` format (32 digits) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:N}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -71,11 +88,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in D format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `D` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_hyphenated_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"DFormat",
+					"GUID",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `D` format and send it as keystrokes to an element within an automation workflow.",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `D` format (32 digits separated by hyphens) as keystrokes to the element specified by the CssSelector value."
+				"### Generate and Send Hyphenated GUID",
+				"",
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `D` format (32 digits separated by hyphens) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:D}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
