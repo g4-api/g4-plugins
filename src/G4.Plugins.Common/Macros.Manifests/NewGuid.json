@@ -73,14 +73,6 @@
 		{
 			"description": [
 				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `D` format and send it as keystrokes to an element within an automation workflow.",
-				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `D` format. For example, `{{$New-Guid --Format:D}}`.                                         |",
-				"",
 				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `D` format (32 digits separated by hyphens) as keystrokes to the element specified by the CssSelector value."
 			],
 			"rule": {
@@ -91,11 +83,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"Malformed braces",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in B format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `B` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_braced_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"BFormat",
+					"GUID",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `B` format and send it as keystrokes to an element within an automation workflow.",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `B` format (32 digits separated by hyphens, enclosed in braces) as keystrokes to the element specified by the CssSelector value."
+				"### Generate and Send Braced GUID",
+				"",
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `B` format (32 digits separated by hyphens, enclosed in braces) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:B}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
