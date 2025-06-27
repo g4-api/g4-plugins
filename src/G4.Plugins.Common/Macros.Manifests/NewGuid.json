@@ -15,6 +15,59 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewGuid.cs"
+			},
+			"rag": {
+				"description": "The NewGuid macro generates unique GUIDs at runtime, facilitating robust automation by preventing ID conflicts. It supports multiple formatting options and custom regex extraction for precise control, maintaining workflow reliability and dynamic adaptability across various scenarios and system requirements.",
+				"qa": [
+					{
+						"question": "What is the basic functionality of the NewGuid macro plugin?",
+						"answer": "It generates unique GUIDs at runtime to prevent conflicts in automation workflows."
+					},
+					{
+						"question": "What key features and parameters does the NewGuid plugin support?",
+						"answer": "It supports multiple GUID formats (D, N, B, P, X) and allows custom regex patterns for specific value extraction. Details: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md"
+					},
+					{
+						"question": "How is the NewGuid plugin integrated into workflows?",
+						"answer": "It's integrated as a macro, generating GUIDs dynamically during workflow execution, suitable for element identification, tracking, and test data."
+					},
+					{
+						"question": "What are best practices when using the NewGuid plugin?",
+						"answer": "Use standardized GUID formats for consistency, apply regex patterns when partial GUID extraction is needed, and validate GUID consumption by subsequent plugins."
+					},
+					{
+						"question": "What rule details are included in NewGuid plugin usage examples?",
+						"answer": "Examples demonstrate action rules using SendKeys and WriteLog plugins with various GUID formats and regex patterns. See: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md"
+					},
+					{
+						"question": "Who authored the NewGuid plugin?",
+						"answer": "Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)"
+					},
+					{
+						"question": "What categories does the NewGuid plugin belong to?",
+						"answer": "Utilities"
+					},
+					{
+						"question": "What platforms are supported by the NewGuid plugin?",
+						"answer": "Any"
+					},
+					{
+						"question": "What is the plugin type for NewGuid?",
+						"answer": "Macro"
+					},
+					{
+						"question": "What does the summary of the NewGuid plugin describe?",
+						"answer": "It highlights the plugin's ability to generate GUIDs in multiple formats, customize extraction via regex, and improve workflow reliability and automation efficiency."
+					},
+					{
+						"question": "Where can I find the source and documentation for the NewGuid plugin?",
+						"answer": "Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewGuid.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md"
+					},
+					{
+						"question": "How does the NewGuid plugin handle errors?",
+						"answer": "It addresses issues such as invalid format specifications, regex pattern errors, and generation failures by clearly documented edge cases."
+					}
+				]
 			}
 		}
 	},
