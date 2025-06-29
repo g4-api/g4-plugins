@@ -11,40 +11,48 @@
 	"categories": [
 		"Utilities"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Resolve-MathExpression.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/ResolveMathExpression.cs"
+			}
+		}
+	},
 	"description": [
-		"In the context of Robotic Process Automation (RPA) and automation testing, the ResolveMathExpression plugin serves a crucial role in resolving mathematical expressions dynamically.",
-		"",
 		"### Purpose",
 		"",
-		"The primary purpose of the ResolveMathExpression plugin is to dynamically resolve mathematical expressions, allowing for flexible computation within automation workflows. By supporting a variety of mathematical operations, sorting options, rounding, and absolute value functionality, this plugin enhances the capabilities of automated systems to perform complex calculations.",
+		"The ResolveMathExpression plugin lets automation workflows perform calculations on numbers at runtime.",
+		"It makes it easy to add, subtract, multiply, divide, exponentiate, or use modulus in a process.",
+		"It also supports options for sorting, rounding, and absolute values.",
+		"These features help automated tasks handle numeric data flexibly and accurately.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature                        | Description                                                                                                        |",
-		"|--------------------------------|--------------------------------------------------------------------------------------------------------------------|",
-		"| Dynamic Expression Resolution  | Resolve mathematical expressions dynamically based on input parameters.                                            |",
-		"| Support for Various Operations | Perform addition, subtraction, multiplication, division, exponentiation, and modulus operations.                   |",
-		"| Flexible Input Handling        | Accept input parameters for numerical values, sorting options, rounding precision, and absolute value computation. |",
+		"| Feature                       | Description                                                                           |",
+		"|-------------------------------|---------------------------------------------------------------------------------------|",
+		"| Dynamic Expression Resolution | Calculate expressions on the fly within automation steps.                             |",
+		"| Arithmetic Operations         | Support addition, subtraction, multiplication, division, exponentiation, and modulus. |",
+		"| Input Sorting                 | Arrange numbers in ascending or descending order before computing.                    |",
+		"| Rounding Precision            | Round results to a specified number of decimal places.                                |",
+		"| Absolute Value Option         | Return the non-negative value of calculation results.                                 |",
+		"| Pattern Extraction            | Apply a regex to extract parts of the result for further use.                         |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                             | Description                                                                                                      |",
-		"|-----------------------------------|------------------------------------------------------------------------------------------------------------------|",
-		"| Mathematical Computations         | Perform complex mathematical computations within RPA processes.                                                  |",
-		"| Dynamic Input Handling            | Dynamically calculate numerical values based on changing conditions or input parameters.                         |",
-		"| Enhanced Calculation Capabilities | Enhance the calculation capabilities of automated systems by supporting a wide range of mathematical operations. |",
+		"| Use Case                 | Description                                                  |",
+		"|--------------------------|--------------------------------------------------------------|",
+		"| Real-Time Calculations   | Perform on-the-fly arithmetic within RPA processes.          |",
+		"| Dynamic Data Generation  | Compute values based on inputs that change during execution. |",
+		"| Conditional Flow Control | Use computed results to drive decision points in workflows.  |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                        | Description                                                                                      |",
-		"|------------------------------|--------------------------------------------------------------------------------------------------|",
-		"| Data Validation              | Validate numerical calculations and results within automation test scripts.                      |",
-		"| Dynamic Test Case Generation | Generate test cases with dynamically calculated input values.                                    |",
-		"| Enhanced Test Coverage       | Increase test coverage by incorporating mathematical computations into automated test scenarios. |",
-		"",
-		"### Conclusion",
-		"",
-		"The ResolveMathExpression plugin provides essential functionality for dynamically resolving mathematical expressions within RPA and automation testing workflows. By supporting a variety of operations and input options, it enhances the computational capabilities of automated systems, contributing to the efficiency and accuracy of automation initiatives."
+		"| Use Case                  | Description                                                |",
+		"|---------------------------|------------------------------------------------------------|",
+		"| Test Data Generation      | Generate numeric inputs for test scenarios dynamically.    |",
+		"| Output Verification       | Validate expected numeric outcomes within automated tests. |",
+		"| Parameterized Test Inputs | Create test cases with calculated parameter values.        |"
 	],
 	"examples": [
 		{
@@ -313,7 +321,9 @@
 	"parameters": [
 		{
 			"description": [
-				"The `Abs` switch, when included, instructs the `ResolveMathExpression` plugin to take the absolute value of the result of the mathematical operation."
+				"Abs instructs the plugin to return the absolute value of the computed result.",
+				"Using Abs ensures the output is always non-negative, regardless of the operation's outcome.",
+				"This can be useful in workflows where only the magnitude of the result is relevant."
 			],
 			"mandatory": false,
 			"name": "Abs",
@@ -321,7 +331,9 @@
 		},
 		{
 			"description": [
-				"The `Asc` switch, when included, instructs the `ResolveMathExpression` plugin to sort the input numbers in ascending order before performing the mathematical operation."
+				"Asc sorts the input numbers in ascending order before performing the calculation.",
+				"Sorting inputs with Asc can change the outcome of operations sensitive to order, such as subtraction or division.",
+				"Use Asc to guarantee numbers are always processed from smallest to largest."
 			],
 			"mandatory": false,
 			"name": "Asc",
@@ -329,15 +341,75 @@
 		},
 		{
 			"description": [
-				"The `Desc` switch, when included, instructs the `ResolveMathExpression` plugin to sort the input numbers in descending order before performing the mathematical operation."
+				"Desc sorts the input numbers in descending order before performing the calculation.",
+				"With Desc, numbers are always processed from largest to smallest, which can impact operations where order matters.",
+				"This is helpful for workflows that require prioritizing the largest values first."
 			],
 			"mandatory": false,
 			"name": "Desc",
 			"type": "Switch"
 		},
 		{
+			"default": "+",
 			"description": [
-				"The `Pattern` parameter specifies a regular expression pattern that is applied to the result of the mathematical expression. This pattern is used to extract specific information from the result before further processing."
+				"Operation specifies the type of mathematical operation to perform on the input numbers.",
+				"Choosing an operation determines how X and Y will be combined in the calculation.",
+				"Supported operations include addition, subtraction, multiplication, division, exponentiation, and modulus.",
+				"Selecting the correct operation is essential for achieving the desired computational result."
+			],
+			"mandatory": false,
+			"name": "Operation",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Add combines X and Y to produce their sum.",
+						"This operation is used when you want to calculate the total of two numbers."
+					],
+					"name": "+"
+				},
+				{
+					"description": [
+						"Subtract finds the difference between X and Y.",
+						"Use this operation to determine how much one number exceeds or falls short of the other."
+					],
+					"name": "-"
+				},
+				{
+					"description": [
+						"Multiply computes the product of X and Y.",
+						"Choose this to scale a number by another, such as calculating area or repeated addition."
+					],
+					"name": "*"
+				},
+				{
+					"description": [
+						"Divide finds how many times Y fits into X or the ratio of X to Y.",
+						"This operation is used for distributing quantities or comparing proportions."
+					],
+					"name": "/"
+				},
+				{
+					"description": [
+						"Exponentiate raises X to the power of Y.",
+						"Use this operation for exponential growth, scientific notation, or advanced calculations."
+					],
+					"name": "^"
+				},
+				{
+					"description": [
+						"Modulus returns the remainder when X is divided by Y.",
+						"This operation is helpful for cyclic calculations or checking divisibility."
+					],
+					"name": "%"
+				}
+			]
+		},
+		{
+			"description": [
+				"Pattern provides a regular expression to apply to the result of the mathematical operation.",
+				"This allows extraction of specific parts of the output for further processing.",
+				"Using Pattern can help isolate or validate the numeric result according to custom rules."
 			],
 			"mandatory": false,
 			"name": "Pattern",
@@ -345,7 +417,9 @@
 		},
 		{
 			"description": [
-				"The `Round` parameter specifies the number of decimal places to round the result of the mathematical expression to, if rounding is requested."
+				"Round sets how many decimal places the final result should be rounded to.",
+				"Applying Round ensures the output has a consistent level of precision.",
+				"This can make results easier to read or compare in subsequent automation steps."
 			],
 			"mandatory": false,
 			"name": "Round",
@@ -353,7 +427,9 @@
 		},
 		{
 			"description": [
-				"The `X` parameter represents one of the numerical values used in a mathematical expression. It serves as the first operand in arithmetic operations such as addition, subtraction, multiplication, division, exponentiation, and modulus."
+				"X is the first number used in the mathematical expression.",
+				"It acts as the initial operand for operations like addition, subtraction, multiplication, division, exponentiation, and modulus.",
+				"Specifying X is required to define the starting point for the calculation."
 			],
 			"mandatory": true,
 			"name": "X",
@@ -361,22 +437,26 @@
 		},
 		{
 			"description": [
-				"The `Y` parameter represents one of the numerical values used in a mathematical expression. It serves as the second operand in arithmetic operations such as addition, subtraction, multiplication, division, exponentiation, and modulus."
+				"Y is the second number used in the mathematical expression.",
+				"It serves as the next operand for operations such as addition, subtraction, multiplication, division, exponentiation, and modulus.",
+				"Supplying Y is essential for completing two-operand calculations."
 			],
 			"mandatory": true,
 			"name": "Y",
 			"type": "Number"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Macro",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `ResolveMathExpression` plugin dynamically resolves mathematical expressions within automation workflows, enhancing computational capabilities."
+		"The ResolveMathExpression plugin lets automation workflows solve math expressions using input values, supporting operations like addition, subtraction, multiplication, division, exponentiation, and modulus.",
+		"It allows sorting numbers, rounding results, and extracting parts of the output with a pattern.",
+		"This helps automate complex calculations in RPA or testing scenarios, making workflows more flexible and accurate."
 	]
 }
