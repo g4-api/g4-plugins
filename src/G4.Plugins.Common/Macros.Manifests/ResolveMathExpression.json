@@ -16,6 +16,87 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Resolve-MathExpression.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/ResolveMathExpression.cs"
+			},
+			"rag": {
+				"description": "The ResolveMathExpression plugin empowers automation workflows to perform precise runtime calculations, validating inputs and flagging edge cases like division by zero. With flexible parameters for various operations, sorting, rounding, and pattern extraction, it ensures reliable numeric handling and error management in complex RPA and testing routines.",
+				"qa": [
+					{
+						"question": "What is the ResolveMathExpression plugin?",
+						"answer": "It enables automation workflows to perform runtime calculations on numerical inputs, supporting operations such as addition, subtraction, multiplication, division, exponentiation, and modulus."
+					},
+					{
+						"question": "What key features and parameters does ResolveMathExpression offer?",
+						"answer": "It supports dynamic expression resolution, arithmetic operations (+, -, *, /, ^, %), input sorting via Asc/Desc switches, rounding with Round parameter, absolute values via Abs switch, regex extraction with Pattern, and requires X and Y operands."
+					},
+					{
+						"question": "Where can I find its documentation and source code?",
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Resolve-MathExpression.md and Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/ResolveMathExpression.cs"
+					},
+					{
+						"question": "What are best practices for using ResolveMathExpression in automation workflows?",
+						"answer": "Always specify mandatory X and Y parameters, choose the correct Operation, apply sorting flags when order impacts results, use Round for consistent precision, leverage Pattern to extract needed output parts, and handle non-numeric or zero-division inputs proactively."
+					},
+					{
+						"question": "Which manifest schema rules does it follow?",
+						"answer": "It adheres to manifestVersion 4, defines pluginType \"Macro\", lists parameters with types and mandatory flags, specifies platforms \"Any\", and declares protocol fields for API docs and W3C compliance."
+					},
+					{
+						"question": "What does the plugin description emphasize about its capabilities?",
+						"answer": "It highlights that the plugin enables runtime numeric calculations—including addition, subtraction, multiplication, division, exponentiation, and modulus—and offers options for sorting inputs, rounding results, and returning absolute values for flexible, accurate data handling."
+					},
+					{
+						"question": "How does it handle errors and edge cases?",
+						"answer": "It detects issues like division by zero, non-numeric inputs, unsupported operations, evaluation failures, sorting flag errors, pattern match failures, and surfaces clear error messages for reliable automation."
+					},
+					{
+						"question": "What aliases are supported for this plugin?",
+						"answer": "Math, ResolveMathExpression, and Calculate."
+					},
+					{
+						"question": "Who authored the plugin?",
+						"answer": "Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "Which category does the plugin belong to?",
+						"answer": "Utilities."
+					},
+					{
+						"question": "What context integration details are provided?",
+						"answer": "It integrates GitHub links for documentation and source code under context.integration.github: document and source URLs."
+					},
+					{
+						"question": "What examples are included in the manifest?",
+						"answer": "Usage scenarios for subtraction, division, modulus, multiplication, sorted inputs, exponentiation, rounding, absolute values, nested expressions, and regex pattern extraction, each demonstrating SendKeys actions."
+					},
+					{
+						"question": "What is the plugin key identifier?",
+						"answer": "Resolve-MathExpression."
+					},
+					{
+						"question": "What manifest version is used?",
+						"answer": "4."
+					},
+					{
+						"question": "What parameters does the plugin accept?",
+						"answer": "Parameters include Abs (switch), Asc (switch), Desc (switch), Operation (String with +, -, *, /, ^, % default '+'), Pattern (Regex), Round (Number), X (Number, mandatory), and Y (Number, mandatory)."
+					},
+					{
+						"question": "Which platforms are supported?",
+						"answer": "Any."
+					},
+					{
+						"question": "What type of plugin is described?",
+						"answer": "Macro."
+					},
+					{
+						"question": "What protocol metadata does the manifest include?",
+						"answer": "apiDocumentation: None, w3c: None."
+					},
+					{
+						"question": "What summary does the manifest provide?",
+						"answer": "It lets workflows solve math expressions with input values, supporting operations like addition, subtraction, multiplication, division, exponentiation, and modulus, along with sorting, rounding, and pattern extraction for flexible, accurate automation."
+					}
+				]
 			}
 		}
 	},
@@ -477,11 +558,39 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Division by zero",
+						"Empty macro output",
+						"Element not found",
+						"Macro evaluation failure",
+						"Nested macro evaluation failure",
+						"Non-numeric input values",
+						"Unsupported Operation parameter"
+					],
+					"expected_result": "`SendKeys` raises 2 to the power of 3 at runtime (2^3 = 8), computes the modulus of that result with 5 (8 % 5 = 3), and inputs the final value into the element matching the `.result-field` CSS selector.",
+					"notes": "`ResolveMathExpression` with nested calls uses inputs X=2, Y=3, Operation '^' to compute 2^3 at runtime, then supplies that result as X for an outer call with Y=5, Operation '%' to compute the modulus, and returns the final numeric result without side effects. `SendKeys` then sends that value as keystrokes into the element matching the `.result-field` CSS selector.",
+					"use_case": "send_nested_exponentiation_modulus_result_via_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ExponentiationOperation",
+					"MacroPlugin",
+					"MathCalculation",
+					"ModulusOperation",
+					"NestedExpression",
+					"SendKeysPlugin"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of nested `ResolveMathExpression` plugins to dynamically calculate the result of a mathematical expression and use it as an input parameter for another expression. Here, we perform exponentiation and then modulus.",
-				"This example instructs the automation system to utilize nested `ResolveMathExpression` plugins to first raise 2 to the power of 3, then find the modulus of the result with 5, and send the final result as keystrokes to the specified element identified by its CSS selector."
+				"### Compute a nested exponentiation and modulus result and send it to a web element",
+				"",
+				"Use the `ResolveMathExpression` macro to raise 2 to the power of 3 at runtime, then compute the modulus of that result with 5, returning only the numeric value without side effects.",
+				"Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Resolve-MathExpression --X:{{$Resolve-MathExpression --X:2 --Y:3 --Operation:^}} --Y:5 --Operation:%}}",
 				"locator": "CssSelector",
 				"onElement": ".result-field",
@@ -489,19 +598,39 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty macro output",
+						"Macro evaluation failure",
+						"Non-numeric input values",
+						"Regex match failure",
+						"Unsupported Operation parameter",
+						"Unsupported Pattern parameter"
+					],
+					"expected_result": "`SendKeys` multiplies 5.5 by 2.5 at runtime (yielding 13.75), extracts the integer part (13) using a regular expression `\\d+`, and inputs the resulting value into the element matching the `.result-field` CSS selector.",
+					"notes": "`ResolveMathExpression` with inputs X=5.5, Y=2.5, Operation '*', and Pattern `\\d+` multiplies the inputs at runtime, applies the regex to extract the integer part, and returns the numeric result without side effects. `SendKeys` then sends that value as keystrokes into the element matching the `.result-field` CSS selector.",
+					"use_case": "send_integer_part_of_multiplication_result_via_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"MacroPlugin",
+					"MathCalculation",
+					"MultiplicationOperation",
+					"RegexExtraction",
+					"SendKeysPlugin"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `ResolveMathExpression` plugin to calculate a mathematical expression dynamically, apply a regular expression pattern to extract the integer part of the result, and send the extracted information as keystrokes to a specific element on a web page.",
+				"### Extract the integer part of a multiplication result and send it to a web element",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                        |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `ResolveMathExpression`. This signifies the action of resolving a mathematical expression.                                                                                                                 |",
-				"| argument   | Specifies the resolution of the mathematical expression '5.5 * 2.5' and the application of a regular expression pattern '\\d+' to extract the integer part of the result. For example, `{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\\d+}}`. |",
-				"| onElement  | Specifies the target element on which the keystrokes will be sent, which is a hypothetical element identified by its CSS selector.                                                                                                                                 |",
-				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example.                                                                                                                                                            |",
-				"",
-				"This example instructs the automation system to utilize the `ResolveMathExpression` plugin to resolve the mathematical expression '5.5 * 2.5', apply a regular expression pattern '\\d+' to extract the integer part of the result, and send the extracted information as keystrokes to the specified element identified by its CSS selector."
+				"Use the `ResolveMathExpression` macro to multiply 5.5 by 2.5 at runtime and return only the numeric result without side effects.",
+				"Next, apply a regular expression `\\d+` to extract the integer part of that result.",
+				"Finally, send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\\d+}}",
 				"locator": "CssSelector",
 				"onElement": ".result-field",
