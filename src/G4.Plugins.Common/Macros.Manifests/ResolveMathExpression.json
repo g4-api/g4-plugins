@@ -66,7 +66,7 @@
 						"Unsupported Operation parameter"
 					],
 					"expected_result": "`SendKeys` evaluates the subtraction of 10 from 2 at runtime and inputs the resulting value into the element matching the `.result-field` CSS selector.",
-					"notes": "This example uses the `ResolveMathExpression` macro plugin with parameters X, Y, and Operation. The macro produces only a numeric value at runtime and has no side effects. The `SendKeys` plugin then inputs that value into the CSS-selected element.",
+					"notes": "This example uses the `ResolveMathExpression` macro plugin with parameters X, Y, and Operation -. The macro produces only a numeric value at runtime and has no side effects. The `SendKeys` plugin then inputs that value into the CSS-selected element.",
 					"use_case": "send_math_expression_result_via_sendkeys",
 					"version": "1.0.0"
 				},
@@ -91,19 +91,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Division by zero",
+						"Element not found",
+						"Empty macro output",
+						"Macro evaluation failure",
+						"Non-numeric input values",
+						"Unsupported Operation parameter"
+					],
+					"expected_result": "`SendKeys` evaluates the division of 10 by 2 at runtime and inputs the resulting value into the element matching the `.result-field` CSS selector.",
+					"notes": "This example uses the `ResolveMathExpression` macro plugin with parameters X, Y, and Operation /. The macro produces only a numeric value at runtime and has no side effects. The `SendKeys` plugin then inputs that value into the CSS-selected element.",
+					"use_case": "send_division_result_via_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"MathCalculation",
+					"SendKeys",
+					"ValueInput"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `ResolveMathExpression` plugin to dynamically calculate the result of a mathematical expression and send it as keystrokes using the `SendKeys` plugin.",
+				"### Compute the division of two numbers and send the result to a web element",
 				"",
-				"| Field      | Description                                                                                                                                                   |",
-				"|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes.                                          |",
-				"| argument   | Specifies the use of the `ResolveMathExpression` plugin to calculate a mathematical expression dynamically. The calculated result will be sent as keystrokes. |",
-				"| onElement  | Specifies the target element on which the keystrokes will be sent, which is a hypothetical element identified by its CSS selector.                            |",
-				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example.                                                       |",
-				"",
-				"This example instructs the automation system to utilize the `ResolveMathExpression` plugin to calculate the division of 10 by 2 and send the result as keystrokes to the specified element identified by its CSS selector."
+				"Use the `ResolveMathExpression` macro to divide 10 by 2 at runtime and produce a numeric result.",
+				"Use the `SendKeys` plugin to consume that value and input it as keystrokes into the element matching the `.result-field` CSS selector."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Resolve-MathExpression --X:10 --Y:2 --Operation:/}}",
 				"locator": "CssSelector",
 				"onElement": ".result-field",
@@ -111,19 +127,35 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Division by zero",
+						"Element not found",
+						"Empty macro output",
+						"Macro evaluation failure",
+						"Non-numeric input values",
+						"Unsupported Operation parameter"
+					],
+					"expected_result": "`SendKeys` evaluates the modulus of 10 divided by 3 at runtime and inputs the resulting value into the element matching the `.result-field` CSS selector.",
+					"notes": "This example uses the `ResolveMathExpression` macro plugin with parameters X, Y, and Operation %. The macro produces only a numeric value at runtime and has no side effects. The `SendKeys` plugin then inputs that value into the CSS-selected element.",
+					"use_case": "send_modulus_result_via_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"MathCalculation",
+					"SendKeys",
+					"ValueInput"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `ResolveMathExpression` plugin to dynamically calculate the result of a mathematical expression and send it as keystrokes using the `SendKeys` plugin.",
+				"### Compute the modulus of two numbers and send the result to a web element",
 				"",
-				"| Field      | Description                                                                                                                                                   |",
-				"|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes.                                          |",
-				"| argument   | Specifies the use of the `ResolveMathExpression` plugin to calculate a mathematical expression dynamically. The calculated result will be sent as keystrokes. |",
-				"| onElement  | Specifies the target element on which the keystrokes will be sent, which is a hypothetical element identified by its CSS selector.                            |",
-				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example.                                                       |",
-				"",
-				"This example instructs the automation system to utilize the `ResolveMathExpression` plugin to calculate the modulus of 10 divided by 3 and send the result as keystrokes to the specified element identified by its CSS selector."
+				"Use the `ResolveMathExpression` macro to compute the modulus of 10 divided by 3 at runtime and produce a numeric result.",
+				"Use the `SendKeys` plugin to consume that value and input it as keystrokes into the element matching the `.result-field` CSS selector."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Resolve-MathExpression --X:10 --Y:3 --Operation:%}}",
 				"locator": "CssSelector",
 				"onElement": ".result-field",
