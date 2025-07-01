@@ -14,6 +14,67 @@
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/Equal.md",
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/EqualOperator.cs"
+			},
+			"rag": {
+				"description": "The EqualOperator plugin performs a case-sensitive comparison between two strings and returns a Boolean result. It ensures accurate conditional logic in automation workflows but must be used inside caller plugins that support operator parameters, maintaining workflow reliability and flexibility.",
+				"qa": [
+					{
+						"question": "What does the EqualOperator plugin do?",
+						"answer": "The EqualOperator plugin compares two strings using case-sensitive matching and returns true if they are exactly equal."
+					},
+					{
+						"question": "What are the key features and parameters of the EqualOperator plugin?",
+						"answer": "Key features include case-sensitive comparison and integration in conditional workflows. It requires two string parameters: LeftHand and RightHand."
+					},
+					{
+						"question": "How is the EqualOperator plugin used in automation contexts?",
+						"answer": "It is used inside caller plugins like Assert or SetCondition to guide workflow logic based on string equality checks."
+					},
+					{
+						"question": "What are best practices for using the EqualOperator plugin?",
+						"answer": "Use it only inside plugins that support operator logic and ensure both strings are normalized if case or whitespace could vary."
+					},
+					{
+						"question": "What are the rules and schema details for the EqualOperator plugin?",
+						"answer": "It requires two mandatory string parameters: LeftHand and RightHand. The comparison is exact and case-sensitive."
+					},
+					{
+						"question": "Who is the author of the EqualOperator plugin?",
+						"answer": "Roei Sabag, https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What aliases can be used for the EqualOperator plugin?",
+						"answer": "It can be referenced by the alias 'Eq'."
+					},
+					{
+						"question": "What categories is the EqualOperator plugin listed under?",
+						"answer": "It is listed under the 'Operators' category."
+					},
+					{
+						"question": "What platforms does the EqualOperator plugin support?",
+						"answer": "It supports any platform."
+					},
+					{
+						"question": "What is the plugin type of the EqualOperator plugin?",
+						"answer": "It is an Operator plugin."
+					},
+					{
+						"question": "What is the manifest version of the EqualOperator plugin?",
+						"answer": "Manifest version is 4."
+					},
+					{
+						"question": "What is the summary of the EqualOperator plugin?",
+						"answer": "The plugin compares two strings using case-sensitive matching and returns a Boolean result for conditional logic."
+					},
+					{
+						"question": "Where can I find the source code and documentation for the EqualOperator plugin?",
+						"answer": "Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/EqualOperator.cs, Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/Equal.md"
+					},
+					{
+						"question": "How does the EqualOperator plugin handle errors or edge cases?",
+						"answer": "It accounts for edge cases like empty strings, case differences, special characters, and whitespace differences."
+					}
+				]
 			}
 		}
 	},
