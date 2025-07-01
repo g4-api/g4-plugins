@@ -9,63 +9,155 @@
 	"categories": [
 		"Operators"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/GreaterEqual.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/GreaterEqualOperator.cs"
+			},
+			"rag": {
+				"description": "The GreaterEqualOperator plugin enforces numeric comparison checks by evaluating whether one value meets or exceeds another. It supports dynamic LeftHand and RightHand parameters for flexible threshold comparisons and seamlessly integrates into automation workflows. Built to ensure reliable conditional logic, it preserves workflow stability by halting execution on invalid inputs.",
+				"qa": [
+					{
+						"question": "What does the GreaterEqualOperator plugin do?",
+						"answer": "It checks if the first numeric value is greater than or equal to the second and returns a Boolean result."
+					},
+					{
+						"question": "What are the key features and parameters of the GreaterEqualOperator plugin?",
+						"answer": "It performs numeric comparisons with two parameters, LeftHand and RightHand, supporting integer and floating-point inputs to evaluate if the baseline value meets or exceeds a threshold."
+					},
+					{
+						"question": "Where can I find the GreaterEqualOperator plugin’s source code and documentation?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/GreaterEqualOperator.cs • Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/GreaterEqual.md"
+					},
+					{
+						"question": "What are best practices for using the GreaterEqualOperator plugin?",
+						"answer": "Ensure both LeftHand and RightHand are provided and numeric before invoking, validate inputs to prevent runtime errors, and explicitly handle error cases for missing or non-numeric values."
+					},
+					{
+						"question": "How do I invoke the GreaterEqualOperator plugin in a rule?",
+						"answer": "Use an Action rule with pluginName 'GreaterEqual' and provide arguments as '{{$ --LeftHand:<number> --RightHand:<number>}}' to specify the comparison values."
+					},
+					{
+						"question": "What alias can be used to call the GreaterEqualOperator plugin?",
+						"answer": "Ge"
+					},
+					{
+						"question": "Who is the author of the GreaterEqualOperator plugin?",
+						"answer": "Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)"
+					},
+					{
+						"question": "Which category does the GreaterEqualOperator plugin belong to?",
+						"answer": "Operators"
+					},
+					{
+						"question": "What is the plugin key for the GreaterEqualOperator plugin?",
+						"answer": "GreaterEqual"
+					},
+					{
+						"question": "What manifest version is used for the GreaterEqualOperator plugin?",
+						"answer": "4"
+					},
+					{
+						"question": "What parameters does the GreaterEqualOperator plugin require?",
+						"answer": "LeftHand (first numeric value) and RightHand (second numeric threshold), both mandatory and of type Number."
+					},
+					{
+						"question": "What type of plugin is the GreaterEqualOperator?",
+						"answer": "Operator"
+					},
+					{
+						"question": "What API documentation protocol is specified for the GreaterEqualOperator plugin?",
+						"answer": "None"
+					},
+					{
+						"question": "What W3C protocol reference is specified for the GreaterEqualOperator plugin?",
+						"answer": "None"
+					},
+					{
+						"question": "What scopes does the GreaterEqualOperator plugin support?",
+						"answer": "Any"
+					},
+					{
+						"question": "What is the summary of the GreaterEqualOperator plugin?",
+						"answer": "The GreaterEqualOperator plugin compares two numbers to see if the first is at least as large as the second."
+					},
+					{
+						"question": "Where does the plugin description content come from?",
+						"answer": "It is drawn directly from the manifest’s description section, detailing the plugin’s purpose, features, and usage scenarios."
+					},
+					{
+						"question": "How does the GreaterEqualOperator plugin handle error conditions?",
+						"answer": "It throws a runtime error when required parameters are missing or non-numeric, allowing workflows to catch and manage invalid inputs."
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the GreaterEqualOperator plugin is to compare two numeric values and determine if the first value is greater than or equal to the second value, using a numerical comparison.",
+		"The GreaterEqualOperator plugin checks if the first number is greater than or equal to the second number.",
+		"It allows automation workflows to make decisions based on numeric comparisons.",
+		"This enables conditional logic to proceed when values meet or exceed specified thresholds.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
 		"| Feature              | Description                                               |",
 		"|----------------------|-----------------------------------------------------------|",
-		"| Numerical Comparison | Performs a numerical comparison of two values.            |",
+		"| Numerical Comparison | Performs a numerical comparison of two numeric values.    |",
 		"| Integration          | Can be used under condition expressions by other plugins. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage              | Description                                                                      |",
-		"|--------------------|----------------------------------------------------------------------------------|",
-		"| Numeric Comparison | Validate if one numeric value is greater than or equal to another numeric value. |",
-		"| Conditional Logic  | Use in conditional expressions to control workflow logic based                   |",
+		"| Use Case           | Description                                                        |",
+		"|--------------------|--------------------------------------------------------------------|",
+		"| Numeric Comparison | Validate if one numeric value is greater than or equal to another. |",
+		"| Conditional Logic  | Control workflow logic based on numeric comparisons.               |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage              | Description                                                               |",
+		"| Use Case           | Description                                                               |",
 		"|--------------------|---------------------------------------------------------------------------|",
 		"| Validation         | Validate output or state by comparing expected and actual numeric values. |",
 		"| Dynamic Conditions | Create dynamic conditions based on numeric comparisons.                   |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Floating-point inputs",
+						"LeftHand less than RightHand",
+						"Missing LeftHand argument",
+						"Missing RightHand argument",
+						"Non-numeric input",
+						"Values are equal"
+					],
+					"expected_result": "The plugin returns true because 10 is greater than or equal to 5.",
+					"notes": "This example uses integer values and performs a numerical comparison at runtime. The plugin returns a Boolean result and aligns with version 1.0.0, its initial stable release.",
+					"use_case": "greater_equal_numeric_comparison",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Comparison",
+					"NumericComparison",
+					"Operator"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `GreaterEqual` plugin to compare two numeric values and determine if the first value is greater than or equal to the second value.",
+				"### GreaterEqual Numeric Comparison Action",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `GreaterEqual`. This signifies the action of comparing two numeric values. |",
-				"| LeftHand   | Specifies the first numeric value to be compared. For example, `10`.                                                               |",
-				"| RightHand  | Specifies the second numeric value to be compared. For example, `5`.                                                               |",
-				"",
-				"This example instructs the automation system to utilize the `GreaterEqual` plugin to compare `10` and `5` and determine if `10` is greater than or equal to `5`."
+				"Both LeftHand and RightHand values must be numeric; non-numeric inputs cause a comparison error.",
+				"This example demonstrates how the `GreaterEqual` plugin uses an argument macro to supply LeftHand=10 and RightHand=5 and compare them.",
+				"The comparison uses the numeric values exactly as provided, with no rounding or type conversion.",
+				"No value transformation occurs; inputs are treated as-is.",
+				"The plugin returns a Boolean result: true because 10 is greater than or equal to 5; false otherwise."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --LeftHand:10 --RightHand:5}}",
 				"pluginName": "GreaterEqual"
-			}
-		},
-		{
-			"description": [
-				"This example demonstrates the usage of the `GreaterEqualOperator` plugin within another plugin, such as `Assert`, to compare two numeric values and determine if the first value is greater than or equal to the second value.",
-				"",
-				"| Field     | Description                                                                                                                                  |",
-				"|-----------|----------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| Condition | Identifies the specific operator being utilized, which is `GreaterEqualOperator`. This signifies the action of comparing two numeric values. |",
-				"| LeftHand  | Specifies the first numeric value to be compared. For example, `10`.                                                                         |",
-				"| RightHand | Specifies the second numeric value to be compared. For example, `5`.                                                                         |"
-			],
-			"rule": {
-				"argument": "{{$ --Condition:GreaterEqual --LeftHand:10 --RightHand:5}}",
-				"pluginName": "Assert"
 			}
 		}
 	],
@@ -74,7 +166,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the first numeric value to be compared in the greater than or equal to check."
+				"LeftHand is the first numeric value used in the greater than or equal comparison.",
+				"It sets the baseline against which the other number is evaluated.",
+				"Providing an accurate LeftHand value ensures the comparison operates correctly."
 			],
 			"mandatory": true,
 			"name": "LeftHand",
@@ -82,7 +176,9 @@
 		},
 		{
 			"description": [
-				"Specifies the second numeric value to be compared in the greater than or equal to check."
+				"RightHand is the second numeric value used in the greater than or equal comparison.",
+				"It represents the threshold that the first value must meet or exceed.",
+				"Providing an accurate RightHand value ensures the comparison produces reliable results."
 			],
 			"mandatory": true,
 			"name": "RightHand",
@@ -98,6 +194,6 @@
 		"Any"
 	],
 	"summary": [
-		"The `GreaterEqual` plugin evaluates whether one numeric value is greater than or equal to another numeric value, providing essential functionality for conditional logic in automation workflows and testing scenarios."
+		"The GreaterEqualOperator plugin compares two numbers to see if the first is at least as large as the second."
 	]
 }
