@@ -17,6 +17,7 @@
 			"sequentialWorkflow": {
 				"$type": "Content",
 				"componentType": "task",
+				"containerable": true,
 				"iconProvider": "content-dom",
 				"model": "ContentRuleModel"
 			}
