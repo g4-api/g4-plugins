@@ -161,6 +161,7 @@
 			"type": "String"
 		},
 		{
+			"default": "(?s).*",
 			"description": [
 				"Specifies the regular expression pattern to apply to the extracted value.",
 				"This allows for precise data extraction from the text or attribute value."
