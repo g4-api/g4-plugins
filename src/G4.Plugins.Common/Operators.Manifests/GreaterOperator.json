@@ -9,6 +9,87 @@
 	"categories": [
 		"Operators"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/Greater.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/GreaterOperator.cs"
+			},
+			"rag": {
+				"description": "The GreaterOperator plugin enforces numeric comparison checks by evaluating whether one value is strictly greater than another. It supports dynamic LeftHand and RightHand parameters for flexible threshold comparisons and seamlessly integrates into automation workflows. Built to ensure reliable conditional logic, it preserves workflow stability by halting execution on invalid inputs.",
+				"qa": [
+					{
+						"question": "What is the primary purpose of the GreaterOperator plugin?",
+						"answer": "It compares two numeric values at runtime and returns true if the first is greater than the second, enabling conditional branching in automation workflows."
+					},
+					{
+						"question": "Which key features and parameters does the plugin support?",
+						"answer": "It supports two mandatory Number parameters, LeftHand and RightHand, for flexible numeric comparisons, and can integrate within other plugins as a conditional operator to guide workflow decisions."
+					},
+					{
+						"question": "Where can I find the plugin’s code and documentation?",
+						"answer": "Code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/GreaterOperator.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/Greater.md"
+					},
+					{
+						"question": "What are some best practices for using the plugin?",
+						"answer": "Use clear, valid numeric inputs for LeftHand and RightHand to avoid errors, validate inputs beforehand, handle potential edge cases like equal or missing values, and integrate the check early to prevent invalid execution paths."
+					},
+					{
+						"question": "How should I invoke the plugin in a rule or schema?",
+						"answer": "Use the Action schema with argument {{$ --LeftHand:<value> --RightHand:<value>}} and pluginName \"Greater\", ensuring both parameters are provided as numbers in the rule definition."
+					},
+					{
+						"question": "What information does the manifest's description section provide?",
+						"answer": "It explains the plugin’s purpose—comparing two numbers for workflow conditions—details key features like numerical comparison and integration capabilities, and showcases usage scenarios in RPA and automation testing."
+					},
+					{
+						"question": "What error cases should be considered when using the plugin?",
+						"answer": "Handle invalid or missing inputs, such as non-numeric values or undefined parameters, and consider equal values if strict greater comparison is required, using pre-validation or fallback logic in your workflow."
+					},
+					{
+						"question": "What aliases are defined for this plugin?",
+						"answer": "Gt"
+					},
+					{
+						"question": "Who is the author and where can I find their profile?",
+						"answer": "Roei Sabag, https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "Which categories does the plugin belong to?",
+						"answer": "Operators"
+					},
+					{
+						"question": "What is the plugin key used in the manifest?",
+						"answer": "Greater"
+					},
+					{
+						"question": "Which manifest version does this plugin use?",
+						"answer": "4"
+					},
+					{
+						"question": "Which platforms are supported by the plugin?",
+						"answer": "Any"
+					},
+					{
+						"question": "What type of plugin is this?",
+						"answer": "Operator"
+					},
+					{
+						"question": "What is the apiDocumentation protocol setting?",
+						"answer": "None"
+					},
+					{
+						"question": "What is the w3c protocol setting?",
+						"answer": "None"
+					},
+					{
+						"question": "What summary does the manifest provide?",
+						"answer": "It compares two numbers and returns true if the first is strictly greater than the second, outputs true or false to control workflow paths, and enables dynamic decisions based on numeric comparisons within automation scripts."
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
