@@ -12,58 +12,93 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the GreaterOperator plugin is to compare two numeric values and determine if the first value is greater than the second value, using a numerical comparison.",
+		"The GreaterOperator plugin lets you compare two numbers to see if one is larger than another.",
+		"This simple comparison is useful in automated workflows and tests to guide decision points.",
+		"It ensures that workflow steps only run when the right numerical conditions are met.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature              | Description                                               |",
-		"|----------------------|-----------------------------------------------------------|",
-		"| Numerical Comparison | Performs a numerical comparison of two values.            |",
-		"| Integration          | Can be used under condition expressions by other plugins. |",
+		"| Feature              | Description                                                                                          |",
+		"|----------------------|------------------------------------------------------------------------------------------------------|",
+		"| Numerical Comparison | Performs a numerical comparison of two numeric values to determine if one is greater than the other. |",
+		"| Integration          | Can be used within other plugins as a conditional operator in workflows.                             |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage              | Description                                                                            |",
-		"|--------------------|----------------------------------------------------------------------------------------|",
-		"| Numeric Comparison | Validate if one numeric value is greater than another numeric value.                   |",
-		"| Conditional Logic  | Use in conditional expressions to control workflow logic based on numeric comparisons. |",
+		"| Use Case           | Description                                                    |",
+		"|--------------------|----------------------------------------------------------------|",
+		"| Numeric Comparison | Stop or continue a process based on numeric thresholds.        |",
+		"| Conditional Logic  | Choose different workflow paths when values exceed set limits. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage              | Description                                                               |",
-		"|--------------------|---------------------------------------------------------------------------|",
-		"| Validation         | Validate output or state by comparing expected and actual numeric values. |",
-		"| Dynamic Conditions | Create dynamic conditions based on numeric comparisons.                   |"
+		"| Use Case           | Description                                                                   |",
+		"|--------------------|-------------------------------------------------------------------------------|",
+		"| Validation         | Confirm that test outputs exceed expected numeric benchmarks.                 |",
+		"| Dynamic Conditions | Adapt test steps dynamically when numeric conditions change during execution. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid numeric arguments",
+						"LeftHand less than RightHand",
+						"Missing arguments",
+						"Non-numeric inputs"
+					],
+					"expected_result": "Return true when LeftHand is greater than RightHand; otherwise, return false.",
+					"notes": "Uses the argument macro `{{$ --LeftHand:<value> --RightHand:<value>}}`.",
+					"use_case": "greater_plugin_positive_comparison",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Comparison",
+					"NumericComparison",
+					"Operator"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `Greater` plugin to compare two numeric values and determine if the first value is greater than the second value.",
+				"### Positive Greater Plugin Comparison",
 				"",
-				"| Field      | Description                                                                                                                   |",
-				"|------------|-------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `Greater`. This signifies the action of comparing two numeric values. |",
-				"| LeftHand   | Specifies the first numeric value to be compared. For example, `10`.                                                          |",
-				"| RightHand  | Specifies the second numeric value to be compared. For example, `5`.                                                          |"
+				"The Greater plugin uses `{{$ --LeftHand:10 --RightHand:5}}` to compare two values at runtime and returns true because 10 is greater than 5."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --LeftHand:10 --RightHand:5}}",
 				"pluginName": "Greater"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Equal values",
+						"Invalid numeric arguments",
+						"LeftHand less than RightHand",
+						"Missing arguments",
+						"Non-numeric inputs"
+					],
+					"expected_result": "Return true when LeftHand is greater than RightHand; otherwise, return false.",
+					"notes": "Uses the argument macro `{{$ --LeftHand:<value> --RightHand:<value>}}`.",
+					"use_case": "greater_plugin_equal_comparison",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Comparison",
+					"NumericComparison",
+					"Operator"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `GreaterOperator` plugin within another plugin, such as `Assert`, to compare two numeric values and determine if the first value is greater than the second value.",
+				"### Equal Greater Plugin Comparison",
 				"",
-				"| Field     | Description                                                                                                                             |",
-				"|-----------|-----------------------------------------------------------------------------------------------------------------------------------------|",
-				"| Condition | Identifies the specific operator being utilized, which is `GreaterOperator`. This signifies the action of comparing two numeric values. |",
-				"| LeftHand  | Specifies the first numeric value to be compared. For example, `10`.                                                                    |",
-				"| RightHand | Specifies the second numeric value to be compared. For example, `5`.                                                                    |"
+				"The Greater plugin uses `{{$ --LeftHand:5 --RightHand:5}}` to compare two values at runtime and returns false because both values are equal."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:Greater --LeftHand:10 --RightHand:5}}",
-				"pluginName": "Assert"
+				"$type": "Action",
+				"argument": "{{$ --LeftHand:5 --RightHand:5}}",
+				"pluginName": "Greater"
 			}
 		}
 	],
@@ -72,7 +107,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the first numeric value to be compared in the greater than check."
+				"LeftHand is the first numeric value in a greater than check.",
+				"It defines the baseline value that the second number is compared against.",
+				"Supplying an accurate LeftHand value ensures the comparison yields correct results."
 			],
 			"mandatory": true,
 			"name": "LeftHand",
@@ -80,22 +117,26 @@
 		},
 		{
 			"description": [
-				"Specifies the second numeric value to be compared in the greater than check."
+				"RightHand is the second numeric value in a greater than check.",
+				"It represents the threshold that the first number must exceed.",
+				"Providing a precise RightHand value ensures the comparison works as intended."
 			],
 			"mandatory": true,
 			"name": "RightHand",
 			"type": "Number"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Operator",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `Greater` plugin evaluates whether one numeric value is greater than another numeric value, providing essential functionality for conditional logic in automation workflows and testing scenarios."
+		"The GreaterOperator plugin compares two numeric values and returns true if the first value is strictly greater than the second.",
+		"It outputs a true or false result that controls conditional branches in automation workflows and tests.",
+		"This lets automation scripts make dynamic decisions based on numeric comparisons and integrate with other actions."
 	]
 }
