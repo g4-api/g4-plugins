@@ -17,7 +17,7 @@ namespace G4.Plugins.Common.Actions
             var id = WebDriver.GetSession().OpaqueKey;
 
             // Dispose the WebDriver instance to release any browser/process resources.
-            WebDriver.Dispose();
+            WebDriver?.Dispose();
 
             // Remove the driver from the global registry so it can't be referenced later.
             // If the key does not exist, TryRemove will return false and the discard (_) ignores the value.
