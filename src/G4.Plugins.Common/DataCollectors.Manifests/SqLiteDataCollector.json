@@ -1,0 +1,293 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataManagement"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/SqLightDataCollector.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/SqLightDataCollector.cs"
+			},
+			"rag": {
+				"description": "SqLightDataCollector writes extraction-rule outputs into a SQLite database table, supporting both streaming inserts and bulk transactions. It hooks into extraction rules, manages database and table creation automatically, and provides flexible parameters to ensure reliable local data persistence and integration with downstream workflows.",
+				"qa": [
+					{
+						"question": "What is the SqLightDataCollector plugin and why does it matter?",
+						"answer": "SqLightDataCollector converts extracted data items into rows in a SQLite table, enabling efficient local persistence, analysis, and reuse in subsequent automation steps."
+					},
+					{
+						"question": "How do its main capabilities work and what are its primary parameters?",
+						"answer": "It integrates via a dataCollector object. Key parameters are ForEntity (true for per-row streaming inserts, false for bulk inserts), Source (SQLite connection string), Repository (table name), and Type (must be SqLightDataCollector)."
+					},
+					{
+						"question": "How does SqLightDataCollector embed into external tools or workflow designers?",
+						"answer": "In workflow definitions it appears as a DataCollector step. You configure the connection string, table name, and insert mode in a low-code interface without writing SQL manually."
+					},
+					{
+						"question": "What are recommended configuration patterns and troubleshooting tips?",
+						"answer": "Use ForEntity=true for high-volume streams to minimize memory use. For moderate datasets, set ForEntity=false to batch inserts in a single transaction. Ensure the connection string is valid and the database file is writable."
+					},
+					{
+						"question": "How are action or rule definitions structured for this plugin?",
+						"answer": "You define an Extraction rule ($type “Extraction”) with a dataCollector object containing ForEntity, Source, Repository, and Type fields. Nested rules ($type “Content”) include key, onElement, and regularExpression to map extracted values to table columns."
+					},
+					{
+						"question": "How does the plugin record failures and control workflow behavior on error?",
+						"answer": "On errors it adds an exception to the response and log stream. By default the workflow continues unless you configure it to stop on error in your automation designer."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema iteration the plugin adheres to for property definitions."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What are the categories?",
+						"answer": "This plugin is categorized under DataManagement, reflecting its role in organizing and persisting data."
+					},
+					{
+						"question": "What platforms does it support?",
+						"answer": "The plugin supports Any platform, making it compatible with Windows, Linux, and other environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is DataCollector, indicating it focuses on gathering and writing data outputs."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is SqLightDataCollector, which is used to reference this plugin in workflow definitions."
+					},
+					{
+						"question": "What is the summary?",
+						"answer": "“The SqLightDataCollector plugin writes extraction outputs into a SQLite table using the provided connection string. Supports streaming inserts for large data sets or bulk inserts in a single transaction. Automatically creates the database file and table if they don’t exist.”"
+					},
+					{
+						"question": "What properties are defined?",
+						"answer": "Properties include ForEntity (Boolean, optional, toggles streaming vs buffered inserts), Repository (String, mandatory, table name), Source (String, mandatory, connection string), and Type (DataCollector, mandatory, must be SqLightDataCollector)."
+					},
+					{
+						"question": "What parameters are defined?",
+						"answer": "This plugin does not define a separate parameters array and relies on its properties section for configuration."
+					},
+					{
+						"question": "What protocol information is included?",
+						"answer": "Protocol settings are apiDocumentation: None and w3c: None, indicating no external API or W3C schema references."
+					},
+					{
+						"question": "Where can I find the GitHub documentation?",
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/SqLightDataCollector.md"
+					},
+					{
+						"question": "Where can I find the source code?",
+						"answer": "Source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/SqLightDataCollector.cs"
+					}
+				]
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"SqLightDataCollector takes your extraction-rule outputs and writes them into a SQLite database table. It uses the provided connection string to open or create the database file, creates the target table if it doesn’t exist, and inserts each record either immediately or in bulk at the end of the run.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                                                         |",
+		"|------------------------|-----------------------------------------------------------------------------------------------------|",
+		"| Extraction Integration | Hooks into your extraction rules so every item becomes a row in a SQLite table.                     |",
+		"| Write Modes            | Supports streaming inserts (`ForEntity=true`) or bulk inserts (`ForEntity=false`) in a transaction. |",
+		"| Automatic Creation     | Creates the SQLite database file and table automatically if they don’t already exist.               |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case           | Description                                                                          |",
+		"|--------------------|--------------------------------------------------------------------------------------|",
+		"| Web Scraping       | Inserts scraped items directly into a SQLite table for local persistence.            |",
+		"| Real-Time Capture  | Streams each record as an INSERT for immediate storage and minimal memory footprint. |",
+		"| Data Aggregation   | Buffers records then commits them in a single transaction for efficiency.            |",
+		"| System Interchange | Produces a local database that other steps or services can query directly.           |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case            | Description                                                                         |",
+		"|---------------------|-------------------------------------------------------------------------------------|",
+		"| Test Result Logging | Records pass/fail status and error details into a test results table for reporting. |",
+		"| Metrics Collection  | Captures timing and resource usage metrics in a table for offline analysis.         |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Database file locked",
+						"Element missing",
+						"Invalid connection string",
+						"Malformed DOM",
+						"Multiple elements found",
+						"Regex failure",
+						"SQL syntax error",
+						"Table name conflicts",
+						"Transaction failure",
+						"Unexpected whitespace",
+						"XPath mismatch",
+						"XPath syntax error"
+					],
+					"expected_result": "Each hotel-location string is extracted and inserted as a new row in the HotelLocations table in Data.db in real time.",
+					"notes": "Opens Data.db, creates HotelLocations if needed, then for each match writes INSERT statements (stringified, trimmed, regex-extracted up to 100 chars).",
+					"use_case": "element_text_extraction_streaming_sqlite",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementTextExtraction",
+					"Extraction",
+					"SqliteDatabaseWrite",
+					"Streaming"
+				]
+			},
+			"description": [
+				"### Stream Hotel Locations to SQLite",
+				"",
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and stream each as an INSERT into the `HotelLocations` table in `Data.db` in real time.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming inserts.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
+			],
+			"rule": {
+				"$type": "Extraction",
+				"dataCollector": {
+					"forEntity": true,
+					"repository": "HotelLocations",
+					"source": "Data Source=Data.db;Version=3;",
+					"type": "SqLightDataCollector"
+				},
+				"extractionScope": "Elements",
+				"onElement": "//div[@class='hotel']",
+				"rules": [
+					{
+						"$type": "Content",
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\\\w+:).*"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Database file locked",
+						"Element missing",
+						"Invalid connection string",
+						"Malformed DOM",
+						"Multiple elements found",
+						"Regex failure",
+						"SQL syntax error",
+						"Table name conflicts",
+						"Transaction failure",
+						"Unexpected whitespace",
+						"XPath mismatch",
+						"XPath syntax error"
+					],
+					"expected_result": "Each hotel-location string is extracted, collected, and inserted as rows in a single transaction to the HotelLocations table in Data.db upon completion.",
+					"notes": "Opens Data.db, buffers each '{\"Location\": \"…\"}' (stringified, trimmed, regex-extracted up to 100 chars) in memory, then executes a single transaction to INSERT all buffered records.",
+					"use_case": "element_text_extraction_bulk_sqlite",
+					"version": "1.0"
+				},
+				"labels": [
+					"BulkWrite",
+					"ElementTextExtraction",
+					"Extraction",
+					"SqliteDatabaseWrite"
+				]
+			},
+			"description": [
+				"### Bulk Hotel Locations to SQLite",
+				"",
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and insert them all in one transaction into the `HotelLocations` table in `Data.db` upon completion.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
+			],
+			"rule": {
+				"$type": "Extraction",
+				"dataCollector": {
+					"forEntity": false,
+					"repository": "HotelLocations",
+					"source": "Data Source=Data.db;Version=3;",
+					"type": "SqLightDataCollector"
+				},
+				"extractionScope": "Elements",
+				"onElement": "//div[@class='hotel']",
+				"rules": [
+					{
+						"$type": "Content",
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\\\w+:).*"
+					}
+				]
+			}
+		}
+	],
+	"key": "SqLightDataCollector",
+	"manifestVersion": 4,
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "DataCollector",
+	"properties": [
+		{
+			"description": [
+				"Set to “true” to save each entry as soon as it arrives so you can see results right away.",
+				"Set to “false” to save all entries at the end so you can review everything together without delays."
+			],
+			"mandatory": false,
+			"name": "ForEntity",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Type the name of the table where your data will be stored so you can find it later.",
+				"A new table is created automatically if it does not exist so you do not have to prepare it yourself."
+			],
+			"mandatory": true,
+			"name": "Repository",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Enter the details the system uses to open your data file so it can access your information.",
+				"A correct entry makes sure your information is read and written without issues."
+			],
+			"mandatory": true,
+			"name": "Source",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Enter “SqLightDataCollector” so the system knows how to handle your data correctly and save it here.",
+				"Choosing a different option will make the system use something else and may keep your data from saving in this place.",
+				"The list of options updates automatically when you add new ones so you always have the latest choices."
+			],
+			"mandatory": true,
+			"name": "Type",
+			"type": "DataCollector"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"The SqLightDataCollector plugin writes extraction outputs into a SQLite table using the provided connection string.",
+		"Supports streaming inserts for large data sets or bulk inserts in a single transaction.",
+		"Automatically creates the database file and table if they don’t exist."
+	]
+}

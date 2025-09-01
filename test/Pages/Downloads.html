@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title data-automation-id="page-title">Embedded File Download</title>
+</head>
+<body data-automation-id="body">
+	<header data-automation-id="header">
+		<h1 data-automation-id="header-title">Embedded File Download</h1>
+		<p data-automation-id="header-description">
+			This page provides two ways to get your file: directly from an embedded data URI or via a standard URL.
+		</p>
+	</header>
+
+	<main data-automation-id="main-content">
+		<section data-automation-id="embedded-download-section">
+			<h2 data-automation-id="embedded-download-title">1. Embedded Download</h2>
+			<p data-automation-id="embedded-download-instruction">
+				Click the link below to download the file embedded in this page:
+			</p>
+			<p>
+				<a href="/test/static/Example.txt"
+				   download="Example.txt"
+				   data-automation-id="embedded-download-link">
+					📥 Download <strong data-automation-id="embedded-download-filename">example.txt</strong>
+				</a>
+			</p>
+		</section>
+
+		<section data-automation-id="direct-url-section">
+			<h2 data-automation-id="direct-url-title">2. Direct URL</h2>
+			<p data-automation-id="direct-url-instruction">
+				If you prefer a normal HTTP link, use this address:
+			</p>
+			<p>
+				<a href="http://localhost:9002/test/static/Example.txt"
+				   target="_blank"
+				   data-automation-id="direct-url-link">
+					http://localhost:9002/test/static/Example.txt
+				</a>
+			</p>
+		</section>
+
+		<section data-automation-id="programmatic-access-section">
+			<h2 data-automation-id="programmatic-access-title">3. Programmatic Access</h2>
+			<p data-automation-id="programmatic-access-instruction">
+				The same URL is stored in the <code data-automation-id="programmatic-access-code-element">data-link</code> attribute of the element below:
+			</p>
+			<pre data-automation-id="programmatic-access-code-block">
+&lt;span id="DownloadLink" data-link="http://localhost:9002/test/static/Example.txt"&gt;
+  DownloadLink Element
+&lt;/span&gt;
+      </pre>
+		</section>
+	</main>
+</body>
+</html>

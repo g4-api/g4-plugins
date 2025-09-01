@@ -9,61 +9,140 @@
 	"categories": [
 		"Operators"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/Equal.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/EqualOperator.cs"
+			},
+			"rag": {
+				"description": "The EqualOperator plugin performs a case-sensitive comparison between two strings and returns a Boolean result. It ensures accurate conditional logic in automation workflows but must be used inside caller plugins that support operator parameters, maintaining workflow reliability and flexibility.",
+				"qa": [
+					{
+						"question": "What does the EqualOperator plugin do?",
+						"answer": "The EqualOperator plugin compares two strings using case-sensitive matching and returns true if they are exactly equal."
+					},
+					{
+						"question": "What are the key features and parameters of the EqualOperator plugin?",
+						"answer": "Key features include case-sensitive comparison and integration in conditional workflows. It requires two string parameters: LeftHand and RightHand."
+					},
+					{
+						"question": "How is the EqualOperator plugin used in automation contexts?",
+						"answer": "It is used inside caller plugins like Assert or SetCondition to guide workflow logic based on string equality checks."
+					},
+					{
+						"question": "What are best practices for using the EqualOperator plugin?",
+						"answer": "Use it only inside plugins that support operator logic and ensure both strings are normalized if case or whitespace could vary."
+					},
+					{
+						"question": "What are the rules and schema details for the EqualOperator plugin?",
+						"answer": "It requires two mandatory string parameters: LeftHand and RightHand. The comparison is exact and case-sensitive."
+					},
+					{
+						"question": "Who is the author of the EqualOperator plugin?",
+						"answer": "Roei Sabag, https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What aliases can be used for the EqualOperator plugin?",
+						"answer": "It can be referenced by the alias 'Eq'."
+					},
+					{
+						"question": "What categories is the EqualOperator plugin listed under?",
+						"answer": "It is listed under the 'Operators' category."
+					},
+					{
+						"question": "What platforms does the EqualOperator plugin support?",
+						"answer": "It supports any platform."
+					},
+					{
+						"question": "What is the plugin type of the EqualOperator plugin?",
+						"answer": "It is an Operator plugin."
+					},
+					{
+						"question": "What is the manifest version of the EqualOperator plugin?",
+						"answer": "Manifest version is 4."
+					},
+					{
+						"question": "What is the summary of the EqualOperator plugin?",
+						"answer": "The plugin compares two strings using case-sensitive matching and returns a Boolean result for conditional logic."
+					},
+					{
+						"question": "Where can I find the source code and documentation for the EqualOperator plugin?",
+						"answer": "Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/EqualOperator.cs, Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/Equal.md"
+					},
+					{
+						"question": "How does the EqualOperator plugin handle errors or edge cases?",
+						"answer": "It accounts for edge cases like empty strings, case differences, special characters, and whitespace differences."
+					}
+				]
+			}
+		}
+	},
 	"description": [
+		"### Disclaimer",
+		"",
+		"Operator plugins are designed to be called and used only by other plugins that expose an Operator parameter (such as Assert, SetCondition, or InvokeWhileLoop).",
+		"They cannot be invoked directly in the workflow; they function only when implemented inside a caller plugin.",
+		"",
 		"### Purpose",
 		"",
-		"The primary purpose of the EqualOperator plugin is to compare two strings and determine if they are exactly equal, using a case-sensitive comparison.",
+		"The EqualOperator plugin compares two strings to determine if they are exactly equal.",
+		"It uses case-sensitive comparison to ensure precise matching.",
+		"It returns a Boolean result that can be used in automation workflows and tests to control the flow based on string equality.",
+		"This capability is essential for building reliable conditional logic.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature                   | Description                                               |",
-		"|---------------------------|---------------------------------------------------------- |",
-		"| Case-Sensitive Comparison | Performs a case-sensitive comparison of two strings.      |",
-		"| Integration               | Can be used under condition expressions by other plugins. |",
+		"| Feature                   | Description                                                                                        |",
+		"|---------------------------|----------------------------------------------------------------------------------------------------|",
+		"| Case-Sensitive Comparison | Performs a case-sensitive comparison of two strings to check for exact equality.                   |",
+		"| Integration               | Can be used within conditional expressions by other plugins to enable flexible workflow decisions. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage             | Description                                                     |",
-		"|-------------------|-----------------------------------------------------------------|",
-		"| String Comparison | Validate if two string values are identical.                    |",
-		"| Conditional Logic | Use in conditional expressions to control workflow logic based  |",
+		"| Use Case          | Description                                                                           |",
+		"|-------------------|---------------------------------------------------------------------------------------|",
+		"| String Comparison | Validate that two string values are exactly the same to guide workflow steps.         |",
+		"| Conditional Logic | Use the comparison result to control the flow of automation based on string equality. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage              | Description                                                      |",
-		"|--------------------|------------------------------------------------------------------|",
-		"| Validation         | Validate output or state by comparing expected and actual values.|",
-		"| Dynamic Conditions | Create dynamic conditions based on string comparisons.           |"
+		"| Use Case           | Description                                                                          |",
+		"|--------------------|--------------------------------------------------------------------------------------|",
+		"| Validation         | Compare expected and actual string values to assert correctness in tests.            |",
+		"| Dynamic Conditions | Create test conditions based on string comparisons for more flexible test scenarios. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty input strings",
+						"Special characters in strings",
+						"Strings differing only in case",
+						"Whitespace differences"
+					],
+					"expected_result": "Determines if 'ActualResult' and 'ExpectedValue' are exactly equal (case-sensitive).",
+					"notes": "Comparison is case-sensitive and evaluates equality directly. This plugin cannot be used standalone and must be implemented inside a caller plugin such as Assert, SetCondition, or InvokeWhileLoop.",
+					"use_case": "compare_strings_for_exact_equality",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"EqualityCheck",
+					"Operator",
+					"StringComparison"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `Equal` plugin to compare two strings and determine if they are equal.",
+				"### String Equality Comparison",
 				"",
-				"| Field      | Description                                                                                                          |",
-				"|------------|----------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `Equal`. This signifies the action of comparing two strings. |",
-				"| LeftHand   | Specifies the first string to be compared. For example, `String1`.                                                   |",
-				"| RightHand  | Specifies the second string to be compared. For example, `String2`.                                                  |"
+				"Uses the `Equal` plugin to determine if two strings are exactly equal, such as comparing an actual result with an expected value.",
+				"The plugin checks if the values of 'LeftHand' and 'RightHand' match, using a case-sensitive comparison. This comparison is valid only when used inside a caller plugin that supports operator logic."
 			],
 			"rule": {
-				"argument": "{{$ --LeftHand:String1 --RightHand:String2}}",
+				"$type": "Action",
+				"argument": "{{$ --LeftHand:ActualResult --RightHand:ExpectedValue}}",
 				"pluginName": "Equal"
-			}
-		},
-		{
-			"description": [
-				"This example demonstrates the usage of the `EqualOperator` plugin within another plugin, such as `Assert`, to compare two strings and determine if they are equal.",
-				"",
-				"| Field       | Description                                                                                                                    |",
-				"|-------------|--------------------------------------------------------------------------------------------------------------------------------|",
-				"| Condition   | Identifies the specific operator being utilized, which is `EqualOperator`. This signifies the action of comparing two strings. |",
-				"| LeftHand    | Specifies the first string to be compared. For example, `String1`.                                                             |",
-				"| RightHand   | Specifies the second string to be compared. For example, `String2`.                                                            |"
-			],
-			"rule": {
-				"argument": "{{$ --Condition:Equal --LeftHand:String1 --RightHand:String2}}",
-				"pluginName": "Assert"
 			}
 		}
 	],
@@ -72,7 +151,10 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the first string to be compared in the equality check."
+				"Specifies the first input string to be used in the comparison.",
+				"This value is compared to another string to determine equality.",
+				"Used on the left side of the equality check.",
+				"Both strings must match exactly for the result to be true."
 			],
 			"mandatory": true,
 			"name": "LeftHand",
@@ -80,22 +162,27 @@
 		},
 		{
 			"description": [
-				"Specifies the second string to be compared in the equality check."
+				"Specifies the second input string for comparison.",
+				"This string is checked against the left-hand value for equality.",
+				"Used on the right side of the equality check.",
+				"The comparison is case-sensitive and expects an exact match."
 			],
 			"mandatory": true,
 			"name": "RightHand",
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Operator",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `Equal` plugin evaluates whether two strings are equal using a case-sensitive comparison, providing essential functionality for conditional logic in automation workflows and testing scenarios."
+		"The EqualOperator plugin compares two strings exactly using case-sensitive matching.",
+		"It returns a Boolean result to drive conditional logic in automation workflows and tests.",
+		"It integrates seamlessly with other operators to enable precise and reliable workflow decisions."
 	]
 }

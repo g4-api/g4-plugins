@@ -6,74 +6,182 @@
 	"categories": [
 		"DataManagement"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Process.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetProcessParameter.cs"
+			},
+			"rag": {
+				"description": "The Process plugin's GetParameter action lets workflows share and retrieve hub-scoped parameters at runtime for cross-workflow data exchange, enforcing dynamic configuration checks and preserving reliability with built-in missing-value handling and exception logging. It supports flexible use of any parameter name via the OnElement property and delivers immediate updates without external storage.",
+				"qa": [
+					{
+						"question": "What is the Process plugin GetParameter action and why does it matter?",
+						"answer": "It is an automation action that retrieves parameters from the G4 Hub process scope, enabling workflows to share data like session tokens and settings across workflows until the hub restarts."
+					},
+					{
+						"question": "What are the key features and parameters of this plugin?",
+						"answer": "Key features include hub-level variable access, live updates at runtime, and empty-value handling. The primary parameter OnElement specifies the name of the hub-scoped parameter to fetch."
+					},
+					{
+						"question": "How does this plugin embed into external tools or workflow designers?",
+						"answer": "It appears as an Action step named GetParameter under the Process plugin in low-code designers. Users select the Process plugin, set the OnElement property, and the action integrates seamlessly into workflow definitions."
+					},
+					{
+						"question": "What are some best practices for using this plugin?",
+						"answer": "Use consistent OnElement names matching hub-scoped variables, include pre-run checks for required parameters, handle empty strings to avoid errors, and review logs for exceptions during execution."
+					},
+					{
+						"question": "What is the rule schema for this plugin’s action definitions?",
+						"answer": "Actions use a JSON schema with $type set to Action, pluginName set to Process, and onElement specifying the parameter name. This structure ensures clear mapping and predictable behavior."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, which indicates the version of the schema used to define this plugin manifest."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/), who developed the GetProcessParameter plugin."
+					},
+					{
+						"question": "What categories does this plugin belong to?",
+						"answer": "It belongs to the DataManagement category, indicating its role in managing and retrieving data within automation workflows."
+					},
+					{
+						"question": "What is the key field?",
+						"answer": "The key field is Process, which serves as the unique identifier for the plugin within the automation platform."
+					},
+					{
+						"question": "What platforms does this plugin support?",
+						"answer": "This plugin supports Any platform, as it operates at the G4 Hub level without OS restrictions."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is GetParameter, indicating that this plugin retrieves parameter values from the hub environment."
+					},
+					{
+						"question": "What properties does this plugin define?",
+						"answer": "It defines a property named OnElement of type String, which specifies the name of the hub-scoped parameter to retrieve."
+					},
+					{
+						"question": "What output entity does this plugin return?",
+						"answer": "It returns an entity named Parameter of type Any, holding the string value fetched from the hub scope or an empty string if the value is missing."
+					},
+					{
+						"question": "What is the summary of this plugin?",
+						"answer": "GetParameter grabs values stored in the G4 Hub, like temporary codes, and shares them across workflows until the hub restarts. It updates values live during a run and makes them available for other steps to use. Workflows can exchange data without external files, and tests can set up or check hub settings before they start."
+					},
+					{
+						"question": "What is the Git document link?",
+						"answer": "The document link is https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Process.md"
+					},
+					{
+						"question": "What is the Git source link?",
+						"answer": "The source link is https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetProcessParameter.cs"
+					},
+					{
+						"question": "How does the plugin handle errors?",
+						"answer": "The plugin records failures by adding an exception to the response and log stream. By default, workflows continue execution unless explicitly configured to stop on error."
+					},
+					{
+						"question": "What is the apiDocumentation protocol setting?",
+						"answer": "The apiDocumentation setting is None, indicating there is no external API documentation for this plugin."
+					},
+					{
+						"question": "What is the w3c protocol setting?",
+						"answer": "The w3c setting is None, indicating there is no W3C standard reference for this plugin."
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `GetProcessParameter` plugin is to fetch environment variables that are specific to the current process. This allows for the dynamic retrieval of parameters that may vary during the execution of a process, such as temporary paths, session-specific tokens, or other environment-specific settings.",
+		"This plugin lets automation workflows retrieve parameters stored in the G4 Hub process scope, making values like temporary settings or session tokens available to every workflow on the hub. These values persist until the hub restarts, so workflows can share data without manual steps. It works like machine-level parameters but without OS restrictions, offering a simple cross-workflow sharing mechanism.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                        | Description                                                                                               |",
-		"|------------------------------- |-----------------------------------------------------------------------------------------------------------|",
-		"| Parameter Retrieval            | Fetches environment variables specific to the current process.                                            |",
-		"| Dynamic Parameter Handling     | Retrieves process-specific parameters that can change during runtime.                                     |",
-		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |",
+		"| Feature                          | Description                                                                         |",
+		"|----------------------------------|-------------------------------------------------------------------------------------|",
+		"| Hub-level variable access        | Reads values stored at the G4 Hub process level for all workflows until restart.    |",
+		"| Temporary machine-level behavior | Acts like machine-scope parameters on any OS and resets when the hub restarts.      |",
+		"| Live updates during runtime      | Picks up changes to hub-scoped parameters immediately for running workflows.        |",
+		"| Output mapping                   | Exposes the fetched value in the `Result` output field for use by downstream steps. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                  | Description                                                                                                 |",
-		"|------------------------|-------------------------------------------------------------------------------------------------------------|",
-		"| Dynamic Configuration  | Retrieve and use process-specific environment variables dynamically based on the process execution context. |",
-		"| Temporary Data Storage | Use process-level environment variables for temporary data storage and retrieval within a process.          |",
+		"| Use Case                         | Description                                                                                  |",
+		"|----------------------------------|----------------------------------------------------------------------------------------------|",
+		"| Shared settings across workflows | Provides a common source of values for all workflows running on the G4 Hub.                  |",
+		"| Dynamic configuration            | Loads temporary hub parameters into tasks so workflows adapt to changing values at runtime.  |",
+		"| Cross-workflow data exchange     | Uses hub-scoped variables to pass data between different workflows without external storage. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                      | Description                                                                                          |",
-		"|----------------------------|------------------------------------------------------------------------------------------------------|",
-		"| Session-Specific Testing   | Retrieve parameters specific to the test session, enabling more accurate and session-specific tests. |",
-		"| Dynamic Test Configuration | Simplify test configuration by fetching process-specific parameters directly within test scripts.    |"
+		"| Use Case                 | Description                                                                                |",
+		"|--------------------------|--------------------------------------------------------------------------------------------|",
+		"| Shared test parameters   | Supplies consistent values to all test workflows on the hub for uniform test runs.         |",
+		"| Data-driven test inputs  | Feeds hub-scoped variables into tests to drive different scenarios without script changes. |",
+		"| Pre-run parameter checks | Verifies required hub variables are set before test execution to avoid failures.           |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the string value returned from the process-level environment variable retrieved by the plugin.",
+				"Returns an empty string if the variable is not defined or has no value, allowing downstream steps to detect and handle missing process parameters."
+			],
+			"mandatory": true,
+			"name": "Parameter",
+			"type": "Any"
+		}
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Access denied to process environment",
+						"Empty or null value returned",
+						"Parameter not found"
+					],
+					"expected_result": "The value of the `TempPath` environment variable is retrieved and made available in the `Result` output field for downstream actions.",
+					"notes": "Retrieves the raw string value of `TempPath` from the process scope. If the parameter is missing or returns an empty value, downstream actions must handle the null or empty case explicitly.",
+					"use_case": "parameter_retrieval_process_environment",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"EnvironmentAccess",
+					"ParameterRetrieval"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `Process` plugin to fetch a parameter named `TempPath` directly.",
+				"### Retrieve Process-Level Environment Variable",
 				"",
-				"| Field      | Description                                                        |",
-				"|------------|--------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `Process`. |",
-				"| onElement  | Specifies the name of the parameter to be fetched.                 |"
+				"This example demonstrates how to retrieve a process-level environment variable named `TempPath` using the Process plugin’s GetParameter action.",
+				"It retrieves the raw value of `TempPath` from the process scope for use in downstream workflows.",
+				"The retrieved value is available in the `Result` output field for subsequent steps."
 			],
 			"rule": {
+				"$type": "Action",
 				"onElement": "TempPath",
 				"pluginName": "Process"
-			}
-		},
-		{
-			"description": [
-				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `TempPath` from the process environment and use it in a `SendKeys` action.",
-				"",
-				"| Field      | Description                                                                                             |",
-				"|------------|---------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
-				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
-				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
-				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
-			],
-			"rule": {
-				"argument": "{{$Get-Parameter --Name:TempPath --Scope:Process}}",
-				"locator": "CssSelector",
-				"onElement": "#someElement",
-				"pluginName": "SendKeys"
 			}
 		}
 	],
 	"key": "Process",
 	"manifestVersion": 4,
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "GetParameter",
 	"properties": [
 		{
 			"description": [
-				"Specifies the name of the environment variable to be fetched from the process environment."
+				"OnElement names the environment variable that workflows will fetch.",
+				"Workflows use this name to load the correct value when they run.",
+				"Using the right name ensures the workflow finds the intended setting every time."
 			],
 			"mandatory": true,
 			"name": "OnElement",
@@ -84,14 +192,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `GetProcessParameter` plugin retrieves process-specific environment variables within automation workflows, enhancing configuration management.",
-		"Key features include fetching environment variables specific to the current process, dynamic parameter handling during runtime, and integration with other plugins for dynamic usage in various actions.",
-		"Process parameters are temporary and can be accessed as long as the process runs; these parameters are not isolated.",
-		"In RPA, it is used for dynamic configuration and temporary data storage within a process.",
-		"In automation testing, it supports session-specific testing and dynamic test configuration."
+		"GetParameter grabs values stored in the G4 Hub, like temporary codes, and shares them across workflows until the hub restarts.",
+		"It updates values live during a run and makes them available for other steps to use.",
+		"Workflows can exchange data without external files, and tests can set up or check hub settings before they start."
 	]
 }

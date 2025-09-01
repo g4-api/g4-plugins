@@ -10,9 +10,12 @@
 		"integration": {
 			"sequentialWorkflow": {
 				"$type": "Content",
+				"branches": [ "Actions", "Transformers" ],
 				"componentType": "task",
+				"containerable": true,
 				"iconProvider": "content-html",
-				"model": "ContentRuleModel"
+				"model": "ContentRuleModel",
+				"switchable": true
 			}
 		}
 	},

@@ -9,8 +9,8 @@
 	"context": {
 		"integration": {
 			"github": {
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForEachLoop.cs",
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForEachLoop.md"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForEachLoop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForEachLoop.cs"
 			},
 			"rag": {
 				"description": "The InvokeForEachLoop plugin automates repetitive tasks by finding collections of elements with a specified locator and executing defined actions on each item. It supports alternative locators, nested loops, and exception logging to maintain reliable workflows in RPA and automated testing.",
@@ -127,7 +127,7 @@
 					],
 					"expected_result": "All pagination buttons matching the XPath selector are processed with Click; exceptions are recorded but do not halt execution.",
 					"notes": "The InvokeForEachLoop plugin locates all elements matching the XPath selector `//ul[@id='Pagination1']/li/button` and performs a Click on each. If no elements are found, an exception is logged and the loop is skipped. If a Click action throws an exception, it is recorded and the loop continues. The process only stops on configured stop-on-error.",
-					"test_case": "invoke_foreach_click_pagination_xpath",
+					"use_case": "invoke_foreach_click_pagination_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -168,7 +168,7 @@
 					],
 					"expected_result": "All pagination buttons matching the CSS selector are processed with Click; exceptions are recorded but do not halt execution.",
 					"notes": "The InvokeForEachLoop plugin locates all elements matching the CSS selector `#Pagination1 > li > button` and performs a Click on each. If no elements are found, an exception is logged and the loop is skipped. If a Click action throws an exception, it is recorded and the loop continues. The process only stops on configured stop-on-error.",
-					"test_case": "invoke_foreach_click_pagination_css",
+					"use_case": "invoke_foreach_click_pagination_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -202,7 +202,7 @@
 		{
 			"context": {
 				"annotations": {
-					"test_case": "invoke_foreach_click_pagination_li_xpath_inner_xpath",
+					"use_case": "invoke_foreach_click_pagination_li_xpath_inner_xpath",
 					"expected_result": "Each `<li>` matching `//ul[@class='pagination']/li` has its child button clicked; exceptions are recorded but do not halt execution.",
 					"notes": "InvokeForEachLoop locates each `<li>` via XPath and performs a Click on its child via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loop.",
 					"edge_cases": [
@@ -251,7 +251,7 @@
 					],
 					"expected_result": "Each `<li>` matching `//ul[@class='pagination']/li` has its child button clicked; exceptions are recorded but do not halt execution.",
 					"notes": "InvokeForEachLoop locates each `<li>` via XPath and performs a Click on its child via CSS selector. Exceptions for missing elements or click failures are logged without stopping the loop.",
-					"test_case": "invoke_foreach_click_pagination_li_xpath_inner_css",
+					"use_case": "invoke_foreach_click_pagination_li_xpath_inner_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -293,7 +293,7 @@
 					],
 					"expected_result": "Each `<li>` matching `.pagination > li` has its child button clicked; exceptions are recorded but do not halt execution.",
 					"notes": "InvokeForEachLoop locates each `<li>` via CSS selector and performs a Click on its child via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loop.",
-					"test_case": "invoke_foreach_click_pagination_li_css_inner_xpath",
+					"use_case": "invoke_foreach_click_pagination_li_css_inner_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -335,7 +335,7 @@
 					],
 					"expected_result": "Each `<li>` matching `.pagination > li` has its child button clicked; exceptions are recorded but do not halt execution.",
 					"notes": "InvokeForEachLoop locates each `<li>` via CSS selector and performs a Click on its child via CSS selector. Exceptions for missing elements or click failures are logged without stopping the loop.",
-					"test_case": "invoke_foreach_click_pagination_li_css_inner_css",
+					"use_case": "invoke_foreach_click_pagination_li_css_inner_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -370,7 +370,7 @@
 		{
 			"context": {
 				"annotations": {
-					"test_case": "invoke_foreach_nested_xpath_xpath",
+					"use_case": "invoke_foreach_nested_xpath_xpath",
 					"expected_result": "Each `button` under each matching `<ul>` is clicked; exceptions are recorded but do not halt execution.",
 					"notes": "Uses nested InvokeForEachLoop: outer selects `<ul>` via XPath, inner selects buttons via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loops.",
 					"edge_cases": [
@@ -428,7 +428,7 @@
 					],
 					"expected_result": "Each `button` under each matching `<ul>` is clicked; exceptions are recorded but do not halt execution.",
 					"notes": "Uses nested InvokeForEachLoop: outer selects `<ul>` via XPath, inner selects buttons via CSS selector. Exceptions for missing elements or click failures are logged without stopping the loops.",
-					"test_case": "invoke_foreach_nested_xpath_css",
+					"use_case": "invoke_foreach_nested_xpath_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -478,7 +478,7 @@
 					],
 					"expected_result": "Each `button` under each matching container is clicked; exceptions are recorded but do not halt execution.",
 					"notes": "Uses nested InvokeForEachLoop: outer selects containers via CSS selector, inner selects buttons via relative XPath. Exceptions for missing elements or click failures are logged without stopping the loops.",
-					"test_case": "invoke_foreach_nested_css_xpath",
+					"use_case": "invoke_foreach_nested_css_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -528,7 +528,7 @@
 					],
 					"expected_result": "Each `button` under each matching container is clicked; exceptions are recorded but do not halt execution.",
 					"notes": "Uses nested InvokeForEachLoop: outer selects containers and inner selects buttons both via CSS selectors. Exceptions for missing elements or click failures are logged without stopping the loops.",
-					"test_case": "invoke_foreach_nested_css_css",
+					"use_case": "invoke_foreach_nested_css_css",
 					"version": "1.0"
 				},
 				"labels": [

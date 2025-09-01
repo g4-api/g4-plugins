@@ -16,9 +16,12 @@
 		"integration": {
 			"sequentialWorkflow": {
 				"$type": "Content",
+				"branches": [ "Actions", "Transformers" ],
 				"componentType": "task",
+				"containerable": true,
 				"iconProvider": "content-dom",
-				"model": "ContentRuleModel"
+				"model": "ContentRuleModel",
+				"switchable": true
 			}
 		}
 	},
@@ -158,6 +161,7 @@
 			"type": "String"
 		},
 		{
+			"default": "(?s).*",
 			"description": [
 				"Specifies the regular expression pattern to apply to the extracted value.",
 				"This allows for precise data extraction from the text or attribute value."

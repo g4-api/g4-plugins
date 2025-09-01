@@ -12,6 +12,103 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WaitFlow.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WaitFlow.cs"
+			},
+			"rag": {
+				"description": "The WaitFlow plugin enables automation workflows to pause execution until a specified condition is met or a timeout occurs. By integrating assertion checks with optional time-based delays, it ensures that steps run in the correct order and prevents race conditions. Errors clear the waiting state and log exceptions to maintain workflow consistency and reliability.",
+				"qa": [
+					{
+						"question": "What is the WaitFlow plugin and why does it matter?",
+						"answer": "WaitFlow pauses an automation script until a condition is true or a timeout occurs, ensuring that subsequent steps execute correctly and preventing errors when waiting for elements or data."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include conditional waiting based on assertions, timeout handling in milliseconds or HH:MM:SS format, and dynamic creation of assertion actions. Primary parameters are Condition (an assertion to evaluate), Expected (value or pattern to match), Operator (comparison type), and Timeout (maximum wait duration)."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined as an ActionRuleModel task with iconProvider \"wait\", making it available as a wait or synchronization action in low-code or RPA platforms."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use precise Condition, Expected, and Operator values to define when to proceed, choose accurate locators or attributes for element checks, specify Timeout in the correct format (milliseconds or HH:MM:SS), and review logs on exceptions to troubleshoot delays or failures."
+					},
+					{
+						"question": "What is the structure of the plugin rule definition?",
+						"answer": "Each rule uses \"$type\": \"Action\", includes pluginName \"WaitFlow\", and may specify an argument string containing flags like --Condition, --Operator, --Expected, and --Timeout. Optional fields include locator, onElement, and onAttribute to target specific elements or attributes."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "On error it clears any stored wait state, logs the exception to the workflow log stream, and by default allows the remainder of the workflow to continue unless explicitly configured to stop."
+					},
+					{
+						"question": "What are the aliases for this plugin?",
+						"answer": "The aliases are \"Wait\" and \"WaitForCondition\"."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It is listed under the \"FlowControl\" category, reflecting its role in controlling execution flow and synchronization."
+					},
+					{
+						"question": "What GitHub documentation link is provided?",
+						"answer": "The GitHub documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WaitFlow.md."
+					},
+					{
+						"question": "What GitHub source link is provided?",
+						"answer": "The GitHub source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WaitFlow.cs."
+					},
+					{
+						"question": "What does the context.integration.sequentialWorkflow section define?",
+						"answer": "It defines \"$type\": \"Action\", componentType \"task\", iconProvider \"wait\", and model \"ActionRuleModel\", making WaitFlow available as a task in workflow designers."
+					},
+					{
+						"question": "What is defined in the description section?",
+						"answer": "The description explains the purpose of WaitFlow, its key features such as conditional waiting and timeout handling, and its usage in RPA and automation testing scenarios."
+					},
+					{
+						"question": "What examples are provided in the manifest?",
+						"answer": "Examples include waiting for an element to be visible with CSS selector and millisecond timeout, using HH:MM:SS timeouts, pausing execution for a fixed duration, waiting for an attribute match via XPath, waiting for specific text via CSS selector, and pausing for a specified number of milliseconds."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is \"WaitFlow\", which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version used for this plugin."
+					},
+					{
+						"question": "What parameters does this plugin accept?",
+						"answer": "It accepts Condition (Assertion type, optional), Expected (Any type for comparison, optional), Operator (Operator type, optional), and Timeout (Number|Time type, optional) to define what to wait for and how long."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports \"Any\" platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is \"Action\", indicating it performs an operation within the automation workflow."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include Argument (Number or Expression specifying wait settings), Locator (String for finding elements, default \"Xpath\"), OnAttribute (String for attribute checks), and OnElement (String for element selectors)."
+					},
+					{
+						"question": "What protocol settings does the manifest specify?",
+						"answer": "Protocol settings show apiDocumentation as \"None\" and w3c as \"None\", indicating no external API documentation or W3C validation is required."
+					},
+					{
+						"question": "What summary is provided for this plugin?",
+						"answer": "The summary states that WaitFlow pauses a task until a watched condition is met or until a set time expires, helping synchronize steps when elements appear or events complete."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -23,84 +120,243 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `WaitFlow` plugin is essential for managing the execution flow in both Robotic Process Automation (RPA) and automation testing. ",
-		"Its primary objective is to pause the execution of an automation script until a specified condition is met or a timeout duration has elapsed.",
+		"The WaitFlow plugin pauses an automation script until a set condition is true or a timeout occurs. ",
+		"This helps ensure steps run in the right order and prevents errors when waiting for something to appear or change. ",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                     | Description                                                                                              |",
-		"|-----------------------------|----------------------------------------------------------------------------------------------------------|",
-		"| Conditional Waiting         | Waits until a specified condition is met, allowing for dynamic flow control based on runtime conditions. |",
-		"| Timeout Handling            | Implements simple delays using specified timeout durations, ensuring controlled execution timing.        |",
-		"| Meta Action                 | Creates, sends, and evaluates assertion plugins to determine whether to proceed based on conditions.     |",
-		"| Integration with Assertions | Utilizes assertion plugins to evaluate conditions, ensuring flexible and dynamic waiting logic.          |",
+		"| Feature               | Description                                                            |",
+		"|-----------------------|------------------------------------------------------------------------|",
+		"| Conditional Waiting   | Pause execution until a given condition is met at runtime.             |",
+		"| Timeout Handling      | Use a set delay to wait a fixed amount of time before continuing.      |",
+		"| Assertion Integration | Use assertion plugins to check conditions and control when to proceed. |",
+		"| Meta Action Creation  | Build and run assertion steps dynamically to decide flow.              |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                    | Description                                                                                        |",
-		"|--------------------------|--------------------------------------------------------------------------------------------------- |",
-		"| Conditional Flow Control | Pause execution until specific conditions are met, ensuring proper sequencing in automation tasks. |",
-		"| Timed Delays             | Implement delays in the workflow to avoid race conditions or ensure timing between steps.          |",
-		"| Dynamic Task Management  | Manage dynamic tasks that require waiting for certain conditions to be true before proceeding.     |",
+		"| Use Case                 | Description                                                         |",
+		"|--------------------------|---------------------------------------------------------------------|",
+		"| Conditional Flow Control | Stop a robot until data or a page element meets a required state.   |",
+		"| Timed Delays             | Wait a fixed time between steps to prevent race conditions.         |",
+		"| Dynamic Task Management  | Hold off on actions until external events or data become available. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                       | Description                                                                                                           |",
-		"|-----------------------------|-----------------------------------------------------------------------------------------------------------------------|",
-		"| Wait for Element Visibility | Wait for elements to become visible on the page before interacting with them, ensuring stable and reliable tests.     |",
-		"| Synchronization Points      | Introduce synchronization points in test scripts, waiting for specific conditions to be met before continuing.        |",
-		"| Handle Asynchronous Events  | Manage asynchronous events by waiting for conditions to be met, ensuring tests adapt to dynamic application behavior. |"
+		"| Use Case                    | Description                                                               |",
+		"|-----------------------------|---------------------------------------------------------------------------|",
+		"| Wait for Element Visibility | Pause a test until a page element appears before continuing.              |",
+		"| Synchronization Points      | Insert waits to keep tests in sync with the application under test.       |",
+		"| Handle Asynchronous Events  | Wait for background actions or data loads before moving to the next step. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not visible within timeout",
+						"Incorrect CSS selector usage",
+						"Timeout exceeded",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The element with selector `#loginForm` becomes visible within 8 seconds.",
+					"notes": "Wait steps do not return a value; they only block execution until the condition is met or the timeout expires.",
+					"use_case": "element_visible_wait_css_loginForm",
+					"version": "1.0"
+				},
+				"labels": [
+					"TimeoutHandling",
+					"VisibilityCheck",
+					"WaitAction"
+				]
+			},
 			"description": [
-				"Wait for the element with the CSS selector `#loading` to become visible, with a maximum timeout of 10 seconds."
+				"### Wait for Login Form to Become Visible (Millisecond Timeout)",
+				"",
+				"This example demonstrates how to wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 8,000 milliseconds (8 seconds).",
+				"It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:8000`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in milliseconds.",
+				"Wait steps do not return a value; they only block execution until the condition is met or the timeout expires."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementVisible --Timeout:10000}}",
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementVisible --Timeout:8000}}",
 				"locator": "CssSelector",
-				"onElement": "#loading",
+				"onElement": "#loginForm",
 				"pluginName": "WaitFlow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not visible within timeout",
+						"Incorrect CSS selector usage",
+						"Timeout exceeded",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The element with selector `#loginForm` becomes visible within 8 seconds.",
+					"notes": "Wait steps do not return a value; they only block execution until the condition is met or the timeout expires.",
+					"use_case": "element_visible_wait_css_loginForm_hms",
+					"version": "1.0"
+				},
+				"labels": [
+					"TimeoutHandling",
+					"VisibilityCheck",
+					"WaitAction"
+				]
+			},
 			"description": [
-				"Pause execution for 5 seconds before proceeding to the next action."
+				"### Wait for Login Form to Become Visible (HH:MM:SS Timeout)",
+				"",
+				"This example demonstrates how to wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 00:00:08 (8 seconds).",
+				"It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:00:00:08`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in HH:MM:SS format.",
+				"Wait steps do not return a value; they only block execution until the condition is met or the timeout expires."
 			],
 			"rule": {
-				"argument": "00:00:05",
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementVisible --Timeout:00:00:08}}",
+				"locator": "CssSelector",
+				"onElement": "#loginForm",
 				"pluginName": "WaitFlow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Negative timeout format",
+						"Timeout exceeded unexpectedly",
+						"Unexpected argument format",
+						"Value parsing error"
+					],
+					"expected_result": "Execution is paused for 4 seconds before proceeding.",
+					"notes": "Wait steps do not return a value; they block execution for the specified duration.",
+					"use_case": "pause_execution_wait_4s",
+					"version": "1.0"
+				},
+				"labels": [
+					"Delay",
+					"WaitAction"
+				]
+			},
 			"description": [
-				"Wait for the attribute `class` of the element with the XPath `//div[@id='status']` to match the regular expression `completed`, with a timeout of 15 seconds."
+				"### Pause Execution for 4 Seconds",
+				"",
+				"This example demonstrates how to pause execution for 4 seconds before continuing to the next step.",
+				"It uses the `WaitFlow` plugin with an argument of `00:00:04`.",
+				"Wait steps do not return a value; they block execution for the specified duration."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:completed --Timeout:15000}}",
+				"$type": "Action",
+				"argument": "00:00:04",
+				"pluginName": "WaitFlow"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute not present",
+						"Attribute value never matches",
+						"Incorrect XPath indexing or attribute usage",
+						"Malformed URL",
+						"Regex match occurs when it shouldn't",
+						"Timeout exceeded",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The `data-status` attribute of the `<div id='dataContainer'>` element matches the pattern `data-loaded` within 12 seconds.",
+					"notes": "Wait steps block execution until the condition is met or the timeout expires.",
+					"use_case": "element_attribute_match_wait_xpath_dataContainer",
+					"version": "1.0"
+				},
+				"labels": [
+					"AttributeCheck",
+					"RegexValidation",
+					"TimeoutHandling",
+					"WaitAction"
+				]
+			},
+			"description": [
+				"### Wait for `data-status` Attribute to Match via XPath (Millisecond Timeout)",
+				"",
+				"This example demonstrates how to wait for the `data-status` attribute of the `<div id='dataContainer'>` element to match the pattern `data-loaded`, using a maximum timeout of 12,000 milliseconds (12 seconds).",
+				"It uses the `WaitFlow` plugin with `--Condition:ElementAttribute`, `--Operator:Match`, `--Expected:data-loaded`, and `--Timeout:12000`, applied to the element’s `data-status` attribute. Note that the timeout is specified in milliseconds.",
+				"Wait steps block execution until the condition is met or the timeout expires."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:data-loaded --Timeout:12000}}",
 				"locator": "XPath",
-				"onAttribute": "class",
-				"onElement": "//div[@id='status']",
+				"onAttribute": "data-status",
+				"onElement": "//div[@id='dataContainer']",
 				"pluginName": "WaitFlow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Element visible but text differs",
+						"Incorrect CSS selector usage",
+						"Text mismatch",
+						"Timeout exceeded",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "The text `Order Complete` appears in the element with selector `#statusMessage` within the system’s default timeout.",
+					"notes": "Wait steps block execution until the condition is met or the system’s default timeout expires.",
+					"use_case": "element_text_equal_wait_css_statusMessage",
+					"version": "1.0"
+				},
+				"labels": [
+					"CssSelectorExtraction",
+					"TextCheck",
+					"TimeoutHandling",
+					"WaitAction"
+				]
+			},
 			"description": [
-				"Wait for a specific text `Success` to be present in the element with the CSS selector `#result` before proceeding."
+				"### Wait for Specific Text via CSS Selector",
+				"",
+				"This example demonstrates how to wait for the text `Order Complete` to appear in the element located by CSS selector `#statusMessage`. It uses the `WaitFlow` plugin with `--Condition:ElementText`, `--Operator:Equal`, and `--Expected:Order Complete` applied to the element. The timeout is specified as the system’s default duration.",
+				"Wait steps block execution until the condition is met or the system’s default timeout expires."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Success}}",
+				"$type": "Action",
+				"argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Order Complete}}",
 				"locator": "CssSelector",
-				"onElement": "#result",
+				"onElement": "#statusMessage",
 				"pluginName": "WaitFlow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Malformed format (e.g., not HH:MM:SS or milliseconds)",
+						"Negative timeout value",
+						"Timeout exceeded unexpectedly",
+						"Unexpected argument format",
+						"Value parsing error"
+					],
+					"expected_result": "Execution is paused for 2 seconds before proceeding.",
+					"notes": "Wait steps block execution for the specified duration.",
+					"use_case": "pause_execution_wait_2s",
+					"version": "1.0"
+				},
+				"labels": [
+					"Delay",
+					"WaitAction"
+				]
+			},
 			"description": [
-				"Pause execution for 3 seconds before proceeding to the next action."
+				"### Pause Execution for 2 Seconds",
+				"",
+				"This example demonstrates how to pause execution for 2 seconds before continuing to the next step. It uses the `WaitFlow` plugin with an argument of `2000` (milliseconds).",
+				"Wait steps block execution for the specified duration."
 			],
 			"rule": {
-				"argument": "3000",
+				"$type": "Action",
+				"argument": "2000",
 				"pluginName": "WaitFlow"
 			}
 		}
@@ -110,7 +366,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the criteria or state that must be evaluated or met during the execution of a plugin or action."
+				"A rule that tells the system what must be true for an action to proceed.",
+				"It sets the situation or threshold to check before moving on.",
+				"Clear conditions help the automation follow the correct path."
 			],
 			"mandatory": false,
 			"name": "Condition",
@@ -118,33 +376,43 @@
 		},
 		{
 			"description": [
-				"Specifies the value or pattern that the automation script expects to find or match during the execution of a condition."
+				"The value or pattern the script looks for when checking a condition.",
+				"It defines what outcome counts as a match.",
+				"Clear expected values ensure accurate checks."
 			],
-			"mandatory": false,
-			"name": "Expected"
+			"name": "Expected",
+			"type": "Any"
 		},
 		{
 			"description": [
-				"Specifies the type of comparison or operation to be performed when evaluating a condition."
+				"How the system compares the actual result to the expected value.",
+				"It can check for equality, greater than, or other comparisons.",
+				"Picking the right comparison type makes sure decisions are correct."
 			],
-			"mandatory": false,
 			"name": "Operator",
 			"type": "Operator"
 		},
 		{
 			"description": [
-				"Specifies the maximum duration the automation script should wait for a condition to be met before proceeding with the next step, after which it will terminate."
+				"The longest time the script waits for a condition before moving on.",
+				"It prevents the process from hanging indefinitely.",
+				"After this time, the script moves to the next step even if the condition is not met."
 			],
 			"mandatory": false,
 			"name": "Timeout",
 			"type": "Number|Time"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Defines the duration to wait or the condition to evaluate, based on the type of wait specified. For time-based waits, it takes a `TimeSpan` format. For condition-based waits, it specifies the condition and parameters."
+				"A value that sets how long to pause or what condition to check before continuing.",
+				"Fixed waits use a time span format to define the pause duration.",
+				"Conditional waits specify what to look for and any needed parameters."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -153,7 +421,9 @@
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies how elements should be located on a webpage or within an application."
+				"Method used to find an item on a page or in an app.",
+				"Common methods include XPath, CSS selectors, or IDs.",
+				"Choosing the correct method ensures the right element is found."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -161,7 +431,9 @@
 		},
 		{
 			"description": [
-				"Specifies the attribute of the target element that will be interacted with or evaluated during automation."
+				"Name of the element’s property whose value will be used or checked.",
+				"It identifies which piece of the element the system needs.",
+				"Picking the correct property ensures the right data is accessed."
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
@@ -169,7 +441,9 @@
 		},
 		{
 			"description": [
-				"Specifies the target element on which conditions will be evaluated during the automation process."
+				"Specifies which element the system will check or interact with.",
+				"It points to the item on a page or in an application where conditions apply.",
+				"Targeting the correct element ensures accurate automation behavior."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -180,13 +454,9 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `WaitFlow` plugin pauses the execution of an automation script until a specified condition is met or a timeout duration has elapsed, providing essential flow control in RPA and automation testing.",
-		"It supports conditional waiting and timeout handling, allowing for dynamic flow control based on runtime conditions and ensuring controlled execution timing.",
-		"Key features include conditional waiting, timeout handling, and integration with assertion plugins for flexible and dynamic waiting logic.",
-		"Common use cases include conditional flow control, timed delays, dynamic task management in RPA, waiting for element visibility, synchronization points, and handling asynchronous events in automation testing."
+		"WaitFlow pauses a task until something you’re watching for happens or until a set time is up.",
+		"It waits for simple checks to pass or stops waiting after a timer so everything happens at the right moment.",
+		"You can use it to pause until an item shows up, add a delay, or keep steps in sync when some things happen later than others."
 	]
 }

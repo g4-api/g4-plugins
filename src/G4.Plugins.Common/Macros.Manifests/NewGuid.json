@@ -10,53 +10,130 @@
 	"categories": [
 		"Utilities"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewGuid.cs"
+			},
+			"rag": {
+				"description": "The NewGuid macro generates unique GUIDs at runtime, facilitating robust automation by preventing ID conflicts. It supports multiple formatting options and custom regex extraction for precise control, maintaining workflow reliability and dynamic adaptability across various scenarios and system requirements.",
+				"qa": [
+					{
+						"question": "What is the basic functionality of the NewGuid macro plugin?",
+						"answer": "It generates unique GUIDs at runtime to prevent conflicts in automation workflows."
+					},
+					{
+						"question": "What key features and parameters does the NewGuid plugin support?",
+						"answer": "It supports multiple GUID formats (D, N, B, P, X) and allows custom regex patterns for specific value extraction. Details: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md"
+					},
+					{
+						"question": "How is the NewGuid plugin integrated into workflows?",
+						"answer": "It's integrated as a macro, generating GUIDs dynamically during workflow execution, suitable for element identification, tracking, and test data."
+					},
+					{
+						"question": "What are best practices when using the NewGuid plugin?",
+						"answer": "Use standardized GUID formats for consistency, apply regex patterns when partial GUID extraction is needed, and validate GUID consumption by subsequent plugins."
+					},
+					{
+						"question": "What rule details are included in NewGuid plugin usage examples?",
+						"answer": "Examples demonstrate action rules using SendKeys and WriteLog plugins with various GUID formats and regex patterns. See: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md"
+					},
+					{
+						"question": "Who authored the NewGuid plugin?",
+						"answer": "Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)"
+					},
+					{
+						"question": "What categories does the NewGuid plugin belong to?",
+						"answer": "Utilities"
+					},
+					{
+						"question": "What platforms are supported by the NewGuid plugin?",
+						"answer": "Any"
+					},
+					{
+						"question": "What is the plugin type for NewGuid?",
+						"answer": "Macro"
+					},
+					{
+						"question": "What does the summary of the NewGuid plugin describe?",
+						"answer": "It highlights the plugin's ability to generate GUIDs in multiple formats, customize extraction via regex, and improve workflow reliability and automation efficiency."
+					},
+					{
+						"question": "Where can I find the source and documentation for the NewGuid plugin?",
+						"answer": "Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewGuid.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-Guid.md"
+					},
+					{
+						"question": "How does the NewGuid plugin handle errors?",
+						"answer": "It addresses issues such as invalid format specifications, regex pattern errors, and generation failures by clearly documented edge cases."
+					}
+				]
+			}
+		}
+	},
 	"description": [
-		"The NewGuid macro plugin generates a new GUID (Globally Unique Identifier) within automation workflows, providing a unique identifier for various tasks.",
-		"",
 		"### Purpose",
 		"",
-		"The primary purpose of the NewGuid macro plugin is to generate unique identifiers in the form of GUIDs. These identifiers are crucial for various automation tasks that require unique references or tracking.",
+		"The NewGuid macro plugin generates a unique GUID at runtime for use in automation workflows.",
+		"These one-of-a-kind IDs help avoid conflicts and make tracking elements or processes straightforward.",
+		"It offers multiple formatting options to fit different system needs.",
+		"You can also apply a custom regex pattern to pull out specific parts of the GUID.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature                      | Description                                                                                     |",
-		"|------------------------------|-------------------------------------------------------------------------------------------------|",
-		"| Unique Identifier Generation | Generates unique GUIDs that can be used as identifiers for elements, transactions, or entities. |",
-		"| Automation Integration       | Integrates seamlessly with automation workflows, providing dynamic and unique identifiers.      |",
+		"| Feature                      | Description                                                                           |",
+		"|------------------------------|---------------------------------------------------------------------------------------|",
+		"| Unique Identifier Generation | Creates a new GUID for use as a unique reference in workflows.                        |",
+		"| Format Options               | Offers multiple output formats (D, N, B, P, X) to meet different system requirements. |",
+		"| Pattern-Based Extraction     | Allows custom regex patterns to extract specific parts of the GUID as needed.         |",
+		"| Workflow Integration         | Integrates GUID generation seamlessly into automation steps at runtime.               |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                  | Description                                                                    |",
-		"|------------------------|--------------------------------------------------------------------------------|",
-		"| Element Identification | Use generated GUIDs to uniquely identify elements within automation processes. |",
-		"| Transaction Tracking   | Track transactions or activities using unique GUIDs for reference.             |",
+		"| Use Case               | Description                                                                       |",
+		"|------------------------|-----------------------------------------------------------------------------------|",
+		"| Element Identification | Assigns unique IDs to UI elements for reliable selection and interaction.         |",
+		"| Transaction Tracking   | Tags transactions or records with GUIDs to ensure accurate tracking and auditing. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                | Description                                                                    |",
-		"|----------------------|--------------------------------------------------------------------------------|",
-		"| Data Generation      | Generate unique test data for testing scenarios.                               |",
-		"| Test Case Management | Use GUIDs to manage and track test cases within automation testing frameworks. |",
-		"",
-		"### Conclusion",
-		"",
-		"The NewGuid macro plugin offers a straightforward solution for generating unique identifiers within automation workflows and testing scenarios. By providing GUIDs, it ensures uniqueness and facilitates efficient automation and testing processes."
+		"| Use Case             | Description                                                                      |",
+		"|----------------------|----------------------------------------------------------------------------------|",
+		"| Test Data Generation | Produces unique data values to avoid duplicates in test scenarios.               |",
+		"| Test Case Management | Uses GUIDs to label and manage test cases for better organization and reporting. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in N format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `N` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_plain_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"GUID",
+					"Macro",
+					"NFormat",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `N` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Plain GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `N` format. For example, `{{$New-Guid --Format:N}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `N` format (32 digits) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `N` format (32 digits) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:N}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -64,19 +141,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in D format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `D` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_hyphenated_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"DFormat",
+					"GUID",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `D` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Hyphenated GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `D` format. For example, `{{$New-Guid --Format:D}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `D` format (32 digits separated by hyphens) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `D` format (32 digits separated by hyphens) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:D}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -84,19 +178,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"Malformed braces",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in B format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `B` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_braced_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"BFormat",
+					"GUID",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `B` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Braced GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `B` format. For example, `{{$New-Guid --Format:B}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `B` format (32 digits separated by hyphens, enclosed in braces) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `B` format (32 digits separated by hyphens, enclosed in braces) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:B}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -104,19 +216,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"Malformed parentheses",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in P format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `P` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_parenthesized_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"GUID",
+					"Macro",
+					"PFormat",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `P` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Parenthesized GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `P` format. For example, `{{$New-Guid --Format:P}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `P` format (32 digits separated by hyphens, enclosed in parentheses) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `P` format (32 digits separated by hyphens, enclosed in parentheses) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:P}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -124,19 +254,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Generation failure",
+						"Invalid format specification",
+						"Invalid onElement selector",
+						"SendKeys plugin failure",
+						"Unexpected characters in input"
+					],
+					"expected_result": "The SendKeys plugin sends the GUID value formatted in X format as keystrokes to the specified element.",
+					"notes": "This example uses the `NewGuid` macro plugin with the `X` format option and the `SendKeys` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `SendKeys` action.",
+					"use_case": "send_formatted_guid_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"GUID",
+					"Macro",
+					"SendKeys",
+					"XFormat"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin to generate a new GUID with the `X` format and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Formatted GUID",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated GUID with the `X` format. For example, `{{$New-Guid --Format:X}}`.                                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated GUID with the `X` format (four hexadecimal values enclosed in braces) as keystrokes to the element specified by the CssSelector value."
+				"Invoke the `NewGuid` macro plugin to obtain a GUID value in `X` format (four hexadecimal values enclosed in braces) at runtime and send it as keystrokes using the `SendKeys` plugin.",
+				"Target the element specified by the `CssSelector` `#inputField`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-Guid --Format:X}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -144,18 +291,39 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty GUID value",
+						"Generation failure",
+						"Invalid regex pattern",
+						"Log write failure",
+						"No regex match",
+						"Pattern produces incorrect length"
+					],
+					"expected_result": "The WriteLog plugin logs the first eight alphanumeric characters extracted from the generated GUID.",
+					"notes": "This example combines the `NewGuid` macro plugin's `Pattern` parameter with the `WriteLog` plugin. The `NewGuid` macro generates a GUID value without side effects, and its output is consumed by the `WriteLog` action.",
+					"use_case": "log_extracted_guid_prefix",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Extraction",
+					"Logging",
+					"NewGuid",
+					"Regex",
+					"WriteLog"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewGuid` macro plugin with a custom regex pattern to extract the first 8 alphanumeric characters of the GUID.",
+				"### Extract and Log GUID Prefix",
 				"",
-				"| Field      | Description                                                                                                                                                                           |",
-				"|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `WriteLog`. This signifies the action of writing information to the host.                                                      |",
-				"| argument   | Specifies the log message, including the matched pattern of the GUID retrieved by the `NewGuid` plugin with the custom regex pattern. For example, `{{$New-Guid --Pattern:^\\w{8}}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `WriteLog` plugin to write information about the matched pattern of the GUID being used to the host.",
-				"The retrieved matched pattern, which consists of the first 8 alphanumeric characters of the GUID, will be dynamically inserted into the log message, providing valuable insight into the automation workflow."
+				"Invoke the `NewGuid` macro plugin to obtain a new GUID value at runtime.",
+				"Apply the regular expression `^\\w{8}` to the GUID value in the `argument` attribute.",
+				"Extract the first eight alphanumeric characters of the GUID.",
+				"Log the extracted GUID prefix using the `WriteLog` plugin."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\\w{8}}}",
 				"pluginName": "WriteLog"
 			}
@@ -167,30 +335,79 @@
 		{
 			"default": "D",
 			"description": [
-				"Specifies the format of the generated GUID. If not specified, the default format is 'D'."
+				"Determines how the GUID value is formatted in string form.",
+				"Format options let you include or exclude hyphens and wrap the value in braces, parentheses, or keep it compact.",
+				"Selecting a compatible format ensures the GUID meets the requirements of different APIs and data stores."
 			],
 			"mandatory": false,
 			"name": "Format",
-			"type": "String"
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Formats the GUID as 32 hexadecimal digits separated by hyphens and enclosed in braces.",
+						"Output looks like {123e4567-e89b-12d3-a456-426614174000}.",
+						"Enclosing braces are useful in environments that require explicit GUID delimiters."
+					],
+					"name": "B"
+				},
+				{
+					"description": [
+						"Formats the GUID as 32 hexadecimal digits separated by hyphens.",
+						"Output looks like 123e4567-e89b-12d3-a456-426614174000.",
+						"That pattern is commonly used in API requests and logging scenarios."
+					],
+					"name": "D"
+				},
+				{
+					"description": [
+						"Formats the GUID as 32 continuous hexadecimal digits without any separators.",
+						"Output looks like 123e4567e89b12d3a456426614174000.",
+						"Compact representation helps when string length needs to be minimized."
+					],
+					"name": "N"
+				},
+				{
+					"description": [
+						"Formats the GUID as 32 hexadecimal digits separated by hyphens and enclosed in parentheses.",
+						"Output looks like (123e4567-e89b-12d3-a456-426614174000).",
+						"Parentheses help indicate the GUID as a grouped identifier in certain contexts."
+					],
+					"name": "P"
+				},
+				{
+					"description": [
+						"Formats the GUID as four hexadecimal values wrapped in braces and separated by commas.",
+						"Output looks like {0x123e4567,0x89b1,0x2d3a,{0x45,0x64,0x26,0x61,0x41,0x74,0x00,0x00}}.",
+						"That detailed representation is useful for low-level programming tasks requiring precise byte-level control."
+					],
+					"name": "X"
+				}
+			]
 		},
 		{
 			"description": [
-				"Specifies the regex pattern used to match and extract the desired portion of the generated GUID."
+				"Defines the regex that identifies and extracts a specific part of the generated GUID.",
+				"Applying the correct pattern ensures you retrieve the exact portion you need.",
+				"Using pattern matching helps keep data formatting consistent across different systems."
 			],
 			"mandatory": false,
 			"name": "Pattern",
 			"type": "Regex"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Macro",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The NewGuid macro plugin generates a new GUID (Globally Unique Identifier) within automation workflows, providing a unique identifier for various tasks."
+		"The NewGuid macro plugin generates globally unique identifiers (GUIDs) to ensure distinct references in automation workflows.",
+		"It supports multiple output formats (D, N, B, P, X) and custom regex extraction to tailor GUID values to different scenarios.",
+		"These unique identifiers enable reliable element identification, transaction tracking, and test data generation within RPA and testing frameworks.",
+		"By automating GUID creation at runtime, it reduces manual setup and prevents identifier collisions across tasks."
 	]
 }

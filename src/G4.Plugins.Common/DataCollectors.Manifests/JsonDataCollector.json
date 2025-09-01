@@ -1,67 +1,226 @@
 {
 	"author": {
-		"name": "Roei Sabag",
-		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
 	},
 	"categories": [
 		"DataManagement"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/JsonDataCollector.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/JsonDataCollector.cs"
+			},
+			"rag": {
+				"description": "JsonDataCollector captures extraction-rule outputs and writes them into a JSON file wrapped in an array, supporting both streaming and bulk modes. It hooks into extraction rules, automates file creation and array management, and provides flexible parameters to ensure reliable data integration with JSON-based APIs, databases, and downstream workflows.",
+				"qa": [
+					{
+						"question": "What is the JsonDataCollector plugin and why does it matter?",
+						"answer": "JsonDataCollector converts extracted data items into JSON objects and writes them to a file, enabling seamless integration with APIs, databases, and other JSON-based consumers."
+					},
+					{
+						"question": "How do its main capabilities work and what are its primary parameters?",
+						"answer": "It embeds into extraction rules via a dataCollector object. The main parameters are ForEntity (true for streaming each object, false for bulk write), Source (the JSON file path), and Type (must be JsonDataCollector)."
+					},
+					{
+						"question": "How does JsonDataCollector embed into external tools or workflow designers?",
+						"answer": "In workflow definitions it appears as a DataCollector step. You specify it under an extraction rule with dataCollector settings, allowing low-code design tools to configure file path, streaming mode, and array management without custom coding."
+					},
+					{
+						"question": "What are recommended configuration patterns and troubleshooting tips?",
+						"answer": "Use ForEntity=true for large or continuous streams to avoid high memory use. For smaller batches, set ForEntity=false to reduce I/O calls. Verify XPath and regex rules to prevent missing or malformed objects, and ensure file paths are writable."
+					},
+					{
+						"question": "How are action or rule definitions structured for this plugin?",
+						"answer": "You define an Extraction rule ($type “Extraction”) with a dataCollector object containing ForEntity, Source, and Type fields. Nested rule entries ($type “Content”) include key, onElement, and regularExpression to shape each JSON object."
+					},
+					{
+						"question": "How does the plugin record failures and control workflow behavior on error?",
+						"answer": "On errors it adds an exception to the response and log stream. By default the workflow continues unless you configure it to stop on error in your automation designer."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema iteration the plugin adheres to for property and parameter definitions."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What are the categories?",
+						"answer": "This plugin is categorized under DataManagement, reflecting its role in collecting and organizing data."
+					},
+					{
+						"question": "What platforms does it support?",
+						"answer": "The plugin supports Any platform, making it compatible with Windows, Linux, and other environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is DataCollector, indicating it focuses on gathering and writing data outputs."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is JsonDataCollector, which is used to reference this plugin in workflow definitions."
+					},
+					{
+						"question": "What is the summary?",
+						"answer": "The JsonDataCollector plugin serializes extraction outputs into a JSON file, wrapping records in an array. Supports streaming writes for large data sets or bulk writes for smaller runs. Ideal for downstream JSON-based systems, APIs, and analytics."
+					},
+					{
+						"question": "What properties are defined?",
+						"answer": "Properties include ForEntity (Boolean, optional, toggles streaming vs buffered write), Source (String, mandatory, file path), and Type (DataCollector, mandatory, must be JsonDataCollector)."
+					},
+					{
+						"question": "What parameters are defined?",
+						"answer": "This plugin does not define a separate parameters array and relies on its properties section for configuration."
+					},
+					{
+						"question": "What protocol information is included?",
+						"answer": "Protocol settings are apiDocumentation: None and w3c: None, indicating no external API or W3C schema references."
+					},
+					{
+						"question": "Where can I find the GitHub documentation?",
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/JsonDataCollector.md"
+					},
+					{
+						"question": "Where can I find the source code?",
+						"answer": "Source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/JsonDataCollector.cs"
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `JsonDataCollector` is to collect data and organize it in a structured format, typically as JSON (JavaScript Object Notation). ",
-		"JSON is a lightweight and human-readable data interchange format, making it suitable for various applications, including automation and data integration.",
+		"JsonDataCollector captures the output of your extraction rules and writes it into a JSON file. It opens or creates the specified file, wraps records in a JSON array, and either appends each object as it’s extracted or writes the full array at the end of the run. This format simplifies integration with APIs, databases, and other JSON-based consumers.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature               | Description                                                                                                            |",
-		"|-----------------------|------------------------------------------------------------------------------------------------------------------------|",
-		"| Data Storage          | Storing data collected from various sources in a structured format, making it easier to manage, retrieve, and analyze. |",
-		"| Data Integration      | Facilitating the integration of data from multiple systems or sources into a single, consistent format.                |",
-		"| Automation            | Supporting automation and RPA processes by collecting and formatting data for further use in automated workflows.      |",
+		"| Feature                | Description                                                                                |",
+		"|------------------------|--------------------------------------------------------------------------------------------|",
+		"| Extraction Integration | Hooks into your extraction rules so every item is automatically turned into a JSON object. |",
+		"| Write Modes            | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run.    |",
+		"| Array Management       | Automatically opens and closes the JSON array wrapper, ensuring valid JSON output.         |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                            | Description                                                                                                                                                               |",
-		"|--------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Web Scraping and Data Extraction | Collect data from websites and save it in JSON format. Data collected can include product information, news articles, weather data, etc.                                  |",
-		"| RPA Data Management              | Gather data during automated tasks and workflows, storing it as JSON for further processing or reporting.                                                                 |",
-		"| Data Aggregation                 | Aggregate data from multiple sources into a single JSON format.                                                                                                           |",
-		"| Data Export and Reporting        | Export data collected from various sources to JSON format for reporting and analysis. JSON is commonly used for transmitting data between systems and generating reports. |",
+		"| Use Case               | Description                                                                    |",
+		"|------------------------|--------------------------------------------------------------------------------|",
+		"| Web Scraping           | Serializes scraped item lists into JSON for API ingestion or analytics.        |",
+		"| Real-Time Data Capture | Streams each transaction or record immediately for monitoring dashboards.      |",
+		"| Data Aggregation       | Collects outputs from multiple sources into one unified JSON document.         |",
+		"| System Interchange     | Produces JSON files that other services or microservices can consume directly. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                  | Description                                                                                                                                     |",
-		"|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Data-Driven Testing    | Use the `JsonDataCollector` plugin to collect test data during test execution and save it in JSON format for further analysis.                  |",
-		"| Test Data Management   | Manage and store test data in a structured JSON format, facilitating easy retrieval and use in various test scenarios.                          |",
-		"| Dynamic Test Execution | Enable dynamic test execution by collecting and storing runtime data in JSON format, allowing for flexible test configurations and validations. |"
+		"| Use Case           | Description                                                                          |",
+		"|--------------------|--------------------------------------------------------------------------------------|",
+		"| Test Result Export | Records pass/fail status as JSON objects for CI systems or custom reporting tools.   |",
+		"| Metrics Collection | Captures timing, resource usage, and custom metrics in JSON for downstream analysis. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector syntax error",
+						"Element missing",
+						"Malformed DOM",
+						"Multiple elements found",
+						"Regex failure",
+						"TagName typo",
+						"Unexpected whitespace",
+						"XPath mismatch"
+					],
+					"expected_result": "Each hotel-location string is extracted and appended as an object to DataFile.json in real time.",
+					"notes": "Opens DataFile.json, writes '[' once, then for each match writes '{\"Location\": \"…\"},' (stringified, trimmed, regex-extracted up to 100 chars), and closes with ']'.",
+					"use_case": "element_text_extraction_streaming_json",
+					"version": "1.0"
+				},
+				"labels": [
+					"ElementTextExtraction",
+					"JsonExtraction",
+					"JsonFileWrite",
+					"Streaming"
+				]
+			},
 			"description": [
-				"Defines an extraction rule that extracts location information from a web page. ",
-				"The extracted data is labeled as `Location`, and it is collected using a `JsonDataCollector` into a JSON file named `DataFile.json`. ",
-				"The extraction process is defined within a specific scope and starts from a `<div>` element with the class `hotel`. ",
-				"The use of regular expressions and XPath expressions allows for precise data extraction and formatting."
+				"### Stream Hotel Locations to JSON",
+				"",
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and stream each as a JSON object into `DataFile.json` in real time.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming writes.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
 			],
 			"rule": {
-				"$type": "ExtractionRuleModel",
+				"$type": "Extraction",
 				"dataCollector": {
-					"ForEntity": true,
-					"Source": "DataFile.json",
-					"Type": "JsonDataCollector"
+					"forEntity": true,
+					"source": "DataFile.json",
+					"type": "JsonDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
 				"rules": [
 					{
-						"$type": "ContentRuleModel",
-						"clearLinesBreak": false,
+						"$type": "Content",
 						"key": "Location",
 						"onElement": ".//p[starts-with(.,'Location:')]",
-						"regularExpression": "(?<=\\w+:).*",
-						"trim": false
+						"regularExpression": "(?<=\\\\w+:).*"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector syntax error",
+						"Element missing",
+						"Malformed DOM",
+						"Multiple elements found",
+						"Regex failure",
+						"TagName typo",
+						"Unexpected whitespace",
+						"XPath mismatch"
+					],
+					"expected_result": "Each hotel-location string is extracted, collected, and written as objects in a single JSON array to DataFile.json upon completion.",
+					"notes": "Opens DataFile.json, buffers each '{\"Location\": \"…\"}' (stringified, trimmed, regex-extracted up to 100 chars) in memory, then writes '[' + joined objects + ']' upon completion.",
+					"use_case": "element_text_extraction_bulk_json",
+					"version": "1.0"
+				},
+				"labels": [
+					"BulkWrite",
+					"ElementTextExtraction",
+					"JsonExtraction",
+					"JsonFileWrite"
+				]
+			},
+			"description": [
+				"### Bulk Hotel Locations to JSON",
+				"",
+				"Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).",
+				"This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and write them all in one JSON array to `DataFile.json` upon completion.",
+				"It uses `extractionScope: \"Elements\"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.",
+				"A regular expression `(?<=\\\\w+:).*` is applied to the text content to extract the substring following the label into a capture group."
+			],
+			"rule": {
+				"$type": "Extraction",
+				"dataCollector": {
+					"forEntity": false,
+					"source": "DataFile.json",
+					"type": "JsonDataCollector"
+				},
+				"extractionScope": "Elements",
+				"onElement": "//div[@class='hotel']",
+				"rules": [
+					{
+						"$type": "Content",
+						"key": "Location",
+						"onElement": ".//p[starts-with(.,'Location:')]",
+						"regularExpression": "(?<=\\\\w+:).*"
 					}
 				]
 			}
@@ -69,29 +228,47 @@
 	],
 	"key": "JsonDataCollector",
 	"manifestVersion": 4,
-	"parameters": [
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "DataCollector",
+	"properties": [
 		{
 			"description": [
-				"Specifies the output destination where the collected data will be saved (e.g., `/Path/To/My/File/DataFile.json`)."
+				"Turning this on sends each item as it happens so you see results sooner and can start working right away.",
+				"Keeping it off waits until everything is ready so you review all items at once and avoid partial updates."
+			],
+			"mandatory": false,
+			"name": "ForEntity",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Setting this path tells the system where to save your file so you can find it easily later.",
+				"Using a new location creates the file automatically and prevents errors from missing files."
 			],
 			"mandatory": true,
 			"name": "Source",
 			"type": "String"
+		},
+		{
+			"description": [
+				"Use the value “JsonDataCollector” to write your file in JSON format so it matches what this system expects and prevents errors.",
+				"Picking a different option starts a different process and may give you results you cannot use.",
+				"The list of options updates on its own when you add new ones so you always have the latest choices."
+			],
+			"mandatory": true,
+			"name": "Type",
+			"type": "DataCollector"
 		}
 	],
-	"pluginType": "DataCollector",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `JsonDataCollector` plugin is used to collect, store, and manage data in JSON format. ",
-		"It facilitates data storage, integration, and automation by organizing data from various sources into a structured JSON format.",
-		"Key features include data storage, integration, and support for automation workflows. ",
-		"Common use cases in RPA involve web scraping, data management, aggregation, and reporting. ",
-		"In automation testing, it is used for data-driven testing, test data management, and dynamic test execution."
+		"The JsonDataCollector plugin serializes extraction outputs into a JSON file, wrapping records in an array.",
+		"Supports streaming writes for large data sets or bulk writes for smaller runs.",
+		"Ideal for downstream JSON-based systems, APIs, and analytics."
 	]
 }

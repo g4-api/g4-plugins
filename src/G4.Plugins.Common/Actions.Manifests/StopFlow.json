@@ -1,0 +1,160 @@
+﻿{
+	"aliases": [
+		"Stop",
+		"EndFlow"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"FlowControl"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/StopFlow.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/StopFlow.cs"
+			},
+			"rag": {
+				"description": "The StopFlow plugin terminates the current browser automation session by disposing the active WebDriver and removing its reference from the global driver registry. This frees system resources, prevents handle leaks, and ensures the workflow does not reuse a stale session. The operation is idempotent—calling it multiple times is safe—and exceptions are handled defensively so the workflow can proceed to subsequent steps if desired.",
+				"qa": [
+					{
+						"question": "What is the StopFlow plugin and why does it matter?",
+						"answer": "StopFlow cleanly ends the current automation session by disposing the WebDriver and removing it from the driver registry, preventing resource leaks and unintended reuse of stale sessions."
+					},
+					{
+						"question": "How does StopFlow work internally?",
+						"answer": "It fetches the current session’s opaque key, calls WebDriver.Dispose(), and then TryRemove(key) on the global driver registry (AutomationInvoker.Drivers)."
+					},
+					{
+						"question": "Is StopFlow safe to call multiple times?",
+						"answer": "Yes. The action is idempotent. If the driver is already disposed or not present, the TryRemove simply fails gracefully and no error is raised."
+					},
+					{
+						"question": "Does StopFlow require arguments or parameters?",
+						"answer": "No. It stops the active session; no arguments are needed."
+					},
+					{
+						"question": "When should I use StopFlow in a workflow?",
+						"answer": "Use it as a terminal or teardown step after finishing browser-based actions, or when you need to explicitly close and reset the session before starting a new one."
+					},
+					{
+						"question": "What happens if there is no active session?",
+						"answer": "StopFlow will attempt to dispose and remove; if nothing exists it completes without error, returning a normal response."
+					},
+					{
+						"question": "How does this plugin integrate into low-code workflow designers?",
+						"answer": "It is exposed as an Action task with a stop icon and can be placed at the end of a sequence or in cleanup paths."
+					},
+					{
+						"question": "What are common failure modes and how are they handled?",
+						"answer": "Typical issues include already-disposed drivers or missing registry entries. These cases are handled gracefully; the action still returns success."
+					},
+					{
+						"question": "Does StopFlow return any data?",
+						"answer": "No payload is produced; it returns a standard success response indicating completion."
+					},
+					{
+						"question": "Can I use StopFlow to switch users or sessions mid-run?",
+						"answer": "Yes. Call StopFlow to tear down the current session, then start a new flow that initializes a fresh WebDriver context."
+					},
+					{
+						"question": "What category best describes this plugin?",
+						"answer": "FlowControl, with a focus on session lifecycle and resource management."
+					},
+					{
+						"question": "What is the plugin key?",
+						"answer": "StopFlow."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "4."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "stop",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The StopFlow plugin ends the current automation session by disposing the active WebDriver and removing its handle from the global registry. This prevents resource leaks and avoids accidental reuse of a stale driver in later steps.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature               | Description                                                         |",
+		"|-----------------------|---------------------------------------------------------------------|",
+		"| Safe Teardown         | Disposes the active WebDriver instance and cleans up references.    |",
+		"| Idempotent Operation  | Multiple calls are safe; no error if the session is already closed. |",
+		"| Registry Cleanup      | Removes the driver from the global registry to prevent later reuse. |",
+		"| No Arguments Required | Works on the current session; no configuration needed.              |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case         | Description                                                            |",
+		"|------------------|------------------------------------------------------------------------|",
+		"| Flow Termination | Place as the final step to ensure browser and driver are fully closed. |",
+		"| Resource Hygiene | Free system resources in long-running robots or shared environments.   |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case      | Description                                                                  |",
+		"|---------------|------------------------------------------------------------------------------|",
+		"| Test Teardown | Add to teardown stages to guarantee clean driver disposal between test runs. |",
+		"| Isolation     | Reset state before starting a new test requiring a fresh browser session.    |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No active session present",
+						"Driver already disposed",
+						"Registry removal returns false"
+					],
+					"expected_result": "The active WebDriver is disposed and its registry entry (by opaque key) is removed.",
+					"notes": "No arguments are required. The action returns a standard success response.",
+					"use_case": "stop_current_session",
+					"version": "1.0"
+				},
+				"labels": [
+					"Teardown",
+					"ResourceManagement",
+					"FlowControl"
+				]
+			},
+			"description": [
+				"### Stop and Dispose Current Session",
+				"",
+				"End the current browser session and clean up the driver registry entry. Use at the end of a flow or before re-initializing a new session."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "StopFlow"
+			}
+		}
+	],
+	"key": "StopFlow",
+	"manifestVersion": 4,
+	"parameters": [],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"StopFlow cleanly ends the current browser session by disposing the WebDriver and removing it from the registry.",
+		"It’s safe to call multiple times and requires no arguments.",
+		"Use it at the end of workflows or before starting a fresh session to keep resources tidy."
+	]
+}

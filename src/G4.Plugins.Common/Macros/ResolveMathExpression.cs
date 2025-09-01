@@ -3,7 +3,6 @@ using G4.Extensions;
 using G4.Models;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
@@ -92,10 +91,6 @@ namespace G4.Plugins.Common.Macros
 
         #region *** Methods: Private ***
         // Finds the method corresponding to a specified mathematical operation.
-        [SuppressMessage(
-            category: "Major Code Smell",
-            checkId: "S3011:Reflection should not be used to increase accessibility of classes, methods, or fields",
-            Justification = "Reflection is used internally within the same class for specialized functionality.")]
         private static MethodInfo FindOperationMethod(string operation)
         {
             // StringComparison to perform case-insensitive comparison

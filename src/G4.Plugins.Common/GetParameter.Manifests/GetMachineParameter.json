@@ -6,94 +6,168 @@
 	"categories": [
 		"DataManagement"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Machine.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetMachineParameter.cs"
+			},
+			"rag": {
+				"description": "The Machine plugin's GetParameter action lets workflows dynamically retrieve and verify machine-level environment variables at runtime, enforcing critical pre-run checks and preserving reliability with built-in empty value handling and exception logging. It supports flexible configuration by allowing any variable name via the OnElement property and delivers up-to-date global settings for downstream workflow steps.",
+				"qa": [
+					{
+						"question": "What is the Machine plugin GetParameter action and why does it matter?",
+						"answer": "It is an automation action that retrieves system-wide environment variables at runtime, ensuring workflows can adapt to global settings and maintain reliability by validating critical parameters before execution."
+					},
+					{
+						"question": "What are the key features and parameters of this plugin?",
+						"answer": "Key features include reading machine-level environment variables, handling missing values by returning an empty string, and exposing the result for downstream use. The primary parameter is OnElement, which specifies the name of the environment variable to retrieve."
+					},
+					{
+						"question": "How does this plugin embed into external tools or workflow designers?",
+						"answer": "It appears as an Action step named GetParameter within the Machine plugin in low-code designers and workflow editors. Users select the Machine plugin, set the OnElement property, and the action integrates seamlessly into the workflow definition."
+					},
+					{
+						"question": "What are some best practices for using this plugin?",
+						"answer": "Validate that OnElement names match existing environment variables and handle empty strings to avoid errors. Include pre-run checks to confirm required variables exist, and configure workflows to log exceptions for troubleshooting."
+					},
+					{
+						"question": "What is the rule schema for this plugin’s action definitions?",
+						"answer": "Actions use a JSON schema with a $type value of Action, pluginName set to Machine, and an onElement field specifying the variable name. This simple structure ensures clear parameter mapping and consistent execution behavior."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version used to define this plugin manifest."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/), who developed the GetMachineParameter plugin."
+					},
+					{
+						"question": "What categories does this plugin belong to?",
+						"answer": "It belongs to the DataManagement category, indicating its use for managing and retrieving data within automation workflows."
+					},
+					{
+						"question": "What is the key field?",
+						"answer": "The key field is Machine, which serves as the unique identifier for the plugin within the automation platform."
+					},
+					{
+						"question": "What platforms does this plugin support?",
+						"answer": "This plugin supports Windows, as it retrieves environment variables defined in the Windows registry."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is GetParameter, indicating that this plugin is used for retrieving parameter values from the environment."
+					},
+					{
+						"question": "What properties does this plugin define?",
+						"answer": "It defines a property named OnElement of type String, which specifies the name of the environment variable to retrieve."
+					},
+					{
+						"question": "What is the summary of this plugin?",
+						"answer": "The plugin gets shared settings from the computer, like folder paths or feature switches. If a setting is missing, it returns an empty string so workflows know it is not set. It makes the setting available for later steps and helps workflows and tests set up or check settings before they run."
+					},
+					{
+						"question": "How does the plugin handle errors?",
+						"answer": "The plugin records failures by adding an exception to the response and log stream. By default, workflows continue execution unless explicitly configured to stop on error."
+					},
+					{
+						"question": "What is the Git document link?",
+						"answer": "The document link is https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/Machine.md"
+					},
+					{
+						"question": "What is the Git source link?",
+						"answer": "The source link is https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetMachineParameter.cs"
+					}
+				]
+			}
+		}
+	},
 	"description": [
-		"> [!IMPORTANT]",
-		"> This plugin is supported on Windows machines only.",
-		"",
 		"### Purpose",
 		"",
-		"The primary purpose of the GetMachineParameter plugin is to retrieve machine-level environment variables. This allows for the extraction of environment-specific values within automation workflows.",
+		"This plugin lets automation workflows retrieve system-wide settings defined on Windows computers. It reads environment variables defined for every user under the machine scope in the Windows registry. By pulling shared values like paths or feature flags, workflows can run with the correct setup without extra steps.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                      |",
-		"|----------------------------|--------------------------------------------------------------------------------------------------|",
-		"| Retrieve Environment Value | Retrieves the value of a specified environment variable from the machine's environment settings. |",
-		"| Integration                | Can be used within other plugins to dynamically fetch machine-specific parameters.               |",
+		"| Feature                | Description                                                           |",
+		"|------------------------|-----------------------------------------------------------------------|",
+		"| Global variable access | Reads values defined for all users on the Windows machine.            |",
+		"| Empty value handling   | Returns an empty string when the variable is missing or has no value. |",
+		"| Result output field    | Makes the fetched value available for use in later workflow steps.    |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                      | Description                                                                            |",
-		"|----------------------------|----------------------------------------------------------------------------------------|",
-		"| Environment Configuration  | Fetch environment-specific configurations for use in automation workflows.             |",
-		"| Dynamic Data Handling      | Retrieve machine-level parameters dynamically during automation execution.             |",
-		"| System Diagnostics         | Use machine parameters to assess and respond to system state or configuration changes. |",
-		"| Security and Compliance    | Access machine environment variables for security settings and compliance checks.      |",
+		"| Use Case                     | Description                                                                               |",
+		"|------------------------------|-------------------------------------------------------------------------------------------|",
+		"| Global configuration loading | Loads shared Windows settings like paths or service URLs so workflows match system setup. |",
+		"| Live value retrieval         | Gets the latest Windows environment values at runtime for up-to-date workflow behavior.   |",
+		"| System health checks         | Reads global settings to verify required variables are set and correct.                   |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                  | Description                                                                          |",
-		"|------------------------|--------------------------------------------------------------------------------------|",
-		"| Test Environment Setup | Configure test environments dynamically by retrieving environment variable values.   |",
-		"| Parameterized Testing  | Use machine-specific parameters to drive parameterized testing scenarios.            |",
-		"| Automated Monitoring   | Automate monitoring of environment variables to ensure consistency across test runs. |",
-		"| Resource Management    | Manage and allocate resources efficiently based on machine-level parameters.         |"
+		"| Use Case                 | Description                                                                                 |",
+		"|--------------------------|---------------------------------------------------------------------------------------------|",
+		"| Test setup configuration | Configures test runs using Windows system-wide settings like API addresses and credentials. |",
+		"| Data-driven tests        | Uses Windows environment values to run tests with different inputs automatically.           |",
+		"| Pre-run checks           | Verifies required Windows variables exist before starting tests to avoid failures.          |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the string value returned from the machine-level environment variable retrieved by the plugin.",
+				"If the variable is not defined or has no value, it will be an empty string, allowing downstream steps to detect and handle missing machine parameters."
+			],
+			"mandatory": true,
+			"name": "Parameter",
+			"type": "Any"
+		}
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Access denied to machine environment",
+						"Empty or null value returned",
+						"Parameter not found"
+					],
+					"expected_result": "The value of the `MyMachineParam` environment variable is retrieved and made available in the `Result` output field for downstream actions.",
+					"notes": "Retrieves the raw string value of `MyMachineParam` from the machine scope. If the parameter is missing or returns an empty value, downstream actions must handle the null or empty case explicitly.",
+					"use_case": "parameter_retrieval_machine_environment",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"EnvironmentAccess",
+					"ParameterRetrieval"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `GetMachineParameter` plugin to retrieve the value of a machine-level environment variable named `MyMachineParam`.",
+				"### Retrieve Machine-Level Environment Variable",
 				"",
-				"| Field      | Description                                                                                                         |",
-				"|------------|---------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `Machine`. This signifies the action of getting the parameter. |",
-				"| onElement  | Specifies the name of the environment variable, which is `MyMachineParam`.                                           |"
+				"This example demonstrates how to retrieve a machine-level environment variable named `MyMachineParam` using the Machine plugin’s GetParameter action.",
+				"It returns the raw value of the `MyMachineParam` variable from the machine scope for use in downstream workflows.",
+				"The retrieved value is available in the `Result` output field for subsequent steps."
 			],
 			"rule": {
+				"$type": "Action",
 				"onElement": "MyMachineParam",
-				"pluginName": "Machine"
-			}
-		},
-		{
-			"description": [
-				"This example demonstrates the usage of the `GetMachineParameter` plugin within an automation flow to send the retrieved parameter value as keystrokes to an element.",
-				"",
-				"| Field      | Description                                                                                                          |",
-				"|------------|----------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes. |",
-				"| argument   | Specifies the use of the `GetMachineParameter` plugin to fetch the environment variable value dynamically.           |",
-				"| onElement  | Specifies the target element on which the keystrokes will be sent, which is identified by its CSS selector.          |",
-				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example.              |"
-			],
-			"rule": {
-				"argument": "{{$Get-Parameter --Name:MyMachineParam --Scope:Machine}}",
-				"locator": "CssSelector",
-				"onElement": "#someElement",
-				"pluginName": "SendKeys"
-			}
-		},
-		{
-			"description": [
-				"This example demonstrates the usage of the `GetMachineParameter` plugin to retrieve a machine-level environment variable without specifying any additional parameters.",
-				"",
-				"| Field      | Description                                                                                                            |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `Machine`. This signifies the action of getting the parameter. |",
-				"| onElement  | Specifies the name of the environment variable, which is `DefaultMachineParam`.                                        |"
-			],
-			"rule": {
-				"onElement": "DefaultMachineParam",
 				"pluginName": "Machine"
 			}
 		}
 	],
 	"key": "Machine",
 	"manifestVersion": 4,
+	"platforms": [
+		"Windows"
+	],
 	"pluginType": "GetParameter",
 	"properties": [
 		{
 			"description": [
-				"The `OnElement` property specifies the name of the environment variable to be retrieved."
+				"OnElement names the environment variable to retrieve.",
+				"Workflows use this name to find the right value when they run."
 			],
 			"mandatory": true,
 			"name": "OnElement",
@@ -104,13 +178,10 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `GetMachineParameter` plugin retrieves machine-level environment variables within automation workflows, enhancing environment-specific configuration management.",
-		"Key features include retrieving specified environment variable values, integration with other plugins for dynamic parameter fetching, and use in system diagnostics and compliance checks.",
-		"In RPA, it is used for environment configuration, dynamic data handling, and system diagnostics.",
-		"In automation testing, it supports environment setup, parameterized testing, automated monitoring, and resource management."
+		"The GetMachineParameter plugin gets shared settings from the computer, like folder paths or feature switches.",
+		"If a setting is missing, it gives back nothing so workflows know it’s not set.",
+		"It makes the setting available for later steps to use in the process.",
+		"Workflows and tests can use it to set up or check settings before they run."
 	]
 }

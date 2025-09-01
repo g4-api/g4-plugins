@@ -9,8 +9,8 @@
 	"context": {
 		"integration": {
 			"github": {
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/Assert.cs",
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/Assert.md"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/Assert.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/Assert.cs"
 			},
 			"rag": {
 				"description": "The Assert plugin automates the validation of expected conditions during automation to ensure reliable and accurate process execution. It supports dynamic assertion handling, regex-based data extraction, and robust exception management.",
@@ -193,7 +193,7 @@
 					],
 					"expected_result": true,
 					"notes": "Confirms alert detection when present. Should also consider cases with no or multiple alerts.",
-					"test_case": "alert_existence_positive",
+					"use_case": "alert_existence_positive",
 					"version": "1.0"
 				},
 				"labels": [
@@ -223,7 +223,7 @@
 					],
 					"expected_result": true,
 					"notes": "Confirms that no alert is present. Should also consider cases where an alert appears unexpectedly.",
-					"test_case": "alert_absence_positive",
+					"use_case": "alert_absence_positive",
 					"version": "1.0"
 				},
 				"labels": [
@@ -257,7 +257,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the actual driver's type exactly matches the expected value using an equality operator.",
-					"test_case": "driver_type_validation",
+					"use_case": "driver_type_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -292,7 +292,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the actual driver's type does not match the expected value using a not-equal operator.",
-					"test_case": "driver_type_mismatch_validation",
+					"use_case": "driver_type_mismatch_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -327,7 +327,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the actual driver's type matches the expected regular expression pattern `.*SimulatorDriver` using the Match operator.",
-					"test_case": "driver_type_regex_match_validation",
+					"use_case": "driver_type_regex_match_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -362,7 +362,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the actual driver's type does not match the expected regular expression pattern `.*ChromeDriver` using the NotMatch operator.",
-					"test_case": "driver_type_regex_notmatch_validation",
+					"use_case": "driver_type_regex_notmatch_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -397,7 +397,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element identified by `#ElementActive` is active based on the ElementActive condition.",
-					"test_case": "element_active_validation",
+					"use_case": "element_active_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -434,7 +434,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element identified by the given Xpath selector is active based on the ElementActive condition.",
-					"test_case": "element_active_validation_xpath",
+					"use_case": "element_active_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -471,7 +471,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `ElementActive` is active based on the ElementActive condition.",
-					"test_case": "element_active_validation_id",
+					"use_case": "element_active_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -507,7 +507,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is exactly equal to `0` using the Equal operator.",
-					"test_case": "element_attribute_equality_validation",
+					"use_case": "element_attribute_equality_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -545,7 +545,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath is exactly equal to `0` using the Equal operator.",
-					"test_case": "element_attribute_equality_validation_xpath",
+					"use_case": "element_attribute_equality_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -582,7 +582,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is exactly equal to `0` using the Equal operator.",
-					"test_case": "element_attribute_equality_validation_id",
+					"use_case": "element_attribute_equality_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -620,7 +620,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is not equal to `0` using the NotEqual operator.",
-					"test_case": "element_attribute_not_equal_validation_css",
+					"use_case": "element_attribute_not_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -658,7 +658,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is not equal to `0` using the NotEqual operator.",
-					"test_case": "element_attribute_not_equal_validation_xpath",
+					"use_case": "element_attribute_not_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -696,7 +696,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is not equal to `0` using the NotEqual operator.",
-					"test_case": "element_attribute_not_equal_validation_id",
+					"use_case": "element_attribute_not_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -735,7 +735,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is greater than `0` using the Greater operator.",
-					"test_case": "element_attribute_greater_validation_css",
+					"use_case": "element_attribute_greater_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -774,7 +774,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is greater than `0` using the Greater operator.",
-					"test_case": "element_attribute_greater_validation_xpath",
+					"use_case": "element_attribute_greater_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -813,7 +813,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is greater than `0` using the Greater operator.",
-					"test_case": "element_attribute_greater_validation_id",
+					"use_case": "element_attribute_greater_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -852,7 +852,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is lower than `0` using the Lower operator.",
-					"test_case": "element_attribute_lower_validation_css",
+					"use_case": "element_attribute_lower_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -891,7 +891,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is lower than `0` using the Lower operator.",
-					"test_case": "element_attribute_lower_validation_xpath",
+					"use_case": "element_attribute_lower_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -930,7 +930,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is lower than `0` using the Lower operator.",
-					"test_case": "element_attribute_lower_validation_id",
+					"use_case": "element_attribute_lower_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -969,7 +969,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is greater than or equal to `0` using the GreaterEqual operator.",
-					"test_case": "element_attribute_greater_equal_validation_css",
+					"use_case": "element_attribute_greater_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1008,7 +1008,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is greater than or equal to `0` using the GreaterEqual operator.",
-					"test_case": "element_attribute_greater_equal_validation_xpath",
+					"use_case": "element_attribute_greater_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1047,7 +1047,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is greater than or equal to `0` using the GreaterEqual operator.",
-					"test_case": "element_attribute_greater_equal_validation_id",
+					"use_case": "element_attribute_greater_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1086,7 +1086,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` is lower than or equal to `0` using the LowerEqual operator.",
-					"test_case": "element_attribute_lower_equal_validation_css",
+					"use_case": "element_attribute_lower_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1125,7 +1125,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector is lower than or equal to `0` using the LowerEqual operator.",
-					"test_case": "element_attribute_lower_equal_validation_xpath",
+					"use_case": "element_attribute_lower_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1164,7 +1164,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` is lower than or equal to `0` using the LowerEqual operator.",
-					"test_case": "element_attribute_lower_equal_validation_id",
+					"use_case": "element_attribute_lower_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1203,7 +1203,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the CSS selector `#elementId` matches the regex pattern `^\\d+$` using the Match operator.",
-					"test_case": "element_attribute_regex_match_validation_css",
+					"use_case": "element_attribute_regex_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1242,7 +1242,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` matches the regex pattern `^\\d+$` using the Match operator.",
-					"test_case": "element_attribute_regex_match_validation_xpath",
+					"use_case": "element_attribute_regex_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1281,7 +1281,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` matches the regex pattern `^\\d+$` using the Match operator.",
-					"test_case": "element_attribute_regex_match_validation_id",
+					"use_case": "element_attribute_regex_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1320,7 +1320,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by `#elementId` does not match the regex pattern `^[a-zA-Z]+$` using the NotMatch operator.",
-					"test_case": "element_attribute_not_match_validation_css",
+					"use_case": "element_attribute_not_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1359,7 +1359,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element identified by the given Xpath selector does not match the regex pattern `^[a-zA-Z]+$` using the NotMatch operator.",
-					"test_case": "element_attribute_not_match_validation_xpath",
+					"use_case": "element_attribute_not_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1398,7 +1398,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the attribute `index` of the element with Id `elementId` does not match the regex pattern `^[a-zA-Z]+$` using the NotMatch operator.",
-					"test_case": "element_attribute_not_match_validation_id",
+					"use_case": "element_attribute_not_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1436,7 +1436,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that exactly 2 elements are found for the selector `.primary-button` using an equality check on element count.",
-					"test_case": "element_count_equal_validation_css",
+					"use_case": "element_count_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1472,7 +1472,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that exactly 2 elements are found for the given Xpath selector `//button` using an equality check on element count.",
-					"test_case": "element_count_equal_validation_xpath",
+					"use_case": "element_count_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1508,7 +1508,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that exactly 2 elements with the tag name `button` are found using an equality check on element count.",
-					"test_case": "element_count_equal_validation_tagname",
+					"use_case": "element_count_equal_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1546,7 +1546,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the selector `.primary-button` is not equal to 2 using a not-equal check on element count.",
-					"test_case": "element_count_not_equal_validation_css",
+					"use_case": "element_count_not_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1583,7 +1583,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is not equal to 2 using a not-equal check on element count.",
-					"test_case": "element_count_not_equal_validation_xpath",
+					"use_case": "element_count_not_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1620,7 +1620,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements with the tag name `button` is not equal to 2 using a not-equal check on element count.",
-					"test_case": "element_count_not_equal_validation_tagname",
+					"use_case": "element_count_not_equal_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1656,7 +1656,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the selector `.primary-button` is greater than 2 using the Greater operator.",
-					"test_case": "element_count_greater_validation_css",
+					"use_case": "element_count_greater_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1693,7 +1693,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is greater than 2 using the Greater operator.",
-					"test_case": "element_count_greater_validation_xpath",
+					"use_case": "element_count_greater_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1729,7 +1729,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements with the tag name `button` is greater than 2 using the Greater operator.",
-					"test_case": "element_count_greater_validation_tagname",
+					"use_case": "element_count_greater_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1765,7 +1765,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the selector `.primary-button` is lower than 2 using the Lower operator.",
-					"test_case": "element_count_lower_validation_css",
+					"use_case": "element_count_lower_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1802,7 +1802,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is lower than 2 using the Lower operator.",
-					"test_case": "element_count_lower_validation_xpath",
+					"use_case": "element_count_lower_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1838,7 +1838,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements with the tag name `button` is lower than 2 using the Lower operator.",
-					"test_case": "element_count_lower_validation_tagname",
+					"use_case": "element_count_lower_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1874,7 +1874,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the selector `.primary-button` is greater than or equal to 2 using the GreaterEqual operator.",
-					"test_case": "element_count_greater_equal_validation_css",
+					"use_case": "element_count_greater_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1911,7 +1911,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is greater than or equal to 2 using the GreaterEqual operator.",
-					"test_case": "element_count_greater_equal_validation_xpath",
+					"use_case": "element_count_greater_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1947,7 +1947,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements with the tag name `button` is greater than or equal to 2 using the GreaterEqual operator.",
-					"test_case": "element_count_greater_equal_validation_tagname",
+					"use_case": "element_count_greater_equal_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -1983,7 +1983,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the selector `.primary-button` is lower than or equal to 2 using the LowerEqual operator.",
-					"test_case": "element_count_lower_equal_validation_css",
+					"use_case": "element_count_lower_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2020,7 +2020,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the given Xpath selector `//button` is lower than or equal to 2 using the LowerEqual operator.",
-					"test_case": "element_count_lower_equal_validation_xpath",
+					"use_case": "element_count_lower_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2056,7 +2056,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements with the tag name `button` is lower than or equal to 2 using the LowerEqual operator.",
-					"test_case": "element_count_lower_equal_validation_tagname",
+					"use_case": "element_count_lower_equal_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2092,7 +2092,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the selector `.primary-button` matches the regex pattern `^[1-9][0-9]*$`, ensuring the count is a positive integer.",
-					"test_case": "element_count_regex_match_validation_css",
+					"use_case": "element_count_regex_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2129,7 +2129,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements for the given Xpath selector `//button` matches the regex pattern `^[1-9][0-9]*$`, ensuring the count is a positive integer.",
-					"test_case": "element_count_regex_match_validation_xpath",
+					"use_case": "element_count_regex_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2166,7 +2166,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the number of elements with the tag name `button` matches the regex pattern `^[1-9][0-9]*$`, ensuring the count is a positive integer.",
-					"test_case": "element_count_regex_match_validation_tagname",
+					"use_case": "element_count_regex_match_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2202,7 +2202,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element count for the selector `.primary-button` is strictly numeric by confirming the absence of alphabetic characters using the regex pattern `.*[a-zA-Z]+.*` with the NotMatch operator.",
-					"test_case": "element_count_not_match_validation_css",
+					"use_case": "element_count_not_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2239,7 +2239,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element count for the Xpath selector `//button` is strictly numeric by confirming the absence of alphabetic characters using the regex pattern `.*[a-zA-Z]+.*` with the NotMatch operator.",
-					"test_case": "element_count_not_match_validation_xpath",
+					"use_case": "element_count_not_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2275,7 +2275,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element count for elements with the tag name `button` is strictly numeric by confirming the absence of alphabetic characters using the regex pattern `.*[a-zA-Z]+.*` with the NotMatch operator.",
-					"test_case": "element_count_not_match_validation_tagname",
+					"use_case": "element_count_not_match_validation_tagname",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2311,7 +2311,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the CSS selector `#username` is disabled using the ElementDisabled condition.",
-					"test_case": "element_disabled_validation_css",
+					"use_case": "element_disabled_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2346,7 +2346,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is disabled using the ElementDisabled condition.",
-					"test_case": "element_disabled_validation_xpath",
+					"use_case": "element_disabled_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2380,7 +2380,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `username` is disabled using the ElementDisabled condition.",
-					"test_case": "element_disabled_validation_id",
+					"use_case": "element_disabled_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2414,7 +2414,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the CSS selector `#username` is enabled using the ElementEnabled condition.",
-					"test_case": "element_enabled_validation_css",
+					"use_case": "element_enabled_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2449,7 +2449,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is enabled using the ElementEnabled condition.",
-					"test_case": "element_enabled_validation_xpath",
+					"use_case": "element_enabled_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2483,7 +2483,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `username` is enabled using the ElementEnabled condition.",
-					"test_case": "element_enabled_validation_id",
+					"use_case": "element_enabled_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2516,7 +2516,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that an element with the CSS selector `#username` exists in the DOM using the ElementExists condition.",
-					"test_case": "element_exists_validation_css",
+					"use_case": "element_exists_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2550,7 +2550,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that an element with the Xpath selector `//input[@id='username']` exists in the DOM using the ElementExists condition.",
-					"test_case": "element_exists_validation_xpath",
+					"use_case": "element_exists_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2583,7 +2583,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that an element with the Id `username` exists in the DOM using the ElementExists condition.",
-					"test_case": "element_exists_validation_id",
+					"use_case": "element_exists_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2617,7 +2617,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the CSS selector `#username` is not active using the ElementNotActive condition.",
-					"test_case": "element_not_active_validation_css",
+					"use_case": "element_not_active_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2652,7 +2652,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is not active using the ElementNotActive condition.",
-					"test_case": "element_not_active_validation_xpath",
+					"use_case": "element_not_active_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2686,7 +2686,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `username` is not active using the ElementNotActive condition.",
-					"test_case": "element_not_active_validation_id",
+					"use_case": "element_not_active_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2720,7 +2720,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that an element with the CSS selector `#username` is not present in the DOM using the ElementNotExists condition.",
-					"test_case": "element_not_exists_validation_css",
+					"use_case": "element_not_exists_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2755,7 +2755,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that an element with the Xpath selector `//input[@id='username']` is not present in the DOM using the ElementNotExists condition.",
-					"test_case": "element_not_exists_validation_xpath",
+					"use_case": "element_not_exists_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2789,7 +2789,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that an element with the Id `username` is not present in the DOM using the ElementNotExists condition.",
-					"test_case": "element_not_exists_validation_id",
+					"use_case": "element_not_exists_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2823,7 +2823,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the CSS selector `#acceptTerms` is not selected using the ElementNotSelected condition. The selector is semantically appropriate for elements like checkboxes or radio buttons.",
-					"test_case": "element_not_selected_validation_css",
+					"use_case": "element_not_selected_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2858,7 +2858,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Xpath selector `//input[@id='acceptTerms']` is not selected using the ElementNotSelected condition. This is appropriate for elements like checkboxes or radio buttons.",
-					"test_case": "element_not_selected_validation_xpath",
+					"use_case": "element_not_selected_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2892,7 +2892,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `acceptTerms` is not selected using the ElementNotSelected condition, which is semantically appropriate for input elements like checkboxes or radio buttons.",
-					"test_case": "element_not_selected_validation_id",
+					"use_case": "element_not_selected_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2927,7 +2927,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the CSS selector `#username` is not visible in the DOM using the ElementNotVisible condition. Visibility may be affected by CSS properties like `display: none`, `visibility: hidden`, or off-screen positioning.",
-					"test_case": "element_not_visible_validation_css",
+					"use_case": "element_not_visible_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -2964,7 +2964,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is not visible in the DOM using the ElementNotVisible condition. Visibility may be affected by CSS properties like `display: none`, `visibility: hidden`, or off-screen positioning.",
-					"test_case": "element_not_visible_validation_xpath",
+					"use_case": "element_not_visible_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3000,7 +3000,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `username` is not visible in the DOM using the ElementNotVisible condition. Visibility may be affected by CSS properties like `display: none`, `visibility: hidden`, or off-screen positioning.",
-					"test_case": "element_not_visible_validation_id",
+					"use_case": "element_not_visible_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3036,7 +3036,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the CSS selector `#acceptTerms` is selected using the ElementSelected condition. The condition only applies to checkboxes, radio buttons, or options.",
-					"test_case": "element_selected_validation_css",
+					"use_case": "element_selected_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3073,7 +3073,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Xpath selector `//input[@id='acceptTerms']` is selected using the ElementSelected condition. The condition only applies to checkboxes, radio buttons, or options.",
-					"test_case": "element_selected_validation_xpath",
+					"use_case": "element_selected_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3109,7 +3109,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `acceptTerms` is selected using the ElementSelected condition. The condition only applies to checkboxes, radio buttons, or options.",
-					"test_case": "element_selected_validation_id",
+					"use_case": "element_selected_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3144,7 +3144,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the CSS selector `#username` is stale using the ElementStale condition. An element is considered stale if it was once attached to the DOM but has since been removed or replaced. This typically applies after a dynamic DOM change, such as an AJAX update or DOM refresh.",
-					"test_case": "element_stale_validation_css",
+					"use_case": "element_stale_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3179,7 +3179,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Xpath selector `//input[@id='username']` is stale using the ElementStale condition. An element is considered stale if it was once attached to the DOM but has since been removed or replaced. This typically applies after a dynamic DOM change, such as an AJAX update or DOM refresh.",
-					"test_case": "element_stale_validation_xpath",
+					"use_case": "element_stale_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3213,7 +3213,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the element with the Id `username` is stale using the ElementStale condition. An element is considered stale if it was once attached to the DOM but has since been removed or replaced. This typically applies after a dynamic DOM change, such as an AJAX update or DOM refresh.",
-					"test_case": "element_stale_validation_id",
+					"use_case": "element_stale_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3248,7 +3248,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the element with the CSS selector `#content` is exactly 255 characters. The text length excludes HTML tags and is computed based on the visible text as returned by the WebDriver Get Element Text endpoint. In cases of nested HTML, the length is calculated by concatenating all visible text from child elements.",
-					"test_case": "element_text_length_equal_validation_css",
+					"use_case": "element_text_length_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3285,7 +3285,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the element with the Xpath selector `//div[@id='content']` is exactly 255 characters. The text length excludes HTML tags and is computed based on the visible text from the WebDriver Get Element Text endpoint. For nested HTML, the length is determined by concatenating visible text from all child elements.",
-					"test_case": "element_text_length_equal_validation_xpath",
+					"use_case": "element_text_length_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3321,7 +3321,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the element with the Id `content` is exactly 255 characters. The text length excludes HTML tags and is based on the visible text returned by the WebDriver Get Element Text endpoint. For nested HTML, the length is computed by concatenating all visible child text.",
-					"test_case": "element_text_length_equal_validation_id",
+					"use_case": "element_text_length_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3358,7 +3358,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text length of the element with the CSS selector `#content` is exactly 100 characters. The text length excludes HTML tags and is based on the visible text from the WebDriver Get Element Text endpoint. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters, and the assertion passes only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.",
-					"test_case": "element_text_length_equal_with_regex_validation_css",
+					"use_case": "element_text_length_equal_with_regex_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3399,7 +3399,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text length of the element with the Xpath selector `//div[@id='content']` is exactly 100 characters. The length excludes HTML tags and is determined by the visible text from the WebDriver Get Element Text endpoint. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters, and the assertion passes only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.",
-					"test_case": "element_text_length_equal_with_regex_validation_xpath",
+					"use_case": "element_text_length_equal_with_regex_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3439,7 +3439,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text length of the element with the Id `content` is exactly 100 characters. The computed text length excludes HTML tags and is based on the visible text from the WebDriver Get Element Text endpoint. The regular expression `(?s)^(.{0,100})` extracts up to 100 characters, and the assertion passes only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.",
-					"test_case": "element_text_length_equal_with_regex_validation_id",
+					"use_case": "element_text_length_equal_with_regex_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3478,7 +3478,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` is exactly 150 characters. The calculation is based solely on the attribute value, excluding any HTML markup. If the value attribute contains exactly 150 characters (regardless of visual presentation), the assert evaluates to `true`.",
-					"test_case": "element_text_length_equal_validation_css_input",
+					"use_case": "element_text_length_equal_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3518,7 +3518,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` is exactly 150 characters. The calculation is based solely on the attribute value, excluding any HTML markup. If the value attribute contains exactly 150 characters (regardless of visual presentation), the assert evaluates to `true`.",
-					"test_case": "element_text_length_equal_validation_xpath_input",
+					"use_case": "element_text_length_equal_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3557,7 +3557,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` is exactly 150 characters. The calculation is based solely on the attribute value, excluding any HTML markup. If the value attribute contains exactly 150 characters (regardless of visual presentation), the assert evaluates to `true`.",
-					"test_case": "element_text_length_equal_validation_id_input",
+					"use_case": "element_text_length_equal_validation_id_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3597,7 +3597,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` is exactly 100 characters. The length is determined solely from the attribute value, excluding HTML markup. A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured; otherwise, it fails.",
-					"test_case": "element_text_length_equal_validation_css_input",
+					"use_case": "element_text_length_equal_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3640,7 +3640,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` is exactly 100 characters. The length is determined solely from the attribute value, excluding HTML markup. A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured; otherwise, it fails.",
-					"test_case": "element_text_length_equal_validation_xpath_input",
+					"use_case": "element_text_length_equal_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3682,7 +3682,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` is exactly 100 characters. The length is determined solely from the attribute value, excluding HTML markup. A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured; otherwise, it fails.",
-					"test_case": "element_text_length_equal_validation_id_input",
+					"use_case": "element_text_length_equal_validation_id_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3723,7 +3723,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text content of the element with the CSS selector `#content` does not equal 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_not_equal_validation_css",
+					"use_case": "element_text_length_not_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3760,7 +3760,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text content of the element with the Xpath selector `//div[@id='content']` does not equal 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_not_equal_validation_xpath",
+					"use_case": "element_text_length_not_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3796,7 +3796,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text content of the element with the Id `content` does not equal 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_not_equal_validation_id",
+					"use_case": "element_text_length_not_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3832,7 +3832,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` does not equal 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group, and the assertion fails if exactly 100 characters are captured.",
-					"test_case": "element_text_length_not_equal_validation_css",
+					"use_case": "element_text_length_not_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3871,7 +3871,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` does not equal 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group, and the assertion fails if exactly 100 characters are captured.",
-					"test_case": "element_text_length_not_equal_validation_xpath",
+					"use_case": "element_text_length_not_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3909,7 +3909,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` does not equal 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group, and the assertion fails if exactly 100 characters are captured.",
-					"test_case": "element_text_length_not_equal_validation_id",
+					"use_case": "element_text_length_not_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3947,7 +3947,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` does not equal 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_not_equal_validation_css_input",
+					"use_case": "element_text_length_not_equal_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -3988,7 +3988,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` does not equal 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_not_equal_validation_xpath_input",
+					"use_case": "element_text_length_not_equal_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4028,7 +4028,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` does not equal 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_not_equal_validation_id_input",
+					"use_case": "element_text_length_not_equal_validation_id_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4068,7 +4068,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` does not equal 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion fails if exactly 100 characters are captured.",
-					"test_case": "element_text_length_not_equal_validation_css_input",
+					"use_case": "element_text_length_not_equal_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4111,7 +4111,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` does not equal 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion fails if exactly 100 characters are captured.",
-					"test_case": "element_text_length_not_equal_validation_xpath_input",
+					"use_case": "element_text_length_not_equal_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4153,7 +4153,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` does not equal 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion fails if exactly 100 characters are captured.",
-					"test_case": "element_text_length_not_equal_validation_id_input",
+					"use_case": "element_text_length_not_equal_validation_id_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4194,7 +4194,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` is greater than 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_validation_css",
+					"use_case": "element_text_length_greater_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4231,7 +4231,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` is greater than 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_validation_xpath",
+					"use_case": "element_text_length_greater_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4267,7 +4267,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` is greater than 255 characters. The length is based solely on the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_validation_id",
+					"use_case": "element_text_length_greater_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4304,7 +4304,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` is greater than 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion passes only if more than 100 characters are captured.",
-					"test_case": "element_text_length_greater_validation_css_input",
+					"use_case": "element_text_length_greater_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4347,7 +4347,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` is greater than 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion passes only if more than 100 characters are captured.",
-					"test_case": "element_text_length_greater_validation_xpath_input",
+					"use_case": "element_text_length_greater_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4389,7 +4389,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` is greater than 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion passes only if more than 100 characters are captured.",
-					"test_case": "element_text_length_greater_validation_id_input",
+					"use_case": "element_text_length_greater_validation_id_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4431,7 +4431,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the CSS selector `textarea#content` is greater than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,200})` is applied to extract up to 200 characters into a capture group; the assertion passes only if the computed length is greater than 150.",
-					"test_case": "element_text_length_greater_validation_css_textarea",
+					"use_case": "element_text_length_greater_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4473,7 +4473,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Xpath selector `//textarea[@id='content']` is greater than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,200})` is applied to extract up to 200 characters into a capture group; the assertion passes only if the computed length is greater than 150.",
-					"test_case": "element_text_length_greater_validation_xpath_textarea",
+					"use_case": "element_text_length_greater_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4514,7 +4514,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Id `content` is greater than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,200})` is applied to extract up to 200 characters into a capture group; the assertion passes only if the computed length is greater than 150.",
-					"test_case": "element_text_length_greater_validation_id_textarea",
+					"use_case": "element_text_length_greater_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4556,7 +4556,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the CSS selector `textarea#content` is greater than 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion passes only if more than 100 characters are captured.",
-					"test_case": "element_text_length_greater_validation_css_textarea",
+					"use_case": "element_text_length_greater_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4599,7 +4599,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Xpath selector `//textarea[@id='content']` is greater than 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion passes only if more than 100 characters are captured.",
-					"test_case": "element_text_length_greater_validation_xpath_textarea",
+					"use_case": "element_text_length_greater_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4641,7 +4641,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Id `content` is greater than 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,110})` is applied to extract up to 110 characters into a capture group; the assertion passes only if more than 100 characters are captured.",
-					"test_case": "element_text_length_greater_validation_id_textarea",
+					"use_case": "element_text_length_greater_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4682,7 +4682,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` is greater than or equal to 255 characters. The length is computed from the visible text only, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_equal_validation_css",
+					"use_case": "element_text_length_greater_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4719,7 +4719,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` is greater than or equal to 255 characters. The length is computed from the visible text only, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_equal_validation_xpath",
+					"use_case": "element_text_length_greater_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4755,7 +4755,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` is greater than or equal to 255 characters. The length is computed from the visible text only, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_equal_validation_id",
+					"use_case": "element_text_length_greater_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4791,7 +4791,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` is greater than or equal to 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group; the assertion passes only if the computed length is greater than or equal to 100.",
-					"test_case": "element_text_length_greater_equal_validation_css",
+					"use_case": "element_text_length_greater_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4829,7 +4829,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` is greater than or equal to 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group; the assertion passes only if the computed length is greater than or equal to 100.",
-					"test_case": "element_text_length_greater_equal_validation_xpath",
+					"use_case": "element_text_length_greater_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4866,7 +4866,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` is greater than or equal to 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group; the assertion passes only if the computed length is greater than or equal to 100.",
-					"test_case": "element_text_length_greater_equal_validation_id",
+					"use_case": "element_text_length_greater_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4903,7 +4903,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the CSS selector `textarea#content` is greater than or equal to 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_equal_validation_css_textarea",
+					"use_case": "element_text_length_greater_equal_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4943,7 +4943,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Xpath selector `//textarea[@id='content']` is greater than or equal to 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_equal_validation_xpath_textarea",
+					"use_case": "element_text_length_greater_equal_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -4983,7 +4983,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Id `content` is greater than or equal to 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_greater_equal_validation_id_textarea",
+					"use_case": "element_text_length_greater_equal_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5022,7 +5022,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the CSS selector `textarea#content` is greater than or equal to 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,})` is applied to extract the full visible text into a capture group; the assertion passes only if the computed length is greater than or equal to 100 characters.",
-					"test_case": "element_text_length_greater_equal_validation_css_textarea",
+					"use_case": "element_text_length_greater_equal_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5064,7 +5064,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Xpath selector `//textarea[@id='content']` is greater than or equal to 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,})` is applied to extract the full visible text into a capture group; the assertion passes only if the computed length is greater than or equal to 100 characters.",
-					"test_case": "element_text_length_greater_equal_validation_xpath_textarea",
+					"use_case": "element_text_length_greater_equal_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5105,7 +5105,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Id `content` is greater than or equal to 100 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,})` is applied to extract the full visible text into a capture group; the assertion passes only if the computed length is greater than or equal to 100 characters.",
-					"test_case": "element_text_length_greater_equal_validation_id_textarea",
+					"use_case": "element_text_length_greater_equal_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5146,7 +5146,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` does not exceed 255 characters. The length is computed solely from the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_equal_validation_css",
+					"use_case": "element_text_length_lower_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5182,7 +5182,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` does not exceed 255 characters. The length is computed solely from the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_equal_validation_xpath",
+					"use_case": "element_text_length_lower_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5217,7 +5217,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` does not exceed 255 characters. The length is computed solely from the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_equal_validation_id",
+					"use_case": "element_text_length_lower_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5252,7 +5252,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` does not exceed 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, no capture occurs and the assertion fails.",
-					"test_case": "element_text_length_lower_equal_validation_css",
+					"use_case": "element_text_length_lower_equal_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5290,7 +5290,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` does not exceed 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, no capture occurs and the assertion fails.",
-					"test_case": "element_text_length_lower_equal_validation_xpath",
+					"use_case": "element_text_length_lower_equal_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5327,7 +5327,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` does not exceed 100 characters. The length is determined solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, no capture occurs and the assertion fails.",
-					"test_case": "element_text_length_lower_equal_validation_id",
+					"use_case": "element_text_length_lower_equal_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5365,7 +5365,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the CSS selector `input#content` does not exceed 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_equal_validation_css_input",
+					"use_case": "element_text_length_lower_equal_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5406,7 +5406,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Xpath selector `//input[@id='content']` does not exceed 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_equal_validation_xpath_input",
+					"use_case": "element_text_length_lower_equal_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5446,7 +5446,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the input element with the Id `content` does not exceed 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_equal_validation_id_input",
+					"use_case": "element_text_length_lower_equal_validation_id_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5485,7 +5485,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the textarea with the CSS selector `textarea#content` does not exceed 100 characters. The text length is determined solely from the text extracted from the value attribute, excluding any HTML markup or tags. The regular expression `(?s)^(.{0,100})` is applied to extract only the first 100 characters, ensuring that only this segment of text is evaluated.",
-					"test_case": "element_text_length_lower_equal_validation_css_textarea",
+					"use_case": "element_text_length_lower_equal_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5526,7 +5526,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the textarea with the Xpath selector `//textarea[@id='content']` does not exceed 100 characters. The text length is computed solely from the text extracted from the value attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract only the first 100 characters, ensuring that only that segment is evaluated.",
-					"test_case": "element_text_length_lower_equal_validation_xpath_textarea",
+					"use_case": "element_text_length_lower_equal_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5566,7 +5566,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the textarea with the Id `content` does not exceed 100 characters. The text length is determined solely from the text extracted from the value attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract only the first 100 characters; the assertion passes only if the computed length is less than or equal to 100.",
-					"test_case": "element_text_length_lower_equal_validation_id_textarea",
+					"use_case": "element_text_length_lower_equal_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5606,7 +5606,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` is less than 255 characters. The length is determined solely from the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_validation_css",
+					"use_case": "element_text_length_lower_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5642,7 +5642,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` is less than 255 characters. The length is determined solely from the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_validation_xpath",
+					"use_case": "element_text_length_lower_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5677,7 +5677,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` is less than 255 characters. The length is determined solely from the visible text, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_validation_id",
+					"use_case": "element_text_length_lower_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5712,7 +5712,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` is less than 100 characters. The length is computed solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters, and the assertion passes only if the computed length is less than 100.",
-					"test_case": "element_text_length_lower_validation_css",
+					"use_case": "element_text_length_lower_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5750,7 +5750,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` is less than 100 characters. The length is computed solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters, and the assertion passes only if the computed length is less than 100.",
-					"test_case": "element_text_length_lower_validation_xpath",
+					"use_case": "element_text_length_lower_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5787,7 +5787,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` is less than 100 characters. The length is computed solely from the visible text, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters, and the assertion passes only if the computed length is less than 100.",
-					"test_case": "element_text_length_lower_validation_id",
+					"use_case": "element_text_length_lower_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5825,7 +5825,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the CSS selector `textarea#content` is less than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_validation_css_textarea",
+					"use_case": "element_text_length_lower_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5865,7 +5865,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Xpath selector `//textarea[@id='content']` is less than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_validation_xpath_textarea",
+					"use_case": "element_text_length_lower_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5904,7 +5904,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text length of the value attribute of the textarea with the Id `content` is less than 150 characters. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags.",
-					"test_case": "element_text_length_lower_validation_id_textarea",
+					"use_case": "element_text_length_lower_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5944,7 +5944,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text from the `value` attribute of the input element with the CSS selector `input#content` is less than 100 characters. The text length is determined solely from the attribute value, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters into a capture group; the assertion passes only if the computed length is less than 100.",
-					"test_case": "element_text_length_lower_validation_css_input",
+					"use_case": "element_text_length_lower_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -5986,7 +5986,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text from the `value` attribute of the input element with the Xpath selector `//input[@id='content']` is less than 100 characters. The text length is determined solely from the attribute value, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters into a capture group; the assertion passes only if the computed length is less than 100.",
-					"test_case": "element_text_length_lower_validation_xpath_input",
+					"use_case": "element_text_length_lower_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6027,7 +6027,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the text from the `value` attribute of the input element with the Id `content` is less than 100 characters. The text length is determined solely from the attribute value, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` extracts up to 100 characters into a capture group; the assertion passes only if the computed length is less than 100.",
-					"test_case": "element_text_length_lower_validation_id_input",
+					"use_case": "element_text_length_lower_validation_id_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6068,7 +6068,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the CSS selector `#content` has a length that matches the pattern `^2\\d+$`. The length is determined solely from the visible text, excluding HTML markup or tags. The regular expression is applied to the computed length (as a string) and must match the expected pattern for the assertion to pass.",
-					"test_case": "element_text_length_match_validation_css",
+					"use_case": "element_text_length_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6105,7 +6105,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Xpath selector `//div[@id='content']` has a length that matches the pattern `^2\\d+$`. The length is determined solely from the visible text, excluding HTML markup or tags. The regular expression is applied to the computed length (as a string) and must match the expected pattern for the assertion to pass.",
-					"test_case": "element_text_length_match_validation_xpath",
+					"use_case": "element_text_length_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6141,7 +6141,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the visible text of the element with the Id `content` has a length that matches the pattern `^2\\d+$`. The length is determined solely from the visible text, excluding HTML markup or tags. The regular expression is applied to the computed length (as a string) and must match the expected pattern for the assertion to pass.",
-					"test_case": "element_text_length_match_validation_id",
+					"use_case": "element_text_length_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6177,7 +6177,7 @@
 					],
 					"expected_result": false,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the CSS selector `input#content` matches the pattern `^15\\d+$`. Since the extraction regex `(?s)^(.{0,100})` limits the capture to at most 100 characters, the expected pattern cannot be met. Note: This test case is designed to fail because the computed length will never begin with '15'.",
-					"test_case": "element_text_length_match_failure_validation_css_input",
+					"use_case": "element_text_length_match_failure_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6219,7 +6219,7 @@
 					],
 					"expected_result": false,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Xpath selector `//input[@id='content']` matches the pattern `^15\\d+$`. Since the regular expression `(?s)^(.{0,100})` limits extraction to 100 characters, the expected pattern cannot be fulfilled. Note: This test case is intended to fail because the computed length will never begin with '15'.",
-					"test_case": "element_text_length_match_failure_validation_xpath_input",
+					"use_case": "element_text_length_match_failure_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6260,7 +6260,7 @@
 					],
 					"expected_result": false,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Id `content` matches the pattern `^15\\d+$`. The regular expression `(?s)^(.{0,100})` limits extraction to at most 100 characters, making it impossible to meet the expected pattern. Note: This test case is designed to fail because the computed length will never begin with '15'.",
-					"test_case": "element_text_length_match_failure_validation_id",
+					"use_case": "element_text_length_match_failure_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6302,7 +6302,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the CSS selector `input#content` matches the expected pattern `^15\\d+$`. In other words, when converted to a string, the length must start with '15' (e.g., '150', '151').",
-					"test_case": "element_text_length_match_validation_css_input",
+					"use_case": "element_text_length_match_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6344,7 +6344,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Xpath selector `//input[@id='content']` matches the expected pattern `^15\\d+$`. In other words, when converted to a string, the length must begin with '15' (e.g., '150', '151').",
-					"test_case": "element_text_length_match_validation_xpath_input",
+					"use_case": "element_text_length_match_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6385,7 +6385,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Id `content` matches the expected pattern `^15\\d+$`. In other words, when converted to a string, the length must begin with '15' (e.g., '150', '151').",
-					"test_case": "element_text_length_match_validation_id",
+					"use_case": "element_text_length_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6425,7 +6425,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the CSS selector `input#content`, when converted to a string, matches the pattern `^1\\d+$`. The regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters from the attribute, and the test passes only if the resulting length meets the expected pattern.",
-					"test_case": "element_text_length_match_validation_css_input",
+					"use_case": "element_text_length_match_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6467,7 +6467,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Xpath selector `//input[@id='content']`, when converted to a string, matches the pattern `^1\\d+$`. The regular expression `(?s)^(.{0,100})` extracts up to 100 characters from the attribute, and the assertion passes only if the resulting length meets the expected pattern.",
-					"test_case": "element_text_length_match_validation_xpath_input",
+					"use_case": "element_text_length_match_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6508,7 +6508,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Id `content`, when converted to a string, matches the expected pattern `^1\\d+$`. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the attribute, and the assertion passes only if the resulting length meets the expected pattern.",
-					"test_case": "element_text_length_match_validation_id",
+					"use_case": "element_text_length_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6549,7 +6549,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the visible text of the element with the CSS selector `#content`, when converted to a string, does not match the pattern `^2\\d+$`. In other words, the length should not start with the digit '2'.",
-					"test_case": "element_text_length_not_match_validation_css",
+					"use_case": "element_text_length_not_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6585,7 +6585,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the visible text of the element with the Xpath selector `//div[@id='content']`, when converted to a string, does not match the pattern `^2\\d+$`. In other words, the length should not start with the digit '2'.",
-					"test_case": "element_text_length_not_match_validation_xpath",
+					"use_case": "element_text_length_not_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6620,7 +6620,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the visible text of the element with the Id `content`, when converted to a string, does not match the pattern `^2\\d+$`. In other words, the length should not start with the digit '2'.",
-					"test_case": "element_text_length_not_match_validation_id",
+					"use_case": "element_text_length_not_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6655,7 +6655,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the CSS selector `input#content`, when converted to a string, does not match the expected pattern `^15\\d+$`. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group.",
-					"test_case": "element_text_length_not_match_validation_css_input",
+					"use_case": "element_text_length_not_match_validation_css_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6697,7 +6697,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Xpath selector `//input[@id='content']`, when converted to a string, does not match the expected pattern `^15\\d+$`. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group.",
-					"test_case": "element_text_length_not_match_validation_xpath_input",
+					"use_case": "element_text_length_not_match_validation_xpath_input",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6738,7 +6738,7 @@
 					],
 					"expected_result": true,
 					"notes": "Verifies that the computed length of the text from the value attribute of the input element with the Id `content`, when converted to a string, does not match the expected pattern `^15\\d+$`. The length is determined solely from the text from the `value` attribute, excluding any HTML markup or tags. A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters into a capture group.",
-					"test_case": "element_text_length_not_match_validation_id",
+					"use_case": "element_text_length_not_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6779,7 +6779,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
 					"notes": "Validation is based solely on text from the value attribute. The regular expression is applied to extract up to 100 characters, and the assertion checks that the resulting computed length does not match the expected pattern.",
-					"test_case": "element_attribute_text_length_not_match_validation_css",
+					"use_case": "element_attribute_text_length_not_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6818,7 +6818,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
 					"notes": "Validation is based solely on text from the value attribute. The regular expression is used to extract up to 100 characters, ensuring that the computed length does not conform to the prohibited pattern.",
-					"test_case": "element_attribute_text_length_not_match_validation_xpath",
+					"use_case": "element_attribute_text_length_not_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6857,7 +6857,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^15\\d+$`; it fails if it does match exactly.",
 					"notes": "Validation is based solely on text from the value attribute. The regular expression extracts up to 100 characters, and the computed length is checked against the prohibited pattern.",
-					"test_case": "element_attribute_text_length_not_match_validation_id",
+					"use_case": "element_attribute_text_length_not_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6897,7 +6897,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^1\\d+$`; it fails if it matches exactly.",
 					"notes": "Validation is based solely on the text from the value attribute. The regular expression is applied to extract up to 100 characters, and the computed length is then compared to the prohibited pattern.",
-					"test_case": "element_attribute_text_length_not_match_validation_css",
+					"use_case": "element_attribute_text_length_not_match_validation_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6938,7 +6938,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^1\\d+$`; it fails if it matches exactly.",
 					"notes": "Validation is based solely on the text from the value attribute. The regular expression is used to extract up to 100 characters, ensuring that the computed length does not conform to the prohibited pattern.",
-					"test_case": "element_attribute_text_length_not_match_validation_xpath",
+					"use_case": "element_attribute_text_length_not_match_validation_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -6979,7 +6979,7 @@
 					],
 					"expected_result": "The assertion passes if the text from the value attribute does not match the regular expression `^1\\d+$`; it fails if it matches exactly.",
 					"notes": "Validation is based solely on the text from the value attribute. The regular expression is applied to extract up to 100 characters, and the computed length is then compared to the prohibited pattern.",
-					"test_case": "element_attribute_text_length_not_match_validation_id",
+					"use_case": "element_attribute_text_length_not_match_validation_id",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7018,7 +7018,7 @@
 					],
 					"expected_result": "The assertion passes if the element with the provided CSS selector is visible in the DOM.",
 					"notes": "Validation is based solely on the element's visibility status as determined by the CSS selector. If the element is not visible or not found, the assertion fails.",
-					"test_case": "element_visible_validation_css_username",
+					"use_case": "element_visible_validation_css_username",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7052,7 +7052,7 @@
 					],
 					"expected_result": "The assertion passes if the element with the provided XPath locator is visible in the DOM.",
 					"notes": "Validation is based solely on the element's visibility status as determined by the XPath locator. If the element is not visible or not found, the assertion fails.",
-					"test_case": "element_visible_validation_xpath_username",
+					"use_case": "element_visible_validation_xpath_username",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7086,7 +7086,7 @@
 					],
 					"expected_result": "The assertion passes if the element with the provided Id is visible in the DOM.",
 					"notes": "Validation is based solely on the element's visibility status as determined by the Id locator. If the element is not visible or not found, the assertion fails.",
-					"test_case": "element_visible_validation_id_username",
+					"use_case": "element_visible_validation_id_username",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7121,7 +7121,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text of the element exactly matches the expected string.",
 					"notes": "Validation is based solely on the element's visible text content. Any additional whitespace or formatting differences will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_css_div",
+					"use_case": "element_text_equal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7156,7 +7156,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text of the element exactly matches the expected string.",
 					"notes": "Validation is based solely on the element's visible text content. Any extraneous whitespace or formatting differences will result in a failure.",
-					"test_case": "element_text_equal_validation_xpath_div",
+					"use_case": "element_text_equal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7191,7 +7191,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text of the element exactly matches the expected string.",
 					"notes": "Validation is based solely on the element's visible text content. Any discrepancies in whitespace or formatting will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_id_div",
+					"use_case": "element_text_equal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7227,7 +7227,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the element exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison. Any discrepancies in text content, including whitespace or formatting differences, will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_css_div",
+					"use_case": "element_text_equal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7266,7 +7266,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the element exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression is used to extract up to 10 characters for comparison. Differences in the text content, such as extra whitespace or formatting issues, will result in failure.",
-					"test_case": "element_text_equal_validation_xpath_div",
+					"use_case": "element_text_equal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7305,7 +7305,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the element exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any deviations such as extra spaces or formatting anomalies will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_id_div",
+					"use_case": "element_text_equal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7343,7 +7343,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the `value` attribute exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the text from the `value` attribute. Any discrepancies, including extra whitespace or formatting differences, will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_css_textarea",
+					"use_case": "element_text_equal_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7379,7 +7379,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the `value` attribute exactly matches 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
 					"notes": "Validation is based solely on the text from the `value` attribute. Any discrepancies, including extra whitespace or formatting differences, will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_xpath_textarea",
+					"use_case": "element_text_equal_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7415,7 +7415,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the `value` attribute exactly matches 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
 					"notes": "Validation is based solely on the text from the `value` attribute. Any discrepancies, including extra whitespace or formatting differences, will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_id_textarea",
+					"use_case": "element_text_equal_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7452,7 +7452,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the `value` attribute exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts up to 10 characters for comparison. Any discrepancies, including extra whitespace or formatting differences, will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_css_textarea",
+					"use_case": "element_text_equal_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7492,7 +7492,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the `value` attribute exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression is applied to extract up to 10 characters for comparison. Any discrepancies, including extra whitespace or formatting differences, will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_xpath_textarea",
+					"use_case": "element_text_equal_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7532,7 +7532,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the `value` attribute exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts up to 10 characters for comparison, and any discrepancies, such as extra spaces or formatting differences, will cause the assertion to fail.",
-					"test_case": "element_text_equal_validation_id_textarea",
+					"use_case": "element_text_equal_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7571,7 +7571,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the element is not equal to 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
 					"notes": "Validation is based solely on the element's visible text content. Any variations, including differences in whitespace or formatting that result in a non-exact match, will cause the assertion to pass.",
-					"test_case": "element_text_notequal_validation_css_div",
+					"use_case": "element_text_notequal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7606,7 +7606,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the element is not equal to 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
 					"notes": "Validation is based solely on the element's visible text content. Any discrepancies, including subtle differences in whitespace or formatting, will result in a successful assertion if the texts are not identical.",
-					"test_case": "element_text_notequal_validation_xpath_div",
+					"use_case": "element_text_notequal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7641,7 +7641,7 @@
 					],
 					"expected_result": "The assertion passes if the computed text from the element is not equal to 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
 					"notes": "Validation is based solely on the element's visible text content. Any differences, including extra spaces or formatting variations leading to a non-exact match, will cause the assertion to pass.",
-					"test_case": "element_text_notequal_validation_id_div",
+					"use_case": "element_text_notequal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7677,7 +7677,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any discrepancies, including extra whitespace or formatting differences, will cause the assertion to pass if the texts are not identical.",
-					"test_case": "element_text_notequal_validation_css_div",
+					"use_case": "element_text_notequal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7716,7 +7716,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression is used to extract up to 10 characters for comparison. Any discrepancies, such as extra whitespace or unexpected formatting, will cause the assertion to pass when there is a non-exact match.",
-					"test_case": "element_text_notequal_validation_xpath_div",
+					"use_case": "element_text_notequal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7755,7 +7755,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any differences such as additional whitespace or formatting anomalies will cause the assertion to pass if the texts are not identical.",
-					"test_case": "element_text_notequal_validation_id_div",
+					"use_case": "element_text_notequal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7794,7 +7794,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any discrepancies, including extra whitespace or formatting differences, will cause the assertion to pass if the texts are not identical.",
-					"test_case": "element_text_notequal_validation_css_div",
+					"use_case": "element_text_notequal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7833,7 +7833,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression is used to extract up to 10 characters for comparison. Any discrepancies, such as extra whitespace or unexpected formatting, will cause the assertion to pass when there is a non-exact match.",
-					"test_case": "element_text_notequal_validation_xpath_div",
+					"use_case": "element_text_notequal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7872,7 +7872,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any differences such as additional whitespace or formatting anomalies will cause the assertion to pass if the texts are not identical.",
-					"test_case": "element_text_notequal_validation_id_div",
+					"use_case": "element_text_notequal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7911,7 +7911,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any discrepancies, including extra whitespace or formatting differences, will cause the assertion to pass when there is a non-exact match.",
-					"test_case": "element_text_notequal_validation_css_div",
+					"use_case": "element_text_notequal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7950,7 +7950,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression is used to extract up to 10 characters for comparison. Any discrepancies, such as extra whitespace or unexpected formatting, will cause the assertion to pass when there is a non-exact match.",
-					"test_case": "element_text_notequal_validation_xpath_div",
+					"use_case": "element_text_notequal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -7989,7 +7989,7 @@
 					],
 					"expected_result": "The assertion passes if the text extracted from the element does not exactly match 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts up to 10 characters for comparison, and any differences such as additional whitespace or formatting anomalies will cause the assertion to pass if the texts are not identical.",
-					"test_case": "element_text_notequal_validation_id_div",
+					"use_case": "element_text_notequal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8028,7 +8028,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion compares this number against the expected threshold 42. If the extracted numeric value is not greater than 42, the assertion fails.",
-					"test_case": "element_text_greater_validation_css_div",
+					"use_case": "element_text_greater_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8066,7 +8066,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression is applied to extract a numeric value from the text, and the assertion compares this value to the expected threshold of 42. The assertion fails if the extracted number is not greater than 42.",
-					"test_case": "element_text_greater_validation_xpath_div",
+					"use_case": "element_text_greater_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8104,7 +8104,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion verifies that this value is greater than the threshold 42. The assertion fails if the extracted numeric value does not exceed 42.",
-					"test_case": "element_text_greater_validation_id_div",
+					"use_case": "element_text_greater_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8142,7 +8142,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this value is greater than 42. Any failure to extract a number or a numeric value less than or equal to 42 will result in assertion failure.",
-					"test_case": "element_text_greater_validation_css_textarea",
+					"use_case": "element_text_greater_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8182,7 +8182,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression is applied to extract a numeric value from the attribute text, and the assertion verifies that this number is greater than 42. Inability to extract a valid number or a number less than or equal to 42 causes assertion failure.",
-					"test_case": "element_text_greater_validation_xpath_textarea",
+					"use_case": "element_text_greater_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8222,7 +8222,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this value is greater than 42. If a valid numeric value is not extracted or the value is not greater than 42, the assertion fails.",
-					"test_case": "element_text_greater_validation_id_textarea",
+					"use_case": "element_text_greater_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8262,7 +8262,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than or equal to 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion verifies that this value is greater than or equal to 42. If extraction fails or the value is less than 42, the assertion fails.",
-					"test_case": "element_text_greaterequal_validation_css_div",
+					"use_case": "element_text_greaterequal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8300,7 +8300,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than or equal to 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression is applied to extract a numeric value from the text, and the assertion verifies that this value meets or exceeds 42. Failure to extract a valid number or a value less than 42 will result in assertion failure.",
-					"test_case": "element_text_greaterequal_validation_xpath_div",
+					"use_case": "element_text_greaterequal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8338,7 +8338,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is greater than or equal to 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion confirms that this number is at least 42. If a valid number cannot be extracted or it is less than 42, the assertion fails.",
-					"test_case": "element_text_greaterequal_validation_id_div",
+					"use_case": "element_text_greaterequal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8376,7 +8376,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than or equal to 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this value meets or exceeds the threshold of 42. If a valid number is not extracted or is less than 42, the assertion fails.",
-					"test_case": "element_text_greaterequal_validation_css_textarea",
+					"use_case": "element_text_greaterequal_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8416,7 +8416,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than or equal to 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion confirms that this number is at least 42. Failure to extract a valid number or a number less than 42 will result in assertion failure.",
-					"test_case": "element_text_greaterequal_validation_xpath_textarea",
+					"use_case": "element_text_greaterequal_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8456,7 +8456,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is greater than or equal to 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this number is at least 42. If a valid number is not extracted or if the extracted number is less than 42, the assertion fails.",
-					"test_case": "element_text_greaterequal_validation_id_textarea",
+					"use_case": "element_text_greaterequal_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8496,7 +8496,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than 42.",
 					"notes": "Validation is based solely on the visible text content of the element. The regular expression extracts a numeric value, and the assertion verifies that this value is lower than 42. If no valid number is extracted or if the extracted number is 42 or greater, the assertion fails.",
-					"test_case": "element_text_lower_validation_css_div",
+					"use_case": "element_text_lower_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8534,7 +8534,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than 42.",
 					"notes": "Validation is based solely on the visible text content of the element. The regular expression extracts a numeric value from the text, and the assertion confirms that this number is lower than 42. Failure to extract a valid number or extraction of a value that is 42 or greater will cause the assertion to fail.",
-					"test_case": "element_text_lower_validation_xpath_div",
+					"use_case": "element_text_lower_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8572,7 +8572,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than 42.",
 					"notes": "Validation is based solely on the visible text content of the element. The regular expression is used to extract a numeric value from the text, and the assertion verifies that this number is lower than 42. If extraction fails or the value is not lower than 42, the assertion fails.",
-					"test_case": "element_text_lower_validation_id_div",
+					"use_case": "element_text_lower_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8610,7 +8610,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is lower than 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this value is lower than 42. Failure to extract a valid number or an extracted value of 42 or greater will cause the assertion to fail.",
-					"test_case": "element_text_lower_validation_css_textarea",
+					"use_case": "element_text_lower_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8650,7 +8650,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is lower than 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression is applied to extract a numeric value from the attribute text, and the assertion verifies that this number is lower than 42. If a valid number is not extracted or the number is 42 or greater, the assertion fails.",
-					"test_case": "element_text_lower_validation_xpath_textarea",
+					"use_case": "element_text_lower_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8690,7 +8690,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is lower than 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion confirms that this value is lower than 42. If the extraction fails or the resulting number is not lower than 42, the assertion fails.",
-					"test_case": "element_text_lower_validation_id_textarea",
+					"use_case": "element_text_lower_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8730,7 +8730,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than or equal to 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion confirms that this value is less than or equal to 42. Failure to extract a valid number or extraction of a number greater than 42 will result in assertion failure.",
-					"test_case": "element_text_lowerequal_validation_css_div",
+					"use_case": "element_text_lowerequal_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8768,7 +8768,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than or equal to 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion confirms that this value is less than or equal to 42. If extraction fails or the resulting number exceeds 42, the assertion fails.",
-					"test_case": "element_text_lowerequal_validation_xpath_div",
+					"use_case": "element_text_lowerequal_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8806,7 +8806,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the element's visible text content is lower than or equal to 42.",
 					"notes": "Validation is based solely on the element's visible text content. The regular expression extracts a numeric value from the text, and the assertion verifies that this extracted number is less than or equal to 42. If a valid number is not extracted or if the number exceeds 42, the assertion fails.",
-					"test_case": "element_text_lowerequal_validation_id_div",
+					"use_case": "element_text_lowerequal_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8844,7 +8844,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is lower than or equal to 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this value is lower than or equal to 42. Failure to extract a valid number or extraction of a number greater than 42 will cause the assertion to fail.",
-					"test_case": "element_text_lowerequal_validation_css_textarea",
+					"use_case": "element_text_lowerequal_validation_css_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8884,7 +8884,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is lower than or equal to 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression is applied to extract a numeric value from the attribute text, and the assertion confirms that this number is lower than or equal to 42. Failure to extract a valid number or extraction of a number greater than 42 will cause the assertion to fail.",
-					"test_case": "element_text_lowerequal_validation_xpath_textarea",
+					"use_case": "element_text_lowerequal_validation_xpath_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8924,7 +8924,7 @@
 					],
 					"expected_result": "The assertion passes if the numeric value extracted from the `value` attribute is lower than or equal to 42.",
 					"notes": "Validation is based solely on the text from the `value` attribute. The regular expression extracts a numeric value from the attribute text, and the assertion verifies that this extracted number is less than or equal to 42. If a valid number is not extracted or if the extracted number exceeds 42, the assertion fails.",
-					"test_case": "element_text_lowerequal_validation_id_textarea",
+					"use_case": "element_text_lowerequal_validation_id_textarea",
 					"version": "1.0"
 				},
 				"labels": [
@@ -8964,7 +8964,7 @@
 					],
 					"expected_result": "The assertion passes if the element's visible text matches the regular expression `^Lorem ipsum dolor.*`; it fails otherwise.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression is applied to test for the expected pattern. If the text does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_css_div",
+					"use_case": "element_text_match_validation_css_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9002,7 +9002,7 @@
 					],
 					"expected_result": "The assertion passes if the element's visible text matches the regular expression `^Lorem ipsum dolor.*`; it fails otherwise.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression is applied to test for the expected pattern. Failure to match the pattern causes the assertion to fail.",
-					"test_case": "element_text_match_validation_xpath_div",
+					"use_case": "element_text_match_validation_xpath_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9040,7 +9040,7 @@
 					],
 					"expected_result": "The assertion passes if the element's visible text matches the regular expression `^Lorem ipsum dolor.*`; it fails otherwise.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression is applied to test for the expected pattern. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_id_div",
+					"use_case": "element_text_match_validation_id_div",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9078,7 +9078,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the element's visible text content. The first regular expression extracts up to 10 characters into a capture group, which is converted to a string. The second regular expression `^Lorem ipsu$` is then applied to this string to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_css_content",
+					"use_case": "element_text_match_validation_css_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9118,7 +9118,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the element's visible text content. The first regular expression extracts up to 10 characters into a capture group, which is converted to a string. The second regular expression `^Lorem ipsu$` is then applied to this string to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_xpath_content",
+					"use_case": "element_text_match_validation_xpath_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9158,7 +9158,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the element's visible text content. The first regular expression extracts up to 10 characters into a capture group, which is converted to a string. The second regular expression `^Lorem ipsu$` is then applied to this string to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_id_content",
+					"use_case": "element_text_match_validation_id_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9200,7 +9200,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `^Lorem ipsum dolor.*` is applied directly to this text to test for a match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_css_content_value",
+					"use_case": "element_text_match_validation_css_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9242,7 +9242,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `^Lorem ipsum dolor.*` is applied directly to this text to test for a match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_xpath_content_value",
+					"use_case": "element_text_match_validation_xpath_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9284,7 +9284,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `^Lorem ipsum dolor.*` is applied directly to this text to test for a match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_id_content_value",
+					"use_case": "element_text_match_validation_id_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9326,7 +9326,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_css_content_value",
+					"use_case": "element_text_match_validation_css_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9370,7 +9370,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_xpath_content_value",
+					"use_case": "element_text_match_validation_xpath_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9414,7 +9414,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "element_text_match_validation_id_content_value",
+					"use_case": "element_text_match_validation_id_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9456,7 +9456,7 @@
 					],
 					"expected_result": "The assertion passes only if the text does not match the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression `^Lorem ipsum dolor.*` is applied directly to this text to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_css_content",
+					"use_case": "element_text_notmatch_validation_css_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9494,7 +9494,7 @@
 					],
 					"expected_result": "The assertion passes only if the text does not match the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression `^Lorem ipsum dolor.*` is applied directly to this text to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_xpath_content",
+					"use_case": "element_text_notmatch_validation_xpath_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9532,7 +9532,7 @@
 					],
 					"expected_result": "The assertion passes only if the text does not match the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression `^Lorem ipsum dolor.*` is applied directly to this text to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_id_content",
+					"use_case": "element_text_notmatch_validation_id_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9570,7 +9570,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then tested against the pattern `^Lorem ipsu$` for a non-match.",
-					"test_case": "element_text_notmatch_validation_css_content",
+					"use_case": "element_text_notmatch_validation_css_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9610,7 +9610,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then tested against the pattern `^Lorem ipsu$` for a non-match.",
-					"test_case": "element_text_notmatch_validation_xpath_content",
+					"use_case": "element_text_notmatch_validation_xpath_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9650,7 +9650,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the element's visible text content. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then tested against the pattern `^Lorem ipsu$` for a non-match.",
-					"test_case": "element_text_notmatch_validation_id_content",
+					"use_case": "element_text_notmatch_validation_id_content",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9692,7 +9692,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `^Lorem ipsum dolor.*` is applied to this text to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_css_content_value",
+					"use_case": "element_text_notmatch_validation_css_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9734,7 +9734,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `^Lorem ipsum dolor.*` is applied to this text to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_xpath_content_value",
+					"use_case": "element_text_notmatch_validation_xpath_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9776,7 +9776,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `^Lorem ipsum dolor.*` is applied to this text to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_id_content_value",
+					"use_case": "element_text_notmatch_validation_id_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9818,7 +9818,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_css_content_value",
+					"use_case": "element_text_notmatch_validation_css_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9862,7 +9862,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_xpath_content_value",
+					"use_case": "element_text_notmatch_validation_xpath_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9906,7 +9906,7 @@
 					],
 					"expected_result": "The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the text from the `value` attribute. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is converted to a string. A second regular expression `^Lorem ipsu$` is then applied to that capture group to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "element_text_notmatch_validation_id_content_value",
+					"use_case": "element_text_notmatch_validation_id_content_value",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9946,7 +9946,7 @@
 					],
 					"expected_result": "The assertion passes only if the page title exactly matches 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
 					"notes": "Validation is based solely on the page title string. If the title differs in any way, including whitespace or formatting, the assertion fails.",
-					"test_case": "page_title_equal_validation",
+					"use_case": "page_title_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -9979,7 +9979,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group exactly matches 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the page title string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string and compared to the expected value. If extraction fails or the texts differ, the assertion fails.",
-					"test_case": "page_title_equal_validation_regex",
+					"use_case": "page_title_equal_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10015,7 +10015,7 @@
 					],
 					"expected_result": "The assertion passes only if the page title differs from 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.'.",
 					"notes": "Validation is based solely on the page title string. Any difference in content, whitespace, or formatting causes the assertion to pass; exact match causes failure.",
-					"test_case": "page_title_not_equal_validation",
+					"use_case": "page_title_not_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10048,7 +10048,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group does not equal 'Lorem ipsu'.",
 					"notes": "Validation is based solely on the page title string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string and compared to the expected value. If they are equal, the assertion fails.",
-					"test_case": "page_title_not_equal_validation_regex",
+					"use_case": "page_title_not_equal_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10086,7 +10086,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is greater than 42.",
 					"notes": "Validation is based solely on the page title string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is not greater than 42, the assertion fails.",
-					"test_case": "page_title_greater_validation_regex",
+					"use_case": "page_title_greater_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10124,7 +10124,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is greater than or equal to 42.",
 					"notes": "Validation is based solely on the page title string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is less than 42, the assertion fails.",
-					"test_case": "page_title_greater_equal_validation_regex",
+					"use_case": "page_title_greater_equal_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10162,7 +10162,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is lower than 42.",
 					"notes": "Validation is based solely on the page title string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is not lower than 42, the assertion fails.",
-					"test_case": "page_title_lower_validation_regex",
+					"use_case": "page_title_lower_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10200,7 +10200,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is lower than or equal to 42.",
 					"notes": "Validation is based solely on the page title string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is greater than 42, the assertion fails.",
-					"test_case": "page_title_lower_equal_validation_regex",
+					"use_case": "page_title_lower_equal_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10237,7 +10237,7 @@
 					],
 					"expected_result": "The assertion passes only if the page title matches the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the page title string. A regular expression `^Lorem ipsum dolor.*` is applied directly to the full title to test for a match. If the pattern does not match, the assertion fails.",
-					"test_case": "page_title_match_validation",
+					"use_case": "page_title_match_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10272,7 +10272,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group matches the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the page title string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string. A second regular expression `^Lorem ipsu$` is applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "page_title_match_validation_regex",
+					"use_case": "page_title_match_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10310,7 +10310,7 @@
 					],
 					"expected_result": "The assertion passes only if the page title does not match the pattern `^Lorem ipsum dolor.*`.",
 					"notes": "Validation is based solely on the page title string. A regular expression `^Lorem ipsum dolor.*` is applied directly to the full title to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "page_title_notmatch_validation",
+					"use_case": "page_title_notmatch_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10346,7 +10346,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`.",
 					"notes": "Validation is based solely on the page title string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string. A second regular expression `^Lorem ipsu$` is applied to that capture group to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "page_title_notmatch_validation_regex",
+					"use_case": "page_title_notmatch_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10385,7 +10385,7 @@
 					],
 					"expected_result": "The assertion passes only if the page URL exactly matches `https://example42.com/page/`.",
 					"notes": "Validation is based solely on the full page URL string. Any deviation, including differences in protocol, trailing slashes, query parameters, or fragments, causes the assertion to fail.",
-					"test_case": "page_url_equal_validation",
+					"use_case": "page_url_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10419,7 +10419,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group exactly matches `https://ex`.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string and compared to the expected value. If extraction fails or the strings differ, the assertion fails.",
-					"test_case": "page_url_equal_validation_regex",
+					"use_case": "page_url_equal_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10457,7 +10457,7 @@
 					],
 					"expected_result": "The assertion passes only if the page URL differs from `https://example42.com/page/`.",
 					"notes": "Validation is based solely on the full page URL string. Any deviation, including differences in protocol, trailing slashes, query parameters, or fragments, causes the assertion to pass; exact match causes failure.",
-					"test_case": "page_url_not_equal_validation",
+					"use_case": "page_url_not_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10491,7 +10491,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group does not match `https://ex`.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string. The assertion fails if that capture group matches `https://ex`.",
-					"test_case": "page_url_not_equal_validation_regex",
+					"use_case": "page_url_not_equal_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10530,7 +10530,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is greater than 42.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is not greater than 42, the assertion fails.",
-					"test_case": "page_url_greater_validation_regex",
+					"use_case": "page_url_greater_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10569,7 +10569,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is greater than 42.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is not greater than 42, the assertion fails.",
-					"test_case": "page_url_greater_validation_regex",
+					"use_case": "page_url_greater_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10608,7 +10608,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is lower than 42.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is not lower than 42, the assertion fails.",
-					"test_case": "page_url_lower_validation_regex",
+					"use_case": "page_url_lower_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10647,7 +10647,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted number is lower than or equal to 42.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `\\d+` extracts the first numeric sequence into a capture group, which is then converted to a number for comparison. If extraction fails or the number is greater than 42, the assertion fails.",
-					"test_case": "page_url_lower_equal_validation_regex",
+					"use_case": "page_url_lower_equal_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10686,7 +10686,7 @@
 					],
 					"expected_result": "The assertion passes only if the page URL matches the pattern `^https://example42.com/page/$`.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `^https://example42.com/page/$` is applied directly to this string to test for a match. If the pattern does not match, the assertion fails.",
-					"test_case": "page_url_match_validation",
+					"use_case": "page_url_match_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10724,7 +10724,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group matches the pattern `^https://ex$`.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string. A second regular expression `^https://ex$` is applied to that capture group to test for an exact match. If the pattern does not match, the assertion fails.",
-					"test_case": "page_url_match_validation_regex",
+					"use_case": "page_url_match_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10764,7 +10764,7 @@
 					],
 					"expected_result": "The assertion passes only if the page URL does not match the pattern `^https://example42.com/page/$`.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `^https://example42.com/page/$` is applied directly to this string to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "page_url_notmatch_validation",
+					"use_case": "page_url_notmatch_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10802,7 +10802,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted 10-character capture group does not match the pattern `^https://ex$`.",
 					"notes": "Validation is based solely on the full page URL string. A regular expression `(?s)^(.{0,10})` extracts up to 10 characters into a capture group, which is then converted to a string. A second regular expression `^https://ex$` is applied to that capture group to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "page_url_notmatch_validation_regex",
+					"use_case": "page_url_notmatch_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10841,7 +10841,7 @@
 					],
 					"expected_result": "The assertion passes only if the number of open windows is exactly 1.",
 					"notes": "Validation is based solely on the count of open browser windows. If the window count differs, the assertion fails.",
-					"test_case": "window_count_equal_validation",
+					"use_case": "window_count_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10875,7 +10875,7 @@
 					],
 					"expected_result": "The assertion passes only if the number of open windows differs from 1.",
 					"notes": "Validation is based solely on the count of open browser windows. If exactly 1 window is open, the assertion fails; any other number of windows causes it to pass.",
-					"test_case": "window_count_not_equal_validation",
+					"use_case": "window_count_not_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10909,7 +10909,7 @@
 					],
 					"expected_result": "The assertion passes only if the number of open windows is greater than 1.",
 					"notes": "Validation is based solely on the count of open browser windows. If the window count is 1 or less, the assertion fails.",
-					"test_case": "window_count_greater_validation",
+					"use_case": "window_count_greater_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10942,7 +10942,7 @@
 					],
 					"expected_result": "The assertion passes only if the number of open windows is greater than or equal to 1.",
 					"notes": "Validation is based solely on the count of open browser windows. If the window count is less than 1, the assertion fails.",
-					"test_case": "window_count_greater_equal_validation",
+					"use_case": "window_count_greater_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -10975,7 +10975,7 @@
 					],
 					"expected_result": "The assertion passes only if the number of open windows is lower than or equal to 1.",
 					"notes": "Validation is based solely on the count of open browser windows. If the window count is greater than 1, the assertion fails.",
-					"test_case": "window_count_lower_equal_validation",
+					"use_case": "window_count_lower_equal_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11009,7 +11009,7 @@
 					],
 					"expected_result": "The assertion passes only if the number of open windows is lower than 1.",
 					"notes": "Validation is based solely on the count of open browser windows. If the window count is greater than or equal to 1, the assertion fails.",
-					"test_case": "window_count_lower_validation",
+					"use_case": "window_count_lower_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11043,7 +11043,7 @@
 					],
 					"expected_result": "The assertion passes only if the string representation of the window count matches the pattern `^1\\d+?$`.",
 					"notes": "Validation is based solely on the count of open browser windows, converted to a string. A regular expression `^1\\d+?$` is applied to that string to test for a match. If the pattern does not match, the assertion fails.",
-					"test_case": "window_count_match_validation",
+					"use_case": "window_count_match_validation",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11080,7 +11080,7 @@
 					],
 					"expected_result": "The assertion passes only if the string representation of the window count does not match the pattern `^1\\d+?$`.",
 					"notes": "Validation is based solely on the count of open browser windows, converted to a string. A regular expression `^1\\d+?$` is applied to that string to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "window_count_notmatch_validation_regex",
+					"use_case": "window_count_notmatch_validation_regex",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11115,7 +11115,7 @@
 					],
 					"expected_result": "The assertion passes only if the text value returned by the session parameter matches `ExpectedValue`.",
 					"notes": "Validation is based solely on the full string returned by the session parameter. If the parameter value differs in any way, including whitespace or embedded formatting, the assertion fails.",
-					"test_case": "text_equal_validation_parameter_myparameter",
+					"use_case": "text_equal_validation_parameter_myparameter",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11148,7 +11148,7 @@
 					],
 					"expected_result": "The assertion passes only if the provided text value differs from `Static Text`.",
 					"notes": "Validation is based solely on the full provided text string. If the provided text exactly matches the expected value, the assertion fails.",
-					"test_case": "text_not_equal_validation_static_text",
+					"use_case": "text_not_equal_validation_static_text",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11181,7 +11181,7 @@
 					],
 					"expected_result": "The assertion passes only if the provided text value matches the pattern `\\d{3}-\\d{2}-\\d{4}`.",
 					"notes": "Validation is based solely on the full provided text string. A regular expression `\\d{3}-\\d{2}-\\d{4}` is applied directly to this text to test for a match. If the pattern does not match, the assertion fails.",
-					"test_case": "text_match_validation_regex_static_text",
+					"use_case": "text_match_validation_regex_static_text",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11216,7 +11216,7 @@
 					],
 					"expected_result": "The assertion passes only if the provided text value does not match the pattern `\\d{3}-\\d{2}-\\d{4}`.",
 					"notes": "Validation is based solely on the full provided text string. A regular expression `\\d{3}-\\d{2}-\\d{4}` is applied directly to this text to test for a non-match. If the pattern matches, the assertion fails.",
-					"test_case": "text_notmatch_validation_regex_static_text",
+					"use_case": "text_notmatch_validation_regex_static_text",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11251,7 +11251,7 @@
 					],
 					"expected_result": "The assertion passes only if the numeric value of the provided text is greater than 10.",
 					"notes": "Validation is based solely on the provided text string, converted to a number. If the text cannot be parsed as a number or if the number is not greater than 10, the assertion fails.",
-					"test_case": "text_greater_validation_static_text",
+					"use_case": "text_greater_validation_static_text",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11284,7 +11284,7 @@
 					],
 					"expected_result": "The assertion passes only if the numeric value of the provided text is lower than 10.",
 					"notes": "Validation is based solely on the provided text string, converted to a number. If the text cannot be parsed as a number or if the number is not lower than 10, the assertion fails.",
-					"test_case": "text_lower_validation_static_text",
+					"use_case": "text_lower_validation_static_text",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11317,7 +11317,7 @@
 					],
 					"expected_result": "The assertion passes only if the numeric value of the provided text is greater than or equal to 10.",
 					"notes": "Validation is based solely on the provided text string, converted to a number. If the text cannot be parsed as a number or if the number is less than 10, the assertion fails.",
-					"test_case": "text_greater_equal_validation_static_text",
+					"use_case": "text_greater_equal_validation_static_text",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11350,7 +11350,7 @@
 					],
 					"expected_result": "The assertion passes only if the numeric value of the provided text is lower than or equal to 10.",
 					"notes": "Validation is based solely on the provided text string, converted to a number. If the text cannot be parsed as a number or if the number is greater than 10, the assertion fails.",
-					"test_case": "text_lower_equal_validation_static_text",
+					"use_case": "text_lower_equal_validation_static_text",
 					"version": "1.0"
 				},
 				"labels": [
@@ -11385,7 +11385,7 @@
 					],
 					"expected_result": "The assertion passes only if the extracted capture group matches `100`.",
 					"notes": "Validation is based solely on the provided text string. A regular expression `\\d{3}` extracts the three‑digit numeric sequence into a capture group, converted to a string and compared to the expected value. If extraction fails or the values differ, the assertion fails.",
-					"test_case": "text_equal_validation_static_text_regex_3digits",
+					"use_case": "text_equal_validation_static_text_regex_3digits",
 					"version": "1.0"
 				},
 				"labels": [

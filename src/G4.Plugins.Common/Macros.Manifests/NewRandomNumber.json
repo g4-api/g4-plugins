@@ -1,8 +1,8 @@
 {
 	"aliases": [
 		"NewRandomNumber",
-		"rndnum",
-		"newrnd"
+		"newrnd",
+		"rndnum"
 	],
 	"author": {
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
@@ -11,49 +11,154 @@
 	"categories": [
 		"Utilities"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-RandomNumber.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewRandomNumber.cs"
+			},
+			"rag": {
+				"description": "The New-RandomNumber macro adds on-demand random value generation to automation workflows, enforcing range bounds and type safety. It supports flexible min/max parameters and multiple numeric formats, enabling dynamic data-driven tests while maintaining workflow reliability through built-in validation and consistent behavior across executions.",
+				"qa": [
+					{
+						"question": "What is the core function of the New-RandomNumber plugin?",
+						"answer": "It generates random numbers within a specified range directly in automation workflows, supporting dynamic test data and decision logic without external scripts."
+					},
+					{
+						"question": "What key features and parameters does the New-RandomNumber plugin support?",
+						"answer": "It allows setting MinValue and MaxValue bounds, selecting NumberType (Byte, Integer, Long, Float, Double), and omitting bounds to use type defaults, enabling precise control over output ranges and formats."
+					},
+					{
+						"question": "Where can I find the New-RandomNumber plugin’s code and documentation?",
+						"answer": "Code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewRandomNumber.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/New-RandomNumber.md"
+					},
+					{
+						"question": "What are best practices for using the New-RandomNumber plugin?",
+						"answer": "Always define explicit MinValue and MaxValue to avoid unexpected defaults, choose the appropriate NumberType for precision needs, and validate ranges to prevent overflow or invalid inputs in workflows."
+					},
+					{
+						"question": "How are rule definitions and parameter schemas structured in the New-RandomNumber manifest?",
+						"answer": "The manifest follows version 4 schema, defining a parameters array with detailed objects (name, type, mandatory, default, values), and includes examples showing how to call the macro in action rules."
+					},
+					{
+						"question": "What does the manifestVersion field specify?",
+						"answer": "It indicates the manifest uses version 4 of the plugin schema."
+					},
+					{
+						"question": "What is the plugin key for New-RandomNumber?",
+						"answer": "The plugin key is \"New-RandomNumber\"."
+					},
+					{
+						"question": "Who is the author of the New-RandomNumber plugin?",
+						"answer": "The plugin is authored by Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What aliases are defined for the New-RandomNumber plugin?",
+						"answer": "The plugin can be invoked using aliases: NewRandomNumber, newrnd, rndnum."
+					},
+					{
+						"question": "Which categories is the New-RandomNumber plugin listed under?",
+						"answer": "It is listed under the \"Utilities\" category."
+					},
+					{
+						"question": "Which platforms does the New-RandomNumber plugin support?",
+						"answer": "It supports \"Any\" platform."
+					},
+					{
+						"question": "What type of plugin is New-RandomNumber classified as?",
+						"answer": "It is classified as a \"Macro\" plugin."
+					},
+					{
+						"question": "What parameters are defined in the New-RandomNumber manifest?",
+						"answer": "Parameters include MinValue (Number, optional), MaxValue (Number, optional), and NumberType (String, optional, default \"Integer\" with values Byte, Double, Float, Integer, Long)."
+					},
+					{
+						"question": "What summary description does the manifest provide for New-RandomNumber?",
+						"answer": "It highlights on-demand random generation, range configuration, type selection, support for data-driven and boundary testing, and workflow streamlining by removing external scripts."
+					},
+					{
+						"question": "What does the apiDocumentation field specify?",
+						"answer": "It is set to \"None\", indicating no separate API documentation is provided."
+					},
+					{
+						"question": "What does the w3c field specify?",
+						"answer": "It is set to \"None\", indicating no W3C protocol compliance is declared."
+					},
+					{
+						"question": "What content is highlighted in the plugin’s description section?",
+						"answer": "The description details purpose, features, RPA and testing use cases, and examples of generating and using random numbers in workflows."
+					},
+					{
+						"question": "How does the New-RandomNumber plugin handle errors?",
+						"answer": "It performs validation on MinValue ≤ MaxValue and checks NumberType values; invalid ranges or unsupported types produce descriptive runtime errors to prevent workflow failures."
+					}
+				]
+			}
+		}
+	},
 	"description": [
-		"The NewRandomNumber macro plugin generates a new random number within automation workflows, providing flexibility in generating random integer values within specified ranges.",
-		"",
 		"### Purpose",
 		"",
-		"The primary purpose of the NewRandomNumber macro plugin is to generate random integer values, allowing for dynamic data generation within automation workflows.",
+		"The primary purpose of the New-RandomNumber macro plugin is to generate a random numbers within automation workflows.",
+		"It lets you set minimum and maximum values and pick from different numeric types like Byte, Integer, Long, Float, or Double.",
+		"This helps create dynamic test data and drive decisions in RPA and automation testing.",
+		"Building random number support directly into workflows removes the need for extra scripts and speeds up automation tasks.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature                  | Description                                                                                        |",
-		"|--------------------------|----------------------------------------------------------------------------------------------------|",
-		"| Random Number Generation | Generates random integer values within specified ranges.                                           |",
-		"| Automation Integration   | Integrates seamlessly with automation workflows, providing flexibility in generating dynamic data. |",
+		"| Feature                  | Description                                                    |",
+		"|--------------------------|----------------------------------------------------------------|",
+		"| Random Number Generation | Generates random numbers within a user-defined range.          |",
+		"| Range Configuration      | Allows specifying MinValue and MaxValue to control limits.     |",
+		"| Number Type Selection    | Supports different types: Byte, Integer, Long, Float, Double.  |",
+		"| Workflow Integration     | Works directly in automation workflows without external tools. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage              | Description                                                                   |",
-		"|--------------------|-------------------------------------------------------------------------------|",
-		"| Data Generation    | Use generated random numbers for data population in RPA tasks.                |",
-		"| Conditional Logic  | Generate random values for conditional branching within automation workflows. |",
+		"| Use Case          | Description                                                       |",
+		"|-------------------|-------------------------------------------------------------------|",
+		"| Data Generation   | Populate RPA tasks with random numbers for data-driven processes. |",
+		"| Conditional Logic | Provide dynamic values for decision-making steps in workflows.    |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage              | Description                                                                    |",
-		"|--------------------|--------------------------------------------------------------------------------|",
-		"| Data-Driven Testing | Utilize random numbers as test data inputs for data-driven testing scenarios. |",
-		"| Boundary Testing    | Generate random values to test boundary conditions of software systems.       |"
+		"| Use Case            | Description                                                         |",
+		"|---------------------|---------------------------------------------------------------------|",
+		"| Data-Driven Testing | Use random values as inputs to test software with varied datasets.  |",
+		"| Boundary Testing    | Generate edge-case values to test system limits and error handling. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "The example generates a random integer at runtime using the NewRandomNumber macro plugin and inputs it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber` macro call. The macro is evaluated at runtime and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_number",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random integer value within the specified range and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Number",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random integer value. For example, `{{$New-RandomNumber}}`.                                                |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random integer value as keystrokes to the specified element within the automation workflow."
+				"Use the `NewRandomNumber` macro plugin to generate a new random integer at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated integer into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -61,35 +166,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a new random integer using the NewRandomNumber macro plugin and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field uses the New-RandomNumber macro call with flags for name, value, and session scope. The macro is evaluated at runtime and its output is consumed by the RegisterParameter plugin.",
+					"use_case": "register_random_number_parameter_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random integer value within the specified range and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Number Parameter with Session Scope",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                               |",
-				"|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                             |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random integer value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session."
+				"Use the `NewRandomNumber` macro plugin to generate a new random integer at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random integer between 100 and int.Max at runtime using the NewRandomNumber macro plugin and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MinValue:100` macro call. The `--MinValue:100` flag sets the minimum value; the maximum value defaults to `int.Max`. The macro output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_number_with_min_value",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random number within the range of 100 (minimum value) and int.Max and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Number with Minimum Value",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random number. For example, `{{$New-RandomNumber --MinValue:100}}`.                                        |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random number as keystrokes to the specified element within the automation workflow."
+				"Use the `NewRandomNumber` macro plugin with the `--MinValue:100` flag to generate a random integer between 100 and int.Max at runtime.  ",
+				"Use the `SendKeys` plugin to input the generated integer into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MinValue:100}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -97,35 +239,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random integer between 100 and int.Max at runtime using the NewRandomNumber macro plugin and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MinValue:100` macro call with flags for name, min value, and session scope. The macro is evaluated at runtime and its output is consumed by the RegisterParameter plugin.",
+					"use_case": "register_random_number_parameter_with_min_value_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random number within the range of 100 (minimum value) and int.Max and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Number Parameter with Session Scope and Minimum Value",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                             |",
-				"|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                           |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random number value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin within the range of 100 (minimum value) and int.Max. The parameter is registered with a session scope, making it available throughout the session."
+				"Use the `NewRandomNumber` macro plugin with the `--MinValue:100` flag to generate a random integer between 100 and int.Max at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random integer between int.Min and 1000 at runtime using the NewRandomNumber macro plugin and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MaxValue:1000` macro call. The `--MaxValue:1000` flag sets the maximum value; the minimum value defaults to `int.Min`. The macro output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_number_with_max_value",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random number within the range of int.Min and 1000 (maximum value) and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Number with Maximum Value",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random number. For example, `{{$New-RandomNumber --MaxValue:1000}}`.                                       |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random number as keystrokes to the specified element within the automation workflow."
+				"Use the `NewRandomNumber` macro plugin with the `--MaxValue:1000` flag to generate a random integer between int.Min and 1000 at runtime.  ",
+				"Use the `SendKeys` plugin to input the generated integer into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MaxValue:1000}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -133,35 +312,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random integer between int.Min and 1000 at runtime using the NewRandomNumber macro plugin and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --MaxValue:1000}}` where the `NewRandomNumber` macro plugin (evaluated with `--MaxValue:1000`) generates a runtime random integer between int.Min and 1000, and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_number_parameter_with_max_value_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random number within the range of int.Min and 1000 (maximum value) and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Number Parameter with Session Scope and Maximum Value",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                              |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                            |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random number value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MaxValue:1000}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin within the range of int.Min and 1000 (maximum value). The parameter is registered with a session scope, making it available throughout the session."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MaxValue:1000` flag to generate a random integer between int.Min and 1000 at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MaxValue:1000}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --NumberType:Long flag and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --NumberType:Long` macro call. The `--NumberType:Long` flag sets the random number type to a 64-bit long integer. When no `--MinValue` or `--MaxValue` flags are provided, the macro defaults to generating a long integer between `int.Min` and `int.Max`. The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_long_integer",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value within the specified range and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Long Integer",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random long integer value. For example, `{{$New-RandomNumber --NumberType:Long}}`.                         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random long integer value as keystrokes to the specified element within the automation workflow."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Long` flag to generate a random long integer at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated long integer into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --NumberType:Long}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -169,51 +385,108 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --NumberType:Long flag and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --NumberType:Long}}` where the `NewRandomNumber` macro plugin (evaluated with `--NumberType:Long`) generates a 64-bit long integer at runtime (defaulting to a value between `int.Min` and `int.Max` when no min or max flags are set), and `--Scope:Session` to set the session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_long_integer_parameter_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value within the specified range and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Long Integer Parameter with Session Scope",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                      |",
-				"|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                    |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random long integer value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Long}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Long` flag to generate a random long integer at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Long}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --MinValue:100 and --NumberType:Long flags and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --MinValue:100 --NumberType:Long}}` where the NewRandomNumber macro plugin (evaluated with `--MinValue:100` and `--NumberType:Long`) generates a 64-bit long integer at runtime between 100 and `int.Max`, and `--Scope:Session` to set the session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_long_integer_parameter_with_min_value_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value with a minimum value of 100 and register it as a parameter named 'RandomNumber' with a session scope. The value will be within the range of 100 and the maximum value allowed for a long integer.",
+				"### Register Random Long Integer Parameter with Session Scope and Minimum Value",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                                     |",
-				"|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                                   |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random long integer value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100 --NumberType:Long}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The minimum value is set to 100, and the maximum value will be the maximum value allowed for a long integer. The parameter is registered with a session scope, making it available throughout the session."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:100` and `--NumberType:Long` flags to generate a random long integer at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100 --NumberType:Long}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --MinValue:100 and --NumberType:Long flags and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MinValue:100 --NumberType:Long` macro call. The `--MinValue:100` flag sets the minimum value, and the `--NumberType:Long` flag sets the number type to a 64-bit long integer. The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_long_integer_with_min_value",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value with a minimum value of 100 and send it as keystrokes to an element within an automation workflow. The value will be within the range of 100 and the maximum value allowed for a long integer.",
+				"### Generate and Send Random Long Integer with Minimum Value",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random long integer value. For example, `{{$New-RandomNumber --MinValue:100 --NumberType:Long}}`.          |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random long integer value as keystrokes to the specified element within the automation workflow. The minimum value is set to 100, and the maximum value will be the maximum value allowed for a long integer."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:100` and `--NumberType:Long` flags to generate a random long integer at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated long integer into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MinValue:100 --NumberType:Long}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -221,35 +494,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --MaxValue:1000 and --NumberType:Long flags and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --MaxValue:1000 --NumberType:Long}}` where the NewRandomNumber macro plugin (evaluated with `--MaxValue:1000` and `--NumberType:Long`) generates a 64-bit long integer at runtime between `int.Min` and 1000, and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_long_integer_parameter_with_max_value_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value with a maximum value of 1000 and register it as a parameter named 'RandomNumber' with a session scope. The value will be within the range of the minimum value allowed for a long integer and 1000.",
+				"### Register Random Long Integer Parameter with Session Scope and Maximum Value",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                                      |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                                    |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random long integer value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MaxValue:1000 --NumberType:Long}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The maximum value is set to 1000, and the minimum value will be the minimum value allowed for a long integer. The parameter is registered with a session scope, making it available throughout the session."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MaxValue:1000` and `--NumberType:Long` flags to generate a random long integer at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MaxValue:1000 --NumberType:Long}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --MaxValue:1000 and --NumberType:Long flags and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MaxValue:1000 --NumberType:Long` macro call. The `--MaxValue:1000` flag sets the maximum value; the `--NumberType:Long` flag sets the number type to a 64-bit long integer. When no `--MinValue` flag is provided, the minimum value defaults to `int.Min`. The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_long_integer_with_max_value",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value with a maximum value of 1000 and send it as keystrokes to an element within an automation workflow. The value will be within the range of the minimum value allowed for a long integer and 1000.",
+				"### Generate and Send Random Long Integer with Maximum Value",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random long integer value. For example, `{{$New-RandomNumber --MaxValue:1000 --NumberType:Long}}`.         |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random long integer value as keystrokes to the specified element within the automation workflow. The maximum value is set to 1000, and the minimum value will be the minimum value allowed for a long integer."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MaxValue:1000` and `--NumberType:Long` flags to generate a random long integer at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated long integer into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MaxValue:1000 --NumberType:Long}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -257,19 +567,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --MinValue:-2147483649, --MaxValue:2147483648, and --NumberType:Long flags and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648 --NumberType:Long` macro call. The `--MinValue:-2147483649` flag sets the lower bound, the `--MaxValue:2147483648` flag sets the upper bound, and the `--NumberType:Long` flag sets the number type to a 64-bit long integer. The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_long_integer_with_min_and_max_values",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value within the specified range and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Long Integer with Specified Range",
 				"",
-				"| Field      | Description                                                                                                                                             |",
-				"|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element.                      |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                                            |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                                       |",
-				"| argument   | Specifies the generated random long integer value. For example, `{{$New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648 --NumberType:Long}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random long integer value as keystrokes to the specified element within the automation workflow."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:-2147483649`, `--MaxValue:2147483648`, and `--NumberType:Long` flags to generate a random long integer at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated long integer into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648 --NumberType:Long}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -277,35 +604,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random long integer at runtime using the NewRandomNumber macro plugin with the --MinValue:-2147483649, --MaxValue:2147483648, and --NumberType:Long flags and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648 --NumberType:Long}}` where the `NewRandomNumber` macro plugin (evaluated with `--MinValue:-2147483649`, `--MaxValue:2147483648`, and `--NumberType:Long`) generates a 64-bit long integer at runtime within the specified range, and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_long_integer_parameter_with_min_and_max_values_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random long integer value within the specified range and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Long Integer Parameter with Session Scope and Specified Range",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                                                                   |",
-				"|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                                                                 |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random long integer value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648 --NumberType:Long}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin within the specified range. The parameter is registered with a session scope, making it available throughout the session."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:-2147483649`, `--MaxValue:2147483648`, and `--NumberType:Long` flags to generate a random long integer at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648 --NumberType:Long}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random byte value (0–255) at runtime using the NewRandomNumber macro plugin with the --NumberType:Byte flag and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --NumberType:Byte` macro call. The `--NumberType:Byte` flag sets the random number type to a byte (0–255). The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_byte",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value between 0 and 255 and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Byte",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random byte value. For example, `{{$New-RandomNumber --NumberType:Byte}}`.                                 |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random byte value as keystrokes to the specified element within the automation workflow. The byte value generated will be between 0 and 255."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Byte` flag to generate a random byte value at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated byte value into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --NumberType:Byte}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -313,35 +677,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random byte value (0–255) at runtime using the NewRandomNumber macro plugin with the --NumberType:Byte flag and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --NumberType:Byte}}` where the NewRandomNumber macro plugin (evaluated with `--NumberType:Byte`) generates a byte value between 0 and 255, and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_byte_parameter_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value between 0 and 255 and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Byte Parameter with Session Scope",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                              |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                            |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random byte value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Byte}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session. The byte value generated will be between 0 and 255."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Byte` flag to generate a random byte value at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Byte}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random byte value between 100 and 150 at runtime using the NewRandomNumber macro plugin with the --MinValue:100, --MaxValue:150, and --NumberType:Byte flags and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MinValue:100 --MaxValue:150 --NumberType:Byte` macro call. The `--MinValue:100` and `--MaxValue:150` flags set the range, and the `--NumberType:Byte` flag sets the type to a byte (0–255). The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_byte_with_specified_range",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value between 100 and 150 and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Byte with Specified Range",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random byte value. For example, `{{$New-RandomNumber --MinValue:100 --MaxValue:150 --NumberType:Byte}}`.   |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random byte value as keystrokes to the specified element within the automation workflow. The byte value generated will be between 100 and 150."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:100`, `--MaxValue:150`, and `--NumberType:Byte` flags to generate a random byte value at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated byte value into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MinValue:100 --MaxValue:150 --NumberType:Byte}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -349,35 +750,73 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid range: MinValue greater than MaxValue",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random byte value between 100 and 150 at runtime using the NewRandomNumber macro plugin with the --MinValue:100, --MaxValue:150, and --NumberType:Byte flags and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --MinValue:100 --MaxValue:150 --NumberType:Byte}}` where the NewRandomNumber macro plugin (evaluated with `--MinValue:100`, `--MaxValue:150`, and `--NumberType:Byte`) generates a byte value at runtime between 100 and 150, and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_byte_parameter_with_specified_range_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value between 100 and 150 and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Byte Parameter with Session Scope and Specified Range",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                                            |",
-				"|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                                          |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random byte value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100 --MaxValue:150 --NumberType:Byte}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session. The byte value generated will be between 100 and 150."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:100`, `--MaxValue:150`, and `--NumberType:Byte` flags to generate a random byte value at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100 --MaxValue:150 --NumberType:Byte}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random byte value greater than or equal to 100 at runtime using the NewRandomNumber macro plugin with the --MinValue:100 and --NumberType:Byte flags and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MinValue:100 --NumberType:Byte` macro call. The `--MinValue:100` flag sets the lower bound. The `--NumberType:Byte` flag sets the type to a byte (0–255), defaulting to a maximum of 255 when no `--MaxValue` flag is provided. The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_byte_with_min_value",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value greater than or equal to 100 and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Byte with Minimum Value",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random byte value. For example, `{{$New-RandomNumber --MinValue:100 --NumberType:Byte}}`.                  |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random byte value as keystrokes to the specified element within the automation workflow. The byte value generated will be greater than or equal to 100."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:100` and `--NumberType:Byte` flags to generate a random byte value greater than or equal to 100 at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated byte value into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MinValue:100 --NumberType:Byte}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -385,35 +824,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random byte value greater than or equal to 100 at runtime using the NewRandomNumber macro plugin with the --MinValue:100 and --NumberType:Byte flags and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --MinValue:100 --NumberType:Byte}}` where the NewRandomNumber macro plugin (evaluated with `--MinValue:100` and `--NumberType:Byte`) generates a byte value at runtime between 100 and the default maximum of 255, and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_byte_parameter_with_min_value_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value greater than or equal to 100 and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Byte Parameter with Session Scope and Minimum Value",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                             |",
-				"|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                           |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random byte value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100 --NumberType:Byte}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session. The byte value generated will be greater than or equal to 100."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MinValue:100` and `--NumberType:Byte` flags to generate a random byte value at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MinValue:100 --NumberType:Byte}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random byte value less than or equal to 150 at runtime using the NewRandomNumber macro plugin with the --MaxValue:150 and --NumberType:Byte flags and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --MaxValue:150 --NumberType:Byte` macro call. The `--MaxValue:150` flag sets the upper bound, and the `--NumberType:Byte` flag sets the type to a byte (0–255). When no `--MinValue` flag is provided, the lower bound defaults to 0. The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_byte_with_max_value",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value less than or equal to 150 and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Byte with Maximum Value",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random byte value. For example, `{{$New-RandomNumber --MaxValue:150 --NumberType:Byte}}`.                  |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random byte value as keystrokes to the specified element within the automation workflow. The byte value generated will be less than or equal to 150."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MaxValue:150` and `--NumberType:Byte` flags to generate a random byte value less than or equal to 150 at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated byte value into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --MaxValue:150 --NumberType:Byte}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -421,35 +897,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random byte value less than or equal to 150 at runtime using the NewRandomNumber macro plugin with the --MaxValue:150 and --NumberType:Byte flags and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --MaxValue:150 --NumberType:Byte}}` where the NewRandomNumber macro plugin (evaluated with `--MaxValue:150` and `--NumberType:Byte`) generates a byte value at runtime less than or equal to 150 (with the lower bound defaulting to 0), and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_byte_parameter_with_max_value_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random byte value less than or equal to 150 and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Byte Parameter with Session Scope and Maximum Value",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                             |",
-				"|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                           |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random byte value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MaxValue:150 --NumberType:Byte}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session. The byte value generated will be less than or equal to 150."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--MaxValue:150` and `--NumberType:Byte` flags to generate a random byte value at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --MaxValue:150 --NumberType:Byte}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random float value between 0 and 1 (exclusive) at runtime using the NewRandomNumber macro plugin with the --NumberType:Float flag and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --NumberType:Float` macro call. The `--NumberType:Float` flag sets the number type to a floating-point value between 0 and 1 (exclusive). The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_float",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random float value between 0 and 1 (exclusive) and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Float",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random float value. For example, `{{$New-RandomNumber --NumberType:Float}}`.                               |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random float value as keystrokes to the specified element within the automation workflow. The float value generated will be between 0 and 1 (exclusive)."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Float` flag to generate a random float value between 0 and 1 (exclusive) at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated float value into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --NumberType:Float}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -457,35 +970,72 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random float value between 0 and 1 (exclusive) at runtime using the NewRandomNumber macro plugin with the --NumberType:Float flag and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --NumberType:Float}}` where the NewRandomNumber macro plugin (evaluated with `--NumberType:Float`) generates a float between 0 and 1 (exclusive), and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_float_parameter_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random float value between 0 and 1 (exclusive) and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Float Parameter with Session Scope",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                |",
-				"|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                              |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random float value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Float}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session. The float value generated will be between 0 and 1 (exclusive)."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Float` flag to generate a random float value between 0 and 1 (exclusive) at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Float}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSS selector not matching any element",
+						"Element not found",
+						"Empty macro output",
+						"KeyboardInput plugin failure",
+						"Macro evaluation failure",
+						"Timeout locating element"
+					],
+					"expected_result": "Generate a random double value between 0 and 1 (exclusive) at runtime using the NewRandomNumber macro plugin with the --NumberType:Double flag and input it into the element identified by '#inputField' using the SendKeys plugin.",
+					"notes": "The `argument` field uses the `New-RandomNumber --NumberType:Double` macro call. The `--NumberType:Double` flag sets the random number type to a double precision floating-point value between 0 and 1 (exclusive). The macro is evaluated at runtime, and its output is passed to the SendKeys plugin as keystrokes.",
+					"use_case": "generate_and_send_random_double",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"KeyboardInput",
+					"Macro",
+					"RandomNumber"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random double value between 0 and 1 (exclusive) and send it as keystrokes to an element within an automation workflow.",
+				"### Generate and Send Random Double",
 				"",
-				"| Field      | Description                                                                                                                        |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to an element. |",
-				"| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element.                                       |",
-				"| onElement  | Specifies the value of the locator mechanism used to identify the target element.                                                  |",
-				"| argument   | Specifies the generated random double value. For example, `{{$New-RandomNumber --NumberType:Double}}`.                             |",
-				"",
-				"This example instructs the automation system to utilize the `SendKeys` plugin to send the generated random double value as keystrokes to the specified element within the automation workflow. The double value generated will be between 0 and 1 (exclusive)."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Double` flag to generate a random double value between 0 and 1 (exclusive) at runtime and pass it to the `SendKeys` plugin.  ",
+				"Use the `SendKeys` plugin to input the generated double value into the element identified by the CSS selector `#inputField`.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$New-RandomNumber --NumberType:Double}}",
 				"locator": "CssSelector",
 				"onElement": "#inputField",
@@ -493,17 +1043,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty macro output",
+						"Invalid parameter name",
+						"Invalid scope value",
+						"Macro evaluation failure",
+						"Parameter registration failure",
+						"Session not available"
+					],
+					"expected_result": "Generate a random double value between 0 and 1 (exclusive) at runtime using the NewRandomNumber macro plugin with the --NumberType:Double flag and register it as a session-scoped parameter named 'RandomNumber' via the RegisterParameter plugin.",
+					"notes": "The `argument` field includes three flags: `--Name:RandomNumber` to specify the parameter name, `--Value:{{$New-RandomNumber --NumberType:Double}}` where the NewRandomNumber macro plugin (evaluated with `--NumberType:Double`) generates a double value between 0 and 1 (exclusive), and `--Scope:Session` to set session scope. The macro is evaluated at runtime, and its output is consumed by the RegisterParameter plugin to register the parameter.",
+					"use_case": "register_random_double_parameter_session_scope",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"AutomationIntegration",
+					"Macro",
+					"ParameterRegistration",
+					"RandomNumber",
+					"SessionScope"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `NewRandomNumber` macro plugin to generate a new random double value between 0 and 1 (exclusive) and register it as a parameter named 'RandomNumber' with a session scope.",
+				"### Register Random Double Parameter with Session Scope",
 				"",
-				"| Field      | Description                                                                                                                                                                                                                                                                  |",
-				"|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This signifies the action of registering a parameter for use within the session.                                                                                                                |",
-				"| argument   | Specifies the usage of the `RegisterParameter` plugin with custom arguments to register a parameter named 'RandomNumber' with the generated random double value. For example, `{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Double}} --Scope:Session}}`. |",
-				"",
-				"This example instructs the automation system to utilize the `RegisterParameter` plugin to register a parameter named 'RandomNumber' with the value generated by the `New-RandomNumber` macro plugin. The parameter is registered with a session scope, making it available throughout the session. The double value generated will be between 0 and 1 (exclusive)."
+				"Evaluate the `NewRandomNumber` macro plugin with the `--NumberType:Double` flag to generate a random double value between 0 and 1 (exclusive) at runtime and pass it to the `RegisterParameter` plugin.  ",
+				"Use the `RegisterParameter` plugin to register a parameter named `RandomNumber` with session scope using the generated value.  "
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Name:RandomNumber --Value:{{$New-RandomNumber --NumberType:Double}} --Scope:Session}}",
 				"pluginName": "RegisterParameter"
 			}
@@ -514,7 +1084,10 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the minimum value for generating random numbers. If not specified, the default value is the minimum value of the integer data type."
+				"MinValue sets the smallest number that can be generated by the random number function.",
+				"Defining a lower bound ensures results stay within a known range.",
+				"Omitting MinValue causes the function to use the lowest value supported by the integer type.",
+				"Specifying MinValue helps prevent values that are too low for the intended use."
 			],
 			"mandatory": false,
 			"name": "MinValue",
@@ -522,7 +1095,10 @@
 		},
 		{
 			"description": [
-				"Specifies the maximum value for generating random numbers. If not specified, the default value is the maximum value of the integer data type."
+				"MaxValue sets the highest number that the random number generator can produce.",
+				"Establishing an upper limit ensures outputs stay within a predictable range.",
+				"Omitting MaxValue causes the function to use the maximum supported integer value.",
+				"Defining MaxValue helps avoid values that exceed intended limits."
 			],
 			"mandatory": false,
 			"name": "MaxValue",
@@ -531,7 +1107,10 @@
 		{
 			"default": "Integer",
 			"description": [
-				"Specifies the type of number to generate. If not specified, the default value is 'Integer'."
+				"NumberType determines which numeric format the generator will produce.",
+				"Choosing the right type ensures output matches the needed precision and range.",
+				"Omitting NumberType results in Integer values by default.",
+				"Specifying NumberType prevents unexpected numeric formats in results."
 			],
 			"mandatory": false,
 			"name": "NumberType",
@@ -539,46 +1118,58 @@
 			"values": [
 				{
 					"description": [
-						"Generates random byte values."
+						"Byte generates whole number values between 0 and 255.",
+						"Choosing Byte reduces memory use for small-range data.",
+						"Using Byte fits scenarios like binary file operations."
 					],
 					"name": "Byte"
 				},
 				{
 					"description": [
-						"Generates random double-precision floating-point values."
+						"Double produces floating-point values from 0.0 up to but not including 1.0 with high precision.",
+						"Using Double supports tasks requiring about 15 decimal digits of accuracy.",
+						"Choosing Double helps in scientific calculations and detailed simulations."
 					],
 					"name": "Double"
 				},
 				{
 					"description": [
-						"Generates random single-precision floating-point values."
+						"Float produces floating-point values from 0.0 up to but not including 1.0 with moderate precision.",
+						"Using Float saves memory when about 7 decimal digits of accuracy are sufficient.",
+						"Choosing Float is useful for graphics and real-time applications."
 					],
 					"name": "Float"
 				},
 				{
 					"description": [
-						"Generates random integer values."
+						"Integer generates whole number values without any decimal part.",
+						"Using Integer simplifies tasks that require counts or indexing."
 					],
 					"name": "Integer"
 				},
 				{
 					"description": [
-						"Generates random long integer values."
+						"Long produces whole numbers beyond the standard integer range.",
+						"Using Long prevents overflow in large-scale computations.",
+						"Choosing Long is ideal for timestamps and very large counters."
 					],
 					"name": "Long"
 				}
 			]
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Macro",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `New-RandomNumber` macro plugin generates a new random number within automation workflows, providing flexibility in generating random integer values within specified ranges."
+		"The New-RandomNumber macro plugin generates random number values on demand within automation workflows.",
+		"It lets users specify minimum and maximum ranges and select different number types, including Integer, Long, Float, Double, or Byte.",
+		"This flexibility supports tasks like data-driven testing, boundary testing, and dynamic data population in automation processes.",
+		"By integrating random value generation directly into workflows, it reduces the need for external scripts and streamlines automated testing and RPA tasks."
 	]
 }

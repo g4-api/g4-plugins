@@ -3,80 +3,184 @@
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
 		"name": "Roei Sabag"
 	},
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/User.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetUserParameter.cs"
+			},
+			"rag": {
+				"description": "The User plugin's GetParameter action lets workflows retrieve environment variables from the current user's context, enforcing per-user data isolation and delivering dynamic value injection with built-in missing-value handling and exception logging. It supports flexible configuration through the OnElement property, ensuring personalized settings are applied reliably in downstream workflow steps.",
+				"qa": [
+					{
+						"question": "What is the User plugin GetParameter action and why does it matter?",
+						"answer": "It is an automation action that retrieves values stored in the environment of the current user, ensuring workflows run with personalized configurations and do not expose user data across sessions."
+					},
+					{
+						"question": "What are the key features and parameters of this plugin?",
+						"answer": "Key features include reading named values from the active user's environment, isolating user context, and injecting values into workflow steps. The main parameter OnElement specifies the name of the user-level environment variable to retrieve."
+					},
+					{
+						"question": "How does this plugin embed into external tools or workflow designers?",
+						"answer": "It appears as an Action step named GetParameter under the User plugin in low-code designers and workflow editors. Users select the User plugin, set the OnElement property, and the action integrates seamlessly into the workflow definition."
+					},
+					{
+						"question": "What are some best practices for using this plugin?",
+						"answer": "Ensure the OnElement name matches an actual user environment variable, include pre-run checks for required parameters, handle empty strings to avoid errors, and review exception logs for troubleshooting."
+					},
+					{
+						"question": "What is the rule schema for this plugin's action definitions?",
+						"answer": "Actions use a JSON schema with $type set to Action, pluginName set to User, and onElement specifying the variable name. This structure ensures clear parameter mapping and consistent execution behavior."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the version of the schema used to define this plugin manifest."
+					},
+					{
+						"question": "Who is the author?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What categories does this plugin belong to?",
+						"answer": "It belongs to the DataManagement category, indicating its role in managing and retrieving data within automation workflows."
+					},
+					{
+						"question": "What is the key field?",
+						"answer": "The key field is User, which serves as the unique identifier for the plugin within the automation platform."
+					},
+					{
+						"question": "What platforms does this plugin support?",
+						"answer": "This plugin supports Windows."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is GetParameter, indicating that this plugin retrieves parameter values from the environment."
+					},
+					{
+						"question": "What properties does this plugin define?",
+						"answer": "It defines a property named OnElement of type String, which specifies the name of the user-level environment variable to fetch."
+					},
+					{
+						"question": "What output entity does this plugin return?",
+						"answer": "It returns an entity named Parameter of type Any, holding the string value fetched from the user scope or an empty string if missing."
+					},
+					{
+						"question": "What is the summary of this plugin?",
+						"answer": "GetUserParameter retrieves a value saved for the current user so automations can use personal settings. If the value is not set, it returns nothing so you know it is missing. Use it to load each user's settings or account info before running steps. Tests can get user-specific values so each test runs with the right setup."
+					},
+					{
+						"question": "What is the Git document link?",
+						"answer": "The document link is https://github.com/g4-api/g4-plugins/blob/main/docs/GetParameters/User.md"
+					},
+					{
+						"question": "What is the Git source link?",
+						"answer": "The source link is https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/GetParameter/GetUserParameter.cs"
+					},
+					{
+						"question": "How does the plugin handle errors?",
+						"answer": "The plugin records failures by adding an exception to the response and log stream. By default workflows continue execution unless explicitly configured to stop on error."
+					},
+					{
+						"question": "What is the apiDocumentation protocol setting?",
+						"answer": "The apiDocumentation setting is None, indicating there is no external API documentation for this plugin."
+					},
+					{
+						"question": "What is the w3c protocol setting?",
+						"answer": "The w3c setting is None, indicating there is no W3C standard reference for this plugin."
+					}
+				]
+			}
+		}
+	},
 	"categories": [
 		"DataManagement"
 	],
 	"description": [
-		"> [!IMPORTANT]",
-		"> This plugin is supported on Windows machines only.",
-		"",
 		"### Purpose",
 		"",
-		"The primary purpose of the `GetUserParameter` plugin is to fetch user-level parameters that are scoped to the current user's environment. This allows for user-specific configuration settings, such as user preferences or user-specific API keys, to be retrieved and used within automation workflows.",
+		"This plugin lets automation workflows get values stored in the environment of the current user. ",
+		"It makes per-user settings—like themes or API keys—available without exposing them to other users. ",
+		"By keeping user data private, workflows can run with personalized configurations safely.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                        | Description                                                                                               |",
-		"|--------------------------------|-----------------------------------------------------------------------------------------------------------|",
-		"| Parameter Retrieval            | Fetches user-specific parameters from the environment variables of the current user.                      |",
-		"| User-Specific Configuration    | Supports retrieval of parameters that are specific to the logged-in user.                                 |",
-		"| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |",
+		"| Feature                 | Description                                                                         |",
+		"|-------------------------|-------------------------------------------------------------------------------------|",
+		"| Parameter retrieval     | Reads named values from the active user’s environment variables.                    |",
+		"| User context isolation  | Keeps values visible only to the current user, preventing cross-user data access.   |",
+		"| Dynamic value injection | Passes the retrieved value into following steps for personalized workflow behavior. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                   | Description                                                                            |",
-		"|-------------------------|----------------------------------------------------------------------------------------|",
-		"| User Preferences        | Retrieve and apply user-specific preferences within automation workflows.              |",
-		"| Personalized Automation | Use user-level parameters to personalize automation actions based on the current user. |",
+		"| Use Case                | Description                                                                |",
+		"|-------------------------|----------------------------------------------------------------------------|",
+		"| User preference loading | Applies per-user settings like themes or shortcuts during automation runs. |",
+		"| Personalized workflows  | Drives actions using user-specific data such as API keys or user IDs.      |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                    | Description                                                                                          |",
-		"|--------------------------|------------------------------------------------------------------------------------------------------|",
-		"| User-Specific Testing    | Retrieve parameters specific to the logged-in user, enabling personalized and user-specific tests.   |",
-		"| Configuration Management | Simplify configuration management by fetching user-specific parameters directly within test scripts. |"
+		"| Use Case                 | Description                                                                       |",
+		"|--------------------------|-----------------------------------------------------------------------------------|",
+		"| User-specific testing    | Runs tests under the correct user context by fetching user-level configurations.  |",
+		"| Test configuration setup | Simplifies test setup by pulling user environment parameters directly in scripts. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the string value returned from the user-level environment variable retrieved by the plugin.",
+				"Returns an empty string if the variable is not defined or has no value, allowing downstream steps to detect and handle missing process parameters."
+			],
+			"mandatory": true,
+			"name": "Parameter",
+			"type": "Any"
+		}
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Access denied to user environment",
+						"Empty or null value returned",
+						"Parameter not found"
+					],
+					"expected_result": "The value of the `UserApiKey` environment variable is retrieved and made available in the `Result` output field for downstream actions.",
+					"notes": "Retrieves the raw string value of `UserApiKey` from the user scope. If the parameter is missing or returns an empty value, downstream actions must handle the null or empty case explicitly.",
+					"use_case": "parameter_retrieval_user_environment",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"EnvironmentAccess",
+					"ParameterRetrieval"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `User` plugin to fetch a parameter named `UserApiKey` directly.",
+				"### Retrieve User API Key Parameter",
 				"",
-				"| Field      | Description                                                     |",
-				"|------------|-----------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `User`. |",
-				"| onElement  | Specifies the name of the parameter to be fetched.              |"
+				"This example demonstrates how to retrieve a user-level parameter named `UserApiKey` using the User plugin’s GetParameter action.",
+				"It retrieves the raw value of `UserApiKey` from the user scope for use in downstream workflows.",
+				"The retrieved value is available in the `Result` output field for subsequent steps."
 			],
 			"rule": {
+				"$type": "Action",
 				"onElement": "UserApiKey",
 				"pluginName": "User"
-			}
-		},
-		{
-			"description": [
-				"This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `UserApiKey` from the user environment and use it in a `SendKeys` action.",
-				"",
-				"| Field      | Description                                                                                             |",
-				"|------------|---------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |",
-				"| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |",
-				"| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |",
-				"| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |"
-			],
-			"rule": {
-				"argument": "{{$Get-Parameter --Name:UserApiKey --Scope:User}}",
-				"locator": "CssSelector",
-				"onElement": "#someElement",
-				"pluginName": "SendKeys"
 			}
 		}
 	],
 	"key": "User",
 	"manifestVersion": 4,
+	"platforms": [
+		"Windows"
+	],
 	"pluginType": "GetParameter",
 	"properties": [
 		{
 			"description": [
-				"Specifies the name of the user parameter to be fetched."
+				"OnElement names the user parameter to fetch.",
+				"Workflows use this name to load the correct user value when they run.",
+				"Using the right name ensures workflows retrieve the intended information for each user."
 			],
 			"mandatory": true,
 			"name": "OnElement",
@@ -87,13 +191,10 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `GetUserParameter` plugin retrieves user-specific parameters within automation workflows, enhancing personalization and configuration management.",
-		"Key features include fetching parameters from the current user's environment, supporting user-specific configuration, and integrating with other plugins for dynamic usage in various actions.",
-		"In RPA, it is used for retrieving user preferences and personalizing automation actions based on the current user.",
-		"In automation testing, it supports user-specific testing and simplifies configuration management by fetching parameters directly within test scripts."
+		"GetUserParameter retrieves a value saved for the current user so automations can use personal settings.",
+		"If the value is not set, it returns nothing so you know it’s missing.",
+		"Use it to load each user's settings or account info before running steps.",
+		"Tests can get user-specific values so each test runs with the right setup."
 	]
 }

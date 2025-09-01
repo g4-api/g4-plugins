@@ -9,8 +9,8 @@
 	"context": {
 		"integration": {
 			"github": {
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs",
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs"
 			},
 			"rag": {
 				"description": "The InvokeWhileLoop plugin automates conditional looping by repeating defined actions while a specified condition remains true. It adapts to runtime changes, handles timeouts, and logs performance data each iteration to ensure reliable and adaptive automation workflows.",
@@ -132,7 +132,7 @@
 					],
 					"expected_result": "Click actions on `#NextBtn1` are performed repeatedly until the `class` attribute of the target element matches `active`.",
 					"notes": "InvokeWhileLoop checks the `class` attribute against regex `(?i)active`. While it does not match, it performs a Click on `#NextBtn1`. Exceptions for missing elements or click failures are logged without stopping the loop. Loop terminates when the condition fails or if stop-on-error is configured.",
-					"test_case": "invoke_while_loop_class_notmatch_active_click_css",
+					"use_case": "invoke_while_loop_class_notmatch_active_click_css",
 					"version": "1.0"
 				},
 				"labels": [
@@ -177,7 +177,7 @@
 					],
 					"expected_result": "Click actions on `//button[@id='NextBtn1']` are performed repeatedly until the `class` attribute of the target element matches `active`.",
 					"notes": "InvokeWhileLoop checks the `class` attribute against regex `(?i)active`. While it does not match, it performs a Click on `//button[@id='NextBtn1']`. Exceptions for missing elements or click failures are logged without stopping the loop. Loop terminates when the condition fails or if stop-on-error is configured.",
-					"test_case": "invoke_while_loop_class_notmatch_active_click_xpath",
+					"use_case": "invoke_while_loop_class_notmatch_active_click_xpath",
 					"version": "1.0"
 				},
 				"labels": [
@@ -222,7 +222,7 @@
 					],
 					"expected_result": "Click actions on `#NextBtn1` are performed repeatedly until the `class` attribute of the target element matches `active`.",
 					"notes": "InvokeWhileLoop checks the `class` attribute against regex `(?i)active`. While it does not match, it performs a Click on `#NextBtn1`. Exceptions for missing elements or click failures are logged without stopping the loop. Loop terminates when the condition fails or if stop-on-error is configured.",
-					"test_case": "invoke_while_loop_class_notmatch_active_click_css_nth_child",
+					"use_case": "invoke_while_loop_class_notmatch_active_click_css_nth_child",
 					"version": "1.0"
 				},
 				"labels": [
@@ -267,7 +267,7 @@
 					],
 					"expected_result": "Click actions on `//button[@id='NextBtn1']` are performed repeatedly until the `class` attribute of the target element matches `active`.",
 					"notes": "InvokeWhileLoop checks the `class` attribute against regex `(?i)active`. While it does not match, it performs a Click on `//button[@id='NextBtn1']`. Exceptions for missing elements or click failures are logged without stopping the loop. Loop terminates when the condition fails or if stop-on-error is configured.",
-					"test_case": "invoke_while_loop_class_notmatch_active_click_xpath_css_nth_child",
+					"use_case": "invoke_while_loop_class_notmatch_active_click_xpath_css_nth_child",
 					"version": "1.0"
 				},
 				"labels": [
@@ -311,7 +311,7 @@
 					],
 					"expected_result": "Each `#NextBtn2` is clicked while both loops match active; then `#FirstBtn2` and `#NextBtn1` are clicked per outer iteration.",
 					"notes": "InvokeWhileLoop checks the `class` attribute against `(?i)active` in both loops. Exceptions for missing elements or click failures are logged without stopping the loops. Loops terminate when their conditions fail or if stop-on-error is configured.",
-					"test_case": "invoke_while_loop_nested_elementattribute_match_active_click_sequence",
+					"use_case": "invoke_while_loop_nested_elementattribute_match_active_click_sequence",
 					"version": "1.0"
 				},
 				"labels": [
@@ -379,7 +379,7 @@
 					],
 					"expected_result": "Click actions on `#NextBtn1` are performed repeatedly while class matches `foo`, with up to 5000ms per check.",
 					"notes": "InvokeWhileLoop checks the `class` attribute against `(?i)foo` with a 5000ms timeout each iteration. Exceptions are logged without stopping the loop. Loop terminates when the condition fails or if stop-on-error is configured.",
-					"test_case": "invoke_while_loop_class_match_foo_click_css_timeout",
+					"use_case": "invoke_while_loop_class_match_foo_click_css_timeout",
 					"version": "1.0"
 				},
 				"labels": [

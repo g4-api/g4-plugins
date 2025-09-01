@@ -6,12 +6,81 @@
 	"categories": [
 		"Http"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Delete.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpDeleteMethod.cs"
+			},
+			"rag": {
+				"description": "The Delete HTTP-method plugin streamlines automated resource removal. It validates inputs, supports dynamic URLs, headers, bodies, and extraction rules, and surfaces status codes and headers so workflows stay reliable across any platform.",
+				"qa": [
+					{
+						"question": "What does the Delete plugin do?",
+						"answer": "It sends HTTP DELETE requests so your automations can remove resources from servers or APIs."
+					},
+					{
+						"question": "What are its key features and parameters?",
+						"answer": "Dynamic URLs, headers, bodies, content types, encodings, form fields, and XPath / JSONPath / regex extraction of response data."
+					},
+					{
+						"question": "Where can I find the code and docs?",
+						"answer": "Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/HttpMethods/Delete.md, Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/HttpMethods/HttpDeleteMethod.cs"
+					},
+					{
+						"question": "Any best practices for using it?",
+						"answer": "Validate URLs, set reasonable timeouts, and add error handling so deletes run safely in production and clean up test data reliably."
+					},
+					{
+						"question": "What schema rules should I know?",
+						"answer": "Examples must include \"$type\":\"Action\" and may use {{$…}} templates; unknown flags are not allowed."
+					},
+					{
+						"question": "Who authored this plugin?",
+						"answer": "Roei Sabag — https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "4"
+					},
+					{
+						"question": "Which category does it belong to?",
+						"answer": "Http"
+					},
+					{
+						"question": "What is the plugin type?",
+						"answer": "HttpMethod"
+					},
+					{
+						"question": "Which platforms are supported?",
+						"answer": "Any"
+					},
+					{
+						"question": "What is the key identifier?",
+						"answer": "Delete"
+					},
+					{
+						"question": "What does the summary say?",
+						"answer": "The plugin removes data by sending delete requests and verifying the outcome."
+					},
+					{
+						"question": "What do the source descriptions highlight?",
+						"answer": "They emphasise data deletion, dynamic request construction, and response handling for RPA and testing scenarios."
+					},
+					{
+						"question": "How is error handling addressed?",
+						"answer": "Edge cases cover invalid URLs, 4xx/5xx responses, timeouts, and network failures so you can plan retries or conditional flows."
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `Delete` plugin is to remove data from a server or API endpoint by sending an HTTP DELETE request. ",
-		"This request is a standard method in the HTTP protocol for requesting the removal of a specified resource on the server. ",
-		"The `Delete` plugin streamlines the process of making programmatically controlled DELETE requests.",
+		"The Delete plugin lets automation workflows remove data from servers or APIs by sending HTTP DELETE requests.",
+		"It follows the standard HTTP protocol to request the removal of specified resources on a server.",
+		"This plugin simplifies programmatic data deletion and ensures consistency in automation processes.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -19,135 +88,409 @@
 		"|----------------------------|--------------------------------------------------------------------------|",
 		"| Data Deletion              | Sends HTTP DELETE requests to remove data from servers or APIs.          |",
 		"| Dynamic Requests           | Supports dynamic URL construction and payload handling.                  |",
-		"| Custom Headers             | Allows inclusion of multiple custom headers in the request.              |",
+		"| Custom Headers             | Allows inclusion of custom headers in the request.                       |",
 		"| Content Types and Encoding | Supports various content types and encoding methods for payloads.        |",
 		"| Response Handling          | Captures HTTP response, headers, and status code for further processing. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                | Description                                                                                                                |",
-		"|----------------------|----------------------------------------------------------------------------------------------------------------------------|",
-		"| Data Management      | Remove outdated or unnecessary data from external systems or APIs, such as outdated customer records or redundant entries. |",
-		"| Workflow Adjustments | Dynamically adjust actions based on the need to remove specific data, triggering subsequent workflow steps.                |",
+		"| Use Case            | Description                                                                                                                |",
+		"|---------------------|----------------------------------------------------------------------------------------------------------------------------|",
+		"| Data Management     | Remove outdated or unnecessary data from external systems or APIs, such as outdated customer records or redundant entries. |",
+		"| Workflow Adjustments| Dynamically adjust subsequent workflow actions based on deletion requirements.                                             |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                                | Description                                                                                                                                                                                                                                                          |",
-		"|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| API Cleanup in Testing               | Automated test scripts can leverage the `Delete` rule to send DELETE requests to API endpoints, cleaning up data created during testing scenarios. This ensures a clean and controlled environment for each test iteration.                                          |",
-		"| Data Integrity Checks                | Automation tests often involve verifying the impact of data removal on the server. The `Delete` rule, combined with appropriate validation techniques, allows for precise confirmation that the specified data has been accurately removed, ensuring data integrity. |",
-		"| Regression Testing for Data Deletion | Ensuring that data deletion functionalities continue to work as expected after updates or changes to external systems.                                                                                                                                               |"
+		"| Use Case                         | Description                                                                                                                                      |",
+		"|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| API Cleanup in Testing           | Use DELETE requests in automated tests to clean up data created during test execution, ensuring a controlled environment for each test run.      |",
+		"| Data Integrity Checks            | Combine deletion requests with validation steps to confirm that specified data has been accurately removed, ensuring system consistency.         |",
+		"| Regression Testing for Deletion  | Verify that deletion functionality remains intact after system updates or changes by replaying delete requests and confirming expected outcomes. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL and returns the HTTP response.",
+					"notes": "The `argument` field specifies the target URL for the DELETE request. The plugin performs a standard HTTP DELETE method and exposes the response for further processing.",
+					"use_case": "delete_resource_by_url",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send a simple HTTP DELETE request to a specified URL."
+				"### Simple DELETE request",
+				"",
+				"Use the `Delete` plugin to send an HTTP DELETE request to a specific URL.",
+				"Delete the resource at that URL and capture the response."
 			],
 			"rule": {
-				"argument": "http://localhost:9002/api/hotels/delete/12345",
+				"$type": "Action",
+				"argument": "http://api.example.com/v1/delete/12345",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate header names",
+						"Invalid header format",
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request with the specified headers and returns the response.",
+					"notes": "The `argument` uses `--Url` to set the target URL and multiple `--Header` flags to include custom headers in the request.",
+					"use_case": "delete_resource_with_headers",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"Headers",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with specified headers."
+				"### DELETE request with custom headers",
+				"",
+				"Use the `Delete` plugin to send an HTTP DELETE request to a specific URL with custom headers.",
+				"Delete the resource at that URL and capture the response."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Body too large",
+						"Duplicate header names",
+						"Invalid JSON body",
+						"Invalid URL format",
+						"Missing argument",
+						"Missing body",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"Unsupported content type"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request with the given JSON body and Content-Type header, then returns the response.",
+					"notes": "The `argument` uses `--Url` to set the target URL, `--Body` to provide a JSON payload, and `--ContentType` to specify the request's Content-Type header.",
+					"use_case": "delete_resource_with_body",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Body",
+					"ContentType",
+					"Delete",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with a request body and content type."
+				"### DELETE request with JSON body and content type",
+				"",
+				"Send an HTTP DELETE request to the specified URL with a JSON payload in the request body and the appropriate Content-Type header.",
+				"Return the response from the server."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete --Body:{\"id\":12345} --ContentType:application/json}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete --Body:{\"id\":12345} --ContentType:application/json}}",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Encoding mismatch",
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"Unsupported encoding"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request to the specified URL using the specified encoding and returns the HTTP response.",
+					"notes": "The `argument` uses `--Url` to set the target URL and `--Encoding` to specify the request encoding.",
+					"use_case": "delete_resource_with_encoding",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"Encoding",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with a specified encoding."
+				"### DELETE request with specified encoding",
+				"",
+				"Send an HTTP DELETE request to the specified URL using the given encoding for the request.",
+				"Return the response from the server."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345 --Encoding:UTF8}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345 --Encoding:UTF8}}",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duplicate field names",
+						"Invalid field format",
+						"Invalid form encoding",
+						"Invalid URL format",
+						"Missing argument",
+						"Missing field values",
+						"Network failure",
+						"Payload ignored by server",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"Unsupported form field name"
+					],
+					"expected_result": "The plugin sends an HTTP DELETE request with the specified form fields and returns the HTTP response.",
+					"notes": "The `argument` uses `--Url` to set the target URL and `--Field` to include form fields in the request. If no `--ContentType` flag is provided, the plugin defaults to `application/json`. Some servers may ignore or reject bodies in DELETE requests.",
+					"use_case": "delete_resource_with_form_fields",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"FormFields",
+					"HTTPRequest",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request with form fields."
+				"### DELETE request with form fields",
+				"",
+				"Send an HTTP DELETE request to the specified URL with form fields.",
+				"If no `--ContentType` flag is provided, the request defaults to `application/json`.",
+				"Return the response from the server."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete --Field:id=12345}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete --Field:id=12345}}",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute not found",
+						"Invalid URL format",
+						"Missing argument",
+						"Network failure",
+						"Non-XML/HTML response",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses",
+						"XPath evaluation error"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL, extracts the specified attribute from the matching element in the XML or HTML response, and returns its value.",
+					"notes": "The `argument` sets the target URL for the DELETE request. `onElement` uses an XPath expression to locate the element in an XML or HTML response, and `onAttribute` specifies which attribute to extract.",
+					"use_case": "delete_and_extract_attribute",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"AttributeExtraction",
+					"Delete",
+					"ElementExtraction",
+					"HTML",
+					"HTTPRequest",
+					"ResourceDeletion",
+					"XML"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request and extract a specific attribute from the response."
+				"### DELETE request with attribute extraction",
+				"",
+				"Send an HTTP DELETE request to the specified URL.",
+				"Extract the `status` attribute from the element identified by the XPath `//response` in the XML or HTML response.",
+				"Return the extracted attribute value."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345}}",
 				"onAttribute": "status",
+				"onElement": "//response",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid JSONPath expression",
+						"Invalid URL format",
+						"JSONPath evaluation error",
+						"JSONPath expression returns no results",
+						"Missing argument",
+						"Network failure",
+						"Non-JSON response",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL, extracts the value at the given JSONPath from the JSON response using the onElement property, and returns it.",
+					"notes": "The `argument` sets the target URL for the DELETE request. When the response is JSON, `onElement` accepts JSONPath expressions (e.g., `$.data.id`). If the response isn’t valid JSON or the path matches no data, extraction will error or return null. This behavior follows the JSONPath specification (RFC 9535).",
+					"use_case": "delete_and_extract_jsonpath",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"HTTPRequest",
+					"JSON",
+					"JSONExtraction",
+					"JSONPath",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request and target elements using XPath."
+				"### DELETE request with JSONPath extraction",
+				"",
+				"Send an HTTP DELETE request to the specified URL.",
+				"Extract the value at the JSONPath `$.data.id` from the JSON response using the onElement property.",
+				"Return the extracted value."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
-				"onElement": "//response/status",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345}}",
+				"onElement": "$.data.id",
 				"pluginName": "Delete"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid regex pattern",
+						"Invalid URL format",
+						"Missing argument",
+						"Multiple regex matches",
+						"Network failure",
+						"No regex match",
+						"Non-JSON response",
+						"Resource not found (404)",
+						"Server error (5xx)",
+						"Timeout",
+						"Unauthorized access (401)",
+						"Unexpected HTTP status codes or malformed responses"
+					],
+					"expected_result": "The plugin deletes the resource at the specified URL, applies the regex to extract the number of deleted records from the JSON response, and returns the first matching count.",
+					"notes": "The `argument` sets the target URL for the DELETE request. The `regularExpression` field specifies a pattern to extract the deletion count from the JSON response (e.g., `\"deletedCount\":\\s*(\\d+)`). The plugin returns the first regex match; if multiple substrings match, later matches are ignored. For more complex JSON structures, consider using JSONPath extraction via `onElement`. This example assumes the response content type is `application/json`.",
+					"use_case": "delete_and_extract_deleted_count",
+					"version": "1.0"
+				},
+				"labels": [
+					"API",
+					"Delete",
+					"HTTPRequest",
+					"JSON",
+					"RegexExtraction",
+					"ResourceDeletion"
+				]
+			},
 			"description": [
-				"Use the `Delete` plugin to send an HTTP DELETE request and apply a regular expression to extract specific data from the response."
+				"### DELETE request with regex extraction for deleted count",
+				"",
+				"Send an HTTP DELETE request to the specified hotel-booking endpoint.",
+				"Extract the number of deleted records from the JSON response using the regular expression `\"deletedCount\":\\s*(\\d+)`.",
+				"Return the first matching count; ignore any additional matches."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://localhost:9002/api/hotels/delete/12345}}",
+				"$type": "Action",
+				"argument": "{{$ --Url:http://api.example.com/v1/delete/12345}}",
 				"pluginName": "Delete",
-				"regularExpression": "\\d{3}"
+				"regularExpression": "\\\"deletedCount\\\":\\s*(\\d+)"
 			}
 		}
 	],
-	"manifestVersion": 4,
 	"key": "Delete",
+	"manifestVersion": 4,
 	"outputParameters": [
 		{
 			"description": [
-				"Holds the results of the HTTP request after `OnElement`, `OnAttribute`, and `RegularExpression` have been applied. ",
-				"If none of these properties are provided, then the entire response body is stored in the `HttpResponse` parameter.  ",
-				"",
-				"This means that the `HttpResponse` parameter captures the content resulting from any data extraction or processing performed by the specified properties (`OnElement`, `OnAttribute`, `RegularExpression`). ",
-				"It provides a way to access the modified or processed content of the HTTP response within the automation workflow."
+				"Holds the content returned from an HTTP request after any specified extraction or processing rules have been applied.",
+				"Provides a way to work with the processed response data instead of the raw body.",
+				"Enables automation workflows to access the exact information they need from the HTTP response."
 			],
-			"name": "HttpResponse"
+			"name": "HttpResponse",
+			"type": "Any"
 		},
 		{
 			"description": [
-				"Holds the HTTP response headers obtained from the HTTP DELETE request. ",
-				"These headers provide additional information about the server's response and are sent along with the actual content of the response."
+				"Holds the HTTP response headers returned from an HTTP request.",
+				"Contains key-value pairs that provide metadata about the response such as content type, date, and length.",
+				"Enables workflows to inspect response details for logging or conditional logic."
 			],
-			"name": "HttpResponseHeaders"
+			"name": "HttpResponseHeaders",
+			"type": "Any"
 		},
 		{
 			"description": [
-				"Holds the HTTP status code obtained from the HTTP DELETE request. ",
-				"The HTTP status code is a three-digit numeric code returned by the server indicating the outcome of the request."
+				"Holds the HTTP status code returned from an HTTP request.",
+				"Represents the outcome of the request using a three-digit numeric code.",
+				"Enables automation flows to check for success or failure of the HTTP operation.",
+				"Supports error handling in workflows based on the status code value."
 			],
-			"name": "HttpStatusCode"
+			"name": "HttpStatusCode",
+			"type": "Any"
 		}
 	],
 	"parameters": [
 		{
 			"description": [
-				"Specifies the payload or data that you want to include in the body of the request. ",
-				"The request body is typically used to send data to the server when making HTTP requests, especially for operations like `POST` or `PUT`."
+				"Defines the data payload sent with a DELETE request.",
+				"Includes extra details the server may need to carry out the deletion.",
+				"Helps ensure the API has the context required to process the delete operation."
 			],
 			"mandatory": false,
 			"name": "Body",
@@ -155,12 +498,9 @@
 		},
 		{
 			"description": [
-				"Specifies the type of data that is included in the body of the request. ",
-				"It indicates the format or encoding of the content being sent, allowing the server to interpret and process the data appropriately.  ",
-				"",
-				"The ContentType parameter is crucial because it tells the server how to parse and handle the incoming data. ",
-				"Different types of data, such as JSON, XML, form-urlencoded, or plain text, have different syntax and structures. ",
-				"By specifying the content type, you inform the server about the expected format of the data in the request body."
+				"Indicates the format of data sent in the request body.",
+				"Helps the server understand how to parse and handle the payload.",
+				"Supports formats such as JSON, XML, form data, and plain text."
 			],
 			"mandatory": false,
 			"name": "ContentType",
@@ -168,91 +508,92 @@
 			"values": [
 				{
 					"description": [
-						"JavaScript Object Notation (JSON) is a lightweight data interchange format. ",
-						"It is easy for humans to read and write and easy for machines to parse and generate. ",
-						"JSON is often used for representing structured data in web applications."
+						"Represents JSON data encoded as JavaScript Object Notation.",
+						"Allows for structured data that is easy to read and parse."
 					],
 					"name": "application/json"
 				},
 				{
 					"description": [
-						"This content type is a generic binary format. ",
-						"It is often used when the content type is not known or when transferring arbitrary binary data that doesn't fit into other more specific categories."
+						"Denotes a generic binary data stream when the format is unknown.",
+						"Enables transferring files or data without predefined structure."
 					],
 					"name": "application/octet-stream"
 				},
 				{
 					"description": [
-						"Portable Document Format (PDF) is a file format that captures all the elements of a printed document as an electronic image. ",
-						"It is widely used for documents intended for printing, such as brochures, manuals, and forms."
+						"Identifies Portable Document Format files for documents and forms.",
+						"Ensures consistent rendering of printable content."
 					],
 					"name": "application/pdf"
 				},
 				{
 					"description": [
-						"Extensible Markup Language (XML) is a markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable. ",
-						"It is often used for representing structured data in a generic way."
+						"Marks XML data formatted with Extensible Markup Language.",
+						"Provides a generic way to represent structured data."
 					],
 					"name": "application/xml"
 				},
 				{
 					"description": [
-						"MP3 is a widely used audio compression format that allows for the storage of music and audio files with relatively high audio quality in a compact size."
+						"Specifies MPEG audio encoded in MP3 format.",
+						"Offers compressed audio suitable for music and podcasts."
 					],
 					"name": "audio/mpeg"
 				},
 				{
 					"description": [
-						"JPEG (Joint Photographic Experts Group) is a commonly used method of lossy compression for digital images. ",
-						"It is suitable for photographs and images with complex colors."
+						"Indicates JPEG images compressed for photographs.",
+						"Balances image quality with file size."
 					],
 					"name": "image/jpeg"
 				},
 				{
 					"description": [
-						"PNG (Portable Network Graphics) is a raster graphics file format that supports lossless data compression. ",
-						"It is commonly used for images on the web and supports transparent backgrounds."
+						"Signals PNG images with lossless compression.",
+						"Supports transparent backgrounds for web graphics."
 					],
 					"name": "image/png"
 				},
 				{
 					"description": [
-						"This content type is used when submitting forms that contain files or binary data along with other text form fields. ",
-						"It allows for the encapsulation of multiple sets of data in a single body."
+						"Used for form submissions that include files and text fields.",
+						"Allows combining different data types in one request."
 					],
 					"name": "multipart/form-data"
 				},
 				{
 					"description": [
-						"Cascading Style Sheets (CSS) is a style sheet language used for describing the look and formatting of a document written in HTML. ",
-						"It defines styles for elements, including layout, colors, and fonts."
+						"Defines stylesheet content for web page styling in CSS.",
+						"Controls layout, colors, and fonts of HTML documents."
 					],
 					"name": "text/css"
 				},
 				{
 					"description": [
-						"Hypertext Markup Language (HTML) is used to structure content on the web. ",
-						"It provides a way to create structured documents by denoting structural semantics for text such as headings, paragraphs, lists, links, quotes, and other items."
+						"Represents HTML content to structure web pages.",
+						"Defines elements like headings, paragraphs, and links."
 					],
 					"name": "text/html"
 				},
 				{
 					"description": [
-						"This content type is used for plain, unformatted text. ",
-						"It is often used for simple textual data that doesn't require any special formatting or styling."
+						"Denotes plain text without special formatting.",
+						"Serves simple messages or logs in text form."
 					],
 					"name": "text/plain"
 				},
 				{
 					"description": [
-						"This content type is used for sending form data in the body of an HTTP request. ",
-						"Data is URL-encoded, where special characters are replaced with `%` followed by two hexadecimal digits."
+						"Encodes URL-encoded form data in key-value pairs.",
+						"Pairs are separated by ampersands and percent-encoded if needed."
 					],
 					"name": "application/x-www-form-urlencoded"
 				},
 				{
 					"description": [
-						"MP4 (MPEG-4 Part 14) is a multimedia container format commonly used for storing video and audio, as well as other data such as subtitles and still images."
+						"Specifies MP4 multimedia container for video and audio.",
+						"Supports subtitles and still images within the file."
 					],
 					"name": "video/mp4"
 				}
@@ -260,65 +601,66 @@
 		},
 		{
 			"description": [
-				"Specifies how text data in the request body is represented as binary code, ensuring accurate interpretation by both the sender and receiver."
+				"Explains how text characters are converted to binary code for transmission.",
+				"Ensures the data is encoded and decoded correctly by both sender and receiver.",
+				"Allows different encoding standards to maintain compatibility across systems."
 			],
 			"name": "Encoding",
 			"type": "String",
 			"values": [
 				{
 					"description": [
-						"ASCII is a basic character encoding standard that represents characters using 7 bits, providing codes for 128 characters.",
-						"It includes standard English letters, digits, and some special characters.",
-						"ASCII is a subset of UTF-8, and UTF-8 is designed to be backward-compatible with ASCII.",
-						"It forms the foundation for many character encodings and is widely used, especially in English-language content."
+						"Uses 7-bit codes to represent 128 common characters such as letters, digits, and symbols.",
+						"Forms the basis for many modern text encoding systems.",
+						"Remains compatible with Unicode formats like UTF-8."
 					],
 					"name": "ASCII"
 				},
 				{
 					"description": [
-						"BigEndianUnicode is a specific form of UTF-16 where the most significant byte is stored first.",
-						"It is used in specific platforms, particularly those employing big-endian byte order.",
-						"Represents characters using 16-bit code units, with a specific byte order in storage."
+						"Stores each character in 16 bits with the most significant byte first.",
+						"Commonly used on platforms that follow big-endian byte ordering.",
+						"Ensures consistent decoding when big-endian formats are required."
 					],
 					"name": "BigEndianUnicode"
 				},
 				{
 					"description": [
-						"ISO-8859-1, also known as Latin-1, covers a subset of characters from the Latin alphabet, including many Western European languages.",
-						"It uses a fixed single-byte encoding.",
-						"While not as versatile as UTF-8 for handling diverse character sets, it is used in certain contexts, especially when compatibility with legacy systems is a concern."
+						"Also called ISO-8859-1 and covers many Western European languages.",
+						"Uses one byte per character for a total of 256 symbols.",
+						"Often used for legacy data but supports fewer characters than Unicode."
 					],
 					"name": "Latin1"
 				},
 				{
 					"description": [
-						"Unicode is a comprehensive character encoding standard assigning a unique code point to every character.",
-						"It provides a universal representation of characters from diverse languages and scripts.",
-						"Enables global character representation, fostering internationalization and multilingual content in various applications."
+						"Assigns a unique code point to every character in most writing systems.",
+						"Supports global text representation in a single standard.",
+						"Forms the foundation for encodings like UTF-8 and UTF-16."
 					],
 					"name": "Unicode"
 				},
 				{
 					"description": [
-						"UTF-7 is a variable-length encoding designed for environments restricting the use of 8-bit data.",
-						"Although less common today, it finds applications in email.",
-						"Utilizes a 7-bit code, making it suitable for environments with limitations on 8-bit data transmission."
+						"Encodes text using only 7-bit ASCII characters for safe transmission in restricted systems.",
+						"Was originally designed for email use where 8-bit data could be problematic.",
+						"Rarely used today because it is less efficient than modern encodings."
 					],
 					"name": "UTF7"
 				},
 				{
 					"description": [
-						"UTF-8 is the most widely used character encoding on the web.",
-						"It can represent virtually all characters in the Unicode character set, making it suitable for internationalization and multilingual content.",
-						"Each character is represented by a variable number of bytes, with ASCII characters represented by a single byte."
+						"Variable-length encoding that uses one to four bytes per character.",
+						"Covers all Unicode code points and is backward-compatible with ASCII.",
+						"Widely adopted as the standard text format on the web."
 					],
 					"name": "UTF8"
 				},
 				{
 					"description": [
-						"UTF-32 uses a fixed 32-bit code point to represent each character.",
-						"It offers a straightforward mapping of characters but may be less space-efficient compared to UTF-8 and UTF-16.",
-						"Provides a direct correspondence between code points and characters, ensuring simplicity in character representation."
+						"Uses a fixed four bytes for each character’s code point.",
+						"Simplifies text processing by providing a constant width per character.",
+						"Consumes more memory but offers straightforward character indexing."
 					],
 					"name": "UTF32"
 				}
@@ -326,37 +668,47 @@
 		},
 		{
 			"description": [
-				"Specifies a form field that you include in the body of the request when making a `POST` or `PUT` request with `form-urlencoded` data."
+				"Defines a form field to include in the request body using key=value pairs.",
+				"Encodes each field correctly so the server can read the data.",
+				"Lets you send extra parameters when the server requires them during a delete operation."
 			],
 			"mandatory": false,
 			"name": "Field",
-			"type": "Key/Value"
+			"type": "KeyValue"
 		},
 		{
 			"description": [
-				"Allows the inclusion of multiple headers in the HTTP DELETE request. ",
-				"Each header is specified as a key-value pair, separated by an equal sign. ",
-				"Multiple headers can be added using the syntax `{{$ --Header:header1name=header1value --Header:header2name=header2value ...}}`."
+				"Enables adding custom headers to an HTTP DELETE request.",
+				"Each header uses a name=value format so the server can read it correctly.",
+				"Allows you to repeat the parameter to include multiple headers.",
+				"Custom headers let you send extra information like authentication tokens or tracing data."
 			],
 			"mandatory": false,
 			"name": "Header",
-			"type": "Key/Value"
+			"type": "KeyValue"
 		},
 		{
 			"description": [
-				"Specifies the target URL for the HTTP DELETE request."
+				"Defines the web address where the delete request is sent.",
+				"Tells the server which resource should be removed.",
+				"Ensures the correct endpoint is targeted for deletion.",
+				"Using an accurate URL helps prevent errors or deleting the wrong resource."
 			],
 			"mandatory": false,
 			"name": "Url",
-			"type": "String"
+			"type": "Uri|String"
 		}
+	],
+	"platforms": [
+		"Any"
 	],
 	"pluginType": "HttpMethod",
 	"properties": [
 		{
 			"description": [
-				"Specifies the details for the HTTP DELETE request. ",
-				"It includes a template or variable structure `{{$...}}` to allow dynamic values."
+				"Specifies where to send the HTTP DELETE request and what data to include.",
+				"Allows dynamic values through templates or variable placeholders in the format {{$...}}.",
+				"Makes it possible to customize the request URL or payload at runtime."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -364,8 +716,20 @@
 		},
 		{
 			"description": [
-				"Used to target elements using either XPath or JSONPath expressions, depending on the type of response the API returns (XML or JSON). ",
-				"This flexibility allows the rule to handle different response formats appropriately."
+				"Specifies the attribute whose value should be extracted from an element identified by the `OnElement` expression.",
+				"Works with XML or HTML responses, returning the value of the given attribute.",
+				"Enables precise retrieval of metadata embedded in tags for downstream workflow processing."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Targets specific parts of an API response by using XPath or JSONPath expressions.",
+				"Works with both XML and JSON responses.",
+				"Adapts to the response format to locate the right element.",
+				"Helps ensure the correct data is extracted regardless of the API’s output format."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -373,8 +737,10 @@
 		},
 		{
 			"description": [
-				"Used for pattern matching and extraction of specific data from a text response. ",
-				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP DELETE request."
+				"Defines a pattern for capturing and extracting specific data from a text response.",
+				"Uses standard regular expression syntax to match and retrieve the parts you need.",
+				"Enables precise extraction of values embedded in the response.",
+				"Helps automate parsing of complex text outputs."
 			],
 			"mandatory": false,
 			"name": "RegularExpression",
@@ -385,13 +751,10 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `Delete` plugin facilitates the removal of data from servers or APIs by sending HTTP DELETE requests, streamlining the process of programmatically controlled data deletion.",
-		"Key features include sending HTTP DELETE requests, supporting dynamic URL construction and payload handling, allowing custom headers, supporting various content types and encoding methods, and capturing HTTP responses for further processing.",
-		"In RPA, it is used for data management by removing outdated or unnecessary data from external systems or APIs and for dynamically adjusting actions based on the need to remove specific data.",
-		"In automation testing, it supports API cleanup by sending DELETE requests to endpoints, verifying data removal, and ensuring data deletion functionalities work as expected in regression testing."
+		"The Delete plugin removes data from servers by sending delete requests.",
+		"It lets you choose where to send the request and what information to include.",
+		"It helps keep systems tidy by removing old or unwanted information.",
+		"It can also check that data removal works correctly during testing."
 	]
 }

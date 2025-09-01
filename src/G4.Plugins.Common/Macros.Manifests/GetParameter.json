@@ -10,45 +10,145 @@
 	"categories": [
 		"DataManagement"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Get-Parameter.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/GetParameter.cs"
+			},
+			"rag": {
+				"description": "GetParameter retrieves configuration or secret values at run-time from multiple scopes and environments, transparently decoding base-64 or decrypting data with an optional key. It enforces scope rules, fall-back defaults, and validation checks, keeping automations secure, current, and reliable.",
+				"qa": [
+					{
+						"question": "What does the GetParameter plugin do in one sentence?",
+						"answer": "It fetches a named parameter at run-time—decoding or decrypting it if needed—and swaps the placeholder with the live value so the workflow continues without manual edits."
+					},
+					{
+						"question": "Which core features and input parameters does GetParameter support?",
+						"answer": "Scope-aware look-ups, environment targeting, on-the-fly base-64 decoding, optional decryption with EncryptionKey, and four inputs: Name (required), Scope, Environment, and EncryptionKey."
+					},
+					{
+						"question": "Where can I find the plugin’s source code and documentation?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/GetParameter.cs – Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Get-Parameter.md"
+					},
+					{
+						"question": "How should I configure scope, environment, and encryption key for reliable runs?",
+						"answer": "Store each value in the correct scope, supply Environment only when you have multiple parameter sets, and pass an EncryptionKey only for secrets encrypted by RegisterParameter."
+					},
+					{
+						"question": "What is the rule/schema for the Name, Scope, Environment, and EncryptionKey fields?",
+						"answer": "Name is mandatory. Scope accepts Application, User, Machine, Process, or Session (default). Environment defaults to SystemParameters. EncryptionKey is optional for decrypting protected values."
+					},
+					{
+						"question": "What is the manifestVersion declared in the plugin manifest?",
+						"answer": "4"
+					},
+					{
+						"question": "Who is listed as the author of GetParameter?",
+						"answer": "Roei Sabag – https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What summary does the manifest provide for GetParameter?",
+						"answer": "It retrieves parameters from various scopes, substitutes live values during execution, and can decode or decrypt them when needed."
+					},
+					{
+						"question": "Which aliases can invoke this plugin?",
+						"answer": "\"getparam\" and \"GetParameter\""
+					},
+					{
+						"question": "Which category does the plugin belong to?",
+						"answer": "DataManagement"
+					},
+					{
+						"question": "What pluginType is declared?",
+						"answer": "Macro"
+					},
+					{
+						"question": "Which platforms are supported?",
+						"answer": "Any"
+					},
+					{
+						"question": "What key message does the long description emphasize about GetParameter?",
+						"answer": "Secure, environment-aware retrieval and seamless placeholder substitution, with support for base-64 decoding and encrypted secrets."
+					},
+					{
+						"question": "How does GetParameter handle missing parameters or invalid scope values?",
+						"answer": "It returns an empty string or explicit error, enabling the calling step to log, branch, or retry so the workflow can react gracefully."
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `GetParameter` plugin retrieves parameter values from designated storage scopes within controlled environments. ",
-		"It supports rapid access to configuration data, real-time substitution of dynamic values, and decoding of encoded parameters. ",
-		"Additionally, it can decrypt secure values using a provided EncryptionKey when the parameter was encrypted by the RegisterParameter plugin. ",
-		"This capability is essential for maintaining secure and efficient automation workflows in diverse deployment scenarios.",
+		"The GetParameter plugin fetches configuration and secret values from defined storage scopes at runtime.",
+		"It instantly substitutes placeholders with live data so automation flows keep moving without manual edits.",
+		"It can safely decode or decrypt values that were stored in base-64 or encrypted form by the RegisterParameter plugin.",
+		"This keeps configuration handling secure, consistent, and environment-aware across robots, tests, and services.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature                                  | Description                                                                                                                                                                                                                                          |",
-		"|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Environment Parameter Retrieval          | Extracts parameter values from specified scopes (Application, User, Machine, Process, Session) while supporting multi-environment setups. This ensures accurate retrieval even in complex, dynamically changing runtime conditions.                  |",
-		"| Dynamic Value Injection                  | Integrates with automation workflows by replacing placeholders with live parameter values in real-time, supporting both synchronous and asynchronous execution paths to maintain workflow continuity.                                                |",
-		"| Encoding Support                         | Implements robust base64 encoding and decoding processes to maintain data integrity and compatibility across various systems and communication channels.                                                                                             |",
-		"| Environment-Specific Parameter Retrieval | Leverages explicit environment identifiers (e.g., test, prod) to target distinct parameter repositories, defaulting to 'SystemParameters' when not specified, thus ensuring that the correct configuration data is isolated and retrieved as needed. |",
-		"| Encryption Support                       | Uses a provided EncryptionKey to decrypt parameter values that were encrypted by the RegisterParameter plugin, ensuring that sensitive data remains secure while being accessible for authorized automation tasks.                                   |",
+		"| Feature                     | Description                                                                             |",
+		"|-----------------------------|-----------------------------------------------------------------------------------------|",
+		"| Environment-Scope Retrieval | Pulls parameters from Application, User, Machine, Process, or Session scopes.           |",
+		"| Environment Targeting       | Directs lookups to specific stores such as test, staging, or prod for clean separation. |",
+		"| Dynamic Injection           | Replaces tokens in workflow inputs or outputs on the fly to keep data current.          |",
+		"| Encoding Support            | Decodes or encodes base-64 strings to ensure safe transport and storage.                |",
+		"| Encryption Support          | Decrypts values protected by RegisterParameter when given a valid EncryptionKey.        |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                           | Description                                                                                                                                                                                     |",
-		"|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Task Orchestration              | Retrieves critical configuration parameters to coordinate multi-stage automation tasks, ensuring that each workflow step is executed with the correct runtime data.                             |",
-		"| Environment-Specific Automation | Adapts automation bots to operate across multiple environments by dynamically sourcing parameters specific to each context, thereby enhancing consistency and reliability in process execution. |",
+		"| Use Case                        | Description                                                                          |",
+		"|---------------------------------|--------------------------------------------------------------------------------------|",
+		"| Task Orchestration              | Supplies critical runtime parameters so multi-step bots execute with the right data. |",
+		"| Environment-Specific Automation | Adapts bots to different environments by pulling the matching configuration set.     |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                           | Description                                                                                                                                                                     |",
-		"|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Data-Driven Testing             | Dynamically retrieves test data parameters to support a data-driven testing approach, allowing test scenarios to be generated and adjusted based on current parameter values.   |",
-		"| Configuration Management        | Extracts and integrates runtime configuration parameters, enabling testing frameworks to automatically adjust to evolving conditions, thus ensuring robustness and scalability. |",
-		"| Environment-Based Customization | Retrieves environment-specific parameters to tailor test cases, providing precise control over test execution and improving overall test coverage.                              |"
+		"| Use Case                        | Description                                                                            |",
+		"|---------------------------------|----------------------------------------------------------------------------------------|",
+		"| Data-Driven Testing             | Retrieves test data parameters to generate scenarios on demand.                        |",
+		"| Configuration Management        | Injects current runtime settings so tests adjust automatically to changing conditions. |",
+		"| Environment-Based Customization | Pulls environment-specific values to tailor test runs for accurate coverage.           |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Environment not found",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'AppVersion' parameter and types its value into the input element located by the CSS selector #appVersionInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_appversion_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ApplicationScope",
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'AppVersion' from SystemParameters in Application scope; use SendKeys to target #appVersionInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the AppVersion parameter stored in the Application scope of the SystemParameters environment.",
+				"A macro invocation {{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}} is applied to the argument attribute.",
+				"The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #appVersionInput.",
+				"The action passes when the input receives the expected version string."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
 				"locator": "CssSelector",
 				"onElement": "#appVersionInput",
@@ -56,21 +156,83 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Environment not found",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'AppVersion' parameter and types its value into the input element located by the CSS selector #appVersionInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_appversion_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ApplicationScope",
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'AppVersion' from default SystemParameters in Application scope; use SendKeys to target #appVersionInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the `AppVersion` parameter stored in the *Application* scope of the `SystemParameters` environment.",
+				"A macro invocation `{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}` is applied to the `argument` attribute.",
+				"The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#appVersionInput`.",
+				"The action passes when the input receives the expected version string."
 			],
 			"rule": {
-				"argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application}}",
+				"$type": "Action",
+				"argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
 				"locator": "CssSelector",
 				"onElement": "#appVersionInput",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Invalid email format",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'Email' parameter and types its value into the input element located by the CSS selector #emailInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_email_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"SendKeys",
+					"UserScope"
+				]
+			},
 			"description": [
-				"Retrieve 'Email' from User scope; use SendKeys to target #emailInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the Email parameter stored in the User scope.",
+				"A macro invocation {{$Get-Parameter --Name:Email --Scope:User}} is applied to the argument attribute.",
+				"The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #emailInput.",
+				"The action passes when the input receives the expected email address."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:Email --Scope:User}}",
 				"locator": "CssSelector",
 				"onElement": "#emailInput",
@@ -78,10 +240,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Invalid scope value",
+						"Machine not identified",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'MachineName' parameter and types its value into the input element located by the CSS selector #machineNameInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_machinename_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"MachineScope",
+					"Macro",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'MachineName' from Machine scope; use SendKeys to target #machineNameInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the `MachineName` parameter stored in the *Machine* scope.",
+				"A macro invocation `{{$Get-Parameter --Name:MachineName --Scope:Machine}}` is applied to the `argument` attribute.",
+				"The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#machineNameInput`.",
+				"The action passes when the input receives the expected machine name."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:MachineName --Scope:Machine}}",
 				"locator": "CssSelector",
 				"onElement": "#machineNameInput",
@@ -89,10 +282,42 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Invalid process ID format",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found",
+						"Process context not available"
+					],
+					"expected_result": "The automation retrieves the 'ProcessId' parameter and types its value into the input element located by the CSS selector #processIdInput.",
+					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
+					"use_case": "send_processid_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"DataEntry",
+					"GetParameter",
+					"Macro",
+					"ProcessScope",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'ProcessId' from Process scope; use SendKeys to target #processIdInput."
+				"### Retrieve parameter value and inject it into an input",
+				"",
+				"The example fetches the text from the ProcessId parameter stored in the Process scope.",
+				"A macro invocation {{$Get-Parameter --Name:ProcessId --Scope:Process}} is applied to the argument attribute.",
+				"The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #processIdInput.",
+				"The action passes when the input receives the expected process ID."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:ProcessId --Scope:Process}}",
 				"locator": "CssSelector",
 				"onElement": "#processIdInput",
@@ -100,10 +325,46 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Decryption failure",
+						"Element not found",
+						"Empty parameter value",
+						"Encrypted parameter value",
+						"Environment not found",
+						"Invalid encryption key",
+						"Invalid scope value",
+						"Network latency",
+						"Parameter not found"
+					],
+					"expected_result": "The automation retrieves the 'SecretParam' parameter, decrypts it with the provided key, and types the plaintext value into the input element located by the CSS selector #secretInput.",
+					"notes": "The Get-Parameter macro returns a decrypted string at runtime, while the SendKeys action performs the UI interaction using that string.",
+					"use_case": "send_secretparam_to_input",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ApplicationScope",
+					"CssSelector",
+					"DataEntry",
+					"Decryption",
+					"EncryptionKey",
+					"GetParameter",
+					"Macro",
+					"Secret",
+					"SendKeys"
+				]
+			},
 			"description": [
-				"Retrieve 'SecretParam' from SystemParameters in Application scope using EncryptionKey for decryption; use SendKeys to target #secretInput."
+				"### Retrieve and decrypt parameter value, then inject it into an input",
+				"",
+				"The example fetches the encrypted text from the SecretParam parameter stored in the Application scope of the SystemParameters environment.",
+				"A macro invocation {{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}} is applied to the argument attribute.",
+				"The macro evaluates to the decrypted secret string, which the SendKeys plugin consumes and sends to the element located by the CSS selector #secretInput.",
+				"The action passes when the input receives the expected secret value."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}}",
 				"locator": "CssSelector",
 				"onElement": "#secretInput",
@@ -116,17 +377,19 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the name of the parameter from which to retrieve the value."
+				"Identifies the parameter whose value you want to fetch.",
+				"Accurate naming ensures the plugin locates the correct stored value."
 			],
 			"mandatory": true,
 			"name": "Name",
 			"type": "String"
 		},
 		{
+			"default": "Session",
 			"description": [
-				"Specifies the scope from which to retrieve the parameter value.",
-				"The scope can be 'Application', 'User', 'Machine', 'Process', or 'Session'.",
-				"If not specified, the default scope 'Session' will be used."
+				"Indicates the storage scope to search for the parameter.",
+				"Accepts 'Application', 'User', 'Machine', 'Process', or 'Session'.",
+				"Omit this property to fall back to the 'Session' scope."
 			],
 			"mandatory": false,
 			"name": "Scope",
@@ -134,8 +397,8 @@
 		},
 		{
 			"description": [
-				"Specifies the environment name from which to retrieve the parameter value.",
-				"If not specified, the default environment name 'SystemParameters' will be used."
+				"Designates the environment collection that holds the parameter.",
+				"Defaults to 'SystemParameters' when the property is not supplied."
 			],
 			"mandatory": false,
 			"name": "Environment",
@@ -143,24 +406,25 @@
 		},
 		{
 			"description": [
-				"Specifies the encryption key used to decrypt the parameter value in case it was encrypted by the RegisterParameter plugin."
+				"Provides the symmetric key used to decrypt secure parameter values.",
+				"Include this key only when the value was encrypted by the RegisterParameter plugin."
 			],
 			"mandatory": false,
 			"name": "EncryptionKey",
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Macro",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `GetParameter` plugin retrieves parameter values from the environment for use within automation workflows. ",
-		"It allows automation scripts to adapt dynamically based on environmental configurations, enhancing flexibility and versatility.",
-		"It also supports decryption using an EncryptionKey if the parameter was encrypted by the RegisterParameter plugin, ensuring secure handling of sensitive data."
+		"The GetParameter plugin fetches a named parameter from application, user, machine, process, or session scopes in any environment.",
+		"It swaps placeholders with the live value during execution, letting automation steps adjust instantly to current settings.",
+		"The plugin also decodes base64 and, with an EncryptionKey, decrypts secrets saved by RegisterParameter, keeping sensitive data secure yet usable."
 	]
 }
