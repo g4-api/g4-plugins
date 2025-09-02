@@ -587,7 +587,7 @@
 			"mandatory": false,
 			"name": "OnAttribute",
 			"type": "String"
-		}
+		},
 		{
 			"description": [
 				"Targets specific parts of an API response by using XPath or JSONPath expressions.",

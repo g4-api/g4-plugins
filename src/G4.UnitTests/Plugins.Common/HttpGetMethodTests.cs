@@ -228,11 +228,7 @@ namespace G4.UnitTests.Plugins.Common
             var ruleJson = JsonSerializer.Serialize(new ActionRuleModel
             {
                 Argument = "{{$ --Url:http://localhost:9002/api/hotels/find/xml}}",
-
-                // XPath expression to select HotelResult element with Name equal to 'Luxury Hotel'.
                 OnElement = "//HotelResult[./Name[.='Luxury Hotel']]",
-
-                // Extract the value of the PricePerNight attribute from the selected HotelResult.
                 OnAttribute = "PricePerNight"
             });
 
