@@ -44,8 +44,6 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         #endregion
         #region *** Data     ***
         [DataRow("^-8$", "{{$Resolve-MathExpression --X:2 --Y:10 --Operation:-}}")]
-        [DataRow("^-8$", "{{$Resolve-MathExpression --X:2 --Y:10 --Operation:-}}")]
-        [DataRow("^-8$", "{{$Math --X:2 --Y:10 --Operation:-}}")]
         [DataRow("^-8$", "{{$math --X:2 --Y:10 --Operation:-}}")]
         #endregion
         public void T0001A(string expectedPattern, string macro)
