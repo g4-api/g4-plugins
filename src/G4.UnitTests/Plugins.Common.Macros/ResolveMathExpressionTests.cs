@@ -54,7 +54,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             "produces the correct result.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$Resolve-MathExpression --X:10 --Y:2 --Operation:/}}\"}", "^5$")]
-        [DataRow("{\"argument\":\"{{$Resolve-MathExpression --X:10 --Y:2 --Operation:\\\\}}\"}", "^5$")]
+        [DataRow("{\"argument\":\"{{$Resolve-MathExpression --X:20 --Y:2 --Operation:\\\\}}\"}", "^10$")]
         #endregion
         public void MathExpressionDivideTest(string ruleJson, string expectedPattern)
         {
