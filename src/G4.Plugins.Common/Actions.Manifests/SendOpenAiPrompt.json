@@ -108,7 +108,7 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "chat",
+				"iconProvider": "ai",
 				"model": "ActionRuleModel"
 			}
 		}
