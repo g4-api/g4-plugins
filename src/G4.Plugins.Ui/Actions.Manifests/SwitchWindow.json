@@ -14,7 +14,7 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "switch",
+				"iconProvider": "window-restore",
 				"model": "ActionRuleModel"
 			}
 		}

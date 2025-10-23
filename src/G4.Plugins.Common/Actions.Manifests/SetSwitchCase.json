@@ -112,7 +112,7 @@
 				],
 				"canEditBranches": true,
 				"componentType": "switch",
-				"iconProvider": "switch-case",
+				"iconProvider": "shuffle",
 				"model": "SwitchRuleModel"
 			}
 		}

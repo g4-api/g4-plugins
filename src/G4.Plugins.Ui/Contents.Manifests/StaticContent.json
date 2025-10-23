@@ -13,7 +13,7 @@
 				"branches": [ "Actions", "Transformers" ],
 				"componentType": "task",
 				"containerable": true,
-				"iconProvider": "content-html",
+				"iconProvider": "file-lines",
 				"model": "ContentRuleModel",
 				"switchable": true
 			}

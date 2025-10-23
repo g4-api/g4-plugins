@@ -97,7 +97,7 @@
 				],
 				"canEditBranches": false,
 				"componentType": "switch",
-				"iconProvider": "if",
+				"iconProvider": "arrows-split-up-and-left",
 				"model": "SwitchRuleModel"
 			}
 		}

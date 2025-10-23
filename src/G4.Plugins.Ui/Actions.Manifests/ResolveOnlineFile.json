@@ -11,7 +11,7 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "import",
+				"iconProvider": "file-arrow-down",
 				"model": "ActionRuleModel"
 			},
 			"rag": {

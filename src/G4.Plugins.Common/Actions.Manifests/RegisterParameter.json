@@ -92,7 +92,7 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "data",
+				"iconProvider": "file-import",
 				"model": "ActionRuleModel"
 			}
 		}
