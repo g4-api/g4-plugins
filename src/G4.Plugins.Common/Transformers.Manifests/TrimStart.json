@@ -11,7 +11,7 @@
 			"sequentialWorkflow": {
 				"$type": "Transformer",
 				"componentType": "task",
-				"iconProvider": "arrows-turn-to-dots",
+				"iconProvider": "text-height",
 				"model": "TransformerRuleModel"
 			}
 		}
