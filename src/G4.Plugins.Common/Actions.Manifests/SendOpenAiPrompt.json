@@ -4,7 +4,7 @@
 		"name": "Roei Sabag"
 	},
 	"categories": [
-		"OpenAI"
+		"OpenAi"
 	],
 	"context": {
 		"integration": {
@@ -108,7 +108,7 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "ai",
+				"iconProvider": "openai",
 				"model": "ActionRuleModel"
 			}
 		}

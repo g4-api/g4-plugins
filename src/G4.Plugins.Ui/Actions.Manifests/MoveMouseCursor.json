@@ -14,7 +14,7 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "pointer",
+				"iconProvider": "arrow-pointer",
 				"model": "ActionRuleModel"
 			}
 		}

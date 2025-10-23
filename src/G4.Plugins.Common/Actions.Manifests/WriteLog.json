@@ -103,7 +103,7 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "text",
+				"iconProvider": "file-lines",
 				"model": "ActionRuleModel"
 			}
 		}

@@ -79,8 +79,9 @@
 			},
 			"sequentialWorkflow": {
 				"$type": "Action",
+				"componentSubType": "loop",
 				"componentType": "container",
-				"iconProvider": "loop",
+				"iconProvider": "repeat",
 				"model": "ActionRuleModel"
 			}
 		}
