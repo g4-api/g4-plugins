@@ -1,9 +1,16 @@
 ﻿using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
+using G4.WebDriver.Extensions;
 using G4.WebDriver.Models;
+using G4.WebDriver.Remote;
 using G4.WebDriver.Remote.Interactions;
 using G4.WebDriver.Remote.Uia;
+
+using System.Net.Http;
+
+using System.Text;
+using System.Text.Json;
 
 namespace G4.Plugins.Ui.Actions.User32
 {
@@ -53,7 +60,7 @@ namespace G4.Plugins.Ui.Actions.User32
             };
 
             // Move the mouse pointer to the specified location within the element.
-            element?.MoveToElement(positionData);
+            MoveByElement(WebDriver, (UiaElement)element, positionData);
 
             // Invoke a click action at the last known mouse position.
             new ActionSequence(WebDriver).AddDoubleClick().Invoke();
@@ -70,6 +77,55 @@ namespace G4.Plugins.Ui.Actions.User32
 
             // Add move and click actions to the sequence.
             actions.AddMoveMouseCursor(x, y, origin: "viewport").AddPauseAction(20).AddDoubleClick().Invoke();
+        }
+
+        // TODO: This is a workaround for now until we can refactor the WebDriver to fix the current API.
+        // Moves the system mouse cursor to the coordinates of a specified UI element using the WebDriver's custom command.
+        private static void MoveByElement(IWebDriver driver, UiaElement element, MousePositionInputModel inputModel)
+        {
+            // Retrieve the predefined command configuration for "MoveUser32MouseToElement"
+            // from the driver's internal command invoker.
+            var command = driver.Invoker.Commands["MoveUser32MouseToElement"];
+
+            // Obtain the current WebDriver session ID (opaque key).
+            var session = driver.GetSession().OpaqueKey;
+
+            // Build the full HTTP route by replacing placeholders with actual session and element identifiers.
+            var route = command.Route
+                .Replace("$[session]", session)
+                .Replace("$[element]", element.Id);
+
+            // Construct the full address for the request.
+            var requestUri = driver.Invoker.ServerAddress.AbsolutePath.TrimEnd('/') + route;
+
+            // Serialize the mouse movement parameters into JSON.
+            var content = JsonSerializer.Serialize(inputModel);
+
+            // Prepare the HTTP request body with appropriate content type.
+            var stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+
+            // Create a POST request to send to the remote automation server.
+            var request = new HttpRequestMessage(method: HttpMethod.Post, requestUri)
+            {
+                Content = stringContent
+            };
+
+            // Execute the request synchronously.
+            // Note: .Result is used here for simplicity, but consider async/await in production.
+            var response = HttpClient.SendAsync(request).GetAwaiter().GetResult();
+
+            // Validate the response from the automation server.
+            if (!response.IsSuccessStatusCode)
+            {
+                // Read the error response content for diagnostics.
+                var responseBody = response.Content
+                    .ReadAsStringAsync()
+                    .GetAwaiter()
+                    .GetResult();
+
+                // Throw an exception with the full response body for debugging.
+                throw new HttpRequestException(responseBody);
+            }
         }
     }
 }
