@@ -96,7 +96,7 @@ namespace G4.Plugins.Ui.Actions.User32
                 .Replace("$[element]", element.Id);
 
             // Construct the full address for the request.
-            var requestUri = driver.Invoker.ServerAddress.AbsolutePath.TrimEnd('/') + route;
+            var requestUri = driver.Invoker.ServerAddress.AbsoluteUri.TrimEnd('/') + route;
 
             // Serialize the mouse movement parameters into JSON.
             var content = JsonSerializer.Serialize(inputModel);
