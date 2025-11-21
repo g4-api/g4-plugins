@@ -36,7 +36,7 @@ namespace G4.UnitTests.Plugins.Common
             var exceptions = Invoke(ruleJson: "{\"$type\":\"Action\", \"pluginName\":\"WriteLog\",\"argument\":\"Log Entry.\"}").GetExceptions();
 
             // Assert that the plugin's exceptions list is empty, indicating success
-            Assert.IsTrue(!exceptions.Any());
+            Assert.IsFalse(exceptions.Any());
         }
     }
 }
