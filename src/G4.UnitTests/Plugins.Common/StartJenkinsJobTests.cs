@@ -33,7 +33,7 @@ namespace G4.UnitTests.Plugins.Common
             AssertPlugin<StartJenkinsJob>();
         }
 
-        //[Ignore(message: _ignoreMessage)]
+        [Ignore(message: _ignoreMessage)]
         [TestMethod(displayName: "Verify that the StartJenkinsJob plugin starts a Jenkins job with issue and " +
             "project fields, waits for completion, and finishes without any exceptions.")]
         public void StartJenkinsJobTest()
@@ -65,7 +65,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsFalse(exceptions.Any());
         }
 
-        //[Ignore(message: _ignoreMessage)]
+        [Ignore(message: _ignoreMessage)]
         [TestMethod(displayName: "Verify that the StartJenkinsJob plugin starts a Jenkins job without waiting " +
             "for completion and finishes without any exceptions.")]
         public void StartJenkinsJobNoWaitTest()
@@ -95,7 +95,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsFalse(exceptions.Any());
         }
 
-        //[Ignore(message: _ignoreMessage)]
+        [Ignore(message: _ignoreMessage)]
         [TestMethod(displayName: "Verify that the StartJenkinsJob plugin fails when mandatory job parameters " +
             "are not provided.")]
         public void StartJenkinsJobNoParametersTest()
