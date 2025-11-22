@@ -17,31 +17,55 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/StartJenkinsJob.cs"
 			},
 			"rag": {
-				"description": "The StartJenkinsJob plugin triggers a Jenkins job (build or buildWithParameters) and optionally waits for its completion. It supports authentication, parameterized jobs, polling for build status, and outputs job metadata such as status code, duration, and job URL.",
+				"description": "This integration reliably triggers Jenkins jobs, enforces required authentication and parameters, and optionally waits with controlled polling until completion. It supports dynamic input fields, JSONPath and Regex extraction, and predictable output formatting for consistent automation workflows.",
 				"qa": [
 					{
 						"question": "What does the StartJenkinsJob plugin do?",
-						"answer": "It triggers a Jenkins job, optionally waits for completion, and outputs job status, duration, URL, and response."
+						"answer": "It triggers a Jenkins job, optionally waits for completion, and outputs job status, duration, URL, and extracted response data."
 					},
 					{
-						"question": "What are the required parameters?",
-						"answer": "Url, JobPath, Username, and Token are required. Optional: Field (for parameterized jobs), PollingInterval, Timeout, Wait, RegularExpression, OnElement (JSONPath)."
+						"question": "What features and parameters does it support?",
+						"answer": "It supports required Url, JobPath, Username, and Token, plus optional Field parameters, PollingInterval, Timeout, Wait, RegularExpression, and OnElement JSONPath extraction."
 					},
 					{
-						"question": "What does the plugin output?",
-						"answer": "JenkinsJobStatusCode, JenkinsJobDuration, JenkinsJobUrl, JenkinsJobResponse (Base64-encoded regex match from job response)."
+						"question": "How does this plugin fit within the integration context?",
+						"answer": "It is used in automation workflows to start Jenkins jobs, track completion, and provide structured outputs for downstream tasks."
 					},
 					{
-						"question": "How does authentication work?",
-						"answer": "Uses HTTP Basic Auth with the provided Username and Token."
+						"question": "What are the recommended usage best practices?",
+						"answer": "Use Wait when job completion is needed, set PollingInterval to balance speed and load, validate JSONPath and Regex patterns, and pass Field parameters only when the Jenkins job requires them."
 					},
 					{
-						"question": "What happens if Wait is false?",
-						"answer": "The plugin returns immediately after triggering the job, only outputting the status code."
+						"question": "What rules or schema details are important?",
+						"answer": "The plugin exposes outputs JenkinsJobStatusCode, JenkinsJobDuration, JenkinsJobUrl, and JenkinsJobResponse, with extraction performed using RegularExpression and OnElement JSONPath."
 					},
 					{
 						"question": "What is the manifestVersion?",
-						"answer": "4.0"
+						"answer": "The manifestVersion is 4.0."
+					},
+					{
+						"question": "What additional metadata is relevant for this plugin?",
+						"answer": "Metadata such as author, key, aliases, categories, and platforms can be found within the plugin manifest."
+					},
+					{
+						"question": "Where can I find source code or documentation?",
+						"answer": "Source code and documentation can be stored in your Git repository, for example: https://github.com/your-org/start-jenkins-job-plugin."
+					},
+					{
+						"question": "How does the plugin handle errors?",
+						"answer": "It stops polling on timeouts, returns status information for failed triggers, and yields empty extraction fields when JSONPath or Regex do not match."
+					},
+					{
+						"question": "How does output extraction work?",
+						"answer": "The value is taken from the OnElement JSONPath result and filtered using RegularExpression, then stored in JenkinsJobResponse."
+					},
+					{
+						"question": "How is authentication performed?",
+						"answer": "Authentication uses HTTP Basic Auth with the provided Username and Token."
+					},
+					{
+						"question": "What happens if Wait is false?",
+						"answer": "If Wait is false, the plugin returns immediately after triggering the job and outputs only the initial status code and job URL."
 					}
 				]
 			},
@@ -98,30 +122,195 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Job not found",
 						"Authentication failure",
+						"HTTP 4xx or 5xx status from Jenkins",
+						"Job not found",
+						"Job remains in queue too long",
+						"Network connectivity issues",
 						"Timeout waiting for job completion"
 					],
-					"expected_result": "Jenkins job is triggered, and status code, duration, URL, and response are output.",
-					"notes": "Set Wait to true to poll for job completion. Use RegularExpression to extract data from the response.",
+					"expected_result": "StartJenkinsJob triggers the Jenkins job, waits for completion, and outputs status code, computed duration, job URL, and response body.",
+					"notes": "Set the Wait flag to poll Jenkins until the job completes or the timeout elapses, then return job metadata including status code, computed duration, URL, and raw response body.",
 					"use_case": "trigger_jenkins_job_and_wait",
 					"version": "1.0"
 				},
 				"labels": [
+					"Automation",
+					"CiCd",
+					"DevOps",
+					"HttpRequest",
 					"Jenkins",
-					"CI/CD",
-					"DevOps"
+					"JobOrchestration"
 				]
 			},
 			"description": [
-				"### Trigger Jenkins Job and Wait for Completion",
+				"### Trigger Jenkins job and wait for completion",
 				"",
-				"Start a Jenkins job, wait for it to finish, and extract job metadata."
+				"Start a Jenkins job by calling the StartJenkinsJob action with a macro that supplies connection details and control flags.",
+				"Use the macro in the argument property to pass the URL, job path, username, token, and the Wait flag as runtime values.",
+				"When Wait is present, the action polls Jenkins until the job finishes or the timeout elapses, then returns the HTTP status code, computed duration, job URL, and raw response body.",
+				"The macro only produces the argument string at runtime, and the StartJenkinsJob action consumes this value to perform the Jenkins HTTP request."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}",
 				"pluginName": "StartJenkinsJob"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Authentication failure",
+						"HTTP 4xx or 5xx status from Jenkins",
+						"Job not found",
+						"Job remains in queue too long",
+						"Network connectivity issues",
+						"Timeout waiting for job completion"
+					],
+					"expected_result": "StartJenkinsJob triggers the Jenkins job, waits using the specified polling interval, and outputs status code, computed duration, job URL, and response body.",
+					"notes": "PollingInterval controls how often the action checks the job state while waiting for completion.",
+					"use_case": "trigger_jenkins_job_with_custom_polling",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"CiCd",
+					"DevOps",
+					"HttpRequest",
+					"Jenkins",
+					"JobOrchestration"
+				]
+			},
+			"description": [
+				"### Trigger Jenkins job with a custom polling interval",
+				"",
+				"Start a Jenkins job and specify how often the action polls Jenkins for build status by setting PollingInterval in milliseconds.",
+				"A macro supplies URL, job path, credentials, the Wait flag, and the PollingInterval value. The macro only produces the argument text at runtime, and the action uses it to perform the Jenkins requests.",
+				"The action continues polling at the specified interval until the job finishes or a timeout occurs, then outputs the status code, computed duration, job URL, and response body."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait --PollingInterval:5000}}",
+				"pluginName": "StartJenkinsJob"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Authentication failure",
+						"Empty or missing Field parameters",
+						"HTTP 4xx or 5xx status from Jenkins",
+						"Job not found",
+						"Job remains in queue too long",
+						"Network connectivity issues",
+						"Timeout waiting for job completion"
+					],
+					"expected_result": "StartJenkinsJob triggers the parameterized Jenkins job using the provided Field parameters and outputs the status code, computed duration, job URL, and response body.",
+					"notes": "Field parameters are passed as key-value pairs and are sent to Jenkins only when the job is parameterized.",
+					"use_case": "trigger_parameterized_jenkins_job",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"CiCd",
+					"DevOps",
+					"HttpRequest",
+					"Jenkins",
+					"JobOrchestration"
+				]
+			},
+			"description": [
+				"### Trigger a parameterized Jenkins job using multiple Field parameters",
+				"",
+				"Start a Jenkins job that requires parameters by using the Field property to specify key-value pairs.",
+				"A macro supplies the URL, job path, credentials, Wait flag, and multiple Field parameters. The macro only produces the argument text, and the action consumes it to perform the Jenkins request.",
+				"The action submits the Field parameters to Jenkins, waits for job completion, and then returns the status code, computed duration, job URL, and response body."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "StartJenkinsJob",
+				"argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-parameterized-job --Username:admin --Token:apitoken --Wait --Field:env=production --Field:retryCount=3}}"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Authentication failure",
+						"Extraction returns no matches",
+						"HTTP 4xx or 5xx status from Jenkins",
+						"Invalid JPath expression",
+						"Job not found",
+						"Network connectivity issues"
+					],
+					"expected_result": "StartJenkinsJob triggers the Jenkins job, waits for completion, extracts JSON using JPath, applies the regular expression, and outputs the extracted build number.",
+					"notes": "A regular expression `build-(\\d+)` is applied to the value attribute after JPath extracts the displayName field.",
+					"use_case": "extract_build_number_with_jpath_and_regex",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"CiCd",
+					"DataExtraction",
+					"DevOps",
+					"HttpRequest",
+					"Jenkins",
+					"Regex"
+				]
+			},
+			"description": [
+				"### Extract build number using JPath and regular expression",
+				"",
+				"Start a Jenkins job, wait for it to finish, and select the displayName field using JPath from the returned JSON.",
+				"A regular expression `build-(\\d+)` is applied to the value attribute to extract only the numeric part.",
+				"The final extracted value is stored in the JenkinsJobResponse output parameter.",
+				"The macro in the argument only produces the text value at runtime, and the StartJenkinsJob action performs the extraction logic using that value."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "StartJenkinsJob",
+				"argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}",
+				"onElement": "$.displayName",
+				"regularExpression": "build-(\\d+)"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Authentication failure",
+						"HTTP 4xx or 5xx status from Jenkins",
+						"Job not found",
+						"Missing Field parameters for a parameterized job",
+						"Network connectivity issues"
+					],
+					"expected_result": "StartJenkinsJob triggers the Jenkins job and immediately returns the queue response without waiting for completion.",
+					"notes": "When the Wait flag is not included, the action posts the job to Jenkins and returns the initial queue item response without polling.",
+					"use_case": "trigger_jenkins_job_without_wait",
+					"version": "1.0"
+				},
+				"labels": [
+					"Automation",
+					"CiCd",
+					"DevOps",
+					"HttpRequest",
+					"Jenkins"
+				]
+			},
+			"description": [
+				"### Trigger Jenkins job without waiting for completion",
+				"",
+				"Start a Jenkins job using connection details supplied by a macro, but omit the Wait flag to return immediately.",
+				"The action posts the job to Jenkins and returns the initial HTTP response with status code and queue item location.",
+				"Because the Wait flag is not set, no polling or duration computation is performed; the action returns as soon as Jenkins accepts the job.",
+				"The macro only generates the argument string at runtime, and the action uses this value to send the request."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "StartJenkinsJob",
+				"argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken}}"
 			}
 		}
 	],
@@ -129,102 +318,146 @@
 	"manifestVersion": 4,
 	"outputParameters": [
 		{
-			"description": [ "HTTP status code returned by Jenkins when triggering the job" ],
-			"name": "JenkinsJobStatusCode",
-			"type": "Int"
-		},
-		{
-			"description": [ "Duration of the Jenkins job in milliseconds (if Wait is true)" ],
+			"description": [
+				"Job duration tracks how long the Jenkins job ran from start to finish in milliseconds.",
+				"The value supports timing analysis and helps detect slow or failing build steps."
+			],
 			"name": "JenkinsJobDuration",
-			"type": "Int64"
+			"type": "Number"
 		},
 		{
-			"description": [ "URL of the triggered Jenkins job (if Wait is true)" ],
-			"name": "JenkinsJobUrl",
+			"description": [
+				"The matched response value captures specific text extracted from the Jenkins reply.",
+				"Encoding the value in Base64 ensures safe transport even when the content includes symbols or special characters."
+			],
+			"name": "JenkinsJobResponse",
 			"type": "String"
 		},
 		{
-			"description": [ "Base64-encoded string of the regex match from the job response (if Wait is true and RegularExpression is set)" ],
-			"name": "JenkinsJobResponse",
+			"description": [
+				"HTTP status code helps identify whether Jenkins accepted or rejected the job trigger request.",
+				"It allows workflows to react to success, failure, or unexpected responses in a predictable way."
+			],
+			"name": "JenkinsJobStatusCode",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Job URL shows the exact Jenkins build instance that was triggered.",
+				"The link allows follow-up steps to query logs, artifacts, or job results directly."
+			],
+			"name": "JenkinsJobUrl",
 			"type": "String"
 		}
 	],
 	"parameters": [
 		{
-			"description": [ "Base URL of the Jenkins server (e.g., https://jenkins.example.com)" ],
+			"description": [
+				"Field provides key-value parameters for Jenkins jobs that accept build parameters.",
+				"The value lets you pass dynamic inputs, such as branch names or environment flags, to the job at runtime."
+			],
+			"mandatory": false,
+			"name": "Field",
+			"type": "KeyValue"
+		},
+		{
+			"description": [
+				"Job path identifies the exact Jenkins job or foldered job to trigger, such as my-job or folder/my-job.",
+				"The value allows the automation to target the correct pipeline or build definition inside Jenkins."
+			],
+			"mandatory": true,
+			"name": "JobPath",
+			"type": "String"
+		},
+		{
+			"default": "5000",
+			"description": [
+				"Polling interval defines how often the plugin checks Jenkins for job status updates.",
+				"The default value of 5000 milliseconds balances timely feedback with reduced load on the Jenkins server."
+			],
+			"mandatory": false,
+			"name": "PollingInterval",
+			"type": "Number|Time"
+		},
+		{
+			"default": "600000",
+			"description": [
+				"Timeout sets the maximum time to wait for the Jenkins job to finish before giving up.",
+				"The default value of 600000 milliseconds (10 minutes) prevents workflows from hanging indefinitely if a job stalls."
+			],
+			"mandatory": false,
+			"name": "Timeout",
+			"type": "Number|Time"
+		},
+		{
+			"description": [
+				"Token holds the Jenkins API token or password for the configured username.",
+				"The value must be kept secret because it grants access to trigger jobs and read their results."
+			],
+			"mandatory": true,
+			"name": "Token",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Base URL points to the root address of the Jenkins server, including the protocol and port if needed.",
+				"The value is used to build all Jenkins API requests, so it must be reachable from the machine running the automation."
+			],
 			"mandatory": true,
 			"name": "Url",
 			"type": "String"
 		},
 		{
-			"name": "JobPath",
-			"type": "String",
+			"description": [
+				"Username specifies the Jenkins account used to authenticate API calls.",
+				"The value controls which permissions are applied when triggering and monitoring the job."
+			],
 			"mandatory": true,
-			"description": [ "Path of the Jenkins job (e.g., my-job or folder/my-job)" ]
-		},
-		{
 			"name": "Username",
-			"type": "String",
-			"mandatory": true,
-			"description": [ "Jenkins username for authentication" ]
+			"type": "String"
 		},
 		{
-			"name": "Token",
-			"type": "String",
-			"mandatory": true,
-			"description": [ "Jenkins API token or password" ]
-		},
-		{
-			"name": "Field",
-			"type": "Dictionary|Expression",
-			"mandatory": false,
-			"description": [ "Parameters for parameterized jobs (key-value pairs)" ]
-		},
-		{
-			"name": "PollingInterval",
-			"type": "Int|TimeSpan",
-			"mandatory": false,
-			"default": "5000",
-			"description": [ "Polling interval in milliseconds for job status checks (default: 5000)" ]
-		},
-		{
-			"name": "Timeout",
-			"type": "Int|TimeSpan",
-			"mandatory": false,
-			"default": "600000",
-			"description": [ "Timeout in milliseconds to wait for job completion (default: 600000)" ]
-		},
-		{
-			"name": "Wait",
-			"type": "Boolean",
-			"mandatory": false,
 			"default": "false",
-			"description": [ "If true, waits for the Jenkins job to complete before returning" ]
-		},
-		{
-			"name": "RegularExpression",
-			"type": "String",
+			"description": [
+				"Wait controls whether the plugin returns immediately after triggering the job or waits for completion.",
+				"Setting this value to true makes the workflow block until Jenkins finishes the job, which is useful when later steps depend on the result."
+			],
 			"mandatory": false,
-			"description": [ "Regex pattern to extract data from the job response (optional)" ]
-		},
-		{
-			"name": "OnElement",
-			"type": "String",
-			"mandatory": false,
-			"description": [ "JSONPath expression to extract a portion of the job response (optional)" ]
+			"name": "Wait",
+			"type": "Boolean"
 		}
 	],
 	"platforms": [
 		"Any"
 	],
 	"pluginType": "Action",
-	"properties": [],
+	"properties": [
+		{
+			"description": [
+				"RegularExpression defines a regex pattern used to extract specific data from the Jenkins job response.",
+				"The value is optional and helps capture targeted information such as IDs, URLs, or status messages."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		},
+		{
+			"description": [
+				"OnElement specifies a JSONPath expression that selects a part of the Jenkins response to read or process.",
+				"The value is optional and is useful when the response contains nested JSON and only a specific section is relevant."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
 	"summary": [
-		"StartJenkinsJob triggers a Jenkins job, optionally waits for completion, and outputs job status, duration, URL, and extracted response data.",
-		"Supports authentication, parameterized jobs, polling, and output extraction via JSONPath and Regex."
+		"The StartJenkinsJob plugin starts a Jenkins job using a Jenkins server URL, job path, and user credentials.",
+		"It can optionally wait for the build to finish and returns details such as result status, duration, and job URL for later steps.",
+		"It also supports passing job parameters and pulling key values from the Jenkins response so they can be reused in downstream automation."
 	]
 }
