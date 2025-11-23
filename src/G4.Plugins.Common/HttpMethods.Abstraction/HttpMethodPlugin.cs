@@ -89,12 +89,13 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
 
             // Create an authentication header if the 'Authorization' header value is not empty.
             // If it is empty, set 'authentication' to null.
-            var authentication = string.IsNullOrEmpty(authorization)
-                ? null
-                : NewAuthenticationHeader(headerValue: authorization);
+            if (string.IsNullOrEmpty(authorization))
+            {
+                return;
+            }
 
             // Set the 'Authorization' header of the request message to the 'authentication' value.
-            requestMessage.Headers.Authorization = authentication;
+            requestMessage.Headers.Authorization = NewAuthenticationHeader(headerValue: authorization);
         }
 
         /// <summary>
