@@ -1,0 +1,301 @@
+﻿{
+	"aliases": [
+		"ActionsGroup",
+		"Container",
+		"Group",
+		"NewContainer"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Mail"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NoAction.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/NoAction.cs"
+			},
+			"rag": {
+				"description": "The NoAction plugin serves as a no-op container and placeholder in automation flows. It groups child steps without side effects, triggers any attached rules, and logs execution details to organize and debug complex workflows.",
+				"qa": [
+					{
+						"question": "What is NoAction?",
+						"answer": "NoAction is a container plugin that does nothing itself but groups and logs child actions as a placeholder in your script."
+					},
+					{
+						"question": "Why use NoAction?",
+						"answer": "You can use NoAction to reserve spots, group related steps, or insert debug checkpoints without running real operations."
+					},
+					{
+						"question": "What are the key features of NoAction?",
+						"answer": "NoAction provides no operation, rule invocation, execution logging, and grouping of multiple steps under one logical block."
+					},
+					{
+						"question": "What aliases does NoAction have?",
+						"answer": "Aliases include ActionsGroup, Container, Group, and NewContainer."
+					},
+					{
+						"question": "Who is the author of NoAction?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "Which categories is NoAction listed under?",
+						"answer": "NoAction is listed under the Containers category."
+					},
+					{
+						"question": "What is the plugin key for NoAction?",
+						"answer": "The plugin key is NoAction."
+					},
+					{
+						"question": "What is the manifestVersion for NoAction?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What pluginType is NoAction?",
+						"answer": "The pluginType is Action."
+					},
+					{
+						"question": "Which platforms does NoAction support?",
+						"answer": "NoAction supports the Any platform."
+					},
+					{
+						"question": "What API documentation is available for NoAction?",
+						"answer": "Unfortunately, no API documentation is available for NoAction plugin."
+					},
+					{
+						"question": "What W3C protocol support is declared?",
+						"answer": "No formal W3C protocol specification is declared for NoAction."
+					},
+					{
+						"question": "Where can I find the source code for NoAction?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/NoAction.cs"
+					},
+					{
+						"question": "Where is the official documentation for NoAction?",
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NoAction.md"
+					},
+					{
+						"question": "What is the summary of NoAction?",
+						"answer": "NoAction runs without doing anything, serving as a placeholder to group steps or debug workflows safely."
+					},
+					{
+						"question": "What properties are defined for NoAction?",
+						"answer": "Properties include Argument (the text to log) and Rules (an optional array of child action steps)."
+					},
+					{
+						"question": "What does the Argument property do?",
+						"answer": "Argument sets the text or data that NoAction will log when it runs."
+					},
+					{
+						"question": "What does the Rules property do?",
+						"answer": "Rules lists the steps that NoAction will perform in sequence under its container block."
+					},
+					{
+						"question": "Can NoAction contain nested NoAction rules?",
+						"answer": "Yes. You can nest NoAction rules within another NoAction using its Rules property, creating a tree of grouped actions without side effects."
+					},
+					{
+						"question": "What is the benefit of nesting NoAction rules?",
+						"answer": "Nesting NoAction rules lets you organize complex workflows into hierarchical groups, improving readability and maintainability."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "at",
+				"label": "Send SMTP Mail",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The NoAction plugin does nothing on its own and serves as a placeholder in your automation script. It can wrap other steps without side effects, making it useful for grouping or testing script flow. This helps you organize complex processes and debug workflows more easily.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature         | Description                                                  |",
+		"|-----------------|--------------------------------------------------------------|",
+		"| No Operation    | Runs without performing any action, acting as a placeholder. |",
+		"| Rule Invocation | Triggers attached rules when conditions are met.             |",
+		"| Logging         | Records execution details for tracking and debugging.        |",
+		"| Container       | Groups multiple steps under one logical block.               |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case         | Description                                                   |",
+		"|------------------|---------------------------------------------------------------|",
+		"| Placeholder Step | Reserve a spot in a script where actions will be added later. |",
+		"| Debug Flow       | Test script logic without executing real operations.          |",
+		"| Step Grouping    | Combine related steps into one block for clarity.             |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case          | Description                                                                |",
+		"|-------------------|----------------------------------------------------------------------------|",
+		"| Test Setup        | Mark the start of tests and verify the environment before running actions. |",
+		"| Flow Verification | Check test logic without performing actual steps.                          |",
+		"| Test Grouping     | Organize related test steps under one marker for better readability.       |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument not provided",
+						"Plugin execution failure",
+						"Unexpected plugin error"
+					],
+					"expected_result": "Execution is logged with no operations performed.",
+					"notes": "NoAction plugin logs the execution point defined by the argument. Useful as a placeholder or checkpoint.",
+					"use_case": "placeholder_action_noaction",
+					"version": "1.0"
+				},
+				"labels": [
+					"NoAction",
+					"PlaceholderAction"
+				]
+			},
+			"description": [
+				"### Placeholder Action Using NoAction Plugin",
+				"",
+				"This example demonstrates how the NoAction plugin logs execution points without performing any operations, useful for placeholder or debugging checkpoints.",
+				"No action is performed; the plugin simply records the event.",
+				"Use this to mark points in the workflow where no actual action is desired."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "This is a Placeholder Action",
+				"pluginName": "NoAction"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument not provided",
+						"Plugin execution failure",
+						"Unexpected plugin error"
+					],
+					"expected_result": "Execution is logged at the debugging point with no operations performed.",
+					"notes": "NoAction plugin logs the specified debugging point. Useful for tracking execution flow without side effects.",
+					"use_case": "debugging_point_noaction",
+					"version": "1.0"
+				},
+				"labels": [
+					"Debugging",
+					"NoAction"
+				]
+			},
+			"description": [
+				"### Debugging Point Using NoAction Plugin",
+				"",
+				"This example demonstrates how the NoAction plugin logs a debugging point labeled `Debugging Point` without performing any operations.",
+				"No action is performed; the plugin simply records the debugging event.",
+				"Use this to insert non-invasive debug markers in the workflow."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Debugging Point",
+				"pluginName": "NoAction"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Inner rule failure",
+						"Login elements not found",
+						"Unexpected DOM structure"
+					],
+					"expected_result": "Username and password are entered and the login button is clicked in sequence.",
+					"notes": "NoAction plugin groups the contained login actions. Inner actions send keys to username and password fields, then click the login button.",
+					"use_case": "login_steps_grouping_noaction",
+					"version": "1.0"
+				},
+				"labels": [
+					"ActionGroup",
+					"NoAction"
+				]
+			},
+			"description": [
+				"### Login Steps Grouping Using NoAction Plugin",
+				"",
+				"This example demonstrates how the NoAction plugin serves as a container to group multiple login actions: sending username, sending password, and clicking the login button.",
+				"Each inner action executes in sequence: SendKeys to `#username`, SendKeys to `#password`, then Click `#loginButton`.",
+				"NoAction itself performs no operations; it simply orchestrates the contained actions.",
+				"Useful for logically grouping related steps in the workflow."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Login Steps",
+				"pluginName": "NoAction",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "Username",
+						"locator": "CssSelector",
+						"onElement": "#username",
+						"pluginName": "SendKeys"
+					},
+					{
+						"$type": "Action",
+						"argument": "Password",
+						"locator": "CssSelector",
+						"onElement": "#password",
+						"pluginName": "SendKeys"
+					},
+					{
+						"$type": "Action",
+						"locator": "CssSelector",
+						"onElement": "#loginButton",
+						"pluginName": "Click"
+					}
+				]
+			}
+		}
+	],
+	"key": "SendSmtpMail",
+	"manifestVersion": 4,
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Sets the text or data that the plugin will log.",
+				"Log entries help you track what happened during execution.",
+				"You must provide this value for the plugin to record."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines a list of steps that the plugin will perform.",
+				"Each step can be a single action or a set of actions.",
+				"Using the NoAction plugin lets you group these steps under one container.",
+				"Nested NoAction plugins let you build a tree of grouped steps."
+			],
+			"mandatory": false,
+			"name": "Rules",
+			"type": "Array"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"The NoAction tool runs without doing anything, serving as a placeholder in your automation flow.",
+		"You can use it to group steps, fill gaps, or debug your scripts without triggering real actions.",
+		"This can helps you organize and test workflows safely without unintended side effects."
+	]
+}
