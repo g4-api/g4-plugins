@@ -15,7 +15,8 @@
 		<NoWarn>$(NoWarn);SYSLIB1045</NoWarn>
 	</PropertyGroup>
 
-	<ItemGroup>		<PackageReference Include="G4.Abstraction.Cli" Version="2025.3.7.16" />
+	<ItemGroup>
+		<PackageReference Include="G4.Abstraction.Cli" Version="2025.3.7.16" />
 		<PackageReference Include="G4.Converters" Version="2025.5.19.38" />
 	</ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11408.102 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G4.DocumentsGenerator", "G4.DocumentsGenerator\G4.DocumentsGenerator.csproj", "{896A5BFF-9B82-47C4-BB0C-C15DB31DE079}"
 EndProject
@@ -18,7 +18,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".test", ".test", "{8E72DDF2-2337-4AF2-AA6C-E5D29DFC4702}"
 	ProjectSection(SolutionItems) = preProject
 		..\test\Settings\Default.runsettings = ..\test\Settings\Default.runsettings
-		..\test\Settings\Local.runsettings = ..\test\Settings\Local.runsettings
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{23DD73C8-1A2F-4596-998A-26B3F8A190B8}"
@@ -32,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{6C196AB2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{AB40C270-E21E-44D5-A50C-1CD5EA778ECC}"
 	ProjectSection(SolutionItems) = preProject
+		.mcp.json = .mcp.json
 		..\.github\workflows\release-pipeline.yml = ..\.github\workflows\release-pipeline.yml
 	EndProjectSection
 EndProject

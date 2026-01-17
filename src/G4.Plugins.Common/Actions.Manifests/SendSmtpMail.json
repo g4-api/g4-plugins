@@ -1,0 +1,444 @@
+﻿{
+	"aliases": [
+		"SendMail"
+	],
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Email"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendSmtpMail.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendSmtpMail.cs"
+			},
+			"rag": {
+				"description": "The SendSmtpMail plugin sends email messages through a configurable SMTP server from within an automation workflow, supporting authentication, TLS, multiple recipients, and plain-text or HTML content for alerts, notifications, and automated reporting.",
+				"qa": [
+					{
+						"question": "What is the SendSmtpMail plugin?",
+						"answer": "The SendSmtpMail plugin is an Action that sends emails through a standard SMTP server as part of an automation workflow. It supports secure connections (SSL/TLS), optional authentication, multiple recipients, and plain-text or HTML message bodies."
+					},
+					{
+						"question": "What problem does the SendSmtpMail plugin solve in automation workflows?",
+						"answer": "It enables workflows to send email notifications for alerts, failures, reports, and status updates without relying on external scripting or custom code."
+					},
+					{
+						"question": "What type of plugin is SendSmtpMail?",
+						"answer": "SendSmtpMail is an Action plugin that executes synchronously within a workflow step."
+					},
+					{
+						"question": "What category is the SendSmtpMail plugin listed under?",
+						"answer": "The plugin is categorized under Email."
+					},
+					{
+						"question": "What platforms does the SendSmtpMail plugin support?",
+						"answer": "The plugin supports the Any platform and can run wherever the automation engine is available."
+					},
+					{
+						"question": "What is the manifest version of the SendSmtpMail plugin?",
+						"answer": "The manifestVersion for SendSmtpMail is 4."
+					},
+					{
+						"question": "What aliases can be used to reference the SendSmtpMail plugin?",
+						"answer": "The plugin can also be referenced using the aliases SendMail and SmtpMail."
+					},
+					{
+						"question": "What SMTP connection settings are supported by SendSmtpMail?",
+						"answer": "It supports Host, Port, EnableSsl, Username, and Password parameters to configure SMTP connectivity and authentication."
+					},
+					{
+						"question": "How does SendSmtpMail handle sender addresses?",
+						"answer": "The plugin supports From, DefaultFrom, and ForceFrom options, allowing workflows to enforce a consistent sender address regardless of message configuration."
+					},
+					{
+						"question": "How are recipients defined in SendSmtpMail?",
+						"answer": "Recipients are defined using To, Cc, and Bcc parameters, with multiple addresses provided as semicolon-separated values."
+					},
+					{
+						"question": "What message content formats does SendSmtpMail support?",
+						"answer": "It supports plain-text and HTML message bodies using the Text parameter and the IsBodyHtml flag."
+					},
+					{
+						"question": "How are parameters passed to the SendSmtpMail plugin at runtime?",
+						"answer": "All parameters are passed through the Action rule’s argument string using the format {{$ --Name:Value --Name1:Value1}} with exactly one space between entries and no trailing space before closing."
+					},
+					{
+						"question": "How are boolean options passed to SendSmtpMail?",
+						"answer": "Boolean options such as EnableSsl, ForceFrom, and IsBodyHtml are enabled by including the flag name in the argument string without an explicit value."
+					},
+					{
+						"question": "Does SendSmtpMail support attachments?",
+						"answer": "No. Attachment support is not currently implemented, as indicated by the plugin source code."
+					},
+					{
+						"question": "Is SendSmtpMail executed asynchronously?",
+						"answer": "No. The email is sent synchronously to match the plugin execution model of the automation engine."
+					},
+					{
+						"question": "What happens if the SMTP server requires authentication but credentials are missing?",
+						"answer": "The email send operation will fail, and the workflow will receive an error indicating authentication is required."
+					},
+					{
+						"question": "What happens if TLS is required but EnableSsl is not specified?",
+						"answer": "The SMTP server may reject the connection, resulting in a delivery failure."
+					},
+					{
+						"question": "How does SendSmtpMail handle runtime errors?",
+						"answer": "Errors such as connection failures or authentication issues are surfaced during execution and can be logged or handled by the workflow depending on configuration."
+					},
+					{
+						"question": "Where can the SendSmtpMail plugin documentation be found?",
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendSmtpMail.md."
+					},
+					{
+						"question": "Where is the source code for the SendSmtpMail plugin located?",
+						"answer": "The source code is located at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendSmtpMail.cs."
+					},
+					{
+						"question": "Who is the author of the SendSmtpMail plugin?",
+						"answer": "The plugin author is Roei Sabag."
+					},
+					{
+						"question": "What is the primary use case described in the SendSmtpMail plugin summary?",
+						"answer": "The plugin is designed for sending email alerts, notifications, and automated reports as part of RPA, testing, and operational workflows."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "at",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The SendSmtpMail plugin sends emails through a standard SMTP server during an automation workflow.",
+		"It supports secure connections, login credentials, and sending to multiple recipients.",
+		"It is useful for alerts, notifications, and automated reporting.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                   | Description                                                              |",
+		"|---------------------------|--------------------------------------------------------------------------|",
+		"| SMTP server configuration | Sends email using a configured host and port.                            |",
+		"| Secure connection option  | Supports SSL or TLS when enabled.                                        |",
+		"| SMTP authentication       | Logs in using a username and password when provided.                     |",
+		"| To recipients             | Sends to one or more primary recipients.                                 |",
+		"| CC and BCC recipients     | Supports carbon copy and blind carbon copy lists.                        |",
+		"| Subject and body content  | Sends a subject and a text or HTML body.                                 |",
+		"| Default sender address    | Uses a default From address when none is provided.                       |",
+		"| Force sender address      | Overrides the request From address with the default sender when enabled. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                | Description                                                         |",
+		"|-------------------------|---------------------------------------------------------------------|",
+		"| Send operational alerts | Notifies operators when an automated task fails or needs attention. |",
+		"| Email generated reports | Sends daily or weekly reports created by a workflow.                |",
+		"| Notify stakeholders     | Sends status updates to business users after a process completes.   |",
+		"| Approval handoff        | Emails a person to approve or review a step before continuing.      |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case                 | Description                                                          |",
+		"|--------------------------|----------------------------------------------------------------------|",
+		"| Test run summary email   | Sends pass and fail results after a test run completes.              |",
+		"| CI failure notifications | Alerts the team when a pipeline test stage fails.                    |",
+		"| Smoke test validation    | Sends confirmation when a quick environment check succeeds or fails. |",
+		"| Regression monitoring    | Notifies owners when repeated failures appear across builds.         |"
+	],
+	"entity": [],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"bcc list contains extra semicolons",
+						"cc list contains whitespace-only entries",
+						"defaultFrom is used when From is missing",
+						"multiple to recipients separated by semicolon",
+						"subject is empty string",
+						"text body is empty string"
+					],
+					"expected_result": "The email is sent through the configured SMTP server using the provided recipients and message content.",
+					"notes": "EnableSsl is enabled by passing the EnableSsl flag. Authentication uses explicit credentials when Username is provided.",
+					"use_case": "send_basic_smtp_email",
+					"version": "8.0.0"
+				},
+				"labels": [
+					"Email",
+					"Notification",
+					"Smtp"
+				]
+			},
+			"description": [
+				"### Send a basic SMTP email",
+				"",
+				"Send a plain-text email to one or more recipients using an SMTP server.  ",
+				"The action reads SMTP connection settings and message fields from the Argument string."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:smtp.mail.io --Port:587 --Username:no-reply@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:no-reply@mail.io --To:user1@mail.io;user2@mail.io --Subject:Build completed --Text:The nightly build finished successfully.}}",
+				"pluginName": "SendSmtpMail"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"forceFrom overrides provided From value",
+						"from is provided but ignored when ForceFrom is set",
+						"to contains a single recipient"
+					],
+					"expected_result": "The email is sent using the DefaultFrom sender address even though a From value is provided.",
+					"notes": "When ForceFrom is passed, the action always uses DefaultFrom as the sender address.",
+					"use_case": "force_sender_address",
+					"version": "8.0.0"
+				},
+				"labels": [
+					"Email",
+					"Governance",
+					"Smtp"
+				]
+			},
+			"description": [
+				"### Force the sender address",
+				"",
+				"Always use a fixed sender address regardless of the From value in the request.  ",
+				"The ForceFrom flag forces the action to use DefaultFrom as the final sender."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:smtp.mail.io --Port:587 --Username:system@mail.io --Password:APP_PASSWORD --EnableSsl --ForceFrom --DefaultFrom:system@mail.io --From:user@mail.io --To:audit@mail.io --Subject:Security alert --Text:A privileged operation was executed.}}",
+				"pluginName": "SendSmtpMail"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"html body contains markup",
+						"multiple cc recipients separated by semicolon",
+						"isBodyHtml is set without plain-text alternative"
+					],
+					"expected_result": "The email is sent with an HTML body rendered by the mail client.",
+					"notes": "The IsBodyHtml flag causes the action to treat Text as HTML.",
+					"use_case": "send_html_email",
+					"version": "8.0.0"
+				},
+				"labels": [
+					"Email",
+					"Html",
+					"Smtp"
+				]
+			},
+			"description": [
+				"### Send an HTML email",
+				"",
+				"Send an email whose body is interpreted as HTML by the mail client.  ",
+				"The IsBodyHtml flag controls whether the message body is treated as HTML."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:smtp.mail.io --Port:465 --Username:reports@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:reports@mail.io --To:manager@mail.io --Cc:lead@mail.io;qa@mail.io --Subject:Weekly report --IsBodyHtml --Text:<h1>Report</h1><p>All systems operational.</p>}}",
+				"pluginName": "SendSmtpMail"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"smtp relay uses default credentials",
+						"username is omitted",
+						"password is omitted"
+					],
+					"expected_result": "The email is sent using default system credentials without explicit authentication.",
+					"notes": "When Username is not passed, the action uses default system credentials instead of explicit NetworkCredential.",
+					"use_case": "send_without_explicit_credentials",
+					"version": "8.0.0"
+				},
+				"labels": [
+					"Email",
+					"Infrastructure",
+					"Smtp"
+				]
+			},
+			"description": [
+				"### Send email using default credentials",
+				"",
+				"Send an email through an internal SMTP relay that does not require explicit authentication.  ",
+				"Omit Username and Password so the action uses default system credentials."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:mail.internal.local --Port:25 --DefaultFrom:automation@internal.local --To:ops@internal.local --Subject:Service restarted --Text:The service was restarted automatically.}}",
+				"pluginName": "SendSmtpMail"
+			}
+		}
+	],
+	"key": "SendSmtpMail",
+	"manifestVersion": 4,
+	"parameters": [
+		{
+			"description": [
+				"Specifies one or more blind carbon copy recipient email addresses separated by semicolons.",
+				"Recipients listed here receive the email without being visible to other recipients.",
+				"This parameter is useful for silently notifying additional parties without exposing addresses."
+			],
+			"mandatory": false,
+			"name": "Bcc",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies one or more carbon copy recipient email addresses separated by semicolons.",
+				"Recipients listed here are visible to all other recipients of the email.",
+				"This parameter is commonly used to keep stakeholders informed without making them primary recipients."
+			],
+			"mandatory": false,
+			"name": "Cc",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the default sender email address used when no explicit sender is provided.",
+				"This value ensures that outgoing emails always have a valid From address.",
+				"It helps prevent delivery failures caused by missing sender information."
+			],
+			"mandatory": false,
+			"name": "DefaultFrom",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Enables SSL or TLS encryption for the SMTP connection when present.",
+				"Secure connections protect credentials and email content during transmission.",
+				"This setting is required by most modern SMTP servers."
+			],
+			"mandatory": false,
+			"name": "EnableSsl",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Forces the sender address to always use the configured default sender.",
+				"Any provided From value in the mail request is ignored when this is enabled.",
+				"This helps enforce consistent sender identity and avoid spoofing issues."
+			],
+			"mandatory": false,
+			"name": "ForceFrom",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Specifies the sender email address for the message.",
+				"This value is used as the From field unless overridden by configuration rules.",
+				"Providing this allows per-message sender customization when permitted."
+			],
+			"mandatory": false,
+			"name": "From",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the hostname or IP address of the SMTP server.",
+				"This value tells the plugin where to establish the SMTP connection.",
+				"Correct configuration is required for successful email delivery."
+			],
+			"mandatory": true,
+			"name": "Host",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Indicates whether the email body should be treated as HTML content.",
+				"When enabled, the message body is rendered using HTML formatting.",
+				"This allows rich text emails with styling and links."
+			],
+			"mandatory": false,
+			"name": "IsBodyHtml",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Specifies the password used to authenticate with the SMTP server.",
+				"This is commonly an app-specific password or token rather than a user password.",
+				"Secure handling of this value is important to protect email credentials."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the port number used to connect to the SMTP server.",
+				"Common values include 587 for STARTTLS and 465 for SSL connections.",
+				"Using the correct port ensures compatibility with the SMTP server configuration."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Integer"
+		},
+		{
+			"description": [
+				"Specifies the subject line of the email message.",
+				"This text is displayed as the email title in the recipient inbox.",
+				"A clear subject improves message visibility and understanding."
+			],
+			"mandatory": false,
+			"name": "Subject",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the main body content of the email message.",
+				"This value represents the text or HTML payload sent to recipients.",
+				"It contains the primary information conveyed by the email."
+			],
+			"mandatory": false,
+			"name": "Text",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies one or more primary recipient email addresses separated by semicolons.",
+				"At least one valid recipient is typically required for successful delivery.",
+				"These addresses represent the main targets of the email message."
+			],
+			"mandatory": true,
+			"name": "To",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the username used to authenticate with the SMTP server.",
+				"This value is often the same as the sender email address.",
+				"Providing a username enables authenticated SMTP sessions when required."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"The SendSmtpMail plugin sends emails through any SMTP server using configurable host, port, credentials, and TLS settings.",
+		"It supports To, Cc, and Bcc recipients, plain text or HTML bodies, and controlled From address handling.",
+		"This plugin is useful for sending alerts, notifications, and automated messages in workflows where email delivery is required."
+	]
+}
