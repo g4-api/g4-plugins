@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 namespace G4.Plugins.Ui.Actions
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Ui, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Ui.Actions.Manifests.{nameof(InvokeScript)}.json")]
     public class InvokeScript(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {

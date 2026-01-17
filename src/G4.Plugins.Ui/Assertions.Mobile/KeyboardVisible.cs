@@ -10,7 +10,7 @@ using G4.WebDriver.Remote.Appium;
 namespace G4.Plugins.Ui.Assertions.Mobile
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Ui, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Ui.Assertions.Mobile.Manifests.{nameof(KeyboardVisible)}.json")]
     public class KeyboardVisible(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
