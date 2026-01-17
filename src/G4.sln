@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{6C196AB2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{AB40C270-E21E-44D5-A50C-1CD5EA778ECC}"
 	ProjectSection(SolutionItems) = preProject
+		.mcp.json = .mcp.json
 		..\.github\workflows\release-pipeline.yml = ..\.github\workflows\release-pipeline.yml
 	EndProjectSection
 EndProject
