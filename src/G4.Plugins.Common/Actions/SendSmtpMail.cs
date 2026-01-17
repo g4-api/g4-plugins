@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace G4.Plugins.Common.Actions
 {
+    // TODO: Add support for attachments.
     [G4Plugin(
         assembly: "G4.Plugins.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Common.Actions.Manifests.{nameof(SendSmtpMail)}.json")]
@@ -70,7 +71,8 @@ namespace G4.Plugins.Common.Actions
             //  - 587: STARTTLS (recommended)
             //  - 465: SSL
             //  - 25:  Plain (not recommended)
-            var port = pluginData.Parameters.Get(key: "Port", defaultValue: 587);
+            var port = pluginData.Parameters.Get(key: "Port", defaultValue: "587");
+            _ = int.TryParse(port, out var portOut) ? portOut : 587;
 
             // Retrieve the SMTP username.
             // Often the same as the sender email address.
@@ -84,7 +86,7 @@ namespace G4.Plugins.Common.Actions
                 ForceFrom = forceFrom,
                 Host = host,
                 Password = password,
-                Port = port,
+                Port = portOut,
                 Username = username
             };
         }
