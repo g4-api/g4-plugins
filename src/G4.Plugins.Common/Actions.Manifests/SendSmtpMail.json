@@ -1,105 +1,110 @@
 ﻿{
 	"aliases": [
-		"ActionsGroup",
-		"Container",
-		"Group",
-		"NewContainer"
+		"SendMail"
 	],
 	"author": {
-		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
-		"name": "Roei Sabag"
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 	},
 	"categories": [
-		"Mail"
+		"Email"
 	],
 	"context": {
 		"integration": {
 			"github": {
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NoAction.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/NoAction.cs"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendSmtpMail.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendSmtpMail.cs"
 			},
 			"rag": {
-				"description": "The NoAction plugin serves as a no-op container and placeholder in automation flows. It groups child steps without side effects, triggers any attached rules, and logs execution details to organize and debug complex workflows.",
+				"description": "The SendSmtpMail plugin sends email messages through a configurable SMTP server from within an automation workflow, supporting authentication, TLS, multiple recipients, and plain-text or HTML content for alerts, notifications, and automated reporting.",
 				"qa": [
 					{
-						"question": "What is NoAction?",
-						"answer": "NoAction is a container plugin that does nothing itself but groups and logs child actions as a placeholder in your script."
+						"question": "What is the SendSmtpMail plugin?",
+						"answer": "The SendSmtpMail plugin is an Action that sends emails through a standard SMTP server as part of an automation workflow. It supports secure connections (SSL/TLS), optional authentication, multiple recipients, and plain-text or HTML message bodies."
 					},
 					{
-						"question": "Why use NoAction?",
-						"answer": "You can use NoAction to reserve spots, group related steps, or insert debug checkpoints without running real operations."
+						"question": "What problem does the SendSmtpMail plugin solve in automation workflows?",
+						"answer": "It enables workflows to send email notifications for alerts, failures, reports, and status updates without relying on external scripting or custom code."
 					},
 					{
-						"question": "What are the key features of NoAction?",
-						"answer": "NoAction provides no operation, rule invocation, execution logging, and grouping of multiple steps under one logical block."
+						"question": "What type of plugin is SendSmtpMail?",
+						"answer": "SendSmtpMail is an Action plugin that executes synchronously within a workflow step."
 					},
 					{
-						"question": "What aliases does NoAction have?",
-						"answer": "Aliases include ActionsGroup, Container, Group, and NewContainer."
+						"question": "What category is the SendSmtpMail plugin listed under?",
+						"answer": "The plugin is categorized under Email."
 					},
 					{
-						"question": "Who is the author of NoAction?",
-						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+						"question": "What platforms does the SendSmtpMail plugin support?",
+						"answer": "The plugin supports the Any platform and can run wherever the automation engine is available."
 					},
 					{
-						"question": "Which categories is NoAction listed under?",
-						"answer": "NoAction is listed under the Containers category."
+						"question": "What is the manifest version of the SendSmtpMail plugin?",
+						"answer": "The manifestVersion for SendSmtpMail is 4."
 					},
 					{
-						"question": "What is the plugin key for NoAction?",
-						"answer": "The plugin key is NoAction."
+						"question": "What aliases can be used to reference the SendSmtpMail plugin?",
+						"answer": "The plugin can also be referenced using the aliases SendMail and SmtpMail."
 					},
 					{
-						"question": "What is the manifestVersion for NoAction?",
-						"answer": "The manifestVersion is 4."
+						"question": "What SMTP connection settings are supported by SendSmtpMail?",
+						"answer": "It supports Host, Port, EnableSsl, Username, and Password parameters to configure SMTP connectivity and authentication."
 					},
 					{
-						"question": "What pluginType is NoAction?",
-						"answer": "The pluginType is Action."
+						"question": "How does SendSmtpMail handle sender addresses?",
+						"answer": "The plugin supports From, DefaultFrom, and ForceFrom options, allowing workflows to enforce a consistent sender address regardless of message configuration."
 					},
 					{
-						"question": "Which platforms does NoAction support?",
-						"answer": "NoAction supports the Any platform."
+						"question": "How are recipients defined in SendSmtpMail?",
+						"answer": "Recipients are defined using To, Cc, and Bcc parameters, with multiple addresses provided as semicolon-separated values."
 					},
 					{
-						"question": "What API documentation is available for NoAction?",
-						"answer": "Unfortunately, no API documentation is available for NoAction plugin."
+						"question": "What message content formats does SendSmtpMail support?",
+						"answer": "It supports plain-text and HTML message bodies using the Text parameter and the IsBodyHtml flag."
 					},
 					{
-						"question": "What W3C protocol support is declared?",
-						"answer": "No formal W3C protocol specification is declared for NoAction."
+						"question": "How are parameters passed to the SendSmtpMail plugin at runtime?",
+						"answer": "All parameters are passed through the Action rule’s argument string using the format {{$ --Name:Value --Name1:Value1}} with exactly one space between entries and no trailing space before closing."
 					},
 					{
-						"question": "Where can I find the source code for NoAction?",
-						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/NoAction.cs"
+						"question": "How are boolean options passed to SendSmtpMail?",
+						"answer": "Boolean options such as EnableSsl, ForceFrom, and IsBodyHtml are enabled by including the flag name in the argument string without an explicit value."
 					},
 					{
-						"question": "Where is the official documentation for NoAction?",
-						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NoAction.md"
+						"question": "Does SendSmtpMail support attachments?",
+						"answer": "No. Attachment support is not currently implemented, as indicated by the plugin source code."
 					},
 					{
-						"question": "What is the summary of NoAction?",
-						"answer": "NoAction runs without doing anything, serving as a placeholder to group steps or debug workflows safely."
+						"question": "Is SendSmtpMail executed asynchronously?",
+						"answer": "No. The email is sent synchronously to match the plugin execution model of the automation engine."
 					},
 					{
-						"question": "What properties are defined for NoAction?",
-						"answer": "Properties include Argument (the text to log) and Rules (an optional array of child action steps)."
+						"question": "What happens if the SMTP server requires authentication but credentials are missing?",
+						"answer": "The email send operation will fail, and the workflow will receive an error indicating authentication is required."
 					},
 					{
-						"question": "What does the Argument property do?",
-						"answer": "Argument sets the text or data that NoAction will log when it runs."
+						"question": "What happens if TLS is required but EnableSsl is not specified?",
+						"answer": "The SMTP server may reject the connection, resulting in a delivery failure."
 					},
 					{
-						"question": "What does the Rules property do?",
-						"answer": "Rules lists the steps that NoAction will perform in sequence under its container block."
+						"question": "How does SendSmtpMail handle runtime errors?",
+						"answer": "Errors such as connection failures or authentication issues are surfaced during execution and can be logged or handled by the workflow depending on configuration."
 					},
 					{
-						"question": "Can NoAction contain nested NoAction rules?",
-						"answer": "Yes. You can nest NoAction rules within another NoAction using its Rules property, creating a tree of grouped actions without side effects."
+						"question": "Where can the SendSmtpMail plugin documentation be found?",
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendSmtpMail.md."
 					},
 					{
-						"question": "What is the benefit of nesting NoAction rules?",
-						"answer": "Nesting NoAction rules lets you organize complex workflows into hierarchical groups, improving readability and maintainability."
+						"question": "Where is the source code for the SendSmtpMail plugin located?",
+						"answer": "The source code is located at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendSmtpMail.cs."
+					},
+					{
+						"question": "Who is the author of the SendSmtpMail plugin?",
+						"answer": "The plugin author is Roei Sabag."
+					},
+					{
+						"question": "What is the primary use case described in the SendSmtpMail plugin summary?",
+						"answer": "The plugin is designed for sending email alerts, notifications, and automated reports as part of RPA, testing, and operational workflows."
 					}
 				]
 			},
@@ -107,7 +112,6 @@
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": "at",
-				"label": "Send SMTP Mail",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -115,187 +119,326 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The NoAction plugin does nothing on its own and serves as a placeholder in your automation script. It can wrap other steps without side effects, making it useful for grouping or testing script flow. This helps you organize complex processes and debug workflows more easily.",
+		"The SendSmtpMail plugin sends emails through a standard SMTP server during an automation workflow.",
+		"It supports secure connections, login credentials, and sending to multiple recipients.",
+		"It is useful for alerts, notifications, and automated reporting.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature         | Description                                                  |",
-		"|-----------------|--------------------------------------------------------------|",
-		"| No Operation    | Runs without performing any action, acting as a placeholder. |",
-		"| Rule Invocation | Triggers attached rules when conditions are met.             |",
-		"| Logging         | Records execution details for tracking and debugging.        |",
-		"| Container       | Groups multiple steps under one logical block.               |",
+		"| Feature                   | Description                                                              |",
+		"|---------------------------|--------------------------------------------------------------------------|",
+		"| SMTP server configuration | Sends email using a configured host and port.                            |",
+		"| Secure connection option  | Supports SSL or TLS when enabled.                                        |",
+		"| SMTP authentication       | Logs in using a username and password when provided.                     |",
+		"| To recipients             | Sends to one or more primary recipients.                                 |",
+		"| CC and BCC recipients     | Supports carbon copy and blind carbon copy lists.                        |",
+		"| Subject and body content  | Sends a subject and a text or HTML body.                                 |",
+		"| Default sender address    | Uses a default From address when none is provided.                       |",
+		"| Force sender address      | Overrides the request From address with the default sender when enabled. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Use Case         | Description                                                   |",
-		"|------------------|---------------------------------------------------------------|",
-		"| Placeholder Step | Reserve a spot in a script where actions will be added later. |",
-		"| Debug Flow       | Test script logic without executing real operations.          |",
-		"| Step Grouping    | Combine related steps into one block for clarity.             |",
+		"| Use Case                | Description                                                         |",
+		"|-------------------------|---------------------------------------------------------------------|",
+		"| Send operational alerts | Notifies operators when an automated task fails or needs attention. |",
+		"| Email generated reports | Sends daily or weekly reports created by a workflow.                |",
+		"| Notify stakeholders     | Sends status updates to business users after a process completes.   |",
+		"| Approval handoff        | Emails a person to approve or review a step before continuing.      |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Use Case          | Description                                                                |",
-		"|-------------------|----------------------------------------------------------------------------|",
-		"| Test Setup        | Mark the start of tests and verify the environment before running actions. |",
-		"| Flow Verification | Check test logic without performing actual steps.                          |",
-		"| Test Grouping     | Organize related test steps under one marker for better readability.       |"
+		"| Use Case                 | Description                                                          |",
+		"|--------------------------|----------------------------------------------------------------------|",
+		"| Test run summary email   | Sends pass and fail results after a test run completes.              |",
+		"| CI failure notifications | Alerts the team when a pipeline test stage fails.                    |",
+		"| Smoke test validation    | Sends confirmation when a quick environment check succeeds or fails. |",
+		"| Regression monitoring    | Notifies owners when repeated failures appear across builds.         |"
 	],
+	"entity": [],
 	"examples": [
 		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Argument not provided",
-						"Plugin execution failure",
-						"Unexpected plugin error"
+						"bcc list contains extra semicolons",
+						"cc list contains whitespace-only entries",
+						"defaultFrom is used when From is missing",
+						"multiple to recipients separated by semicolon",
+						"subject is empty string",
+						"text body is empty string"
 					],
-					"expected_result": "Execution is logged with no operations performed.",
-					"notes": "NoAction plugin logs the execution point defined by the argument. Useful as a placeholder or checkpoint.",
-					"use_case": "placeholder_action_noaction",
-					"version": "1.0"
+					"expected_result": "The email is sent through the configured SMTP server using the provided recipients and message content.",
+					"notes": "EnableSsl is enabled by passing the EnableSsl flag. Authentication uses explicit credentials when Username is provided.",
+					"use_case": "send_basic_smtp_email",
+					"version": "8.0.0"
 				},
 				"labels": [
-					"NoAction",
-					"PlaceholderAction"
+					"Email",
+					"Notification",
+					"Smtp"
 				]
 			},
 			"description": [
-				"### Placeholder Action Using NoAction Plugin",
+				"### Send a basic SMTP email",
 				"",
-				"This example demonstrates how the NoAction plugin logs execution points without performing any operations, useful for placeholder or debugging checkpoints.",
-				"No action is performed; the plugin simply records the event.",
-				"Use this to mark points in the workflow where no actual action is desired."
+				"Send a plain-text email to one or more recipients using an SMTP server.  ",
+				"The action reads SMTP connection settings and message fields from the Argument string."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "This is a Placeholder Action",
-				"pluginName": "NoAction"
+				"argument": "{{$ --Host:smtp.mail.io --Port:587 --Username:no-reply@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:no-reply@mail.io --To:user1@mail.io;user2@mail.io --Subject:Build completed --Text:The nightly build finished successfully.}}",
+				"pluginName": "SendSmtpMail"
 			}
 		},
 		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Argument not provided",
-						"Plugin execution failure",
-						"Unexpected plugin error"
+						"forceFrom overrides provided From value",
+						"from is provided but ignored when ForceFrom is set",
+						"to contains a single recipient"
 					],
-					"expected_result": "Execution is logged at the debugging point with no operations performed.",
-					"notes": "NoAction plugin logs the specified debugging point. Useful for tracking execution flow without side effects.",
-					"use_case": "debugging_point_noaction",
-					"version": "1.0"
+					"expected_result": "The email is sent using the DefaultFrom sender address even though a From value is provided.",
+					"notes": "When ForceFrom is passed, the action always uses DefaultFrom as the sender address.",
+					"use_case": "force_sender_address",
+					"version": "8.0.0"
 				},
 				"labels": [
-					"Debugging",
-					"NoAction"
+					"Email",
+					"Governance",
+					"Smtp"
 				]
 			},
 			"description": [
-				"### Debugging Point Using NoAction Plugin",
+				"### Force the sender address",
 				"",
-				"This example demonstrates how the NoAction plugin logs a debugging point labeled `Debugging Point` without performing any operations.",
-				"No action is performed; the plugin simply records the debugging event.",
-				"Use this to insert non-invasive debug markers in the workflow."
+				"Always use a fixed sender address regardless of the From value in the request.  ",
+				"The ForceFrom flag forces the action to use DefaultFrom as the final sender."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "Debugging Point",
-				"pluginName": "NoAction"
+				"argument": "{{$ --Host:smtp.mail.io --Port:587 --Username:system@mail.io --Password:APP_PASSWORD --EnableSsl --ForceFrom --DefaultFrom:system@mail.io --From:user@mail.io --To:audit@mail.io --Subject:Security alert --Text:A privileged operation was executed.}}",
+				"pluginName": "SendSmtpMail"
 			}
 		},
 		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Inner rule failure",
-						"Login elements not found",
-						"Unexpected DOM structure"
+						"html body contains markup",
+						"multiple cc recipients separated by semicolon",
+						"isBodyHtml is set without plain-text alternative"
 					],
-					"expected_result": "Username and password are entered and the login button is clicked in sequence.",
-					"notes": "NoAction plugin groups the contained login actions. Inner actions send keys to username and password fields, then click the login button.",
-					"use_case": "login_steps_grouping_noaction",
-					"version": "1.0"
+					"expected_result": "The email is sent with an HTML body rendered by the mail client.",
+					"notes": "The IsBodyHtml flag causes the action to treat Text as HTML.",
+					"use_case": "send_html_email",
+					"version": "8.0.0"
 				},
 				"labels": [
-					"ActionGroup",
-					"NoAction"
+					"Email",
+					"Html",
+					"Smtp"
 				]
 			},
 			"description": [
-				"### Login Steps Grouping Using NoAction Plugin",
+				"### Send an HTML email",
 				"",
-				"This example demonstrates how the NoAction plugin serves as a container to group multiple login actions: sending username, sending password, and clicking the login button.",
-				"Each inner action executes in sequence: SendKeys to `#username`, SendKeys to `#password`, then Click `#loginButton`.",
-				"NoAction itself performs no operations; it simply orchestrates the contained actions.",
-				"Useful for logically grouping related steps in the workflow."
+				"Send an email whose body is interpreted as HTML by the mail client.  ",
+				"The IsBodyHtml flag controls whether the message body is treated as HTML."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "Login Steps",
-				"pluginName": "NoAction",
-				"rules": [
-					{
-						"$type": "Action",
-						"argument": "Username",
-						"locator": "CssSelector",
-						"onElement": "#username",
-						"pluginName": "SendKeys"
-					},
-					{
-						"$type": "Action",
-						"argument": "Password",
-						"locator": "CssSelector",
-						"onElement": "#password",
-						"pluginName": "SendKeys"
-					},
-					{
-						"$type": "Action",
-						"locator": "CssSelector",
-						"onElement": "#loginButton",
-						"pluginName": "Click"
-					}
+				"argument": "{{$ --Host:smtp.mail.io --Port:465 --Username:reports@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:reports@mail.io --To:manager@mail.io --Cc:lead@mail.io;qa@mail.io --Subject:Weekly report --IsBodyHtml --Text:<h1>Report</h1><p>All systems operational.</p>}}",
+				"pluginName": "SendSmtpMail"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"smtp relay uses default credentials",
+						"username is omitted",
+						"password is omitted"
+					],
+					"expected_result": "The email is sent using default system credentials without explicit authentication.",
+					"notes": "When Username is not passed, the action uses default system credentials instead of explicit NetworkCredential.",
+					"use_case": "send_without_explicit_credentials",
+					"version": "8.0.0"
+				},
+				"labels": [
+					"Email",
+					"Infrastructure",
+					"Smtp"
 				]
+			},
+			"description": [
+				"### Send email using default credentials",
+				"",
+				"Send an email through an internal SMTP relay that does not require explicit authentication.  ",
+				"Omit Username and Password so the action uses default system credentials."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:mail.internal.local --Port:25 --DefaultFrom:automation@internal.local --To:ops@internal.local --Subject:Service restarted --Text:The service was restarted automatically.}}",
+				"pluginName": "SendSmtpMail"
 			}
 		}
 	],
 	"key": "SendSmtpMail",
 	"manifestVersion": 4,
-	"platforms": [
-		"Any"
-	],
-	"pluginType": "Action",
-	"properties": [
+	"parameters": [
 		{
 			"description": [
-				"Sets the text or data that the plugin will log.",
-				"Log entries help you track what happened during execution.",
-				"You must provide this value for the plugin to record."
+				"Specifies one or more blind carbon copy recipient email addresses separated by semicolons.",
+				"Recipients listed here receive the email without being visible to other recipients.",
+				"This parameter is useful for silently notifying additional parties without exposing addresses."
 			],
-			"mandatory": true,
-			"name": "Argument",
+			"mandatory": false,
+			"name": "Bcc",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Defines a list of steps that the plugin will perform.",
-				"Each step can be a single action or a set of actions.",
-				"Using the NoAction plugin lets you group these steps under one container.",
-				"Nested NoAction plugins let you build a tree of grouped steps."
+				"Specifies one or more carbon copy recipient email addresses separated by semicolons.",
+				"Recipients listed here are visible to all other recipients of the email.",
+				"This parameter is commonly used to keep stakeholders informed without making them primary recipients."
 			],
 			"mandatory": false,
-			"name": "Rules",
-			"type": "Array"
+			"name": "Cc",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the default sender email address used when no explicit sender is provided.",
+				"This value ensures that outgoing emails always have a valid From address.",
+				"It helps prevent delivery failures caused by missing sender information."
+			],
+			"mandatory": false,
+			"name": "DefaultFrom",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Enables SSL or TLS encryption for the SMTP connection when present.",
+				"Secure connections protect credentials and email content during transmission.",
+				"This setting is required by most modern SMTP servers."
+			],
+			"mandatory": false,
+			"name": "EnableSsl",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Forces the sender address to always use the configured default sender.",
+				"Any provided From value in the mail request is ignored when this is enabled.",
+				"This helps enforce consistent sender identity and avoid spoofing issues."
+			],
+			"mandatory": false,
+			"name": "ForceFrom",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Specifies the sender email address for the message.",
+				"This value is used as the From field unless overridden by configuration rules.",
+				"Providing this allows per-message sender customization when permitted."
+			],
+			"mandatory": false,
+			"name": "From",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the hostname or IP address of the SMTP server.",
+				"This value tells the plugin where to establish the SMTP connection.",
+				"Correct configuration is required for successful email delivery."
+			],
+			"mandatory": true,
+			"name": "Host",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Indicates whether the email body should be treated as HTML content.",
+				"When enabled, the message body is rendered using HTML formatting.",
+				"This allows rich text emails with styling and links."
+			],
+			"mandatory": false,
+			"name": "IsBodyHtml",
+			"type": "Boolean"
+		},
+		{
+			"description": [
+				"Specifies the password used to authenticate with the SMTP server.",
+				"This is commonly an app-specific password or token rather than a user password.",
+				"Secure handling of this value is important to protect email credentials."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the port number used to connect to the SMTP server.",
+				"Common values include 587 for STARTTLS and 465 for SSL connections.",
+				"Using the correct port ensures compatibility with the SMTP server configuration."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Integer"
+		},
+		{
+			"description": [
+				"Specifies the subject line of the email message.",
+				"This text is displayed as the email title in the recipient inbox.",
+				"A clear subject improves message visibility and understanding."
+			],
+			"mandatory": false,
+			"name": "Subject",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Defines the main body content of the email message.",
+				"This value represents the text or HTML payload sent to recipients.",
+				"It contains the primary information conveyed by the email."
+			],
+			"mandatory": false,
+			"name": "Text",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies one or more primary recipient email addresses separated by semicolons.",
+				"At least one valid recipient is typically required for successful delivery.",
+				"These addresses represent the main targets of the email message."
+			],
+			"mandatory": true,
+			"name": "To",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the username used to authenticate with the SMTP server.",
+				"This value is often the same as the sender email address.",
+				"Providing a username enables authenticated SMTP sessions when required."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
 	"summary": [
-		"The NoAction tool runs without doing anything, serving as a placeholder in your automation flow.",
-		"You can use it to group steps, fill gaps, or debug your scripts without triggering real actions.",
-		"This can helps you organize and test workflows safely without unintended side effects."
+		"The SendSmtpMail plugin sends emails through any SMTP server using configurable host, port, credentials, and TLS settings.",
+		"It supports To, Cc, and Bcc recipients, plain text or HTML bodies, and controlled From address handling.",
+		"This plugin is useful for sending alerts, notifications, and automated messages in workflows where email delivery is required."
 	]
 }
