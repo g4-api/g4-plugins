@@ -23,7 +23,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class MoveMouseCursorTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the MoveMouseCursor plugin correctly maximizes the browser window, " +
             "asserts the equality of the ScrollOutcomeY attribute to 0, moves the mouse cursor " +
             "to the MoveOutcome element, and asserts that the ScrollOutcomeY attribute is greater " +
@@ -48,7 +48,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the MoveMouseCursor plugin correctly maximizes the browser window, " +
             "moves the mouse cursor to the specified coordinates, and asserts that the " +
             "MouseXPosition and MouseYPosition elements display the expected coordinates.")]

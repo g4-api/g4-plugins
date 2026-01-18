@@ -9,7 +9,7 @@ namespace G4.UnitTests.Engine
     [TestCategory("UnitTest")]
     public class EncryptionTests
     {
-        [TestMethod(displayName: "Verify basic encryption and decryption.")]
+        [TestMethod(DisplayName = "Verify basic encryption and decryption.")]
         public void EncryptionBasicTest()
         {
             // Constants for encryption

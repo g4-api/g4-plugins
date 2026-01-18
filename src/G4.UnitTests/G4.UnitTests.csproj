@@ -11,7 +11,7 @@
 		<LangVersion>latest</LangVersion>
 
 		<!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/syslib-diagnostics/syslib1040-1049 -->
-		<NoWarn>$(NoWarn);SYSLIB1045,S4144;S3431;MSTEST0006;MSTEST0015</NoWarn>
+		<NoWarn>$(NoWarn);SYSLIB1045,S4144;S3431;MSTEST0006;MSTEST0015;MSTEST0001</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -34,21 +34,20 @@
 	<ItemGroup>
 		<PackageReference Include="G4.Abstraction.Logging" Version="2025.3.7.16" />
 		<PackageReference Include="G4.Api" Version="2025.3.29.35" />
-		<PackageReference Include="G4.Converters" Version="2025.5.19.38" />
-		<PackageReference Include="G4.Plugins" Version="2025.5.19.38" />
-		<PackageReference Include="G4.Extensions" Version="2025.5.19.38" />
-		<PackageReference Include="G4.Models" Version="2025.5.19.38" />
-		<PackageReference Include="G4.Settings" Version="2025.5.19.38" />
-		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="8.0.10" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.9.1" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.9.1" />
+		<PackageReference Include="G4.Converters" Version="2025.8.11.43" />
+		<PackageReference Include="G4.Plugins" Version="2025.8.11.43" />
+		<PackageReference Include="G4.Extensions" Version="2025.8.11.43" />
+		<PackageReference Include="G4.Models" Version="2025.8.11.43" />
+		<PackageReference Include="G4.Settings" Version="2025.8.11.43" />
+		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
 		<PackageReference Include="coverlet.collector" Version="6.0.4">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.2" />
-		<PackageReference Include="System.Runtime" Version="4.3.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>

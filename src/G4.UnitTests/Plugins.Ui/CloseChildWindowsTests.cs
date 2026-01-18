@@ -14,7 +14,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class CloseChildWindowsTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the CloseChildWindows plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the CloseChildWindows plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
@@ -22,7 +22,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<CloseChildWindows>();
         }
 
-        [TestMethod(displayName: "Verify that the CloseChildWindows plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the CloseChildWindows plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -30,7 +30,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<CloseChildWindows>();
         }
 
-        [TestMethod(displayName: "Verify that the CloseChildWindows plugin correctly closes child windows.")]
+        [TestMethod(DisplayName = "Verify that the CloseChildWindows plugin correctly closes child windows.")]
         #region *** Data Set ***
         [DataRow("{\"pluginName\":\".//CloseChildWindows\",\"onElement\":\".//positive\"}")]
         [DataRow("{\"pluginName\":\".//CloseChildWindows\"}")]
@@ -49,7 +49,7 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseChildWindows>(rulesJson, By.Custom.Positive(), capabilities);
 
             // Assert that the final window count is 1 (only the main window remains open)
-            Assert.AreEqual(expected: 1, actual: response.Plugin.WebDriver.WindowHandles.Count);
+            Assert.HasCount(expected: 1, collection: response.Plugin.WebDriver.WindowHandles);
         }
     }
 }

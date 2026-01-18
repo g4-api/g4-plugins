@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Common
     public class SendHttpRequestTests : TestBase
     {
         #region *** Delete ***
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin successfully sends an HTTP DELETE request with " +
             "an empty body to delete a resource.")]
         #region *** Criteria ***
@@ -58,7 +58,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0016>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin successfully sends an HTTP DELETE request with " +
             "no body to delete a hotel.")]
         #region *** Criteria ***
@@ -90,7 +90,7 @@ namespace G4.IntegrationTests.Suites.Common
         #endregion
 
         #region *** Get    ***
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin successfully sends an HTTP GET request to find " +
             "hotels when no method is provided.")]
         #region *** Criteria ***
@@ -113,7 +113,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin successfully sends an HTTP GET request to find " +
             "hotels using the Url parameter.")]
         #region *** Criteria ***
@@ -136,7 +136,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin successfully sends an HTTP GET request to find " +
             "hotels in XML format using the Url parameter.")]
         #region *** Criteria ***
@@ -160,7 +160,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin successfully sends an HTTP GET request with " +
             "basic authentication.")]
         #region *** Criteria ***
@@ -184,7 +184,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin successfully sends an HTTP GET request with" +
             "custom headers.")]
         #region *** Criteria ***
@@ -208,7 +208,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0005>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "sends an HTTP GET request and extracts relevant data from the response using " +
             "JSONPath expressions.")]
@@ -232,7 +232,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0006>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL and HTTP GET " +
             "method, sends an HTTP GET request and extracts relevant data from the response using " +
             "JSONPath expressions and a regular expression to extract two-digit numbers.")]
@@ -256,7 +256,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0007>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL and HTTP GET " +
             "method, sends an HTTP GET request and extracts relevant data from the response using a " +
             "regular expression to extract the pricePerNight value of the Luxury Hotel entry.")]
@@ -280,7 +280,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0008>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL and HTTP GET " +
             "method, sends an HTTP GET request and extracts relevant data from the XML response " +
             "using XPath.")]
@@ -307,7 +307,7 @@ namespace G4.IntegrationTests.Suites.Common
 
         #region *** Patch  ***
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, does not " +
             "retrieve the price of a non-existent hotel and returns an appropriate error message.")]
         #region *** Criteria ***
@@ -333,7 +333,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0024>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL and " +
             "HTTP PATCH method, sends an HTTP PATCH request to update hotel information.")]
         #region *** Criteria ***
@@ -358,7 +358,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request body, and content type, returns an appropriate error message " +
             "when the assertion operation fails.")]
@@ -385,7 +385,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0025>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request body, and content type, sends an HTTP PATCH request to " +
             "update hotel information.")]
@@ -412,7 +412,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request body, and content type as text/plain, returns an appropriate " +
             "error message when the assertion operation fails.")]
@@ -439,7 +439,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0026>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request body, and content type as text/plain, sends an HTTP PATCH " +
             "request to update hotel information.")]
@@ -466,7 +466,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request body, and ASCII encoding, returns an appropriate error " +
             "message when the assertion operation fails.")]
@@ -493,7 +493,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0027>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request body, and ASCII encoding, sends an HTTP PATCH request to " +
             "update hotel information.")]
@@ -520,7 +520,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request fields, and encoded parameters, returns an appropriate error " +
             "message when the assertion operation fails.")]
@@ -552,7 +552,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0028>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with a specific URL, " +
             "HTTP PATCH method, request fields, and encoded parameters, sends an HTTP PATCH request " +
             "to update hotel information.")]
@@ -584,7 +584,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PATCH request " +
             "in XML format, returns an appropriate error message when the assertion operation fails.")]
         #region *** Criteria ***
@@ -615,7 +615,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0029>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PATCH request " +
             "in XML format, successfully updates hotel information.")]
         #region *** Criteria ***
@@ -647,7 +647,7 @@ namespace G4.IntegrationTests.Suites.Common
 
         #region *** Post   ***
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with basic authentication " +
             "and POST method, returns an appropriate error message when the assertion operation fails.")]
         #region *** Criteria ***
@@ -675,7 +675,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0010>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured with basic authentication " +
             "and POST method, successfully connects to the specified URL.")]
         #region *** Criteria ***
@@ -701,7 +701,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with a JSON body to book a hotel room with specific details, correctly handles assertion " +
             "failure.")]
@@ -729,7 +729,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0011>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with a JSON body to book a hotel room with specific details, correctly confirms the " +
             "booking and handles errors gracefully.")]
@@ -754,7 +754,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with a plain text body to book a hotel room with specific details, correctly confirms " +
             "the booking and handles errors gracefully.")]
@@ -782,7 +782,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0012>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with a plain text body to book a hotel room with specific details, correctly confirms " +
             "the booking and handles errors gracefully.")]
@@ -807,7 +807,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with a plain text body using ASCII encoding to book a hotel room with specific details, " +
             "correctly handles assertion failure.")]
@@ -835,7 +835,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0013>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with a plain text body using ASCII encoding to book a hotel room with specific details, " +
             "correctly confirms the booking and handles errors gracefully.")]
@@ -860,7 +860,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with specified fields and content type to book a hotel, correctly handles assertion failure.")]
         #region *** Criteria ***
@@ -892,7 +892,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0014>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "with specified fields and content type to book a hotel, correctly confirms the booking.")]
         #region *** Criteria ***
@@ -921,7 +921,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "in XML format to book a hotel, correctly handles assertion failure.")]
         #region *** Criteria ***
@@ -953,7 +953,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0015>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP POST request " +
             "in XML format to book a hotel, correctly confirms the booking.")]
         #region *** Criteria ***
@@ -984,7 +984,7 @@ namespace G4.IntegrationTests.Suites.Common
 
         #region *** Put    ***
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information with a JSON body, correctly handles assertion failure.")]
         #region *** Criteria ***
@@ -1011,7 +1011,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0018>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information with a JSON body, correctly updates the hotel information.")]
         #region *** Criteria ***
@@ -1035,7 +1035,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information in text format, correctly handles assertion failure.")]
         #region *** Criteria ***
@@ -1062,7 +1062,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0019>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information in text format, correctly updates the hotel information.")]
         #region *** Criteria ***
@@ -1086,7 +1086,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information without specifying content-type and with a text/plain body, " +
             "correctly handles assertion failure.")]
@@ -1114,7 +1114,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0020>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information without specifying content-type and with a text/plain body, " +
             "correctly updates the hotel information.")]
@@ -1139,7 +1139,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information in text format with ASCII encoding, correctly handles " +
             "assertion failure.")]
@@ -1168,7 +1168,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0021>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information in text format with ASCII encoding, correctly updates the " +
             "hotel information.")]
@@ -1194,7 +1194,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information in encoded format, correctly handles assertion failure.")]
         #region *** Criteria ***
@@ -1226,7 +1226,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0022>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information in encoded format, correctly updates the hotel information.")]
         #region *** Criteria ***
@@ -1255,7 +1255,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information in XML format, correctly handles assertion failure, both " +
             "with and without specifying the content-type.")]
@@ -1290,7 +1290,7 @@ namespace G4.IntegrationTests.Suites.Common
             Invoke<C0023>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendHttpRequest plugin, when configured to send an HTTP PUT request " +
             "to update hotel information, correctly updates the hotel information, both with and " +
             "without specifying the content-type and using XML body.")]

@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     public class InvokeClickTests : TestBase
     {
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin gracefully handles failed assertions when " +
             "simulating a click action on a specified element.")]
         #region *** Criteria ***
@@ -52,7 +52,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin accurately simulates a click action on " +
             "a specified element.")]
         #region *** Criteria ***
@@ -73,7 +73,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin accurately simulates a click action on a " +
             "specified element until an alert dialog appears, and then verify the presence " +
             "of the alert.")]
@@ -107,7 +107,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin accurately simulates a click action on " +
             "a specified element, dismissing any alert dialogs triggered, and ensuring no " +
             "further alerts are present.")]
@@ -142,7 +142,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin gracefully handles failed assertions " +
             "when simulating clicking on a specified element until it becomes active.")]
         #region *** Criteria ***
@@ -178,7 +178,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin accurately simulates a click action on " +
             "a specified element until it becomes active.")]
         #region *** Criteria ***
@@ -208,7 +208,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin gracefully handles failed assertions " +
             "when simulating clicking on a specified element until a condition is met.")]
         #region *** Criteria ***
@@ -273,7 +273,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0005>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin accurately simulates a click action on " +
             "a specified element until a condition is met.")]
         #region *** Criteria ***
@@ -343,7 +343,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0005>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeClick plugin accurately simulates a click action on " +
             "a specified element until it becomes disabled.")]
         #region *** Criteria ***

@@ -16,7 +16,7 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class SendSmtpMailTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SendSmtpMail plugin is correctly registered " +
+        [TestMethod(DisplayName = "Verify that the SendSmtpMail plugin is correctly registered " +
             "and operational.")]
         public override void NewPluginTest()
         {
@@ -24,7 +24,7 @@ namespace G4.UnitTests.Plugins.Common
             AssertPlugin<SendSmtpMail>();
         }
 
-        [TestMethod(displayName: "Verify that the SendSmtpMail plugin manifest complies with the " +
+        [TestMethod(DisplayName = "Verify that the SendSmtpMail plugin manifest complies with the " +
             "expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -33,7 +33,7 @@ namespace G4.UnitTests.Plugins.Common
         }
 
         [Ignore(message: "This test requires valid Gmail SMTP credentials. It is not for public use.")]
-        [TestMethod(displayName: "Verify that SendSmtpMail can send an email via Gmail SMTP " +
+        [TestMethod(DisplayName = "Verify that SendSmtpMail can send an email via Gmail SMTP " +
             "using configured credentials.")]
         public void SendSmtpMailGoogleTest()
         {
@@ -74,7 +74,7 @@ namespace G4.UnitTests.Plugins.Common
         }
 
         [Ignore(message: "This test requires a local SMTP server (e.g., Mailpit) to be running.")]
-        [TestMethod(displayName: "Verify that SendSmtpMail can send an email to a local SMTP server " +
+        [TestMethod(DisplayName = "Verify that SendSmtpMail can send an email to a local SMTP server " +
             "(Mailpit) without authentication.")]
         public void SendSmtpMailTest()
         {

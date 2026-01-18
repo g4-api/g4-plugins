@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class InvokeContextClickTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin can perform a " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin can perform a " +
             "context click action without exceptions.")]
         public void ContextClickTest()
         {
@@ -24,7 +24,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin can perform a " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin can perform a " +
             "context click action on specified elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -39,7 +39,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin can perform a " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin can perform a " +
             "context click action on elements inside other elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -54,45 +54,44 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin throws a " +
             "NoSuchElementException for non-existing elements.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//none""}")]
         #endregion
         public void ContextClickOnElementInsideElementNoElementExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeContextClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<NoSuchElementException>(() 
+                => Invoke<InvokeContextClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin throws a " +
             "StaleElementReferenceException for stale elements.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//stale""}")]
         #endregion
         public void ContextClickOnElementInsideElementStaleExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeContextClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<StaleElementReferenceException>(()
+                => Invoke<InvokeContextClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin throws a " +
             "WebDriverException for elements that cause exceptions.")]
-        [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//exception""}")]
         #endregion
         public void ContextClickOnElementInsideElementExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeContextClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<WebDriverException>(()
+                => Invoke<InvokeContextClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin throws a " +
             "WebDriverTimeoutException for timeout scenarios.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//null""}")]
         [DataRow(@"{""onElement"":""//none""}")]
@@ -102,10 +101,10 @@ namespace G4.UnitTests.Plugins.Ui
         public void ContextClickOnElementTimeoutExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON
-            Invoke<InvokeContextClick>(ruleJson);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<InvokeContextClick>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
@@ -113,7 +112,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<InvokeContextClick>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeContextClick plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the InvokeContextClick plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {

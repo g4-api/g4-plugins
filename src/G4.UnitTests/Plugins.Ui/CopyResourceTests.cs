@@ -10,7 +10,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class CopyResourceTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the CopyResource plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the CopyResource plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -18,7 +18,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<CopyResource>();
         }
 
-        [TestMethod(displayName: "Verify that the CopyResource plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the CopyResource plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {

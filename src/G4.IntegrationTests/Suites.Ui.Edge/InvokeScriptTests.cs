@@ -24,7 +24,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class InvokeScriptTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeScript plugin correctly executes a script on the " +
             "page, and ensures that the page behaves as expected after script execution.")]
         #region *** Criteria ***
@@ -52,7 +52,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeScript plugin correctly executes a script block " +
             "on the page, and ensures that the page behaves as expected after script execution.")]
         #region *** Criteria ***
@@ -80,7 +80,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeScript plugin correctly executes a script block " +
             "on the page, passing arguments when necessary, and ensures that the page " +
             "behaves as expected after script execution.")]
@@ -109,7 +109,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeScript plugin correctly executes a script block " +
             "on the specified element, passing arguments when necessary, and ensures " +
             "that the element behaves as expected after script execution.")]
@@ -138,7 +138,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeScript plugin correctly executes a script block " +
             "on the specified element, and ensures that the element behaves as expected " +
             "after script execution.")]

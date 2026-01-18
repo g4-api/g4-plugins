@@ -14,7 +14,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SetWindowStateTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SetWindowFullScreen plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SetWindowFullScreen plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -22,7 +22,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SetWindowState>();
         }
 
-        [TestMethod(displayName: "Verify that the SetWindowFullScreen plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SetWindowFullScreen plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -30,7 +30,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SetWindowState>();
         }
 
-        [TestMethod(displayName: "Verify that the SetWindowFullScreen action works correctly.")]
+        [TestMethod(DisplayName = "Verify that the SetWindowFullScreen action works correctly.")]
         public void SetWindowFullScreenTest()
         {
             // Define the rule JSON
@@ -40,10 +40,10 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke<SetWindowState>(ruleJson).Response;
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(!responseModel.Exceptions.Any());
+            Assert.IsFalse(responseModel.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that the SetWindowFullScreen action works correctly with an element.")]
+        [TestMethod(DisplayName = "Verify that the SetWindowFullScreen action works correctly with an element.")]
         public void SetWindowFullScreenElementTest()
         {
             // Invoke the SetWindowFullScreen action with the specified action rule
@@ -52,10 +52,10 @@ namespace G4.UnitTests.Plugins.Ui
                 by: By.Custom.Positive()).Response;
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(!responseModel.Exceptions.Any());
+            Assert.IsFalse(responseModel.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that the InvokeMaximizeWindow plugin can maximize " +
+        [TestMethod(DisplayName = "Verify that the InvokeMaximizeWindow plugin can maximize " +
             "a window without exceptions.")]
         public void MaximizeWindowTest()
         {
@@ -69,7 +69,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeMaximizeWindow plugin can maximize " +
+        [TestMethod(DisplayName = "Verify that the InvokeMaximizeWindow plugin can maximize " +
             "a window with an element without exceptions.")]
         public void MaximizeWindowWithElementTest()
         {
@@ -83,7 +83,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeMinimizeWindow plugin can minimize " +
+        [TestMethod(DisplayName = "Verify that the InvokeMinimizeWindow plugin can minimize " +
             "a window without exceptions.")]
         public void MinimizeWindowTest()
         {
@@ -97,7 +97,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeMinimizeWindow plugin can minimize " +
+        [TestMethod(DisplayName = "Verify that the InvokeMinimizeWindow plugin can minimize " +
             "a window with an element without exceptions.")]
         public void MinimizeWindowWithElementTest()
         {

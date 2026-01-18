@@ -29,7 +29,7 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonConditionDynamic, "notSelected"]
         ];
 
-        [TestMethod(displayName: "Verify that element is not selected with various positive conditions")]
+        [TestMethod(DisplayName = "Verify that element is not selected with various positive conditions")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
         #endregion
@@ -51,7 +51,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual("Foo Bar", actual, ignoreCase: true);
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected condition fails for various " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected condition fails for various " +
             "conditions with first-layer elements.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
@@ -77,7 +77,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected condition fails for various " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected condition fails for various " +
             "negative cases.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
@@ -100,7 +100,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected condition handles " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected condition handles " +
             "StaleElementReferenceException for first-layer elements.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
@@ -126,7 +126,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected condition handles " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected condition handles " +
             "WebDriverException for first-layer elements.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
@@ -152,7 +152,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element is not selected when null with various assertions")]
+        [TestMethod(DisplayName = "Verify that element is not selected when null with various assertions")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
         #endregion
@@ -177,14 +177,14 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin can be successfully created.")]
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin can be successfully created.")]
         public override void NewPluginTest()
         {
             // Ensure the plugin can be instantiated without issues
             AssertPlugin<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {

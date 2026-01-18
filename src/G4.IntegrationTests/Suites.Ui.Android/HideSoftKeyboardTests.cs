@@ -25,7 +25,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
     public class HideSoftKeyboardTests : TestBase
     {
         [TestCategory("MobileWeb")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the HideKeyboard plugin correctly hides the soft keyboard on the UI.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The HideKeyboard plugin integrates seamlessly into the automation testing framework.")]
@@ -56,7 +56,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the HideKeyboard plugin correctly hides the soft keyboard on the UI using " +
             "different strategies.")]
         #region *** Criteria ***
@@ -90,7 +90,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the HideKeyboard plugin correctly hides the soft keyboard on the UI by " +
             "pressing a specified key code.")]
         #region *** Criteria ***
@@ -120,7 +120,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the HideKeyboard plugin correctly hides the soft keyboard on the UI by " +
             "pressing a specified key name.")]
         #region *** Criteria ***
@@ -150,7 +150,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the HideKeyboard plugin correctly hides the soft keyboard on the UI by " +
             "pressing a specified key.")]
         #region *** Criteria ***

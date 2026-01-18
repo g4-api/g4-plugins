@@ -26,7 +26,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class InvokeScrollTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeScroll plugin correctly scrolls the page according to " +
             "the specified argument, and ensures that the page scroll left and top outcomes " +
             "match the expected values, considering different scroll behaviors (smooth, instant, or auto).")]
@@ -67,7 +67,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeScroll plugin correctly scrolls the specified element " +
             "according to the specified argument, and ensures that the element scroll left " +
             "and top outcomes match the expected values, considering different scroll " +

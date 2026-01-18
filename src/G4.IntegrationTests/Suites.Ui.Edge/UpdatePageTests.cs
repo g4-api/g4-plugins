@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class UpdatePageTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UpdatePage plugin, when invoked, correctly updates the page, resetting " +
             "input fields and refreshing content.")]
         #region *** Criteria ***
@@ -50,7 +50,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UpdatePage plugin, when invoked multiple times, correctly updates the " +
             "page, resetting input fields and refreshing content.")]
         #region *** Criteria ***
@@ -72,7 +72,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UpdatePage plugin, when invoked multiple times with repetition specified " +
             "by the Repeat parameter, correctly updates the page, resetting input fields and refreshing " +
             "content.")]
@@ -95,7 +95,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UpdatePage plugin, when invoked to refresh the page multiple times with " +
             "repetition specified by the Repeat parameter and a delay between each refresh specified " +
             "by the Delay parameter, correctly resets input fields and refreshes content.")]
@@ -127,7 +127,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime > 3 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UpdatePage plugin, when invoked to update the page multiple times with " +
             "repetition specified by the Repeat parameter and a delay between updates specified in " +
             "the 'HH:mm:ss' format by the Delay parameter, correctly resets input fields and refreshes " +

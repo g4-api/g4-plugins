@@ -26,21 +26,21 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonBoolean, "notExists"]
         ];
 
-        [TestMethod(displayName: "Verify that the ElementNotExists plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ElementNotExists plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementNotExists>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotExists plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the ElementNotExists plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementNotExists>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotExists plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementNotExists plugin correctly evaluates " +
             "elements in negative scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
@@ -60,7 +60,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotExists plugin handles StaleElementReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementNotExists plugin handles StaleElementReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -82,7 +82,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotExists plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementNotExists plugin correctly evaluates " +
             "elements in positive scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]

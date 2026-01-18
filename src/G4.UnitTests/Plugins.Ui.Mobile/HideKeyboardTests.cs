@@ -11,21 +11,21 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
     [DoNotParallelize]
     public class HideKeyboardTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the HideSoftKeyboard plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the HideSoftKeyboard plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<HideSoftKeyboard>();
         }
 
-        [TestMethod(displayName: "Verify that the HideSoftKeyboard plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the HideSoftKeyboard plugin complies with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<HideSoftKeyboard>();
         }
 
-        [TestMethod(displayName: "Verify that the HideSoftKeyboard plugin functions correctly " +
+        [TestMethod(DisplayName = "Verify that the HideSoftKeyboard plugin functions correctly " +
             "with various valid arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --KeyName:Done --Strategy:pressKey}}""}")]

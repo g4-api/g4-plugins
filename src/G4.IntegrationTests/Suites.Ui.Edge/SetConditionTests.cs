@@ -25,7 +25,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SetConditionTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check for the existence " +
             "of an alert, triggers conditional actions accurately and seamlessly integrates " +
             "into the automation testing framework.")]
@@ -47,7 +47,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check for the absence of an alert, " +
             "triggers conditional actions accurately and seamlessly integrates into the automation " +
             "testing framework.")]
@@ -69,7 +69,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to match a pattern with the driver " +
             "type name, triggers conditional actions accurately and seamlessly integrates into the " +
             "automation testing framework.")]
@@ -92,7 +92,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is not active, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -114,7 +114,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate a specified element " +
             "attribute and meet a condition, triggers conditional actions accurately and seamlessly " +
             "integrates into the automation testing framework.")]
@@ -136,7 +136,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0005>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the count of specified " +
             "elements and meet a condition, triggers conditional actions accurately and seamlessly " +
             "integrates into the automation testing framework.")]
@@ -158,7 +158,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0006>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is disabled, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -180,7 +180,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0007>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is enabled, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -202,7 +202,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0008>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element exists, " +
             "triggers conditional actions accurately and seamlessly integrates into the automation " +
             "testing framework.")]
@@ -224,7 +224,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0009>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is not active, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -246,7 +246,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0010>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "does not exist, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -268,7 +268,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0011>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is not selected, triggers conditional actions accurately and seamlessly integrates " +
             "into the automation testing framework.")]
@@ -290,7 +290,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0012>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is not visible, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -312,7 +312,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0013>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is selected, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -334,7 +334,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0014>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate a specified element's " +
             "text and meet a condition, triggers conditional actions accurately and seamlessly " +
             "integrates into the automation testing framework.")]
@@ -356,7 +356,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0015>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the length of a " +
             "specified element's text and meet a condition, triggers conditional actions accurately " +
             "and seamlessly integrates into the automation testing framework.")]
@@ -378,7 +378,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0016>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is visible, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -400,7 +400,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0017>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the page title and " +
             "meet a condition, triggers conditional actions accurately and seamlessly integrates " +
             "into the automation testing framework.")]
@@ -422,7 +422,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0018>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the page URL and meet " +
             "a condition, triggers conditional actions accurately and seamlessly integrates into " +
             "the automation testing framework.")]
@@ -444,7 +444,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0019>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the count of windows " +
             "and meet a condition, triggers conditional actions accurately and seamlessly integrates " +
             "into the automation testing framework.")]
@@ -466,7 +466,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0020>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if an alert exists, " +
             "accurately handles negative scenarios where an alert is expected not to exist, ensuring " +
             "that no actions are executed.")]
@@ -491,7 +491,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0021>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if an alert does not exist, " +
             "accurately handles negative scenarios where an alert is expected to exist, ensuring " +
             "that no actions are executed.")]
@@ -516,7 +516,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0022>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate certain conditions, " +
             "accurately handles negative scenarios where the conditions are not met, ensuring that " +
             "no actions are executed.")]
@@ -542,7 +542,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is active, accurately handles negative scenarios where the element is expected not to " +
             "be active, ensuring that no actions are executed.")]
@@ -567,7 +567,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0024>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate a specified element's " +
             "attribute and meet a condition, accurately handles negative scenarios where the element's " +
             "attribute does not meet the specified condition, ensuring that no actions are executed.")]
@@ -592,7 +592,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0025>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the count of specified " +
             "elements and meet a condition, accurately handles negative scenarios where the elements " +
             "count does not meet the specified condition, ensuring that no actions are executed.")]
@@ -617,7 +617,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0026>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is disabled, accurately handles negative scenarios where the element is expected not " +
             "to be disabled, ensuring that no actions are executed.")]
@@ -642,7 +642,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0027>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is enabled, accurately handles negative scenarios where the element is expected not " +
             "to be enabled, ensuring that no actions are executed.")]
@@ -667,7 +667,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0028>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "exists, accurately handles negative scenarios where the element is expected not to " +
             "exist, ensuring that no actions are executed.")]
@@ -693,7 +693,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0029>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is not active, accurately handles negative scenarios where the element is expected to " +
             "be active, ensuring that no actions are executed.")]
@@ -718,7 +718,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0030>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "does not exist, accurately handles negative scenarios where the element is expected to " +
             "exist, ensuring that no actions are executed.")]
@@ -743,7 +743,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0031>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is not selected, accurately handles negative scenarios where the element is expected to " +
             "be selected, ensuring that no actions are executed.")]
@@ -768,7 +768,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0032>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is not visible, accurately handles negative scenarios where the element is expected " +
             "to be visible, ensuring that no actions are executed.")]
@@ -794,7 +794,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0033>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is selected, accurately handles negative scenarios where the element is expected not " +
             "to be selected, ensuring that no actions are executed.")]
@@ -819,7 +819,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0034>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate a specified element's " +
             "text and meet a condition, accurately handles negative scenarios where the element's " +
             "text does not meet the specified condition, ensuring that no actions are executed.")]
@@ -844,7 +844,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0035>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate a specified element's " +
             "text length and meet a condition, accurately handles negative scenarios where the " +
             "element's text length does not meet the specified condition, ensuring that no actions are execute")]
@@ -869,7 +869,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0036>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to check if a specified element " +
             "is visible, accurately handles negative scenarios where the element is expected not to " +
             "be visible, ensuring that no actions are executed.")]
@@ -894,7 +894,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0037>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the page title and " +
             "meet a condition, accurately handles negative scenarios where the page title does not " +
             "meet the specified condition, ensuring that no actions are executed.")]
@@ -919,7 +919,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0038>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the page URL and meet " +
             "a condition, accurately handles negative scenarios where the page URL does not meet the " +
             "specified condition, ensuring that no actions are executed.")]
@@ -944,7 +944,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0039>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetCondition plugin, when configured to evaluate the count of open " +
             "windows and meet a condition, accurately handles negative scenarios where the count " +
             "of open windows does not meet the specified condition, ensuring that no actions are executed.")]

@@ -19,7 +19,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SaveScreenshotTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SaveScreenshot plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -27,7 +27,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SaveScreenshot>();
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -35,7 +35,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SaveScreenshot>();
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with valid arguments.")]
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with valid arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Directory:Screenshots --FileName:$[FileName]}}""}", "PageScreenshot-$[Guid].png")]
         #endregion
@@ -66,7 +66,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => i.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with no directory specified.")]
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with no directory specified.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --FileName:$[FileName]}}""}", "PageScreenshot-$[Guid].png")]
         #endregion
@@ -97,7 +97,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => i.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with no file name specified.")]
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with no file name specified.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Directory:Screenshots}}""}", "PageScreenshot-$[Guid].png")]
         #endregion
@@ -128,7 +128,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with no arguments.")]
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with no arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":null}", "PageScreenshot-$[Guid].png")]
         #endregion
@@ -159,7 +159,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with an element specified.")]
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with an element specified.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Directory:Screenshots --FileName:$[FileName]}}""}", "PageScreenshot-$[Guid].png")]
         #endregion
@@ -190,7 +190,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => i.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with no " +
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with no " +
             "directory specified and an element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --FileName:$[FileName]}}""}", "PageScreenshot-$[Guid].png")]
@@ -222,7 +222,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => i.EndsWith(fileName, StringComparison.OrdinalIgnoreCase)));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with no file " +
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with no file " +
             "name specified and an element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Directory:Screenshots}}""}", "PageScreenshot-$[Guid].png")]
@@ -254,7 +254,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action works with no arguments and an element.")]
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action works with no arguments and an element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":null}", "PageScreenshot-$[Guid].png")]
         #endregion
@@ -285,7 +285,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action throws exceptions with null elements.")]
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action throws exceptions with null elements.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":null, ""onElement"":""null""}")]
         #endregion
@@ -310,49 +310,40 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action throws " +
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action throws " +
             "StaleElementReferenceException with stale elements.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":null, ""onElement"":""stale""}")]
         #endregion
         public void SaveScreenshotExceptionStaleElementTest(string ruleJson)
         {
             // Invoke the action to get the plugin
-            var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that the plugin's exceptions are not empty
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<StaleElementReferenceException>(() =>
+                Invoke<SaveScreenshot>(ruleJson, By.Custom.Stale()));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action throws " +
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action throws " +
             "NoSuchElementException with no elements.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":null, ""onElement"":""none""}")]
         #endregion
         public void SaveScreenshotExceptionNoElementTest(string ruleJson)
         {
             // Invoke the action to get the plugin
-            var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that the plugin's exceptions are not empty
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<NoSuchElementException>(() =>
+                Invoke<SaveScreenshot>(ruleJson, By.Custom.Negative()));
         }
 
-        [TestMethod(displayName: "Verify that the SaveScreenshot action throws WebDriverException " +
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action throws WebDriverException " +
             "with exception elements.")]
-        [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":null, ""onElement"":""exception""}")]
         #endregion
         public void SaveScreenshotExceptionElementTest(string ruleJson)
         {
             // Invoke the action to get the plugin
-            var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that the plugin's exceptions are not empty
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<WebDriverException>(() =>
+                Invoke<SaveScreenshot>(ruleJson, By.Custom.Exception()));
         }
     }
 }

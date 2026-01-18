@@ -15,7 +15,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SwitchAlertTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SwitchAlert plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SwitchAlert plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -23,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SwitchAlert>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchAlert plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SwitchAlert plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -31,7 +31,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SwitchAlert>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchAlert action works correctly.")]
+        [TestMethod(DisplayName = "Verify that the SwitchAlert action works correctly.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""""}")]
         [DataRow(@"{""argument"":""{{$ --AlertAction:Dismiss}}""}")]
@@ -51,25 +51,25 @@ namespace G4.UnitTests.Plugins.Ui
             });
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(!responseModel.Response.Exceptions.Any());
+            Assert.IsFalse(responseModel.Response.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that the SwitchAlert action throws NoSuchAlertException " +
+        [TestMethod(DisplayName = "Verify that the SwitchAlert action throws NoSuchAlertException " +
             "when no alert is present.")]
-        [ExpectedException(typeof(NoSuchAlertException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""""}")]
         #endregion
         public void SwitchAlertNoAlertTest(string ruleJson)
         {
-            // Invoke the SwitchAlert action with the specified action rule
-            var responseModel = Invoke<SwitchAlert>(ruleJson, capabilities: new Dictionary<string, object>
+            // Initialize simulator capabilities indicating no alert is present
+            var capabilities = new Dictionary<string, object>
             {
                 [SimulatorCapabilities.HasAlert] = false
-            });
+            };
 
-            // Assert that NoSuchAlertException was thrown
-            Assert.IsFalse(!responseModel.Response.Exceptions.Any());
+            // Invoke the SwitchAlert action with the specified action rule
+            Assert.Throws<NoSuchAlertException>(()
+                => Invoke<SwitchAlert>(ruleJson, capabilities));
         }
     }
 }

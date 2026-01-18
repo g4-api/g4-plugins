@@ -13,7 +13,7 @@ namespace G4.UnitTests.Loggers
     [TestCategory("UnitTest")]
     public class LoggerTests
     {
-        [TestMethod(displayName: "Verify the creation of a new logger with the configuration " +
+        [TestMethod(DisplayName = "Verify the creation of a new logger with the configuration " +
             "specified in the appsettings.json file and environment variables.")]
         public void NewLoggerTest()
         {

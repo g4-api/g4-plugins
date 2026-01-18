@@ -16,7 +16,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SetFocusTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SetFocus plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SetFocus plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -24,7 +24,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SetFocus>();
         }
 
-        [TestMethod(displayName: "Verify that the SetFocus plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SetFocus plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -32,7 +32,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SetFocus>();
         }
 
-        [TestMethod(displayName: "Verify that the SetFocus action works with valid elements " +
+        [TestMethod(DisplayName = "Verify that the SetFocus action works with valid elements " +
             "inside an element.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive""}")]
@@ -45,34 +45,34 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke<SetFocus>(ruleJson, By.Custom.Positive()).Response;
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(!responseModel.Exceptions.Any());
+            Assert.IsFalse(responseModel.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that the SetFocus action throws NoSuchElementException " +
+        [TestMethod(DisplayName = "Verify that the SetFocus action throws NoSuchElementException " +
             "for none element inside an element.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//none""}")]
         #endregion
         public void SetFocusElementInsideElementNoElementExceptionTest(string ruleJson)
         {
             // Invoke the SetFocus action with the specified action rule
-            Invoke<SetFocus>(ruleJson, By.Custom.Positive());
+            Assert.Throws<NoSuchElementException>(()
+                => Invoke<SetFocus>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SetFocus action throws StaleElementReferenceException " +
+        [TestMethod(DisplayName = "Verify that the SetFocus action throws StaleElementReferenceException " +
             "for stale element inside an element.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//stale""}")]
         #endregion
         public void SetFocusElementInsideElementStaleExceptionTest(string ruleJson)
         {
             // Invoke the SetFocus action with the specified action rule
-            Invoke<SetFocus>(ruleJson, By.Custom.Positive());
+            Assert.Throws<StaleElementReferenceException>(()
+                => Invoke<SetFocus>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SetFocus action works with valid elements.")]
+        [TestMethod(DisplayName = "Verify that the SetFocus action works with valid elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
         [DataRow(@"{""onElement"":""//negative""}")]
@@ -83,12 +83,11 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke<SetFocus>(ruleJson, By.Custom.Positive()).Response;
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(!responseModel.Exceptions.Any());
+            Assert.IsFalse(responseModel.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that the SetFocus action throws " +
+        [TestMethod(DisplayName = "Verify that the SetFocus action throws " +
             "WebDriverTimeoutException for invalid elements.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//none""}")]
         [DataRow(@"{""onElement"":""//null""}")]
@@ -97,10 +96,10 @@ namespace G4.UnitTests.Plugins.Ui
         public void SetFocusTimeoutExceptionTest(string ruleJson)
         {
             // Invoke the SetFocus action with the specified action rule
-            Invoke<SetFocus>(ruleJson);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<SetFocus>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the SetFocus action throws " +
+        [TestMethod(DisplayName = "Verify that the SetFocus action throws " +
             "MissingMandatoryPropertyException for no element.")]
         public void SetFocusNoElementTest()
         {

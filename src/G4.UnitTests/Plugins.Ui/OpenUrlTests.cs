@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class OpenUrlTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the OpenUrl plugin manifest complies with " +
+        [TestMethod(DisplayName = "Verify that the OpenUrl plugin manifest complies with " +
             "the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -21,14 +21,14 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<OpenUrl>();
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl plugin can be successfully created.")]
+        [TestMethod(DisplayName = "Verify that the OpenUrl plugin can be successfully created.")]
         public override void NewPluginTest()
         {
             // Ensure the plugin can be instantiated without issues
             AssertPlugin<OpenUrl>();
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl method opens a URL from the attribute.")]
+        [TestMethod(DisplayName = "Verify that the OpenUrl method opens a URL from the attribute.")]
         public void OpenUrlFromAttributeTest()
         {
             // Define the rule JSON to open a URL from an attribute
@@ -43,7 +43,7 @@ namespace G4.UnitTests.Plugins.Ui
                 actual: plugin.WebDriver.Navigate().Url.TrimEnd('/'));
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl method opens a URL from the argument.")]
+        [TestMethod(DisplayName = "Verify that the OpenUrl method opens a URL from the argument.")]
         public void OpenUrlFromArgumentTest()
         {
             // Define the rule JSON to open a URL from an argument
@@ -56,7 +56,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected: "http://positive.io", actual: plugin.WebDriver.Navigate().Url);
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl method opens a URL from the element.")]
+        [TestMethod(DisplayName = "Verify that the OpenUrl method opens a URL from the element.")]
         public void OpenUrlFromElementTest()
         {
             // Define the rule JSON to open a URL from an element
@@ -69,31 +69,30 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected: "http://positive.io/20", actual: plugin.WebDriver.Navigate().Url);
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl method throws a NoSuchElementException " +
+        [TestMethod(DisplayName = "Verify that the OpenUrl method throws a NoSuchElementException " +
             "when the element does not exist.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         public void OpenUrlNoSuchElementExceptionTest()
         {
             // Invoke the OpenUrl plugin with a non-existing element, expecting a NoSuchElementException
-            Invoke<OpenUrl>(
-                ruleJson: @"{""pluginName"":""OpenUrl"", ""onElement"":"".//none""}",
-                by: By.Custom.Positive());
+            Assert.Throws<NoSuchElementException>(() =>
+                Invoke<OpenUrl>(
+                    ruleJson: @"{""pluginName"":""OpenUrl"", ""onElement"":"".//none""}",
+                    by: By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl method throws a StaleElementReferenceException " +
+        [TestMethod(DisplayName = "Verify that the OpenUrl method throws a StaleElementReferenceException " +
             "when the element is stale.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         public void OpenUrlStaleElementReferenceExceptionTest()
         {
             // Invoke the OpenUrl plugin with a stale element, expecting a StaleElementReferenceException
-            Invoke<OpenUrl>(
-                ruleJson: @"{""pluginName"":""OpenUrl"", ""onElement"":"".//stale""}",
-                by: By.Custom.Positive());
+            Assert.Throws<StaleElementReferenceException>(() =>
+                Invoke<OpenUrl>(
+                    ruleJson: @"{""pluginName"":""OpenUrl"", ""onElement"":"".//stale""}",
+                    by: By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl method throws a WebDriverTimeoutException " +
+        [TestMethod(DisplayName = "Verify that the OpenUrl method throws a WebDriverTimeoutException " +
             "when the element is invalid.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""OpenUrl"", ""onElement"":""//none""}")]
         [DataRow(@"{""pluginName"":""OpenUrl"", ""onElement"":""//null""}")]
@@ -102,7 +101,7 @@ namespace G4.UnitTests.Plugins.Ui
         public void OpenUrlTimeoutExceptionTest(string ruleJson)
         {
             // Invoke the OpenUrl plugin with invalid elements, expecting a WebDriverTimeoutException
-            Invoke<OpenUrl>(ruleJson);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<OpenUrl>(ruleJson));
         }
     }
 }

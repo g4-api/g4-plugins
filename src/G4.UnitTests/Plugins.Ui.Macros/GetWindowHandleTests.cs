@@ -19,7 +19,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
     [TestCategory("UnitTest")]
     public class GetWindowHandleTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the GetWindowHandle macro plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the GetWindowHandle macro plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -27,7 +27,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertManifest<GetWindowHandle>(pluginName: "Get-WindowHandle");
         }
 
-        [TestMethod(displayName: "Verify that the GetWindowHandle macro plugin can be " +
+        [TestMethod(DisplayName = "Verify that the GetWindowHandle macro plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -35,7 +35,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertPlugin<GetWindowHandle>();
         }
 
-        [TestMethod(displayName: "Verify that the GetWindowHandle macro plugin returns an empty result " +
+        [TestMethod(DisplayName = "Verify that the GetWindowHandle macro plugin returns an empty result " +
             "when the driver is null.")]
         public void GetWindowHandleExceptionTest()
         {
@@ -55,7 +55,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.AreEqual(expected: string.Empty, testResult.Response.Entity[MacroResultKey]);
         }
 
-        [DataTestMethod(displayName: "Verify that the GetWindowHandle macro plugin returns " +
+        [TestMethod(DisplayName = "Verify that the GetWindowHandle macro plugin returns " +
             "the correct window handle when a valid index is specified.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Index:1}}""}")]
@@ -81,7 +81,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.AreEqual(expected, responseModel.Entity[MacroResultKey]);
         }
 
-        [DataTestMethod(displayName: "Verify that the GetWindowHandle macro plugin returns " +
+        [TestMethod(DisplayName = "Verify that the GetWindowHandle macro plugin returns " +
             "the correct driver type name.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Index:a}}""}")]
@@ -102,7 +102,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.IsTrue(Regex.IsMatch(input: $"{responseModel.Entity[MacroResultKey]}", pattern: expected));
         }
 
-        [DataTestMethod(displayName: "Verify that the GetWindowHandle macro plugin throws ArgumentOutOfRangeException " +
+        [TestMethod(DisplayName = "Verify that the GetWindowHandle macro plugin throws ArgumentOutOfRangeException " +
             "when an invalid index is specified.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Index:-1}}""}")]

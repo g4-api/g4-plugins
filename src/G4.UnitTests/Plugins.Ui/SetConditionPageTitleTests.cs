@@ -287,21 +287,21 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonConditionDynamicFailOnException, "windowTitle", @"^\\d+ Mock G4™ API Page Title$", ".*", "notMatch"]
         ];
 
-        [TestMethod(displayName: "Verify that the plugin's manifest complies with expected " +
+        [TestMethod(DisplayName = "Verify that the plugin's manifest complies with expected " +
             "standards and specifications")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the plugin is correctly instantiated and " +
+        [TestMethod(DisplayName = "Verify that the plugin is correctly instantiated and " +
             "operates as expected")]
         public override void NewPluginTest()
         {
             AssertPlugin<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that title assertions are evaluated correctly")]
+        [TestMethod(DisplayName = "Verify that title assertions are evaluated correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -324,7 +324,7 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke(ruleJson);
 
             // Assert that no exceptions were thrown
-            Assert.IsTrue(!responseModel.GetExceptions().Any());
+            Assert.IsFalse(responseModel.GetExceptions().Any());
 
             // Extract the session parameter value from the response model and decode it from Base64
             // encoding to a string value for comparison purposes
@@ -334,7 +334,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual("Foo Bar", actual, ignoreCase: true);
         }
 
-        [TestMethod(displayName: "Verify that title value assertions handle WebDriverException correctly")]
+        [TestMethod(DisplayName = "Verify that title value assertions handle WebDriverException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion

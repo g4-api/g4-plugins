@@ -24,7 +24,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class CloseChildWindowsTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CloseChildWindows plugin, when configured to close a specific number " +
             "of child windows, correctly handles the window count.")]
         #region *** Criteria ***

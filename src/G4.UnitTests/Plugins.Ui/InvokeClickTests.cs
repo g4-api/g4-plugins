@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class InvokeClickTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeClick plugin can perform a click " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin can perform a click " +
             "action on specified elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -27,7 +27,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin can perform a click " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin can perform a click " +
             "action on elements inside other elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -41,69 +41,67 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin throws an " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin throws an " +
             "ElementNotInteractableException for elements that are not interactable.")]
-        [ExpectedException(typeof(ElementNotInteractableException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//negative""}")]
         #endregion
         public void ClickOnElementNotInteractableExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeClick>(ruleJson);
+            Assert.Throws<ElementNotInteractableException>(() => Invoke<InvokeClick>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin throws an " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin throws an " +
             "ElementNotInteractableException for elements that are not interactable inside other elements.")]
-        [ExpectedException(typeof(ElementNotInteractableException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//negative""}")]
         #endregion
         public void ClickOnElementInsideElementNotInteractableExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<ElementNotInteractableException>(() 
+                => Invoke<InvokeClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin throws a " +
             "NoSuchElementException for non-existing elements.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//none""}")]
         #endregion
         public void ClickOnElementInsideElementNoElementExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<NoSuchElementException>(()
+                => Invoke<InvokeClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin throws a " +
             "StaleElementReferenceException for stale elements inside other elements.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//stale""}")]
         #endregion
         public void ClickOnElementInsideElementStaleExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<StaleElementReferenceException>(()
+                => Invoke<InvokeClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin throws a WebDriverException " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin throws a WebDriverException " +
             "for elements that cause exceptions inside other elements.")]
-        [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//exception""}")]
         #endregion
         public void ClickOnElementInsideElementExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<WebDriverException>(() 
+                => Invoke<InvokeClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin throws a WebDriverTimeoutException " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin throws a WebDriverTimeoutException " +
             "for timeout scenarios.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//null""}")]
         [DataRow(@"{""onElement"":""//none""}")]
@@ -113,10 +111,10 @@ namespace G4.UnitTests.Plugins.Ui
         public void ClickOnElementTimeoutExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON
-            Invoke<InvokeClick>(ruleJson);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<InvokeClick>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin can perform a click " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin can perform a click " +
             "action without exceptions.")]
         public void ClickTest()
         {
@@ -127,7 +125,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -135,7 +133,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<InvokeClick>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeClick plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the InvokeClick plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             // Assert that the InvokeClick plugin can be created successfully

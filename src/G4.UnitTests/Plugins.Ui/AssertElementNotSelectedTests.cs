@@ -27,21 +27,21 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonBoolean, "notSelected"]
         ];
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementNotSelected>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementNotSelected>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected plugin correctly evaluates " +
             "elements in negative scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
@@ -61,7 +61,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected plugin handles NoSuchElementException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected plugin handles NoSuchElementException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -83,7 +83,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected plugin handles NullReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected plugin handles NullReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -105,7 +105,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected plugin handles StaleElementReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected plugin handles StaleElementReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -127,7 +127,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotSelected plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementNotSelected plugin correctly evaluates " +
             "elements in positive scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]

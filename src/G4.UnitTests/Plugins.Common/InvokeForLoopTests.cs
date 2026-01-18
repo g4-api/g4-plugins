@@ -19,21 +19,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class InvokeForLoopTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the InvokeForLoop plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<InvokeForLoop>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin complies with " +
+        [TestMethod(DisplayName = "Verify that the InvokeForLoop plugin complies with " +
             "the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<InvokeForLoop>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin performs the loop " +
+        [TestMethod(DisplayName = "Verify that the InvokeForLoop plugin performs the loop " +
             "correctly and awards the expected performance points.")]
         public void InvokeForLoopPositiveTest()
         {
@@ -43,7 +43,7 @@ namespace G4.UnitTests.Plugins.Common
                 expectedPerformancePoints: 4);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin performs nested " +
+        [TestMethod(DisplayName = "Verify that the InvokeForLoop plugin performs nested " +
             "loops correctly and awards the expected performance points.")]
         public void InvokeForLoopWithNestedLoopPositiveTest()
         {
@@ -53,7 +53,7 @@ namespace G4.UnitTests.Plugins.Common
                 expectedPerformancePoints: 13);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeForLoop plugin performs triple " +
+        [TestMethod(DisplayName = "Verify that the InvokeForLoop plugin performs triple " +
             "nested loops correctly and awards the expected performance points.")]
         public void InvokeForLoopTripleLoopPositiveTest()
         {
@@ -84,7 +84,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: "Foo Bar", actual);
 
             // Assert that the number of performance points matches the expected count.
-            Assert.IsTrue(performancePoints.Count() == expectedPerformancePoints);
+            Assert.AreEqual(expectedPerformancePoints, performancePoints.Count());
         }
     }
 }

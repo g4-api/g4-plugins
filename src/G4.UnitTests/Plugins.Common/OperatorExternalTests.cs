@@ -11,14 +11,15 @@ using Stubs = G4.UnitTests.Framework.ActionRuleStubs;
 
 namespace G4.UnitTests.Plugins.Common
 {
-    //[TestClass]
+    [TestClass]
     [TestCategory("OperatorExternal")]
     [TestCategory("UnitTest")]
     public class OperatorExternalTests : TestBase
     {
+        [Ignore(IgnoreMessage = "Requires external service not available on CI/CD environment.")]
         [RetryableTestMethod(
             numberOfAttempts: 5,
-            displayName: "Verify that the ExternalOperator plugin handles exceptions correctly and evaluates the condition.",
+            DisplayName = "Verify that the ExternalOperator plugin handles exceptions correctly and evaluates the condition.",
             DelayBetweenAttempts = 3000)]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonExternal, "index", "Between", "0", "ElementAttribute", "//positive")]
@@ -49,9 +50,6 @@ namespace G4.UnitTests.Plugins.Common
 
             // Check if the evaluation returns true
             Assert.IsTrue(testResult.GetEvaluation());
-
-            // Ensure the evaluation is not false
-            Assert.IsFalse(!testResult.GetEvaluation());
         }
     }
 }

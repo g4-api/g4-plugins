@@ -20,21 +20,21 @@ namespace G4.UnitTests.Plugins.Common
         private const string _ignoreMessage = "Test is intended for execution only in a local demo environment. " +
             "Not suitable for production or CI/CD pipelines due to external dependencies.";
 
-        [TestMethod(displayName: "Verify that the StartJenkinsJob plugin manifest complies with " +
+        [TestMethod(DisplayName = "Verify that the StartJenkinsJob plugin manifest complies with " +
             "the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<StartJenkinsJob>();
         }
 
-        [TestMethod(displayName: "Verify that the StartJenkinsJob plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the StartJenkinsJob plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<StartJenkinsJob>();
         }
 
         [Ignore(message: _ignoreMessage)]
-        [TestMethod(displayName: "Verify that the StartJenkinsJob plugin starts a Jenkins job with issue and " +
+        [TestMethod(DisplayName = "Verify that the StartJenkinsJob plugin starts a Jenkins job with issue and " +
             "project fields, waits for completion, and finishes without any exceptions.")]
         public void StartJenkinsJobTest()
         {
@@ -66,7 +66,7 @@ namespace G4.UnitTests.Plugins.Common
         }
 
         [Ignore(message: _ignoreMessage)]
-        [TestMethod(displayName: "Verify that the StartJenkinsJob plugin starts a Jenkins job without waiting " +
+        [TestMethod(DisplayName = "Verify that the StartJenkinsJob plugin starts a Jenkins job without waiting " +
             "for completion and finishes without any exceptions.")]
         public void StartJenkinsJobNoWaitTest()
         {
@@ -96,7 +96,7 @@ namespace G4.UnitTests.Plugins.Common
         }
 
         [Ignore(message: _ignoreMessage)]
-        [TestMethod(displayName: "Verify that the StartJenkinsJob plugin fails when mandatory job parameters " +
+        [TestMethod(DisplayName = "Verify that the StartJenkinsJob plugin fails when mandatory job parameters " +
             "are not provided.")]
         public void StartJenkinsJobNoParametersTest()
         {

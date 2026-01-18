@@ -32,7 +32,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
     #endregion
     public class AssertKeyboardVisibleTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the AssertKeyboardVisible plugin correctly identifies when the keyboard " +
             "is visible on the UI.")]
         #region *** Criteria ***
@@ -63,7 +63,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the AssertKeyboardVisible plugin correctly identifies when the keyboard " +
             "is not visible on the UI.")]
         #region *** Criteria ***

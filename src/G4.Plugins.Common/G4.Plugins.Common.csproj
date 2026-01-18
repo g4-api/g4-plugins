@@ -25,10 +25,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2025.5.19.38" />
-		<PackageReference Include="G4.Extensions" Version="2025.5.19.38" />
-		<PackageReference Include="G4.Plugins" Version="2025.5.19.38" />
-		<PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.16" />
+		<PackageReference Include="G4.Converters" Version="2025.8.11.43" />
+		<PackageReference Include="G4.Extensions" Version="2025.8.11.43" />
+		<PackageReference Include="G4.Plugins" Version="2025.8.11.43" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -32,7 +32,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class ResolveMathExpressionTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=2, Y=10, and Operation='-', correctly resolves the mathematical expression " +
             "and returns the expected result (-8).")]
@@ -60,7 +60,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=10, Y=2, and Operation='+', correctly resolves the mathematical expression " +
             "and returns the expected result (12).")]
@@ -87,7 +87,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=10, Y=2, and Operation='/', correctly resolves the mathematical expression " +
             "and returns the expected result (5).")]
@@ -115,7 +115,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin gracefully handles invalid operations " +
             "when provided with specific parameters such as X=10, Y=2, and an invalid Operation, " +
             "ensuring it provides informative error messages.")]
@@ -141,7 +141,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=10, Y=3, and Operation='%', correctly resolves the modulus operation and " +
             "returns the expected result (1).")]
@@ -168,7 +168,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=10, Y=2, and Operation='*', correctly resolves the multiplication operation " +
             "and returns the expected result (20).")]
@@ -195,7 +195,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=10, Y=3, Operation='%', and Ascending sorting flag, correctly sorts the input " +
             "numbers in ascending order before resolving the modulus operation and returns the expected " +
@@ -224,7 +224,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=3, Y=10, Operation='%', and Descending sorting flag, correctly sorts the input " +
             "numbers in descending order before resolving the modulus operation and returns the expected " +
@@ -253,7 +253,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=10, Y=2, and Operation='^' (exponentiation), correctly resolves the " +
             "exponentiation operation and returns the expected result (100).")]
@@ -280,7 +280,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=10, Y=3, Operation='/' (division), and Round=2, correctly resolves the division " +
             "operation, rounds the result to two decimal places, and returns the expected result (3.33).")]
@@ -308,7 +308,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin can correctly resolve mathematical " +
             "expressions to decimal numbers.")]
         #region *** Criteria ***
@@ -335,7 +335,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with specific parameters " +
             "such as X=2, Y=10, Operation='-' (subtraction), and Abs flag, correctly resolves the " +
             "subtraction operation and returns the absolute value of the result.")]
@@ -363,7 +363,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the Resolve-MathExpression plugin, when provided with nested expressions " +
             "as parameters, correctly resolves the inner expression first and then uses the result " +
             "to resolve the outer expression.")]

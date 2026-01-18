@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class NewBrowserWindowTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the NewBrowserWindow plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -21,7 +21,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<NewBrowserWindow>();
         }
 
-        [TestMethod(displayName: "Verify that the NewBrowserWindow plugin can be " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -29,7 +29,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<NewBrowserWindow>();
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method opens multiple " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method opens multiple " +
             "new browser windows with the Amount parameter from attribute.")]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""NewBrowserWindow"", ""argument"":""{{$ --Amount:5}}"",""onElement"":""//positive"",""onAttribute"":""href""}")]
@@ -40,10 +40,10 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<NewBrowserWindow>(ruleJson).Plugin;
 
             // Verify that six window handles are present after invocation (original + 5 new windows)
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Count == 6);
+            Assert.HasCount(6, plugin.WebDriver.WindowHandles);
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method opens multiple " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method opens multiple " +
             "new browser windows with the Amount parameter from attribute (negative test).")]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""NewBrowserWindow"", ""argument"":""{{$ --Amount:5}}"",""onAttribute"":""href""}")]
@@ -54,10 +54,10 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<NewBrowserWindow>(ruleJson).Plugin;
 
             // Verify that six window handles are present after invocation (original + 5 new windows)
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Count == 6);
+            Assert.HasCount(6, plugin.WebDriver.WindowHandles);
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method opens multiple " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method opens multiple " +
             "new browser windows with the Amount parameter from element.")]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""NewBrowserWindow"", ""argument"":""{{$ --Amount:5}}"",""onElement"":""//positive""}")]
@@ -68,10 +68,10 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<NewBrowserWindow>(ruleJson).Plugin;
 
             // Verify that six window handles are present after invocation (original + 5 new windows)
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Count == 6);
+            Assert.HasCount(6, plugin.WebDriver.WindowHandles);
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method opens multiple " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method opens multiple " +
             "new browser windows with the Amount parameter.")]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""NewBrowserWindow"", ""argument"":""{{$ --Amount:5}}""}")]
@@ -82,25 +82,22 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<NewBrowserWindow>(ruleJson).Plugin;
 
             // Verify that six window handles are present after invocation (original + 5 new windows)
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Count == 6);
+            Assert.HasCount(6, plugin.WebDriver.WindowHandles);
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method with no elements " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method with no elements " +
             "throws a NoSuchElementException.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//none""}")]
         #endregion
         public void NewBrowserWindowNoSuchElementExceptionTest(string ruleJson)
         {
             // Invoke the NewBrowserWindow plugin with the specified rule JSON on non-existing elements
-            var plugin = Invoke<NewBrowserWindow>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Verify that a NoSuchElementException is thrown, indicating no such element exists
-            Assert.IsTrue(plugin.Exceptions.IsEmpty);
+            Assert.Throws<NoSuchElementException>(()
+                => Invoke<NewBrowserWindow>(ruleJson, By.Custom.Positive()));
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method opens a new " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method opens a new " +
             "browser window with specified elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive""}")]
@@ -113,10 +110,10 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<NewBrowserWindow>(ruleJson, By.Custom.Positive()).Plugin;
 
             // Verify that two window handles are present after invocation
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Count == 2);
+            Assert.HasCount(2, plugin.WebDriver.WindowHandles);
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method opens a new " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method opens a new " +
             "browser window with valid arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -128,12 +125,11 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<NewBrowserWindow>(ruleJson).Plugin;
 
             // Verify that two window handles are present after invocation
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Count == 2);
+            Assert.HasCount(2, plugin.WebDriver.WindowHandles);
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method with invalid elements " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method with invalid elements " +
             "throws a WebDriverTimeoutException.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//none""}")]
         [DataRow(@"{""onElement"":""//null""}")]
@@ -142,25 +138,20 @@ namespace G4.UnitTests.Plugins.Ui
         public void NewBrowserWindowTimeoutExceptionTest(string ruleJson)
         {
             // Invoke the NewBrowserWindow plugin with the specified rule JSON on invalid elements
-            var plugin = Invoke<NewBrowserWindow>(ruleJson).Plugin;
-
-            // Verify that a WebDriverTimeoutException is thrown, indicating the operation timed out
-            Assert.IsTrue(plugin.Exceptions.IsEmpty);
+            Assert.Throws<WebDriverTimeoutException>(()
+                => Invoke<NewBrowserWindow>(ruleJson, By.Custom.Positive()));
         }
 
-        [DataTestMethod(displayName: "Verify that the NewBrowserWindow method with stale elements " +
+        [TestMethod(DisplayName = "Verify that the NewBrowserWindow method with stale elements " +
             "throws a StaleElementReferenceException.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//stale""}")]
         #endregion
         public void NewBrowserWindowStaleElementReferenceExceptionTest(string ruleJson)
         {
             // Invoke the NewBrowserWindow plugin with the specified rule JSON on stale elements
-            var plugin = Invoke<NewBrowserWindow>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Verify that a StaleElementReferenceException is thrown, indicating the element is no longer in the DOM
-            Assert.IsTrue(plugin.Exceptions.IsEmpty);
+            Assert.Throws<StaleElementReferenceException>(()
+                => Invoke<NewBrowserWindow>(ruleJson, By.Custom.Positive()));
         }
     }
 }

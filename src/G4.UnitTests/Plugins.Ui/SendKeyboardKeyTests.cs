@@ -15,7 +15,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SendKeyboardKeyTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SendKeyboardKey plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -23,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SendKeyboardKey>();
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -31,7 +31,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SendKeyboardKey>();
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with valid arguments.")]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with valid arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""positive""}")]
@@ -45,7 +45,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with multiple keys.")]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with multiple keys.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Key:Backspace}}"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Key:Backspace}}"", ""onElement"":""positive""}")]
@@ -59,7 +59,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with delay.")]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with delay.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Delay:00:00:04}}"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Delay:4000}}"", ""onElement"":""input""}")]
@@ -73,10 +73,10 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(responseModel.Plugin.Exceptions?.IsEmpty);
 
             // Assert that the total runtime is greater than 4 seconds
-            Assert.IsTrue(responseModel.Stopwatch.ElapsedTicks > 4 * TimeSpan.TicksPerSecond);
+            Assert.IsGreaterThan(4 * TimeSpan.TicksPerSecond, responseModel.Stopwatch.ElapsedTicks);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with clear argument.")]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with clear argument.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Clear}}"", ""onElement"":""input""}")]
         #endregion
@@ -89,7 +89,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with native clear argument.")]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with native clear argument.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --NativeClear}}"", ""onElement"":""input""}")]
         #endregion
@@ -102,7 +102,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws exceptions " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws exceptions " +
             "with native clear argument.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --NativeClear}}"", ""onElement"":""positive""}")]
@@ -116,8 +116,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws WebDriverTimeoutException.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws WebDriverTimeoutException.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""stale""}")]
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""null""}")]
@@ -127,27 +126,20 @@ namespace G4.UnitTests.Plugins.Ui
         public void SendKeyboardKeyExceptionTest(string ruleJson)
         {
             // Invoke the SendKeyboardKey action with the specified action rule
-            var plugin = Invoke<SendKeyboardKey>(ruleJson).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<SendKeyboardKey>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws ElementNotInteractableException.")]
-        [ExpectedException(typeof(ElementNotInteractableException))]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws ElementNotInteractableException.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""negative""}")]
         #endregion
         public void SendKeyboardKeyNegativeTest(string ruleJson)
         {
             // Invoke the SendKeyboardKey action with the specified action rule
-            var plugin = Invoke<SendKeyboardKey>(ruleJson).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<ElementNotInteractableException>(() => Invoke<SendKeyboardKey>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with valid " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with valid " +
             "element and arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""input""}")]
@@ -162,7 +154,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with " +
             "multiple keys and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Key:Backspace}}"", ""onElement"":""input""}")]
@@ -177,7 +169,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with delay and element.")]
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with delay and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Delay:00:00:04}}"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Delay:4000}}"", ""onElement"":""input""}")]
@@ -191,10 +183,10 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(responseModel.Plugin.Exceptions?.IsEmpty);
 
             // Assert that the total runtime is greater than 4 seconds
-            Assert.IsTrue(responseModel.Stopwatch.ElapsedTicks > 4 * TimeSpan.TicksPerSecond);
+            Assert.IsGreaterThan(4 * TimeSpan.TicksPerSecond, responseModel.Stopwatch.ElapsedTicks);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with clear " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with clear " +
             "argument and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --Clear}}"", ""onElement"":""input""}")]
@@ -208,7 +200,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action works with native " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action works with native " +
             "clear argument and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --NativeClear}}"", ""onElement"":""input""}")]
@@ -222,7 +214,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws exceptions " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws exceptions " +
             "with native clear argument and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Key:Enter --NativeClear}}"", ""onElement"":""positive""}")]
@@ -236,37 +228,31 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws " +
             "WebDriverException with exception element.")]
-        [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""exception""}")]
         #endregion
         public void SendKeyboardKeyExceptionElementTest(string ruleJson)
         {
             // Invoke the SendKeyboardKey action with the specified action rule
-            var plugin = Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<WebDriverException>(() =>
+                Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws " +
             "NoSuchElementException with none element.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""none""}")]
         #endregion
         public void SendKeyboardKeyNoneElementTest(string ruleJson)
         {
             // Invoke the SendKeyboardKey action with the specified action rule
-            var plugin = Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<NoSuchElementException>(() =>
+                Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws exceptions " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws exceptions " +
             "with null element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""null""}")]
@@ -280,34 +266,28 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws " +
             "StaleElementReferenceException with stale element.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""stale""}")]
         #endregion
         public void SendKeyboardKeyStaleElementTest(string ruleJson)
         {
             // Invoke the SendKeyboardKey action with the specified action rule
-            var plugin = Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<StaleElementReferenceException>(() =>
+                Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeyboardKey action throws " +
+        [TestMethod(DisplayName = "Verify that the SendKeyboardKey action throws " +
             "ElementNotInteractableException with negative element.")]
-        [ExpectedException(typeof(ElementNotInteractableException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""Enter"", ""onElement"":""negative""}")]
         #endregion
         public void SendKeyboardKeyElementNegativeTest(string ruleJson)
         {
             // Invoke the SendKeyboardKey action with the specified action rule
-            var plugin = Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<ElementNotInteractableException>(() =>
+                Invoke<SendKeyboardKey>(ruleJson, By.Custom.Positive()));
         }
     }
 }

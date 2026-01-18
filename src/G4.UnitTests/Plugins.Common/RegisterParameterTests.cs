@@ -17,7 +17,7 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class RegisterParameterTests : TestBase
     {
-        [ClassCleanup(ClassCleanupBehavior.EndOfClass)]
+        [ClassCleanup(InheritanceBehavior.BeforeEachDerivedClass)]
         public static void ClearEnvironments()
         {
             // Remove the environment variable "MyParam" from the Machine target.
@@ -30,14 +30,14 @@ namespace G4.UnitTests.Plugins.Common
             Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.Process);
         }
 
-        [TestMethod(displayName: "Verify that the RegisterParameter plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the RegisterParameter plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<RegisterParameter>();
         }
 
-        [TestMethod(displayName: "Verify that the RegisterParameter plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the RegisterParameter plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -45,7 +45,7 @@ namespace G4.UnitTests.Plugins.Common
         }
 
         [DoNotParallelize]
-        [TestMethod(displayName: "Verify that the application parameter is registered " +
+        [TestMethod(DisplayName = "Verify that the application parameter is registered " +
             "correctly with a specific environment name.")]
         public void RegisterApplicationParameterTest()
         {
@@ -77,7 +77,7 @@ namespace G4.UnitTests.Plugins.Common
         }
 
         [DoNotParallelize]
-        [TestMethod(displayName: "Verify that the encrypted application parameter is registered " +
+        [TestMethod(DisplayName = "Verify that the encrypted application parameter is registered " +
             "correctly with a specific environment name.")]
         public void RegisterApplicationEncryptedParameterTest()
         {
@@ -106,25 +106,25 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue("Bar Foo".Equals(actual.ConvertFromBase64().Decrypt("g4"), Comparison));
         }
 
-        [TestMethod(displayName: "Verify that the machine parameter is registered correctly.")]
+        [TestMethod(DisplayName = "Verify that the machine parameter is registered correctly.")]
         public void RegisterMachineParameterTest()
         {
             Invoke(testBase: this, scope: "Machine");
         }
 
-        [TestMethod(displayName: "Verify that the process parameter is registered correctly.")]
+        [TestMethod(DisplayName = "Verify that the process parameter is registered correctly.")]
         public void RegisterProcessParameterTest()
         {
             Invoke(testBase: this, scope: "Process");
         }
 
-        [TestMethod(displayName: "Verify that the session parameter is registered correctly.")]
+        [TestMethod(DisplayName = "Verify that the session parameter is registered correctly.")]
         public void RegisterSessionParameterTest()
         {
             Invoke(testBase: this, scope: "Session");
         }
 
-        [TestMethod(displayName: "Verify that the user parameter is registered correctly.")]
+        [TestMethod(DisplayName = "Verify that the user parameter is registered correctly.")]
         public void RegisterUserParameterTest()
         {
             Invoke(testBase: this, scope: "User");

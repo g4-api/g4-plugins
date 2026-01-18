@@ -15,7 +15,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SetWindowRectangleTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SetWindowRectangle plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SetWindowRectangle plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -23,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SetWindowRectangle>();
         }
 
-        [TestMethod(displayName: "Verify that the SetWindowRectangle plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SetWindowRectangle plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -31,7 +31,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SetWindowRectangle>();
         }
 
-        [TestMethod(displayName: "Verify that the SetWindowRectangle action works correctly.")]
+        [TestMethod(DisplayName = "Verify that the SetWindowRectangle action works correctly.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"": ""{{$ --Height:100 --Width:150 --X:20 --Y:30}}""}")]
         [DataRow(@"{""argument"": ""{{$ --height:100 --width:150 --x:20 --y:30}}""}")]
@@ -51,7 +51,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected: 30, actual: windowRectangle.Y);
         }
 
-        [TestMethod(displayName: "Verify that the SetWindowRectangle action throws MissingMandatoryPropertyException " +
+        [TestMethod(DisplayName = "Verify that the SetWindowRectangle action throws MissingMandatoryPropertyException " +
             "for incomplete arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"": """"}")]
@@ -65,7 +65,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(responseModel.Exceptions.Any(i => i.Exception is MissingMandatoryPropertyException));
         }
 
-        [TestMethod(displayName: "Verify that the SetWindowRectangle action works correctly " +
+        [TestMethod(DisplayName = "Verify that the SetWindowRectangle action works correctly " +
             "with an element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"": ""{{$ --Height:100 --Width:150 --X:20 --Y:30}}""}")]

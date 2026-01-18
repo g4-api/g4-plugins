@@ -34,7 +34,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class NewGuidTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the default generation functionality of the {{$NewGuid}} plugin, so that I can " +
             "ensure it generates unique identifiers (GUIDs) correctly without specifying a format.")]
         #region *** Criteria ***
@@ -63,7 +63,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the functionality of the {{$NewGuid}} plugin when specifying different GUID " +
             "formats (e.g., N, D, B, P, and X), to ensure it generates unique identifiers (GUIDs) " +
             "correctly according to the specified format.")]

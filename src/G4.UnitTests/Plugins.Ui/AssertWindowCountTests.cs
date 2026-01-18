@@ -15,21 +15,21 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class AssertWindowCountTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the WindowCount plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<WindowCount>();
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<WindowCount>();
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count equality (negative scenario).")]
         #region *** Data Set ***
         // Window Count
@@ -68,7 +68,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count equality.")]
         #region *** Data Set ***
         // Window Count
@@ -107,7 +107,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count greater or equal (negative scenario).")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonNoAttributeOperator, "WindowCount", "Ge")]
@@ -145,7 +145,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count inequality.")]
         #region *** Data Set ***
         // Window Count
@@ -187,7 +187,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count not match (negative scenario).")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonNoAttributeOperator, "WindowCount", "NotMatch")]
@@ -217,7 +217,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count greater than.")]
         #region *** Data Set ***
         // Window Count
@@ -256,7 +256,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count less or equal (negative scenario).")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonNoAttributeOperator, "WindowCount", "Le")]
@@ -294,7 +294,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count greater or equal.")]
         #region *** Data Set ***
         // Window Count
@@ -333,7 +333,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count greater than (negative scenario).")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonNoAttributeOperator, "WindowCount", "Gt")]
@@ -371,7 +371,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count less or equal.")]
         #region *** Data Set ***
         // Window Count
@@ -410,7 +410,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count less than (negative scenario).")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonNoAttributeOperator, "WindowCount", "Lt")]
@@ -448,7 +448,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count less than.")]
         #region *** Data Set ***
         // Window Count
@@ -487,7 +487,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count match (negative scenario).")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonNoAttributeOperator, "WindowCount", "Match")]
@@ -517,7 +517,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count match.")]
         #region *** Data Set ***
         // Window Count
@@ -548,7 +548,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count inequality (negative scenario).")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonNoAttributeOperator, "WindowCount", "Ne")]
@@ -586,7 +586,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the WindowCount plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the WindowCount plugin correctly evaluates " +
             "window count not match.")]
         #region *** Data Set ***
         // Window Count

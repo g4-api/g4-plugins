@@ -24,7 +24,7 @@ namespace G4.IntegrationTests.Suites.Ui.Android
     #endregion
     public class SetGeolocationTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetGeoLocation plugin correctly sets the geolocation on the device " +
             "to latitude 121.21, longitude 11.56, and altitude 94.23.")]
         #region *** Criteria ***

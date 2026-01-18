@@ -14,21 +14,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class HttpDeleteMethodTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the HttpDeleteMethod plugin named 'Delete' " +
+        [TestMethod(DisplayName = "Verify that the HttpDeleteMethod plugin named 'Delete' " +
             "complies with the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<HttpDeleteMethod>(pluginName: "Delete");
         }
 
-        [TestMethod(displayName: "Verify that the HttpDeleteMethod plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the HttpDeleteMethod plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<HttpDeleteMethod>();
         }
 
-        [TestMethod(displayName: "Verify that the DELETE request returns the expected " +
+        [TestMethod(DisplayName = "Verify that the DELETE request returns the expected " +
             "status code and confirmation message.")]
         #region *** Data Set ***
         [DataRow("12345", 200, "Booking canceled successfully")]
@@ -53,10 +53,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: expectedStatusCode, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains(expectedMessage));
+            Assert.Contains(expectedMessage, $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the DELETE request with a JSON body returns " +
+        [TestMethod(DisplayName = "Verify that the DELETE request with a JSON body returns " +
             "the expected status code and confirmation message.")]
         #region *** Data Set ***
         [DataRow("12345", 200, "Booking canceled successfully")]
@@ -84,7 +84,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: expectedStatusCode, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains(expectedMessage));
+            Assert.Contains(expectedMessage, $"{response}".ConvertFromBase64());
         }
     }
 }

@@ -13,21 +13,21 @@ namespace G4.UnitTests.Plugins.Common.Macros
     [TestCategory("UnitTest")]
     public class ResolveMathExpressionTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the ResolveMathExpression plugin manifest " +
+        [TestMethod(DisplayName = "Verify that the ResolveMathExpression plugin manifest " +
             "complies with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ResolveMathExpression>(pluginName: "Resolve-MathExpression");
         }
 
-        [TestMethod(displayName: "Verify that the ResolveMathExpression plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ResolveMathExpression plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ResolveMathExpression>();
         }
 
-        [TestMethod(displayName: "Verify that the subtraction operation and absolute value " +
+        [TestMethod(DisplayName = "Verify that the subtraction operation and absolute value " +
             "calculation in math expressions produce the correct result.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$Resolve-MathExpression --X:2 --Y:10 --Operation:-}}\"}", "^-8$")]
@@ -39,7 +39,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern);
         }
 
-        [TestMethod(displayName: "Verify that the addition operation in math expressions " +
+        [TestMethod(DisplayName = "Verify that the addition operation in math expressions " +
             "produces the correct result.")]
         public void MathExpressionAddTest()
         {
@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^12$");
         }
 
-        [TestMethod(displayName: "Verify that the division operation in math expressions " +
+        [TestMethod(DisplayName = "Verify that the division operation in math expressions " +
             "produces the correct result.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$Resolve-MathExpression --X:10 --Y:2 --Operation:/}}\"}", "^5$")]
@@ -62,7 +62,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern);
         }
 
-        [TestMethod(displayName: "Verify that the math expressions plugin handles invalid " +
+        [TestMethod(DisplayName = "Verify that the math expressions plugin handles invalid " +
             "operations correctly and produces an error result.")]
         public void MathExpressionInvalidOperationTest()
         {
@@ -73,7 +73,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^Err$");
         }
 
-        [TestMethod(displayName: "Verify that the modulus operation in math expressions " +
+        [TestMethod(DisplayName = "Verify that the modulus operation in math expressions " +
             "produces the correct result.")]
         public void MathExpressionModulusTest()
         {
@@ -84,7 +84,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^1$");
         }
 
-        [TestMethod(displayName: "Verify that the multiplication operation in math " +
+        [TestMethod(DisplayName = "Verify that the multiplication operation in math " +
             "expressions produces the correct result.")]
         public void MathExpressionMultiplyTest()
         {
@@ -95,7 +95,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^20$");
         }
 
-        [TestMethod(displayName: "Verify that sorting input in ascending order before " +
+        [TestMethod(DisplayName = "Verify that sorting input in ascending order before " +
             "performing the math operation in math expressions produces the correct result.")]
         public void MathExpressionOrderAscTest()
         {
@@ -106,7 +106,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^3$");
         }
 
-        [TestMethod(displayName: "Verify that sorting input in descending order before " +
+        [TestMethod(DisplayName = "Verify that sorting input in descending order before " +
             "performing the math operation in math expressions produces the correct result.")]
         public void MathExpressionOrderDescTest()
         {
@@ -117,7 +117,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^1$");
         }
 
-        [TestMethod(displayName: "Verify that the power operation in math expressions " +
+        [TestMethod(DisplayName = "Verify that the power operation in math expressions " +
             "produces the correct result.")]
         public void MathExpressionPowerTest()
         {
@@ -128,7 +128,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^100$");
         }
 
-        [TestMethod(displayName: "Verify that the result of math expressions can be rounded correctly.")]
+        [TestMethod(DisplayName = "Verify that the result of math expressions can be rounded correctly.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$Resolve-MathExpression --X:10 --Y:3 --Operation:/}}\"}", @"^\d+\.\d{3,}$")]
         [DataRow("{\"argument\":\"{{$Resolve-MathExpression --X:10 --Y:3 --Operation:/ --Round:2}}\"}", @"^\d+\.\d{2}$")]
@@ -138,7 +138,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern);
         }
 
-        [TestMethod(displayName: "Verify that the subtraction operation with decimal numbers " +
+        [TestMethod(DisplayName = "Verify that the subtraction operation with decimal numbers " +
             "in math expressions produces the correct result.")]
         public void MathExpressionSubtractDecimalTest()
         {
@@ -149,7 +149,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Invoke(testBase: this, ruleJson, expectedPattern: "^9.5$");
         }
 
-        [TestMethod(displayName: "Verify that the subtraction operation in math expressions " +
+        [TestMethod(DisplayName = "Verify that the subtraction operation in math expressions " +
             "produces the correct result.")]
         public void MathExpressionSubtractTest()
         {

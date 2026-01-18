@@ -23,7 +23,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SwitchWindowTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchWindow plugin, when invoked to switch to a specific window index, " +
             "correctly changes the focus to the targeted window.")]
         #region *** Criteria ***

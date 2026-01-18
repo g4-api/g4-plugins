@@ -14,21 +14,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class HttpPatchMethodTest : TestBase
     {
-        [TestMethod(displayName: "Verify that the HttpPatchMethod plugin named 'Patch' " +
+        [TestMethod(DisplayName = "Verify that the HttpPatchMethod plugin named 'Patch' " +
             "complies with the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<HttpPatchMethod>(pluginName: "Patch");
         }
 
-        [TestMethod(displayName: "Verify that the HttpPatchMethod plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the HttpPatchMethod plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<HttpPatchMethod>();
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PATCH request with a JSON body " +
+        [TestMethod(DisplayName = "Verify that the HTTP PATCH request with a JSON body " +
             "returns a status code of 200 and the response contains the expected confirmation message.")]
         public void PatchRequestWithJsonBodyTest()
         {
@@ -51,10 +51,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Review posted for Luxury Hotel"));
+            Assert.Contains("Review posted for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PATCH request with text body and different " +
+        [TestMethod(DisplayName = "Verify that the HTTP PATCH request with text body and different " +
             "Content-Types returns the expected status code.")]
         #region *** Data Set ***
         [DataRow("application/json", 415)]
@@ -81,7 +81,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expectedStatusCode, actualStatusCode);
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PATCH request with text body and ASCII " +
+        [TestMethod(DisplayName = "Verify that the HTTP PATCH request with text body and ASCII " +
             "encoding returns a status code of 200 and the response contains the expected confirmation message.")]
         public void PatchRequestWithTextBodyAndEncodingTest()
         {
@@ -105,10 +105,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Review posted for Luxury Hotel"));
+            Assert.Contains("Review posted for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PATCH request with text body returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP PATCH request with text body returns " +
             "a status code of 200 and the response contains the expected confirmation message.")]
         public void PatchRequestWithTextBodyTest()
         {
@@ -131,10 +131,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Review posted for Luxury Hotel"));
+            Assert.Contains("Review posted for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PATCH request with URL-encoded body returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP PATCH request with URL-encoded body returns " +
             "a status code of 200 and the response contains the expected confirmation message.")]
         public void PatchRequestWithUrlEncodedBodyTest()
         {
@@ -158,10 +158,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the response contains the confirmation message for the hotel update
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Review posted for Luxury Hotel"));
+            Assert.Contains("Review posted for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PATCH request with XML body returns a status " +
+        [TestMethod(DisplayName = "Verify that the HTTP PATCH request with XML body returns a status " +
             "code of 200 and the response contains the expected confirmation message.")]
         public void PatchRequestWithXmlBodyTest()
         {
@@ -184,7 +184,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Review posted for Luxury Hotel"));
+            Assert.Contains("Review posted for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
     }
 }

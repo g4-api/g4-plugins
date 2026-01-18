@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class ExportDataTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the BodyHtmlExtractionScope, ElementsExtractionScope, " +
+        [TestMethod(DisplayName = "Verify that the BodyHtmlExtractionScope, ElementsExtractionScope, " +
             "and PageSourceExtractionScope plugin manifests comply with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -27,7 +27,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<PageSourceExtractionScope>();
         }
 
-        [TestMethod(displayName: "Verify that the BodyHtmlExtractionScope, ElementsExtractionScope, " +
+        [TestMethod(DisplayName = "Verify that the BodyHtmlExtractionScope, ElementsExtractionScope, " +
             "and PageSourceExtractionScope plugins are correctly registered and operational.")]
         public override void NewPluginTest()
         {
@@ -41,7 +41,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<PageSourceExtractionScope>();
         }
 
-        [TestMethod(displayName: "Verify that the ExportData action rule extracts data " +
+        [TestMethod(DisplayName = "Verify that the ExportData action rule extracts data " +
             "correctly for various extraction scopes.")]
         #region *** Data Set ***
         [DoNotParallelize]
@@ -82,7 +82,7 @@ namespace G4.UnitTests.Plugins.Ui
             var extractions = session.ResponseData.Extractions.First().Entities.ToList();
 
             // Assert that the number of extractions is 2
-            Assert.AreEqual(expected: 2, actual: extractions.Count);
+            Assert.HasCount(expected: 2, collection: extractions);
         }
     }
 }

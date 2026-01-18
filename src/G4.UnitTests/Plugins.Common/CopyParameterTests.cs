@@ -41,21 +41,21 @@ namespace G4.UnitTests.Plugins.Common
             CleanEnvironment();
         }
 
-        [TestMethod(displayName: "Verify that the CopyParameter plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the CopyParameter plugin complies with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<CopyParameter>();
         }
 
-        [TestMethod(displayName: "Verify that the CopyParameter plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the CopyParameter plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<CopyParameter>();
         }
 
-        [TestMethod(displayName: "Verify the CopyParameter action behavior when a mandatory " +
+        [TestMethod(DisplayName = "Verify the CopyParameter action behavior when a mandatory " +
             "argument is missing.")]
         #region *** Data Set ***
         [DataRow("Application", "Machine")]
@@ -102,7 +102,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreNotEqual(notExpected, actual);
         }
 
-        [TestMethod(displayName: "Verify the CopyParameter action behavior when a mandatory " +
+        [TestMethod(DisplayName = "Verify the CopyParameter action behavior when a mandatory " +
             "argument is missing during parameter copying between scopes.")]
         #region *** Data Set ***
         [DataRow("Application", "Machine")]
@@ -151,7 +151,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreNotEqual(notExpected, actual);
         }
 
-        [TestMethod(displayName: "Verify the CopyParameter action behavior for successful " +
+        [TestMethod(DisplayName = "Verify the CopyParameter action behavior for successful " +
             "parameter copying between scopes.")]
         #region *** Data Set ***
         [DataRow("Application", "Machine")]

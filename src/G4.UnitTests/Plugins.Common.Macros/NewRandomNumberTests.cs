@@ -13,21 +13,21 @@ namespace G4.UnitTests.Plugins.Common.Macros
     [TestCategory("UnitTest")]
     public class NewRandomNumberTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<NewRandomNumber>(pluginName: "New-RandomNumber");
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<NewRandomNumber>();
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin generates random " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin generates random " +
             "byte numbers within the specified range.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$New-RandomNumber --NumberType:Byte}}\"}", byte.MinValue, byte.MaxValue)]
@@ -47,13 +47,12 @@ namespace G4.UnitTests.Plugins.Common.Macros
             var actual = byte.Parse(input);
 
             // Assert that the generated random number is within the specified byte range
-            Assert.IsTrue(actual >= minValue);
-            Assert.IsTrue(actual <= maxValue);
+            Assert.IsGreaterThanOrEqualTo(minValue, actual);
+            Assert.IsLessThanOrEqualTo(maxValue, actual);
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin throws a FormatException " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin throws a FormatException " +
             "for invalid byte number inputs.")]
-        [ExpectedException(typeof(FormatException))]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$New-RandomNumber --NumberType:Byte --MinValue:NotNumber --MaxValue:255}}\"}")]
         [DataRow("{\"argument\":\"{{$New-RandomNumber --NumberType:Byte --MinValue:0 --MaxValue:NotNumber}}\"}")]
@@ -61,22 +60,21 @@ namespace G4.UnitTests.Plugins.Common.Macros
         public void NewRandomByteNumberFormatExceptionTest(string ruleJson)
         {
             // Invoke the action and expect a FormatException to be thrown
-            Invoke<NewRandomNumber>(ruleJson);
+            Assert.Throws<FormatException>(() => Invoke<NewRandomNumber>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin throws an OverflowException " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin throws an OverflowException " +
             "for invalid byte number range inputs.")]
-        [ExpectedException(typeof(OverflowException))]
         public void NewRandomByteNumberOverflowExceptionTest()
         {
             // Initialize the rule JSON with invalid range parameters
             const string ruleJson = "{\"argument\":\"{{$New-RandomNumber --MinValue:-1 --MaxValue:256 --NumberType:Byte}}\"}";
 
-            // Invoke the action and expect an OverflowException to be thrown
-            Invoke<NewRandomNumber>(ruleJson);
+            // Assert that an OverflowException is thrown
+            Assert.Throws<OverflowException>(() => Invoke<NewRandomNumber>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin generates random double " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin generates random double " +
             "numbers within the specified range.")]
         public void NewRandomDoubleNumberTest()
         {
@@ -90,11 +88,11 @@ namespace G4.UnitTests.Plugins.Common.Macros
             var actual = double.Parse(input);
 
             // Assert that the generated random number is within the specified double range
-            Assert.IsTrue(actual >= 0.0D); // Ensuring the random double is greater than or equal 0.0
-            Assert.IsTrue(actual < 1.0D);  // Ensuring the random double is less than 1.0
+            Assert.IsGreaterThanOrEqualTo(0.0D, actual); // Ensuring the random double is greater than or equal 0.0
+            Assert.IsLessThan(1.0D, actual);             // Ensuring the random double is less than 1.0
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin generates random float " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin generates random float " +
             "numbers within the specified range.")]
         public void NewRandomFloatNumberTest()
         {
@@ -108,11 +106,11 @@ namespace G4.UnitTests.Plugins.Common.Macros
             var actual = float.Parse(input);
 
             // Assert that the generated random number is within the specified float range
-            Assert.IsTrue(actual >= 0.0F); // Ensuring the random float is greater than or equal 0.0
-            Assert.IsTrue(actual < 1.0F);  // Ensuring the random float is less than 1.0
+            Assert.IsGreaterThanOrEqualTo(0.0F, actual); // Ensuring the random float is greater than or equal 0.0
+            Assert.IsLessThan(1.0F, actual);             // Ensuring the random float is less than 1.0
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin generates random " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin generates random " +
             "long numbers within the specified range.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$New-RandomNumber --NumberType:Long}}\"}", long.MinValue, long.MaxValue)]
@@ -132,13 +130,12 @@ namespace G4.UnitTests.Plugins.Common.Macros
             var actual = long.Parse(input);
 
             // Assert that the generated random number is within the specified long range
-            Assert.IsTrue(actual >= minValue);
-            Assert.IsTrue(actual <= maxValue);
+            Assert.IsGreaterThanOrEqualTo(minValue, actual);
+            Assert.IsLessThanOrEqualTo(maxValue, actual);
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin throws a FormatException " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin throws a FormatException " +
             "for invalid long number inputs.")]
-        [ExpectedException(typeof(FormatException))]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$New-RandomNumber --NumberType:Long --MinValue:NotNumber --MaxValue:9223372036854775807}}\"}")]
         [DataRow("{\"argument\":\"{{$New-RandomNumber --NumberType:Long --MinValue:-9223372036854775808 --MaxValue:NotNumber}}\"}")]
@@ -146,12 +143,11 @@ namespace G4.UnitTests.Plugins.Common.Macros
         public void NewRandomLongNumberFormatExceptionTest(string ruleJson)
         {
             // Invoke the action and expect a FormatException to be thrown
-            Invoke<NewRandomNumber>(ruleJson);
+            Assert.Throws<FormatException>(() => Invoke<NewRandomNumber>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin throws an OverflowException " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin throws an OverflowException " +
             "for invalid long number range inputs.")]
-        [ExpectedException(typeof(OverflowException))]
         public void NewRandomLongNumberOverflowExceptionTest()
         {
             // Initialize the rule JSON with invalid range parameters
@@ -161,10 +157,10 @@ namespace G4.UnitTests.Plugins.Common.Macros
                 "--NumberType:Long}}\"}";
 
             // Invoke the action and expect an OverflowException to be thrown
-            Invoke<NewRandomNumber>(ruleJson);
+            Assert.Throws<OverflowException>(() => Invoke<NewRandomNumber>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin generates random integers within " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin generates random integers within " +
             "the specified range.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$NewRandomNumber}}\"}", int.MinValue, int.MaxValue)]
@@ -188,13 +184,12 @@ namespace G4.UnitTests.Plugins.Common.Macros
             var actual = int.Parse(input);
 
             // Assert that the generated random number is within the range of integers
-            Assert.IsTrue(actual >= minValue);
-            Assert.IsTrue(actual <= maxValue);
+            Assert.IsGreaterThanOrEqualTo(minValue, actual);
+            Assert.IsLessThanOrEqualTo(maxValue, actual);
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin throws a FormatException for " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin throws a FormatException for " +
             "invalid integer number inputs.")]
-        [ExpectedException(typeof(FormatException))]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$New-RandomNumber --MinValue:NotNumber --MaxValue:100}}\"}")]
         [DataRow("{\"argument\":\"{{$New-RandomNumber --MinValue:100 --MaxValue:NotNumber}}\"}")]
@@ -202,16 +197,18 @@ namespace G4.UnitTests.Plugins.Common.Macros
         public void NewRandomNumberFormatExceptionTest(string ruleJson)
         {
             // Invoke the action and expect a FormatException to be thrown
-            Invoke<NewRandomNumber>(ruleJson);
+            Assert.Throws<FormatException>(() => Invoke<NewRandomNumber>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the NewRandomNumber plugin throws an OverflowException " +
+        [TestMethod(DisplayName = "Verify that the NewRandomNumber plugin throws an OverflowException " +
             "for invalid integer number range inputs.")]
-        [ExpectedException(typeof(OverflowException))]
         public void NewRandomNumberOverflowExceptionTest()
         {
+            // Initialize the rule JSON with invalid range parameters
+            var ruleJson = "{\"argument\":\"{{$New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648}}\"}";
+
             // Invoke the action and expect an OverflowException to be thrown
-            Invoke<NewRandomNumber>(ruleJson: "{\"argument\":\"{{$New-RandomNumber --MinValue:-2147483649 --MaxValue:2147483648}}\"}");
+            Assert.Throws<OverflowException>(() => Invoke<NewRandomNumber>(ruleJson));
         }
     }
 }

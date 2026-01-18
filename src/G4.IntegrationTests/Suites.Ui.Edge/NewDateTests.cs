@@ -26,7 +26,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class NewDateTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewDate plugin correctly generates and inputs a new date " +
             "result into the target element, and ensures that the resulting date matches the " +
             "expected pattern.")]
@@ -56,7 +56,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewDate plugin correctly generates and inputs a new date " +
             "result into the target element with a specific format, and ensures that the " +
             "resulting date matches the expected pattern.")]
@@ -84,7 +84,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewDate plugin correctly generates and inputs a new date " +
             "result into the target element with the format 'yyyy-MM-dd' in UTC, and ensures that the " +
             "resulting date matches the expected pattern.")]
@@ -112,7 +112,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewDate plugin correctly generates and inputs a new date " +
             "result into the target element using the Unix epoch format, and ensures that the " +
             "resulting date matches the expected pattern.")]
@@ -140,7 +140,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewDate plugin correctly generates and inputs a new date " +
             "result into the target element using the OLE Automation (OaDate) format, and ensures that the " +
             "resulting date matches the expected pattern.")]
@@ -168,7 +168,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewDate plugin correctly generates and inputs a new date " +
             "result into the target element using a specific date part, and ensures that the " +
             "resulting date matches the expected pattern.")]

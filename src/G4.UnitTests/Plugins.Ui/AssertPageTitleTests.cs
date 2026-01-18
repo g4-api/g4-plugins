@@ -15,21 +15,21 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class AssertPageTitleTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the PageTitle plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<PageTitle>();
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<PageTitle>();
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title equality.")]
         #region *** Data Set ***
         // Page Title
@@ -78,7 +78,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title inequality.")]
         #region *** Data Set ***
         // Page Title
@@ -127,7 +127,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title greater than.")]
         #region *** Data Set ***
         // Page Title
@@ -176,7 +176,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title greater or equal.")]
         #region *** Data Set ***
         // Page Title
@@ -225,7 +225,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title less or equal.")]
         #region *** Data Set ***
         // Page Title
@@ -274,7 +274,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title less than.")]
         #region *** Data Set ***
         // Page Title
@@ -323,7 +323,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title match.")]
         #region *** Data Set ***
         // Page Title
@@ -354,7 +354,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageTitle plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the PageTitle plugin correctly evaluates " +
             "page title not match.")]
         #region *** Data Set ***
         // Page Title

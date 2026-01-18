@@ -32,7 +32,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class NewScriptResultTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the NewScriptResult plugin's ability to execute a specific script, ensuring " +
             "accurate retrieval of the inner text of an HTML element identified by the 'ScriptData' ID.")]
         #region *** Criteria ***
@@ -58,7 +58,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the NewScriptResult plugin's ability to execute a custom JavaScript function, " +
             "multiplying a given number by a value retrieved from an HTML input element, to ensure " +
             "accurate computation of the multiplication result within my automation workflows.")]
@@ -85,7 +85,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the NewScriptResult plugin's ability to execute a custom JavaScript function, " +
             "which multiplies two given numbers and a value retrieved from an HTML input element, to ensure " +
             "accurate computation of the multiplication result within my automation workflows.")]
@@ -112,7 +112,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the NewScriptResult plugin's ability to execute a custom JavaScript function, " +
             "which multiplies two given numbers passed as an object with two fields, ensuring " +
             "correct handling of data types, to ensure accurate computation of the multiplication " +

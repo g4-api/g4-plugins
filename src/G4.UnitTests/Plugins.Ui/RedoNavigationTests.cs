@@ -12,7 +12,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class RedoNavigationTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the RedoNavigation plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the RedoNavigation plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -20,7 +20,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<RedoNavigation>();
         }
 
-        [TestMethod(displayName: "Verify that the RedoNavigation plugin can be " +
+        [TestMethod(DisplayName = "Verify that the RedoNavigation plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -28,7 +28,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<RedoNavigation>();
         }
 
-        [TestMethod(displayName: "Verify that the RedoNavigation action works with arguments.")]
+        [TestMethod(DisplayName = "Verify that the RedoNavigation action works with arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""3""}")]
         #endregion
@@ -38,7 +38,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeTest(testBase: this, ruleJson);
         }
 
-        [TestMethod(displayName: "Verify that the RedoNavigation action works with invalid delay arguments.")]
+        [TestMethod(DisplayName = "Verify that the RedoNavigation action works with invalid delay arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Repeat:3 --Delay:A}}""}")]
         [DataRow(@"{""argument"":""{{$ --Repeat:3 --Delay:0x7fffffff}}""}")]
@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeTest(testBase: this, ruleJson);
         }
 
-        [TestMethod(displayName: "Verify that the RedoNavigation action works with repeat " +
+        [TestMethod(DisplayName = "Verify that the RedoNavigation action works with repeat " +
             "and delay arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Repeat:3 --Delay:1000}}""}")]
@@ -63,14 +63,14 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeTest(testBase: this, ruleJson);
         }
 
-        [TestMethod(displayName: "Verify that the RedoNavigation action works with no arguments.")]
+        [TestMethod(DisplayName = "Verify that the RedoNavigation action works with no arguments.")]
         public void RedoNavigationNoArgumentTest()
         {
             // Invoke the RedoNavigation action with the specified action rule
             InvokeTest(testBase: this, ruleJson: @"{""pluginName"":""RedoNavigation""}");
         }
 
-        [TestMethod(displayName: "Verify that the RedoNavigation action works with repeat arguments.")]
+        [TestMethod(DisplayName = "Verify that the RedoNavigation action works with repeat arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Repeat:3}}""}")]
         [DataRow(@"{""argument"":""{{$ --Repeat:A}}""}")]

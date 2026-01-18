@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class UndoNavigationTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UndoNavigation plugin, when used to navigate back to the previous page, " +
             "correctly undoes the navigation to a specific URL.")]
         #region *** Criteria ***
@@ -50,7 +50,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UndoNavigation plugin, when used to navigate back multiple steps, " +
             "correctly undoes the navigation to previous pages.")]
         #region *** Criteria ***
@@ -72,7 +72,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UndoNavigation plugin, when used to navigate back multiple steps with " +
             "repetition specified by the Repeat parameter, correctly undoes the navigation to previous pages.")]
         #region *** Criteria ***
@@ -94,7 +94,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UndoNavigation plugin, when used to navigate back multiple steps with " +
             "repetition specified by the Repeat parameter and a delay between steps specified by the " +
             "Delay parameter, correctly undoes the navigation to previous pages.")]
@@ -126,7 +126,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime > 3 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the UndoNavigation plugin, when used to navigate back multiple steps with " +
             "repetition specified by the Repeat parameter and a delay between steps specified by " +
             "the Delay parameter in the format 'HH:mm:ss', correctly undoes the navigation to previous pages.")]

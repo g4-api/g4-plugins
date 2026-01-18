@@ -22,7 +22,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SwitchAlertTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchAlert plugin successfully dismisses the alert dialog by default, " +
             "or clicks on the cancel button if available, when invoked without any arguments.")]
         #region *** Criteria ***
@@ -44,7 +44,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchAlert plugin successfully switches to the alert dialog and accepts " +
             "it when provided with the 'Accept' argument.")]
         #region *** Criteria ***
@@ -66,7 +66,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchAlert plugin successfully switches to the alert dialog, sends " +
             "specified keys to it, and then accepts it when provided with the appropriate arguments.")]
         #region *** Criteria ***
@@ -90,7 +90,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchAlert plugin successfully switches to the alert dialog, sends " +
             "specified keys to it, and then accepts the alert when provided with both 'Keys' " +
             "and 'AlertAction' arguments.")]
@@ -114,7 +114,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchAlert plugin successfully switches to the alert dialog, sends " +
             "specified keys to it, and then dismisses the alert when provided with both 'Keys' " +
             "and 'AlertAction' arguments.")]

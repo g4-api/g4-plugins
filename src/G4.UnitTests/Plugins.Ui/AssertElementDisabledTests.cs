@@ -31,21 +31,21 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonBoolean, "disable"],
         ];
 
-        [TestMethod(displayName: "Verify that the ElementDisabled plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ElementDisabled plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementDisabled>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementDisabled plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the ElementDisabled plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementDisabled>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementDisabled plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementDisabled plugin correctly evaluates " +
             "elements in negative scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
@@ -68,7 +68,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementDisabled plugin handles NoSuchElementException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementDisabled plugin handles NoSuchElementException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -93,7 +93,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementDisabled plugin handles NullReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementDisabled plugin handles NullReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -118,7 +118,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementDisabled plugin handles StaleElementReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementDisabled plugin handles StaleElementReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -143,7 +143,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementDisabled plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementDisabled plugin correctly evaluates " +
             "elements in positive scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]

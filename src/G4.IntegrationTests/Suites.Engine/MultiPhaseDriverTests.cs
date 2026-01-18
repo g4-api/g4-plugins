@@ -15,7 +15,7 @@ namespace G4.IntegrationTests.Suites.Engine
     [TestCategory("Engine")]
     public class MultiPhaseDriverTests : TestBase
     {
-        [TestMethod(displayName: "Verify that two WebDriver instances are initiated when a " +
+        [TestMethod(DisplayName = "Verify that two WebDriver instances are initiated when a " +
             "job takes the driver from its parent stage.")]
         #region *** Data Set ***
         [DataRow("Default()")]
@@ -44,9 +44,9 @@ namespace G4.IntegrationTests.Suites.Engine
             var sessions = driverSessions.Concat([automationDriverSession]).Distinct().ToArray();
 
             // Assert that exactly two unique driver sessions were created
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 2,
-                actual: sessions.Length,
+                collection: sessions,
                 message: "Expected two distinct WebDriver sessions to be initiated.");
 
             // Assert that none of the plugins within the job are using the automation driver
@@ -62,7 +62,7 @@ namespace G4.IntegrationTests.Suites.Engine
                 message: "The 'TestParameter' should be 'Foo Bar' after decoding.");
         }
 
-        [TestMethod(displayName: "Verify that a stage can take a driver from the preceding " +
+        [TestMethod(DisplayName = "Verify that a stage can take a driver from the preceding " +
             "stage or use the default driver from the parent automation.")]
         #region *** Data Set ***
         [DataRow("Default()")]
@@ -91,15 +91,15 @@ namespace G4.IntegrationTests.Suites.Engine
             var sessions = driverSessions.Concat([automationDriverSession]).Distinct().ToArray();
 
             // Assert that exactly two unique driver sessions were created
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 2,
-                actual: sessions.Length,
+                collection: sessions,
                 message: "Expected two distinct WebDriver sessions to be initiated.");
 
             // Assert that the environment's session parameters count is exactly two
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 2,
-                actual: response.Environment.SessionParameters.Count,
+                collection: response.Environment.SessionParameters,
                 message: "Expected exactly two session parameters to be present.");
 
             // Assert that all session parameters have the expected decoded value "Foo Bar"
@@ -108,7 +108,7 @@ namespace G4.IntegrationTests.Suites.Engine
                 message: "All session parameters should have the decoded value 'Foo Bar'.");
         }
 
-        [TestMethod(displayName: "Verify that the automation driver is correctly retrieved " +
+        [TestMethod(DisplayName = "Verify that the automation driver is correctly retrieved " +
             "and no exceptions occur during GetStateDriver invocation.")]
         public void GetStateDriverTest()
         {

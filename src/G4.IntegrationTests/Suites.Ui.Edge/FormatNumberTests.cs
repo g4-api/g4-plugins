@@ -45,7 +45,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | PositiveSign              | Defines the string that indicates that an exponent is positive.        |
         // 
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#RFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the correct formatting of a decimal number using the 'R' format specifier.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Number Formatting: The decimal number is correctly formatted using the 'R' format specifier.")]
@@ -93,7 +93,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | CurrencyGroupSizes        | Defines the number of integer digits that appear in a group.                                                                                                          |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#BFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the correct formatting of an integer number using the 'B' format specifier.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Number Formatting: The integer number is correctly formatted using the 'B' format specifier.")]
@@ -133,7 +133,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | NegativeSign              | Defines the string that indicates that a number is negative. |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#DFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the correct formatting of an integer number using the 'D' format specifier.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Number Formatting: The integer number is correctly formatted using the 'D' format specifier.")]
@@ -168,7 +168,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // The result string is not affected by the formatting information of the current NumberFormatInfo object.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#XFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the correct formatting of an integer number using the 'X' format specifier.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Number Formatting: The integer number is correctly formatted using the 'X' format specifier.")]
@@ -223,7 +223,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | CurrencyGroupSizes        | Defines the number of integer digits that appear in a group.                                                                                                          |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#CFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the correct formatting of a decimal number as currency using the 'C' format specifier " +
             "with a specified culture.")]
         #region *** Criteria ***
@@ -275,7 +275,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | PositiveSign              | Defines the string that indicates that an exponent is positive.                                    |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#EFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the correct formatting of a decimal number using the 'E' format specifier " +
             "with a specified culture.")]
         #region *** Criteria ***
@@ -320,7 +320,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | NumberDecimalDigits       | Defines the default number of decimal digits. This value can be overridden by using the precision specifier. |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#FFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the correct formatting of a decimal number using the 'F' format specifier " +
             "with a specified culture.")]
         #region *** Criteria ***
@@ -371,7 +371,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // |  UInt64          |  20 digits                                                                                                |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#GFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify the correct formatting of a decimal number using the 'G' format specifier " +
             "with a specified culture.")]
         #region *** Criteria ***
@@ -421,7 +421,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | NumberNegativePattern     | Defines the format of negative values, and specifies whether the negative sign is represented by parentheses or the NegativeSign property. |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#NFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify the correct formatting of a decimal number using the 'N' format specifier " +
             "with a specified culture.")]
         #region *** Criteria ***
@@ -470,7 +470,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // | PercentSymbol             | Defines the percent symbol.                                                                                                       |
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#PFormatString
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify the correct formatting of a decimal number using the 'P' format specifier " +
             "with a specified culture.")]
         #region *** Criteria ***
@@ -509,7 +509,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // away from zero is always used.For example, formatting 34.5 with `00` would result in the value 35.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the-0-custom-specifier
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify the correct formatting of a decimal number using the '00.0000' custom " +
             "format specifier with a specified culture.")]
         #region *** Criteria ***
@@ -547,7 +547,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // away from zero is always used. For example, formatting 34.5 with `##` would result in the value 35.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify the correct formatting of a decimal number using the '#' custom format " +
             "specifier with a specified culture.")]
         #region *** Criteria ***
@@ -583,7 +583,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         //NumberDecimalSeparator property of the NumberFormatInfo object that controls formatting.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-1
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify the correct formatting of a decimal number using the '.' custom format " +
             "specifier with a specified culture.")]
         #region *** Criteria ***
@@ -629,7 +629,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // You can use group separator and number scaling specifiers in the same format string. For example, if the string `#,0,,`
         // and the invariant culture are used to format the number one billion, the output is `1,000`.
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-2
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify the correct formatting of a decimal number using the ',' custom format " +
             "specifier with a specified culture.")]
         #region *** Criteria ***
@@ -663,7 +663,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // used is defined by the PercentSymbol property of the current NumberFormatInfo object.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-3
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the decimal number is correctly multiplied by 100 and formatted as " +
             "a percentage using the '%' custom format specifier with a specified culture.")]
         #region *** Criteria ***
@@ -698,7 +698,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // provides culture-specific formatting information.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--custom-specifier-4
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the decimal number is correctly multiplied by 1000 and formatted " +
             "using the '‰' custom format specifier with a specified culture.")]
         #region *** Criteria ***
@@ -734,7 +734,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // The `E`, `E-`, `e`, or `e-` formats indicate that a sign character should precede only negative exponents.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the-e-and-e-custom-specifiers
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the decimal number is correctly formatted using the scientific " +
             "notation with the 'e' format specifier.")]
         #region *** Criteria ***
@@ -781,7 +781,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // > before the string in C#, or add another backslash character before each backslash in C# and C++.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--escape-character
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the backslash character is used as an escape character for the " +
             "custom format specifier.")]
         #region *** Criteria ***
@@ -825,7 +825,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // custom format specifier.
         //
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#the--section-separator
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the conditional format specifier ';' applies different formatting " +
             "to a number based on its value.")]
         #region *** Criteria ***
@@ -873,7 +873,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // comparison is case-sensitive.
         // 
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings#character-literals
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that unused characters in the format string appear as literals in the " +
             "final output.")]
         #region *** Criteria ***

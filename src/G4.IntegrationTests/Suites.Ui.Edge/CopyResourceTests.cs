@@ -32,7 +32,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class CopyResourceTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CopyResource plugin, when configured to copy a specific resource from " +
             "the source to the destination, correctly copies the resource.")]
         #region *** Criteria ***
@@ -69,7 +69,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
                 message: "The expected number of resources was not copied. Check the CopyResource action.");
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CopyResource plugin, when configured to copy a specific resource from " +
             "the source to the destination in parallel, correctly copies the resource.")]
         #region *** Criteria ***
@@ -107,7 +107,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [TestCategory("Negative")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify the behavior of the CopyResource plugin when the destination is not provided.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The CopyResource plugin integrates seamlessly.")]
@@ -146,7 +146,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
                 message: "Unexpected CopiedResources found. The action must not copy any resources.");
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CopyResource plugin, when the source is not provided, unavailable, " +
             "or corrupted, gracefully handles the situation.")]
         #region *** Criteria ***
@@ -186,7 +186,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
                 message: "Unexpected CopiedResources found. The action must not copy any resources.");
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CopyResource action, when triggered, successfully copies the resource " +
             "from the extracted source to the 'TestImages' destination folder. This ensures availability " +
             "for further testing, with the requirement of employing a regular expression to extract the " +

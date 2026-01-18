@@ -25,7 +25,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class NewRandomNumberTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when invoked without parameters, generates a " +
             "random integer within the range of int.MinValue and int.MaxValue.")]
         #region *** Criteria ***
@@ -55,7 +55,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with specific minimum and maximum " +
             "values, generates a random integer within the specified range.")]
         #region *** Criteria ***
@@ -83,7 +83,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with a specific minimum value, " +
             "generates a random integer greater than or equal to the specified minimum and less than " +
             "or equal to the maximum value of the integer type.")]
@@ -112,7 +112,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with a specific maximum value, " +
             "generates a random integer greater than or equal to the minimum value of the integer " +
             "type and less than or equal to the specified maximum.")]
@@ -141,7 +141,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured to generate a random long integer, " +
             "produces a random integer within the range of long.MinValue and long.MaxValue.")]
         #region *** Criteria ***
@@ -169,7 +169,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with specific minimum and maximum " +
             "values and set to generate a random long integer, produces a random integer within the " +
             "range of -2147483649 and 2147483648.")]
@@ -198,7 +198,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with a specific minimum value " +
             "and set to generate a random long integer, produces a random integer greater than or " +
             "equal to the specified minimum and within the range of long.MinValue and long.MaxValue.")]
@@ -227,7 +227,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with a specific maximum value " +
             "and set to generate a random long integer, produces a random integer less than or equal " +
             "to the specified maximum and within the range of long.MinValue and long.MaxValue.")]
@@ -256,7 +256,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured to generate a random byte, " +
             "produces a random integer within the range of byte.MinValue and byte.MaxValue.")]
         #region *** Criteria ***
@@ -284,7 +284,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with specific minimum and maximum " +
             "values and set to generate a random byte, produces a random integer greater than or equal " +
             "to the specified minimum and less than or equal to the specified maximum.")]
@@ -313,7 +313,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with a specific minimum value " +
             "and set to generate a random byte, produces a random integer greater than or equal to " +
             "the specified minimum and within the range of byte.MinValue and byte.MaxValue.")]
@@ -342,7 +342,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured with a specific maximum value " +
             "and set to generate a random byte, produces a random integer less than or equal to " +
             "the specified maximum and within the range of byte.MinValue and byte.MaxValue.")]
@@ -371,7 +371,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured to generate a random float, " +
             "produces a random floating-point number within the range of 0.0 and 1.0.")]
         #region *** Criteria ***
@@ -399,7 +399,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the NewRandomNumber plugin, when configured to generate a random double, " +
             "produces a random floating-point number within the range of 0.0 and 1.0.")]
         #region *** Criteria ***

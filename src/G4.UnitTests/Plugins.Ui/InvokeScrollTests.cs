@@ -15,7 +15,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class InvokeScrollTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeScroll plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the InvokeScroll plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -23,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<InvokeScroll>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeScroll plugin can be " +
+        [TestMethod(DisplayName = "Verify that the InvokeScroll plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -31,19 +31,18 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<InvokeScroll>();
         }
 
-        [DataTestMethod(displayName: "Verify that the InvokeScroll method with exception elements throws a WebDriverException.")]
-        [ExpectedException(typeof(WebDriverException))]
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method with exception elements throws a WebDriverException.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""..//exception"",""argument"":""{{$ --Top:10}}""}")]
         #endregion
         public void ScrollWithExceptionElementTest(string ruleJson)
         {
             // Invoke the scroll test with the specified rule JSON
-            InvokeScrollTest(this, ruleJson, onElement: true);
+            Assert.Throws<WebDriverException>(()
+                => InvokeScrollTest(this, ruleJson, onElement: true));
         }
 
-        [DataTestMethod(displayName: "Verify that the InvokeScroll method with invalid elements throws a WebDriverTimeoutException.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method with invalid elements throws a WebDriverTimeoutException.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//stale"",""argument"":""{{$ --Top:10}}""}")]
         [DataRow(@"{""onElement"":""//none"",""argument"":""{{$ --Top:10}}""}")]
@@ -53,10 +52,11 @@ namespace G4.UnitTests.Plugins.Ui
         public void ScrollWithInvalidElementTest(string ruleJson)
         {
             // Invoke the scroll test with the specified rule JSON
-            InvokeScrollTest(this, ruleJson, onElement: false);
+            Assert.Throws<WebDriverTimeoutException>(()
+                => InvokeScrollTest(this, ruleJson, onElement: false));
         }
 
-        [DataTestMethod(displayName: "Verify that the InvokeScroll method with nested valid elements works as expected.")]
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method with nested valid elements works as expected.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --Top:10}}""}")]
         [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --Left:10}}""}")]
@@ -77,40 +77,40 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeScrollTest(this, ruleJson, onElement: true);
         }
 
-        [DataTestMethod(displayName: "Verify that the InvokeScroll method with no elements throws a NoSuchElementException.")]
-        [ExpectedException(typeof(NoSuchElementException))]
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method with no elements throws a NoSuchElementException.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""..//none"",""argument"":""{{$ --Top:10}}""}")]
         #endregion
         public void ScrollWithNoElementTest(string ruleJson)
         {
             // Invoke the scroll test with the specified rule JSON
-            InvokeScrollTest(this, ruleJson, onElement: true);
+            Assert.Throws<NoSuchElementException>(()
+                => InvokeScrollTest(this, ruleJson, onElement: true));
         }
 
-        [DataTestMethod(displayName: "Verify that the InvokeScroll method with null elements throws a WebDriverException.")]
-        [ExpectedException(typeof(WebDriverException))]
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method with null elements throws a WebDriverException.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""..//null"",""argument"":""{{$ --Top:10}}""}")]
         #endregion
         public void ScrollWithNullElementTest(string ruleJson)
         {
             // Invoke the scroll test with the specified rule JSON
-            InvokeScrollTest(this, ruleJson, onElement: true);
+            Assert.Throws<WebDriverException>(()
+                => InvokeScrollTest(this, ruleJson, onElement: true));
         }
 
-        [DataTestMethod(displayName: "Verify that the InvokeScroll method with stale elements throws a StaleElementReferenceException.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method with stale elements throws a StaleElementReferenceException.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""..//stale"",""argument"":""{{$ --Top:10}}""}")]
         #endregion
         public void ScrollWithStaleElementTest(string ruleJson)
         {
             // Invoke the scroll test with the specified rule JSON
-            InvokeScrollTest(this, ruleJson, onElement: true);
+            Assert.Throws<StaleElementReferenceException>(()
+                => InvokeScrollTest(this, ruleJson, onElement: true));
         }
 
-        [DataTestMethod(displayName: "Verify that the InvokeScroll method works with valid arguments.")]
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method works with valid arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Top:10}}""}")]
         [DataRow(@"{""argument"":""{{$ --Left:10}}""}")]

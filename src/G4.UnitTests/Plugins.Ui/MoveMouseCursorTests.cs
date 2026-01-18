@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class MoveMouseCursorTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the MoveMouseCursor plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -21,7 +21,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<MoveMouseCursor>();
         }
 
-        [TestMethod(displayName: "Verify that the MoveMouseCursor plugin can be " +
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -29,7 +29,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<MoveMouseCursor>();
         }
 
-        [DataTestMethod(displayName: "Verify that the MoveMouseCursor method works with valid arguments.")]
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor method works with valid arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
         [DataRow(@"{""onElement"":""//negative""}")]
@@ -44,7 +44,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [DataTestMethod(displayName: "Verify that the MoveMouseCursor method works with nested valid elements.")]
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor method works with nested valid elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive""}")]
         [DataRow(@"{""onElement"":"".//negative""}")]
@@ -60,7 +60,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the MoveMouseCursor method can be invoked " +
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor method can be invoked " +
             "without any arguments.")]
         public void MoveMouseCursorFlat()
         {
@@ -71,39 +71,32 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [DataTestMethod(displayName: "Verify that the MoveMouseCursor method with no elements " +
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor method with no elements " +
             "throws a NoSuchElementException.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//none""}")]
         #endregion
         public void MoveMouseCursorNoElementNestedTest(string ruleJson)
         {
             // Invoke the MoveMouseCursor plugin with the specified rule JSON on non-existing elements
-            var plugin = Invoke<MoveMouseCursor>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Verify that a NoSuchElementException is thrown, indicating no such element exists
-            Assert.IsTrue(plugin.Exceptions.IsEmpty);
+            Assert.Throws<NoSuchElementException>(()
+                => Invoke<MoveMouseCursor>(ruleJson, By.Custom.Positive()));
         }
 
-        [DataTestMethod(displayName: "Verify that the MoveMouseCursor method with stale elements " +
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor method with stale elements " +
             "throws a StaleElementReferenceException.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//stale""}")]
         #endregion
         public void MoveMouseCursorStaleNestedTest(string ruleJson)
         {
             // Invoke the MoveMouseCursor plugin with the specified rule JSON on stale elements
-            var plugin = Invoke<MoveMouseCursor>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Verify that a StaleElementReferenceException is thrown, indicating the element is no longer in the DOM
-            Assert.IsTrue(plugin.Exceptions.IsEmpty);
+            Assert.Throws<StaleElementReferenceException>(()
+                => Invoke<MoveMouseCursor>(ruleJson, By.Custom.Positive()));
         }
 
-        [DataTestMethod(displayName: "Verify that the MoveMouseCursor method with invalid elements " +
+        [TestMethod(DisplayName = "Verify that the MoveMouseCursor method with invalid elements " +
             "throws a WebDriverTimeoutException.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//none""}")]
         [DataRow(@"{""onElement"":""//null""}")]
@@ -112,10 +105,7 @@ namespace G4.UnitTests.Plugins.Ui
         public void MoveMouseCursorTimeoutTest(string ruleJson)
         {
             // Invoke the MoveMouseCursor plugin with the specified rule JSON on invalid elements
-            var plugin = Invoke<MoveMouseCursor>(ruleJson).Plugin;
-
-            // Verify that a WebDriverTimeoutException is thrown, indicating the operation timed out
-            Assert.IsTrue(plugin.Exceptions.IsEmpty);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<MoveMouseCursor>(ruleJson));
         }
     }
 }

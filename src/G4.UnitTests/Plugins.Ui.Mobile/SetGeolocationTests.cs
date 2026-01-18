@@ -16,21 +16,21 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
     [DoNotParallelize]
     public class SetGeolocationTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SetGeolocation plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the SetGeolocation plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<SetGeolocation>();
         }
 
-        [TestMethod(displayName: "Verify that the SetGeolocation plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the SetGeolocation plugin complies with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<SetGeolocation>();
         }
 
-        [TestMethod(displayName: "Verify that invalid geolocation arguments trigger " +
+        [TestMethod(DisplayName = "Verify that invalid geolocation arguments trigger " +
             "exceptions in the plugin.")]
         #region *** Data Set ***
         [DataRow("")]
@@ -63,7 +63,7 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
             Assert.IsTrue(response.ResponseData.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that valid geolocation arguments do not trigger " +
+        [TestMethod(DisplayName = "Verify that valid geolocation arguments do not trigger " +
             "exceptions in the plugin.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Altitude:100 --Latitude:200 --Longitude:300}}""}")]

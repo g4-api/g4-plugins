@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SendKeyboardKeyTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendKeyboardKey plugin, when configured to send the 'Enter' key to a " +
             "designated element, accurately simulates the keyboard input and triggers the expected " +
             "action on the web UI.")]
@@ -51,7 +51,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendKeyboardKey plugin, when configured to send a specified key (e.g., 'Enter') " +
             "to a designated element using the 'Key' parameter, accurately simulates the keyboard " +
             "input and captures the expected outcome.")]
@@ -74,7 +74,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendKeyboardKey plugin, when configured to send multiple specified " +
             "keys (e.g., 'Enter' and 'Backspace') to a designated element using the 'Key' parameter, " +
             "accurately simulates the keyboard input and captures the expected outcomes.")]
@@ -97,7 +97,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendKeyboardKey plugin, when configured to send multiple specified " +
             "keys (e.g., 'Enter' and 'Backspace') to a designated element with a specified delay " +
             "between each key input, accurately simulates the keyboard input with the expected " +
@@ -133,10 +133,10 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
                 .First();
 
             // Assert that the runtime of the performance point is greater than 8 seconds
-            Assert.IsTrue(performancePoint.RunTime > 8 * TimeSpan.TicksPerSecond);
+            Assert.IsGreaterThan(8 * TimeSpan.TicksPerSecond, performancePoint.RunTime);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendKeyboardKey plugin, when configured to clear any existing text in " +
             "the designated element and send the 'Enter' key, accurately performs the specified " +
             "actions and triggers the expected outcomes.")]
@@ -160,7 +160,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0005>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SendKeyboardKey plugin, when configured to clear any existing text in " +
             "the designated element using native clear functionality and send the 'Enter' key, " +
             "accurately performs the specified actions and triggers the expected outcomes.")]
