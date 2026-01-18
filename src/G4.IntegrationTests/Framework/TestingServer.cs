@@ -3,7 +3,6 @@ using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
 
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +14,8 @@ using Microsoft.Extensions.Logging;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
