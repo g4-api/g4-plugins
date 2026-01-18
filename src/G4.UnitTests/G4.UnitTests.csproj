@@ -34,11 +34,11 @@
 	<ItemGroup>
 		<PackageReference Include="G4.Abstraction.Logging" Version="2025.3.7.16" />
 		<PackageReference Include="G4.Api" Version="2025.3.29.35" />
-		<PackageReference Include="G4.Converters" Version="2025.8.11.43" />
-		<PackageReference Include="G4.Plugins" Version="2025.8.11.43" />
-		<PackageReference Include="G4.Extensions" Version="2025.8.11.43" />
-		<PackageReference Include="G4.Models" Version="2025.8.11.43" />
-		<PackageReference Include="G4.Settings" Version="2025.8.11.43" />
+		<PackageReference Include="G4.Converters" Version="2026.1.18.46" />
+		<PackageReference Include="G4.Plugins" Version="2026.1.18.46" />
+		<PackageReference Include="G4.Extensions" Version="2026.1.18.46" />
+		<PackageReference Include="G4.Models" Version="2026.1.18.46" />
+		<PackageReference Include="G4.Settings" Version="2026.1.18.46" />
 		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.2" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
 		<PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
