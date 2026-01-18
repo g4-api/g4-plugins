@@ -5,7 +5,7 @@ using G4.Models;
 namespace G4.Plugins.Common.Transformers
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        assembly: "G4.Plugins.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Common.Transformers.Manifests.{nameof(TrimStart)}.json")]
     public class TrimStart(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {

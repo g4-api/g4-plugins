@@ -24,7 +24,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class ResolveOnlineFileTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "ResolveOnlineFile plugin downloads a file from a URL and populates session parameters with correct " +
             "file details.")]
         #region *** Criteria ***
@@ -50,7 +50,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "ResolveOnlineFile plugin resolves a file link from a page element and extracts its metadata correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The ResolveOnlineFile plugin seamlessly integrates into the G4™ Engine framework.")]
@@ -75,7 +75,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "ResolveOnlineFile plugin filters a link with a regex, downloads the file, and extracts its metadata correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The ResolveOnlineFile plugin seamlessly integrates into the G4™ Engine framework.")]
@@ -100,7 +100,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "ResolveOnlineFile plugin reads a URL from an element attribute, downloads the file, and extracts its " +
             "metadata correctly.")]
         #region *** Criteria ***
@@ -126,7 +126,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "ResolveOnlineFile plugin reads a URL from an element attribute, applies a regex filter, downloads the " +
             "file, and extracts its metadata correctly.")]
         #region *** Criteria ***

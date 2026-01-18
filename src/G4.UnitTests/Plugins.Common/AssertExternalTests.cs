@@ -88,8 +88,8 @@ namespace G4.UnitTests.Plugins.Common
         ];
 
         [RetryableTestMethod(
-            displayName: "Verify that the ExternalAssertion plugin correctly evaluates nested conditions in a positive scenario.",
             numberOfAttempts: 5,
+            DisplayName = "Verify that the ExternalAssertion plugin correctly evaluates nested conditions in a positive scenario.",
             DelayBetweenAttempts = 3000)]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]

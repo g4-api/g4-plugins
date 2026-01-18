@@ -25,14 +25,14 @@ namespace G4.UnitTests.Plugins.Ui
             [SimulatorCapabilities.ChildWindows] = 5
         };
 
-        [TestMethod(displayName: "Verify that the CloseWindow plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the CloseWindow plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             // Assert that the CloseWindow plugin can be created successfully
             AssertPlugin<CloseWindow>();
         }
 
-        [TestMethod(displayName: "Verify that the CloseWindow plugin manifest complies with the " +
+        [TestMethod(DisplayName = "Verify that the CloseWindow plugin manifest complies with the " +
             "expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -40,7 +40,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<CloseWindow>();
         }
 
-        [TestMethod(displayName: "Verify that the CloseWindow plugin correctly closes the current window.")]
+        [TestMethod(DisplayName = "Verify that the CloseWindow plugin correctly closes the current window.")]
         #region *** Data Set ***
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"onElement\":\".//positive\"}")]
         [DataRow("{\"pluginName\":\".//CloseWindow\"}")]
@@ -51,7 +51,7 @@ namespace G4.UnitTests.Plugins.Ui
             var driver = new SimulatorDriver().AddCapabilities(Capabilities);
 
             // Assert that there are more windows than the predefined number of windows
-            Assert.IsTrue(driver.WindowHandles.Count > NumberOfWindows);
+            Assert.IsGreaterThan(NumberOfWindows, driver.WindowHandles.Count);
 
             // Store the handle of the first window
             var windowHandle = driver.WindowHandles[0];
@@ -65,7 +65,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
         }
 
-        [TestMethod(displayName: "Verify that the CloseWindow plugin correctly closes a window by index.")]
+        [TestMethod(DisplayName = "Verify that the CloseWindow plugin correctly closes a window by index.")]
         #region *** Data Set ***
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"2\",\"onElement\":\".//positive\"}")]
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"2\"}")]
@@ -76,7 +76,7 @@ namespace G4.UnitTests.Plugins.Ui
             var driver = new SimulatorDriver().AddCapabilities(Capabilities);
 
             // Assert that there are more windows than the predefined number of windows
-            Assert.IsTrue(driver.WindowHandles.Count > NumberOfWindows);
+            Assert.IsGreaterThan(NumberOfWindows, driver.WindowHandles.Count);
 
             // Store the handle of the window at index 2
             var windowHandle = driver.WindowHandles[2];
@@ -90,9 +90,8 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
         }
 
-        [TestMethod(displayName: "Verify that the CloseWindow plugin throws an exception when " +
+        [TestMethod(DisplayName = "Verify that the CloseWindow plugin throws an exception when " +
             "trying to close a window by a non-existing index.")]
-        [ExpectedException(typeof(NoSuchWindowException))]
         #region *** Data Set ***
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"200\",\"onElement\":\".//positive\"}")]
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"200\"}")]
@@ -103,23 +102,19 @@ namespace G4.UnitTests.Plugins.Ui
             var driver = new SimulatorDriver().AddCapabilities(Capabilities);
 
             // Assert that there are more windows than the predefined number of windows
-            Assert.IsTrue(driver.WindowHandles.Count > NumberOfWindows);
+            Assert.IsGreaterThan(NumberOfWindows, driver.WindowHandles.Count);
 
             // Store the handle of the window at index 2
             var windowHandle = driver.WindowHandles[2];
 
             // Invoke the CloseWindow plugin with or without nested elements based on the rulesJson
-            var plugin = !rulesJson.Contains("onElement")
+            Assert.Throws<NoSuchWindowException>(() => !rulesJson.Contains("onElement")
                 ? Invoke<CloseWindow>(driver, rulesJson).Plugin
-                : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin;
-
-            // This will throw an exception as the index 200 does not exist
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
+                : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin);
         }
 
-        [TestMethod(displayName: "Verify that the CloseWindow plugin throws an exception when " +
+        [TestMethod(DisplayName = "Verify that the CloseWindow plugin throws an exception when " +
             "trying to close a window by a non-existing handle.")]
-        [ExpectedException(typeof(NoSuchWindowException))]
         #region *** Data Set ***
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"NO-SUCH-HANDLE\",\"onElement\":\".//positive\"}")]
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"NO-SUCH-HANDLE\"}")]
@@ -130,21 +125,18 @@ namespace G4.UnitTests.Plugins.Ui
             var driver = new SimulatorDriver().AddCapabilities(Capabilities);
 
             // Assert that there are more windows than the predefined number of windows
-            Assert.IsTrue(driver.WindowHandles.Count > NumberOfWindows);
+            Assert.IsGreaterThan(NumberOfWindows, driver.WindowHandles.Count);
 
             // Store the handle of the first window
             var windowHandle = driver.WindowHandles[0];
 
             // Invoke the CloseWindow plugin with or without nested elements based on the rulesJson
-            var plugin = !rulesJson.Contains("onElement")
+            Assert.Throws<NoSuchWindowException>(() => !rulesJson.Contains("onElement")
                 ? Invoke<CloseWindow>(driver, rulesJson).Plugin
-                : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin;
-
-            // This will throw an exception as the handle NO-SUCH-HANDLE does not exist
-            Assert.IsTrue(plugin.WebDriver.WindowHandles.Any(i => i == windowHandle));
+                : Invoke<CloseWindow>(driver, rulesJson, By.Custom.Positive()).Plugin);
         }
 
-        [TestMethod(displayName: "Verify that the CloseWindow plugin correctly closes a window by handle.")]
+        [TestMethod(DisplayName = "Verify that the CloseWindow plugin correctly closes a window by handle.")]
         #region *** Data Set ***
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"windowHandle\",\"onElement\":\".//positive\"}")]
         [DataRow("{\"pluginName\":\".//CloseWindow\",\"argument\":\"windowHandle\"}")]
@@ -155,7 +147,7 @@ namespace G4.UnitTests.Plugins.Ui
             var driver = new SimulatorDriver().AddCapabilities(Capabilities);
 
             // Assert that there are more windows than the predefined number of windows
-            Assert.IsTrue(driver.WindowHandles.Count > NumberOfWindows);
+            Assert.IsGreaterThan(NumberOfWindows, driver.WindowHandles.Count);
 
             // Store the handle of the window at index 2
             var windowHandle = driver.WindowHandles[2];

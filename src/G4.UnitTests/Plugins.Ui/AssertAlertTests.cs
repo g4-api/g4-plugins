@@ -16,20 +16,20 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class AssertAlertTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the AlertExists plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the AlertExists plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<AlertExists>();
         }
 
-        [TestMethod(displayName: "Verify that the AlertExists plugin manifest complies with " +
+        [TestMethod(DisplayName = "Verify that the AlertExists plugin manifest complies with " +
             "the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<AlertExists>();
         }
 
-        [TestMethod(displayName: "Verify that the AlertExists condition evaluates to " +
+        [TestMethod(DisplayName = "Verify that the AlertExists condition evaluates to " +
             "false when there is no alert.")]
         #region *** Data Set ***
         [DataRow("AlertExists")]
@@ -60,7 +60,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(actual);
         }
 
-        [TestMethod(displayName: "Verify that the AlertExists condition evaluates to " +
+        [TestMethod(DisplayName = "Verify that the AlertExists condition evaluates to " +
             "true when there is an alert.")]
         #region *** Data Set ***
         [DataRow("AlertExists")]
@@ -91,7 +91,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(actual);
         }
 
-        [TestMethod(displayName: "Verify that the AlertNotExists condition evaluates to " +
+        [TestMethod(DisplayName = "Verify that the AlertNotExists condition evaluates to " +
             "false when there is an alert.")]
         #region *** Data Set ***
         [DataRow("AlertNotExists")]
@@ -122,7 +122,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(actual);
         }
 
-        [TestMethod(displayName: "Verify that the AlertNotExists condition evaluates to " +
+        [TestMethod(DisplayName = "Verify that the AlertNotExists condition evaluates to " +
             "true when there is no alert.")]
         #region *** Data Set ***
         [DataRow("AlertNotExists")]

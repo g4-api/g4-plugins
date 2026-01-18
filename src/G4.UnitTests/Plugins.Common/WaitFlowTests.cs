@@ -30,20 +30,20 @@ namespace G4.UnitTests.Plugins.Common
         // The URL of the page being tested.
         private const string PageUrl = "http://positive.io/20";
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<WaitFlow>();
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin manifest complies with " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin manifest complies with " +
             "the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<WaitFlow>();
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin meets boolean conditions within the timeout period.")]
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin meets boolean conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:AlertNotExists     --Timeout:00:00:05}}\"}")]
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementActive      --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -64,10 +64,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout when boolean conditions are not met.")]
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout when boolean conditions are not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:AlertExists        --Timeout:00:00:05}}\"}")]
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementActive      --Timeout:00:00:05}}\",\"onElement\":\"//negative\"}")]
@@ -88,10 +88,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "DriverTypeName conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:DriverTypeName --Operator:Eq       --Expected:" + DriverTypeName + " --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -105,10 +105,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for DriverTypeName conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:DriverTypeName --Operator:Ne       --Expected:" + DriverTypeName + " --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -122,10 +122,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "ElementAttribute conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementAttribute --Operator:Eq       --Expected:" + ElementAttribute + " --Timeout:00:00:05}}\",\"onElement\":\"//positive\",\"onAttribute\":\"href\"}")]
@@ -139,10 +139,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for ElementAttribute conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementAttribute --Operator:Ne       --Expected:" + ElementAttribute + " --Timeout:00:00:05}}\",\"onElement\":\"//positive\",\"onAttribute\":\"href\"}")]
@@ -156,10 +156,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "ElementCount conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementCount --Operator:Gt --Expected:1 --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -177,10 +177,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for ElementCount conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementCount --Operator:Gt --Expected:2 --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -196,10 +196,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "ElementText conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementText --Operator:Eq       --Expected:" + ElementText + " --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -213,10 +213,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for ElementText conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementText --Operator:Ne       --Expected:" + ElementText + " --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -230,10 +230,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "ElementTextLength conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementTextLength --Operator:Gt --Expected:24 --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -251,10 +251,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for ElementTextLength conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:ElementTextLength --Operator:Gt --Expected:26 --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -270,10 +270,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "PageTitle conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:PageTitle --Operator:Eq       --Expected:" + PageTitle + "    --Timeout:00:00:05}}\",\"onElement\":\"//positive\",\"onAttribute\":\"href\"}")]
@@ -287,10 +287,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for PageTitle conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:PageTitle --Operator:Ne       --Expected:" + PageTitle + "    --Timeout:00:00:05}}\",\"onElement\":\"//positive\",\"onAttribute\":\"href\"}")]
@@ -304,10 +304,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "PageUrl conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:PageUrl --Operator:Eq       --Expected:" + PageUrl + "         --Timeout:00:00:05}}\",\"onElement\":\"//positive\",\"onAttribute\":\"href\"}")]
@@ -321,10 +321,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for PageUrl conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:PageUrl --Operator:Ne       --Expected:" + PageUrl + "         --Timeout:00:00:05}}\",\"onElement\":\"//positive\",\"onAttribute\":\"href\"}")]
@@ -338,10 +338,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin correctly handles " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin correctly handles " +
             "WindowCount conditions within the timeout period.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:WindowCount --Operator:Gt --Expected:0 --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -359,10 +359,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is less than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond < 5000);
+            Assert.IsLessThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the timeout " +
             "for WindowCount conditions when not met.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"{{$ --Condition:WindowCount --Operator:Gt --Expected:1 --Timeout:00:00:05}}\",\"onElement\":\"//positive\"}")]
@@ -378,10 +378,10 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 5000 milliseconds (5 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 5000);
+            Assert.IsGreaterThan(5000, runtime / TimeSpan.TicksPerMillisecond);
         }
 
-        [TestMethod(displayName: "Verify that the WaitFlow plugin respects the specified timeout.")]
+        [TestMethod(DisplayName = "Verify that the WaitFlow plugin respects the specified timeout.")]
         #region *** Data Set ***
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"3000\"}")]
         [DataRow("{\"$type\":\"Action\", \"pluginName\":\"WaitFlow\",\"argument\":\"00:00:03\"}")]
@@ -394,7 +394,7 @@ namespace G4.UnitTests.Plugins.Common
             var runtime = Invoke(ruleJson).GetPerformancePoint(pluginName: "WaitFlow").RunTime;
 
             // Assert that the elapsed time is greater than 3000 milliseconds (3 seconds)
-            Assert.IsTrue(runtime / TimeSpan.TicksPerMillisecond > 3000);
+            Assert.IsGreaterThan(3000, runtime / TimeSpan.TicksPerMillisecond);
         }
     }
 }

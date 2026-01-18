@@ -16,7 +16,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class InvokeScriptTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeScript plugin can be " +
+        [TestMethod(DisplayName = "Verify that the InvokeScript plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -24,7 +24,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<InvokeScript>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeScript plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the InvokeScript plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -32,7 +32,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<InvokeScript>();
         }
 
-        [TestMethod(displayName: "Verify the InvokeScript method with no arguments and " +
+        [TestMethod(DisplayName = "Verify the InvokeScript method with no arguments and " +
             "check the result against a regex pattern.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""return document.readyState;""}")]
@@ -43,7 +43,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeScriptTest(this, ruleJson, onElement: false);
         }
 
-        [TestMethod(displayName: "Verify the InvokeScript method with script block and " +
+        [TestMethod(DisplayName = "Verify the InvokeScript method with script block and " +
             "check the result against a regex pattern.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}")]
@@ -56,7 +56,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeScriptTest(this, ruleJson, onElement: false);
         }
 
-        [TestMethod(displayName: "Verify the InvokeScript method with script block and " +
+        [TestMethod(DisplayName = "Verify the InvokeScript method with script block and " +
             "arguments, and check the result against a regex pattern.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
@@ -69,7 +69,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeScriptTest(this, ruleJson, onElement: false);
         }
 
-        [TestMethod(displayName: "Verify the behavior of invoking a script with a script block, " +
+        [TestMethod(DisplayName = "Verify the behavior of invoking a script with a script block, " +
             "arguments, and an element.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive"",""argument"":""{{$ --ScriptBlock:return document.readyState; --Arguments:[1.5,false,'Foo Bar',{'number':0,'text':'a','boolean':true}]}}""}")]
@@ -88,7 +88,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeScriptTest(this, ruleJson, onElement: true);
         }
 
-        [TestMethod(displayName: "Verify the behavior of invoking a script with a script block " +
+        [TestMethod(DisplayName = "Verify the behavior of invoking a script with a script block " +
             "and an element for positive cases.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}")]
@@ -101,40 +101,40 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeScriptTest(this, ruleJson, onElement: true);
         }
 
-        [TestMethod(displayName: "Verify the behavior of invoking a script with a script block " +
+        [TestMethod(DisplayName = "Verify the behavior of invoking a script with a script block " +
             "and a stale element, expecting a StaleElementReferenceException.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""..//stale"",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}")]
         #endregion
         public void InvokeScriptWithStaleElementTest(string ruleJson)
         {
             // Invoke the script test with the specified rule JSON
-            InvokeScriptTest(this, ruleJson, onElement: true);
+            Assert.Throws<StaleElementReferenceException>(()
+                => InvokeScriptTest(this, ruleJson, onElement: true));
         }
 
-        [TestMethod(displayName: "Verify the behavior of invoking a script with a script block " +
+        [TestMethod(DisplayName = "Verify the behavior of invoking a script with a script block " +
             "and no element, expecting a NoSuchElementException.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""..//none"",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}")]
         #endregion
         public void InvokeScriptWithNoElementTest(string ruleJson)
         {
             // Invoke the script test with the specified rule JSON
-            InvokeScriptTest(this, ruleJson, onElement: true);
+            Assert.Throws<NoSuchElementException>(()
+                => InvokeScriptTest(this, ruleJson, onElement: true));
         }
 
-        [TestMethod(displayName: "Verify the behavior of invoking a script with a script block " +
+        [TestMethod(DisplayName = "Verify the behavior of invoking a script with a script block " +
             "and an exception element, expecting a WebDriverException.")]
-        [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""..//exception"",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}")]
         #endregion
         public void InvokeScriptWithExceptionElementTest(string ruleJson)
         {
             // Invoke the script test with the specified rule JSON
-            InvokeScriptTest(this, ruleJson, onElement: true);
+            Assert.Throws<WebDriverException>(()
+                => InvokeScriptTest(this, ruleJson, onElement: true));
         }
 
         // Invokes the script block test with the specified test base and action rule.

@@ -7,7 +7,6 @@ using G4.WebDriver.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace G4.UnitTests.Plugins.Ui
 {
@@ -16,7 +15,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class CloseBrowserTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the CloseBrowser plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the CloseBrowser plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
@@ -24,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<CloseBrowser>();
         }
 
-        [TestMethod(displayName: "Verify that the CloseBrowser plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the CloseBrowser plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -32,7 +31,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<CloseBrowser>();
         }
 
-        [TestMethod(displayName: "Verify that the CloseBrowser plugin correctly closes " +
+        [TestMethod(DisplayName = "Verify that the CloseBrowser plugin correctly closes " +
             "the browser window.")]
         #region *** Data Set ***
         [DataRow("{\"pluginName\":\".//CloseBrowser\",\"onElement\":\".//positive\"}")]
@@ -46,22 +45,24 @@ namespace G4.UnitTests.Plugins.Ui
                 : Invoke<CloseBrowser>(rulesJson, By.Custom.Positive());
 
             // Assert that the final window count is 0
-            Assert.AreEqual(expected: 0, actual: response.Plugin.WebDriver.WindowHandles.Count);
+            Assert.IsEmpty(response.Plugin.WebDriver.WindowHandles);
         }
 
-        [TestMethod(displayName: "Verify that the CloseBrowser plugin throws an exception " +
+        [TestMethod(DisplayName = "Verify that the CloseBrowser plugin throws an exception " +
             "when an error occurs during browser closure.")]
-        [ExpectedException(typeof(WebDriverException))]
         public void CloseBrowserExceptionTest()
         {
-            // Invoke the CloseBrowser plugin with a configuration that causes an exception
-            var response = Invoke<CloseBrowser>(rulesJson: "{\"pluginName\":\".//CloseBrowser\"}", capabilities: new Dictionary<string, object>
+            // Initialize the rule configuration for the CloseBrowser plugin
+            var ruleJson = "{\"pluginName\":\".//CloseBrowser\"}";
+
+            // Set up capabilities to simulate an exception during browser closure
+            var capabilities = new Dictionary<string, object>
             {
                 [SimulatorCapabilities.ThrowOnClose] = true
-            });
+            };
 
-            // Assert that the response contains a WebDriverException
-            Assert.IsTrue(response.Plugin.Exceptions.Any(i => i.Exception is WebDriverException));
+            // Invoke the CloseBrowser plugin with a configuration that causes an exception
+            Assert.Throws<WebDriverException>(() => Invoke<CloseBrowser>(rulesJson: ruleJson, capabilities: capabilities));
         }
     }
 }

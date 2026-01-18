@@ -16,7 +16,7 @@ namespace G4.UnitTests.Plugins
     [TestCategory("UnitTest")]
     public class InvokerTests : TestBase
     {
-        [TestMethod(displayName: "Verify that an action rule is correctly invoked and " +
+        [TestMethod(DisplayName = "Verify that an action rule is correctly invoked and " +
             "that the response contains a session.")]
         public void InvokeActionTest()
         {
@@ -43,10 +43,10 @@ namespace G4.UnitTests.Plugins
             var response = client.Automation.Invoke(Automation);
 
             // Assert that the response contains a session.
-            Assert.IsTrue(response.First().Value.Sessions.FirstOrDefault().Value != default);
+            Assert.AreNotEqual(default, response.First().Value.Sessions.FirstOrDefault().Value);
         }
 
-        [TestMethod(displayName:"Verify that an external action rule is correctly invoked and that " +
+        [TestMethod(DisplayName = "Verify that an external action rule is correctly invoked and that " +
             "the response contains a session.")]
         public void InvokeExternalActionTest()
         {
@@ -82,7 +82,7 @@ namespace G4.UnitTests.Plugins
             var response = client.Automation.Invoke(Automation);
 
             // Assert that the response contains a session.
-            Assert.IsTrue(response.First().Value.Sessions.FirstOrDefault().Value != default);
+            Assert.AreNotEqual(default, response.First().Value.Sessions.FirstOrDefault().Value);
         }
     }
 }

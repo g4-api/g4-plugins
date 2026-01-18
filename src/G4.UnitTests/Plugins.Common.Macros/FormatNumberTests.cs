@@ -13,20 +13,20 @@ namespace G4.UnitTests.Plugins.Common.Macros
     [TestCategory("UnitTest")]
     public class FormatNumberTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the FormatNumber plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the FormatNumber plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<FormatNumber>(pluginName: "Format-Number");
         }
 
-        [TestMethod(displayName: "Verify that the FormatNumber plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the FormatNumber plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<FormatNumber>();
         }
 
-        [TestMethod(displayName: "Verify that the FormatNumber plugin correctly formats " +
+        [TestMethod(DisplayName = "Verify that the FormatNumber plugin correctly formats " +
             "numbers according to specified formats and cultures.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$Format-Number --Number:0.45678       --Format:0.00   --Culture:en-US}}\"}", @"^0\.46$")]
@@ -73,19 +73,18 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Assert.IsTrue(Regex.IsMatch(input: $"{actual.Entity[MacroResultKey]}", pattern: expectedPattern));
         }
 
-        [TestMethod(displayName: "Verify that the FormatNumber plugin throws a FormatException " +
+        [TestMethod(DisplayName = "Verify that the FormatNumber plugin throws a FormatException " +
             "for invalid numeric formats.")]
-        [ExpectedException(typeof(FormatException))]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$Format-Number --Number:123456789.12345678 --Format:Z}}\"}")]
         #endregion
         public void StandardNumericFormatExceptionTest(string ruleJson)
         {
             // Invoke the action with the invalid format and expect a FormatException.
-            Invoke<FormatNumber>(ruleJson);
+            Assert.Throws<FormatException>(() => Invoke<FormatNumber>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the FormatNumber plugin correctly formats " +
+        [TestMethod(DisplayName = "Verify that the FormatNumber plugin correctly formats " +
             "numbers using standard numeric formats for various number formats and cultures.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$Format-Number --Number:123456789.12345678   --Format:R}}\"}", "^123456789.12345678$")]

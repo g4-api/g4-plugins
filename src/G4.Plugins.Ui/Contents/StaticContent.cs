@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace G4.Plugins.Ui.Contents
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Ui, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Ui.Contents.Manifests.{nameof(StaticContent)}.json")]
     public class StaticContent(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {

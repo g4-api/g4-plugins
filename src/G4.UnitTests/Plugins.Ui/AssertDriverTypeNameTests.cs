@@ -23,21 +23,21 @@ namespace G4.UnitTests.Plugins.Ui
         // The driver type that is not the simulator driver for the negative test
         private const string Negative = "G4.WebDriver.Simulator.ChromeDriver";
 
-        [TestMethod(displayName: "Verify that the DriverTypeName plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the DriverTypeName plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<DriverTypeName>();
         }
 
-        [TestMethod(displayName: "Verify that the DriverTypeName plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the DriverTypeName plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<DriverTypeName>();
         }
 
-        [TestMethod(displayName: "Verify that the DriverTypeName plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the DriverTypeName plugin correctly evaluates " +
             "various conditions.")]
         #region *** Data Set ***
         // Equal
@@ -76,7 +76,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the DriverTypeName plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the DriverTypeName plugin correctly evaluates " +
             "negative conditions.")]
         #region *** Data Set ***
         // Equal

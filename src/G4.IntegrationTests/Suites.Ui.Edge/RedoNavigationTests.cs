@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class RedoNavigationTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the RedoNavigation plugin, when used to redo a navigation action, correctly " +
             "restores the page URL to the state prior to the undo action.")]
         #region *** Criteria ***
@@ -50,7 +50,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the RedoNavigation plugin, when used to redo multiple navigation actions, " +
             "correctly restores the page URL to its state prior to the undo actions.")]
         #region *** Criteria ***
@@ -72,7 +72,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the RedoNavigation plugin, when used to redo multiple navigation actions " +
             "specified with a repeat parameter, correctly restores the page URL to its state prior " +
             "to the undo actions.")]
@@ -95,7 +95,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the RedoNavigation plugin, when used to redo multiple navigation actions " +
             "specified with a repeat parameter and delay, correctly restores the page URL to its " +
             "state prior to the undo actions with the specified delay between actions.")]
@@ -128,7 +128,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime > 3 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the RedoNavigation plugin, when used to redo multiple navigation actions " +
             "specified with a repeat parameter and delay, correctly restores the page URL to its " +
             "state prior to the undo actions with the specified delay between actions.")]

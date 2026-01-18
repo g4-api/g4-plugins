@@ -15,20 +15,20 @@ namespace G4.UnitTests.Plugins.Common.Macros
     [TestCategory("UnitTest")]
     public class NewDateTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the NewDate plugin manifest complies with " +
+        [TestMethod(DisplayName = "Verify that the NewDate plugin manifest complies with " +
             "the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<NewDate>(pluginName: "New-Date");
         }
 
-        [TestMethod(displayName: "Verify that the NewDate plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the NewDate plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<NewDate>();
         }
 
-        [TestMethod(displayName: "Verify that the NewDate plugin correctly adds the specified " +
+        [TestMethod(DisplayName = "Verify that the NewDate plugin correctly adds the specified " +
             "time to the current date.")]
         public void NewDateAddTimeTest()
         {
@@ -45,10 +45,10 @@ namespace G4.UnitTests.Plugins.Common.Macros
             var expected = DateTime.Parse(macroResult, CultureInfo.InvariantCulture);
 
             // Assert that the difference in days between expected and actual is at least 23.
-            Assert.IsTrue(Math.Round((expected - actual).TotalDays, 0) >= 23);
+            Assert.IsGreaterThanOrEqualTo(23, Math.Round((expected - actual).TotalDays, 0));
         }
 
-        [TestMethod(displayName: "Verify that the NewDate plugin correctly formats the date " +
+        [TestMethod(DisplayName = "Verify that the NewDate plugin correctly formats the date " +
             "and matches the specified pattern.")]
         public void NewDatePatternTest()
         {
@@ -62,7 +62,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Assert.IsTrue(Regex.IsMatch(input: $"{actual.Entity[MacroResultKey]}", pattern: @"^\d{2}$"));
         }
 
-        [TestMethod(displayName: "Verify that the NewDate plugin correctly subtracts the " +
+        [TestMethod(DisplayName = "Verify that the NewDate plugin correctly subtracts the " +
             "specified time from the current date.")]
         public void NewDateSubtractTimeTest()
         {
@@ -79,10 +79,10 @@ namespace G4.UnitTests.Plugins.Common.Macros
             var expected = DateTime.Parse(macroResult, CultureInfo.InvariantCulture);
 
             // Assert that the difference in days between expected and actual is at least 23.
-            Assert.IsTrue(Math.Round((actual - expected).TotalDays, 0) >= 23);
+            Assert.IsGreaterThanOrEqualTo(23, Math.Round((actual - expected).TotalDays, 0));
         }
 
-        [TestMethod(displayName: "Verify that the NewDate plugin correctly handles various " +
+        [TestMethod(DisplayName = "Verify that the NewDate plugin correctly handles various " +
             "date formats, parts, and patterns.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$date}}\"}", @"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}[+-]\d{2}:\d{2}$")]

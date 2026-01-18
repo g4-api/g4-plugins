@@ -82,7 +82,7 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonConditionDynamicFailOnException, "elementText", "19", "ge", @"\\d+"]
         ];
 
-        [TestMethod(displayName: "Verify that element text assertions handle NoSuchElementException correctly")]
+        [TestMethod(DisplayName = "Verify that element text assertions handle NoSuchElementException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -116,7 +116,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element text assertions handle NullReferenceException correctly")]
+        [TestMethod(DisplayName = "Verify that element text assertions handle NullReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -150,7 +150,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element text assertions handle " +
+        [TestMethod(DisplayName = "Verify that element text assertions handle " +
             "StaleElementReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
@@ -185,7 +185,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element text assertions are evaluated correctly")]
+        [TestMethod(DisplayName = "Verify that element text assertions are evaluated correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -209,7 +209,7 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke(ruleJson);
 
             // Assert that no exceptions were thrown
-            Assert.IsTrue(!responseModel.GetExceptions().Any());
+            Assert.IsFalse(responseModel.GetExceptions().Any());
 
             // Extract the session parameter value from the response model and decode it from Base64
             // encoding to a string value for comparison purposes
@@ -221,7 +221,7 @@ namespace G4.UnitTests.Plugins.Ui
 
         [RetryableTestMethod(
             numberOfAttempts:5,
-            displayName: "Verify that element text assertions handle WebDriverException correctly",
+            DisplayName = "Verify that element text assertions handle WebDriverException correctly",
             DelayBetweenAttempts = 3000)]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
@@ -256,13 +256,13 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that the plugin is correctly instantiated and operates as expected")]
+        [TestMethod(DisplayName = "Verify that the plugin is correctly instantiated and operates as expected")]
         public override void NewPluginTest()
         {
             AssertPlugin<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the plugin's manifest complies with expected " +
+        [TestMethod(DisplayName = "Verify that the plugin's manifest complies with expected " +
             "standards and specifications")]
         public override void ManifestComplianceTest()
         {

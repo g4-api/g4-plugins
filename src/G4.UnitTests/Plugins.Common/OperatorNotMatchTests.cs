@@ -17,21 +17,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class OperatorNotMatchTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the NotMatchOperator plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the NotMatchOperator plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<NotMatchOperator>();
         }
 
-        [TestMethod(displayName: "Verify that the NotMatchOperator plugin named 'NotMatch' " +
+        [TestMethod(DisplayName = "Verify that the NotMatchOperator plugin named 'NotMatch' " +
             "complies with the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<NotMatchOperator>(pluginName: "NotMatch");
         }
 
-        [TestMethod(displayName: "Verify that the NotMatchOperator plugin evaluates correctly " +
+        [TestMethod(DisplayName = "Verify that the NotMatchOperator plugin evaluates correctly " +
             "in negative scenarios.")]
         #region *** Test Data ***
         [DataRow(Stubs.RuleJsonAttributeOperator, "random", "NotMatch", @"^mock attribute value \\d+$", "ElementAttribute", ".//positive")]
@@ -62,12 +62,9 @@ namespace G4.UnitTests.Plugins.Common
 
             // Check if the evaluation returns false
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
-
-            // Ensure the evaluation is false
-            Assert.IsTrue(!session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the NotMatchOperator plugin evaluates correctly " +
+        [TestMethod(DisplayName = "Verify that the NotMatchOperator plugin evaluates correctly " +
             "in positive scenarios.")]
         #region *** Test Data ***
         [DataRow(Stubs.RuleJsonAttributeOperator, "random", "NotMatch", @"^attribute value \\d+ mock$", "ElementAttribute", ".//positive")]
@@ -98,9 +95,6 @@ namespace G4.UnitTests.Plugins.Common
 
             // Check if the evaluation returns true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Ensure the evaluation is not false
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
     }
 }

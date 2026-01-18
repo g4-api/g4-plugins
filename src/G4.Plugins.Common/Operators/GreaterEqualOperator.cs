@@ -5,7 +5,7 @@ using G4.Models;
 namespace G4.Plugins.Common.Operators
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        assembly: "G4.Plugins.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Common.Operators.Manifests.{nameof(GreaterEqualOperator)}.json")]
     public class GreaterEqualOperator(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {

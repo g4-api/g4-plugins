@@ -13,21 +13,21 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
     [TestCategory("UnitTest")]
     public class AssertKeyboardVisibleTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the KeyboardVisible plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the KeyboardVisible plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<KeyboardVisible>();
         }
 
-        [TestMethod(displayName: "Verify that the KeyboardVisible plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the KeyboardVisible plugin complies with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<KeyboardVisible>();
         }
 
-        [TestMethod(displayName: "Verify the behavior of the KeyboardVisible plugin with " +
+        [TestMethod(DisplayName = "Verify the behavior of the KeyboardVisible plugin with " +
             "various nested assertions.")]
         #region *** Data Set ***
         [DataRow(ActionRuleStubs.RuleJsonBoolean, null, "KeyboardVisible")]

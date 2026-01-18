@@ -17,21 +17,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class OperatorGreaterEqualTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the GreaterEqualOperator plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the GreaterEqualOperator plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<GreaterEqualOperator>();
         }
 
-        [TestMethod(displayName: "Verify that the GreaterEqualOperator plugin named 'GreaterEqual' " +
+        [TestMethod(DisplayName = "Verify that the GreaterEqualOperator plugin named 'GreaterEqual' " +
             "complies with the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<GreaterEqualOperator>(pluginName: "GreaterEqual");
         }
 
-        [TestMethod(displayName: "Verify that the GreaterEqualOperator plugin evaluates " +
+        [TestMethod(DisplayName = "Verify that the GreaterEqualOperator plugin evaluates " +
             "correctly in negative scenarios.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonAttributeOperator, "index", "1", "ElementAttribute", ".//positive", "Ge")]
@@ -62,14 +62,11 @@ namespace G4.UnitTests.Plugins.Common
             // Invoke the action rule and retrieve the session from the test result.
             var session = Invoke([ruleModel]).Response.First().Value.Sessions.First().Value;
 
-            // Check if the evaluation returns false
-            Assert.IsTrue(!session.ResponseData.Extractions.GetEvaluation());
-
             // Ensure the evaluation is false
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the GreaterEqualOperator plugin evaluates " +
+        [TestMethod(DisplayName = "Verify that the GreaterEqualOperator plugin evaluates " +
             "correctly in positive scenarios.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonAttributeOperator, "index", "ElementAttribute", ".//positive", "0", "Ge")]
@@ -106,9 +103,6 @@ namespace G4.UnitTests.Plugins.Common
 
             // Check if the evaluation returns true
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
-
-            // Ensure the evaluation is not false
-            Assert.IsFalse(!session.ResponseData.Extractions.GetEvaluation());
         }
     }
 }

@@ -25,7 +25,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SetSwitchCaseTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that " +
             "the SetSwitchCase plugin correctly assigns TestResult based on a randomly generated TestParameter.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SetSwitchCase plugin seamlessly integrates into the G4™ Engine framework.")]
@@ -45,7 +45,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that " +
             "the SetSwitchCase plugin correctly selects a branch based on an element’s text and sets TestResult to 3.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SetSwitchCase plugin seamlessly integrates into the G4™ Engine framework.")]
@@ -65,7 +65,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SetSwitchCase plugin correctly selects a branch based on the onclick attribute of the input element and sets TestResult to 3.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SetSwitchCase plugin seamlessly integrates into the G4™ Engine framework.")]
@@ -86,7 +86,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0003>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SetSwitchCase plugin correctly matches the onclick attribute against the RegularExpression \"([A-Z])\\w+\" and " +
             "selects the 'StaleElement' branch, sets TestResult to 3.")]
         #region *** Criteria ***
@@ -107,7 +107,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0004>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SetSwitchCase plugin correctly applies ignore-case regex matching on the onclick attribute and selects the 'staleelement' " +
             "branch, setting TestResult to 3.")]
         #region *** Criteria ***
@@ -128,7 +128,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0005>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SetSwitchCase plugin correctly uses the SwitchOn argument to set TestResult based on the randomly generated " +
             "TestParameter.")]
         #region *** Criteria ***
@@ -149,7 +149,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0006>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SetSwitchCase plugin correctly selects the Default branch when TestParameter is outside defined " +
             "cases (5–10) and sets TestResult to 5.")]
         #region *** Criteria ***

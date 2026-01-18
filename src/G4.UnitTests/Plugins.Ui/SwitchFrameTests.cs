@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SwitchFrameTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SwitchFrame plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SwitchFrame plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -21,7 +21,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SwitchFrame>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchFrame plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SwitchFrame plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -29,7 +29,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SwitchFrame>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchFrame action works correctly by frame ID.")]
+        [TestMethod(DisplayName = "Verify that the SwitchFrame action works correctly by frame ID.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""0""}")]
         #endregion
@@ -47,7 +47,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchFrame action works correctly by frame element.")]
+        [TestMethod(DisplayName = "Verify that the SwitchFrame action works correctly by frame element.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
         #endregion
@@ -66,16 +66,18 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreNotEqual(originalHandle, actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchFrame action throws NoSuchFrameException " +
+        [TestMethod(DisplayName = "Verify that the SwitchFrame action throws NoSuchFrameException " +
             "when the frame does not exist.")]
-        [ExpectedException(typeof(NoSuchFrameException))]
         public void SwitchFrameNoSuchFrameExceptionTest()
         {
+            // Initialize the action rule JSON for a non-existent frame
+            var ruleJson = @"{""pluginName"":""SwitchFrame""}";
+
             // Invoke the SwitchFrame action with the specified action rule
-            Invoke<SwitchFrame>(ruleJson: @"{""pluginName"":""SwitchFrame""}");
+            Assert.Throws<NoSuchFrameException>(() => Invoke<SwitchFrame>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the SwitchFrame action works correctly by " +
+        [TestMethod(DisplayName = "Verify that the SwitchFrame action works correctly by " +
             "frame ID with an element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""0""}")]
@@ -94,7 +96,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchFrame action works correctly by " +
+        [TestMethod(DisplayName = "Verify that the SwitchFrame action works correctly by " +
             "frame element with an element.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -114,13 +116,16 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreNotEqual(originalHandle, actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchFrame action throws NoSuchFrameException " +
+        [TestMethod(DisplayName = "Verify that the SwitchFrame action throws NoSuchFrameException " +
             "when the frame does not exist with an element.")]
-        [ExpectedException(typeof(NoSuchFrameException))]
         public void SwitchFrameNoSuchFrameExceptionElementTest()
         {
+            // Initialize the action rule JSON for a non-existent frame
+            var ruleJson = @"{""pluginName"":""SwitchFrame""}";
+
             // Invoke the SwitchFrame action with the specified action rule
-            Invoke<SwitchFrame>(ruleJson: @"{""pluginName"":""SwitchFrame""}", By.Custom.Null());
+            Assert.Throws<NoSuchFrameException>(()
+                => Invoke<SwitchFrame>(ruleJson, By.Custom.Null()));
         }
     }
 }

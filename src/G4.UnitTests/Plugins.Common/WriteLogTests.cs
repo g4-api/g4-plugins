@@ -15,20 +15,20 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class WriteLogTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the WriteLog plugin manifest complies with " +
+        [TestMethod(DisplayName = "Verify that the WriteLog plugin manifest complies with " +
             "the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<WriteLog>();
         }
 
-        [TestMethod(displayName: "Verify that the WriteLog plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the WriteLog plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<WriteLog>();
         }
 
-        [TestMethod(displayName: "Verify that the WriteLog plugin executes successfully " +
+        [TestMethod(DisplayName = "Verify that the WriteLog plugin executes successfully " +
             "without any exceptions.")]
         public void WriteLogTest()
         {

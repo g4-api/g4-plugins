@@ -22,7 +22,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SetFocusTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetFocus plugin, when invoked on a specific UI element, successfully " +
             "sets focus to that element, enhancing the efficiency and reliability of UI interactions " +
             "in automated testing scenarios.")]

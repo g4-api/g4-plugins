@@ -31,21 +31,21 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonBoolean, "notDisplayed"]
         ];
 
-        [TestMethod(displayName: "Verify that the ElementNotVisible plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ElementNotVisible plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementNotVisible>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotVisible plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the ElementNotVisible plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementNotVisible>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotVisible plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementNotVisible plugin correctly evaluates " +
             "elements in negative scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
@@ -65,7 +65,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotVisible plugin handles NoSuchElementException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementNotVisible plugin handles NoSuchElementException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -87,7 +87,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotVisible plugin handles NullReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementNotVisible plugin handles NullReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -109,7 +109,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotVisible plugin handles StaleElementReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementNotVisible plugin handles StaleElementReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -131,7 +131,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementNotVisible plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementNotVisible plugin correctly evaluates " +
             "elements in positive scenarios.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]

@@ -21,7 +21,7 @@ namespace G4.UnitTests.Plugins.Ui
             [SimulatorCapabilities.ChildWindows] = 3
         };
 
-        [TestMethod(displayName: "Verify that the SwitchWindow plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -29,7 +29,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SwitchWindow>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -37,7 +37,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SwitchWindow>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action works correctly by index.")]
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action works correctly by index.")]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""SwitchWindow"",""argument"":""1""}")]
         #endregion
@@ -54,7 +54,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action works correctly by handle.")]
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action works correctly by handle.")]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""SwitchWindow"",""argument"":""WindowHandleName""}")]
         #endregion
@@ -70,31 +70,31 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual("WindowHandleName", actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action throws ArgumentOutOfRangeException " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action throws ArgumentOutOfRangeException " +
             "for invalid index.")]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""SwitchWindow"",""argument"":""-1""}")]
         #endregion
         public void SwitchWindowByIndexNegativeTest(string ruleJson)
         {
             // Invoke the SwitchWindow action with the specified action rule and capabilities
-            Invoke<SwitchWindow>(ruleJson, Capabilities);
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => Invoke<SwitchWindow>(ruleJson, Capabilities));
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action throws NoSuchWindowException " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action throws NoSuchWindowException " +
             "for invalid handle.")]
-        [ExpectedException(typeof(NoSuchWindowException))]
         #region *** Data Set ***
         [DataRow(@"{""pluginName"":""SwitchWindow"",""argument"":""NoSuchWindow""}")]
         #endregion
         public void SwitchWindowByHandleNegativeTest(string ruleJson)
         {
             // Invoke the SwitchWindow action with the specified action rule and capabilities
-            Invoke<SwitchWindow>(ruleJson, Capabilities);
+            Assert.Throws<NoSuchWindowException>(()
+                => Invoke<SwitchWindow>(ruleJson, Capabilities));
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action works correctly by " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action works correctly by " +
             "index within an element.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive"",""argument"":""1""}")]
@@ -116,7 +116,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action works correctly by " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action works correctly by " +
             "handle within an element.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive"",""argument"":""WindowHandleName""}")]
@@ -137,9 +137,8 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual("WindowHandleName", actual);
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action throws ArgumentOutOfRangeException " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action throws ArgumentOutOfRangeException " +
             "for invalid index within an element.")]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive"",""argument"":""-1""}")]
         [DataRow(@"{""onElement"":"".//none"",""argument"":""-1""}")]
@@ -150,12 +149,12 @@ namespace G4.UnitTests.Plugins.Ui
         public void SwitchWindowByIndexNestedNegativeTest(string ruleJson)
         {
             // Invoke the SwitchWindow action with the specified action rule and capabilities within an element
-            Invoke<SwitchWindow>(ruleJson, By.Custom.Positive(), Capabilities);
+            Assert.Throws<ArgumentOutOfRangeException>(()
+                => Invoke<SwitchWindow>(ruleJson, By.Custom.Positive(), Capabilities));
         }
 
-        [TestMethod(displayName: "Verify that the SwitchWindow action throws NoSuchWindowException " +
+        [TestMethod(DisplayName = "Verify that the SwitchWindow action throws NoSuchWindowException " +
             "for invalid handle within an element.")]
-        [ExpectedException(typeof(NoSuchWindowException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//positive"",""argument"":""NoSuchWindow""}")]
         [DataRow(@"{""onElement"":"".//none"",""argument"":""NoSuchWindow""}")]
@@ -166,7 +165,8 @@ namespace G4.UnitTests.Plugins.Ui
         public void SwitchWindowByHandleNestedNegativeTest(string ruleJson)
         {
             // Invoke the SwitchWindow action with the specified action rule and capabilities within an element
-            Invoke<SwitchWindow>(ruleJson, By.Custom.Positive(), Capabilities);
+            Assert.Throws<NoSuchWindowException>(()
+                => Invoke<SwitchWindow>(ruleJson, By.Custom.Positive(), Capabilities));
         }
     }
 }

@@ -25,7 +25,7 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
             AssertManifest<KeyboardVisible>();
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(Stubs.RuleJsonBoolean, null, "KeyboardNotVisible", "(Fail | KeyboardVisible)")]
         [DataRow(Stubs.RuleJsonBoolean, null, "keyboardNotVisible", "(Fail | KeyboardVisible)")]
         [DataRow(Stubs.RuleJsonBoolean, null, "OnScreenKeyboardNotVisible", "(Fail | KeyboardVisible)")]
@@ -48,13 +48,13 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
 
             // Assert that the actual message does not contain the specified message.
-            Assert.IsFalse(actualMessage.Contains(message));
+            Assert.DoesNotContain(message, actualMessage);
 
             // Assert that the actual message contains the expected message.
-            Assert.IsTrue(actualMessage.Contains(expectedMessage));
+            Assert.Contains(expectedMessage, actualMessage);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(Stubs.RuleJsonBoolean, null, "KeyboardNotVisible", "(Fail | KeyboardVisible)")]
         [DataRow(Stubs.RuleJsonBoolean, null, "keyboardNotVisible", "(Fail | KeyboardVisible)")]
         [DataRow(Stubs.RuleJsonBoolean, null, "OnScreenKeyboardNotVisible", "(Fail | KeyboardVisible)")]
@@ -77,10 +77,10 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
 
             // Assert that the actual message does not contain the specified message.
-            Assert.IsFalse(actualMessage.Contains(message));
+            Assert.DoesNotContain(message, actualMessage);
 
             // Assert that the actual message contains the expected message.
-            Assert.IsTrue(actualMessage.Contains(expectedMessage));
+            Assert.Contains(expectedMessage, actualMessage);
         }
     }
 }

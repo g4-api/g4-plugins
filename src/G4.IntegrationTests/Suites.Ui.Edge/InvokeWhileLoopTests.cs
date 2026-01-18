@@ -38,7 +38,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class InvokeWhileLoopTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeWhileLoop plugin correctly clicks the 'Next' button " +
             "until the button with text '6' has the class 'active', and ensures that the " +
             "button with text '6' eventually becomes active.")]
@@ -60,7 +60,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeWhileLoop plugin correctly clicks the 'Next' button " +
             "for the first pagination until the button with text '3' has the class 'active', " +
             "then clicks the 'Next' button for the second pagination until the button with " +
@@ -85,7 +85,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeWhileLoop plugin correctly clicks the 'Next' button " +
             "until the button with text '6' has the class 'foo' within the specified timeout.")]
         #region *** Criteria ***
@@ -117,8 +117,8 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
                 .First();
 
             // Assert that the run time of the performance point is within the expected range.
-            Assert.IsTrue(performancePoint.RunTime > 5 * TimeSpan.TicksPerSecond);
-            Assert.IsTrue(performancePoint.RunTime < 9 * TimeSpan.TicksPerSecond);
+            Assert.IsGreaterThan(5 * TimeSpan.TicksPerSecond, performancePoint.RunTime);
+            Assert.IsLessThan(9 * TimeSpan.TicksPerSecond, performancePoint.RunTime);
         }
     }
 }

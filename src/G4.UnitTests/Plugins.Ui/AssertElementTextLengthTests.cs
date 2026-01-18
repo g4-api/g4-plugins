@@ -188,21 +188,21 @@ namespace G4.UnitTests.Plugins.Ui
         ];
         #endregion
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementTextLength>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementTextLength>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length equality (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
@@ -226,7 +226,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length equality.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
@@ -250,7 +250,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length greater or equal (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(GreaterEqualDataSet))]
@@ -274,7 +274,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length greater or equal.")]
         #region *** Data Set ***
         // Text Length
@@ -299,7 +299,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length greater than (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(GreaterDataSet))]
@@ -323,7 +323,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length greater than.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(GreaterDataSet))]
@@ -347,7 +347,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length less or equal (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerEqualDataSet))]
@@ -371,7 +371,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length less or equal.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerEqualDataSet))]
@@ -395,7 +395,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length less than (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerDataSet))]
@@ -419,7 +419,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length less than.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerDataSet))]
@@ -443,7 +443,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length match (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(MatchDataSet))]
@@ -467,7 +467,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length match.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(MatchDataSet))]
@@ -491,7 +491,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length inequality (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotEqualDataSet))]
@@ -515,7 +515,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length inequality.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotEqualDataSet))]
@@ -539,7 +539,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length not match (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotMatchDataSet))]
@@ -563,7 +563,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "attribute text length not match.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotMatchDataSet))]
@@ -587,7 +587,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin handles " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin handles " +
             "NoSuchElementException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
@@ -613,7 +613,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is NoSuchElementException));
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin handles NullReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin handles NullReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
         #endregion
@@ -638,7 +638,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is NullReferenceException));
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin handles " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin handles " +
             "StaleElementReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
@@ -664,7 +664,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is StaleElementReferenceException));
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
                 "element text length equality (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
@@ -688,7 +688,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length equality.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
@@ -712,7 +712,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length greater or equal (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(GreaterEqualDataSet))]
@@ -736,7 +736,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length inequality.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotEqualDataSet))]
@@ -760,7 +760,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length not match (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotMatchDataSet))]
@@ -784,7 +784,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length greater than.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(GreaterDataSet))]
@@ -808,7 +808,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length less or equal (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerEqualDataSet))]
@@ -832,7 +832,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length greater or equal.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(GreaterEqualDataSet))]
@@ -856,7 +856,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length greater than (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(GreaterDataSet))]
@@ -880,7 +880,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length less or equal.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerEqualDataSet))]
@@ -904,7 +904,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length less than (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerDataSet))]
@@ -928,7 +928,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length less than.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(LowerDataSet))]
@@ -952,7 +952,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length match (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(MatchDataSet))]
@@ -976,7 +976,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length match.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(MatchDataSet))]
@@ -1000,7 +1000,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length inequality (negative scenario).")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotEqualDataSet))]
@@ -1024,7 +1024,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin correctly evaluates " +
             "element text length not match.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NotMatchDataSet))]
@@ -1048,7 +1048,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin handles WebDriverException inside element correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin handles WebDriverException inside element correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
         #endregion
@@ -1074,7 +1074,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is WebDriverException));
         }
 
-        [TestMethod(displayName: "Verify that the ElementTextLength plugin handles WebDriverException correctly.")]
+        [TestMethod(DisplayName = "Verify that the ElementTextLength plugin handles WebDriverException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(EqualDataSet))]
         #endregion

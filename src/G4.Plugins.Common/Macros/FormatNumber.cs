@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 namespace G4.Plugins.Common.Macros
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        assembly: "G4.Plugins.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Common.Macros.Manifests.{nameof(FormatNumber)}.json")]
     public class FormatNumber(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {

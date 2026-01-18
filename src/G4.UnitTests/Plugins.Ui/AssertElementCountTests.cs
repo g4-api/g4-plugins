@@ -707,21 +707,21 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonNoAttributeOperator, "count", "^ABC$", "notMatch"]
         ];
 
-        [TestMethod(displayName: "Verify that the ElementCount plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ElementCount plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementCount>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementCount plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the ElementCount plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementCount>();
         }
 
-        [TestMethod(displayName: "Verify that element count assertions handle WebDriverException " +
+        [TestMethod(DisplayName = "Verify that element count assertions handle WebDriverException " +
             "correctly for nested elements.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(PositiveDataSet))]
@@ -759,7 +759,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is WebDriverException));
         }
 
-        [TestMethod(displayName: "Verify that element count assertions handle WebDriverException correctly.")]
+        [TestMethod(DisplayName = "Verify that element count assertions handle WebDriverException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(PositiveDataSet))]
         #endregion
@@ -796,7 +796,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is WebDriverException));
         }
 
-        [TestMethod(displayName: "Verify that element count negative assertions handle various conditions correctly.")]
+        [TestMethod(DisplayName = "Verify that element count negative assertions handle various conditions correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(NegativeDataSet))]
         #endregion
@@ -824,7 +824,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that element count assertions handle NoSuchElementException correctly.")]
+        [TestMethod(DisplayName = "Verify that element count assertions handle NoSuchElementException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(ZeroCountDataSet))]
         #endregion
@@ -852,7 +852,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that element count assertions handle NullReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that element count assertions handle NullReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(ZeroCountDataSet))]
         #endregion
@@ -880,7 +880,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that element count assertions handle StaleElementReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that element count assertions handle StaleElementReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(PositiveDataSet))]
         #endregion
@@ -917,7 +917,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is StaleElementReferenceException));
         }
 
-        [TestMethod(displayName: "Verify that element count assertions handle positive scenarios correctly.")]
+        [TestMethod(DisplayName = "Verify that element count assertions handle positive scenarios correctly.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(PositiveDataSet))]
         #endregion

@@ -14,7 +14,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
     [TestCategory("UnitTest")]
     public class GetParameterTests : TestBase
     {
-        [ClassCleanup(ClassCleanupBehavior.EndOfClass)]
+        [ClassCleanup(InheritanceBehavior.BeforeEachDerivedClass)]
         public static void ClearEnvironments()
         {
             // Remove the environment variable "MyParam" from the Machine target.
@@ -27,20 +27,20 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.Process);
         }
 
-        [TestMethod(displayName: "Verify that the GetParameter plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the GetParameter plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<GetParameter>(pluginName: "Get-Parameter");
         }
 
-        [TestMethod(displayName: "Verify that the GetParameter plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the GetParameter plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<GetParameter>();
         }
 
-        [TestMethod(displayName: "Verify that the GetParameter plugin retrieves the correct " +
+        [TestMethod(DisplayName = "Verify that the GetParameter plugin retrieves the correct " +
             "parameter value for different scopes.")]
         #region *** Data Set ***
         [DataRow("Session")]
@@ -78,7 +78,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Assert.AreEqual(expected: "Rm9vIEJhcg==", actual);
         }
 
-        [TestMethod(displayName: "Verify that the GetParameter plugin retrieves the correct " +
+        [TestMethod(DisplayName = "Verify that the GetParameter plugin retrieves the correct " +
             "parameter value for different scopes with encryption.")]
         #region *** Data Set ***
         [DataRow("Session")]

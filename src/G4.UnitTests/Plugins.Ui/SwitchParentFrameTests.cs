@@ -15,7 +15,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SwitchParentFrameTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SwitchParentFrame plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SwitchParentFrame plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -23,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SwitchParentFrame>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchParentFrame plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SwitchParentFrame plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -31,7 +31,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SwitchParentFrame>();
         }
 
-        [TestMethod(displayName: "Verify that the SwitchParentFrame action works correctly.")]
+        [TestMethod(DisplayName = "Verify that the SwitchParentFrame action works correctly.")]
         public void SwitchParentFrameByIdTest()
         {
             // Define the action rule model
@@ -44,10 +44,10 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke<SwitchParentFrame>(ruleModel).Response;
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(!responseModel.Exceptions.Any());
+            Assert.IsFalse(responseModel.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that the SwitchParentFrame action works correctly " +
+        [TestMethod(DisplayName = "Verify that the SwitchParentFrame action works correctly " +
             "with an element inside an element.")]
         public void SwitchParentFrameByIdOnElementInsideElementTest()
         {
@@ -61,7 +61,7 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke<SwitchParentFrame>(ruleModel, By.Custom.Positive()).Response;
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(!responseModel.Exceptions.Any());
+            Assert.IsFalse(responseModel.Exceptions.Any());
         }
     }
 }

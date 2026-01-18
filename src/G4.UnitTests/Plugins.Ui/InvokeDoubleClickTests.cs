@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class InvokeDoubleClickTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin can perform a " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin can perform a " +
             "double-click action without exceptions.")]
         public void DoubleClickTest()
         {
@@ -24,7 +24,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin can perform a " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin can perform a " +
             "double-click action on specified elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -39,7 +39,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin can perform a " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin can perform a " +
             "double-click action on elements inside other elements.")]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//positive""}")]
@@ -54,45 +54,44 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin throws a " +
             "NoSuchElementException for non-existing elements.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//none""}")]
         #endregion
         public void DoubleClickOnElementInsideElementNoElementExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeDoubleClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<NoSuchElementException>(() 
+                => Invoke<InvokeDoubleClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin throws a " +
             "StaleElementReferenceException for stale elements.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//stale""}")]
         #endregion
         public void DoubleClickOnElementInsideElementStaleExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeDoubleClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<StaleElementReferenceException>(()
+                => Invoke<InvokeDoubleClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin throws a " +
             "WebDriverException for elements that cause exceptions.")]
-        [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":"".//exception""}")]
         #endregion
         public void DoubleClickOnElementInsideElementExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON and a custom locator
-            Invoke<InvokeDoubleClick>(ruleJson, By.Custom.Positive());
+            Assert.Throws<WebDriverException>(()
+                => Invoke<InvokeDoubleClick>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin throws a " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin throws a " +
             "WebDriverTimeoutException for timeout scenarios.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
         #region *** Data Set ***
         [DataRow(@"{""onElement"":""//null""}")]
         [DataRow(@"{""onElement"":""//none""}")]
@@ -102,10 +101,10 @@ namespace G4.UnitTests.Plugins.Ui
         public void DoubleClickOnElementTimeoutExceptionTest(string ruleJson)
         {
             // Invoke the plugin with the specified rule JSON
-            Invoke<InvokeDoubleClick>(ruleJson);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<InvokeDoubleClick>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
@@ -113,7 +112,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<InvokeDoubleClick>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeDoubleClick plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the InvokeDoubleClick plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {

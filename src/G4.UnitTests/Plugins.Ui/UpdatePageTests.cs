@@ -12,7 +12,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class UpdatePageTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the UpdatePage plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the UpdatePage plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -20,7 +20,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<UpdatePage>();
         }
 
-        [TestMethod(displayName: "Verify that the UpdatePage plugin can be " +
+        [TestMethod(DisplayName = "Verify that the UpdatePage plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -28,7 +28,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<UpdatePage>();
         }
 
-        [TestMethod(displayName: "Verify that the UpdatePage action works with arguments.")]
+        [TestMethod(DisplayName = "Verify that the UpdatePage action works with arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""3""}")]
         #endregion
@@ -38,7 +38,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeTest(testBase: this, ruleJson);
         }
 
-        [TestMethod(displayName: "Verify that the UpdatePage action works with invalid " +
+        [TestMethod(DisplayName = "Verify that the UpdatePage action works with invalid " +
             "delay arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Repeat:3 --Delay:A}}""}")]
@@ -51,7 +51,7 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeTest(testBase: this, ruleJson);
         }
 
-        [TestMethod(displayName: "Verify that the UpdatePage action works with repeat " +
+        [TestMethod(DisplayName = "Verify that the UpdatePage action works with repeat " +
             "and delay arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Repeat:3 --Delay:1000}}""}")]
@@ -64,14 +64,14 @@ namespace G4.UnitTests.Plugins.Ui
             InvokeTest(testBase: this, ruleJson);
         }
 
-        [TestMethod(displayName: "Verify that the UpdatePage action works with no arguments.")]
+        [TestMethod(DisplayName = "Verify that the UpdatePage action works with no arguments.")]
         public void UpdatePageNoArgumentTest()
         {
             // Invoke the UpdatePage action with the specified action rule
             InvokeTest(testBase: this, ruleJson: @"{""pluginName"":""UpdatePage""}");
         }
 
-        [TestMethod(displayName: "Verify that the UpdatePage action works with repeat arguments.")]
+        [TestMethod(DisplayName = "Verify that the UpdatePage action works with repeat arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Repeat:3}}""}")]
         [DataRow(@"{""argument"":""{{$ --Repeat:A}}""}")]

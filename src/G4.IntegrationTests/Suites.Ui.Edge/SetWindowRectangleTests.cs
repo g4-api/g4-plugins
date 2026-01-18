@@ -24,7 +24,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SetWindowRectangleTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetWindowRectangle plugin, when configured with specific dimensions, " +
             "correctly resizes the application window.")]
         #region *** Criteria ***

@@ -24,7 +24,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SelectOptionTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SelectOption plugin, when invoked to select an option by its 0-based " +
             "index, accurately chooses the desired option from a dropdown menu.")]
         #region *** Criteria ***
@@ -49,7 +49,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SelectOption plugin, when invoked to select an option by its value, " +
             "accurately chooses the desired option from a dropdown menu.")]
         #region *** Criteria ***
@@ -74,7 +74,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SelectOption plugin, when invoked to select an option by partial text, " +
             "accurately chooses the desired option from a dropdown menu.")]
         #region *** Criteria ***
@@ -99,7 +99,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SelectOption plugin, when invoked without specifying the OnAttribute " +
             "property, accurately chooses the desired option from a dropdown menu based on exact text match.")]
         #region *** Criteria ***

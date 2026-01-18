@@ -10,7 +10,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class NewWindowTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the NewWindow plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the NewWindow plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -18,7 +18,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<NewWindow>();
         }
 
-        [TestMethod(displayName: "Verify that the NewWindow plugin can be " +
+        [TestMethod(DisplayName = "Verify that the NewWindow plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -26,7 +26,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<NewWindow>();
         }
 
-        [DataTestMethod(displayName: "Verify that the NewWindow method opens a new window or tab.")]
+        [TestMethod(DisplayName = "Verify that the NewWindow method opens a new window or tab.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""tab""}")]
         [DataRow(@"{""argument"":""window""}")]

@@ -32,7 +32,7 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonBoolean, "hasFocus"]
         ];
 
-        [TestMethod(displayName: "Verify that ElementActive plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that ElementActive plugin correctly evaluates " +
             "elements in positive scenarios.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
@@ -55,7 +55,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that ElementActive plugin handles NoSuchElementException correctly.")]
+        [TestMethod(DisplayName = "Verify that ElementActive plugin handles NoSuchElementException correctly.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
         #endregion
@@ -80,7 +80,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that ElementActive plugin handles NullReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that ElementActive plugin handles NullReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
         #endregion
@@ -105,7 +105,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that ElementActive plugin handles negative cases correctly.")]
+        [TestMethod(DisplayName = "Verify that ElementActive plugin handles negative cases correctly.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
         #endregion
@@ -127,7 +127,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that ElementActive plugin handles StaleElementReferenceException correctly.")]
+        [TestMethod(DisplayName = "Verify that ElementActive plugin handles StaleElementReferenceException correctly.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
         #endregion
@@ -152,7 +152,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that ElementActive plugin handles WebDriverException correctly.")]
+        [TestMethod(DisplayName = "Verify that ElementActive plugin handles WebDriverException correctly.")]
         #region *** Data Set ***
         [DynamicData(nameof(DataSet))]
         #endregion
@@ -177,14 +177,14 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that ElementActive plugin can be successfully created.")]
+        [TestMethod(DisplayName = "Verify that ElementActive plugin can be successfully created.")]
         public override void NewPluginTest()
         {
             // Ensure the plugin can be instantiated without issues
             AssertPlugin<ElementActive>();
         }
 
-        [TestMethod(displayName: "Verify that ElementActive plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that ElementActive plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {

@@ -22,7 +22,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class OpenUrlTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the OpenUrl plugin can assert the page URL " +
+        [TestMethod(DisplayName = "Verify that the OpenUrl plugin can assert the page URL " +
             "matches the expected value in ExportData.html")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "URL Matching: The OpenUrl plugin must correctly assert that the page URL matches the expected pattern in ExportData.html.")]
@@ -40,7 +40,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl plugin can open the URL from " +
+        [TestMethod(DisplayName = "Verify that the OpenUrl plugin can open the URL from " +
             "the 'src' attribute of the image with alt text 'ImageA' and assert the page URL")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "URL Opening: The OpenUrl plugin must correctly open the URL specified in the 'src' attribute of the image element with alt text 'ImageA'.")]
@@ -59,7 +59,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "Verify that the OpenUrl plugin can open the URL matching " +
+        [TestMethod(DisplayName = "Verify that the OpenUrl plugin can open the URL matching " +
             "the regular expression in the paragraph containing 'Image A' and assert the page URL")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "URL Opening: The OpenUrl plugin must correctly open the URL matching the regular expression in the paragraph element containing the text 'Image A'.")]

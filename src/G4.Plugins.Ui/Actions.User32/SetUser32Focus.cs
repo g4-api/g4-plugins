@@ -6,7 +6,7 @@ using G4.WebDriver.Remote.Uia;
 namespace G4.Plugins.Ui.Actions.User32
 {
     [G4Plugin(
-        assembly: "G4.Plugins.Ui, Version=8.0.0.0, Culture=neutral, PublicKeyToken=null",
+        assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Ui.Actions.User32.Manifests.{nameof(SetUser32Focus)}.json")]
     public class SetUser32Focus(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {

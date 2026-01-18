@@ -23,7 +23,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class CloseWindowTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CloseWindow plugin, when configured to close the current browser window " +
             "or tab, correctly closes the window and updates the window count.")]
         #region *** Criteria ***
@@ -52,7 +52,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CloseWindow plugin, when configured to close a specific browser " +
             "window or tab by its 0-based index, correctly closes the window and updates the window count.")]
         #region *** Criteria ***
@@ -81,7 +81,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the CloseWindow plugin, when configured to close a specific browser window " +
             "or tab by getting the window handle at a given index, correctly closes the window and " +
             "updates the window count.")]

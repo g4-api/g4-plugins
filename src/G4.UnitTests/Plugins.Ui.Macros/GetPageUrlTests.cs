@@ -14,7 +14,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
     [TestCategory("UnitTest")]
     public class GetPageUrlTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the GetPageUrl macro plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the GetPageUrl macro plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -22,7 +22,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertManifest<GetPageUrl>(pluginName: "Get-PageUrl");
         }
 
-        [TestMethod(displayName: "Verify that the GetPageUrl macro plugin can be " +
+        [TestMethod(DisplayName = "Verify that the GetPageUrl macro plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -30,7 +30,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertPlugin<GetPageUrl>();
         }
 
-        [TestMethod(displayName: "Verify that the GetPageUrl macro plugin returns an empty result " +
+        [TestMethod(DisplayName = "Verify that the GetPageUrl macro plugin returns an empty result " +
             "when the driver is null.")]
         public void GetPageUrlExceptionTest()
         {
@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.AreEqual(expected: string.Empty, resultModel.Response.Entity[MacroResultKey]);
         }
 
-        [TestMethod(displayName: "Verify that the GetPageUrl macro plugin returns the correct page URL.")]
+        [TestMethod(DisplayName = "Verify that the GetPageUrl macro plugin returns the correct page URL.")]
         public void GetPageUrlTest()
         {
             // Define the expected URL
@@ -66,7 +66,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.AreEqual(Expected, actual: $"{resultModel.Response.Entity[MacroResultKey]}");
         }
 
-        [DataTestMethod(displayName: "Verify that the GetPageUrl macro plugin returns the correct page URL " +
+        [TestMethod(DisplayName = "Verify that the GetPageUrl macro plugin returns the correct page URL " +
             "when a pattern is specified.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Pattern:\\d+$}}""}")]

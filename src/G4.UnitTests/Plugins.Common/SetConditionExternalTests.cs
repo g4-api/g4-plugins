@@ -20,21 +20,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class SetConditionExternalTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SetCondition plugin is correctly registered " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin is correctly registered " +
             "and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin complies with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin evaluates conditions " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin evaluates conditions " +
             "correctly in positive scenarios.")]
         #region *** Data Set ***
         // Equal

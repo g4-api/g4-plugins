@@ -15,21 +15,21 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class AssertElementTextTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the ElementText plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementText>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementText>();
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text equality.")]
         #region *** Data Set ***
         // Element Text
@@ -60,7 +60,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text inequality.")]
         #region *** Data Set ***
         // Element Text
@@ -91,7 +91,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text greater than.")]
         #region *** Data Set ***
         // Element Text
@@ -122,7 +122,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text greater or equal.")]
         #region *** Data Set ***
         // Element Text
@@ -153,7 +153,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text less than.")]
         #region *** Data Set ***
         // Element Text
@@ -184,7 +184,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text less or equal.")]
         #region *** Data Set ***
         // Element Text
@@ -215,7 +215,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text match.")]
         #region *** Data Set ***
         // Element Text
@@ -240,7 +240,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the ElementText plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the ElementText plugin correctly evaluates " +
             "element text not match.")]
         #region *** Data Set ***
         // Element Text

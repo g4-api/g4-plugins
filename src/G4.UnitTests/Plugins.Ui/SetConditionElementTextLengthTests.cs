@@ -368,7 +368,7 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonConditionDynamicFailOnException, "textLength", "^13$", ".*", "notMatch"]
         ];
 
-        [TestMethod(displayName: "Verify that element attribute text length assertions handle " +
+        [TestMethod(DisplayName = "Verify that element attribute text length assertions handle " +
             "NoSuchElementException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(AttributeDataSet))]
@@ -403,7 +403,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element attribute text length assertions handle " +
+        [TestMethod(DisplayName = "Verify that element attribute text length assertions handle " +
             "NullReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(AttributeDataSet))]
@@ -438,7 +438,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element attribute text length assertions handle " +
+        [TestMethod(DisplayName = "Verify that element attribute text length assertions handle " +
             "StaleElementReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(AttributeDataSet))]
@@ -473,7 +473,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element attribute text length assertions are evaluated correctly")]
+        [TestMethod(DisplayName = "Verify that element attribute text length assertions are evaluated correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(AttributeDataSet))]
         #endregion
@@ -498,7 +498,7 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke(ruleJson);
 
             // Assert that no exceptions were thrown
-            Assert.IsTrue(!responseModel.GetExceptions().Any());
+            Assert.IsFalse(responseModel.GetExceptions().Any());
 
             // Extract the session parameter value from the response model and decode it from Base64
             // encoding to a string value for comparison purposes
@@ -508,7 +508,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual("Foo Bar", actual, ignoreCase: true);
         }
 
-        [TestMethod(displayName: "Verify that element attribute text length assertions handle" +
+        [TestMethod(DisplayName = "Verify that element attribute text length assertions handle" +
             " WebDriverException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(AttributeDataSet))]
@@ -543,7 +543,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element text length assertions handle " +
+        [TestMethod(DisplayName = "Verify that element text length assertions handle " +
             "NoSuchElementException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(TextDataSet))]
@@ -578,7 +578,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element text length assertions handle " +
+        [TestMethod(DisplayName = "Verify that element text length assertions handle " +
             "NullReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(TextDataSet))]
@@ -613,7 +613,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element text length assertions handle " +
+        [TestMethod(DisplayName = "Verify that element text length assertions handle " +
             "StaleElementReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(TextDataSet))]
@@ -648,7 +648,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that element text length assertions are evaluated correctly")]
+        [TestMethod(DisplayName = "Verify that element text length assertions are evaluated correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(TextDataSet))]
         #endregion
@@ -672,7 +672,7 @@ namespace G4.UnitTests.Plugins.Ui
             var responseModel = Invoke(ruleJson);
 
             // Assert that no exceptions were thrown
-            Assert.IsTrue(!responseModel.GetExceptions().Any());
+            Assert.IsFalse(responseModel.GetExceptions().Any());
 
             // Extract the session parameter value from the response model and decode it from Base64
             // encoding to a string value for comparison purposes
@@ -682,7 +682,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual("Foo Bar", actual, ignoreCase: true);
         }
 
-        [TestMethod(displayName: "Verify that element text length assertions handle " +
+        [TestMethod(DisplayName = "Verify that element text length assertions handle " +
             "WebDriverException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(TextDataSet))]
@@ -717,14 +717,14 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(string.IsNullOrEmpty(actual));
         }
 
-        [TestMethod(displayName: "Verify that the plugin is correctly instantiated and " +
+        [TestMethod(DisplayName = "Verify that the plugin is correctly instantiated and " +
             "operates as expected")]
         public override void NewPluginTest()
         {
             AssertPlugin<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the plugin's manifest complies with expected " +
+        [TestMethod(DisplayName = "Verify that the plugin's manifest complies with expected " +
             "standards and specifications")]
         public override void ManifestComplianceTest()
         {

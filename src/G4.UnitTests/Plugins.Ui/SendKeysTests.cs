@@ -15,7 +15,7 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class SendKeysTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SendKeys plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SendKeys plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -23,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SendKeys>();
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SendKeys plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -31,7 +31,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SendKeys>();
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with valid arguments.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with valid arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""keys"", ""onElement"":""positive""}")]
@@ -45,7 +45,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with delay.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with delay.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --Delay:00:00:01}}"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""{{$ --Keys:keys --Delay:1000}}"", ""onElement"":""input""}")]
@@ -59,10 +59,10 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(responseModel.Plugin.Exceptions?.IsEmpty);
 
             // Assert that the total runtime is greater than 4 seconds
-            Assert.IsTrue(responseModel.Stopwatch.ElapsedTicks > 4 * TimeSpan.TicksPerSecond);
+            Assert.IsGreaterThan(4 * TimeSpan.TicksPerSecond, responseModel.Stopwatch.ElapsedTicks);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with clear argument.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with clear argument.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --Clear}}"", ""onElement"":""input""}")]
         #endregion
@@ -75,7 +75,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with native clear argument.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with native clear argument.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --NativeClear}}"", ""onElement"":""input""}")]
         #endregion
@@ -88,7 +88,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with modifier keys.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with modifier keys.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:A --Modifier:Control}}"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""{{$ --Keys:A --Modifier:Control --Modifier:Shift}}"", ""onElement"":""input""}")]
@@ -102,7 +102,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws exceptions with " +
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws exceptions with " +
             "native clear argument.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --NativeClear}}"", ""onElement"":""positive""}")]
@@ -116,8 +116,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws WebDriverTimeoutException.")]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws WebDriverTimeoutException.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""stale""}")]
         [DataRow(@"{""argument"":""keys"", ""onElement"":""null""}")]
@@ -127,27 +126,20 @@ namespace G4.UnitTests.Plugins.Ui
         public void SendKeysExceptionTest(string ruleJson)
         {
             // Invoke the SendKeys action with the specified action rule
-            var plugin = Invoke<SendKeys>(ruleJson).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<WebDriverTimeoutException>(() => Invoke<SendKeys>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws ElementNotInteractableException.")]
-        [ExpectedException(typeof(ElementNotInteractableException))]
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws ElementNotInteractableException.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""negative""}")]
         #endregion
         public void SendKeysNegativeTest(string ruleJson)
         {
             // Invoke the SendKeys action with the specified action rule
-            var plugin = Invoke<SendKeys>(ruleJson).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<ElementNotInteractableException>(() => Invoke<SendKeys>(ruleJson));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with valid element and arguments.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with valid element and arguments.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""keys"", ""onElement"":""positive""}")]
@@ -155,13 +147,13 @@ namespace G4.UnitTests.Plugins.Ui
         public void SendKeysElementTest(string ruleJson)
         {
             // Invoke the SendKeys action with the specified action rule
-            var plugin = Invoke<SendKeys>(ruleJson, By.Custom.Positive()).Plugin;
+            var response = Invoke<SendKeys>(ruleJson, By.Custom.Positive()).Response;
 
             // Assert that no exceptions were thrown during the plugin invocation
-            Assert.IsTrue(plugin.Exceptions?.IsEmpty);
+            Assert.IsEmpty(response.Exceptions);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with delay and element.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with delay and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --Delay:00:00:01}}"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""{{$ --Keys:keys --Delay:1000}}"", ""onElement"":""input""}")]
@@ -175,10 +167,10 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(responseModel.Plugin.Exceptions?.IsEmpty);
 
             // Assert that the total runtime is greater than 4 seconds
-            Assert.IsTrue(responseModel.Stopwatch.ElapsedTicks > 4 * TimeSpan.TicksPerSecond);
+            Assert.IsGreaterThan(4 * TimeSpan.TicksPerSecond, responseModel.Stopwatch.ElapsedTicks);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with clear argument and element.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with clear argument and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --Clear}}"", ""onElement"":""input""}")]
         #endregion
@@ -191,7 +183,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with native clear " +
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with native clear " +
             "argument and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --NativeClear}}"", ""onElement"":""input""}")]
@@ -205,7 +197,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action works with modifier keys and element.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action works with modifier keys and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:A --Modifier:Control}}"", ""onElement"":""input""}")]
         [DataRow(@"{""argument"":""{{$ --Keys:A --Modifier:Control --Modifier:Shift}}"", ""onElement"":""input""}")]
@@ -219,7 +211,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws exceptions with " +
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws exceptions with " +
             "native clear argument and element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Keys:keys --NativeClear}}"", ""onElement"":""positive""}")]
@@ -233,37 +225,31 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws WebDriverException " +
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws WebDriverException " +
             "with exception element.")]
-        [ExpectedException(typeof(WebDriverException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""exception""}")]
         #endregion
         public void SendKeysExceptionElementTest(string ruleJson)
         {
             // Invoke the SendKeys action with the specified action rule
-            var plugin = Invoke<SendKeys>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<WebDriverException>(()
+                => Invoke<SendKeys>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws NoSuchElementException " +
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws NoSuchElementException " +
             "with none element.")]
-        [ExpectedException(typeof(NoSuchElementException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""none""}")]
         #endregion
         public void SendKeysNoneElementTest(string ruleJson)
         {
             // Invoke the SendKeys action with the specified action rule
-            var plugin = Invoke<SendKeys>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<NoSuchElementException>(()
+                => Invoke<SendKeys>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws exceptions with null element.")]
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws exceptions with null element.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""null""}")]
         #endregion
@@ -276,34 +262,28 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(plugin.Exceptions?.IsEmpty);
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws StaleElementReferenceException " +
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws StaleElementReferenceException " +
             "with stale element.")]
-        [ExpectedException(typeof(StaleElementReferenceException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""stale""}")]
         #endregion
         public void SendKeysStaleElementTest(string ruleJson)
         {
             // Invoke the SendKeys action with the specified action rule
-            var plugin = Invoke<SendKeys>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<StaleElementReferenceException>(()
+                => Invoke<SendKeys>(ruleJson, By.Custom.Positive()));
         }
 
-        [TestMethod(displayName: "Verify that the SendKeys action throws ElementNotInteractableException " +
+        [TestMethod(DisplayName = "Verify that the SendKeys action throws ElementNotInteractableException " +
             "with negative element.")]
-        [ExpectedException(typeof(ElementNotInteractableException))]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""keys"", ""onElement"":""negative""}")]
         #endregion
         public void SendKeysElementNegativeTest(string ruleJson)
         {
             // Invoke the SendKeys action with the specified action rule
-            var plugin = Invoke<SendKeys>(ruleJson, By.Custom.Positive()).Plugin;
-
-            // Assert that exceptions were thrown during the plugin invocation
-            Assert.IsFalse(plugin.Exceptions?.IsEmpty);
+            Assert.Throws<ElementNotInteractableException>(()
+                => Invoke<SendKeys>(ruleJson, By.Custom.Positive()));
         }
     }
 }

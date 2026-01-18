@@ -31,7 +31,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class GetWindowHandleTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to ensure that the Get-WindowHandle plugin correctly registers the window handle " +
             "with session scope, sends this handle to a designated element, and asserts its presence.")]
         #region *** Criteria ***
@@ -60,7 +60,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to ensure that the Get-WindowHandle plugin correctly registers the window handle " +
             "of a new tab with session scope, sends this handle to a designated element, and " +
             "asserts its presence.")]
@@ -87,7 +87,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to ensure that the Get-WindowHandle plugin correctly registers the window handle " +
             "of the current tab with session scope, opens a new tab, retrieves its handle " +
             "directly with SendKeys action, and asserts that the window handles of the current " +

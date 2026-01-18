@@ -30,7 +30,7 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonConditionDynamic, "hasAlert"]
         ];
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -38,7 +38,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertManifest<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -46,7 +46,7 @@ namespace G4.UnitTests.Plugins.Ui
             AssertPlugin<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the AlertExists condition fails when no alert is present.")]
+        [TestMethod(DisplayName = "Verify that the AlertExists condition fails when no alert is present.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -65,10 +65,10 @@ namespace G4.UnitTests.Plugins.Ui
             var environment = responseModel.GetEnvironment();
 
             // Assert that no session parameters were set
-            Assert.IsTrue(!environment.SessionParameters.Any());
+            Assert.IsFalse(environment.SessionParameters.Any());
         }
 
-        [TestMethod(displayName: "Verify that the AlertExists condition succeeds when an alert is present.")]
+        [TestMethod(DisplayName = "Verify that the AlertExists condition succeeds when an alert is present.")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion

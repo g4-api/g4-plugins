@@ -1,4 +1,4 @@
-﻿#pragma warning disable CA1822 // Mark members as static
+﻿#pragma warning disable CA1822, S2325, CA1873 // Mark members as static
 using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
@@ -1251,11 +1251,11 @@ namespace G4.IntegrationTests.Framework
         /// Configures services for the application.
         /// </summary>
         /// <param name="services">The collection of services to configure.</param>
-        [SuppressMessage(
-            category: "Minor Code Smell",
-            checkId: "S2325:Methods and properties that don't access instance data should be static",
-            Justification = "This method configures services through dependency injection and must interact with the application's service collection instance. " +
-            "Making this method static would prevent it from being overridden in derived classes if customization or extension is needed, thereby reducing flexibility and violating the principles of extensible software design.")]
+        //[SuppressMessage(
+        //    category: "Minor Code Smell",
+        //    checkId: "S2325:Methods and properties that don't access instance data should be static",
+        //    Justification = "This method configures services through dependency injection and must interact with the application's service collection instance. " +
+        //    "Making this method static would prevent it from being overridden in derived classes if customization or extension is needed, thereby reducing flexibility and violating the principles of extensible software design.")]
         public void ConfigureServices(IServiceCollection services)
         {
             // Configure JSON options for controllers
@@ -1325,7 +1325,7 @@ namespace G4.IntegrationTests.Framework
     public static class WebServer
     {
         // Static variable to hold the web host instance.
-        private static IWebHost s_webHost = NewWebHost(port: 9002, shutdownTimeout: TimeSpan.FromSeconds(60));
+        private static IHost s_webHost = NewWebHost(port: 9002, shutdownTimeout: TimeSpan.FromSeconds(60));
 
         /// <summary>
         /// Starts the web host asynchronously.
@@ -1339,14 +1339,15 @@ namespace G4.IntegrationTests.Framework
             => s_webHost = NewWebHost(port: 9002, shutdownTimeout: TimeSpan.FromSeconds(60));
 
         // Creates a new web host with the specified port and shutdown timeout.
-        private static IWebHost NewWebHost(int port, TimeSpan shutdownTimeout)
+        private static IHost NewWebHost(int port, TimeSpan shutdownTimeout)
         {
-            return WebHost
-                .CreateDefaultBuilder()
-                .UseUrls()
-                .ConfigureKestrel(i => i.Listen(IPAddress.Any, port))
-                .UseStartup<Startup>()
-                .UseShutdownTimeout(shutdownTimeout)
+            return Host.CreateDefaultBuilder()
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseKestrel(options => options.ListenAnyIP(port));
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseShutdownTimeout(shutdownTimeout);
+                })
                 .Build();
         }
 

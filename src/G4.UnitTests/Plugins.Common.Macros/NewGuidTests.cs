@@ -13,20 +13,20 @@ namespace G4.UnitTests.Plugins.Common.Macros
     [TestCategory("UnitTest")]
     public class NewGuidTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the NewGuid plugin manifest complies with " +
+        [TestMethod(DisplayName = "Verify that the NewGuid plugin manifest complies with " +
             "the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<NewGuid>(pluginName: "New-Guid");
         }
 
-        [TestMethod(displayName: "Verify that the NewGuid plugin is correctly registered and operational.")]
+        [TestMethod(DisplayName = "Verify that the NewGuid plugin is correctly registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<NewGuid>();
         }
 
-        [TestMethod(displayName: "Verify that the NewGuid plugin correctly generates GUIDs in various formats.")]
+        [TestMethod(DisplayName = "Verify that the NewGuid plugin correctly generates GUIDs in various formats.")]
         #region *** Data Set ***
         [DataRow("{\"argument\":\"{{$New-Guid --Format:N}}\"}", @"^\w{32}$")]
         [DataRow("{\"argument\":\"{{$New-Guid --Format:D}}\"}", @"^\w{8}-(\w{4}-){3}\w{12}$")]
@@ -46,7 +46,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Assert.IsTrue(Regex.IsMatch(input: $"{actual.Entity[MacroResultKey]}", pattern: expectedPattern));
         }
 
-        [TestMethod(displayName: "Verify that the NewGuid plugin correctly generates GUIDs " +
+        [TestMethod(DisplayName = "Verify that the NewGuid plugin correctly generates GUIDs " +
             "matching the specified pattern.")]
         public void NewGuidPatternTest()
         {
@@ -60,7 +60,7 @@ namespace G4.UnitTests.Plugins.Common.Macros
             Assert.IsTrue(Regex.IsMatch(input: $"{actual.Entity[MacroResultKey]}", pattern: @"^\w{2}$"));
         }
 
-        [TestMethod(displayName: "Verify that the NewGuid plugin generates a valid GUID " +
+        [TestMethod(DisplayName = "Verify that the NewGuid plugin generates a valid GUID " +
             "in the default format.")]
         public void NewGuidTest()
         {

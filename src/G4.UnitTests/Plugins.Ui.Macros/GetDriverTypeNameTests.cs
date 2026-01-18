@@ -14,7 +14,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
     [TestCategory("UnitTest")]
     public class GetDriverTypeNameTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the GetDriverTypeName macro plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the GetDriverTypeName macro plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -22,7 +22,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertManifest<GetDriverTypeName>(pluginName: "Get-DriverTypeName");
         }
 
-        [TestMethod(displayName: "Verify that the GetDriverTypeName macro plugin can be " +
+        [TestMethod(DisplayName = "Verify that the GetDriverTypeName macro plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -30,7 +30,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertPlugin<GetDriverTypeName>();
         }
 
-        [TestMethod(displayName: "Verify that the GetDriverTypeName macro plugin returns an empty result " +
+        [TestMethod(DisplayName = "Verify that the GetDriverTypeName macro plugin returns an empty result " +
             "when the driver is null.")]
         public void GetDriverTypeNameNegativeTest()
         {
@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.AreEqual(expected: string.Empty, responseModel.Response.Entity[MacroResultKey]);
         }
 
-        [DataTestMethod(displayName: "Verify that the GetDriverTypeName macro plugin returns " +
+        [TestMethod(DisplayName = "Verify that the GetDriverTypeName macro plugin returns " +
             "the correct driver type name when a pattern is specified.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Pattern:[^.]+$}}""}")]
@@ -70,7 +70,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.AreEqual(expected, resultModel.Entity[MacroResultKey]);
         }
 
-        [TestMethod(displayName: "Verify that the GetDriverTypeName macro plugin returns the " +
+        [TestMethod(DisplayName = "Verify that the GetDriverTypeName macro plugin returns the " +
             "correct driver type name.")]
         public void GetDriverTypeNameTest()
         {

@@ -34,7 +34,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         // Comparison type for string operations.
         private const StringComparison Compare = StringComparison.OrdinalIgnoreCase;
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when invoked with specific parameters to capture " +
             "and save a screenshot, successfully saves the screenshot in the specified directory with " +
             "the provided file name.")]
@@ -75,7 +75,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(entities.All((i) => i.EndsWith($"{environment.TestParameters["fileName"]}", Compare)));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when invoked with specific parameters to capture " +
             "and save a screenshot, successfully saves the screenshot in the current working directory " +
             "if the directory parameter is not specified.")]
@@ -113,7 +113,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(entities.All(File.Exists));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when invoked with specific parameters to capture " +
             "and save a screenshot, successfully saves the screenshot with a default file name if the " +
             "FileName parameter is not specified.")]
@@ -157,7 +157,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when invoked without specifying the Directory " +
             "and FileName parameters, successfully saves the screenshot in the current working " +
             "directory with a default file name.")]
@@ -198,7 +198,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when configured to capture and save a screenshot " +
             "of a specified element with both the Directory and FileName parameters specified, successfully " +
             "saves the screenshot in the specified directory with the provided file name.")]
@@ -239,7 +239,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(entities.All((i) => i.EndsWith($"{environment.TestParameters["fileName"]}", Compare)));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when configured to capture and save a screenshot " +
             "of a specified element without specifying the Directory parameter, successfully saves " +
             "the screenshot in the current working directory with the provided file name.")]
@@ -277,7 +277,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(entities.All(File.Exists));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when configured to capture and save a screenshot " +
             "of a specified element without specifying the FileName parameter, successfully saves the " +
             "screenshot in the specified directory with a default file name.")]
@@ -321,7 +321,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SaveScreenshot plugin, when configured to capture and save a screenshot " +
             "of a specified element without specifying both the Directory and FileName parameters, " +
             "successfully saves the screenshot in the current working directory with a default file name.")]

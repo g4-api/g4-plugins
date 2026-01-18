@@ -77,7 +77,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         ];
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters without " +
             "trimming and without clearing line breaks, accurately extracts hotel information " +
             "from webpage elements.")]
@@ -109,7 +109,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var entities = environment.GetEntities().ToList();
 
             // Assert that there are exactly 2 entities in the extracted data
-            Assert.AreEqual(expected: 2, actual: entities.Count, message: $"Expected 2 entities, but found {entities.Count}");
+            Assert.HasCount(expected: 2, collection: entities, message: $"Expected 2 entities, but found {entities.Count}");
 
             // Assert that all entities have exactly 5 content items
             Assert.IsTrue(
@@ -118,18 +118,20 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
 
             // Assert that the content of the "Pre" key in the first entity,
             // when split using a regular expression to separate lines, has a length greater than 1
-            Assert.IsTrue(
-                condition: Regex.Split($"{entities[0].Content["Pre"]}", @"[\r\n]+", RegexOptions.Singleline).Length > 1,
+            Assert.IsGreaterThan(
+                lowerBound: 1,
+                value: Regex.Split($"{entities[0].Content["Pre"]}", @"[\r\n]+", RegexOptions.Singleline).Length,
                 message: "Expected the content of 'Pre' to have more than one line.");
 
             // Assert that the content of the "Location" key in the first entity starts with a space character
-            Assert.IsTrue(
-                condition: $"{entities[0].Content["Location"]}".StartsWith(' '),
+            Assert.StartsWith(
+                expectedPrefix: " ",
+                value: $"{entities[0].Content["Location"]}",
                 message: "Expected the content of 'Location' to start with a space character.");
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters without " +
             "trimming and with clearing line breaks, accurately extracts hotel information from " +
             "webpage elements.")]
@@ -162,7 +164,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var entities = environment.GetEntities().ToList();
 
             // Assert that there are exactly 2 entities in the extracted data
-            Assert.AreEqual(expected: 2, actual: entities.Count, message: $"Expected 2 entities, but found {entities.Count}");
+            Assert.HasCount(expected: 2, collection: entities, message: $"Expected 2 entities, but found {entities.Count}");
 
             // Assert that all entities have exactly 5 content items
             Assert.IsTrue(
@@ -171,19 +173,20 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
 
             // Assert that the content of the "Pre" key in the first entity,
             // when split using a regular expression to separate lines, has a length of 1
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 1,
-                actual: Regex.Split($"{entities[0].Content["Pre"]}", @"[\r\n]+", RegexOptions.Singleline).Length,
+                collection: Regex.Split($"{entities[0].Content["Pre"]}", @"[\r\n]+", RegexOptions.Singleline),
                 message: "Expected the content of 'Pre' to have exactly one line.");
 
             // Assert that the content of the "Location" key in the first entity starts with a space character
-            Assert.IsTrue(
-                condition: $"{entities[0].Content["Location"]}".StartsWith(' '),
+            Assert.StartsWith(
+                expectedPrefix: " ",
+                value: $"{entities[0].Content["Location"]}",
                 message: "Expected the content of 'Location' to start with a space character.");
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters with trimming " +
             "and with clearing line breaks, accurately extracts hotel information from webpage elements.")]
         #region *** Criteria ***
@@ -216,7 +219,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var entities = environment.GetEntities().ToList();
 
             // Assert that there are exactly 2 entities in the extracted data
-            Assert.AreEqual(expected: 2, actual: entities.Count, message: $"Expected 2 entities, but found {entities.Count}");
+            Assert.HasCount(expected: 2, collection: entities, message: $"Expected 2 entities, but found {entities.Count}");
 
             // Assert that all entities have exactly 5 content items
             Assert.IsTrue(
@@ -225,19 +228,20 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
 
             // Assert that the content of the "Pre" key in the first entity,
             // when split using a regular expression to separate lines, has a length of 1
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 1,
-                actual: Regex.Split($"{entities[0].Content["Pre"]}", @"[\r\n]+", RegexOptions.Singleline).Length,
+                collection: Regex.Split($"{entities[0].Content["Pre"]}", @"[\r\n]+", RegexOptions.Singleline),
                 message: "Expected the content of 'Pre' to have exactly one line.");
 
             // Assert that the content of the "Location" key in the first entity does not start with a space character
-            Assert.IsFalse(
-                $"{entities[0].Content["Location"]}".StartsWith(' '),
-                "Expected the content of 'Location' to not start with a space character.");
+            Assert.DoesNotStartWith(
+                notExpectedPrefix: " ",
+                value: $"{entities[0].Content["Location"]}",
+                message: "Expected the content of 'Location' to not start with a space character.");
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters with trimming, " +
             "with clearing line breaks, accurately extracts hotel information from webpage elements " +
             "and validates extracted data types.")]
@@ -318,7 +322,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements and writes the extracted data to " +
             "a JSON file in real-time for each entity extracted.")]
@@ -367,7 +371,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements and writes the extracted data to " +
             "a JSON file at the end of the extraction.")]
@@ -415,7 +419,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements and writes the extracted data to an " +
             "XML file in real-time for each entity extracted.")]
@@ -464,7 +468,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements and writes the extracted data to an " +
             "XML file at the end of the extraction.")]
@@ -512,7 +516,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements and writes the extracted data to " +
             "a CSV file in real-time for each entity extracted.")]
@@ -561,7 +565,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements and writes the extracted data to " +
             "a CSV file at the end of the extraction.")]
@@ -610,7 +614,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements, invokes actions under each ContentRule " +
             "before moving to the next rule, and writes the extracted data to a CSV file in real-time " +
@@ -661,7 +665,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements, invokes actions under each ContentRule " +
             "before moving to the next rule, and writes the extracted data to a CSV file at the end " +
@@ -712,7 +716,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the ExportData plugin, when triggered with specific parameters, accurately " +
             "extracts hotel information from webpage elements, writes the extracted data to a CSV " +
             "file at the end of the extraction, and ensures data type consistency.")]
@@ -807,7 +811,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SqlLiteDataCollector plugin, when run with specific parameters, accurately extracts hotel information " +
             "from webpage elements and writes each record into a SQLite database in real-time.")]
         #region *** Criteria ***
@@ -871,7 +875,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SqlLiteDataCollector plugin, when triggered with specific parameters, accurately extracts hotel information " +
             "from webpage elements and writes the extracted data into a SQLite database at the end of the extraction.")]
         #region *** Criteria ***
@@ -931,26 +935,42 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
                 message: "Data read from SQLite does not match the expected JSON payload.");
         }
 
-        public static string ReadAsJson(string dbFile, string tableName)
+        // Reads all rows from the specified SQLite table and returns them as a JSON string.
+        private static string ReadAsJson(string dbFile, string tableName)
         {
+            // Create and open a connection to the SQLite database file
             using var connection = new SqliteConnection($"Data Source={dbFile}");
             connection.Open();
 
+            // Create a SQL command to select all rows from the given table
             using var command = new SqliteCommand($"SELECT * FROM {tableName}", connection);
+
+            // Execute the command and get a forward-only reader
             using var reader = command.ExecuteReader();
 
+            // This will hold all rows as dictionaries (column name -> value)
             var results = new List<Dictionary<string, object>>();
 
+            // Iterate over each row in the result set
             while (reader.Read())
             {
                 var row = new Dictionary<string, object>();
+
+                // Loop through all columns in the current row
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    row[reader.GetName(i)] = reader.GetValue(i) is DBNull ? null : reader.GetValue(i);
+                    var columnName = reader.GetName(i);
+                    var value = reader.GetValue(i);
+
+                    // Convert DBNull to null for JSON compatibility
+                    row[columnName] = value is DBNull ? null : value;
                 }
+
+                // Add the populated row to the result list
                 results.Add(row);
             }
 
+            // Serialize the entire result set into a JSON string
             return JsonSerializer.Serialize(results);
         }
     }

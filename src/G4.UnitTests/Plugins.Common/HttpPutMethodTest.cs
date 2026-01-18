@@ -14,21 +14,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class HttpPutMethodTest : TestBase
     {
-        [TestMethod(displayName: "Verify that the HttpPutMethod plugin named 'Put' complies " +
+        [TestMethod(DisplayName = "Verify that the HttpPutMethod plugin named 'Put' complies " +
             "with the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<HttpPutMethod>(pluginName: "Put");
         }
 
-        [TestMethod(displayName: "Verify that the HttpPutMethod plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the HttpPutMethod plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<HttpPutMethod>();
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PUT request with JSON body returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP PUT request with JSON body returns " +
             "a status code of 200 and the response contains the expected confirmation message.")]
         public void PutRequestWithJsonBodyTest()
         {
@@ -51,10 +51,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Hotel information updated for Luxury Hotel"));
+            Assert.Contains("Hotel information updated for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PUT request with text body and different" +
+        [TestMethod(DisplayName = "Verify that the HTTP PUT request with text body and different" +
             " Content-Types returns the expected status code.")]
         #region *** Data Set ***
         [DataRow("application/json", 415)]
@@ -81,7 +81,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expectedStatusCode, actualStatusCode);
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PUT request with text body returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP PUT request with text body returns " +
             "a status code of 200 and the response contains the expected confirmation message.")]
         public void PutRequestWithTextBodyTest()
         {
@@ -104,10 +104,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Hotel information updated for Luxury Hotel"));
+            Assert.Contains("Hotel information updated for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PUT request with text body and ASCII " +
+        [TestMethod(DisplayName = "Verify that the HTTP PUT request with text body and ASCII " +
             "encoding returns a status code of 200 and the response contains the expected confirmation message.")]
         public void PutRequestWithTextBodyAndEncodingTest()
         {
@@ -131,10 +131,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Hotel information updated for Luxury Hotel"));
+            Assert.Contains("Hotel information updated for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PUT request with URL-encoded body " +
+        [TestMethod(DisplayName = "Verify that the HTTP PUT request with URL-encoded body " +
             "returns a status code of 200 and the response contains the expected confirmation message.")]
         public void PutRequestWithUrlEncodedBodyTest()
         {
@@ -158,10 +158,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the response contains the confirmation message for the hotel update
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Hotel information updated for Luxury Hotel"));
+            Assert.Contains("Hotel information updated for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP PUT request with XML body returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP PUT request with XML body returns " +
             "a status code of 200 and the response contains the expected confirmation message.")]
         public void PutRequestWithXmlBodyTest()
         {
@@ -184,7 +184,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Hotel information updated for Luxury Hotel"));
+            Assert.Contains("Hotel information updated for Luxury Hotel", $"{response}".ConvertFromBase64());
         }
     }
 }

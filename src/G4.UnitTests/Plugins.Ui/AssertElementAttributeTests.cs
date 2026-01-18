@@ -153,20 +153,20 @@ namespace G4.UnitTests.Plugins.Ui
             [Stubs.RuleJsonAttributeOperator, "random", "attribute", @"^\\d+ mock attribute value$", "notMatch"]
         ];
 
-        [TestMethod(displayName: "Verify that the plugin is correctly instantiated and operates as expected")]
+        [TestMethod(DisplayName = "Verify that the plugin is correctly instantiated and operates as expected")]
         public override void NewPluginTest()
         {
             AssertPlugin<ElementAttribute>();
         }
 
-        [TestMethod(displayName: "Verify that the plugin's manifest complies with expected " +
+        [TestMethod(DisplayName = "Verify that the plugin's manifest complies with expected " +
             "standards and specifications")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<ElementAttribute>();
         }
 
-        [TestMethod(displayName: "Verify that attribute value assertions handle " +
+        [TestMethod(DisplayName = "Verify that attribute value assertions handle " +
             "StaleElementReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
@@ -206,7 +206,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is StaleElementReferenceException));
         }
 
-        [TestMethod(displayName: "Verify that attribute value assertions handle NoSuchElementException correctly")]
+        [TestMethod(DisplayName = "Verify that attribute value assertions handle NoSuchElementException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -245,7 +245,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is NoSuchElementException));
         }
 
-        [TestMethod(displayName: "Verify that attribute value assertions handle WebDriverException correctly")]
+        [TestMethod(DisplayName = "Verify that attribute value assertions handle WebDriverException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -284,7 +284,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is WebDriverException));
         }
 
-        [TestMethod(displayName: "Verify that attribute value assertions handle NullReferenceException correctly")]
+        [TestMethod(DisplayName = "Verify that attribute value assertions handle NullReferenceException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -323,7 +323,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is NullReferenceException));
         }
 
-        [TestMethod(displayName: "Verify that element attribute assertions are evaluated correctly")]
+        [TestMethod(DisplayName = "Verify that element attribute assertions are evaluated correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion

@@ -15,21 +15,21 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class AssertPageUrlTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the PageUrl plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin is correctly " +
             "registered and operational.")]
         public override void NewPluginTest()
         {
             AssertPlugin<PageUrl>();
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<PageUrl>();
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL equality.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL equality.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "Eq")]
@@ -77,7 +77,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL inequality.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL inequality.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "Ne")]
@@ -125,7 +125,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions .GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL greater than.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL greater than.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "Gt")]
@@ -173,7 +173,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL greater or equal.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL greater or equal.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "Ge")]
@@ -221,7 +221,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL less or equal.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL less or equal.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "Le")]
@@ -269,7 +269,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL less than.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL less than.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "Lt")]
@@ -317,7 +317,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL match.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL match.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "Match")]
@@ -347,7 +347,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(displayName: "Verify that the PageUrl plugin correctly evaluates page URL not match.")]
+        [TestMethod(DisplayName = "Verify that the PageUrl plugin correctly evaluates page URL not match.")]
         #region *** Data Set ***
         // Page URL
         [DataRow(Stubs.RuleJsonArgumentRegularExpressionOperator, "PageUrl", "NotMatch")]

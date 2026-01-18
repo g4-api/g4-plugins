@@ -10,7 +10,7 @@ namespace G4.IntegrationTests.Suites.Common
     public class SendOpenAiPromptTests : TestBase
     {
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin sends prompts and stores the response and token counts correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SendOpenAiPrompt plugin integrates into the G4™ Engine framework.")]
@@ -34,7 +34,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin sends prompts across new chat sessions and stores the response and token counts correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SendOpenAiPrompt plugin integrates into the G4™ Engine framework.")]
@@ -59,7 +59,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin respects the MaxTokens parameter and stores token counts correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SendOpenAiPrompt plugin integrates into the G4™ Engine framework.")]
@@ -82,7 +82,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin respects MaxTokens and Temperature parameters and stores token counts correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SendOpenAiPrompt plugin integrates into the G4™ Engine framework.")]
@@ -106,7 +106,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin respects MaxTokens, Temperature, and TopP parameters and stores token counts correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SendOpenAiPrompt plugin integrates into the G4™ Engine framework.")]
@@ -131,7 +131,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin respects CompletionsUri, MaxTokens, Temperature, and TopP parameters and stores token counts correctly.")]
         #region *** Criteria ***
         [AcceptanceCriteria(criteria: "Plugin Integration: The SendOpenAiPrompt plugin integrates into the G4™ Engine framework.")]
@@ -163,7 +163,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin respects Model, CompletionsUri, MaxTokens, Temperature, and TopP parameters and " +
             "stores token counts correctly.")]
         #region *** Criteria ***
@@ -197,7 +197,7 @@ namespace G4.IntegrationTests.Suites.Common
         }
 
         [Ignore(message: "This test is currently skipped in the production environment due to cost management.")]
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
             "SendOpenAiPrompt plugin respects TopK, Model, CompletionsUri, MaxTokens, Temperature, and TopP " +
             "parameters and stores token counts correctly.")]
         #region *** Criteria ***

@@ -18,21 +18,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class HttpGetMethodTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the HttpGetMethod plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the HttpGetMethod plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<HttpGetMethod>();
         }
 
-        [TestMethod(displayName: "Verify that the HttpGetMethod plugin named 'Get' " +
+        [TestMethod(DisplayName = "Verify that the HttpGetMethod plugin named 'Get' " +
             "complies with the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<HttpGetMethod>(pluginName: "Get");
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request returns a status code " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request returns a status code " +
             "of 200 (OK) and the response content is in JSON format.")]
         public void GetRequestPositiveTest()
         {
@@ -56,7 +56,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue($"{response}".ConvertFromBase64().AssertJson());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request returns a status code " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request returns a status code " +
             "of 200 (OK) and the response content is in XML format.")]
         public void GetRequestPositiveXmlTest()
         {
@@ -80,7 +80,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue($"{response}".ConvertFromBase64().AssertXml());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request with authorization returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request with authorization returns " +
             "a status code of 405 and the response contains the custom headers.")]
         public void GetRequestWithAuthorizationPositiveTest()
         {
@@ -110,7 +110,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue(response.Equals(string.Empty));
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request with custom headers returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request with custom headers returns " +
             "a status code of 200 (OK) and the response contains the custom headers.")]
         public void GetRequestWithHeadersPositiveTest()
         {
@@ -144,7 +144,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue(response.Contains("MyCustomUserAgent", StringComparison.OrdinalIgnoreCase));
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request returns a status code of 200 (OK) " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request returns a status code of 200 (OK) " +
             "and the response contains the expected data extracted using JSONPath.")]
         public void GetRequestWithJsonPathTest()
         {
@@ -169,7 +169,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue($"{response}".ConvertFromBase64().Equals("250"));
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request returns a status code of 200 (OK) " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request returns a status code of 200 (OK) " +
             "and the response contains the expected data extracted using both Regular Expression and JSONPath.")]
         public void GetRequestWithRegularExpressionAndJsonPath()
         {
@@ -195,7 +195,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue($"{response}".ConvertFromBase64().Equals("25"));
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request returns a status code of 200 (OK) " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request returns a status code of 200 (OK) " +
             "and the response contains the expected data extracted using Regular Expression.")]
         public void GetRequestWithRegularExpressionTest()
         {
@@ -220,7 +220,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue($"{response}".ConvertFromBase64().Equals("250"));
         }
 
-        [TestMethod(displayName: "Verify that the HTTP GET request returns a status code of 200 (OK) " +
+        [TestMethod(DisplayName = "Verify that the HTTP GET request returns a status code of 200 (OK) " +
             "and the response contains the expected data extracted using XPath.")]
         public void GetRequestWithXpathTest()
         {

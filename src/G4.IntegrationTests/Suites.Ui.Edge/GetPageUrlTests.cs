@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class GetPageUrlTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the Get-PageUrl plugin correctly retrieves the current page URL, " +
             "registers it as a session parameter, sends it to the designated element, and " +
             "asserts its value.")]
@@ -59,7 +59,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the Get-PageUrl plugin correctly retrieves the current page URL, " +
             "opens it with additional parameters, sends a numeric value extracted from the URL " +
             "to a designated element using a specified pattern, and asserts its value.")]

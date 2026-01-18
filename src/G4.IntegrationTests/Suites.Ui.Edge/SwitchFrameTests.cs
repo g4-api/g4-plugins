@@ -23,7 +23,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SwitchFrameTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchFrame plugin, when configured with a specific frame index, correctly " +
             "switches to the designated frame, enabling subsequent actions within it.")]
         #region *** Criteria ***
@@ -44,7 +44,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchFrame plugin, when configured with a specific frame element, correctly " +
             "switches to the designated frame, enabling subsequent actions within it.")]
         #region *** Criteria ***

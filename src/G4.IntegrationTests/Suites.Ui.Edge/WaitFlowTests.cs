@@ -28,7 +28,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class WaitFlowTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the alert does not exist for a maximum " +
             "of 15 seconds as specified by the Timeout parameter in the 'HH:mm:ss' format, and " +
             "handles errors gracefully.")]
@@ -59,7 +59,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementDisabled' becomes " +
             "active for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -91,7 +91,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementEnabled' becomes " +
             "disabled for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -123,7 +123,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementDisabled' becomes " +
             "enabled for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -155,7 +155,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with automation-data 'ElementCount' " +
             "exists for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -187,7 +187,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementActive' is " +
             "not active for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -220,7 +220,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementExists' does " +
             "not exist for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -252,7 +252,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementSelected' is " +
             "not selected for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -284,7 +284,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementVisible' is " +
             "not visible for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -316,7 +316,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementNotSelected' " +
             "is selected for a maximum of 15 seconds, and handles errors gracefully.")]
         #region *** Criteria ***
@@ -348,7 +348,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'StaleElement' becomes " +
             "stale for a maximum of 15 seconds and handles errors gracefully.")]
         #region *** Criteria ***
@@ -379,7 +379,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element with id 'ElementVisible' becomes " +
             "not visible for a maximum of 15 seconds, then becomes visible again after an action, and " +
             "handles errors gracefully.")]
@@ -414,7 +414,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the condition 'DriverTypeName' with the " +
             "specified operator and expected value is met for a maximum of 15 seconds and asserts " +
             "the same condition.")]
@@ -453,7 +453,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the attribute value of the element with id " +
             "'ElementAttribute' satisfies the condition with the specified operator and expected value " +
             "for a maximum of 15 seconds, and asserts the same condition.")]
@@ -493,7 +493,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element count meets the specified " +
             "condition for a maximum of 15 seconds, while the element count is increasing, and " +
             "asserts the same condition.")]
@@ -533,7 +533,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the element count meets the specified " +
             "condition for a maximum of 15 seconds, while the element count is decreasing, and " +
             "asserts the same condition.")]
@@ -573,7 +573,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the condition 'ElementText' with the specified " +
             "operator and expected value is met for a maximum of 15 seconds, while the element text is " +
             "changing, and asserts the same condition.")]
@@ -613,7 +613,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the condition 'ElementTextLength' with " +
             "the specified operator and expected value is met for a maximum of 15 seconds, while " +
             "the element text length is changing, and asserts the same condition.")]
@@ -658,7 +658,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the condition 'PageTitle' with the specified " +
             "operator and expected value is met for a maximum of 15 seconds, while the page title is " +
             "changing, and asserts the same condition.")]
@@ -698,7 +698,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the condition 'PageUrl' with the specified " +
             "operator and expected value is met for a maximum of 15 seconds, while the page URL is " +
             "changing, and asserts the same condition.")]
@@ -738,7 +738,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the condition 'WindowCount' with the specified " +
             "operator and expected value is met for a maximum of 15 seconds, while the number of browser " +
             "windows is changing, and asserts the same condition.")]
@@ -778,7 +778,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Assert.IsTrue(performancePoints.All(i => i.RunTime < 15 * TimeSpan.TicksPerSecond));
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the WaitFlow plugin waits until the condition 'WindowCount' with the specified " +
             "operator and expected value is met for a maximum of 15 seconds, while the number of browser " +
             "windows is changing due to opening and closing tabs, and asserts the same condition.")]

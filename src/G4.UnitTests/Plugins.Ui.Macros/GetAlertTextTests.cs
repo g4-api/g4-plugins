@@ -16,7 +16,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
     [TestCategory("UnitTest")]
     public class GetAlertTextTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the GetAlertText macro plugin throws NoSuchAlertException " +
+        [TestMethod(DisplayName = "Verify that the GetAlertText macro plugin throws NoSuchAlertException " +
             "when no alert is present.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""""}")]
@@ -33,7 +33,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.IsTrue(responseModel.Exceptions.Any(i => i.Exception is NoSuchAlertException));
         }
 
-        [TestMethod(displayName: "Verify that the GetAlertText macro plugin works correctly " +
+        [TestMethod(DisplayName = "Verify that the GetAlertText macro plugin works correctly " +
             "when an alert is present and matches the specified pattern.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Pattern:.{4}}}""}")]
@@ -53,7 +53,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.AreEqual(expected: 4, actual: $"{testResult.Response.Entity[MacroResultKey]}".Length);
         }
 
-        [TestMethod(displayName: "Verify that the GetAlertText macro plugin can be " +
+        [TestMethod(DisplayName = "Verify that the GetAlertText macro plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -61,7 +61,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertPlugin<GetAlertText>();
         }
 
-        [TestMethod(displayName: "Verify that the GetAlertText macro plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the GetAlertText macro plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -69,7 +69,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertManifest<GetAlertText>(pluginName: "Get-AlertText");
         }
 
-        [TestMethod(displayName: "Verify that the GetAlertText macro plugin works correctly " +
+        [TestMethod(DisplayName = "Verify that the GetAlertText macro plugin works correctly " +
             "and returns the correct text.")]
         public void GetAlertTextTest()
         {

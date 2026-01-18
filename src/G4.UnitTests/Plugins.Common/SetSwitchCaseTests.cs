@@ -18,21 +18,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class SetSwitchCaseTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the SetSwitchCase plugin is correctly registered " +
+        [TestMethod(DisplayName = "Verify that the SetSwitchCase plugin is correctly registered " +
             "and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<SetSwitchCase>();
         }
 
-        [TestMethod(displayName: "Verify that the SetSwitchCase plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the SetSwitchCase plugin complies with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<SetSwitchCase>();
         }
 
-        [TestMethod(displayName: "Verify that the SetSwitchCase plugin evaluates conditions " +
+        [TestMethod(DisplayName = "Verify that the SetSwitchCase plugin evaluates conditions " +
             "correctly in positive scenarios.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonSwitchCaseNoElement, "SwitchRule", "SwitchRule")]

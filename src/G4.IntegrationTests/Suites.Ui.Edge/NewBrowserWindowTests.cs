@@ -23,7 +23,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class NewBrowserWindowTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewBrowserWindow plugin correctly opens a new browser window " +
             "with the specified URL, amount, and target, and ensures that the number of " +
             "windows equals the expected value.")]
@@ -62,7 +62,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the NewBrowserWindow plugin correctly opens a new browser window " +
             "with the specified URL, and ensures that the number of opened windows equals " +
             "2, and that switching to the second window and verifying its URL matches the " +

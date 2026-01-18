@@ -32,7 +32,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class GetParameterTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the Get-Parameter plugin correctly registers a parameter with " +
             "an expected value and scope, sends this value to a designated element, and " +
             "asserts its presence.")]
@@ -74,7 +74,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the Get-Parameter plugin correctly registers a parameter with " +
             "an expected value (decoded from Base64) and scope, sends this value to a " +
             "designated element without decoding, and asserts its presence as a Base64 " +
@@ -107,7 +107,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the Get-Parameter plugin correctly registers a parameter with " +
             "an expected value, application scope, and specific environment, sends this " +
             "value to a designated element, and asserts its presence.")]

@@ -20,14 +20,14 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class InvokeWhileLoopTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the InvokeWhileLoop plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin complies with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<InvokeWhileLoop>();
         }
 
-        [TestMethod(displayName: "Verify that the InvokeWhileLoop plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
@@ -36,7 +36,7 @@ namespace G4.UnitTests.Plugins.Common
 
         // This test may produce inconsistent results due to its reliance on random object generation.
         // Running it in a loop helps mitigate this inconsistency.
-        [TestMethod(displayName: "Verify that the InvokeWhileLoop plugin performs correctly " +
+        [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin performs correctly " +
             "within the given parameters, despite potential inconsistencies due to random object generation.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonInvokeWhileLoop, "Match", "Negative", "ElementText", ".//random-p")]
@@ -87,7 +87,7 @@ namespace G4.UnitTests.Plugins.Common
             }
         }
 
-        [TestMethod(displayName: "Verify that the InvokeWhileLoop plugin respects the timeout " +
+        [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin respects the timeout " +
             "settings and the runtime exceeds the specified duration.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonInvokeWhileLoopWithTimeout, "NotMatch", "Negative", "ElementText", ".//positive", "5000")]
@@ -116,12 +116,12 @@ namespace G4.UnitTests.Plugins.Common
             var session = Invoke([ruleModel]).Response.First().Value.Sessions.First().Value;
 
             // Assert that the runtime of the while loop exceeds the specified timeout duration.
-            Assert.IsTrue(session.PerformancePoint.RunTime > 5 * TimeSpan.TicksPerSecond);
+            Assert.IsGreaterThan(5 * TimeSpan.TicksPerSecond, session.PerformancePoint.RunTime);
         }
 
         // This test may produce inconsistent results due to its reliance on random object generation.
         // Running it in a loop helps mitigate this inconsistency.
-        [TestMethod(displayName: "Verify that the InvokeWhileLoop plugin performs triple " +
+        [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin performs triple " +
             "nested loops correctly in a positive scenario.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonInvokeWhileTripleLoop, "Match", "Negative", "ElementText", ".//random-p")]
@@ -174,7 +174,7 @@ namespace G4.UnitTests.Plugins.Common
 
         // This test may produce inconsistent results due to its reliance on random object generation.
         // Running it in a loop helps mitigate this inconsistency.
-        [TestMethod(displayName: "Verify that the InvokeWhileLoop plugin performs nested " +
+        [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin performs nested " +
             "loops correctly in a positive scenario.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonInvokeWhileLoopWithNestedLoop, "Match", "Negative", "ElementText", ".//random-p")]

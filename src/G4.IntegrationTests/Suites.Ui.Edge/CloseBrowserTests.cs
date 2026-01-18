@@ -24,7 +24,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class CloseBrowserTests : TestBase
     {
-        [TestMethod(displayName: "Verify the closing of the browser window using the 'CloseBrowser' plugin " +
+        [TestMethod(DisplayName = "Verify the closing of the browser window using the 'CloseBrowser' plugin " +
             "after maximizing the browser window. Additionally, confirm that the element with the ID 'ClickButtonOutcome' " +
             "does not exist using CSS selector.")]
         #region *** Criteria ***

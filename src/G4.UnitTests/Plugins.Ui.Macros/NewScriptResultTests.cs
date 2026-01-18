@@ -13,7 +13,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
     [TestCategory("UnitTest")]
     public class NewScriptResultTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the NewScriptResult macro plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the NewScriptResult macro plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
@@ -21,7 +21,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertManifest<NewScriptResult>(pluginName: "New-ScriptResult");
         }
 
-        [TestMethod(displayName: "Verify that the NewScriptResult macro plugin can be " +
+        [TestMethod(DisplayName = "Verify that the NewScriptResult macro plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {
@@ -29,7 +29,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             AssertPlugin<NewScriptResult>();
         }
 
-        [TestMethod(displayName: "Verify that the NewScriptResult macro plugin handles " +
+        [TestMethod(DisplayName = "Verify that the NewScriptResult macro plugin handles " +
             "exceptions during script execution.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Src:exception --Arg:5 --Arg:Foo Bar}}""}")]
@@ -46,7 +46,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             Assert.IsTrue(actual.Exceptions.Any());
         }
 
-        [TestMethod(displayName: "Verify that the NewScriptResult macro plugin executes " +
+        [TestMethod(DisplayName = "Verify that the NewScriptResult macro plugin executes " +
             "scripts with different arguments correctly.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Src:readyState --Arg:5 --Arg:Foo Bar}}""}")]

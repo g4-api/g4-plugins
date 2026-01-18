@@ -31,7 +31,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class GetAlertTextTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the Get-AlertText plugin correctly interacts with alert dialogs on " +
             "webpages and handles alert text.")]
         #region *** Criteria ***
@@ -61,7 +61,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need " +
             "to verify that the Get-AlertText plugin correctly interacts with alert dialogs on " +
             "webpages, handles alert text with pattern matching, and extracts the exact text.")]
         #region *** Criteria ***

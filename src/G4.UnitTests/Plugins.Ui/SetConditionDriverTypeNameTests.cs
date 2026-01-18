@@ -23,7 +23,7 @@ namespace G4.UnitTests.Plugins.Ui
         // The driver type that is not the simulator driver for the negative test
         private const string Negative = "G4.WebDriver.Simulator.ChromeDriver";
 
-        [TestMethod(displayName: "Verify that the DriverTypeName condition in SetCondition plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the DriverTypeName condition in SetCondition plugin correctly evaluates " +
             "negative conditions.")]
         #region *** Data Set ***
         // Equal
@@ -59,10 +59,10 @@ namespace G4.UnitTests.Plugins.Ui
             var environment = responseModel.GetEnvironment();
 
             // Assert that no session parameters were set.
-            Assert.IsTrue(!environment.SessionParameters.Any());
+            Assert.IsFalse(environment.SessionParameters.Any());
         }
 
-        [TestMethod(displayName: "Verify that the DriverTypeName condition in SetCondition plugin correctly evaluates " +
+        [TestMethod(DisplayName = "Verify that the DriverTypeName condition in SetCondition plugin correctly evaluates " +
             "various conditions.")]
         #region *** Data Set ***
         // Equal
@@ -102,14 +102,14 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.AreEqual(expected: "Foo Bar", actual, ignoreCase: true);
         }
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin manifest complies " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<SetCondition>();
         }
 
-        [TestMethod(displayName: "Verify that the SetCondition plugin can be " +
+        [TestMethod(DisplayName = "Verify that the SetCondition plugin can be " +
             "successfully created.")]
         public override void NewPluginTest()
         {

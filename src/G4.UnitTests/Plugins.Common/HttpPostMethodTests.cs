@@ -15,21 +15,21 @@ namespace G4.UnitTests.Plugins.Common
     [TestCategory("UnitTest")]
     public class HttpPostMethodTests : TestBase
     {
-        [TestMethod(displayName: "Verify that the HttpPostMethod plugin named 'Post' " +
+        [TestMethod(DisplayName = "Verify that the HttpPostMethod plugin named 'Post' " +
             "complies with the manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<HttpPostMethod>(pluginName: "Post");
         }
 
-        [TestMethod(displayName: "Verify that the HttpPostMethod plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the HttpPostMethod plugin is correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<HttpPostMethod>();
         }
 
-        [TestMethod(displayName: "Verify that the HTTP POST request with authorization returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP POST request with authorization returns " +
             "a status code of 200 and the response contains the custom headers.")]
         public void PostRequestWithAuthorizationPositiveTest()
         {
@@ -59,7 +59,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: "username:password", actual: response.ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP POST request with JSON body returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP POST request with JSON body returns " +
             "a status code of 200 and the response contains the expected confirmation message.")]
         public void PostRequestWithJsonBodyTest()
         {
@@ -82,10 +82,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Booking confirmed for Luxury Hotel, Suite"));
+            Assert.Contains("Booking confirmed for Luxury Hotel, Suite", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP POST request with text body and different " +
+        [TestMethod(DisplayName = "Verify that the HTTP POST request with text body and different " +
             "Content-Types returns the expected status code.")]
         #region *** Data Set ***
         [DataRow("application/json", 415)]
@@ -112,7 +112,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expectedStatusCode, actualStatusCode);
         }
 
-        [TestMethod(displayName: "Verify that the HTTP POST request with text body returns a status " +
+        [TestMethod(DisplayName = "Verify that the HTTP POST request with text body returns a status " +
             "code of 200 and the response contains the expected confirmation message.")]
         public void PostRequestWithTextBodyTest()
         {
@@ -135,10 +135,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Booking confirmed for Luxury Hotel, Suite"));
+            Assert.Contains("Booking confirmed for Luxury Hotel, Suite", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP POST request with text body and ASCII " +
+        [TestMethod(DisplayName = "Verify that the HTTP POST request with text body and ASCII " +
             "encoding returns a status code of 200 and the response contains the expected confirmation message.")]
         public void PostRequestWithTextBodyAndEncodingTest()
         {
@@ -162,10 +162,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Booking confirmed for Luxury Hotel, Suite"));
+            Assert.Contains("Booking confirmed for Luxury Hotel, Suite", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP POST request with URL-encoded body " +
+        [TestMethod(DisplayName = "Verify that the HTTP POST request with URL-encoded body " +
             "returns a status code of 200 and the response contains the expected confirmation message.")]
         public void PostRequestWithUrlEncodedBodyTest()
         {
@@ -190,10 +190,10 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the response contains the confirmation message for the hotel booking
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Booking confirmed for Luxury Hotel, Suite"));
+            Assert.Contains("Booking confirmed for Luxury Hotel, Suite", $"{response}".ConvertFromBase64());
         }
 
-        [TestMethod(displayName: "Verify that the HTTP POST request with XML body returns " +
+        [TestMethod(DisplayName = "Verify that the HTTP POST request with XML body returns " +
             "a status code of 200 and the response contains the expected confirmation message.")]
         public void PostRequestWithXmlBodyTest()
         {
@@ -216,7 +216,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected: 200, actual: statusCode);
 
             // Assert that the decoded response contains the expected confirmation message
-            Assert.IsTrue($"{response}".ConvertFromBase64().Contains("Booking confirmed for Luxury Hotel, Suite"));
+            Assert.Contains("Booking confirmed for Luxury Hotel, Suite", $"{response}".ConvertFromBase64());
         }
     }
 }

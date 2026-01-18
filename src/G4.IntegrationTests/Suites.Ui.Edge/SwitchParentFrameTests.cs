@@ -21,7 +21,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SwitchParentFrameTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SwitchParentFrame plugin, when invoked, navigates to the highest frame, " +
             "ensuring accurate navigation within nested iframes during UI automation.")]
         #region *** Criteria ***

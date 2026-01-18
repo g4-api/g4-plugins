@@ -30,7 +30,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class InvokeForLoopTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeForLoop plugin correctly executes a series of actions " +
             "a specified number of times.")]
         #region *** Criteria ***
@@ -51,7 +51,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeForLoop plugin correctly executes a series of actions " +
             "a specified number of times in nested loops.")]
         #region *** Criteria ***

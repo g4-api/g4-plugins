@@ -22,7 +22,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
     #endregion
     public class SetWindowStateTests : TestBase
     {
-        [TestMethod(displayName: "As an automation engineer utilizing the G4™ platform, I need to " +
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to " +
             "verify that the SetWindowState plugin, when invoked, successfully toggles the browser " +
             "window to full-screen mode, ensuring an immersive viewing experience during UI testing " +
             "and automation workflows.")]
@@ -44,7 +44,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the SetWindowState plugin correctly maximizes the browser " +
             "window and triggers the corresponding event on the specified element.")]
         #region *** Criteria ***
@@ -65,7 +65,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0002>(testOptions);
         }
 
-        [TestMethod(displayName: "As an automation engineer using the G4™ platform, I need " +
+        [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the SetWindowState plugin correctly minimizes the browser " +
             "window and triggers the corresponding event on the specified element.")]
         #region *** Criteria ***
