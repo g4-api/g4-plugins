@@ -1,0 +1,324 @@
+﻿{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataExtraction"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadJson.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ReadJson.cs"
+			},
+			"rag": {
+				"description": "The ReadJson plugin reliably extracts targeted data from JSON sources inside automation workflows. It enforces strict JSON parsing, supports dynamic JSONPath selection and optional regular expression filtering, normalizes single or multiple matches, and encodes results to Base64. This preserves workflow reliability while enabling flexible, reusable data extraction.",
+				"qa": [
+					{
+						"question": "What is the ReadJson plugin?",
+						"answer": "ReadJson is an action plugin that reads JSON from a file path or inline content, extracts selected values using JSONPath, optionally filters them with a regular expression, and outputs the result as a Base64-encoded string."
+					},
+					{
+						"question": "What problem does ReadJson solve in automation workflows?",
+						"answer": "It removes the need for custom code when extracting structured values from JSON, making workflows easier to maintain, more reliable, and simpler to reuse."
+					},
+					{
+						"question": "What input sources does ReadJson support?",
+						"answer": "The plugin accepts either a file path to a JSON file or raw inline JSON text provided through the Argument property."
+					},
+					{
+						"question": "How does the OnElement property work?",
+						"answer": "OnElement defines a JSONPath expression that selects which parts of the JSON structure should be extracted for further processing."
+					},
+					{
+						"question": "What happens if the JSONPath expression matches multiple values?",
+						"answer": "All matched values are serialized into a JSON array before any further filtering or encoding is applied."
+					},
+					{
+						"question": "What happens if the JSONPath expression matches a single value?",
+						"answer": "Only the matched value is serialized as JSON instead of wrapping it in an array."
+					},
+					{
+						"question": "What is the purpose of the RegularExpression property?",
+						"answer": "RegularExpression optionally filters the serialized JSON output to isolate a specific portion of the extracted content before encoding."
+					},
+					{
+						"question": "Is the RegularExpression property mandatory?",
+						"answer": "No. If it is omitted or empty, the serialized JSON result is encoded directly without additional filtering."
+					},
+					{
+						"question": "Why does ReadJson encode results to Base64?",
+						"answer": "Base64 encoding ensures the extracted value can be safely stored, transported, and reused without formatting or character issues."
+					},
+					{
+						"question": "Where is the extracted result stored?",
+						"answer": "The result is saved into the session parameter named ReadJsonResult for use by downstream plugins."
+					},
+					{
+						"question": "What output does the plugin expose directly in its response?",
+						"answer": "The plugin exposes the extracted Base64-encoded value through the JsonResult field in the response entity."
+					},
+					{
+						"question": "What are best practices when using ReadJson?",
+						"answer": "Use precise JSONPath expressions, validate JSON input early, apply a regular expression only when necessary, and reference ReadJsonResult consistently in later steps."
+					},
+					{
+						"question": "What manifest metadata defines the ReadJson plugin?",
+						"answer": "ReadJson has the key ReadJson, manifestVersion 4, pluginType Action, category DataExtraction, and supports the Any platform."
+					},
+					{
+						"question": "Who is the author of the ReadJson plugin?",
+						"answer": "The plugin is authored by Roei Sabag."
+					},
+					{
+						"question": "Where can I find the source code for ReadJson?",
+						"answer": "The source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ReadJson.cs."
+					},
+					{
+						"question": "Where can I find the official documentation for ReadJson?",
+						"answer": "The official documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadJson.md."
+					},
+					{
+						"question": "How does ReadJson handle missing matches or edge cases?",
+						"answer": "If no JSONPath tokens or regex matches are found, the plugin returns an empty result while keeping the workflow execution stable."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "file-import",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The ReadJson plugin extracts specific values from JSON data in a simple and reliable way.",
+		"It can read JSON either from a file path or directly from inline content.",
+		"The plugin helps automation workflows reuse structured data without custom code.",
+		"It is useful when JSON responses need to be filtered, transformed, or passed to later steps.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                        | Description                                                                      |",
+		"|--------------------------------|----------------------------------------------------------------------------------|",
+		"| File or Inline JSON Input      | Reads JSON from a file if the path exists, or treats the input as raw JSON text. |",
+		"| JSONPath Selection             | Extracts one or more values using a JSONPath expression.                         |",
+		"| Automatic Result Normalization | Returns a single object or an array, depending on how many values are matched.   |",
+		"| Regular Expression Filtering   | Applies an optional regular expression to the extracted JSON content.            |",
+		"| Base64 Encoding                | Encodes the final extracted value to Base64 for safe transport and storage.      |",
+		"| Session Storage                | Saves the result in session parameters for use by downstream plugins.            |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                   | Description                                                             |",
+		"|----------------------------|-------------------------------------------------------------------------|",
+		"| API Response Parsing       | Extract specific fields from API JSON responses during automation runs. |",
+		"| Configuration Reading      | Read values from JSON configuration files used by bots.                 |",
+		"| Dynamic Decision Making    | Use extracted JSON values to drive conditional workflow logic.          |",
+		"| Data Passing Between Steps | Store JSON-derived values in session parameters for later actions.      |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case              | Description                                                   |",
+		"|-----------------------|---------------------------------------------------------------|",
+		"| Test Data Extraction  | Read expected values from JSON test data files.               |",
+		"| API Validation        | Extract and validate fields from JSON API responses in tests. |",
+		"| Assertion Preparation | Prepare filtered JSON values for comparison and assertions.   |",
+		"| Test Context Sharing  | Share parsed JSON values across multiple test steps.          |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Contains the extracted value produced from the selected JSON content.",
+				"The value represents the portion of JSON matched by the optional regular expression.",
+				"The result is stored as a Base64-encoded string for safe transport and reuse."
+			],
+			"name": "JsonResult",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty JSON document",
+						"Invalid JSONPath expression",
+						"JSONPath returns multiple tokens",
+						"JSONPath returns no tokens",
+						"Regular expression does not match",
+						"Single JSON token result"
+					],
+					"expected_result": "The selected JSON value is extracted, optionally filtered by a regular expression, converted to Base64, and stored in the session parameter ReadJsonResult.",
+					"notes": "The Argument value may be either a file path or inline JSON. The action parses the JSON, applies the JSONPath expression from OnElement, serializes the result, applies the regular expression if provided, and Base64-encodes the matched value.",
+					"use_case": "read_json_single_property",
+					"version": "10.0.0"
+				},
+				"labels": [
+					"Base64Encoding",
+					"DataExtraction",
+					"Json",
+					"JsonPath",
+					"RegularExpression"
+				]
+			},
+			"description": [
+				"### Extract a single JSON property",
+				"",
+				"Provide inline JSON content through the `argument` property.",
+				"Select a single value using a JSONPath expression defined in `OnElement`.",
+				"The selected value is serialized as JSON before further processing.",
+				"A regular expression `\"[^\"]+\"` is applied to the value attribute to extract the inner string.",
+				"The extracted value is converted to Base64 and stored in the session parameter `ReadJsonResult`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{\"name\":\"alpha\",\"count\":3}",
+				"onElement": "$.name",
+				"pluginName": "ReadJson",
+				"regularExpression": "\"[^\"]+\""
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File path does not exist",
+						"JSON array contains multiple objects",
+						"JSONPath selects multiple fields",
+						"Regular expression matches partially",
+						"Whitespace differences in serialized JSON"
+					],
+					"expected_result": "All matched JSONPath values are serialized as a JSON array, processed by the regular expression, converted to Base64, and saved to the session parameter ReadJsonResult.",
+					"notes": "When multiple tokens are returned by the JSONPath expression, the action serializes the full array instead of a single object before applying the regular expression.",
+					"use_case": "read_json_multiple_values",
+					"version": "10.0.0"
+				},
+				"labels": [
+					"Base64Encoding",
+					"CollectionHandling",
+					"DataExtraction",
+					"Json",
+					"JsonPath",
+					"RegularExpression"
+				]
+			},
+			"description": [
+				"### Extract multiple values from a JSON array",
+				"",
+				"Load JSON content from a file path provided in the `argument` property.",
+				"Use a JSONPath expression in `OnElement` to select multiple values.",
+				"The selected tokens are serialized into a JSON array.",
+				"A regular expression `\\d+` is applied to the value attribute to extract numeric content.",
+				"The matched value is converted to Base64 and written to the session parameter `ReadJsonResult`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "data.json",
+				"onElement": "$.items[*].id",
+				"pluginName": "ReadJson",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Missing regularExpression property",
+						"JSONPath matches nested objects",
+						"Large JSON payload",
+						"Special characters in JSON strings"
+					],
+					"expected_result": "The serialized JSON result is converted directly to Base64 when no regular expression is provided and stored in the session parameter ReadJsonResult.",
+					"notes": "If the regularExpression value is empty or omitted, the full serialized JSON output is used as the input for Base64 conversion.",
+					"use_case": "read_json_without_regex",
+					"version": "10.0.0"
+				},
+				"labels": [
+					"Base64Encoding",
+					"DataExtraction",
+					"Json",
+					"JsonPath"
+				]
+			},
+			"description": [
+				"### Extract JSON data without a regular expression",
+				"",
+				"Supply inline JSON using the `argument` property.",
+				"Select a nested object using the JSONPath expression defined in `OnElement`.",
+				"The selected result is serialized as JSON.",
+				"No filtering is applied because no regular expression is provided.",
+				"The serialized JSON is converted to Base64 and saved in the session parameter `ReadJsonResult`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{\"config\":{\"enabled\":true,\"level\":\"high\"}}",
+				"onElement": "$.config",
+				"pluginName": "ReadJson"
+			}
+		}
+	],
+	"key": "ReadJson",
+	"manifestVersion": 4,
+	"OutputParameters": [
+		{
+			"description": [
+				"The session parameter that holds the extracted JSON value.",
+				"The parameter contains the final result produced from the selected JSON content.",
+				"Its value can be referenced by other parameters or expressions in the workflow."
+			],
+			"mandatory": true,
+			"name": "ReadJsonResult",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Provides the JSON input to be read and processed by the plugin.",
+				"The value can be either a file path pointing to a JSON file or raw JSON content provided inline.",
+				"This flexibility allows workflows to read JSON from disk or from dynamically generated data."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Defines the JSONPath expression used to select specific elements from the input JSON.",
+				"The expression controls which parts of the JSON structure are extracted for further processing.",
+				"Using a precise path ensures only the relevant data is read and passed to later steps."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies an optional regular expression applied to the extracted JSON content.",
+				"The expression is used to match and isolate a specific portion of the selected JSON.",
+				"This allows fine-grained filtering before the result is converted and stored."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"The ReadJson plugin reads JSON data from a file path or from inline text and parses it for querying.",
+		"It extracts values using a JSONPath expression and can further filter the result with a regular expression.",
+		"The extracted value is converted to Base64 and stored for reuse in later workflow steps."
+	]
+}
