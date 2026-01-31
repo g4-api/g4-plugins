@@ -9,60 +9,200 @@
 	"categories": [
 		"Operators"
 	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Operators/LowerEqual.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Operators/LowerEqualOperator.cs"
+			},
+			"rag": {
+				"description": "The GreaterOperator plugin enforces numeric comparison checks by evaluating whether one value is strictly greater than another. It supports dynamic LeftHand and RightHand parameters for flexible threshold comparisons and seamlessly integrates into automation workflows. Built to ensure reliable conditional logic, it preserves workflow stability by halting execution on invalid inputs.",
+				"qa": [
+					{
+						"question": "What does the LowerEqualOperator plugin do?",
+						"answer": "It compares two values as numbers and returns true when the left-hand value is less than or equal to the right-hand value."
+					},
+					{
+						"question": "What are the key features of the LowerEqualOperator plugin?",
+						"answer": "It performs a <= numeric comparison, validates both inputs by parsing them to numbers, and returns a boolean result that can be used in workflow conditions."
+					},
+					{
+						"question": "Where is this plugin typically used in an automation workflow?",
+						"answer": "It is used inside conditional logic (for example, within assertion or branching actions) to decide what happens next based on numeric thresholds."
+					},
+					{
+						"question": "What are best practices for using LowerEqualOperator?",
+						"answer": "Pass numeric strings that match the machine’s culture formatting, test boundary cases (equal values, negatives, zero), and validate your inputs when values come from dynamic macros."
+					},
+					{
+						"question": "What is the rule/schema shape for using this comparison?",
+						"answer": "Provide an argument that includes both required parameters: LeftHand and RightHand. The operator evaluates them as numbers and returns true/false."
+					},
+					{
+						"question": "How does LowerEqualOperator handle non-numeric inputs?",
+						"answer": "If either LeftHand or RightHand cannot be parsed into a number at runtime, the operator returns false."
+					},
+					{
+						"question": "What inputs (parameters) does LowerEqualOperator require?",
+						"answer": "It requires two mandatory string parameters: LeftHand (the left side of the comparison) and RightHand (the right side of the comparison)."
+					},
+					{
+						"question": "What is an example of using this comparison directly?",
+						"answer": "Use the LowerEqual action with an argument like {{$--LeftHand:5 --RightHand:10}} to evaluate whether 5 <= 10."
+					},
+					{
+						"question": "What is an example of using this comparison inside an assertion?",
+						"answer": "Use the Assert action with an argument like {{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}} so the assertion passes only when the comparison is true."
+					},
+					{
+						"question": "What edge cases should be tested for LowerEqualOperator?",
+						"answer": "Test equal values, left greater than right, negative numbers, zero values, and non-numeric text in either LeftHand or RightHand."
+					},
+					{
+						"question": "What is the plugin key for this manifest?",
+						"answer": "The plugin key is LowerEqual."
+					},
+					{
+						"question": "What aliases does this plugin provide?",
+						"answer": "It provides the alias: Le."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What category is this plugin listed under?",
+						"answer": "It is listed under the Operators category."
+					},
+					{
+						"question": "What is the plugin type?",
+						"answer": "The pluginType is Operator."
+					},
+					{
+						"question": "What platforms are supported by this plugin?",
+						"answer": "It supports Any platform."
+					},
+					{
+						"question": "What manifest version is this plugin using?",
+						"answer": "It uses manifestVersion 4."
+					},
+					{
+						"question": "What documentation and source repository links are provided for this plugin?",
+						"answer": "No Git repository link or documentation/README link is included in this manifest."
+					},
+					{
+						"question": "What is the error handling behavior for this operator?",
+						"answer": "If parsing fails for either input, it safely returns false instead of throwing, so workflows can continue with predictable behavior."
+					},
+					{
+						"question": "What is the source description of the plugin’s purpose in simple terms?",
+						"answer": "It helps workflows make decisions based on numeric limits by checking if one value is less than or equal to another."
+					}
+				]
+			}
+		}
+	},
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the LowerEqualOperator plugin is to compare two numeric values and determine if the first value is less than or equal to the second value, using a numerical comparison.",
+		"The LowerEqualOperator plugin compares two values and checks whether the first value is less than or equal to the second value.",
+		"It is used to evaluate numeric conditions in automation workflows.",
+		"This helps workflows make decisions based on thresholds, limits, or maximum allowed values.",
 		"",
-		"### Key Features",
+		"### Key Features and Functionality",
 		"",
-		"| Feature              | Description                                                       |",
-		"|----------------------|-------------------------------------------------------------------|",
-		"| Numerical Comparison | Performs a numerical comparison of two values.                    |",
-		"| Integration          | Can be used under condition expressions by other plugins.         |",
+		"| Feature                       | Description                                                                                 |",
+		"|-------------------------------|---------------------------------------------------------------------------------------------|",
+		"| Less-than-or-equal comparison | Compares two numeric values using the less-than-or-equal (<=) operator.                     |",
+		"| Numeric validation            | Ensures both input values can be safely converted to numbers before comparison.             |",
+		"| Boolean evaluation result     | Returns true when the left value is less than or equal to the right value, otherwise false. |",
+		"| Operator integration          | Integrates with the operator framework to return a standard comparison result.              |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage              | Description                                                                            |",
-		"|--------------------|----------------------------------------------------------------------------------------|",
-		"| Numeric Comparison | Validate if one numeric value is less than or equal to another numeric value.          |",
-		"| Conditional Logic  | Use in conditional expressions to control workflow logic based on numeric comparisons. |",
+		"| Use Case              | Description                                                                   |",
+		"|-----------------------|-------------------------------------------------------------------------------|",
+		"| Threshold checks      | Verify that a value does not exceed a defined maximum.                        |",
+		"| Data validation       | Ensure numeric inputs are within allowed limits before continuing a workflow. |",
+		"| Conditional branching | Decide workflow paths based on numeric comparisons.                           |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage              | Description                                                               |",
-		"|--------------------|---------------------------------------------------------------------------|",
-		"| Validation         | Validate output or state by comparing expected and actual numeric values. |",
-		"| Dynamic Conditions | Create dynamic conditions based on numeric comparisons.                   |"
+		"| Use Case          | Description                                                            |",
+		"|-------------------|------------------------------------------------------------------------|",
+		"| Assertion logic   | Validate that actual values are less than or equal to expected values. |",
+		"| Boundary testing  | Check upper boundary conditions in numeric test scenarios.             |",
+		"| Test flow control | Control test execution paths based on comparison outcomes.             |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"both values equal",
+						"left value greater than right value",
+						"negative numeric values",
+						"non-numeric text in LeftHand or RightHand",
+						"zero values"
+					],
+					"expected_result": "The rule evaluates to true when the left-hand value is less than or equal to the right-hand value.",
+					"notes": "A macro produces runtime values that are substituted into the argument text. The LowerEqual action consumes the substituted values and compares them as numbers.",
+					"use_case": "numeric_lower_equal_comparison",
+					"version": "4"
+				},
+				"labels": [
+					"Comparison",
+					"ConditionalLogic",
+					"NumericEvaluation"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `LowerEqual` plugin to compare two numeric values and determine if the first value is less than or equal to the second value.",
+				"### Compare two numeric values using LowerEqual",
 				"",
-				"| Field      | Description                                                                                                                      |",
-				"|------------|----------------------------------------------------------------------------------------------------------------------------------|",
-				"| pluginName | Identifies the specific plugin being utilized, which is `LowerEqual`. This signifies the action of comparing two numeric values. |",
-				"| LeftHand   | Specifies the first numeric value to be compared. For example, `5`.                                                              |",
-				"| RightHand  | Specifies the second numeric value to be compared. For example, `10`.                                                            |"
+				"Compare a left-hand numeric value to a right-hand numeric value.",
+				"The rule evaluates to true only when the left-hand value is less than or equal to the right-hand value.",
+				"A macro produces runtime values that are substituted where the token appears.",
+				"The LowerEqual action consumes the macro output to perform the comparison."
 			],
 			"rule": {
-				"argument": "{{$ --LeftHand:5 --RightHand:10}}",
+				"$type": "Action",
+				"argument": "{{$--LeftHand:5 --RightHand:10}}",
 				"pluginName": "LowerEqual"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"assertion fails when left value is greater",
+						"both values equal",
+						"negative numeric values",
+						"non-numeric text in LeftHand or RightHand",
+						"zero values"
+					],
+					"expected_result": "The assertion passes only when the LowerEqual condition evaluates to true.",
+					"notes": "A macro produces runtime values that are substituted into the argument text. The Assert action consumes the substituted values and evaluates the specified condition plugin.",
+					"use_case": "assert_lower_equal_condition",
+					"version": "4"
+				},
+				"labels": [
+					"Assertion",
+					"Comparison",
+					"ConditionalLogic",
+					"NumericEvaluation"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `LowerEqualOperator` plugin within another plugin, such as `Assert`, to compare two numeric values and determine if the first value is less than or equal to the second value.",
+				"### Assert a LowerEqual condition",
 				"",
-				"| Field     | Description                                                                                                                                |",
-				"|-----------|--------------------------------------------------------------------------------------------------------------------------------------------|",
-				"| Condition | Identifies the specific operator being utilized, which is `LowerEqualOperator`. This signifies the action of comparing two numeric values. |",
-				"| LeftHand  | Specifies the first numeric value to be compared. For example, `5`.                                                                        |",
-				"| RightHand | Specifies the second numeric value to be compared. For example, `10`.                                                                      |"
+				"Evaluate a numeric comparison as part of an assertion.",
+				"The assertion passes only when the left-hand value is less than or equal to the right-hand value.",
+				"A macro produces runtime values that are substituted where the token appears.",
+				"The Assert action consumes the macro output and applies the LowerEqual comparison."
 			],
 			"rule": {
-				"argument": "{{$ --Condition:LowerEqual --LeftHand:5 --RightHand:10}}",
+				"$type": "Action",
+				"argument": "{{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}}",
 				"pluginName": "Assert"
 			}
 		}
@@ -72,30 +212,38 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the first numeric value to be compared in the less than or equal to check."
+				"LeftHand is the value on the left side of the <= comparison.",
+				"The value is treated as text and must successfully parse to a double at runtime.",
+				"Parsing uses the current machine culture, so decimal separators and formatting must match the environment.",
+				"If parsing fails for either side of the comparison, the operator returns false."
 			],
 			"mandatory": true,
 			"name": "LeftHand",
-			"type": "Number"
+			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the second numeric value to be compared in the less than or equal to check."
+				"RightHand is the value on the right side of the <= comparison.",
+				"The value is treated as text and must successfully parse to a double at runtime.",
+				"Parsing uses the current machine culture, so decimal separators and formatting must match the environment.",
+				"If parsing fails for either side of the comparison, the operator returns false."
 			],
 			"mandatory": true,
 			"name": "RightHand",
-			"type": "Number"
+			"type": "String"
 		}
+	],
+	"platforms": [
+		"Any"
 	],
 	"pluginType": "Operator",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `LowerEqual` plugin evaluates whether one numeric value is less than or equal to another numeric value, providing essential functionality for conditional logic in automation workflows and testing scenarios."
+		"The LowerEqualOperator plugin compares two values and checks whether the left value is less than or equal to the right value.",
+		"It converts both inputs to numbers and returns false if either value cannot be parsed.",
+		"This operator is used in conditions and rules to safely evaluate numeric thresholds and comparisons during automation."
 	]
 }
