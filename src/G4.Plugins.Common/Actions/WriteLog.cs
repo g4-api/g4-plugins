@@ -13,8 +13,12 @@ namespace G4.Plugins.Common.Actions
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Log the plugin data's argument using the logger
-            Logger.LogInformation("{Argument}", pluginData.Rule.Argument);
+            // Check if the logger is enabled for the Information level before logging
+            if (Logger.IsEnabled(LogLevel.Information))
+            {
+                // Log the plugin data's argument using the logger
+                Logger.LogInformation("{Argument}", pluginData.Rule.Argument);
+            }
 
             // Return a new plugin response
             return this.NewPluginResponse();
