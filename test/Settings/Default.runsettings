@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
 	<TestRunParameters>
+		<!-- Settings: Google -->
+		<Parameter name="Google.App.ClientId" value="" />
+		<Parameter name="Google.App.ClientSecret" value="" />
+		<Parameter name="Google.App.Domains" value="" />
+		<Parameter name="Google.App.Name" value="" />
+		<Parameter name="Google.App.RedirectUrl" value="" />
+		<Parameter name="Google.App.RefreshToken" value="" />
+		<Parameter name="Google.Smtp.Password" value="" />
+		<Parameter name="Google.Smtp.Username" value="" />
+
 		<!-- Settings: Selenium Grid -->
 		<Parameter name="Grid.Endpoint" value="" />
 		<Parameter name="BrowserStack.Username" value="" />
@@ -12,8 +22,6 @@
 		
 		<!-- Settings -->
 		<Parameter name="G4.Username" value="" />
-		<Parameter name="Google.Smtp.Password" value="" />
-		<Parameter name="Google.Smtp.Username" value="" />
 		<Parameter name="Integration" value="BrowserStack" />
 		<Parameter name="Integration.ApplicationUnderTest" value="http://localhost:9002/test/static/" />
 		<Parameter name="Integration.Selenium.Version" value ="4.8.0" />
