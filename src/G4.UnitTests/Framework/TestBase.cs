@@ -14,6 +14,7 @@ using G4.WebDriver.Simulator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -36,6 +37,12 @@ namespace G4.UnitTests.Framework
     [DeploymentItem("appsettings.json")]
     public abstract class TestBase
     {
+        /// <summary>
+        /// Gets a thread-safe dictionary to be used as a data
+        /// bag for storing arbitrary key-value pairs during tests.
+        /// </summary>
+        protected static ConcurrentDictionary<string, object> DataBag { get; } = new(StringComparer.OrdinalIgnoreCase);
+
         /// <summary>
         /// A constant for string comparison with a specified comparison type.
         /// </summary>
