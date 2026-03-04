@@ -5,6 +5,8 @@ using G4.Exceptions;
 using G4.Extensions;
 using G4.Models;
 
+using Newtonsoft.Json.Linq;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,11 @@ namespace G4.Plugins.Google.Actions.Abstraction
     /// </summary>
     internal class GooglePlugin(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        /// <summary>
+        /// Represents the ISO 8601 date and time format string with milliseconds and a UTC designator.
+        /// </summary>
+        public const string Iso = "yyyy-MM-ddTHH:mm:ss.fffZ";
+
         /// <summary>
         /// Retrieves all Google Tasks lists for the authenticated user.
         /// </summary>
@@ -70,6 +77,40 @@ namespace G4.Plugins.Google.Actions.Abstraction
 
             // Return the task lists collection as JSON so downstream steps can consume it directly.
             return JsonSerializer.Serialize(itemsOut);
+        }
+
+        /// <summary>
+        /// Finds a Google Tasks list by its title or identifier.
+        /// </summary>
+        /// <param name="token">OAuth Bearer access token used to call the Google Tasks API. Ignored when <paramref name="credentials"/> is provided.</param>
+        /// <param name="credentials">Optional credential record id or name used to obtain a freshaccess token via <c>NewAccessToken</c>.
+        /// </param>
+        /// <param name="idOrName">The task list identifier or title used to locate the desired list.</param>
+        /// <returns>A <see cref="JsonElement"/> representing the matching Google Tasks list.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when no task list matching the specified id or title is found.</exception>
+        public static JsonElement FindTasksList(string token, string credentials, string idOrName)
+        {
+            // Retrieve all task lists as JSON.
+            var json = ExportTasksLists(token, credentials);
+
+            // JSONPath expression that finds a list where the title or id matches the provided value.
+            var jsonPath = $"$..[?(@.title == '{idOrName}' || @.id == '{idOrName}')]";
+
+            // Parse the JSON response and execute the JSONPath query.
+            var jarray = JArray.Parse(json);
+
+            // Select the first matching task list.
+            var tasksListId = jarray.SelectTokens(jsonPath).FirstOrDefault()?.ToString() ?? "{}";
+
+            // If no matching list was found, throw an exception.
+            if (string.IsNullOrEmpty(tasksListId) || tasksListId == "{}")
+            {
+                throw new InvalidOperationException(
+                    message: $"No matching task list found for title or ID: '{idOrName}'.");
+            }
+
+            // Convert the JSON string into a JsonElement for downstream processing.
+            return JsonDocument.Parse(tasksListId).RootElement;
         }
 
         /// <summary>
