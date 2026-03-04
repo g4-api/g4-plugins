@@ -218,5 +218,58 @@ namespace G4.UnitTests.Plugins.Google
             // Assert required outputs exist.
             Assert.IsGreaterThan(lowerBound: 0, list.Length);
         }
+
+        [TestMethod(DisplayName = "Verify that the NewGmailTask plugin creates a " +
+            "new task correctly.")]
+        public void NewTaskTest()
+        {
+            // Plugin name for session output keys.
+            const string pluginName = nameof(NewGmailTask);
+
+            // Resolve the credential record name/id from the test configuration.
+            // This value is injected into the rule so the plugin can obtain
+            // an OAuth access token at runtime.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule JSON and inject the credential reference.
+            // The rule invokes the NewGmailTask plugin with a title, notes,
+            // due date, target task list, and credential reference.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "NewGmailTask",
+                "argument": "{{$ --Title:New Task --Notes:Foo Bar --Due:09/20/2026 --Credentials:$(name) --TasksList:My Tasks}}"
+            }
+            """.Replace("$(name)", name);
+
+            // Execute the rule and obtain the session parameters produced by the plugin.
+            // Plugins store their outputs in the session using the pattern:
+            // <PluginName>:<Property>.
+            var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
+
+            var id = session[$"{pluginName}:Id"]?.ToString();
+            var title = session[$"{pluginName}:Title"]?.ToString();
+            var link = session[$"{pluginName}:SelfLink"]?.ToString();
+            var position = session[$"{pluginName}:Position"]?.ToString();
+            var status = session[$"{pluginName}:Status"]?.ToString();
+
+            // Persist the created task id in the shared test data bag so it can be
+            // reused by cleanup steps or other related tests.
+            DataBag["GmailTaskId"] = id?.ConvertFromBase64() ?? string.Empty;
+
+            // Verify that the plugin returned all required outputs.
+            Assert.IsFalse(condition: string.IsNullOrEmpty(id));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(title));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(link));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(position));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(status));
+
+            // Verify that the title value matches the input.
+            // Plugin outputs are stored as Base64-encoded strings in session parameters.
+            Assert.AreEqual(
+                expected: "New Task",
+                actual: title.ConvertFromBase64() ?? string.Empty);
+        }
     }
 }
