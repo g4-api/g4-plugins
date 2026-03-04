@@ -9,16 +9,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
 using System.IO;
+using System.Text.Json;
 
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace G4.UnitTests.Plugins.Google
 {
     [TestClass]
-    [DoNotParallelize]
     [TestCategory("GmailTasksList")]
     [TestCategory("UnitTest")]
-    public class GmailTasksListTests : TestBase
+    public class GmailTasksListsTests : TestBase
     {
         [ClassInitialize]
         public static void ClassSetup(TestContext context)
@@ -63,20 +63,24 @@ namespace G4.UnitTests.Plugins.Google
             };
         }
 
-        [TestMethod(DisplayName = "Verify that the NewGmailTasksList plugin complies with the " +
+        [TestMethod(DisplayName = "Verify that the GmailTasksList plugins comply with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
             AssertManifest<NewGmailTasksList>();
             AssertManifest<RemoveGmailTasksList>();
+            AssertManifest<UpdateGmailTasksList>();
+            AssertManifest<G4.Plugins.Google.Actions.ExportGmailTasksLists>();
         }
 
-        [TestMethod(DisplayName = "Verify that the NewGmailTasksList plugin is correctly " +
+        [TestMethod(DisplayName = "Verify that the GmailTasksList plugins are correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
             AssertPlugin<NewGmailTasksList>();
             AssertPlugin<RemoveGmailTasksList>();
+            AssertPlugin<UpdateGmailTasksList>();
+            AssertPlugin<G4.Plugins.Google.Actions.ExportGmailTasksLists>();
         }
 
         [TestMethod(DisplayName = "Verify the lifecycle of a Gmail tasks list (Add, Update and Delete).")]
@@ -186,6 +190,33 @@ namespace G4.UnitTests.Plugins.Google
             Assert.AreEqual(
                 expected: "TestsListUpdated",
                 actual: title.ConvertFromBase64() ?? string.Empty);
+        }
+
+        [TestMethod(DisplayName = "Verify that the ExportGmailTasksLists plugin exports all " +
+            "tasks lists correctly.")]
+        public void ExportTasksListsTest()
+        {
+            // Resolve the credential record name/id from test settings.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule JSON and inject the credential reference.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "ExportGmailTasksLists",
+                "argument": "{{$ --Credentials:$(name)}}"
+            }
+            """.Replace("$(name)", name);
+
+            // Invoke the action and read the session outputs produced by the plugin.
+            var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
+
+            var result = session["GmailTasksListsResult"]?.ToString().ConvertFromBase64();
+            var list = JsonSerializer.Deserialize<object[]>(result) ?? [];
+
+            // Assert required outputs exist.
+            Assert.IsGreaterThan(lowerBound: 0, list.Length);
         }
     }
 }
