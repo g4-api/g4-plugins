@@ -71,6 +71,9 @@ namespace G4.UnitTests.Plugins.Google
             AssertManifest<RemoveGmailTasksList>();
             AssertManifest<UpdateGmailTasksList>();
             AssertManifest<ExportGmailTasksLists>();
+
+            AssertManifest<NewGmailTask>();
+            AssertManifest<RemoveGmailTask>();
         }
 
         [TestMethod(DisplayName = "Verify that the GmailTasksList plugins are correctly " +
@@ -81,6 +84,9 @@ namespace G4.UnitTests.Plugins.Google
             AssertPlugin<RemoveGmailTasksList>();
             AssertPlugin<UpdateGmailTasksList>();
             AssertPlugin<ExportGmailTasksLists>();
+
+            AssertPlugin<NewGmailTask>();
+            AssertPlugin<RemoveGmailTask>();
         }
 
         [TestMethod(DisplayName = "Verify the lifecycle of a Gmail tasks list (Add, Update and Delete).")]
@@ -228,6 +234,14 @@ namespace G4.UnitTests.Plugins.Google
             Assert.IsGreaterThan(lowerBound: 0, list.GetProperty("items").GetArrayLength());
         }
 
+        [TestMethod(DisplayName = "Verify the lifecycle of a Gmail task (Add, Update and Delete).")]
+        public void GmailTasktLifecycleTest()
+        {
+            NewTaskTest();
+            RemoveTaskTest();
+        }
+
+        [Ignore(message: "Runs as part of the GmailTasktLifecycleTest.")]
         [TestMethod(DisplayName = "Verify that the NewGmailTask plugin creates a " +
             "new task correctly.")]
         public void NewTaskTest()
@@ -248,7 +262,7 @@ namespace G4.UnitTests.Plugins.Google
             {
                 "$type": "Action",
                 "pluginName": "NewGmailTask",
-                "argument": "{{$ --Title:New Task --Notes:Foo Bar --Due:09/20/2026 --Credentials:$(name) --TasksList:My Tasks}}"
+                "argument": "{{$ --Title:New Task --Notes:Foo Bar --Due:09/20/2026 --Credentials:$(name) --TaskList:My Tasks}}"
             }
             """.Replace("$(name)", name);
 
@@ -279,6 +293,37 @@ namespace G4.UnitTests.Plugins.Google
             Assert.AreEqual(
                 expected: "New Task",
                 actual: title.ConvertFromBase64() ?? string.Empty);
+        }
+
+        [Ignore(message: "Runs as part of the GmailTasktLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the RemoveGmailTask plugin deletes an " +
+            "existing task correctly.")]
+        public void RemoveTaskTest()
+        {
+            // Resolve the credential record name/id from the test configuration.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Read the task id produced by the create test (stored in the shared data bag).
+            var id = DataBag["GmailTaskId"]?.ToString() ?? string.Empty;
+
+            // Ensure we have a task id to delete; otherwise the test is not valid.
+            Assert.IsFalse(condition: string.IsNullOrWhiteSpace(id));
+
+            // Build the action rule JSON and inject the credential reference and task id.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "RemoveGmailTask",
+                "argument": "{{$ --Task:$(id) --Credentials:$(name) --TaskList:My Tasks}}"
+            }
+            """.Replace("$(name)", name).Replace("$(id)", id);
+
+            // Invoke the action and ensure no exceptions were produced by the workflow.
+            var exceptions = Invoke(ruleJson).GetExceptions();
+
+            // Assert that the plugin executed without errors.
+            Assert.IsEmpty(exceptions);
         }
     }
 }
