@@ -27,7 +27,7 @@ namespace G4.Plugins.Google.Actions
             var title = pluginData.Parameters.Get(key, defaultValue: defaultTitle);
 
             // Read task fields from plugin parameters.
-            var tasksList = pluginData.Parameters.Get(key: "TaskList", defaultValue: string.Empty);
+            var taskList = pluginData.Parameters.Get(key: "TaskList", defaultValue: string.Empty);
             var notes = pluginData.Parameters.Get(key: "Notes", defaultValue: string.Empty);
             var due = pluginData.Parameters.Get(key: "Due", defaultValue: string.Empty);
 
@@ -44,15 +44,15 @@ namespace G4.Plugins.Google.Actions
                 .Get()
                 .Items
                 .FirstOrDefault(i =>
-                    string.Equals(i.Id, tasksList) ||
-                    string.Equals(i.Title, tasksList, StringComparison.OrdinalIgnoreCase))?
+                    string.Equals(i.Id, taskList) ||
+                    string.Equals(i.Title, taskList, StringComparison.OrdinalIgnoreCase))?
                 .Id;
 
             // Treat missing list id as a hard failure (otherwise the request URI becomes invalid).
             if (string.IsNullOrEmpty(tasksListId))
             {
                 throw new InvalidOperationException(
-                    message: $"No matching task list found for title or ID: '{tasksList}'.");
+                    message: $"No matching task list found for title or ID: '{taskList}'.");
             }
 
             // Parse Due only when provided. Google Tasks accepts RFC3339/ISO timestamps.
