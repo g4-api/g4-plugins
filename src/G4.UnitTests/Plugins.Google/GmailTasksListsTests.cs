@@ -67,20 +67,20 @@ namespace G4.UnitTests.Plugins.Google
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
-            AssertManifest<NewGmailTasksList>();
+            AssertManifest<NewGmailTaskList>();
             AssertManifest<RemoveGmailTasksList>();
             AssertManifest<UpdateGmailTasksList>();
-            AssertManifest<G4.Plugins.Google.Actions.ExportGmailTasksLists>();
+            AssertManifest<ExportGmailTasksLists>();
         }
 
         [TestMethod(DisplayName = "Verify that the GmailTasksList plugins are correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
-            AssertPlugin<NewGmailTasksList>();
+            AssertPlugin<NewGmailTaskList>();
             AssertPlugin<RemoveGmailTasksList>();
             AssertPlugin<UpdateGmailTasksList>();
-            AssertPlugin<G4.Plugins.Google.Actions.ExportGmailTasksLists>();
+            AssertPlugin<ExportGmailTasksLists>();
         }
 
         [TestMethod(DisplayName = "Verify the lifecycle of a Gmail tasks list (Add, Update and Delete).")]
@@ -96,6 +96,9 @@ namespace G4.UnitTests.Plugins.Google
             "new tasks list correctly.")]
         public void NewTasksListTest()
         {
+            // Plugin name for session output keys.
+            const string pluginName = nameof(NewGmailTaskList);
+
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
@@ -104,20 +107,20 @@ namespace G4.UnitTests.Plugins.Google
             """
             {
                 "$type": "Action",
-                "pluginName": "NewGmailTasksList",
+                "pluginName": "NewGmailTaskList",
                 "argument": "{{$ --Title:TestsList --Credentials:$(name)}}"
             }
             """.Replace("$(name)", name);
 
             // Invoke the action and read the session outputs produced by the plugin.
             var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
-            var id = session["GmailTasksListId"]?.ToString();
-            var title = session["GmailTasksListTitle"]?.ToString();
-            var link = session["GmailTasksListLink"]?.ToString();
+            var id = session[$"{pluginName}:Id"]?.ToString();
+            var title = session[$"{pluginName}:Title"]?.ToString();
+            var link = session[$"{pluginName}:SelfLink"]?.ToString();
 
             // Store the created task list id in the test context
             // for potential use in cleanup or other tests.
-            DataBag["GmailTasksListId"] = id?.ConvertFromBase64() ?? string.Empty;
+            DataBag["NewGmailTaskList:Id"] = id?.ConvertFromBase64() ?? string.Empty;
 
             // Assert required outputs exist.
             Assert.IsFalse(condition: string.IsNullOrEmpty(id));
@@ -137,7 +140,7 @@ namespace G4.UnitTests.Plugins.Google
         {
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
-            var id = $"{DataBag["GmailTasksListId"]}";
+            var id = $"{DataBag["NewGmailTaskList:Id"]}";
 
             // Build the action rule JSON and inject the credential reference.
             var ruleJson =
@@ -161,9 +164,12 @@ namespace G4.UnitTests.Plugins.Google
             "tasks list correctly.")]
         public void UpdateTasksListTest()
         {
+            // Plugin name for session output keys.
+            const string pluginName = nameof(UpdateGmailTasksList);
+
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
-            var id = $"{DataBag["GmailTasksListId"]}";
+            var id = $"{DataBag["NewGmailTaskList:Id"]}";
 
             // Build the action rule JSON and inject the credential reference.
             var ruleJson =
@@ -177,9 +183,9 @@ namespace G4.UnitTests.Plugins.Google
 
             // Invoke the action and read the session outputs produced by the plugin.
             var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
-            id = session["GmailTasksListId"]?.ToString();
-            var title = session["GmailTasksListTitle"]?.ToString();
-            var link = session["GmailTasksListLink"]?.ToString();
+            id = session[$"{pluginName}:Id"]?.ToString();
+            var title = session[$"{pluginName}:Title"]?.ToString();
+            var link = session[$"{pluginName}:SelfLink"]?.ToString();
 
             // Assert required outputs exist.
             Assert.IsFalse(condition: string.IsNullOrEmpty(id));
@@ -196,6 +202,9 @@ namespace G4.UnitTests.Plugins.Google
             "tasks lists correctly.")]
         public void ExportTasksListsTest()
         {
+            // Plugin name for session output keys.
+            const string pluginName = nameof(ExportGmailTasksLists);
+
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
@@ -212,11 +221,11 @@ namespace G4.UnitTests.Plugins.Google
             // Invoke the action and read the session outputs produced by the plugin.
             var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
 
-            var result = session["GmailTasksListsResult"]?.ToString().ConvertFromBase64();
-            var list = JsonSerializer.Deserialize<object[]>(result) ?? [];
+            var result = session[$"{pluginName}:Result"]?.ToString().ConvertFromBase64();
+            var list = JsonSerializer.Deserialize<JsonElement>(result);
 
             // Assert required outputs exist.
-            Assert.IsGreaterThan(lowerBound: 0, list.Length);
+            Assert.IsGreaterThan(lowerBound: 0, list.GetProperty("items").GetArrayLength());
         }
 
         [TestMethod(DisplayName = "Verify that the NewGmailTask plugin creates a " +
