@@ -59,10 +59,7 @@ namespace G4.Plugins.Google.Extensions
             public T Send<T>(HttpRequestMessage requestMessage, JsonSerializerOptions jsonOptions)
             {
                 // Send the HTTP request synchronously and ensure the response is disposed.
-                var response = client.Send(requestMessage);
-
-                // Throw an exception for non-success HTTP status codes (4xx/5xx).
-                response.EnsureSuccessStatusCode();
+                using var response = client.ConfirmResponse(requestMessage);
 
                 // Read the response body as a raw JSON string.
                 var responseContent = response
@@ -76,6 +73,24 @@ namespace G4.Plugins.Google.Extensions
                 return JsonSerializer.Deserialize<T>(responseContent, jsonOptions)
                     ?? throw new InvalidOperationException(
                         message: $"Failed to deserialize response into {typeof(T).Name}.");
+            }
+
+            /// <summary>
+            /// Sends an HTTP request and ensures the response indicates success.
+            /// </summary>
+            /// <param name="requestMessage">The prepared HTTP request to send.</param>
+            /// <returns>The <see cref="HttpResponseMessage"/> returned by the server. The caller is responsible for disposing the response.</returns>
+            /// <exception cref="HttpRequestException">Thrown when the server returns a non-success HTTP status code.</exception>
+            public HttpResponseMessage ConfirmResponse(HttpRequestMessage requestMessage)
+            {
+                // Send the HTTP request using the configured HTTP client.
+                var response = client.Send(requestMessage);
+
+                // Throw an exception for non-success HTTP status codes (4xx/5xx).
+                response.EnsureSuccessStatusCode();
+
+                // Return the response so the caller can read the content.
+                return response;
             }
         }
 
