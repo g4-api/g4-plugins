@@ -19,12 +19,9 @@ namespace G4.Plugins.Google.Actions
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Read either a raw access token or a credential record reference.
-            var token = pluginData.Parameters.Get(key: "Token", defaultValue: string.Empty);
-            var credentials = pluginData.Parameters.Get(key: "Credentials", defaultValue: string.Empty);
-
-            // If both a raw token and credentials reference are provided, prioritize the credentials reference.
-            credentials = string.IsNullOrEmpty(credentials) ? token : credentials;
+            // If both a raw token and credentials reference are
+            // provided, prioritize the credentials reference.
+            var credentials = pluginData.ResolveCredentials();
 
             // Initialize the Google API adapter with the resolved credentials.
             var adapter = new GoogleAdapter(credentials);
@@ -32,7 +29,7 @@ namespace G4.Plugins.Google.Actions
             // Get the lists from Google using the plugin's static method,
             // which handles both token and credentials scenarios.
             var response = adapter.TaskLists.Get();
-            var value = JsonSerializer.Serialize(response, ClientBase.JsonOptions);
+            var value = JsonSerializer.Serialize(response, PluginDataModel.JsonOptions);
 
             // Persist the exported lists in session parameters (Base64-encoded for safe transport/storage).
             this.AddSessionParameter(@namespace: NameReference, name: "Result", value);

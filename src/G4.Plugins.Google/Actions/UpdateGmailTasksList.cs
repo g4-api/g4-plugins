@@ -27,12 +27,9 @@ namespace G4.Plugins.Google.Actions
             var defaultTitle = $"Updated Tasks List {DateTime.UtcNow:yyyyMMddHHmmssfff}";
             var title = pluginData.Parameters.Get(key, defaultValue: defaultTitle);
 
-            // Read either a raw access token or a credential record reference.
-            var token = pluginData.Parameters.Get(key: "Token", defaultValue: string.Empty);
-            var credentials = pluginData.Parameters.Get(key: "Credentials", defaultValue: string.Empty);
-
-            // If both a raw token and credentials reference are provided, prioritize the credentials reference.
-            credentials = string.IsNullOrEmpty(credentials) ? token : credentials;
+            // If both a raw token and credentials reference are
+            // provided, prioritize the credentials reference.
+            var credentials = pluginData.ResolveCredentials();
 
             // Initialize the Google API adapter with the resolved credentials.
             var adapter = new GoogleAdapter(credentials);
