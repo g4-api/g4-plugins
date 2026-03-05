@@ -1,4 +1,5 @@
 ﻿using G4.Extensions;
+using G4.Models;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -19,11 +21,14 @@ namespace G4.Plugins.Google.Extensions
         // or serializing payloads for Google APIs. 
         private static readonly JsonSerializerOptions s_jsonOptions = new()
         {
+            // Do not include properties with null values in serialized JSON.
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+
             // Convert C# property names (PascalCase) to camelCase for JSON.
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
 
-            // Do not include properties with null values in serialized JSON.
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            // Use relaxed escaping to allow special characters in JSON without being escaped.
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
 
         extension(HttpClient client)
@@ -92,6 +97,31 @@ namespace G4.Plugins.Google.Extensions
 
                 // Store the value in the workflow session scope.
                 plugin.Invoker.Context.SessionParameters[name] = value;
+            }
+        }
+
+        extension(PluginDataModel)
+        {
+            /// <summary>
+            /// Gets the default JSON serializer options used for all Google API interactions within the plugin.
+            /// </summary>
+            public static JsonSerializerOptions JsonOptions => s_jsonOptions;
+        }
+
+        extension(PluginDataModel pluginData)
+        {
+            /// <summary>
+            /// Resolves the credential source used for authentication.
+            /// </summary>
+            /// <returns>A credential reference or raw OAuth access token depending on the provided parameters.</returns>
+            public string ResolveCredentials()
+            {
+                // Read either a raw access token or a credential record reference.
+                var token = pluginData.Parameters.Get(key: "Token", defaultValue: string.Empty);
+                var credentials = pluginData.Parameters.Get(key: "Credentials", defaultValue: string.Empty);
+
+                // If credentials are provided, use them; otherwise fall back to the raw token.
+                return string.IsNullOrEmpty(credentials) ? token : credentials;
             }
         }
 
