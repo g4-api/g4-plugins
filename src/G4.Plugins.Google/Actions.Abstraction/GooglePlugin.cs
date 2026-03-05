@@ -26,6 +26,56 @@ namespace G4.Plugins.Google.Actions.Abstraction
         /// </summary>
         public const string Iso = "yyyy-MM-ddTHH:mm:ss.fffZ";
 
+        public static string ExportTasks(string token, string credentials, string tasksList)
+        {
+            // If credentials were provided, exchange them for a fresh access token.
+            if (!string.IsNullOrEmpty(credentials))
+            {
+                token = NewAccessToken(idOrName: credentials).AccessToken;
+            }
+
+            var tasksListId = FindTasksList(token, credentials, tasksList)
+                .GetProperty("id")
+                .GetString();
+
+            // Google Tasks endpoint that returns all task lists for the authenticated user.
+            var requestUri = new Uri($"https://tasks.googleapis.com/tasks/v1/users/@me/lists/{tasksListId}/tasks");
+
+            // Create HTTP GET request with OAuth Bearer authentication.
+            using var requestMessage = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            requestMessage.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            // Execute the request synchronously (plugin execution model is synchronous).
+            using var response = HttpClient
+                .SendAsync(requestMessage)
+                .GetAwaiter()
+                .GetResult();
+
+            // Throw if the API returned a non-success status code.
+            response.EnsureSuccessStatusCode();
+
+            // Read the JSON response body.
+            var responseContent = response.Content
+                .ReadAsStringAsync()
+                .GetAwaiter()
+                .GetResult();
+
+            // Parse the response JSON to validate presence of required
+            // properties and to extract the "items" array.
+            using var responseJson = JsonDocument.Parse(responseContent);
+
+            // Validate that the response contains the expected "items" property.
+            if (!responseJson.RootElement.TryGetProperty("items", out var itemsOut))
+            {
+                throw new MissingMandatoryPropertyException(
+                    message: "Google Tasks API response is missing required property: 'items'.");
+            }
+
+            // Return the task lists collection as JSON so downstream steps can consume it directly.
+            return JsonSerializer.Serialize(itemsOut);
+        }
+
         /// <summary>
         /// Retrieves all Google Tasks lists for the authenticated user.
         /// </summary>
