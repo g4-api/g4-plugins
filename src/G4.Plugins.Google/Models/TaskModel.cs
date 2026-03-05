@@ -27,10 +27,9 @@ namespace G4.Plugins.Google.Models
         public bool? Deleted { get; set; }
 
         /// <summary>
-        /// Scheduled date for the task (RFC 3339). Optional.
-        /// Note: only date information is recorded; time is discarded when setting this field.
+        /// Scheduled date for the task (ISO 8601). Optional.
         /// </summary>
-        public DateTimeOffset? Due { get; set; }
+        public string Due { get; set; }
 
         /// <summary>
         /// ETag of the resource.
@@ -89,9 +88,9 @@ namespace G4.Plugins.Google.Models
         public string Title { get; set; }
 
         /// <summary>
-        /// Output only. Last modification time (RFC 3339).
+        /// Output only. Last modification time (ISO 8601).
         /// </summary>
-        public DateTimeOffset? Updated { get; set; }
+        public string Updated { get; set; }
 
         /// <summary>
         /// Output only. Absolute link to the task in the Google Tasks Web UI.
