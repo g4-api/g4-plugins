@@ -7,7 +7,6 @@ using G4.Plugins.Google.Models;
 
 using System;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace G4.Plugins.Google.Clients
 {
@@ -17,9 +16,9 @@ namespace G4.Plugins.Google.Clients
         /// Creates a new task in the specified Google Tasks list.
         /// </summary>
         /// <param name="taskList">The identifier of the task list where the task will be created.</param>
-        /// <param name="requestBody">A <see cref="Task"/> containing the task fields to create.</param>
+        /// <param name="requestBody">A <see cref="TaskModel"/> containing the task fields to create.</param>
         /// <returns>A <see cref="TaskModel"/> representing the task returned by the Google Tasks API.</returns>
-        public TaskModel Add(string taskList, Task requestBody)
+        public TaskModel Add(string taskList, TaskModel requestBody)
         {
             return Add(taskList, requestBody, options: default);
         }
@@ -28,10 +27,10 @@ namespace G4.Plugins.Google.Clients
         /// Creates a new task in the specified Google Tasks list with optional query parameters.
         /// </summary>
         /// <param name="taskList">The identifier of the task list where the task will be created.</param>
-        /// <param name="requestBody">A <see cref="Task"/> containing the task fields to create.</param>
+        /// <param name="requestBody">A <see cref="TaskModel"/> containing the task fields to create.</param>
         /// <param name="options">Optional query parameters controlling the insert operation (for example destination position or parent task).</param>
         /// <returns>A <see cref="TaskModel"/> representing the created task returned by the Google Tasks API.</returns>
-        public TaskModel Add(string taskList, Task requestBody, InsertTaskQueryModel options)
+        public TaskModel Add(string taskList, TaskModel requestBody, InsertTaskQueryModel options)
         {
             // Extract the OAuth access token used to authorize the request.
             var token = Credentials.AccessToken;
