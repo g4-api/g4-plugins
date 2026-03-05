@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -36,11 +37,14 @@ namespace G4.Plugins.Google.Clients
         /// </summary>
         public static readonly JsonSerializerOptions JsonOptions = new()
         {
-            // Convert C# property names (PascalCase) to camelCase for JSON.
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-
             // Do not include properties with null values in serialized JSON.
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+
+            // Use relaxed escaping to allow special characters in JSON without being escaped.
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+
+            // Convert C# property names (PascalCase) to camelCase for JSON.
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
         /// <summary>
