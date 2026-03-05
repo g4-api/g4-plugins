@@ -107,7 +107,7 @@ namespace G4.Plugins.Google.Clients
         /// </summary>
         /// <param name="taskList">Task list identifier.</param>
         /// <returns>If successful, the response body is empty.</returns>
-        public JsonElement Remove(string taskList)
+        public HttpResponseMessage Remove(string taskList)
         {
             // Extract the access token from the credentials for authorization.
             var token = Credentials.AccessToken;
@@ -118,8 +118,9 @@ namespace G4.Plugins.Google.Clients
             // Create the HTTP request message with the appropriate method, URI, and headers.
             var requestMessage = NewRequest(HttpMethod.Delete, requestUri, token);
 
-            // Return the deserialized response content as a JsonElement instance.
-            return HttpClient.Send<JsonElement>(requestMessage);
+            // Send the request and return the raw HTTP response message
+            // for successful request (204 No Content).
+            return HttpClient.ConfirmResponse(requestMessage);
         }
 
         /// <summary>
