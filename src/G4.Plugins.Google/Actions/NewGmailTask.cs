@@ -1,15 +1,12 @@
 ﻿using G4.Attributes;
-using G4.Exceptions;
 using G4.Extensions;
 using G4.Models;
 using G4.Plugins.Google.Actions.Abstraction;
+using G4.Plugins.Google.Clients;
+using G4.Plugins.Google.Extensions;
 
 using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Text;
-using System.Text.Json;
+using System.Linq;
 
 namespace G4.Plugins.Google.Actions
 {
@@ -24,44 +21,32 @@ namespace G4.Plugins.Google.Actions
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Adds a session parameter with Base64 encoding and namespacing.
-            void AddSessionParameter(string name, string value)
-            {
-                // Namespace the session keys with the plugin name reference to avoid collisions.
-                name = $"{NameReference}:{name}";
-
-                // Store values as Base64 to keep session transport predictable and safe for JSON/escaping.
-                value = value?.ConvertToBase64() ?? string.Empty;
-
-                // Persist into the workflow session scope.
-                Invoker.Context.SessionParameters[name] = value;
-            }
-
             // Resolve Title: use provided value or fall back to a timestamped default for traceability.
             var key = "Title";
             var defaultTitle = $"New Task {DateTime.UtcNow.ToString(GooglePlugin.Iso)}";
             var title = pluginData.Parameters.Get(key, defaultValue: defaultTitle);
 
-            // Read task fields.
+            // Read task fields from plugin parameters.
             var tasksList = pluginData.Parameters.Get(key: "TasksList", defaultValue: string.Empty);
             var notes = pluginData.Parameters.Get(key: "Notes", defaultValue: string.Empty);
             var due = pluginData.Parameters.Get(key: "Due", defaultValue: string.Empty);
 
-            // Read either a raw access token or a credential record reference.
-            var token = pluginData.Parameters.Get(key: "token", defaultValue: string.Empty);
-            var credentials = pluginData.Parameters.Get(key: "credentials", defaultValue: string.Empty);
+            // Resolve either a credential reference or raw access token (credentials wins over token).
+            var credentials = pluginData.ResolveCredentials();
 
-            // If credentials were provided, exchange them for a fresh access token.
-            if (!string.IsNullOrEmpty(credentials))
-            {
-                token = GooglePlugin.NewAccessToken(idOrName: credentials).AccessToken;
-            }
+            // Create an adapter authenticated with the resolved credentials/token.
+            var adapter = new GoogleAdapter(credentials);
 
             // Resolve the target list id from either the list title or list id provided by the user.
-            var tasksListId = GooglePlugin
-                .FindTasksList(token, credentials, tasksList)
-                .GetProperty("id")
-                .GetString();
+            // This allows users to pass "My Tasks" or the actual list id interchangeably.
+            var tasksListId = adapter
+                .TaskLists
+                .Get()
+                .Items
+                .FirstOrDefault(i =>
+                    string.Equals(i.Id, tasksList) ||
+                    string.Equals(i.Title, tasksList, StringComparison.OrdinalIgnoreCase))?
+                .Id;
 
             // Treat missing list id as a hard failure (otherwise the request URI becomes invalid).
             if (string.IsNullOrEmpty(tasksListId))
@@ -70,70 +55,30 @@ namespace G4.Plugins.Google.Actions
                     message: $"No matching task list found for title or ID: '{tasksList}'.");
             }
 
-            // Build request JSON payload for creating a task in the list.
-            // Notes: "status" is set to needsAction so the task starts as not completed.
-            var requestBody = new
+            // Parse Due only when provided. Google Tasks accepts RFC3339/ISO timestamps.
+            // If Due is empty, omit it so the API uses its default behavior.
+            string dueIso = null;
+
+            if (!string.IsNullOrWhiteSpace(due))
             {
-                title,
-                notes,
-                // Convert due date to ISO 8601 (UTC, Z-suffix) to match Google Tasks expectations.
-                due = DateTime.Parse(due).ToString(GooglePlugin.Iso),
-                status = "needsAction"
-            };
-
-            // Serialize request body to JSON and prepare HTTP content with appropriate headers.
-            using var stringContent = new StringContent(
-                content: JsonSerializer.Serialize(requestBody),
-                encoding: Encoding.UTF8,
-                mediaType: MediaTypeNames.Application.Json);
-
-            // Google Tasks endpoint for creating a task inside a specific list:
-            // POST https://tasks.googleapis.com/tasks/v1/lists/{tasklist}/tasks
-            var requestUri = new Uri($"https://tasks.googleapis.com/tasks/v1/lists/{tasksListId}/tasks");
-
-            // Construct HTTP request message with JSON content and authorization header.
-            using var requestMessage = new HttpRequestMessage(method: HttpMethod.Post, requestUri)
-            {
-                Content = stringContent
-            };
-
-            // Attach Bearer token for authorization.
-            requestMessage.Headers.Authorization =
-                new AuthenticationHeaderValue(scheme: "Bearer", parameter: token);
-
-            // Send the request (synchronous/blocking by design).
-            using var response = HttpClient.SendAsync(requestMessage).GetAwaiter().GetResult();
-
-            // Throw on non-success (includes 4xx/5xx).
-            response.EnsureSuccessStatusCode();
-
-            // Parse response JSON.
-            var responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            using var responseJson = JsonDocument.Parse(responseContent);
-
-            // Validate presence of required properties in the response.
-            // These are used by downstream workflow steps via session parameters.
-            if (!responseJson.RootElement.TryGetProperty("id", out var idOut) ||
-                !responseJson.RootElement.TryGetProperty("selfLink", out var selfLinkOut) ||
-                !responseJson.RootElement.TryGetProperty("position", out var positionOut) ||
-                !responseJson.RootElement.TryGetProperty("status", out var statusOut))
-            {
-                throw new MissingMandatoryPropertyException(
-                    message: "Google Tasks API response is missing required properties: 'id' or 'selfLink'.");
+                dueIso = DateTime.Parse(due).ToUniversalTime().ToString(GooglePlugin.Iso);
             }
 
-            // Extract values from JSON properties.
-            var id = idOut.GetString();
-            var selfLink = selfLinkOut.GetString();
-            var position = positionOut.GetString();
-            var status = statusOut.GetString();
+            // Create the task in the resolved list.
+            var task = adapter.Tasks.Add(tasksListId, new()
+            {
+                Title = title,
+                Notes = notes,
+                Due = dueIso,
+                Status = "needsAction"
+            });
 
             // Persist response details in session parameters (Base64-encoded).
-            AddSessionParameter(name: "Id", value: id);
-            AddSessionParameter(name: "Title", value: title);
-            AddSessionParameter(name: "SelfLink", value: selfLink);
-            AddSessionParameter(name: "Position", value: position);
-            AddSessionParameter(name: "Status", value: status);
+            this.AddSessionParameter(@namespace: NameReference, name: "Id", value: task.Id);
+            this.AddSessionParameter(@namespace: NameReference, name: "Title", value: task.Title);
+            this.AddSessionParameter(@namespace: NameReference, name: "SelfLink", value: task.SelfLink);
+            this.AddSessionParameter(@namespace: NameReference, name: "Position", value: task.Position);
+            this.AddSessionParameter(@namespace: NameReference, name: "Status", value: task.Status);
 
             // Indicate successful completion.
             return this.NewPluginResponse();
