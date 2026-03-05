@@ -39,7 +39,7 @@ namespace G4.Plugins.Google.Clients
             var queryParameters = options?.ConvertToQueryParameters();
 
             // Build the endpoint URI for creating a new task.
-            var uriString = $"{TasksBaseUri}/users/@me/lists/{taskList}/tasks{queryParameters}";
+            var uriString = $"{TasksBaseUri}/lists/{taskList}/tasks{queryParameters}";
             var requestUri = new Uri(uriString);
 
             // Create the HTTP POST request with the JSON payload and authorization header.
