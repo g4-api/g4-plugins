@@ -32,8 +32,8 @@ namespace G4.Plugins.Google.Actions
             var title = pluginData.Parameters.Get(key, defaultValue: defaultTitle);
 
             // Read either a raw access token or a credential record reference.
-            var token = pluginData.Parameters.Get(key: "token", defaultValue: string.Empty);
-            var credentials = pluginData.Parameters.Get(key: "credentials", defaultValue: string.Empty);
+            var token = pluginData.Parameters.Get(key: "Token", defaultValue: string.Empty);
+            var credentials = pluginData.Parameters.Get(key: "Credentials", defaultValue: string.Empty);
 
             // If both a raw token and credentials reference are provided, prioritize the credentials reference.
             credentials = string.IsNullOrEmpty(credentials) ? token : credentials;
