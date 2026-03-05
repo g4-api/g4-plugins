@@ -1,15 +1,10 @@
 ﻿using G4.Attributes;
-using G4.Exceptions;
 using G4.Extensions;
 using G4.Models;
-using G4.Plugins.Google.Actions.Abstraction;
+using G4.Plugins.Google.Clients;
+using G4.Plugins.Google.Extensions;
 
 using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Text;
-using System.Text.Json;
 
 namespace G4.Plugins.Google.Actions
 {
@@ -18,6 +13,10 @@ namespace G4.Plugins.Google.Actions
         manifest: $"G4.Plugins.Google.Actions.Manifests.{nameof(UpdateGmailTasksList)}.json")]
     public class UpdateGmailTasksList(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        // Define a constant for the plugin name reference to ensure
+        // consistent namespacing of session parameters.
+        private const string NameReference = nameof(UpdateGmailTasksList);
+
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Read the list id to update.
@@ -32,61 +31,22 @@ namespace G4.Plugins.Google.Actions
             var token = pluginData.Parameters.Get(key: "token", defaultValue: string.Empty);
             var credentials = pluginData.Parameters.Get(key: "credentials", defaultValue: string.Empty);
 
-            // If credentials were provided, exchange them for a fresh access token.
-            if (!string.IsNullOrEmpty(credentials))
+            // If both a raw token and credentials reference are provided, prioritize the credentials reference.
+            credentials = string.IsNullOrEmpty(credentials) ? token : credentials;
+
+            // Initialize the Google API adapter with the resolved credentials.
+            var adapter = new GoogleAdapter(credentials);
+
+            // Update an existing Gmail Task List using the adapter and capture the response.
+            var response = adapter.TaskLists.Update(taskList: id, requestBody: new()
             {
-                token = GooglePlugin.NewAccessToken(idOrName: credentials).AccessToken;
-            }
+                Title = title
+            });
 
-            // Build request JSON payload for "TaskLists: update".
-            var requestBody = new { title };
-
-            // Serialize request body to JSON and prepare HTTP content with appropriate headers.
-            using var stringContent = new StringContent(
-                content: JsonSerializer.Serialize(requestBody),
-                encoding: Encoding.UTF8,
-                mediaType: MediaTypeNames.Application.Json);
-
-            // Define the Google Tasks API endpoint for updating an existing task list.
-            var requestUri = new Uri($"https://tasks.googleapis.com/tasks/v1/users/@me/lists/{id}");
-
-            // Construct HTTP request message with JSON content and authorization header.
-            using var requestMessage = new HttpRequestMessage(method: HttpMethod.Patch, requestUri)
-            {
-                Content = stringContent
-            };
-
-            // Attach Bearer token for authorization.
-            requestMessage.Headers.Authorization =
-                new AuthenticationHeaderValue(scheme: "Bearer", parameter: token);
-
-            // Send the request (synchronous/blocking by design).
-            using var response = HttpClient.SendAsync(requestMessage).GetAwaiter().GetResult();
-
-            // Throw with rich HTTP diagnostics on failure.
-            response.EnsureSuccessStatusCode();
-
-            // Parse response JSON and extract key fields.
-            var responseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            using var responseJson = JsonDocument.Parse(responseContent);
-
-            // Validate presence of required properties in the response.
-            if (!responseJson.RootElement.TryGetProperty("id", out var idOut) ||
-                !responseJson.RootElement.TryGetProperty("selfLink", out var selfLinkOut))
-            {
-                throw new MissingMandatoryPropertyException(
-                    message:
-                        "Google Tasks API response is missing required properties: 'id' or 'selfLink'.");
-            }
-
-            // Extract values from JSON properties.
-            id = idOut.GetString();
-            var selfLink = selfLinkOut.GetString();
-
-            // Persist created list details in session parameters (Base64-encoded for safe transport/storage).
-            Invoker.Context.SessionParameters["GmailTasksListId"] = id?.ConvertToBase64() ?? string.Empty;
-            Invoker.Context.SessionParameters["GmailTasksListTitle"] = title?.ConvertToBase64() ?? string.Empty;
-            Invoker.Context.SessionParameters["GmailTasksListLink"] = selfLink?.ConvertToBase64() ?? string.Empty;
+            // Persist updated list details in session parameters (Base64-encoded for safe transport/storage).
+            this.AddSessionParameter(@namespace: NameReference, name: "Id", value: response.Id);
+            this.AddSessionParameter(@namespace: NameReference, name: "Title", value: response.Title);
+            this.AddSessionParameter(@namespace: NameReference, name: "SelfLink", value: response.SelfLink);
 
             // Indicate successful completion.
             return this.NewPluginResponse();

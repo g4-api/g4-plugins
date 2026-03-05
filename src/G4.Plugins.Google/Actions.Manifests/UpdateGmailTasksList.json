@@ -33,7 +33,7 @@
 					},
 					{
 						"question": "What rule/schema details matter when calling UpdateGmailTasksList?",
-						"answer": "Call it as an Action with pluginName “UpdateGmailTasksList” and an argument macro that supplies --Id and optionally --Title, plus either --Token or --Credentials; Id is mandatory and the plugin writes GmailTasksListId, GmailTasksListTitle, and GmailTasksListLink to Session parameters as Base64 strings."
+						"answer": "Call it as an Action with pluginName “UpdateGmailTasksList” and an argument macro that supplies --Id and optionally --Title, plus either --Token or --Credentials; Id is mandatory and the plugin writes UpdateGmailTasksList:Id, UpdateGmailTasksList:Title, and UpdateGmailTasksList:SelfLink to Session parameters as Base64 strings."
 					},
 					{
 						"question": "What is the manifestVersion for this plugin?",
@@ -229,7 +229,7 @@
 				"Identifies the exact list that was created, updated, or retrieved.",
 				"Enables later actions to reference the same list without calling the API again."
 			],
-			"name": "GmailTasksListId",
+			"name": "UpdateGmailTasksList:Id",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -239,7 +239,7 @@
 				"Reflects either the provided title or the generated default value.",
 				"Allows later steps to confirm or reuse the final list name without recalculating it."
 			],
-			"name": "GmailTasksListTitle",
+			"name": "UpdateGmailTasksList:Title",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -249,12 +249,22 @@
 				"Provides the direct API URL for the specific task list resource.",
 				"Supports traceability and follow-up API calls using the exact resource link."
 			],
-			"name": "GmailTasksListLink",
+			"name": "UpdateGmailTasksList:SelfLink",
 			"scope": "Session",
 			"type": "String"
 		}
 	],
 	"parameters": [
+		{
+			"description": [
+				"Identifies a stored credential record by id or name.",
+				"Triggers a runtime exchange to obtain a fresh OAuth access token before calling the Google Tasks API.",
+				"Simplifies authentication by reusing securely stored credentials instead of passing raw tokens in each request."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
 		{
 			"description": [
 				"Specifies the unique identifier of the Google Tasks list to update.",
@@ -283,16 +293,6 @@
 			],
 			"mandatory": false,
 			"name": "Token",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Identifies a stored credential record by id or name.",
-				"Triggers a runtime exchange to obtain a fresh OAuth access token before calling the Google Tasks API.",
-				"Simplifies authentication by reusing securely stored credentials instead of passing raw tokens in each request."
-			],
-			"mandatory": false,
-			"name": "Credentials",
 			"type": "String|Expression"
 		}
 	],
