@@ -60,7 +60,7 @@ namespace G4.Plugins.Google.Clients
             var token = Credentials.AccessToken;
 
             // Build the endpoint URI for clearing completed tasks from the list.
-            var uriString = $"{TasksBaseUri}/users/@me/lists/{taskList}/tasks/clear";
+            var uriString = $"{TasksBaseUri}/lists/{taskList}/tasks/clear";
             var requestUri = new Uri(uriString);
 
             // The Google Tasks "clear" operation is a POST with no request body.
@@ -82,7 +82,7 @@ namespace G4.Plugins.Google.Clients
             var token = Credentials.AccessToken;
 
             // Build the endpoint URI for retrieving the specified task.
-            var uriString = $"{TasksBaseUri}/users/@me/lists/{taskList}/tasks/{task}";
+            var uriString = $"{TasksBaseUri}/lists/{taskList}/tasks/{task}";
             var requestUri = new Uri(uriString);
 
             // Create the HTTP GET request with the authorization header.
@@ -107,7 +107,7 @@ namespace G4.Plugins.Google.Clients
             var queryParameters = options?.ConvertToQueryParameters();
 
             // Build the full endpoint URI for retrieving tasks from the specified list.
-            var uriString = $"{TasksBaseUri}/users/@me/lists/{taskList}/tasks{queryParameters}";
+            var uriString = $"{TasksBaseUri}/lists/{taskList}/tasks{queryParameters}";
             var requestUri = new Uri(uriString);
 
             // Create the HTTP GET request with authorization headers.
@@ -133,7 +133,7 @@ namespace G4.Plugins.Google.Clients
             var queryParameters = options?.ConvertToQueryParameters();
 
             // Build the endpoint URI for moving the specified task.
-            var uriString = $"{TasksBaseUri}/users/@me/lists/{taskList}/tasks/{task}/move{queryParameters}";
+            var uriString = $"{TasksBaseUri}/lists/{taskList}/tasks/{task}/move{queryParameters}";
             var requestUri = new Uri(uriString);
 
             // Create the HTTP POST request with the authorization header.
@@ -155,7 +155,7 @@ namespace G4.Plugins.Google.Clients
             var token = Credentials.AccessToken;
 
             // Build the endpoint URI for deleting the specified task.
-            var uriString = $"{TasksBaseUri}/users/@me/lists/{taskList}/tasks/{task}";
+            var uriString = $"{TasksBaseUri}/lists/{taskList}/tasks/{task}";
             var requestUri = new Uri(uriString);
 
             // Create the HTTP DELETE request with the authorization header.
@@ -178,7 +178,7 @@ namespace G4.Plugins.Google.Clients
             var token = Credentials.AccessToken;
 
             // Build the endpoint URI for updating the specified task.
-            var uriString = $"{TasksBaseUri}/users/@me/lists/{taskList}/tasks/{task}";
+            var uriString = $"{TasksBaseUri}/lists/{taskList}/tasks/{task}";
             var requestUri = new Uri(uriString);
 
             // Create the HTTP PATCH request with the JSON payload and authorization header.
