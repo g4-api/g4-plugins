@@ -9,18 +9,18 @@
 	"context": {
 		"integration": {
 			"github": {
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NewGmailTasksList.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/NewGmailTasksList.cs"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NewGmailTaskList.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/NewGmailTaskList.cs"
 			},
 			"rag": {
-				"description": "Use NewGmailTasksList to create a Google Tasks list during an automation run, using either a direct OAuth access token or a stored credentials reference. It enforces authentication checks, applies safe defaults for missing titles, validates required response fields, and stores the created list id/title/link as Base64 Session parameters to keep downstream workflow steps reliable and repeatable.",
+				"description": "Use NewGmailTaskList to create a Google Tasks list during an automation run, using either a direct OAuth access token or a stored credentials reference. It enforces authentication checks, applies safe defaults for missing titles, validates required response fields, and stores the created list id/title/link as Base64 Session parameters to keep downstream workflow steps reliable and repeatable.",
 				"qa": [
 					{
-						"question": "What is NewGmailTasksList in one sentence?",
+						"question": "What is NewGmailTaskList in one sentence?",
 						"answer": "It creates a new Google Tasks list for the authenticated user and stores the list id, title, and selfLink into Session parameters for later workflow steps."
 					},
 					{
-						"question": "What key inputs and behaviors does NewGmailTasksList support?",
+						"question": "What key inputs and behaviors does NewGmailTaskList support?",
 						"answer": "You can pass Title, Token, or Credentials; if Title is missing it generates a timestamped default, and if Credentials is provided it takes priority over Token by exchanging stored credentials for a fresh access token at runtime."
 					},
 					{
@@ -28,12 +28,12 @@
 						"answer": "It is an Action that runs as a task in sequential workflows, calls the Google Tasks API to create a list, and then exposes the result through Session output parameters for downstream rules."
 					},
 					{
-						"question": "What are best practices for using NewGmailTasksList in automations?",
+						"question": "What are best practices for using NewGmailTaskList in automations?",
 						"answer": "Prefer Credentials to avoid copying raw tokens into workflows, provide an explicit Title for predictable naming, and consume the saved Session parameters (Base64) in later steps instead of re-requesting the list details."
 					},
 					{
-						"question": "What rule/schema details matter when calling NewGmailTasksList?",
-						"answer": "Call it as an Action with pluginName “NewGmailTasksList” and an argument macro that supplies --Title and either --Token or --Credentials; the plugin writes GmailTasksListId, GmailTasksListTitle, and GmailTasksListLink to Session parameters as Base64 strings."
+						"question": "What rule/schema details matter when calling NewGmailTaskList?",
+						"answer": "Call it as an Action with pluginName “NewGmailTaskList” and an argument macro that supplies --Title and either --Token or --Credentials; the plugin writes NewGmailTaskList:Id, NewGmailTaskList:Title, and NewGmailTaskList:SelfLink to Session parameters as Base64 strings."
 					},
 					{
 						"question": "What is the manifestVersion for this plugin?",
@@ -41,18 +41,18 @@
 					},
 					{
 						"question": "What is the plugin key in the manifest?",
-						"answer": "The key is “NewGmailTasksList”."
+						"answer": "The key is “NewGmailTaskList”."
 					},
 					{
-						"question": "What is the pluginType for NewGmailTasksList?",
+						"question": "What is the pluginType for NewGmailTaskList?",
 						"answer": "The pluginType is “Action”."
 					},
 					{
-						"question": "Which platforms does NewGmailTasksList support?",
+						"question": "Which platforms does NewGmailTaskList support?",
 						"answer": "Platforms is “Any”, meaning it is intended to run across supported environments without a platform-specific restriction."
 					},
 					{
-						"question": "Which categories is NewGmailTasksList listed under?",
+						"question": "Which categories is NewGmailTaskList listed under?",
 						"answer": "It is categorized under “GoogleTasks”."
 					},
 					{
@@ -72,19 +72,19 @@
 						"answer": "protocol.w3c is “None”."
 					},
 					{
-						"question": "What is the manifest summary for NewGmailTasksList?",
+						"question": "What is the manifest summary for NewGmailTaskList?",
 						"answer": "It creates a Google Tasks list, supports Token or Credentials-based authentication, and saves the created list id, title, and self link into Session parameters for reuse by later steps."
 					},
 					{
 						"question": "Where is the official documentation for this plugin?",
-						"answer": "The documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NewGmailTasksList.md"
+						"answer": "The documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NewGmailTaskList.md"
 					},
 					{
 						"question": "Where is the source code for this plugin?",
-						"answer": "The source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/NewGmailTasksList.cs"
+						"answer": "The source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/NewGmailTaskList.cs"
 					},
 					{
-						"question": "How does NewGmailTasksList handle errors and failures?",
+						"question": "How does NewGmailTaskList handle errors and failures?",
 						"answer": "If authentication fails, the token exchange fails, the API returns a non-success status, the response JSON is malformed, or required properties like id or selfLink are missing, the action fails and does not write the output Session parameters."
 					}
 				]
@@ -100,7 +100,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The NewGmailTasksList plugin creates a new Google Tasks list for the authenticated user using the Google Tasks API.",
+		"The NewGmailTaskList plugin creates a new Google Tasks list for the authenticated user using the Google Tasks API.",
 		"It allows workflows to automatically organize tasks without manual setup in the Google interface.",
 		"It supports either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"After creation, it stores the new list details as Base64-encoded session parameters for safe reuse in later steps.",
@@ -154,7 +154,7 @@
 				]
 			},
 			"description": [
-				"### NewGmailTasksList: Create using access token",
+				"### NewGmailTaskList: Create using access token",
 				"",
 				"Create a Google Tasks list using an OAuth access token and a custom title.  ",
 				"The macro in the `argument` attribute produces runtime values for `Title` and `token`, and the action consumes those values when calling the Google Tasks API.  ",
@@ -165,7 +165,7 @@
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Title:My Automation Backlog --Token:ya29...}}",
-				"pluginName": "NewGmailTasksList"
+				"pluginName": "NewGmailTaskList"
 			}
 		},
 		{
@@ -200,7 +200,7 @@
 				]
 			},
 			"description": [
-				"### NewGmailTasksList: Create using credentials reference",
+				"### NewGmailTaskList: Create using credentials reference",
 				"",
 				"Create a Google Tasks list by referencing a stored credential record instead of passing a raw access token.  ",
 				"The macro in the `argument` attribute produces runtime values for `Title` and `credentials`, and the action consumes those values to resolve the credential record by id or name.  ",
@@ -212,11 +212,11 @@
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Title:New Tasks --Credentials:my-google-creds}}",
-				"pluginName": "NewGmailTasksList"
+				"pluginName": "NewGmailTaskList"
 			}
 		}
 	],
-	"key": "NewGmailTasksList",
+	"key": "NewGmailTaskList",
 	"manifestVersion": 4,
 	"outputParameters": [
 		{
@@ -224,7 +224,7 @@
 				"The created Task List `id` returned by Google Tasks API."
 			],
 			"encoding": "Base64",
-			"name": "GmailTasksListId",
+			"name": "NewGmailTaskList:Id",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -233,7 +233,7 @@
 				"The effective title used when creating the list."
 			],
 			"encoding": "Base64",
-			"name": "GmailTasksListTitle",
+			"name": "NewGmailTaskList:Title",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -242,7 +242,7 @@
 				"The created Task List `selfLink` returned by Google Tasks API."
 			],
 			"encoding": "Base64",
-			"name": "GmailTasksListLink",
+			"name": "NewGmailTaskList:SelfLink",
 			"scope": "Session",
 			"type": "String"
 		}
@@ -288,7 +288,7 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The NewGmailTasksList plugin creates a new Google Tasks list for the authenticated user.",
+		"The NewGmailTaskList plugin creates a new Google Tasks list for the authenticated user.",
 		"It supports using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"It saves the created list id, title, and self link into session parameters so later steps can reuse them."
 	]
