@@ -27,7 +27,7 @@ namespace G4.Plugins.Google.Actions
             var title = pluginData.Parameters.Get(key, defaultValue: defaultTitle);
 
             // Read task fields from plugin parameters.
-            var tasksList = pluginData.Parameters.Get(key: "TasksList", defaultValue: string.Empty);
+            var tasksList = pluginData.Parameters.Get(key: "TaskList", defaultValue: string.Empty);
             var notes = pluginData.Parameters.Get(key: "Notes", defaultValue: string.Empty);
             var due = pluginData.Parameters.Get(key: "Due", defaultValue: string.Empty);
 

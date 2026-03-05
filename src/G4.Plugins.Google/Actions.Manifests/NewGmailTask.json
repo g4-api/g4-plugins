@@ -19,7 +19,7 @@
 					},
 					{
 						"question": "What are the key features and parameters of NewGmailTask?",
-						"answer": "TasksList is required, while Title, Notes, and Due are optional. For authentication, provide either Token or Credentials, and the plugin writes key outputs to NewGmailTask:* session parameters."
+						"answer": "TaskList is required, while Title, Notes, and Due are optional. For authentication, provide either Token or Credentials, and the plugin writes key outputs to NewGmailTask:* session parameters."
 					},
 					{
 						"question": "How does NewGmailTask fit into the integration context of an automation workflow?",
@@ -31,7 +31,7 @@
 					},
 					{
 						"question": "What rule or schema details should I follow when configuring NewGmailTask?",
-						"answer": "Use $type “Action” with pluginName “NewGmailTask” and pass arguments for TasksList plus optional Title, Notes, Due, and either Token or Credentials, then consume outputs from NewGmailTask:Id, Title, Status, SelfLink, and Position."
+						"answer": "Use $type “Action” with pluginName “NewGmailTask” and pass arguments for TaskList plus optional Title, Notes, Due, and either Token or Credentials, then consume outputs from NewGmailTask:Id, Title, Status, SelfLink, and Position."
 					},
 					{
 						"question": "What is the manifest key of this plugin?",
@@ -71,7 +71,7 @@
 					},
 					{
 						"question": "How does NewGmailTask handle errors and edge cases?",
-						"answer": "It accounts for missing or invalid authentication, missing TasksList, ambiguous or missing list matches, invalid Due parsing, Google API quota or non-success responses, and missing required response fields like id, selfLink, position, or status."
+						"answer": "It accounts for missing or invalid authentication, missing TaskList, ambiguous or missing list matches, invalid Due parsing, Google API quota or non-success responses, and missing required response fields like id, selfLink, position, or status."
 					}
 				]
 			},
@@ -122,11 +122,11 @@
 						"Invalid Due date format (DateTime.Parse fails)",
 						"Invalid or expired access token",
 						"Missing Due",
-						"Missing TasksList",
-						"Multiple task lists match the TasksList title",
-						"No matching task list found for TasksList title/id",
+						"Missing TaskList",
+						"Multiple task lists match the TaskList title",
+						"No matching task list found for TaskList title/id",
 						"Response JSON missing required properties: id/selfLink/position/status",
-						"TasksList is empty or whitespace-only",
+						"TaskList is empty or whitespace-only",
 						"Title is missing or whitespace-only"
 					],
 					"expected_result": "A new task is created in the resolved list and task fields are stored in `NewGmailTask:*` session parameters (Base64).",
@@ -151,7 +151,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --TasksList:My Tasks --Title:Pay electricity --Notes:via automation --Due:2026-03-10T09:00:00Z --Token:ya29...}}",
+				"argument": "{{$ --TaskList:My Tasks --Title:Pay electricity --Notes:via automation --Due:2026-03-10T09:00:00Z --Token:ya29...}}",
 				"pluginName": "NewGmailTask"
 			}
 		},
@@ -167,11 +167,11 @@
 						"Google Tasks API returns non-success status code",
 						"Invalid Due date format (DateTime.Parse fails)",
 						"Missing Due",
-						"Missing TasksList",
-						"No matching task list found for TasksList id",
+						"Missing TaskList",
+						"No matching task list found for TaskList id",
 						"Refresh-token exchange fails",
 						"Response JSON missing required properties: id/selfLink/position/status",
-						"TasksList is empty or whitespace-only",
+						"TaskList is empty or whitespace-only",
 						"Title is missing or whitespace-only"
 					],
 					"expected_result": "A new task is created in the resolved list and task fields are stored in `NewGmailTask:*` session parameters (Base64).",
@@ -197,7 +197,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --TasksList:task-list-id --Title:Follow up --Due:2026-03-10T09:00:00Z --Credentials:my-google-creds}}",
+				"argument": "{{$ --TaskList:task-list-id --Title:Follow up --Due:2026-03-10T09:00:00Z --Credentials:my-google-creds}}",
 				"pluginName": "NewGmailTask"
 			}
 		}
@@ -294,7 +294,7 @@
 				"Supports reliable targeting by resolving the list id from the provided value before creation."
 			],
 			"mandatory": true,
-			"name": "TasksList",
+			"name": "TaskList",
 			"type": "String|Expression"
 		},
 		{
