@@ -59,6 +59,25 @@ namespace G4.Plugins.Google.Clients
         }
 
         /// <summary>
+        /// Retrieves the list of task lists for the authenticated user from the Google Tasks API.
+        /// </summary>
+        /// <returns>A <see cref="TaskListsListResponseModel"/> containing the user's task lists. The response will be empty if no task lists are found.</returns>
+        public TaskListsListResponseModel Get()
+        {
+            // Extract the access token from the credentials for authorization.
+            var token = Credentials.AccessToken;
+
+            // Define the Google Tasks API endpoint for creating a new task list.
+            var requestUri = new Uri(uriString: $"{TasksBaseUri}/users/@me/lists");
+
+            // Create the HTTP request message with the appropriate method, URI, and headers.
+            var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
+
+            // Return the deserialized response content as a TaskListModel instance.
+            return HttpClient.Send<TaskListsListResponseModel>(requestMessage);
+        }
+
+        /// <summary>
         /// Returns all the authenticated user's task lists.
         /// A user can have up to 2000 lists at a time.
         /// </summary>
@@ -109,8 +128,7 @@ namespace G4.Plugins.Google.Clients
         /// <param name="taskList">Task list identifier.</param>
         /// <param name="requestBody">The task list data to be updated.</param>
         /// <returns>If successful, the response body contains an instance of <see cref="TaskListModel"/>.</returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public JsonElement Update(string taskList, TaskListModel requestBody)
+        public TaskListModel Update(string taskList, TaskListModel requestBody)
         {
             // Extract the access token from the credentials for authorization.
             var token = Credentials.AccessToken;
@@ -120,13 +138,13 @@ namespace G4.Plugins.Google.Clients
 
             // Create the HTTP request message with the appropriate method, URI, headers, and body.
             var requestMessage = NewRequest(
-                HttpMethod.Post,
+                HttpMethod.Patch,
                 requestUri,
                 token,
                 requestBody);
 
-            // Return the deserialized response content as a JsonElement instance.
-            return HttpClient.Send<JsonElement>(requestMessage);
+            // Return the deserialized response content as a TaskListModel instance.
+            return HttpClient.Send<TaskListModel>(requestMessage);
         }
     }
 }
