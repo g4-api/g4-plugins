@@ -222,6 +222,7 @@
 	],
 	"key": "UpdateGmailTasksList",
 	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Google",
 	"outputParameters": [
 		{
 			"description": [
