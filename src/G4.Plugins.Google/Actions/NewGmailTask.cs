@@ -21,7 +21,7 @@ namespace G4.Plugins.Google.Actions
         {
             // Resolve Title: use provided value or fall back to a timestamped default for traceability.
             var key = "Title";
-            var defaultTitle = $"New Task {DateTime.UtcNow.ToString(GooglePlugin.Iso)}";
+            var defaultTitle = $"New Task {DateTime.UtcNow.ToString(GoogleAdapter.Iso)}";
             var title = pluginData.Parameters.Get(key, defaultValue: defaultTitle);
 
             // Read task fields from plugin parameters.
@@ -52,7 +52,7 @@ namespace G4.Plugins.Google.Actions
 
             if (!string.IsNullOrWhiteSpace(due))
             {
-                dueIso = DateTime.Parse(due).ToUniversalTime().ToString(GooglePlugin.Iso);
+                dueIso = DateTime.Parse(due).ToUniversalTime().ToString(GoogleAdapter.Iso);
             }
 
             // Create the task in the resolved list.
