@@ -18,7 +18,7 @@ namespace G4.UnitTests.Plugins.Google
     [TestClass]
     [TestCategory("GmailTasksList")]
     [TestCategory("UnitTest")]
-    public class GmailTasksListsTests : TestBase
+    public class GmailTasksTests : TestBase
     {
         [ClassInitialize]
         public static void ClassSetup(TestContext context)
