@@ -34,4 +34,8 @@
 		<EmbeddedResource Include="*.Manifests\**\*.*" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Actions.Abstraction\" />
+	</ItemGroup>
+
 </Project>

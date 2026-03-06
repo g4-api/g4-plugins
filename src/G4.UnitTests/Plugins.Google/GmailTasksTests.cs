@@ -73,6 +73,7 @@ namespace G4.UnitTests.Plugins.Google
             AssertManifest<ExportGmailTasksLists>();
 
             AssertManifest<NewGmailTask>();
+            AssertManifest<UpdateGmailTask>();
             AssertManifest<RemoveGmailTask>();
         }
 
@@ -86,6 +87,7 @@ namespace G4.UnitTests.Plugins.Google
             AssertPlugin<ExportGmailTasksLists>();
 
             AssertPlugin<NewGmailTask>();
+            AssertPlugin<UpdateGmailTask>();
             AssertPlugin<RemoveGmailTask>();
         }
 
@@ -238,6 +240,7 @@ namespace G4.UnitTests.Plugins.Google
         public void GmailTasktLifecycleTest()
         {
             NewTaskTest();
+            UpdateTaskTest();
             RemoveTaskTest();
         }
 
@@ -324,6 +327,56 @@ namespace G4.UnitTests.Plugins.Google
 
             // Assert that the plugin executed without errors.
             Assert.IsEmpty(exceptions);
+        }
+
+        [Ignore(message: "Runs as part of the GmailTaskLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the UpdateGmailTask plugin updates an " +
+            "existing task correctly.")]
+        public void UpdateTaskTest()
+        {
+            // Plugin name used for resolving session output keys.
+            const string pluginName = nameof(UpdateGmailTask);
+
+            // Resolve the credential record name/id from the test configuration.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Read the task id created by a previous test from the shared data bag.
+            var id = $"{DataBag["GmailTaskId"]}";
+
+            // Ensure a task id is available before attempting the update.
+            Assert.IsFalse(condition: string.IsNullOrWhiteSpace(id));
+
+            // Build the action rule JSON and inject the credential reference and task id.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "UpdateGmailTask",
+                "argument": "{{$ --Title:New Task Updated --Credentials:$(name) --Task:$(id) --TaskList:My Tasks}}"
+            }
+            """.Replace("$(name)", name).Replace("$(id)", id);
+
+            // Invoke the action and read the session outputs produced by the plugin.
+            var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
+
+            id = session[$"{pluginName}:Id"]?.ToString();
+            var title = session[$"{pluginName}:Title"]?.ToString();
+            var link = session[$"{pluginName}:SelfLink"]?.ToString();
+            var position = session[$"{pluginName}:Position"]?.ToString();
+            var status = session[$"{pluginName}:Status"]?.ToString();
+
+            // Verify that the plugin returned all expected outputs.
+            Assert.IsFalse(condition: string.IsNullOrEmpty(id));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(title));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(link));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(position));
+            Assert.IsFalse(condition: string.IsNullOrEmpty(status));
+
+            // Verify that the updated title matches the requested value.
+            // Plugin outputs are stored as Base64-encoded strings in session parameters.
+            Assert.AreEqual(
+                expected: "New Task Updated",
+                actual: title.ConvertFromBase64() ?? string.Empty);
         }
     }
 }
