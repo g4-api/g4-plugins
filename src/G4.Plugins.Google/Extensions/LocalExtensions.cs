@@ -140,7 +140,6 @@ namespace G4.Plugins.Google.Extensions
             /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
             /// <param name="timeout">Maximum amount of time allowed for paging through task lists while searching.</param>
             /// <returns>The matching <see cref="TaskListModel"/>.</returns>
-            /// <exception cref="InvalidOperationException">Thrown when no matching task list is found before the timeout expires.</exception>
             public TaskListModel FindTaskList(string taskListIdOrName, TimeSpan timeout)
             {
                 // Iterate through task list pages until a match is found or the timeout expires.
@@ -175,13 +174,6 @@ namespace G4.Plugins.Google.Extensions
                     nextPageToken = taskListsPage.NextPageToken;
                 }
                 while (!string.IsNullOrWhiteSpace(nextPageToken) && DateTime.UtcNow < expired);
-
-                // Treat a missing task list as a hard failure so callers do not continue with an invalid result.
-                if (taskListModel == null)
-                {
-                    throw new InvalidOperationException(
-                        message: $"No matching task list found for title or ID: '{taskListIdOrName}'.");
-                }
 
                 // Return the matched task list.
                 return taskListModel;
