@@ -1,17 +1,10 @@
 ﻿using G4.Attributes;
-using G4.Exceptions;
 using G4.Extensions;
 using G4.Models;
-using G4.Plugins.Google.Actions.Abstraction;
 using G4.Plugins.Google.Clients;
 using G4.Plugins.Google.Extensions;
 
 using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Text;
-using System.Text.Json;
 
 namespace G4.Plugins.Google.Actions
 {
