@@ -1,12 +1,10 @@
 ﻿using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
-using G4.Plugins.Google.Actions.Abstraction;
 using G4.Plugins.Google.Clients;
 using G4.Plugins.Google.Extensions;
 
 using System;
-using System.Linq;
 
 namespace G4.Plugins.Google.Actions
 {
@@ -27,7 +25,7 @@ namespace G4.Plugins.Google.Actions
             var title = pluginData.Parameters.Get(key, defaultValue: defaultTitle);
 
             // Read task fields from plugin parameters.
-            var taskList = pluginData.Parameters.Get(key: "TaskList", defaultValue: string.Empty);
+            var taskListIdOrName = pluginData.Parameters.Get(key: "TaskList", defaultValue: string.Empty);
             var notes = pluginData.Parameters.Get(key: "Notes", defaultValue: string.Empty);
             var due = pluginData.Parameters.Get(key: "Due", defaultValue: string.Empty);
 
@@ -39,20 +37,13 @@ namespace G4.Plugins.Google.Actions
 
             // Resolve the target list id from either the list title or list id provided by the user.
             // This allows users to pass "My Tasks" or the actual list id interchangeably.
-            var tasksListId = adapter
-                .TaskLists
-                .Get()
-                .Items
-                .FirstOrDefault(i =>
-                    string.Equals(i.Id, taskList) ||
-                    string.Equals(i.Title, taskList, StringComparison.OrdinalIgnoreCase))?
-                .Id;
+            var tasksListId = adapter.FindTaskList(taskListIdOrName)?.Id;
 
             // Treat missing list id as a hard failure (otherwise the request URI becomes invalid).
             if (string.IsNullOrEmpty(tasksListId))
             {
                 throw new InvalidOperationException(
-                    message: $"No matching task list found for title or ID: '{taskList}'.");
+                    message: $"No matching task list found for title or ID: '{taskListIdOrName}'.");
             }
 
             // Parse Due only when provided. Google Tasks accepts RFC3339/ISO timestamps.
