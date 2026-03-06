@@ -1,5 +1,7 @@
 ﻿using G4.Extensions;
 using G4.Models;
+using G4.Plugins.Google.Clients;
+using G4.Plugins.Google.Models;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +32,161 @@ namespace G4.Plugins.Google.Extensions
             // Use relaxed escaping to allow special characters in JSON without being escaped.
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
+
+        extension(GoogleAdapter adapter)
+        {
+            /// <summary>
+            /// Finds a task by task id or title within the specified task list.
+            /// </summary>
+            /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
+            /// <param name="taskIdOrName">Task identifier or task title used to locate the target task.</param>
+            /// <returns> matching <see cref="TaskModel"/>.</returns>
+            /// <remarks>Uses a default timeout of 30 seconds while paging through the task list.</remarks>
+            public TaskModel FindTask(string taskListIdOrName, string taskIdOrName)
+            {
+                return adapter.FindTask(
+                    taskListIdOrName,
+                    taskIdOrName,
+                    timeout: TimeSpan.FromSeconds(30));
+            }
+
+            /// <summary>
+            /// Finds a task by task id or title within the specified task list.
+            /// </summary>
+            /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
+            /// <param name="taskIdOrName">Task identifier or task title used to locate the target task.</param>
+            /// <param name="timeout">Maximum amount of time allowed for paging through the task list while searching.</param>
+            /// <returns>The matching <see cref="TaskModel"/>.</returns>
+            /// <exception cref="InvalidOperationException">Thrown when the task list cannot be found or when no matching task is found before the timeout expires.</exception>
+            public TaskModel FindTask(string taskListIdOrName, string taskIdOrName, TimeSpan timeout)
+            {
+                // Resolve the task list id from either the list id or list title.
+                var taskListId = adapter
+                    .TaskLists
+                    .Get()
+                    .Items
+                    .FirstOrDefault(i =>
+                        string.Equals(i.Id, taskListIdOrName, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(i.Title, taskListIdOrName, StringComparison.OrdinalIgnoreCase))?
+                    .Id;
+
+                // Treat a missing list id as a hard failure to avoid sending invalid requests.
+                if (string.IsNullOrWhiteSpace(taskListId))
+                {
+                    throw new InvalidOperationException(
+                        message: $"No matching task list found for title or ID: '{taskListIdOrName}'.");
+                }
+
+                // Iterate through task pages until a match is found or the timeout expires.
+                var nextPageToken = string.Empty;
+                TaskModel taskModel = null;
+                var expired = DateTime.UtcNow.Add(timeout);
+
+                do
+                {
+                    // Build paging options for the current request.
+                    var options = string.IsNullOrEmpty(nextPageToken)
+                        ? new ListTasksQueryModel { MaxResults = 100 }
+                        : new ListTasksQueryModel { MaxResults = 100, PageToken = nextPageToken };
+
+                    // Retrieve the current page of tasks from the resolved list.
+                    var tasksPage = adapter.Tasks.Get(taskListId, options);
+
+                    // Search the current page by task id or task title.
+                    var task = tasksPage.Items
+                        .FirstOrDefault(i =>
+                            string.Equals(i.Id, taskIdOrName, StringComparison.OrdinalIgnoreCase) ||
+                            string.Equals(i.Title, taskIdOrName, StringComparison.OrdinalIgnoreCase));
+
+                    // Stop as soon as a matching task is found.
+                    if (!string.IsNullOrWhiteSpace(task?.Id))
+                    {
+                        taskModel = task;
+                        break;
+                    }
+
+                    // Move to the next page, if available.
+                    nextPageToken = tasksPage.NextPageToken;
+                }
+                while (!string.IsNullOrWhiteSpace(nextPageToken) && DateTime.UtcNow < expired);
+
+                // Treat a missing task as a hard failure so callers do not continue with an invalid result.
+                if (taskModel == null)
+                {
+                    throw new InvalidOperationException(
+                        message: $"No matching task found for title or ID: '{taskIdOrName}' in list '{taskListIdOrName}'.");
+                }
+
+                // Return the matched task.
+                return taskModel;
+            }
+
+            /// <summary>
+            /// Finds a task list by task list id or title.
+            /// </summary>
+            /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
+            /// <returns>The matching <see cref="TaskListModel"/>.</returns>
+            /// <remarks>Uses a default timeout of 30 seconds while paging through task lists.</remarks>
+            public TaskListModel FindTaskList(string taskListIdOrName)
+            {
+                return adapter.FindTaskList(
+                    taskListIdOrName,
+                    timeout: TimeSpan.FromSeconds(30));
+            }
+
+            /// <summary>
+            /// Finds a task list by task list id or title.
+            /// </summary>
+            /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
+            /// <param name="timeout">Maximum amount of time allowed for paging through task lists while searching.</param>
+            /// <returns>The matching <see cref="TaskListModel"/>.</returns>
+            /// <exception cref="InvalidOperationException">Thrown when no matching task list is found before the timeout expires.</exception>
+            public TaskListModel FindTaskList(string taskListIdOrName, TimeSpan timeout)
+            {
+                // Iterate through task list pages until a match is found or the timeout expires.
+                var nextPageToken = string.Empty;
+                TaskListModel taskListModel = null;
+                var expired = DateTime.UtcNow.Add(timeout);
+
+                do
+                {
+                    // Build paging options for the current request.
+                    var options = string.IsNullOrEmpty(nextPageToken)
+                        ? new ListTaskListsQueryModel { MaxResults = 1000 }
+                        : new ListTaskListsQueryModel { MaxResults = 1000, PageToken = nextPageToken };
+
+                    // Retrieve the current page of task lists.
+                    var taskListsPage = adapter.TaskLists.Get(options);
+
+                    // Search the current page by task list id or task list title.
+                    var taskList = taskListsPage.Items
+                        .FirstOrDefault(i =>
+                            string.Equals(i.Id, taskListIdOrName, StringComparison.OrdinalIgnoreCase) ||
+                            string.Equals(i.Title, taskListIdOrName, StringComparison.OrdinalIgnoreCase));
+
+                    // Stop as soon as a matching task list is found.
+                    if (!string.IsNullOrWhiteSpace(taskList?.Id))
+                    {
+                        taskListModel = taskList;
+                        break;
+                    }
+
+                    // Move to the next page, if available.
+                    nextPageToken = taskListsPage.NextPageToken;
+                }
+                while (!string.IsNullOrWhiteSpace(nextPageToken) && DateTime.UtcNow < expired);
+
+                // Treat a missing task list as a hard failure so callers do not continue with an invalid result.
+                if (taskListModel == null)
+                {
+                    throw new InvalidOperationException(
+                        message: $"No matching task list found for title or ID: '{taskListIdOrName}'.");
+                }
+
+                // Return the matched task list.
+                return taskListModel;
+            }
+        }
 
         extension(HttpClient client)
         {
