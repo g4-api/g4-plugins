@@ -123,8 +123,8 @@ namespace G4.Plugins.Google.Clients
         /// <param name="taskList">The identifier of the source task list containing the task.</param>
         /// <param name="task">The identifier of the task to move.</param>
         /// <param name="options">Query parameters controlling the move operation (for example destination list or previous task).</param>
-        /// <returns>The <see cref="HttpResponseMessage"/> returned by the Google Tasks API.</returns>
-        public HttpResponseMessage Move(string taskList, string task, MoveTaskQueryModel options)
+        /// <returns>A <see cref="TaskModel"/> representing the moved task returned by the Google Tasks API.</returns>
+        public TaskModel Move(string taskList, string task, MoveTaskQueryModel options)
         {
             // Extract the OAuth access token used to authorize the request.
             var token = Credentials.AccessToken;
@@ -139,8 +139,8 @@ namespace G4.Plugins.Google.Clients
             // Create the HTTP POST request with the authorization header.
             var requestMessage = NewRequest(HttpMethod.Post, requestUri, token);
 
-            // Send the request and ensure the response indicates success.
-            return HttpClient.ConfirmResponse(requestMessage);
+            // Send the request and deserialize the JSON response into TaskModel.
+            return HttpClient.Send<TaskModel>(requestMessage);
         }
 
         /// <summary>
