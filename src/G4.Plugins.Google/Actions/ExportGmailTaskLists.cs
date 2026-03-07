@@ -11,11 +11,11 @@ namespace G4.Plugins.Google.Actions
     [G4Plugin(
         assembly: "G4.Plugins.Google, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Google.Actions.Manifests.{NameReference}.json")]
-    public class ExportGmailTasksLists(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+    public class ExportGmailTaskLists(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         // Define a constant for the plugin name reference to ensure
         // consistent namespacing of session parameters.
-        private const string NameReference = nameof(ExportGmailTasksLists);
+        private const string NameReference = nameof(ExportGmailTaskLists);
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {

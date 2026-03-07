@@ -8,8 +8,8 @@ namespace G4.Plugins.Google.Actions
 {
     [G4Plugin(
         assembly: "G4.Plugins.Google, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Google.Actions.Manifests.{nameof(RemoveGmailTasksList)}.json")]
-    public class RemoveGmailTasksList(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+        manifest: $"G4.Plugins.Google.Actions.Manifests.{nameof(RemoveGmailTaskList)}.json")]
+    public class RemoveGmailTaskList(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
