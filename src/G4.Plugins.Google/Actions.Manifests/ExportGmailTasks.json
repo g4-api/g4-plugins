@@ -1,0 +1,264 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"GoogleTasks"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportGmailTasks.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/ExportGmailTasks.cs"
+			},
+			"rag": {
+				"description": "Export tasks from a Google Tasks list during an automation run by resolving the target list from either its title or id, then retrieving the full task collection with paging. It supports authentication with a direct OAuth token or a stored credentials reference, enforces required inputs and API success checks, and stores the exported tasks as Base64-encoded JSON in a namespaced session parameter so downstream steps can reuse a stable snapshot reliably.",
+				"qa": [
+					{
+						"question": "What does ExportGmailTasks do?",
+						"answer": "ExportGmailTasks exports tasks from a specified Google Tasks list and stores the returned task collection in a namespaced session parameter."
+					},
+					{
+						"question": "What parameters and key features does ExportGmailTasks support?",
+						"answer": "It requires TaskList, supports optional Token and Credentials authentication (Credentials takes precedence when both are provided), resolves the list by id or title, exports tasks with paging, and stores the result as Base64-encoded JSON."
+					},
+					{
+						"question": "How does ExportGmailTasks fit into the integration context?",
+						"answer": "It runs as an Action in the sequential workflow model (componentType “task”) with the google icon provider and ActionRuleModel, so it can be used as a standard workflow step."
+					},
+					{
+						"question": "What are best practices for using ExportGmailTasks?",
+						"answer": "Prefer Credentials for long-running automations, pass a list id when available to avoid title ambiguity, reuse ExportGmailTasks:Result instead of repeating the API call, and handle the case where the exported task collection is empty."
+					},
+					{
+						"question": "What rule and schema details should I follow to run ExportGmailTasks?",
+						"answer": "Create an Action rule with pluginName set to ExportGmailTasks and pass {{$ --TaskList:value}} plus either {{$ --Token:value}} or {{$ --Credentials:value}} via the rule argument. The output is stored as Base64-encoded JSON in ExportGmailTasks:Result."
+					},
+					{
+						"question": "What is the manifest key of this plugin?",
+						"answer": "The manifest key is “ExportGmailTasks”."
+					},
+					{
+						"question": "What manifestVersion is used by this plugin?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What is the pluginType of ExportGmailTasks?",
+						"answer": "The pluginType is “Action”."
+					},
+					{
+						"question": "Which platforms are supported by this plugin?",
+						"answer": "The plugin supports platforms “Any”."
+					},
+					{
+						"question": "Which categories is this plugin associated with?",
+						"answer": "The plugin is listed under the “GoogleTasks” category."
+					},
+					{
+						"question": "Who is the author of this plugin manifest?",
+						"answer": "The author is Roei Sabag."
+					},
+					{
+						"question": "What author link is provided in the manifest metadata?",
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What namespace is defined for this plugin?",
+						"answer": "The namespace is “G4.Plugins.Google”."
+					},
+					{
+						"question": "What is the manifest summary for ExportGmailTasks?",
+						"answer": "It exports all tasks from a Google Tasks list, resolves the list by id or title, authenticates with Token or Credentials, and stores the exported tasks collection as Base64-encoded JSON in a namespaced session parameter for safe downstream processing."
+					},
+					{
+						"question": "What source descriptions and Git links are relevant for ExportGmailTasks?",
+						"answer": "The documentation matches the manifest behavior: resolve TaskList by title or id, export the full tasks collection with paging, then store the serialized result as Base64-encoded JSON for downstream use. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportGmailTasks.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/ExportGmailTasks.cs."
+					},
+					{
+						"question": "How does ExportGmailTasks handle errors and unexpected responses?",
+						"answer": "It is designed to fail when TaskList cannot be resolved or when the Google Tasks API returns a non-success response, and workflows should handle invalid or expired tokens, credential resolution or refresh failures, insufficient OAuth scopes, API quota or rate limits, network timeouts, malformed responses, and empty exports."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": "google",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The ExportGmailTasks plugin exports tasks from a Google Tasks list during an automation run.",
+		"It helps workflows read the current task list content so bots can report, sync, or make decisions based on tasks.",
+		"It supports authentication using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
+		"It stores the exported tasks as Base64-encoded JSON in a session parameter so later steps can reuse the results reliably.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                 |",
+		"|----------------------------|---------------------------------------------------------------------------------------------|",
+		"| Export tasks               | Retrieves tasks from a resolved Google Tasks list using the Google Tasks API (Tasks: list). |",
+		"| List resolution            | Resolves the target list by id or by matching the provided list title.                      |",
+		"| Task paging support        | Pages through tasks to export the full collection from the list.                            |",
+		"| Token authentication       | Accepts a raw OAuth Bearer access token for direct API calls.                               |",
+		"| Credentials authentication | Accepts a credentials id/name and exchanges it for a fresh access token at runtime.         |",
+		"| Credentials precedence     | Uses credentials when both token and credentials are provided.                              |",
+		"| Result session storage     | Stores the exported task collection in ExportGmailTasks:Result as Base64-encoded JSON.      |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                     | Description                                                                       |",
+		"|------------------------------|-----------------------------------------------------------------------------------|",
+		"| Build daily task reports     | Export tasks and send a summary to email, chat, or a dashboard.                   |",
+		"| Sync tasks to another system | Export tasks and upsert them into a CRM, ticketing tool, or database.             |",
+		"| Drive decision steps         | Export tasks and branch workflow logic based on status, due dates, or titles.     |",
+		"| Prepare clean-up actions     | Export tasks first, then delete or update selected tasks in later workflow steps. |",
+		""
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Export returns an empty task collection",
+						"Google Tasks API rate limit or quota exceeded",
+						"Google Tasks API returns non-success status code",
+						"Invalid or expired OAuth access token",
+						"Missing TaskList",
+						"Multiple task lists match the same TaskList title",
+						"No matching task list found for TaskList title/id",
+						"TaskList value is empty or whitespace-only",
+						"Token value is empty or whitespace-only"
+					],
+					"expected_result": "The tasks collection from the resolved list is serialized and stored in `ExportGmailTasks:Result`.",
+					"notes": "Exports all tasks from a Google Tasks list using a provided access token.",
+					"use_case": "export_google_tasks_from_list_with_token",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Authentication",
+					"Export",
+					"GoogleTasks",
+					"OAuth",
+					"SessionParameters",
+					"Tasks"
+				]
+			},
+			"description": [
+				"### ExportGmailTasks: Export tasks using access token",
+				"",
+				"This example exports all tasks from the `My Tasks` list using a provided OAuth access token."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --TaskList:My Tasks --token:ya29...}}",
+				"pluginName": "ExportGmailTasks"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials id/name not found",
+						"Credentials record missing refresh token",
+						"Credentials value is empty or whitespace-only",
+						"Export returns an empty task collection",
+						"Google OAuth token endpoint returns non-success status code",
+						"Google Tasks API rate limit or quota exceeded",
+						"Google Tasks API returns non-success status code",
+						"Missing TaskList",
+						"Multiple task lists match the same TaskList title",
+						"No matching task list found for TaskList title/id",
+						"Refresh-token exchange fails",
+						"TaskList value is empty or whitespace-only"
+					],
+					"expected_result": "The tasks collection from the resolved list is serialized and stored in `ExportGmailTasks:Result`.",
+					"notes": "Exports all tasks from a Google Tasks list by resolving the list by id and exchanging a stored credentials record for a fresh access token.",
+					"use_case": "export_google_tasks_from_list_with_credentials_reference",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Authentication",
+					"Credentials",
+					"Export",
+					"GoogleTasks",
+					"OAuth",
+					"SessionParameters",
+					"Tasks"
+				]
+			},
+			"description": [
+				"### ExportGmailTasks: Export tasks using credentials reference",
+				"",
+				"This example exports all tasks from a Google Tasks list by resolving the list from its id and authenticating through a stored credentials record."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --TaskList:task-list-id --credentials:my-google-creds}}",
+				"pluginName": "ExportGmailTasks"
+			}
+		}
+	],
+	"key": "ExportGmailTasks",
+	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Google",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the exported tasks for the resolved Google Tasks list as a Base64-encoded JSON payload.",
+				"Provides the full task collection so downstream steps can parse, filter, and act on the exported data.",
+				"Improves workflow reliability by keeping a stable snapshot of the export result in session storage."
+			],
+			"name": "ExportGmailTasksResult",
+			"scope": "Session",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.",
+				"Avoids hardcoding short-lived tokens by exchanging stored credentials for a valid access token when needed.",
+				"Takes precedence over the token parameter so authentication stays consistent and renewable."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies the Google Tasks list identifier or list title whose tasks should be exported.",
+				"Determines the exact list to export from by resolving the list using its id or its title.",
+				"Prevents exporting the wrong list by requiring the resolved list to match the provided value."
+			],
+			"mandatory": true,
+			"name": "TaskList",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies an OAuth Bearer access token used to call the Google Tasks API.",
+				"Enables direct API access when a stored credential reference is not used.",
+				"Is ignored when a credentials reference is provided so stored credentials can take priority."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"The ExportGmailTasks plugin exports all tasks from a Google Tasks list during an automation run.",
+		"It resolves the list by id or title and can authenticate using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token.",
+		"It stores the exported tasks collection as Base64-encoded JSON in a namespaced session parameter so later steps can safely read and process the data."
+	]
+}
