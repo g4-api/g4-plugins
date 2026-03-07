@@ -36,6 +36,79 @@ namespace G4.Plugins.Google.Extensions
         extension(GoogleAdapter adapter)
         {
             /// <summary>
+            /// Exports all tasks from the specified task list.
+            /// </summary>
+            /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
+            /// <returns>A sequence of <see cref="TaskModel"/> items returned from the resolved task list.</returns>
+            public IEnumerable<TaskModel> ExportTasks(string taskListIdOrName)
+            {
+                return adapter.ExportTasks(
+                    taskListIdOrName,
+                    timeout: TimeSpan.FromSeconds(30));
+            }
+
+            /// <summary>
+            /// Exports all tasks from the specified task list.
+            /// </summary>
+            /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
+            /// <param name="timeout">Maximum amount of time allowed for paging through the task list while exporting tasks.</param>
+            /// <returns>A sequence of <see cref="TaskModel"/> items returned from the resolved task list.</returns>
+            public IEnumerable<TaskModel> ExportTasks(string taskListIdOrName, TimeSpan timeout)
+            {
+                // Resolve the task list id from either the list id or list title.
+                var taskListId = adapter
+                    .TaskLists
+                    .Get()
+                    .Items
+                    .FirstOrDefault(i =>
+                        string.Equals(i.Id, taskListIdOrName, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(i.Title, taskListIdOrName, StringComparison.OrdinalIgnoreCase))?
+                    .Id;
+
+                // Treat a missing list id as a hard failure to avoid sending invalid requests.
+                if (string.IsNullOrWhiteSpace(taskListId))
+                {
+                    throw new InvalidOperationException(
+                        message: $"No matching task list found for title or ID: '{taskListIdOrName}'.");
+                }
+
+                // Iterate through task pages until all tasks are collected or the timeout expires.
+                var nextPageToken = string.Empty;
+                var taskModels = new List<TaskModel>();
+                var expired = DateTime.UtcNow.Add(timeout);
+
+                do
+                {
+                    // Build paging options for the current request.
+                    var options = string.IsNullOrEmpty(nextPageToken)
+                        ? new ListTasksQueryModel { MaxResults = 100 }
+                        : new ListTasksQueryModel { MaxResults = 100, PageToken = nextPageToken };
+
+                    // Retrieve the current page of tasks from the resolved list.
+                    var tasksPage = adapter.Tasks.Get(taskListId, options);
+
+                    // Read the tasks returned in the current page.
+                    var tasks = tasksPage.Items;
+
+                    // Stop when the current page does not contain any tasks.
+                    if (tasks == null || tasks.Length == 0)
+                    {
+                        break;
+                    }
+
+                    // Add the current page of tasks to the overall result set.
+                    taskModels.AddRange(tasks);
+
+                    // Move to the next page, if available.
+                    nextPageToken = tasksPage.NextPageToken;
+                }
+                while (!string.IsNullOrWhiteSpace(nextPageToken) && DateTime.UtcNow < expired);
+
+                // Return all collected tasks.
+                return taskModels;
+            }
+
+            /// <summary>
             /// Finds a task by task id or title within the specified task list.
             /// </summary>
             /// <param name="taskListIdOrName">Task list identifier or task list title used to locate the target list.</param>
