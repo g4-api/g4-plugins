@@ -76,6 +76,7 @@ namespace G4.UnitTests.Plugins.Google
             AssertManifest<UpdateGmailTask>();
             AssertManifest<ExportGmailTasks>();
             AssertManifest<RemoveGmailTask>();
+            AssertManifest<MoveGmailTask>();
         }
 
         [TestMethod(DisplayName = "Verify that the GmailTaskList plugins are correctly " +
@@ -91,14 +92,7 @@ namespace G4.UnitTests.Plugins.Google
             AssertPlugin<UpdateGmailTask>();
             AssertPlugin<ExportGmailTasks>();
             AssertPlugin<RemoveGmailTask>();
-        }
-
-        [TestMethod(DisplayName = "Verify the lifecycle of a Gmail tasks list (Add, Update and Delete).")]
-        public void GmailTaskListLifecycleTest()
-        {
-            NewTaskListTest();
-            UpdateTaskListTest();
-            RemoveTaskListTest();
+            AssertPlugin<MoveGmailTask>();
         }
 
         [Ignore(message: "Runs as part of the GmailTaskListLifecycleTest.")]
@@ -238,15 +232,6 @@ namespace G4.UnitTests.Plugins.Google
             Assert.IsGreaterThan(lowerBound: 0, list.GetProperty("items").GetArrayLength());
         }
 
-        [TestMethod(DisplayName = "Verify the lifecycle of a Gmail task (Add, Update and Delete).")]
-        public void GmailTasktLifecycleTest()
-        {
-            NewTaskTest();
-            ExportTasksTest();
-            UpdateTaskTest();
-            RemoveTaskTest();
-        }
-
         [Ignore(message: "Runs as part of the GmailTasktLifecycleTest.")]
         [TestMethod(DisplayName = "Verify that the ExportGmailTasks plugin exports " +
             "all tasks correctly.")]
@@ -257,7 +242,7 @@ namespace G4.UnitTests.Plugins.Google
 
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
-            
+
             // Build the action rule JSON and inject the credential reference and task list name.
             var ruleJson =
             """
@@ -272,7 +257,7 @@ namespace G4.UnitTests.Plugins.Google
             var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
             var result = session[$"{pluginName}:Result"]?.ToString().ConvertFromBase64();
             var tasks = JsonSerializer.Deserialize<JsonElement>(result);
-            
+
             // Assert required outputs exist.
             Assert.IsGreaterThan(lowerBound: 0, tasks.GetArrayLength());
         }
@@ -410,6 +395,70 @@ namespace G4.UnitTests.Plugins.Google
             Assert.AreEqual(
                 expected: "New Task Updated",
                 actual: title.ConvertFromBase64() ?? string.Empty);
+        }
+
+        [TestMethod(DisplayName = "Verify the lifecycle of a Gmail tasks list (Add, Update and Delete).")]
+        public void GmailTaskListLifecycleTest()
+        {
+            NewTaskListTest();
+            UpdateTaskListTest();
+            RemoveTaskListTest();
+        }
+
+        [TestMethod(DisplayName = "Verify the lifecycle of a Gmail task (Add, Update and Delete).")]
+        public void GmailTasktLifecycleTest()
+        {
+            NewTaskTest();
+            ExportTasksTest();
+            UpdateTaskTest();
+            RemoveTaskTest();
+        }
+
+        [DoNotParallelize]
+        [TestMethod(DisplayName = "Verify the lifecycle of moving a Gmail task.")]
+        public void MoveTaskLifecycleTest()
+        {
+            try
+            {
+                // Create a source task and a destination task list used by this test.
+                NewTaskTest();
+                NewTaskListTest();
+
+                // Resolve the credential record name/id from the test configuration.
+                var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+                // Read the created task id and destination list id from the shared data bag.
+                var id = $"{DataBag["GmailTaskId"]}";
+                var destination = $"{DataBag["NewGmailTaskList:Id"]}";
+
+                // Ensure a task id is available before attempting the move.
+                Assert.IsFalse(condition: string.IsNullOrWhiteSpace(id));
+
+                // Build the action rule JSON and inject the credential reference,
+                // source task id, and destination task list id.
+                var ruleJson =
+                """
+                {
+                    "$type": "Action",
+                    "pluginName": "MoveGmailTask",
+                    "argument": "{{$ --TaskList:My Tasks --Task:$(id) --Destination:$(destination) --Credentials:$(name)}}"
+                }
+                """
+                .Replace("$(name)", name)
+                .Replace("$(id)", id)
+                .Replace("$(destination)", destination);
+
+                // Invoke the action and collect any workflow exceptions.
+                var exceptions = Invoke(ruleJson).GetExceptions();
+
+                // Assert that the plugin executed without errors.
+                Assert.IsEmpty(exceptions);
+            }
+            finally
+            {
+                // Clean up the destination task list created for this test.
+                RemoveTaskListTest();
+            }
         }
     }
 }
