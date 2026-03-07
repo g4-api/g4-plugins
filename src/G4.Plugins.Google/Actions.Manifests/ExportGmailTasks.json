@@ -215,7 +215,7 @@
 				"Provides the full task collection so downstream steps can parse, filter, and act on the exported data.",
 				"Improves workflow reliability by keeping a stable snapshot of the export result in session storage."
 			],
-			"name": "ExportGmailTasksResult",
+			"name": "ExportGmailTasks:Result",
 			"scope": "Session",
 			"type": "String"
 		}
