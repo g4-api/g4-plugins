@@ -1,12 +1,4 @@
-﻿using G4.Credentials;
-using G4.Credentials.Models;
-
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-
-namespace G4.Plugins.Google.Clients
+﻿namespace G4.Plugins.Google.Clients
 {
     internal class GoogleAdapter(string credentials)
     {

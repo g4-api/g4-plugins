@@ -7,7 +7,6 @@ using G4.Plugins.Google.Models;
 
 using System;
 using System.Net.Http;
-using System.Text.Json;
 
 namespace G4.Plugins.Google.Clients
 {
