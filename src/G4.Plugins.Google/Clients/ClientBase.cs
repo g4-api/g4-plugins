@@ -25,6 +25,11 @@ namespace G4.Plugins.Google.Clients
     {
         #region *** Constants    ***
         /// <summary>
+        /// Base URI for Gmail API endpoints.
+        /// </summary>
+        public const string GmailBaseUri = "https://gmail.googleapis.com/gmail/v1";
+
+        /// <summary>
         /// Base URI for Google Tasks API endpoints.
         /// </summary>
         public const string TasksBaseUri = "https://tasks.googleapis.com/tasks/v1";

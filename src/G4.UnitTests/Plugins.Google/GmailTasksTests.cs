@@ -20,50 +20,7 @@ namespace G4.UnitTests.Plugins.Google
     [TestCategory("UnitTest")]
     public class GmailTasksTests : TestBase
     {
-        [ClassInitialize]
-        public static void ClassSetup(TestContext context)
-        {
-            // Ensure a clean Data directory for repeatable tests.
-            var directoryPath = Path.Combine(Environment.CurrentDirectory, "Data");
-            if (Directory.Exists(directoryPath))
-            {
-                Directory.Delete(directoryPath, recursive: true);
-            }
-
-            // Build OAuth credential model from test configuration.
-            var oauth = new OAuthCredentialModel
-            {
-                ClientId = $"{context.Properties["Google.App.ClientId"]}",
-                ClientSecret = $"{context.Properties["Google.App.ClientSecret"]}",
-                Domains = $"{context.Properties["Google.App.Domains"]}",
-                Name = $"{context.Properties["Google.App.Name"]}",
-                RedirectUrl = $"{context.Properties["Google.App.RedirectUrl"]}",
-                RefreshToken = $"{context.Properties["Google.App.RefreshToken"]}",
-                Scope = $"{context.Properties["Google.App.Scope"]}"
-            };
-
-            // Cache key convention: "<name>;<id>" (lowercase for normalization).
-            var key = $"{oauth.Name};{oauth.Id}".ToLowerInvariant();
-
-            // Seed the credentials cache with secured secrets.
-            CacheManager.Instance.CredentialsCache[key] = new()
-            {
-                AccessToken = string.Empty,
-                ClientId = oauth.ClientId,
-                CreatedAt = oauth.CreatedAt,
-                ExpiresAt = oauth.ExpiresAt,
-                ClientSecret = oauth.ClientSecret.Protect(),
-                Domains = oauth.Domains,
-                Id = oauth.Id,
-                Name = oauth.Name,
-                Provider = "google",
-                RedirectUrl = oauth.RedirectUrl,
-                RefreshToken = oauth.RefreshToken.Protect(),
-                Scope = oauth.Scope
-            };
-        }
-
-        [TestMethod(DisplayName = "Verify that the GmailTaskList plugins comply with the " +
+        [TestMethod(DisplayName = "Verify that the GmailTask plugins comply with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
@@ -79,7 +36,7 @@ namespace G4.UnitTests.Plugins.Google
             AssertManifest<MoveGmailTask>();
         }
 
-        [TestMethod(DisplayName = "Verify that the GmailTaskList plugins are correctly " +
+        [TestMethod(DisplayName = "Verify that the GmailTask plugins are correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {

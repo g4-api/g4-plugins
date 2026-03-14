@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -14,6 +15,7 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace G4.Plugins.Google.Extensions
 {
@@ -106,6 +108,56 @@ namespace G4.Plugins.Google.Extensions
 
                 // Return all collected tasks.
                 return taskModels;
+            }
+
+            /// <summary>
+            /// Searches Gmail messages until a subject matches the specified regular expression
+            /// or the timeout expires.
+            /// </summary>
+            /// <param name="pattern">Regular expression pattern used to match the message subject.</param>
+            /// <param name="timeout">Maximum amount of time allowed for paging through Gmail messages while searching.</param>
+            /// <returns>The first <see cref="MessageModel"/> whose <c>Subject</c> header matches the specified pattern.</returns>
+            public MessageModel FindMail(
+                [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
+                TimeSpan timeout)
+            {
+                // Iterate through message pages until a match is found or the timeout expires.
+                var nextPageToken = string.Empty;
+                var expired = DateTime.UtcNow.Add(timeout);
+
+                do
+                {
+                    // Retrieve the current page of message identifiers.
+                    var messagesPage = string.IsNullOrWhiteSpace(nextPageToken)
+                        ? adapter.Gmail.Messages.Get()
+                        : adapter.Gmail.Messages.Get(query: new() { PageToken = nextPageToken });
+
+                    // Stop if the current page does not contain any messages.
+                    if (messagesPage?.Messages == null || messagesPage.Messages.Length == 0)
+                    {
+                        break;
+                    }
+
+                    // Load each full message and test its Subject header against the regex pattern.
+                    foreach (var message in messagesPage.Messages)
+                    {
+                        var messageModel = adapter.Gmail.Messages.Get(message.Id);
+                        var subject = GetHeader(messageModel: messageModel, name: "Subject");
+
+                        if (Regex.IsMatch(input: subject, pattern))
+                        {
+                            return messageModel;
+                        }
+                    }
+
+                    // Move to the next page, if available.
+                    nextPageToken = messagesPage.NextPageToken;
+                }
+                while (!string.IsNullOrWhiteSpace(nextPageToken) && DateTime.UtcNow < expired);
+
+                // Treat a missing match as a hard failure so callers do not continue with an invalid result.
+                throw new InvalidOperationException(
+                    message: $"No matching mail subject was found for pattern: '{pattern}'.");
             }
 
             /// <summary>
@@ -486,6 +538,125 @@ namespace G4.Plugins.Google.Extensions
                     // Return the encoded query parameter pair.
                     return $"{Uri.EscapeDataString(name)}={Uri.EscapeDataString(stringValue)}";
                 }
+            }
+        }
+
+        extension(MessageModel message)
+        {
+            /// <summary>
+            /// Retrieves the Bcc header value from the message.
+            /// </summary>
+            /// <returns>The Bcc header value, or an empty string when the header is not present.</returns>
+            public string GetBcc()
+            {
+                return GetHeader(messageModel: message, name: "Bcc");
+            }
+
+            /// <summary>
+            /// Retrieves the Cc header value from the message.
+            /// </summary>
+            /// <returns>The Cc header value, or an empty string when the header is not present.</returns>
+            public string GetCc()
+            {
+                return GetHeader(messageModel: message, name: "Cc");
+            }
+
+            /// <summary>
+            /// Retrieves the From header value from the message.
+            /// </summary>
+            /// <returns>The From header value, or an empty string when the header is not present.</returns>
+            public string GetFrom()
+            {
+                return GetHeader(messageModel: message, name: "From");
+            }
+
+            /// <summary>
+            /// Retrieves the Subject header value from the message.
+            /// </summary>
+            /// <returns>The Subject header value, or an empty string when the header is not present.</returns>
+            public string GetSubject()
+            {
+                return GetHeader(messageModel: message, name: "Subject");
+            }
+
+            /// <summary>
+            /// Retrieves the To header value from the message.
+            /// </summary>
+            /// <returns>The To header value, or an empty string when the header is not present.</returns>
+            public string GetTo()
+            {
+                return GetHeader(messageModel: message, name: "To");
+            }
+
+            /// <summary>
+            /// Reads the message body from the Gmail message payload.
+            /// </summary>
+            /// <returns>The decoded message body content. Plain text is preferred when available, otherwise HTML content is returned. Returns an empty string when no body exists.</returns>
+            public string Read()
+            {
+                // Use case-insensitive comparison when matching MIME types because
+                // Gmail responses may vary in casing depending on the sender/client.
+                const StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+
+                // Gmail messages usually contain their content in the payload parts collection.
+                // Each part represents a MIME section such as plain text, HTML, or attachments.
+                // We first try to locate a "text/plain" part because it is the safest and most
+                // predictable representation of the message content.
+                var plainTextPart = message
+                    .Payload
+                    .Parts?
+                    .FirstOrDefault(p => p.MimeType.Equals("text/plain", comparison));
+
+                // If plain text is not available, attempt to locate an HTML body instead.
+                // Many emails only include HTML content and omit a plain text alternative.
+                var htmlPart = message
+                    .Payload
+                    .Parts?
+                    .FirstOrDefault(p => p.MimeType.Equals("text/html", comparison));
+
+                // When a plain text body is present, decode and return it.
+                if (plainTextPart != null)
+                {
+                    return DecodeBase64(plainTextPart.Body.Data);
+                }
+
+                // If plain text is not available but HTML exists, decode and return it instead.
+                if (htmlPart != null)
+                {
+                    return DecodeBase64(htmlPart.Body.Data);
+                }
+
+                // When neither plain text nor HTML bodies exist, return an empty string.
+                // This can occur for messages containing only attachments or unusual MIME structures.
+                return string.Empty;
+
+                // Local helper used to decode Gmail's Base64URL encoded message body content.
+                // Gmail replaces '+' with '-' and '/' with '_' in Base64 strings, so we normalize
+                // the value before performing the standard Base64 decoding.
+                static string DecodeBase64(string base64Data)
+                {
+                    // Convert Base64URL format to standard Base64 format.
+                    var normalized = base64Data
+                        .Replace('-', '+')
+                        .Replace('_', '/');
+
+                    // Decode the Base64 content into raw bytes.
+                    var data = Convert.FromBase64String(normalized);
+
+                    // Convert the decoded byte array into a UTF-8 string.
+                    return System.Text.Encoding.UTF8.GetString(data);
+                }
+            }
+
+            // Retrieves a header value from the Gmail message payload.
+            private static string GetHeader(MessageModel messageModel, string name)
+            {
+                // Search the message payload headers for the specified header name.
+                return messageModel
+                    .Payload
+                    .Headers
+                    .FirstOrDefault(i => i.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?
+                    .Value ?? string.Empty;
             }
         }
     }
