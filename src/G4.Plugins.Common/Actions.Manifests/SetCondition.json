@@ -97,7 +97,10 @@
 				],
 				"canEditBranches": false,
 				"componentType": "switch",
-				"iconProvider": "arrows-split-up-and-left",
+				"iconProvider": {
+					"name": "arrows-split-up-and-left",
+					"svg": null
+				},
 				"model": "SwitchRuleModel"
 			}
 		}

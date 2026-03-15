@@ -88,7 +88,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "google",
+				"iconProvider": {
+					"name": "google",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}

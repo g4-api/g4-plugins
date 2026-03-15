@@ -108,7 +108,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "openai",
+				"iconProvider": {
+					"name": "openai",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}

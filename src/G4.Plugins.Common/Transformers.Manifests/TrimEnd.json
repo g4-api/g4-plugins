@@ -11,7 +11,10 @@
 			"sequentialWorkflow": {
 				"$type": "Transformer",
 				"componentType": "task",
-				"iconProvider": "text-height",
+				"iconProvider": {
+					"name": "text-height",
+					"svg": null
+				},
 				"model": "TransformerRuleModel"
 			}
 		}
@@ -127,6 +130,9 @@
 			"type": "String"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Transformer",
 	"properties": [
 		{
@@ -168,9 +174,6 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
 		"Removes trailing whitespace characters or specified characters from the end of a given text input."
 	]

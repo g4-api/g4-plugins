@@ -81,7 +81,10 @@
 				"$type": "Action",
 				"componentSubType": "loop",
 				"componentType": "container",
-				"iconProvider": "repeat",
+				"iconProvider": {
+					"name": "repeat",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}

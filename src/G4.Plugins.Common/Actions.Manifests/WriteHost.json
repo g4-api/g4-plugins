@@ -96,7 +96,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "terminal",
+				"iconProvider": {
+					"name": "terminal",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}

@@ -10,7 +10,10 @@
 		"integration": {
 			"sequentialWorkflow": {
 				"componentType": "task",
-				"iconProvider": "mobile-task",
+				"iconProvider": {
+					"name": "mobile-task",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}

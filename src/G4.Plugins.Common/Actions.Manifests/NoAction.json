@@ -106,7 +106,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "container",
-				"iconProvider": "boxes-packing",
+				"iconProvider": {
+					"name": "boxes-packing",
+					"svg": null
+				},
 				"label": "Actions Group",
 				"model": "ActionRuleModel"
 			}

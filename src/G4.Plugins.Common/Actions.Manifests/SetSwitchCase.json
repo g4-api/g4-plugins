@@ -112,7 +112,10 @@
 				],
 				"canEditBranches": true,
 				"componentType": "switch",
-				"iconProvider": "shuffle",
+				"iconProvider": {
+					"name": "shuffle",
+					"svg": null
+				},
 				"model": "SwitchRuleModel"
 			}
 		}

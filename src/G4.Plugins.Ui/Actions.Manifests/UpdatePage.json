@@ -15,7 +15,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "arrow-rotate-right",
+				"iconProvider": {
+					"name": "arrow-rotate-right",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}

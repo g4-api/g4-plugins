@@ -16,7 +16,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "clone",
+				"iconProvider": {
+					"name": "clone",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
