@@ -232,7 +232,7 @@
 		}
 	],
 	"key": "XmlDataCollector",
-	"manifestVersion": 4,
+	"version": 4,
 	"platforms": [
 		"Any"
 	],

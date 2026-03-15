@@ -64,7 +64,7 @@
 		}
 	],
 	"key": "ElementNotExists",
-	"manifestVersion": 4,
+	"version": 4,
 	"pluginType": "Assertion",
 	"properties": [
 		{

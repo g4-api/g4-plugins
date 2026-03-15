@@ -266,7 +266,7 @@
 		}
 	],
 	"key": "ReadJson",
-	"manifestVersion": 4,
+	"version": 4,
 	"OutputParameters": [
 		{
 			"description": [

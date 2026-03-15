@@ -170,7 +170,7 @@
 		}
 	],
 	"key": "User",
-	"manifestVersion": 4,
+	"version": 4,
 	"platforms": [
 		"Windows"
 	],

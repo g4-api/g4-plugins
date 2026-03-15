@@ -103,7 +103,7 @@
 		}
 	],
 	"key": "ClearLines",
-	"manifestVersion": 4,
+	"version": 4,
 	"outputParameters": [
 		{
 			"description": [

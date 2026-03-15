@@ -70,7 +70,7 @@
 		}
 	],
 	"key": "KeyboardVisible",
-	"manifestVersion": 4,
+	"version": 4,
 	"pluginType": "Assertion",
 	"protocol": {
 		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/is-keyboard-shown/#http-api-specifications",

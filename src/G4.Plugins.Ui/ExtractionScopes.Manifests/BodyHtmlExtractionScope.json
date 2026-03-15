@@ -106,7 +106,7 @@
 		}
 	],
 	"key": "BodyHtml",
-	"manifestVersion": 4,
+	"version": 4,
 	"pluginType": "ExtractionScope",
 	"properties": [
 		{

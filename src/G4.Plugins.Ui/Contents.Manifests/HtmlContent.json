@@ -125,7 +125,7 @@
 		}
 	],
 	"key": "HtmlContent",
-	"manifestVersion": 4,
+	"version": 4,
 	"parameters": [],
 	"pluginType": "Content",
 	"properties": [

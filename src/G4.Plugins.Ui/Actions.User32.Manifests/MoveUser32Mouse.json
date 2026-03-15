@@ -84,7 +84,7 @@
 		}
 	],
 	"key": "MoveUser32Mouse",
-	"manifestVersion": 4,
+	"version": 4,
 	"parameters": [
 		{
 			"default": "0",

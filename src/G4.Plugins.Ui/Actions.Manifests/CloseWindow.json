@@ -80,7 +80,7 @@
 		}
 	],
 	"key": "CloseWindow",
-	"manifestVersion": 4,
+	"version": 4,
 	"pluginType": "Action",
 	"properties": [
 		{

@@ -85,7 +85,7 @@
 		}
 	],
 	"key": "SendUser32Keys",
-	"manifestVersion": 4,
+	"version": 4,
 	"parameters": [
 		{
 			"description": [

@@ -1338,7 +1338,7 @@
 		}
 	],
 	"key": "CopyParameter",
-	"manifestVersion": 4,
+	"version": 4,
 	"parameters": [
 		{
 			"default": "SystemParameters",

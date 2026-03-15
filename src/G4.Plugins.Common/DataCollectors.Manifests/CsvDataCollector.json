@@ -225,7 +225,7 @@
 		}
 	],
 	"key": "CsvDataCollector",
-	"manifestVersion": 4,
+	"version": 4,
 	"properties": [
 		{
 			"description": [

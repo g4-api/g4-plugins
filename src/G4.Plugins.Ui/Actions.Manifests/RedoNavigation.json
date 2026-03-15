@@ -95,7 +95,7 @@
 		}
 	],
 	"key": "RedoNavigation",
-	"manifestVersion": 4,
+	"version": 4,
 	"parameters": [
 		{
 			"default": "0",

@@ -163,7 +163,7 @@
 		}
 	],
 	"key": "GreaterEqual",
-	"manifestVersion": 4,
+	"version": 4,
 	"parameters": [
 		{
 			"description": [

@@ -639,7 +639,7 @@
 		}
 	],
 	"key": "Resolve-MathExpression",
-	"manifestVersion": 4,
+	"version": 4,
 	"parameters": [
 		{
 			"description": [

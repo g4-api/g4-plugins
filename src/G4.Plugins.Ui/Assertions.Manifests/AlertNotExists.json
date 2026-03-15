@@ -61,7 +61,7 @@
 		}
 	],
 	"key": "AlertNotExists",
-	"manifestVersion": 4,
+	"version": 4,
 	"pluginType": "Assertion",
 	"protocol": {
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#user-prompts",
