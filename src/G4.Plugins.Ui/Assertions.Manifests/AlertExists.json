@@ -61,7 +61,7 @@
 		}
 	],
 	"key": "AlertExists",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"protocol": {
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#user-prompts",
@@ -76,5 +76,6 @@
 		"The `AlertExists` plugin performs assertions within automation scripts to check for the presence of alert dialogs.",
 		"In robotic process automation (RPA), it ensures alerts are correctly triggered during processes.",
 		"In automation testing, it validates the presence of alerts during functional, error scenario, and end-to-end testing."
-	]
+	],
+	"version": 4
 }

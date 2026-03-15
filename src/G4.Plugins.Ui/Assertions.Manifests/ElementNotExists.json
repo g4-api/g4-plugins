@@ -64,7 +64,7 @@
 		}
 	],
 	"key": "ElementNotExists",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"properties": [
 		{
@@ -97,5 +97,6 @@
 		"The `ElementNotExists` plugin asserts that a specified web element does not exist within an application or web browser during automated tasks, ensuring that automation scripts validate the absence of elements.",
 		"In robotic process automation (RPA), it confirms the correct elements are absent, preventing unnecessary interactions and enhancing workflow efficiency.",
 		"In automation testing, it validates the non-existence of elements, ensuring accurate user interaction flows and test outcomes."
-	]
+	],
+	"version": 4
 }

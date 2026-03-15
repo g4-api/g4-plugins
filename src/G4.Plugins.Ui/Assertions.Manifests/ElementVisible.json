@@ -65,7 +65,7 @@
 		}
 	],
 	"key": "ElementVisible",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"properties": [
 		{
@@ -100,5 +100,6 @@
 		"The `ElementStale` plugin asserts that a specified web element has become stale within a web page during automated tasks, ensuring that automation scripts validate the removal of elements from the DOM.",
 		"In robotic process automation (RPA), it confirms that elements are correctly removed, enabling accurate workflow control and progression.",
 		"In automation testing, it validates the staleness of elements, ensuring accurate handling of dynamic content and workflow outcomes."
-	]
+	],
+	"version": 4
 }

@@ -72,7 +72,7 @@
 		}
 	],
 	"key": "SwitchWindow",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -97,5 +97,6 @@
 		"The `SwitchWindow` plugin automates the process of switching between different browser windows or tabs during automation tasks.",
 		"In robotic process automation (RPA), it facilitates navigation and interaction across multiple windows or tabs within workflows.",
 		"In automation testing, it enables comprehensive test coverage by allowing the automation scripts to switch context as needed."
-	]
+	],
+	"version": 4
 }

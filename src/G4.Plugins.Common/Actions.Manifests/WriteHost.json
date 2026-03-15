@@ -197,7 +197,7 @@
 		}
 	],
 	"key": "WriteHost",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -222,5 +222,6 @@
 		"`WriteHost` prints messages to the console while a task runs so you can see what happened.",
 		"It outputs your message to the host stream for immediate visibility during execution.",
 		"This makes it easy to follow steps, spot problems, and capture important notes in real time."
-	]
+	],
+	"version": 4
 }

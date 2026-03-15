@@ -110,7 +110,7 @@
 		}
 	],
 	"key": "Application",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"default": "SystemParameters",
@@ -150,5 +150,6 @@
 	],
 	"summary": [
 		"The `SetApplicationParameter` plugin sets application parameters within automation workflows, enhancing configuration management."
-	]
+	],
+	"version": 4
 }

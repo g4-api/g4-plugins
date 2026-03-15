@@ -68,7 +68,7 @@
 		}
 	],
 	"key": "Lower",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -97,5 +97,6 @@
 	],
 	"summary": [
 		"The `Lower` plugin evaluates whether one numeric value is less than another numeric value, providing essential functionality for conditional logic in automation workflows and testing scenarios."
-	]
+	],
+	"version": 4
 }

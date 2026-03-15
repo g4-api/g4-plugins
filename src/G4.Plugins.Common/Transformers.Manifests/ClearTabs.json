@@ -103,7 +103,7 @@
 		}
 	],
 	"key": "ClearTabs",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -161,5 +161,6 @@
 	},
 	"summary": [
 		"Removes all tab characters from a given text input."
-	]
+	],
+	"version": 4
 }

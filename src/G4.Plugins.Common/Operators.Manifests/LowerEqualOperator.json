@@ -208,7 +208,7 @@
 		}
 	],
 	"key": "LowerEqual",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -245,5 +245,6 @@
 		"The LowerEqualOperator plugin compares two values and checks whether the left value is less than or equal to the right value.",
 		"It converts both inputs to numbers and returns false if either value cannot be parsed.",
 		"This operator is used in conditions and rules to safely evaluate numeric thresholds and comparisons during automation."
-	]
+	],
+	"version": 4
 }

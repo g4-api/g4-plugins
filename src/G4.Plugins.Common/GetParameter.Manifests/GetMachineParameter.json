@@ -158,7 +158,7 @@
 		}
 	],
 	"key": "Machine",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Windows"
 	],
@@ -183,5 +183,6 @@
 		"If a setting is missing, it gives back nothing so workflows know it’s not set.",
 		"It makes the setting available for later steps to use in the process.",
 		"Workflows and tests can use it to set up or check settings before they run."
-	]
+	],
+	"version": 4
 }

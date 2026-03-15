@@ -125,7 +125,7 @@
 		}
 	],
 	"key": "HtmlContent",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Content",
 	"properties": [
@@ -203,5 +203,6 @@
 	],
 	"summary": [
 		"Extracts content from HTML documents using XPath selectors, with optional attribute selection, regular expressions, and data type conversion."
-	]
+	],
+	"version": 4
 }

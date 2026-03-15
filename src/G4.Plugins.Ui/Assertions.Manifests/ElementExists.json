@@ -64,7 +64,7 @@
 		}
 	],
 	"key": "ElementExists",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"properties": [
 		{
@@ -98,5 +98,6 @@
 		"The `ElementExists` plugin asserts that a specified web element exists within a web browser during automated tasks, ensuring that automation scripts validate the presence of elements.",
 		"In robotic process automation (RPA), it confirms the correct elements are present, allowing necessary interactions and enhancing workflow efficiency.",
 		"In automation testing, it validates the presence of elements, ensuring accurate user interaction flows and test outcomes."
-	]
+	],
+	"version": 4
 }

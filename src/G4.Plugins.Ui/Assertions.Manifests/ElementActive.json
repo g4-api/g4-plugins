@@ -65,7 +65,7 @@
 		}
 	],
 	"key": "ElementActive",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"properties": [
 		{
@@ -99,5 +99,6 @@
 		"The `ElementActive` plugin asserts that a specified web element is currently active (focused) within a web browser during automated tasks, ensuring that automation scripts validate the active state of elements.",
 		"In robotic process automation (RPA), it confirms the correct elements are active before interactions, enhancing the reliability of automated workflows.",
 		"In automation testing, it validates the active state of elements, ensuring accurate user interaction flows and test outcomes."
-	]
+	],
+	"version": 4
 }

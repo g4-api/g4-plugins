@@ -109,7 +109,7 @@
 		}
 	],
 	"key": "Process",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -140,5 +140,6 @@
 	],
 	"summary": [
 		"The `SetProcessParameter` plugin sets process-level parameters within automation workflows, enhancing configuration management."
-	]
+	],
+	"version": 4
 }

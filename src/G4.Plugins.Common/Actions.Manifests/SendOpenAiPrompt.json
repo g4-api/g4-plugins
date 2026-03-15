@@ -366,7 +366,7 @@
 		}
 	],
 	"key": "SendOpenAiPrompt",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -548,5 +548,6 @@
 		"SendOpenAiPrompt sends your messages to OpenAI's chat service and shows the replies while keeping track of each person's past messages.",
 		"You can give it a custom starting instruction, set options like how long the answer should be, which version to use, and how creative it should be, and start a new chat when you want.",
 		"It also picks out any hidden `think` notes in the reply and saves both those notes and the final answer for later use."
-	]
+	],
+	"version": 4
 }

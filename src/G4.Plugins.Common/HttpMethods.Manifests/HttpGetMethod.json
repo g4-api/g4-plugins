@@ -328,7 +328,7 @@
 		}
 	],
 	"key": "Get",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -619,5 +619,6 @@
 		"The Get plugin sends HTTP GET requests to servers or APIs to retrieve data with dynamic URLs, custom headers, and payload handling.",
 		"It captures response details for use in downstream automation steps and RPA workflows, enabling real-time access to resources like customer or product records.",
 		"It streamlines automation testing by verifying data retrieval accuracy and ensuring reliable regression testing of API endpoints."
-	]
+	],
+	"version": 4
 }

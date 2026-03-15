@@ -208,7 +208,7 @@
 		}
 	],
 	"key": "Application",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"default": "SystemParameters",
@@ -255,5 +255,6 @@
 		"GetApplicationParameter gets settings that apps share across all runs.",
 		"It grabs the right values for each setup, like server addresses or access codes.",
 		"It helps teams keep settings in one place and make sure each run has the right information."
-	]
+	],
+	"version": 4
 }

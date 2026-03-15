@@ -113,7 +113,7 @@
 		}
 	],
 	"key": "OpenUrl",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Action",
 	"properties": [
@@ -170,5 +170,6 @@
 	"summary": [
 		"The `OpenUrl` plugin automates the navigation to specified URLs within the browser, enabling seamless integration into multi-page workflows and testing scenarios. ",
 		"It supports retrieving URLs from web elements, extracting with regular expressions, and navigating directly to specified URLs."
-	]
+	],
+	"version": 4
 }

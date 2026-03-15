@@ -144,7 +144,7 @@
 		}
 	],
 	"key": "StopFlow",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [],
 	"platforms": [
 		"Any"
@@ -159,5 +159,6 @@
 		"StopFlow cleanly ends the current browser session by disposing the WebDriver and removing it from the registry.",
 		"It’s safe to call multiple times and requires no arguments.",
 		"Use it at the end of workflows or before starting a fresh session to keep resources tidy."
-	]
+	],
+	"version": 4
 }

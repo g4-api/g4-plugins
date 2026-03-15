@@ -84,7 +84,7 @@
 		}
 	],
 	"key": "MoveUser32Mouse",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "0",
@@ -221,5 +221,6 @@
 		"The `MoveUser32Mouse` plugin moves the mouse pointer using the Windows User32 API. ",
 		"It supports moving to absolute coordinates on the viewport as well as relative movement within a target UI element using configurable offsets and alignment. ",
 		"This plugin is ideal for desktop UI automation and testing on Windows platforms."
-	]
+	],
+	"version": 4
 }

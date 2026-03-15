@@ -113,7 +113,7 @@
 		}
 	],
 	"key": "User",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -144,5 +144,6 @@
 	],
 	"summary": [
 		"The `SetUserParameter` plugin sets user-level parameters within automation workflows, enhancing configuration management."
-	]
+	],
+	"version": 4
 }

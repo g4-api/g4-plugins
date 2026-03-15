@@ -330,7 +330,7 @@
 		}
 	],
 	"key": "New-Guid",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"default": "D",
@@ -409,5 +409,6 @@
 		"It supports multiple output formats (D, N, B, P, X) and custom regex extraction to tailor GUID values to different scenarios.",
 		"These unique identifiers enable reliable element identification, transaction tracking, and test data generation within RPA and testing frameworks.",
 		"By automating GUID creation at runtime, it reduces manual setup and prevents identifier collisions across tasks."
-	]
+	],
+	"version": 4
 }

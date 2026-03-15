@@ -1390,7 +1390,7 @@
 		}
 	],
 	"key": "Format-Number",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -1504,5 +1504,6 @@
 		"It supports locale-based formatting and custom patterns to ensure numbers display correctly in different regions.",
 		"This plugin makes automation workflows produce consistent, readable numbers in reports, logs, and interfaces.",
 		"It reduces manual formatting work and minimizes errors in numeric representation across diverse locales."
-	]
+	],
+	"version": 4
 }

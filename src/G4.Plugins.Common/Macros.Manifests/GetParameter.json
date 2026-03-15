@@ -10,6 +10,7 @@
 	"categories": [
 		"DataManagement"
 	],
+	"namespace": "G4.Plugins.Common",
 	"context": {
 		"integration": {
 			"github": {

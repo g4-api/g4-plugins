@@ -109,7 +109,7 @@
 		}
 	],
 	"key": "TrimStart",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -177,5 +177,6 @@
 	},
 	"summary": [
 		"Removes leading whitespace characters or specified characters from the beginning of a given text input."
-	]
+	],
+	"version": 4
 }

@@ -84,7 +84,7 @@
 		}
 	],
 	"key": "InvokeContextClick",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -116,5 +116,6 @@
 		"The `InvokeContextClick` plugin is designed to facilitate the interaction with web elements through context-click (right-click) actions. It can perform simple context-clicks as well as handle complex interactions with context menus.",
 		"In robotic process automation (RPA), it is used for automating user interactions such as opening context menus and performing actions within those menus.",
 		"In automation testing, it is invaluable for verifying user interface interactions, testing dynamic behaviors triggered by context-clicks, and ensuring that context-click functionalities remain consistent across different versions of the application."
-	]
+	],
+	"version": 4
 }

@@ -64,7 +64,7 @@
 		}
 	],
 	"key": "ElementNotSelected",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"properties": [
 		{
@@ -98,5 +98,6 @@
 		"The `ElementNotSelected` plugin asserts that a specified web element is not selected within an application or web browser during automated tasks, ensuring that automation scripts validate the non-selection of elements.",
 		"In robotic process automation (RPA), it confirms that elements remain unselected, preventing unintended actions and enhancing workflow accuracy.",
 		"In automation testing, it validates the non-selection of elements, ensuring accurate user interaction flows and test outcomes."
-	]
+	],
+	"version": 4
 }

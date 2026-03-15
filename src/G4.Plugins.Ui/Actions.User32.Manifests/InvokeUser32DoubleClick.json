@@ -74,7 +74,7 @@
 		}
 	],
 	"key": "InvokeUser32DoubleClick",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "0",
@@ -220,5 +220,6 @@
 		"The `InvokeUser32DoubleClick` plugin performs double-click actions using the Windows User32 API. ",
 		"It supports both coordinate-based double-clicks when no target element is provided and element-specific double-clicks with configurable offsets and alignment. ",
 		"This plugin is designed for desktop UI automation and testing on Windows platforms."
-	]
+	],
+	"version": 4
 }

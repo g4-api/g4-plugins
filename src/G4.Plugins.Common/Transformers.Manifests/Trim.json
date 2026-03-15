@@ -117,7 +117,7 @@
 		}
 	],
 	"key": "Trim",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -185,5 +185,6 @@
 	},
 	"summary": [
 		"Removes leading and trailing whitespace characters or specified characters from a given text input."
-	]
+	],
+	"version": 4
 }

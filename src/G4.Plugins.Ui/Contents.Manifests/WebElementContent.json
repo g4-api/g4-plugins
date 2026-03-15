@@ -133,7 +133,7 @@
 		}
 	],
 	"key": "WebElementContent",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Content",
 	"properties": [
@@ -222,5 +222,6 @@
 	],
 	"summary": [
 		"Extracts content from elements in web, mobile, and desktop applications using any WebDriver locator, with optional attribute selection, regular expressions, and data type conversion."
-	]
+	],
+	"version": 4
 }

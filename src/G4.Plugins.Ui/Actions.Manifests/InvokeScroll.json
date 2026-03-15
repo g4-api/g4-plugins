@@ -153,7 +153,7 @@
 		}
 	],
 	"key": "InvokeScroll",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -239,5 +239,6 @@
 	"summary": [
 		"The `InvokeScroll` plugin automates scrolling actions on web pages, enabling precise control over vertical and horizontal scrolling within web pages or specific elements. ",
 		"It supports a variety of scrolling behaviors, making it an essential tool for both robotic process automation (RPA) and automation testing scenarios where interaction with off-screen elements or dynamic content is required."
-	]
+	],
+	"version": 4
 }

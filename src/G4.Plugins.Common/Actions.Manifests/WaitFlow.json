@@ -365,7 +365,7 @@
 		}
 	],
 	"key": "WaitFlow",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -461,5 +461,6 @@
 		"WaitFlow pauses a task until something you’re watching for happens or until a set time is up.",
 		"It waits for simple checks to pass or stops waiting after a timer so everything happens at the right moment.",
 		"You can use it to pause until an item shows up, add a delay, or keep steps in sync when some things happen later than others."
-	]
+	],
+	"version": 4
 }

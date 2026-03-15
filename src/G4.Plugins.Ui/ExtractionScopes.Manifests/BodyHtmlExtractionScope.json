@@ -106,7 +106,7 @@
 		}
 	],
 	"key": "BodyHtml",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "ExtractionScope",
 	"properties": [
 		{
@@ -164,5 +164,6 @@
 		"The `BodyHtml` plugin extracts fully rendered, static content from the body of an HTML document, focusing on XPath-based data collection.",
 		"In robotic process automation (RPA), it ensures comprehensive data extraction from web pages, including dynamically generated content.",
 		"In automation testing, it validates the final rendered state of a page, supporting regression and load testing scenarios."
-	]
+	],
+	"version": 4
 }

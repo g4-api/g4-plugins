@@ -163,7 +163,7 @@
 		}
 	],
 	"key": "GreaterEqual",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -198,5 +198,6 @@
 		"The GreaterEqualOperator plugin checks whether the first number is greater than or equal to the second number.",
 		"It outputs a true or false result to drive conditional logic in automation workflows.",
 		"This enables workflows to adapt based on numeric thresholds."
-	]
+	],
+	"version": 4
 }

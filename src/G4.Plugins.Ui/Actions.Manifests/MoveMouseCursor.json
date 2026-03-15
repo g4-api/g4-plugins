@@ -108,7 +108,7 @@
 		}
 	],
 	"key": "MoveMouseCursor",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -193,5 +193,6 @@
 	"summary": [
 		"The `MoveMouseCursor` plugin automates mouse cursor movements, providing precise control over cursor positioning for interacting with specific elements or coordinates. ",
 		"It supports element targeting, coordinate-based movements, and the use of the 'Origin' parameter to define the reference point, which can be set to either 'Pointer' (relative to the current position) or 'Viewport' (relative to the top-left corner of the viewport)."
-	]
+	],
+	"version": 4
 }

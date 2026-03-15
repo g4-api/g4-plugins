@@ -225,7 +225,11 @@
 		}
 	],
 	"key": "CsvDataCollector",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "DataCollector",
 	"properties": [
 		{
 			"description": [
@@ -256,10 +260,6 @@
 			"type": "DataCollector"
 		}
 	],
-	"platforms": [
-		"Any"
-	],
-	"pluginType": "DataCollector",
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
@@ -268,5 +268,6 @@
 		"The CsvDataCollector plugin writes data records into a CSV file either as they are collected or all at once at the end of a run.",
 		"It creates column headers automatically based on your data and lets you select which fields to include.",
 		"Storing data in CSV format makes it easy to share, analyze, and feed into other automation tasks."
-	]
+	],
+	"version": 4
 }

@@ -237,7 +237,7 @@
 		}
 	],
 	"key": "SqLightDataCollector",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -289,5 +289,6 @@
 		"The SqLightDataCollector plugin writes extraction outputs into a SQLite table using the provided connection string.",
 		"Supports streaming inserts for large data sets or bulk inserts in a single transaction.",
 		"Automatically creates the database file and table if they don’t exist."
-	]
+	],
+	"version": 4
 }

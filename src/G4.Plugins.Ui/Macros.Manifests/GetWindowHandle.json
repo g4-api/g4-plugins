@@ -67,7 +67,7 @@
 		}
 	],
 	"key": "Get-WindowHandle",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -99,5 +99,6 @@
 		"The `Get-WindowHandle` plugin retrieves the window handle (unique identifier) of the current browser window or a specific window based on its index.",
 		"In robotic process automation (RPA), it facilitates dynamic window handling and error recovery by identifying and interacting with specific browser windows or tabs.",
 		"In automation testing, it supports cross-browser and parallel testing by accurately managing multiple windows or tabs."
-	]
+	],
+	"version": 4
 }

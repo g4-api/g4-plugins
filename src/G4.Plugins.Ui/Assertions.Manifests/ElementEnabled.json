@@ -65,7 +65,7 @@
 		}
 	],
 	"key": "ElementEnabled",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"properties": [
 		{
@@ -99,5 +99,6 @@
 		"The `ElementEnabled` plugin asserts that a specified web element is currently enabled within a web browser during automated tasks, ensuring that automation scripts validate the enabled state of elements.",
 		"In robotic process automation (RPA), it confirms the correct elements are enabled, allowing necessary interactions and enhancing workflow efficiency.",
 		"In automation testing, it validates the enabled state of elements, ensuring accurate user interaction flows and test outcomes."
-	]
+	],
+	"version": 4
 }

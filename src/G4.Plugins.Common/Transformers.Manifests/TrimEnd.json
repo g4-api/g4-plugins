@@ -108,7 +108,7 @@
 		}
 	],
 	"key": "TrimEnd",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -176,5 +176,6 @@
 	},
 	"summary": [
 		"Removes trailing whitespace characters or specified characters from the end of a given text input."
-	]
+	],
+	"version": 4
 }

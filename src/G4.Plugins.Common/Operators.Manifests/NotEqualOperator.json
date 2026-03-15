@@ -68,7 +68,7 @@
 		}
 	],
 	"key": "NotEqual",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -97,5 +97,6 @@
 	],
 	"summary": [
 		"The `NotEqual` plugin evaluates whether two string values are not equal, providing essential functionality for conditional logic in automation workflows and testing scenarios."
-	]
+	],
+	"version": 4
 }

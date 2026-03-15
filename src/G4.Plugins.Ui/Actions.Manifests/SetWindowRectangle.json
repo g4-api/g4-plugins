@@ -104,7 +104,7 @@
 		}
 	],
 	"key": "SetWindowRectangle",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -164,5 +164,6 @@
 		"The `SetWindowRectangle` plugin automates the resizing and repositioning of the browser window, providing precise control over its size and position.",
 		"In robotic process automation (RPA), it optimizes the layout of the browser window for better visibility and interaction.",
 		"In automation testing, it ensures consistent testing conditions and verifies the responsiveness and layout behavior of web applications."
-	]
+	],
+	"version": 4
 }

@@ -639,7 +639,7 @@
 		}
 	],
 	"key": "Resolve-MathExpression",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -780,5 +780,6 @@
 		"The ResolveMathExpression plugin lets automation workflows solve math expressions using input values, supporting operations like addition, subtraction, multiplication, division, exponentiation, and modulus.",
 		"It allows sorting numbers, rounding results, and extracting parts of the output with a pattern.",
 		"This helps automate complex calculations in RPA or testing scenarios, making workflows more flexible and accurate."
-	]
+	],
+	"version": 4
 }

@@ -99,7 +99,7 @@
 		}
 	],
 	"key": "PageSource",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "ExtractionScope",
 	"properties": [
 		{
@@ -158,5 +158,6 @@
 		"The `PageSource` plugin extracts data from a web page's static HTML content as initially loaded, focusing on XPath-based element selection.",
 		"In robotic process automation (RPA), it is used for extracting static content from web pages where dynamic content is not required.",
 		"In automation testing, it validates the core HTML structure of a page, supporting scenarios where the integrity of static content is critical."
-	]
+	],
+	"version": 4
 }

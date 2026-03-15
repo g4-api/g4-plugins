@@ -454,7 +454,7 @@
 		}
 	],
 	"key": "Delete",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -756,5 +756,6 @@
 		"It lets you choose where to send the request and what information to include.",
 		"It helps keep systems tidy by removing old or unwanted information.",
 		"It can also check that data removal works correctly during testing."
-	]
+	],
+	"version": 4
 }

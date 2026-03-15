@@ -122,7 +122,7 @@
 		}
 	],
 	"key": "DriverTypeName",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -165,5 +165,6 @@
 		"The `DriverTypeName` plugin asserts the type name of the WebDriver used in automation tasks, ensuring that the correct driver is in use.",
 		"In robotic process automation (RPA), it confirms the WebDriver type, ensuring that tasks are executed in the intended browser.",
 		"In automation testing, it supports cross-browser testing by validating that tests are running in the correct browser, enhancing test coverage and consistency."
-	]
+	],
+	"version": 4
 }

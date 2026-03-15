@@ -171,7 +171,7 @@
 		}
 	],
 	"key": "Process",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -196,5 +196,6 @@
 		"GetParameter grabs values stored in the G4 Hub, like temporary codes, and shares them across workflows until the hub restarts.",
 		"It updates values live during a run and makes them available for other steps to use.",
 		"Workflows can exchange data without external files, and tests can set up or check hub settings before they start."
-	]
+	],
+	"version": 4
 }

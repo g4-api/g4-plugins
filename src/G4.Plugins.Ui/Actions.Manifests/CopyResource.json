@@ -97,7 +97,7 @@
 		}
 	],
 	"key": "CopyResource",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"outputParameters": [
 		{
 			"description": [
@@ -185,5 +185,6 @@
 		"Key features include downloading data from specified endpoints, supporting parallel processing to handle multiple resources concurrently, allowing custom paths for saving resources, and using regular expressions for URL extraction.",
 		"In RPA, it is used for data collection, automating the download of necessary resources as part of a larger workflow. It helps in collecting resources like images or documents from web pages for further processing or storage.",
 		"In automation testing, it supports resource validation, performance testing, and regression testing. It allows downloading and validating resources to ensure they are correctly served by the web application, assessing the performance of resource download times under different conditions, and ensuring resource download functionality works as expected after changes or updates to the web application."
-	]
+	],
+	"version": 4
 }

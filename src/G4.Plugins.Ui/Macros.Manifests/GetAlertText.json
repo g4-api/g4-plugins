@@ -61,7 +61,7 @@
 		}
 	],
 	"key": "Get-AlertText",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "(?s).*",
@@ -86,5 +86,6 @@
 		"The `Get-AlertText` plugin retrieves the text content of alert dialogs encountered during automation workflows.",
 		"In robotic process automation (RPA), it captures alert text for processing, allowing dynamic responses.",
 		"In automation testing, it validates and handles alert messages to ensure proper application behavior."
-	]
+	],
+	"version": 4
 }

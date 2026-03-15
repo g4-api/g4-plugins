@@ -298,7 +298,7 @@
 		}
 	],
 	"key": "InvokeForLoop",
-	"version": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -333,5 +333,6 @@
 		"The InvokeForLoop tool repeats a series of steps a set number of times.",
 		"You simply specify how many times to run your tasks, and it handles the rest.",
 		"This makes your automation more reliable and cuts out manual repetition."
-	]
+	],
+	"version": 4
 }

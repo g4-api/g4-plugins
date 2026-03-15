@@ -102,7 +102,7 @@
 		}
 	],
 	"key": "HideSoftKeyboard",
-	"version": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -199,5 +199,6 @@
 		"The `HideSoftKeyboard` plugin automates the hiding of the on-screen keyboard on a mobile device.",
 		"In robotic process automation (RPA), it simulates human-like interactions by managing the keyboard visibility after data entry, optimizing the automation flows.",
 		"In automation testing, it ensures UI stability by dynamically controlling the keyboard visibility, leading to comprehensive test coverage, especially in input scenarios."
-	]
+	],
+	"version": 4
 }
