@@ -87,7 +87,7 @@
 		}
 	],
 	"key": "InvokeDoubleClick",
-	"manifestVersion": 1,
+	"version": "4",
 	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Action",
 	"properties": [

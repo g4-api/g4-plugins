@@ -256,5 +256,5 @@
 		"It grabs the right values for each setup, like server addresses or access codes.",
 		"It helps teams keep settings in one place and make sure each run has the right information."
 	],
-	"version": 4
+	"version": "4"
 }

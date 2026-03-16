@@ -165,5 +165,5 @@
 		"In robotic process automation (RPA), this plugin is useful for performing custom actions on elements, extracting data, and dynamically interacting with elements based on the results of the script execution.",
 		"In automation testing, the `InvokeScript` plugin is essential for validating script execution, testing the effects of scripts on the environment, and creating custom test scenarios by running environment-specific scripts."
 	],
-	"version": 4
+	"version": "4"
 }

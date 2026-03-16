@@ -101,5 +101,5 @@
 		"In robotic process automation (RPA), it confirms that elements are correctly removed, enabling accurate workflow control and progression.",
 		"In automation testing, it validates the staleness of elements, ensuring accurate handling of dynamic content and workflow outcomes."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -160,5 +160,5 @@
 		"It’s safe to call multiple times and requires no arguments.",
 		"Use it at the end of workflows or before starting a fresh session to keep resources tidy."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -540,5 +540,5 @@
 		"It stops automatically when that condition changes or a timeout happens.",
 		"This helps you automate tasks that depend on changing conditions without manual checks."
 	],
-	"version": 4
+	"version": "4"
 }

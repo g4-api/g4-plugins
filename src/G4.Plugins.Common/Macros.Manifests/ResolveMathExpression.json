@@ -781,5 +781,5 @@
 		"It allows sorting numbers, rounding results, and extracting parts of the output with a pattern.",
 		"This helps automate complex calculations in RPA or testing scenarios, making workflows more flexible and accurate."
 	],
-	"version": 4
+	"version": "4"
 }

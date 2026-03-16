@@ -197,5 +197,5 @@
 		"Use it to load each user's settings or account info before running steps.",
 		"Tests can get user-specific values so each test runs with the right setup."
 	],
-	"version": 4
+	"version": "4"
 }

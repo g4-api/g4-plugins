@@ -219,5 +219,5 @@
 		"The `SendKeys` plugin automates the sending of text inputs to specified elements, simulating user interactions for web automation and testing. ",
 		"It supports dynamic text entry, clearing input fields, using modifier keys, and introducing delays between inputs for accurate simulation of user behavior."
 	],
-	"version": 4
+	"version": "4"
 }

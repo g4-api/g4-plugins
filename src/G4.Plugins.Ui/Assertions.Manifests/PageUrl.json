@@ -161,5 +161,5 @@
 		"The `PageUrl` plugin validates the current web page URL against specific conditions, supporting a range of operators for flexible assertions. ",
 		"It is commonly used in RPA to verify correct navigation and dynamic URL validation, and in automation testing to ensure SEO compliance, localization accuracy, and correct URL handling across different scenarios."
 	],
-	"version": 4
+	"version": "4"
 }

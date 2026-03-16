@@ -246,5 +246,5 @@
 		"It converts both inputs to numbers and returns false if either value cannot be parsed.",
 		"This operator is used in conditions and rules to safely evaluate numeric thresholds and comparisons during automation."
 	],
-	"version": 4
+	"version": "4"
 }

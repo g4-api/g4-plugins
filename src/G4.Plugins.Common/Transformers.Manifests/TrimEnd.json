@@ -177,5 +177,5 @@
 	"summary": [
 		"Removes trailing whitespace characters or specified characters from the end of a given text input."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -151,5 +151,5 @@
 	"summary": [
 		"The `SetApplicationParameter` plugin sets application parameters within automation workflows, enhancing configuration management."
 	],
-	"version": 4
+	"version": "4"
 }

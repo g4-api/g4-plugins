@@ -204,5 +204,5 @@
 	"summary": [
 		"Extracts content from HTML documents using XPath selectors, with optional attribute selection, regular expressions, and data type conversion."
 	],
-	"version": 4
+	"version": "4"
 }

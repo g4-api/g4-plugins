@@ -197,5 +197,5 @@
 		"It updates values live during a run and makes them available for other steps to use.",
 		"Workflows can exchange data without external files, and tests can set up or check hub settings before they start."
 	],
-	"version": 4
+	"version": "4"
 }

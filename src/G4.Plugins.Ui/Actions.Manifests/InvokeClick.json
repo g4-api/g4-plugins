@@ -201,5 +201,5 @@
 		"In RPA, it is used for automating user interactions such as form submissions, modal handling, and navigation through multi-step processes. The plugin's ability to handle conditional actions ensures that workflows can adapt based on the state of web elements, improving reliability and flexibility.",
 		"In automation testing, it is invaluable for verifying user interface interactions, testing dynamic behaviors, and ensuring that click functionalities remain consistent across different versions of the application. The plugin supports detailed configuration options to handle complex testing scenarios, making it an essential tool for thorough UI testing."
 	],
-	"version": 4
+	"version": "4"
 }

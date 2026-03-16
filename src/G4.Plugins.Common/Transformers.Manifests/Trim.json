@@ -186,5 +186,5 @@
 	"summary": [
 		"Removes leading and trailing whitespace characters or specified characters from a given text input."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -98,5 +98,5 @@
 		"In robotic process automation (RPA), it facilitates navigation and interaction across multiple windows or tabs within workflows.",
 		"In automation testing, it enables comprehensive test coverage by allowing the automation scripts to switch context as needed."
 	],
-	"version": 4
+	"version": "4"
 }

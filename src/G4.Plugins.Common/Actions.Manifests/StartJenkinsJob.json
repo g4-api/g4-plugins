@@ -463,5 +463,5 @@
 		"It can optionally wait for the build to finish and returns details such as result status, duration, and job URL for later steps.",
 		"It also supports passing job parameters and pulling key values from the Jenkins response so they can be reused in downstream automation."
 	],
-	"version": 4
+	"version": "4"
 }

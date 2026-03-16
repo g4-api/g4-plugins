@@ -210,5 +210,5 @@
 		"The `NewBrowserWindow` plugin automates the opening of new browser windows or tabs, enabling the creation of multi-window workflows and testing scenarios. ",
 		"It supports retrieving URLs from specified web elements, customizing the target attribute, and opening multiple windows or tabs simultaneously."
 	],
-	"version": 4
+	"version": "4"
 }

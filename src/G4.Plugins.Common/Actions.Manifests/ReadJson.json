@@ -324,5 +324,5 @@
 		"It extracts values using a JSONPath expression and can further filter the result with a regular expression.",
 		"The extracted value is converted to Base64 and stored for reuse in later workflow steps."
 	],
-	"version": 4
+	"version": "4"
 }

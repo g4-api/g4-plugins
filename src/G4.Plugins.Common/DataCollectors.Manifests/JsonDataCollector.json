@@ -271,5 +271,5 @@
 		"Supports streaming writes for large data sets or bulk writes for smaller runs.",
 		"Ideal for downstream JSON-based systems, APIs, and analytics."
 	],
-	"version": 4
+	"version": "4"
 }

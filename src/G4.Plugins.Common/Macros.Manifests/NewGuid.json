@@ -410,5 +410,5 @@
 		"These unique identifiers enable reliable element identification, transaction tracking, and test data generation within RPA and testing frameworks.",
 		"By automating GUID creation at runtime, it reduces manual setup and prevents identifier collisions across tasks."
 	],
-	"version": 4
+	"version": "4"
 }

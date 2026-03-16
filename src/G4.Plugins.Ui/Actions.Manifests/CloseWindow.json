@@ -108,5 +108,5 @@
 		"In robotic process automation (RPA), it manages browser windows efficiently by targeting specific windows for closure.",
 		"In automation testing, it helps control test flow by closing windows after validations or interactions."
 	],
-	"version": 4
+	"version": "4"
 }

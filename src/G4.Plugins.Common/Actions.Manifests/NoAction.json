@@ -301,5 +301,5 @@
 		"You can use it to group steps, fill gaps, or debug your scripts without triggering real actions.",
 		"This can helps you organize and test workflows safely without unintended side effects."
 	],
-	"version": 4
+	"version": "4"
 }

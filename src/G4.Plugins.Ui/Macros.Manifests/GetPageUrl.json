@@ -90,5 +90,5 @@
 		"In robotic process automation (RPA), it allows for navigation and validation of web pages, ensuring correct URLs are accessed.",
 		"In automation testing, it supports URL verification and dynamic interaction with web elements based on the retrieved URL."
 	],
-	"version": 4
+	"version": "4"
 }

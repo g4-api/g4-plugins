@@ -185,5 +185,5 @@
 		"It returns a Boolean result to drive conditional logic in automation workflows and tests.",
 		"It integrates seamlessly with other operators to enable precise and reliable workflow decisions."
 	],
-	"version": 4
+	"version": "4"
 }

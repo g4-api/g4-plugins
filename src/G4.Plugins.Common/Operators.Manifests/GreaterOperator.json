@@ -220,5 +220,5 @@
 		"It outputs a true or false result that controls conditional branches in automation workflows and tests.",
 		"This lets automation scripts make dynamic decisions based on numeric comparisons and integrate with other actions."
 	],
-	"version": 4
+	"version": "4"
 }

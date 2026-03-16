@@ -99,5 +99,5 @@
 		"In robotic process automation (RPA), it confirms that elements are correctly selected, enabling accurate workflow control and progression.",
 		"In automation testing, it validates the selection state of elements, ensuring accurate user input validation and workflow outcomes."
 	],
-	"version": 4
+	"version": "4"
 }

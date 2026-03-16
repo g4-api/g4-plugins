@@ -12394,5 +12394,5 @@
 		"It allows configuring headers, body content, and query parameters on the fly for precise API interactions.",
 		"It captures response status codes, headers, and body content to feed into subsequent automation steps."
 	],
-	"version": 4
+	"version": "4"
 }

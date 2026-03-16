@@ -149,5 +149,5 @@
 		"In robotic process automation (RPA), it is used for tasks requiring precise, up-to-date data collection from dynamic web pages.",
 		"In automation testing, it validates the current state of DOM elements, supporting high-precision assertions and accurate regression testing."
 	],
-	"version": 4
+	"version": "4"
 }

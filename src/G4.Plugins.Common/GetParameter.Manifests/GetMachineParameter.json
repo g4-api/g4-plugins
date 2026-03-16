@@ -184,5 +184,5 @@
 		"It makes the setting available for later steps to use in the process.",
 		"Workflows and tests can use it to set up or check settings before they run."
 	],
-	"version": 4
+	"version": "4"
 }

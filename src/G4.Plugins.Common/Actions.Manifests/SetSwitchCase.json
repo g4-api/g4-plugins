@@ -614,5 +614,5 @@
 		"If nothing matches, it runs a fallback set of steps.",
 		"This lets your tasks follow different paths based on the information they see."
 	],
-	"version": 4
+	"version": "4"
 }

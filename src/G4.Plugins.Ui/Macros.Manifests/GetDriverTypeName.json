@@ -86,5 +86,5 @@
 		"In robotic process automation (RPA), it allows dynamic adaptation of workflows based on the WebDriver type.",
 		"In automation testing, it enhances test scripts by enabling logging and decision-making based on the WebDriver in use."
 	],
-	"version": 4
+	"version": "4"
 }

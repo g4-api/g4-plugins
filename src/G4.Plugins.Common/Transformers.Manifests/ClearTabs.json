@@ -162,5 +162,5 @@
 	"summary": [
 		"Removes all tab characters from a given text input."
 	],
-	"version": 4
+	"version": "4"
 }

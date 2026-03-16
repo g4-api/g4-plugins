@@ -100,5 +100,5 @@
 		"In robotic process automation (RPA), it facilitates dynamic window handling and error recovery by identifying and interacting with specific browser windows or tabs.",
 		"In automation testing, it supports cross-browser and parallel testing by accurately managing multiple windows or tabs."
 	],
-	"version": 4
+	"version": "4"
 }

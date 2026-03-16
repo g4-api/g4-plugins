@@ -127,5 +127,5 @@
 		"In robotic process automation (RPA), it allows for dynamic script execution, enabling tailored actions and flexible automation.",
 		"In automation testing, it supports custom validation and testing scenarios, enhancing the adaptability and coverage of test scripts."
 	],
-	"version": 4
+	"version": "4"
 }

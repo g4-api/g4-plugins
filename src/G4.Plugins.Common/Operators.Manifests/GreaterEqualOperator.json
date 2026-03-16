@@ -199,5 +199,5 @@
 		"It outputs a true or false result to drive conditional logic in automation workflows.",
 		"This enables workflows to adapt based on numeric thresholds."
 	],
-	"version": 4
+	"version": "4"
 }

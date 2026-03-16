@@ -11518,5 +11518,5 @@
 		"It applies simple rules to compare values or parts of a page and keeps track of any mismatches.",
 		"This makes your automated tasks more reliable and helps you catch problems early."
 	],
-	"version": 4
+	"version": "4"
 }

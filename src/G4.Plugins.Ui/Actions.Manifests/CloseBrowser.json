@@ -74,5 +74,5 @@
 		"In robotic process automation (RPA), it helps maintain system efficiency by releasing resources when a browser session is no longer needed.",
 		"In automation testing, it ensures clean test execution by properly closing browser instances after tests are completed."
 	],
-	"version": 4
+	"version": "4"
 }

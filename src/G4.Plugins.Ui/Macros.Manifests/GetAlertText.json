@@ -87,5 +87,5 @@
 		"In robotic process automation (RPA), it captures alert text for processing, allowing dynamic responses.",
 		"In automation testing, it validates and handles alert messages to ensure proper application behavior."
 	],
-	"version": 4
+	"version": "4"
 }

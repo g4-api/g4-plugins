@@ -444,5 +444,5 @@
 		"It supports To, Cc, and Bcc recipients, plain text or HTML bodies, and controlled From address handling.",
 		"This plugin is useful for sending alerts, notifications, and automated messages in workflows where email delivery is required."
 	],
-	"version": 4
+	"version": "4"
 }

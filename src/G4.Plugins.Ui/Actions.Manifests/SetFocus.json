@@ -118,5 +118,5 @@
 		"The `SetFocus` plugin automates the process of setting focus on specified web elements. ",
 		"It ensures that elements are focused before performing further interactions, which is crucial for form filling, interactive workflows, and event triggering in both RPA and automation testing scenarios."
 	],
-	"version": 4
+	"version": "4"
 }

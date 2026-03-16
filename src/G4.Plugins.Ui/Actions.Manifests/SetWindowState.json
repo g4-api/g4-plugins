@@ -123,5 +123,5 @@
 		"In robotic process automation (RPA), it ensures that web elements are fully visible or allows browser-based tasks to run in the background.",
 		"In automation testing, it helps verify that the application functions correctly across different window states, ensuring UI elements are visible and interactable."
 	],
-	"version": 4
+	"version": "4"
 }

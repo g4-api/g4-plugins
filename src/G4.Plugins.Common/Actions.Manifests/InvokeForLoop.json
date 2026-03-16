@@ -334,5 +334,5 @@
 		"You simply specify how many times to run your tasks, and it handles the rest.",
 		"This makes your automation more reliable and cuts out manual repetition."
 	],
-	"version": 4
+	"version": "4"
 }

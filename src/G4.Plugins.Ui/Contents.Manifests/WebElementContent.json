@@ -223,5 +223,5 @@
 	"summary": [
 		"Extracts content from elements in web, mobile, and desktop applications using any WebDriver locator, with optional attribute selection, regular expressions, and data type conversion."
 	],
-	"version": 4
+	"version": "4"
 }

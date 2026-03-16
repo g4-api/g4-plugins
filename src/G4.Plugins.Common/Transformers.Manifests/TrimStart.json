@@ -178,5 +178,5 @@
 	"summary": [
 		"Removes leading whitespace characters or specified characters from the beginning of a given text input."
 	],
-	"version": 4
+	"version": "4"
 }

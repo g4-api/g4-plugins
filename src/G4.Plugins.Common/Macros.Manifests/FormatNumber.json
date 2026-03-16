@@ -1505,5 +1505,5 @@
 		"This plugin makes automation workflows produce consistent, readable numbers in reports, logs, and interfaces.",
 		"It reduces manual formatting work and minimizes errors in numeric representation across diverse locales."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -117,5 +117,5 @@
 		"In robotic process automation (RPA), it is used for automating user interactions such as opening context menus and performing actions within those menus.",
 		"In automation testing, it is invaluable for verifying user interface interactions, testing dynamic behaviors triggered by context-clicks, and ensuring that context-click functionalities remain consistent across different versions of the application."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -155,5 +155,5 @@
 		"In robotic process automation (RPA), it ensures periodic updates and aids in error recovery by automating the page refresh process.",
 		"In automation testing, it helps manage browser state and contributes to realistic performance testing by controlling page refreshes with specified delays."
 	],
-	"version": 4
+	"version": "4"
 }

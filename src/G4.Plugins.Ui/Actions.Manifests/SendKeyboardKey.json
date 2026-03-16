@@ -212,5 +212,5 @@
 		"The `SendKeyboardKey` plugin automates the simulation of keyboard actions during web automation. ",
 		"It supports customizable sequences of key presses, native clearing methods, and time delays, ensuring precise and flexible control over keyboard interactions."
 	],
-	"version": 4
+	"version": "4"
 }

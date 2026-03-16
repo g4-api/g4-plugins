@@ -95,5 +95,5 @@
 	"summary": [
 		"The `NotMatch` plugin evaluates whether a string value does not match a given regular expression, providing essential functionality for conditional logic in automation workflows and testing scenarios."
 	],
-	"version": 4
+	"version": "4"
 }

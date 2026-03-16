@@ -100,5 +100,5 @@
 		"In robotic process automation (RPA), it confirms the correct elements are active before interactions, enhancing the reliability of automated workflows.",
 		"In automation testing, it validates the active state of elements, ensuring accurate user interaction flows and test outcomes."
 	],
-	"version": 4
+	"version": "4"
 }

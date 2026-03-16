@@ -549,5 +549,5 @@
 		"You can give it a custom starting instruction, set options like how long the answer should be, which version to use, and how creative it should be, and start a new chat when you want.",
 		"It also picks out any hidden `think` notes in the reply and saves both those notes and the final answer for later use."
 	],
-	"version": 4
+	"version": "4"
 }

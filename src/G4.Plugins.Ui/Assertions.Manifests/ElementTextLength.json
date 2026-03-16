@@ -179,5 +179,5 @@
 		"The `ElementTextLength` plugin validates the length of the text content of web elements, supporting a range of operators for flexible assertion. ",
 		"It is commonly used in RPA to verify content length, form inputs, and dynamic content, and in automation testing to ensure UI consistency, localization accuracy, and proper error message length."
 	],
-	"version": 4
+	"version": "4"
 }

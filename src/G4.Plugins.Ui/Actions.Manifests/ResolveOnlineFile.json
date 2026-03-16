@@ -534,5 +534,5 @@
 		"It turns the file into text, records its name, type, size, and whether it downloaded successfully, and saves this info for use later.",
 		"If the download fails, it wipes out any saved info and notes the problem so nothing gets mixed up."
 	],
-	"version": 4
+	"version": "4"
 }

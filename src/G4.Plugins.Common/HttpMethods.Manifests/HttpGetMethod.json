@@ -620,5 +620,5 @@
 		"It captures response details for use in downstream automation steps and RPA workflows, enabling real-time access to resources like customer or product records.",
 		"It streamlines automation testing by verifying data retrieval accuracy and ensuring reliable regression testing of API endpoints."
 	],
-	"version": 4
+	"version": "4"
 }

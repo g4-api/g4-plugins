@@ -1172,5 +1172,5 @@
 		"This flexibility supports tasks like data-driven testing, boundary testing, and dynamic data population in automation processes.",
 		"By integrating random value generation directly into workflows, it reduces the need for external scripts and streamlines automated testing and RPA tasks."
 	],
-	"version": 4
+	"version": "4"
 }

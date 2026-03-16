@@ -742,5 +742,5 @@
 		"Users can update specific fields in external systems, like customer details or product info, without replacing entire records.",
 		"It records system replies to confirm updates succeeded, helping automated workflows check that changes were applied."
 	],
-	"version": 4
+	"version": "4"
 }

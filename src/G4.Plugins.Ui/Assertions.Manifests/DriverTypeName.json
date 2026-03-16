@@ -166,5 +166,5 @@
 		"In robotic process automation (RPA), it confirms the WebDriver type, ensuring that tasks are executed in the intended browser.",
 		"In automation testing, it supports cross-browser testing by validating that tests are running in the correct browser, enhancing test coverage and consistency."
 	],
-	"version": 4
+	"version": "4"
 }

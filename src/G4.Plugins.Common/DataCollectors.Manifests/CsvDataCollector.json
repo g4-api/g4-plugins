@@ -269,5 +269,5 @@
 		"It creates column headers automatically based on your data and lets you select which fields to include.",
 		"Storing data in CSV format makes it easy to share, analyze, and feed into other automation tasks."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -206,7 +206,7 @@
 		}
 	],
 	"key": "NewGmailTask",
-	"version": 4,
+	"version": "4",
 	"namespace": "G4.Plugins.Google",
 	"outputParameters": [
 		{

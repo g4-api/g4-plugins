@@ -98,5 +98,5 @@
 		"In robotic process automation (RPA), it ensures a focused workflow by maintaining only the primary window.",
 		"In automation testing, it helps manage window states by removing unnecessary child windows during test execution."
 	],
-	"version": 4
+	"version": "4"
 }

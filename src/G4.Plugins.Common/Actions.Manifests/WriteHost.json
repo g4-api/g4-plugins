@@ -223,5 +223,5 @@
 		"It outputs your message to the host stream for immediate visibility during execution.",
 		"This makes it easy to follow steps, spot problems, and capture important notes in real time."
 	],
-	"version": 4
+	"version": "4"
 }

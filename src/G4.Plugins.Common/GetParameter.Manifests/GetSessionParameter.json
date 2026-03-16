@@ -197,5 +197,5 @@
 		"Use it when you want each run to have its own settings without mixing things up across runs.",
 		"When tests run at the same time, it helps each test keep its own data separate."
 	],
-	"version": 4
+	"version": "4"
 }

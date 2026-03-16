@@ -93,5 +93,5 @@
 		"The `SetUser32Focus` plugin sets focus on a UI element using the Windows User32 API. ",
 		"It ensures that the target element is activated and ready for subsequent interactions, making it ideal for desktop UI automation and testing on Windows platforms."
 	],
-	"version": 4
+	"version": "4"
 }

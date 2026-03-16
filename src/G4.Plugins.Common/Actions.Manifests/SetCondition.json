@@ -421,5 +421,5 @@
 		"It uses simple checks to decide which steps to run.",
 		"This helps you do things only when needed and handle errors or set up tests that depend on earlier results."
 	],
-	"version": 4
+	"version": "4"
 }

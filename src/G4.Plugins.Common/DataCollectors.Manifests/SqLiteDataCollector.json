@@ -290,5 +290,5 @@
 		"Supports streaming inserts for large data sets or bulk inserts in a single transaction.",
 		"Automatically creates the database file and table if they don’t exist."
 	],
-	"version": 4
+	"version": "4"
 }

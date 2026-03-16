@@ -222,5 +222,5 @@
 		"It supports moving to absolute coordinates on the viewport as well as relative movement within a target UI element using configurable offsets and alignment. ",
 		"This plugin is ideal for desktop UI automation and testing on Windows platforms."
 	],
-	"version": 4
+	"version": "4"
 }

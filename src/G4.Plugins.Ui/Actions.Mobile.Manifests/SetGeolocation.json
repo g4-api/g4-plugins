@@ -121,5 +121,5 @@
 		"In robotic process automation (RPA), it facilitates location-based automation by programmatically setting the device's coordinates.",
 		"In automation testing, it enables comprehensive testing of location-based features and ensures UI stability when the device's location changes."
 	],
-	"version": 4
+	"version": "4"
 }

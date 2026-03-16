@@ -160,5 +160,5 @@
 	"summary": [
 		"The `SendUser32Keys` plugin simulates realistic typing of text into native Windows application elements using the User32 API, sending characters individually with configurable delays and keyboard layouts."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -757,5 +757,5 @@
 		"It helps keep systems tidy by removing old or unwanted information.",
 		"It can also check that data removal works correctly during testing."
 	],
-	"version": 4
+	"version": "4"
 }

@@ -462,5 +462,5 @@
 		"It waits for simple checks to pass or stops waiting after a timer so everything happens at the right moment.",
 		"You can use it to pause until an item shows up, add a delay, or keep steps in sync when some things happen later than others."
 	],
-	"version": 4
+	"version": "4"
 }

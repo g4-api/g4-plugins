@@ -221,5 +221,5 @@
 		"It supports both coordinate-based clicks when no target element is provided and element-specific clicks with configurable offsets and alignment. ",
 		"This plugin is designed for desktop UI automation and testing on Windows platforms."
 	],
-	"version": 4
+	"version": "4"
 }

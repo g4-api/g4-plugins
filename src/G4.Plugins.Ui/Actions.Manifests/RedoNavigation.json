@@ -143,5 +143,5 @@
 		"The `RedoNavigation` plugin automates the forward navigation in a web browser, allowing users to revisit previous pages or states. ",
 		"It offers options for specifying the number of repeats and introducing delays between steps for controlled navigation."
 	],
-	"version": 4
+	"version": "4"
 }

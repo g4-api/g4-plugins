@@ -102,5 +102,5 @@
 		"In robotic process automation (RPA), it confirms that elements remain hidden, preventing unintended actions and enhancing workflow accuracy.",
 		"In automation testing, it validates the non-visibility of elements, ensuring accurate user interaction flows and test outcomes."
 	],
-	"version": 4
+	"version": "4"
 }

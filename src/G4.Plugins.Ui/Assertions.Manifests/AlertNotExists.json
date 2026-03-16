@@ -75,5 +75,5 @@
 		"In robotic process automation (RPA), it confirms the smooth execution of processes by validating the absence of alert dialogs.",
 		"In automation testing, it ensures workflows proceed without interruption from alerts, validating the absence of unexpected alert dialogs."
 	],
-	"version": 4
+	"version": "4"
 }

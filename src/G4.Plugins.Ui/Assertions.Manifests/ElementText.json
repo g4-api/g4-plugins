@@ -208,5 +208,5 @@
 		"The `ElementText` plugin validates the text content of web elements, supporting a range of operators for flexible assertion. ",
 		"It is commonly used in RPA to verify dynamic content, form inputs, and error messages, and in automation testing to ensure UI consistency, localization accuracy, and proper error handling."
 	],
-	"version": 4
+	"version": "4"
 }

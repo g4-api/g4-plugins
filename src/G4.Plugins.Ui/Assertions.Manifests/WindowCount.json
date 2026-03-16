@@ -175,5 +175,5 @@
 		"The `WindowCount` plugin validates the number of open browser windows or tabs, supporting a range of operators for flexible assertions.",
 		"It is commonly used in RPA to verify the presence of multiple windows or tabs and in automation testing to ensure UI consistency, correct session management, and proper dynamic window handling."
 	],
-	"version": 4
+	"version": "4"
 }

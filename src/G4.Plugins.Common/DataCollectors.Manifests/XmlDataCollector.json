@@ -276,5 +276,5 @@
 		"Supports streaming writes for large data sets or bulk writes for smaller runs.",
 		"Ideal for integration with XML-based systems and reporting tools."
 	],
-	"version": 4
+	"version": "4"
 }

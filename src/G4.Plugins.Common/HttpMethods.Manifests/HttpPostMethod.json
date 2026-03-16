@@ -734,5 +734,5 @@
 		"It supports dynamic URL construction, custom headers, and different content types to handle various payloads easily.",
 		"It captures response details to guide subsequent workflow steps in robotic process automation and to verify data submission in automated tests."
 	],
-	"version": 4
+	"version": "4"
 }
