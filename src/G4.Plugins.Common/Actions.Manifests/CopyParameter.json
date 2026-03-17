@@ -73,7 +73,7 @@
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": {
-					"name": "clon3",
+					"name": "clone",
 					"svg": null
 				},
 				"model": "ActionRuleModel"
