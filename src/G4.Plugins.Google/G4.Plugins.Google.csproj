@@ -25,13 +25,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.3.3.56" />
-		<PackageReference Include="G4.Extensions" Version="2026.3.3.56" />
+		<PackageReference Include="G4.Converters" Version="2026.3.19.58" />
+		<PackageReference Include="G4.Extensions" Version="2026.3.19.58" />
+		<!--
 		<PackageReference Include="G4.Plugins" Version="2026.3.3.56" />
+		-->
 	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Include="*.Manifests\**\*.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
 	</ItemGroup>
 
 </Project>
