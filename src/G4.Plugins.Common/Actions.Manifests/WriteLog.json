@@ -103,7 +103,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "file-lines",
+				"iconProvider": {
+					"name": "file-lines",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -199,7 +202,7 @@
 		}
 	],
 	"key": "WriteLog",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -224,5 +227,6 @@
 		"`WriteLog` writes messages while a task runs so you can see what happened.",
 		"It takes your message and puts it into the system’s records.",
 		"This makes it easy to follow steps, spot problems, and save important notes."
-	]
+	],
+	"version": "4"
 }

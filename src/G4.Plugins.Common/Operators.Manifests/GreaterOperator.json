@@ -184,7 +184,7 @@
 		}
 	],
 	"key": "Greater",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -219,5 +219,6 @@
 		"The GreaterOperator plugin compares two numeric values and returns true if the first value is strictly greater than the second.",
 		"It outputs a true or false result that controls conditional branches in automation workflows and tests.",
 		"This lets automation scripts make dynamic decisions based on numeric comparisons and integrate with other actions."
-	]
+	],
+	"version": "4"
 }

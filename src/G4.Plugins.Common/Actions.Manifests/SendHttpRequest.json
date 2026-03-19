@@ -112,7 +112,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "globe",
+				"iconProvider": {
+					"name": "globe",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -12143,7 +12146,7 @@
 		}
 	],
 	"key": "SendHttpRequest",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -12390,5 +12393,6 @@
 		"The SendHttpRequest plugin lets automation workflows send HTTP GET, POST, PUT, DELETE, or custom method requests to any URL at runtime.",
 		"It allows configuring headers, body content, and query parameters on the fly for precise API interactions.",
 		"It captures response status codes, headers, and body content to feed into subsequent automation steps."
-	]
+	],
+	"version": "4"
 }

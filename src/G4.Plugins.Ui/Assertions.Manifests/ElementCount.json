@@ -132,7 +132,7 @@
 		}
 	],
 	"key": "ElementCount",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -200,5 +200,6 @@
 	"summary": [
 		"The `ElementCount` plugin validates the number of elements matching a specified locator, supporting a range of operators for flexible assertion. ",
 		"It is commonly used in RPA to verify the presence of multiple elements, dynamic content, and form field counts, and in automation testing to ensure UI consistency, correct pagination, and proper dynamic content loading."
-	]
+	],
+	"version": "4"
 }

@@ -15,7 +15,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "image",
+				"iconProvider": {
+					"name": "image",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -148,7 +151,7 @@
 		}
 	],
 	"key": "SaveScreenshot",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"outputParameters": [
 		{
 			"description": [
@@ -211,5 +214,6 @@
 		"Key features include capturing screenshots of the entire page or specific elements, specifying custom directories and filenames for saved screenshots, and generating unique filenames to avoid overwrites.",
 		"In RPA, it is used for verification and documentation, capturing screenshots at critical steps to ensure the application's interface matches the expected state and providing a visual record for comprehensive reports.",
 		"In automation testing, it supports visual regression testing, cross-browser testing, and historical tracking. It captures screenshots during different test runs to detect unexpected visual changes, ensures consistent rendering across various browsers, and creates a historical timeline of the application's behavior for deeper analysis."
-	]
+	],
+	"version": "4"
 }

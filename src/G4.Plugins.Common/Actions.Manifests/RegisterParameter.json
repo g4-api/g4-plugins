@@ -92,7 +92,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "file-import",
+				"iconProvider": {
+					"name": "file-import",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -5392,7 +5395,7 @@
 		}
 	],
 	"key": "RegisterParameter",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -5512,5 +5515,6 @@
 		"The RegisterParameter plugin captures values from user input or elements and saves them for later use.",
 		"It can keep values in different places and can pull out parts of a value or change how it looks.",
 		"Keeping data organized makes it easy to find and helps tasks run smoothly."
-	]
+	],
+	"version": "4"
 }

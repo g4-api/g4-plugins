@@ -839,7 +839,7 @@
 		}
 	],
 	"key": "New-Date",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -1038,5 +1038,6 @@
 		"The NewDate plugin instantly creates date and time values, including the current moment or a value shifted by an amount you choose.",
 		"It can return full timestamps, individual parts such as year or minute, or special formats like Unix epoch and OLE Automation numbers.",
 		"Custom formatting and a UTC switch help automations stamp logs, fill inputs, and schedule tasks without hand-written date math."
-	]
+	],
+	"version": "4"
 }

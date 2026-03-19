@@ -227,7 +227,7 @@
 		}
 	],
 	"key": "JsonDataCollector",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -270,5 +270,6 @@
 		"The JsonDataCollector plugin serializes extraction outputs into a JSON file, wrapping records in an array.",
 		"Supports streaming writes for large data sets or bulk writes for smaller runs.",
 		"Ideal for downstream JSON-based systems, APIs, and analytics."
-	]
+	],
+	"version": "4"
 }

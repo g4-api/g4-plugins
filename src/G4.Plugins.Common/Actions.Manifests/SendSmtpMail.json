@@ -111,7 +111,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "at",
+				"iconProvider": {
+					"name": "at",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -285,7 +288,7 @@
 		}
 	],
 	"key": "SendSmtpMail",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -440,5 +443,6 @@
 		"The SendSmtpMail plugin sends emails through any SMTP server using configurable host, port, credentials, and TLS settings.",
 		"It supports To, Cc, and Bcc recipients, plain text or HTML bodies, and controlled From address handling.",
 		"This plugin is useful for sending alerts, notifications, and automated messages in workflows where email delivery is required."
-	]
+	],
+	"version": "4"
 }

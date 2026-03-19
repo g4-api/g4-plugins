@@ -72,7 +72,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "jenkins",
+				"iconProvider": {
+					"name": "jenkins",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -315,7 +318,7 @@
 		}
 	],
 	"key": "StartJenkinsJob",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -459,5 +462,6 @@
 		"The StartJenkinsJob plugin starts a Jenkins job using a Jenkins server URL, job path, and user credentials.",
 		"It can optionally wait for the build to finish and returns details such as result status, duration, and job URL for later steps.",
 		"It also supports passing job parameters and pulling key values from the Jenkins response so they can be reused in downstream automation."
-	]
+	],
+	"version": "4"
 }

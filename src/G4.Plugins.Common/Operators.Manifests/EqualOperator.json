@@ -147,7 +147,7 @@
 		}
 	],
 	"key": "Equal",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -184,5 +184,6 @@
 		"The EqualOperator plugin compares two strings exactly using case-sensitive matching.",
 		"It returns a Boolean result to drive conditional logic in automation workflows and tests.",
 		"It integrates seamlessly with other operators to enable precise and reliable workflow decisions."
-	]
+	],
+	"version": "4"
 }

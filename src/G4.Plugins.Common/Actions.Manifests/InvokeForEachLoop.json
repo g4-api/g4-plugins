@@ -81,7 +81,10 @@
 				"$type": "Action",
 				"componentSubType": "loop",
 				"componentType": "container",
-				"iconProvider": "repeat",
+				"iconProvider": {
+					"name": "repeat",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -570,7 +573,7 @@
 		}
 	],
 	"key": "InvokeForEachLoop",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -615,5 +618,6 @@
 	"summary": [
 		"The InvokeForEachLoop tool finds each item you specify and runs the steps you choose on every one.",
 		"It can also run steps inside other steps to tackle more complex tasks."
-	]
+	],
+	"version": "4"
 }

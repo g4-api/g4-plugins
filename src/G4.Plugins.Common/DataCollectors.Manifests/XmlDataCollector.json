@@ -232,7 +232,7 @@
 		}
 	],
 	"key": "XmlDataCollector",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -275,5 +275,6 @@
 		"The XmlDataCollector plugin serializes extraction outputs into an XML file, wrapping records under a default root element.",
 		"Supports streaming writes for large data sets or bulk writes for smaller runs.",
 		"Ideal for integration with XML-based systems and reporting tools."
-	]
+	],
+	"version": "4"
 }

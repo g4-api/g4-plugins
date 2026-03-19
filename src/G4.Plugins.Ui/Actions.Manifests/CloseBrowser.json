@@ -15,7 +15,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "circle-xmark",
+				"iconProvider": {
+					"name": "circle-xmark",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -57,7 +60,7 @@
 		}
 	],
 	"key": "CloseBrowser",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Action",
 	"protocol": {
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#delete-session",
@@ -70,5 +73,6 @@
 		"The `CloseBrowser` plugin closes the currently active browser window and disposes of the WebDriver instance to ensure proper resource management.",
 		"In robotic process automation (RPA), it helps maintain system efficiency by releasing resources when a browser session is no longer needed.",
 		"In automation testing, it ensures clean test execution by properly closing browser instances after tests are completed."
-	]
+	],
+	"version": "4"
 }

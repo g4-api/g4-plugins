@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "file-code",
+				"iconProvider": {
+					"name": "file-code",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -102,7 +105,7 @@
 		}
 	],
 	"key": "InvokeScript",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -161,5 +164,6 @@
 		"The type of script executed is determined by the environment, such as JavaScript in web browsers, Xcode scripts on iOS, or PowerShell scripts on Windows.",
 		"In robotic process automation (RPA), this plugin is useful for performing custom actions on elements, extracting data, and dynamically interacting with elements based on the results of the script execution.",
 		"In automation testing, the `InvokeScript` plugin is essential for validating script execution, testing the effects of scripts on the environment, and creating custom test scenarios by running environment-specific scripts."
-	]
+	],
+	"version": "4"
 }

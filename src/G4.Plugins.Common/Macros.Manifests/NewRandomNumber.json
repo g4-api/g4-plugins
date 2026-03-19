@@ -1080,7 +1080,7 @@
 		}
 	],
 	"key": "New-RandomNumber",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -1171,5 +1171,6 @@
 		"It lets users specify minimum and maximum ranges and select different number types, including Integer, Long, Float, Double, or Byte.",
 		"This flexibility supports tasks like data-driven testing, boundary testing, and dynamic data population in automation processes.",
 		"By integrating random value generation directly into workflows, it reduces the need for external scripts and streamlines automated testing and RPA tasks."
-	]
+	],
+	"version": "4"
 }

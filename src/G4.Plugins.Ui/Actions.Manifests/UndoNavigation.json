@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "arrow-rotate-left",
+				"iconProvider": {
+					"name": "arrow-rotate-left",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -102,7 +105,7 @@
 		}
 	],
 	"key": "UndoNavigation",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "0",
@@ -150,5 +153,6 @@
 		"The `UndoNavigation` plugin automates the backward navigation in a web browser, allowing users to revisit previous pages or states.",
 		"In robotic process automation (RPA), it streamlines multi-step processes and aids in error recovery by automating the backward navigation.",
 		"In automation testing, it helps manage browser state and contributes to realistic performance testing by controlling navigation delays."
-	]
+	],
+	"version": "4"
 }

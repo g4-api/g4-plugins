@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "keyboard",
+				"iconProvider": {
+					"name": "keyboard",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -129,7 +132,7 @@
 		}
 	],
 	"key": "SendKeyboardKey",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -208,5 +211,6 @@
 	"summary": [
 		"The `SendKeyboardKey` plugin automates the simulation of keyboard actions during web automation. ",
 		"It supports customizable sequences of key presses, native clearing methods, and time delays, ensuring precise and flexible control over keyboard interactions."
-	]
+	],
+	"version": "4"
 }

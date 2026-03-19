@@ -427,7 +427,7 @@
 		}
 	],
 	"key": "Put",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -727,5 +727,6 @@
 	"summary": [
 		"The Put plugin lets automation workflows create or replace data on any endpoint with an HTTP PUT request.",
 		"It builds URLs and payloads on the fly, adds custom headers, and returns status, headers, and body so other steps can react."
-	]
+	],
+	"version": "4"
 }

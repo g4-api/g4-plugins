@@ -11,7 +11,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "gears",
+				"iconProvider": {
+					"name": "gears",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -77,7 +80,7 @@
 		}
 	],
 	"key": "CloseWindow",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -104,5 +107,6 @@
 		"The `CloseWindow` plugin closes a specific browser window identified by its handle or index, or closes the active window if no specific window is provided.",
 		"In robotic process automation (RPA), it manages browser windows efficiently by targeting specific windows for closure.",
 		"In automation testing, it helps control test flow by closing windows after validations or interactions."
-	]
+	],
+	"version": "4"
 }

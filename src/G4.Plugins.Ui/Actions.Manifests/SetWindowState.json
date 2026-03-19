@@ -11,7 +11,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "gears",
+				"iconProvider": {
+					"name": "gears",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -76,7 +79,7 @@
 		}
 	],
 	"key": "SetWindowState",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -119,5 +122,6 @@
 		"The `SetWindowState` plugin controls the state of the browser window, allowing it to be maximized, minimized, or set to full screen.",
 		"In robotic process automation (RPA), it ensures that web elements are fully visible or allows browser-based tasks to run in the background.",
 		"In automation testing, it helps verify that the application functions correctly across different window states, ensuring UI elements are visible and interactable."
-	]
+	],
+	"version": "4"
 }

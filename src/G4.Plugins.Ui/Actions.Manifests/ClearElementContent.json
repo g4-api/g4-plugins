@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "gears",
+				"iconProvider": {
+					"name": "gears",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -88,7 +91,7 @@
 		}
 	],
 	"key": "ClearElementContent",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -152,5 +155,6 @@
 		"The `ClearElementContent` plugin automates the process of clearing the content of input elements in automation tasks.",
 		"In robotic process automation (RPA), it resets form fields and prepares them for data entry, ensuring accuracy and consistency.",
 		"In automation testing, it validates input field behavior and manages test conditions by resetting fields before executing tests."
-	]
+	],
+	"version": "4"
 }

@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "shuffle",
+				"iconProvider": {
+					"name": "shuffle",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -59,7 +62,7 @@
 		}
 	],
 	"key": "SwitchParentFrame",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Action",
 	"properties": [],
@@ -75,5 +78,6 @@
 		"The `SwitchParentFrame` plugin automates the process of switching from a child frame back to its parent frame within a web page.",
 		"In robotic process automation (RPA), it facilitates efficient navigation and interaction with elements outside of nested frames.",
 		"In automation testing, it ensures comprehensive test coverage by enabling interactions with elements in the parent frame after navigating through child frames."
-	]
+	],
+	"version": "4"
 }

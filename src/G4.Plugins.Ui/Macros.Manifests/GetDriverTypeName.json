@@ -61,7 +61,7 @@
 		}
 	],
 	"key": "Get-DriverTypeName",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "(?s).*",
@@ -85,5 +85,6 @@
 		"The `Get-DriverTypeName` plugin retrieves the type name of the WebDriver instance used in automation workflows, providing valuable insight for customization and logging purposes.",
 		"In robotic process automation (RPA), it allows dynamic adaptation of workflows based on the WebDriver type.",
 		"In automation testing, it enhances test scripts by enabling logging and decision-making based on the WebDriver in use."
-	]
+	],
+	"version": "4"
 }

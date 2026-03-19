@@ -1,0 +1,227 @@
+﻿{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Logging"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WriteHost.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WriteHost.cs"
+			},
+			"rag": {
+				"description": "The WriteHost plugin prints informational messages to the console during automation execution by taking a provided argument and writing it to the host output stream. It helps with real-time progress visibility and troubleshooting without requiring log level configuration, and surfaces exceptions to preserve workflow visibility.",
+				"qa": [
+					{
+						"question": "What is the WriteHost plugin and why does it matter?",
+						"answer": "The WriteHost plugin prints informational messages to the console during automation runs so users can follow execution in real time and diagnose issues faster."
+					},
+					{
+						"question": "What are the key features and primary parameters of this plugin?",
+						"answer": "Key features include writing the content of the Argument property to the host/console output. The primary parameter is Argument, which specifies the text or expression to print."
+					},
+					{
+						"question": "How does this plugin integrate into automation workflows?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined as an ActionRuleModel task with a console-oriented icon, making it available as a simple output/logging action in workflows."
+					},
+					{
+						"question": "What are best practices for configuring and using this plugin?",
+						"answer": "Use clear, descriptive messages in Argument, include dynamic values via expressions when needed, and rely on these messages to trace execution flow during debugging."
+					},
+					{
+						"question": "What is the structure of its rule definition?",
+						"answer": "Each rule uses \"$type\": \"Action\", includes pluginName \"WriteHost\", and provides a string or expression under the argument property."
+					},
+					{
+						"question": "How does the plugin handle errors during execution?",
+						"answer": "If an error occurs, the exception is surfaced through the workflow output/log stream so it is visible during execution; workflow behavior (continue/stop) depends on the runner’s failure handling."
+					},
+					{
+						"question": "Who is the author of this plugin?",
+						"answer": "The author is Roei Sabag, linked at https://www.linkedin.com/in/roei-sabag-247aa18/."
+					},
+					{
+						"question": "What categories is this plugin listed under?",
+						"answer": "It belongs to the Logging category, since it provides visible runtime output useful for tracing execution."
+					},
+					{
+						"question": "What GitHub documentation link is provided?",
+						"answer": "The GitHub documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WriteHost.md."
+					},
+					{
+						"question": "What GitHub source link is provided?",
+						"answer": "The GitHub source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WriteHost.cs."
+					},
+					{
+						"question": "How is this plugin defined in the integration context?",
+						"answer": "Under context.integration.sequentialWorkflow it is defined with \"$type\": \"Action\", componentType \"task\", iconProvider \"terminal\", and model \"ActionRuleModel\"."
+					},
+					{
+						"question": "What is described in the description section?",
+						"answer": "The description explains that WriteHost prints informational messages during automation execution for immediate visibility, highlights progress tracking and debugging value, and lists usage in RPA and automation testing."
+					},
+					{
+						"question": "What examples are provided in the manifest?",
+						"answer": "Examples include printing a static console message and printing a dynamic session-scoped parameter value, demonstrating both fixed and expression-based output."
+					},
+					{
+						"question": "What is the key for this plugin?",
+						"answer": "The key is \"WriteHost\", which uniquely identifies this plugin in the system."
+					},
+					{
+						"question": "What is the manifestVersion?",
+						"answer": "The manifestVersion is 4, indicating the schema version used for this plugin."
+					},
+					{
+						"question": "Which platforms does this plugin support?",
+						"answer": "It supports Any platform, making it usable across different operating systems and environments."
+					},
+					{
+						"question": "What is the pluginType?",
+						"answer": "The pluginType is Action, meaning it performs an operation within the automation workflow."
+					},
+					{
+						"question": "What properties define how the plugin operates?",
+						"answer": "Properties include Argument of type String|Expression, which provides the text or expression to print to the console/host output."
+					},
+					{
+						"question": "What does the summary describe?",
+						"answer": "The summary states that WriteHost prints messages to the console while a task runs so you can see what happened, making it easier to follow steps and spot problems during execution."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "terminal",
+					"svg": null
+				},
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The WriteHost plugin prints informational messages during automation execution for immediate visibility. ",
+		"It takes a given argument and writes it to the console/host output so users can see what happened at each step. ",
+		"This helps track progress and diagnose issues in real time.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature          | Description                                                              |",
+		"|------------------|--------------------------------------------------------------------------|",
+		"| Console Output   | Write the content of the `Argument` property to the host/console output. |",
+		"| Debugging Aid    | Print key events and details to help diagnose and fix issues.            |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case           | Description                                                                  |",
+		"|--------------------|------------------------------------------------------------------------------|",
+		"| Execution Tracking | Print key points to see the flow of an automated task and confirm steps ran. |",
+		"| Debugging          | Print messages that help identify where and why a process failed.            |",
+		"| Status Output      | Print important data or status updates during automation.                    |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case              | Description                                                                          |",
+		"|-----------------------|--------------------------------------------------------------------------------------|",
+		"| Test Execution Output | Print messages during test runs to understand test flow and state.                   |",
+		"| Debugging Tests       | Print details that help pinpoint failures or unexpected behavior in automated tests. |",
+		"| Recording Test Data   | Print test inputs, outputs, and results for later analysis and verification.         |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid message format",
+						"Console write failure"
+					],
+					"expected_result": "The message \"Writing a simple message\" is printed to the console output.",
+					"notes": "Host output is produced for visibility during execution.",
+					"use_case": "write_host_static_message",
+					"version": "1.0"
+				},
+				"labels": [
+					"Logging"
+				]
+			},
+			"description": [
+				"### Write a Static Console Message",
+				"",
+				"This example demonstrates how to print a simple, static message to the console during automation execution.",
+				"It uses the `WriteHost` plugin with the argument set to \"Writing a simple message\".",
+				"Host output is produced for visibility during execution."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Writing a simple message",
+				"pluginName": "WriteHost"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Console write failure",
+						"Parameter not found",
+						"Scope invalid"
+					],
+					"expected_result": "The value of the session-scoped parameter \"MyParam\" is retrieved and printed to the console output.",
+					"notes": "Host output is produced for visibility during execution.",
+					"use_case": "write_host_dynamic_parameter",
+					"version": "1.0"
+				},
+				"labels": [
+					"Logging",
+					"ParameterRetrieval"
+				]
+			},
+			"description": [
+				"### Write a Dynamic Parameter Value to Console",
+				"",
+				"This example demonstrates how to retrieve a dynamic, session-scoped parameter and print its value to the console.",
+				"It uses the `WriteHost` plugin with the argument set to `{{$Get-Parameter --Name:MyParam --Scope:Session}}`.",
+				"Host output is produced for visibility during execution."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Get-Parameter --Name:MyParam --Scope:Session}}",
+				"pluginName": "WriteHost"
+			}
+		}
+	],
+	"key": "WriteHost",
+	"namespace": "G4.Plugins.Common",
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Text or information to print to the console/host output.",
+				"It can be a fixed phrase or a value that changes at runtime.",
+				"Clear messages help track what the system does in real time."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"`WriteHost` prints messages to the console while a task runs so you can see what happened.",
+		"It outputs your message to the host stream for immediate visibility during execution.",
+		"This makes it easy to follow steps, spot problems, and capture important notes in real time."
+	],
+	"version": "4"
+}

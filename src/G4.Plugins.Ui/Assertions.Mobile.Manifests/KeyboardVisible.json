@@ -70,7 +70,7 @@
 		}
 	],
 	"key": "KeyboardVisible",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"protocol": {
 		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/is-keyboard-shown/#http-api-specifications",
@@ -83,5 +83,6 @@
 	"summary": [
 		"The `KeyboardVisible` plugin validates that the on-screen keyboard is visible on a mobile device, ensuring that it is displayed before proceeding with text input or other actions.",
 		"It is commonly used in RPA to verify that the keyboard is visible before user interactions and in automation testing to ensure UI consistency, correct behavior during input, and proper application performance."
-	]
+	],
+	"version": "4"
 }

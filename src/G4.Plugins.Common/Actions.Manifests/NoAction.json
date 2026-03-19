@@ -106,7 +106,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "container",
-				"iconProvider": "boxes-packing",
+				"iconProvider": {
+					"name": "boxes-packing",
+					"svg": null
+				},
 				"label": "Actions Group",
 				"model": "ActionRuleModel"
 			}
@@ -261,7 +264,7 @@
 		}
 	],
 	"key": "NoAction",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
 	],
@@ -297,5 +300,6 @@
 		"The NoAction tool runs without doing anything, serving as a placeholder in your automation flow.",
 		"You can use it to group steps, fill gaps, or debug your scripts without triggering real actions.",
 		"This can helps you organize and test workflows safely without unintended side effects."
-	]
+	],
+	"version": "4"
 }

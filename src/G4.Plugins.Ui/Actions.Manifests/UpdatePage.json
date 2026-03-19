@@ -15,7 +15,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "arrow-rotate-right",
+				"iconProvider": {
+					"name": "arrow-rotate-right",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -103,7 +106,7 @@
 		}
 	],
 	"key": "UpdatePage",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "0",
@@ -151,5 +154,6 @@
 		"The `UpdatePage` plugin automates the page refresh in a web browser, allowing users to update the current page with options for specifying the number of repeats and introducing delays between steps for controlled refresh.",
 		"In robotic process automation (RPA), it ensures periodic updates and aids in error recovery by automating the page refresh process.",
 		"In automation testing, it helps manage browser state and contributes to realistic performance testing by controlling page refreshes with specified delays."
-	]
+	],
+	"version": "4"
 }

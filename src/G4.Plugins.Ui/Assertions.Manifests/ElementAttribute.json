@@ -145,7 +145,7 @@
 		}
 	],
 	"key": "ElementAttribute",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -222,5 +222,6 @@
 	"summary": [
 		"The `ElementAttribute` plugin asserts that an element's attribute meets specific conditions, supporting a range of operators for flexible validation. ",
 		"It is commonly used in RPA to validate form inputs, dynamic content, and element properties, and in automation testing to ensure UI consistency, accessibility compliance, correct versioning of elements, and proper input field values."
-	]
+	],
+	"version": "4"
 }

@@ -72,7 +72,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "clone",
+				"iconProvider": {
+					"name": "clone",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -1335,7 +1338,7 @@
 		}
 	],
 	"key": "CopyParameter",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"default": "SystemParameters",
@@ -1406,5 +1409,6 @@
 	"summary": [
 		"The CopyParameter plugin automatically moves values from one part of an automation to another.",
 		"It takes a value from one step and makes it available where it's needed next."
-	]
+	],
+	"version": "4"
 }

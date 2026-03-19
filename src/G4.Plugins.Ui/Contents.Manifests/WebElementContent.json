@@ -16,10 +16,16 @@
 		"integration": {
 			"sequentialWorkflow": {
 				"$type": "Content",
-				"branches": [ "Actions", "Transformers" ],
+				"branches": [
+					"Actions",
+					"Transformers"
+				],
 				"componentType": "task",
 				"containerable": true,
-				"iconProvider": "file-code",
+				"iconProvider": {
+					"name": "file-code",
+					"svg": null
+				},
 				"model": "ContentRuleModel",
 				"switchable": true
 			}
@@ -127,7 +133,7 @@
 		}
 	],
 	"key": "WebElementContent",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Content",
 	"properties": [
@@ -216,5 +222,6 @@
 	],
 	"summary": [
 		"Extracts content from elements in web, mobile, and desktop applications using any WebDriver locator, with optional attribute selection, regular expressions, and data type conversion."
-	]
+	],
+	"version": "4"
 }

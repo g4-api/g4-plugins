@@ -90,7 +90,7 @@
 		}
 	],
 	"key": "Elements",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "ExtractionScope",
 	"properties": [
 		{
@@ -148,5 +148,6 @@
 		"The `Elements` plugin extracts data from the live DOM structure of a web page in real-time, ensuring accuracy by avoiding caching.",
 		"In robotic process automation (RPA), it is used for tasks requiring precise, up-to-date data collection from dynamic web pages.",
 		"In automation testing, it validates the current state of DOM elements, supporting high-precision assertions and accurate regression testing."
-	]
+	],
+	"version": "4"
 }

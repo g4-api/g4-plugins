@@ -11,7 +11,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "gears",
+				"iconProvider": {
+					"name": "gears",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -80,7 +83,7 @@
 		}
 	],
 	"key": "NewWindow",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Action",
 	"properties": [
@@ -119,5 +122,6 @@
 	"summary": [
 		"The `NewWindow` plugin automates the opening of a new browser window or tab, enabling the creation of multi-window workflows and testing scenarios. ",
 		"It supports specifying the type of new window to open (`tab` or `window`) and is useful for both robotic process automation (RPA) and automation testing."
-	]
+	],
+	"version": "4"
 }

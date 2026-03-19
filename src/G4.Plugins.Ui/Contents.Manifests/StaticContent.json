@@ -10,10 +10,16 @@
 		"integration": {
 			"sequentialWorkflow": {
 				"$type": "Content",
-				"branches": [ "Actions", "Transformers" ],
+				"branches": [
+					"Actions",
+					"Transformers"
+				],
 				"componentType": "task",
 				"containerable": true,
-				"iconProvider": "file-lines",
+				"iconProvider": {
+					"name": "file-lines",
+					"svg": null
+				},
 				"model": "ContentRuleModel",
 				"switchable": true
 			}
@@ -119,7 +125,7 @@
 		}
 	],
 	"key": "StaticContent",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Content",
 	"properties": [
@@ -197,5 +203,6 @@
 	],
 	"summary": [
 		"Extracts content from HTML documents using XPath selectors, with optional attribute selection, regular expressions, and data type conversion."
-	]
+	],
+	"version": "4"
 }

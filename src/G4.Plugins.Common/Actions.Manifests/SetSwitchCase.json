@@ -112,7 +112,10 @@
 				],
 				"canEditBranches": true,
 				"componentType": "switch",
-				"iconProvider": "shuffle",
+				"iconProvider": {
+					"name": "shuffle",
+					"svg": null
+				},
 				"model": "SwitchRuleModel"
 			}
 		}
@@ -522,7 +525,7 @@
 		}
 	],
 	"key": "SetSwitchCase",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -610,5 +613,6 @@
 		"SetSwitchCase checks a value you give or finds on a page and runs the matching set of steps.",
 		"If nothing matches, it runs a fallback set of steps.",
 		"This lets your tasks follow different paths based on the information they see."
-	]
+	],
+	"version": "4"
 }

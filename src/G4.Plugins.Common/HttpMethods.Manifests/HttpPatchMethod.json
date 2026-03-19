@@ -439,7 +439,7 @@
 		}
 	],
 	"key": "Patch",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -741,5 +741,6 @@
 		"It supports dynamic URL building, request content handling, and custom headers for flexible API interactions.",
 		"Users can update specific fields in external systems, like customer details or product info, without replacing entire records.",
 		"It records system replies to confirm updates succeeded, helping automated workflows check that changes were applied."
-	]
+	],
+	"version": "4"
 }

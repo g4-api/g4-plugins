@@ -372,7 +372,7 @@
 		}
 	],
 	"key": "Text",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -429,5 +429,6 @@
 		"Text plugin returns a piece of text you give it or that it makes from other information.",
 		"It can use fixed words, values saved earlier, or items from a list to make that text.",
 		"That text can then be used to check results or for tests with different inputs."
-	]
+	],
+	"version": "4"
 }

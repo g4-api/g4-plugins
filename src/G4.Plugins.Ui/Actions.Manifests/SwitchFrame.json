@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "shuffle",
+				"iconProvider": {
+					"name": "shuffle",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -72,7 +75,7 @@
 		}
 	],
 	"key": "SwitchFrame",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
 	"pluginType": "Action",
 	"properties": [
@@ -115,5 +118,6 @@
 		"The `SwitchFrame` plugin automates the process of switching to different frames or iframes within a web page.",
 		"In robotic process automation (RPA), it simplifies navigating and interacting with frame-contained content.",
 		"In automation testing, it ensures comprehensive test coverage by enabling interactions with elements inside frames."
-	]
+	],
+	"version": "4"
 }

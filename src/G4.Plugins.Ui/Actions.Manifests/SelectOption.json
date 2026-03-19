@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "gears",
+				"iconProvider": {
+					"name": "gears",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -103,7 +106,7 @@
 		}
 	],
 	"key": "SelectOption",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Action",
 	"properties": [
 		{
@@ -179,5 +182,6 @@
 		"Key features include element validation, multiple selection methods, and robust error handling.",
 		"In RPA, it is used for form submissions, data entry, and user interaction, streamlining tasks involving dropdown menus. ",
 		"In automation testing, it supports user interface testing, form field validation, and end-to-end testing by ensuring accurate selection of options in dropdown menus."
-	]
+	],
+	"version": "4"
 }

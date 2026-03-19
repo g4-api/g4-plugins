@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "arrow-rotate-left",
+				"iconProvider": {
+					"name": "arrow-rotate-left",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -92,7 +95,7 @@
 		}
 	],
 	"key": "RedoNavigation",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "0",
@@ -139,5 +142,6 @@
 	"summary": [
 		"The `RedoNavigation` plugin automates the forward navigation in a web browser, allowing users to revisit previous pages or states. ",
 		"It offers options for specifying the number of repeats and introducing delays between steps for controlled navigation."
-	]
+	],
+	"version": "4"
 }

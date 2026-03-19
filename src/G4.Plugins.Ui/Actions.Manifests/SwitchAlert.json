@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "shuffle",
+				"iconProvider": {
+					"name": "shuffle",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -110,7 +113,7 @@
 		}
 	],
 	"key": "SwitchAlert",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -180,5 +183,6 @@
 		"The `SwitchAlert` plugin automates the handling of alert dialogs in web-based automation tasks, enabling seamless identification and action upon alert messages.",
 		"In robotic process automation (RPA), it ensures efficient management of alerts, enhancing the reliability of automated workflows.",
 		"In automation testing, it provides comprehensive test coverage by validating alert handling functionality and simulating user interactions with alert dialogs."
-	]
+	],
+	"version": "4"
 }

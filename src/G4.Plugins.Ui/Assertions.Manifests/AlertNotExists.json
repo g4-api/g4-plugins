@@ -61,7 +61,7 @@
 		}
 	],
 	"key": "AlertNotExists",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"protocol": {
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#user-prompts",
@@ -74,5 +74,6 @@
 		"The `AlertNotExists` plugin asserts that no alert dialog is present within a web browser during automated tasks, ensuring that automation scripts validate the absence of alerts.",
 		"In robotic process automation (RPA), it confirms the smooth execution of processes by validating the absence of alert dialogs.",
 		"In automation testing, it ensures workflows proceed without interruption from alerts, validating the absence of unexpected alert dialogs."
-	]
+	],
+	"version": "4"
 }

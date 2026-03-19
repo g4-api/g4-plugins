@@ -11,7 +11,10 @@
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
-				"iconProvider": "keyboard",
+				"iconProvider": {
+					"name": "keyboard",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -82,7 +85,7 @@
 		}
 	],
 	"key": "SendUser32Keys",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -156,5 +159,6 @@
 	],
 	"summary": [
 		"The `SendUser32Keys` plugin simulates realistic typing of text into native Windows application elements using the User32 API, sending characters individually with configurable delays and keyboard layouts."
-	]
+	],
+	"version": "4"
 }

@@ -3,6 +3,9 @@
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
 		"name": "Roei Sabag"
 	},
+	"categories": [
+		"DataManagement"
+	],
 	"context": {
 		"integration": {
 			"github": {
@@ -92,9 +95,6 @@
 			}
 		}
 	},
-	"categories": [
-		"DataManagement"
-	],
 	"description": [
 		"### Purpose",
 		"",
@@ -170,7 +170,7 @@
 		}
 	],
 	"key": "User",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Windows"
 	],
@@ -196,5 +196,6 @@
 		"If the value is not set, it returns nothing so you know it’s missing.",
 		"Use it to load each user's settings or account info before running steps.",
 		"Tests can get user-specific values so each test runs with the right setup."
-	]
+	],
+	"version": "4"
 }

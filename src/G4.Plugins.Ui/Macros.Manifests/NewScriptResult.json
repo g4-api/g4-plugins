@@ -85,7 +85,7 @@
 		}
 	],
 	"key": "New-ScriptResult",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -126,5 +126,6 @@
 		"The `New-ScriptResult` plugin executes custom scripts and returns the result as a macro output within automation workflows.",
 		"In robotic process automation (RPA), it allows for dynamic script execution, enabling tailored actions and flexible automation.",
 		"In automation testing, it supports custom validation and testing scenarios, enhancing the adaptability and coverage of test scripts."
-	]
+	],
+	"version": "4"
 }

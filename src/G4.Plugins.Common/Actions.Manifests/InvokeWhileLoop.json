@@ -85,7 +85,10 @@
 				"$type": "Action",
 				"componentSubType": "loop",
 				"componentType": "container",
-				"iconProvider": "repeat",
+				"iconProvider": {
+					"name": "repeat",
+					"svg": null
+				},
 				"model": "ActionRuleModel"
 			}
 		}
@@ -415,7 +418,7 @@
 		}
 	],
 	"key": "InvokeWhileLoop",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"parameters": [
 		{
 			"description": [
@@ -536,5 +539,6 @@
 		"The InvokeWhileLoop tool repeats your chosen steps as long as a condition you set remains true.",
 		"It stops automatically when that condition changes or a timeout happens.",
 		"This helps you automate tasks that depend on changing conditions without manual checks."
-	]
+	],
+	"version": "4"
 }

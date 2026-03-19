@@ -29,11 +29,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.1.18.46" />
+		<PackageReference Include="G4.Converters" Version="2026.3.19.58" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
+	  <ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
 	</ItemGroup>
 
 </Project>

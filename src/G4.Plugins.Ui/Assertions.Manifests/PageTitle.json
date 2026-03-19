@@ -94,7 +94,7 @@
 		}
 	],
 	"key": "PageTitle",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
@@ -145,5 +145,6 @@
 	"summary": [
 		"The `PageTitle` plugin validates the title of the current web page against specific conditions, ensuring that it matches expected text, patterns, or numerical values.",
 		"It is commonly used in RPA to verify correct page navigation and in automation testing to ensure UI consistency, localization accuracy, and adherence to SEO best practices."
-	]
+	],
+	"version": "4"
 }

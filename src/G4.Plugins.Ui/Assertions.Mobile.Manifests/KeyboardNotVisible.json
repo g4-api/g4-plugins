@@ -70,7 +70,7 @@
 		}
 	],
 	"key": "KeyboardNotVisible",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"pluginType": "Assertion",
 	"protocol": {
 		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/is-keyboard-shown/#http-api-specifications",
@@ -83,5 +83,6 @@
 	"summary": [
 		"The `KeyboardNotVisible` plugin validates that the on-screen keyboard is not visible on a mobile device, ensuring that it is hidden before proceeding with further actions.",
 		"It is commonly used in RPA to verify that the keyboard is hidden before or after user interactions and in automation testing to ensure UI consistency and correct behavior during input and navigation tasks."
-	]
+	],
+	"version": "4"
 }

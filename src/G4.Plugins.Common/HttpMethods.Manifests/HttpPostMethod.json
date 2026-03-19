@@ -432,7 +432,7 @@
 		}
 	],
 	"key": "Post",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -733,5 +733,6 @@
 		"The Post plugin lets automation workflows submit data to servers or APIs using HTTP POST requests for consistent data submission.",
 		"It supports dynamic URL construction, custom headers, and different content types to handle various payloads easily.",
 		"It captures response details to guide subsequent workflow steps in robotic process automation and to verify data submission in automated tests."
-	]
+	],
+	"version": "4"
 }

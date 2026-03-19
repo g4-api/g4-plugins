@@ -64,7 +64,7 @@
 		}
 	],
 	"key": "Get-PageUrl",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"default": "(?s).*",
@@ -89,5 +89,6 @@
 		"The `Get-PageUrl` plugin retrieves the URL of the current web page in automation workflows, enabling dynamic actions based on the URL.",
 		"In robotic process automation (RPA), it allows for navigation and validation of web pages, ensuring correct URLs are accessed.",
 		"In automation testing, it supports URL verification and dynamic interaction with web elements based on the retrieved URL."
-	]
+	],
+	"version": "4"
 }

@@ -14,7 +14,10 @@
 			"sequentialWorkflow": {
 				"$type": "Transformer",
 				"componentType": "task",
-				"iconProvider": "text-height",
+				"iconProvider": {
+					"name": "text-height",
+					"svg": null
+				},
 				"model": "TransformerRuleModel"
 			}
 		}
@@ -100,7 +103,7 @@
 		}
 	],
 	"key": "ClearLines",
-	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Common",
 	"outputParameters": [
 		{
 			"description": [
@@ -112,6 +115,9 @@
 		}
 	],
 	"parameters": [],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Transformer",
 	"properties": [
 		{
@@ -153,10 +159,8 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
 		"Removes all carriage return and newline characters from a given text input."
-	]
+	],
+	"version": "4"
 }

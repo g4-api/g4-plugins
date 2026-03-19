@@ -1,6 +1,7 @@
 ﻿using G4.Api;
 using G4.Attributes;
 using G4.Cache;
+using G4.Credentials.Models;
 using G4.Extensions;
 using G4.Models;
 using G4.Plugins;
@@ -14,6 +15,7 @@ using G4.WebDriver.Simulator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -36,6 +38,12 @@ namespace G4.UnitTests.Framework
     [DeploymentItem("appsettings.json")]
     public abstract class TestBase
     {
+        /// <summary>
+        /// Gets a thread-safe dictionary to be used as a data
+        /// bag for storing arbitrary key-value pairs during tests.
+        /// </summary>
+        protected static ConcurrentDictionary<string, object> DataBag { get; } = new(StringComparer.OrdinalIgnoreCase);
+
         /// <summary>
         /// A constant for string comparison with a specified comparison type.
         /// </summary>
@@ -84,6 +92,12 @@ namespace G4.UnitTests.Framework
 
             // Write a message to the test context indicating that a new test server was created.
             context.WriteLine("New-TestServer = Created");
+
+            // Initialize credentials for the test context.
+            InitializeCredentials(context);
+
+            // Write a message to the test context indicating that credentials were initialized.
+            context.WriteLine("Credentials initialized.");
         }
 
         /// <summary>
@@ -1161,6 +1175,49 @@ namespace G4.UnitTests.Framework
 
             // Convert StringBuilder to string and return
             return stringBuilder.ToString();
+        }
+
+        // Initializes credentials in the cache manager based on the provided test context.
+        private static void InitializeCredentials(TestContext context)
+        {
+            // Ensure a clean Data directory for repeatable tests.
+            var directoryPath = Path.Combine(Environment.CurrentDirectory, "Data");
+            if (Directory.Exists(directoryPath))
+            {
+                Directory.Delete(directoryPath, recursive: true);
+            }
+
+            // Build OAuth credential model from test configuration.
+            var oauth = new OAuthCredentialModel
+            {
+                ClientId = $"{context.Properties["Google.App.ClientId"]}",
+                ClientSecret = $"{context.Properties["Google.App.ClientSecret"]}",
+                Domains = $"{context.Properties["Google.App.Domains"]}",
+                Name = $"{context.Properties["Google.App.Name"]}",
+                RedirectUrl = $"{context.Properties["Google.App.RedirectUrl"]}",
+                RefreshToken = $"{context.Properties["Google.App.RefreshToken"]}",
+                Scope = $"{context.Properties["Google.App.Scope"]}"
+            };
+
+            // Cache key convention: "<name>;<id>" (lowercase for normalization).
+            var key = $"{oauth.Name};{oauth.Id}".ToLowerInvariant();
+
+            // Seed the credentials cache with secured secrets.
+            CacheManager.Instance.CredentialsCache[key] = new()
+            {
+                AccessToken = string.Empty,
+                ClientId = oauth.ClientId,
+                CreatedAt = oauth.CreatedAt,
+                ExpiresAt = oauth.ExpiresAt,
+                ClientSecret = oauth.ClientSecret.Protect(),
+                Domains = oauth.Domains,
+                Id = oauth.Id,
+                Name = oauth.Name,
+                Provider = "google",
+                RedirectUrl = oauth.RedirectUrl,
+                RefreshToken = oauth.RefreshToken.Protect(),
+                Scope = oauth.Scope
+            };
         }
         #endregion
 
