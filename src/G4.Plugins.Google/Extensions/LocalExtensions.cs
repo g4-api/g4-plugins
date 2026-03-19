@@ -368,27 +368,6 @@ namespace G4.Plugins.Google.Extensions
             }
         }
 
-        extension(PluginBase plugin)
-        {
-            /// <summary>
-            /// Adds a value to the workflow session parameters using a namespaced key.
-            /// </summary>
-            /// <param name="namespace">Logical namespace used to prefix the session key (typically the plugin name) to avoid collisions with other session parameters.</param>
-            /// <param name="name">The parameter name to store within the specified namespace.</param>
-            /// <param name="value">The value to store. The value is Base64-encoded before being persisted.</param>
-            public void AddSessionParameter(string @namespace, string name, string value)
-            {
-                // Prefix the parameter with the namespace (usually the plugin name).
-                name = $"{@namespace}:{name}";
-
-                // Encode the value as Base64 to keep storage and transport predictable.
-                value = value?.ConvertToBase64() ?? string.Empty;
-
-                // Store the value in the workflow session scope.
-                plugin.Invoker.Context.SessionParameters[name] = value;
-            }
-        }
-
         extension(PluginDataModel)
         {
             /// <summary>
