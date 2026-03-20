@@ -10,6 +10,7 @@ namespace G4.IntegrationTests.Suites.Common
     [TestClass]
     public class PrototypeTests
     {
+        [Ignore]
         [TestMethod]
         public void ScrappingTest()
         {

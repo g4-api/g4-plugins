@@ -38,7 +38,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
-                    Argument = "{{$ ----Condition:Text --Operator:" + assertionOperation + @" --Expected:(?<=Basic\s+)([A-Za-z0-9+/=]+)}}",
+                    Argument = "{{$ --Condition:Text --Operator:" + assertionOperation + @" --Expected:(?<=Basic\s+)([A-Za-z0-9+/=]+)}}",
                     OnElement = "{{$Get-Parameter --Name:HttpResponse --Scope:Session}}"
                 }
             ];

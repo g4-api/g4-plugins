@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Ui.Macros
             "scripts with different arguments correctly.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":""{{$ --Src:readyState --Arg:5 --Arg:Foo Bar}}""}")]
-        [DataRow(@"{""argument"":""{{$ --Src:readyState --Arg:5 --arg:Foo Bar}}""}")]
+        [DataRow(@"{""argument"":""{{$ --Src:readyState --arg:5 --arg:Foo Bar}}""}")]
         [DataRow(@"{""argument"":""{{$ --Src:readyState --Arg:{\""key\"":\""value\""} --Arg:Foo Bar}}""}")]
         [DataRow(@"{""argument"":""{{$ --Src:readyState --Arg:[{\""key\"":\""value\""},{\""key\"":\""value1\""}] --Arg:Foo Bar}}""}")]
         #endregion

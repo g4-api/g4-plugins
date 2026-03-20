@@ -25,9 +25,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.3.19.58" />
-		<PackageReference Include="G4.Extensions" Version="2026.3.19.58" />
-		<PackageReference Include="G4.Plugins" Version="2026.3.19.58" />
+		<PackageReference Include="G4.Converters" Version="2026.3.19.59" />
+		<PackageReference Include="G4.Extensions" Version="2026.3.19.59" />
+		<PackageReference Include="G4.Plugins" Version="2026.3.19.59" />
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.5" />
 	</ItemGroup>
 
