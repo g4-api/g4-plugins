@@ -24,6 +24,8 @@ namespace G4.Plugins.Ui.Macros
             PropertyNameCaseInsensitive = true
         };
 
+        // TODO: Consider to normalize the script arguments before invoking the WebDriver
+        // script, to ensure consistent handling of different argument formats.
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Initialize the macro result string.

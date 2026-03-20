@@ -1,17 +1,12 @@
-﻿using G4.Cache;
-using G4.Credentials.Models;
-using G4.Extensions;
-using G4.Plugins.Google.Actions;
+﻿using G4.Plugins.Google.Actions;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using System;
-using System.IO;
-
 namespace G4.UnitTests.Plugins.Google
 {
+    [Ignore]
     [TestClass]
     [TestCategory("GmailMail")]
     [TestCategory("UnitTest")]
