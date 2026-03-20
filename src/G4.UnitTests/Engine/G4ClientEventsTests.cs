@@ -46,8 +46,6 @@ namespace G4.UnitTests.Engine
             // Create automation model using test context, without data
             var automation = NewAutomation(TestContext, useData: false);
 
-            var a = JsonSerializer.Serialize(automation, new JsonSerializerOptions());
-
             // Create a new G4Client instance
             var client = new G4Client();
 
