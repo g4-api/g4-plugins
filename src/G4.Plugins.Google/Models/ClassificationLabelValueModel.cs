@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace G4.Plugins.Google.Models
+﻿namespace G4.Plugins.Google.Models
 {
     internal class ClassificationLabelValueModel
     {
