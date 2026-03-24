@@ -1,5 +1,9 @@
 ﻿namespace G4.Plugins.Google.Clients
 {
+    /// <summary>
+    /// Provides authenticated access to Google APIs using the specified credentials.
+    /// </summary>
+    /// <param name="credentials">The credentials (token or stored credentials name) used to authenticate requests to Google APIs.</param>
     internal class GoogleAdapter(string credentials)
     {
         /// <summary>
@@ -7,9 +11,19 @@
         /// </summary>
         public const string Iso = "yyyy-MM-ddTHH:mm:ss.fffZ";
 
+        /// <summary>
+        /// Gets an authenticated Gmail client instance for accessing Gmail APIs.
+        /// </summary>
         public GmailClient Gmail { get; } = new(credentials);
 
+        /// <summary>
+        /// Gets an authenticated TaskLists client instance for accessing Google TaskLists APIs.
+        /// </summary>
         public TaskListsClient TaskLists { get; } = new(credentials);
+        
+        /// <summary>
+        /// Gets an authenticated Tasks client instance for accessing Google Tasks APIs.
+        /// </summary>
         public TasksClient Tasks { get; } = new(credentials);
     }
 }
