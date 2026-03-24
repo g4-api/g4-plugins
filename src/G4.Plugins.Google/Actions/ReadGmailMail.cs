@@ -5,6 +5,7 @@ using G4.Plugins.Google.Clients;
 using G4.Plugins.Google.Extensions;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace G4.Plugins.Google.Actions
@@ -34,29 +35,54 @@ namespace G4.Plugins.Google.Actions
             });
 
             // Extract the first available message id from the returned page.
-            var id = list.Messages.FirstOrDefault()?.Id;
+            var messageId = list.Messages.FirstOrDefault()?.Id;
 
             // Treat a missing message id as a hard failure because there is no mail to read.
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(messageId))
             {
                 throw new InvalidOperationException(
                     message: "No Gmail messages were returned for the authenticated account.");
             }
 
             // Retrieve the full Gmail message using the resolved message id.
-            var message = adapter.Gmail.Messages.Get(id);
+            var message = adapter.Gmail.Messages.Get(messageId);
+
+            // Extract commonly used properties from the Gmail message.
+            var bcc = message.GetBcc();
+            var cc = message.GetCc();
+            var content = message.Read();
+            var from = message.GetFrom();
+            var id = message.Id;
+            var subject = message.GetSubject();
+            var to = message.GetTo();
 
             // Persist mail data in session parameters.
-            this.AddSessionParameter(@namespace: NameReference, name: "Bcc", value: message.GetBcc());
-            this.AddSessionParameter(@namespace: NameReference, name: "Cc", value: message.GetCc());
-            this.AddSessionParameter(@namespace: NameReference, name: "Content", value: message.Read());
-            this.AddSessionParameter(@namespace: NameReference, name: "From", value: message.GetFrom());
-            this.AddSessionParameter(@namespace: NameReference, name: "Id", value: message.Id);
-            this.AddSessionParameter(@namespace: NameReference, name: "Subject", value: message.GetSubject());
-            this.AddSessionParameter(@namespace: NameReference, name: "To", value: message.GetTo());
+            this.AddSessionParameter(@namespace: NameReference, name: "Bcc", value: bcc);
+            this.AddSessionParameter(@namespace: NameReference, name: "Cc", value: cc);
+            this.AddSessionParameter(@namespace: NameReference, name: "Content", value: content);
+            this.AddSessionParameter(@namespace: NameReference, name: "From", value: from);
+            this.AddSessionParameter(@namespace: NameReference, name: "Id", value: id);
+            this.AddSessionParameter(@namespace: NameReference, name: "Subject", value: subject);
+            this.AddSessionParameter(@namespace: NameReference, name: "To", value: to);
 
-            // Indicate successful completion.
-            return this.NewPluginResponse();
+            // Create a new plugin response to return
+            // the extracted mail properties in the response entity.
+            var response = this.NewPluginResponse();
+
+            // Initialize the plugin response entity with the extracted mail properties.
+            response.Entity = new Dictionary<string, object>
+            {
+                ["Bcc"] = bcc,
+                ["Cc"] = cc,
+                ["Content"] = content,
+                ["From"] = from,
+                ["Id"] = id,
+                ["Subject"] = subject,
+                ["To"] = to
+            };
+
+            // Return the plugin response.
+            return response;
         }
     }
 }
