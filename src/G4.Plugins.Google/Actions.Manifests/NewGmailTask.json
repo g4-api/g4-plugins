@@ -3,7 +3,9 @@
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 	},
-	"categories": [ "GoogleTasks" ],
+	"categories": [
+		"GoogleTasks"
+	],
 	"context": {
 		"integration": {
 			"github": {
