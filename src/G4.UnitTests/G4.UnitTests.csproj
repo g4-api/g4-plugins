@@ -33,7 +33,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="G4.Abstraction.Logging" Version="2026.3.15.19" />
-		<PackageReference Include="G4.Api" Version="2026.3.19.39" />
+		<PackageReference Include="G4.Api" Version="2026.3.21.40" />
 		<PackageReference Include="G4.Converters" Version="2026.3.19.59" />
 		<PackageReference Include="G4.Plugins" Version="2026.3.19.59" />
 		<PackageReference Include="G4.Extensions" Version="2026.3.19.59" />
@@ -47,7 +47,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.5" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.6" />
 	</ItemGroup>
 
 	<ItemGroup>
