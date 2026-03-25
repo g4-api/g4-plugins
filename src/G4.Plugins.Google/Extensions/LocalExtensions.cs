@@ -1,7 +1,6 @@
 ﻿using G4.Extensions;
 using G4.Models;
 using G4.Plugins.Google.Clients;
-using G4.Plugins.Google.Models;
 using G4.Plugins.Google.Models.Gmail;
 using G4.Plugins.Google.Models.Tasks;
 
