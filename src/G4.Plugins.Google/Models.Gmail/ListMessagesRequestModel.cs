@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace G4.Plugins.Google.Models
+namespace G4.Plugins.Google.Models.Gmail
 {
     /// <summary>
     /// Represents query parameters used when listing Gmail messages.
     /// </summary>
-    internal class MessageListQueryModel
+    internal class ListMessagesRequestModel
     {
         /// <summary>
         /// Indicates whether messages in Spam and Trash should be included.

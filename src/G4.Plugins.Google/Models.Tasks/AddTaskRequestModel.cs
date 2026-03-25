@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace G4.Plugins.Google.Models
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Parameters for inserting a task (Tasks: insert), controlling initial placement
     /// in the hierarchy (parent) and ordering among siblings (previous).
     /// </summary>
-    internal class InsertTaskQueryModel
+    internal class AddTaskRequestModel
     {
         /// <summary>
         /// Parent task identifier.

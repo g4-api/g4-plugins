@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace G4.Plugins.Google.Models
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Query parameters for moving a task (Tasks: move).
     /// </summary>
-    internal class MoveTaskQueryModel
+    internal class MoveTaskRequestModel
     {
         /// <summary>
         /// Optional. Destination task list identifier.

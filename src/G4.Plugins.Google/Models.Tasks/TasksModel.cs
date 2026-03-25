@@ -1,21 +1,25 @@
-﻿namespace G4.Plugins.Google.Models
+﻿using G4.Plugins.Google.Models.Abstraction;
+
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Represents a paged response from the Google Tasks Tasks API (<c>Tasks: list</c>).
     /// Contains response metadata (kind/etag), an optional continuation token (nextPageToken) for pagination,
     /// and the collection of returned tasks (<c>items[]</c>).
     /// </summary>
-    internal class TaskListResponseModel
+    internal class TasksModel : IDirectResponseSchema
     {
-        /// <summary>
-        /// ETag of the resource.
-        /// </summary>
-        public string Etag { get; set; }
+        /// <inheritdoc />
+        [JsonPropertyName(name: "etag")]
+        public string ETag { get; set; }
 
         /// <summary>
         /// Collection of tasks.
         /// </summary>
-        public TaskModel[] Items { get; set; }
+        public List<TaskModel> Items { get; set; }
 
         /// <summary>
         /// Type of the resource. This is always "tasks#tasks".

@@ -5,7 +5,7 @@
  * https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.labels
  */
 using G4.Plugins.Google.Extensions;
-using G4.Plugins.Google.Models;
+using G4.Plugins.Google.Models.Gmail;
 
 using System;
 using System.Net.Http;
@@ -62,8 +62,8 @@ namespace G4.Plugins.Google.Clients
             /// Retrieves a page of Gmail messages for the authenticated user using the specified query parameters.
             /// </summary>
             /// <param name="query">Query parameters used to filter, page, or shape the returned message list.</param>
-            /// <returns>A <see cref="MessageListModel"/> containing the messages returned by the Gmail API.</returns>
-            public MessageListModel Get(MessageListQueryModel query)
+            /// <returns>A <see cref="ListMessagesResponseModel"/> containing the messages returned by the Gmail API.</returns>
+            public ListMessagesResponseModel Get(ListMessagesRequestModel query)
             {
                 // Extract the OAuth access token used to authorize the request.
                 var token = Credentials.AccessToken;
@@ -78,14 +78,14 @@ namespace G4.Plugins.Google.Clients
                 var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
 
                 // Send the request and deserialize the JSON response into MessageListModel.
-                return HttpClient.Send<MessageListModel>(requestMessage);
+                return HttpClient.Send<ListMessagesResponseModel>(requestMessage);
             }
 
             /// <summary>
             /// Retrieves a page of Gmail messages for the authenticated user.
             /// </summary>
-            /// <returns>A <see cref="MessageListModel"/> containing the messages returned by the Gmail API.</returns>
-            public MessageListModel Get()
+            /// <returns>A <see cref="ListMessagesResponseModel"/> containing the messages returned by the Gmail API.</returns>
+            public ListMessagesResponseModel Get()
             {
                 // Extract the OAuth access token used to authorize the request.
                 var token = Credentials.AccessToken;
@@ -97,7 +97,7 @@ namespace G4.Plugins.Google.Clients
                 var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
 
                 // Send the request and deserialize the JSON response into MessageListModel.
-                return HttpClient.Send<MessageListModel>(requestMessage);
+                return HttpClient.Send<ListMessagesResponseModel>(requestMessage);
             }
 
             /// <summary>
@@ -131,8 +131,8 @@ namespace G4.Plugins.Google.Clients
             /// <summary>
             /// Retrieves all Gmail labels for the authenticated user.
             /// </summary>
-            /// <returns>A <see cref="LabelsResponseModel"/> representing the labels returned by the Gmail API.</returns>
-            public LabelsResponseModel Get()
+            /// <returns>A <see cref="ListLabelsResponseModel"/> representing the labels returned by the Gmail API.</returns>
+            public ListLabelsResponseModel Get()
             {
                 // Extract the OAuth access token used to authorize the request.
                 var token = Credentials.AccessToken;
@@ -144,7 +144,7 @@ namespace G4.Plugins.Google.Clients
                 var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
 
                 // Send the request and deserialize the JSON response into LabelsResponseModel.
-                return HttpClient.Send<LabelsResponseModel>(requestMessage);
+                return HttpClient.Send<ListLabelsResponseModel>(requestMessage);
             }
 
             /// <summary>

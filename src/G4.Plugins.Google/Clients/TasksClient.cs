@@ -3,7 +3,7 @@
  * - https://developers.google.com/workspace/tasks/reference/rest
  */
 using G4.Plugins.Google.Extensions;
-using G4.Plugins.Google.Models;
+using G4.Plugins.Google.Models.Tasks;
 
 using System;
 using System.Net.Http;
@@ -30,7 +30,7 @@ namespace G4.Plugins.Google.Clients
         /// <param name="requestBody">A <see cref="TaskModel"/> containing the task fields to create.</param>
         /// <param name="options">Optional query parameters controlling the insert operation (for example destination position or parent task).</param>
         /// <returns>A <see cref="TaskModel"/> representing the created task returned by the Google Tasks API.</returns>
-        public TaskModel Add(string taskList, TaskModel requestBody, InsertTaskQueryModel options)
+        public TaskModel Add(string taskList, TaskModel requestBody, AddTaskRequestModel options)
         {
             // Extract the OAuth access token used to authorize the request.
             var token = Credentials.AccessToken;
@@ -97,8 +97,8 @@ namespace G4.Plugins.Google.Clients
         /// </summary>
         /// <param name="taskList">The identifier of the task list from which tasks should be retrieved.</param>
         /// <param name="options">Optional query parameters used to filter or control the returned task collection.</param>
-        /// <returns>A <see cref="TaskListResponseModel"/> containing the tasks returned by the Google Tasks API.</returns>
-        public TaskListResponseModel Get(string taskList, ListTasksQueryModel options)
+        /// <returns>A <see cref="TasksModel"/> containing the tasks returned by the Google Tasks API.</returns>
+        public TasksModel Get(string taskList, ListTasksRequestModel options)
         {
             // Extract the OAuth access token used to authorize the request.
             var token = Credentials.AccessToken;
@@ -114,7 +114,7 @@ namespace G4.Plugins.Google.Clients
             var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
 
             // Send the request and deserialize the JSON response into TaskListResponseModel.
-            return HttpClient.Send<TaskListResponseModel>(requestMessage);
+            return HttpClient.Send<TasksModel>(requestMessage);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace G4.Plugins.Google.Clients
         /// <param name="task">The identifier of the task to move.</param>
         /// <param name="options">Query parameters controlling the move operation (for example destination list or previous task).</param>
         /// <returns>A <see cref="TaskModel"/> representing the moved task returned by the Google Tasks API.</returns>
-        public TaskModel Move(string taskList, string task, MoveTaskQueryModel options)
+        public TaskModel Move(string taskList, string task, MoveTaskRequestModel options)
         {
             // Extract the OAuth access token used to authorize the request.
             var token = Credentials.AccessToken;

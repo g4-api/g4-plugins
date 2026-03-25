@@ -2,6 +2,8 @@
 using G4.Models;
 using G4.Plugins.Google.Clients;
 using G4.Plugins.Google.Models;
+using G4.Plugins.Google.Models.Gmail;
+using G4.Plugins.Google.Models.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -83,8 +85,8 @@ namespace G4.Plugins.Google.Extensions
                 {
                     // Build paging options for the current request.
                     var options = string.IsNullOrEmpty(nextPageToken)
-                        ? new ListTasksQueryModel { MaxResults = 100 }
-                        : new ListTasksQueryModel { MaxResults = 100, PageToken = nextPageToken };
+                        ? new ListTasksRequestModel { MaxResults = 100 }
+                        : new ListTasksRequestModel { MaxResults = 100, PageToken = nextPageToken };
 
                     // Retrieve the current page of tasks from the resolved list.
                     var tasksPage = adapter.Tasks.Get(taskListId, options);
@@ -93,7 +95,7 @@ namespace G4.Plugins.Google.Extensions
                     var tasks = tasksPage.Items;
 
                     // Stop when the current page does not contain any tasks.
-                    if (tasks == null || tasks.Length == 0)
+                    if (tasks == null || tasks.Count == 0)
                     {
                         break;
                     }
@@ -238,8 +240,8 @@ namespace G4.Plugins.Google.Extensions
                 {
                     // Build paging options for the current request.
                     var options = string.IsNullOrEmpty(nextPageToken)
-                        ? new ListTasksQueryModel { MaxResults = 100 }
-                        : new ListTasksQueryModel { MaxResults = 100, PageToken = nextPageToken };
+                        ? new ListTasksRequestModel { MaxResults = 100 }
+                        : new ListTasksRequestModel { MaxResults = 100, PageToken = nextPageToken };
 
                     // Retrieve the current page of tasks from the resolved list.
                     var tasksPage = adapter.Tasks.Get(taskListId, options);
@@ -303,8 +305,8 @@ namespace G4.Plugins.Google.Extensions
                 {
                     // Build paging options for the current request.
                     var options = string.IsNullOrEmpty(nextPageToken)
-                        ? new ListTaskListsQueryModel { MaxResults = 1000 }
-                        : new ListTaskListsQueryModel { MaxResults = 1000, PageToken = nextPageToken };
+                        ? new ListTaskListsRequestModel { MaxResults = 1000 }
+                        : new ListTaskListsRequestModel { MaxResults = 1000, PageToken = nextPageToken };
 
                     // Retrieve the current page of task lists.
                     var taskListsPage = adapter.TaskLists.Get(options);

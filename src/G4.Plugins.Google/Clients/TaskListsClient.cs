@@ -3,7 +3,7 @@
  * - https://developers.google.com/workspace/tasks/reference/rest
  */
 using G4.Plugins.Google.Extensions;
-using G4.Plugins.Google.Models;
+using G4.Plugins.Google.Models.Tasks;
 
 using System;
 using System.Net.Http;
@@ -60,8 +60,8 @@ namespace G4.Plugins.Google.Clients
         /// <summary>
         /// Retrieves the list of task lists for the authenticated user from the Google Tasks API.
         /// </summary>
-        /// <returns>A <see cref="TaskListsListResponseModel"/> containing the user's task lists. The response will be empty if no task lists are found.</returns>
-        public TaskListsListResponseModel Get()
+        /// <returns>A <see cref="TaskListsModel"/> containing the user's task lists. The response will be empty if no task lists are found.</returns>
+        public TaskListsModel Get()
         {
             // Extract the access token from the credentials for authorization.
             var token = Credentials.AccessToken;
@@ -73,7 +73,7 @@ namespace G4.Plugins.Google.Clients
             var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
 
             // Return the deserialized response content as a TaskListModel instance.
-            return HttpClient.Send<TaskListsListResponseModel>(requestMessage);
+            return HttpClient.Send<TaskListsModel>(requestMessage);
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace G4.Plugins.Google.Clients
         /// A user can have up to 2000 lists at a time.
         /// </summary>
         /// <param name="options">The options for listing task lists.</param>
-        /// <returns>If successful, the response body contains an instance of <see cref="TaskListsListResponseModel"/>.</returns>
-        public TaskListsListResponseModel Get(ListTaskListsQueryModel options)
+        /// <returns>If successful, the response body contains an instance of <see cref="TaskListsModel"/>.</returns>
+        public TaskListsModel Get(ListTaskListsRequestModel options)
         {
             // Extract the access token from the credentials for authorization.
             var token = Credentials.AccessToken;
@@ -97,7 +97,7 @@ namespace G4.Plugins.Google.Clients
             var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
 
             // Return the deserialized response content as a TaskListsListResponseModel instance.
-            return HttpClient.Send<TaskListsListResponseModel>(requestMessage);
+            return HttpClient.Send<TaskListsModel>(requestMessage);
         }
 
         /// <summary>

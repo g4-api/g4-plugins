@@ -4,6 +4,7 @@ using G4.Models;
 using G4.Plugins.Google.Clients;
 using G4.Plugins.Google.Extensions;
 using G4.Plugins.Google.Models;
+using G4.Plugins.Google.Models.Tasks;
 
 using System;
 
@@ -74,7 +75,7 @@ namespace G4.Plugins.Google.Actions.Tasks
                 : adapter.FindTask(taskListIdOrName, parentTaskIdOrName)?.Id;
 
             // Build move options using only resolved identifiers.
-            var options = new MoveTaskQueryModel
+            var options = new MoveTaskRequestModel
             {
                 DestinationTasklist = destination,
                 Parent = parent,

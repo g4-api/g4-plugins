@@ -1,14 +1,22 @@
-﻿namespace G4.Plugins.Google.Models
+﻿using G4.Plugins.Google.Models.Abstraction;
+
+using System.Text.Json.Serialization;
+
+namespace G4.Plugins.Google.Models.Gmail
 {
     /// <summary>
     /// Represents a Gmail label resource.
     /// </summary>
-    internal sealed class LabelModel
+    internal sealed class LabelModel : IDirectResponseSchema
     {
         /// <summary>
         /// The color settings for the label.
         /// </summary>
         public LabelColorModel Color { get; set; }
+
+        /// <inheritdoc />
+        [JsonPropertyName(name: "etag")]
+        public string ETag { get; set; }
 
         /// <summary>
         /// The immutable ID of the label.
@@ -33,42 +41,26 @@
         /// <summary>
         /// The total number of messages with this label.
         /// </summary>
-        public int MessagesTotal { get; set; }
+        public int? MessagesTotal { get; set; }
 
         /// <summary>
         /// The number of unread messages with this label.
         /// </summary>
-        public int MessagesUnread { get; set; }
+        public int? MessagesUnread { get; set; }
 
         /// <summary>
         /// The total number of threads with this label.
         /// </summary>
-        public int ThreadsTotal { get; set; }
+        public int? ThreadsTotal { get; set; }
 
         /// <summary>
         /// The number of unread threads with this label.
         /// </summary>
-        public int ThreadsUnread { get; set; }
+        public int? ThreadsUnread { get; set; }
 
         /// <summary>
         /// The type of label, typically SYSTEM or USER.
         /// </summary>
         public string Type { get; set; }
-
-        /// <summary>
-        /// Represents the color object of a Gmail label.
-        /// </summary>
-        internal sealed class LabelColorModel
-        {
-            /// <summary>
-            /// The background color of the label, as a hex string.
-            /// </summary>
-            public string BackgroundColor { get; set; }
-
-            /// <summary>
-            /// The text color of the label, as a hex string.
-            /// </summary>
-            public string TextColor { get; set; }
-        }
     }
 }

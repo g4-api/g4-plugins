@@ -2,13 +2,13 @@
 
 using System;
 
-namespace G4.Plugins.Google.Models
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Query parameters for listing tasks (Tasks: list).
     /// Timestamps are RFC 3339 (use UTC, e.g. 2026-03-04T10:08:34.925Z).
     /// </summary>
-    internal class ListTasksQueryModel
+    internal class ListTasksRequestModel
     {
         /// <summary>
         /// Upper bound for a task's completion date (RFC 3339). Optional.

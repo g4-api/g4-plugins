@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace G4.Plugins.Google.Models
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Query parameters for listing task lists (TaskLists: list).
     /// </summary>
-    internal class ListTaskListsQueryModel
+    internal class ListTaskListsRequestModel
     {
         /// <summary>
         /// Maximum number of task lists returned on one page. Optional.

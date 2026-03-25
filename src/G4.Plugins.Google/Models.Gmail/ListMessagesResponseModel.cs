@@ -1,4 +1,7 @@
-﻿using G4.Plugins.Google.Models;
+﻿using G4.Plugins.Google.Models.Abstraction;
+using G4.Plugins.Google.Models.Gmail;
+
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents a paged collection of Gmail messages returned by the Gmail API.
@@ -7,8 +10,12 @@
 /// This model corresponds to the response returned by:
 /// <c>GET https://gmail.googleapis.com/gmail/v1/users/{userId}/messages</c>.
 /// </remarks>
-internal class MessageListModel
+internal class ListMessagesResponseModel : IDirectResponseSchema
 {
+    /// <inheritdoc />
+    [JsonPropertyName(name: "etag")]
+    public string ETag { get; set; }
+
     /// <summary>
     /// Collection of messages returned in the current page.
     /// </summary>

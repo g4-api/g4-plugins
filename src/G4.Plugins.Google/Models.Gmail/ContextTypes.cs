@@ -1,4 +1,4 @@
-﻿namespace G4.Plugins.Google.Models
+﻿namespace G4.Plugins.Google.Models.Gmail
 {
     /// <summary>
     /// The product associated with the task.

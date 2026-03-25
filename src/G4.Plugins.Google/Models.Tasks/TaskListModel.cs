@@ -1,6 +1,9 @@
-﻿using System;
+﻿using G4.Plugins.Google.Models.Abstraction;
 
-namespace G4.Plugins.Google.Models
+using System;
+using System.Text.Json.Serialization;
+
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Represents a Google Tasks <c>TaskList</c> resource returned by the TaskLists API.
@@ -8,12 +11,11 @@ namespace G4.Plugins.Google.Models
     /// and read-only metadata provided by the service (kind/updated/selfLink) for navigation
     /// and concurrency scenarios.
     /// </summary>
-    internal class TaskListModel
+    internal class TaskListModel : IDirectResponseSchema
     {
-        /// <summary>
-        /// ETag of the resource.
-        /// </summary>
-        public string Etag { get; set; }
+        /// <inheritdoc />
+        [JsonPropertyName(name: "etag")]
+        public string ETag { get; set; }
 
         /// <summary>
         /// Task list identifier.

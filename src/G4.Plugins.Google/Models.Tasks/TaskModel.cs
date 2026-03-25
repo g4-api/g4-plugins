@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using G4.Plugins.Google.Models.Abstraction;
 
-namespace G4.Plugins.Google.Models
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Represents a Google Tasks resource returned by the Tasks API.
     /// </summary>
-    internal class TaskModel
+    internal class TaskModel : IDirectResponseSchema
     {
         #region *** Properties   ***
         /// <summary>
@@ -31,10 +34,9 @@ namespace G4.Plugins.Google.Models
         /// </summary>
         public string Due { get; set; }
 
-        /// <summary>
-        /// ETag of the resource.
-        /// </summary>
-        public string Etag { get; set; }
+        /// <inheritdoc />
+        [JsonPropertyName(name: "etag")]
+        public string ETag { get; set; }
 
         /// <summary>
         /// Flag indicating whether the task is hidden. Default is false. Output only / read-only.
@@ -54,7 +56,7 @@ namespace G4.Plugins.Google.Models
         /// <summary>
         /// Output only. Collection of links. Read-only.
         /// </summary>
-        public List<TaskLinkModel> Links { get; set; }
+        public List<LinksData> Links { get; set; }
 
         /// <summary>
         /// Notes describing the task. Optional. Max length: 8192.
@@ -88,9 +90,9 @@ namespace G4.Plugins.Google.Models
         public string Title { get; set; }
 
         /// <summary>
-        /// Output only. Last modification time (ISO 8601).
+        /// Output only. Last modification time of the task (as a RFC 3339 timestamp).
         /// </summary>
-        public string Updated { get; set; }
+        public DateTimeOffset? Updated { get; set; }
 
         /// <summary>
         /// Output only. Absolute link to the task in the Google Tasks Web UI.
@@ -102,7 +104,7 @@ namespace G4.Plugins.Google.Models
         /// <summary>
         /// Represents a read-only link entry attached to a Google Tasks task.
         /// </summary>
-        public sealed class TaskLinkModel
+        public sealed class LinksData
         {
             /// <summary>
             /// The description (might be empty).

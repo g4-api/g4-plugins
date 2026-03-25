@@ -1,14 +1,22 @@
-﻿namespace G4.Plugins.Google.Models
+﻿using G4.Plugins.Google.Models.Abstraction;
+
+using System.Text.Json.Serialization;
+
+namespace G4.Plugins.Google.Models.Tasks
 {
     /// <summary>
     /// Drive file reference details associated with a task.
     /// </summary>
-    internal class DriveResourceInfoModel
+    internal class DriveResourceInfoModel : IDirectResponseSchema
     {
         /// <summary>
         /// Output only. Identifier of the file in the Drive API.
         /// </summary>
         public string DriveFileId { get; set; }
+
+        /// <inheritdoc />
+        [JsonPropertyName(name: "etag")]
+        public string ETag { get; set; }
 
         /// <summary>
         /// Output only. Resource key required to access files shared via a shared link.
