@@ -9,18 +9,18 @@
 	"context": {
 		"integration": {
 			"github": {
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGmailTaskList.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGmailTaskList.cs"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGoogleTaskList.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGoogleTaskList.cs"
 			},
 			"rag": {
-				"description": "Use RemoveGmailTaskList to delete a Google Tasks list during an automation run using either a direct OAuth access token or a stored credentials reference. It supports flexible runtime inputs, enforces critical checks like mandatory “Id” and API success, and keeps cleanup reliable by failing fast on auth, network, or API errors instead of leaving workflows in an unknown state.",
+				"description": "Use RemoveGoogleTaskList to delete a Google Tasks list during an automation run using either a direct OAuth access token or a stored credentials reference. It supports flexible runtime inputs, enforces critical checks like mandatory “Id” and API success, and keeps cleanup reliable by failing fast on auth, network, or API errors instead of leaving workflows in an unknown state.",
 				"qa": [
 					{
-						"question": "What does RemoveGmailTaskList do?",
+						"question": "What does RemoveGoogleTaskList do?",
 						"answer": "It deletes an existing Google Tasks list for the current user using the Google Tasks API."
 					},
 					{
-						"question": "What key inputs and behaviors does RemoveGmailTaskList support?",
+						"question": "What key inputs and behaviors does RemoveGoogleTaskList support?",
 						"answer": "You must provide “Id” to choose the list to delete, and you can authenticate with either “Token” or “Credentials”, where “Credentials” takes priority and is exchanged for a fresh access token at runtime."
 					},
 					{
@@ -28,12 +28,12 @@
 						"answer": "It is an Action designed to run as a sequential workflow task, deleting one Tasks list in a single step and letting the workflow branch based on success or failure."
 					},
 					{
-						"question": "What are best practices for using RemoveGmailTaskList in automations?",
+						"question": "What are best practices for using RemoveGoogleTaskList in automations?",
 						"answer": "Prefer “Credentials” over raw tokens, ensure “Id” is the exact list identifier you intend to remove, and use this action as a cleanup step after temporary list creation to keep runs repeatable."
 					},
 					{
-						"question": "What rule/schema details matter when calling RemoveGmailTaskList?",
-						"answer": "Call it as an Action with pluginName “RemoveGmailTaskList” and an argument macro that supplies --Id plus either --Token or --Credentials; “Id” is mandatory and the deletion is permanent."
+						"question": "What rule/schema details matter when calling RemoveGoogleTaskList?",
+						"answer": "Call it as an Action with pluginName “RemoveGoogleTaskList” and an argument macro that supplies --Id plus either --Token or --Credentials; “Id” is mandatory and the deletion is permanent."
 					},
 					{
 						"question": "What is the manifestVersion for this plugin?",
@@ -41,7 +41,7 @@
 					},
 					{
 						"question": "What is the key in the manifest?",
-						"answer": "The key is “RemoveGmailTaskList”."
+						"answer": "The key is “RemoveGoogleTaskList”."
 					},
 					{
 						"question": "What is the pluginType in the manifest?",
@@ -65,11 +65,11 @@
 					},
 					{
 						"question": "What is context.integration.github.document in the manifest?",
-						"answer": "context.integration.github.document is https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGmailTaskList.md"
+						"answer": "context.integration.github.document is https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGoogleTaskList.md"
 					},
 					{
 						"question": "What is context.integration.github.source in the manifest?",
-						"answer": "context.integration.github.source is https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGmailTaskList.cs"
+						"answer": "context.integration.github.source is https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGoogleTaskList.cs"
 					},
 					{
 						"question": "What is the summary in the manifest?",
@@ -77,10 +77,10 @@
 					},
 					{
 						"question": "What sources describe what this plugin does and where are the Git links?",
-						"answer": "Primary sources are the manifest description and summary, plus the GitHub repository and docs. Repository: https://github.com/g4-api/g4-plugins. Documentation or README entry point: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGmailTaskList.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGmailTaskList.cs."
+						"answer": "Primary sources are the manifest description and summary, plus the GitHub repository and docs. Repository: https://github.com/g4-api/g4-plugins. Documentation or README entry point: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGoogleTaskList.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGoogleTaskList.cs."
 					},
 					{
-						"question": "How does RemoveGmailTaskList handle errors and failures?",
+						"question": "How does RemoveGoogleTaskList handle errors and failures?",
 						"answer": "If “Id” is missing, credentials lookup fails, token exchange fails, the network call fails, or the Google Tasks API returns a non-success status, the action fails and the list is not deleted."
 					}
 				]
@@ -99,7 +99,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The RemoveGmailTaskList plugin deletes an existing Google Tasks list for the authenticated user using the Google Tasks API.",
+		"The RemoveGoogleTaskList plugin deletes an existing Google Tasks list for the authenticated user using the Google Tasks API.",
 		"It helps automation workflows clean up task lists that are no longer needed.",
 		"It supports either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"After successful execution, the specified task list is permanently removed from the user’s account.",
@@ -150,7 +150,7 @@
 				]
 			},
 			"description": [
-				"### RemoveGmailTaskList: Delete using access token",
+				"### RemoveGoogleTaskList: Delete using access token",
 				"",
 				"Delete a Google Tasks list using a list id and an OAuth access token.  ",
 				"The `Get-Parameter` macros produce runtime values for `Id` and `Token` from Session parameters, and they are side-effect-free and reusable in any context that accepts literal values.  ",
@@ -160,7 +160,7 @@
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Id:{{$Get-Parameter --Name:GmailTaskListId --Scope:Session}} --Token:{{$Get-Parameter --Name:AccessToken --Scope:Session}}}}",
-				"pluginName": "RemoveGmailTaskList"
+				"pluginName": "RemoveGoogleTaskList"
 			}
 		},
 		{
@@ -193,7 +193,7 @@
 				]
 			},
 			"description": [
-				"### RemoveGmailTaskList: Delete using credentials reference",
+				"### RemoveGoogleTaskList: Delete using credentials reference",
 				"",
 				"Delete a Google Tasks list by referencing a stored credential record instead of passing a raw access token.  ",
 				"The `argument` attribute contains literal values for `Id` and `credentials`, and the action consumes those values to resolve the credential record by id or name.  ",
@@ -203,11 +203,11 @@
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Id:task-list-id --Credentials:my-google-creds}}",
-				"pluginName": "RemoveGmailTaskList"
+				"pluginName": "RemoveGoogleTaskList"
 			}
 		}
 	],
-	"key": "RemoveGmailTaskList",
+	"key": "RemoveGoogleTaskList",
 	"version": "4",
 	"namespace": "G4.Plugins.Google",
 	"parameters": [
@@ -247,7 +247,7 @@
 	],
 	"pluginType": "Action",
 	"summary": [
-		"The RemoveGmailTaskList plugin deletes an existing Google Tasks list for the authenticated user.",
+		"The RemoveGoogleTaskList plugin deletes an existing Google Tasks list for the authenticated user.",
 		"It supports using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"It helps automation flows clean up or manage task lists without manual intervention."
 	]

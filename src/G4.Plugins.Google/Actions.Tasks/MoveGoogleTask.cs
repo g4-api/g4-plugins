@@ -7,16 +7,16 @@ using G4.Plugins.Google.Models;
 
 using System;
 
-namespace G4.Plugins.Google.Actions
+namespace G4.Plugins.Google.Actions.Tasks
 {
     [G4Plugin(
         assembly: "G4.Plugins.Google, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Google.Actions.Manifests.{NameReference}.json")]
-    public class MoveGmailTask(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+        manifest: $"G4.Plugins.Google.Actions.Tasks.Manifests.{NameReference}.json")]
+    public class MoveGoogleTask(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         // Define a constant for the plugin name reference to ensure
         // consistent namespacing of session parameters.
-        private const string NameReference = nameof(MoveGmailTask);
+        private const string NameReference = nameof(MoveGoogleTask);
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {

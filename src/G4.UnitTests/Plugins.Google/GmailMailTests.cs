@@ -1,4 +1,4 @@
-﻿using G4.Plugins.Google.Actions;
+﻿using G4.Plugins.Google.Actions.Gmail.Messages;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
 
@@ -15,25 +15,25 @@ namespace G4.UnitTests.Plugins.Google
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
-            AssertManifest<ReadGmailMail>();
-            AssertManifest<UpdateGmailMailLabels>();
+            AssertManifest<ReadGmailMessage>();
+            AssertManifest<EditGmailMessage>();
         }
 
         [TestMethod(DisplayName = "Verify that the GmailMail plugins are correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
-            AssertPlugin<ReadGmailMail>();
-            AssertPlugin<UpdateGmailMailLabels>();
+            AssertPlugin<ReadGmailMessage>();
+            AssertPlugin<EditGmailMessage>();
         }
 
         [Ignore]
-        [TestMethod(DisplayName = "Verify that the ReadGmailMail plugin " +
+        [TestMethod(DisplayName = "Verify that the ReadGmailMessage plugin " +
             "reads emails correctly.")]
         public void ReadMailTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
-            const string pluginName = nameof(ReadGmailMail);
+            const string pluginName = nameof(ReadGmailMessage);
 
             // Resolve the credential record name/id from the test configuration.
             // This value is injected into the rule so the plugin can authenticate
@@ -41,12 +41,12 @@ namespace G4.UnitTests.Plugins.Google
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
             // Build the action rule JSON and inject the credential reference.
-            // The rule invokes the ReadGmailMail plugin using the configured credentials.
+            // The rule invokes the ReadGmailMessage plugin using the configured credentials.
             var ruleJson =
             """
             {
                 "$type": "Action",
-                "pluginName": "ReadGmailMail",
+                "pluginName": "ReadGmailMessage",
                 "argument": "{{$ --Credentials:$(name)}}"
             }
             """.Replace("$(name)", name);
@@ -82,13 +82,13 @@ namespace G4.UnitTests.Plugins.Google
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:To"]?.ToString());
         }
 
-        [Ignore]
-        [TestMethod(DisplayName = "Verify that the UpdateGmailMailLabels plugin " +
+        //[Ignore]
+        [TestMethod(DisplayName = "Verify that the EditGmailMessage plugin " +
             "updates message labels correctly.")]
         public void UpdateMessageLabelsSingleLabelTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
-            const string pluginName = nameof(UpdateGmailMailLabels);
+            const string pluginName = nameof(EditGmailMessage);
 
             // Resolve the credential record name/id from the test configuration.
             // This value is injected into the rule so the plugin can authenticate
@@ -96,13 +96,13 @@ namespace G4.UnitTests.Plugins.Google
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
             // Build the action rule JSON and inject the credential reference.
-            // The rule invokes the ReadGmailMail plugin using the configured credentials.
+            // The rule invokes the ReadGmailMessage plugin using the configured credentials.
             var ruleJson =
             """
             {
                 "$type": "Action",
-                "pluginName": "UpdateGmailMailLabels",
-                "argument": "{{$ --Credentials:$(name) --MessageId:19d04fa3cf3f4883 --Add:notifications --Remove:new}}"
+                "pluginName": "EditGmailMessage",
+                "argument": "{{$ --Credentials:$(name) --MessageId:19d04fa3cf3f4883 --Add:notifications --Remove:INBOX}}"
             }
             """.Replace("$(name)", name);
 
@@ -138,12 +138,12 @@ namespace G4.UnitTests.Plugins.Google
         }
 
         [Ignore]
-        [TestMethod(DisplayName = "Verify that the UpdateGmailMailLabels plugin " +
+        [TestMethod(DisplayName = "Verify that the EditGmailMessage plugin " +
             "updates message labels correctly.")]
         public void UpdateMessageLabelsTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
-            const string pluginName = nameof(UpdateGmailMailLabels);
+            const string pluginName = nameof(EditGmailMessage);
 
             // Resolve the credential record name/id from the test configuration.
             // This value is injected into the rule so the plugin can authenticate
@@ -151,12 +151,12 @@ namespace G4.UnitTests.Plugins.Google
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
             // Build the action rule JSON and inject the credential reference.
-            // The rule invokes the ReadGmailMail plugin using the configured credentials.
+            // The rule invokes the ReadGmailMessage plugin using the configured credentials.
             var ruleJson =
             """
             {
                 "$type": "Action",
-                "pluginName": "UpdateGmailMailLabels",
+                "pluginName": "EditGmailMessage",
                 "argument": "{{$ --Credentials:$(name) --MessageId:19d04fa3cf3f4883 --Remove:follow-up --Remove:set-meeting}}"
             }
             """.Replace("$(name)", name);

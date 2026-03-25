@@ -8,16 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace G4.Plugins.Google.Actions
+namespace G4.Plugins.Google.Actions.Gmail.Messages
 {
     [G4Plugin(
         assembly: "G4.Plugins.Google, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Google.Actions.Manifests.{NameReference}.json")]
-    public class ReadGmailMail(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+        manifest: $"G4.Plugins.Google.Actions.Gmail.Messages.Manifests.{NameReference}.json")]
+    public class ReadGmailMessage(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         // Define a constant for the plugin name reference to ensure
         // consistent namespacing of session parameters.
-        private const string NameReference = nameof(ReadGmailMail);
+        private const string NameReference = nameof(ReadGmailMessage);
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
@@ -35,7 +35,7 @@ namespace G4.Plugins.Google.Actions
             });
 
             // Extract the first available message id from the returned page.
-            var messageId = list.Messages.FirstOrDefault()?.Id;
+            var messageId = list.Messages?.FirstOrDefault()?.Id;
 
             // Treat a missing message id as a hard failure because there is no mail to read.
             if (string.IsNullOrEmpty(messageId))

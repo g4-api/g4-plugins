@@ -9,42 +9,42 @@
 	"context": {
 		"integration": {
 			"github": {
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadGmailMail.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/ReadGmailMail.cs"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadGmailMessage.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/ReadGmailMessage.cs"
 			},
 			"rag": {
 				"description": "Read a Gmail message during an automation run by requesting a single message from the authenticated mailbox, then fetching full message details and extracting common headers and body content. It supports authentication with a direct OAuth token or a stored credentials reference, enforces success and “mailbox not empty” checks, and stores the extracted fields as Base64 session parameters so downstream steps can reliably reuse the same email snapshot.",
 				"qa": [
 					{
-						"question": "What does ReadGmailMail do?",
-						"answer": "ReadGmailMail retrieves a Gmail message and stores key fields such as From, To/Cc/Bcc, Subject, and Content in namespaced session parameters."
+						"question": "What does ReadGmailMessage do?",
+						"answer": "ReadGmailMessage retrieves a Gmail message and stores key fields such as From, To/Cc/Bcc, Subject, and Content in namespaced session parameters."
 					},
 					{
-						"question": "What parameters and key features does ReadGmailMail support?",
-						"answer": "It supports optional Token and Credentials authentication (Credentials takes precedence when both are provided), requests one message id from the Gmail API, fetches the full message, and extracts From, To, Cc, Bcc, Subject, Content, and Id into ReadGmailMail:* session parameters."
+						"question": "What parameters and key features does ReadGmailMessage support?",
+						"answer": "It supports optional Token and Credentials authentication (Credentials takes precedence when both are provided), requests one message id from the Gmail API, fetches the full message, and extracts From, To, Cc, Bcc, Subject, Content, and Id into ReadGmailMessage:* session parameters."
 					},
 					{
-						"question": "How does ReadGmailMail fit into the integration context?",
+						"question": "How does ReadGmailMessage fit into the integration context?",
 						"answer": "It runs as an Action in the sequential workflow model (componentType “task”) with the google icon provider and ActionRuleModel, so it can be used as a standard workflow step."
 					},
 					{
-						"question": "What are best practices for using ReadGmailMail?",
-						"answer": "Prefer Credentials for long-running automations, handle the case where the mailbox contains no messages, and always read fields from ReadGmailMail:* session parameters to avoid repeating the API calls in later steps."
+						"question": "What are best practices for using ReadGmailMessage?",
+						"answer": "Prefer Credentials for long-running automations, handle the case where the mailbox contains no messages, and always read fields from ReadGmailMessage:* session parameters to avoid repeating the API calls in later steps."
 					},
 					{
-						"question": "What rule and schema details should I follow to run ReadGmailMail?",
-						"answer": "Create an Action rule with pluginName set to ReadGmailMail and pass either {{$--Token:value}} or {{$--Credentials:value}} via the rule argument. The plugin writes outputs to ReadGmailMail:Id, From, To, Cc, Bcc, Subject, and Content."
+						"question": "What rule and schema details should I follow to run ReadGmailMessage?",
+						"answer": "Create an Action rule with pluginName set to ReadGmailMessage and pass either {{$--Token:value}} or {{$--Credentials:value}} via the rule argument. The plugin writes outputs to ReadGmailMessage:Id, From, To, Cc, Bcc, Subject, and Content."
 					},
 					{
 						"question": "What is the manifest key of this plugin?",
-						"answer": "The manifest key is “ReadGmailMail”."
+						"answer": "The manifest key is “ReadGmailMessage”."
 					},
 					{
 						"question": "What manifestVersion is used by this plugin?",
 						"answer": "The manifestVersion is 4."
 					},
 					{
-						"question": "What is the pluginType of ReadGmailMail?",
+						"question": "What is the pluginType of ReadGmailMessage?",
 						"answer": "The pluginType is “Action”."
 					},
 					{
@@ -68,15 +68,15 @@
 						"answer": "The namespace is “G4.Plugins.Google”."
 					},
 					{
-						"question": "What is the manifest summary for ReadGmailMail?",
+						"question": "What is the manifest summary for ReadGmailMessage?",
 						"answer": "It retrieves the first Gmail message returned by the API from the authenticated mailbox, authenticates with Token or Credentials, and stores key message fields in namespaced session parameters for safe downstream reuse."
 					},
 					{
-						"question": "What source descriptions and Git links are relevant for ReadGmailMail?",
-						"answer": "The documentation matches the manifest behavior: request one message from Gmail, fetch full details for that message, extract From, To/Cc/Bcc, Subject, Content, and Id, then store them as Base64 session parameters under ReadGmailMail:*. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadGmailMail.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/ReadGmailMail.cs."
+						"question": "What source descriptions and Git links are relevant for ReadGmailMessage?",
+						"answer": "The documentation matches the manifest behavior: request one message from Gmail, fetch full details for that message, extract From, To/Cc/Bcc, Subject, Content, and Id, then store them as Base64 session parameters under ReadGmailMessage:*. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadGmailMessage.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/ReadGmailMessage.cs."
 					},
 					{
-						"question": "How does ReadGmailMail handle errors and unexpected responses?",
+						"question": "How does ReadGmailMessage handle errors and unexpected responses?",
 						"answer": "It is designed to fail when authentication cannot be resolved, when the mailbox contains no messages, or when the Gmail API returns a non-success response, and workflows should handle invalid or expired tokens, credential resolution or refresh failures, insufficient OAuth scopes, API quota or rate limits, and network timeouts."
 					}
 				]
@@ -94,7 +94,7 @@
 	},
 	"description": [
 		"### Purpose",
-		"The ReadGmailMail plugin reads a Gmail message from the authenticated mailbox during an automation run.",
+		"The ReadGmailMessage plugin reads a Gmail message from the authenticated mailbox during an automation run.",
 		"It helps workflows pull email details so bots can route messages, extract information, or trigger follow-up actions.",
 		"It first fetches a message id from the mailbox and then retrieves the full message details for that message.",
 		"It stores key email fields in session parameters so later steps can reuse the results reliably.",
@@ -108,7 +108,7 @@
 		"| Field extraction              | Extracts common fields such as From, To/Cc/Bcc, Subject, and message content.                     |",
 		"| Token authentication          | Accepts a raw OAuth Bearer access token for direct API calls.                                     |",
 		"| Credentials authentication    | Accepts a credentials id/name and exchanges it for a fresh access token at runtime.               |",
-		"| Result session storage        | Stores message fields in namespaced session parameters (ReadGmailMail:) as Base64-encoded values. |",
+		"| Result session storage        | Stores message fields in namespaced session parameters (ReadGmailMessage:) as Base64-encoded values. |",
 		"",
 		"### Usages in RPA",
 		"",
@@ -131,7 +131,7 @@
 						"Missing Token",
 						"Token value is empty or whitespace-only"
 					],
-					"expected_result": "The email details are stored in `ReadGmailMail:*` session parameters.",
+					"expected_result": "The email details are stored in `ReadGmailMessage:*` session parameters.",
 					"notes": "Reads the first Gmail message returned by the API using a provided access token.",
 					"use_case": "read_gmail_message_with_token",
 					"version": "1.0"
@@ -147,14 +147,14 @@
 				]
 			},
 			"description": [
-				"### ReadGmailMail: Read Gmail message using access token",
+				"### ReadGmailMessage: Read Gmail message using access token",
 				"",
 				"This example reads the first Gmail message returned by the API using a provided OAuth access token."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Token:ya29...}}",
-				"pluginName": "ReadGmailMail"
+				"pluginName": "ReadGmailMessage"
 			}
 		},
 		{
@@ -171,7 +171,7 @@
 						"Missing Credentials",
 						"Refresh-token exchange fails"
 					],
-					"expected_result": "The email details are stored in `ReadGmailMail:*` session parameters.",
+					"expected_result": "The email details are stored in `ReadGmailMessage:*` session parameters.",
 					"notes": "Reads the first Gmail message returned by the API using a stored credentials reference.",
 					"use_case": "read_gmail_message_with_credentials_reference",
 					"version": "1.0"
@@ -188,18 +188,18 @@
 				]
 			},
 			"description": [
-				"### ReadGmailMail: Read Gmail message using credentials reference",
+				"### ReadGmailMessage: Read Gmail message using credentials reference",
 				"",
 				"This example reads the first Gmail message returned by the API using a stored credentials reference."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Credentials:my-google-creds}}",
-				"pluginName": "ReadGmailMail"
+				"pluginName": "ReadGmailMessage"
 			}
 		}
 	],
-	"key": "ReadGmailMail",
+	"key": "ReadGmailMessage",
 	"version": "4",
 	"namespace": "G4.Plugins.Google",
 	"outputParameters": [
@@ -209,7 +209,7 @@
 				"Preserves hidden recipients so auditing and routing logic can use the same header data Gmail returned.",
 				"Helps downstream steps make decisions based on the complete set of recipients."
 			],
-			"name": "ReadGmailMail:Bcc",
+			"name": "ReadGmailMessage:Bcc",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -219,7 +219,7 @@
 				"Keeps carbon copy recipients available for logging, filtering, or routing rules.",
 				"Helps downstream steps evaluate who else received the message."
 			],
-			"name": "ReadGmailMail:Cc",
+			"name": "ReadGmailMessage:Cc",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -229,7 +229,7 @@
 				"Provides the actual email text so later steps can parse, summarize, or act on the message.",
 				"Supports automations that need the email content without making another API call."
 			],
-			"name": "ReadGmailMail:Content",
+			"name": "ReadGmailMessage:Content",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -239,7 +239,7 @@
 				"Enables filtering and routing based on who sent the email.",
 				"Helps downstream steps validate the source before taking action."
 			],
-			"name": "ReadGmailMail:From",
+			"name": "ReadGmailMessage:From",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -249,7 +249,7 @@
 				"Provides a stable reference for follow-up actions like fetching details or linking threads.",
 				"Helps downstream steps target the exact message without ambiguity."
 			],
-			"name": "ReadGmailMail:Id",
+			"name": "ReadGmailMessage:Id",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -259,7 +259,7 @@
 				"Helps workflows display, log, or classify the message using its subject.",
 				"Supports quick filtering when only header information is needed."
 			],
-			"name": "ReadGmailMail:Subject",
+			"name": "ReadGmailMessage:Subject",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -269,7 +269,7 @@
 				"Keeps primary recipients available for routing, filtering, and audit checks.",
 				"Helps downstream steps determine whether the message was addressed to the expected target."
 			],
-			"name": "ReadGmailMail:To",
+			"name": "ReadGmailMessage:To",
 			"scope": "Session",
 			"type": "String"
 		}
@@ -299,7 +299,7 @@
 	"platforms": [ "Any" ],
 	"pluginType": "Action",
 	"summary": [
-		"The ReadGmailMail plugin retrieves the first Gmail message returned by the API from the authenticated mailbox during an automation run.",
+		"The ReadGmailMessage plugin retrieves the first Gmail message returned by the API from the authenticated mailbox during an automation run.",
 		"It can authenticate using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"It stores key message fields like sender, recipients, subject, snippet, and content in namespaced session parameters so later workflow steps can reuse the email data safely."
 	]

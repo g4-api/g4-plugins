@@ -9,16 +9,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
-namespace G4.Plugins.Google.Actions
+namespace G4.Plugins.Google.Actions.Gmail.Messages
 {
     [G4Plugin(
         assembly: "G4.Plugins.Google, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Google.Actions.Manifests.{NameReference}.json")]
-    public class UpdateGmailMailLabels(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+        manifest: $"G4.Plugins.Google.Actions.Gmail.Messages.Manifests.{NameReference}.json")]
+    public class EditGmailMessage(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         // Define a constant for the plugin name reference to ensure
         // consistent namespacing of session parameters.
-        private const string NameReference = nameof(UpdateGmailMailLabels);
+        private const string NameReference = nameof(EditGmailMessage);
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {

@@ -6,12 +6,12 @@ using G4.Plugins.Google.Extensions;
 
 using System;
 
-namespace G4.Plugins.Google.Actions
+namespace G4.Plugins.Google.Actions.Tasks
 {
     [G4Plugin(
         assembly: "G4.Plugins.Google, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Google.Actions.Manifests.{nameof(RemoveGmailTask)}.json")]
-    public class RemoveGmailTask(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+        manifest: $"G4.Plugins.Google.Actions.Tasks.Manifests.{nameof(RemoveGoogleTask)}.json")]
+    public class RemoveGoogleTask(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {

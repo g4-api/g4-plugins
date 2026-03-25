@@ -6,16 +6,16 @@ using G4.Plugins.Google.Extensions;
 
 using System.Text.Json;
 
-namespace G4.Plugins.Google.Actions
+namespace G4.Plugins.Google.Actions.Tasks
 {
     [G4Plugin(
         assembly: "G4.Plugins.Google, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Google.Actions.Manifests.{NameReference}.json")]
-    public class ExportGmailTaskLists(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+        manifest: $"G4.Plugins.Google.Actions.Tasks.Manifests.{NameReference}.json")]
+    public class ExportGoogleTaskLists(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
         // Define a constant for the plugin name reference to ensure
         // consistent namespacing of session parameters.
-        private const string NameReference = nameof(ExportGmailTaskLists);
+        private const string NameReference = nameof(ExportGoogleTaskLists);
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {

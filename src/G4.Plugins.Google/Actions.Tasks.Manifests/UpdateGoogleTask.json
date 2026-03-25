@@ -9,42 +9,42 @@
 	"context": {
 		"integration": {
 			"github": {
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/UpdateGmailTask.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/UpdateGmailTask.cs"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/UpdateGoogleTask.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/UpdateGoogleTask.cs"
 			},
 			"rag": {
 				"description": "Update an existing Google Tasks task during an automation run by resolving the target list and task from either ids or titles, then applying only the provided changes. It supports authentication with a direct OAuth token or a stored credentials reference, enforces required inputs and valid status values, and stores the updated task fields as Base64 session parameters so downstream steps can reuse the exact results reliably.",
 				"qa": [
 					{
-						"question": "What does UpdateGmailTask do?",
-						"answer": "UpdateGmailTask updates an existing task in a Google Tasks list and stores the updated task fields in namespaced session parameters for later workflow steps."
+						"question": "What does UpdateGoogleTask do?",
+						"answer": "UpdateGoogleTask updates an existing task in a Google Tasks list and stores the updated task fields in namespaced session parameters for later workflow steps."
 					},
 					{
-						"question": "What parameters and key features does UpdateGmailTask support?",
+						"question": "What parameters and key features does UpdateGoogleTask support?",
 						"answer": "It requires TaskList and Task, supports optional Title, Notes, Due, and Status updates, and supports Token or Credentials authentication (Credentials takes precedence when both are provided)."
 					},
 					{
-						"question": "How does UpdateGmailTask fit into the integration context?",
+						"question": "How does UpdateGoogleTask fit into the integration context?",
 						"answer": "It runs as an Action in the sequential workflow model (componentType “task”) with the google icon provider and ActionRuleModel."
 					},
 					{
-						"question": "What are best practices for using UpdateGmailTask?",
+						"question": "What are best practices for using UpdateGoogleTask?",
 						"answer": "Prefer Credentials for long-running automations, pass list id and task id when available to avoid title ambiguity, use ISO 8601 UTC for Due (Z-suffix), and remember that if multiple tasks share the same title the first match will be updated."
 					},
 					{
-						"question": "What rule and schema details should I follow to run UpdateGmailTask?",
-						"answer": "Create an Action rule with pluginName set to UpdateGmailTask and pass arguments for TaskList and Task plus any of Title, Notes, Due, Status, and either {{$--Token:value}} or {{$--Credentials:value}} via the rule argument."
+						"question": "What rule and schema details should I follow to run UpdateGoogleTask?",
+						"answer": "Create an Action rule with pluginName set to UpdateGoogleTask and pass arguments for TaskList and Task plus any of Title, Notes, Due, Status, and either {{$--Token:value}} or {{$--Credentials:value}} via the rule argument."
 					},
 					{
 						"question": "What is the manifest key of this plugin?",
-						"answer": "The manifest key is “UpdateGmailTask”."
+						"answer": "The manifest key is “UpdateGoogleTask”."
 					},
 					{
 						"question": "What manifestVersion is used by this plugin?",
 						"answer": "The manifestVersion is 4."
 					},
 					{
-						"question": "What is the pluginType of UpdateGmailTask?",
+						"question": "What is the pluginType of UpdateGoogleTask?",
 						"answer": "The pluginType is “Action”."
 					},
 					{
@@ -68,15 +68,15 @@
 						"answer": "The namespace is “G4.Plugins.Google”."
 					},
 					{
-						"question": "What is the manifest summary for UpdateGmailTask?",
+						"question": "What is the manifest summary for UpdateGoogleTask?",
 						"answer": "It updates an existing task in a Google Tasks list, authenticates with Token or Credentials, and stores key updated task fields in namespaced session parameters so later workflow steps can reuse the task data reliably."
 					},
 					{
-						"question": "What source descriptions and Git links are relevant for UpdateGmailTask?",
-						"answer": "The documentation aligns with the manifest behavior: resolve TaskList and Task by id or title, update only provided fields (Title, Notes, Due, Status), then store Id, Title, SelfLink, Position, and Status as Base64 session parameters. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/UpdateGmailTask.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/UpdateGmailTask.cs."
+						"question": "What source descriptions and Git links are relevant for UpdateGoogleTask?",
+						"answer": "The documentation aligns with the manifest behavior: resolve TaskList and Task by id or title, update only provided fields (Title, Notes, Due, Status), then store Id, Title, SelfLink, Position, and Status as Base64 session parameters. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/UpdateGoogleTask.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/UpdateGoogleTask.cs."
 					},
 					{
-						"question": "How does UpdateGmailTask handle errors and unexpected responses?",
+						"question": "How does UpdateGoogleTask handle errors and unexpected responses?",
 						"answer": "It is designed to fail fast when TaskList or Task cannot be resolved, and workflows should handle invalid or expired tokens, credential resolution or refresh failures, insufficient OAuth scopes, API quota or rate limits, invalid Due formats, invalid Status values, network timeouts, and non-success Google Tasks API responses."
 					}
 				]
@@ -95,7 +95,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The UpdateGmailTask plugin updates an existing Google Tasks task in a chosen task list during an automation run.",
+		"The UpdateGoogleTask plugin updates an existing Google Tasks task in a chosen task list during an automation run.",
 		"It helps workflows keep task details in sync when titles, notes, due dates, or status change over time.",
 		"It supports authentication using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"It saves the updated task details into session parameters so later steps can reuse the results reliably.",
@@ -110,7 +110,7 @@
 		"| Optional field updates     | Updates only the provided fields, such as Title, Notes, Due, and Status.                                  |",
 		"| Token authentication       | Accepts a raw OAuth Bearer access token for direct API calls.                                             |",
 		"| Credentials authentication | Accepts a credentials id/name and exchanges it for a fresh access token at runtime.                       |",
-		"| Result session storage     | Stores updated task fields in namespaced session parameters (UpdateGmailTask:*) as Base64-encoded values. |",
+		"| Result session storage     | Stores updated task fields in namespaced session parameters (UpdateGoogleTask:*) as Base64-encoded values. |",
 		"",
 		"### Usages in RPA",
 		"",
@@ -141,7 +141,7 @@
 						"Task value is empty or whitespace-only",
 						"TaskList value is empty or whitespace-only"
 					],
-					"expected_result": "The matching task is updated and the resulting task fields are stored in `UpdateGmailTask:*` session parameters.",
+					"expected_result": "The matching task is updated and the resulting task fields are stored in `UpdateGoogleTask:*` session parameters.",
 					"notes": "Updates an existing task using a provided access token and resolves both the list and task by title.",
 					"use_case": "update_google_task_with_token",
 					"version": "1.0"
@@ -157,14 +157,14 @@
 				]
 			},
 			"description": [
-				"### UpdateGmailTask: Update task using access token",
+				"### UpdateGoogleTask: Update task using access token",
 				"",
 				"This example updates a task by title in the `My Tasks` list, changing its title, notes, due date, and status."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Task:Pay electricity --TaskList:My Tasks --Title:Pay electricity bill --Notes:updated by automation --Due:2026-03-10T09:00:00Z --Status:needsAction --token:ya29...}}",
-				"pluginName": "UpdateGmailTask"
+				"pluginName": "UpdateGoogleTask"
 			}
 		},
 		{
@@ -186,7 +186,7 @@
 						"Task value is empty or whitespace-only",
 						"TaskList value is empty or whitespace-only"
 					],
-					"expected_result": "The matching task is updated and the resulting task fields are stored in `UpdateGmailTask:*` session parameters.",
+					"expected_result": "The matching task is updated and the resulting task fields are stored in `UpdateGoogleTask:*` session parameters.",
 					"notes": "Updates an existing task using a stored credentials reference and resolves the list by id.",
 					"use_case": "update_google_task_with_credentials_reference",
 					"version": "1.0"
@@ -203,18 +203,18 @@
 				]
 			},
 			"description": [
-				"### UpdateGmailTask: Update task using credentials reference",
+				"### UpdateGoogleTask: Update task using credentials reference",
 				"",
 				"This example updates a task using a stored credentials record and a task list id."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Task:task-id --TaskList:task-list-id --Title:Follow up with vendor --Notes:moved to next sprint --Status:completed --credentials:my-google-creds}}",
-				"pluginName": "UpdateGmailTask"
+				"pluginName": "UpdateGoogleTask"
 			}
 		}
 	],
-	"key": "UpdateGmailTask",
+	"key": "UpdateGoogleTask",
 	"version": "4",
 	"namespace": "G4.Plugins.Google",
 	"outputParameters": [
@@ -224,7 +224,7 @@
 				"Helps later workflow steps reference the exact updated task for follow-up actions.",
 				"Improves reliability by keeping a stable identifier even if other task fields change."
 			],
-			"name": "UpdateGmailTaskId",
+			"name": "UpdateGoogleTaskId",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -234,7 +234,7 @@
 				"Helps downstream steps display or verify the updated title without fetching the task again.",
 				"Keeps automation output consistent when the title was calculated from expressions or defaults."
 			],
-			"name": "UpdateGmailTaskTitle",
+			"name": "UpdateGoogleTaskTitle",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -244,7 +244,7 @@
 				"Provides a direct reference to the exact updated task resource for troubleshooting and auditing.",
 				"Helps confirm that the update was applied to the intended task record."
 			],
-			"name": "UpdateGmailTaskSelfLink",
+			"name": "UpdateGoogleTaskSelfLink",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -254,7 +254,7 @@
 				"Preserves ordering metadata that affects where the task appears within the list.",
 				"Supports workflows that need to keep or validate task ordering after updates."
 			],
-			"name": "UpdateGmailTaskPosition",
+			"name": "UpdateGoogleTaskPosition",
 			"scope": "Session",
 			"type": "String"
 		},
@@ -264,7 +264,7 @@
 				"Captures the resulting state so later steps can make decisions without reloading the task.",
 				"Helps verify that the update did not unintentionally change the task state."
 			],
-			"name": "UpdateGmailTaskStatus",
+			"name": "UpdateGoogleTaskStatus",
 			"scope": "Session",
 			"type": "String"
 		}
@@ -374,7 +374,7 @@
 	],
 	"pluginType": "Action",
 	"summary": [
-		"The UpdateGmailTask plugin updates an existing task in a Google Tasks list during an automation run.",
+		"The UpdateGoogleTask plugin updates an existing task in a Google Tasks list during an automation run.",
 		"It can authenticate using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"It stores key updated task fields in namespaced session parameters so later workflow steps can reliably reuse the task data."
 	]

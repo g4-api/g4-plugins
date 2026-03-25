@@ -1,5 +1,5 @@
 ﻿using G4.Extensions;
-using G4.Plugins.Google.Actions;
+using G4.Plugins.Google.Actions.Tasks;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
 
@@ -13,49 +13,49 @@ namespace G4.UnitTests.Plugins.Google
 {
     [Ignore]
     [TestClass]
-    [TestCategory("GmailTaskList")]
+    [TestCategory("GoogleTasks")]
     [TestCategory("UnitTest")]
-    public class GmailTasksTests : TestBase
+    public class GoogleTasksTests : TestBase
     {
-        [TestMethod(DisplayName = "Verify that the GmailTask plugins comply with the " +
+        [TestMethod(DisplayName = "Verify that the GoogleTask plugins comply with the " +
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
-            AssertManifest<NewGmailTaskList>();
-            AssertManifest<RemoveGmailTaskList>();
-            AssertManifest<UpdateGmailTaskList>();
-            AssertManifest<ExportGmailTaskLists>();
+            AssertManifest<NewGoogleTaskList>();
+            AssertManifest<RemoveGoogleTaskList>();
+            AssertManifest<UpdateGoogleTaskList>();
+            AssertManifest<ExportGoogleTaskLists>();
 
-            AssertManifest<NewGmailTask>();
-            AssertManifest<UpdateGmailTask>();
-            AssertManifest<ExportGmailTasks>();
-            AssertManifest<RemoveGmailTask>();
-            AssertManifest<MoveGmailTask>();
+            AssertManifest<NewGoogleTask>();
+            AssertManifest<UpdateGoogleTask>();
+            AssertManifest<ExportGoogleTasks>();
+            AssertManifest<RemoveGoogleTask>();
+            AssertManifest<MoveGoogleTask>();
         }
 
-        [TestMethod(DisplayName = "Verify that the GmailTask plugins are correctly " +
+        [TestMethod(DisplayName = "Verify that the GoogleTask plugins are correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
-            AssertPlugin<NewGmailTaskList>();
-            AssertPlugin<RemoveGmailTaskList>();
-            AssertPlugin<UpdateGmailTaskList>();
-            AssertPlugin<ExportGmailTaskLists>();
+            AssertPlugin<NewGoogleTaskList>();
+            AssertPlugin<RemoveGoogleTaskList>();
+            AssertPlugin<UpdateGoogleTaskList>();
+            AssertPlugin<ExportGoogleTaskLists>();
 
-            AssertPlugin<NewGmailTask>();
-            AssertPlugin<UpdateGmailTask>();
-            AssertPlugin<ExportGmailTasks>();
-            AssertPlugin<RemoveGmailTask>();
-            AssertPlugin<MoveGmailTask>();
+            AssertPlugin<NewGoogleTask>();
+            AssertPlugin<UpdateGoogleTask>();
+            AssertPlugin<ExportGoogleTasks>();
+            AssertPlugin<RemoveGoogleTask>();
+            AssertPlugin<MoveGoogleTask>();
         }
 
-        [Ignore(message: "Runs as part of the GmailTaskListLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the NewGmailTaskList plugin creates a " +
+        [Ignore(message: "Runs as part of the GoogleTaskListLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the NewGoogleTaskList plugin creates a " +
             "new tasks list correctly.")]
         public void NewTaskListTest()
         {
             // Plugin name for session output keys.
-            const string pluginName = nameof(NewGmailTaskList);
+            const string pluginName = nameof(NewGoogleTaskList);
 
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
@@ -65,7 +65,7 @@ namespace G4.UnitTests.Plugins.Google
             """
             {
                 "$type": "Action",
-                "pluginName": "NewGmailTaskList",
+                "pluginName": "NewGoogleTaskList",
                 "argument": "{{$ --Title:TestsList --Credentials:$(name)}}"
             }
             """.Replace("$(name)", name);
@@ -78,7 +78,7 @@ namespace G4.UnitTests.Plugins.Google
 
             // Store the created task list id in the test context
             // for potential use in cleanup or other tests.
-            DataBag["NewGmailTaskList:Id"] = id?.ConvertFromBase64() ?? string.Empty;
+            DataBag["NewGoogleTaskList:Id"] = id?.ConvertFromBase64() ?? string.Empty;
 
             // Assert required outputs exist.
             Assert.IsFalse(condition: string.IsNullOrEmpty(id));
@@ -91,21 +91,21 @@ namespace G4.UnitTests.Plugins.Google
                 actual: title.ConvertFromBase64() ?? string.Empty);
         }
 
-        [Ignore(message: "Runs as part of the GmailTaskListLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the RemoveGmailTaskList plugin removes a " +
+        [Ignore(message: "Runs as part of the GoogleTaskListLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the RemoveGoogleTaskList plugin removes a " +
             "tasks list correctly.")]
         public void RemoveTaskListTest()
         {
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
-            var id = $"{DataBag["NewGmailTaskList:Id"]}";
+            var id = $"{DataBag["NewGoogleTaskList:Id"]}";
 
             // Build the action rule JSON and inject the credential reference.
             var ruleJson =
             """
             {
                 "$type": "Action",
-                "pluginName": "RemoveGmailTaskList",
+                "pluginName": "RemoveGoogleTaskList",
                 "argument": "{{$ --Credentials:$(name) --Id:$(id)}}"
             }
             """.Replace("$(name)", name).Replace("$(id)", id);
@@ -117,24 +117,24 @@ namespace G4.UnitTests.Plugins.Google
             Assert.IsEmpty(exceptions);
         }
 
-        [Ignore(message: "Runs as part of the GmailTaskListLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the UpdateGmailTaskList plugin updates a " +
+        [Ignore(message: "Runs as part of the GoogleTaskListLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the UpdateGoogleTaskList plugin updates a " +
             "tasks list correctly.")]
         public void UpdateTaskListTest()
         {
             // Plugin name for session output keys.
-            const string pluginName = nameof(UpdateGmailTaskList);
+            const string pluginName = nameof(UpdateGoogleTaskList);
 
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
-            var id = $"{DataBag["NewGmailTaskList:Id"]}";
+            var id = $"{DataBag["NewGoogleTaskList:Id"]}";
 
             // Build the action rule JSON and inject the credential reference.
             var ruleJson =
             """
             {
                 "$type": "Action",
-                "pluginName": "UpdateGmailTaskList",
+                "pluginName": "UpdateGoogleTaskList",
                 "argument": "{{$ --Title:TestsListUpdated --Credentials:$(name) --Id:$(id)}}"
             }
             """.Replace("$(name)", name).Replace("$(id)", id);
@@ -156,12 +156,12 @@ namespace G4.UnitTests.Plugins.Google
                 actual: title.ConvertFromBase64() ?? string.Empty);
         }
 
-        [TestMethod(DisplayName = "Verify that the ExportGmailTaskLists plugin exports all " +
+        [TestMethod(DisplayName = "Verify that the ExportGoogleTaskLists plugin exports all " +
             "tasks lists correctly.")]
         public void ExportTaskListsTest()
         {
             // Plugin name for session output keys.
-            const string pluginName = nameof(ExportGmailTaskLists);
+            const string pluginName = nameof(ExportGoogleTaskLists);
 
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
@@ -171,7 +171,7 @@ namespace G4.UnitTests.Plugins.Google
             """
             {
                 "$type": "Action",
-                "pluginName": "ExportGmailTaskLists",
+                "pluginName": "ExportGoogleTaskLists",
                 "argument": "{{$ --Credentials:$(name)}}"
             }
             """.Replace("$(name)", name);
@@ -186,13 +186,13 @@ namespace G4.UnitTests.Plugins.Google
             Assert.IsGreaterThan(lowerBound: 0, list.GetProperty("items").GetArrayLength());
         }
 
-        [Ignore(message: "Runs as part of the GmailTasktLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the ExportGmailTasks plugin exports " +
+        [Ignore(message: "Runs as part of the GoogleTasktLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the ExportGoogleTasks plugin exports " +
             "all tasks correctly.")]
         public void ExportTasksTest()
         {
             // Plugin name for session output keys.
-            const string pluginName = nameof(ExportGmailTasks);
+            const string pluginName = nameof(ExportGoogleTasks);
 
             // Resolve the credential record name/id from test settings.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
@@ -202,7 +202,7 @@ namespace G4.UnitTests.Plugins.Google
             """
             {
                 "$type": "Action",
-                "pluginName": "ExportGmailTasks",
+                "pluginName": "ExportGoogleTasks",
                 "argument": "{{$ --Credentials:$(name) --TaskList:My Tasks}}"
             }
             """.Replace("$(name)", name);
@@ -216,13 +216,13 @@ namespace G4.UnitTests.Plugins.Google
             Assert.IsGreaterThan(lowerBound: 0, tasks.GetArrayLength());
         }
 
-        [Ignore(message: "Runs as part of the GmailTasktLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the NewGmailTask plugin creates a " +
+        [Ignore(message: "Runs as part of the GoogleTasktLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the NewGoogleTask plugin creates a " +
             "new task correctly.")]
         public void NewTaskTest()
         {
             // Plugin name for session output keys.
-            const string pluginName = nameof(NewGmailTask);
+            const string pluginName = nameof(NewGoogleTask);
 
             // Resolve the credential record name/id from the test configuration.
             // This value is injected into the rule so the plugin can obtain
@@ -230,13 +230,13 @@ namespace G4.UnitTests.Plugins.Google
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
             // Build the action rule JSON and inject the credential reference.
-            // The rule invokes the NewGmailTask plugin with a title, notes,
+            // The rule invokes the NewGoogleTask plugin with a title, notes,
             // due date, target task list, and credential reference.
             var ruleJson =
             """
             {
                 "$type": "Action",
-                "pluginName": "NewGmailTask",
+                "pluginName": "NewGoogleTask",
                 "argument": "{{$ --Title:New Task --Notes:Foo Bar --Due:09/20/2026 --Credentials:$(name) --TaskList:My Tasks}}"
             }
             """.Replace("$(name)", name);
@@ -254,7 +254,7 @@ namespace G4.UnitTests.Plugins.Google
 
             // Persist the created task id in the shared test data bag so it can be
             // reused by cleanup steps or other related tests.
-            DataBag["GmailTaskId"] = id?.ConvertFromBase64() ?? string.Empty;
+            DataBag["GoogleTaskId"] = id?.ConvertFromBase64() ?? string.Empty;
 
             // Verify that the plugin returned all required outputs.
             Assert.IsFalse(condition: string.IsNullOrEmpty(id));
@@ -270,8 +270,8 @@ namespace G4.UnitTests.Plugins.Google
                 actual: title.ConvertFromBase64() ?? string.Empty);
         }
 
-        [Ignore(message: "Runs as part of the GmailTasktLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the RemoveGmailTask plugin deletes an " +
+        [Ignore(message: "Runs as part of the GoogleTasktLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the RemoveGoogleTask plugin deletes an " +
             "existing task correctly.")]
         public void RemoveTaskTest()
         {
@@ -279,7 +279,7 @@ namespace G4.UnitTests.Plugins.Google
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
             // Read the task id produced by the create test (stored in the shared data bag).
-            var id = DataBag["GmailTaskId"]?.ToString() ?? string.Empty;
+            var id = DataBag["GoogleTaskId"]?.ToString() ?? string.Empty;
 
             // Ensure we have a task id to delete; otherwise the test is not valid.
             Assert.IsFalse(condition: string.IsNullOrWhiteSpace(id));
@@ -289,7 +289,7 @@ namespace G4.UnitTests.Plugins.Google
             """
             {
                 "$type": "Action",
-                "pluginName": "RemoveGmailTask",
+                "pluginName": "RemoveGoogleTask",
                 "argument": "{{$ --Task:$(id) --Credentials:$(name) --TaskList:My Tasks}}"
             }
             """.Replace("$(name)", name).Replace("$(id)", id);
@@ -301,19 +301,19 @@ namespace G4.UnitTests.Plugins.Google
             Assert.IsEmpty(exceptions);
         }
 
-        [Ignore(message: "Runs as part of the GmailTaskLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the UpdateGmailTask plugin updates an " +
+        [Ignore(message: "Runs as part of the GoogleTaskLifecycleTest.")]
+        [TestMethod(DisplayName = "Verify that the UpdateGoogleTask plugin updates an " +
             "existing task correctly.")]
         public void UpdateTaskTest()
         {
             // Plugin name used for resolving session output keys.
-            const string pluginName = nameof(UpdateGmailTask);
+            const string pluginName = nameof(UpdateGoogleTask);
 
             // Resolve the credential record name/id from the test configuration.
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
             // Read the task id created by a previous test from the shared data bag.
-            var id = $"{DataBag["GmailTaskId"]}";
+            var id = $"{DataBag["GoogleTaskId"]}";
 
             // Ensure a task id is available before attempting the update.
             Assert.IsFalse(condition: string.IsNullOrWhiteSpace(id));
@@ -323,7 +323,7 @@ namespace G4.UnitTests.Plugins.Google
             """
             {
                 "$type": "Action",
-                "pluginName": "UpdateGmailTask",
+                "pluginName": "UpdateGoogleTask",
                 "argument": "{{$ --Title:New Task Updated --Credentials:$(name) --Task:$(id) --TaskList:My Tasks}}"
             }
             """.Replace("$(name)", name).Replace("$(id)", id);
@@ -351,16 +351,16 @@ namespace G4.UnitTests.Plugins.Google
                 actual: title.ConvertFromBase64() ?? string.Empty);
         }
 
-        [TestMethod(DisplayName = "Verify the lifecycle of a Gmail tasks list (Add, Update and Delete).")]
-        public void GmailTaskListLifecycleTest()
+        [TestMethod(DisplayName = "Verify the lifecycle of a Google tasks list (Add, Update and Delete).")]
+        public void GoogleTaskListLifecycleTest()
         {
             NewTaskListTest();
             UpdateTaskListTest();
             RemoveTaskListTest();
         }
 
-        [TestMethod(DisplayName = "Verify the lifecycle of a Gmail task (Add, Update and Delete).")]
-        public void GmailTasktLifecycleTest()
+        [TestMethod(DisplayName = "Verify the lifecycle of a Google task (Add, Update and Delete).")]
+        public void GoogleTasktLifecycleTest()
         {
             NewTaskTest();
             ExportTasksTest();
@@ -369,7 +369,7 @@ namespace G4.UnitTests.Plugins.Google
         }
 
         [DoNotParallelize]
-        [TestMethod(DisplayName = "Verify the lifecycle of moving a Gmail task.")]
+        [TestMethod(DisplayName = "Verify the lifecycle of moving a Google task.")]
         public void MoveTaskLifecycleTest()
         {
             try
@@ -382,8 +382,8 @@ namespace G4.UnitTests.Plugins.Google
                 var name = $"{TestContext.Properties["Google.App.Name"]}";
 
                 // Read the created task id and destination list id from the shared data bag.
-                var id = $"{DataBag["GmailTaskId"]}";
-                var destination = $"{DataBag["NewGmailTaskList:Id"]}";
+                var id = $"{DataBag["GoogleTaskId"]}";
+                var destination = $"{DataBag["NewGoogleTaskList:Id"]}";
 
                 // Ensure a task id is available before attempting the move.
                 Assert.IsFalse(condition: string.IsNullOrWhiteSpace(id));
@@ -394,7 +394,7 @@ namespace G4.UnitTests.Plugins.Google
                 """
                 {
                     "$type": "Action",
-                    "pluginName": "MoveGmailTask",
+                    "pluginName": "MoveGoogleTask",
                     "argument": "{{$ --TaskList:My Tasks --Task:$(id) --Destination:$(destination) --Credentials:$(name)}}"
                 }
                 """

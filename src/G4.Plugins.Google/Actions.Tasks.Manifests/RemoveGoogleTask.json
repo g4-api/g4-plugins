@@ -9,42 +9,42 @@
 	"context": {
 		"integration": {
 			"github": {
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGmailTask.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGmailTask.cs"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGoogleTask.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGoogleTask.cs"
 			},
 			"rag": {
 				"description": "Delete a Google Tasks task during an automation run by resolving the target list (title or id), paging through tasks to find an exact id or title match, and then deleting the first verified match. It supports either a direct OAuth token or a stored credentials reference, enforces fail-fast checks when the list or task cannot be found, and keeps downstream steps reliable by ensuring only the intended task is removed.",
 				"qa": [
 					{
-						"question": "What does RemoveGmailTask do?",
-						"answer": "RemoveGmailTask deletes a task from a specified Google Tasks list after it finds an exact match by task id or task title."
+						"question": "What does RemoveGoogleTask do?",
+						"answer": "RemoveGoogleTask deletes a task from a specified Google Tasks list after it finds an exact match by task id or task title."
 					},
 					{
-						"question": "What parameters and key features does RemoveGmailTask support?",
+						"question": "What parameters and key features does RemoveGoogleTask support?",
 						"answer": "It requires TaskList and Task, supports optional Token and Credentials for authentication, resolves the list by id or title, pages through tasks, matches by id or title (case-insensitive), and deletes the first matching task."
 					},
 					{
-						"question": "How does RemoveGmailTask fit into the integration context?",
+						"question": "How does RemoveGoogleTask fit into the integration context?",
 						"answer": "It runs as an Action in the sequential workflow model (componentType “task”) with the google icon provider and ActionRuleModel, so it can be used as a standard workflow step."
 					},
 					{
-						"question": "What are best practices for using RemoveGmailTask?",
+						"question": "What are best practices for using RemoveGoogleTask?",
 						"answer": "Prefer Credentials for long-running automations, pass a list id and task id when you have them to avoid title ambiguity, and remember that if multiple tasks share the same title the first match will be deleted."
 					},
 					{
-						"question": "What rule and schema details should I follow to run RemoveGmailTask?",
-						"answer": "Create an Action rule with pluginName set to RemoveGmailTask and pass arguments for TaskList and Task plus either {{$--Token:value}} or {{$--Credentials:value}} via the rule argument."
+						"question": "What rule and schema details should I follow to run RemoveGoogleTask?",
+						"answer": "Create an Action rule with pluginName set to RemoveGoogleTask and pass arguments for TaskList and Task plus either {{$--Token:value}} or {{$--Credentials:value}} via the rule argument."
 					},
 					{
 						"question": "What is the manifest key of this plugin?",
-						"answer": "The manifest key is “RemoveGmailTask”."
+						"answer": "The manifest key is “RemoveGoogleTask”."
 					},
 					{
 						"question": "What manifestVersion is used by this plugin?",
 						"answer": "The manifestVersion is 4."
 					},
 					{
-						"question": "What is the pluginType of RemoveGmailTask?",
+						"question": "What is the pluginType of RemoveGoogleTask?",
 						"answer": "The pluginType is “Action”."
 					},
 					{
@@ -64,15 +64,15 @@
 						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 					},
 					{
-						"question": "What is the manifest summary for RemoveGmailTask?",
+						"question": "What is the manifest summary for RemoveGoogleTask?",
 						"answer": "It deletes a task from a Google Tasks list by resolving the list by id or title, searching tasks by id or title across paged results, and failing if the list or task cannot be found to avoid deleting the wrong item."
 					},
 					{
-						"question": "What sources describe RemoveGmailTask and where are they located?",
-						"answer": "The documentation matches the manifest behavior: resolve the list by title or id, page through tasks, and delete the first exact match by id or title. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGmailTask.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGmailTask.cs."
+						"question": "What sources describe RemoveGoogleTask and where are they located?",
+						"answer": "The documentation matches the manifest behavior: resolve the list by title or id, page through tasks, and delete the first exact match by id or title. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGoogleTask.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/RemoveGoogleTask.cs."
 					},
 					{
-						"question": "How does RemoveGmailTask handle errors and unexpected responses?",
+						"question": "How does RemoveGoogleTask handle errors and unexpected responses?",
 						"answer": "It fails fast when TaskList cannot be resolved or when no matching Task is found, and workflows should handle invalid or expired tokens, credential resolution or refresh failures, insufficient OAuth scopes, API quota or rate limits, network timeouts, and non-success Google Tasks API responses."
 					}
 				]
@@ -91,7 +91,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The RemoveGmailTask plugin deletes a task from a Google Tasks list during an automation run.",
+		"The RemoveGoogleTask plugin deletes a task from a Google Tasks list during an automation run.",
 		"It helps workflows clean up completed, cancelled, or mistaken tasks without manual work in Google Tasks.",
 		"It supports authentication using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
 		"It reduces accidental deletions by resolving the target list first and deleting only a task that matches the provided id or title.",
@@ -150,14 +150,14 @@
 				]
 			},
 			"description": [
-				"### RemoveGmailTask: Delete by task id using access token",
+				"### RemoveGoogleTask: Delete by task id using access token",
 				"",
 				"This example deletes a task by its id from the list `My Tasks` using a provided OAuth access token."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Task:dGFrZS10YXNrLWlk --TaskList:My Tasks --Token:ya29...}}",
-				"pluginName": "RemoveGmailTask"
+				"pluginName": "RemoveGoogleTask"
 			}
 		},
 		{
@@ -193,18 +193,18 @@
 				]
 			},
 			"description": [
-				"### RemoveGmailTask: Delete by task title using credentials reference",
+				"### RemoveGoogleTask: Delete by task title using credentials reference",
 				"",
 				"This example deletes a task by its title using a stored credentials record, after resolving the list by id."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Task:Pay electricity --TaskList:task-list-id --Credentials:my-google-creds}}",
-				"pluginName": "RemoveGmailTask"
+				"pluginName": "RemoveGoogleTask"
 			}
 		}
 	],
-	"key": "RemoveGmailTask",
+	"key": "RemoveGoogleTask",
 	"version": "4",
 	"namespace": "G4.Plugins.Google",
 	"parameters": [
@@ -254,7 +254,7 @@
 	],
 	"pluginType": "Action",
 	"summary": [
-		"The RemoveGmailTask plugin deletes a task from a Google Tasks list during an automation run.",
+		"The RemoveGoogleTask plugin deletes a task from a Google Tasks list during an automation run.",
 		"It resolves the target list by matching the provided list id or title, then finds the task by id or title across paged results.",
 		"It authenticates using either a direct OAuth access token or a stored credentials reference, and fails if the list or task cannot be found to avoid deleting the wrong item."
 	]
