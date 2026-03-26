@@ -15,16 +15,18 @@ namespace G4.UnitTests.Plugins.Google
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
-            AssertManifest<ReadGmailMessage>();
             AssertManifest<EditGmailMessage>();
+            AssertManifest<ReadGmailMessage>();
+            AssertManifest<SendGmailMessage>();
         }
 
         [TestMethod(DisplayName = "Verify that the GmailMail plugins are correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
-            AssertPlugin<ReadGmailMessage>();
             AssertPlugin<EditGmailMessage>();
+            AssertPlugin<ReadGmailMessage>();
+            AssertPlugin<SendGmailMessage>();
         }
 
         [Ignore]
@@ -78,11 +80,66 @@ namespace G4.UnitTests.Plugins.Google
             // Verify that the plugin returned the Subject header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Subject"]?.ToString());
 
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
+
             // Verify that the plugin returned the To header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:To"]?.ToString());
         }
 
-        //[Ignore]
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the ReadGmailMessage plugin " +
+            "sends emails correctly.")]
+        public void SendMailTest()
+        {
+            // Plugin name used as the namespace prefix for session output keys.
+            const string pluginName = nameof(SendGmailMessage);
+
+            // Resolve the credential record name/id from the test configuration.
+            // This value is injected into the rule so the plugin can authenticate
+            // and send mail from the target Gmail account.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule JSON and inject the credential reference.
+            // The rule invokes the SendGmailMessage plugin using the configured credentials.
+            var argument = "{{$ " +
+                "--Credentials:$(name) " +
+                "--From:g4.platforms@gmail.com " +
+                "--To:1@gmail.com;2@outlook.com " +
+                "--Cc:3@outlook.com " +
+                "--Bcc:4@outlook.com " +
+                "--Body:Test Mail " +
+                "--Subject:G4 API}}";
+            
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "SendGmailMessage",
+                "argument": "$(argument)"
+            }
+            """.Replace("$(argument)", argument).Replace("$(name)", name);
+
+            // Execute the rule and capture the invocation result.
+            // The plugin writes its outputs into the workflow session parameters
+            // using the pattern: <PluginName>:<Property>.
+            var session = Invoke(ruleJson);
+            var sessionParameters = session.GetEnvironment().SessionParameters;
+
+            // Verify that the plugin completed without reporting execution exceptions.
+            Assert.IsEmpty(session.GetExceptions());
+
+            // Verify that the plugin returned the Gmail message id.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Id"]?.ToString());
+
+            // Verify that the plugin returned the Subject header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Labels"]?.ToString());
+
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
+        }
+
+        [Ignore]
         [TestMethod(DisplayName = "Verify that the EditGmailMessage plugin " +
             "updates message labels correctly.")]
         public void UpdateMessageLabelsSingleLabelTest()
@@ -132,6 +189,9 @@ namespace G4.UnitTests.Plugins.Google
 
             // Verify that the plugin returned the Subject header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Subject"]?.ToString());
+
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
 
             // Verify that the plugin returned the To header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:To"]?.ToString());
@@ -187,6 +247,9 @@ namespace G4.UnitTests.Plugins.Google
 
             // Verify that the plugin returned the Subject header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Subject"]?.ToString());
+
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
 
             // Verify that the plugin returned the To header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:To"]?.ToString());
