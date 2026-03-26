@@ -265,6 +265,16 @@
 		},
 		{
 			"description": [
+				"Stores the thread identifier extracted from the retrieved Gmail message.",
+				"Helps workflows track and manage email threads.",
+				"Supports actions that need to reference the entire conversation."
+			],
+			"name": "ReadGmailMessage:ThreadId",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
 				"Stores the To recipient list extracted from the retrieved Gmail message.",
 				"Keeps primary recipients available for routing, filtering, and audit checks.",
 				"Helps downstream steps determine whether the message was addressed to the expected target."

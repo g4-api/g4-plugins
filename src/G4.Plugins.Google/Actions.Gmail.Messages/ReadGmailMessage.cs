@@ -54,6 +54,7 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
             var from = message.GetFrom();
             var id = message.Id;
             var subject = message.GetSubject();
+            var threadId = message.ThreadId;
             var to = message.GetTo();
 
             // Persist mail data in session parameters.
@@ -63,6 +64,7 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
             this.AddSessionParameter(@namespace: NameReference, name: "From", value: from);
             this.AddSessionParameter(@namespace: NameReference, name: "Id", value: id);
             this.AddSessionParameter(@namespace: NameReference, name: "Subject", value: subject);
+            this.AddSessionParameter(@namespace: NameReference, name: "ThreadId", value: threadId);
             this.AddSessionParameter(@namespace: NameReference, name: "To", value: to);
 
             // Create a new plugin response to return
@@ -78,6 +80,7 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
                 ["From"] = from,
                 ["Id"] = id,
                 ["Subject"] = subject,
+                ["ThreadId"] = threadId,
                 ["To"] = to
             };
 
