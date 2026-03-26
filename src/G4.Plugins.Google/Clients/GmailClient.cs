@@ -101,6 +101,30 @@ namespace G4.Plugins.Google.Clients
             }
 
             /// <summary>
+            /// Sends the specified message to the recipients in the To, Cc, and Bcc headers.
+            /// </summary>
+            /// <param name="message">The message to send.</param>
+            /// <returns>A <see cref="MessageModel"/> representing the sent message returned by the Gmail API.</returns>
+            public MessageModel Send(MessageModel message)
+            {
+                // Extract the OAuth access token used to authorize the request.
+                var token = Credentials.AccessToken;
+
+                // Build the Gmail API endpoint for sending a message.
+                var requestUri = new Uri($"{GmailBaseUri}/users/me/messages/send");
+                
+                // Create the HTTP POST request with the authorization header and request body.
+                var requestMessage = NewRequest(
+                    HttpMethod.Post,
+                    requestUri,
+                    token,
+                    requestBody: message);
+                
+                // Send the request and deserialize the JSON response into MessageModel.
+                return HttpClient.Send<MessageModel>(requestMessage);
+            }
+
+            /// <summary>
             /// Modifies the labels on the specified message.
             /// </summary>
             /// <param name="id">The ID of the message to modify.</param>
