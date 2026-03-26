@@ -66,6 +66,7 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
             var id = message.Id;
             var labels = JsonSerializer.Serialize(message.ResolveLabels(adapter));
             var subject = message.GetSubject();
+            var threadId = message?.ThreadId;
             var to = message.GetTo();
 
             // Persist the updated message data into session parameters for downstream workflow use.
@@ -76,6 +77,7 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
             this.AddSessionParameter(@namespace: NameReference, name: "Id", value: id);
             this.AddSessionParameter(@namespace: NameReference, name: "Labels", value: labels);
             this.AddSessionParameter(@namespace: NameReference, name: "Subject", value: subject);
+            this.AddSessionParameter(@namespace: NameReference, name: "ThreadId", value: threadId);
             this.AddSessionParameter(@namespace: NameReference, name: "To", value: to);
 
             // Create the plugin response that will expose the updated message data to the caller.
@@ -91,6 +93,7 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
                 ["Id"] = id,
                 ["Labels"] = labels,
                 ["Subject"] = subject,
+                ["ThreadId"] = threadId,
                 ["To"] = to
             };
 
