@@ -35,7 +35,7 @@ namespace G4.Plugins.Google.Models.Gmail
         /// <summary>
         /// Gets or sets the internal message creation date as epoch milliseconds.
         /// </summary>
-        public long InternalDate { get; set; }
+        public string InternalDate { get; set; }
 
         /// <summary>
         /// Gets or sets the label identifiers currently applied to the message.
