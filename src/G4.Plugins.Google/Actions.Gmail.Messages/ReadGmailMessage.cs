@@ -53,6 +53,8 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
             var content = message.Read();
             var from = message.GetFrom();
             var id = message.Id;
+            var rfcMessageId = message.GetMessageId();
+            var rfcThreadId = message.GetThreadId();
             var subject = message.GetSubject();
             var threadId = message.ThreadId;
             var to = message.GetTo();
@@ -63,6 +65,8 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
             this.AddSessionParameter(@namespace: NameReference, name: "Content", value: content);
             this.AddSessionParameter(@namespace: NameReference, name: "From", value: from);
             this.AddSessionParameter(@namespace: NameReference, name: "Id", value: id);
+            this.AddSessionParameter(@namespace: NameReference, name: "RfcMessageId", value: rfcMessageId);
+            this.AddSessionParameter(@namespace: NameReference, name: "RfcThreadId", value: rfcThreadId);
             this.AddSessionParameter(@namespace: NameReference, name: "Subject", value: subject);
             this.AddSessionParameter(@namespace: NameReference, name: "ThreadId", value: threadId);
             this.AddSessionParameter(@namespace: NameReference, name: "To", value: to);
@@ -79,6 +83,8 @@ namespace G4.Plugins.Google.Actions.Gmail.Messages
                 ["Content"] = content,
                 ["From"] = from,
                 ["Id"] = id,
+                ["RfcMessageId"] = rfcMessageId,
+                ["RfcThreadId"] = rfcThreadId,
                 ["Subject"] = subject,
                 ["ThreadId"] = threadId,
                 ["To"] = to

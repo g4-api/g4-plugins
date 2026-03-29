@@ -255,6 +255,26 @@
 		},
 		{
 			"description": [
+				"Stores the RFC Message-ID header value from the retrieved Gmail message.",
+				"Enables correct email threading for replies by supplying the value used in In-Reply-To and References headers.",
+				"Helps workflows link messages across systems using the standard RFC 5322 identifier."
+			],
+			"name": "ReadGmailMessageRfc:MessageId",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the RFC thread reference value derived from the retrieved Gmail message headers.",
+				"Helps maintain reply threading by providing the identifier used to build References chains.",
+				"Supports consistent conversation linking when creating follow-up messages."
+			],
+			"name": "ReadGmailMessageRfc:ThreadId",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
 				"Stores the subject line extracted from the retrieved Gmail message.",
 				"Helps workflows display, log, or classify the message using its subject.",
 				"Supports quick filtering when only header information is needed."
