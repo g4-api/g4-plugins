@@ -578,12 +578,30 @@ namespace G4.Plugins.Google.Extensions
             }
 
             /// <summary>
+            /// Retrieves the Message-Id header value from the message.
+            /// </summary>
+            /// <returns>The Message-Id header value, or an empty string when the header is not present.</returns>
+            public string GetMessageId()
+            {
+                return GetHeader(messageModel: message, name: "Message-Id");
+            }
+
+            /// <summary>
             /// Retrieves the Subject header value from the message.
             /// </summary>
             /// <returns>The Subject header value, or an empty string when the header is not present.</returns>
             public string GetSubject()
             {
                 return GetHeader(messageModel: message, name: "Subject");
+            }
+
+            /// <summary>
+            /// Retrieves the thread identifier associated with the current message.
+            /// </summary>
+            /// <returns>A string containing the thread identifier if present; otherwise, null.</returns>
+            public string GetThreadId()
+            {
+                return GetHeader(messageModel: message, name: "Thread-Id");
             }
 
             /// <summary>
