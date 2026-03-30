@@ -1,0 +1,236 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Gmail"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendGmailMessageReply.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions.Gmail.Messages/SendGmailMessageReply.cs"
+			},
+			"rag": {
+				"description": "The SendGmailMessageReply automates threaded email interactions by building and sending RFC 2822 reply payloads. It ensures conversation integrity through automatic thread and subject resolution, supporting dynamic recipient overrides and flexible authentication via stored credentials or direct tokens. This maintainable approach keeps automated communications reliably grouped within existing Gmail conversations.",
+				"qa": [
+					{
+						"answer": "SendGmailMessageReply is designed to send replies to existing Gmail messages while ensuring they are correctly grouped within the original conversation thread.",
+						"question": "What is the purpose of SendGmailMessageReply?"
+					},
+					{
+						"answer": "The primary parameters include MessageId (the original message to reply to), Body (the reply content), and optional overrides for To, Cc, and Bcc recipients.",
+						"question": "What are the main parameters for SendGmailMessageReply?"
+					},
+					{
+						"answer": "Documentation is at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendGmailMessageReply.md and the source code is at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions.Gmail.Messages/SendGmailMessageReply.cs.",
+						"question": "Where can I find the documentation and source code for SendGmailMessageReply?"
+					},
+					{
+						"answer": "It automatically retrieves the original message's thread ID and subject, then populates the In-Reply-To and References headers in the reply payload.",
+						"question": "How does SendGmailMessageReply maintain conversation threading?"
+					},
+					{
+						"answer": "The plugin is an Action under the G4.Plugins.Google namespace, and it uses the ActionRuleModel for its configuration.",
+						"question": "What is the plugin type and namespace for SendGmailMessageReply?"
+					},
+					{
+						"answer": "The plugin was authored by Roei Sabag, and more information is available at https://www.linkedin.com/in/roei-sabag-247aa18/.",
+						"question": "Who is the author of the SendGmailMessageReply plugin?"
+					},
+					{
+						"answer": "Key features include threaded replies using RFC 2822 headers, recipient overrides, automatic subject matching, and session parameter storage for reply metadata.",
+						"question": "What are the key features of SendGmailMessageReply?"
+					},
+					{
+						"answer": "If no Gmail messages are returned or the send result cannot be tracked, the plugin throws an InvalidOperationException to signal a hard failure.",
+						"question": "What happens if the Gmail message reply cannot be sent or tracked?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "google",
+					"svg": null
+				},
+				"label": "Send Gmail Message Reply",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The SendGmailMessageReply sends a reply to an existing Gmail message while maintaining the conversation thread.",
+		"It automatically resolves the original message's thread and subject to ensure the reply is correctly grouped.",
+		"This helps automate email interactions within a workflow without breaking conversation history.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"|----------------------------|------------------------------------------------------------------------------------------|",
+		"| Threaded Replies           | Automatically links the reply to the original message and thread using RFC 2822 headers. |",
+		"| Recipient Overrides        | Allows specifying To, Cc, and Bcc recipients for the reply.                              |",
+		"| Automatic Subject Matching | Automatically uses the original message's subject to maintain the conversation.          |",
+		"| Session Parameter Storage  | Stores reply metadata like Id and ThreadId in session parameters for later use.          |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                    | Description                                                                                        |",
+		"|-----------------------------|----------------------------------------------------------------------------------------------------|",
+		"| Customer Support Automation | Reply to customer inquiries while keeping the conversation in a single thread for better tracking. |",
+		"| Approval Workflows          | Send replies to approval request emails to confirm or reject actions within an automated process.  |",
+		"| Order Status Updates        | Automatically reply to customer order emails with status updates or tracking information.          |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case               | Description                                                                                            |",
+		"|------------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Email Flow Validation  | Test the ability of a system to correctly receive and reply to emails within a conversation thread.    |",
+		"| Notification Testing   | Verify that automated replies are sent with the correct headers and content during integration tests.  |",
+		"| Threading Verification | Ensure that the email client or system under test correctly groups replies into the same conversation. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Expired Token",
+						"Invalid MessageId",
+						"Network connectivity issues",
+						"Unauthorized access to the message thread"
+					],
+					"expected_result": "A reply is sent to the specified Gmail message, and the reply metadata is stored in session parameters.",
+					"notes": "This example demonstrates how to reply to a message using its unique ID and a direct OAuth token for authentication.",
+					"use_case": "reply_to_gmail_message",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"Email",
+					"Gmail",
+					"Reply",
+					"Threading"
+				]
+			},
+			"description": [
+				"### Reply to a specific Gmail message",
+				"",
+				"The `SendGmailMessageReply` action sends a reply to an existing Gmail message identified by `MessageId`.",
+				"It uses a direct OAuth token for authentication and sends the content provided in `Body` as the reply.",
+				"The action reads the original message first so the reply is sent as part of the same conversation."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --MessageId:msg-123 --Body:Thank you for the update! --token:ya29...}}",
+				"pluginName": "SendGmailMessageReply"
+			}
+		}
+	],
+	"key": "SendGmailMessageReply",
+	"namespace": "G4.Plugins.Google",
+	"outputParameters": [
+		{
+			"description": [
+				"Id stores the unique identifier assigned to the sent reply message by Gmail.",
+				"It allows subsequent workflow steps to reference and manage the specific reply."
+			],
+			"name": "SendGmailMessageReply:Id",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Labels captures the list of labels applied to the newly sent reply message.",
+				"It provides insight into how the message is categorized within the Gmail mailbox."
+			],
+			"name": "SendGmailMessageReply:Labels",
+			"type": "String"
+		},
+		{
+			"description": [
+				"ThreadId identifies the conversation thread to which the reply belongs.",
+				"It is essential for grouping related messages together in the user's inbox."
+			],
+			"name": "SendGmailMessageReply:ThreadId",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Bcc identifies blind carbon copy recipients who receive the reply without being visible to others.",
+				"It is useful for discreetly archiving or monitoring automated email responses."
+			],
+			"mandatory": false,
+			"name": "Bcc",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Body contains the text content of the reply message.",
+				"It conveys the actual information or response back to the original sender."
+			],
+			"mandatory": false,
+			"name": "Body",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Cc lists the carbon copy recipients who should receive a copy of the reply.",
+				"It helps keep relevant stakeholders informed about the ongoing conversation."
+			],
+			"mandatory": false,
+			"name": "Cc",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Credentials refers to a stored set of authentication details used to access the Gmail API.",
+				"It ensures secure and authorized communication with the user's mailbox."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String"
+		},
+		{
+			"description": [
+				"MessageId identifies the specific Gmail message to which the reply is being sent.",
+				"It ensures that the automation targets the correct conversation thread."
+			],
+			"mandatory": true,
+			"name": "MessageId",
+			"type": "String"
+		},
+		{
+			"description": [
+				"To specifies the primary recipients for the reply message.",
+				"It allows overriding or supplementing the default recipient list for the reply."
+			],
+			"mandatory": false,
+			"name": "To",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Token provides a direct OAuth 2.0 access token for authentication.",
+				"It serves as an alternative to stored credentials for quick or temporary API access."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"The SendGmailMessageReply sends a reply to an existing Gmail message while maintaining the conversation thread.",
+		"It automatically resolves the original message's thread and subject to ensure the reply is correctly grouped.",
+		"This helps automate email interactions within a workflow without breaking conversation history."
+	],
+	"version": "4"
+}

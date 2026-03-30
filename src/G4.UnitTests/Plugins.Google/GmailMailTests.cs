@@ -18,6 +18,7 @@ namespace G4.UnitTests.Plugins.Google
             AssertManifest<EditGmailMessage>();
             AssertManifest<ReadGmailMessage>();
             AssertManifest<SendGmailMessage>();
+            AssertManifest<SendGmailMessageReply>();
         }
 
         [TestMethod(DisplayName = "Verify that the GmailMail plugins are correctly " +
@@ -27,12 +28,13 @@ namespace G4.UnitTests.Plugins.Google
             AssertPlugin<EditGmailMessage>();
             AssertPlugin<ReadGmailMessage>();
             AssertPlugin<SendGmailMessage>();
+            AssertPlugin<SendGmailMessageReply>();
         }
 
         [Ignore]
         [TestMethod(DisplayName = "Verify that the ReadGmailMessage plugin " +
             "reads emails correctly.")]
-        public void ReadMailTest()
+        public void ReadGmailMessageTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
             const string pluginName = nameof(ReadGmailMessage);
@@ -88,9 +90,59 @@ namespace G4.UnitTests.Plugins.Google
         }
 
         [Ignore]
+        [TestMethod(DisplayName = "Verify that the SendGmailMessageReply plugin " +
+            "sends emails correctly.")]
+        public void SendGmailMessageReplyTest()
+        {
+            // Use the plugin class name as the namespace prefix for session output parameters.
+            const string pluginName = nameof(SendGmailMessageReply);
+
+            // Resolve the configured Google application credential reference from the test context.
+            // This value is injected into the action rule so the plugin can authenticate.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule argument string that invokes the reply plugin
+            // with credentials, target message id, recipients, and reply body.
+            var argument = "{{$ " +
+                "--Credentials:$(name) " +
+                "--MessageId:19d3ae8f06771f47 " +
+                "--From:1@gmail.com " +
+                "--To:2@outlook.com;3@gmail.com " +
+                "--Body:This is a test reply message.}}";
+
+            // Build the action rule JSON and inject the resolved argument and credential values.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "SendGmailMessageReply",
+                "argument": "$(argument)"
+            }
+            """.Replace("$(argument)", argument).Replace("$(name)", name);
+
+            // Execute the action rule and capture the resulting workflow session.
+            var session = Invoke(ruleJson);
+
+            // Read the session parameters written by the plugin during execution.
+            var sessionParameters = session.GetEnvironment().SessionParameters;
+
+            // Verify that the plugin completed without reporting execution exceptions.
+            Assert.IsEmpty(session.GetExceptions());
+
+            // Verify that the plugin returned the created Gmail message identifier.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Id"]?.ToString());
+
+            // Verify that the plugin returned the applied Gmail labels.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Labels"]?.ToString());
+
+            // Verify that the plugin returned the Gmail thread identifier.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
+        }
+
+        [Ignore]
         [TestMethod(DisplayName = "Verify that the ReadGmailMessage plugin " +
             "sends emails correctly.")]
-        public void SendMailTest()
+        public void SendGmailMessageTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
             const string pluginName = nameof(SendGmailMessage);
@@ -142,7 +194,7 @@ namespace G4.UnitTests.Plugins.Google
         [Ignore]
         [TestMethod(DisplayName = "Verify that the EditGmailMessage plugin " +
             "updates message labels correctly.")]
-        public void UpdateMessageLabelsSingleLabelTest()
+        public void EditGmailMessageSingleLabelTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
             const string pluginName = nameof(EditGmailMessage);
@@ -200,7 +252,7 @@ namespace G4.UnitTests.Plugins.Google
         [Ignore]
         [TestMethod(DisplayName = "Verify that the EditGmailMessage plugin " +
             "updates message labels correctly.")]
-        public void UpdateMessageLabelsTest()
+        public void EditGmailMessageTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
             const string pluginName = nameof(EditGmailMessage);
