@@ -98,34 +98,106 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Expired Token",
-						"Invalid MessageId",
-						"Network connectivity issues",
-						"Unauthorized access to the message thread"
+						"Expired OAuth token",
+						"Invalid MessageId format",
+						"Message thread already deleted",
+						"Recipient email address rejected"
 					],
-					"expected_result": "A reply is sent to the specified Gmail message, and the reply metadata is stored in session parameters.",
-					"notes": "This example demonstrates how to reply to a message using its unique ID and a direct OAuth token for authentication.",
-					"use_case": "reply_to_gmail_message",
+					"expected_result": "The reply is delivered to the customer, and the message metadata (Id, Labels, ThreadId) is stored in session parameters.",
+					"notes": "Authenticates using a direct OAuth 2.0 Token and sends a support reply. The action populates In-Reply-To and References headers to maintain the original thread.",
+					"use_case": "customer_support_reply",
 					"version": "1.0"
 				},
 				"labels": [
 					"Action",
+					"CustomerSupport",
 					"Email",
 					"Gmail",
-					"Reply",
-					"Threading"
+					"Reply"
 				]
 			},
 			"description": [
-				"### Reply to a specific Gmail message",
+				"### Reply to customer inquiry",
 				"",
-				"The `SendGmailMessageReply` action sends a reply to an existing Gmail message identified by `MessageId`.",
-				"It uses a direct OAuth token for authentication and sends the content provided in `Body` as the reply.",
-				"The action reads the original message first so the reply is sent as part of the same conversation."
+				"The `SendGmailMessageReply` action sends a threaded reply to a customer inquiry identified by its unique `MessageId`.",
+				"It authenticates using a direct OAuth 2.0 `Token` and delivers the specified `Body` content to the address provided in the `To` parameter.",
+				"The action automatically resolves the original thread metadata to ensure the response appears correctly in the customer's conversation history."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --MessageId:msg-123 --Body:Thank you for the update! --token:ya29...}}",
+				"argument": "{{$ --MessageId:msg-98765 --To:customer@example.com --Body:We have received your request and our team is looking into it. --Token:ya29.a0AR...}}",
+				"pluginName": "SendGmailMessageReply"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Account lacks necessary Gmail scopes",
+						"Missing 'Subject' in original message",
+						"Original message no longer exists",
+						"Stored credentials expired"
+					],
+					"expected_result": "The approval confirmation is sent within the original email thread, and the reply identifiers are captured in session parameters.",
+					"notes": "Uses stored Credentials to authorize the reply. The system retrieves the original Message-Id and ThreadId to link the reply payload correctly.",
+					"use_case": "approval_workflow_reply",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"Approval",
+					"Automation",
+					"Email",
+					"Gmail",
+					"Workflow"
+				]
+			},
+			"description": [
+				"### Send approval workflow reply",
+				"",
+				"The `SendGmailMessageReply` action automates the approval process by replying to a specific request email.",
+				"It utilizes stored `Credentials` for secure access and delivers the approval confirmation provided in the `Body` parameter to the recipient specified in `To`.",
+				"The action preserves conversation integrity by linking the reply to the original message via RFC 2822 headers."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --MessageId:app-554433 --To:approver@example.com --Body:The requested item has been approved and is now being processed. --Credentials:GmailServiceAccount}}",
+				"pluginName": "SendGmailMessageReply"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CC recipient address invalid",
+						"Message thread already closed",
+						"Network timeout during API call",
+						"Rate limiting by Gmail API"
+					],
+					"expected_result": "The order status update is sent to the customer with CC and Bcc recipients, preserving the conversation thread.",
+					"notes": "Applies recipient overrides via To, Cc, and Bcc parameters. The action encodes the RFC 2822 payload in base64url format for the Gmail API and stores reply metadata.",
+					"use_case": "order_status_update",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"Commerce",
+					"Email",
+					"Gmail",
+					"Notifications",
+					"Reply"
+				]
+			},
+			"description": [
+				"### Update order status with CC and Bcc",
+				"",
+				"The `SendGmailMessageReply` action sends an order status update as a reply to a customer's order confirmation email.",
+				"It overrides the default recipient list using the `To`, `Cc`, and `Bcc` parameters to ensure both the customer and internal stakeholders are informed.",
+				"The action correctly threads the reply with the original order email, providing a seamless communication experience."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --MessageId:ord-112233 --To:buyer@example.com --Cc:manager@example.com --Bcc:archive@example.com --Body:Your order #12345 has been shipped and is on its way! --Token:ya29.a0AR...}}",
 				"pluginName": "SendGmailMessageReply"
 			}
 		}
