@@ -11,6 +11,47 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeScroll.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeScroll.cs"
+			},
+			"rag": {
+				"description": "The InvokeScroll action scrolls a web page or a specific overflow element using JavaScript. When OnElement is provided and at least one offset is specified, the action calls element.scroll() on the located element; otherwise it calls window.scroll() to scroll the entire page. If neither Left nor Top is provided the action takes no effect.",
+				"qa": [
+					{
+						"question": "What does the InvokeScroll action do?",
+						"answer": "InvokeScroll scrolls a web page or a specific overflow element to the given Left and Top pixel offsets using JavaScript. It targets the full page via window.scroll() when no element is specified, or a specific element via element.scroll() when OnElement is provided."
+					},
+					{
+						"question": "What determines whether the page or a specific element is scrolled?",
+						"answer": "When OnElement is provided and at least one of Left or Top is specified, InvokeScroll calls element.scroll() on the located element. When OnElement is absent (or when both Left and Top are omitted), it calls window.scroll() to scroll the whole page."
+					},
+					{
+						"question": "What happens when neither Left nor Top is provided?",
+						"answer": "When both Left and Top are absent, the internal invalid flag is set to true and neither scroll method is called — the action takes no effect."
+					},
+					{
+						"question": "What are the valid values for the Behavior parameter?",
+						"answer": "The Behavior parameter accepts auto (default — determined by the CSS scroll-behavior property), instant (single-jump scroll), and smooth (animated scroll)."
+					},
+					{
+						"question": "What is the default scrolling behavior when Behavior is omitted?",
+						"answer": "When Behavior is omitted it defaults to auto, which delegates the animation decision to the computed CSS scroll-behavior property of the target."
+					},
+					{
+						"question": "Can InvokeScroll scroll horizontally only?",
+						"answer": "Yes. Providing only the Left parameter scrolls horizontally to the specified pixel offset without changing the vertical position."
+					},
+					{
+						"question": "What JavaScript API does InvokeScroll use under the hood?",
+						"answer": "InvokeScroll executes window.scroll({behavior, top, left}) for page scrolling and arguments[0].scroll({behavior, top, left}) for element scrolling via the WebDriver ExecuteScript endpoint."
+					},
+					{
+						"question": "Where is the source code for InvokeScroll?",
+						"answer": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeScroll.cs"
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,6 +59,7 @@
 					"name": "gears",
 					"svg": null
 				},
+				"label": "Invoke Scroll",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,126 +67,184 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `InvokeScroll` plugin is to automate scrolling actions on web pages. ",
-		"In both RPA and automation testing, interacting with web pages often involves scrolling to view hidden or off-screen elements, simulate user behavior, or verify the appearance of elements at different scroll positions. ",
-		"This plugin provides a mechanism to perform such scrolling actions programmatically as part of automated workflows or tests.",
+		"The InvokeScroll action scrolls a web page or a specific overflow element to a given pixel position using JavaScript.",
+		"When an element is specified via OnElement, the action targets that element with `element.scroll()`; otherwise it scrolls the entire page via `window.scroll()`.",
+		"This makes it the primary way to programmatically position the viewport or scroll within overflow containers in automation workflows and test scripts.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature       | Description                                                                                                                                   |",
-		"|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Scalability   | The plugin can handle scrolling for both specific elements and entire pages, making it versatile for various automation scenarios.            |",
-		"| Customization | It allows customization of scrolling behavior by accepting arguments such as behavior type (smooth, auto, etc.), left offset, and top offset. |",
-		"| Reusable      | The plugin encapsulates scrolling logic into reusable components, reducing code duplication and enhancing maintainability.                    |",
-		"| Reliability   | By leveraging JavaScript-based scrolling, the plugin ensures reliable scrolling behavior across different web browsers and environments.      |",
+		"| Feature           | Description                                                                                                           |",
+		"|-------------------|-----------------------------------------------------------------------------------------------------------------------|",
+		"| Page Scroll       | Scrolls the entire page to the specified Left and Top pixel offsets using `window.scroll()`.                          |",
+		"| Element Scroll    | Scrolls within a specific overflow element using `element.scroll()`, targeting it via any supported locator strategy. |",
+		"| Behavior Control  | Accepts `auto`, `instant`, and `smooth` scroll behaviors to control animation.                                        |",
+		"| Axis Independence | Left and Top offsets are independently optional — supply one or both depending on the scroll direction required.      |",
+		"| No-Op Guard       | When neither Left nor Top is provided the action takes no effect, preventing unintended scroll resets.                |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                | Description                                                                                                 |",
-		"|----------------------|-------------------------------------------------------------------------------------------------------------|",
-		"| Data Extraction      | Scrolling through web pages to extract relevant data from tables, lists, or grids.                          |",
-		"| Silent Paging        | Navigating through paginated content to collect comprehensive datasets.                                     |",
-		"| Multi-Step Workflows | Automating scrolling actions as part of broader RPA processes to navigate through multi-step workflows.     |",
-		"| Forms & Data         | Completing forms or interacting with web-based applications that require scrolling beyond the initial view. |",
+		"| Use Case             | Description                                                                                                    |",
+		"|----------------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Data Extraction      | Scroll through paginated tables or lazy-loaded lists to expose additional rows before data collection.         |",
+		"| Form Navigation      | Scroll to a specific section of a long form to bring off-screen fields into view before interaction.           |",
+		"| Overflow Navigation  | Scroll within a fixed-height panel, textarea, or scrollable container to reach content below the visible fold. |",
+		"| Multi-Step Workflows | Position the viewport as part of a broader workflow that chains scroll with click or extract actions.          |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                        | Description                                                                                                                               |",
-		"|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Responsive Design Testing    | Simulate scrolling actions on different screen sizes and devices, ensuring application responsiveness across various viewport dimensions. |",
-		"| Accessibility Testing        | Scroll through web pages and verify the accessibility of interactive elements for individuals with disabilities.                          |",
-		"| Automation Test Scripts      | Integrate scrolling actions into automated test scripts to interact with dynamic web elements effectively.                                |",
-		"| Infinite Scroll Handling     | Automate scrolling to test and validate the functionality of infinite scroll features during automated testing.                           |",
-		"| Visual Testing               | Scroll through web pages and capture screenshots for visual regression testing.                                                           |",
-		"| Dynamic Content Verification | Automate scrolling actions to verify the presence and behavior of dynamically loaded content during automated tests.                      |"
+		"| Use Case                   | Description                                                                                                          |",
+		"|----------------------------|----------------------------------------------------------------------------------------------------------------------|",
+		"| Infinite Scroll Testing    | Scroll to the bottom of the page repeatedly to trigger and validate lazy-loaded or infinite-scroll content.          |",
+		"| Responsive Design Testing  | Scroll to specific offsets on different viewport sizes to verify element visibility and layout at each position.     |",
+		"| Overflow Element Testing   | Scroll within a container to verify that content below the fold is rendered and accessible to assertions.            |",
+		"| Visual Regression Testing  | Scroll to a defined position and capture a screenshot to compare layout against a baseline.                          |",
+		"| Smooth Scroll Verification | Use Behavior:smooth and assert the scroll offset over time to confirm animated scrolling is functioning as expected. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Top value exceeds document height — the browser clamps the scroll position to the maximum scrollable offset",
+						"Page has overflow:hidden on the body — window.scroll() may have no visible effect",
+						"Top is provided but the page has no vertical scroll space — scroll position stays at 0",
+						"Behavior:auto and CSS scroll-behavior:smooth are both set — the CSS property controls the animation",
+						"Calling without Left causes only vertical scrolling; horizontal position is unchanged"
+					],
+					"expected_result": "The page scrolls vertically so that the top of the viewport is 500 pixels from the top of the document.",
+					"notes": "window.scroll() is called with {behavior: 'auto', top: 500}. Left is omitted from the script because isLeft is false. The horizontal scroll position is not affected.",
+					"use_case": "page_scroll_vertical",
+					"version": "4"
+				},
+				"labels": [
+					"PageScroll",
+					"VerticalScroll",
+					"TopOffset",
+					"WindowScroll",
+					"AutoBehavior"
+				]
+			},
 			"description": [
-				"Scroll the web page, moving the view to a position where the top offset is 10 pixels from the top of the page. ",
-				"This could be useful, for example, if you need to scroll down the page by a specific distance to reveal certain content or elements."
+				"### Scroll the page vertically to a specific offset",
+				"",
+				"Scrolls the entire page so the top of the viewport is 500 pixels from the top of the document.",
+				"Use this form to bring off-screen content into view or to position the viewport at a known vertical coordinate."
 			],
 			"rule": {
-				"argument": "{{$ --Top:10}}",
+				"$type": "Action",
+				"argument": "{{$ --Top:500}}",
 				"pluginName": "InvokeScroll"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Left or Top exceeds the scrollable document dimensions — browser silently clamps to the max scrollable offset",
+						"Browser or OS has smooth-scroll accessibility settings disabled — smooth behavior may be overridden",
+						"Page is not yet fully loaded — scroll may complete before dynamic content extends the document height",
+						"Calling on a single-screen page with no overflow — scroll call succeeds but position stays at 0,0"
+					],
+					"expected_result": "The page scrolls smoothly both vertically (300 px) and horizontally (100 px) in a single animated motion.",
+					"notes": "window.scroll() is called with {behavior: 'smooth', top: 300, left: 100}. Smooth behavior triggers a CSS-driven animation rather than an instant jump.",
+					"use_case": "page_scroll_both_axes_smooth",
+					"version": "4"
+				},
+				"labels": [
+					"BothAxes",
+					"HorizontalScroll",
+					"LeftOffset",
+					"PageScroll",
+					"SmoothBehavior",
+					"TopOffset",
+					"VerticalScroll",
+					"WindowScroll"
+				]
+			},
 			"description": [
-				"Scroll the web page, moving the view horizontally to a position where the left offset is 10 pixels from the left edge of the page. ",
-				"This could be useful, for instance, if you need to shift the view horizontally to focus on a particular section or element of the page."
+				"### Scroll the page on both axes with smooth animation",
+				"",
+				"Scrolls the entire page to 300 pixels from the top and 100 pixels from the left using a smooth animated transition.",
+				"Use this form when the scroll direction, offset, and animation style all need explicit control."
 			],
 			"rule": {
-				"argument": "{{$ --Left:10}}",
+				"$type": "Action",
+				"argument": "{{$ --Top:300 --Left:100 --Behavior:smooth}}",
 				"pluginName": "InvokeScroll"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element does not have overflow:auto or overflow:scroll — element.scroll() call succeeds but the visual position does not change",
+						"Element is not in the DOM at the time of the call — a StaleElementReferenceException may be thrown",
+						"Top offset exceeds the element's scrollable height — browser clamps scroll to the maximum offset",
+						"Element is inside an iframe — the driver must be switched to the correct frame before locating the element",
+						"CssSelector matches multiple elements — the action targets the first match"
+					],
+					"expected_result": "The overflow container matched by #ScrollablePanel scrolls vertically so that its internal content is 150 pixels from the top of the container.",
+					"notes": "element.scroll() is called with {behavior: 'auto', top: 150}. The element must have a scrollable overflow axis for the call to produce a visible result.",
+					"use_case": "element_scroll_vertical",
+					"version": "4"
+				},
+				"labels": [
+					"CssSelector",
+					"ElementScroll",
+					"OverflowContainer",
+					"TopOffset",
+					"VerticalScroll"
+				]
+			},
 			"description": [
-				"Scroll the web page, moving the view both vertically and horizontally to a position where the top offset is 10 pixels from the top of the page and the left offset is 10 pixels from the left edge of the page. ",
-				"This could be useful, for example, when you need to precisely position the view to focus on a specific area or element of the page."
+				"### Scroll within a specific overflow element vertically",
+				"",
+				"Locates the element matching `#ScrollablePanel` using the CssSelector strategy and scrolls its internal content 150 pixels from the top.",
+				"Use this form when the scroll target is an overflow container rather than the full page."
 			],
 			"rule": {
-				"argument": "{{$ --Top:10 --Left:10}}",
-				"pluginName": "InvokeScroll"
-			}
-		},
-		{
-			"description": [
-				"Scroll the web page, moving the view both vertically and horizontally to a position where the top offset is 10 pixels from the top of the page and the left offset is 10 pixels from the left edge of the page. ",
-				"Additionally, the scrolling action will be performed smoothly with animation. ",
-				"This could be useful for creating a more visually appealing scrolling experience for users."
-			],
-			"rule": {
-				"argument": "{{$ --Top:10 --Left:10 --Behavior:smooth}}",
-				"pluginName": "InvokeScroll"
-			}
-		},
-		{
-			"description": [
-				"Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it vertically so that the content shifts down by 10 pixels from its original position. ",
-				"This could be useful for scenarios where the content within a specific element overflows, such as in a textarea, and you need to scroll it to reveal additional content or ensure visibility of specific elements within the overflow area."
-			],
-			"rule": {
-				"argument": "{{$ --Top:10}}",
+				"$type": "Action",
+				"argument": "{{$ --Top:150}}",
 				"locator": "CssSelector",
-				"onElement": "#TextAreaEnabled",
+				"onElement": "#ScrollablePanel",
 				"pluginName": "InvokeScroll"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element lacks both vertical and horizontal overflow — neither axis scrolls despite valid arguments",
+						"Smooth scroll is interrupted by a page navigation before the animation completes — final position may be partial",
+						"Left offset exceeds the element's scrollable width — browser clamps to the maximum horizontal offset",
+						"Element becomes stale mid-animation — a StaleElementReferenceException is raised after the script is dispatched",
+						"CssSelector selects an element with nested scrollable children — only the matched element's own scroll position changes"
+					],
+					"expected_result": "The overflow container matched by #TextAreaEnabled scrolls 10 pixels from the top and 10 pixels from the left with a smooth animated transition.",
+					"notes": "element.scroll() is called with {behavior: 'smooth', top: 10, left: 10}. Both axes and the animation style are controlled explicitly. The element must support overflow on both axes for both offsets to take effect.",
+					"use_case": "element_scroll_both_axes_smooth",
+					"version": "4"
+				},
+				"labels": [
+					"BothAxes",
+					"CssSelector",
+					"ElementScroll",
+					"HorizontalScroll",
+					"LeftOffset",
+					"OverflowContainer",
+					"SmoothBehavior",
+					"TopOffset",
+					"VerticalScroll"
+				]
+			},
 			"description": [
-				"Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it horizontally so that the content shifts to the right by 10 pixels from its original position. ",
-				"This could be useful for scenarios where the content within a specific element overflows horizontally, such as in a textarea, and you need to scroll it to reveal additional content or ensure visibility of specific elements within the overflow area."
+				"### Scroll within a specific overflow element on both axes with smooth animation",
+				"",
+				"Locates the element matching `#TextAreaEnabled` using the CssSelector strategy and scrolls its content 10 pixels from the top and 10 pixels from the left with smooth animation.",
+				"Use this form when element-level scrolling must control both axes and the visual animation style simultaneously."
 			],
 			"rule": {
-				"argument": "{{$ --Left:10}}",
-				"locator": "CssSelector",
-				"onElement": "#TextAreaEnabled",
-				"pluginName": "InvokeScroll"
-			}
-		},
-		{
-			"description": [
-				"Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it both vertically and horizontally. ",
-				"The content will shift down by 10 pixels from its original position (top offset), and it will also shift to the right by 10 pixels from its original position (left offset). ",
-				"This could be useful for scenarios where the content within a specific element overflows both vertically and horizontally, such as in a textarea, and you need to scroll it to reveal additional content or ensure visibility of specific elements within the overflow area."
-			],
-			"rule": {
-				"argument": "{{$ --Top:10 --Left:10}}",
-				"locator": "CssSelector",
-				"onElement": "#TextAreaEnabled",
-				"pluginName": "InvokeScroll"
-			}
-		},
-		{
-			"description": [
-				"Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it both vertically and horizontally. ",
-				"The content will shift down by 10 pixels from its original position (top offset), and it will also shift to the right by 10 pixels from its original position (left offset). ",
-				"Additionally, the scrolling action will be performed smoothly, providing a gradual animation effect. ",
-				"This configuration is useful for scenarios where smooth scrolling is desired, enhancing the user experience by providing fluid navigation within the overflow content."
-			],
-			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Top:10 --Left:10 --Behavior:smooth}}",
 				"locator": "CssSelector",
 				"onElement": "#TextAreaEnabled",
@@ -157,7 +257,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the scrolling behavior. Possible values are `auto`, `instant`, and `smooth`."
+				"Specifies the scrolling animation style.",
+				"Accepted values are `auto` (default — follows the computed CSS scroll-behavior), `instant` (single-jump, no animation), and `smooth` (animated transition).",
+				"When absent the value defaults to `auto`."
 			],
 			"mandatory": false,
 			"name": "Behavior",
@@ -165,19 +267,19 @@
 			"values": [
 				{
 					"description": [
-						"Scroll behavior is determined by the computed value of [scroll-behavior](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior)."
+						"Scroll behavior is determined by the computed value of the [scroll-behavior](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior) CSS property on the target."
 					],
 					"name": "auto"
 				},
 				{
 					"description": [
-						"Scrolling happens instantly in a single jump."
+						"Scrolling happens instantly in a single jump with no animation."
 					],
 					"name": "instant"
 				},
 				{
 					"description": [
-						"Scrolling animates smoothly."
+						"Scrolling animates smoothly to the target offset."
 					],
 					"name": "smooth"
 				}
@@ -185,7 +287,8 @@
 		},
 		{
 			"description": [
-				"Specifies the horizontal scrolling offset from the left edge of the overflow element or the page to which the scrolling action is applied."
+				"Specifies the horizontal pixel offset from the left edge of the scroll container (the page or the target element) to scroll to.",
+				"When absent the horizontal position is not changed."
 			],
 			"mandatory": false,
 			"name": "Left",
@@ -193,27 +296,37 @@
 		},
 		{
 			"description": [
-				"Specifies the vertical scrolling offset from the top of the overflow element or top of the page to which the scrolling action is applied."
+				"Specifies the vertical pixel offset from the top of the scroll container (the page or the target element) to scroll to.",
+				"When absent the vertical position is not changed."
 			],
 			"mandatory": false,
 			"name": "Top",
 			"type": "Number"
 		}
 	],
+	"platforms": [
+		"Web",
+		"MobileWeb"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Provides additional instructions or parameters to control the behavior of the scrolling action."
+				"Argument passes the scroll parameters using the `{{$ --Name:Value}}` macro format.",
+				"It accepts the Behavior, Left, and Top parameters that control the scroll target and animation.",
+				"When neither Left nor Top is supplied via Argument the action takes no effect."
 			],
-			"mandatory": true,
+			"mandatory": false,
 			"name": "Argument",
 			"type": "String|Expression"
 		},
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the type of locator used to identify the target element defined by the `OnElement` property."
+				"Locator specifies the strategy used to find the target element for element-level scrolling.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"When absent the default Xpath strategy is used.",
+				"Locator is only evaluated when OnElement is also provided."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -221,7 +334,9 @@
 		},
 		{
 			"description": [
-				"Specifies the target element to which the scrolling action should be applied."
+				"OnElement provides the locator expression that identifies the overflow container to scroll.",
+				"It is evaluated using the strategy defined by the Locator property.",
+				"When absent the action scrolls the entire page via `window.scroll()` instead of a specific element."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -232,13 +347,10 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#execute-script",
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
-	"platforms": [
-		"Web",
-		"MobileWeb"
-	],
 	"summary": [
-		"The `InvokeScroll` plugin automates scrolling actions on web pages, enabling precise control over vertical and horizontal scrolling within web pages or specific elements. ",
-		"It supports a variety of scrolling behaviors, making it an essential tool for both robotic process automation (RPA) and automation testing scenarios where interaction with off-screen elements or dynamic content is required."
+		"The InvokeScroll action scrolls a web page or a specific overflow element to given Left and Top pixel offsets using JavaScript, making it the primary way to programmatically control scroll position in an automation workflow.",
+		"When OnElement is provided the action calls `element.scroll()` on the located element; otherwise it calls `window.scroll()` to scroll the entire page. The Behavior parameter controls whether the scroll is instant, auto, or smooth.",
+		"In RPA it positions the viewport for data extraction, form navigation, and overflow panel traversal. In automation testing it drives infinite-scroll validation, responsive layout checks, and visual regression captures."
 	],
 	"version": "4"
 }
