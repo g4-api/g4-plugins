@@ -156,7 +156,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#executing-script",
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
-	"scopes": [
+	"platforms": [
 		"Any"
 	],
 	"summary": [

@@ -110,7 +110,7 @@
 		"w3c": "POST /session/{session id}/frame",
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#switch-to-frame"
 	},
-	"scopes": [
+	"platforms": [
 		"Web",
 		"MobileWeb"
 	],

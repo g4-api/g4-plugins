@@ -146,7 +146,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#refresh",
 		"w3c": "POST /session/{session id}/refresh"
 	},
-	"scopes": [
+	"platforms": [
 		"Web",
 		"MobileWeb"
 	],

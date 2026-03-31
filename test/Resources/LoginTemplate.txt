@@ -95,7 +95,7 @@
             "pluginName": "Click"
         }
     ],
-    "scopes": [
+    "platforms": [
         "Web",
         "MobileWeb"
     ],

@@ -113,7 +113,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
 		"w3c": "POST /session/{session id}/actions"
 	},
-	"scopes": [
+	"platforms": [
 		"Any"
 	],
 	"summary": [

@@ -517,7 +517,7 @@
 		"apiDocumentation": "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendinput",
 		"w3c": "POST /session/{session id}/actions"
 	},
-	"scopes": [
+	"platforms": [
 		"WindowsNative"
 	],
 	"summary": [

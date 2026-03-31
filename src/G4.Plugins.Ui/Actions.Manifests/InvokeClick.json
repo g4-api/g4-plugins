@@ -192,7 +192,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-click",
 		"w3c": "POST /session/{session id}/element/{element id}/click"
 	},
-	"scopes": [
+	"platforms": [
 		"Any"
 	],
 	"summary": [

@@ -214,7 +214,7 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
+	"platforms": [
 		"WindowsNative"
 	],
 	"summary": [

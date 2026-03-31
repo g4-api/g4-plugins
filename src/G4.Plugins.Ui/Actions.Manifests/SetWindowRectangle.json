@@ -156,7 +156,7 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#set-window-rect",
 		"w3c": "POST /session/{session id}/window/rect"
 	},
-	"scopes": [
+	"platforms": [
 		"Web",
 		"MobileWeb"
 	],
