@@ -9,9 +9,13 @@ namespace G4.Plugins.Ui.Actions
 {
     [G4Plugin(
         assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Ui.Actions.Manifests.{nameof(InvokeScript)}.json")]
+        manifest: $"G4.Plugins.Ui.Actions.Manifests.{NameReference}.json")]
     public class InvokeScript(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        // Define a constant for the plugin name reference to ensure
+        // consistent namespacing of session parameters.
+        private const string NameReference = nameof(InvokeScript);
+
         // JSON serialization options for customizing the behavior of the JSON serializer.
         private static readonly JsonSerializerOptions s_jsonSerializerOptions = new()
         {
@@ -51,7 +55,7 @@ namespace G4.Plugins.Ui.Actions
 
             // Invoke the script with the specified arguments using the WebDriver
             // Store the script result in the session parameters for future reference
-            Invoker.Context.SessionParameters["ScriptResult"] = WebDriver.InvokeScript(script, arguments);
+            Invoker.Context.SessionParameters[$"{NameReference}:ScriptResult"] = WebDriver.InvokeScript(script, arguments);
 
             // Create and return a new PluginResponseModel
             return this.NewPluginResponse();
