@@ -19,6 +19,10 @@ namespace G4.Plugins.Ui.Actions
         manifest: $"G4.Plugins.Ui.Actions.Manifests.{nameof(CopyResource)}.json")]
     public class CopyResource(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        // Define a constant for the plugin name reference to ensure
+        // consistent namespacing of session parameters.
+        private const string NameReference = nameof(CopyResource);
+
         // Static instance of HttpClient for making HTTP requests.
         private static readonly HttpClient s_httpClient = new();
 
@@ -72,7 +76,7 @@ namespace G4.Plugins.Ui.Actions
             }
 
             // Store the list of copied resources in the session parameters
-            Invoker.Context.SessionParameters["CopiedResources"] = files;
+            Invoker.Context.SessionParameters[$"{NameReference}:CopiedResources"] = files;
 
             // Create and return a new PluginResponseModel
             return this.NewPluginResponse();
