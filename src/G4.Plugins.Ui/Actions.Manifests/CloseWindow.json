@@ -8,6 +8,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CloseWindow.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/CloseWindow.cs"
+			},
+			"rag": {
+				"description": "The CloseWindow action closes a specific browser window or the currently active window. When no Argument is provided it calls WebDriver.Close() on the active window. When Argument is a valid integer it is treated as a zero-based index into the driver window handle list and the window at that position is switched to and closed. When Argument is a non-numeric string it is matched case-insensitively against the open window handles and the matching window is switched to and closed. If the supplied integer index is out of range or the supplied handle string does not match any open window handle a NoSuchWindowException is thrown immediately.",
+				"qa": [
+					{
+						"question": "What is the primary purpose of the CloseWindow action?",
+						"answer": "CloseWindow closes a specific browser window identified by an index or handle string, or closes the currently active window when no argument is supplied."
+					},
+					{
+						"question": "What happens when no Argument is provided to CloseWindow?",
+						"answer": "When Argument is absent or empty the action calls WebDriver.Close() on whichever window currently has driver focus without switching windows first."
+					},
+					{
+						"question": "How does CloseWindow interpret an integer Argument?",
+						"answer": "An integer Argument is treated as a zero-based index into the driver's window handle list. The action switches to the window at that position and closes it."
+					},
+					{
+						"question": "How does CloseWindow interpret a non-numeric string Argument?",
+						"answer": "A non-numeric string Argument is matched case-insensitively against all open window handles. When a match is found the action switches to that window and closes it. When no match is found a NoSuchWindowException is thrown."
+					},
+					{
+						"question": "What exception is thrown when an invalid index or handle is provided?",
+						"answer": "A NoSuchWindowException is thrown with the message 'Invalid window handle or index provided.' when the supplied integer index is out of range or the supplied handle string is non-empty and does not match any open window."
+					},
+					{
+						"question": "Is handle matching in CloseWindow case-sensitive?",
+						"answer": "No. Handle matching uses OrdinalIgnoreCase comparison so the casing of the supplied handle string does not need to match the casing stored by the browser."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +48,7 @@
 					"name": "gears",
 					"svg": null
 				},
+				"label": "Close Window",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,58 +56,130 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `CloseWindow` plugin is to close a specific browser window or the active window if no specific window is specified. This is useful for managing browser sessions that involve multiple windows.",
+		"The CloseWindow action closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
+		"It supports three targeting modes — active window, index-based, and handle-based — providing precise window management across multi-window browser sessions.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature               | Description                                                              |",
-		"|-----------------------|------------------------------------------------------------------------- |",
-		"| Close Specific Window | Closes a browser window specified by its handle or index.                |",
-		"| Close Active Window   | Closes the active browser window if no handle or index is specified.     |",
-		"| Exception Handling    | Handles any exceptions that occur due to invalid window handle or index. |",
+		"| Feature                    | Description                                                                                                |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------------|",
+		"| Close Active Window        | Closes the currently focused window when no Argument is provided.                                          |",
+		"| Index-Based Targeting      | Accepts a zero-based integer index to close the window at that position in the driver handle list.         |",
+		"| Handle-Based Targeting     | Accepts a window handle string and matches it case-insensitively against open windows before closing.      |",
+		"| Invalid Argument Detection | Throws NoSuchWindowException immediately when the index is out of range or the handle string is not found. |",
+		"| Focus Switch on Closure    | When targeting by index or handle the action switches focus to the target window before closing it.        |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage             | Description                                                                   |",
-		"|-------------------|-------------------------------------------------------------------------------|",
-		"| Window Management | Close specific browser windows during the automation process.                 |",
-		"| Session Cleanup   | Ensure proper cleanup of browser windows at the end of an automation session. |",
+		"| Use Case         | Description                                                                                                  |",
+		"|------------------|--------------------------------------------------------------------------------------------------------------|",
+		"| Popup Dismissal  | Close a known popup or advertisement window by index after detecting it was opened by the page.              |",
+		"| Session Cleanup  | Close an auxiliary window opened for authentication or file download before continuing the automation flow.  |",
+		"| Targeted Closure | When the exact window handle was captured earlier, close it precisely without relying on a positional index. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage             | Description                                                                                |",
-		"|-------------------|--------------------------------------------------------------------------------------------|",
-		"| Test Cleanup      | Close specific windows at the end of tests to ensure no windows remain open between tests. |",
-		"| Window Management | Manage browser windows efficiently during test execution.                                  |"
+		"| Use Case                  | Description                                                                                                  |",
+		"|---------------------------|--------------------------------------------------------------------------------------------------------------|",
+		"| Post-Interaction Teardown | Close a window opened by a test step such as a print preview or OAuth popup before proceeding to assertions. |",
+		"| Window Count Assertion    | Close specific windows then assert the expected remaining window count for state validation.                 |",
+		"| Isolated Window Cleanup   | Close windows by stored handle to ensure the test cleans up exactly the window it opened.                    |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No other windows are open — closing the last window terminates the browser session",
+						"The active window is in an unresponsive state — close may time out or raise a WebDriver exception",
+						"A beforeunload dialog is present — the dialog must be dismissed before the window can close"
+					],
+					"expected_result": "The currently active browser window is closed. If it is the last window the browser session ends.",
+					"notes": "No Argument is provided. WebDriver.Close() is called on whichever window currently has driver focus.",
+					"use_case": "close_active_window",
+					"version": "4"
+				},
+				"labels": [
+					"ActiveWindow",
+					"BrowserManagement",
+					"Cleanup",
+					"SessionManagement",
+					"WindowManagement"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `CloseWindow` plugin to close the active browser window. ",
-				"If there is no specific window handle or index provided, the plugin will close the window that is currently in focus."
+				"### Close the currently active browser window",
+				"",
+				"Closes whichever browser window currently has WebDriver focus.",
+				"Use this mode when the target window is already active and no handle or index tracking is needed."
 			],
 			"rule": {
+				"$type": "Action",
 				"pluginName": "CloseWindow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Index is out of range (>= number of open windows) — NoSuchWindowException is thrown",
+						"Index 0 closes the main window; subsequent interactions require switching to another remaining window",
+						"Window order shifts when closing in a loop — capture handles first to avoid index drift"
+					],
+					"expected_result": "The browser window at zero-based index 1 (the second open window) is closed.",
+					"notes": "Argument '1' targets the second entry in the driver handle list. The driver switches to that window before closing.",
+					"use_case": "close_window_by_index",
+					"version": "4"
+				},
+				"labels": [
+					"BrowserManagement",
+					"IndexBased",
+					"MultiWindow",
+					"PositionalTargeting",
+					"WindowManagement"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `CloseWindow` plugin to close a browser window specified by its index. ",
-				"In this case, the window at index 1 (second window) in the list of window handles will be closed. ",
-				"This is useful when you know the position of the window you want to close."
+				"### Close a browser window by its zero-based index",
+				"",
+				"Closes the window at position 1 in the driver window handle list.",
+				"Index-based targeting is convenient when the order of window opening is predictable and stable."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "1",
 				"pluginName": "CloseWindow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Handle no longer exists at execution time — NoSuchWindowException is thrown",
+						"Multiple handles that differ only in casing — OrdinalIgnoreCase matching closes the first match found",
+						"Handle format varies by browser (CDwindow- prefix in Chrome, {GUID} in others) — capture handles at runtime for portability"
+					],
+					"expected_result": "The browser window whose handle matches CDwindow-1234 case-insensitively is closed.",
+					"notes": "Handle matching uses OrdinalIgnoreCase. The driver switches to the matched window before closing.",
+					"use_case": "close_window_by_handle",
+					"version": "4"
+				},
+				"labels": [
+					"BrowserManagement",
+					"HandleBased",
+					"MultiWindow",
+					"PrecisionTargeting",
+					"WindowManagement"
+				]
+			},
 			"description": [
-				"This example demonstrates the usage of the `CloseWindow` plugin to close a browser window specified by its handle. ",
-				"Here, the window with the handle `CDwindow-1234` will be closed. ",
-				"This is useful when you have the exact handle of the window you want to close, ensuring precision in window management."
+				"### Close a browser window by its handle",
+				"",
+				"Closes the window identified by the handle string `CDwindow-1234`.",
+				"Handle-based targeting provides index-drift-free closure when the handle was captured at window-open time."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "CDwindow-1234",
 				"pluginName": "CloseWindow"
 			}
@@ -85,10 +191,11 @@
 	"properties": [
 		{
 			"description": [
-				"The `Argument` property specifies which browser window to close. ",
-				"It accepts either an index (number) or a window handle (string). ",
-				"If no argument is provided, the active window will be closed. ",
-				"Providing an invalid index or handle will result in an exception."
+				"Argument specifies which browser window to close.",
+				"When omitted or empty the currently active window is closed via WebDriver.Close().",
+				"When set to an integer the window at that zero-based index in the driver handle list is switched to and closed.",
+				"When set to a non-numeric string it is matched case-insensitively against open window handles and the matching window is switched to and closed.",
+				"An out-of-range index or an unrecognized non-empty handle string causes a NoSuchWindowException."
 			],
 			"mandatory": false,
 			"name": "Argument",
@@ -104,9 +211,9 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The `CloseWindow` plugin closes a specific browser window identified by its handle or index, or closes the active window if no specific window is provided.",
-		"In robotic process automation (RPA), it manages browser windows efficiently by targeting specific windows for closure.",
-		"In automation testing, it helps control test flow by closing windows after validations or interactions."
+		"The CloseWindow action closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
+		"In robotic process automation it provides targeted window closure by index position or stored handle, enabling precise session management without disrupting other open windows.",
+		"In automation testing it removes specific windows opened during test interactions, keeping the window state clean and predictable between test steps."
 	],
 	"version": "4"
 }
