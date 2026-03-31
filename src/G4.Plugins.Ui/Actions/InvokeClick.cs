@@ -62,7 +62,7 @@ namespace G4.Plugins.Ui.Actions
             return this.NewPluginResponse();
         }
 
-        #region *** Methods: Private ***
+        #region *** Methods      ***
         // Invokes a conditional click on the specified element, checking a condition until it is met or a timeout occurs.
         private static void InvokeConditionalClick(
             PluginBase plugin,
@@ -196,7 +196,7 @@ namespace G4.Plugins.Ui.Actions
         }
         #endregion
 
-        #region *** Nested Types     ***
+        #region *** Nested Types ***
         /// <summary>
         /// Contains methods for handling different click scenarios.
         /// </summary>
