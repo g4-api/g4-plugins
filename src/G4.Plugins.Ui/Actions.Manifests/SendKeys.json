@@ -4,10 +4,52 @@
 		"name": "Roei Sabag"
 	},
 	"categories": [
-		"WebDriver"
+		"WebDriver",
+		"Ui"
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendKeys.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SendKeys.cs"
+			},
+			"rag": {
+				"description": "The SendKeys action types text into target UI elements with support for typing delay, clearing options, and keyboard modifier combinations. It targets elements via XPath or CSS locators and handles element-not-found scenarios by logging exceptions.",
+				"qa": [
+					{
+						"question": "What does the SendKeys action do?",
+						"answer": "SendKeys types text into a target UI element, simulating real keyboard input with configurable delay, clearing, and modifier key support."
+					},
+					{
+						"question": "What parameters does SendKeys support?",
+						"answer": "Keys (text), Delay (typing speed), NativeClear (backspace clear), Clear (standard clear), and Modifier (Ctrl, Alt, Shift, Meta)."
+					},
+					{
+						"question": "How does element targeting work?",
+						"answer": "Elements are targeted using onElement with a locator strategy. Default locator is XPath. Regular expression patterns can filter element matching."
+					},
+					{
+						"question": "When should NativeClear vs Clear be used?",
+						"answer": "NativeClear uses backspace simulation for custom controls. Clear uses standard WebDriver clear for simple inputs."
+					},
+					{
+						"question": "How are modifier keys specified?",
+						"answer": "Modifier accepts a single string or JSON array: Control, Alt, Shift, or Meta. Keys are held during text input."
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What happens if the target element is not found?",
+						"answer": "A NoSuchElementException is logged and an empty response is returned. The workflow continues."
+					},
+					{
+						"question": "Can SendKeys handle keyboard combinations?",
+						"answer": "Yes. SendModifiedKeys holds modifiers like Ctrl+A or Ctrl+C by specifying the modifier and key together."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +57,7 @@
 					"name": "keyboard",
 					"svg": null
 				},
+				"label": "Send Keys",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,120 +65,207 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `SendKeys` plugin is to provide automation scripts with the capability to send text inputs to specified elements. ",
-		"This is particularly important in scenarios where user interactions involve input fields, requiring precise control over text entry to simulate user behavior. ",
-		"The plugin aims to streamline automation workflows by facilitating seamless text inputs.",
+		"The SendKeys action types text into a target UI element such as input fields or text areas.",
+		"It provides flexible control over typing speed, content clearing, and keyboard modifier combinations.",
+		"This action is essential for automating form filling, search box input, and any text entry workflow.",
 		"",
 		"### Key Features and Functionality",
+		"| Feature              | Description                                                                |",
+		"|----------------------|----------------------------------------------------------------------------|",
+		"| Text Input           | Sends keystrokes to the element with configurable delay between characters |",
+		"| Clear Before Typing  | Supports native backspace clear and standard WebDriver clear               |",
+		"| Modifier Keys        | Press Ctrl, Alt, Shift, or Meta while sending text for shortcuts           |",
+		"| Flexible Text Source | Accepts text from the Keys parameter or rule argument                      |",
 		"",
-		"| Feature               | Description                                                                                                |",
-		"|-----------------------|------------------------------------------------------------------------------------------------------------|",
-		"| Dynamic Configuration | Supports dynamic configuration through parameters such as `Keys`, `Delay`, `Clear`, and `NativeClear`.     |",
-		"| Robust Error Handling | Includes mechanisms for handling exceptions, ensuring reliable execution of text inputs.                   |",
-		"| Modifier Keys Support | Allows sending text with modifier keys such as `Shift`, `Ctrl`, or `Alt` for complex text entry scenarios. |",
+		"### Usages in RPA",
+		"| Use Case          | Description                                 |",
+		"|-------------------|---------------------------------------------|",
+		"| Form Field Entry  | Automatically fill text inputs in web forms |",
+		"| Search Box Input  | Type search queries into search fields      |",
+		"| Text Area Content | Enter multi-line text into text areas       |",
 		"",
-		"### Usage in RPA",
-		"",
-		"| Usage                 | Description                                                                                                               |",
-		"|-----------------------|---------------------------------------------------------------------------------------------------------------------------|",
-		"| Filling Forms         | Enables RPA processes to simulate user-like text entries, such as filling out forms or entering data into web elements.   |",
-		"| Data Entry Automation | Helps in automating data entry tasks, ensuring that text is accurately entered into input fields, reducing manual effort. |",
-		"| Triggering Events     | Triggers keyboard events such as `input`, `change`, and `keydown` events, simulating user interactions with the page.     |",
-		"",
-		"### Usage in Automation Testing",
-		"",
-		"| Usage                     | Description                                                                                                                                    |",
-		"|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Form Field Testing        | Allows dynamic control of text inputs, leading to more thorough test coverage in scenarios involving text input fields.                        |",
-		"| UI Stability Verification | Ensures that the user interface remains stable after text inputs for accurate validation of input handling by the application.                 |",
-		"| Event Handling Testing    | Verifies that keyboard events are properly triggered and handled by the application, ensuring comprehensive testing of event-driven behaviors. |"
+		"### Usages in Automation Testing",
+		"| Use Case           | Description                                     |",
+		"|--------------------|-------------------------------------------------|",
+		"| Input Validation   | Test form fields with various text inputs       |",
+		"| Keyboard Shortcuts | Test Ctrl+A, Ctrl+C type combinations           |",
+		"| Type Speed Testing | Verify typing behavior with configurable delays |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty keys value",
+						"Keys parameter overrides argument"
+					],
+					"expected_result": "The text 'Hello World' is typed into the input field.",
+					"notes": "The action uses the Keys parameter from the argument macro. When Keys is empty, the argument itself is used as fallback text.",
+					"use_case": "basic_text_input",
+					"version": "4"
+				},
+				"labels": [
+					"Input",
+					"TextEntry",
+					"Typing"
+				]
+			},
 			"description": [
-				"Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput`."
+				"### Send text to an input field",
+				"",
+				"The rule targets an input element using XPath and sends the text 'Hello World' to it.",
+				"The element is located using the default Xpath locator strategy."
 			],
 			"rule": {
-				"argument": "Hello World",
-				"locator": "CssSelector",
-				"onElement": "#TextInput",
-				"pluginName": "SendKeys"
-			}
-		},
-		{
-			"description": [
-				"Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput` using a parameterized argument."
-			],
-			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Keys:Hello World}}",
-				"locator": "CssSelector",
-				"onElement": "#TextInput",
+				"locator": "Xpath",
+				"onElement": "//input[@id='username']",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Clear fails silently",
+						"NativeClear preferred for custom controls"
+					],
+					"expected_result": "The input field is cleared first, then 'New Text' is entered.",
+					"notes": "NativeClear uses backspace simulation. Standard Clear uses WebDriver Clear method. Only one clear method should be used.",
+					"use_case": "clear_before_input",
+					"version": "4"
+				},
+				"labels": [
+					"Clear",
+					"Input",
+					"TextEntry"
+				]
+			},
 			"description": [
-				"First clear the content of the input element identified by the CSS selector `#TextInput` and then send the text `Hello World`."
+				"### Clear and type new content",
+				"",
+				"The rule clears the target element using native backspace simulation before sending the new text.",
+				"This is useful when replacing existing content in an input field."
 			],
 			"rule": {
-				"argument": "{{$ --Keys:Hello World --Clear}}",
-				"locator": "CssSelector",
-				"onElement": "#TextInput",
+				"$type": "Action",
+				"argument": "{{$ --Keys:New Text --NativeClear}}",
+				"locator": "Xpath",
+				"onElement": "//textarea[@name='description']",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Modifier combination fails",
+						"Invalid modifier key name"
+					],
+					"expected_result": "Ctrl+A is pressed to select all text in the element.",
+					"notes": "Modifier keys are held down while the text is sent. Multiple modifiers can be provided as a JSON array.",
+					"use_case": "keyboard_shortcut_with_modifier",
+					"version": "4"
+				},
+				"labels": [
+					"KeyboardShortcut",
+					"Modifier",
+					"Selection"
+				]
+			},
 			"description": [
-				"First clear the content of the input element identified by the CSS selector `#TextInput` using `NativeClear` functionality and then send the text `Hello World`."
+				"### Send keys with a modifier",
+				"",
+				"The rule holds the Ctrl modifier while sending 'a' to trigger a Select All keyboard shortcut.",
+				"The modifier is provided as a JSON array containing Control."
 			],
 			"rule": {
-				"argument": "{{$ --Keys:Hello World --NativeClear}}",
-				"locator": "CssSelector",
-				"onElement": "#TextInput",
+				"$type": "Action",
+				"argument": "{{$ --Keys:a --Modifier:Control}}",
+				"locator": "Xpath",
+				"onElement": "//div[@contenteditable='true']",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Invalid modifier key name",
+						"One modifier key is not supported by the active driver"
+					],
+					"expected_result": "The Control and Alt modifiers are held while the key 'a' is sent to the target element.",
+					"notes": "Modifier accepts repeated parameter values that are converted into an array at runtime. The action holds all provided modifiers while sending the key value to the element.",
+					"use_case": "send_key_with_multiple_modifiers",
+					"version": "4"
+				},
+				"labels": [
+					"KeyboardShortcut",
+					"Modifier",
+					"MultiModifier"
+				]
+			},
 			"description": [
-				"Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput` with a delay of 2000 milliseconds between each character."
+				"### Send a key with multiple modifiers",
+				"",
+				"The rule holds the Control and Alt modifiers while sending the key `a` to the target element.",
+				"The repeated `--Modifier` parameters are converted into an array at runtime and applied together during the key send."
 			],
 			"rule": {
-				"argument": "{{$ --Keys:Hello World --Delay:2000}}",
-				"locator": "CssSelector",
-				"onElement": "#TextInput",
+				"$type": "Action",
+				"argument": "{{$ --Keys:a --Modifier:Control --Modifier:Alt}}",
+				"locator": "Xpath",
+				"onElement": "//div[@contenteditable='true']",
 				"pluginName": "SendKeys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Invalid TimeSpan format",
+						"Zero delay for instant typing"
+					],
+					"expected_result": "The text is typed character by character with a 100ms delay between each keystroke.",
+					"notes": "Delay accepts TimeSpan format like 00:00:00.100 for 100ms between characters. Default is zero delay for instant typing.",
+					"use_case": "typed_input_with_delay",
+					"version": "4"
+				},
+				"labels": [
+					"Delay",
+					"Input",
+					"TypingSpeed"
+				]
+			},
 			"description": [
-				"Send the text `Hello` while holding down the `Shift` key to the HTML element identified by the CSS selector `#TextInput`. This will send the text `Hello` with the `Shift` key pressed, resulting in `HELLO` being typed."
+				"### Type text with character delay",
+				"",
+				"The rule sends text to an element with a 100ms delay between each keystroke.",
+				"This simulates human typing speed for applications that require realistic input timing."
 			],
 			"rule": {
-				"argument": "{{$ --Keys:Hello --Modifier:Shift}}",
-				"locator": "CssSelector",
-				"onElement": "#TextInput",
-				"pluginName": "SendKeys"
-			}
-		},
-		{
-			"description": [
-				"Send the text `Hello` while holding down both the `Ctrl` and `Alt` keys to the HTML element identified by the CSS selector `#TextInput`. This demonstrates sending text with multiple modifier keys pressed simultaneously."
-			],
-			"rule": {
-				"argument": "{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}",
-				"locator": "CssSelector",
-				"onElement": "#TextInput",
+				"$type": "Action",
+				"argument": "{{$ --Keys:Slow Type --Delay:00:00:00.100}}",
+				"locator": "Xpath",
+				"onElement": "//input[@id='search']",
 				"pluginName": "SendKeys"
 			}
 		}
 	],
 	"key": "SendKeys",
-	"namespace": "G4.Plugins.Ui",
+	"namespace": "G4.Plugins.Ui.Actions",
 	"parameters": [
 		{
 			"description": [
-				"Indicates that a clearing action will consistently be executed before any subsequent text inputs on the targeted input element. ",
-				"This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data."
+				"Clear triggers a standard WebDriver clear operation before sending keys.",
+				"It removes existing content from input fields when present.",
+				"Use NativeClear for custom controls that do not respond to standard clear."
 			],
 			"mandatory": false,
 			"name": "Clear",
@@ -143,17 +273,19 @@
 		},
 		{
 			"description": [
-				"Used to introduce a time pause after each simulated keyboard action. ",
-				"This delay ensures a controlled pacing between consecutive text inputs during web automation. ",
-				"The purpose is to emulate a more human-like interaction flow by allowing specified intervals between keyboard actions."
+				"Delay sets the time interval between each keystroke.",
+				"Accepts TimeSpan format like 00:00:00.100 for 100ms delay between characters.",
+				"Set to 00:00:00 for instant typing without any delay."
 			],
 			"mandatory": false,
 			"name": "Delay",
-			"type": "Time|Number"
+			"type": "String"
 		},
 		{
 			"description": [
-				"Used to specify the text that should be sent to a targeted element during an automation task."
+				"Keys specifies the text string to send to the element.",
+				"This is the primary way to provide input text via parameter macro syntax.",
+				"When empty, the rule argument is used as the text to send."
 			],
 			"mandatory": false,
 			"name": "Keys",
@@ -161,50 +293,70 @@
 		},
 		{
 			"description": [
-				"Indicates that a native clearing action will consistently be executed before any subsequent text inputs on the targeted input element. ",
-				"This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data."
-			],
-			"mandatory": false,
-			"name": "NativeClear",
-			"type": "Switch"
-		},
-		{
-			"description": [
-				"Used to specify modifier keys (such as `Shift`, `Ctrl`, `Alt`) to be held down while sending the text inputs. ",
-				"This allows for complex text entry scenarios where modifiers are required."
+				"Modifier specifies one or more keyboard modifier keys to hold while the key value is sent to the target element.",
+				"It accepts repeated parameter values that are converted into an array at runtime, such as `--Modifier:Control --Modifier:Alt`.",
+				"Use Modifier for keyboard combinations like Control+A, Shift+Tab, or multi-modifier shortcuts."
 			],
 			"mandatory": false,
 			"name": "Modifier",
 			"type": "Array"
+		},
+		{
+			"description": [
+				"NativeClear triggers a native backspace-based clear before sending keys.",
+				"It provides better compatibility with custom input controls.",
+				"Use this instead of Clear for elements that do not respond to standard clearing."
+			],
+			"mandatory": false,
+			"name": "NativeClear",
+			"type": "Switch"
 		}
+	],
+	"platforms": [
+		"Any"
 	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the set of instructions or parameters for the text inputs to be simulated during automation. ",
-				"It allows you to define a sequence of text interactions, including the text to be entered and any additional actions."
+				"argument provides the keystroke text as a fallback when the Keys parameter is not set.",
+				"It allows passing text directly to the element without using a named parameter.",
+				"When both argument and Keys parameter are present, Keys takes precedence."
 			],
 			"mandatory": true,
 			"name": "argument",
-			"type": "String|Expression"
+			"type": "String"
 		},
 		{
-			"default": "Xpath",
 			"description": [
-				"Specifies the strategy or method used to locate the element on which the text inputs will be simulated during automation."
+				"locator determines the strategy for finding the target element.",
+				"It defaults to Xpath for element location.",
+				"Supported locators include Xpath, CssSelector, Id, LinkText, and PartialLinkText."
 			],
+			"default": "Xpath",
 			"mandatory": false,
 			"name": "locator",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the identifier or locator for the element on which the text inputs defined in the plugin's `Argument` property will be simulated during web automation. ",
-				"It indicates the target element where the simulated text interactions should take place."
+				"onElement specifies the target element for sending keystrokes.",
+				"It is required for identifying which element receives the keyboard input.",
+				"The value format depends on the selected locator strategy."
 			],
 			"mandatory": true,
 			"name": "onElement",
+			"type": "String"
+		},
+		{
+			"description": [
+				"regularExpression filters element matching using pattern matching on element attributes.",
+				"It defaults to '(?si).*' to match all elements.",
+				"Use this to narrow down element selection when multiple elements match the locator."
+			],
+			"default": "(?si).*",
+			"mandatory": false,
+			"name": "regularExpression",
 			"type": "String"
 		}
 	],
@@ -212,12 +364,11 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-send-keys",
 		"w3c": "POST /session/{session id}/element/{element id}/value"
 	},
-	"platforms": [
-		"Any"
-	],
 	"summary": [
-		"The `SendKeys` plugin automates the sending of text inputs to specified elements, simulating user interactions for web automation and testing. ",
-		"It supports dynamic text entry, clearing input fields, using modifier keys, and introducing delays between inputs for accurate simulation of user behavior."
+		"The SendKeys action sends keystrokes to a target element in the UI.",
+		"It supports typing text with configurable delay between keystrokes.",
+		"The action can clear element content before typing using native or standard clear methods.",
+		"Modifier keys like Ctrl, Alt, and Shift can be held during text input."
 	],
 	"version": "4"
 }
