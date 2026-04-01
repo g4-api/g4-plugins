@@ -11,13 +11,55 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RedoNavigation.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/RedoNavigation.cs"
+			},
+			"rag": {
+				"description": "The RedoNavigation plugin navigates the browser forward in session history. It supports configurable repeat counts and optional delays between steps, enabling controlled multi-step forward navigation in RPA workflows and automated test suites.",
+				"qa": [
+					{
+						"question": "What does the RedoNavigation plugin do?",
+						"answer": "It navigates the browser forward in session history, equivalent to clicking the browser's forward button. The repeat count and inter-step delay are both configurable."
+					},
+					{
+						"question": "What parameters does RedoNavigation support?",
+						"answer": "It supports Repeat (number of forward steps, default 1) and Delay (pause between steps in milliseconds or time format, default 0)."
+					},
+					{
+						"question": "How is RedoNavigation integrated into a Sequential Workflow?",
+						"answer": "It is used as an Action task node and maps to the W3C WebDriver POST /session/{session id}/forward endpoint."
+					},
+					{
+						"question": "What is the recommended approach for multi-step forward navigation?",
+						"answer": "Pass `{{$ --Repeat:N --Delay:Ms}}` as the argument to control the number of steps and the pause between them in a single action."
+					},
+					{
+						"question": "What delay formats does the Delay parameter accept?",
+						"answer": "Delay accepts a millisecond integer such as 1000 or a time span string such as 00:00:01. Values exceeding the maximum integer millisecond range are reset to zero with a warning."
+					},
+					{
+						"question": "What is the manifest version for RedoNavigation?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What is the purpose of RedoNavigation according to its description?",
+						"answer": "It automates forward browser navigation with configurable repeat counts and delays to support multi-step RPA workflows and browser state management in automated tests."
+					},
+					{
+						"question": "What happens when RedoNavigation is called with no forward history available?",
+						"answer": "The WebDriver forward call completes without error but has no visible effect if no forward history exists in the current session."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": {
-					"name": "arrow-rotate-left",
+					"name": "arrow-rotate-right",
 					"svg": null
 				},
+				"label": "Navigate Forward",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,46 +67,98 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `RedoNavigation` plugin is to automate the process of navigating forward within a web browser. ",
-		"It provides a structured and configurable way to perform the `forward` action, enabling automation scripts to simulate user interactions with precision. ",
-		"The plugin caters to scenarios where navigating forward multiple steps with optional delays between actions is a requirement.",
+		"The `RedoNavigation` plugin automates forward browser navigation, equivalent to clicking the browser's built-in forward button.",
+		"It provides a structured way to advance through session history with configurable repeat counts and optional delays between steps.",
+		"The plugin supports both simple single-step navigation and multi-step sequences with per-iteration timing control.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                                                                                |",
-		"|---------------------|----------------------------------------------------------------------------------------------------------------------------|",
-		"| Dynamic Repeats     | Allows specifying the number of times the browser should navigate forward, adapting to various automation needs.           |",
-		"| Configurable Delays | Introduces delays between each navigation step, enhancing flexibility and preventing interference with web responsiveness. |",
-		"| Intuitive Logging   | Incorporates logging capabilities, providing insights and transparency into the execution process.                         |",
+		"| Feature             | Description                                                                                                                  |",
+		"|---------------------|------------------------------------------------------------------------------------------------------------------------------|",
+		"| Dynamic Repeats     | Configures how many times the browser navigates forward in a single action invocation.                                       |",
+		"| Configurable Delays | Introduces a pause between each forward step, in milliseconds or time span format, to control navigation pace.               |",
+		"| Legacy Argument     | Accepts a plain integer directly as the repeat count for backwards-compatible usage.                                         |",
+		"| Delay Safeguard     | Logs a warning and resets the delay to zero when the configured value exceeds the maximum allowed integer millisecond range. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                | Description                                                                                                      |",
-		"|----------------------|------------------------------------------------------------------------------------------------------------------|",
-		"| Multi-Step Processes | Streamlines multi-step workflows that involve navigating through multiple pages.                                 |",
-		"| Error Handling       | Navigates forward to a known state for retrying or taking alternative actions if certain conditions are not met. |",
+		"| Use Case             | Description                                                                                               |",
+		"|----------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Multi-Step Traversal | Advances through a sequence of previously visited pages in a single action without manual forward clicks. |",
+		"| State Restoration    | Navigates forward to restore a known browser state after automated back navigation.                       |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                    | Description                                                                           |",
-		"|--------------------------|---------------------------------------------------------------------------------------|",
-		"| Browser State Management | Manages the state of the browser in end-to-end tests involving complex user journeys. |",
-		"| Performance Testing      | Simulates realistic user interactions with controlled navigation forward and delays.  |"
+		"| Use Case                | Description                                                                                                    |",
+		"|-------------------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Browser History Testing | Verifies that the browser correctly restores pages when navigating forward after a programmatic back sequence. |",
+		"| Navigation Flow Testing | Simulates realistic forward navigation patterns with controlled delays for performance test accuracy.          |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Already at the end of forward history — forward call completes without error but has no visible effect",
+						"Browser session ends before navigation completes — WebDriver exception propagates to the caller",
+						"Page load triggered by the forward step exceeds the implicit wait — downstream steps may interact with a stale or loading DOM",
+						"Single-page application updates URL state without a full reload — forward navigation behaviour may differ from a traditional page"
+					],
+					"expected_result": "The browser navigates forward by one step in session history.",
+					"notes": "When no argument or parameters are supplied the plugin navigates forward exactly once with no delay. This is equivalent to a single forward button click.",
+					"use_case": "default_forward_navigation",
+					"version": "4"
+				},
+				"labels": [
+					"BrowserNavigation",
+					"DefaultBehavior",
+					"ForwardNavigation",
+					"NoParameters",
+					"SessionHistory",
+					"WebDriver",
+					"WebUI"
+				]
+			},
 			"description": [
-				"Perform a default browser forward navigation. ",
-				"This is useful for simple scenarios where returning to the previous web page is required without specifying additional parameters."
+				"### Default single forward navigation",
+				"",
+				"Navigates the browser forward by one step using default settings.",
+				"No repeat count or delay is configured, so the action executes once immediately."
 			],
 			"rule": {
 				"pluginName": "RedoNavigation"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument value is negative — treated as zero; no navigation steps are executed",
+						"Argument value is zero — no navigation steps are executed",
+						"Forward history has fewer pages than the requested repeat count — remaining steps have no effect but complete without error",
+						"Page load between repeats takes longer than expected — the next step may act on a still-loading page"
+					],
+					"expected_result": "The browser navigates forward three times in succession with no delay between steps.",
+					"notes": "Passing a plain integer as the argument is the legacy shorthand for the Repeat count. It is equivalent to `{{$ --Repeat:3}}` but requires no parameter expression syntax. The Delay parameter also accepts a time span string such as `00:00:01`.",
+					"use_case": "forward_navigation_integer_argument",
+					"version": "4"
+				},
+				"labels": [
+					"BrowserNavigation",
+					"ForwardNavigation",
+					"LegacyArgument",
+					"MultiStep",
+					"RepeatCount",
+					"SessionHistory",
+					"WebDriver",
+					"WebUI"
+				]
+			},
 			"description": [
-				"Navigate the web browser forward by three steps. ",
-				"The provided argument, `3`, specifies the number of repeats for the navigation action."
+				"### Forward navigation using an integer argument",
+				"",
+				"Navigates the browser forward three times by passing `3` as a plain integer argument.",
+				"The integer is interpreted directly as the repeat count without requiring parameter expression syntax."
 			],
 			"rule": {
 				"argument": "3",
@@ -72,24 +166,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Delay is zero but Repeat is greater than one — steps execute as fast as the browser allows with no pause",
+						"Delay value exceeds int.MaxValue milliseconds — a warning is logged and the delay resets to zero",
+						"Forward history is exhausted before all repeats complete — remaining steps have no visible effect but do not throw",
+						"Network latency causes page loads to exceed the configured delay — the next forward step may begin before the current page finishes loading",
+						"Time format string is malformed — ConvertToTimeSpan returns zero and the delay is effectively disabled"
+					],
+					"expected_result": "The browser navigates forward three times, pausing 1000 milliseconds between each step.",
+					"notes": "The `{{$ --Repeat:3 --Delay:1000}}` expression sets both the repeat count and the inter-step delay in milliseconds. The Delay parameter also accepts a time span string such as `00:00:01` for the same one-second pause.",
+					"use_case": "forward_navigation_repeat_with_delay",
+					"version": "4"
+				},
+				"labels": [
+					"BrowserNavigation",
+					"ConfigurableDelay",
+					"ForwardNavigation",
+					"InterStepDelay",
+					"MultiStep",
+					"ParameterExpression",
+					"RepeatCount",
+					"SessionHistory",
+					"WebDriver",
+					"WebUI"
+				]
+			},
 			"description": [
-				"Command the `RedoNavigation` plugin to conduct a series of forward navigations in the web browser. ",
-				"The provided argument, `{{$ --Repeat:3 --Delay:1000}}`, precisely dictates three repetitions with a `1000-millisecond` delay between each step. ",
-				"This configuration grants meticulous control over the forward navigation process, including the number of repeats and inter-step delays."
+				"### Forward navigation with repeat count and delay",
+				"",
+				"Navigates the browser forward three times, pausing 1000 milliseconds between each step.",
+				"The `{{$ --Repeat:3 --Delay:1000}}` argument expression sets both the repeat count and the inter-step delay in a single value."
 			],
 			"rule": {
 				"argument": "{{$ --Repeat:3 --Delay:1000}}",
-				"pluginName": "RedoNavigation"
-			}
-		},
-		{
-			"description": [
-				"Command the `RedoNavigation` plugin to execute a sequence of forward navigations in the web browser. ",
-				"The provided argument, `{{$ --Repeat:3 --Delay:00:00:01}}`, dictates three repetitions with a `1-second` delay between each step. ",
-				"This example showcases how the plugin can be configured with supplementary parameters, offering precise control over the navigation process."
-			],
-			"rule": {
-				"argument": "{{$ --Repeat:3 --Delay:00:00:01}}",
 				"pluginName": "RedoNavigation"
 			}
 		}
@@ -100,8 +211,9 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the pause or waiting period between each step of the forward navigation process. ",
-				"This parameter allows users to specify a duration, either in milliseconds or a formatted time expression, to control the pace of the navigation."
+				"Controls the pause between each forward navigation step.",
+				"Accepts a value in milliseconds or a time span string such as `00:00:01` for one second.",
+				"When the configured delay exceeds the maximum allowed integer millisecond value, a warning is logged and the delay resets to zero."
 			],
 			"mandatory": false,
 			"name": "Delay",
@@ -110,21 +222,27 @@
 		{
 			"default": "1",
 			"description": [
-				"The number of iterations for the forward navigation process. ",
-				"It is instrumental in scenarios where repetitive navigation actions are essential for achieving specific automation objectives."
+				"Sets how many times the browser navigates forward in one action invocation.",
+				"Useful when advancing through multiple pages is required without issuing separate forward commands.",
+				"When no valid value is provided, the browser navigates forward exactly once."
 			],
 			"mandatory": false,
 			"name": "Repeat",
 			"type": "Number"
 		}
 	],
+	"platforms": [
+		"Web",
+		"MobileWeb"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"default": "1",
 			"description": [
-				"Allow users to customize the behavior of the plugin by providing supplementary information or instructions. ",
-				"It acts as a configurable parameter, enabling users to tailor the plugin's action to meet specific requirements."
+				"Provides the primary input for the forward navigation action.",
+				"Accepts either a plain integer as the repeat count or a parameter expression such as `{{$ --Repeat:3 --Delay:1000}}` for combined repeat and delay control.",
+				"When a plain integer is supplied and no `Repeat` parameter is present, the integer is used directly as the repeat count."
 			],
 			"mandatory": false,
 			"name": "Argument",
@@ -135,13 +253,10 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#forward",
 		"w3c": "POST /session/{session id}/forward"
 	},
-	"platforms": [
-		"Web",
-		"MobileWeb"
-	],
 	"summary": [
-		"The `RedoNavigation` plugin automates the forward navigation in a web browser, allowing users to revisit previous pages or states. ",
-		"It offers options for specifying the number of repeats and introducing delays between steps for controlled navigation."
+		"The `RedoNavigation` plugin navigates the browser forward in session history, equivalent to clicking the browser's built-in forward button.",
+		"It supports configurable repeat counts and optional delays between steps, enabling controlled multi-step forward navigation in automation workflows.",
+		"Common uses include advancing through previously visited pages in RPA flows and managing browser state during end-to-end testing."
 	],
 	"version": "4"
 }
