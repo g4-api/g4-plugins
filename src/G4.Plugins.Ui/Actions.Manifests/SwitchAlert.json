@@ -11,6 +11,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SwitchAlert.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SwitchAlert.cs"
+			},
+			"rag": {
+				"description": "The SwitchAlert action switches WebDriver focus to the active browser alert dialog and performs one of three outcomes: accept (alert.Approve()), dismiss (alert.Close()), or no-action pass-through. When invoked with no parameters and no Argument, the plugin dismisses the alert immediately via the early-exit branch (Parameters.Count == 0 AND Rule.Argument is empty). AlertAction is resolved from the named parameter first; if absent, the raw Rule.Argument string is used as the fallback. Only 'ACCEPT' and 'DISMISS' (case-insensitive) trigger the corresponding alert method — any other value is a deliberate no-action pass-through. The optional Keys parameter sends text via alert.SendKeys() only when the value is non-null and non-empty; an empty string bypasses the SendKeys call entirely.",
+				"qa": [
+					{
+						"question": "What does SwitchAlert do when invoked with no argument and no parameters?",
+						"answer": "When both pluginData.Parameters.Count is 0 and pluginData.Rule.Argument is empty, the plugin switches to the alert and immediately calls alert.Close() to dismiss it, then returns without executing any further alert logic."
+					},
+					{
+						"question": "How do you accept an alert dialog with SwitchAlert?",
+						"answer": "Set Argument to 'Accept' or supply the AlertAction named parameter with value 'Accept'. The comparison is case-insensitive (OrdinalIgnoreCase), so 'ACCEPT', 'accept', and 'Accept' all trigger alert.Approve(). Values with leading or trailing whitespace do not match and will fall through to no-action."
+					},
+					{
+						"question": "How do you send text to a prompt dialog and then accept it in a single step?",
+						"answer": "Use the argument format '{{$ --Keys:your text --AlertAction:Accept}}'. The Keys parameter sends the text via alert.SendKeys() before AlertAction is evaluated and alert.Approve() is called."
+					},
+					{
+						"question": "What happens when AlertAction is 'Ignore' or any unrecognized value?",
+						"answer": "AlertAction is compared only against 'ACCEPT' and 'DISMISS' (case-insensitive). Any other value falls through both branches — neither alert.Approve() nor alert.Close() is called. Keys are still sent if the Keys value is non-empty. This is the intentional no-action pass-through behavior."
+					},
+					{
+						"question": "What is the AlertAction resolution order?",
+						"answer": "AlertAction is resolved via pluginData.Parameters.Get('AlertAction', pluginData.Rule.Argument). The named AlertAction parameter takes priority; if absent, the raw Argument string is used as the fallback."
+					},
+					{
+						"question": "What happens when the Keys parameter is an empty string?",
+						"answer": "The code guards the SendKeys call with !string.IsNullOrEmpty(keys). An empty string causes string.IsNullOrEmpty to return true, so alert.SendKeys() is not called. Providing --Keys: with no value is functionally identical to omitting the Keys parameter entirely."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,57 +51,108 @@
 					"name": "shuffle",
 					"svg": null
 				},
+				"label": "Switch Alert",
 				"model": "ActionRuleModel"
 			}
 		}
 	},
 	"description": [
-		"> [!IMPORTANT]",
-		"> This plugin works only for `alert`, `beforeUnload`, `confirm`, `default`, `prompt`.",
-		"",
 		"### Purpose",
 		"",
-		"The `SwitchAlert` plugin serves the purpose of automating the handling of alert dialogs in web-based automation workflows, particularly in the context of RPA (Robotic Process Automation) and automation testing. ",
-		"Its primary goal is to provide a seamless and efficient mechanism for interacting with alert dialogs that may appear during automated processes, ensuring smooth execution and accurate handling of alert messages.",
+		"The `SwitchAlert` plugin switches WebDriver focus to the active browser alert dialog and performs a configurable action: accept, dismiss, or no-action pass-through.",
+		"An optional `Keys` parameter sends text to prompt dialogs before the action is applied.",
+		"When invoked with no argument and no parameters, the alert is dismissed by default.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature            | Description                                                                                   |",
-		"|--------------------|-----------------------------------------------------------------------------------------------|",
-		"| Alert Recognition  | Seamlessly identifies and switches to alert dialogs encountered during automation tasks.      |",
-		"| Action Flexibility | Offers flexibility in performing actions on alerts, supporting both acceptance and dismissal. |",
-		"| Argument Handling  | Efficiently handles plugin arguments, specifying actions and keys to send to the alert.       |",
-		"| Error Handling     | Robust error handling mechanisms ensure reliability and resilience of automation processes.   |",
+		"| Feature            | Description                                                                                                                                            |",
+		"|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Default Dismiss    | Dismisses the alert when invoked with no argument and no parameters (early-exit branch: `Parameters.Count == 0` AND `Argument` is empty).              |",
+		"| Accept             | Calls `alert.Approve()` when `AlertAction` resolves to `Accept` (case-insensitive, exact match — whitespace is not trimmed).                           |",
+		"| Dismiss            | Calls `alert.Close()` when `AlertAction` resolves to `Dismiss` (case-insensitive, exact match — whitespace is not trimmed).                            |",
+		"| Ignore / No-Action | Any `AlertAction` value other than `Accept` or `Dismiss` — including `Ignore` — is a deliberate pass-through; neither accept nor dismiss is performed. |",
+		"| Keys Input         | Sends text via `alert.SendKeys()` only when `Keys` is non-null and non-empty; always executed before the accept/dismiss action.                        |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                       | Description                                                                                          |",
-		"|-----------------------------|------------------------------------------------------------------------------------------------------|",
-		"| Alert Notification Handling | Automates the handling of alert dialogs during RPA tasks, ensuring alerts are managed automatically. |",
-		"| Error Recovery              | Handles unexpected alerts, allowing graceful error recovery and continued execution.                 |",
-		"| User Notification           | Interacts with alerts similar to human users, facilitating user-driven processes.                    |",
+		"| Usage                       | Description                                                                                                    |",
+		"|-----------------------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Alert Notification Handling | Automatically accept or dismiss confirmation dialogs triggered during automated form submission or navigation. |",
+		"| Prompt Input Automation     | Send dynamic text to prompt dialogs and accept them to satisfy required inputs without manual intervention.    |",
+		"| Error Recovery              | Dismiss unexpected alert dialogs to allow the automation process to recover and continue execution.            |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                  | Description                                                                                         |",
-		"|------------------------|-----------------------------------------------------------------------------------------------------|",
-		"| Alert Testing          | Validates alert handling functionality by simulating alert dialogs and verifying correct responses. |",
-		"| Error Scenario Testing | Simulates error conditions triggering alerts for comprehensive testing of application behavior.     |",
-		"| End-to-End Testing     | Automates alert handling in user interaction scenarios, ensuring robust application behavior.       |"
+		"| Usage                  | Description                                                                             |",
+		"|------------------------|-----------------------------------------------------------------------------------------|",
+		"| Alert Acceptance Tests | Verify that the application responds correctly when alert dialogs are accepted.         |",
+		"| Dismiss Behavior       | Confirm that dismissing an alert leaves the application in the expected state.          |",
+		"| Prompt Input Testing   | Validate that text entered in prompt dialogs is processed correctly by the application. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Both Parameters.Count == 0 and Rule.Argument must be empty simultaneously — providing even one named parameter or a non-empty Argument bypasses the early-exit and enters the main alertAction branch",
+						"Rule.Argument is whitespace-only — string.IsNullOrEmpty returns false for whitespace, so the early-exit path is skipped; alertAction becomes the whitespace string, which matches neither ACCEPT nor DISMISS, and no accept or dismiss is called",
+						"The active alert was already handled — WebDriver.SwitchTo().Alert() throws NoAlertPresentException if no alert is present when the plugin runs",
+						"Multiple alerts queued — only the currently frontmost alert is targeted; each subsequent alert requires a separate SwitchAlert invocation"
+					],
+					"expected_result": "The active alert dialog is dismissed (alert.Close() is called) because no argument and no parameters are provided.",
+					"notes": "This is the early-exit branch in the code: both Parameters.Count == 0 and Rule.Argument being empty must be true simultaneously for this path to execute.",
+					"use_case": "default_dismiss",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AlertHandling",
+					"DefaultDismiss",
+					"NoArgument",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Handle alert dialogs during automated tasks by defaulting to **dismiss**. ",
-				"This ensures the automation process continues smoothly without manual intervention, effectively managing alert dialogs encountered during execution."
+				"### Dismiss an alert by default (no argument)",
+				"",
+				"Dismiss the active alert dialog without providing any argument or parameters.",
+				"When both `Parameters.Count` is 0 and `Argument` is empty, the plugin takes the early-exit dismiss path and calls `alert.Close()` immediately."
 			],
 			"rule": {
 				"pluginName": "SwitchAlert"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument has leading or trailing whitespace — ' Accept '.Equals('ACCEPT', OrdinalIgnoreCase) is false; alert.Approve() is NOT called and the alert is neither accepted nor dismissed",
+						"Alert is a confirm dialog — alert.Approve() clicks OK, confirming the dialog and allowing the page action to proceed",
+						"Alert is a beforeUnload dialog — some browsers restrict programmatic accept on beforeUnload prompts; driver behavior may vary across environments",
+						"Alert is already dismissed externally — NoAlertPresentException is thrown by WebDriver.SwitchTo().Alert() before alert.Approve() is reached"
+					],
+					"expected_result": "The active alert dialog is accepted (alert.Approve() is called).",
+					"notes": "The Argument value 'Accept' resolves as the fallback for AlertAction because no named parameters are present. StringComparison.OrdinalIgnoreCase makes 'accept', 'Accept', and 'ACCEPT' equivalent.",
+					"use_case": "accept_via_argument",
+					"version": "4"
+				},
+				"labels": [
+					"AcceptAlert",
+					"Action",
+					"AlertHandling",
+					"OkButton",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Accept any alert dialog that appears during automation, facilitating the seamless execution of tasks by acknowledging the alert."
+				"### Accept an alert dialog",
+				"",
+				"Accept the active alert dialog by setting `Argument` to `Accept`.",
+				"The value is compared case-insensitively, so `ACCEPT`, `accept`, and `Accept` all trigger `alert.Approve()`."
 			],
 			"rule": {
 				"argument": "Accept",
@@ -76,8 +160,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Any non-empty, non-ACCEPT, non-DISMISS AlertAction value produces the same no-action pass-through as 'Ignore' — including typos such as 'Acccept' or unrelated strings",
+						"Keys parameter is also supplied alongside Ignore AlertAction — alert.SendKeys() is still called before the pass-through; the alert receives the text input but remains open",
+						"Argument resolves to the raw template string when only Keys is provided via '{{$ --Keys:text}}' — AlertAction falls back to that raw string, which matches neither ACCEPT nor DISMISS, producing the same pass-through behavior",
+						"Alert is not present — NoAlertPresentException is thrown by WebDriver.SwitchTo().Alert() before the pass-through logic is reached"
+					],
+					"expected_result": "WebDriver switches to the alert but neither accepts nor dismisses it. The alert remains open.",
+					"notes": "The code only branches on 'ACCEPT' and 'DISMISS'. Any other value, including 'Ignore', falls through both branches. This is the intentional no-action pass-through — the alert stays open after this step.",
+					"use_case": "ignore_alert",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AlertHandling",
+					"IgnoreAlert",
+					"NoAction",
+					"PassThrough",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Ignore any alert dialog that appears during automation, allowing the process to continue without interacting with the alert."
+				"### Ignore an alert (no-action pass-through)",
+				"",
+				"Switch to the alert dialog without accepting or dismissing it by setting `Argument` to `Ignore`.",
+				"Because `Ignore` is neither `Accept` nor `Dismiss`, both action branches are skipped and the alert remains open.",
+				"Any value other than `Accept` or `Dismiss` produces the same no-action result."
 			],
 			"rule": {
 				"argument": "Ignore",
@@ -85,8 +197,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Keys is an empty string — string.IsNullOrEmpty('') is true, so alert.SendKeys() is NOT called; behavior is equivalent to omitting the Keys parameter entirely",
+						"Keys is whitespace-only — string.IsNullOrEmpty(' ') is false, so alert.SendKeys(' ') is called with the whitespace value",
+						"Alert is not a prompt dialog — calling SendKeys on an alert or confirm type is driver-dependent and may throw or be silently ignored",
+						"No AlertAction is specified — alertAction resolves to the raw Argument string, which matches neither ACCEPT nor DISMISS; the alert remains open after keys are sent"
+					],
+					"expected_result": "The text 'Foo Bar' is sent to the prompt dialog via alert.SendKeys(). No accept or dismiss action is taken; the alert remains open.",
+					"notes": "Using Keys without AlertAction intentionally leaves the alert open after the text is entered. Pair with --AlertAction:Accept or --AlertAction:Dismiss to close the dialog in the same step.",
+					"use_case": "send_keys_only",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AlertHandling",
+					"KeysInput",
+					"PromptDialog",
+					"SendKeys",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Send specific keys `Foo Bar` to the alert dialog, useful for interacting with alerts that require input, such as entering text or responding to prompts."
+				"### Send keys to a prompt dialog (no action)",
+				"",
+				"Send the text `Foo Bar` to the active prompt dialog without accepting or dismissing it.",
+				"Because no `AlertAction` is specified, only `alert.SendKeys()` is called — the alert remains open after this step.",
+				"Pair `Keys` with `AlertAction` in the same invocation when the dialog must also be closed."
 			],
 			"rule": {
 				"argument": "{{$ --Keys:Foo Bar}}",
@@ -94,8 +234,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Keys is an empty string — string.IsNullOrEmpty('') is true, so alert.SendKeys() is skipped; alert.Approve() still fires because AlertAction resolves to 'Accept'",
+						"Keys are always evaluated before AlertAction — the code checks the Keys branch first, then the AlertAction branch, regardless of parameter order in the argument string",
+						"Alert is a simple alert with no text input field — SendKeys may be silently ignored by the driver, but alert.Approve() still fires and closes the dialog",
+						"Prompt dialog has a pre-filled default value — sending Keys appends to or replaces the existing value depending on the driver and browser"
+					],
+					"expected_result": "The text 'Foo Bar' is sent to the prompt dialog via alert.SendKeys(), then alert.Approve() is called to accept it.",
+					"notes": "This is the standard pattern for prompt dialogs: type into the prompt and confirm. The code always evaluates Keys before AlertAction.",
+					"use_case": "send_keys_then_accept",
+					"version": "4"
+				},
+				"labels": [
+					"AcceptAlert",
+					"Action",
+					"AlertHandling",
+					"KeysInput",
+					"PromptDialog",
+					"SendKeys",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Send specific keys `Foo Bar` to the alert dialog and then accept it, useful for scenarios needing input followed by acknowledgment to proceed with tasks."
+				"### Send keys to a prompt and accept",
+				"",
+				"Send the text `Foo Bar` to the active prompt dialog and then accept it.",
+				"`alert.SendKeys()` is called first; `alert.Approve()` is called immediately after."
 			],
 			"rule": {
 				"argument": "{{$ --Keys:Foo Bar --AlertAction:Accept}}",
@@ -103,8 +271,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Keys is an empty string — alert.SendKeys() is skipped, but alert.Close() still fires because AlertAction resolves to 'Dismiss'",
+						"Dismissing a prompt discards any text sent via Keys — the application receives no input value from the canceled dialog, which is the expected cancel behavior",
+						"Alert is a confirm dialog — alert.Close() clicks Cancel, which is the equivalent of declining the confirmation and preventing the associated page action",
+						"beforeUnload dialog with Dismiss — some browsers prevent programmatic dismissal of beforeUnload dialogs; driver behavior may vary"
+					],
+					"expected_result": "The text 'Foo Bar' is sent to the prompt dialog via alert.SendKeys(), then alert.Close() is called to dismiss it.",
+					"notes": "Dismissing after sending keys is useful for testing that the application handles canceled prompt inputs correctly.",
+					"use_case": "send_keys_then_dismiss",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AlertHandling",
+					"DismissAlert",
+					"KeysInput",
+					"PromptDialog",
+					"SendKeys",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Send specific keys `Foo Bar` to the alert dialog and then dismiss it, useful for workflows requiring interaction with the alert followed by its dismissal."
+				"### Send keys to a prompt and dismiss",
+				"",
+				"Send the text `Foo Bar` to the active prompt dialog and then dismiss it.",
+				"`alert.SendKeys()` is called first; `alert.Close()` is called immediately after.",
+				"Use this pattern to verify that the application handles a canceled prompt input correctly."
 			],
 			"rule": {
 				"argument": "{{$ --Keys:Foo Bar --AlertAction:Dismiss}}",
@@ -117,8 +314,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Determines the action to be taken when encountering an alert dialog during automation tasks. ",
-				"It specifies whether to accept or dismiss the alert."
+				"Specifies the action to perform on the active alert dialog.",
+				"Resolved from the named `AlertAction` parameter first; falls back to the raw `Argument` string if the named parameter is absent.",
+				"Comparison is case-insensitive: `Accept`, `ACCEPT`, and `accept` are all equivalent."
 			],
 			"mandatory": false,
 			"name": "AlertAction",
@@ -126,21 +324,20 @@
 			"values": [
 				{
 					"description": [
-						"The plugin will interact with the alert dialog in a way that acknowledges it, typically by clicking the `OK` or `Accept` button, if present. ",
-						"This action allows the automation process to continue smoothly without any interruptions caused by the alert dialog."
+						"Calls `alert.Approve()`, equivalent to clicking the `OK` or `Accept` button on the dialog."
 					],
 					"name": "Accept"
 				},
 				{
 					"description": [
-						"The plugin will interact with the alert dialog in a manner that closes it, typically by clicking the `Cancel` or `Dismiss` button, if present. ",
-						"This action enables the automation process to proceed without interruptions caused by the alert dialog."
+						"Calls `alert.Close()`, equivalent to clicking the `Cancel` or `Dismiss` button on the dialog."
 					],
 					"name": "Dismiss"
 				},
 				{
 					"description": [
-						"The plugin will interact with the alert dialog by ignoring it, allowing the automation process to continue without taking any action on the alert dialog."
+						"Neither `alert.Approve()` nor `alert.Close()` is called — the alert dialog remains open.",
+						"This is the fallthrough behavior: any `AlertAction` value other than `Accept` or `Dismiss` produces the same no-action result."
 					],
 					"name": "Ignore"
 				}
@@ -148,10 +345,9 @@
 		},
 		{
 			"description": [
-				"The plugin can use the Keys parameter to send specific text or input to the dialog. ",
-				"This input can be used to interact with the alert in a customized way, such as entering information or responding to prompts within the dialog.  ",
-				"",
-				"For example, if the `Keys` parameter is set to `Username123`, the plugin will send the text `Username123` to the alert dialog, allowing it to interact with any input fields or prompts within the dialog."
+				"Text to send to the active alert dialog via `alert.SendKeys()` before `AlertAction` is applied.",
+				"Intended for prompt dialogs that require text input.",
+				"If omitted or empty, no keys are sent."
 			],
 			"mandatory": false,
 			"name": "Keys",
@@ -163,8 +359,9 @@
 		{
 			"default": "Dismiss",
 			"description": [
-				"The `Argument` property customizes how the `SwitchAlert` plugin handles alert dialogs. ",
-				"It allows you to specify actions like sending keys to the alert or determining whether to accept or dismiss the alert. "
+				"Specifies the alert action or provides named parameters for the `SwitchAlert` plugin.",
+				"Accepts a plain action value (`Accept`, `Dismiss`, `Ignore`) or a parameterized expression such as `{{$ --Keys:text --AlertAction:Accept}}`.",
+				"When absent, the plugin uses the default dismiss behavior."
 			],
 			"mandatory": false,
 			"name": "Argument",
@@ -180,9 +377,9 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The `SwitchAlert` plugin automates the handling of alert dialogs in web-based automation tasks, enabling seamless identification and action upon alert messages.",
-		"In robotic process automation (RPA), it ensures efficient management of alerts, enhancing the reliability of automated workflows.",
-		"In automation testing, it provides comprehensive test coverage by validating alert handling functionality and simulating user interactions with alert dialogs."
+		"The `SwitchAlert` plugin switches WebDriver focus to the active browser alert dialog and performs a configurable action: accept, dismiss, or no-action pass-through.",
+		"When invoked with no argument and no parameters the alert is dismissed by default. Use `AlertAction:Accept` or `AlertAction:Dismiss` to control the outcome explicitly; use `Keys` to send text to prompt dialogs before the action is taken.",
+		"In RPA it automates handling of confirmation and prompt dialogs; in automation testing it validates accept, dismiss, and prompt-input behaviors."
 	],
 	"version": "4"
 }
