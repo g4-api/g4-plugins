@@ -9,6 +9,7 @@ using System;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -76,7 +77,10 @@ namespace G4.Plugins.Ui.Actions
             }
 
             // Store the list of copied resources in the session parameters
-            Invoker.Context.SessionParameters[$"{NameReference}:CopiedResources"] = files;
+            this.AddSessionParameter(
+                @namespace: NameReference,
+                name: "CopiedResources",
+                value: JsonSerializer.Serialize(files));
 
             // Create and return a new PluginResponseModel
             return this.NewPluginResponse();
