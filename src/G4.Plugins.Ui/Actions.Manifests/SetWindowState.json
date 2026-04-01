@@ -8,13 +8,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SetWindowState.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SetWindowState.cs"
+			},
+			"rag": {
+				"description": "The SetWindowState action sets the browser window to Maximized, Minimized, or FullScreen by calling the corresponding W3C WebDriver window command (Maximize, Minimize, or Fullscreen). The target state is taken from the Argument property and matched with OrdinalIgnoreCase, so 'maximized', 'MAXIMIZED', and 'Maximized' are all equivalent. If Argument is absent, empty, or does not match any recognized value, all three conditional branches are skipped and the action returns a default plugin response without error — the window state is unchanged. There are no parameters and no output values.",
+				"qa": [
+					{
+						"question": "What does the SetWindowState action do?",
+						"answer": "SetWindowState changes the browser window state by calling the W3C WebDriver Maximize, Minimize, or Fullscreen window command depending on the value of the Argument property. The comparison is OrdinalIgnoreCase, so 'maximized', 'MAXIMIZED', and 'Maximized' are all equivalent."
+					},
+					{
+						"question": "What values does the Argument property accept?",
+						"answer": "Argument accepts three values: 'Maximized' to call WebDriver.Manage().Window.Maximize(), 'Minimized' to call WebDriver.Manage().Window.Minimize(), and 'FullScreen' to call WebDriver.Manage().Window.FullScreen(). All comparisons are OrdinalIgnoreCase."
+					},
+					{
+						"question": "What happens if Argument is absent, empty, or set to an unrecognized value?",
+						"answer": "If Argument does not match any of the three recognized values — including when it is absent or empty — all three conditional branches are skipped. The action returns a default plugin response without error and the browser window state is unchanged."
+					},
+					{
+						"question": "Does SetWindowState produce any output parameters?",
+						"answer": "No. SetWindowState returns a default plugin response with no output parameters. The window state is changed via the driver but not echoed back into the session context."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": {
-					"name": "gears",
+					"name": "window-maximize",
 					"svg": null
 				},
+				"label": "Set Window State",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,57 +48,132 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `SetWindowState` plugin is to control the state of the browser window, providing options to maximize, minimize, or set the window to full screen.",
+		"The `SetWindowState` action sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
+		"The `Argument` property specifies the target state and is evaluated with `OrdinalIgnoreCase`, so `maximized`, `MAXIMIZED`, and `Maximized` are all valid.",
+		"If `Argument` is absent, empty, or does not match any recognized value, the action returns a default response without error — the window state is not changed.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                | Description                                                        |",
-		"|------------------------|--------------------------------------------------------------------|",
-		"| Maximize Window Action | Maximizes the browser window to the screen's full size.            |",
-		"| Minimize Window Action | Minimizes the browser window to the taskbar or dock.               |",
-		"| Full Screen Action     | Sets the browser window to full screen mode for an immersive view. |",
+		"| Feature                | Description                                                                                                                  |",
+		"|------------------------|------------------------------------------------------------------------------------------------------------------------------|",
+		"| Maximize               | Calls `WebDriver.Manage().Window.Maximize()` to expand the browser window to fill the screen.                                |",
+		"| Minimize               | Calls `WebDriver.Manage().Window.Minimize()` to collapse the browser window to the taskbar.                                  |",
+		"| Full Screen            | Calls `WebDriver.Manage().Window.FullScreen()` to enter true full-screen mode, hiding OS and browser chrome.                 |",
+		"| Case-Insensitive Match | State names are compared with `OrdinalIgnoreCase` — `fullscreen`, `FullScreen`, and `FULLSCREEN` all resolve to full screen. |",
+		"| Safe No-Op on Mismatch | An unrecognized or absent `Argument` value skips all branches and returns normally without throwing an exception.            |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                   | Description                                                                   |",
-		"|-------------------------|-------------------------------------------------------------------------------|",
-		"| Full View Automation    | Ensures that web elements are fully visible by maximizing the browser window. |",
-		"| Background Processing   | Runs browser-based tasks in the background by minimizing the browser window.  |",
-		"| Screen Space Management | Frees up screen space for other applications while the browser runs minimized.|",
+		"| Use Case                   | Description                                                                                                            |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------------------------|",
+		"| Workflow Normalization     | Maximize the browser window before starting a workflow to ensure consistent element visibility and layout.             |",
+		"| Background Task Management | Minimize the browser window to move it out of view while other applications or steps are active.                       |",
+		"| Kiosk Mode                 | Switch to `FullScreen` to present a page without OS or browser chrome, simulating a kiosk or presentation environment. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage               | Description                                                                                             |",
-		"|---------------------|---------------------------------------------------------------------------------------------------------|",
-		"| UI Testing          | Ensures that all UI elements are visible and interactable by maximizing the browser window.             |",
-		"| Layout Verification | Verifies that the layout of the web application behaves correctly when the browser window is maximized. |",
-		"| Performance Testing | Verifies that the application continues to function correctly when the browser window is minimized.     |",
-		"| Regression Testing  | Ensures that changes to the application do not affect functionality when the window state is changed.   |"
+		"| Use Case                    | Description                                                                                                            |",
+		"|-----------------------------|------------------------------------------------------------------------------------------------------------------------|",
+		"| Consistent Screenshot State | Maximize the window before taking screenshots to avoid layout shifts caused by non-standard window sizes.              |",
+		"| Minimize Interaction Test   | Minimize the window and verify that subsequent element interactions behave as expected when the window is not visible. |",
+		"| Full-Screen Layout Test     | Enter full-screen mode to verify that the application layout adapts correctly when OS and browser toolbars are hidden. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Window is already maximized — Maximize() is called again; the driver accepts the call without error and the state remains maximized",
+						"Window is currently minimized — Maximize() restores and expands the window; the window becomes the active foreground window",
+						"Window is currently in FullScreen mode — Maximize() exits full-screen before applying maximized state on most browsers",
+						"Argument is matched case-insensitively — 'maximized', 'MAXIMIZED', and 'Maximized' all route to the same Maximize() call"
+					],
+					"expected_result": "The browser window is expanded to fill the screen in maximized state.",
+					"notes": "The Argument value 'Maximized' triggers WebDriver.Manage().Window.Maximize(). The comparison is OrdinalIgnoreCase so any casing is accepted.",
+					"use_case": "maximize_window",
+					"version": "4"
+				},
+				"labels": [
+					"Maximize",
+					"SetWindowState",
+					"WebDriver",
+					"WindowState"
+				]
+			},
 			"description": [
-				"Perform a `MaximizeWindow` action to ensure the browser window is maximized, providing an optimal view for subsequent actions."
+				"### Maximize the browser window",
+				"",
+				"Sets the browser window to maximized state by calling `WebDriver.Manage().Window.Maximize()`.",
+				"The `Argument` value `Maximized` is matched case-insensitively."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Maximized",
 				"pluginName": "SetWindowState"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Window is already minimized — Minimize() is called again; the driver accepts the call without error and the state remains minimized",
+						"Window is in FullScreen mode — Minimize() exits full-screen before minimizing on most browsers",
+						"Minimized window does not respond to element interactions — actions targeting DOM elements after minimizing may fail if the driver requires the window to be visible",
+						"Argument is matched case-insensitively — 'minimized', 'MINIMIZED', and 'Minimized' all route to the same Minimize() call"
+					],
+					"expected_result": "The browser window is collapsed to the taskbar in minimized state.",
+					"notes": "The Argument value 'Minimized' triggers WebDriver.Manage().Window.Minimize(). The comparison is OrdinalIgnoreCase so any casing is accepted.",
+					"use_case": "minimize_window",
+					"version": "4"
+				},
+				"labels": [
+					"Minimize",
+					"SetWindowState",
+					"WebDriver",
+					"WindowState"
+				]
+			},
 			"description": [
-				"Perform a `MinimizeWindow` action to minimize the browser window, allowing the browser to run in the background without taking up screen space."
+				"### Minimize the browser window",
+				"",
+				"Collapses the browser window to the taskbar by calling `WebDriver.Manage().Window.Minimize()`.",
+				"The `Argument` value `Minimized` is matched case-insensitively."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Minimized",
 				"pluginName": "SetWindowState"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Window is already in full-screen mode — FullScreen() is called again; the driver accepts the call without error and the state remains full screen",
+						"Browser security restrictions may prevent full-screen from taking effect in some test environments or headless drivers",
+						"FullScreen hides OS chrome and browser toolbars — layout-dependent tests may see different element positions compared to maximized mode",
+						"Argument is matched case-insensitively — 'fullscreen', 'FULLSCREEN', and 'FullScreen' all route to the same FullScreen() call"
+					],
+					"expected_result": "The browser window enters full-screen mode, hiding OS and browser chrome.",
+					"notes": "The Argument value 'FullScreen' triggers WebDriver.Manage().Window.FullScreen(). The comparison is OrdinalIgnoreCase so any casing is accepted.",
+					"use_case": "fullscreen_window",
+					"version": "4"
+				},
+				"labels": [
+					"FullScreen",
+					"SetWindowState",
+					"WebDriver",
+					"WindowState"
+				]
+			},
 			"description": [
-				"Perform a `FullScreen` action to set the browser window to full screen, providing an immersive view of the web content."
+				"### Enter full-screen mode",
+				"",
+				"Switches the browser window to full-screen mode by calling `WebDriver.Manage().Window.FullScreen()`.",
+				"The `Argument` value `FullScreen` is matched case-insensitively."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "FullScreen",
 				"pluginName": "SetWindowState"
 			}
@@ -80,11 +181,19 @@
 	],
 	"key": "SetWindowState",
 	"namespace": "G4.Plugins.Ui",
+	"parameters": [],
+	"platforms": [
+		"MobileWeb",
+		"Web"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the desired state of the browser window."
+				"Argument specifies the target browser window state.",
+				"Accepted values are `Maximized`, `Minimized`, and `FullScreen`.",
+				"The comparison is case-insensitive — `fullscreen`, `FullScreen`, and `FULLSCREEN` are all valid.",
+				"If Argument is absent, empty, or set to an unrecognized value, no state change occurs and the action returns normally without error."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -92,19 +201,19 @@
 			"values": [
 				{
 					"description": [
-						"Maximizes the browser window to the screen's full size."
+						"Expands the browser window to fill the screen by calling `WebDriver.Manage().Window.Maximize()`."
 					],
 					"name": "Maximized"
 				},
 				{
 					"description": [
-						"Minimizes the browser window to the taskbar or dock."
+						"Collapses the browser window to the taskbar by calling `WebDriver.Manage().Window.Minimize()`."
 					],
 					"name": "Minimized"
 				},
 				{
 					"description": [
-						"Sets the browser window to full screen mode for an immersive view."
+						"Switches the browser window to full-screen mode, hiding OS and browser chrome, by calling `WebDriver.Manage().Window.FullScreen()`."
 					],
 					"name": "FullScreen"
 				}
@@ -113,15 +222,12 @@
 	],
 	"protocol": {
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#resizing-and-positioning-windows",
-		"w3c": "None"
+		"w3c": "POST /session/{session id}/window/maximize | POST /session/{session id}/window/minimize | POST /session/{session id}/window/fullscreen"
 	},
-	"platforms": [
-		"Web"
-	],
 	"summary": [
-		"The `SetWindowState` plugin controls the state of the browser window, allowing it to be maximized, minimized, or set to full screen.",
-		"In robotic process automation (RPA), it ensures that web elements are fully visible or allows browser-based tasks to run in the background.",
-		"In automation testing, it helps verify that the application functions correctly across different window states, ensuring UI elements are visible and interactable."
+		"The `SetWindowState` action sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
+		"The `Argument` property selects the target state and is matched case-insensitively; an unrecognized or absent value is a safe no-op that returns normally without error.",
+		"In RPA it normalizes window visibility and supports kiosk-mode presentation. In automation testing it enforces a consistent window state before screenshots, layout checks, or full-screen layout verification."
 	],
 	"version": "4"
 }
