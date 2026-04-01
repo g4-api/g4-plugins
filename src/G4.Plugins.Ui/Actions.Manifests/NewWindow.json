@@ -8,13 +8,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NewWindow.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/NewWindow.cs"
+			},
+			"rag": {
+				"description": "The NewWindow action opens a new browser tab or window in the current WebDriver session by calling WebDriver.SwitchTo().NewWindow(type), where type comes from the Argument property and defaults to 'tab' when Argument is absent or empty. The action uses the W3C WebDriver native new-window command (POST /session/{session id}/window/new), not JavaScript. The new context opens as about:blank and immediately becomes the active window handle — the new handle is appended to driver.WindowHandles and all previous handles remain accessible for switching. There are no parameters and no named outputs — the only configurable input is the Argument value ('tab' or 'window') and the action returns a standard plugin response.",
+				"qa": [
+					{
+						"question": "What does the NewWindow action do?",
+						"answer": "NewWindow calls WebDriver.SwitchTo().NewWindow(type) to open a new browser tab or window. The type is taken from the Argument property and defaults to 'tab' when Argument is absent or empty. The new context opens as about:blank, its handle is appended to driver.WindowHandles, and it immediately becomes the active window handle. All previously open handles remain accessible."
+					},
+					{
+						"question": "What is the default behavior when no Argument is provided?",
+						"answer": "When Argument is absent or empty, string.IsNullOrEmpty returns true and the type variable is set to 'tab'. The action then calls SwitchTo().NewWindow('tab'), opening a new blank browser tab. The new tab handle is appended to driver.WindowHandles and becomes the current active handle."
+					},
+					{
+						"question": "How does NewWindow differ from NewBrowserWindow?",
+						"answer": "NewWindow uses the W3C WebDriver native new-window command (SwitchTo().NewWindow()) — no URL, element, JavaScript, or Amount loop is involved. NewBrowserWindow uses JavaScript window.open(url, target), which requires a URL derived from element text, an attribute, or about:blank, and supports regex filtering, a Target context string, and an Amount loop to open multiple windows in a single step."
+					},
+					{
+						"question": "What values are accepted for Argument, and what happens with each?",
+						"answer": "Argument accepts 'tab' to request a new browser tab or 'window' to request a separate browser window. When absent or empty it defaults to 'tab'. The type value is passed directly to WebDriver.SwitchTo().NewWindow(). Whether 'window' produces a distinct window or a tab depends on the browser and its pop-up or window settings."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": {
-					"name": "gears",
+					"name": "window-restore",
 					"svg": null
 				},
+				"label": "New Window",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,62 +48,115 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `NewWindow` plugin is to automate the opening of a new browser window or tab. ",
-		"This plugin provides a mechanism to programmatically open a new browser window or tab, which can be part of automated workflows or tests.",
+		"The NewWindow action opens a new browser tab or window in the current WebDriver session by calling `WebDriver.SwitchTo().NewWindow()`, the W3C WebDriver native new-window command.",
+		"Unlike `NewBrowserWindow`, which uses JavaScript `window.open()`, `NewWindow` uses the browser driver's built-in context-creation mechanism — no URL, element, or JavaScript execution is required.",
+		"The new context opens blank and immediately becomes the active WebDriver window handle.",
+		"The `Argument` property controls whether a `tab` (default) or a `window` is created.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                                 |",
-		"|---------------------|-----------------------------------------------------------------------------|",
-		"| Open New Window/Tab | Automates the opening of a new browser window or tab.                       |",
-		"| Customizable Type   | Allows specifying the type of new window to open (e.g., `tab` or `window`). |",
+		"| Feature          | Description                                                                                       |",
+		"|------------------|---------------------------------------------------------------------------------------------------|",
+		"| Native WebDriver | Uses `WebDriver.SwitchTo().NewWindow()` — the W3C standard command, not JavaScript execution.     |",
+		"| Tab or Window    | Opens either a new tab or a new browser window depending on the `Argument` value.                 |",
+		"| Default to Tab   | When `Argument` is absent or empty, a new tab is opened automatically.                            |",
+		"| Active Context   | The new tab or window immediately becomes the active WebDriver handle after the action completes. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                  | Description                                                                                  |",
-		"|------------------------|----------------------------------------------------------------------------------------------|",
-		"| Multi-Window Workflows | Automating workflows that require interacting with multiple browser windows or tabs.         |",
-		"| Data Collection        | Opening a new tab to collect data from another source while keeping the original tab intact. |",
-		"| Navigation Automation  | Navigating to a different URL in a new window or tab as part of an automated process.        |",
+		"| Use Case               | Description                                                                                                                                |",
+		"|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Multi-Window Workflows | Open a new tab or window to begin a parallel navigation path while the original context remains reachable by handle.                       |",
+		"| Context Isolation      | Isolate a new browsing context from the current page for unrelated data collection or independent interaction.                             |",
+		"| Sequential Navigation  | After opening a new tab, switch back to the original handle to continue its workflow, then switch to the new handle when that step begins. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                | Description                                                                  |",
-		"|----------------------|------------------------------------------------------------------------------|",
-		"| Multi-Window Testing | Testing web applications that involve multiple browser windows or tabs.      |",
-		"| UI Testing           | Verifying the behavior of web applications when opening new windows or tabs. |",
-		"| Functional Testing   | Ensuring that links and buttons correctly open new windows or tabs.          |"
+		"| Use Case             | Description                                                                                               |",
+		"|----------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Multi-Window Testing | Verify that the application correctly handles workflows spanning multiple browser windows or tabs.        |",
+		"| Handle Count Testing | Assert that the expected number of window handles is present after opening a new tab or window.           |",
+		"| Window Type Testing  | Confirm that passing `tab` opens a tab and `window` opens a separate window, subject to browser behavior. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument is absent — string.IsNullOrEmpty returns true and the type variable is set to 'tab' before calling SwitchTo().NewWindow()",
+						"Argument is an empty string — string.IsNullOrEmpty returns true and the default 'tab' path is taken, identical to the absent case",
+						"The new tab immediately becomes the active WebDriver window handle — driver.CurrentWindowHandle changes to the new handle and all prior handles remain in driver.WindowHandles",
+						"Subsequent actions after this step automatically target the new tab — an explicit SwitchTo().Window() call is not needed unless the workflow must return to a previous handle",
+						"Driver session is not active — SwitchTo() raises a WebDriverException before any window creation attempt is made"
+					],
+					"expected_result": "A new blank browser tab is opened; its handle is appended to driver.WindowHandles and becomes driver.CurrentWindowHandle.",
+					"notes": "This is the canonical minimal form. Argument is absent so string.IsNullOrEmpty returns true and the implementation assigns type = 'tab'. The W3C new-window command (POST /session/{session id}/window/new) is issued with type 'tab'. The new tab opens as about:blank.",
+					"use_case": "open_new_tab_default",
+					"version": "4"
+				},
+				"labels": [
+					"ActiveHandle",
+					"BlankTab",
+					"Default",
+					"MultiWindow",
+					"NativeWebDriver",
+					"NewTab",
+					"NoArgument",
+					"W3C",
+					"WebDriver",
+					"WindowHandle"
+				]
+			},
 			"description": [
-				"Open a new browser tab. ",
-				"This action simulates the behavior of a user manually opening a new tab in the browser. ",
-				"Useful for scenarios where you need to keep the current page open while navigating to a new page in a separate tab."
+				"### Open a new browser tab (default)",
+				"",
+				"Calls `WebDriver.SwitchTo().NewWindow('tab')` via the W3C new-window command to open a new blank browser tab in the current WebDriver session.",
+				"No `Argument` is supplied so the action defaults to `tab`.",
+				"The new tab handle is appended to `driver.WindowHandles` and immediately becomes `driver.CurrentWindowHandle`."
 			],
 			"rule": {
-				"argument": "tab",
+				"$type": "Action",
 				"pluginName": "NewWindow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Browser settings may override 'window' and open a tab instead — the type value is passed to the browser as-is; the driver does not enforce window vs. tab separation",
+						"The new window immediately becomes the active WebDriver window handle — driver.CurrentWindowHandle changes to the new window's handle; all prior handles remain in driver.WindowHandles",
+						"The original window handle must be saved before this action runs if the workflow needs to return to it — driver.WindowHandles is the authoritative list after the call",
+						"Not all WebDriver implementations distinguish 'window' from 'tab' — some drivers treat both type values identically and always open a tab",
+						"Driver session is not active — SwitchTo() raises a WebDriverException before any window creation attempt is made"
+					],
+					"expected_result": "A new separate browser window is opened; its handle is appended to driver.WindowHandles and becomes driver.CurrentWindowHandle.",
+					"notes": "Passing 'window' as Argument causes the implementation to skip the IsNullOrEmpty default and pass 'window' directly to WebDriver.SwitchTo().NewWindow(). The W3C new-window command is issued with type 'window'. Whether a distinct window or a tab appears depends on the browser and its current settings.",
+					"use_case": "open_new_window",
+					"version": "4"
+				},
+				"labels": [
+					"ActiveHandle",
+					"ExplicitArgument",
+					"ExplicitType",
+					"MultiWindow",
+					"NativeWebDriver",
+					"NewWindow",
+					"SeparateWindow",
+					"W3C",
+					"WebDriver",
+					"WindowHandle"
+				]
+			},
 			"description": [
-				"Open a new browser window. ",
-				"This action is similar to a user opening a completely new browser window, separate from the current one. ",
-				"It is helpful for tests or automation workflows that need to interact with multiple browser windows independently."
+				"### Open a new browser window",
+				"",
+				"Calls `WebDriver.SwitchTo().NewWindow('window')` via the W3C new-window command to open a new separate browser window in the current WebDriver session.",
+				"The `Argument` is set to `window` to request a distinct window rather than a tab.",
+				"The new window handle is appended to `driver.WindowHandles`, becomes `driver.CurrentWindowHandle`, and all previous handles remain accessible for switching."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "window",
-				"pluginName": "NewWindow"
-			}
-		},
-		{
-			"description": [
-				"Open a new browser tab. ",
-				"If no specific argument is provided, the default action is to open a new tab. ",
-				"This is useful for creating additional tabs without specifying the type explicitly."
-			],
-			"rule": {
 				"pluginName": "NewWindow"
 			}
 		}
@@ -85,12 +164,19 @@
 	"key": "NewWindow",
 	"namespace": "G4.Plugins.Ui",
 	"parameters": [],
+	"platforms": [
+		"Web",
+		"MobileWeb"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"default": "tab",
 			"description": [
-				"Specifies the type of new window to open (`tab` or `window`)."
+				"Argument specifies the type of new browsing context to open.",
+				"Accepted values are `tab` and `window`.",
+				"When absent or empty the value defaults to `tab`.",
+				"The actual behavior for `window` may depend on browser settings — some browsers open a tab regardless of the requested type."
 			],
 			"mandatory": false,
 			"name": "Argument",
@@ -98,13 +184,13 @@
 			"values": [
 				{
 					"description": [
-						"Open a new browser tab."
+						"Opens a new browser tab in the current WebDriver session."
 					],
 					"name": "tab"
 				},
 				{
 					"description": [
-						"Open a new browser window."
+						"Opens a new browser window separate from the current one."
 					],
 					"name": "window"
 				}
@@ -115,13 +201,11 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#new-window",
 		"w3c": "POST /session/{session id}/window/new"
 	},
-	"platforms": [
-		"Web",
-		"MobileWeb"
-	],
 	"summary": [
-		"The `NewWindow` plugin automates the opening of a new browser window or tab, enabling the creation of multi-window workflows and testing scenarios. ",
-		"It supports specifying the type of new window to open (`tab` or `window`) and is useful for both robotic process automation (RPA) and automation testing."
+		"The NewWindow action opens a new browser tab or window within the current WebDriver session by calling `WebDriver.SwitchTo().NewWindow()`, the W3C WebDriver native new-window command.",
+		"The `Argument` property controls whether a `tab` (default) or a separate `window` is created; when `Argument` is absent or empty the action always opens a new tab.",
+		"Unlike `NewBrowserWindow`, which uses JavaScript `window.open()`, `NewWindow` requires no URL or element — the new context opens blank and immediately becomes the active window handle.",
+		"In RPA it supports multi-window workflows and context isolation. In automation testing it enables multi-window navigation, window handle count assertions, and window type validation."
 	],
 	"version": "4"
 }
