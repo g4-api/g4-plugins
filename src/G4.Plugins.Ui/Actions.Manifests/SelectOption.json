@@ -11,6 +11,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SelectOption.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SelectOption.cs"
+			},
+			"rag": {
+				"description": "The SelectOption action selects an option from a native HTML <select> dropdown element using one of four strategies: by zero-based index, by value attribute, by partial text match, or by exact text match (default). The target element is validated as a <select> before any selection attempt. Index selection catches out-of-range and parse exceptions and records them without rethrowing, while the other three modes throw a NoSuchElementException when no matching option is found.",
+				"qa": [
+					{
+						"question": "What does the SelectOption action do?",
+						"answer": "SelectOption clicks an option within a native HTML <select> dropdown element. It validates that the target is a <select> element and then selects the matching option using the strategy specified by the OnAttribute property."
+					},
+					{
+						"question": "What selection modes does SelectOption support?",
+						"answer": "SelectOption supports four modes: Index (zero-based position), Value (exact option value attribute), PartialText (XPath contains() substring match), and exact text match (default when OnAttribute is absent or unrecognized)."
+					},
+					{
+						"question": "What happens when the target element is not a <select> element?",
+						"answer": "SelectOption throws an InvalidOperationException with a message that includes the actual tag name and states that only <select> elements are supported."
+					},
+					{
+						"question": "What happens when Index mode receives an out-of-range or non-integer argument?",
+						"answer": "Index mode wraps the selection in a try-catch. Any exception — including FormatException for non-integer input or ArgumentOutOfRangeException for an invalid index — is captured as a G4ExceptionModel and added to the plugin exception list without rethrowing."
+					},
+					{
+						"question": "What is the default selection mode when OnAttribute is absent or unrecognized?",
+						"answer": "The default mode uses XPath exact text match: ./option[.='argument']. Any OnAttribute value other than Index, Value, or PartialText (comparison is case-insensitive) falls through to this default."
+					},
+					{
+						"question": "What is the difference between PartialText and exact text selection?",
+						"answer": "PartialText uses XPath ./option[contains(.,'argument')], which matches any option whose visible text contains the supplied substring. The default exact text mode uses ./option[.='argument'], which requires the full visible text to match exactly. Both comparisons are case-sensitive."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,6 +51,7 @@
 					"name": "gears",
 					"svg": null
 				},
+				"label": "Select Option",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,38 +59,72 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SelectOption` plugin serves the purpose of automating the selection of options within `<select>` elements on web pages. ",
-		"Its primary goal is to streamline and automate the process of interacting with dropdown menus, enhancing the efficiency and accuracy of web-based tasks in RPA and automation testing scenarios.",
+		"The SelectOption action selects an option from a native HTML `<select>` dropdown element.",
+		"The target element is validated as a `<select>` before any selection attempt, and the desired option is located using one of four strategies controlled by the `OnAttribute` property.",
+		"Use this action whenever an automation workflow must interact with dropdown menus rendered as standard HTML select elements.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                                                                                                                                                                               |",
-		"|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Element Validation         | The plugin validates that the targeted element is indeed a `<select>` element before attempting the selection operation, ensuring that the automation process is applied only to appropriate elements.                                                    |",
-		"| Multiple Selection Methods | It provides flexibility by offering various methods to select options, including by index, value, partial text, or exact text match. This versatility accommodates different use cases and scenarios encountered in RPA and automation testing workflows. |",
-		"| Error Handling             | The plugin incorporates robust error handling mechanisms to capture and handle exceptions that may arise during the selection process, enhancing the reliability and resilience of automation workflows.                                                  |",
+		"| Feature               | Description                                                                                                                                      |",
+		"|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Element Validation    | Throws `InvalidOperationException` if the target is not a `<select>` element, preventing silent failures on wrong element types.                 |",
+		"| Index Selection       | Selects the option at the specified zero-based position. Out-of-range and parse errors are caught and recorded as exceptions without rethrowing. |",
+		"| Value Selection       | Selects the option whose `value` attribute matches `Argument` exactly using XPath `./option[@value='…']`.                                        |",
+		"| PartialText Selection | Selects the first option whose visible text contains `Argument` as a substring using XPath `./option[contains(.,'…')]`.                          |",
+		"| Exact Text Selection  | Default mode. Selects the first option whose full visible text equals `Argument` using XPath `./option[.='…']`.                                  |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage            | Description                                                                                                                                                                                                                                         |",
-		"|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Form Submission  | In RPA processes involving form submissions, the `SelectOption` plugin can automate the selection of dropdown menu options, enabling seamless completion of form fields with minimal manual intervention.                                           |",
-		"| Data Entry       | When dealing with web applications that utilize dropdown menus for data entry, the plugin automates the selection of predefined options, accelerating data input tasks and reducing processing time.                                                |",
-		"| User Interaction | RPA bots can use the `SelectOption` plugin to interact with web interfaces in a manner similar to human users, facilitating the execution of complex workflows that involve selecting options from dropdown menus as part of user-driven processes. |",
+		"| Use Case        | Description                                                                                                    |",
+		"|-----------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Form Completion | Select a country, state, or category from a dropdown as part of a multi-field form submission workflow.        |",
+		"| Data Entry      | Automate selection of predefined options in data-entry screens where dropdown values are process-controlled.   |",
+		"| User Simulation | Reproduce exact user interactions with dropdown menus to drive downstream page updates or validation triggers. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                  | Description                                                                                                                                                                                                                                                              |",
-		"|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| User Interface Testing | In automated UI testing scenarios, the `SelectOption` plugin enables testers to validate the behavior of dropdown menus by selecting options based on different criteria such as index, value, or text match.                                                            |",
-		"| Form Field Validation  | Automation scripts can utilize the plugin to validate the functionality of form fields that rely on dropdown menus for user input, ensuring that the correct options are selected and processed accurately.                                                              |",
-		"| End-to-End Testing     | When conducting end-to-end testing of web applications, the plugin contributes to comprehensive test coverage by automating the selection of dropdown menu options as part of user interaction scenarios, verifying the application's behavior under various conditions. |"
+		"| Use Case              | Description                                                                                                              |",
+		"|-----------------------|--------------------------------------------------------------------------------------------------------------------------|",
+		"| Dropdown Behavior     | Verify that selecting each option triggers the correct page update, form state, or API call.                             |",
+		"| Boundary Testing      | Test index-boundary conditions — first option, last option, and out-of-range index — to confirm error handling behavior. |",
+		"| Data-Driven Selection | Drive option selection from a test data set using value attributes to ensure each option is reachable by value.          |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument is not a valid integer — FormatException is caught and added to plugin exceptions without rethrowing",
+						"Index is out of range — ArgumentOutOfRangeException is caught and added to plugin exceptions without rethrowing",
+						"Index is 0 — selects the very first option (zero-based indexing)",
+						"Select element has no options — ElementAt throws immediately and is caught silently",
+						"Target element is not a <select> — InvalidOperationException is thrown before index logic runs",
+						"Select element is disabled — Click on the option may be ignored or throw depending on the driver",
+						"Option at the specified index is disabled — the browser may or may not prevent selection",
+						"Options are loaded dynamically after page render — option list may be incomplete at time of selection"
+					],
+					"expected_result": "The option at zero-based index 1 (the second option) is clicked in the dropdown matching #SelectElement.",
+					"notes": "Index selection uses ElementAt(index) on the found ./option child elements and calls Click(). Any exception during parsing or element access is caught and recorded as a G4ExceptionModel without rethrowing.",
+					"use_case": "select_by_index",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"DropdownInteraction",
+					"FormHandling",
+					"IndexSelection",
+					"SelectElement",
+					"UiAutomation",
+					"WebAutomation",
+					"ZeroBasedIndex"
+				]
+			},
 			"description": [
-				"Select the option at index 1 (i.e., the second option) from the dropdown menu identified by the CSS selector `#SelectElement`. ",
-				"This configuration is useful for automating tasks where the selection of options from dropdown menus needs to be performed based on their positions within the menu."
+				"### Select an option by index",
+				"",
+				"Selects the option at zero-based index `1` (the second option) from the dropdown identified by the CSS selector `#SelectElement`.",
+				"The `onAttribute` is set to `Index`, so the `argument` is parsed as an integer and used to click the option at that position.",
+				"If the argument is not a valid integer or the index is out of range, the exception is caught and recorded without interrupting the workflow."
 			],
 			"rule": {
 				"argument": "1",
@@ -67,35 +135,132 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No option has the specified value attribute — XPath returns no match and NoSuchElementException is thrown",
+						"Value attribute match is case-sensitive — 'Option2' and 'option2' are treated as different values",
+						"Multiple options share the same value attribute — the first matching option in DOM order is clicked",
+						"Value contains a single quote — the XPath string literal breaks and an exception is thrown",
+						"Target element is not a <select> — InvalidOperationException is thrown before value logic runs",
+						"Select element is disabled — option click may be ignored by the browser",
+						"Value is an empty string — matches options with value='' or options missing the value attribute depending on the browser",
+						"Option is hidden by CSS — WebDriver may still be able to click it depending on the driver implementation"
+					],
+					"expected_result": "The option whose value attribute equals 'option2' is clicked in the dropdown identified by id 'SelectElement'.",
+					"notes": "Value selection uses the XPath ./option[@value='argument'] scoped to the located select element. The first matching option is clicked. Matching is exact and case-sensitive.",
+					"use_case": "select_by_value_attribute",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AttributeSelection",
+					"DropdownInteraction",
+					"ExactMatch",
+					"FormHandling",
+					"SelectElement",
+					"UiAutomation",
+					"ValueAttribute",
+					"WebAutomation"
+				]
+			},
 			"description": [
-				"Select the option with a value attribute of `option2` from the dropdown menu identified by the CSS selector `#SelectElement`. ",
-				"This configuration is useful when the selection needs to be made based on the values associated with the options in the dropdown menu."
+				"### Select an option by value attribute",
+				"",
+				"Selects the option whose `value` attribute equals `option2` from the dropdown identified by element id `SelectElement`.",
+				"The `onAttribute` is set to `Value`, so the action matches against each option's `value` attribute using XPath `./option[@value='option2']`.",
+				"Use this mode when the value attribute is stable and predictable, regardless of the option's visible text."
 			],
 			"rule": {
 				"argument": "option2",
-				"locator": "CssSelector",
+				"locator": "Id",
 				"onAttribute": "Value",
-				"onElement": "#SelectElement",
+				"onElement": "SelectElement",
 				"pluginName": "SelectOption"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No option text contains the partial text — XPath contains() finds no match and NoSuchElementException is thrown",
+						"Multiple options contain the partial text — the first matching option in DOM order is clicked",
+						"Partial text match is case-sensitive — 'Option' and 'option' are different",
+						"Partial text is an empty string — XPath contains(., '') is always true and the first option is selected",
+						"Partial text contains a single quote — the XPath string literal breaks and an exception is thrown",
+						"Target element is not a <select> — InvalidOperationException is thrown before partial text logic runs",
+						"Option text includes leading or trailing whitespace — contains() still finds the substring correctly",
+						"Dropdown options change dynamically after the options list is fetched — the clicked option may differ from expected"
+					],
+					"expected_result": "The first option whose visible text contains 'Option 2' is clicked in the dropdown at the specified XPath.",
+					"notes": "PartialText selection uses XPath ./option[contains(.,'argument')] scoped to the located select element. The match is case-sensitive. When multiple options match, the first in DOM order is clicked.",
+					"use_case": "select_by_partial_text",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"DropdownInteraction",
+					"DynamicContent",
+					"FormHandling",
+					"PartialTextMatch",
+					"SelectElement",
+					"SubstringMatch",
+					"UiAutomation",
+					"WebAutomation",
+					"XPathSelection"
+				]
+			},
 			"description": [
-				"Select the option from the dropdown menu identified by the CSS selector `#SelectElement`, where the option's text contains the partial text `2`. ",
-				"This configuration is useful when the option's text is dynamic or when only a portion of the text is known beforehand."
+				"### Select an option by partial text",
+				"",
+				"Selects the first option whose visible text contains the substring `Option 2` from the dropdown located by XPath.",
+				"The `onAttribute` is set to `PartialText`, so the action uses XPath `./option[contains(.,'Option 2')]` scoped to the `<select>` element.",
+				"Use this mode when only a portion of the option text is known or when option labels are generated dynamically."
 			],
 			"rule": {
-				"argument": "2",
-				"locator": "CssSelector",
+				"argument": "Option 2",
+				"locator": "Xpath",
 				"onAttribute": "PartialText",
-				"onElement": "#SelectElement",
+				"onElement": "//select[@id='SelectElement']",
 				"pluginName": "SelectOption"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No option has the exact text — XPath ./option[.='argument'] returns no match and NoSuchElementException is thrown",
+						"Exact text match is case-sensitive — 'option 2' and 'Option 2' are treated as different values",
+						"Option text has leading or trailing whitespace — XPath text equality includes whitespace, so the match fails",
+						"Option text contains a single quote — the XPath string literal breaks and an exception is thrown",
+						"Target element is not a <select> — InvalidOperationException is thrown before exact text logic runs",
+						"Multiple options share the same visible text — the first matching option in DOM order is clicked",
+						"OnAttribute is set to an unrecognized value — falls through to the default exact text branch",
+						"Option text contains HTML entities — the browser decodes entities before text comparison"
+					],
+					"expected_result": "The option whose full visible text equals 'Option 2' is clicked in the dropdown matching #SelectElement.",
+					"notes": "Exact text is the default mode activated when OnAttribute is absent, empty, or any value other than Index, Value, or PartialText (case-insensitive). The XPath is ./option[.='argument'] scoped to the located select element.",
+					"use_case": "select_by_exact_text",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"DefaultMode",
+					"DropdownInteraction",
+					"ExactTextMatch",
+					"FormHandling",
+					"SelectElement",
+					"UiAutomation",
+					"WebAutomation",
+					"XPathSelection"
+				]
+			},
 			"description": [
-				"Select the option from the dropdown menu identified by the CSS selector `#SelectElement`, where the option's text matches exactly `Option 2`. ",
-				"This configuration is useful when the exact text of the option to be selected is known in advance."
+				"### Select an option by exact text (default mode)",
+				"",
+				"Selects the option whose full visible text equals `Option 2` from the dropdown matching the CSS selector `#SelectElement`.",
+				"No `onAttribute` is specified, so the action uses the default exact text mode with XPath `./option[.='Option 2']`.",
+				"Use this mode when the complete option text is known in advance and must match precisely."
 			],
 			"rule": {
 				"argument": "Option 2",
@@ -107,12 +272,16 @@
 	],
 	"key": "SelectOption",
 	"namespace": "G4.Plugins.Ui",
+	"platforms": [
+		"Web",
+		"MobileWeb"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"The `Argument` property specifies the value that the plugin will use to select an option from a dropdown menu. ",
-				"Depending on the specified `OnAttribute` property, the `Argument` can represent different criteria for selecting an option."
+				"Argument specifies the value used to select an option from the dropdown.",
+				"Its meaning depends on the OnAttribute property: an integer for Index mode, a value attribute string for Value mode, a substring for PartialText mode, or a full visible text string for the default exact text mode."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -121,7 +290,9 @@
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the type of locator used to identify the target dropdown menu element on the web page."
+				"Locator specifies the strategy used to find the target `<select>` element.",
+				"Accepted values are Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"When absent the default Xpath strategy is used."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -129,8 +300,8 @@
 		},
 		{
 			"description": [
-				"Specifies the attribute of the options within the dropdown menu that will be used as the basis for selecting an option. ",
-				"It determines how the plugin should interpret the `Argument` property when selecting an option."
+				"OnAttribute determines which selection strategy is applied when locating the target option.",
+				"When absent or set to any value other than Index, Value, or PartialText, the default exact text match strategy is used."
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
@@ -138,31 +309,31 @@
 			"values": [
 				{
 					"description": [
-						"The plugin will interpret the `Argument` property as the index of the option to be selected within the dropdown menu. ",
-						"For example, an `Argument` of `2` would select the third option in the menu (assuming zero-based indexing)."
+						"Parses `Argument` as a zero-based integer index and clicks the option at that position.",
+						"Out-of-range or non-integer values are caught and recorded as plugin exceptions without rethrowing."
 					],
 					"name": "Index"
 				},
 				{
 					"description": [
-						"The plugin will interpret the `Argument` property as the partial text that the option's text content should contain. ",
-						"It will select the option whose text contains the specified partial text."
+						"Selects the first option whose `value` HTML attribute equals `Argument` exactly.",
+						"Uses XPath `./option[@value='…']` scoped to the `<select>` element. Matching is case-sensitive."
 					],
-					"name": "PartialText"
+					"name": "Value"
 				},
 				{
 					"description": [
-						"The plugin will interpret the `Argument` property as the value attribute of the option to be selected. ",
-						"It will search for an option whose value attribute matches the specified argument."
+						"Selects the first option whose visible text contains `Argument` as a substring.",
+						"Uses XPath `./option[contains(.,'…')]` scoped to the `<select>` element. Matching is case-sensitive."
 					],
-					"name": "Value"
+					"name": "PartialText"
 				}
 			]
 		},
 		{
 			"description": [
-				"Specifies the target dropdown menu element on the web page where the selection action will be performed. ",
-				"It indicates the HTML element that contains the options within the dropdown menu."
+				"OnElement provides the locator expression that identifies the `<select>` element.",
+				"The element must be a `<select>` tag — any other tag type causes an `InvalidOperationException` before any selection logic runs."
 			],
 			"mandatory": true,
 			"name": "OnElement",
@@ -173,15 +344,10 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-click",
 		"w3c": "POST /session/{session id}/element/{element id}/click"
 	},
-	"platforms": [
-		"Web",
-		"MobileWeb"
-	],
 	"summary": [
-		"The `SelectOption` plugin automates the selection of options within dropdown menus on web pages based on specified attributes or text criteria. ",
-		"Key features include element validation, multiple selection methods, and robust error handling.",
-		"In RPA, it is used for form submissions, data entry, and user interaction, streamlining tasks involving dropdown menus. ",
-		"In automation testing, it supports user interface testing, form field validation, and end-to-end testing by ensuring accurate selection of options in dropdown menus."
+		"The SelectOption action selects an option from a native HTML `<select>` dropdown element using one of four strategies: zero-based index, value attribute, partial text match, or exact text match (default).",
+		"It validates that the target element is a `<select>` before selection, and handles index errors gracefully by recording exceptions without rethrowing.",
+		"In RPA it automates form dropdown interactions; in automation testing it verifies option selection across all four selection modes."
 	],
 	"version": "4"
 }
