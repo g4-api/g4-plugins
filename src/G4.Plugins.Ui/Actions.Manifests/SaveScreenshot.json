@@ -12,6 +12,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SaveScreenshot.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SaveScreenshot.cs"
+			},
+			"rag": {
+				"description": "The SaveScreenshot action (aliases: GetScreenshot, TakeScreenshot) captures and saves a PNG screenshot to disk using the W3C WebDriver GET /session/{session id}/screenshot command. It supports full-page viewport captures and element-level screenshots when OnElement and Locator are supplied. The target directory is created automatically via Directory.CreateDirectory including any missing parent directories. The file name defaults to a new GUID and always receives a .png extension if not already present (case-insensitive). If a locator is supplied but GetElement returns null the plugin falls back to a full-page screenshot unconditionally. Every saved absolute path is appended to the SaveScreenshot:Screenshots session parameter, accumulating across all invocations in the session.",
+				"qa": [
+					{
+						"question": "What does the SaveScreenshot plugin do?",
+						"answer": "It captures a PNG screenshot of either the full browser viewport or a specific element and saves it to disk using the W3C WebDriver screenshot command. The output directory is created automatically if absent, and every saved absolute path is appended to the SaveScreenshot:Screenshots session parameter. The action is also known by aliases GetScreenshot and TakeScreenshot."
+					},
+					{
+						"question": "What parameters does SaveScreenshot accept?",
+						"answer": "It accepts two optional parameters: Directory (the folder to save the screenshot into, defaulting to Environment.CurrentDirectory) and FileName (the file name, defaulting to a new GUID string with .png appended automatically when the name does not already end with .png)."
+					},
+					{
+						"question": "How does SaveScreenshot choose between a full-page and an element screenshot?",
+						"answer": "When OnElement and Locator are provided the plugin calls this.GetElement(rule, element) to resolve the target. If that returns a non-null element it calls element.SaveScreenshot to scope the capture. If GetElement returns null — either because OnElement was absent or the element was not found — the plugin calls WebDriver.SaveScreenshot to capture the full browser viewport. The fallback is unconditional and silent; no error is raised."
+					},
+					{
+						"question": "What is the SaveScreenshot:Screenshots output parameter?",
+						"answer": "SaveScreenshot:Screenshots is a session parameter holding a JSON array of absolute file paths for every screenshot saved during the session. Each invocation deserializes the existing list, appends the new path, and re-serializes it, so the parameter accumulates paths across multiple calls rather than replacing them."
+					},
+					{
+						"question": "How is the file name determined and what extension is enforced?",
+						"answer": "The FileName parameter value is used when supplied. If omitted a new GUID string is generated as the default name. In both cases the plugin appends .png if the name does not already end with .png (case-insensitive check via String.EndsWith), ensuring every saved file is a valid PNG regardless of what the caller provides."
+					},
+					{
+						"question": "What happens when the specified Directory does not exist?",
+						"answer": "The plugin calls Directory.CreateDirectory before writing the file. This creates the full directory path including any missing parent directories automatically. No error is raised for a new or previously absent directory."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -19,6 +52,7 @@
 					"name": "image",
 					"svg": null
 				},
+				"label": "Save Screenshot",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -26,124 +60,163 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `SaveScreenshot` plugin is to capture and save screenshots during automated test scenarios. ",
-		"This plugin is essential for quality assurance and RPA processes, allowing users to take snapshots of the application's state at specific points in the automation workflow, providing visual confirmation and aiding in debugging.",
+		"The `SaveScreenshot` plugin captures and saves a PNG screenshot of the browser viewport or a specific element during automation workflows, using the W3C WebDriver `GET /session/{session id}/screenshot` command as its underlying mechanism.",
+		"It automatically creates the target directory, enforces the `.png` extension on every output file, generates a unique GUID-based file name when none is provided, and accumulates every saved absolute path in the `SaveScreenshot:Screenshots` session parameter for downstream use.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                                                                                                                                                     |",
-		"|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Verification and Debugging | Screenshots can be used for visual verification, ensuring that the application's interface matches the expected state. This is particularly useful in automated test cases where precise UI details matter.                     |",
-		"| Documentation              | Screenshots serve as valuable documentation, providing a visual record of the application's behavior at different stages of the automation process. This aids in creating comprehensive reports for debugging and analysis.     |",
-		"| Error Identification       | When an error occurs during the automation process, a saved screenshot at the point of failure can provide insights into the issue, making it easier for developers and testers to identify and address problems.               |",
-		"| Visual Regression Testing  | Integral to visual regression testing, where screenshots taken during different test runs are compared to detect any unexpected visual changes in the application.                                                              |",
-		"| Cross-Browser Testing      | For web applications, taking screenshots across different browsers helps ensure consistent rendering and user interface across various browser environments.                                                                    |",
-		"| Historical Tracking        | By saving screenshots at critical steps, users can create a historical timeline of the application's behavior, facilitating a deeper understanding of how changes in the codebase or environment may impact the user interface. |",
+		"| Feature                 | Description                                                                                                                                                    |",
+		"|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Full-Page Screenshot    | Captures the entire browser viewport as a PNG file when no target element is specified.                                                                        |",
+		"| Element Screenshot      | Captures only the specified element when OnElement and Locator are supplied, using the element-level screenshot call.                                          |",
+		"| Null-Element Fallback   | Falls back to a full-page screenshot when a locator is supplied but GetElement returns null, making the action unconditionally safe to invoke.                 |",
+		"| Auto Directory Creation | Calls Directory.CreateDirectory before writing, creating the target directory and any missing parent directories automatically.                                |",
+		"| Auto File Naming        | Generates a unique GUID-based file name when FileName is omitted, preventing accidental overwrites across repeated invocations.                               |",
+		"| PNG Enforcement         | Always appends .png to the output file name if it does not already end with .png (case-insensitive), ensuring every saved file is a valid PNG.                |",
+		"| Session Output          | Appends each saved absolute path to the SaveScreenshot:Screenshots session parameter, accumulating a complete path list across all invocations in the session. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                      | Description                                                                                                                                         |",
-		"|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Verification and Debugging | Screenshots can be used for visual verification, ensuring that the application's interface matches the expected state.                              |",
-		"| Documentation              | Screenshots serve as valuable documentation, providing a visual record of the application's behavior at different stages of the automation process. |",
-		"| Error Identification       | When an error occurs during the automation process, a saved screenshot at the point of failure can provide insights into the issue.                 |",
+		"| Use Case              | Description                                                                                                                               |",
+		"|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Audit Trail           | Capture screenshots at key workflow steps to create a visual record for compliance review and process documentation.                      |",
+		"| Error Documentation   | Take a screenshot when an unexpected state is detected to provide visual evidence that pinpoints the exact failure point for analysis.     |",
+		"| Step Evidence Capture | Save a screenshot after a critical form submission or navigation to confirm the application transitioned to the expected state.            |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                     | Description                                                                                                                                                                                                                     |",
-		"|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Visual Regression Testing | Integral to visual regression testing, where screenshots taken during different test runs are compared to detect any unexpected visual changes in the application.                                                              |",
-		"| Cross-Browser Testing     | For web applications, taking screenshots across different browsers helps ensure consistent rendering and user interface across various browser environments.                                                                    |",
-		"| Historical Tracking       | By saving screenshots at critical steps, users can create a historical timeline of the application's behavior, facilitating a deeper understanding of how changes in the codebase or environment may impact the user interface. |"
+		"| Use Case                   | Description                                                                                                                                            |",
+		"|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Visual Regression Testing  | Capture screenshots at fixed checkpoints across test runs and compare the accumulated SaveScreenshot:Screenshots paths to detect unintended UI changes. |",
+		"| Cross-Browser Verification | Save viewport and element screenshots across browser configurations to confirm consistent rendering and layout behaviour.                              |",
+		"| Failure Evidence           | Collect a screenshot immediately at the point of assertion failure to provide a reproducible visual artifact for root-cause analysis.                  |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Directory does not exist — Directory.CreateDirectory is called first and creates it automatically",
+						"FileName already ends with .png — no second extension is appended; the name is used as-is",
+						"FileName does not end with .png — .png is appended before writing the file",
+						"Directory path contains spaces or special characters — Path.Combine handles them; the caller is responsible for otherwise valid path characters",
+						"File with the same name already exists in the directory — the existing file is silently overwritten",
+						"Session parameter SaveScreenshot:Screenshots is not yet initialised — the plugin defaults to an empty JSON array and starts a new accumulation list"
+					],
+					"expected_result": "A file named PageScreenshot.png is saved under the Screenshots directory. Its absolute path is appended to the SaveScreenshot:Screenshots session parameter.",
+					"notes": "Both Directory and FileName are optional. When both are supplied the plugin uses them directly, appending .png to FileName only if not already present.",
+					"use_case": "full_page_screenshot_with_directory_and_filename",
+					"version": "4"
+				},
+				"labels": [
+					"AuditTrail",
+					"BrowserScreenshot",
+					"CrossBrowserTesting",
+					"CustomDirectory",
+					"CustomFileName",
+					"FullPage",
+					"PngEnforcement",
+					"ScreenCapture",
+					"SessionOutput",
+					"VisualRegression",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Capture and save a screenshot with specific parameters. ",
-				"The screenshot is stored in the `Screenshots` directory, and the file is named `PageScreenshot.png`."
+				"### Full-page screenshot with custom directory and file name",
+				"",
+				"Captures a screenshot of the full browser viewport and saves it as `PageScreenshot.png` in the `Screenshots` directory.",
+				"The plugin creates the directory automatically if it does not exist and appends `.png` if the supplied name does not already end with it.",
+				"The saved absolute path is appended to the `SaveScreenshot:Screenshots` session parameter."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Directory:Screenshots --FileName:PageScreenshot.png}}",
 				"pluginName": "SaveScreenshot"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No argument supplied — Directory defaults to Environment.CurrentDirectory and FileName defaults to a new GUID string",
+						"Current working directory is read-only — Directory.CreateDirectory does not throw for an existing directory, but the file write fails with UnauthorizedAccessException",
+						"Multiple calls in the same session — each generates a unique GUID-named file; all paths accumulate in SaveScreenshot:Screenshots without collision",
+						"Session already contains paths in SaveScreenshot:Screenshots — the new path is appended to the existing JSON array, not replacing it",
+						"WebDriver session is unexpectedly terminated — the screenshot call throws a WebDriverException before the file is written"
+					],
+					"expected_result": "A PNG file with a GUID-based name is saved in the current working directory. Its absolute path is appended to the SaveScreenshot:Screenshots session parameter.",
+					"notes": "When the plugin is invoked with no argument both Directory and FileName use their defaults. Repeated calls safely accumulate paths in the session parameter.",
+					"use_case": "full_page_screenshot_default_no_parameters",
+					"version": "4"
+				},
+				"labels": [
+					"AutoGeneratedName",
+					"BrowserScreenshot",
+					"DefaultBehavior",
+					"FullPage",
+					"GuidFileName",
+					"NoParameters",
+					"ScreenCapture",
+					"SessionAccumulation",
+					"SessionOutput",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Capture and save a screenshot without specifying a directory. ",
-				"The screenshot is directly stored in the default or current working directory, and it is named `PageScreenshot.png`."
+				"### Full-page screenshot with default settings",
+				"",
+				"Captures a screenshot of the full browser viewport using all default settings.",
+				"The plugin saves the file to the current working directory with a GUID-generated file name and appends the absolute path to the `SaveScreenshot:Screenshots` session parameter.",
+				"This is the simplest invocation — no directory or file name configuration is required."
 			],
 			"rule": {
-				"argument": "{{$ --FileName:PageScreenshot.png}}",
+				"$type": "Action",
 				"pluginName": "SaveScreenshot"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not found by the locator — GetElement returns null; the plugin falls back to a full-page screenshot",
+						"Element is present in the DOM but not visible — the element screenshot may capture an empty or transparent region",
+						"Element is partially outside the viewport — the screenshot captures only the visible portion of the element",
+						"Directory does not exist — created automatically before the file is written",
+						"FileName already ends with .png — used as-is without appending a second extension",
+						"Multiple element screenshots in the same session with different FileName values — each path is appended to SaveScreenshot:Screenshots without collision"
+					],
+					"expected_result": "A screenshot of the element identified by #ClickButton is saved as ElementScreenshot.png in the Screenshots directory. Its absolute path is appended to the SaveScreenshot:Screenshots session parameter.",
+					"notes": "When OnElement and Locator are both provided the plugin calls element.SaveScreenshot, scoping the capture to that element only. If the element cannot be found the plugin silently falls back to a full-page screenshot.",
+					"use_case": "element_screenshot_with_css_selector",
+					"version": "4"
+				},
+				"labels": [
+					"CssSelector",
+					"CustomDirectory",
+					"CustomFileName",
+					"ElementScreenshot",
+					"NullElementFallback",
+					"PartialCapture",
+					"PngEnforcement",
+					"ScreenCapture",
+					"SessionOutput",
+					"TargetedCapture",
+					"VisualRegression",
+					"WebDriver"
+				]
+			},
 			"description": [
-				"Capture and save a screenshot in the `Screenshots` directory without specifying a custom file name. ",
-				"The plugin will generate a unique file name, ensuring each screenshot is uniquely identified within the specified directory. ",
-				"This is useful when a specific file name is not necessary, and the emphasis is on organizing screenshots in a designated folder."
+				"### Element-level screenshot with CSS selector",
+				"",
+				"Captures a screenshot scoped to the element identified by the CSS selector `#ClickButton` and saves it as `ElementScreenshot.png` in the `Screenshots` directory.",
+				"When `OnElement` and `Locator` are provided the plugin calls `element.SaveScreenshot` instead of the full-page capture.",
+				"If the element is not found by the locator the plugin falls back to a full-page screenshot.",
+				"The saved absolute path is appended to the `SaveScreenshot:Screenshots` session parameter."
 			],
 			"rule": {
-				"argument": "{{$ --Directory:Screenshots}}",
-				"pluginName": "SaveScreenshot"
-			}
-		},
-		{
-			"description": [
-				"Capture and save a screenshot without specifying a custom directory or file name. ",
-				"When executed, the plugin will save the screenshot in the current working directory with a dynamically generated file name. ",
-				"This is a straightforward way to capture a screenshot without the need for custom naming or directory settings."
-			],
-			"rule": {
-				"pluginName": "SaveScreenshot"
-			}
-		},
-		{
-			"description": [
-				"Capture and save a screenshot of a specific element with the ID `ClickButton`. ",
-				"The screenshot will be saved in the `Screenshots` directory with the specified file name `ElementScreenshot.png`. ",
-				"This allows for targeted screenshot capture based on a specific element's appearance."
-			],
-			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Directory:Screenshots --FileName:ElementScreenshot.png}}",
-				"locator": "CssSelector",
-				"onElement": "#ClickButton",
-				"pluginName": "SaveScreenshot"
-			}
-		},
-		{
-			"description": [
-				"Capture and save a screenshot of the element with the ID `ClickButton`. ",
-				"The screenshot will be saved with the specified file name `ElementScreenshot.png`. ",
-				"The absence of the `--Directory` parameter indicates that the screenshot will be saved in the default directory."
-			],
-			"rule": {
-				"argument": "{{$ --FileName:ElementScreenshot.png}}",
-				"locator": "CssSelector",
-				"onElement": "#ClickButton",
-				"pluginName": "SaveScreenshot"
-			}
-		},
-		{
-			"description": [
-				"Capture and save a screenshot of the element with the ID `ClickButton` and save it in the specified directory `Screenshots`. ",
-				"The absence of the `--FileName` parameter indicates that the plugin will generate a default file name for the screenshot."
-			],
-			"rule": {
-				"argument": "{{$ --Directory:Screenshots}}",
-				"locator": "CssSelector",
-				"onElement": "#ClickButton",
-				"pluginName": "SaveScreenshot"
-			}
-		},
-		{
-			"description": [
-				"Capture and save a screenshot of the element with the ID `ClickButton`. ",
-				"The absence of the `--directory` parameter indicates that the screenshot will be saved in the default directory. ",
-				"The absence of the `--fileName` parameter indicates that the plugin will generate a default file name for the screenshot."
-			],
-			"rule": {
-				"argument": "{{$ --directory:Screenshots}}",
 				"locator": "CssSelector",
 				"onElement": "#ClickButton",
 				"pluginName": "SaveScreenshot"
@@ -155,10 +228,11 @@
 	"outputParameters": [
 		{
 			"description": [
-				"Serves as a container for maintaining a list of file paths corresponding to screenshots captured during the automation session. ",
-				"Each time the `SaveScreenshot` plugin is invoked, the path of the saved screenshot is added to this list."
+				"A JSON array of absolute file paths for every screenshot saved during the automation session.",
+				"Each invocation of SaveScreenshot appends the new path to the existing list, so the parameter accumulates paths across multiple calls in the same session.",
+				"Use this parameter in downstream steps to validate, move, rename, or attach the saved screenshots."
 			],
-			"name": "SavedScreenshots",
+			"name": "SaveScreenshot:Screenshots",
 			"type": "Array"
 		}
 	],
@@ -166,8 +240,9 @@
 		{
 			"default": ".",
 			"description": [
-				"The directory or folder where the screenshot captured by the `SaveScreenshot` plugin will be saved. ",
-				"If the specified directory does not exist, the plugin may create it, depending on its implementation."
+				"The directory where the screenshot file is saved.",
+				"The plugin calls Directory.CreateDirectory before writing, so the directory and any missing parent directories are created automatically when they do not exist.",
+				"Defaults to the current working directory when omitted."
 			],
 			"mandatory": false,
 			"name": "Directory",
@@ -175,7 +250,9 @@
 		},
 		{
 			"description": [
-				"The name of the screenshot file generated by the SaveScreenshot plugin. If omitted, a name is generated automatically."
+				"The name of the screenshot file.",
+				"When omitted a new GUID string is used as the file name.",
+				"The plugin always appends .png if the supplied or generated name does not already end with .png (case-insensitive)."
 			],
 			"mandatory": false,
 			"name": "FileName",
@@ -185,8 +262,10 @@
 	"pluginType": "Action",
 	"properties": [
 		{
+			"default": "Xpath",
 			"description": [
-				"The type of locator strategy employed when identifying the element specified in the `onElement` property."
+				"The locator strategy used to find the element specified in OnElement.",
+				"When OnElement is absent this property is ignored and the plugin takes a full-page screenshot."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -194,8 +273,9 @@
 		},
 		{
 			"description": [
-				"Specifies a target HTML element on the page for which a screenshot will be captured. ",
-				"When the `SaveScreenshot` plugin is executed with the `onElement` property, it captures a screenshot specifically focused on the identified HTML element."
+				"A locator expression that identifies the element to screenshot.",
+				"When supplied the plugin captures only that element instead of the full browser viewport.",
+				"When the element cannot be found the plugin falls back to a full-page screenshot without raising an error."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -210,10 +290,9 @@
 		"Any"
 	],
 	"summary": [
-		"The `SaveScreenshot` plugin captures and saves screenshots during automated test scenarios, providing visual confirmation and aiding in debugging.",
-		"Key features include capturing screenshots of the entire page or specific elements, specifying custom directories and filenames for saved screenshots, and generating unique filenames to avoid overwrites.",
-		"In RPA, it is used for verification and documentation, capturing screenshots at critical steps to ensure the application's interface matches the expected state and providing a visual record for comprehensive reports.",
-		"In automation testing, it supports visual regression testing, cross-browser testing, and historical tracking. It captures screenshots during different test runs to detect unexpected visual changes, ensures consistent rendering across various browsers, and creates a historical timeline of the application's behavior for deeper analysis."
+		"The `SaveScreenshot` plugin (also known as `GetScreenshot` and `TakeScreenshot`) captures and saves a PNG screenshot of the full browser viewport or a specific element to disk during automation workflows.",
+		"It automatically creates the target directory, enforces the `.png` extension on every output file, generates a unique GUID-based file name when none is provided, and appends every saved absolute path to the `SaveScreenshot:Screenshots` session parameter for downstream consumption.",
+		"Select this plugin whenever visual evidence, regression baselines, element-level captures, or screenshot audit trails are required — it is the dedicated screenshot action for both RPA workflows and automated test suites."
 	],
 	"version": "4"
 }
