@@ -11,6 +11,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SetWindowRectangle.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SetWindowRectangle.cs"
+			},
+			"rag": {
+				"description": "The SetWindowRectangle action resizes and repositions the browser window by applying any combination of Height, Width, X, and Y parameters. Omitted parameters keep the current window value by reading the live window rect from the driver before applying changes. The action maps to the W3C WebDriver Set Window Rect command (POST /session/{session id}/window/rect).",
+				"qa": [
+					{
+						"question": "What does the SetWindowRectangle action do?",
+						"answer": "SetWindowRectangle resizes and repositions the browser window to the specified pixel dimensions and screen coordinates. Any combination of Height, Width, X, and Y may be provided; omitted dimensions default to the current window values read from the driver."
+					},
+					{
+						"question": "What happens when a parameter is omitted from the argument?",
+						"answer": "When a parameter is absent, the action reads the current window rect from the driver and preserves that dimension unchanged. Only the explicitly supplied parameters are updated."
+					},
+					{
+						"question": "What is the alias for SetWindowRectangle?",
+						"answer": "SetWindowRectangle is also accepted as SetWindowRect — both resolve to identical behavior."
+					},
+					{
+						"question": "What parameters does SetWindowRectangle accept?",
+						"answer": "SetWindowRectangle accepts four optional Number parameters: Height (window height in pixels), Width (window width in pixels), X (left-edge X screen coordinate), and Y (top-edge Y screen coordinate). All are optional and can be combined freely."
+					},
+					{
+						"question": "Does SetWindowRectangle produce any output parameters?",
+						"answer": "No. SetWindowRectangle returns a default plugin response with no output parameters. The window geometry is applied via the driver but not echoed back into the session context."
+					},
+					{
+						"question": "What W3C WebDriver command underlies SetWindowRectangle?",
+						"answer": "SetWindowRectangle maps to the W3C WebDriver Set Window Rect command: POST /session/{session id}/window/rect."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,6 +51,7 @@
 					"name": "gears",
 					"svg": null
 				},
+				"label": "Set Window Rectangle",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,79 +59,208 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SetWindowRectangle` plugin is designed to automate the resizing and repositioning of the browser window within web automation workflows. ",
-		"It provides a seamless way to set the window's size and position, ensuring optimal layout and visibility for automated tasks.",
+		"The `SetWindowRectangle` action resizes and repositions the browser window by supplying any combination of `Height`, `Width`, `X`, and `Y` parameters.",
+		"Omitted parameters are preserved from the current window geometry, allowing size-only, position-only, or full-rect changes in a single call.",
+		"This action maps directly to the W3C WebDriver Set Window Rect command and is the primary way to enforce a specific window geometry before layout-sensitive steps.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature              | Description                                                                           |",
-		"|----------------------|---------------------------------------------------------------------------------------|",
-		"| Window Resizing      | Allows precise control over the height and width of the browser window.               |",
-		"| Window Repositioning | Enables setting the X and Y coordinates of the browser window for accurate placement. |",
+		"| Feature               | Description                                                                                                        |",
+		"|-----------------------|--------------------------------------------------------------------------------------------------------------------|",
+		"| Precise Resizing      | Sets window height and width to exact pixel values using `--Height` and `--Width`.                                 |",
+		"| Precise Repositioning | Sets the window's screen position to exact coordinates using `--X` (left edge) and `--Y` (top edge).               |",
+		"| Partial Apply         | Omitted parameters fall back to the current window value — one call can change only size, only position, or both.  |",
+		"| Flexible Combinations | Any subset of the four parameters is valid, enabling targeted adjustments without disturbing unrelated dimensions. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                   | Description                                                                                        |",
-		"|-------------------------|----------------------------------------------------------------------------------------------------|",
-		"| Screen Layout           | Optimizes the layout of the browser window for better visibility and interaction during RPA tasks. |",
-		"| Multi-Window Management | Manages multiple browser windows by setting specific sizes and positions.                          |",
-		"| Data Entry              | Facilitates data entry tasks by ensuring the browser window is appropriately sized and positioned. |",
+		"| Use Case               | Description                                                                                                  |",
+		"|------------------------|--------------------------------------------------------------------------------------------------------------|",
+		"| Screen Layout Control  | Position and size the browser window to avoid overlap with other application windows during RPA workflows.   |",
+		"| Multi-Window Placement | Tile or stack browser windows at known coordinates for multi-window automation scenarios.                    |",
+		"| Pre-Task Normalization | Establish a known window geometry before executing form-fill or scraping steps that rely on full visibility. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage               | Description                                                                                      |",
-		"|---------------------|--------------------------------------------------------------------------------------------------|",
-		"| UI Testing          | Ensures consistent testing conditions by setting the window size and position before tests.      |",
-		"| Responsive Design   | Tests different window sizes to verify the responsiveness of web applications.                   |",
-		"| Layout Verification | Verifies that web application layouts behave correctly under various window sizes and positions. |"
+		"| Use Case                  | Description                                                                                                         |",
+		"|---------------------------|---------------------------------------------------------------------------------------------------------------------|",
+		"| Responsive Design Testing | Resize the window to standard breakpoints (e.g. 1024×768, 1920×1080) to verify responsive layout rules.             |",
+		"| Layout Regression Testing | Enforce a fixed window size before taking screenshots or running visual comparisons.                                |",
+		"| Viewport Boundary Tests   | Position the window at edge coordinates to verify element visibility and scroll behaviour near viewport boundaries. |",
+		"| Window Geometry Assertion | Resize and then read back the window rect via another action to assert the driver applied the requested dimensions. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Driver enforces a browser-minimum size — the applied height or width may be larger than requested if the browser has a minimum dimension",
+						"Window is currently maximized or full screen — SetWindowRect implicitly exits that state before applying the new geometry",
+						"Screen resolution is smaller than the requested size — OS may cap the window to the display boundary",
+						"Floating-point inputs are parsed as doubles and passed to the driver — the driver may truncate to integers",
+						"Negative X or Y is silently rejected by some browsers — the window may be placed at (0, 0) instead"
+					],
+					"expected_result": "The browser window is resized to 1024 × 768 pixels and moved to screen position (100, 100).",
+					"notes": "All four parameters are provided. This is the full-rect form and replaces all four window dimensions in a single call.",
+					"use_case": "set_full_window_rect",
+					"version": "4"
+				},
+				"labels": [
+					"FullRect",
+					"Height",
+					"MoveAndResize",
+					"SetWindowRect",
+					"SetWindowRectangle",
+					"Width",
+					"X",
+					"Y"
+				]
+			},
 			"description": [
-				"Set the browser window size to 1024x768 pixels and position it at coordinates (100, 100). ",
-				"This configuration is useful for ensuring that the window is of a specific size and located at a particular position on the screen."
+				"### Set full window geometry — size and position in one call",
+				"",
+				"Resizes the browser window to 1024 × 768 pixels and moves it to screen coordinates (100, 100).",
+				"All four parameters are provided, making this the full-rect form that controls both size and position simultaneously."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Height:768 --Width:1024 --X:100 --Y:100}}",
 				"pluginName": "SetWindowRectangle"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"X and Y are absent — the current window position is preserved unchanged",
+						"Driver enforces a browser-minimum size — the applied height or width may be larger than 600 × 800",
+						"Window is currently maximized — SetWindowRect exits maximized state before applying the new size",
+						"Screen is smaller than 800 pixels wide — window may be capped at the display boundary"
+					],
+					"expected_result": "The browser window is resized to 800 × 600 pixels. Its screen position is unchanged.",
+					"notes": "Only Height and Width are supplied. The action reads the current X and Y from the driver and reapplies them unchanged, so the window changes only in size, not position.",
+					"use_case": "resize_only",
+					"version": "4"
+				},
+				"labels": [
+					"Height",
+					"ResizeOnly",
+					"SetWindowRect",
+					"SetWindowRectangle",
+					"Width"
+				]
+			},
 			"description": [
-				"Resize the browser window to 800x600 pixels without changing its current position. ",
-				"This configuration is useful for testing scenarios that require a specific window size without repositioning the window."
+				"### Resize the window without changing its position",
+				"",
+				"Resizes the browser window to 800 × 600 pixels while keeping its current screen position.",
+				"Use this form when only the window size needs to change and the position should remain where it is."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Height:600 --Width:800}}",
 				"pluginName": "SetWindowRectangle"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Height and Width are absent — the current window size is preserved unchanged",
+						"Negative coordinates — some browsers reject negative values and may place the window at (0, 0)",
+						"Coordinates move the window to a secondary monitor — behavior depends on the OS and browser driver",
+						"Window is currently full screen — SetWindowRect exits full-screen state before applying the new position"
+					],
+					"expected_result": "The browser window is moved to screen coordinates (200, 150). Its size is unchanged.",
+					"notes": "Only X and Y are supplied. The action reads the current Height and Width from the driver and reapplies them unchanged, so the window changes position only.",
+					"use_case": "reposition_only",
+					"version": "4"
+				},
+				"labels": [
+					"MoveOnly",
+					"RepositionOnly",
+					"SetWindowRect",
+					"SetWindowRectangle",
+					"X",
+					"Y"
+				]
+			},
 			"description": [
-				"Reposition the browser window to coordinates (200, 150) without changing its current size. ",
-				"This configuration is useful for organizing multiple windows on the screen by setting their specific positions."
+				"### Reposition the window without changing its size",
+				"",
+				"Moves the browser window to screen coordinates (200, 150) while keeping its current width and height.",
+				"Use this form when only the window position needs to change and the size should remain as-is."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --X:200 --Y:150}}",
 				"pluginName": "SetWindowRectangle"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Height and Y are absent — current height and Y position are preserved unchanged",
+						"Width of 1200 exceeds screen width — browser or OS may cap the applied width to the display boundary",
+						"X of 50 places the window partially near the left edge — verify coordinates against the target display resolution"
+					],
+					"expected_result": "The browser window width is set to 1200 pixels and its left-edge X position is moved to 50. Height and Y position are unchanged.",
+					"notes": "Width and X are supplied but Height and Y are omitted. The current height and Y are preserved. This demonstrates mixed partial-apply across the horizontal size and position axes.",
+					"use_case": "set_width_and_x",
+					"version": "4"
+				},
+				"labels": [
+					"HorizontalPartial",
+					"MixedPartial",
+					"SetWindowRect",
+					"SetWindowRectangle",
+					"Width",
+					"X"
+				]
+			},
 			"description": [
-				"Set the browser window width to 1200 pixels and reposition it to the X coordinate 50, keeping the current height and Y position. ",
-				"This combination allows for adjusting the window width and horizontal position while maintaining the existing height and vertical position."
+				"### Set window width and horizontal position together",
+				"",
+				"Sets the browser window width to 1200 pixels and moves its left edge to X coordinate 50, while leaving the height and Y position unchanged.",
+				"Use this form to adjust only the horizontal geometry — width and X — in a single call."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Width:1200 --X:50}}",
 				"pluginName": "SetWindowRectangle"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Width and X are absent — current width and X position are preserved unchanged",
+						"Y of 300 may push the window below the visible area on displays with limited vertical resolution",
+						"Height of 700 combined with Y of 300 may extend the window below the screen boundary — OS may clip or reposition"
+					],
+					"expected_result": "The browser window height is set to 700 pixels and its top-edge Y position is moved to 300. Width and X position are unchanged.",
+					"notes": "Height and Y are supplied but Width and X are omitted. The current width and X are preserved. This demonstrates mixed partial-apply across the vertical size and position axes.",
+					"use_case": "set_height_and_y",
+					"version": "4"
+				},
+				"labels": [
+					"Height",
+					"MixedPartial",
+					"SetWindowRect",
+					"SetWindowRectangle",
+					"VerticalPartial",
+					"Y"
+				]
+			},
 			"description": [
-				"Set the browser window height to 700 pixels and reposition it to the Y coordinate 300, keeping the current width and X position. ",
-				"This combination allows for adjusting the window height and vertical position while maintaining the existing width and horizontal position."
+				"### Set window height and vertical position together",
+				"",
+				"Sets the browser window height to 700 pixels and moves its top edge to Y coordinate 300, while leaving the width and X position unchanged.",
+				"Use this form to adjust only the vertical geometry — height and Y — in a single call."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Height:700 --Y:300}}",
 				"pluginName": "SetWindowRectangle"
 			}
@@ -108,7 +271,8 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the height of the browser window in pixels."
+				"Specifies the height of the browser window in pixels.",
+				"When absent, the current window height is read from the driver and preserved unchanged."
 			],
 			"mandatory": false,
 			"name": "Height",
@@ -116,7 +280,8 @@
 		},
 		{
 			"description": [
-				"Specifies the width of the browser window in pixels."
+				"Specifies the width of the browser window in pixels.",
+				"When absent, the current window width is read from the driver and preserved unchanged."
 			],
 			"mandatory": false,
 			"name": "Width",
@@ -124,7 +289,8 @@
 		},
 		{
 			"description": [
-				"Specifies the X coordinate of the browser window's position."
+				"Specifies the X coordinate of the browser window's left edge on the screen.",
+				"When absent, the current window X position is read from the driver and preserved unchanged."
 			],
 			"mandatory": false,
 			"name": "X",
@@ -132,20 +298,25 @@
 		},
 		{
 			"description": [
-				"Specifies the Y coordinate of the browser window's position."
+				"Specifies the Y coordinate of the browser window's top edge on the screen.",
+				"When absent, the current window Y position is read from the driver and preserved unchanged."
 			],
 			"mandatory": false,
 			"name": "Y",
 			"type": "Number"
 		}
 	],
+	"platforms": [
+		"MobileWeb",
+		"Web"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"The `Argument` property allows for customization of the plugin's behavior by providing specific instructions or parameters. ",
-				"In the case of the `SetWindowRectangle` plugin, it defines the height, width, and position coordinates (X, Y) of the browser window. ",
-				"This flexibility ensures the plugin's adaptability to various scenarios encountered during automation workflows."
+				"Argument provides the CLI-formatted parameter string for setting the window rectangle.",
+				"Accepted parameters are --Height, --Width, --X, and --Y.",
+				"Any combination of the four parameters is valid; omitted parameters fall back to the current window value read from the driver."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -156,14 +327,10 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#set-window-rect",
 		"w3c": "POST /session/{session id}/window/rect"
 	},
-	"platforms": [
-		"Web",
-		"MobileWeb"
-	],
 	"summary": [
-		"The `SetWindowRectangle` plugin automates the resizing and repositioning of the browser window, providing precise control over its size and position.",
-		"In robotic process automation (RPA), it optimizes the layout of the browser window for better visibility and interaction.",
-		"In automation testing, it ensures consistent testing conditions and verifies the responsiveness and layout behavior of web applications."
+		"The `SetWindowRectangle` action resizes and repositions the browser window to exact pixel dimensions and screen coordinates using the W3C WebDriver Set Window Rect command.",
+		"Any combination of Height, Width, X, and Y parameters is accepted; omitted parameters default to the current window value, enabling size-only, position-only, or full-rect changes in a single call.",
+		"In RPA and automation testing, it ensures reproducible window geometry for layout-sensitive workflows, multi-window coordination, and responsive-design verification."
 	],
 	"version": "4"
 }
