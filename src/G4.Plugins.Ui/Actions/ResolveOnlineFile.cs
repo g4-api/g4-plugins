@@ -14,9 +14,13 @@ namespace G4.Plugins.Ui.Actions
 {
     [G4Plugin(
         assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Ui.Actions.Manifests.{nameof(ResolveOnlineFile)}.json")]
+        manifest: $"G4.Plugins.Ui.Actions.Manifests.{NameReference}.json")]
     public class ResolveOnlineFile(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        // Define a constant for the plugin name reference to ensure
+        // consistent namespacing of session parameters.
+        private const string NameReference = nameof(ResolveOnlineFile);
+
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Initialize the parameters for the HTTP client
@@ -94,13 +98,13 @@ namespace G4.Plugins.Ui.Actions
         private static void CleanSessionParameters(IAutomationInvoker invoker)
         {
             // Remove any previously set session parameters related to file resolution
-            invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileData", out _);
-            invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileExtension", out _);
-            invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileFullName", out _);
-            invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileName", out _);
-            invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileSize", out _);
-            invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileStatusCode", out _);
-            invoker.Context.SessionParameters.TryRemove(key: "ResolvedFileUri", out _);
+            invoker.Context.SessionParameters.TryRemove(key: $"{NameReference}:Data", out _);
+            invoker.Context.SessionParameters.TryRemove(key: $"{NameReference}:Extension", out _);
+            invoker.Context.SessionParameters.TryRemove(key: $"{NameReference}:FullName", out _);
+            invoker.Context.SessionParameters.TryRemove(key: $"{NameReference}:Name", out _);
+            invoker.Context.SessionParameters.TryRemove(key: $"{NameReference}:Size", out _);
+            invoker.Context.SessionParameters.TryRemove(key: $"{NameReference}:StatusCode", out _);
+            invoker.Context.SessionParameters.TryRemove(key: $"{NameReference}:Uri", out _);
         }
 
         // Gets the URI based on the provided action rule and web element.
@@ -135,13 +139,13 @@ namespace G4.Plugins.Ui.Actions
             var pluginResponse = plugin.NewPluginResponse();
 
             // Store the processed values in session parameters (keys in alphabetical order)
-            plugin.Invoker.Context.SessionParameters["ResolvedFileData"] = data.ConvertToBase64();
-            plugin.Invoker.Context.SessionParameters["ResolvedFileExtension"] = extension.ConvertToBase64();
-            plugin.Invoker.Context.SessionParameters["ResolvedFileFullName"] = fullName;
-            plugin.Invoker.Context.SessionParameters["ResolvedFileName"] = name.ConvertToBase64();
-            plugin.Invoker.Context.SessionParameters["ResolvedFileSize"] = size;
-            plugin.Invoker.Context.SessionParameters["ResolvedFileStatusCode"] = statusCode;
-            plugin.Invoker.Context.SessionParameters["ResolvedFileUri"] = uri.ConvertToBase64();
+            plugin.AddSessionParameter(@namespace: NameReference, name: "Data", value: data);
+            plugin.AddSessionParameter(@namespace: NameReference, name: "Extension", value: extension);
+            plugin.AddSessionParameter(@namespace: NameReference, name: "FullName", value: fullName);
+            plugin.AddSessionParameter(@namespace: NameReference, name: "Name", value: name);
+            plugin.AddSessionParameter(@namespace: NameReference, name: "Size", value: $"{size}");
+            plugin.AddSessionParameter(@namespace: NameReference, name: "StatusCode", value: $"{statusCode}");
+            plugin.AddSessionParameter(@namespace: NameReference, name: "Uri", value: uri);
 
             // Populate the Entity dictionary with the provided parameters
             pluginResponse.Entity = new Dictionary<string, object>

@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
 		"name": "Roei Sabag"
@@ -8,14 +8,9 @@
 	],
 	"context": {
 		"integration": {
-			"sequentialWorkflow": {
-				"$type": "Action",
-				"componentType": "task",
-				"iconProvider": {
-					"name": "file-arrow-down",
-					"svg": null
-				},
-				"model": "ActionRuleModel"
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ResolveOnlineFile.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/ResolveOnlineFile.cs"
 			},
 			"rag": {
 				"description": "The ResolveOnlineFile plugin enables automation workflows to reliably locate and download files from a URL or web element, apply optional regex filtering, convert file data to Base64, and store content plus metadata in session parameters with automatic cleanup and error logging to preserve workflow integrity.",
@@ -62,7 +57,7 @@
 					},
 					{
 						"question": "What outputParameters does this plugin return?",
-						"answer": "It returns ResolvedFileData, ResolvedFileExtension, ResolvedFileFullName, ResolvedFileName, ResolvedFileSize, ResolvedFileStatusCode, and ResolvedFileUri as session parameters."
+						"answer": "It returns ResolveOnlineFile:Data, ResolveOnlineFile:Extension, ResolveOnlineFile:FullName, ResolveOnlineFile:Name, ResolveOnlineFile:Size, ResolveOnlineFile:StatusCode, and ResolveOnlineFile:Uri as session parameters."
 					},
 					{
 						"question": "What does the entity section define?",
@@ -89,6 +84,16 @@
 						"answer": "The summary explains that the tool grabs a file link or finds it on a page, downloads and encodes the file, records its name, type, size, and download status, and clears data on failure."
 					}
 				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "file-arrow-down",
+					"svg": null
+				},
+				"label": "Resolve Online File",
+				"model": "ActionRuleModel"
 			}
 		}
 	},
@@ -136,7 +141,7 @@
 		},
 		{
 			"description": [
-				"File extension without a dot, like “pdf” or “jpg”, that tells you the file type.",
+				"File extension without a dot, like \u201cpdf\u201d or \u201cjpg\u201d, that tells you the file type.",
 				"Knowing the extension helps scripts choose the right way to open or save the file.",
 				"It determines how the file can be processed or displayed."
 			],
@@ -145,7 +150,7 @@
 		},
 		{
 			"description": [
-				"Complete file name including its extension, for example “report.pdf”.",
+				"Complete file name including its extension, for example \u201creport.pdf\u201d.",
 				"Use this name when saving or displaying the file to keep it recognizable.",
 				"It comes directly from the resource's address."
 			],
@@ -154,7 +159,7 @@
 		},
 		{
 			"description": [
-				"File name without its extension, for example “report” from “report.pdf”.",
+				"File name without its extension, for example \u201creport\u201d from \u201creport.pdf\u201d.",
 				"Using the base name helps when you need a label separate from the file format.",
 				"It makes it easier to organize files by name only."
 			],
@@ -163,7 +168,7 @@
 		},
 		{
 			"description": [
-				"Size of the downloaded file in bytes as a text number like “102400”.",
+				"Size of the downloaded file in bytes as a text number like \u201c102400\u201d.",
 				"Knowing the file size helps workflows decide if the file is too large or small.",
 				"Scripts can use this value to enforce limits or display progress information."
 			],
@@ -172,7 +177,7 @@
 		},
 		{
 			"description": [
-				"HTTP status code from the download request, such as “200” for success or “404” if not found.",
+				"HTTP status code from the download request, such as \u201c200\u201d for success or \u201c404\u201d if not found.",
 				"Using the status code lets workflows handle errors or confirm success.",
 				"Scripts can check this value to decide what to do next."
 			],
@@ -209,7 +214,7 @@
 					"expected_result": "The PDF file at the specified URL is downloaded and made available for further processing.",
 					"notes": "Binary file contents are returned unchanged to ensure fidelity.",
 					"use_case": "file_resolution_full",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"FileRetrieval"
@@ -234,7 +239,7 @@
 					"expected_result": "The PDF file is downloaded, and the link text matching the XPath is extracted and returned.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing.",
 					"use_case": "file_resolution_element_xpath",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"ElementText",
@@ -268,7 +273,7 @@
 					"expected_result": "The file at the URL is downloaded, and the link text matching the CSS selector is extracted and returned.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing.",
 					"use_case": "file_resolution_element_css",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"ElementText",
@@ -304,7 +309,7 @@
 					"expected_result": "The file is downloaded, the link element matching the XPath is selected, and the URL matching the regex is returned as a string.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing and filtering.",
 					"use_case": "file_resolution_element_xpath_regex_extraction",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"FileRetrieval",
@@ -340,7 +345,7 @@
 					"expected_result": "The file is downloaded, and the href attribute of the link matching the XPath is extracted and returned as a string.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing.",
 					"use_case": "file_resolution_element_xpath_attribute_extraction",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"AttributeExtraction",
@@ -376,7 +381,7 @@
 					"expected_result": "The file is downloaded, the href attribute of the link matching the XPath is extracted, and the regex is applied to strip query parameters, returning the cleaned value.",
 					"notes": "Extracted values are converted to strings to ensure consistent processing and filtering.",
 					"use_case": "file_resolution_element_xpath_attribute_regex_extraction",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"FileRetrieval",
@@ -409,52 +414,52 @@
 				"Encoded data can be converted back into the original file for use or storage.",
 				"Keeping file data in text form helps scripts move it without breaking."
 			],
-			"name": "ResolvedFileData",
+			"name": "ResolveOnlineFile:Data",
 			"type": "String"
 		},
 		{
 			"description": [
-				"File extension without a dot, like “pdf” or “jpg”, that tells you the file type.",
+				"File extension without a dot, like \u201cpdf\u201d or \u201cjpg\u201d, that tells you the file type.",
 				"Knowing the extension helps scripts choose the right way to open or save the file.",
 				"It determines how the file can be processed or displayed."
 			],
-			"name": "ResolvedFileExtension",
+			"name": "ResolveOnlineFile:Extension",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Complete file name including its extension, for example “report.pdf”.",
+				"Complete file name including its extension, for example \u201creport.pdf\u201d.",
 				"Use this name when saving or displaying the file to keep it recognizable.",
 				"It comes directly from the resource's address."
 			],
-			"name": "ResolvedFileFullName",
+			"name": "ResolveOnlineFile:FullName",
 			"type": "String"
 		},
 		{
 			"description": [
-				"File name without its extension, for example “report” from “report.pdf”.",
+				"File name without its extension, for example \u201creport\u201d from \u201creport.pdf\u201d.",
 				"Using the base name helps when you need a label separate from the file format.",
 				"It makes it easier to organize files by name only."
 			],
-			"name": "ResolvedFileName",
+			"name": "ResolveOnlineFile:Name",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Size of the downloaded file in bytes as a text number like “102400”.",
+				"Size of the downloaded file in bytes as a text number like \u201c102400\u201d.",
 				"Knowing the file size helps workflows decide if the file is too large or small.",
 				"Scripts can use this value to enforce limits or display progress information."
 			],
-			"name": "ResolvedFileSize",
+			"name": "ResolveOnlineFile:Size",
 			"type": "String"
 		},
 		{
 			"description": [
-				"HTTP status code from the download request, such as “200” for success or “404” if not found.",
+				"HTTP status code from the download request, such as \u201c200\u201d for success or \u201c404\u201d if not found.",
 				"Using the status code lets workflows handle errors or confirm success.",
 				"Scripts can check this value to decide what to do next."
 			],
-			"name": "ResolvedFileStatusCode",
+			"name": "ResolveOnlineFile:StatusCode",
 			"type": "String"
 		},
 		{
@@ -463,7 +468,7 @@
 				"Logging the exact address helps track which resource was used or retried.",
 				"Using the URI makes auditing and debugging more reliable."
 			],
-			"name": "ResolvedFileUri",
+			"name": "ResolveOnlineFile:Uri",
 			"type": "String"
 		}
 	],
