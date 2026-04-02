@@ -6,24 +6,23 @@
     /// <param name="credentials">The credentials (token or stored credentials name) used to authenticate requests to Google APIs.</param>
     internal class GoogleAdapter(string credentials)
     {
+        #region *** Constants  ***
         /// <summary>
         /// Represents the ISO 8601 date and time format string with milliseconds and a UTC designator.
         /// </summary>
         public const string Iso = "yyyy-MM-ddTHH:mm:ss.fffZ";
+        #endregion
 
+        #region *** Properties ***
         /// <summary>
         /// Gets an authenticated Gmail client instance for accessing Gmail APIs.
         /// </summary>
-        public GmailClient Gmail { get; } = new(credentials);
-
-        /// <summary>
-        /// Gets an authenticated TaskLists client instance for accessing Google TaskLists APIs.
-        /// </summary>
-        public TaskListsClient TaskLists { get; } = new(credentials);
+        public GmailAdapter Gmail => new(credentials);
         
         /// <summary>
         /// Gets an authenticated Tasks client instance for accessing Google Tasks APIs.
         /// </summary>
-        public TasksClient Tasks { get; } = new(credentials);
+        public TasksAdapter Tasks => new(credentials);
+        #endregion
     }
 }

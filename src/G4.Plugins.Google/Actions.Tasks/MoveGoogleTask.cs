@@ -82,7 +82,7 @@ namespace G4.Plugins.Google.Actions.Tasks
             };
 
             // Move the task and capture the updated task returned by the API.
-            var task = adapter.Tasks.Move(tasksListId, taskId, options);
+            var task = adapter.Tasks.Tasks.Move(tasksListId, taskId, options);
 
             // Persist response details in session parameters (Base64-encoded).
             this.AddSessionParameter(@namespace: NameReference, name: "Id", value: task.Id);

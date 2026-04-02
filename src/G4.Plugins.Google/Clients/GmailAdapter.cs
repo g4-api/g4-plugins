@@ -1,5 +1,4 @@
 ﻿/*
- * 
  * RESOURCES:
  * https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages
  * https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.labels
@@ -16,11 +15,14 @@ namespace G4.Plugins.Google.Clients
     /// Provides a client for accessing Gmail API functionality for an authenticated user.
     /// </summary>
     /// <param name="credentials">The credentials used to authenticate requests to the Gmail API.</param>
-    internal class GmailClient(string credentials) : ClientBase(credentials)
+    internal class GmailAdapter(string credentials)
     {
+        #region *** Fields       ***
         // Store the credentials in a private readonly field to be used by the nested clients.
         private readonly string _credentials = credentials;
+        #endregion
 
+        #region *** Properties   ***
         /// <summary>
         /// Gets the client used to manage and interact with labels.
         /// </summary>
@@ -30,7 +32,9 @@ namespace G4.Plugins.Google.Clients
         /// Gets the client for sending and receiving messages.
         /// </summary>
         public MessagesClient Messages => new(_credentials);
+        #endregion
 
+        #region *** Nested Types ***
         /// <summary>
         /// A client for interacting with the Gmail API's messages endpoints,
         /// allowing retrieval and management of Gmail messages for the authenticated user.
@@ -252,5 +256,6 @@ namespace G4.Plugins.Google.Clients
                 return HttpClient.Send<LabelModel>(requestMessage);
             }
         }
+        #endregion
     }
 }

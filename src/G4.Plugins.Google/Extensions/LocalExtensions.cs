@@ -60,6 +60,7 @@ namespace G4.Plugins.Google.Extensions
             {
                 // Resolve the task list id from either the list id or list title.
                 var taskListId = adapter
+                    .Tasks
                     .TaskLists
                     .Get()
                     .Items
@@ -88,7 +89,7 @@ namespace G4.Plugins.Google.Extensions
                         : new ListTasksRequestModel { MaxResults = 100, PageToken = nextPageToken };
 
                     // Retrieve the current page of tasks from the resolved list.
-                    var tasksPage = adapter.Tasks.Get(taskListId, options);
+                    var tasksPage = adapter.Tasks.Tasks.Get(taskListId, options);
 
                     // Read the tasks returned in the current page.
                     var tasks = tasksPage.Items;
@@ -215,6 +216,7 @@ namespace G4.Plugins.Google.Extensions
             {
                 // Resolve the task list id from either the list id or list title.
                 var taskListId = adapter
+                    .Tasks
                     .TaskLists
                     .Get()
                     .Items
@@ -243,7 +245,7 @@ namespace G4.Plugins.Google.Extensions
                         : new ListTasksRequestModel { MaxResults = 100, PageToken = nextPageToken };
 
                     // Retrieve the current page of tasks from the resolved list.
-                    var tasksPage = adapter.Tasks.Get(taskListId, options);
+                    var tasksPage = adapter.Tasks.Tasks.Get(taskListId, options);
 
                     // Search the current page by task id or task title.
                     var task = tasksPage.Items
@@ -308,7 +310,7 @@ namespace G4.Plugins.Google.Extensions
                         : new ListTaskListsRequestModel { MaxResults = 1000, PageToken = nextPageToken };
 
                     // Retrieve the current page of task lists.
-                    var taskListsPage = adapter.TaskLists.Get(options);
+                    var taskListsPage = adapter.Tasks.TaskLists.Get(options);
 
                     // Search the current page by task list id or task list title.
                     var taskList = taskListsPage.Items

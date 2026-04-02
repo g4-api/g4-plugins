@@ -28,7 +28,7 @@ namespace G4.Plugins.Google.Actions.Tasks
 
             // Get the lists from Google using the plugin's static method,
             // which handles both token and credentials scenarios.
-            var response = adapter.TaskLists.Get();
+            var response = adapter.Tasks.TaskLists.Get();
             var value = JsonSerializer.Serialize(response, PluginDataModel.JsonOptions);
 
             // Persist the exported lists in session parameters (Base64-encoded for safe transport/storage).

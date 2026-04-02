@@ -23,6 +23,7 @@ namespace G4.Plugins.Google.Actions.Tasks
             // Remove an existing Gmail Task List using the adapter.
             // The adapter abstracts the underlying API calls, allowing for cleaner and more maintainable code.
             new GoogleAdapter(credentials)
+                .Tasks
                 .TaskLists
                 .Remove(taskList: id);
 

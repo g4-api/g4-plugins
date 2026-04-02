@@ -35,7 +35,7 @@ namespace G4.Plugins.Google.Actions.Tasks
             var adapter = new GoogleAdapter(credentials);
 
             // Update an existing Gmail Task List using the adapter and capture the response.
-            var response = adapter.TaskLists.Update(taskList: id, requestBody: new()
+            var response = adapter.Tasks.TaskLists.Update(taskList: id, requestBody: new()
             {
                 Title = title
             });

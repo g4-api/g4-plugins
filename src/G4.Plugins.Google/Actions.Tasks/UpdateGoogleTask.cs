@@ -72,7 +72,7 @@ namespace G4.Plugins.Google.Actions.Tasks
             }
 
             // Update the task in the resolved list.
-            var task = adapter.Tasks.Update(taskListId, taskId, new()
+            var task = adapter.Tasks.Tasks.Update(taskListId, taskId, new()
             {
                 Title = title,
                 Notes = notes,

@@ -32,7 +32,7 @@ namespace G4.Plugins.Google.Actions.Tasks
             var adapter = new GoogleAdapter(credentials);
 
             // Create a new Gmail Task List using the adapter and capture the response.
-            var response = adapter.TaskLists.Add(requestBody: new()
+            var response = adapter.Tasks.TaskLists.Add(requestBody: new()
             {
                 Title = title
             });

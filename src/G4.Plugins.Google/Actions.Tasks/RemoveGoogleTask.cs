@@ -50,7 +50,7 @@ namespace G4.Plugins.Google.Actions.Tasks
             }
 
             // Delete the task using the adapter.
-            adapter.Tasks.Remove(taskListId, taskId);
+            adapter.Tasks.Tasks.Remove(taskListId, taskId);
 
             // Indicate successful completion.
             return this.NewPluginResponse();

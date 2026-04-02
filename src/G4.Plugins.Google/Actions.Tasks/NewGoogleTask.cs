@@ -56,7 +56,7 @@ namespace G4.Plugins.Google.Actions.Tasks
             }
 
             // Create the task in the resolved list.
-            var task = adapter.Tasks.Add(tasksListId, new()
+            var task = adapter.Tasks.Tasks.Add(tasksListId, new()
             {
                 Title = title,
                 Notes = notes,
