@@ -11,6 +11,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SwitchWindow.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SwitchWindow.cs"
+			},
+			"rag": {
+				"description": "The SwitchWindow action switches WebDriver focus to a different browser window or tab. Mode selection is determined at runtime by `int.TryParse(pluginData.Rule.Argument, out int index)`: when parsing succeeds the plugin calls `WebDriver.SwitchTo().Window(index)` using the zero-based integer index; when parsing fails the plugin calls `WebDriver.SwitchTo().Window(handle)` using the raw Argument string as a window handle. No named parameters exist — only the Argument property is consumed. The plugin returns a standard PluginResponseModel with no extra output data.",
+				"qa": [
+					{
+						"question": "How does SwitchWindow decide whether to switch by index or by handle?",
+						"answer": "`int.TryParse(pluginData.Rule.Argument, out int index)` is evaluated at the start of OnSend. If parsing succeeds the plugin calls `WebDriver.SwitchTo().Window(index)` directly. If parsing fails — because Argument is absent, empty, or a non-integer string — the plugin passes the raw Argument string to `WebDriver.SwitchTo().Window(handle)`."
+					},
+					{
+						"question": "What happens when SwitchWindow is invoked with Argument set to \"0\"?",
+						"answer": "`int.TryParse(\"0\", out int index)` succeeds with index = 0. The plugin calls `WebDriver.SwitchTo().Window(0)`, switching context into the first open window or tab (zero-based). No handle resolution occurs."
+					},
+					{
+						"question": "What happens when Argument is a window handle string such as \"CDwindow-ABCD1234\"?",
+						"answer": "`int.TryParse(\"CDwindow-ABCD1234\", ...)` fails and returns false. The plugin calls `WebDriver.SwitchTo().Window(\"CDwindow-ABCD1234\")` directly. WebDriver routes the call to the W3C switch-to-window endpoint using that handle. If the handle does not correspond to an open window, WebDriver throws NoSuchWindowException."
+					},
+					{
+						"question": "What happens when Argument is a decimal string such as \"1.5\"?",
+						"answer": "`int.TryParse(\"1.5\", ...)` fails and returns false. The plugin falls through to the handle path and calls `WebDriver.SwitchTo().Window(\"1.5\")`. Because \"1.5\" is not a valid window handle, WebDriver throws NoSuchWindowException."
+					},
+					{
+						"question": "Does SwitchWindow produce any output parameters?",
+						"answer": "No. The plugin returns `this.NewPluginResponse()` with no additional payload. There are no output parameters or extra session-data entries added to the response."
+					},
+					{
+						"question": "What happens when Argument is an empty string or absent?",
+						"answer": "`int.TryParse(\"\", ...)` and `int.TryParse(null, ...)` both fail and return false. The plugin falls through to the handle path and calls `WebDriver.SwitchTo().Window(\"\")` or `WebDriver.SwitchTo().Window(null)` respectively. Neither is a valid window handle; WebDriver throws NoSuchWindowException or ArgumentNullException depending on the driver implementation. There is no default-window fallback in the plugin."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,6 +51,7 @@
 					"name": "window-restore",
 					"svg": null
 				},
+				"label": "Switch Window",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,35 +59,76 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchWindow` plugin automates the process of switching between different browser windows or tabs during web-based automation tasks. ",
-		"This functionality is essential for workflows that involve multiple windows or tabs, ensuring that the correct window is focused and interacted with as needed.",
+		"The `SwitchWindow` plugin switches WebDriver context to a different browser window or tab.",
+		"Mode selection is automatic: at runtime `int.TryParse(pluginData.Rule.Argument, out int index)` determines the path — a successful parse triggers the index path; a failed parse triggers the handle path.",
+		"No other parameters exist; the entire switching contract is expressed through a single `Argument` value.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                | Description                                                                                        |",
-		"|------------------------|----------------------------------------------------------------------------------------------------|",
-		"| Index-based Switching  | Allows switching to a window using its index, facilitating navigation among multiple open windows. |",
-		"| Handle-based Switching | Enables switching to a window using its handle, providing flexibility in window management.        |",
+		"| Feature                  | Description                                                                                                                                  |",
+		"|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Automatic Mode Selection | `int.TryParse` is the sole gate: integer strings use the index path; all other strings use the handle path. No explicit mode flag is needed. |",
+		"| Switch by Index          | When `Argument` parses as an integer, calls `WebDriver.SwitchTo().Window(index)` using the zero-based index — no handle resolution occurs.   |",
+		"| Switch by Handle         | When `Argument` is non-integer, calls `WebDriver.SwitchTo().Window(handle)` passing the raw string as a WebDriver window handle.             |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                                 | Description                                                                                   |",
-		"|---------------------------------------|-----------------------------------------------------------------------------------------------|",
-		"| Multi-Window Workflows                | Automates the process of switching between multiple windows or tabs during complex workflows. |",
-		"| Data Collection from Multiple Sources | Facilitates the collection of data from different windows or tabs simultaneously.             |",
+		"| Usage                          | Description                                                                                                                        |",
+		"|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Multi-Window Workflows         | Automates switching to a specific window or tab during complex workflows that span multiple browser contexts.                      |",
+		"| Data Collection Across Sources | Focuses driver context on a target window to extract or interact with content before returning to the main session.                |",
+		"| Pop-up Handling                | Switches to a newly opened pop-up window triggered by a page action, performs work, and returns to the parent tab.                 |",
+		"| Sequential Tab Processing      | Iterates through open tabs by incrementing the index argument, allowing bots to process each tab in order without storing handles. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage              | Description                                                                                               |",
-		"|--------------------|-----------------------------------------------------------------------------------------------------------|",
-		"| UI Testing         | Validates the behavior of applications across multiple windows or tabs by switching context as needed.    |",
-		"| End-to-End Testing | Ensures comprehensive test coverage by automating window switching as part of user interaction scenarios. |"
+		"| Usage                | Description                                                                                                                            |",
+		"|----------------------|----------------------------------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing           | Validates application behavior across multiple windows or tabs by switching driver context as part of test flows.                      |",
+		"| End-to-End Testing   | Ensures comprehensive coverage by automating window switches that mirror real user interactions with the browser.                      |",
+		"| Handle-Based Control | Targets a specific window by its known handle for deterministic test isolation when multiple windows are open.                         |",
+		"| Window Order Testing | Verifies that the application opens and maintains windows in the expected order by switching via index and asserting content or state. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Index 0 is zero-based — it targets the first open window or tab in the WebDriver window handle list, not necessarily the window that was opened first",
+						"Negative integer — `int.TryParse` succeeds for negative values such as '-1'; WebDriver passes the negative index to the W3C endpoint, which typically throws NoSuchWindowException or an equivalent driver-level error",
+						"Index exceeds the number of open windows — WebDriver throws NoSuchWindowException; the plugin does not validate the index range before calling `SwitchTo().Window()`",
+						"Argument is an empty string — `int.TryParse` fails for an empty string; the plugin falls through to the handle path and calls `WebDriver.SwitchTo().Window(\"\")`, which typically throws NoSuchWindowException",
+						"Argument is whitespace-only — `int.TryParse` fails for whitespace; the plugin falls through to the handle path and calls `WebDriver.SwitchTo().Window(whitespace)`, which throws NoSuchWindowException",
+						"Argument is a decimal string such as '1.5' — `int.TryParse` fails; the plugin passes '1.5' as a handle string, which is not a valid window handle and throws NoSuchWindowException",
+						"Only one window is open and index 1 is supplied — index 1 is out of range; WebDriver throws NoSuchWindowException",
+						"`Int32.MaxValue` (2147483647) as Argument — `int.TryParse` succeeds; WebDriver attempts to switch to that index position, which is beyond any realistic window count and throws NoSuchWindowException"
+					],
+					"expected_result": "WebDriver context switches to the second open window or tab (zero-based index 1).",
+					"notes": "`int.TryParse` succeeds for any valid integer string. The zero-based index maps directly to the position in the WebDriver window handle list passed to the W3C switch-to-window endpoint.",
+					"use_case": "switch_by_index",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"BrowserTab",
+					"IndexBased",
+					"IntegerArgument",
+					"MultiWindow",
+					"TabNavigation",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver",
+					"WindowNavigation",
+					"WindowSwitching",
+					"ZeroBasedIndex"
+				]
+			},
 			"description": [
-				"Switch to the window with index `1`. ",
-				"This is useful for navigating to a specific window when multiple windows are open."
+				"### Switch to a window by index",
+				"",
+				"Switch WebDriver context to the second open window or tab by passing its zero-based index `1` as the `Argument`.",
+				"When `Argument` parses as an integer, `WebDriver.SwitchTo().Window(index)` is called directly — no handle resolution occurs.",
+				"Index `0` targets the first window; `1` the second, and so on."
 			],
 			"rule": {
 				"argument": "1",
@@ -61,24 +136,63 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Handle does not match any open window — WebDriver throws NoSuchWindowException; the plugin does not validate that the handle is in the active window list before calling `SwitchTo().Window()`",
+						"Handle belongs to a window that was closed — WebDriver throws NoSuchWindowException because closed windows are removed from the handle list",
+						"Handle string parses as an integer — `int.TryParse` succeeds and the value is treated as an index, not a handle; use a non-numeric window handle to force the handle path",
+						"Handle is an empty string — `int.TryParse` fails for an empty string; `WebDriver.SwitchTo().Window(\"\")` is called, which typically throws NoSuchWindowException",
+						"Handle is null — `int.TryParse(null, ...)` fails; `WebDriver.SwitchTo().Window(null)` is called, which may throw ArgumentNullException or NoSuchWindowException depending on the driver",
+						"Handle is a valid driver-assigned identifier such as 'CDwindow-ABCD1234' — WebDriver routes directly to that window without iterating the handle list",
+						"Handle contains extra whitespace — the raw Argument string (including whitespace) is passed verbatim to the W3C endpoint; no trimming occurs, so ' CDwindow-ABCD1234' does not match the registered handle and throws NoSuchWindowException",
+						"Handle from a different WebDriver session — each session maintains its own handle namespace; a handle from a second session is not valid in the current session and throws NoSuchWindowException"
+					],
+					"expected_result": "WebDriver context switches to the window identified by the handle `CDwindow-ABCD1234`.",
+					"notes": "Window handles are driver-assigned opaque strings returned by `WebDriver.WindowHandles`. Pass the exact handle string as `Argument` to target a specific window deterministically, independent of window order.",
+					"use_case": "switch_by_handle",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"BrowserTab",
+					"DeterministicSwitch",
+					"HandleBased",
+					"MultiWindow",
+					"OpaqueHandle",
+					"PopupWindow",
+					"TabNavigation",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver",
+					"WindowHandle",
+					"WindowNavigation",
+					"WindowSwitching"
+				]
+			},
 			"description": [
-				"Switch to the window with the handle `CDwindow-1234`. ",
-				"This is useful for switching to a window with a known handle, ensuring the correct window is focused."
+				"### Switch to a window by handle",
+				"",
+				"Switch WebDriver context to the window identified by the handle `CDwindow-ABCD1234`.",
+				"When `Argument` cannot be parsed as an integer, the raw string is passed directly to `WebDriver.SwitchTo().Window(handle)`.",
+				"Obtain the handle from `WebDriver.WindowHandles` before invoking this plugin to ensure the value is current and valid."
 			],
 			"rule": {
-				"argument": "CDwindow-1234",
+				"argument": "CDwindow-ABCD1234",
 				"pluginName": "SwitchWindow"
 			}
 		}
 	],
 	"key": "SwitchWindow",
 	"namespace": "G4.Plugins.Ui",
+	"parameters": [],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the identifier for the window to switch to. ",
-				"It can be either an index (e.g., `1`) or a window handle (e.g., `CDwindow-1234`)."
+				"Specifies the target window to switch to.",
+				"When the value parses as an integer, the plugin switches by zero-based window index via `WebDriver.SwitchTo().Window(index)`.",
+				"When the value is non-integer, the plugin passes the raw string to `WebDriver.SwitchTo().Window(handle)` as a WebDriver window handle."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -94,9 +208,9 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The `SwitchWindow` plugin automates the process of switching between different browser windows or tabs during automation tasks.",
-		"In robotic process automation (RPA), it facilitates navigation and interaction across multiple windows or tabs within workflows.",
-		"In automation testing, it enables comprehensive test coverage by allowing the automation scripts to switch context as needed."
+		"The `SwitchWindow` plugin switches WebDriver context to a different browser window or tab.",
+		"It selects the switching mode automatically: an integer `Argument` switches by zero-based window index; a non-integer `Argument` is passed directly to WebDriver as a window handle string.",
+		"In RPA it enables multi-window and pop-up workflows; in automation testing it provides deterministic window targeting by index or handle."
 	],
 	"version": "4"
 }
