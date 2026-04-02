@@ -11,6 +11,47 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/UndoNavigation.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/UndoNavigation.cs"
+			},
+			"rag": {
+				"description": "The UndoNavigation plugin navigates the browser backward in session history. It supports configurable repeat counts and optional delays between steps, enabling controlled multi-step backward navigation in RPA workflows and automated test suites.",
+				"qa": [
+					{
+						"question": "What does the UndoNavigation plugin do?",
+						"answer": "It navigates the browser backward in session history, equivalent to clicking the browser's back button. The repeat count and inter-step delay are both configurable."
+					},
+					{
+						"question": "What parameters does UndoNavigation support?",
+						"answer": "It supports Repeat (number of backward steps, default 1) and Delay (pause between steps in milliseconds or time format, default 0)."
+					},
+					{
+						"question": "How is UndoNavigation integrated into a Sequential Workflow?",
+						"answer": "It is used as an Action task node and maps to the W3C WebDriver POST /session/{session id}/back endpoint."
+					},
+					{
+						"question": "What is the recommended approach for multi-step backward navigation?",
+						"answer": "Pass `{{$ --Repeat:N --Delay:Ms}}` as the argument to control the number of steps and the pause between them in a single action."
+					},
+					{
+						"question": "What delay formats does the Delay parameter accept?",
+						"answer": "Delay accepts a millisecond integer such as 1000 or a time span string such as 00:00:01. Values exceeding the maximum integer millisecond range are reset to zero with a warning."
+					},
+					{
+						"question": "What happens when UndoNavigation is called with no back history available?",
+						"answer": "The WebDriver back call completes without error but has no visible effect if no back history exists in the current session."
+					},
+					{
+						"question": "What is the manifest version for UndoNavigation?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What is the purpose of UndoNavigation according to its description?",
+						"answer": "It automates backward browser navigation with configurable repeat counts and delays to support multi-step RPA workflows and browser state management in automated tests."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,6 +59,7 @@
 					"name": "arrow-rotate-left",
 					"svg": null
 				},
+				"label": "Undo Navigation",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,46 +67,98 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `UndoNavigation` plugin is to automate the process of navigating backward within a web browser. ",
-		"It provides a structured and configurable way to perform the `back` action, enabling automation scripts to simulate user interactions with precision. ",
-		"The plugin caters to scenarios where navigating back multiple steps with optional delays between actions is a requirement.",
+		"The `UndoNavigation` plugin automates backward browser navigation, equivalent to clicking the browser's built-in back button.",
+		"It provides a structured way to traverse session history backward with configurable repeat counts and optional delays between steps.",
+		"The plugin supports both simple single-step navigation and multi-step sequences with per-iteration timing control.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                                                  |",
-		"|---------------------|----------------------------------------------------------------------------------------------|",
-		"| Dynamic Repeats     | Allows users to specify the number of times the browser should navigate back.                |",
-		"| Configurable Delays | Users can introduce delays between each navigation step, enhancing the plugin's flexibility. |",
-		"| Intuitive Logging   | Logs a warning if the specified delay exceeds the maximum allowed value.                     |",
+		"| Feature             | Description                                                                                                                  |",
+		"|---------------------|------------------------------------------------------------------------------------------------------------------------------|",
+		"| Dynamic Repeats     | Configures how many times the browser navigates back in a single action invocation.                                          |",
+		"| Configurable Delays | Introduces a pause between each backward step, in milliseconds or time span format, to control navigation pace.              |",
+		"| Legacy Argument     | Accepts a plain integer directly as the repeat count for backwards-compatible usage.                                         |",
+		"| Delay Safeguard     | Logs a warning and resets the delay to zero when the configured value exceeds the maximum allowed integer millisecond range. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                | Description                                                                                      |",
-		"|----------------------|--------------------------------------------------------------------------------------------------|",
-		"| Multi-Step Processes | Streamlines automation scripts by automating backward navigation through multiple pages.         |",
-		"| Error Handling       | Utilized in error-handling mechanisms to navigate back to a known state before retrying actions. |",
+		"| Use Case             | Description                                                                                                           |",
+		"|----------------------|-----------------------------------------------------------------------------------------------------------------------|",
+		"| Multi-Step Traversal | Navigates back through a sequence of previously visited pages in a single action without repeated manual back clicks. |",
+		"| Error Recovery       | Returns the browser to a known stable state before retrying a failed automation sequence.                             |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                    | Description                                                                                      |",
-		"|--------------------------|--------------------------------------------------------------------------------------------------|",
-		"| Browser State Management | Aids in managing the state of the browser during complex user journeys in automated test suites. |",
-		"| Performance Testing      | Contributes to a more accurate representation of user behavior by controlling navigation delays. |"
+		"| Use Case                | Description                                                                                                        |",
+		"|-------------------------|--------------------------------------------------------------------------------------------------------------------|",
+		"| Browser History Testing | Verifies that the browser correctly restores pages when navigating backward after a programmatic forward sequence. |",
+		"| Navigation Flow Testing | Simulates realistic back navigation patterns with controlled delays for performance test accuracy.                 |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Already at the beginning of back history — back call completes without error but has no visible effect",
+						"Browser session ends before navigation completes — WebDriver exception propagates to the caller",
+						"Page load triggered by the back step exceeds the implicit wait — downstream steps may interact with a stale or loading DOM",
+						"Single-page application updates URL state without a full reload — back navigation behaviour may differ from a traditional page"
+					],
+					"expected_result": "The browser navigates backward by one step in session history.",
+					"notes": "When no argument or parameters are supplied the plugin navigates back exactly once with no delay. This is equivalent to a single back button click.",
+					"use_case": "default_backward_navigation",
+					"version": "4"
+				},
+				"labels": [
+					"BackNavigation",
+					"BrowserNavigation",
+					"DefaultBehavior",
+					"NoParameters",
+					"SessionHistory",
+					"WebDriver",
+					"WebUI"
+				]
+			},
 			"description": [
-				"Perform a default browser back navigation. ",
-				"This is useful for simple scenarios where returning to the previous web page is required without specifying additional parameters."
+				"### Default single backward navigation",
+				"",
+				"Navigates the browser backward by one step using default settings.",
+				"No repeat count or delay is configured, so the action executes once immediately."
 			],
 			"rule": {
 				"pluginName": "UndoNavigation"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Argument value is negative — treated as zero; no navigation steps are executed",
+						"Argument value is zero — no navigation steps are executed",
+						"Back history has fewer pages than the requested repeat count — remaining steps have no effect but complete without error",
+						"Page load between repeats takes longer than expected — the next step may act on a still-loading page"
+					],
+					"expected_result": "The browser navigates backward three times in succession with no delay between steps.",
+					"notes": "Passing a plain integer as the argument is the legacy shorthand for the Repeat count. It is equivalent to `{{$ --Repeat:3}}` but requires no parameter expression syntax.",
+					"use_case": "backward_navigation_integer_argument",
+					"version": "4"
+				},
+				"labels": [
+					"BackNavigation",
+					"BrowserNavigation",
+					"LegacyArgument",
+					"MultiStep",
+					"RepeatCount",
+					"SessionHistory",
+					"WebDriver",
+					"WebUI"
+				]
+			},
 			"description": [
-				"Navigate the web browser back by three steps. ",
-				"The provided argument, `3`, specifies the number of repeats for the navigation action."
+				"### Backward navigation using an integer argument",
+				"",
+				"Navigates the browser backward three times by passing `3` as a plain integer argument.",
+				"The integer is interpreted directly as the repeat count without requiring parameter expression syntax."
 			],
 			"rule": {
 				"argument": "3",
@@ -72,34 +166,41 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Delay is zero but Repeat is greater than one — steps execute as fast as the browser allows with no pause",
+						"Delay value exceeds int.MaxValue milliseconds — a warning is logged and the delay resets to zero",
+						"Back history is exhausted before all repeats complete — remaining steps have no visible effect but do not throw",
+						"Network latency causes page loads to exceed the configured delay — the next back step may begin before the current page finishes loading",
+						"Time format string is malformed — ConvertToTimeSpan returns zero and the delay is effectively disabled"
+					],
+					"expected_result": "The browser navigates backward three times, pausing 1000 milliseconds between each step.",
+					"notes": "The `{{$ --Repeat:3 --Delay:1000}}` expression sets both the repeat count and the inter-step delay in milliseconds. The Delay parameter also accepts a time span string such as `00:00:01` for the same one-second pause.",
+					"use_case": "backward_navigation_repeat_with_delay",
+					"version": "4"
+				},
+				"labels": [
+					"BackNavigation",
+					"BrowserNavigation",
+					"ConfigurableDelay",
+					"InterStepDelay",
+					"MultiStep",
+					"ParameterExpression",
+					"RepeatCount",
+					"SessionHistory",
+					"WebDriver",
+					"WebUI"
+				]
+			},
 			"description": [
-				"Navigate the web browser back by three steps. ",
-				"The argument `--Repeat:3` explicitly designates the number of repetitions for the navigation action."
-			],
-			"rule": {
-				"argument": "3",
-				"pluginName": "UndoNavigation"
-			}
-		},
-		{
-			"description": [
-				"Command the `UndoNavigation` plugin to conduct a series of backward navigations in the web browser. ",
-				"The provided argument, `{{$ --Repeat:3 --Delay:1000}}`, precisely dictates three repetitions with a `1000-millisecond` delay between each step. ",
-				"This instance exemplifies how the UndoNavigation plugin can be finely configured with supplementary parameters, granting meticulous control over the backward navigation process, including the number of repeats and inter-step delays."
+				"### Backward navigation with repeat count and delay",
+				"",
+				"Navigates the browser backward three times, pausing 1000 milliseconds between each step.",
+				"The `{{$ --Repeat:3 --Delay:1000}}` argument expression sets both the repeat count and the inter-step delay in a single value."
 			],
 			"rule": {
 				"argument": "{{$ --Repeat:3 --Delay:1000}}",
-				"pluginName": "UndoNavigation"
-			}
-		},
-		{
-			"description": [
-				"Command the `UndoNavigation` plugin to execute a sequence of backward navigations in the web browser. ",
-				"The provided argument, `{{$ --Repeat:3 --Delay:00:00:01}}`, precisely dictates three repetitions with a `1-second` delay between each step. ",
-				"This example showcases how the `UndoNavigation` plugin can be meticulously configured with supplementary parameters, offering precise control over the backward navigation process, including the number of repeats and inter-step delays specified in a time format."
-			],
-			"rule": {
-				"argument": "{{$ --Repeat:3 --Delay:00:00:01}}",
 				"pluginName": "UndoNavigation"
 			}
 		}
@@ -110,8 +211,9 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the pause or waiting period between each step of the backward navigation process. ",
-				"This parameter allows users to specify a duration, either in milliseconds or a formatted time expression, to control the pace of the navigation."
+				"Controls the pause between each backward navigation step.",
+				"Accepts a value in milliseconds or a time span string such as `00:00:01` for one second.",
+				"When the configured delay exceeds the maximum allowed integer millisecond value, a warning is logged and the delay resets to zero."
 			],
 			"mandatory": false,
 			"name": "Delay",
@@ -120,39 +222,41 @@
 		{
 			"default": "1",
 			"description": [
-				"The number of iterations for the backward navigation process. ",
-				"It is instrumental in scenarios where repetitive navigation actions are essential for achieving specific automation objectives."
+				"Sets how many times the browser navigates backward in one action invocation.",
+				"Useful when traversing multiple pages back is required without issuing separate back commands.",
+				"When no valid value is provided, the browser navigates backward exactly once."
 			],
 			"mandatory": false,
 			"name": "Repeat",
 			"type": "Number"
 		}
 	],
+	"platforms": [
+		"Web",
+		"MobileWeb"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"default": "1",
 			"description": [
-				"Allows users to customize the behavior of the plugin by providing supplementary information or instructions. ",
-				"It acts as a configurable parameter, enabling users to tailor the plugin's action to meet specific requirements."
+				"Provides the primary input for the backward navigation action.",
+				"Accepts either a plain integer as the repeat count or a parameter expression such as `{{$ --Repeat:3 --Delay:1000}}` for combined repeat and delay control.",
+				"When a plain integer is supplied and no `Repeat` parameter is present, the integer is used directly as the repeat count."
 			],
 			"mandatory": false,
 			"name": "Argument",
-			"type": "String|Expression"
+			"type": "Number|Expression"
 		}
 	],
 	"protocol": {
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#back",
 		"w3c": "POST /session/{session id}/back"
 	},
-	"platforms": [
-		"Web",
-		"MobileWeb"
-	],
 	"summary": [
-		"The `UndoNavigation` plugin automates the backward navigation in a web browser, allowing users to revisit previous pages or states.",
-		"In robotic process automation (RPA), it streamlines multi-step processes and aids in error recovery by automating the backward navigation.",
-		"In automation testing, it helps manage browser state and contributes to realistic performance testing by controlling navigation delays."
+		"The `UndoNavigation` plugin navigates the browser backward in session history, equivalent to clicking the browser's built-in back button.",
+		"It supports configurable repeat counts and optional delays between steps, enabling controlled multi-step backward navigation in automation workflows.",
+		"Common uses include returning to a previous page in RPA flows and managing browser state during end-to-end testing."
 	],
 	"version": "4"
 }
