@@ -25,6 +25,11 @@ namespace G4.Plugins.Google.Clients
     {
         #region *** Constants    ***
         /// <summary>
+        /// The base URL for the Google Calendar API v3.
+        /// </summary>
+        public const string CalendarBaseUrl = "https://www.googleapis.com/calendar/v3";
+
+        /// <summary>
         /// Base URI for Gmail API endpoints.
         /// </summary>
         public const string GmailBaseUri = "https://gmail.googleapis.com/gmail/v1";

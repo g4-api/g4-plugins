@@ -15,6 +15,11 @@
 
         #region *** Properties ***
         /// <summary>
+        /// Gets an authenticated Calendar client instance for accessing Google Calendar APIs.
+        /// </summary>
+        public CalendarAdapter Calendar => new(credentials);
+
+        /// <summary>
         /// Gets an authenticated Gmail client instance for accessing Gmail APIs.
         /// </summary>
         public GmailAdapter Gmail => new(credentials);
