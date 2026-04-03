@@ -17,6 +17,7 @@ namespace G4.UnitTests.Plugins.Google
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
+            AssertManifest<ExportGoogleCalendar>();
             AssertManifest<ExportGoogleCalendarList>();
         }
 
@@ -24,12 +25,13 @@ namespace G4.UnitTests.Plugins.Google
             "registered and functioning.")]
         public override void NewPluginTest()
         {
+            AssertPlugin<ExportGoogleCalendar>();
             AssertPlugin<ExportGoogleCalendarList>();
         }
 
-        //[Ignore(message: "Runs as part of the GoogleTaskListLifecycleTest.")]
-        [TestMethod(DisplayName = "Verify that the NewGoogleTaskList plugin creates a " +
-            "new tasks list correctly.")]
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the ExportGoogleCalendarList plugin exports a " +
+            "new calendar list correctly.")]
         public void ExportGoogleCalendarListTest()
         {
             // Plugin name for session output keys.
@@ -50,6 +52,34 @@ namespace G4.UnitTests.Plugins.Google
             // Invoke the action and read the session outputs produced by the plugin.
             var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
             var result = session[$"{pluginName}:Result"]?.ToString();
+
+            // Assert required outputs exist.
+            Assert.IsFalse(condition: string.IsNullOrEmpty(result));
+        }
+
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the ExportGoogleCalendar plugin exports a " +
+            "new calendar correctly.")]
+        public void ExportGoogleCalendarTest()
+        {
+            // Plugin name for session output keys.
+            const string pluginName = nameof(ExportGoogleCalendar);
+
+            // Resolve the credential record name/id from test settings.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule JSON and inject the credential reference.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "ExportGoogleCalendar"
+            }
+            """.Replace("$(name)", name);
+
+            // Invoke the action and read the session outputs produced by the plugin.
+            var session = Invoke(ruleJson).GetEnvironment().SessionParameters;
+            var result = session[$"{pluginName}:Id"]?.ToString();
 
             // Assert required outputs exist.
             Assert.IsFalse(condition: string.IsNullOrEmpty(result));
