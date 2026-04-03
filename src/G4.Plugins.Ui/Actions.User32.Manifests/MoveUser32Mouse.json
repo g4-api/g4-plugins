@@ -8,6 +8,51 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/MoveUser32Mouse.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/MoveUser32Mouse.cs"
+			},
+			"rag": {
+				"description": "MoveUser32Mouse moves the system mouse cursor using the Windows User32 API on native desktop applications. It supports three modes: coordinate mode (absolute viewport position when X or Y is non-zero and no element is targeted), pointer-offset mode (relative to current cursor position when OffsetX or OffsetY is non-zero and no element is targeted), and element mode (relative to a located UI element with configurable alignment and pixel offsets). Requires a User32-compatible WebDriver and runs exclusively on Windows.",
+				"qa": [
+					{
+						"question": "What does MoveUser32Mouse do?",
+						"answer": "It moves the mouse cursor using the Windows User32 API, supporting absolute viewport coordinates, pointer-relative offsets, and element-targeted movement with configurable alignment and pixel offsets."
+					},
+					{
+						"question": "What parameters does MoveUser32Mouse support?",
+						"answer": "X and Y for absolute viewport coordinates; OffsetX and OffsetY for pixel offsets relative to the current cursor position or target element; Alignment to set the reference point on the target element bounding box (default: MiddleCenter)."
+					},
+					{
+						"question": "When is coordinate mode used?",
+						"answer": "Coordinate mode activates when at least one of X or Y is non-zero and no target element is provided. The cursor moves to the specified absolute viewport position."
+					},
+					{
+						"question": "When is pointer-offset mode used?",
+						"answer": "Pointer-offset mode activates when at least one of OffsetX or OffsetY is non-zero and no target element is provided. The cursor moves relative to its current position using the pointer as the origin."
+					},
+					{
+						"question": "What happens when an element is provided?",
+						"answer": "Element mode activates regardless of X and Y values. The cursor moves to the alignment point on the element bounding box, adjusted by any specified OffsetX and OffsetY."
+					},
+					{
+						"question": "Can coordinate mode and pointer-offset mode both activate in one call?",
+						"answer": "Yes. When X or Y and OffsetX or OffsetY are all non-zero with no element targeted, the plugin first moves to the absolute coordinates and then applies the pointer offset from that position."
+					},
+					{
+						"question": "What happens when the WebDriver does not support IUser32Driver?",
+						"answer": "The plugin returns an empty response immediately and no movement is performed."
+					},
+					{
+						"question": "What locator strategy does MoveUser32Mouse support?",
+						"answer": "Only Xpath is supported for locating User32 elements."
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +60,7 @@
 					"name": "arrow-pointer",
 					"svg": null
 				},
+				"label": "Move User32 Mouse",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,30 +68,31 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `MoveUser32Mouse` plugin moves the mouse pointer using the Windows User32 API. ",
-		"This plugin supports both absolute movement to specified viewport coordinates and relative movement within a UI element or viewport using customizable offsets and alignment.",
+		"The `MoveUser32Mouse` plugin moves the mouse pointer using the Windows User32 API.",
+		"Automation scripts can control the cursor position for native desktop applications by moving to absolute viewport coordinates, by applying a pixel offset from the current cursor position, or by targeting a specific UI element with configurable alignment and offsets.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                 | Description                                                                                                                           |",
-		"|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Absolute Movement       | Moves the mouse cursor to specific (X, Y) coordinates on the viewport when absolute coordinates are provided.                         |",
-		"| Relative Movement       | Moves the mouse cursor relative to a target UI element or last known mouse pointer location using configurable offsets and alignment. |",
-		"| Dynamic Decision Making | Automatically determines whether to use absolute coordinates or element-relative offsets based on provided parameters.                |",
+		"| Feature                    | Description                                                                                                                          |",
+		"|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Coordinate Movement        | Moves the mouse cursor to specific (X, Y) absolute coordinates on the viewport when no element is targeted.                          |",
+		"| Pointer-Offset Movement    | Moves the mouse cursor relative to its current position when OffsetX or OffsetY is non-zero and no element is targeted.              |",
+		"| Element-Targeted Movement  | Moves the cursor to the alignment point on a target UI element bounding box, adjusted by optional OffsetX and OffsetY pixel offsets. |",
+		"| Combined Coordinate+Offset | Applies coordinate movement first, then pointer-offset movement when both X/Y and OffsetX/OffsetY are non-zero without an element.   |",
 		"",
 		"### Usage in RPA",
 		"",
-		"| Usage                    | Description                                                                                                             |",
-		"|--------------------------|-------------------------------------------------------------------------------------------------------------------------|",
-		"| Desktop Automation       | Integrate with RPA workflows to control the mouse position for native desktop applications using the User32 API.        |",
-		"| Precise Pointer Movement | Use absolute coordinates or element-relative offsets to precisely position the mouse cursor as required by the process. |",
+		"| Usage                   | Description                                                                                                              |",
+		"|-------------------------|--------------------------------------------------------------------------------------------------------------------------|",
+		"| Desktop Automation      | Integrate with RPA workflows to position the mouse precisely on native desktop UI elements using the Windows User32 API. |",
+		"| Precise Pointer Control | Use absolute coordinates or element-relative offsets to position the cursor at runtime-determined locations.             |",
 		"",
 		"### Usage in Automation Testing",
 		"",
-		"| Usage               | Description                                                                                                           |",
-		"|---------------------|-----------------------------------------------------------------------------------------------------------------------|",
-		"| UI Testing          | Simulate user interactions by moving the mouse to specific areas of the screen or within UI elements.                 |",
-		"| Regression Testing  | Validate UI layouts and behavior by verifying consistent mouse pointer movements across different application states. |",
+		"| Usage              | Description                                                                                                          |",
+		"|--------------------|----------------------------------------------------------------------------------------------------------------------|",
+		"| UI Testing         | Simulate hover and focus behaviors by moving the mouse to specific screen areas or within UI elements.               |",
+		"| Regression Testing | Validate consistent mouse positioning across application states by automating cursor movements using the User32 API. |",
 		"",
 		"### Platform",
 		"",
@@ -53,33 +100,117 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Both X and Y are zero — coordinate mode does not activate; no movement occurs unless an element or offset is also specified",
+						"Non-IUser32Driver detected — plugin returns an empty response with no movement performed",
+						"Only one of X or Y is non-zero — coordinate mode still activates",
+						"Viewport coordinates outside the visible screen area may move the cursor off-screen with no visible effect"
+					],
+					"expected_result": "The mouse cursor moves to absolute viewport coordinates (300, 400).",
+					"notes": "Coordinate mode activates when at least one of X or Y is non-zero and no element is targeted. The `{{$ --X:300 --Y:400}}` syntax binds X and Y as a parameters dictionary before execution.",
+					"use_case": "move_mouse_to_absolute_viewport_coordinates",
+					"version": "4"
+				},
+				"labels": [
+					"AbsoluteCoordinates",
+					"CursorControl",
+					"DesktopAutomation",
+					"MouseMovement",
+					"User32",
+					"ViewportNavigation",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Move the mouse cursor to absolute viewport coordinates (X: 300, Y: 400) without targeting any UI element."
+				"### Move mouse to absolute viewport coordinates",
+				"",
+				"The plugin moves the system mouse cursor to position (300, 400) on the viewport.",
+				"No element is targeted; the `{{$ --X:300 --Y:400}}` syntax binds X and Y as a parameters dictionary that activates coordinate mode at runtime."
 			],
 			"rule": {
-				"Argument": "{{$ --X:300 --Y:400}}",
-				"PluginName": "MoveUser32Mouse"
+				"$type": "Action",
+				"argument": "{{$ --X:300 --Y:400}}",
+				"pluginName": "MoveUser32Mouse"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Both OffsetX and OffsetY are zero — pointer-offset mode does not activate and no movement occurs",
+						"Non-IUser32Driver detected — plugin returns an empty response with no movement performed",
+						"Only one of OffsetX or OffsetY is non-zero — pointer-offset mode still activates",
+						"Negative offset values move the cursor left or upward from the current position",
+						"Large offsets may move the cursor outside the visible screen area"
+					],
+					"expected_result": "The mouse cursor moves 15 pixels to the right and 25 pixels downward from its current position.",
+					"notes": "Pointer-offset mode activates when at least one of OffsetX or OffsetY is non-zero and no element is targeted. Movement origin is the current pointer position.",
+					"use_case": "move_mouse_by_pointer_offset_without_element",
+					"version": "4"
+				},
+				"labels": [
+					"CursorControl",
+					"DesktopAutomation",
+					"MouseMovement",
+					"PointerOffset",
+					"RelativeMovement",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Move the mouse cursor relative to a UI element identified by the XPath `//div[@id='InteractiveArea']` with an offset of 15 pixels horizontally and 25 pixels vertically, aligned to the BottomCenter of the element."
+				"### Move mouse by offset relative to current cursor position",
+				"",
+				"The plugin moves the system mouse cursor 15 pixels right and 25 pixels down from its current position.",
+				"No element is targeted; the `{{$ --OffsetX:15 --OffsetY:25}}` syntax binds the offsets as a parameters dictionary that activates pointer-offset mode at runtime."
 			],
 			"rule": {
-				"Argument": "{{$ --OffsetX:15 --OffsetY:25 --Alignment:BottomCenter}}",
-				"Locator": "Xpath",
-				"OnElement": "//div[@id='InteractiveArea']",
-				"PluginName": "MoveUser32Mouse"
+				"$type": "Action",
+				"argument": "{{$ --OffsetX:15 --OffsetY:25}}",
+				"pluginName": "MoveUser32Mouse"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found — an exception is raised by the User32 driver",
+						"Non-IUser32Driver detected — plugin returns an empty response with no movement performed",
+						"Offset values push the cursor outside the element bounding box — movement still executes at the computed position",
+						"Both OffsetX and OffsetY are zero — cursor moves to the alignment point with no additional offset",
+						"X and Y are non-zero when an element is present — element mode takes precedence and coordinate mode is ignored"
+					],
+					"expected_result": "The mouse cursor moves to the BottomCenter alignment point of the target panel element, adjusted 10 pixels right and 20 pixels down.",
+					"notes": "Element mode activates when an element is provided via OnElement. Alignment and offset parameters adjust the final cursor position within or around the element bounding box. X and Y are ignored when an element is present.",
+					"use_case": "move_mouse_to_element_with_alignment_and_offset",
+					"version": "4"
+				},
+				"labels": [
+					"Alignment",
+					"CursorControl",
+					"DesktopAutomation",
+					"ElementInteraction",
+					"ElementTargeted",
+					"MouseMovement",
+					"PixelOffset",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Move the mouse cursor relative to the last know mouse pointer location with an offset of 15 pixels horizontally and 25 pixels vertically."
+				"### Move mouse to element with alignment and offset",
+				"",
+				"The plugin locates the element at `//div[@id='InteractivePanel']` using the Xpath locator, moves the mouse to the BottomCenter alignment point with a 10-pixel horizontal and 20-pixel vertical offset.",
+				"The `{{$ --OffsetX:10 --OffsetY:20 --Alignment:BottomCenter}}` syntax binds the parameters as a dictionary before execution."
 			],
 			"rule": {
-				"Argument": "{{$ --OffsetX:15 --OffsetY:25}}",
-				"Locator": "Xpath",
-				"PluginName": "MoveUser32Mouse"
+				"$type": "Action",
+				"argument": "{{$ --OffsetX:10 --OffsetY:20 --Alignment:BottomCenter}}",
+				"locator": "Xpath",
+				"onElement": "//div[@id='InteractivePanel']",
+				"pluginName": "MoveUser32Mouse"
 			}
 		}
 	],
@@ -87,9 +218,89 @@
 	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
+			"default": "MiddleCenter",
+			"description": [
+				"Controls the alignment point on the target element where the mouse cursor is positioned during element-targeted movement.",
+				"Alignment determines which corner, edge, or center of the element bounding box serves as the movement reference point.",
+				"Combine with OffsetX and OffsetY to fine-tune the cursor position relative to the chosen alignment point.",
+				"Use MiddleCenter for standard centered positioning or edge and corner values for precise boundary interactions."
+			],
+			"mandatory": false,
+			"name": "Alignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Positions the cursor at the bottom center of the element bounding box.",
+						"Use this alignment when the target position is near the lower middle edge of the element."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the bottom left corner of the element bounding box.",
+						"Use this alignment when the target position is near the lower left boundary of the element."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the bottom right corner of the element bounding box.",
+						"Use this alignment when the target position is near the lower right boundary of the element."
+					],
+					"name": "BottomRight"
+				},
+				{
+					"description": [
+						"Positions the cursor at the horizontal and vertical center of the element bounding box.",
+						"This is the default alignment and works well for most standard mouse-move interactions."
+					],
+					"name": "MiddleCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the left edge and vertical center of the element bounding box.",
+						"Use this alignment when the target position is near the left side of the element."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the right edge and vertical center of the element bounding box.",
+						"Use this alignment when the target position is near the right side of the element."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top center of the element bounding box.",
+						"Use this alignment when the target position is near the upper middle edge of the element."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top left corner of the element bounding box.",
+						"Use this alignment when the target position is near the upper left boundary of the element."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top right corner of the element bounding box.",
+						"Use this alignment when the target position is near the upper right boundary of the element."
+					],
+					"name": "TopRight"
+				}
+			]
+		},
+		{
 			"default": "0",
 			"description": [
-				"Specifies the horizontal offset (in pixels) to adjust the mouse position relative to the target UI element or to the last known mouse pointer location if the element was not provided."
+				"Specifies the horizontal pixel offset applied to the mouse position.",
+				"In element mode, the offset is relative to the alignment point on the target element bounding box; positive values shift right, negative values shift left.",
+				"In pointer-offset mode (no element, OffsetX or OffsetY non-zero), the offset is relative to the current cursor position.",
+				"Use this parameter when the move must land slightly away from the default alignment or current cursor position."
 			],
 			"mandatory": false,
 			"name": "OffsetX",
@@ -98,7 +309,10 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the vertical offset (in pixels) to adjust the mouse position relative to the target UI element or to the last known mouse pointer location if the element was not provided."
+				"Specifies the vertical pixel offset applied to the mouse position.",
+				"In element mode, the offset is relative to the alignment point on the target element bounding box; positive values shift downward, negative values shift upward.",
+				"In pointer-offset mode (no element, OffsetX or OffsetY non-zero), the offset is relative to the current cursor position.",
+				"Use this parameter when the move must land slightly away from the default alignment or current cursor position."
 			],
 			"mandatory": false,
 			"name": "OffsetY",
@@ -107,7 +321,9 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the absolute X coordinate for moving the mouse when no UI element is targeted."
+				"Specifies the absolute horizontal coordinate on the viewport where the cursor will move when no target element is provided.",
+				"The coordinate is measured in pixels from the left edge of the viewport.",
+				"Set X and Y together to trigger coordinate-based movement without element targeting."
 			],
 			"mandatory": false,
 			"name": "X",
@@ -116,85 +332,32 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the absolute Y coordinate for moving the mouse when no UI element is targeted."
+				"Specifies the absolute vertical coordinate on the viewport where the cursor will move when no target element is provided.",
+				"The coordinate is measured in pixels from the top edge of the viewport.",
+				"Set X and Y together to trigger coordinate-based movement without element targeting."
 			],
 			"mandatory": false,
 			"name": "Y",
 			"type": "Number"
-		},
-		{
-			"default": "MiddleCenter",
-			"description": [
-				"Defines the alignment for positioning the mouse relative to the target UI element.",
-				"Select an alignment option that best matches the desired click area within the element."
-			],
-			"mandatory": false,
-			"name": "Alignment",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Align the mouse to the top left corner of the element."
-					],
-					"name": "TopLeft"
-				},
-				{
-					"description": [
-						"Align the mouse to the top center of the element."
-					],
-					"name": "TopCenter"
-				},
-				{
-					"description": [
-						"Align the mouse to the top right corner of the element."
-					],
-					"name": "TopRight"
-				},
-				{
-					"description": [
-						"Align the mouse to the middle left side of the element."
-					],
-					"name": "MiddleLeft"
-				},
-				{
-					"description": [
-						"Align the mouse to the center of the element."
-					],
-					"name": "MiddleCenter"
-				},
-				{
-					"description": [
-						"Align the mouse to the middle right side of the element."
-					],
-					"name": "MiddleRight"
-				},
-				{
-					"description": [
-						"Align the mouse to the bottom left corner of the element."
-					],
-					"name": "BottomLeft"
-				},
-				{
-					"description": [
-						"Align the mouse to the bottom center of the element."
-					],
-					"name": "BottomCenter"
-				},
-				{
-					"description": [
-						"Align the mouse to the bottom right corner of the element."
-					],
-					"name": "BottomRight"
-				}
-			]
 		}
 	],
 	"pluginType": "Action",
 	"properties": [
 		{
+			"description": [
+				"Carries the parameter expression used to pass runtime values to the plugin.",
+				"Use the `{{$ --Name:Value}}` format to specify Alignment, OffsetX, OffsetY, X, or Y at runtime.",
+				"The expression is parsed into a parameters dictionary before the plugin executes."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+				"Specifies the strategy used to locate the target UI element before performing the mouse move.",
+				"Xpath is the only supported locator strategy for User32 elements in this plugin."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -202,8 +365,9 @@
 		},
 		{
 			"description": [
-				"Specifies the XPath for the target UI element to which the mouse pointer will be moved.",
-				"This property is used when the movement should be relative to a specific UI element."
+				"Specifies the XPath expression that identifies the target UI element for the mouse move action.",
+				"When provided, the plugin resolves the element and moves the cursor to the alignment point adjusted by any OffsetX and OffsetY values.",
+				"Omit this property to use coordinate-based or pointer-offset movement with the X, Y, OffsetX, and OffsetY parameters instead."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -218,9 +382,9 @@
 		"WindowsNative"
 	],
 	"summary": [
-		"The `MoveUser32Mouse` plugin moves the mouse pointer using the Windows User32 API. ",
-		"It supports moving to absolute coordinates on the viewport as well as relative movement within a target UI element using configurable offsets and alignment. ",
-		"This plugin is ideal for desktop UI automation and testing on Windows platforms."
+		"The `MoveUser32Mouse` plugin moves the mouse pointer using the Windows User32 API on native desktop applications.",
+		"It supports absolute coordinate movement to viewport positions, pointer-relative offset movement from the current cursor location, and element-targeted movement with configurable alignment and pixel offsets.",
+		"The plugin is exclusively for Windows platforms and requires a User32-compatible WebDriver."
 	],
 	"version": "4"
 }
