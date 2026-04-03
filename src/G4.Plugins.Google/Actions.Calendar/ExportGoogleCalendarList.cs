@@ -5,6 +5,8 @@ using G4.Plugins.Google.Clients;
 using G4.Plugins.Google.Extensions;
 using G4.Plugins.Google.Models.Calendar;
 
+using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 
 namespace G4.Plugins.Google.Actions.Calendar
@@ -30,16 +32,26 @@ namespace G4.Plugins.Google.Actions.Calendar
             var options = NewOptions(pluginData);
 
             // Retrieve the calendar list from Google Calendar.
-            var response = adapter.Calendar.CalendarList.Get(options);
+            var calendarList = adapter.Calendar.CalendarList.Get(options);
 
             // Serialize the full response to JSON so it can be safely persisted in session state.
-            var value = JsonSerializer.Serialize(response, PluginDataModel.JsonOptions);
+            var value = JsonSerializer.Serialize(calendarList, PluginDataModel.JsonOptions);
 
             // Store the serialized result in session parameters for later workflow steps.
             this.AddSessionParameter(@namespace: NameReference, name: "Result", value);
 
             // Return a successful plugin response.
-            return this.NewPluginResponse();
+            var response = this.NewPluginResponse();
+
+            // Serialize the calendar object into a dictionary
+            // of property names and values for the response entity.
+            response.Entity = calendarList
+                .GetType()
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .ToDictionary(k => k.Name, v => v.GetValue(calendarList));
+
+            // The response entity now contains all the properties of the calendar object,
+            return response;
         }
 
         // Builds a CalendarListRequestModel from the supplied plugin parameters.
