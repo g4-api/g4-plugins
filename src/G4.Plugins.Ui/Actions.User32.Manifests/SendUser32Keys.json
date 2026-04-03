@@ -1,13 +1,50 @@
 {
 	"author": {
-		"name": "Roei Sabag",
-		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
 	},
 	"categories": [
 		"User32"
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendUser32Keys.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/SendUser32Keys.cs"
+			},
+			"rag": {
+				"description": "SendUser32Keys types a text string character-by-character into native Windows application elements using the User32 API. It supports optional element targeting with automatic focus, configurable per-character delay, and keyboard layout selection for multilingual input. The text source is either the Keys parameter or the Argument fallback. StickyKeys mode is not supported — use SendUser32KeyboardKey for key combinations. Requires a User32-compatible WebDriver and runs exclusively on Windows.",
+				"qa": [
+					{
+						"question": "What does SendUser32Keys do?",
+						"answer": "It sends a text string to a native Windows application element by typing each character individually via the User32 API, with optional element targeting, per-character delay, and keyboard layout selection."
+					},
+					{
+						"question": "What parameters does SendUser32Keys support?",
+						"answer": "Keys (the text string to type; falls back to the Argument property if omitted), Delay (milliseconds between each character, default 0), and KeyboardLayout (BCP-47 locale for character mapping, default en-US, also supports he-IL)."
+					},
+					{
+						"question": "How does the Keys parameter interact with the Argument property?",
+						"answer": "The Keys parameter is preferred when present and non-empty. If Keys is not specified, the plugin falls back to the raw Argument value as the text to type. The Argument also serves as the carrier for the {{$ ...}} parameter expression syntax."
+					},
+					{
+						"question": "What happens when OnElement is not specified?",
+						"answer": "When OnElement is omitted, the plugin sends keystrokes to whatever element currently has focus in the native application. No SetFocus call is made. This is suitable for workflows where focus is already set by a prior step."
+					},
+					{
+						"question": "What keyboard layouts are supported?",
+						"answer": "en-US (English United States, default) and he-IL (Hebrew Standard). The layout controls how characters are mapped to User32 key codes, which is critical for correct multilingual text input."
+					},
+					{
+						"question": "How is SendUser32Keys different from SendUser32KeyboardKey?",
+						"answer": "SendUser32Keys types a text string character-by-character and does not support sticky mode or key name sequences. SendUser32KeyboardKey sends individual named key scan codes and supports sticky mode for keyboard shortcuts like Ctrl+C."
+					},
+					{
+						"question": "What happens when the WebDriver does not implement IUser32Driver?",
+						"answer": "The plugin returns an empty response immediately and performs no action. This guard prevents execution in incompatible driver environments such as standard WebDriver sessions."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +52,7 @@
 					"name": "keyboard",
 					"svg": null
 				},
+				"label": "Send User32 Keys",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,63 +60,151 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SendUser32Keys` plugin simulates typing text character-by-character into native Windows application elements using the Windows User32 API. It is designed for scenarios requiring realistic text input automation.",
+		"The `SendUser32Keys` plugin simulates realistic text typing into native Windows application elements using the Windows User32 API.",
+		"It is designed for automation scenarios that require character-by-character text input into native or legacy Windows applications that lack standard WebDriver support.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                | Description                                                                                                          |",
-		"|------------------------|----------------------------------------------------------------------------------------------------------------------|",
-		"| Character-by-Character | Sends each character individually, mimicking human typing behavior.                                                  |",
-		"| Configurable Delay     | Supports delays between each character to simulate realistic typing speed.                                           |",
-		"| Keyboard Layout        | Supports specifying keyboard layouts to ensure correct character representation, especially for multilingual inputs. |",
+		"| Feature                    | Description                                                                                                                   |",
+		"|----------------------------|-------------------------------------------------------------------------------------------------------------------------------|",
+		"| Character-by-Character     | Sends each character of the text string individually, mimicking human typing behavior.                                        |",
+		"| Optional Element Targeting | Accepts an `OnElement` locator to focus a specific element before typing; omitting it sends to the currently focused element. |",
+		"| Configurable Delay         | Supports a per-character delay in milliseconds to simulate realistic typing speed or satisfy application timing requirements. |",
+		"| Keyboard Layout Selection  | Maps characters to User32 key codes using the specified locale, enabling accurate multilingual text input.                    |",
+		"| Flexible Text Source       | Accepts text via the `Keys` parameter or falls back to the raw `Argument` value when `Keys` is not provided.                  |",
 		"",
 		"### Limitations",
 		"",
-		"- Does not support sending special keyboard keys like `Tab`, `Escape`, etc. Use `SendUser32KeyboardKey` plugin for those scenarios.",
-		"- Does not support sticky keys or simultaneous key presses.",
+		"- Does not support special keyboard keys such as `Tab`, `Escape`, or function keys. Use `SendUser32KeyboardKey` for those scenarios.",
+		"- Does not support sticky mode or simultaneous key presses. Use `SendUser32KeyboardKey` with the `--Sticky` switch for keyboard shortcuts.",
 		"",
 		"### Usage in RPA",
 		"",
-		"| Usage                 | Description                                                                                |",
-		"|-----------------------|--------------------------------------------------------------------------------------------|",
-		"| Text Input Automation | Ideal for automating realistic text entry in forms or input fields in native applications. |",
+		"| Usage                 | Description                                                                                                     |",
+		"|-----------------------|-----------------------------------------------------------------------------------------------------------------|",
+		"| Text Input Automation | Enables RPA workflows to type text realistically into native application input fields, forms, and search boxes. |",
+		"| Multilingual Input    | Supports typing in non-Latin scripts such as Hebrew by specifying the appropriate keyboard layout.              |",
 		"",
 		"### Usage in Automation Testing",
 		"",
-		"| Usage                     | Description                                                                                  |",
-		"|---------------------------|----------------------------------------------------------------------------------------------|",
-		"| Native UI Text Validation | Facilitates accurate testing of text input handling by simulating realistic typing behavior. |",
-		"",
-		"### Supported Platform",
-		"",
-		"This plugin is specifically designed for **Windows OS** environments."
+		"| Usage                     | Description                                                                                                    |",
+		"|---------------------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Native UI Text Validation | Validates text input handling in native Windows applications by simulating realistic OS-level character input. |",
+		"| Timing-Sensitive Testing  | Uses per-character delay to test application behavior under realistic or throttled typing conditions.          |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty Argument and no Keys parameter — plugin posts an empty string to the server; behavior depends on the target application",
+						"Non-IUser32Driver detected — plugin returns empty response with no text sent",
+						"OnElement XPath does not match any element — GetUser32Element returns null or throws; exception is silently swallowed",
+						"Target element does not accept keyboard input — characters are sent but the application may ignore them"
+					],
+					"expected_result": "The text 'Hello User32' is typed character-by-character into the native input element identified by the XPath, with the element focused automatically before typing begins.",
+					"notes": "This is the simplest form: the Argument value is used directly as the text to type, and OnElement identifies the target input field. No delay is applied between characters.",
+					"use_case": "plain_text_to_element_via_argument",
+					"version": "4"
+				},
+				"labels": [
+					"BasicTyping",
+					"DirectArgument",
+					"ElementTargeting",
+					"NativeApp",
+					"TextInput",
+					"User32",
+					"WindowsNative",
+					"XPath"
+				]
+			},
 			"description": [
-				"Send the text `Hello User32` to the UI element identified by the XPath `//input[@id='User32Input']`."
+				"### Type text directly into a native element",
+				"",
+				"Send the text `Hello User32` to the native input element identified by the XPath `//input[@id='User32Input']`.",
+				"The Argument value is used directly as the text string because no `--Keys` parameter is specified.",
+				"The element receives focus automatically before typing begins."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Hello User32",
 				"onElement": "//input[@id='User32Input']",
 				"pluginName": "SendUser32Keys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Delay of 0 sends all characters back-to-back without any pause",
+						"Non-IUser32Driver detected — plugin returns empty response with no text sent",
+						"Very large delay values slow down automation significantly but are valid",
+						"OnElement XPath does not match any element — exception is silently swallowed and no text is sent"
+					],
+					"expected_result": "The text 'Hello User32' is typed character-by-character into the identified native input element with a 500-millisecond pause between each character.",
+					"notes": "Using the Keys parameter inside a {{$ ...}} expression allows delay and keyboard layout to be specified alongside the text. This form is required whenever delay or layout options are needed.",
+					"use_case": "parameterized_text_with_delay_to_element",
+					"version": "4"
+				},
+				"labels": [
+					"Delay",
+					"ElementTargeting",
+					"NativeApp",
+					"ParameterExpression",
+					"RealisticTyping",
+					"TextInput",
+					"User32",
+					"WindowsNative",
+					"XPath"
+				]
+			},
 			"description": [
-				"Send the text `Hello User32` with a delay of 500 milliseconds between each character to the UI element identified by XPath `//input[@id='User32Input']`."
+				"### Type text with per-character delay into a native element",
+				"",
+				"Send the text `Hello User32` to the native input element identified by the XPath `//input[@id='User32Input']`, with a 500-millisecond delay between each character.",
+				"The `--Keys` parameter carries the text and `--Delay:500` sets the inter-character pause inside the `{{$ ...}}` expression."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Keys:Hello User32 --Delay:500}}",
 				"onElement": "//input[@id='User32Input']",
 				"pluginName": "SendUser32Keys"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Unsupported KeyboardLayout value — the server may default to en-US or raise an error",
+						"Non-IUser32Driver detected — plugin returns empty response with no text sent",
+						"The OS must have the he-IL keyboard layout installed for correct character rendering",
+						"No OnElement provided — text is sent to whichever element currently holds focus in the application"
+					],
+					"expected_result": "The Hebrew text 'שלום' is typed character-by-character into the currently focused native application element using the Hebrew Standard keyboard layout.",
+					"notes": "When OnElement is omitted, the plugin sends keystrokes to the element that currently has focus. This is useful after a prior step has already focused the target. KeyboardLayout:he-IL instructs the server to map characters using the Hebrew Standard scan code table.",
+					"use_case": "multilingual_text_to_focused_element_hebrew",
+					"version": "4"
+				},
+				"labels": [
+					"FocusedElement",
+					"HebrewLayout",
+					"KeyboardLayout",
+					"Multilingual",
+					"NativeApp",
+					"NoElement",
+					"TextInput",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Send the Hebrew text `שלום` ('Hello') using the Hebrew Standard keyboard layout."
+				"### Type Hebrew text into the currently focused element",
+				"",
+				"Send the Hebrew text `שלום` (Hello) into whichever element currently holds focus in the native application, using the Hebrew Standard keyboard layout.",
+				"No `onElement` is specified, so the plugin sends keystrokes directly to the focused element without calling `SetFocus`."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Keys:שלום --KeyboardLayout:he-IL}}",
 				"pluginName": "SendUser32Keys"
 			}
@@ -89,15 +215,10 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the text to be typed into the target UI element. If not provided, the plugin uses the rule's Argument."
-			],
-			"mandatory": false,
-			"name": "Keys",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Specifies the delay between typing each character, simulating realistic human typing speed."
+				"Specifies the pause in milliseconds between typing each consecutive character.",
+				"Accepts a time string (e.g., `00:00:00.500`) or a numeric value representing milliseconds.",
+				"Default is `0`, meaning characters are sent back-to-back without any pause.",
+				"Use this parameter to simulate realistic human typing cadence or to ensure the target application processes each character before the next one arrives."
 			],
 			"mandatory": false,
 			"name": "Delay",
@@ -105,7 +226,21 @@
 		},
 		{
 			"description": [
-				"Specifies the keyboard layout used to interpret characters, essential for multilingual inputs."
+				"Specifies the text string to type into the target element, sent character-by-character.",
+				"When this parameter is provided and non-empty, it takes priority over the Argument property value.",
+				"When this parameter is not provided, the plugin falls back to the raw Argument value as the text source.",
+				"Use the `{{$ --Keys:your text}}` expression syntax to combine this parameter with Delay or KeyboardLayout options."
+			],
+			"mandatory": false,
+			"name": "Keys",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Specifies the BCP-47 locale identifier used to map characters to OS-level User32 key codes.",
+				"Use `en-US` for standard English keyboard input and `he-IL` for Hebrew Standard keyboard layout.",
+				"The default layout is `en-US` when this parameter is omitted.",
+				"Specifying the correct layout is critical when typing characters on non-English systems or when the target application requires locale-specific input encoding."
 			],
 			"mandatory": false,
 			"name": "KeyboardLayout",
@@ -113,11 +248,15 @@
 			"values": [
 				{
 					"name": "en-US",
-					"description": [ "English (US) keyboard layout." ]
+					"description": [
+						"English (United States) keyboard layout. This is the default."
+					]
 				},
 				{
 					"name": "he-IL",
-					"description": [ "Hebrew Standard keyboard layout." ]
+					"description": [
+						"Hebrew Standard keyboard layout."
+					]
 				}
 			]
 		}
@@ -126,7 +265,10 @@
 	"properties": [
 		{
 			"description": [
-				"Defines the text to send character-by-character to the UI element. Can be a literal string or expression."
+				"Carries the text string to type or a `{{$ ...}}` parameter expression containing the `Keys`, `Delay`, and `KeyboardLayout` options.",
+				"When used without a parameter expression, the raw Argument value is treated directly as the text to type.",
+				"When a parameter expression is used, the Argument acts as the expression carrier and `Keys` inside the expression provides the text.",
+				"This property is the primary input for the plugin when the `Keys` parameter is not specified inline."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -135,7 +277,10 @@
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy for the target UI element."
+				"Specifies the locator strategy used to find the target element before typing.",
+				"Supported strategies include `Xpath`, `CssSelector`, `Id`, `LinkText`, and `PartialLinkText`.",
+				"Defaults to `Xpath` when not specified.",
+				"This property is only relevant when `OnElement` is also provided."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -143,7 +288,10 @@
 		},
 		{
 			"description": [
-				"Specifies the XPath locator for the UI element to type text into. If omitted, text is sent to the currently focused element."
+				"Specifies the locator expression for the element that should receive the typed text.",
+				"When provided, the plugin finds the element and calls `SetFocus` before sending characters.",
+				"When omitted, the plugin sends keystrokes to whichever element currently holds focus in the native application.",
+				"Pair with the `Locator` property to select the appropriate element-finding strategy."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -158,7 +306,8 @@
 		"WindowsNative"
 	],
 	"summary": [
-		"The `SendUser32Keys` plugin simulates realistic typing of text into native Windows application elements using the User32 API, sending characters individually with configurable delays and keyboard layouts."
+		"The `SendUser32Keys` plugin types a text string character-by-character into native Windows application elements using the Windows User32 API.",
+		"It supports optional element targeting with automatic focus, configurable per-character delays, and keyboard layout selection for multilingual input."
 	],
 	"version": "4"
 }
