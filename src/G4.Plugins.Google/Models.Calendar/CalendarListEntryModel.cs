@@ -56,7 +56,7 @@ namespace G4.Plugins.Google.Models.Calendar
         /// <summary>
         /// The default reminders that the authenticated user has for this calendar.
         /// </summary>
-        public List<EventReminder> DefaultReminders { get; set; }
+        public List<EventReminderModel> DefaultReminders { get; set; }
 
         /// <summary>
         /// Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default
@@ -119,8 +119,9 @@ namespace G4.Plugins.Google.Models.Calendar
         /// </summary>
         public bool? Selected { get; set; }
 
-        /// <summary>Title of the calendar. Read-only.</summary>
-        [Newtonsoft.Json.JsonPropertyAttribute("summary")]
+        /// <summary>
+        /// Title of the calendar. Read-only.
+        /// </summary>
         public string Summary { get; set; }
 
         /// <summary>
