@@ -8,6 +8,31 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SwitchKeyboardLayout.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/SwitchKeyboardLayout.cs"
+			},
+			"rag": {
+				"description": "SwitchKeyboardLayout switches the active OS keyboard layout in native Windows applications using the User32 API. It accepts a BCP-47 locale identifier via the KeyboardLayout parameter or a raw Argument fallback, defaulting to en-US when neither is provided. It requires an IUser32Driver-compatible WebDriver and returns silently without error if the driver is incompatible.",
+				"qa": [
+					{
+						"question": "What does SwitchKeyboardLayout do?",
+						"answer": "It posts a keyboard layout change request to the User32 server endpoint at /session/{session}/user32/layouts, activating the specified BCP-47 locale as the active OS keyboard input method in a native Windows application session."
+					},
+					{
+						"question": "What is the default keyboard layout when no argument is specified?",
+						"answer": "The plugin defaults to en-US (English United States) when both the KeyboardLayout parameter and the Argument property are empty or absent."
+					},
+					{
+						"question": "What happens when the WebDriver does not implement IUser32Driver?",
+						"answer": "The plugin returns an empty response immediately and does not send any HTTP request. No error is raised."
+					},
+					{
+						"question": "How does the KeyboardLayout parameter interact with the Argument property?",
+						"answer": "The KeyboardLayout parameter is evaluated first. If it is present and non-empty, it is used as the layout identifier. If it is absent or empty, the plugin falls back to the raw Argument value. If both are empty, the layout defaults to en-US."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +40,7 @@
 					"name": "keyboard",
 					"svg": null
 				},
+				"label": "Switch Keyboard Layout",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,72 +48,138 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchKeyboardLayout` plugin switches the keyboard layout using the User32 API. It's essential for automation scenarios that require precise control over input languages in native Windows applications.",
+		"The `SwitchKeyboardLayout` plugin switches the active OS-level keyboard layout in native Windows applications using the Windows User32 API.",
+		"It is designed for automation workflows that require precise control over input language settings in desktop applications that do not support standard WebDriver keyboard layout control.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                 | Description                                                             |",
-		"|-------------------------|-------------------------------------------------------------------------|",
-		"| Dynamic Switching       | Dynamically switches keyboard layouts based on automation requirements. |",
-		"| User32 Integration      | Utilizes User32 API calls to reliably change layouts at the OS level.   |",
-		"| Supports Custom Layouts | Supports specifying different keyboard layouts dynamically.             |",
+		"| Feature                | Description                                                                                                     |",
+		"|------------------------|-----------------------------------------------------------------------------------------------------------------|",
+		"| OS-Level Layout Switch | Posts a layout change request to the User32 server, activating the specified locale as the active input method. |",
+		"| BCP-47 Locale Support  | Accepts standard BCP-47 locale identifiers such as `en-US` and `he-IL` for precise language targeting.          |",
+		"| Flexible Input         | Accepts the layout via the `KeyboardLayout` parameter or a raw `Argument` fallback, defaulting to `en-US`.      |",
+		"| Safe Guard             | Returns an empty response without error when the WebDriver does not implement `IUser32Driver`.                  |",
 		"",
 		"### Usage in RPA",
 		"",
-		"| Usage                          | Description                                                    |",
-		"|--------------------------------|----------------------------------------------------------------|",
-		"| Multilingual Automation        | Facilitates automation scenarios involving multiple languages. |",
-		"| Legacy Application Integration | Enables precise keyboard layout control in legacy apps.        |",
+		"| Usage                    | Description                                                                                                        |",
+		"|--------------------------|--------------------------------------------------------------------------------------------------------------------|",
+		"| Multilingual Workflows   | Switches between keyboard layouts during automation flows that process input in multiple languages.                |",
+		"| Legacy Application Input | Ensures correct input encoding for legacy Windows applications that require a specific OS keyboard layout setting. |",
 		"",
 		"### Usage in Automation Testing",
 		"",
-		"| Usage               | Description                                                            |",
-		"|---------------------|------------------------------------------------------------------------|",
-		"| UI Language Testing | Ensures correct keyboard layout during UI tests.                       |",
-		"| Input Validation    | Validates multilingual input scenarios with accurate layout switching. |"
+		"| Usage                     | Description                                                                                                        |",
+		"|---------------------------|--------------------------------------------------------------------------------------------------------------------|",
+		"| UI Localization Testing   | Validates application behavior and character rendering when the keyboard layout changes between test scenarios.    |",
+		"| Input Encoding Validation | Confirms that the application accepts and displays characters correctly under non-default locale keyboard layouts. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-IUser32Driver detected — plugin returns an empty response and no HTTP request is made",
+						"The OS must have the he-IL keyboard layout installed for correct character rendering in the application",
+						"Unsupported locale value — server behavior depends on implementation; it may default or raise an error",
+						"Subsequent key input steps must also use the he-IL layout for correct character mapping"
+					],
+					"expected_result": "The OS keyboard layout is switched to Hebrew Standard (he-IL) for the current native application session.",
+					"notes": "This is the canonical parameter-expression form. Using {{$ --KeyboardLayout:he-IL}} passes the layout identifier through the parameter channel. The KeyboardLayout parameter takes priority over any raw Argument value when both are present.",
+					"use_case": "switch_to_non_default_layout_via_parameter",
+					"version": "4"
+				},
+				"labels": [
+					"HebrewLayout",
+					"KeyboardLayout",
+					"LanguageSwitch",
+					"Multilingual",
+					"NativeApp",
+					"ParameterExpression",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Switch keyboard layout to Hebrew Standard."
+				"### Switch to Hebrew Standard layout via parameter expression",
+				"",
+				"Switch the active keyboard layout to Hebrew Standard (`he-IL`) using the `--KeyboardLayout` parameter inside a `{{$ ...}}` expression.",
+				"This is the canonical form for explicit layout selection and takes priority over any raw `Argument` value."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --KeyboardLayout:he-IL}}",
 				"pluginName": "SwitchKeyboardLayout"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-IUser32Driver detected — plugin returns an empty response and no HTTP request is made",
+						"The layout identifier must be a valid BCP-47 locale string; invalid values are sent as-is to the server",
+						"This form does not support combining additional parameters alongside the layout identifier"
+					],
+					"expected_result": "The OS keyboard layout is switched to Hebrew Standard (he-IL) for the current native application session.",
+					"notes": "Passing the layout identifier as a raw Argument value is a simplified alternative to the parameter-expression form. The Argument value is used directly when the KeyboardLayout parameter is absent or empty. Both forms produce the same server-side effect for layout switching.",
+					"use_case": "switch_to_non_default_layout_via_argument",
+					"version": "4"
+				},
+				"labels": [
+					"DirectArgument",
+					"HebrewLayout",
+					"KeyboardLayout",
+					"LanguageSwitch",
+					"Multilingual",
+					"NativeApp",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Switch keyboard layout to English (US)."
+				"### Switch to Hebrew Standard layout via direct Argument",
+				"",
+				"Switch the active keyboard layout to Hebrew Standard (`he-IL`) by passing the locale identifier directly as the raw `Argument` value.",
+				"This simplified form is equivalent to the parameter-expression form but does not support combining additional options."
 			],
 			"rule": {
-				"argument": "{{$ --KeyboardLayout:en-US}}",
-				"pluginName": "SwitchKeyboardLayout"
-			}
-		},
-		{
-			"description": [
-				"Switch keyboard layout to English (US)."
-			],
-			"rule": {
-				"argument": "en-US",
-				"pluginName": "SwitchKeyboardLayout"
-			}
-		},
-		{
-			"description": [
-				"Switch keyboard layout to Hebrew Standard."
-			],
-			"rule": {
+				"$type": "Action",
 				"argument": "he-IL",
 				"pluginName": "SwitchKeyboardLayout"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-IUser32Driver detected — plugin returns an empty response and no HTTP request is made",
+						"Both Argument and KeyboardLayout parameter must be absent or empty for this default path to activate",
+						"If the session was previously set to a non-default layout, this step resets it to en-US"
+					],
+					"expected_result": "The OS keyboard layout is reset to English (United States) (en-US) for the current native application session.",
+					"notes": "When neither Argument nor KeyboardLayout parameter is supplied, the plugin defaults to en-US. This form is useful for explicitly resetting the layout to the default after processing multilingual input.",
+					"use_case": "reset_layout_to_default_en_us",
+					"version": "4"
+				},
+				"labels": [
+					"DefaultLayout",
+					"EnglishLayout",
+					"KeyboardLayout",
+					"LayoutReset",
+					"NativeApp",
+					"NoArgument",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Switch keyboard layout to English (US)."
+				"### Reset keyboard layout to default (en-US)",
+				"",
+				"Invoke `SwitchKeyboardLayout` without any argument to reset the active keyboard layout to the default `en-US` (English United States).",
+				"This is useful at the end of a multilingual input sequence to restore the expected layout for subsequent steps."
 			],
 			"rule": {
+				"$type": "Action",
 				"pluginName": "SwitchKeyboardLayout"
 			}
 		}
@@ -98,18 +190,25 @@
 		{
 			"default": "en-US",
 			"description": [
-				"Specifies the keyboard layout to activate."
+				"Specifies the BCP-47 locale identifier for the keyboard layout to activate.",
+				"When present and non-empty, this parameter takes priority over the raw `Argument` value.",
+				"When omitted, the plugin falls back to the `Argument` value, then defaults to `en-US` if that is also empty.",
+				"Use `en-US` for English (United States) input and `he-IL` for Hebrew Standard input."
 			],
 			"mandatory": false,
 			"name": "KeyboardLayout",
 			"type": "String",
 			"values": [
 				{
-					"description": [ "English (US) keyboard layout." ],
+					"description": [
+						"English (United States) keyboard layout. This is the default value."
+					],
 					"name": "en-US"
 				},
 				{
-					"description": [ "Hebrew Standard keyboard layout." ],
+					"description": [
+						"Hebrew Standard keyboard layout."
+					],
 					"name": "he-IL"
 				}
 			]
@@ -119,7 +218,10 @@
 	"properties": [
 		{
 			"description": [
-				"Defines the keyboard layout identifier to switch to."
+				"Carries the keyboard layout identifier directly, or a `{{$ --KeyboardLayout:...}}` parameter expression.",
+				"When used without a parameter expression, the raw Argument value is treated as the BCP-47 layout identifier.",
+				"When the `KeyboardLayout` parameter is supplied inside a `{{$ ...}}` expression, the Argument acts as the expression carrier and the parameter value takes priority.",
+				"When both this property and the `KeyboardLayout` parameter are absent or empty, the plugin defaults to `en-US`."
 			],
 			"mandatory": false,
 			"name": "Argument",
@@ -134,7 +236,8 @@
 		"WindowsNative"
 	],
 	"summary": [
-		"The `SwitchKeyboardLayout` plugin switches the active keyboard layout through User32 API interactions, enabling automation and testing workflows to accurately simulate multilingual keyboard inputs in native Windows applications."
+		"The `SwitchKeyboardLayout` plugin switches the active OS keyboard layout in native Windows applications using the Windows User32 API.",
+		"It accepts a BCP-47 locale identifier via the `KeyboardLayout` parameter or a raw `Argument` fallback, defaulting to `en-US` when neither is provided."
 	],
 	"version": "4"
 }
