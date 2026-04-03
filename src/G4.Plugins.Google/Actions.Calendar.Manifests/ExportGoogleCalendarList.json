@@ -4,88 +4,40 @@
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 	},
 	"categories": [
-		"Gmail"
+		"GoogleCalendar"
 	],
 	"context": {
 		"integration": {
 			"github": {
-				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/EditGmailMessage.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/EditGmailMessage.cs"
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportGoogleCalendarList.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/Calendar/ExportGoogleCalendarList.cs"
 			},
 			"rag": {
-				"description": "Update Gmail message labels during an automation run by resolving label names to Gmail label ids, removing labels first, then adding new ones. It supports token or credentials-based authentication, enforces required inputs like MessageId, and stores the updated message fields as Base64 session parameters so downstream steps can reliably reuse the exact post-update email state.",
+				"description": "Export the authenticated user's Google Calendar list during an automation run using token or credentials-based authentication. It applies optional request options — MaxResults (integer 1–250, default 100), MinAccessRole (freeBusyReader, owner, reader, writer), PageToken, presence-activated Switch flags ShowDeleted and ShowHidden, and SyncToken for incremental sync — with the strict constraint that MinAccessRole and SyncToken cannot be combined in the same request. The full CalendarListModel response (ETag, Kind, Items array with id, summary, accessRole and per-entry metadata, NextPageToken, NextSyncToken) is serialized to JSON and stored in ExportGoogleCalendarList:Result so downstream steps can enumerate calendars, page through large lists, or persist NextSyncToken for subsequent incremental syncs without repeating the API call.",
 				"qa": [
 					{
-						"question": "What does EditGmailMessage do?",
-						"answer": "EditGmailMessage adds and removes labels on a Gmail message, then returns and stores updated message fields for downstream workflow steps."
+						"question": "What does ExportGoogleCalendarList do?",
+						"answer": "ExportGoogleCalendarList retrieves the authenticated user's list of calendars from the Google Calendar API and stores the full response as JSON in the ExportGoogleCalendarList:Result session parameter so later workflow steps can access calendar ids and metadata."
 					},
 					{
-						"question": "What are the key features and parameters of EditGmailMessage?",
-						"answer": "It updates labels by resolving label names to ids, removing labels first then adding labels. It accepts MessageId (required) plus optional Add and Remove lists, and Token or Credentials for authentication (Credentials takes precedence)."
+						"question": "What parameters does ExportGoogleCalendarList support?",
+						"answer": "It supports Credentials and Token for authentication; MaxResults (integer 1–250, default 100) for page size; MinAccessRole (freeBusyReader, owner, reader, writer) for access-role filtering; PageToken for pagination; ShowDeleted and ShowHidden as presence-activated Switch flags to include deleted or hidden calendars; and SyncToken for incremental synchronization. MinAccessRole and SyncToken cannot be used together."
 					},
 					{
-						"question": "How does EditGmailMessage fit into the integration context?",
-						"answer": "It runs as an Action in a sequential workflow step (componentType “task”) using the google icon provider and ActionRuleModel."
+						"question": "How does ExportGoogleCalendarList handle incremental synchronization?",
+						"answer": "Pass the nextSyncToken value from a previous response as the SyncToken parameter. The API returns only entries changed since that token was issued. Do not combine SyncToken with MinAccessRole. If the token has expired, the API returns 410 GONE and a full re-sync without SyncToken is required."
 					},
 					{
-						"question": "What are best practices for using EditGmailMessage?",
-						"answer": "Prefer Credentials for long-running automations, use consistent label naming, avoid empty Add or Remove values, and verify the final state using EditGmailMessage:Labels instead of assuming changes succeeded."
+						"question": "What rule and schema details should I follow to run ExportGoogleCalendarList?",
+						"answer": "Create an Action rule with pluginName ExportGoogleCalendarList and pass parameters via argument: {{$ --Credentials:my-google-creds --MaxResults:25 --MinAccessRole:writer}}. Presence-only Switch flags use {{$ --ShowDeleted}} or {{$ --ShowHidden}} without a value. The output lands in ExportGoogleCalendarList:Result as a JSON string."
 					},
 					{
-						"question": "What rule or schema details should I follow when configuring EditGmailMessage?",
-						"answer": "Use $type “Action” with pluginName “EditGmailMessage”, pass {{$--MessageId:value}} plus any {{$--Add:label}} and {{$--Remove:label}} entries, and include either {{$--Token:value}} or {{$--Credentials:value}}. Outputs are written under EditGmailMessage:*."
+						"question": "What output does ExportGoogleCalendarList produce?",
+						"answer": "It produces a single session parameter ExportGoogleCalendarList:Result containing the full serialized CalendarListModel JSON, which includes ETag, Kind, Items (array of calendar entries with id, summary, accessRole, and other metadata), NextPageToken, and NextSyncToken."
 					},
 					{
-						"question": "What is the author name in the manifest metadata?",
-						"answer": "The author name is “Roei Sabag”."
-					},
-					{
-						"question": "What is the author link in the manifest metadata?",
-						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
-					},
-					{
-						"question": "What source descriptions and Git links are relevant for EditGmailMessage?",
-						"answer": "The documentation matches the manifest behavior: resolve label names to ids, remove labels first, add labels next, then store updated message fields as Base64 session parameters under EditGmailMessage:*. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/EditGmailMessage.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/EditGmailMessage.cs."
-					},
-					{
-						"question": "What categories are defined for this plugin?",
-						"answer": "The categories list contains “Gmail”."
-					},
-					{
-						"question": "What is the manifest key for this plugin?",
-						"answer": "The manifest key is “EditGmailMessage”."
-					},
-					{
-						"question": "What manifestVersion does this plugin use?",
-						"answer": "The manifestVersion is 4."
-					},
-					{
-						"question": "What namespace is defined for this plugin?",
-						"answer": "The namespace is “G4.Plugins.Google”."
-					},
-					{
-						"question": "Which platforms does the plugin support?",
-						"answer": "It supports platforms “Any”."
-					},
-					{
-						"question": "What is the pluginType in the manifest?",
-						"answer": "The pluginType is “Action”."
-					},
-					{
-						"question": "What is the summary in the manifest metadata?",
-						"answer": "It updates Gmail message labels by resolving label names to ids, removing specified labels, adding new labels, and storing updated message fields as Base64-encoded namespaced session parameters for safe downstream reuse."
-					},
-					{
-						"question": "What output parameters does EditGmailMessage produce?",
-						"answer": "It stores Base64-encoded outputs in session parameters including EditGmailMessage:Id, EditGmailMessage:Labels, EditGmailMessage:From, EditGmailMessage:To, EditGmailMessage:Cc, EditGmailMessage:Bcc, EditGmailMessage:Subject, and EditGmailMessage:Content."
-					},
-					{
-						"question": "What sources describe this plugin and where can I find the Git links?",
-						"answer": "The manifest description and examples cover name-to-id label resolution, remove-then-add ordering, and Base64 outputs under EditGmailMessage:*. Repository: https://github.com/g4-api/g4-plugins. Documentation/README: https://github.com/g4-api/g4-plugins/blob/main/README.md."
-					},
-					{
-						"question": "How does EditGmailMessage handle errors and edge cases?",
-						"answer": "Workflows should handle invalid or missing MessageId, label name not found, invalid JSON for Add or Remove, empty Add or Remove, Gmail API non-success responses, quota or rate limits, and credential or token resolution failures."
+						"question": "How does ExportGoogleCalendarList handle errors and edge cases?",
+						"answer": "Workflows should handle invalid or expired tokens, credential resolution failures, insufficient OAuth scopes, network timeouts, non-success API responses, SyncToken expiry (410 GONE requiring full re-sync), invalid MinAccessRole values, MaxResults outside the 1–250 range, expired PageToken, and the unsupported combination of MinAccessRole with SyncToken."
 					}
 				]
 			},
@@ -103,79 +55,183 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The EditGmailMessage plugin adds and removes labels on a Gmail message during an automation run.",
-		"It helps workflows route, tag, and organize emails automatically without manual inbox work.",
-		"It supports authentication using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
-		"It stores the updated message details in session parameters so later steps can reuse the results reliably.",
+		"The ExportGoogleCalendarList plugin retrieves the authenticated user's list of calendars from the Google Calendar API.",
+		"It helps automation workflows discover, filter, and reference calendars without opening the Google Calendar interface.",
+		"The plugin supports authentication using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
+		"The exported calendar list is stored as JSON in a session parameter so later workflow steps can safely access calendar ids and metadata.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                                       |",
-		"|----------------------------|-------------------------------------------------------------------------------------------------------------------|",
-		"| Update message labels      | Adds and removes labels on a Gmail message using the Gmail API (users.messages.modify).                           |",
-		"| Label name resolution      | Resolves provided label names to label ids at runtime before applying changes.                                    |",
-		"| Add labels                 | Adds one or more resolved labels to the target message.                                                           |",
-		"| Remove labels              | Removes one or more resolved labels from the target message.                                                      |",
-		"| Token authentication       | Accepts a raw OAuth Bearer access token for direct API calls.                                                     |",
-		"| Credentials authentication | Accepts a credentials id/name and exchanges it for a fresh access token at runtime.                               |",
-		"| Credentials precedence     | Uses credentials when both token and credentials are provided.                                                    |",
-		"| Result session storage     | Stores updated message fields in namespaced session parameters (EditGmailMessage:) as Base64-encoded values. |",
+		"| Feature                         | Description                                                                                                      |",
+		"|---------------------------------|------------------------------------------------------------------------------------------------------------------|",
+		"| Export Calendar List            | Retrieves all calendars on the authenticated user's calendar list via the Google Calendar API.                   |",
+		"| Access Role Filtering           | Filters results by minimum access role: freeBusyReader, owner, reader, or writer.                                |",
+		"| Page Size Control               | Limits the number of entries returned per page using MaxResults (1–250, default 100).                            |",
+		"| Pagination Support              | Accepts a PageToken to retrieve a specific page of results from a previous request.                              |",
+		"| Show Deleted Entries            | Includes deleted calendar list entries in the response when ShowDeleted is present.                              |",
+		"| Show Hidden Entries             | Includes hidden calendar list entries in the response when ShowHidden is present.                                |",
+		"| Incremental Synchronization     | Accepts a SyncToken to retrieve only entries that changed since the token was issued.                            |",
+		"| Token Authentication            | Accepts a direct OAuth Bearer access token for API access.                                                       |",
+		"| Credentials Authentication      | Uses a stored credential record to generate a fresh access token at runtime.                                     |",
+		"| Session Result Storage          | Saves the full API response as JSON in the ExportGoogleCalendarList:Result session parameter.                    |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Use Case                         | Description                                                                                      |",
-		"|----------------------------------|--------------------------------------------------------------------------------------------------|",
-		"| Auto-triage incoming mail        | Add labels like Needs Review, Customer, or Urgent based on sender, subject, or content rules.    |",
-		"| Move emails through a workflow   | Add and remove labels as a message progresses through stages such as New, In Progress, and Done. |",
-		"| Keep shared processes consistent | Apply a standard label taxonomy so teams can search and report reliably.                         |",
-		"| Reduce inbox noise               | Remove a routing label after the message was processed, to prevent duplicate handling.           |"
+		"| Use Case                         | Description                                                                                                   |",
+		"|----------------------------------|---------------------------------------------------------------------------------------------------------------|",
+		"| Discover Calendars               | Retrieve all calendars so later steps can locate the correct calendar by id or summary.                       |",
+		"| Role-Based Calendar Selection    | Filter calendars by access role to find only those the user owns or has write access to.                      |",
+		"| Paged Calendar Export            | Use MaxResults and PageToken to iterate over large calendar lists in controlled pages.                         |",
+		"| Incremental Calendar Sync        | Pass a stored SyncToken to fetch only calendars changed since the last export, reducing API load.             |",
+		"| Hidden and Deleted Auditing      | Enable ShowDeleted and ShowHidden to include all entries in auditing or compliance workflows.                  |"
 	],
 	"examples": [
 		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Add and Remove are both empty",
-						"Add contains an empty label name",
+						"Credentials value overrides Token when both are provided",
 						"Credentials id/name not found",
-						"Credentials record missing refresh token",
 						"Credentials value is empty or whitespace-only",
-						"Gmail API rate limit or quota exceeded",
-						"Gmail API returns non-success status code",
-						"Invalid JSON format for Add/Remove",
-						"Invalid MessageId",
-						"Label name not found",
-						"Message not found for MessageId",
-						"Missing Add and Remove",
-						"Missing MessageId",
+						"Credentials record missing refresh token",
 						"Refresh-token exchange fails",
-						"Remove contains an empty label name"
+						"Google Calendar API returns non-success status code",
+						"Google Calendar API returns malformed JSON",
+						"Insufficient OAuth scopes for the Google Calendar API",
+						"Network timeout or connection failure",
+						"No calendars returned (Items array empty or absent)",
+						"ExportGoogleCalendarList:Result session parameter cannot be written",
+						"Token contains leading/trailing whitespace",
+						"Token is empty or whitespace-only",
+						"Invalid or expired OAuth access token"
 					],
-					"expected_result": "Message labels are updated and the updated message fields are stored in `EditGmailMessage:*` session parameters (Base64).",
-					"notes": "Removes the UNREAD and NEW labels and adds the IMPORTANT and FOLLOW-UP labels to a Gmail message.",
-					"use_case": "update_gmail_labels_add_and_remove",
-					"version": "1.0"
+					"expected_result": "The full calendar list JSON is stored in the ExportGoogleCalendarList:Result session parameter.",
+					"notes": "Retrieves the authenticated user's full calendar list using default options (up to 100 entries, no role filter, no pagination) by passing a direct OAuth access token.",
+					"use_case": "export_calendar_list_with_token",
+					"version": "4"
 				},
 				"labels": [
-					"ApiIntegration",
+					"ApiCall",
 					"Authentication",
-					"Credentials",
-					"Gmail",
-					"Labels",
+					"CalendarList",
+					"Export",
+					"GoogleCalendar",
 					"OAuth",
-					"SessionParameters",
-					"Update"
+					"SessionParameter",
+					"Token"
 				]
 			},
 			"description": [
-				"### EditGmailMessage: Add and remove labels",
+				"### ExportGoogleCalendarList: Export using access token",
 				"",
-				"This example updates Gmail labels by removing `unread` and `new` and adding `important` and `follow-up`."
+				"Retrieve the authenticated user's full Google Calendar list using an OAuth access token with default options.",
+				"Store the returned JSON in the ExportGoogleCalendarList:Result session parameter.",
+				"A macro token produces a runtime token value that is substituted where the token appears, and ExportGoogleCalendarList uses that substituted value to authorize the API request."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --MessageId:172ce2c4a72cc353 --Add:important --Add:follow-up --Remove:unread --Remove:new --Credentials:my-google-creds}}",
-				"pluginName": "EditGmailMessage"
+				"argument": "{{$ --Token:ya29.A0...}}",
+				"pluginName": "ExportGoogleCalendarList"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Both Token and Credentials provided — Token is ignored",
+						"Credentials id/name not found",
+						"Credentials record missing refresh token",
+						"Refresh-token exchange fails",
+						"MaxResults set below 1 or above 250",
+						"MinAccessRole set to an unsupported value",
+						"MinAccessRole combined with SyncToken — unsupported, API returns error",
+						"No calendars match the MinAccessRole filter (Items empty)",
+						"Google Calendar API returns non-success status code",
+						"Insufficient OAuth scopes for the Google Calendar API",
+						"Network timeout or connection failure",
+						"ExportGoogleCalendarList:Result session parameter cannot be written"
+					],
+					"expected_result": "At most 25 calendar entries where the user has at least writer access are stored in ExportGoogleCalendarList:Result.",
+					"notes": "Retrieves up to 25 calendar entries filtered to calendars where the authenticated user holds at least writer access, using stored credentials for token exchange.",
+					"use_case": "export_calendar_list_filtered_by_role",
+					"version": "4"
+				},
+				"labels": [
+					"AccessRoleFilter",
+					"ApiCall",
+					"Authentication",
+					"CalendarList",
+					"Credentials",
+					"Export",
+					"GoogleCalendar",
+					"MaxResults",
+					"MinAccessRole",
+					"OAuth",
+					"SessionParameter"
+				]
+			},
+			"description": [
+				"### ExportGoogleCalendarList: Export with access role filter and page size",
+				"",
+				"Retrieve up to 25 Google Calendar entries for which the authenticated user holds at least writer access.",
+				"Resolve a stored credentials reference at runtime to obtain an OAuth access token before calling the API.",
+				"Store the filtered calendar list JSON in the ExportGoogleCalendarList:Result session parameter."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:my-google-creds --MaxResults:25 --MinAccessRole:writer}}",
+				"pluginName": "ExportGoogleCalendarList"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"SyncToken expired — API returns 410 GONE; full re-sync required",
+						"SyncToken combined with MinAccessRole — unsupported, API returns error",
+						"SyncToken used without ShowDeleted or ShowHidden — deleted or hidden changes may be missed",
+						"PageToken passed alongside SyncToken — ambiguous pagination state",
+						"Credentials id/name not found",
+						"Credentials record missing refresh token",
+						"Refresh-token exchange fails",
+						"Google Calendar API returns non-success status code",
+						"No changed entries since SyncToken was issued — Items array is empty",
+						"NextSyncToken absent in response — sync state cannot be persisted",
+						"Insufficient OAuth scopes for the Google Calendar API",
+						"Network timeout or connection failure",
+						"ExportGoogleCalendarList:Result session parameter cannot be written"
+					],
+					"expected_result": "Only calendar entries changed since the previous sync token was issued are stored in ExportGoogleCalendarList:Result, including any deleted or hidden entries.",
+					"notes": "Performs an incremental sync by supplying a stored SyncToken with ShowDeleted and ShowHidden flags so that removed or hidden calendars are captured in the delta response.",
+					"use_case": "export_calendar_list_incremental_sync",
+					"version": "4"
+				},
+				"labels": [
+					"ApiCall",
+					"Authentication",
+					"CalendarList",
+					"Credentials",
+					"Export",
+					"GoogleCalendar",
+					"IncrementalSync",
+					"OAuth",
+					"SessionParameter",
+					"ShowDeleted",
+					"ShowHidden",
+					"SyncToken"
+				]
+			},
+			"description": [
+				"### ExportGoogleCalendarList: Incremental sync with ShowDeleted and ShowHidden",
+				"",
+				"Retrieve only Google Calendar list entries that changed since a previously stored sync token was issued.",
+				"Enable ShowDeleted and ShowHidden so deleted and hidden calendar entries are included in the delta response.",
+				"Store the incremental result in the ExportGoogleCalendarList:Result session parameter and extract NextSyncToken from the response for use in the next sync cycle."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:my-google-creds --SyncToken:CPDAleLjy... --ShowDeleted --ShowHidden}}",
+				"pluginName": "ExportGoogleCalendarList"
 			}
 		}
 	],
@@ -185,81 +241,11 @@
 	"outputParameters": [
 		{
 			"description": [
-				"Stores the Bcc recipient list from the Gmail message after label updates are applied.",
-				"Preserves hidden recipients so auditing and routing logic can use the same header data Gmail returned.",
-				"Helps downstream steps make decisions using the complete set of recipients."
+				"Stores the full Google Calendar list response returned by the Google Calendar API.",
+				"Contains a JSON-serialized CalendarListModel including ETag, Kind, Items (calendar entries with id, summary, accessRole, and metadata), NextPageToken, and NextSyncToken.",
+				"Allows later workflow steps to extract specific calendar ids, enumerate available calendars, or persist the NextSyncToken for incremental synchronization without repeating the API call."
 			],
-			"name": "EditGmailMessage:Bcc",
-			"scope": "Session",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Stores the Cc recipient list from the Gmail message after label updates are applied.",
-				"Keeps carbon copy recipients available for logging, filtering, and routing rules.",
-				"Helps downstream steps evaluate who else received the message."
-			],
-			"name": "EditGmailMessage:Cc",
-			"scope": "Session",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Stores the message body content from the Gmail message after label updates are applied.",
-				"Provides the email text so later steps can parse, summarize, or act on the message without another API call.",
-				"Supports workflows that need content context while processing label changes."
-			],
-			"name": "EditGmailMessage:Content",
-			"scope": "Session",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Stores the sender address from the Gmail message after label updates are applied.",
-				"Enables filtering and routing based on who sent the email.",
-				"Helps downstream steps validate the source before taking action."
-			],
-			"name": "EditGmailMessage:From",
-			"scope": "Session",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Stores the Gmail message identifier for the message whose labels were updated.",
-				"Provides a stable reference for follow-up actions like fetching details or applying more label changes.",
-				"Helps downstream steps target the exact message without ambiguity."
-			],
-			"name": "EditGmailMessage:Id",
-			"scope": "Session",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Stores the resolved label names currently assigned to the message after the update completes.",
-				"Provides a JSON list of labels so later steps can verify the final labeling state.",
-				"Helps workflows make decisions based on the actual labels without re-fetching the message."
-			],
-			"name": "EditGmailMessage:Labels",
-			"scope": "Session",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Stores the subject line from the Gmail message after label updates are applied.",
-				"Helps workflows display, log, or classify the message using its subject.",
-				"Supports quick filtering when only header information is needed."
-			],
-			"name": "EditGmailMessage:Subject",
-			"scope": "Session",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Stores the To recipient list from the Gmail message after label updates are applied.",
-				"Keeps primary recipients available for routing, filtering, and audit checks.",
-				"Helps downstream steps determine whether the message was addressed to the expected target."
-			],
-			"name": "EditGmailMessage:To",
+			"name": "ExportGoogleCalendarList:Result",
 			"scope": "Session",
 			"type": "String"
 		}
@@ -267,19 +253,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Defines the list of Gmail label names that will be added to the target message.",
-				"Controls how the message is categorized in Gmail so later searches and automations can find it.",
-				"Applies no new labels when the list is empty or not provided."
-			],
-			"mandatory": false,
-			"name": "Add",
-			"type": "Array"
-		},
-		{
-			"description": [
-				"Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.",
-				"Avoids hardcoding short-lived tokens by exchanging stored credentials for a valid access token when needed.",
-				"Takes precedence over the token parameter so authentication stays consistent and renewable."
+				"Specifies the identifier or name of a stored credential record used to obtain an OAuth access token at runtime.",
+				"Avoids hard-coding short-lived access tokens by exchanging stored credentials for a fresh token when needed.",
+				"Takes precedence over the Token parameter when both are provided so authentication remains consistent and renewable."
 			],
 			"mandatory": false,
 			"name": "Credentials",
@@ -287,29 +263,69 @@
 		},
 		{
 			"description": [
-				"Specifies the Gmail message identifier that will have its labels updated.",
-				"Ensures the label changes are applied to the intended message in the mailbox.",
-				"Prevents accidental updates by requiring a stable message id before making the API call."
+				"Sets the maximum number of calendar list entries returned on a single result page.",
+				"Accepts integer values from 1 to 250; the default is 100 when the parameter is not specified.",
+				"Helps control API response size and memory usage when a user has many calendars."
 			],
 			"mandatory": false,
-			"name": "MessageId",
+			"name": "MaxResults",
+			"type": "Number|Expression"
+		},
+		{
+			"description": [
+				"Filters the calendar list to entries where the authenticated user holds at least the specified access role.",
+				"Accepted values are freeBusyReader, owner, reader, and writer.",
+				"Cannot be combined with SyncToken; the Google Calendar API will return an error if both parameters are specified."
+			],
+			"mandatory": false,
+			"name": "MinAccessRole",
 			"type": "String|Expression"
 		},
 		{
 			"description": [
-				"Defines the list of Gmail label names that will be removed from the target message.",
-				"Controls how the message is categorized by removing labels that are no longer relevant.",
-				"Removes no labels when the list is empty or not provided."
+				"Specifies a token returned by a previous calendar list request that identifies the next page of results.",
+				"Enables pagination through large calendar lists by continuing from where the previous request left off.",
+				"Omit this parameter to start from the first page of results."
 			],
 			"mandatory": false,
-			"name": "Remove",
-			"type": "Array"
+			"name": "PageToken",
+			"type": "String|Expression"
 		},
 		{
 			"description": [
-				"Supplies an OAuth Bearer access token used to call the Gmail API.",
-				"Enables direct API access when a stored credential reference is not used.",
-				"Is ignored when a credentials reference is provided so stored credentials can take priority."
+				"Instructs the plugin to include deleted calendar list entries in the response when present.",
+				"Activated by the presence of the parameter key; no value is required.",
+				"Useful for auditing workflows that need to detect calendars removed from the user's list, and required alongside ShowHidden when using SyncToken."
+			],
+			"mandatory": false,
+			"name": "ShowDeleted",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Instructs the plugin to include hidden calendar list entries in the response when present.",
+				"Activated by the presence of the parameter key; no value is required.",
+				"Required alongside ShowDeleted when using SyncToken so that hidden entries changed since the last sync are captured in the delta."
+			],
+			"mandatory": false,
+			"name": "ShowHidden",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Provides the nextSyncToken value returned by a previous calendar list response to enable incremental synchronization.",
+				"When supplied, the API returns only entries that changed since the token was issued, reducing data volume and API load.",
+				"Cannot be combined with MinAccessRole. If the token has expired, the API returns 410 GONE and a full re-sync without SyncToken is required."
+			],
+			"mandatory": false,
+			"name": "SyncToken",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies an OAuth Bearer access token used to authenticate requests to the Google Calendar API.",
+				"Allows direct API access without retrieving credentials from a stored record.",
+				"Is ignored when the Credentials parameter is supplied because stored credentials take precedence."
 			],
 			"mandatory": false,
 			"name": "Token",
@@ -321,8 +337,8 @@
 	],
 	"pluginType": "Action",
 	"summary": [
-		"The UpdateGmailLabels plugin updates labels on a Gmail message during an automation run.",
-		"It resolves label names to Gmail label ids, removes the specified labels, and then adds the new labels using authenticated Gmail API calls.",
-		"It returns the updated message fields and stores key values (including labels) as Base64-encoded, namespaced session parameters so later steps can safely reuse the results."
+		"The ExportGoogleCalendarList plugin retrieves the authenticated user's list of calendars from the Google Calendar API.",
+		"It supports filtering by minimum access role, controlling page size, paginating through results, including deleted or hidden entries, and performing incremental synchronization via a sync token.",
+		"The full API response is serialized to JSON and stored in the ExportGoogleCalendarList:Result session parameter so later workflow steps can access calendar ids and metadata without repeating the API call."
 	]
 }
