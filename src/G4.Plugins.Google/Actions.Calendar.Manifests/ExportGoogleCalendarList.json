@@ -1,0 +1,328 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Gmail"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/EditGmailMessage.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/EditGmailMessage.cs"
+			},
+			"rag": {
+				"description": "Update Gmail message labels during an automation run by resolving label names to Gmail label ids, removing labels first, then adding new ones. It supports token or credentials-based authentication, enforces required inputs like MessageId, and stores the updated message fields as Base64 session parameters so downstream steps can reliably reuse the exact post-update email state.",
+				"qa": [
+					{
+						"question": "What does EditGmailMessage do?",
+						"answer": "EditGmailMessage adds and removes labels on a Gmail message, then returns and stores updated message fields for downstream workflow steps."
+					},
+					{
+						"question": "What are the key features and parameters of EditGmailMessage?",
+						"answer": "It updates labels by resolving label names to ids, removing labels first then adding labels. It accepts MessageId (required) plus optional Add and Remove lists, and Token or Credentials for authentication (Credentials takes precedence)."
+					},
+					{
+						"question": "How does EditGmailMessage fit into the integration context?",
+						"answer": "It runs as an Action in a sequential workflow step (componentType “task”) using the google icon provider and ActionRuleModel."
+					},
+					{
+						"question": "What are best practices for using EditGmailMessage?",
+						"answer": "Prefer Credentials for long-running automations, use consistent label naming, avoid empty Add or Remove values, and verify the final state using EditGmailMessage:Labels instead of assuming changes succeeded."
+					},
+					{
+						"question": "What rule or schema details should I follow when configuring EditGmailMessage?",
+						"answer": "Use $type “Action” with pluginName “EditGmailMessage”, pass {{$--MessageId:value}} plus any {{$--Add:label}} and {{$--Remove:label}} entries, and include either {{$--Token:value}} or {{$--Credentials:value}}. Outputs are written under EditGmailMessage:*."
+					},
+					{
+						"question": "What is the author name in the manifest metadata?",
+						"answer": "The author name is “Roei Sabag”."
+					},
+					{
+						"question": "What is the author link in the manifest metadata?",
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What source descriptions and Git links are relevant for EditGmailMessage?",
+						"answer": "The documentation matches the manifest behavior: resolve label names to ids, remove labels first, add labels next, then store updated message fields as Base64 session parameters under EditGmailMessage:*. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/EditGmailMessage.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/EditGmailMessage.cs."
+					},
+					{
+						"question": "What categories are defined for this plugin?",
+						"answer": "The categories list contains “Gmail”."
+					},
+					{
+						"question": "What is the manifest key for this plugin?",
+						"answer": "The manifest key is “EditGmailMessage”."
+					},
+					{
+						"question": "What manifestVersion does this plugin use?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What namespace is defined for this plugin?",
+						"answer": "The namespace is “G4.Plugins.Google”."
+					},
+					{
+						"question": "Which platforms does the plugin support?",
+						"answer": "It supports platforms “Any”."
+					},
+					{
+						"question": "What is the pluginType in the manifest?",
+						"answer": "The pluginType is “Action”."
+					},
+					{
+						"question": "What is the summary in the manifest metadata?",
+						"answer": "It updates Gmail message labels by resolving label names to ids, removing specified labels, adding new labels, and storing updated message fields as Base64-encoded namespaced session parameters for safe downstream reuse."
+					},
+					{
+						"question": "What output parameters does EditGmailMessage produce?",
+						"answer": "It stores Base64-encoded outputs in session parameters including EditGmailMessage:Id, EditGmailMessage:Labels, EditGmailMessage:From, EditGmailMessage:To, EditGmailMessage:Cc, EditGmailMessage:Bcc, EditGmailMessage:Subject, and EditGmailMessage:Content."
+					},
+					{
+						"question": "What sources describe this plugin and where can I find the Git links?",
+						"answer": "The manifest description and examples cover name-to-id label resolution, remove-then-add ordering, and Base64 outputs under EditGmailMessage:*. Repository: https://github.com/g4-api/g4-plugins. Documentation/README: https://github.com/g4-api/g4-plugins/blob/main/README.md."
+					},
+					{
+						"question": "How does EditGmailMessage handle errors and edge cases?",
+						"answer": "Workflows should handle invalid or missing MessageId, label name not found, invalid JSON for Add or Remove, empty Add or Remove, Gmail API non-success responses, quota or rate limits, and credential or token resolution failures."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "google",
+					"svg": null
+				},
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The EditGmailMessage plugin adds and removes labels on a Gmail message during an automation run.",
+		"It helps workflows route, tag, and organize emails automatically without manual inbox work.",
+		"It supports authentication using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
+		"It stores the updated message details in session parameters so later steps can reuse the results reliably.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                       |",
+		"|----------------------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| Update message labels      | Adds and removes labels on a Gmail message using the Gmail API (users.messages.modify).                           |",
+		"| Label name resolution      | Resolves provided label names to label ids at runtime before applying changes.                                    |",
+		"| Add labels                 | Adds one or more resolved labels to the target message.                                                           |",
+		"| Remove labels              | Removes one or more resolved labels from the target message.                                                      |",
+		"| Token authentication       | Accepts a raw OAuth Bearer access token for direct API calls.                                                     |",
+		"| Credentials authentication | Accepts a credentials id/name and exchanges it for a fresh access token at runtime.                               |",
+		"| Credentials precedence     | Uses credentials when both token and credentials are provided.                                                    |",
+		"| Result session storage     | Stores updated message fields in namespaced session parameters (EditGmailMessage:) as Base64-encoded values. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                         | Description                                                                                      |",
+		"|----------------------------------|--------------------------------------------------------------------------------------------------|",
+		"| Auto-triage incoming mail        | Add labels like Needs Review, Customer, or Urgent based on sender, subject, or content rules.    |",
+		"| Move emails through a workflow   | Add and remove labels as a message progresses through stages such as New, In Progress, and Done. |",
+		"| Keep shared processes consistent | Apply a standard label taxonomy so teams can search and report reliably.                         |",
+		"| Reduce inbox noise               | Remove a routing label after the message was processed, to prevent duplicate handling.           |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Add and Remove are both empty",
+						"Add contains an empty label name",
+						"Credentials id/name not found",
+						"Credentials record missing refresh token",
+						"Credentials value is empty or whitespace-only",
+						"Gmail API rate limit or quota exceeded",
+						"Gmail API returns non-success status code",
+						"Invalid JSON format for Add/Remove",
+						"Invalid MessageId",
+						"Label name not found",
+						"Message not found for MessageId",
+						"Missing Add and Remove",
+						"Missing MessageId",
+						"Refresh-token exchange fails",
+						"Remove contains an empty label name"
+					],
+					"expected_result": "Message labels are updated and the updated message fields are stored in `EditGmailMessage:*` session parameters (Base64).",
+					"notes": "Removes the UNREAD and NEW labels and adds the IMPORTANT and FOLLOW-UP labels to a Gmail message.",
+					"use_case": "update_gmail_labels_add_and_remove",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Authentication",
+					"Credentials",
+					"Gmail",
+					"Labels",
+					"OAuth",
+					"SessionParameters",
+					"Update"
+				]
+			},
+			"description": [
+				"### EditGmailMessage: Add and remove labels",
+				"",
+				"This example updates Gmail labels by removing `unread` and `new` and adding `important` and `follow-up`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --MessageId:172ce2c4a72cc353 --Add:important --Add:follow-up --Remove:unread --Remove:new --Credentials:my-google-creds}}",
+				"pluginName": "EditGmailMessage"
+			}
+		}
+	],
+	"key": "ExportGoogleCalendarList",
+	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Google",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the Bcc recipient list from the Gmail message after label updates are applied.",
+				"Preserves hidden recipients so auditing and routing logic can use the same header data Gmail returned.",
+				"Helps downstream steps make decisions using the complete set of recipients."
+			],
+			"name": "EditGmailMessage:Bcc",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the Cc recipient list from the Gmail message after label updates are applied.",
+				"Keeps carbon copy recipients available for logging, filtering, and routing rules.",
+				"Helps downstream steps evaluate who else received the message."
+			],
+			"name": "EditGmailMessage:Cc",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the message body content from the Gmail message after label updates are applied.",
+				"Provides the email text so later steps can parse, summarize, or act on the message without another API call.",
+				"Supports workflows that need content context while processing label changes."
+			],
+			"name": "EditGmailMessage:Content",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the sender address from the Gmail message after label updates are applied.",
+				"Enables filtering and routing based on who sent the email.",
+				"Helps downstream steps validate the source before taking action."
+			],
+			"name": "EditGmailMessage:From",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the Gmail message identifier for the message whose labels were updated.",
+				"Provides a stable reference for follow-up actions like fetching details or applying more label changes.",
+				"Helps downstream steps target the exact message without ambiguity."
+			],
+			"name": "EditGmailMessage:Id",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the resolved label names currently assigned to the message after the update completes.",
+				"Provides a JSON list of labels so later steps can verify the final labeling state.",
+				"Helps workflows make decisions based on the actual labels without re-fetching the message."
+			],
+			"name": "EditGmailMessage:Labels",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the subject line from the Gmail message after label updates are applied.",
+				"Helps workflows display, log, or classify the message using its subject.",
+				"Supports quick filtering when only header information is needed."
+			],
+			"name": "EditGmailMessage:Subject",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the To recipient list from the Gmail message after label updates are applied.",
+				"Keeps primary recipients available for routing, filtering, and audit checks.",
+				"Helps downstream steps determine whether the message was addressed to the expected target."
+			],
+			"name": "EditGmailMessage:To",
+			"scope": "Session",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Defines the list of Gmail label names that will be added to the target message.",
+				"Controls how the message is categorized in Gmail so later searches and automations can find it.",
+				"Applies no new labels when the list is empty or not provided."
+			],
+			"mandatory": false,
+			"name": "Add",
+			"type": "Array"
+		},
+		{
+			"description": [
+				"Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.",
+				"Avoids hardcoding short-lived tokens by exchanging stored credentials for a valid access token when needed.",
+				"Takes precedence over the token parameter so authentication stays consistent and renewable."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies the Gmail message identifier that will have its labels updated.",
+				"Ensures the label changes are applied to the intended message in the mailbox.",
+				"Prevents accidental updates by requiring a stable message id before making the API call."
+			],
+			"mandatory": false,
+			"name": "MessageId",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Defines the list of Gmail label names that will be removed from the target message.",
+				"Controls how the message is categorized by removing labels that are no longer relevant.",
+				"Removes no labels when the list is empty or not provided."
+			],
+			"mandatory": false,
+			"name": "Remove",
+			"type": "Array"
+		},
+		{
+			"description": [
+				"Supplies an OAuth Bearer access token used to call the Gmail API.",
+				"Enables direct API access when a stored credential reference is not used.",
+				"Is ignored when a credentials reference is provided so stored credentials can take priority."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"The UpdateGmailLabels plugin updates labels on a Gmail message during an automation run.",
+		"It resolves label names to Gmail label ids, removes the specified labels, and then adds the new labels using authenticated Gmail API calls.",
+		"It returns the updated message fields and stores key values (including labels) as Base64-encoded, namespaced session parameters so later steps can safely reuse the results."
+	]
+}
