@@ -5,8 +5,11 @@
 using G4.Plugins.Google.Extensions;
 using G4.Plugins.Google.Models.Calendar;
 
+using Microsoft.Extensions.Options;
+
 using System;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 
 namespace G4.Plugins.Google.Clients
 {
@@ -70,6 +73,26 @@ namespace G4.Plugins.Google.Clients
 
                 // Send the request and deserialize the response body into the target model.
                 return HttpClient.Send<CalendarListModel>(requestMessage);
+            }
+
+            /// <summary>
+            /// Retrieves a specific calendar from the authenticated user's calendar list by its unique identifier.
+            /// </summary>
+            /// <param name="id">The unique identifier of the calendar to retrieve. Use `primary` to refer to the primary calendar of the authenticated user.</param>
+            /// <returns>A <see cref="CalendarListEntryModel"/> representing the requested calendar.</returns>
+            public CalendarListEntryModel Get(string id)
+            {
+                // Extract the OAuth access token from the resolved credentials.
+                var token = Credentials.AccessToken;
+
+                // Build the Google Calendar API endpoint for the authenticated user's calendar.
+                var requestUri = new Uri(uriString: $"{CalendarBaseUrl}/calendars/{id}");
+
+                // Create the authorized HTTP GET request message.
+                var requestMessage = NewRequest(HttpMethod.Get, requestUri, token);
+
+                // Send the request and deserialize the response body into the target model.
+                return HttpClient.Send<CalendarListEntryModel>(requestMessage);
             }
         }
         #endregion
