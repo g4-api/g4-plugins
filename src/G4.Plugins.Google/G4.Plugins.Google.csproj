@@ -37,9 +37,4 @@
 		<ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Actions.Calendar\" />
-	  <Folder Include="Actions.Calendar.Manifests\" />
-	</ItemGroup>
-
 </Project>
