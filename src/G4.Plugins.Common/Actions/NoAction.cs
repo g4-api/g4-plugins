@@ -17,7 +17,7 @@ namespace G4.Plugins.Common.Actions
             pluginData.Rule.SetInvokeRules(true);
 
             // Log the execution of the action with its name and argument.
-            Logger.LogInformation("Executing Action: {Name} with Argument: {Argument}",
+            Logger?.LogInformation("Executing Action: {Name} with Argument: {Argument}",
                 GetType().Name,
                 pluginData.Rule.Argument);
 
