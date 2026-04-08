@@ -219,9 +219,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"`WriteHost` prints messages to the console while a task runs so you can see what happened.",
-		"It outputs your message to the host stream for immediate visibility during execution.",
-		"This makes it easy to follow steps, spot problems, and capture important notes in real time."
+		"Prints messages to the console during task execution for immediate visibility.",
+		"Outputs text or expression values to the host stream in real time.",
+		"Helps track progress, debug issues, and capture important notes during runs."
 	],
 	"version": "4"
 }

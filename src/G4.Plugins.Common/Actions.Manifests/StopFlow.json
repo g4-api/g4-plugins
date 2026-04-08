@@ -156,9 +156,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"StopFlow cleanly ends the current browser session by disposing the WebDriver and removing it from the registry.",
-		"It’s safe to call multiple times and requires no arguments.",
-		"Use it at the end of workflows or before starting a fresh session to keep resources tidy."
+		"Disposes the active WebDriver and removes it from the registry to end the browser session.",
+		"Idempotent operation that completes successfully even if already disposed.",
+		"Place at workflow end to free resources before starting a fresh session."
 	],
 	"version": "4"
 }

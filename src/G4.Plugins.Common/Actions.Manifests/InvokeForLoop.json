@@ -330,9 +330,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The InvokeForLoop tool repeats a series of steps a set number of times.",
-		"You simply specify how many times to run your tasks, and it handles the rest.",
-		"This makes your automation more reliable and cuts out manual repetition."
+		"Repeats a set of actions a specified number of times.",
+		"Executes each step sequentially for each iteration.",
+		"Supports parameterized iteration counts for dynamic loops."
 	],
 	"version": "4"
 }

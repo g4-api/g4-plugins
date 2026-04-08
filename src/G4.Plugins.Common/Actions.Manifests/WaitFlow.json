@@ -458,9 +458,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"WaitFlow pauses a task until something you’re watching for happens or until a set time is up.",
-		"It waits for simple checks to pass or stops waiting after a timer so everything happens at the right moment.",
-		"You can use it to pause until an item shows up, add a delay, or keep steps in sync when some things happen later than others."
+		"Pauses execution until a condition is met or a timeout expires.",
+		"Supports assertion-based checks and fixed-duration delays.",
+		"Synchronizes steps when elements appear or events complete."
 	],
 	"version": "4"
 }

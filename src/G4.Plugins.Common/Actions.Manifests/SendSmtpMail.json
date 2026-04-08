@@ -440,9 +440,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The SendSmtpMail plugin sends emails through any SMTP server using configurable host, port, credentials, and TLS settings.",
-		"It supports To, Cc, and Bcc recipients, plain text or HTML bodies, and controlled From address handling.",
-		"This plugin is useful for sending alerts, notifications, and automated messages in workflows where email delivery is required."
+		"Sends email messages through any SMTP server with configurable authentication and TLS.",
+		"Supports multiple recipients via To, Cc, and Bcc with plain text or HTML body content.",
+		"Useful for sending alerts, notifications, and automated reports from workflows."
 	],
 	"version": "4"
 }

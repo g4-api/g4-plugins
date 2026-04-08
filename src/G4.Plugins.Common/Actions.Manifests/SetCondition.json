@@ -417,9 +417,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"SetCondition checks a situation and runs one group of steps when it’s true, or a different group when it’s not true.",
-		"It uses simple checks to decide which steps to run.",
-		"This helps you do things only when needed and handle errors or set up tests that depend on earlier results."
+		"Evaluates a condition and branches execution into true or false paths.",
+		"Uses assertion-based checks to determine which set of steps to run.",
+		"Enables conditional workflows that respond to runtime conditions."
 	],
 	"version": "4"
 }

@@ -459,9 +459,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The StartJenkinsJob plugin starts a Jenkins job using a Jenkins server URL, job path, and user credentials.",
-		"It can optionally wait for the build to finish and returns details such as result status, duration, and job URL for later steps.",
-		"It also supports passing job parameters and pulling key values from the Jenkins response so they can be reused in downstream automation."
+		"Triggers a Jenkins job using server URL, job path, and user credentials.",
+		"Optionally waits for build completion and returns status, duration, and job URL.",
+		"Supports job parameters and response extraction for downstream automation."
 	],
 	"version": "4"
 }

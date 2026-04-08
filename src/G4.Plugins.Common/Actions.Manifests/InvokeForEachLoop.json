@@ -616,8 +616,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The InvokeForEachLoop tool finds each item you specify and runs the steps you choose on every one.",
-		"It can also run steps inside other steps to tackle more complex tasks."
+		"Locates a collection of elements and runs actions on each one sequentially.",
+		"Supports XPath, CSS selector, and Id locators for element selection.",
+		"Handles nested loops for multi-level iteration workflows."
 	],
 	"version": "4"
 }
