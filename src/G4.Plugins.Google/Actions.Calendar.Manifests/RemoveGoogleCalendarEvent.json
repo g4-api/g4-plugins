@@ -116,24 +116,18 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"EventId is missing or empty",
-						"EventId does not exist on the target calendar — API returns 404",
 						"CalendarId defaults to 'primary' when omitted",
+						"EventId does not exist on the target calendar — API returns 404",
+						"EventId is missing or empty — plugin cannot build the delete request",
 						"Invalid or expired OAuth access token — API returns 401",
-						"Access token missing required Google Calendar API scope",
-						"SendUpdates defaults to 'none' — no cancellation emails are sent",
-						"Google Calendar API rate limit or quota exceeded",
-						"Google Calendar API returns non-success status code",
-						"Network timeout or connection failure"
+						"SendUpdates defaults to 'none' — no cancellation emails are sent"
 					],
-					"expected_result": "The event is deleted from the primary calendar. The API returns 204 No Content.",
-					"notes": "Deletes an event from the primary calendar using a direct OAuth access token.",
+					"expected_result": "The event is deleted from the primary calendar and the API returns 204 No Content.",
+					"notes": "EventId is the only required parameter. Token provides a raw OAuth Bearer token suited for single-step runs where token expiry is not a concern. Omitting CalendarId targets the authenticated user's primary calendar.",
 					"use_case": "remove_calendar_event_with_token",
 					"version": "4"
 				},
 				"labels": [
-					"ApiIntegration",
-					"Authentication",
 					"Calendar",
 					"Delete",
 					"GoogleCalendar",
@@ -159,33 +153,22 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Credentials id/name not found",
-						"Credentials record missing refresh token",
-						"Refresh-token exchange fails",
-						"Google OAuth token endpoint returns non-success status code",
+						"CalendarId not found or not writable — API returns 404 or 403",
+						"Credentials record not found or missing refresh token — token exchange fails",
 						"EventId does not exist on the target calendar — API returns 404",
-						"CalendarId not found — API returns 404",
-						"CalendarId refers to a calendar the user cannot write to — API returns 403",
-						"CalendarId contains special characters that require URL encoding",
-						"SendUpdates:all causes cancellation emails to be sent to all attendees immediately",
-						"Google Calendar API rate limit or quota exceeded",
-						"Google Calendar API returns non-success status code",
-						"Network timeout or connection failure"
+						"SendUpdates:all sends cancellation emails to all attendees immediately",
+						"Token parameter is ignored when Credentials is provided"
 					],
-					"expected_result": "The event is deleted from the specified secondary calendar and cancellation emails are sent to all attendees. The API returns 204 No Content.",
-					"notes": "Deletes an event from a secondary calendar using stored credentials, notifying all attendees.",
+					"expected_result": "The event is deleted from the specified secondary calendar, cancellation emails are sent to all attendees, and the API returns 204 No Content.",
+					"notes": "Credentials is resolved at runtime to a fresh access token, making it safe for long-running workflows where raw tokens may expire. Passing CalendarId explicitly targets the secondary calendar by its email-format identifier. SendUpdates:all delivers cancellation emails to all attendees immediately.",
 					"use_case": "remove_calendar_event_with_credentials_and_notifications",
 					"version": "4"
 				},
 				"labels": [
-					"ApiIntegration",
-					"Authentication",
 					"Calendar",
 					"Credentials",
 					"Delete",
 					"GoogleCalendar",
-					"Invitations",
-					"OAuth",
 					"SecondaryCalendar",
 					"SendUpdates"
 				]
@@ -194,8 +177,8 @@
 				"### RemoveGoogleCalendarEvent: Delete event from secondary calendar using stored credentials",
 				"",
 				"Delete a calendar event from a secondary calendar by supplying its identifier and CalendarId.",
-				"Stored credentials are resolved at runtime to obtain a fresh OAuth access token.",
-				"SendUpdates:all notifies all attendees of the cancellation."
+				"Stored credentials are exchanged at runtime for a fresh OAuth access token, avoiding hardcoded token expiry issues.",
+				"SendUpdates:all notifies all attendees of the cancellation immediately."
 			],
 			"rule": {
 				"$type": "Action",
@@ -266,6 +249,7 @@
 	"summary": [
 		"Deletes a Google Calendar event by its unique identifier from the target calendar.",
 		"Authenticates via a direct OAuth access token or a stored credentials reference exchanged for a fresh token.",
+		"Controls whether attendees receive cancellation emails via SendUpdates, defaulting to no notifications.",
 		"Fails with a non-success API response when the calendar or event cannot be found."
 	]
 }
