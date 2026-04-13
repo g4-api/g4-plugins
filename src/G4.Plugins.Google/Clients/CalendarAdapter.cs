@@ -5,16 +5,13 @@
 using G4.Plugins.Google.Extensions;
 using G4.Plugins.Google.Models.Calendar;
 
-using Microsoft.Extensions.Options;
-
 using System;
 using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
 
 namespace G4.Plugins.Google.Clients
 {
     /// <summary>
-    /// Provides access to Google Calendar API calendar list operations using the supplied OAuth credentials.
+    /// Provides access to Google Calendar API operations using the supplied OAuth credentials.
     /// </summary>
     /// <param name="credentials">
     /// The serialized credentials payload used to authenticate requests against the Google Calendar API.
@@ -33,8 +30,13 @@ namespace G4.Plugins.Google.Clients
         /// Gets the client responsible for working with the authenticated user's calendar list.
         /// </summary>
         public CalendarListClient CalendarList => new(_credentials);
+
+        /// <summary>
+        /// Gets the client responsible for creating and managing calendar events.
+        /// </summary>
+        public EventsClient Events => new(_credentials);
         #endregion
-        
+
         #region *** Nested Types ***
         /// <summary>
         /// Handles requests related to the authenticated user's calendar list.
@@ -93,6 +95,65 @@ namespace G4.Plugins.Google.Clients
 
                 // Send the request and deserialize the response body into the target model.
                 return HttpClient.Send<CalendarListEntryModel>(requestMessage);
+            }
+        }
+
+        /// <summary>
+        /// Handles requests for creating and managing events on a specific calendar.
+        /// </summary>
+        /// <param name="credentials">The serialized credentials payload used to authenticate API requests.</param>
+        public class EventsClient(string credentials) : ClientBase(credentials)
+        {
+            /// <summary>
+            /// Deletes an event from the specified calendar.
+            /// </summary>
+            /// <param name="options">The request parameters containing the target calendar identifier, the event identifier to delete, and optional notification settings.</param>
+            /// <returns>The <see cref="HttpResponseMessage"/> returned by the Google Calendar API.</returns>
+            public HttpResponseMessage Remove(RemoveEventRequestModel options)
+            {
+                // Extract the OAuth access token from the resolved credentials.
+                var token = Credentials.AccessToken;
+
+                // Convert the request options into a query string, or use an empty string when no query parameters are needed.
+                var queryParameters = options?.ConvertToQueryParameters() ?? string.Empty;
+
+                // Build the Google Calendar API endpoint for deleting the specified event from the target calendar.
+                var requestUri = new Uri(
+                    uriString: $"{CalendarBaseUrl}/calendars/{options.CalendarId}/events/{options.EventId}{queryParameters}");
+
+                // Create the authorized HTTP DELETE request message.
+                var requestMessage = NewRequest(HttpMethod.Delete, requestUri, token);
+
+                // Send the request and return the HTTP response.
+                return HttpClient.ConfirmResponse(requestMessage);
+            }
+
+            /// <summary>
+            /// Creates a new event on the specified calendar.
+            /// </summary>
+            /// <param name="options">The request parameters containing the target calendar identifier, the event body to create, and optional notification settings.</param>
+            /// <returns>A <see cref="CalendarEventModel"/> representing the event created by the Google Calendar API.</returns>
+            public CalendarEventModel New(NewEventRequestModel options)
+            {
+                // Extract the OAuth access token from the resolved credentials.
+                var token = Credentials.AccessToken;
+
+                // Convert the request options into a query string, or use an empty string when no query parameters are needed.
+                var queryParameters = options?.ConvertToQueryParameters() ?? string.Empty;
+
+                // Build the Google Calendar API endpoint for inserting an event into the specified calendar.
+                var requestUri = new Uri(
+                    uriString: $"{CalendarBaseUrl}/calendars/{options.CalendarId}/events{queryParameters}");
+
+                // Create the authorized HTTP POST request message with the serialized event body.
+                var requestMessage = NewRequest(
+                    HttpMethod.Post,
+                    requestUri,
+                    token,
+                    requestBody: options.EventModel);
+
+                // Send the request and deserialize the API response into the event model.
+                return HttpClient.Send<CalendarEventModel>(requestMessage);
             }
         }
         #endregion
