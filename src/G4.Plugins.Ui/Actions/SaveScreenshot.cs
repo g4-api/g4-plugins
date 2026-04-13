@@ -6,20 +6,27 @@ using G4.WebDriver.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 
 namespace G4.Plugins.Ui.Actions
 {
     [G4Plugin(
         assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Ui.Actions.Manifests.{nameof(SaveScreenshot)}.json")]
+        manifest: $"G4.Plugins.Ui.Actions.Manifests.{NameReference}.json")]
     public class SaveScreenshot(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        // Define a constant for the plugin name reference to ensure
+        // consistent namespacing of session parameters.
+        private const string NameReference = nameof(SaveScreenshot);
+
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Retrieve screenshot-related arguments from the plugin data
             var directory = pluginData.Parameters.Get(key: "Directory", defaultValue: Environment.CurrentDirectory);
             var fileName = FormatFileName(pluginData);
-            var screenshots = Invoker.Context.SessionParameters.Get(key: "Screenshots", defaultValue: new List<string>());
+            var screenshots = Invoker.Context.SessionParameters.Get(
+                key: $"{NameReference}:Screenshots",
+                defaultValue: "[]");
             var path = Path.Combine(directory, fileName);
             var element = this.GetElement(pluginData.Rule, pluginData.Element);
 
@@ -35,10 +42,14 @@ namespace G4.Plugins.Ui.Actions
             }
 
             // Add the path of the saved screenshot to the list of screenshots
-            screenshots.Add(path);
+            var list = JsonSerializer.Deserialize<List<string>>(screenshots) ?? [];
+            list.Add(path);
 
             // Update the session parameters with the updated list of saved screenshots
-            Invoker.Context.SessionParameters["SavedScreenshots"] = screenshots;
+            this.AddSessionParameter(
+                @namespace: NameReference,
+                name: "Screenshots",
+                value: JsonSerializer.Serialize(list));
 
             // Return a new plugin response indicating success
             return this.NewPluginResponse();

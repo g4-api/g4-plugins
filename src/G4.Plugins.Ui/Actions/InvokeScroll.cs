@@ -51,7 +51,7 @@ namespace G4.Plugins.Ui.Actions
             return this.NewPluginResponse();
         }
 
-        #region *** Methods: Private ***
+        #region *** Methods      ***
         // Scrolls to a specific element based on provided options.
         private static void ScrollElement(PluginBase pluginBase, PluginDataModel pluginData, Options options)
         {
@@ -107,7 +107,7 @@ namespace G4.Plugins.Ui.Actions
         }
         #endregion
 
-        #region *** Nested Types     ***
+        #region *** Nested Types ***
         /// <summary>
         /// Represents options for scrolling.
         /// </summary>

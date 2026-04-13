@@ -297,9 +297,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The NoAction tool runs without doing anything, serving as a placeholder in your automation flow.",
-		"You can use it to group steps, fill gaps, or debug your scripts without triggering real actions.",
-		"This can helps you organize and test workflows safely without unintended side effects."
+		"Acts as a no-op container that groups child steps without side effects.",
+		"Logs execution details and triggers any attached rules.",
+		"Useful as a placeholder for organizing or debugging workflows."
 	],
 	"version": "4"
 }

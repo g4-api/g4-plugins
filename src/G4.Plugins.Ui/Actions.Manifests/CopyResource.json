@@ -5,14 +5,47 @@
 		"DownloadResources"
 	],
 	"author": {
-		"name": "Roei Sabag",
-		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
 	},
 	"categories": [
 		"WebDriver"
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CopyResource.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/CopyResource.cs"
+			},
+			"rag": {
+				"description": "The CopyResource action downloads files from web elements and saves them to local disk. It resolves URLs from an element attribute or text content, applies an optional regular expression to isolate the exact endpoint, and fetches content via HTTP/HTTPS or by decoding an inline data URI. The target directory is created automatically when it does not exist. Parallel processing is available via the Parallel switch parameter. All successfully written file paths are collected into the CopiedResources session parameter for downstream use.",
+				"qa": [
+					{
+						"question": "What is the CopyResource plugin and what does it do?",
+						"answer": "CopyResource downloads files from URLs resolved from web elements and saves them to local disk. It reads URLs from element attributes or text, downloads content via HTTP/HTTPS or decodes inline data URIs, and stores all saved file paths in the CopiedResources session parameter."
+					},
+					{
+						"question": "How do the Path parameter and Argument property interact?",
+						"answer": "Path is an optional parameter that specifies where to save the downloaded files. When Path is absent the plugin falls back to the rule's Argument value as the save location. If neither resolves to a usable filename the file is skipped with a warning log."
+					},
+					{
+						"question": "How does the plugin determine which URL to download from each element?",
+						"answer": "When OnAttribute is set the plugin reads that attribute's value from the element; otherwise it reads the element's visible text content. It then applies the RegularExpression pattern to that value and uses the first match as the download endpoint."
+					},
+					{
+						"question": "What download protocols does CopyResource support?",
+						"answer": "CopyResource supports HTTP and HTTPS URLs via an HttpClient GET request, and inline data URIs by base64-decoding the data segment directly without making any HTTP request."
+					},
+					{
+						"question": "What does the Parallel switch parameter do and how is concurrency controlled?",
+						"answer": "When the Parallel switch is present the plugin processes elements using Parallel.ForEach with MaxDegreeOfParallelism set to Environment.ProcessorCount. Without it elements are processed sequentially. Either way results are safely accumulated in a ConcurrentBag."
+					},
+					{
+						"question": "What does the CopiedResources output parameter contain?",
+						"answer": "CopiedResources is a session parameter holding a collection of absolute file paths for every resource successfully downloaded during the action. Files that failed to download are omitted — only successfully written paths are included."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -20,79 +53,156 @@
 					"name": "clone",
 					"svg": null
 				},
+				"label": "Copy Resource",
 				"model": "ActionRuleModel"
 			}
 		}
 	},
 	"description": [
-		"> [!IMPORTANT]",
-		"> When interacting with web resources, it's crucial to consider security aspects, such as handling sensitive data, authentication, and secure communication.",
-		"",
 		"### Purpose",
 		"",
-		"The primary purpose of the `CopyResource` plugin is to download data from a specified endpoint and save it to a local file. This can be used to retrieve resources like images, documents, or any other file types from web elements during automated workflows.",
+		"The CopyResource action downloads files from web elements and saves them to local disk. It reads a URL from an element's text or a named attribute, applies an optional regular expression to extract the exact endpoint, and fetches the content via HTTP, HTTPS, or by decoding an inline data URI. The output directory is created automatically if it does not exist, and every successfully written file path is stored in the CopiedResources session parameter for downstream use.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                               |",
-		"|---------------------|---------------------------------------------------------------------------|",
-		"| Data Download       | Downloads data from specified endpoints and saves it to local files.      |",
-		"| Parallel Processing | Supports parallel processing to download multiple resources concurrently. |",
-		"| Custom Paths        | Allows specification of custom paths for saving downloaded resources.     |",
-		"| Regular Expression  | Uses regular expressions to extract and match URLs from web elements.     |",
+		"| Feature                 | Description                                                                                   |",
+		"|-------------------------|-----------------------------------------------------------------------------------------------|",
+		"| Element URL Resolution  | Reads the download URL from a named attribute or element text content.                        |",
+		"| Regex URL Extraction    | Applies a regular expression to isolate the exact URL from surrounding text or markup.        |",
+		"| HTTP/HTTPS Download     | Fetches file content via an HttpClient GET request and writes bytes directly to disk.         |",
+		"| Data URI Support        | Decodes inline base64-encoded data URIs without making any HTTP request.                      |",
+		"| Parallel Processing     | Processes elements concurrently using Parallel.ForEach when the Parallel switch is set.       |",
+		"| Auto Directory Creation | Creates the target directory automatically if it does not already exist before writing files. |",
+		"| Session Output          | Stores all saved file paths in the CopiedResources session parameter for downstream steps.    |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage               | Description                                                                                  |",
-		"|---------------------|----------------------------------------------------------------------------------------------|",
-		"| Data Collection     | Collect resources like images or documents from web pages for further processing or storage. |",
-		"| Workflow Automation | Automate the process of downloading necessary resources as part of a larger workflow.        |",
+		"| Use Case            | Description                                                                                            |",
+		"|---------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Bulk Asset Download | Download images, PDFs, or other files listed on a page into a local folder as part of an RPA workflow. |",
+		"| Document Collection | Harvest linked documents from a content portal and store them locally for further processing.          |",
+		"| Media Archival      | Capture media files from web pages into a structured archive directory.                                |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage               | Description                                                                                                    |",
-		"|---------------------|----------------------------------------------------------------------------------------------------------------|",
-		"| Resource Validation | Download and validate resources to ensure they are correctly served by the web application.                    |",
-		"| Performance Testing | Assess the performance of resource download times under different conditions.                                  |",
-		"| Regression Testing  | Ensure that resource download functionality works as expected after changes or updates to the web application. |"
+		"| Use Case              | Description                                                                                              |",
+		"|-----------------------|----------------------------------------------------------------------------------------------------------|",
+		"| Resource Verification | Download advertised resources and verify their content or file size against expected values.             |",
+		"| Download Regression   | Confirm that file download links continue to resolve correctly after application changes.                |",
+		"| Performance Baseline  | Measure resource download durations against an established baseline using parallel and sequential modes. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"img element has no src attribute — GetAttribute returns null and Regex.Match returns an empty string, the element is skipped",
+						"HTTP response is not 2xx — plugin logs a warning, returns an empty byte array, and skips writing the file",
+						"Downloaded file has no resolvable name from the endpoint URI — plugin logs a warning and skips that file",
+						"Target directory cannot be created due to permissions — Directory.CreateDirectory throws, element is skipped with an error log",
+						"Race condition on filename collision in parallel mode — later write silently overwrites the earlier one"
+					],
+					"expected_result": "Images whose src matches the regex are downloaded in parallel and saved to /home/user/images. Their absolute file paths are stored in CopiedResources.",
+					"notes": "The --Parallel switch enables Parallel.ForEach with MaxDegreeOfParallelism = Environment.ProcessorCount. Switch parameters require no value — presence alone activates the behavior.",
+					"use_case": "parallel_image_download_from_attribute",
+					"version": "4"
+				},
+				"labels": [
+					"AttributeExtraction",
+					"BulkDownload",
+					"ImageDownload",
+					"ParallelProcessing",
+					"ResourceCopy",
+					"WebScraping"
+				]
+			},
 			"description": [
-				"Use the `CopyResource` plugin to download images from a webpage and save them to a specified directory. The images' URLs are extracted from the `src` attribute of `img` elements matching the provided regular expression."
+				"### Download images from src attributes in parallel",
+				"",
+				"Selects all `img` elements with a `src` attribute using an XPath locator, reads the `src` attribute from each, matches the URL with the supplied regular expression, and downloads each image to `/home/user/images` in parallel.",
+				"The `--Parallel` switch activates concurrent processing via `Parallel.ForEach`, which is useful when downloading many resources at once."
 			],
 			"rule": {
-				"argument": "{{$ --Path:/home/user/downloaded_resources --Parallel:true}}",
-				"locator": "CssSelector",
+				"$type": "Action",
+				"argument": "{{$ --Path:/home/user/images --Parallel}}",
+				"locator": "Xpath",
 				"onAttribute": "src",
-				"onElement": "img",
+				"onElement": "//img[@src]",
 				"pluginName": "CopyResource",
-				"regularExpression": "https?:\\/\\/.*"
+				"regularExpression": "https?://.*"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Anchor has no href attribute — GetAttribute returns null, element is skipped",
+						"href contains a relative URL — Regex.Match returns the relative string, which fails URI construction and is caught and logged",
+						"Multiple anchors resolve to the same filename — later downloads overwrite earlier ones silently",
+						"HTTP 301/302 redirect — HttpClient follows automatically and the final content is written"
+					],
+					"expected_result": "PDF links whose href matches the regex are downloaded sequentially and saved to /home/user/docs. Their absolute file paths are stored in CopiedResources.",
+					"notes": "Sequential mode is the default when --Parallel is absent. Use this for ordered or rate-sensitive downloads.",
+					"use_case": "sequential_document_download_from_href",
+					"version": "4"
+				},
+				"labels": [
+					"AttributeExtraction",
+					"DocumentDownload",
+					"HrefExtraction",
+					"ResourceCopy",
+					"SequentialProcessing"
+				]
+			},
 			"description": [
-				"Use the `CopyResource` plugin to download documents from a webpage in a sequential manner. The URLs are extracted from the `href` attribute of `a` elements."
+				"### Download documents from href attributes sequentially",
+				"",
+				"Selects `a` elements whose `href` ends with `.pdf` using a CSS selector, reads the `href` attribute from each, extracts the URL with the regular expression, and saves each document to `/home/user/docs` one at a time.",
+				"Sequential mode is the default when `--Parallel` is omitted."
 			],
 			"rule": {
-				"argument": "{{$ --Path:/home/user/downloaded_documents}}",
+				"$type": "Action",
+				"argument": "{{$ --Path:/home/user/docs}}",
 				"locator": "CssSelector",
 				"onAttribute": "href",
-				"onElement": "a",
+				"onElement": "a[href$='.pdf']",
 				"pluginName": "CopyResource",
-				"regularExpression": "https?:\\/\\/.*"
+				"regularExpression": "https?://[^\\s]+"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element text does not contain a URL matching the regex — Regex.Match returns an empty string and the element is skipped",
+						"Element text contains multiple URLs — only the first regex match is used as the download endpoint",
+						"Inline data URI in element text — decoded directly without an HTTP request; filename falls back to the Path parameter's filename segment"
+					],
+					"expected_result": "URLs found in the visible text of matched elements are downloaded sequentially and saved to /home/user/resources. File paths are stored in CopiedResources.",
+					"notes": "When OnAttribute is absent the plugin reads element.Text. The regex isolates the URL from any surrounding text content.",
+					"use_case": "text_based_url_extraction_download",
+					"version": "4"
+				},
+				"labels": [
+					"ResourceCopy",
+					"TextExtraction",
+					"UrlFromText",
+					"WebScraping"
+				]
+			},
 			"description": [
-				"Use the `CopyResource` plugin to download all resources from `a` tags on a webpage. The URLs are extracted directly from the text content of the `a` tags."
+				"### Download resources extracted from element text content",
+				"",
+				"Selects elements matching the CSS selector `div.resource-link`, reads their visible text, applies the regular expression to extract the embedded URL, and downloads the resolved resource to `/home/user/resources`.",
+				"Use this mode when the download URL is embedded in element text rather than an HTML attribute."
 			],
 			"rule": {
-				"argument": "{{$ --Path:/home/user/all_resources}}",
+				"$type": "Action",
+				"argument": "{{$ --Path:/home/user/resources}}",
 				"locator": "CssSelector",
-				"onElement": "a",
+				"onElement": "div.resource-link",
 				"pluginName": "CopyResource",
-				"regularExpression": "https?:\\/\\/.*"
+				"regularExpression": "https?://[^\\s]+"
 			}
 		}
 	],
@@ -101,15 +211,20 @@
 	"outputParameters": [
 		{
 			"description": [
-				"Stores the list of file paths for the resources that were successfully downloaded. This allows further processing or validation within the workflow."
+				"A collection of absolute file paths for every resource successfully downloaded during the action.",
+				"Paths for files that failed to download are omitted — only successfully written paths are included.",
+				"Use this parameter in downstream steps to validate, move, or further process the downloaded files."
 			],
-			"name": "DownloadedFiles"
+			"name": "CopyResource:CopiedResources",
+			"type": "Array"
 		}
 	],
 	"parameters": [
 		{
 			"description": [
-				"Specifies the path to the directory where the downloaded resources should be saved. If not provided, the current directory is used."
+				"The directory or file path where downloaded resources are saved.",
+				"When Path is absent the plugin uses the rule's Argument value as the save location.",
+				"If neither provides a usable path the current working directory is used and the filename is derived from the endpoint URI."
 			],
 			"mandatory": false,
 			"name": "Path",
@@ -117,7 +232,9 @@
 		},
 		{
 			"description": [
-				"Indicates whether to process the downloads in parallel. This can significantly speed up the process when downloading multiple resources."
+				"When present, enables parallel processing of all matched elements using Parallel.ForEach with MaxDegreeOfParallelism set to Environment.ProcessorCount.",
+				"Omit this switch for sequential processing.",
+				"Results are accumulated in a thread-safe ConcurrentBag regardless of mode."
 			],
 			"mandatory": false,
 			"name": "Parallel",
@@ -128,17 +245,19 @@
 	"properties": [
 		{
 			"description": [
-				"Specifies the details for the `CopyResource` request. ",
-				"It includes a template or variable structure `{{$...}}` to allow dynamic values. This allows passing parameters such as `Path` and `Parallel`."
+				"The save path used when the Path parameter is not supplied. Accepts a directory path, a file path, or a dynamic expression.",
+				"When the Path parameter is present this value is ignored as a save target.",
+				"Defaults to the current working directory when this property is also absent."
 			],
-			"mandatory": true,
+			"mandatory": false,
 			"name": "Argument",
-			"type": "Uri|Expression"
+			"type": "String|Uri|Expression"
 		},
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the strategy or method used to locate the elements to use for downloading sources."
+				"Specifies the strategy used to locate elements from which URLs are resolved.",
+				"Defaults to Xpath when not provided."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -146,8 +265,8 @@
 		},
 		{
 			"description": [
-				"Used to specify and extract a specific attribute value from an HTML element. ",
-				"This is particularly relevant when dealing with web data, where elements can have associated attributes containing URLs or other relevant information."
+				"The name of the HTML attribute to read from each element when resolving the download URL.",
+				"When absent the plugin reads the element's visible text content instead."
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
@@ -155,7 +274,8 @@
 		},
 		{
 			"description": [
-				"Used to target elements using either XPath or CSS selectors, allowing the rule to locate and process specific elements within the HTML content."
+				"The locator expression that identifies the elements to iterate over.",
+				"Each matched element contributes one download attempt."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -164,8 +284,9 @@
 		{
 			"default": "(?s).*",
 			"description": [
-				"Used for pattern matching and extraction of specific data from a text response. ",
-				"It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP request."
+				"A regular expression applied to the element's text or attribute value to extract the exact download URL.",
+				"The first match is used as the endpoint.",
+				"Defaults to `(?s).*`, which matches and returns the entire value unchanged."
 			],
 			"mandatory": false,
 			"name": "RegularExpression",
@@ -176,15 +297,14 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#find-elements",
 		"w3c": "None"
 	},
-	"scopes": [
+	"platforms": [
 		"MobileWeb",
 		"Web"
 	],
 	"summary": [
-		"The `CopyResource` plugin automates the process of downloading resources from web elements and saving them to specified directories. It supports parallel processing for efficient downloads and uses regular expressions to match and extract URLs.",
-		"Key features include downloading data from specified endpoints, supporting parallel processing to handle multiple resources concurrently, allowing custom paths for saving resources, and using regular expressions for URL extraction.",
-		"In RPA, it is used for data collection, automating the download of necessary resources as part of a larger workflow. It helps in collecting resources like images or documents from web pages for further processing or storage.",
-		"In automation testing, it supports resource validation, performance testing, and regression testing. It allows downloading and validating resources to ensure they are correctly served by the web application, assessing the performance of resource download times under different conditions, and ensuring resource download functionality works as expected after changes or updates to the web application."
+		"The CopyResource action downloads files from web elements and saves them to local disk, storing all successfully written file paths in the CopiedResources session parameter.",
+		"It resolves download URLs from element attributes or text using a regular expression, supports both HTTP/HTTPS requests and inline data URI decoding, and can process multiple elements in parallel or sequentially.",
+		"In RPA it automates bulk asset and document collection workflows; in automation testing it verifies that resource links remain functional and that downloaded content meets expected criteria."
 	],
 	"version": "4"
 }

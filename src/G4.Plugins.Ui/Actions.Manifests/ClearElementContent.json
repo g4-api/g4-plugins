@@ -1,23 +1,59 @@
 {
-	"aliases": [
-		"ClearContent"
-	],
 	"author": {
-		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
-		"name": "Roei Sabag"
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
 	},
-	"categories": [
-		"WebDriver"
-	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ClearElementContent.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/ClearElementContent.cs"
+			},
+			"rag": {
+				"description": "The ClearElementContent action provides a reliable way to remove text from input elements during automation. It supports dynamic wait times through the Delay parameter and includes a NativeClear option to handle complex elements. This ensures that form fields and search boxes are in a consistent, empty state before new data is entered, improving overall workflow stability.",
+				"qa": [
+					{
+						"question": "What is the primary purpose of the ClearElementContent action?",
+						"answer": "It removes all existing text or values from a specified input or textarea element to ensure a clean state for subsequent automation steps."
+					},
+					{
+						"question": "Which parameters can be used to customize the clearing process?",
+						"answer": "The action supports a Delay parameter for synchronization and a NativeClear boolean to enable keyboard-simulated clearing for complex elements."
+					},
+					{
+						"question": "Where can I find the documentation and source code for this action?",
+						"answer": "Documentation is at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ClearElementContent.md and source code is at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/ClearElementContent.cs."
+					},
+					{
+						"question": "When should I use the NativeClear option?",
+						"answer": "Use NativeClear when an element has custom event listeners or input masks that prevent the standard browser clear method from working correctly."
+					},
+					{
+						"question": "What rule type is used for this plugin in a G4 manifest?",
+						"answer": "This plugin uses the Action rule type with the pluginName set to ClearElementContent."
+					},
+					{
+						"question": "What is the namespace and plugin type for ClearElementContent?",
+						"answer": "The namespace is G4.Plugins.Ui.Actions and the pluginType is Action."
+					},
+					{
+						"question": "How does the ClearElementContent action improve automation reliability?",
+						"answer": "It ensures that input fields are cleared of any stale or pre-filled data, preventing errors that occur when new text is appended to existing values."
+					},
+					{
+						"question": "What happens if the target element for the ClearElementContent action is not found?",
+						"answer": "The action logs a NoSuchElementException in the plugin response and terminates the clear operation for that specific rule."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": {
-					"name": "gears",
+					"name": "eraser",
 					"svg": null
 				},
+				"label": "Clear Element Content",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,136 +61,277 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `ClearElementContent` plugin automates the process of clearing the content of input elements in automation workflows. ",
-		"It provides a seamless and efficient mechanism for resetting input fields, ensuring that the desired elements are properly cleared before proceeding with further actions.",
+		"The ClearElementContent action removes any existing text or values from a targeted element.",
+		"It ensures that subsequent interactions start from a clean state, preventing errors caused by pre-filled data.",
+		"The action provides a native clearing option to handle complex elements that do not respond to standard methods.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature           | Description                                                                              |",
-		"|-------------------|------------------------------------------------------------------------------------------|",
-		"| Standard Clearing | Clears the content of input elements using the standard clear method.                    |",
-		"| Native Clearing   | Clears the content by simulating backspace key presses, mimicking a manual clear action. |",
-		"| Delay Handling    | Supports the introduction of delays between key presses during the native clear process. |",
-		"| Error Management  | Incorporates robust error handling to manage exceptions during the clearing process.     |",
+		"| Feature        | Description                                                                                |",
+		"|----------------|--------------------------------------------------------------------------------------------|",
+		"| Standard Clear | Uses the built-in browser clear method to remove element content.                          |",
+		"| Native Clear   | Simulates backspace key presses to clear elements that do not respond to standard methods. |",
+		"| Delay Support  | Allows specifying a wait time before the clear operation occurs.                           |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                       | Description                                                                                     |",
-		"|-----------------------------|-------------------------------------------------------------------------------------------------|",
-		"| Form Resets                 | Automates the resetting of form fields to ensure clean state before data entry.                 |",
-		"| Data Entry Preparation      | Clears input fields in preparation for new data entry tasks, ensuring accuracy and consistency. |",
-		"| User Interaction Simulation | Mimics user behavior by simulating manual clear actions through backspace key presses.          |",
+		"| Use Case           | Description                                                                   |",
+		"|--------------------|-------------------------------------------------------------------------------|",
+		"| Form Reset         | Clearing all input fields in a web form before entering new transaction data. |",
+		"| Search Box Cleanup | Removing previous search terms before initiating a new lookup.                |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                  | Description                                                                                             |",
-		"|------------------------|---------------------------------------------------------------------------------------------------------|",
-		"| Input Field Testing    | Validates the behavior of input fields by clearing their content before entering new test data.         |",
-		"| State Management       | Ensures consistent test conditions by resetting input fields to a known state before test execution.    |",
-		"| Error Scenario Testing | Simulates scenarios where input fields need to be cleared as part of error handling and recovery tests. |"
+		"| Use Case         | Description                                                                  |",
+		"|------------------|------------------------------------------------------------------------------|",
+		"| Input Validation | Ensuring a field is empty before testing mandatory field constraints.        |",
+		"| Data Integrity   | Clearing persistent user profile fields before updating them with test data. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Autocomplete suggestions reappear after clearing",
+						"Element covered by an overlay or modal",
+						"Element has pre-filled data restored by JavaScript",
+						"Element inside a shadow DOM boundary",
+						"Element inside an iframe",
+						"Element is disabled",
+						"Element is hidden or not displayed",
+						"Element is read-only",
+						"Element not yet rendered in the DOM",
+						"Target element not found"
+					],
+					"expected_result": "The text content of the specified input field is completely removed.",
+					"notes": "The action uses the standard browser clear method to reset the form field state. No additional parameters are needed for basic clearing.",
+					"use_case": "form_reset",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"DataEntry",
+					"ElementInteraction",
+					"FormHandling",
+					"InputManagement",
+					"StateReset",
+					"UiAutomation",
+					"WebAutomation"
+				]
+			},
 			"description": [
-				"Clear the content of the input element identified by the CSS selector `#inputField`. ",
-				"This uses the standard clear method to reset the field, ensuring it is empty before further actions."
+				"### Reset form field content",
+				"",
+				"The ClearElementContent removes any existing text from the target input element located by a CSS selector.",
+				"It ensures the field is empty before new data is entered during the automation flow.",
+				"No additional parameters are passed, so the standard browser clear method is used."
 			],
 			"rule": {
 				"locator": "CssSelector",
-				"onElement": "#inputField",
+				"onElement": "input[name='user-name']",
 				"pluginName": "ClearElementContent"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Complex event listeners blocking standard clear",
+						"Content-editable element contains formatted HTML",
+						"Element inside a custom web component",
+						"Element text length exceeds viewport height",
+						"Focus lost during backspace key sequence",
+						"Input masking or custom formatters interfering",
+						"JavaScript re-populates content during clearing",
+						"No caret position available in the target element",
+						"Shadow DOM boundary prevents direct interaction",
+						"Standard clear silently fails without error"
+					],
+					"expected_result": "The element content is cleared by simulating backspace key presses.",
+					"notes": "Native clearing sends repeated backspace key events to the element. It is useful for content-editable divs and elements with custom input handlers that ignore the standard WebDriver clear command.",
+					"use_case": "native_clear_complex_element",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AdvancedInteraction",
+					"ContentEditable",
+					"ElementInteraction",
+					"EventSimulation",
+					"FallbackStrategy",
+					"KeyboardSimulation",
+					"NativeInteraction",
+					"UiAutomation",
+					"WebAutomation"
+				]
+			},
 			"description": [
-				"Clear the content of the input element identified by the CSS selector `#inputField` using native clear. ",
-				"This mimics manual clearing by sending backspace key presses, effectively resetting the field."
+				"### Clear element using native keyboard events",
+				"",
+				"The `NativeClear` parameter simulates physical keyboard interactions to clear elements that resist the standard browser clear method.",
+				"The action sends backspace commands to the content-editable element until all text is removed, bypassing standard clearing limitations."
 			],
 			"rule": {
 				"argument": "{{$ --NativeClear}}",
-				"locator": "CssSelector",
-				"onElement": "#inputField",
+				"locator": "Xpath",
+				"onElement": "//div[@contenteditable='true']",
 				"pluginName": "ClearElementContent"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Animation still in progress when clear begins",
+						"Asynchronous data loading replaces content after clear",
+						"Delay exceeds session or implicit wait timeout",
+						"Element removed from DOM during delay period",
+						"Element state changes between delay and clear",
+						"Network latency affects element readiness",
+						"Page navigation occurs during delay",
+						"Search suggestions overlay blocking the element",
+						"Wait timeout exceeded before element becomes interactive"
+					],
+					"expected_result": "The action waits for two seconds before clearing the search input field.",
+					"notes": "The Delay parameter accepts a TimeSpan value in HH:mm:ss format. Adding a delay improves reliability when the target element appears or updates dynamically after page load.",
+					"use_case": "search_box_cleanup_with_delay",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"DelayConfiguration",
+					"DynamicContent",
+					"ElementInteraction",
+					"InputManagement",
+					"Reliability",
+					"SearchAutomation",
+					"Synchronization",
+					"TimingControl",
+					"UiAutomation",
+					"WebAutomation"
+				]
+			},
 			"description": [
-				"Clear the content of the input element identified by the CSS selector `#inputField` using native clear with a delay of 500 milliseconds between key presses. ",
-				"This simulates a more realistic user interaction by introducing pauses between backspace key presses."
+				"### Clear search box with delay",
+				"",
+				"The rule applies a two-second delay before performing the clear operation on the search input.",
+				"The `Delay` parameter is set to `00:00:02` using the `{{$ ...}}` macro format to pass the value at runtime.",
+				"It helps synchronize the automation with the application state, ensuring the element is ready to be cleared."
 			],
 			"rule": {
-				"argument": "{{$ --NativeClear --Delay:500}}",
+				"argument": "{{$ --Delay:00:00:02}}",
+				"locator": "Id",
+				"onElement": "search-box",
+				"pluginName": "ClearElementContent"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Browser autofill restores value after clear",
+						"Client-side validation differs from server-side",
+						"Element triggers validation before clear completes",
+						"Element validation triggered on blur event",
+						"Field has placeholder text confused with actual value",
+						"Mandatory field indicator does not update after clear",
+						"Multiple validation rules on the same field",
+						"Read-only field prevents clearing",
+						"Validation error message not dismissed after re-entry"
+					],
+					"expected_result": "The mandatory input field is cleared to allow for validation testing.",
+					"notes": "Clearing a field is a common step when testing that an application correctly handles empty mandatory inputs. The CSS selector targets the element by its ID attribute.",
+					"use_case": "input_validation_testing",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AutomationTesting",
+					"ElementInteraction",
+					"FormHandling",
+					"InputManagement",
+					"QualityAssurance",
+					"StateReset",
+					"TestPreparation",
+					"UiAutomation",
+					"Validation",
+					"WebAutomation"
+				]
+			},
+			"description": [
+				"### Clear field for input validation",
+				"",
+				"The action clears a mandatory email field to prepare for a validation check.",
+				"The element is located using a CSS selector targeting the `#user-email` ID.",
+				"It ensures that subsequent steps can verify if the application correctly identifies the missing required data."
+			],
+			"rule": {
 				"locator": "CssSelector",
-				"onElement": "#inputField",
+				"onElement": "#user-email",
 				"pluginName": "ClearElementContent"
 			}
 		}
 	],
 	"key": "ClearElementContent",
-	"namespace": "G4.Plugins.Ui",
+	"namespace": "G4.Plugins.Ui.Actions",
 	"parameters": [
 		{
+			"default": "00:00:00",
 			"description": [
-				"Specifies the delay, in milliseconds, between each key press when performing a native clear action. ",
-				"This delay helps to simulate a more realistic user interaction during the clearing process."
+				"Delay specifies the amount of time to wait before the clear operation begins.",
+				"It helps ensure that any previous page updates or animations are finished before the content is removed.",
+				"Using a delay can improve reliability when interacting with dynamic elements that load asynchronously."
 			],
 			"mandatory": false,
 			"name": "Delay",
-			"type": "Number"
+			"type": "Time"
 		},
 		{
 			"description": [
-				"Indicates that the content should be cleared by simulating backspace key presses, mimicking a manual clear action. ",
-				"This approach is useful for scenarios where a more human-like interaction is needed."
+				"NativeClear determines whether to use simulated keyboard events to clear the element content.",
+				"It matters because some elements may not respond to standard clearing methods due to custom scripts or event listeners.",
+				"Enabling this option ensures that the element is thoroughly cleared even in complex scenarios."
 			],
 			"mandatory": false,
 			"name": "NativeClear",
-			"type": "Switch"
+			"type": "Boolean"
 		}
 	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Allows customization of the clear action by specifying additional instructions. ",
-				"Options include introducing a delay between key presses or using native clear actions."
+				"Argument specifies the set of instructions or parameters for the clearing action.",
+				"It allows you to define additional options such as NativeClear and Delay for the operation."
 			],
-			"mandatory": false,
+			"mandatory": true,
 			"name": "Argument",
 			"type": "String|Expression"
 		},
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the strategy or method used to locate the element whose content will be cleared during automation."
+				"Locator specifies the strategy used to find the targeted element for clearing.",
+				"It determines how the automation engine identifies the element on the page."
 			],
-			"mandatory": true,
+			"mandatory": false,
 			"name": "Locator",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the identifier or locator for the element whose content will be cleared during automation. ",
-				"It indicates the target element where the clear action should be performed."
+				"OnElement defines the unique identifier for the element that will have its content removed.",
+				"It points the action to the exact location where the clear operation should occur."
 			],
 			"mandatory": true,
 			"name": "OnElement",
 			"type": "String"
 		}
 	],
-	"protocol": {
-		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-clear",
-		"w3c": "POST /session/{session id}/element/{element id}/clear"
-	},
-	"scopes": [
-		"Web",
-		"MobileWeb",
-		"OsNative"
-	],
 	"summary": [
-		"The `ClearElementContent` plugin automates the process of clearing the content of input elements in automation tasks.",
-		"In robotic process automation (RPA), it resets form fields and prepares them for data entry, ensuring accuracy and consistency.",
-		"In automation testing, it validates input field behavior and manages test conditions by resetting fields before executing tests."
+		"The ClearElementContent removes any existing text or values from a targeted element.",
+		"It ensures that subsequent data entry starts from a clean state, preventing errors and data corruption.",
+		"The action includes a native clearing method to handle complex elements that might resist standard clearing attempts."
 	],
 	"version": "4"
 }

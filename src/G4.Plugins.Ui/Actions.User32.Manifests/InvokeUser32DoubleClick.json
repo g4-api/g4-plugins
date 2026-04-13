@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -8,6 +8,43 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeUser32DoubleClick.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/InvokeUser32DoubleClick.cs"
+			},
+			"rag": {
+				"description": "InvokeUser32DoubleClick performs Windows User32 API double-click actions on native desktop applications. It supports coordinate-based double-clicking at absolute viewport positions and element-targeted double-clicking with configurable alignment and pixel offsets. Requires a User32-compatible WebDriver and runs exclusively on Windows.",
+				"qa": [
+					{
+						"question": "What does InvokeUser32DoubleClick do?",
+						"answer": "It performs double-click actions using the Windows User32 API, supporting absolute coordinate double-clicks and element-targeted double-clicks with configurable alignment and pixel offsets."
+					},
+					{
+						"question": "What parameters does InvokeUser32DoubleClick support?",
+						"answer": "X and Y for absolute viewport coordinates; OffsetX and OffsetY for pixel offsets relative to the target element; Alignment to set the double-click reference point on the element (default: MiddleCenter)."
+					},
+					{
+						"question": "When is coordinate mode used instead of element mode?",
+						"answer": "Coordinate mode activates when at least one of X or Y is non-zero and no target element is provided. Element mode is used when an element is targeted via OnElement."
+					},
+					{
+						"question": "How does InvokeUser32DoubleClick integrate with sequential workflows?",
+						"answer": "It runs as a task-type action in the G4 sequential workflow model, targeting native Windows UI elements through a User32-compatible WebDriver."
+					},
+					{
+						"question": "What locator strategy does InvokeUser32DoubleClick support?",
+						"answer": "Only Xpath is supported for locating User32 elements."
+					},
+					{
+						"question": "What happens when the WebDriver does not support IUser32Driver?",
+						"answer": "The plugin returns an empty response immediately and no action is performed."
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +52,7 @@
 					"name": "arrow-pointer",
 					"svg": null
 				},
+				"label": "Invoke User32 Double Click",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,16 +60,16 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `InvokeUser32DoubleClick` plugin is to perform double-click actions using the Windows User32 API. ",
-		"This allows automation scripts to interact with native UI elements in desktop applications, either by double-clicking at specific coordinates or on a target element with configurable offsets and alignment.",
+		"The primary purpose of the `InvokeUser32DoubleClick` plugin is to perform double-click actions using the Windows User32 API.",
+		"Automation scripts can interact with native UI elements in desktop applications by double-clicking at specific coordinates or on a target element with configurable offsets and alignment.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                       | Description                                                                                                     |",
-		"|-------------------------------|-----------------------------------------------------------------------------------------------------------------|",
-		"| Native Double-Click Action    | Executes double-click actions using the User32 API for native Windows UI elements.                              |",
-		"| Coordinate-based Double-Click | Supports double-clicking at specific (X, Y) coordinates when no target element is provided.                     |",
-		"| Element-specific Double-Click | Moves the mouse to a target element with configurable offsets and alignment before performing the double-click. |",
+		"| Feature                          | Description                                                                                                     |",
+		"|----------------------------------|-----------------------------------------------------------------------------------------------------------------|",
+		"| Native Double-Click Action       | Executes double-click actions using the User32 API for native Windows UI elements.                              |",
+		"| Coordinate-based Double-Clicking | Supports double-clicking at specific (X, Y) coordinates when no target element is provided.                     |",
+		"| Element-specific Double-Clicking | Moves the mouse to a target element with configurable offsets and alignment before performing the double-click. |",
 		"",
 		"### Usage in RPA",
 		"",
@@ -53,23 +91,74 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Both X and Y are zero — coordinate mode does not activate; element mode is used instead",
+						"Non-IUser32Driver detected — plugin returns an empty response with no action performed",
+						"Viewport coordinates outside the visible screen area may produce no visible double-click effect",
+						"Only one of X or Y is non-zero — coordinate mode still activates"
+					],
+					"expected_result": "The mouse cursor moves to viewport coordinates (100, 200) and a double-click is performed.",
+					"notes": "Coordinate mode activates when at least one of X or Y is non-zero and no element is targeted. The `{{$ --X:100 --Y:200}}` syntax binds X and Y as a parameters dictionary before execution.",
+					"use_case": "double_click_at_absolute_viewport_coordinates",
+					"version": "4"
+				},
+				"labels": [
+					"Coordinates",
+					"DesktopAutomation",
+					"DoubleClick",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Perform a double-click action at specific coordinates (X: 100, Y: 200) without targeting any element."
+				"### Double-click at absolute viewport coordinates",
+				"",
+				"The plugin moves the system mouse cursor to position (100, 200) on the viewport and performs a double-click.",
+				"No element is targeted; the `{{$ --X:100 --Y:200}}` syntax binds X and Y as a parameters dictionary that activates coordinate mode at runtime."
 			],
 			"rule": {
-				"Argument": "{{$ --X:100 --Y:200}}",
-				"PluginName": "InvokeUser32DoubleClick"
+				"$type": "Action",
+				"argument": "{{$ --X:100 --Y:200}}",
+				"pluginName": "InvokeUser32DoubleClick"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found — an exception is raised by the User32 driver",
+						"Non-IUser32Driver detected — plugin returns an empty response with no action performed",
+						"Offset values push the double-click outside the element bounding box — the double-click still executes at the computed position",
+						"Both X and Y are zero with an element present — element mode activates normally"
+					],
+					"expected_result": "The mouse moves to the TopLeft corner of the target button plus the specified offsets and a double-click is performed.",
+					"notes": "Element mode activates when an element is provided and X and Y are both zero. Alignment and offset parameters adjust the final cursor position within or around the element bounding box.",
+					"use_case": "double_click_on_element_with_alignment_and_offset",
+					"version": "4"
+				},
+				"labels": [
+					"Alignment",
+					"DesktopAutomation",
+					"DoubleClick",
+					"ElementInteraction",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Perform a double-click action on a UI element identified by the XPath `//button[@id='SubmitButton']`, with an offset of 10 pixels horizontally and 20 pixels vertically, aligned to the TopLeft of the element."
+				"### Double-click on element with alignment and offset",
+				"",
+				"The plugin locates the element at `//button[@id='SubmitButton']` using the Xpath locator, moves the mouse to the TopLeft alignment point with a 10-pixel horizontal and 20-pixel vertical offset, then performs a double-click.",
+				"The `{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}` syntax binds the parameters as a dictionary before execution."
 			],
 			"rule": {
-				"Argument": "{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}",
-				"Locator": "Xpath",
-				"OnElement": "//button[@id='SubmitButton']",
-				"PluginName": "InvokeUser32DoubleClick"
+				"$type": "Action",
+				"argument": "{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}",
+				"locator": "Xpath",
+				"onElement": "//button[@id='SubmitButton']",
+				"pluginName": "InvokeUser32DoubleClick"
 			}
 		}
 	],
@@ -77,9 +166,88 @@
 	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
+			"default": "MiddleCenter",
+			"description": [
+				"Controls the alignment point on the target element where the mouse cursor is positioned before double-clicking.",
+				"Alignment determines which corner, edge, or center of the element bounding box serves as the double-click reference point.",
+				"Combine with OffsetX and OffsetY to fine-tune the double-click position relative to the chosen alignment point.",
+				"Use MiddleCenter for standard centered double-clicks or edge and corner values for precise boundary interactions."
+			],
+			"mandatory": false,
+			"name": "Alignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Positions the cursor at the bottom center of the element bounding box.",
+						"Use this alignment when the target action is near the lower middle edge of the element."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the bottom left corner of the element bounding box.",
+						"Use this alignment when the target action is near the lower left boundary of the element."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the bottom right corner of the element bounding box.",
+						"Use this alignment when the target action is near the lower right boundary of the element."
+					],
+					"name": "BottomRight"
+				},
+				{
+					"description": [
+						"Positions the cursor at the horizontal and vertical center of the element bounding box.",
+						"This is the default alignment and works well for most standard double-click interactions."
+					],
+					"name": "MiddleCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the left edge and vertical center of the element bounding box.",
+						"Use this alignment when the target action is near the left side of the element."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the right edge and vertical center of the element bounding box.",
+						"Use this alignment when the target action is near the right side of the element."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top center of the element bounding box.",
+						"Use this alignment when the target action is near the upper middle edge of the element."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top left corner of the element bounding box.",
+						"Use this alignment when the target action is near the upper left boundary of the element."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top right corner of the element bounding box.",
+						"Use this alignment when the target action is near the upper right boundary of the element."
+					],
+					"name": "TopRight"
+				}
+			]
+		},
+		{
 			"default": "0",
 			"description": [
-				"Specifies the horizontal offset (in pixels) to adjust the double-click position relative to the target element."
+				"Specifies the horizontal pixel offset applied to the mouse position relative to the aligned point on the target element.",
+				"Positive values shift the double-click position to the right; negative values shift it to the left.",
+				"Use this parameter when the double-click must land slightly away from the default alignment point."
 			],
 			"mandatory": false,
 			"name": "OffsetX",
@@ -88,82 +256,20 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the vertical offset (in pixels) to adjust the double-click position relative to the target element."
+				"Specifies the vertical pixel offset applied to the mouse position relative to the aligned point on the target element.",
+				"Positive values shift the double-click position downward; negative values shift it upward.",
+				"Use this parameter when the double-click must land slightly away from the default alignment point."
 			],
 			"mandatory": false,
 			"name": "OffsetY",
 			"type": "Number"
 		},
 		{
-			"default": "MiddleCenter",
-			"description": [
-				"Defines the alignment of the double-click relative to the target element. Choose an alignment that best fits your UI layout.",
-				"For example, 'MiddleCenter' will double-click at the center of the element, while 'TopLeft' will double-click at the upper left corner."
-			],
-			"mandatory": false,
-			"name": "Alignment",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Double-click at the top left corner of the element."
-					],
-					"name": "TopLeft"
-				},
-				{
-					"description": [
-						"Double-click at the top center of the element."
-					],
-					"name": "TopCenter"
-				},
-				{
-					"description": [
-						"Double-click at the top right corner of the element."
-					],
-					"name": "TopRight"
-				},
-				{
-					"description": [
-						"Double-click at the middle left side of the element."
-					],
-					"name": "MiddleLeft"
-				},
-				{
-					"description": [
-						"Double-click at the middle right side of the element."
-					],
-					"name": "MiddleRight"
-				},
-				{
-					"description": [
-						"Double-click at the bottom left corner of the element."
-					],
-					"name": "BottomLeft"
-				},
-				{
-					"description": [
-						"Double-click at the bottom center of the element."
-					],
-					"name": "BottomCenter"
-				},
-				{
-					"description": [
-						"Double-click at the bottom right corner of the element."
-					],
-					"name": "BottomRight"
-				},
-				{
-					"description": [
-						"Double-click at the center of the element."
-					],
-					"name": "MiddleCenter"
-				}
-			]
-		},
-		{
 			"default": "0",
 			"description": [
-				"Specifies the X coordinate for a double-click action when no target element is provided."
+				"Specifies the absolute horizontal coordinate on the viewport where the double-click will occur when no target element is provided.",
+				"The coordinate is measured in pixels from the left edge of the viewport.",
+				"Set X and Y together to trigger coordinate-based double-clicking without element targeting."
 			],
 			"mandatory": false,
 			"name": "X",
@@ -172,7 +278,9 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the Y coordinate for a double-click action when no target element is provided."
+				"Specifies the absolute vertical coordinate on the viewport where the double-click will occur when no target element is provided.",
+				"The coordinate is measured in pixels from the top edge of the viewport.",
+				"Set X and Y together to trigger coordinate-based double-clicking without element targeting."
 			],
 			"mandatory": false,
 			"name": "Y",
@@ -182,9 +290,20 @@
 	"pluginType": "Action",
 	"properties": [
 		{
+			"description": [
+				"Carries the parameter expression used to pass runtime values to the plugin.",
+				"Use the `{{$ --Name:Value}}` format to specify OffsetX, OffsetY, Alignment, X, or Y at runtime.",
+				"The expression is parsed into a parameters dictionary before the plugin executes."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+				"Specifies the strategy used to locate the target UI element before performing the double-click.",
+				"Xpath is the only supported locator strategy for User32 elements in this plugin."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -192,34 +311,26 @@
 		},
 		{
 			"description": [
-				"Specifies the XPath for the target UI element where the double-click will be performed.",
-				"This property is used when an element is targeted for the double-click action."
+				"Specifies the XPath expression that identifies the target UI element for the double-click action.",
+				"When provided, the plugin resolves the element, moves the mouse to the aligned position, and performs the double-click.",
+				"Omit this property to use coordinate-based double-clicking with the X and Y parameters instead."
 			],
 			"mandatory": false,
 			"name": "OnElement",
 			"type": "String"
-		},
-		{
-			"description": [
-				"Specifies the parameters expression for the double-click action.",
-				"Use this expression to dynamically set values such as offsets, alignment, and coordinates."
-			],
-			"mandatory": false,
-			"name": "Argument",
-			"type": "String|Expression"
 		}
 	],
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
+	"platforms": [
 		"WindowsNative"
 	],
 	"summary": [
-		"The `InvokeUser32DoubleClick` plugin performs double-click actions using the Windows User32 API. ",
-		"It supports both coordinate-based double-clicks when no target element is provided and element-specific double-clicks with configurable offsets and alignment. ",
-		"This plugin is designed for desktop UI automation and testing on Windows platforms."
+		"The `InvokeUser32DoubleClick` plugin performs double-click actions using the Windows User32 API on native desktop applications.",
+		"It supports coordinate-based double-clicks at absolute viewport positions and element-targeted double-clicks with configurable alignment and pixel offsets.",
+		"The plugin is exclusively for Windows platforms and requires a User32-compatible WebDriver."
 	],
 	"version": "4"
 }

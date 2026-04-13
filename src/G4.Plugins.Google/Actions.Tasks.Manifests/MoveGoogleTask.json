@@ -1,0 +1,358 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"GoogleTasks"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/MoveGoogleTask.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/MoveGoogleTask.cs"
+			},
+			"rag": {
+				"description": "Move a Google Tasks task during an automation run by resolving the source list and task from either ids or titles, optionally resolving a destination list, and then applying move and positioning rules. It supports authentication with a direct OAuth token or a stored credentials reference, enforces required inputs and safe matching, and stores the moved task fields as Base64 session parameters so downstream steps can reuse the exact updated task details reliably.",
+				"qa": [
+					{
+						"question": "What does MoveGoogleTask do?",
+						"answer": "MoveGoogleTask moves a task within a list or to another Google Tasks list and stores the updated task details in namespaced session parameters."
+					},
+					{
+						"question": "What parameters and key features does MoveGoogleTask support?",
+						"answer": "It requires TaskList and Task, supports optional Destination, Parent, and Previous for move targeting and positioning, and supports Token or Credentials authentication (Credentials takes precedence when both are provided)."
+					},
+					{
+						"question": "How does MoveGoogleTask fit into the integration context?",
+						"answer": "It runs as an Action in the sequential workflow model (componentType “task”) with the google icon provider and ActionRuleModel, so it can be used as a standard workflow step."
+					},
+					{
+						"question": "What are best practices for using MoveGoogleTask?",
+						"answer": "Prefer Credentials for long-running automations, use list ids and task ids when available to avoid title ambiguity, set Destination only when you intend to change lists, and remember that if multiple tasks share the same title the first match will be moved."
+					},
+					{
+						"question": "What rule and schema details should I follow to run MoveGoogleTask?",
+						"answer": "Create an Action rule with pluginName set to MoveGoogleTask and pass arguments for TaskList and Task plus any of Destination, Parent, Previous, and either {{$ --Token:value}} or {{$ --Credentials:value}} via the rule argument."
+					},
+					{
+						"question": "What is the manifest key of this plugin?",
+						"answer": "The manifest key is “MoveGoogleTask”."
+					},
+					{
+						"question": "What manifestVersion is used by this plugin?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What is the pluginType of MoveGoogleTask?",
+						"answer": "The pluginType is “Action”."
+					},
+					{
+						"question": "Which platforms are supported by this plugin?",
+						"answer": "The plugin supports platforms “Any”."
+					},
+					{
+						"question": "Which categories is this plugin associated with?",
+						"answer": "The plugin is listed under the “GoogleTasks” category."
+					},
+					{
+						"question": "Who is the author of this plugin manifest?",
+						"answer": "The author is Roei Sabag."
+					},
+					{
+						"question": "What author link is provided in the manifest metadata?",
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What namespace is defined for this plugin?",
+						"answer": "The namespace is “G4.Plugins.Google”."
+					},
+					{
+						"question": "What is the manifest summary for MoveGoogleTask?",
+						"answer": "It moves a task within a Google Tasks list or to a different list, resolves lists and tasks by id or title, and stores the moved task’s updated fields in namespaced session parameters for reliable downstream reuse."
+					},
+					{
+						"question": "What source descriptions and Git links are relevant for MoveGoogleTask?",
+						"answer": "The documentation matches the manifest behavior: resolve TaskList and Task by title or id, optionally resolve Destination, and control placement using Parent and Previous, then store Id, Title, SelfLink, Position, and Status as Base64 session parameters. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/MoveGoogleTask.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/MoveGoogleTask.cs."
+					},
+					{
+						"question": "How does MoveGoogleTask handle errors and unexpected responses?",
+						"answer": "It is designed to fail when required inputs are missing or when the source list, destination list, task, parent, or previous references cannot be resolved, and workflows should handle invalid or expired tokens, credential resolution or refresh failures, insufficient OAuth scopes, API quota or rate limits, network timeouts, and non-success Google Tasks API responses."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "google",
+					"svg": null
+				},
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The MoveGoogleTask plugin moves a Google Tasks task within a list or to a different list during an automation run.",
+		"It helps workflows reorganize tasks as work changes, such as moving an item from an inbox list to a project list.",
+		"It supports flexible inputs by resolving lists and tasks using either ids or titles.",
+		"It saves the moved task details into session parameters so later steps can reuse the results reliably.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                     | Description                                                                                           |",
+		"|-----------------------------|-------------------------------------------------------------------------------------------------------|",
+		"| Move task                   | Moves a task using the Google Tasks API (Tasks: move).                                                |",
+		"| Source list resolution      | Resolves the source list by id or by matching the provided list title.                                |",
+		"| Destination list resolution | Resolves the destination list by id or by matching the provided list title.                           |",
+		"| Task resolution             | Resolves the task to move by id or by matching the provided task title.                               |",
+		"| Optional parent task        | Supports moving the task under a parent task, resolved by id or title when provided.                  |",
+		"| Optional previous task      | Supports positioning the moved task after a previous task, resolved by id or title when provided.     |",
+		"| Result session storage      | Stores moved task fields in namespaced session parameters (MoveGoogleTask:*) as Base64-encoded values. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case             | Description                                                                       |",
+		"|----------------------|-----------------------------------------------------------------------------------|",
+		"| Triage inbox tasks   | Move new tasks from an inbox list to the right project list based on keywords.    |",
+		"| Organize by status   | Move tasks into lists like To Do, In Progress, or Done to reflect workflow state. |",
+		"| Group under a parent | Move tasks under a parent task to build simple task hierarchies for a project.    |",
+		"| Reorder priorities   | Move a task after another task to reflect priority changes during the day.        |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Google Tasks API rate limit or quota exceeded",
+						"Google Tasks API returns non-success status code",
+						"Invalid or expired OAuth access token",
+						"Invalid previous task reference",
+						"Missing Previous",
+						"Missing Task",
+						"Missing TaskList",
+						"Multiple task lists match the same TaskList title",
+						"Multiple tasks share the same title (first match will be moved)",
+						"No matching task found for Previous title/id in the resolved list",
+						"No matching task found for Task title/id in the resolved list",
+						"No matching task list found for TaskList title/id",
+						"Task value is empty or whitespace-only",
+						"TaskList value is empty or whitespace-only",
+						"Token value is empty or whitespace-only"
+					],
+					"expected_result": "The task is repositioned in the list and updated task details are stored in `MoveGoogleTask:*` session parameters.",
+					"notes": "Moves a task within the same list to a new position after another task.",
+					"use_case": "move_task_within_list",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Authentication",
+					"GoogleTasks",
+					"Move",
+					"OAuth",
+					"SessionParameters",
+					"Tasks"
+				]
+			},
+			"description": [
+				"### MoveGoogleTask: Move task within the same list",
+				"",
+				"This example moves a task within the `My Tasks` list and positions it after another task."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --TaskList:My Tasks --Task:Pay electricity --Previous:Buy groceries --token:ya29...}}",
+				"pluginName": "MoveGoogleTask"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials id/name not found",
+						"Credentials record missing refresh token",
+						"Credentials value is empty or whitespace-only",
+						"Destination value is empty or whitespace-only",
+						"Google OAuth token endpoint returns non-success status code",
+						"Google Tasks API rate limit or quota exceeded",
+						"Google Tasks API returns non-success status code",
+						"Missing Destination",
+						"Missing Task",
+						"Missing TaskList",
+						"Multiple task lists match the same Destination title",
+						"Multiple task lists match the same TaskList title",
+						"Multiple tasks share the same title (first match will be moved)",
+						"No matching task found in the source list",
+						"No matching task list found for source or destination",
+						"Refresh-token exchange fails",
+						"Task value is empty or whitespace-only",
+						"TaskList value is empty or whitespace-only"
+					],
+					"expected_result": "The task is moved to the destination list and updated task details are stored in `MoveGoogleTask:*` session parameters.",
+					"notes": "Moves a task from one list to another list using stored credentials.",
+					"use_case": "move_task_to_another_list",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Authentication",
+					"Credentials",
+					"GoogleTasks",
+					"Move",
+					"OAuth",
+					"SessionParameters",
+					"Tasks"
+				]
+			},
+			"description": [
+				"### MoveGoogleTask: Move task to another list",
+				"",
+				"This example moves a task from one Google Tasks list to another using a stored credentials reference."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --TaskList:My Tasks --Task:Follow up --Destination:Work Tasks --credentials:my-google-creds}}",
+				"pluginName": "MoveGoogleTask"
+			}
+		}
+	],
+	"key": "MoveGoogleTask",
+	"version": "4",
+	"namespace": "G4.Plugins.Google",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the task identifier returned by Google Tasks after the task is moved.",
+				"Helps downstream steps reference the exact moved task for follow-up actions or verification.",
+				"Improves reliability by keeping a stable id even if the task order or list context changes."
+			],
+			"name": "MoveGoogleTask:Id",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the task title after the move operation has completed in Google Tasks.",
+				"Helps downstream steps display or verify the moved task without fetching it again.",
+				"Keeps a consistent record of the effective title associated with the moved task."
+			],
+			"name": "MoveGoogleTask:Title",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the self link URL returned by Google Tasks for the task after it is moved.",
+				"Provides a direct reference to the exact task resource for auditing and troubleshooting.",
+				"Helps confirm the move affected the intended task record."
+			],
+			"name": "MoveGoogleTask:SelfLink",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the position value returned by Google Tasks after the move operation.",
+				"Preserves ordering metadata that determines where the task appears in the destination list.",
+				"Supports workflows that need to validate or use task ordering after a move."
+			],
+			"name": "MoveGoogleTask:Position",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the status returned by Google Tasks for the task after it is moved.",
+				"Captures the resulting state so later steps can make decisions without reloading the task.",
+				"Helps verify that the move did not unintentionally change the task state."
+			],
+			"name": "MoveGoogleTask:Status",
+			"scope": "Session",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Identifies a destination Google Tasks list by id or title for moving the task.",
+				"Moves the task into the specified list when a destination value is provided.",
+				"Keeps the task in the source list when the destination value is not provided."
+			],
+			"mandatory": false,
+			"name": "Destination",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.",
+				"Avoids hardcoding short-lived tokens by exchanging stored credentials for a valid access token when needed.",
+				"Takes precedence over the token parameter so authentication stays consistent and renewable."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies an optional parent task by id or title under which the task should be moved.",
+				"Controls the task hierarchy by nesting the moved task under the resolved parent task.",
+				"Leaves the task unparented when no parent value is provided."
+			],
+			"mandatory": false,
+			"name": "Parent",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies an optional previous task by id or title that is used to position the moved task.",
+				"Controls ordering by placing the moved task after the resolved previous task when provided.",
+				"Lets Google determine the position when no previous value is provided."
+			],
+			"mandatory": false,
+			"name": "Previous",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies the task identifier or task title that should be moved from the source list.",
+				"Ensures the plugin targets the intended task by matching against both the task id and the task title.",
+				"Prevents moving the wrong task by requiring an exact match before performing the move operation."
+			],
+			"mandatory": true,
+			"name": "Task",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies the source Google Tasks list identifier or list title that currently contains the task.",
+				"Ensures the move operation starts from the correct list by resolving the list from the provided value.",
+				"Reduces mistakes by tying task resolution to the intended source list."
+			],
+			"mandatory": true,
+			"name": "TaskList",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies an OAuth Bearer access token used to call the Google Tasks API.",
+				"Enables direct API access when a stored credential reference is not used.",
+				"Is ignored when a credentials reference is provided so stored credentials can take priority."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"The MoveGoogleTask plugin moves a task within a Google Tasks list or to a different list during an automation run.",
+		"It resolves the source and target lists and the task by id or title, then performs the move using authenticated Google adapter calls.",
+		"It stores the moved task’s updated fields in namespaced session parameters so later workflow steps can reuse the new task details reliably."
+	]
+}

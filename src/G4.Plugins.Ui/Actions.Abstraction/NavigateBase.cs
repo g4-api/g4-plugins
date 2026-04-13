@@ -3,90 +3,91 @@ using G4.Models;
 
 using Microsoft.Extensions.Logging;
 
+using System;
 using System.Threading;
 
 namespace G4.Plugins.Ui.Actions.Abstraction
 {
     /// <summary>
-    /// Represents an abstract base class for navigation-related actions within a plugin.
-    /// This class provides common functionality for executing navigation commands,
-    /// such as repeating actions and applying delays between repetitions.
+    /// Provides shared navigation execution logic for UI navigation plugins,
+    /// including repeat handling and optional delay between actions.
     /// </summary>
-    /// <param name="pluginSetup">The setup model containing configuration and plugin information.</param>
-    public abstract class NavigateBase(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
+    /// <param name="pluginSetup">Plugin setup model containing configuration and logger.</param>
+    internal class NavigateBase(G4PluginSetupModel pluginSetup)
     {
-        protected override PluginResponseModel OnSend(PluginDataModel pluginData)
+        #region *** Methods      ***
+        /// <summary>
+        /// Executes the specified navigation action using the repeat and delay
+        /// values resolved from the provided plugin data.
+        /// </summary>
+        /// <param name="pluginData">The plugin execution data that contains the navigation parameters.</param>
+        /// <param name="navigationAction">The navigation action to execute for each iteration.</param>
+        public void CallNavigate(PluginDataModel pluginData, Action navigationAction)
         {
-            // Get the 'Repeat' argument from pluginData, with a default value of "1"
+            // Resolve how many times the navigation action should run.
             var repeats = GetNumberOfRepeats(pluginData);
 
-            // Convert the 'Delay' argument to a TimeSpan
+            // Resolve the optional delay between repeated navigation actions.
             var delay = pluginData
                 .Parameters
                 .Get("Delay", "0")
                 .ConvertToTimeSpan();
 
-            // Check if delay exceeds the maximum allowed value
+            // Guard against delays that exceed what Thread.Sleep can safely accept.
             if (delay.TotalMilliseconds > int.MaxValue)
             {
-                // Define an error message indicating the delay value exceeds the maximum allowed value
+                // Define the warning template used when the configured delay is too large.
                 const string error400 = "Delay value ({TotalMilliseconds} milliseconds) exceeds " +
                     "the maximum allowed value ({MaxValue} milliseconds).";
 
-                // Log a warning message indicating the delay value exceeds the maximum allowed value
-                Logger.LogWarning(message: error400, delay.TotalMilliseconds, int.MaxValue);
+                // Log a warning and fall back to the default delay value.
+                pluginSetup.Invoker.Logger.LogWarning(message: error400, delay.TotalMilliseconds, int.MaxValue);
 
-                // Set the delay to the default value
+                // Reset the delay to zero when the configured value is invalid.
                 delay = default;
             }
 
-            // Perform the navigation 'Back' action for the specified number of times with the specified delay
+            // Execute the requested navigation action for the resolved number of iterations.
             for (int i = 0; i < repeats; i++)
             {
-                // Invoke the navigation action based on the provided PluginDataModel
-                InvokeNavigationAction(pluginData);
+                // Invoke the provided navigation action.
+                navigationAction();
 
-                // Wait for the specified delay before executing the next iteration
+                // Wait before the next iteration when a delay is configured.
                 Thread.Sleep(timeout: delay);
             }
-
-            // Return a new PluginResponseModel indicating the successful completion of the action
-            return this.NewPluginResponse();
         }
 
-        /// <summary>
-        /// Abstract method to invoke a navigation action based on the provided PluginDataModel.
-        /// </summary>
-        /// <param name="pluginData">The data model containing information for the navigation action.</param>
-        protected abstract void InvokeNavigationAction(PluginDataModel pluginData);
-
-        // Gets the number of repeats specified in the plugin data.
+        // Resolves the number of times the navigation action should be repeated.
+        // The resolved repeat count. Returns <c>1</c> when no valid repeat value is provided.
         private static int GetNumberOfRepeats(PluginDataModel pluginData)
         {
-            // Extract relevant information from the plugin data
+            // Read the full parameter collection and the raw argument value.
             var arguments = pluginData.Parameters;
             var argument = pluginData.Rule.Argument;
 
-            // Check if the argument is a valid integer value
+            // Check whether the raw argument itself is a valid integer.
             var isArgumentValue = int.TryParse(argument, out int repeatOut);
 
-            // Check if the 'Repeat' argument is not present and the 'Argument' is a valid integer value
+            // Support the legacy case where Repeat is not provided
+            // and the rule argument itself contains the repeat count.
             var isArgument = !arguments.ContainsKey("Repeat") && isArgumentValue;
 
-            // Return the parsed repeat value if 'Argument' is a valid integer value
+            // Return the raw argument value when it is being used as the repeat count.
             if (isArgument)
             {
                 return repeatOut;
             }
 
-            // Get the 'Repeat' argument value or use the default value "1"
+            // Read the Repeat parameter, defaulting to 1 when it is not provided.
             var repeatValue = pluginData.Parameters.Get(key: "Repeat", defaultValue: "1");
 
-            // Parse the 'Repeat' argument value to an integer
+            // Parse the Repeat parameter and return it when valid.
             isArgumentValue = int.TryParse(repeatValue, out repeatOut);
 
-            // Return the parsed 'Repeat' value or default to 1 if parsing fails
+            // Fall back to a single execution when parsing fails.
             return isArgumentValue ? repeatOut : 1;
         }
+        #endregion
     }
 }

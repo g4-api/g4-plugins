@@ -13,6 +13,31 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeContextClick.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeContextClick.cs"
+			},
+			"rag": {
+				"description": "The InvokeContextClick action performs a context-click (right-click) on a target web element or at the current mouse position when no element is specified. When an element is provided the action moves the mouse to it first to ensure viewport visibility before dispatching the right-click via the WebDriver Actions API.",
+				"qa": [
+					{
+						"question": "What does the InvokeContextClick action do?",
+						"answer": "InvokeContextClick performs a right-click (context-click) on a target element located by a locator strategy, or right-clicks at the current mouse position when no element is specified."
+					},
+					{
+						"question": "When is the context-click performed at the current mouse position?",
+						"answer": "When no OnElement is supplied, the action performs a context-click at the last known mouse position without locating any element."
+					},
+					{
+						"question": "Does InvokeContextClick move to the element before clicking?",
+						"answer": "Yes. When an element is provided, the action calls MoveToElement before dispatching the context-click to ensure the element is scrolled into view and interactable."
+					},
+					{
+						"question": "What aliases does InvokeContextClick accept?",
+						"answer": "InvokeContextClick is also accepted as ContextClick, RightClick, and RightMouseClick — all three resolve to identical behavior."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -20,6 +45,7 @@
 					"name": "arrow-pointer",
 					"svg": null
 				},
+				"label": "Invoke Context Click",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -27,70 +53,125 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `InvokeContextClick` plugin is to perform context-click (right-click) actions on specified web elements.",
+		"The InvokeContextClick action performs a context-click (right-click) on a target element or at the current mouse position when no element is specified.",
+		"When an element is provided, the action first moves the mouse cursor to the element to ensure it is scrolled into view before dispatching the right-click via the WebDriver Actions API.",
+		"This makes it the primary way to trigger context menus, secondary actions, and right-click–dependent behaviors in an automation workflow.",
+		"For standard left-click interactions, use InvokeClick instead.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature              | Description                                                     |",
-		"|----------------------|-----------------------------------------------------------------|",
-		"| Context Click Action | Performs a context-click action on the specified web element.   |",
-		"| Element Handling     | Handles web elements based on provided locators and attributes. |",
+		"| Feature             | Description                                                                                     |",
+		"|---------------------|-------------------------------------------------------------------------------------------------|",
+		"| Context Click       | Performs a right-click on the target element using the WebDriver Actions API.                   |",
+		"| Auto Scroll         | Calls MoveToElement before clicking to scroll the element into view and ensure interactability. |",
+		"| Positional Click    | Right-clicks at the current mouse position when no element locator is provided.                 |",
+		"| Locator Flexibility | Supports Xpath, CssSelector, Id, LinkText, and PartialLinkText locator strategies.              |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage               | Description                                                                                    |",
-		"|---------------------|------------------------------------------------------------------------------------------------|",
-		"| Element Interaction | Interact with web elements by performing context-click actions as part of automated workflows. |",
-		"| Context Menus       | Automate the opening of context menus by right-clicking on specific elements.                  |",
+		"| Use Case                 | Description                                                                                            |",
+		"|--------------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Context Menu Access      | Right-click an element to open its context menu and select an option as part of an automated workflow. |",
+		"| Secondary Action Trigger | Trigger secondary actions exposed only through right-click menus, such as copy, paste, or inspect.     |",
+		"| Positional Right-Click   | Right-click at a scripted mouse position when no stable element reference is available.                |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                | Description                                                                                                 |",
-		"|----------------------|-------------------------------------------------------------------------------------------------------------|",
-		"| UI Testing           | Perform context-click actions on web elements to test user interface interactions.                          |",
-		"| Context Menu Testing | Test scenarios where actions depend on context menus being triggered by a right-click.                      |",
-		"| Regression Testing   | Ensure that context-click functionalities work as expected after changes or updates to the web application. |"
+		"| Use Case                | Description                                                                                                |",
+		"|-------------------------|------------------------------------------------------------------------------------------------------------|",
+		"| Context Menu Testing    | Verify that right-clicking an element opens the expected context menu with the correct options.            |",
+		"| UI Interaction Testing  | Confirm that right-click–sensitive elements respond correctly to user interaction.                         |",
+		"| Viewport Scroll Testing | Validate that MoveToElement correctly scrolls off-screen elements into view before the right-click occurs. |",
+		"| Regression Testing      | Ensure context-click behavior on interactive elements remains consistent after application updates.        |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not in the viewport — MoveToElement scrolls it into view before the context-click",
+						"Element is obscured by another element — the context-click may land on the overlapping element instead",
+						"Element becomes stale between location and click — a StaleElementReferenceException is raised",
+						"Context menu does not appear — the browser may suppress context menus via JavaScript event listeners",
+						"Element is inside an iframe — the driver must be switched to the correct frame before locating the element",
+						"Element has no context menu defined — right-click opens the browser default context menu instead"
+					],
+					"expected_result": "The element matched by the CSS selector #RightClickButton receives a context-click and its context menu opens.",
+					"notes": "MoveToElement is called before AddContextClick to ensure the element is in view and interactable. CssSelector is used because onElement is a CSS selector expression.",
+					"use_case": "context_click_by_css_selector",
+					"version": "4"
+				},
+				"labels": [
+					"ContextClick",
+					"ContextMenu",
+					"CssSelector",
+					"ElementInteraction",
+					"MoveToElement",
+					"RightClick",
+					"SimpleClick"
+				]
+			},
 			"description": [
-				"Perform a `ContextClick` action on a web element with the `ID` attribute `RightClickButton`, using a CSS selector to locate the element."
+				"### Context-click an element using a CSS selector",
+				"",
+				"Locates the element matching `#RightClickButton` using the CssSelector strategy, moves the mouse to it, and performs a right-click.",
+				"Use this form for any straightforward context-click interaction on a known stable element to open its context menu."
 			],
 			"rule": {
+				"$type": "Action",
 				"locator": "CssSelector",
 				"onElement": "#RightClickButton",
 				"pluginName": "InvokeContextClick"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No prior mouse movement has occurred — click lands at coordinate (0, 0) or the browser default position",
+						"Browser focus has shifted to another window — the right-click may not register on the intended document",
+						"Mouse position was set by a move action that targeted an element that has since scrolled — position may no longer correspond to the intended target"
+					],
+					"expected_result": "A context-click is performed at the current mouse cursor position without locating any element.",
+					"notes": "When no OnElement is provided the action calls AddContextClick().Invoke() on an ActionSequence, dispatching a right-click at the last known mouse position. Useful for scripted mouse-cursor workflows where the position was set by a preceding MoveMouseCursor action.",
+					"use_case": "positional_context_click_no_element",
+					"version": "4"
+				},
+				"labels": [
+					"ActionSequence",
+					"ContextClick",
+					"MousePosition",
+					"NoElement",
+					"PositionalClick",
+					"RightClick"
+				]
+			},
 			"description": [
-				"Perform a `ContextClick` action at the last known mouse location. ",
-				"While this approach might be suitable for certain scenarios, it's generally less reliable and less commonly used in automation testing compared to locating and interacting with elements using locators."
+				"### Context-click at the current mouse position",
+				"",
+				"Performs a right-click at the last known mouse cursor position without locating or targeting any element.",
+				"Use this form when the mouse position has been set by a preceding move action and no element reference is needed."
 			],
 			"rule": {
-				"pluginName": "InvokeContextClick"
-			}
-		},
-		{
-			"description": [
-				"Perform a `ContextClick` action on a web element with the ID attribute `RightClickArea`. ",
-				"This configuration is useful for scenarios where a context menu needs to be triggered by right-clicking on a specific area of the web page."
-			],
-			"rule": {
-				"locator": "Id",
-				"onElement": "RightClickArea",
+				"$type": "Action",
 				"pluginName": "InvokeContextClick"
 			}
 		}
 	],
 	"key": "InvokeContextClick",
 	"namespace": "G4.Plugins.Ui",
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the web element to be context-clicked. Supported locator types include `CssSelector`, `XPath`, `LinkText`, etc."
+				"Locator specifies the strategy used to find the target element for the context-click.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"When absent the default Xpath strategy is used.",
+				"Locator is only evaluated when OnElement is also provided; it has no effect in positional-click mode."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -98,7 +179,9 @@
 		},
 		{
 			"description": [
-				"Specifies the actual element identifier using the locator strategy defined. For example, if the locator is `CssSelector`, this would be a CSS selector string."
+				"OnElement provides the locator expression that identifies the element to context-click.",
+				"It is evaluated using the strategy defined by the Locator property.",
+				"When absent the action performs a context-click at the current mouse position instead."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -109,13 +192,10 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
 		"w3c": "POST /session/{session id}/actions"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `InvokeContextClick` plugin is designed to facilitate the interaction with web elements through context-click (right-click) actions. It can perform simple context-clicks as well as handle complex interactions with context menus.",
-		"In robotic process automation (RPA), it is used for automating user interactions such as opening context menus and performing actions within those menus.",
-		"In automation testing, it is invaluable for verifying user interface interactions, testing dynamic behaviors triggered by context-clicks, and ensuring that context-click functionalities remain consistent across different versions of the application."
+		"The InvokeContextClick action performs a context-click (right-click) on a target element or at the current mouse position when no element is specified, making it the primary way to trigger right-click interactions in an automation workflow.",
+		"When an element is provided, the action moves the mouse to it first to ensure viewport visibility before dispatching the right-click via the WebDriver Actions API.",
+		"In RPA it automates context-menu access and secondary-action triggers; in automation testing it verifies right-click behavior, context-menu rendering, and viewport-scroll interactions."
 	],
 	"version": "4"
 }

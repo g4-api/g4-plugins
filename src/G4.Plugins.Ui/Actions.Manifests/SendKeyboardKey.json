@@ -11,6 +11,39 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendKeyboardKey.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SendKeyboardKey.cs"
+			},
+			"rag": {
+				"description": "The SendKeyboardKey action sends one or more named keyboard keys to a target element. Keys are provided as a direct argument string or via the --Key parameter, which can be repeated to build a sequence. An optional --Delay inserts a pause after each individual key send, accepting milliseconds or TimeSpan format. Pre-clearing is available via --Clear (browser built-in clear) or --NativeClear (backspace simulation). When the target element is not found, a NoSuchElementException is recorded and the action returns without sending keys. NativeClear exceptions are caught and recorded without stopping the key sequence.",
+				"qa": [
+					{
+						"question": "What does the SendKeyboardKey action do?",
+						"answer": "SendKeyboardKey locates a target element and sends one or more named keyboard keys — such as Enter, Backspace, or Tab — to it, with optional pre-clearing and per-key delay."
+					},
+					{
+						"question": "How do multiple --Key parameters work?",
+						"answer": "Multiple --Key parameters accumulate into an ordered sequence. Each named key is resolved against WebDriver key constants and sent to the element in the order the parameters appear, with the Delay applied after each."
+					},
+					{
+						"question": "What is the difference between the Clear and NativeClear parameters?",
+						"answer": "Clear calls the browser's built-in element.Clear() method. NativeClear simulates repeated backspace key presses via element.SendNativeClear(), which works for elements that ignore the standard WebDriver clear command, such as content-editable divs or inputs with custom event handlers."
+					},
+					{
+						"question": "What happens when the target element is not found?",
+						"answer": "A NoSuchElementException is wrapped in a G4ExceptionModel, added to the plugin exception list, and the action returns an empty response without sending any keys."
+					},
+					{
+						"question": "How does the Delay parameter apply to key sequences?",
+						"answer": "The Delay is applied after each individual key send within the sequence, not as a single total pause. Both millisecond numbers (e.g., 500) and TimeSpan strings (e.g., 00:00:00.500) are accepted."
+					},
+					{
+						"question": "Can a key be provided as a direct argument without using the --Key parameter?",
+						"answer": "Yes. When no --Key parameter is present, the full argument string is used as the single key name. This allows compact rules such as argument: 'Enter' without any macro syntax."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,6 +51,7 @@
 					"name": "keyboard",
 					"svg": null
 				},
+				"label": "Send Keyboard Key",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,35 +59,69 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `SendKeyboardKey` plugin is to empower automation scripts with the capability to send keyboard inputs to an element in an application. ",
-		"This functionality is vital in scenarios where user interactions involve input fields, and precise control over the keyboard is required to simulate user behavior. ",
-		"The plugin aims to streamline automation workflows by facilitating seamless management of keyboard interactions.",
+		"The SendKeyboardKey action sends one or more named keyboard keys to a target web element, simulating physical keyboard interactions.",
+		"Each key name is resolved against WebDriver key constants and dispatched sequentially to the element.",
+		"Use this action wherever a workflow needs to trigger keyboard-driven behavior — such as submitting a form with Enter, deleting content with Backspace, or shifting focus with Tab — on a specific element.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                | Description                                                                                                                                                                                                                               |",
-		"|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Dynamic Configuration  | The plugin supports dynamic configuration through a set of parameters, including `Clear`, `Delay`, `Key`, and `NativeClear`. This flexibility allows precise control over keyboard interactions based on specific automation scenarios.   |",
-		"| Error Handling         | The plugin includes robust error handling mechanisms, ensuring that exceptions are caught and logged appropriately. This enhances the reliability of automation scripts by addressing issues that may arise during keyboard interactions. |",
+		"| Feature            | Description                                                                                                                                      |",
+		"|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Single Key         | Supply a key name directly as the argument for a compact single-key interaction without macro syntax.                                            |",
+		"| Multi-Key Sequence | Repeat the --Key parameter to build an ordered sequence of key presses dispatched one at a time.                                                 |",
+		"| Per-Key Delay      | The Delay parameter inserts a pause after each key send, accepting milliseconds or TimeSpan format, to emulate human typing pacing.              |",
+		"| Browser Clear      | The Clear switch calls the browser's built-in clear method on the element before the key sequence begins.                                        |",
+		"| Native Clear       | The NativeClear switch simulates backspace key presses to clear elements that ignore the standard WebDriver clear command.                       |",
+		"| Error Recording    | When the target element is not found, a NoSuchElementException is recorded in the plugin exception list and the action returns without throwing. |",
 		"",
-		"### Usage in RPA",
+		"### Usages in RPA",
 		"",
-		"| Usage                       | Description                                                                                                                                                                                                                                                |",
-		"|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Simulating User Inputs      | RPA processes involving web interactions benefit from the `SendKeyboardKey` plugin to simulate user-like inputs. Whether filling out forms or navigating through web elements, the plugin ensures accurate emulation of keyboard interactions.             |",
-		"| Optimizing Automation Flows | Automation flows in RPA often require the simulation of various keyboard inputs. By strategically using the plugin, RPA developers can optimize automation scripts, ensuring precise control over keyboard actions to align with desired user experiences. |",
+		"| Use Case          | Description                                                                                                |",
+		"|-------------------|------------------------------------------------------------------------------------------------------------|",
+		"| Form Submission   | Press Enter on an input field to submit a form without clicking a submit button.                           |",
+		"| Focus Navigation  | Send Tab or Arrow keys to move focus through interactive controls in a web form.                           |",
+		"| Pre-Cleared Entry | Use NativeClear to remove existing content and then send a key such as Enter to confirm the cleared state. |",
 		"",
-		"### Usage in Automation Testing",
+		"### Usages in Automation Testing",
 		"",
-		"| Usage                        | Description                                                                                                                                                                                                                                          |",
-		"|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|",
-		"| Comprehensive Test Scenarios | In automation testing scenarios for applications, the `SendKeyboardKey` plugin is invaluable. It allows scripts to dynamically control keyboard inputs, leading to more comprehensive test coverage, especially in scenarios involving input fields. |",
-		"| Ensuring UI Stability        | Post-user interactions, such as entering text into input fields, the plugin ensures that the UI remains stable for subsequent validations. This is crucial for accurately assessing the impact of keyboard inputs on the application's state.        |"
+		"| Use Case                | Description                                                                                                         |",
+		"|-------------------------|---------------------------------------------------------------------------------------------------------------------|",
+		"| Keyboard Event Testing  | Verify that an input element correctly handles key events such as Enter triggering form submission or validation.   |",
+		"| Backspace Behavior      | Test that Backspace removes characters as expected and the resulting element state matches the expected value.      |",
+		"| Sequence State Testing  | Confirm that a multi-key sequence — such as Enter followed by Backspace — produces the correct UI state transition. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Key name does not match any WebDriver constant — GetKeyboardKey resolves to an unrecognized value and the element receives an unexpected character",
+						"Element is not found — NoSuchElementException is recorded and no key is sent",
+						"Element is not interactable at the time of key send — WebDriver raises an ElementNotInteractableException",
+						"Element is in a read-only state — the key event is dispatched but produces no visible change",
+						"Element is inside an iframe — the frame must be switched to before the action runs"
+					],
+					"expected_result": "The Enter key is sent to the element matched by the CSS selector #KeyboardKeyOutcome.",
+					"notes": "The argument is the key name directly — no macro syntax is needed for a single-key, no-delay, no-clear interaction. The key name is passed to GetKeyboardKey which resolves it to the WebDriver Enter key constant.",
+					"use_case": "send_single_key_direct_argument",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"CssSelector",
+					"ElementInteraction",
+					"KeyboardSimulation",
+					"SingleKey",
+					"UiAutomation",
+					"WebAutomation"
+				]
+			},
 			"description": [
-				"Simulate pressing the `Enter` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
+				"### Send a single keyboard key using a direct argument",
+				"",
+				"Sends the `Enter` key to the element matched by the CSS selector `#KeyboardKeyOutcome`.",
+				"The key name is passed directly as the argument with no macro syntax, which is the simplest form of this action.",
+				"No clearing or delay is applied — the key is sent immediately to the located element."
 			],
 			"rule": {
 				"argument": "Enter",
@@ -63,70 +131,85 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Delay value exceeds the implicit wait timeout — the session may time out between key sends",
+						"One key in the sequence is unrecognized — GetKeyboardKey resolves it to an unexpected value; subsequent keys are still sent",
+						"Element becomes stale between key sends — a StaleElementReferenceException may interrupt the loop mid-sequence",
+						"Delay is 0 — keys are sent back-to-back with no pause between them",
+						"Element loses focus between key sends — subsequent keys may not register on the intended element",
+						"Key sequence produces a navigation event — the page may change before all keys in the sequence are sent"
+					],
+					"expected_result": "Enter is sent to #KeyboardKeyOutcome, then a 500 ms pause occurs, then Backspace is sent followed by another 500 ms pause.",
+					"notes": "Multiple --Key parameters accumulate into an ordered sequence. The Delay value of 500 is interpreted as milliseconds and applied after each individual key send, emulating human pacing between key presses.",
+					"use_case": "send_multi_key_sequence_with_delay",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"CssSelector",
+					"DelayConfiguration",
+					"ElementInteraction",
+					"KeyboardSimulation",
+					"MultiKeySequence",
+					"TimingControl",
+					"UiAutomation",
+					"WebAutomation"
+				]
+			},
 			"description": [
-				"Simulate pressing the `Enter` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
+				"### Send a multi-key sequence with a per-key delay",
+				"",
+				"Sends `Enter` and then `Backspace` to the element matched by `#KeyboardKeyOutcome`, with a 500 ms pause applied after each key.",
+				"The `--Key` parameter is repeated to build an ordered sequence, and `--Delay:500` controls the per-key pacing.",
+				"Use this form when the target application requires a brief pause between key events to process each input before the next arrives."
 			],
 			"rule": {
-				"argument": "{{$ --Key:Enter}}",
+				"argument": "{{$ --Key:Enter --Key:Backspace --Delay:500}}",
 				"locator": "CssSelector",
 				"onElement": "#KeyboardKeyOutcome",
 				"pluginName": "SendKeyboardKey"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"NativeClear throws an exception — it is caught, wrapped in a G4ExceptionModel, and recorded; the key sequence still proceeds",
+						"Element is a content-editable div — standard clear does not work, making NativeClear the correct choice",
+						"Element content is fully selected before NativeClear runs — a single backspace may remove all selected content rather than individual characters",
+						"Element becomes unresponsive during the backspace sequence — partial clearing may occur before the exception is recorded",
+						"Element is empty when NativeClear runs — backspace events produce no visible change and the action continues normally"
+					],
+					"expected_result": "The contenteditable div is cleared using backspace simulation, then the Enter key is sent to it.",
+					"notes": "NativeClear calls element.SendNativeClear() before the key sequence. Any exception during clearing is caught and recorded as a G4ExceptionModel without stopping the action — the key send proceeds regardless of whether clearing succeeded.",
+					"use_case": "native_clear_then_send_key",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AdvancedInteraction",
+					"ContentEditable",
+					"ElementInteraction",
+					"KeyboardSimulation",
+					"NativeClear",
+					"UiAutomation",
+					"WebAutomation",
+					"XPath"
+				]
+			},
 			"description": [
-				"Simulate pressing the `Enter` key followed by the `Backspace` key on the HTML element identified by the CSS selector `#KeyboardKeyOutcome`."
-			],
-			"rule": {
-				"argument": "{{$ --Key:Enter --Key:Backspace}}",
-				"locator": "CssSelector",
-				"onElement": "#KeyboardKeyOutcome",
-				"pluginName": "SendKeyboardKey"
-			}
-		},
-		{
-			"description": [
-				"Simulate pressing the `Enter` key, followed by the `Backspace` key, with a delay of 4000 milliseconds between them. ",
-				"This simulated keyboard input is targeted at the HTML element identified by the CSS selector `#KeyboardKeyOutcome` on a web page."
-			],
-			"rule": {
-				"argument": "{{$ --Key:Enter --Key:Backspace --Delay:4000}}",
-				"locator": "CssSelector",
-				"onElement": "#KeyboardKeyOutcome",
-				"pluginName": "SendKeyboardKey"
-			}
-		},
-		{
-			"description": [
-				"Simulate pressing the `Enter` key, followed by the `Backspace` key, with a delay of 4000 milliseconds between them. ",
-				"This simulated keyboard input is targeted at the HTML element identified by the CSS selector `#KeyboardKeyOutcome` on a web page."
-			],
-			"rule": {
-				"argument": "{{$ --Key:Enter --Key:Backspace --Delay:00:00:04}}",
-				"locator": "CssSelector",
-				"onElement": "#KeyboardKeyOutcome",
-				"pluginName": "SendKeyboardKey"
-			}
-		},
-		{
-			"description": [
-				"First clear the content of the input element identified by the CSS selector `#KeyboardKeyOutcome` and then simulate pressing the `Enter` key."
-			],
-			"rule": {
-				"argument": "{{$ --Key:Enter --Clear}}",
-				"locator": "CssSelector",
-				"onElement": "#KeyboardKeyOutcome",
-				"pluginName": "SendKeyboardKey"
-			}
-		},
-		{
-			"description": [
-				"First clear the content of the input element identified by the CSS selector `#KeyboardKeyOutcome` using `NativeClear` functionality and then simulate pressing the `Enter` key."
+				"### Clear element content natively and then send a key",
+				"",
+				"Clears the content of a `contenteditable` div using native backspace simulation and then sends the `Enter` key.",
+				"The `--NativeClear` switch triggers `element.SendNativeClear()` before the key sequence begins, bypassing the standard WebDriver clear method.",
+				"Use this form for elements that ignore the standard clear command, such as content-editable divs or inputs with custom event handlers."
 			],
 			"rule": {
 				"argument": "{{$ --Key:Enter --NativeClear}}",
-				"locator": "CssSelector",
-				"onElement": "#KeyboardKeyOutcome",
+				"locator": "Xpath",
+				"onElement": "//div[@contenteditable='true']",
 				"pluginName": "SendKeyboardKey"
 			}
 		}
@@ -136,18 +219,20 @@
 	"parameters": [
 		{
 			"description": [
-				"Indicates that a clearing action will consistently be executed before any subsequent keyboard actions on the targeted input element. ",
-				"This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data."
+				"Clear indicates that the browser's built-in element clear method should be called before the key sequence is sent.",
+				"It ensures that any existing content in the input field is removed before the keyboard interaction begins.",
+				"Use Clear for standard input elements that respond to the WebDriver clear command."
 			],
 			"mandatory": false,
 			"name": "Clear",
 			"type": "Switch"
 		},
 		{
+			"default": "0",
 			"description": [
-				"Used to introduce a time pause after each simulated keyboard action. ",
-				"This delay ensures a controlled pacing between consecutive key presses during web automation. ",
-				"The purpose is to emulate a more human-like interaction flow by allowing specified intervals between keyboard actions."
+				"Delay sets the duration to pause after each individual key send within the sequence.",
+				"It accepts a number of milliseconds (e.g., 500) or a TimeSpan string (e.g., 00:00:00.500) to emulate human typing pacing.",
+				"When absent or zero, keys are sent back-to-back with no pause between them."
 			],
 			"mandatory": false,
 			"name": "Delay",
@@ -155,7 +240,9 @@
 		},
 		{
 			"description": [
-				"Used to specify a keyboard key or a sequence of keyboard keys that should be sent to a targeted element during an automation task."
+				"Key specifies the name of a keyboard key to send to the target element.",
+				"It can be repeated to build a multi-key sequence dispatched in the order the parameters appear.",
+				"When Key is absent, the action uses the full argument string as a single key name."
 			],
 			"mandatory": false,
 			"name": "Key",
@@ -163,41 +250,49 @@
 		},
 		{
 			"description": [
-				"Indicates that a native clearing action will consistently be executed before any subsequent keyboard actions on the targeted input element. ",
-				"This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data."
+				"NativeClear indicates that element content should be cleared using simulated backspace key presses before the key sequence begins.",
+				"It calls element.SendNativeClear(), which is effective for content-editable elements and inputs with custom event handlers that ignore the standard WebDriver clear method.",
+				"Any exception raised during native clearing is caught, recorded as a G4ExceptionModel, and the key sequence proceeds regardless."
 			],
 			"mandatory": false,
 			"name": "NativeClear",
 			"type": "Switch"
 		}
 	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the set of instructions or parameters for the keyboard actions to be simulated during automation. ",
-				"It allows you to define a sequence of keyboard interactions, including the keys to be pressed and any additional actions."
+				"Argument supplies the key name or the macro expression containing the Key, Delay, Clear, and NativeClear parameters.",
+				"A plain string is used as the single key name when no --Key parameter is present in the macro.",
+				"The macro format {{$ --Key:Enter --Delay:500}} is required when combining multiple parameters."
 			],
 			"mandatory": true,
-			"name": "argument",
-			"type": "String"
+			"name": "Argument",
+			"type": "String|Expression"
 		},
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the strategy or method used to locate the element on which the keyboard actions will be simulated during automation."
+				"Locator specifies the strategy used to find the target element.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"When absent the default Xpath strategy is used."
 			],
 			"mandatory": false,
-			"name": "locator",
+			"name": "Locator",
 			"type": "String"
 		},
 		{
 			"description": [
-				"Specifies the identifier or locator for the element on which the keyboard actions defined in the plugin's `Argument` property will be simulated during web automation. ",
-				"It indicates the target element where the simulated keyboard interactions should take place."
+				"OnElement provides the locator expression that identifies the element to which the keyboard keys are sent.",
+				"It is evaluated using the strategy defined by the Locator property.",
+				"When the element is not found a NoSuchElementException is recorded and the action returns without sending keys."
 			],
 			"mandatory": true,
-			"name": "onElement",
+			"name": "OnElement",
 			"type": "String"
 		}
 	],
@@ -205,12 +300,10 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#element-send-keys",
 		"w3c": "POST /session/{session id}/element/{element id}/value"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `SendKeyboardKey` plugin automates the simulation of keyboard actions during web automation. ",
-		"It supports customizable sequences of key presses, native clearing methods, and time delays, ensuring precise and flexible control over keyboard interactions."
+		"The SendKeyboardKey action sends one or more named keyboard keys — such as Enter, Backspace, or Tab — to a target element, with support for sequential multi-key sequences built from repeated --Key parameters.",
+		"An optional per-key Delay controls pacing between key presses, and pre-clearing modes (browser clear or native backspace simulation) ensure a clean element state before the sequence begins.",
+		"In RPA it drives form submission, focus navigation, and pre-cleared interactions; in automation testing it verifies keyboard event handling, backspace behavior, and multi-key state transitions."
 	],
 	"version": "4"
 }

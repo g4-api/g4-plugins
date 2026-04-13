@@ -157,7 +157,7 @@
 		"apiDocumentation": "https://html-agility-pack.net/documentation",
 		"w3c": "POST /session/{session id}/element"
 	},
-	"scopes": [
+	"platforms": [
 		"Any"
 	],
 	"summary": [

@@ -11514,9 +11514,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The Assert plugin checks that each automated step gives the results you expect and tells you when it doesn't.",
-		"It applies simple rules to compare values or parts of a page and keeps track of any mismatches.",
-		"This makes your automated tasks more reliable and helps you catch problems early."
+		"Validates conditions during automation runs by comparing actual values against expected values.",
+		"Supports text, numerical, element visibility, and attribute checks with multiple comparison operators.",
+		"Reports mismatches in the response and logs failures for debugging."
 	],
 	"version": "4"
 }

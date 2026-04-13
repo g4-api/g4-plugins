@@ -1,0 +1,255 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"GoogleCalendar"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/RemoveGoogleCalendarEvent.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/Calendar/RemoveGoogleCalendarEvent.cs"
+			},
+			"rag": {
+				"description": "Delete a Google Calendar event by its unique identifier from a target calendar (defaults to primary) during an automation run, using either a direct OAuth token or a stored credentials reference. Supports attendee notification control via SendUpdates. Fails with a non-success API response when the calendar or event cannot be found.",
+				"qa": [
+					{
+						"question": "What does the RemoveGoogleCalendarEvent plugin do?",
+						"answer": "It deletes a Google Calendar event by its unique identifier using the Calendar API v3 events.delete endpoint."
+					},
+					{
+						"question": "What parameters does RemoveGoogleCalendarEvent require?",
+						"answer": "EventId is required. CalendarId defaults to 'primary'. SendUpdates is optional and defaults to 'none'. Authentication uses Token or Credentials (Credentials takes precedence)."
+					},
+					{
+						"question": "How does RemoveGoogleCalendarEvent notify attendees of the deletion?",
+						"answer": "Pass SendUpdates:all to notify all attendees, SendUpdates:externalOnly to notify only external attendees, or SendUpdates:none (the default) to send no notifications."
+					},
+					{
+						"question": "How does RemoveGoogleCalendarEvent fit into the integration context of an automation workflow?",
+						"answer": "It runs as an Action in a sequential workflow step (componentType 'task') using the google icon provider and the ActionRuleModel."
+					},
+					{
+						"question": "What are best practices for using RemoveGoogleCalendarEvent in automations?",
+						"answer": "Prefer Credentials over a raw Token for long-running runs to allow token refresh. Use SendUpdates:none in test runs to avoid sending spurious cancellation emails. Pass CalendarId explicitly when targeting a secondary calendar."
+					},
+					{
+						"question": "What rule or schema details should I follow when configuring RemoveGoogleCalendarEvent?",
+						"answer": "Use $type 'Action' with pluginName 'RemoveGoogleCalendarEvent' and pass at minimum EventId via argument."
+					},
+					{
+						"question": "What is the manifest key of this plugin?",
+						"answer": "The manifest key is 'RemoveGoogleCalendarEvent'."
+					},
+					{
+						"question": "What manifestVersion is used by this plugin?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What is the pluginType of RemoveGoogleCalendarEvent?",
+						"answer": "The pluginType is 'Action'."
+					},
+					{
+						"question": "Which platforms are supported by this plugin?",
+						"answer": "The plugin supports platforms 'Any'."
+					},
+					{
+						"question": "Which categories is this plugin associated with?",
+						"answer": "The plugin is listed under the 'GoogleCalendar' category."
+					},
+					{
+						"question": "Who is the author of this plugin manifest?",
+						"answer": "The author is Roei Sabag."
+					},
+					{
+						"question": "What is the summary of RemoveGoogleCalendarEvent?",
+						"answer": "Deletes a Google Calendar event by its identifier from a target calendar, with optional attendee notification control."
+					},
+					{
+						"question": "How does RemoveGoogleCalendarEvent handle errors and edge cases?",
+						"answer": "It fails with a non-success API response when the event or calendar is not found (404), the token is invalid or expired (401), the authenticated user lacks write access (403), or the Google Calendar API returns a non-success status code for any other reason."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "google",
+					"svg": null
+				},
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Deletes a Google Calendar event by its unique identifier from the target calendar.",
+		"Targets the authenticated user's primary calendar by default when CalendarId is omitted.",
+		"Authenticates via a direct OAuth access token or a stored credentials reference exchanged for a fresh token.",
+		"Controls whether attendees are notified of the deletion via SendUpdates.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                           |",
+		"|----------------------------|-------------------------------------------------------------------------------------------------------|",
+		"| Delete event               | Deletes an event by id using the Google Calendar API (Events: delete).                                |",
+		"| Calendar targeting         | Targets any accessible calendar by CalendarId; defaults to the authenticated user's primary calendar. |",
+		"| Notification control       | Controls whether attendees are notified of the deletion via SendUpdates.                              |",
+		"| Token authentication       | Accepts a raw OAuth Bearer access token.                                                              |",
+		"| Credentials authentication | Accepts a credentials id/name and exchanges it for a fresh access token.                              |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                             | Description                                                              |",
+		"|--------------------------------------|--------------------------------------------------------------------------|",
+		"| Cancel scheduled meetings            | Delete events that are no longer needed after a workflow decision.       |",
+		"| Clean up test events                 | Remove events created during automated testing runs.                     |",
+		"| Sync deletions from external systems | Mirror event cancellations from an external system into Google Calendar. |",
+		"| Remove outdated calendar blocks      | Delete focus time or out-of-office blocks when conditions change.        |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CalendarId defaults to 'primary' when omitted",
+						"EventId does not exist on the target calendar — API returns 404",
+						"EventId is missing or empty — plugin cannot build the delete request",
+						"Invalid or expired OAuth access token — API returns 401",
+						"SendUpdates defaults to 'none' — no cancellation emails are sent"
+					],
+					"expected_result": "The event is deleted from the primary calendar and the API returns 204 No Content.",
+					"notes": "EventId is the only required parameter. Token provides a raw OAuth Bearer token suited for single-step runs where token expiry is not a concern. Omitting CalendarId targets the authenticated user's primary calendar.",
+					"use_case": "remove_calendar_event_with_token",
+					"version": "4"
+				},
+				"labels": [
+					"Calendar",
+					"Delete",
+					"GoogleCalendar",
+					"OAuth",
+					"PrimaryCalendar",
+					"Token"
+				]
+			},
+			"description": [
+				"### RemoveGoogleCalendarEvent: Delete event from primary calendar using access token",
+				"",
+				"Delete a calendar event by its unique identifier from the primary calendar.",
+				"CalendarId is omitted so the plugin targets the authenticated user's primary calendar.",
+				"SendUpdates is omitted so no cancellation emails are sent to attendees."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --EventId:abc123xyz --Token:ya29...}}",
+				"pluginName": "RemoveGoogleCalendarEvent"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CalendarId not found or not writable — API returns 404 or 403",
+						"Credentials record not found or missing refresh token — token exchange fails",
+						"EventId does not exist on the target calendar — API returns 404",
+						"SendUpdates:all sends cancellation emails to all attendees immediately",
+						"Token parameter is ignored when Credentials is provided"
+					],
+					"expected_result": "The event is deleted from the specified secondary calendar, cancellation emails are sent to all attendees, and the API returns 204 No Content.",
+					"notes": "Credentials is resolved at runtime to a fresh access token, making it safe for long-running workflows where raw tokens may expire. Passing CalendarId explicitly targets the secondary calendar by its email-format identifier. SendUpdates:all delivers cancellation emails to all attendees immediately.",
+					"use_case": "remove_calendar_event_with_credentials_and_notifications",
+					"version": "4"
+				},
+				"labels": [
+					"Calendar",
+					"Credentials",
+					"Delete",
+					"GoogleCalendar",
+					"SecondaryCalendar",
+					"SendUpdates"
+				]
+			},
+			"description": [
+				"### RemoveGoogleCalendarEvent: Delete event from secondary calendar using stored credentials",
+				"",
+				"Delete a calendar event from a secondary calendar by supplying its identifier and CalendarId.",
+				"Stored credentials are exchanged at runtime for a fresh OAuth access token, avoiding hardcoded token expiry issues.",
+				"SendUpdates:all notifies all attendees of the cancellation immediately."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --EventId:abc123xyz --CalendarId:team@group.calendar.google.com --SendUpdates:all --Credentials:my-google-creds}}",
+				"pluginName": "RemoveGoogleCalendarEvent"
+			}
+		}
+	],
+	"key": "RemoveGoogleCalendarEvent",
+	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Google",
+	"parameters": [
+		{
+			"description": [
+				"Unique identifier of the calendar that contains the event to delete.",
+				"Defaults to 'primary' when not provided, targeting the authenticated user's primary calendar.",
+				"Any valid calendar identifier is accepted, including secondary calendar IDs in email-address format."
+			],
+			"mandatory": false,
+			"name": "CalendarId",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Stored credential record id or name used to obtain a fresh access token.",
+				"Avoids hardcoding tokens by exchanging the stored refresh token for a new access token when needed.",
+				"Use when access tokens may expire between steps.",
+				"Takes precedence over the Token parameter when both are provided."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Unique identifier of the event to delete.",
+				"Use the id returned by NewGoogleCalendarEvent or retrieved from the Calendar API."
+			],
+			"mandatory": true,
+			"name": "EventId",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Controls whether cancellation emails are sent to attendees when the event is deleted.",
+				"Accepted values: 'all' (notify all attendees), 'externalOnly' (notify only external attendees), 'none' (send no notifications).",
+				"Defaults to 'none' to avoid sending spurious emails during automated runs."
+			],
+			"mandatory": false,
+			"name": "SendUpdates",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"OAuth Bearer access token used to call the Google Calendar API.",
+				"Used when no stored credential record is available.",
+				"Ignored when Credentials is provided."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Deletes a Google Calendar event by its unique identifier from the target calendar.",
+		"Authenticates via a direct OAuth access token or a stored credentials reference exchanged for a fresh token.",
+		"Controls whether attendees receive cancellation emails via SendUpdates, defaulting to no notifications.",
+		"Fails with a non-success API response when the calendar or event cannot be found."
+	]
+}

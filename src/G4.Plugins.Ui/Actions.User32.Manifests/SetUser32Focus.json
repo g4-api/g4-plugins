@@ -8,6 +8,31 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SetUser32Focus.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/SetUser32Focus.cs"
+			},
+			"rag": {
+				"description": "SetUser32Focus sets keyboard focus on a native Windows UI element using the User32 API. It locates the target element via XPath and calls SetFocus. If the WebDriver is not User32-compatible or the element is not found, the plugin exits silently without error.",
+				"qa": [
+					{
+						"question": "What does SetUser32Focus do?",
+						"answer": "It sets keyboard focus on a native Windows UI element using the User32 API, locating the element via XPath before activating it."
+					},
+					{
+						"question": "What locator strategy does SetUser32Focus support?",
+						"answer": "Only Xpath is supported for locating User32 elements."
+					},
+					{
+						"question": "What happens when the WebDriver does not support IUser32Driver?",
+						"answer": "The plugin returns an empty response immediately and no action is performed."
+					},
+					{
+						"question": "What happens when the target element is not found?",
+						"answer": "The plugin silently skips the SetFocus call and returns an empty response without throwing an error."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +40,7 @@
 					"name": "arrow-pointer",
 					"svg": null
 				},
+				"label": "Set User32 Focus",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,14 +48,15 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `SetUser32Focus` plugin is to set focus on a UI element using the Windows User32 API. ",
+		"The primary purpose of the `SetUser32Focus` plugin is to set keyboard focus on a UI element using the Windows User32 API.",
 		"This ensures that the target element becomes active and ready for subsequent user interactions or automated actions.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature          | Description                                                                                    |",
-		"|------------------|------------------------------------------------------------------------------------------------|",
-		"| Set Focus Action | Activates the target UI element by setting focus on it, preparing it for further interactions. |",
+		"| Feature          | Description                                                                                             |",
+		"|------------------|---------------------------------------------------------------------------------------------------------|",
+		"| Set Focus Action | Activates the target UI element by setting keyboard focus on it, preparing it for further interactions. |",
+		"| Silent Skip      | If the target element is not found, the plugin exits silently without raising an error.                 |",
 		"",
 		"### Usage in RPA",
 		"",
@@ -49,13 +76,35 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Non-IUser32Driver detected — plugin returns an empty response with no action performed",
+						"Element not found — SetFocus is not called; the plugin returns silently without error"
+					],
+					"expected_result": "Keyboard focus is set on the element located at `//input[@id='Username']`.",
+					"notes": "The plugin locates the element via the Xpath locator and calls SetFocus. The Locator property defaults to Xpath and does not need to be specified explicitly.",
+					"use_case": "set_focus_on_element",
+					"version": "4"
+				},
+				"labels": [
+					"DesktopAutomation",
+					"Focus",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Set focus on a UI element identified by the XPath `//input[@id='Username']`."
+				"### Set focus on a UI element",
+				"",
+				"The plugin locates the element at `//input[@id='Username']` using the Xpath locator and sets keyboard focus on it.",
+				"The `Locator` property defaults to `Xpath` and does not need to be specified explicitly."
 			],
 			"rule": {
-				"Locator": "Xpath",
-				"OnElement": "//input[@id='Username']",
-				"PluginName": "SetUser32Focus"
+				"$type": "Action",
+				"locator": "Xpath",
+				"onElement": "//input[@id='Username']",
+				"pluginName": "SetUser32Focus"
 			}
 		}
 	],
@@ -67,7 +116,8 @@
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+				"Specifies the locator strategy used to find the target UI element.",
+				"Xpath is the only supported locator strategy for User32 elements."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -75,7 +125,8 @@
 		},
 		{
 			"description": [
-				"Specifies the XPath for the target UI element on which focus will be set. This property is required to identify the element."
+				"Specifies the XPath expression that identifies the target UI element on which focus will be set.",
+				"This property is required to identify the element."
 			],
 			"mandatory": true,
 			"name": "OnElement",
@@ -86,12 +137,13 @@
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
+	"platforms": [
 		"WindowsNative"
 	],
 	"summary": [
-		"The `SetUser32Focus` plugin sets focus on a UI element using the Windows User32 API. ",
-		"It ensures that the target element is activated and ready for subsequent interactions, making it ideal for desktop UI automation and testing on Windows platforms."
+		"The `SetUser32Focus` plugin sets keyboard focus on a native Windows UI element using the Windows User32 API.",
+		"It locates the target element via XPath and activates it, preparing it for subsequent interactions.",
+		"The plugin is exclusively for Windows platforms and requires a User32-compatible WebDriver."
 	],
 	"version": "4"
 }

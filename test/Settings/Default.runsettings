@@ -8,6 +8,7 @@
 		<Parameter name="Google.App.Name" value="" />
 		<Parameter name="Google.App.RedirectUrl" value="" />
 		<Parameter name="Google.App.RefreshToken" value="" />
+		<Parameter name="Google.App.Scope" value="" />
 		<Parameter name="Google.Smtp.Password" value="" />
 		<Parameter name="Google.Smtp.Username" value="" />
 

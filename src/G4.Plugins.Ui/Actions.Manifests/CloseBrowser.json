@@ -12,6 +12,47 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CloseBrowser.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/CloseBrowser.cs"
+			},
+			"rag": {
+				"description": "The CloseBrowser action terminates the current browser session by closing the browser window and releasing the underlying WebDriver instance. It calls Quit to end the session and Dispose to free all associated resources, ensuring no orphaned browser processes remain. This action is essential for clean teardown at the end of automation workflows and test executions, supporting reliable resource management and consistent test isolation.",
+				"qa": [
+					{
+						"question": "What is the primary purpose of the CloseBrowser action?",
+						"answer": "It terminates the current browser session by closing the browser window and releasing the underlying WebDriver instance to ensure a clean teardown."
+					},
+					{
+						"question": "What happens internally when the CloseBrowser action executes?",
+						"answer": "The action calls WebDriver.Quit to end the browser session and then calls WebDriver.Dispose in a finally block to release all associated resources regardless of whether Quit succeeded."
+					},
+					{
+						"question": "Which W3C WebDriver protocol endpoint does this action correspond to?",
+						"answer": "It maps to the DELETE /session/{session id} endpoint as defined in the W3C WebDriver specification at https://www.w3.org/TR/webdriver/#delete-session."
+					},
+					{
+						"question": "When should I use CloseBrowser in an RPA workflow?",
+						"answer": "Use it at the end of any browser-based automation workflow to release system resources and prevent orphaned browser processes from accumulating across repeated runs."
+					},
+					{
+						"question": "When should I use CloseBrowser in automation testing?",
+						"answer": "Use it in test teardown or cleanup phases to ensure each test run ends with a properly closed session, supporting parallel execution and consistent test isolation."
+					},
+					{
+						"question": "What rule type is used for this plugin in a G4 manifest?",
+						"answer": "This plugin uses the Action rule type with the pluginName set to CloseBrowser."
+					},
+					{
+						"question": "What is the namespace and plugin type for CloseBrowser?",
+						"answer": "The namespace is G4.Plugins.Ui and the pluginType is Action."
+					},
+					{
+						"question": "What aliases are available for the CloseBrowser action?",
+						"answer": "The action can also be invoked using the aliases CloseSession and QuitSession."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -19,6 +60,7 @@
 					"name": "circle-xmark",
 					"svg": null
 				},
+				"label": "Close Browser",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -26,35 +68,80 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `CloseBrowser` plugin is to close the currently active browser window. This is useful for ending browser sessions cleanly and ensuring that resources are properly released.",
+		"The CloseBrowser action terminates the current browser session by closing the browser window and disposing of the WebDriver instance.",
+		"It ensures that all browser resources are properly released, preventing orphaned processes from consuming system memory.",
+		"The action performs both a session quit and a resource disposal, guaranteeing a clean teardown regardless of the session state.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                                |",
-		"|---------------------|----------------------------------------------------------------------------|",
-		"| Browser Control     | Closes the currently active browser window.                                |",
-		"| Resource Management | Ensures that the WebDriver instance is properly disposed of after closing. |",
+		"| Feature             | Description                                                                                    |",
+		"|---------------------|------------------------------------------------------------------------------------------------|",
+		"| Session Termination | Calls the WebDriver Quit method to end the active browser session.                             |",
+		"| Resource Disposal   | Disposes of the WebDriver instance to release all associated system resources.                 |",
+		"| Safe Teardown       | Uses a finally block to ensure disposal occurs even if the quit operation encounters an error. |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                      | Description                                                                       |",
-		"|----------------------------|-----------------------------------------------------------------------------------|",
-		"| End of Automation Session  | Close the browser at the end of an automation session to clean up resources.      |",
-		"| Error Handling             | Use to close the browser in case of errors or exceptions to ensure a clean state. |",
+		"| Use Case            | Description                                                                                       |",
+		"|---------------------|---------------------------------------------------------------------------------------------------|",
+		"| Workflow Completion | Closing the browser at the end of a robotic process to free resources for the next scheduled run. |",
+		"| Resource Management | Preventing orphaned browser processes from accumulating during long-running automation cycles.    |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                          | Description                                                                                   |",
-		"|--------------------------------|-----------------------------------------------------------------------------------------------|",
-		"| Test Cleanup                   | Close the browser at the end of tests to ensure no browser windows remain open between tests. |",
-		"| Resource Management in Testing | Ensures that the WebDriver instance is disposed of properly after each test run.              |"
+		"| Use Case           | Description                                                                                            |",
+		"|--------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Test Teardown      | Ensuring each test ends with a properly closed session to avoid state leakage between test cases.      |",
+		"| Parallel Execution | Releasing browser instances promptly so that parallel test runners do not exhaust available resources. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Browser crash leaves orphaned child processes",
+						"Browser process already terminated externally",
+						"Browser window closed manually before action executes",
+						"Concurrent test teardown attempts on the same session",
+						"Dispose called on an already disposed WebDriver instance",
+						"Multiple browser windows open in the same session",
+						"Network disconnection during session termination",
+						"No active session exists",
+						"Operating system denies process termination",
+						"Quit timeout exceeded on unresponsive browser",
+						"Session timeout occurred before close",
+						"Unresponsive browser due to JavaScript infinite loop",
+						"WebDriver instance already disposed"
+					],
+					"expected_result": "The browser session is terminated and the WebDriver instance is disposed, releasing all associated resources.",
+					"notes": "The action calls WebDriver.Quit to end the session and WebDriver.Dispose in a finally block to release resources even if Quit fails. No parameters, arguments, or element targeting are accepted. The plugin can also be invoked using the aliases CloseSession and QuitSession. It maps to the W3C WebDriver DELETE /session/{session id} endpoint.",
+					"use_case": "session_teardown",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"BrowserManagement",
+					"Cleanup",
+					"ProcessManagement",
+					"ResourceManagement",
+					"SessionManagement",
+					"Teardown",
+					"TestIsolation",
+					"UiAutomation",
+					"WebAutomation",
+					"WorkflowCompletion"
+				]
+			},
 			"description": [
-				"Use the `CloseBrowser` plugin to close the currently active browser window."
+				"### Terminate browser session and release resources",
+				"",
+				"The CloseBrowser action closes the active browser window and disposes of the underlying WebDriver instance.",
+				"It calls Quit to end the session and Dispose to free all associated system resources.",
+				"No parameters or element targeting are required because the action operates on the current session directly.",
+				"This is the standard teardown step placed at the end of an automation workflow or test execution to prevent orphaned browser processes."
 			],
 			"rule": {
+				"$type": "Action",
 				"pluginName": "CloseBrowser"
 			}
 		}
@@ -66,13 +153,13 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#delete-session",
 		"w3c": "DELETE /session/{session id}"
 	},
-	"scopes": [
+	"platforms": [
 		"Any"
 	],
 	"summary": [
-		"The `CloseBrowser` plugin closes the currently active browser window and disposes of the WebDriver instance to ensure proper resource management.",
-		"In robotic process automation (RPA), it helps maintain system efficiency by releasing resources when a browser session is no longer needed.",
-		"In automation testing, it ensures clean test execution by properly closing browser instances after tests are completed."
+		"The CloseBrowser action terminates the current browser session by closing the browser window and releasing the underlying WebDriver instance.",
+		"In robotic process automation, it provides a clean session teardown that frees system resources and prevents orphaned browser processes from accumulating.",
+		"In automation testing, it ensures each test run concludes with a proper session cleanup, supporting reliable parallel execution and consistent test isolation."
 	],
 	"version": "4"
 }

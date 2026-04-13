@@ -1,0 +1,232 @@
+{
+	"aliases": [],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataExtraction"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadPdfFile.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ReadPdfFile.cs"
+			},
+			"rag": {
+				"description": "The ReadPdfFile plugin extracts text from PDF and plain text files using a file path, applies a regular expression to filter the content, and stores the matched result in a session parameter as Base64. It keeps workflows reliable by delivering extracted document content cleanly for downstream steps.",
+				"qa": [
+					{
+						"question": "What does ReadPdfFile do?",
+						"answer": "ReadPdfFile reads a PDF or plain text file from a given path, extracts the full text content, and stores it in a session parameter for downstream use."
+					},
+					{
+						"question": "What parameters does ReadPdfFile accept?",
+						"answer": "It accepts Argument (the file path, mandatory) and RegularExpression (an optional filter applied to extracted text, defaulting to `(?si).*` which matches all content)."
+					},
+					{
+						"question": "Where can I find the ReadPdfFile source code and documentation?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ReadPdfFile.cs. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReadPdfFile.md."
+					},
+					{
+						"question": "What is the best practice when using ReadPdfFile in a workflow?",
+						"answer": "Provide a valid file path in Argument and a targeted RegularExpression to isolate only the content you need; reference ReadPdfFile:Content in downstream steps to reuse the result without re-reading the file."
+					},
+					{
+						"question": "What output does ReadPdfFile produce?",
+						"answer": "The matched text is stored in the session parameter ReadPdfFile:Content and the full raw content is exposed through the entity field Content."
+					},
+					{
+						"question": "What is the plugin key, type, version, category, platform, and author for ReadPdfFile?",
+						"answer": "Key: ReadPdfFile, pluginType: Action, version: 4, category: DataExtraction, platform: Any, author: Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "What is the ReadPdfFile plugin summary?",
+						"answer": "Reads PDF and plain text files from a given file path, applies a regular expression to filter the extracted text, converts the matched portion to Base64, and stores the result in a session parameter for downstream reuse."
+					},
+					{
+						"question": "What happens if the regular expression does not match any content?",
+						"answer": "When no match is found the result falls back to an empty string; the plugin completes without throwing an error."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "file-import",
+					"svg": null
+				},
+				"label": "Read PDF File",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Reads PDF and plain text files from a file path and extracts their full text content.",
+		"PDF files are processed page by page using PdfPig; all other file types are read directly as plain text.",
+		"A regular expression filters the extracted content, and the matched result is converted to Base64 for safe transport and storage.",
+		"Makes it straightforward to pull specific data from documents inside automation workflows without custom code.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                      | Description                                                                           |",
+		"|------------------------------|---------------------------------------------------------------------------------------|",
+		"| PDF Text Extraction          | Reads all pages of a PDF using PdfPig and joins word tokens into a single text block. |",
+		"| Plain Text File Reading      | Reads non-PDF files directly using the system default encoding.                       |",
+		"| Regular Expression Filtering | Applies a regex to the extracted content to isolate a specific portion of the text.   |",
+		"| Base64 Encoding              | Converts the matched content to Base64 for safe transport and reuse.                  |",
+		"| Session Storage              | Saves the extracted result in a session parameter for use by downstream steps.        |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                 | Description                                                                                 |",
+		"|--------------------------|---------------------------------------------------------------------------------------------|",
+		"| Invoice Data Extraction  | Pull invoice numbers, totals, or dates from PDF invoices during document processing runs.   |",
+		"| Report Parsing           | Read summary sections from generated PDF reports and pass values to downstream steps.       |",
+		"| Text File Processing     | Extract specific lines or values from plain text log or configuration files.                |",
+		"| Document Content Routing | Read file content and store it in session parameters for further classification or routing. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case                 | Description                                                                                       |",
+		"|--------------------------|---------------------------------------------------------------------------------------------------|",
+		"| PDF Content Assertion    | Verify that a generated PDF contains expected text such as a confirmation number or status label. |",
+		"| Report Validation        | Read values from exported PDF reports and compare them against expected test data.                |",
+		"| File Output Verification | Check that a workflow-generated text file contains the correct content after processing.          |",
+		"| Regex Match Testing      | Confirm that specific patterns are present in extracted file content as part of test assertions.  |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Contains the full text content extracted from the PDF or text file.",
+				"Holds the complete raw text exactly as it appears after page extraction or file reading.",
+				"Access it when unfiltered content is needed alongside any downstream processing."
+			],
+			"name": "Content",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File does not exist at the given path",
+						"File is not a valid PDF",
+						"PDF contains no extractable text"
+					],
+					"expected_result": "All text from the PDF is extracted and stored in the session parameter ReadPdfFile:Content.",
+					"notes": "The argument must be a valid path to a PDF file. PdfPig reads each page and joins word tokens into a single string. The default regular expression matches all extracted content.",
+					"use_case": "read_pdf_full_content",
+					"version": "4"
+				},
+				"labels": [
+					"DataExtraction",
+					"FileProcessing",
+					"Pdf",
+					"ReadPdfFile"
+				]
+			},
+			"description": [
+				"### Extract full text from a PDF file",
+				"",
+				"Reads all pages of the PDF at the given path using PdfPig and joins word tokens into a single text block.",
+				"No custom regular expression is supplied, so the default `(?si).*` pattern matches all extracted content.",
+				"The full text is stored in the session parameter `ReadPdfFile:Content` for use in downstream steps."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "C:/Reports/document.pdf",
+				"pluginName": "ReadPdfFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File extension is not .pdf; plain text branch is used instead of PdfPig",
+						"Pattern match is partial, returning only part of the expected content",
+						"Regular expression does not match any content"
+					],
+					"expected_result": "Only the portion of the extracted content matching the regular expression is converted to Base64 and stored in ReadPdfFile:Content.",
+					"notes": "When regularExpression is set, only the first match is used. Non-PDF files bypass PdfPig and are read as plain text; the same regex applies regardless of file type.",
+					"use_case": "read_file_filtered_content",
+					"version": "4"
+				},
+				"labels": [
+					"DataExtraction",
+					"FileProcessing",
+					"ReadPdfFile",
+					"RegularExpression"
+				]
+			},
+			"description": [
+				"### Extract filtered content using a regular expression",
+				"",
+				"Reads the file at the given path and applies a regular expression to the extracted text.",
+				"A regular expression `Invoice\\s+#\\d+` is applied to the extracted content to isolate matching invoice identifiers.",
+				"The first match is converted to Base64 and stored in the session parameter `ReadPdfFile:Content`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "C:/Reports/document.pdf",
+				"pluginName": "ReadPdfFile",
+				"regularExpression": "Invoice\\s+#\\d+"
+			}
+		}
+	],
+	"key": "ReadPdfFile",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"ReadPdfFile:Content holds the full text content extracted from the PDF or plain text file.",
+				"Reference it in downstream steps to reuse the content without re-reading the source file.",
+				"Set every time the plugin runs, regardless of the regular expression configured."
+			],
+			"mandatory": true,
+			"name": "ReadPdfFile:Content",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Specifies the path to the file to read.",
+				"PDF files are processed with PdfPig to extract text from every page.",
+				"All other file types are read as plain text using the system default encoding."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "(?si).*",
+			"description": [
+				"Applies a regular expression to the extracted file content to isolate a specific portion.",
+				"Defaults to `(?si).*` when omitted, which selects the entire extracted text.",
+				"If no match is found, the result is set to an empty string."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Reads PDF and plain text files from a given file path and extracts their full text content.",
+		"Applies a regular expression to the extracted text and converts the matched portion to Base64.",
+		"Stores the result in a session parameter for reuse in downstream workflow steps."
+	],
+	"version": "4"
+}

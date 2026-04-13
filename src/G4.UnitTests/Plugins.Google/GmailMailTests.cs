@@ -1,4 +1,4 @@
-﻿using G4.Plugins.Google.Actions;
+﻿using G4.Plugins.Google.Actions.Gmail.Messages;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
 
@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace G4.UnitTests.Plugins.Google
 {
-    [Ignore]
     [TestClass]
     [TestCategory("GmailMail")]
     [TestCategory("UnitTest")]
@@ -16,22 +15,29 @@ namespace G4.UnitTests.Plugins.Google
             "manifest specifications.")]
         public override void ManifestComplianceTest()
         {
-            AssertManifest<ReadGmailMail>();
+            AssertManifest<EditGmailMessage>();
+            AssertManifest<ReadGmailMessage>();
+            AssertManifest<SendGmailMessage>();
+            AssertManifest<SendGmailMessageReply>();
         }
 
         [TestMethod(DisplayName = "Verify that the GmailMail plugins are correctly " +
             "registered and functioning.")]
         public override void NewPluginTest()
         {
-            AssertPlugin<ReadGmailMail>();
+            AssertPlugin<EditGmailMessage>();
+            AssertPlugin<ReadGmailMessage>();
+            AssertPlugin<SendGmailMessage>();
+            AssertPlugin<SendGmailMessageReply>();
         }
 
-        [TestMethod(DisplayName = "Verify that the ReadGmailMail plugin " +
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the ReadGmailMessage plugin " +
             "reads emails correctly.")]
-        public void ReadMailTest()
+        public void ReadGmailMessageTest()
         {
             // Plugin name used as the namespace prefix for session output keys.
-            const string pluginName = nameof(ReadGmailMail);
+            const string pluginName = nameof(ReadGmailMessage);
 
             // Resolve the credential record name/id from the test configuration.
             // This value is injected into the rule so the plugin can authenticate
@@ -39,12 +45,12 @@ namespace G4.UnitTests.Plugins.Google
             var name = $"{TestContext.Properties["Google.App.Name"]}";
 
             // Build the action rule JSON and inject the credential reference.
-            // The rule invokes the ReadGmailMail plugin using the configured credentials.
+            // The rule invokes the ReadGmailMessage plugin using the configured credentials.
             var ruleJson =
             """
             {
                 "$type": "Action",
-                "pluginName": "ReadGmailMail",
+                "pluginName": "ReadGmailMessage",
                 "argument": "{{$ --Credentials:$(name)}}"
             }
             """.Replace("$(name)", name);
@@ -75,6 +81,227 @@ namespace G4.UnitTests.Plugins.Google
 
             // Verify that the plugin returned the Subject header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Subject"]?.ToString());
+
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
+
+            // Verify that the plugin returned the To header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:To"]?.ToString());
+        }
+
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the SendGmailMessageReply plugin " +
+            "sends emails correctly.")]
+        public void SendGmailMessageReplyTest()
+        {
+            // Use the plugin class name as the namespace prefix for session output parameters.
+            const string pluginName = nameof(SendGmailMessageReply);
+
+            // Resolve the configured Google application credential reference from the test context.
+            // This value is injected into the action rule so the plugin can authenticate.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule argument string that invokes the reply plugin
+            // with credentials, target message id, recipients, and reply body.
+            var argument = "{{$ " +
+                "--Credentials:$(name) " +
+                "--MessageId:19d3ae8f06771f47 " +
+                "--From:1@gmail.com " +
+                "--To:2@outlook.com;3@gmail.com " +
+                "--Body:This is a test reply message.}}";
+
+            // Build the action rule JSON and inject the resolved argument and credential values.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "SendGmailMessageReply",
+                "argument": "$(argument)"
+            }
+            """.Replace("$(argument)", argument).Replace("$(name)", name);
+
+            // Execute the action rule and capture the resulting workflow session.
+            var session = Invoke(ruleJson);
+
+            // Read the session parameters written by the plugin during execution.
+            var sessionParameters = session.GetEnvironment().SessionParameters;
+
+            // Verify that the plugin completed without reporting execution exceptions.
+            Assert.IsEmpty(session.GetExceptions());
+
+            // Verify that the plugin returned the created Gmail message identifier.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Id"]?.ToString());
+
+            // Verify that the plugin returned the applied Gmail labels.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Labels"]?.ToString());
+
+            // Verify that the plugin returned the Gmail thread identifier.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
+        }
+
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the ReadGmailMessage plugin " +
+            "sends emails correctly.")]
+        public void SendGmailMessageTest()
+        {
+            // Plugin name used as the namespace prefix for session output keys.
+            const string pluginName = nameof(SendGmailMessage);
+
+            // Resolve the credential record name/id from the test configuration.
+            // This value is injected into the rule so the plugin can authenticate
+            // and send mail from the target Gmail account.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule JSON and inject the credential reference.
+            // The rule invokes the SendGmailMessage plugin using the configured credentials.
+            var argument = "{{$ " +
+                "--Credentials:$(name) " +
+                "--From:g4.platforms@gmail.com " +
+                "--To:1@gmail.com;2@outlook.com " +
+                "--Cc:3@outlook.com " +
+                "--Bcc:4@outlook.com " +
+                "--Body:Test Mail " +
+                "--Subject:G4 API}}";
+            
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "SendGmailMessage",
+                "argument": "$(argument)"
+            }
+            """.Replace("$(argument)", argument).Replace("$(name)", name);
+
+            // Execute the rule and capture the invocation result.
+            // The plugin writes its outputs into the workflow session parameters
+            // using the pattern: <PluginName>:<Property>.
+            var session = Invoke(ruleJson);
+            var sessionParameters = session.GetEnvironment().SessionParameters;
+
+            // Verify that the plugin completed without reporting execution exceptions.
+            Assert.IsEmpty(session.GetExceptions());
+
+            // Verify that the plugin returned the Gmail message id.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Id"]?.ToString());
+
+            // Verify that the plugin returned the Subject header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Labels"]?.ToString());
+
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
+        }
+
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the EditGmailMessage plugin " +
+            "updates message labels correctly.")]
+        public void EditGmailMessageSingleLabelTest()
+        {
+            // Plugin name used as the namespace prefix for session output keys.
+            const string pluginName = nameof(EditGmailMessage);
+
+            // Resolve the credential record name/id from the test configuration.
+            // This value is injected into the rule so the plugin can authenticate
+            // and read mail from the target Gmail account.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule JSON and inject the credential reference.
+            // The rule invokes the ReadGmailMessage plugin using the configured credentials.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "EditGmailMessage",
+                "argument": "{{$ --Credentials:$(name) --MessageId:19d04fa3cf3f4883 --Add:notifications --Remove:INBOX}}"
+            }
+            """.Replace("$(name)", name);
+
+            // Execute the rule and capture the invocation result.
+            // The plugin writes its outputs into the workflow session parameters
+            // using the pattern: <PluginName>:<Property>.
+            var session = Invoke(ruleJson);
+            var sessionParameters = session.GetEnvironment().SessionParameters;
+
+            // Verify that the plugin completed without reporting execution exceptions.
+            Assert.IsEmpty(session.GetExceptions());
+
+            // Verify that the plugin returned the Bcc header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Bcc"]?.ToString());
+
+            // Verify that the plugin returned the Cc header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:CC"]?.ToString());
+
+            // Verify that the plugin returned the decoded mail body content.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Content"]?.ToString());
+
+            // Verify that the plugin returned the From header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:From"]?.ToString());
+
+            // Verify that the plugin returned the Gmail message id.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Id"]?.ToString());
+
+            // Verify that the plugin returned the Subject header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Subject"]?.ToString());
+
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
+
+            // Verify that the plugin returned the To header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:To"]?.ToString());
+        }
+
+        [Ignore]
+        [TestMethod(DisplayName = "Verify that the EditGmailMessage plugin " +
+            "updates message labels correctly.")]
+        public void EditGmailMessageTest()
+        {
+            // Plugin name used as the namespace prefix for session output keys.
+            const string pluginName = nameof(EditGmailMessage);
+
+            // Resolve the credential record name/id from the test configuration.
+            // This value is injected into the rule so the plugin can authenticate
+            // and read mail from the target Gmail account.
+            var name = $"{TestContext.Properties["Google.App.Name"]}";
+
+            // Build the action rule JSON and inject the credential reference.
+            // The rule invokes the ReadGmailMessage plugin using the configured credentials.
+            var ruleJson =
+            """
+            {
+                "$type": "Action",
+                "pluginName": "EditGmailMessage",
+                "argument": "{{$ --Credentials:$(name) --MessageId:19d04fa3cf3f4883 --Remove:follow-up --Remove:set-meeting}}"
+            }
+            """.Replace("$(name)", name);
+
+            // Execute the rule and capture the invocation result.
+            // The plugin writes its outputs into the workflow session parameters
+            // using the pattern: <PluginName>:<Property>.
+            var session = Invoke(ruleJson);
+            var sessionParameters = session.GetEnvironment().SessionParameters;
+
+            // Verify that the plugin completed without reporting execution exceptions.
+            Assert.IsEmpty(session.GetExceptions());
+
+            // Verify that the plugin returned the Bcc header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Bcc"]?.ToString());
+
+            // Verify that the plugin returned the Cc header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:CC"]?.ToString());
+
+            // Verify that the plugin returned the decoded mail body content.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Content"]?.ToString());
+
+            // Verify that the plugin returned the From header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:From"]?.ToString());
+
+            // Verify that the plugin returned the Gmail message id.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Id"]?.ToString());
+
+            // Verify that the plugin returned the Subject header.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:Subject"]?.ToString());
+
+            // Verify that the plugin returned the ThreadId.
+            Assert.IsNotNull(value: sessionParameters[$"{pluginName}:ThreadId"]?.ToString());
 
             // Verify that the plugin returned the To header.
             Assert.IsNotNull(value: sessionParameters[$"{pluginName}:To"]?.ToString());

@@ -8,6 +8,47 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeUser32Click.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/InvokeUser32Click.cs"
+			},
+			"rag": {
+				"description": "InvokeUser32Click performs Windows User32 API click actions on native desktop applications. It supports coordinate-based clicking at absolute viewport positions and element-targeted clicking with configurable alignment and pixel offsets. Requires a User32-compatible WebDriver and runs exclusively on Windows.",
+				"qa": [
+					{
+						"question": "What does InvokeUser32Click do?",
+						"answer": "It performs click actions using the Windows User32 API, supporting absolute coordinate clicks and element-targeted clicks with configurable alignment and pixel offsets."
+					},
+					{
+						"question": "What parameters does InvokeUser32Click support?",
+						"answer": "X and Y for absolute viewport coordinates; OffsetX and OffsetY for pixel offsets relative to the target element; Alignment to set the click reference point on the element (default: MiddleCenter)."
+					},
+					{
+						"question": "When is coordinate mode used instead of element mode?",
+						"answer": "Coordinate mode activates when at least one of X or Y is non-zero and no target element is provided. Element mode is used when an element is targeted via OnElement."
+					},
+					{
+						"question": "How does InvokeUser32Click integrate with sequential workflows?",
+						"answer": "It runs as a task-type action in the G4 sequential workflow model, targeting native Windows UI elements through a User32-compatible WebDriver."
+					},
+					{
+						"question": "What locator strategy does InvokeUser32Click support?",
+						"answer": "Only Xpath is supported for locating User32 elements."
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What does the plugin summary describe?",
+						"answer": "InvokeUser32Click performs User32 API click actions supporting coordinate-based viewport clicks and element-targeted clicks with configurable alignment and pixel offsets, exclusively on Windows."
+					},
+					{
+						"question": "What happens when the WebDriver does not support IUser32Driver?",
+						"answer": "The plugin returns an empty response immediately and no action is performed."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -15,6 +56,7 @@
 					"name": "arrow-pointer",
 					"svg": null
 				},
+				"label": "Invoke User32 Click",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -22,8 +64,8 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `InvokeUser32Click` plugin is to perform click actions using the Windows User32 API. ",
-		"This allows automation scripts to interact with native UI elements in desktop applications, either by clicking at specific coordinates or on a target element with configurable offsets and alignment.",
+		"The primary purpose of the `InvokeUser32Click` plugin is to perform click actions using the Windows User32 API.",
+		"Automation scripts can interact with native UI elements in desktop applications by clicking at specific coordinates or on a target element with configurable offsets and alignment.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -53,23 +95,72 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Both X and Y are zero — coordinate mode does not activate; element mode is used instead",
+						"Non-IUser32Driver detected — plugin returns an empty response with no action performed",
+						"Viewport coordinates outside the visible screen area may produce no visible click effect"
+					],
+					"expected_result": "The mouse cursor moves to viewport coordinates (100, 200) and a click is performed.",
+					"notes": "Coordinate mode activates when at least one of X or Y is non-zero and no element is targeted. The `{{$ --X:100 --Y:200}}` syntax binds X and Y as a parameters dictionary before execution.",
+					"use_case": "click_at_absolute_viewport_coordinates",
+					"version": "4"
+				},
+				"labels": [
+					"Click",
+					"Coordinates",
+					"DesktopAutomation",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Perform a click action at specific coordinates (X: 100, Y: 200) without targeting any element."
+				"### Click at absolute viewport coordinates",
+				"",
+				"The plugin moves the system mouse cursor to position (100, 200) on the viewport and performs a click.",
+				"No element is targeted; the `{{$ --X:100 --Y:200}}` syntax binds X and Y as a parameters dictionary that activates coordinate mode at runtime."
 			],
 			"rule": {
-				"Argument": "{{$ -X:100 --Y:200}}",
-				"PluginName": "InvokeUser32Click"
+				"$type": "Action",
+				"argument": "{{$ --X:100 --Y:200}}",
+				"pluginName": "InvokeUser32Click"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found — an exception is raised by the User32 driver",
+						"Non-IUser32Driver detected — plugin returns an empty response with no action performed",
+						"Offset values push the click outside the element bounding box — the click still executes at the computed position"
+					],
+					"expected_result": "The mouse moves to the TopLeft corner of the target button plus the specified offsets and a click is performed.",
+					"notes": "Element mode activates when an element is provided and X and Y are both zero. Alignment and offset parameters adjust the final cursor position within or around the element bounding box.",
+					"use_case": "click_on_element_with_alignment_and_offset",
+					"version": "4"
+				},
+				"labels": [
+					"Alignment",
+					"Click",
+					"DesktopAutomation",
+					"ElementInteraction",
+					"User32",
+					"WindowsNative"
+				]
+			},
 			"description": [
-				"Perform a click action on a UI element identified by the XPath `//button[@id='SubmitButton']`, with an offset of 10 pixels horizontally and 20 pixels vertically, aligned to the TopLeft of the element."
+				"### Click on element with alignment and offset",
+				"",
+				"The plugin locates the element at `//button[@id='SubmitButton']` using the Xpath locator, moves the mouse to the TopLeft alignment point with a 10-pixel horizontal and 20-pixel vertical offset, then performs a click.",
+				"The `{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}` syntax binds the parameters as a dictionary before execution."
 			],
 			"rule": {
-				"Argument": "{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}",
-				"Locator": "Xpath",
-				"OnElement": "//button[@id='SubmitButton']",
-				"PluginName": "InvokeUser32Click"
+				"$type": "Action",
+				"argument": "{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}",
+				"locator": "Xpath",
+				"onElement": "//button[@id='SubmitButton']",
+				"pluginName": "InvokeUser32Click"
 			}
 		}
 	],
@@ -77,9 +168,88 @@
 	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
+			"default": "MiddleCenter",
+			"description": [
+				"Controls the alignment point on the target element where the mouse cursor is positioned before clicking.",
+				"Alignment determines which corner, edge, or center of the element bounding box serves as the click reference point.",
+				"Combine with OffsetX and OffsetY to fine-tune the click position relative to the chosen alignment point.",
+				"Use MiddleCenter for standard centered clicks or edge and corner values for precise boundary interactions."
+			],
+			"mandatory": false,
+			"name": "Alignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Positions the cursor at the bottom center of the element bounding box.",
+						"Use this alignment when the target action is near the lower middle edge of the element."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the bottom left corner of the element bounding box.",
+						"Use this alignment when the target action is near the lower left boundary of the element."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the bottom right corner of the element bounding box.",
+						"Use this alignment when the target action is near the lower right boundary of the element."
+					],
+					"name": "BottomRight"
+				},
+				{
+					"description": [
+						"Positions the cursor at the horizontal and vertical center of the element bounding box.",
+						"This is the default alignment and works well for most standard click interactions."
+					],
+					"name": "MiddleCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the left edge and vertical center of the element bounding box.",
+						"Use this alignment when the target action is near the left side of the element."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the right edge and vertical center of the element bounding box.",
+						"Use this alignment when the target action is near the right side of the element."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top center of the element bounding box.",
+						"Use this alignment when the target action is near the upper middle edge of the element."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top left corner of the element bounding box.",
+						"Use this alignment when the target action is near the upper left boundary of the element."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"Positions the cursor at the top right corner of the element bounding box.",
+						"Use this alignment when the target action is near the upper right boundary of the element."
+					],
+					"name": "TopRight"
+				}
+			]
+		},
+		{
 			"default": "0",
 			"description": [
-				"Specifies the horizontal offset (in pixels) to adjust the click position relative to the target element."
+				"Specifies the horizontal pixel offset applied to the mouse position relative to the aligned point on the target element.",
+				"Positive values shift the click position to the right; negative values shift it to the left.",
+				"Use this parameter when the click must land slightly away from the default alignment point."
 			],
 			"mandatory": false,
 			"name": "OffsetX",
@@ -88,82 +258,20 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the vertical offset (in pixels) to adjust the click position relative to the target element."
+				"Specifies the vertical pixel offset applied to the mouse position relative to the aligned point on the target element.",
+				"Positive values shift the click position downward; negative values shift it upward.",
+				"Use this parameter when the click must land slightly away from the default alignment point."
 			],
 			"mandatory": false,
 			"name": "OffsetY",
 			"type": "Number"
 		},
 		{
-			"default": "MiddleCenter",
-			"description": [
-				"Defines the alignment of the click relative to the target element. Choose an alignment that best fits your UI layout.",
-				"For example, 'MiddleCenter' will click at the center of the element, while 'TopLeft' will click at the upper left corner."
-			],
-			"mandatory": false,
-			"name": "Alignment",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Click at the top left corner of the element."
-					],
-					"name": "TopLeft"
-				},
-				{
-					"description": [
-						"Click at the top center of the element."
-					],
-					"name": "TopCenter"
-				},
-				{
-					"description": [
-						"Click at the top right corner of the element."
-					],
-					"name": "TopRight"
-				},
-				{
-					"description": [
-						"Click at the middle left side of the element."
-					],
-					"name": "MiddleLeft"
-				},
-				{
-					"description": [
-						"Click at the middle right side of the element."
-					],
-					"name": "MiddleRight"
-				},
-				{
-					"description": [
-						"Click at the bottom left corner of the element."
-					],
-					"name": "BottomLeft"
-				},
-				{
-					"description": [
-						"Click at the bottom center of the element."
-					],
-					"name": "BottomCenter"
-				},
-				{
-					"description": [
-						"Click at the bottom right corner of the element."
-					],
-					"name": "BottomRight"
-				},
-				{
-					"description": [
-						"Click at the center of the element."
-					],
-					"name": "MiddleCenter"
-				}
-			]
-		},
-		{
 			"default": "0",
 			"description": [
-				"Specifies the X coordinate for a click action when no target element is provided."
+				"Specifies the absolute horizontal coordinate on the viewport where the click will occur when no target element is provided.",
+				"The coordinate is measured in pixels from the left edge of the viewport.",
+				"Set X and Y together to trigger coordinate-based clicking without element targeting."
 			],
 			"mandatory": false,
 			"name": "X",
@@ -172,7 +280,9 @@
 		{
 			"default": "0",
 			"description": [
-				"Specifies the Y coordinate for a click action when no target element is provided."
+				"Specifies the absolute vertical coordinate on the viewport where the click will occur when no target element is provided.",
+				"The coordinate is measured in pixels from the top edge of the viewport.",
+				"Set X and Y together to trigger coordinate-based clicking without element targeting."
 			],
 			"mandatory": false,
 			"name": "Y",
@@ -182,9 +292,20 @@
 	"pluginType": "Action",
 	"properties": [
 		{
+			"description": [
+				"Carries the parameter expression used to pass runtime values to the plugin.",
+				"Use the `{{$ --Name:Value}}` format to specify OffsetX, OffsetY, Alignment, X, or Y at runtime.",
+				"The expression is parsed into a parameters dictionary before the plugin executes."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`."
+				"Specifies the strategy used to locate the target UI element before performing the click.",
+				"Xpath is the only supported locator strategy for User32 elements in this plugin."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -192,34 +313,26 @@
 		},
 		{
 			"description": [
-				"Specifies the XPath for the target UI element where the click will be performed. ",
-				"This property is used when an element is targeted for the click action."
+				"Specifies the XPath expression that identifies the target UI element for the click action.",
+				"When provided, the plugin resolves the element, moves the mouse to the aligned position, and performs the click.",
+				"Omit this property to use coordinate-based clicking with the X and Y parameters instead."
 			],
 			"mandatory": false,
 			"name": "OnElement",
 			"type": "String"
-		},
-		{
-			"description": [
-				"Specifies the parameters expression for the click action. ",
-				"Use this expression to dynamically set values such as offsets, alignment, and coordinates."
-			],
-			"mandatory": false,
-			"name": "Argument",
-			"type": "String|Expression"
 		}
 	],
 	"protocol": {
 		"apiDocumentation": "None",
 		"w3c": "None"
 	},
-	"scopes": [
+	"platforms": [
 		"WindowsNative"
 	],
 	"summary": [
-		"The `InvokeUser32Click` plugin performs click actions using the Windows User32 API. ",
-		"It supports both coordinate-based clicks when no target element is provided and element-specific clicks with configurable offsets and alignment. ",
-		"This plugin is designed for desktop UI automation and testing on Windows platforms."
+		"The `InvokeUser32Click` plugin performs click actions using the Windows User32 API on native desktop applications.",
+		"It supports coordinate-based clicks at absolute viewport positions and element-targeted clicks with configurable alignment and pixel offsets.",
+		"The plugin is exclusively for Windows platforms and requires a User32-compatible WebDriver."
 	],
 	"version": "4"
 }

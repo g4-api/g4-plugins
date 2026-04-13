@@ -320,9 +320,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The ReadJson plugin reads JSON data from a file path or from inline text and parses it for querying.",
-		"It extracts values using a JSONPath expression and can further filter the result with a regular expression.",
-		"The extracted value is converted to Base64 and stored for reuse in later workflow steps."
+		"Reads JSON data from a file path or inline text and extracts values using JSONPath.",
+		"Applies optional regex filtering to the extracted content.",
+		"Converts the result to Base64 and stores it for reuse in downstream steps."
 	],
 	"version": "4"
 }

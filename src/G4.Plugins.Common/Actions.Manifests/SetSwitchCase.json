@@ -610,9 +610,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"SetSwitchCase checks a value you give or finds on a page and runs the matching set of steps.",
-		"If nothing matches, it runs a fallback set of steps.",
-		"This lets your tasks follow different paths based on the information they see."
+		"Evaluates a key from an argument or element and executes the matching branch of steps.",
+		"Runs a default fallback branch when no case matches.",
+		"Supports regex extraction and case-insensitive matching for flexible routing."
 	],
 	"version": "4"
 }

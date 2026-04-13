@@ -5512,9 +5512,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The RegisterParameter plugin captures values from user input or elements and saves them for later use.",
-		"It can keep values in different places and can pull out parts of a value or change how it looks.",
-		"Keeping data organized makes it easy to find and helps tasks run smoothly."
+		"Captures values from user input or elements and stores them in a specified scope.",
+		"Supports session, application, machine, user, and process scopes with optional encryption.",
+		"Applies regex filtering or Base64 encoding to transform values before storage."
 	],
 	"version": "4"
 }

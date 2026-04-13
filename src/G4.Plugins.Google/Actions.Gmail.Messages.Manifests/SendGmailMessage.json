@@ -1,0 +1,296 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Gmail"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendGmailMessage.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/SendGmailMessage.cs"
+			},
+			"rag": {
+				"description": "Send a Gmail email during an automation run by building an RFC 2822 message from your inputs, encoding it for the Gmail API, and submitting it with either a token or stored credentials. It normalizes recipient lists, enforces required fields like To, and stores message id, thread id, and labels as Base64 session outputs for reliable downstream steps.",
+				"qa": [
+					{
+						"question": "What does SendGmailMessage do?",
+						"answer": "SendGmailMessage sends an email through the Gmail API using an RFC 2822 payload and stores the sent message metadata so later workflow steps can reference the exact message."
+					},
+					{
+						"question": "What are the key features and parameters of SendGmailMessage?",
+						"answer": "It builds a raw email from To (required) plus optional Cc, Bcc, Subject, Body, and From, normalizes recipient separators, authenticates with Token or Credentials (Credentials takes precedence), and stores Base64 outputs including SendGmailMessage:Id, SendGmailMessageThread:Id, and SendGmailMessage:Labels."
+					},
+					{
+						"question": "How does SendGmailMessage fit into the integration context?",
+						"answer": "It runs as an Action in a sequential workflow step (componentType “task”) using the google icon provider and the ActionRuleModel."
+					},
+					{
+						"question": "What are best practices for using SendGmailMessage?",
+						"answer": "Prefer Credentials for long-running automations, keep To non-empty, use semicolons or commas consistently for recipient lists, set From only when you explicitly need a custom header value, and always consume the stored message id and thread id outputs instead of re-querying Gmail."
+					},
+					{
+						"question": "What rule or schema details should I follow when configuring SendGmailMessage?",
+						"answer": "Use $type “Action” with pluginName “SendGmailMessage”, pass To plus any of Body, Subject, From, Cc, and Bcc, and include either {{$--Token:value}} or {{$--Credentials:value}}. Outputs are written under SendGmailMessage:* and SendGmailMessageThread:Id."
+					},
+					{
+						"question": "What is the author name in the manifest metadata?",
+						"answer": "The author name is Roei Sabag."
+					},
+					{
+						"question": "What is the author link in the manifest metadata?",
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What categories are defined for this plugin?",
+						"answer": "The categories list contains “Gmail”."
+					},
+					{
+						"question": "What is the manifest key for this plugin?",
+						"answer": "The manifest key is “SendGmailMessage”."
+					},
+					{
+						"question": "What manifestVersion does this plugin use?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What namespace is defined for this plugin?",
+						"answer": "The namespace is “G4.Plugins.Google”."
+					},
+					{
+						"question": "Which platforms does the plugin support?",
+						"answer": "It supports platforms “Any”."
+					},
+					{
+						"question": "What is the pluginType in the manifest?",
+						"answer": "The pluginType is “Action”."
+					},
+					{
+						"question": "What is the summary in the manifest metadata?",
+						"answer": "It sends an email from the authenticated Gmail mailbox using To, Cc, Bcc, Subject, and Body, authenticates with Token or Credentials, and stores the sent message id, thread id, and labels in namespaced session parameters for downstream reuse."
+					},
+					{
+						"question": "What source descriptions and Git links are relevant for SendGmailMessage?",
+						"answer": "The documentation matches the manifest behavior: build an RFC 2822 message, normalize recipients, send via Gmail, and store Id, ThreadId, and Labels as Base64 session outputs. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendGmailMessage.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/SendGmailMessage.cs. Repository: https://github.com/g4-api/g4-plugins. README: https://github.com/g4-api/g4-plugins/blob/main/README.md."
+					},
+					{
+						"question": "How does SendGmailMessage handle errors and edge cases?",
+						"answer": "Workflows should handle missing To, malformed recipient lists, empty or whitespace inputs, invalid or expired tokens, credential resolution or refresh failures, Gmail API quota or rate limits, non-success status codes, and cases where the Gmail API returns no message id."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "google",
+					"svg": null
+				},
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The SendGmailMessage plugin sends a new email message from the authenticated Gmail mailbox during an automation run.",
+		"It helps workflows send notifications, confirmations, and reports without manual email work.",
+		"It supports authentication using either a direct OAuth access token or a stored credentials reference that is exchanged for a fresh token at runtime.",
+		"It stores the sent message metadata in session parameters so later steps can reuse the results reliably.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                              |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Send email                 | Sends an email using the Gmail API (users.messages.send).                                                                                |",
+		"| RFC 2822 payload           | Builds and sends a raw RFC 2822 email payload, including headers and body.                                                               |",
+		"| Multiple recipients        | Supports multiple To, Cc, and Bcc recipients in the message headers.                                                                     |",
+		"| Token authentication       | Accepts a raw OAuth Bearer access token for direct API calls.                                                                            |",
+		"| Credentials authentication | Accepts a credentials id/name and exchanges it for a fresh access token at runtime.                                                      |",
+		"| Credentials precedence     | Uses credentials when both token and credentials are provided.                                                                           |",
+		"| Result session storage     | Stores message metadata such as Id, ThreadId, and Labels in namespaced session parameters (SendGmailMessage:*) as Base64-encoded values. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                    | Description                                                               |",
+		"|-----------------------------|---------------------------------------------------------------------------|",
+		"| Send workflow notifications | Email status updates when a job starts, completes, or fails.              |",
+		"| Deliver generated reports   | Send a report file link or summary text to a distribution list.           |",
+		"| Confirm user actions        | Send confirmation emails after form submissions, approvals, or purchases. |",
+		"| Escalate incidents          | Email on-call or support teams with details collected by an automation.   |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Bcc value is empty or whitespace-only",
+						"Body value is empty or whitespace-only",
+						"Cc value is empty or whitespace-only",
+						"Gmail API rate limit or quota exceeded",
+						"Gmail API returns non-success status code",
+						"Invalid or expired OAuth access token",
+						"Malformed recipient list",
+						"Missing To recipient",
+						"No message id returned by the Gmail API",
+						"Subject value is empty or whitespace-only",
+						"To value is empty or whitespace-only",
+						"Token value is empty or whitespace-only"
+					],
+					"expected_result": "A Gmail message is sent successfully and its id, thread id, and labels are stored in `SendGmailMessage:*` session parameters.",
+					"notes": "Sends a new Gmail message using a provided OAuth access token.",
+					"use_case": "send_gmail_message_with_token",
+					"version": "1.0"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Authentication",
+					"Email",
+					"Gmail",
+					"OAuth",
+					"Send",
+					"SessionParameters"
+				]
+			},
+			"description": [
+				"### SendGmailMessage: Send email using access token",
+				"",
+				"This example sends a new Gmail message with primary, CC, and BCC recipients using a provided OAuth access token."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --To:alice@example.com;bob@example.com --Cc:manager@example.com --Bcc:audit@example.com --Subject:Build completed --Body:The nightly build finished successfully. --token:ya29...}}",
+				"pluginName": "SendGmailMessage"
+			}
+		}
+	],
+	"key": "SendGmailMessage",
+	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Google",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the Gmail message identifier returned after the message is sent successfully.",
+				"Provides a stable reference that later steps can use to fetch the message or apply updates.",
+				"Helps workflows avoid ambiguity by targeting the exact sent message."
+			],
+			"name": "SendGmailMessage:Id",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the Gmail label identifiers assigned to the sent message as a JSON array.",
+				"Helps workflows understand how Gmail categorized the message right after sending.",
+				"Supports later filtering and processing based on the labels that were applied."
+			],
+			"name": "SendGmailMessage:Labels",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the Gmail thread identifier associated with the sent message.",
+				"Enables later steps to group messages in the same conversation or send follow-up replies.",
+				"Helps workflows link the sent message to its related thread context."
+			],
+			"name": "SendGmailMessageThread:Id",
+			"scope": "Session",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Provides an optional blind carbon copy recipient list for the email being sent.",
+				"Ensures recipients in this list receive the message without being visible to other recipients.",
+				"Normalizes semicolon-separated addresses into comma-separated addresses before sending."
+			],
+			"mandatory": false,
+			"name": "Bcc",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Provides the body content for the email message being sent.",
+				"Supplies the main message text that recipients will read in the email client.",
+				"Supports dynamic content by allowing expressions when building automated messages."
+			],
+			"mandatory": false,
+			"name": "Body",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Provides an optional carbon copy recipient list for the email being sent.",
+				"Ensures recipients in this list receive the message and are visible to other recipients.",
+				"Normalizes semicolon-separated addresses into comma-separated addresses before sending."
+			],
+			"mandatory": false,
+			"name": "Cc",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.",
+				"Avoids hardcoding short-lived tokens by exchanging stored credentials for a valid access token when needed.",
+				"Takes precedence over the token parameter so authentication stays consistent and renewable."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Provides an optional From header value to include in the RFC 2822 message headers.",
+				"Controls what sender value is written into the raw email payload when a custom From is needed.",
+				"Helps ensure the outgoing message headers match the intended sender identity."
+			],
+			"mandatory": false,
+			"name": "From",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Provides the subject line for the email message being sent.",
+				"Helps recipients understand the message purpose and supports search and filtering.",
+				"Supports dynamic subject generation by allowing expressions at runtime."
+			],
+			"mandatory": false,
+			"name": "Subject",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Provides the primary recipient email address list for the email being sent.",
+				"Determines who receives the message as direct recipients and supports multiple addresses.",
+				"Normalizes semicolon-separated addresses into comma-separated addresses before sending."
+			],
+			"mandatory": true,
+			"name": "To",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies an OAuth Bearer access token used to call the Gmail API.",
+				"Enables direct API access when a stored credential reference is not used.",
+				"Is ignored when a credentials reference is provided so stored credentials can take priority."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		}
+
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"The SendGmailMessage plugin sends an email from the authenticated Gmail mailbox during an automation run.",
+		"It supports common fields like To, Cc, Bcc, Subject, and Body, and can authenticate using either a direct OAuth access token or a stored credentials reference.",
+		"It stores the sent message id, thread id, and labels in namespaced session parameters so later workflow steps can reference and manage the message."
+	]
+}

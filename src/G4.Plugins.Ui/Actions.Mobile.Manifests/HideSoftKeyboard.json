@@ -11,12 +11,43 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/HideSoftKeyboard.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.Mobile/HideSoftKeyboard.cs"
+			},
+			"rag": {
+				"description": "The HideSoftKeyboard action hides the on-screen keyboard on a mobile device by calling IMobileDeviceKeyboard.HideKeyboard() with a HideKeyboardModel. Strategy (SwipeDown, PressKey, TapOutside, Press, TapOut), Key, KeyCode, and KeyName are all optional; omitting Strategy passes a null value and lets the Appium driver choose its own default dismissal method. Key, KeyCode, and KeyName are meaningful only when Strategy is PressKey or Press — they identify which key triggers keyboard dismissal. If the WebDriver does not implement IMobileDeviceKeyboard, the plugin silently no-ops and returns without error.",
+				"qa": [
+					{
+						"question": "What does HideSoftKeyboard do when invoked with no parameters?",
+						"answer": "A HideKeyboardModel with all-null fields is passed to IMobileDeviceKeyboard.HideKeyboard(). The Appium driver uses its own default dismissal method. If the WebDriver does not implement IMobileDeviceKeyboard, the plugin silently returns without calling HideKeyboard() or throwing an exception."
+					},
+					{
+						"question": "What is the difference between Key, KeyCode, and KeyName?",
+						"answer": "All three specify the key to press when Strategy is PressKey or Press. KeyCode maps to HideKeyboardModel.KeyCode and accepts an Android numeric key code as a string (e.g., '4' for the Back key). KeyName maps to HideKeyboardModel.KeyName and accepts a string key name. Key maps to HideKeyboardModel.Key and also accepts a string key name — it is an alternative to KeyName when the driver requires the 'key' field instead of 'keyName'."
+					},
+					{
+						"question": "What happens if the WebDriver does not implement IMobileDeviceKeyboard?",
+						"answer": "The guard 'if (WebDriver is IMobileDeviceKeyboard mobileDeviceKeyboard)' evaluates to false and the HideKeyboard() call is skipped entirely. The plugin returns NewPluginResponse() without throwing an exception — it is a silent no-op on non-mobile WebDriver sessions."
+					},
+					{
+						"question": "When should Key, KeyCode, and KeyName be used?",
+						"answer": "Use Key, KeyCode, or KeyName together with Strategy:PressKey or Strategy:Press to specify the exact key that triggers keyboard dismissal. They are passed to the driver regardless of strategy, but are only meaningful when the strategy is PressKey or Press. Providing them with SwipeDown, TapOutside, or TapOut has no effect on keyboard dismissal behavior."
+					},
+					{
+						"question": "What is the difference between the PressKey and Press strategies?",
+						"answer": "Both strategies instruct the Appium driver to press a specific key to hide the keyboard. The distinction is the string value sent as HideKeyboardModel.Strategy — 'pressKey' vs 'press'. Some Appium driver versions accept one but not the other. Use PressKey for standard Appium environments and Press when the driver requires the shorter form."
+					}
+				]
+			},
 			"sequentialWorkflow": {
+				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": {
 					"name": "mobile-task",
 					"svg": null
 				},
+				"label": "Hide Soft Keyboard",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -52,18 +83,70 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"WebDriver does not implement IMobileDeviceKeyboard — the plugin silently returns without calling HideKeyboard(); no exception is thrown",
+						"Driver does not support a default strategy — driver behavior is undefined when Strategy is null; some drivers fall back to swipeDown, others throw a WebDriver error",
+						"Keyboard is already hidden — the call typically succeeds silently; Appium does not error when HideKeyboard is called while no keyboard is visible",
+						"Running on iOS vs Android — the driver default strategy may differ across platforms; omit Strategy only when the default is known to work on the target platform"
+					],
+					"expected_result": "The on-screen keyboard is hidden using the Appium driver's default dismissal strategy.",
+					"notes": "All HideKeyboardModel fields are null. The driver selects its own default method to dismiss the keyboard. Use an explicit Strategy value when consistent cross-platform behavior is required.",
+					"use_case": "default_hide",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AppiumAction",
+					"HideKeyboard",
+					"MobileAutomation",
+					"MobileNative",
+					"MobileWeb",
+					"NoArgument",
+					"SoftKeyboard"
+				]
+			},
 			"description": [
-				"Hide the on-screen keyboard in a mobile automation scenario. ",
-				"The absence of specific arguments implies that the plugin will use default strategies or configurations to hide the keyboard."
+				"### Hide the on-screen keyboard using the driver default",
+				"",
+				"Hide the on-screen keyboard without specifying any parameters.",
+				"The absence of arguments causes the plugin to pass a fully-null `HideKeyboardModel` to the driver, which uses its own default dismissal method."
 			],
 			"rule": {
 				"pluginName": "HideSoftKeyboard"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"WebDriver does not implement IMobileDeviceKeyboard — plugin silently no-ops; no exception is thrown",
+						"swipeDown is not supported on the target device — the driver may return an error; not all Appium drivers support every strategy",
+						"Keyboard is already hidden — the swipe gesture may still be sent to the driver; driver behavior when no keyboard is visible varies",
+						"Running on iOS — swipeDown is typically supported on iOS; verify driver compatibility before using in a cross-platform suite"
+					],
+					"expected_result": "The on-screen keyboard is hidden by simulating a downward swipe gesture on the device screen.",
+					"notes": "SwipeDown is one of the most reliable cross-platform strategies. The exact swipe coordinates are determined internally by the Appium driver.",
+					"use_case": "swipe_down_strategy",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AppiumAction",
+					"HideKeyboard",
+					"MobileAutomation",
+					"MobileNative",
+					"MobileWeb",
+					"SoftKeyboard",
+					"SwipeDown"
+				]
+			},
 			"description": [
-				"Hide the on-screen keyboard using the `swipeDown` strategy. ",
-				"This tailored approach provides flexibility in adapting the automation script to the desired user interaction patterns."
+				"### Hide the on-screen keyboard using the SwipeDown strategy",
+				"",
+				"Hide the on-screen keyboard by specifying `Strategy:swipeDown`.",
+				"This tailored approach simulates a downward swipe gesture, providing flexibility in adapting the automation script to the desired user interaction patterns."
 			],
 			"rule": {
 				"argument": "{{$ --Strategy:swipeDown}}",
@@ -71,9 +154,37 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"WebDriver does not implement IMobileDeviceKeyboard — plugin silently no-ops; no exception is thrown",
+						"KeyCode 4 is the Android KEYCODE_BACK; this approach is Android-specific and will not work on iOS where numeric key codes are not supported",
+						"Keyboard is not focused — pressing Back when no keyboard is active may trigger app back-navigation instead of dismissing the keyboard",
+						"Driver does not support pressKey strategy — a WebDriver error may be thrown; verify Appium driver and version compatibility",
+						"Incorrect key code — passing an unsupported key code may produce no visible effect or a driver error depending on the Appium version"
+					],
+					"expected_result": "Android key code 4 (KEYCODE_BACK) is pressed via the Appium driver, dismissing the on-screen keyboard.",
+					"notes": "KeyCode 4 is the Android Back key. This is an Android-specific approach. A full list of Android key codes is available at https://www.temblast.com/ref/akeyscode.htm.",
+					"use_case": "press_key_by_code",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AndroidKeyCode",
+					"AppiumAction",
+					"BackKey",
+					"HideKeyboard",
+					"MobileAutomation",
+					"MobileNative",
+					"PressKey",
+					"SoftKeyboard"
+				]
+			},
 			"description": [
-				"Hide the on-screen keyboard using the `pressKey` strategy with `KeyCode:4`. ",
-				"This configuration simulates pressing a specific key (key code 4) to hide the on-screen keyboard after interacting with an input field."
+				"### Hide the on-screen keyboard using PressKey with KeyCode",
+				"",
+				"Hide the on-screen keyboard using the `pressKey` strategy with `KeyCode:4`.",
+				"This configuration simulates pressing Android key code 4 (the Back key) to dismiss the on-screen keyboard after interacting with an input field."
 			],
 			"rule": {
 				"argument": "{{$ --Strategy:pressKey --KeyCode:4}}",
@@ -81,9 +192,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"WebDriver does not implement IMobileDeviceKeyboard — plugin silently no-ops; no exception is thrown",
+						"KeyName 'Back' is driver-specific; the accepted key name strings vary across Appium drivers and versions — verify with the target driver",
+						"Combining KeyName with KeyCode in the same call — both fields are set on HideKeyboardModel; the driver may use only one; avoid passing both simultaneously",
+						"iOS driver — 'Back' as a KeyName value may not be recognized; test against the specific Appium iOS driver version before using in production"
+					],
+					"expected_result": "The string 'Back' is passed as HideKeyboardModel.KeyName; the Appium driver presses the Back key by name to dismiss the keyboard.",
+					"notes": "KeyName maps to HideKeyboardModel.KeyName. Use this when the Appium driver accepts key names rather than numeric codes. Prefer KeyCode for Android where numeric codes are well-defined.",
+					"use_case": "press_key_by_name",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AppiumAction",
+					"BackKey",
+					"HideKeyboard",
+					"KeyName",
+					"MobileAutomation",
+					"MobileNative",
+					"PressKey",
+					"SoftKeyboard"
+				]
+			},
 			"description": [
-				"Hide the on-screen keyboard using the `pressKey` strategy with `KeyName:Back`. ",
-				"This configuration simulates pressing the `Back` key to hide the on-screen keyboard after interacting with an input field."
+				"### Hide the on-screen keyboard using PressKey with KeyName",
+				"",
+				"Hide the on-screen keyboard using the `pressKey` strategy with `KeyName:Back`.",
+				"This configuration simulates pressing the `Back` key by name to hide the on-screen keyboard after interacting with an input field."
 			],
 			"rule": {
 				"argument": "{{$ --Strategy:pressKey --KeyName:Back}}",
@@ -91,9 +229,36 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"WebDriver does not implement IMobileDeviceKeyboard — plugin silently no-ops; no exception is thrown",
+						"Key and KeyName are semantically similar but map to different HideKeyboardModel fields (Key vs KeyName); use the one the target Appium driver accepts",
+						"Providing both Key and KeyName simultaneously — both fields are set on HideKeyboardModel; driver behavior when both are non-null is undefined and driver-dependent",
+						"iOS driver — 'Back' may not be a recognized Key value; verify with the specific Appium iOS driver version before using in production"
+					],
+					"expected_result": "The string 'Back' is passed as HideKeyboardModel.Key; the Appium driver presses the Back key to dismiss the keyboard.",
+					"notes": "Key maps to HideKeyboardModel.Key, distinct from KeyName which maps to HideKeyboardModel.KeyName. Some Appium drivers require the 'key' field while others require 'keyName' — use the parameter that matches the driver's expectation.",
+					"use_case": "press_key_by_key_value",
+					"version": "4"
+				},
+				"labels": [
+					"Action",
+					"AppiumAction",
+					"BackKey",
+					"HideKeyboard",
+					"KeyField",
+					"MobileAutomation",
+					"MobileNative",
+					"PressKey",
+					"SoftKeyboard"
+				]
+			},
 			"description": [
-				"Hide the on-screen keyboard using the `pressKey` strategy with `Key:Back`. ",
-				"This configuration simulates pressing the `Back` key to hide the on-screen keyboard after interacting with an input field."
+				"### Hide the on-screen keyboard using PressKey with Key",
+				"",
+				"Hide the on-screen keyboard using the `pressKey` strategy with `Key:Back`.",
+				"This configuration passes the key value directly via `HideKeyboardModel.Key`, which some Appium drivers require instead of the `KeyName` field."
 			],
 			"rule": {
 				"argument": "{{$ --Strategy:pressKey --Key:Back}}",
@@ -111,6 +276,7 @@
 				"If the `Strategy` parameter is not explicitly specified, the plugin may employ a default strategy for hiding the keyboard. ",
 				"The default strategy can vary based on the implementation, and it is recommended to consult the plugin documentation or source code for details."
 			],
+			"mandatory": false,
 			"name": "Strategy",
 			"type": "String",
 			"values": [
@@ -191,7 +357,7 @@
 		"apiDocumentation": "https://appium.readthedocs.io/en/latest/en/commands/device/keys/hide-keyboard/#http-api-specifications",
 		"w3c": "POST /session/{session id}/appium/device/hide_keyboard"
 	},
-	"scopes": [
+	"platforms": [
 		"MobileNative",
 		"MobileWeb"
 	],

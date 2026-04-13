@@ -25,11 +25,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.3.19.59" />
-		<PackageReference Include="G4.Extensions" Version="2026.3.19.59" />
-		<!--
-		<PackageReference Include="G4.Plugins" Version="2026.3.3.56" />
-		-->
+		<PackageReference Include="G4.Converters" Version="2026.4.12.61" />
+		<PackageReference Include="G4.Extensions" Version="2026.4.12.61" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
+		<ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
 	</ItemGroup>
 
 </Project>

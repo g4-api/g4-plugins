@@ -11,6 +11,47 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeScript.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeScript.cs"
+			},
+			"rag": {
+				"description": "The InvokeScript action executes an environment-specific script — JavaScript in web browsers, Xcode on iOS — within the current WebDriver session. It accepts an optional web element that is prepended to the arguments array so the script can reference it as arguments[0], and it stores the script return value in the session parameter ScriptResult for use by downstream rules.",
+				"qa": [
+					{
+						"question": "What does the InvokeScript action do?",
+						"answer": "InvokeScript executes a script (JavaScript in web browsers) synchronously in the context of the current WebDriver session and stores the return value in the session parameter ScriptResult."
+					},
+					{
+						"question": "How is the script specified?",
+						"answer": "The script can be provided as the raw Argument property value, or explicitly via the ScriptBlock parameter using the {{$ --ScriptBlock:...}} macro syntax. When ScriptBlock is present it takes precedence over the Argument fallback."
+					},
+					{
+						"question": "How are custom values passed to the script?",
+						"answer": "Custom values are passed via the Arguments parameter as a JSON array string, for example --Arguments:[\"value1\",42]. Inside the script they are accessed as arguments[0], arguments[1], and so on."
+					},
+					{
+						"question": "How is a web element passed to the script?",
+						"answer": "When OnElement is provided the action resolves the element and prepends it to the arguments array before calling InvokeScript. The script accesses the element as arguments[0]; any custom Arguments values follow at arguments[1] and beyond."
+					},
+					{
+						"question": "Where is the script result stored?",
+						"answer": "The return value of the script execution is stored in the session parameter named ScriptResult, accessible by downstream rules via the session parameters macro."
+					},
+					{
+						"question": "What happens when OnElement is provided but no Arguments are supplied?",
+						"answer": "The element is the sole entry in the arguments array and the script accesses it as arguments[0]. No custom values follow."
+					},
+					{
+						"question": "What happens when Arguments is not valid JSON?",
+						"answer": "When Arguments is absent or fails JSON validation the deserialization step is skipped and an empty array is used, so no custom values are passed to the script."
+					},
+					{
+						"question": "What is the ExecuteScript alias?",
+						"answer": "ExecuteScript is an alias for InvokeScript — both resolve to identical behavior."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
@@ -18,6 +59,7 @@
 					"name": "file-code",
 					"svg": null
 				},
+				"label": "Invoke Script",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -25,79 +67,193 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `InvokeScript` plugin is to execute scripts within the context of the current session. ",
-		"The type of script executed is determined by the environment; for instance, JavaScript in web browsers, Xcode scripts on iOS, or PowerShell scripts on Windows.",
+		"The InvokeScript action executes an environment-specific script within the current WebDriver session.",
+		"In a web browser the script is JavaScript; on iOS it is Xcode; on Windows it can be PowerShell.",
+		"The script can receive a located web element and custom argument values, making it the primary way to perform DOM manipulation, extract hidden data, or trigger JavaScript-only behaviors that native WebDriver commands cannot reach.",
+		"The return value of the script is stored in the session parameter ScriptResult and is immediately available to downstream rules.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature             | Description                                                           |",
-		"|---------------------|-----------------------------------------------------------------------|",
-		"| Script Execution    | Executes environment-specific scripts within the current session.     |",
-		"| Element Interaction | Allows interaction with elements by passing them as script arguments. |",
-		"| Custom Arguments    | Supports passing custom arguments to the script.                      |",
-		"| Result Storage      | Stores the result of the script execution in session parameters.      |",
+		"| Feature           | Description                                                                                            |",
+		"|-------------------|--------------------------------------------------------------------------------------------------------|",
+		"| Script Execution  | Executes environment-specific scripts synchronously within the current session via WebDriver.          |",
+		"| Flexible Input    | Script can be supplied inline as the Argument value or explicitly via the ScriptBlock parameter.       |",
+		"| Element Injection | When OnElement is provided the resolved element is prepended to the arguments array as arguments[0].   |",
+		"| Custom Arguments  | The Arguments parameter accepts a JSON array whose values are appended to the script's arguments list. |",
+		"| Result Storage    | The script return value is stored in SessionParameters[\"ScriptResult\"] for use by downstream rules.  |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage               | Description                                                               |",
-		"|---------------------|---------------------------------------------------------------------------|",
-		"| Custom Actions      | Perform custom actions on elements using environment-specific scripts.    |",
-		"| Data Extraction     | Extract data from the environment using custom scripts.                   |",
-		"| Dynamic Interaction | Interact with elements dynamically based on the script execution results. |",
+		"| Use Case             | Description                                                                                               |",
+		"|----------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| DOM Manipulation     | Set element values, trigger events, or change styles that cannot be driven through standard interactions. |",
+		"| Data Extraction      | Return hidden attributes, computed properties, or page-level data for downstream processing.              |",
+		"| Dynamic Interaction  | Inject values into inputs, scroll elements into view, or simulate events in single-page applications.     |",
+		"| JavaScript Utilities | Run reusable JS utilities — date formatters, encoders, or data transforms — within the browser context.   |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                   | Description                                                                                                 |",
-		"|-------------------------|-------------------------------------------------------------------------------------------------------------|",
-		"| Script Validation       | Validate the execution of scripts and their effects on the environment.                                     |",
-		"| Environment Interaction | Test the effects of scripts on the environment (e.g., DOM manipulation in web, system configuration in OS). |",
-		"| Custom Test Scenarios   | Create and execute custom test scenarios by running environment-specific scripts.                           |"
+		"| Use Case                | Description                                                                                              |",
+		"|-------------------------|----------------------------------------------------------------------------------------------------------|",
+		"| DOM State Validation    | Read hidden properties or computed values that are not exposed through standard element APIs.            |",
+		"| Pre-condition Setup     | Set initial field values or application state via script to put the UI in the correct starting state.    |",
+		"| Script Return Assertion | Capture the ScriptResult session parameter and assert its value with a downstream assertion rule.        |",
+		"| Event Simulation        | Dispatch custom browser events to trigger handlers that are difficult to reach through WebDriver clicks. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Script syntax error — WebDriver throws a JavaScriptException with the interpreter error message",
+						"Script returns undefined — ScriptResult is set to null in the session parameters",
+						"Script targets an element by selector internally but the element does not exist — the script throws and the action fails",
+						"Script modifies the DOM in a way that invalidates held element references — subsequent steps may fail with StaleElementReferenceException",
+						"Script is empty or whitespace — WebDriver executes a no-op and ScriptResult is null"
+					],
+					"expected_result": "The value property of the input element matching #InputEnabled is set to 'Foo Bar' and the script return value is stored in ScriptResult.",
+					"notes": "Script is passed as the raw Argument property value. The ScriptBlock parameter is not used. The engine reads pluginData.Rule.Argument directly as the script string when ScriptBlock is absent.",
+					"use_case": "inline_script_dom_set_value",
+					"version": "4"
+				},
+				"labels": [
+					"DomManipulation",
+					"InlineScript",
+					"InputValue",
+					"JavaScript",
+					"NoElement",
+					"ScriptResult",
+					"SimpleExecution"
+				]
+			},
 			"description": [
-				"Execute a JavaScript code that sets the value of the input element with the `ID` `InputEnabled` to `Foo Bar` in a web browser."
+				"### Execute an inline JavaScript script",
+				"",
+				"Passes the JavaScript expression directly as the Argument property and executes it in the browser.",
+				"The return value is stored in the ScriptResult session parameter.",
+				"Use this form for one-liner scripts that do not require parameterization."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "document.querySelector('#InputEnabled').value='Foo Bar';",
 				"pluginName": "InvokeScript"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Arguments value is not valid JSON — deserialization is skipped and an empty array is passed to the script",
+						"arguments[0] index is accessed beyond the array length — the script receives undefined and may behave unexpectedly",
+						"JSON array contains nested objects — they are deserialized as JsonElement and passed as-is to the script",
+						"Arguments array is an empty JSON array ([]) — script receives no custom values; arguments.length is 0 inside the script",
+						"ScriptBlock value contains semicolons or special characters — ensure the macro value is correctly terminated before the closing }}"
+					],
+					"expected_result": "The input element #InputEnabled receives the value 'Foo Bar' passed via arguments[0], and the script return value is stored in ScriptResult.",
+					"notes": "ScriptBlock is passed explicitly as a parameter in the macro. Arguments is a JSON array string that is deserialized with JsonSerializer and provided as the args array to WebDriver.InvokeScript. The script references custom values via arguments[0], arguments[1], and so on.",
+					"use_case": "script_block_with_arguments_array",
+					"version": "4"
+				},
+				"labels": [
+					"ArgumentsArray",
+					"DomManipulation",
+					"JavaScript",
+					"JsonArray",
+					"NoElement",
+					"ParameterizedScript",
+					"ScriptBlock",
+					"ScriptResult"
+				]
+			},
 			"description": [
-				"Execute a JavaScript code block that sets the value of the input element with the `ID` `InputEnabled` to `Foo Bar` using the `ScriptBlock` parameter in a web browser."
+				"### Execute a script block with custom arguments",
+				"",
+				"Specifies the script via the ScriptBlock parameter and passes a JSON array of values via the Arguments parameter.",
+				"The script accesses passed values through the `arguments` array — `arguments[0]` is the first entry in the JSON array.",
+				"Use this form when the script body and its input values need to vary independently."
 			],
 			"rule": {
-				"argument": "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value='Foo Bar';}}",
-				"pluginName": "InvokeScript"
-			}
-		},
-		{
-			"description": [
-				"Execute a JavaScript code block that sets the value of the input element with the `ID` `InputEnabled` to the value passed in the `Arguments` parameter (`Foo Bar`) in a web browser."
-			],
-			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:[\"Foo Bar\"]}}",
 				"pluginName": "InvokeScript"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not found by the locator — GetElement returns null, the arguments array remains empty, and the script receives no element reference",
+						"Element is inside an iframe — the driver must be switched to the correct frame before InvokeScript to ensure GetElement resolves correctly",
+						"Element is stale at the time of script invocation — WebDriver passes the stale reference and the script may throw or behave unexpectedly",
+						"Script does not use arguments[0] — the element is passed but unused; no error is raised",
+						"Element is hidden or detached from the DOM — the reference is still valid for script use even if the element is not interactable via standard click"
+					],
+					"expected_result": "The resolved element #InputEnabled is injected as arguments[0] and its value property is set to 'Foo Bar'. The script return value is stored in ScriptResult.",
+					"notes": "GetElement resolves the CssSelector expression to a WebElement. The element is prepended to the arguments array before InvokeScript is called. The script references it via arguments[0].",
+					"use_case": "script_with_element_as_first_argument",
+					"version": "4"
+				},
+				"labels": [
+					"CssSelector",
+					"DomManipulation",
+					"ElementAsArgument",
+					"ElementInteraction",
+					"JavaScript",
+					"ScriptBlock",
+					"ScriptResult"
+				]
+			},
 			"description": [
-				"Execute a JavaScript code block that sets the value of the element passed as the first argument (`#InputEnabled`) to the value passed as the second argument (`Foo Bar`) in a web browser."
+				"### Execute a script with a web element as the first argument",
+				"",
+				"Locates the element matching `#InputEnabled` using the CssSelector strategy and injects it as `arguments[0]` in the script.",
+				"Use this form when the script must operate directly on a located DOM element rather than re-querying it internally via a selector."
 			],
 			"rule": {
-				"argument": "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:[\"Foo Bar\"]}}",
+				"$type": "Action",
+				"argument": "{{$ --ScriptBlock:arguments[0].value='Foo Bar';}}",
 				"locator": "CssSelector",
 				"onElement": "#InputEnabled",
 				"pluginName": "InvokeScript"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not found — the arguments array contains only the custom Arguments values with no element prepended",
+						"Arguments JSON array is malformed — deserialization is skipped and only the element is in the arguments array",
+						"Script indexes beyond the available arguments — accessing arguments[N] where N exceeds array length returns undefined in the script",
+						"Element is stale at invocation time — the element reference is passed but the script may fail or produce unexpected output",
+						"Custom Arguments array contains the same value types as the element — the script must rely on index order to distinguish element from data values"
+					],
+					"expected_result": "The resolved element #InputEnabled is arguments[0] and 'Foo Bar' is arguments[1]. The script sets the element's value to the custom argument. The script return value is stored in ScriptResult.",
+					"notes": "Element is prepended first using the C# spread operator ([element, ..arguments]). Custom Arguments follow. arguments[0] is the WebElement; arguments[1] is the first entry of the Arguments JSON array.",
+					"use_case": "script_with_element_and_custom_arguments",
+					"version": "4"
+				},
+				"labels": [
+					"ArgumentsArray",
+					"CssSelector",
+					"DomManipulation",
+					"ElementAsArgument",
+					"ElementInteraction",
+					"JavaScript",
+					"JsonArray",
+					"ScriptBlock",
+					"ScriptResult"
+				]
+			},
 			"description": [
-				"Execute a JavaScript code block that sets the value of the element identified by the `CSS selector` `#InputEnabled` to `Foo Bar` in a web browser."
+				"### Execute a script with a web element and custom arguments",
+				"",
+				"Locates the element matching `#InputEnabled` and injects it as `arguments[0]`.",
+				"Values from the Arguments JSON array follow at `arguments[1]` and beyond.",
+				"Use this form when the script needs both a DOM element reference and separate data values passed as independent arguments."
 			],
 			"rule": {
-				"argument": "{{$ --ScriptBlock:arguments[0].value='Foo Bar';}}",
+				"$type": "Action",
+				"argument": "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:[\"Foo Bar\"]}}",
 				"locator": "CssSelector",
 				"onElement": "#InputEnabled",
 				"pluginName": "InvokeScript"
@@ -109,7 +265,10 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the arguments to be passed to the script as a JSON array."
+				"Arguments specifies the values to pass to the script as a JSON array string.",
+				"The array is deserialized and each entry is appended to the script's arguments list.",
+				"When OnElement is also provided the element is prepended first so Arguments entries begin at arguments[1].",
+				"When Arguments is absent or not valid JSON an empty array is used and no custom values are passed."
 			],
 			"mandatory": false,
 			"name": "Arguments",
@@ -117,18 +276,37 @@
 		},
 		{
 			"description": [
-				"Specifies the script code block to be executed."
+				"ScriptBlock specifies the script code to execute.",
+				"When ScriptBlock is provided it takes precedence over the raw Argument property value.",
+				"When ScriptBlock is absent the engine uses the Argument property value directly as the script string."
 			],
 			"mandatory": false,
 			"name": "ScriptBlock",
 			"type": "String"
 		}
 	],
+	"outputParameters": [
+		{
+			"description": [
+				"InvokeScript:ScriptResult holds the return value produced by the executed script.",
+				"It is written to session parameters after the script completes and is immediately available to any downstream rule that needs to read or assert the script output.",
+				"The stored value type matches whatever the script returns — a string, number, boolean, object, or null when the script returns undefined."
+			],
+			"mandatory": false,
+			"name": "InvokeScript:ScriptResult",
+			"type": "Any"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Specifies the script code to be executed. This can be a direct script or a reference to a script block defined in parameters."
+				"Argument provides the script to execute or a macro expression that carries the ScriptBlock and Arguments parameters.",
+				"When passed as a plain string it is used directly as the script code.",
+				"When passed as a macro expression it carries ScriptBlock and Arguments parameters using the {{$ --Name:Value}} format."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -137,7 +315,10 @@
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifies the locator strategy to find the element. Supported locator types include `CssSelector`, `Xpath`, `LinkText`, etc."
+				"Locator specifies the strategy used to find the target element when OnElement is provided.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"When absent the default Xpath strategy is used.",
+				"Locator has no effect when OnElement is not set."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -145,7 +326,9 @@
 		},
 		{
 			"description": [
-				"Specifies the actual element identifier using the locator strategy defined. For example, if the locator is `CssSelector`, this would be a CSS selector string."
+				"OnElement provides the locator expression that identifies the element to inject into the script as arguments[0].",
+				"It is evaluated using the strategy defined by the Locator property.",
+				"When absent no element is prepended to the arguments array."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -156,14 +339,11 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#executing-script",
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
-	"scopes": [
-		"Any"
-	],
 	"summary": [
-		"The `InvokeScript` plugin allows for the execution of scripts within the context of the current session, providing powerful capabilities to manipulate elements, interact with the environment, and perform custom actions. ",
-		"The type of script executed is determined by the environment, such as JavaScript in web browsers, Xcode scripts on iOS, or PowerShell scripts on Windows.",
-		"In robotic process automation (RPA), this plugin is useful for performing custom actions on elements, extracting data, and dynamically interacting with elements based on the results of the script execution.",
-		"In automation testing, the `InvokeScript` plugin is essential for validating script execution, testing the effects of scripts on the environment, and creating custom test scenarios by running environment-specific scripts."
+		"The InvokeScript action executes an environment-specific script — JavaScript in web browsers, Xcode on iOS — within the current WebDriver session, making it the primary way to perform DOM manipulation, extract hidden data, and trigger JavaScript-only behaviors that native WebDriver commands cannot reach.",
+		"The script receives an optional located web element as arguments[0] and custom values from the Arguments JSON array at subsequent indices.",
+		"In RPA it enables DOM manipulation, data extraction, dynamic interactions, and JavaScript utility execution. In automation testing it supports DOM state validation, pre-condition setup, script return value assertions, and custom event simulation.",
+		"The script return value is stored in the session parameter ScriptResult and is immediately available to downstream rules."
 	],
 	"version": "4"
 }

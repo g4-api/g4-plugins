@@ -1,7 +1,8 @@
 ﻿using G4.Extensions;
 using G4.Models;
 using G4.Plugins.Google.Clients;
-using G4.Plugins.Google.Models;
+using G4.Plugins.Google.Models.Gmail;
+using G4.Plugins.Google.Models.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,6 +60,7 @@ namespace G4.Plugins.Google.Extensions
             {
                 // Resolve the task list id from either the list id or list title.
                 var taskListId = adapter
+                    .Tasks
                     .TaskLists
                     .Get()
                     .Items
@@ -83,17 +85,17 @@ namespace G4.Plugins.Google.Extensions
                 {
                     // Build paging options for the current request.
                     var options = string.IsNullOrEmpty(nextPageToken)
-                        ? new ListTasksQueryModel { MaxResults = 100 }
-                        : new ListTasksQueryModel { MaxResults = 100, PageToken = nextPageToken };
+                        ? new ListTasksRequestModel { MaxResults = 100 }
+                        : new ListTasksRequestModel { MaxResults = 100, PageToken = nextPageToken };
 
                     // Retrieve the current page of tasks from the resolved list.
-                    var tasksPage = adapter.Tasks.Get(taskListId, options);
+                    var tasksPage = adapter.Tasks.Tasks.Get(taskListId, options);
 
                     // Read the tasks returned in the current page.
                     var tasks = tasksPage.Items;
 
                     // Stop when the current page does not contain any tasks.
-                    if (tasks == null || tasks.Length == 0)
+                    if (tasks == null || tasks.Count == 0)
                     {
                         break;
                     }
@@ -111,6 +113,25 @@ namespace G4.Plugins.Google.Extensions
             }
 
             /// <summary>
+            /// Finds Gmail labels whose names match the specified regular expression pattern.
+            /// </summary>
+            /// <param name="pattern">Regular expression pattern used to match label names.</param>
+            /// <returns>A sequence of <see cref="LabelModel"/> items whose names match the specified pattern.</returns>
+            public IEnumerable<LabelModel> FindLabels(
+                [StringSyntax(StringSyntaxAttribute.Regex)] string pattern)
+            {
+                // Retrieve all labels from Gmail to search
+                // for matches against the specified pattern.
+                var response = adapter.Gmail.Labels.Get();
+
+                // Use regex matching to find labels whose
+                // names match the specified pattern.
+                return response
+                    .Labels
+                    .Where(i => Regex.IsMatch(input: i.Name.Trim(), pattern));
+            }
+
+            /// <summary>
             /// Searches Gmail messages until a subject matches the specified regular expression
             /// or the timeout expires.
             /// </summary>
@@ -121,41 +142,49 @@ namespace G4.Plugins.Google.Extensions
                 [StringSyntax(StringSyntaxAttribute.Regex)] string pattern,
                 TimeSpan timeout)
             {
-                // Iterate through message pages until a match is found or the timeout expires.
+                // Initialize paging state for the Gmail messages list operation.
+                // The first request is executed without a page token.
                 var nextPageToken = string.Empty;
+
+                // Calculate the absolute expiration time for the search operation.
                 var expired = DateTime.UtcNow.Add(timeout);
 
                 do
                 {
-                    // Retrieve the current page of message identifiers.
+                    // Request the current page of message identifiers.
+                    // When a next-page token exists, continue from that page.
                     var messagesPage = string.IsNullOrWhiteSpace(nextPageToken)
                         ? adapter.Gmail.Messages.Get()
                         : adapter.Gmail.Messages.Get(query: new() { PageToken = nextPageToken });
 
-                    // Stop if the current page does not contain any messages.
+                    // Stop the search when no messages are returned.
                     if (messagesPage?.Messages == null || messagesPage.Messages.Length == 0)
                     {
                         break;
                     }
 
-                    // Load each full message and test its Subject header against the regex pattern.
+                    // Retrieve each full message individually and inspect its Subject header.
                     foreach (var message in messagesPage.Messages)
                     {
+                        // Load the complete message model by its identifier.
                         var messageModel = adapter.Gmail.Messages.Get(message.Id);
+
+                        // Read the Subject header from the message metadata.
                         var subject = GetHeader(messageModel: messageModel, name: "Subject");
 
+                        // Return immediately once a matching subject is found.
                         if (Regex.IsMatch(input: subject, pattern))
                         {
                             return messageModel;
                         }
                     }
 
-                    // Move to the next page, if available.
+                    // Advance to the next page, if Gmail returned a continuation token.
                     nextPageToken = messagesPage.NextPageToken;
                 }
                 while (!string.IsNullOrWhiteSpace(nextPageToken) && DateTime.UtcNow < expired);
 
-                // Treat a missing match as a hard failure so callers do not continue with an invalid result.
+                // Fail explicitly when no message matched the requested subject pattern.
                 throw new InvalidOperationException(
                     message: $"No matching mail subject was found for pattern: '{pattern}'.");
             }
@@ -187,6 +216,7 @@ namespace G4.Plugins.Google.Extensions
             {
                 // Resolve the task list id from either the list id or list title.
                 var taskListId = adapter
+                    .Tasks
                     .TaskLists
                     .Get()
                     .Items
@@ -211,11 +241,11 @@ namespace G4.Plugins.Google.Extensions
                 {
                     // Build paging options for the current request.
                     var options = string.IsNullOrEmpty(nextPageToken)
-                        ? new ListTasksQueryModel { MaxResults = 100 }
-                        : new ListTasksQueryModel { MaxResults = 100, PageToken = nextPageToken };
+                        ? new ListTasksRequestModel { MaxResults = 100 }
+                        : new ListTasksRequestModel { MaxResults = 100, PageToken = nextPageToken };
 
                     // Retrieve the current page of tasks from the resolved list.
-                    var tasksPage = adapter.Tasks.Get(taskListId, options);
+                    var tasksPage = adapter.Tasks.Tasks.Get(taskListId, options);
 
                     // Search the current page by task id or task title.
                     var task = tasksPage.Items
@@ -276,11 +306,11 @@ namespace G4.Plugins.Google.Extensions
                 {
                     // Build paging options for the current request.
                     var options = string.IsNullOrEmpty(nextPageToken)
-                        ? new ListTaskListsQueryModel { MaxResults = 1000 }
-                        : new ListTaskListsQueryModel { MaxResults = 1000, PageToken = nextPageToken };
+                        ? new ListTaskListsRequestModel { MaxResults = 1000 }
+                        : new ListTaskListsRequestModel { MaxResults = 1000, PageToken = nextPageToken };
 
                     // Retrieve the current page of task lists.
-                    var taskListsPage = adapter.TaskLists.Get(options);
+                    var taskListsPage = adapter.Tasks.TaskLists.Get(options);
 
                     // Search the current page by task list id or task list title.
                     var taskList = taskListsPage.Items
@@ -550,12 +580,30 @@ namespace G4.Plugins.Google.Extensions
             }
 
             /// <summary>
+            /// Retrieves the Message-Id header value from the message.
+            /// </summary>
+            /// <returns>The Message-Id header value, or an empty string when the header is not present.</returns>
+            public string GetMessageId()
+            {
+                return GetHeader(messageModel: message, name: "Message-Id");
+            }
+
+            /// <summary>
             /// Retrieves the Subject header value from the message.
             /// </summary>
             /// <returns>The Subject header value, or an empty string when the header is not present.</returns>
             public string GetSubject()
             {
                 return GetHeader(messageModel: message, name: "Subject");
+            }
+
+            /// <summary>
+            /// Retrieves the thread identifier associated with the current message.
+            /// </summary>
+            /// <returns>A string containing the thread identifier if present; otherwise, null.</returns>
+            public string GetThreadId()
+            {
+                return GetHeader(messageModel: message, name: "Thread-Id");
             }
 
             /// <summary>
@@ -627,11 +675,27 @@ namespace G4.Plugins.Google.Extensions
                 }
             }
 
+            /// <summary>
+            /// Resolves the Gmail label names associated with the message based on its label IDs.
+            /// </summary>
+            /// <param name="adapter">The GoogleAdapter instance used to interact with the Gmail API.</param>
+            /// <returns>An enumerable of label names associated with the message.</returns>
+            public IEnumerable<string> ResolveLabels(GoogleAdapter adapter)
+            {
+                return adapter
+                    .Gmail
+                    .Labels
+                    .Get()
+                    .Labels
+                    .Where(i => message.LabelIds.Contains(i.Id, StringComparer.Ordinal))
+                    .Select(i => i.Name);
+            }
+
             // Retrieves a header value from the Gmail message payload.
             private static string GetHeader(MessageModel messageModel, string name)
             {
                 // Search the message payload headers for the specified header name.
-                return messageModel
+                return messageModel?
                     .Payload
                     .Headers
                     .FirstOrDefault(i => i.Name.Equals(name, StringComparison.OrdinalIgnoreCase))?

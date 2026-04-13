@@ -224,9 +224,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"`WriteLog` writes messages while a task runs so you can see what happened.",
-		"It takes your message and puts it into the system’s records.",
-		"This makes it easy to follow steps, spot problems, and save important notes."
+		"Records messages to the system log during task execution.",
+		"Writes text or expression values to the log stream for tracking.",
+		"Helps trace execution flow, identify failures, and store important notes."
 	],
 	"version": "4"
 }

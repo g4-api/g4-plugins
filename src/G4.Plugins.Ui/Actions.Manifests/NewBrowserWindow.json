@@ -13,13 +13,47 @@
 	],
 	"context": {
 		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NewBrowserWindow.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/NewBrowserWindow.cs"
+			},
+			"rag": {
+				"description": "The NewBrowserWindow action opens one or more new browser windows or tabs by calling window.open(url, target) via JavaScript execution. There is no URL parameter — the URL is always about:blank when no element is provided, or extracted from the element's text content or the attribute named by OnAttribute when an element is provided. Regex.Match is always applied to the extracted string using RegularExpression, and match.Value becomes the URL. The Target parameter controls the window.open() target string and defaults to _blank. The Amount parameter controls how many times window.open() is called and defaults to 1; if Amount cannot be parsed as an integer by int.TryParse the loop runs zero times and no window is opened.",
+				"qa": [
+					{
+						"question": "What does the NewBrowserWindow action do?",
+						"answer": "NewBrowserWindow calls window.open(url, target) via JavaScript one or more times to open new browser windows or tabs. The URL is about:blank when no element is supplied, or extracted from the element's text or a named attribute when OnElement is provided."
+					},
+					{
+						"question": "What URL is opened when no OnElement is specified?",
+						"answer": "When no OnElement is provided the element resolves to default and the URL is always about:blank regardless of any argument values. There is no Url parameter — the URL source is always the element or about:blank."
+					},
+					{
+						"question": "How is the URL determined when OnElement is provided?",
+						"answer": "When OnElement is provided the action reads element.Text if OnAttribute is absent, or calls element.GetAttribute(OnAttribute) if OnAttribute is set. Regex.Match is then always called on the result using RegularExpression, and match.Value becomes the URL passed to window.open(). When RegularExpression matches the full string the entire extracted value is used."
+					},
+					{
+						"question": "What does the Amount parameter control?",
+						"answer": "Amount controls how many times window.open() is called. It defaults to 1. If Amount cannot be parsed as an integer by int.TryParse the loop variable is 0 and no window or tab is opened."
+					},
+					{
+						"question": "What does the Target parameter control?",
+						"answer": "Target is passed as the second argument to window.open(). It defaults to _blank, which requests a new tab or window; whether a tab or a separate window appears depends on the browser's pop-up settings. Other valid values are _self (current tab), _parent (parent frame), and _top (topmost frame)."
+					},
+					{
+						"question": "What happens when Amount is not a valid integer?",
+						"answer": "int.TryParse fails silently and the amount variable is set to 0. The for loop runs zero iterations and no new window or tab is opened."
+					}
+				]
+			},
 			"sequentialWorkflow": {
 				"$type": "Action",
 				"componentType": "task",
 				"iconProvider": {
-					"name": "gears",
+					"name": "arrow-up-right-from-square",
 					"svg": null
 				},
+				"label": "New Browser Window",
 				"model": "ActionRuleModel"
 			}
 		}
@@ -27,75 +61,150 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the `NewBrowserWindow` plugin is to automate the opening of new browser windows or tabs. ",
-		"This plugin provides a mechanism to programmatically open one or more new browser windows or tabs with specified URLs, which can be part of automated workflows or tests.",
+		"The NewBrowserWindow action opens one or more new browser windows or tabs by calling `window.open(url, target)` via JavaScript execution within the current WebDriver session.",
+		"Unlike `OpenUrl`, which navigates the current browsing context to a new address, `NewBrowserWindow` always opens an additional context without leaving the current page.",
+		"There is no URL parameter — the URL is exclusively derived from a located element's text or attribute, or defaults to `about:blank` when no element is provided.",
+		"`RegularExpression` is always applied to the extracted URL string; when the pattern matches the full string the complete value is passed to `window.open()`.",
+		"The `Target` parameter controls the `window.open()` target context and the `Amount` parameter controls how many times the call is repeated.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                | Description                                                                                     |",
-		"|------------------------|-------------------------------------------------------------------------------------------------|",
-		"| Open New Windows/Tabs  | Automates the opening of new browser windows or tabs using specified URLs.                      |",
-		"| URL Targeting          | Retrieves URLs from specified web elements or attributes for opening new windows.               |",
-		"| Customizable Target    | Allows customization of the target attribute (`_blank`, `_self`, etc.) for new windows or tabs. |",
-		"| Multiple Windows/Tabs  | Supports opening multiple browser windows or tabs in a single action.                           |",
+		"| Feature              | Description                                                                                                       |",
+		"|----------------------|-------------------------------------------------------------------------------------------------------------------|",
+		"| Blank Window Opening | Opens a new blank window or tab (`about:blank`) when no element is provided.                                     |",
+		"| Element URL Source   | Reads the URL from an element's text content or a named attribute when `OnElement` is specified.                  |",
+		"| Regex Filtering      | Always applies `RegularExpression` to the extracted URL so only the matched portion is passed to `window.open()`. |",
+		"| Target Control       | Sets the `window.open()` target context — `_blank`, `_self`, `_parent`, or `_top` — via the `Target` parameter.  |",
+		"| Repeat Opening       | Calls `window.open()` `Amount` times, opening multiple identical windows or tabs in a single step.               |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Usage                  | Description                                                                               |",
-		"|------------------------|-------------------------------------------------------------------------------------------|",
-		"| Multi-Window Workflows | Automating workflows that require interacting with multiple browser windows or tabs.      |",
-		"| Data Collection        | Opening multiple tabs to collect data from various sources simultaneously.                |",
-		"| Navigation Automation  | Navigating to different URLs in separate windows or tabs as part of an automated process. |",
+		"| Use Case                   | Description                                                                                                           |",
+		"|----------------------------|-----------------------------------------------------------------------------------------------------------------------|",
+		"| Multi-Window Workflows     | Open several blank tabs or element-sourced URLs simultaneously as part of a parallel processing workflow.             |",
+		"| Link-Driven Navigation     | Programmatically open a URL extracted from a page element in a new tab without navigating away from the current page. |",
+		"| Bulk Context Provisioning  | Pre-open a fixed number of blank windows that subsequent steps populate by switching handles and navigating each one. |",
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Usage                | Description                                                                                |",
-		"|----------------------|--------------------------------------------------------------------------------------------|",
-		"| Multi-Window Testing | Testing web applications that involve multiple browser windows or tabs.                    |",
-		"| UI Testing           | Verifying the behavior of web applications when links open new windows or tabs.            |",
-		"| Functional Testing   | Ensuring that links and buttons correctly open new windows or tabs with specified content. |"
+		"| Use Case                | Description                                                                                                                  |",
+		"|-------------------------|------------------------------------------------------------------------------------------------------------------------------|",
+		"| Multi-Window Testing    | Verify that an application correctly handles workflows that span multiple browser windows or tabs.                            |",
+		"| Link Target Testing     | Confirm that element-extracted URLs open in the expected target context (`_blank`, `_self`, etc.) when the action runs.      |",
+		"| Window Count Validation | Open a known number of tabs with `Amount` and assert the resulting window handle count to validate multi-window bookkeeping. |"
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Amount is not a valid integer — int.TryParse fails silently and no window is opened",
+						"Amount is 0 — the loop runs zero times and no window is opened",
+						"Target is an unrecognised string — window.open() passes it as-is to the browser; behavior is browser-defined",
+						"The browser blocks the pop-up — window.open() returns null and no new window handle appears"
+					],
+					"expected_result": "window.open('about:blank', '_blank') is called three times, resulting in three new browser tabs.",
+					"notes": "No element is specified so GetUrl returns about:blank unconditionally. Amount and Target are read from the CLI argument dictionary. Amount defaults to 1 when the argument is absent.",
+					"use_case": "open_multiple_blank_tabs",
+					"version": "4"
+				},
+				"labels": [
+					"Amount",
+					"BlankTab",
+					"MultiWindow",
+					"NoElement",
+					"Target"
+				]
+			},
 			"description": [
-				"Open a new browser window or tab with the URL `http://example.com`. ",
-				"The new window or tab will be opened in a new browsing context (`_blank`)."
+				"### Open multiple blank browser tabs",
+				"",
+				"Calls `window.open('about:blank', '_blank')` three times to open three new browser tabs.",
+				"No element is required — the URL is always `about:blank` when `OnElement` is absent.",
+				"Use this form when the goal is to pre-open a set of blank tabs as part of a multi-window workflow."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://example.com --Amount:1 --Target:_blank}}",
+				"$type": "Action",
+				"argument": "{{$ --Amount:3 --Target:_blank}}",
 				"pluginName": "NewBrowserWindow"
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not found — GetElement returns default and the URL falls back to about:blank",
+						"Element text is empty — Regex.Match returns an empty match and window.open receives an empty URL string",
+						"Element is inside an iframe — the driver must be switched to the correct frame before the action resolves the element",
+						"Element becomes stale before text is read — a StaleElementReferenceException is raised",
+						"Element text contains leading or trailing whitespace — the whitespace is included in the URL unless RegularExpression is used to trim it"
+					],
+					"expected_result": "The text content of the element matching #OpenLink is extracted and passed to window.open(text, '_blank'), opening one new tab at that URL.",
+					"notes": "OnAttribute is absent so element.Text is used as the URL source. RegularExpression default matches the entire string. Amount defaults to 1. Target defaults to _blank.",
+					"use_case": "open_from_element_text",
+					"version": "4"
+				},
+				"labels": [
+					"CssSelector",
+					"ElementText",
+					"ElementUrl",
+					"NewTab",
+					"OnElement"
+				]
+			},
 			"description": [
-				"Open three new browser windows or tabs with the URL `http://example.com`. ",
-				"The new windows or tabs will be opened in the same browsing context (`_self`)."
+				"### Open a new tab using a URL from element text",
+				"",
+				"Locates the element matching `#OpenLink` using the CssSelector strategy and reads its text content as the URL.",
+				"Calls `window.open(url, '_blank')` once to open a new tab at that address.",
+				"Use this form when the target URL is stored as the visible text of a page element."
 			],
 			"rule": {
-				"argument": "{{$ --Url:http://example.com --Amount:3 --Target:_self}}",
-				"pluginName": "NewBrowserWindow"
-			}
-		},
-		{
-			"description": [
-				"Open two new browser windows or tabs with the URL `http://example.com`. ",
-				"This can be useful for testing the behavior of web applications when multiple new windows or tabs are opened simultaneously."
-			],
-			"rule": {
-				"argument": "{{$ --Url:http://example.com --Amount:2}}",
-				"pluginName": "NewBrowserWindow"
-			}
-		},
-		{
-			"description": [
-				"Open a new browser window or tab using the URL retrieved from the element identified by the CSS selector `#LinkToOpen`. ",
-				"The new window or tab will be opened in a new browsing context (`_blank`). ",
-				"This example demonstrates the default behavior of opening a single new window or tab."
-			],
-			"rule": {
+				"$type": "Action",
 				"locator": "CssSelector",
-				"onElement": "#LinkToOpen",
+				"onElement": "#OpenLink",
 				"pluginName": "NewBrowserWindow"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"href attribute is absent on the element — GetAttribute returns null; Regex.Match called with a null input throws ArgumentNullException and the action fails",
+						"href contains a relative path — window.open receives the relative URL; the browser resolves it relative to the current page origin",
+						"RegularExpression does not match the attribute value — Regex.Match returns an empty match, match.Value is an empty string, and window.open receives an empty URL",
+						"Element is inside an iframe — the driver must be switched to the frame before locating the element",
+						"Target _self replaces the current window — switching back to the original context requires driver navigation or a window handle switch"
+					],
+					"expected_result": "The href attribute of #OpenLink is extracted, the regex retains only the https URL portion, and window.open(url, '_self') loads it in the current tab.",
+					"notes": "OnAttribute is set so element.GetAttribute('href') is used instead of element.Text. RegularExpression filters the attribute value to the URL portion. Target is _self so the URL loads in the current browsing context rather than a new tab.",
+					"use_case": "open_from_element_attribute_with_regex",
+					"version": "4"
+				},
+				"labels": [
+					"AttributeExtraction",
+					"CssSelector",
+					"OnAttribute",
+					"OnElement",
+					"Regex",
+					"TargetSelf"
+				]
+			},
+			"description": [
+				"### Open a URL from an element attribute filtered by regex",
+				"",
+				"Locates the element matching `#OpenLink`, reads its `href` attribute, and applies the regular expression `https?://[^\\s]+` to extract only the URL portion.",
+				"Calls `window.open(url, '_self')` to load the extracted URL in the current tab.",
+				"Use this form when the attribute value contains surrounding text and only the URL portion should be passed to `window.open()`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Target:_self}}",
+				"locator": "CssSelector",
+				"onAttribute": "href",
+				"onElement": "#OpenLink",
+				"pluginName": "NewBrowserWindow",
+				"regularExpression": "https?://[^\\s]+"
 			}
 		}
 	],
@@ -103,8 +212,12 @@
 	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
+			"default": "1",
 			"description": [
-				"Specifies the number of new browser windows or tabs to open."
+				"Amount specifies how many times `window.open()` is called.",
+				"Each call opens one new browser window or tab.",
+				"When absent the value defaults to 1.",
+				"When the value cannot be parsed as an integer the call count is 0 and no window is opened."
 			],
 			"mandatory": false,
 			"name": "Amount",
@@ -113,7 +226,8 @@
 		{
 			"default": "_blank",
 			"description": [
-				"Specifies the target attribute for the new browser windows or tabs. Possible values include `_blank`, `_self`, etc."
+				"Target specifies the second argument passed to `window.open()`, which controls the browsing context where the new page is loaded.",
+				"When absent the value defaults to `_blank`."
 			],
 			"mandatory": false,
 			"name": "Target",
@@ -121,53 +235,53 @@
 			"values": [
 				{
 					"description": [
-						"Open the URL in a new tab or window."
+						"Opens the URL in a new tab or window."
 					],
 					"name": "_blank"
 				},
 				{
 					"description": [
-						"Open the URL in the current tab or window."
+						"Opens the URL in the current tab or window."
 					],
 					"name": "_self"
 				},
 				{
 					"description": [
-						"Open the URL in the parent frame."
+						"Opens the URL in the parent frame."
 					],
 					"name": "_parent"
 				},
 				{
 					"description": [
-						"Open the URL in the topmost frame."
+						"Opens the URL in the topmost frame."
 					],
 					"name": "_top"
 				}
 			]
-		},
-		{
-			"description": [
-				"Specifies the URL to open in the new browser window or tab if no element is provided."
-			],
-			"mandatory": false,
-			"name": "Url",
-			"type": "String|Uri"
 		}
+	],
+	"platforms": [
+		"Web",
+		"MobileWeb"
 	],
 	"pluginType": "Action",
 	"properties": [
 		{
 			"description": [
-				"Providing additional instructions or parameters to control the behavior of the window opening action."
+				"Argument carries the `--Amount` and `--Target` parameter values as a CLI macro expression.",
+				"When absent both parameters take their default values: Amount = 1 and Target = _blank."
 			],
 			"mandatory": false,
 			"name": "Argument",
-			"type": "String"
+			"type": "String|Expression"
 		},
 		{
 			"default": "Xpath",
 			"description": [
-				"Specifying the type of locator used to identify the target element defined by the `OnElement` property."
+				"Locator specifies the strategy used to find the target element when `OnElement` is provided.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"When absent the default Xpath strategy is used.",
+				"Locator has no effect when OnElement is not set."
 			],
 			"mandatory": false,
 			"name": "Locator",
@@ -175,7 +289,10 @@
 		},
 		{
 			"description": [
-				"Retrieves the URL from the specified attribute of the target element."
+				"OnAttribute specifies the name of the element attribute from which the URL is read.",
+				"When set, `element.GetAttribute(OnAttribute)` is called instead of reading `element.Text`.",
+				"When absent the element's text content is used as the URL source.",
+				"OnAttribute has no effect when OnElement is not set."
 			],
 			"mandatory": false,
 			"name": "OnAttribute",
@@ -183,7 +300,8 @@
 		},
 		{
 			"description": [
-				"Specifying the target element from which the URL should be retrieved for opening the new browser window or tab."
+				"OnElement provides the locator expression that identifies the element from which the URL is extracted.",
+				"When absent no element is resolved and the URL defaults to `about:blank`."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -191,7 +309,9 @@
 		},
 		{
 			"description": [
-				"Uses a regular expression to match and extract the desired part of the URL from the target element."
+				"RegularExpression is applied to the extracted URL string via `Regex.Match` and only the matched portion is passed to `window.open()`.",
+				"Use this property to isolate the URL when the element text or attribute contains surrounding content.",
+				"When absent the default pattern matches the full string so the complete extracted value is passed as the URL."
 			],
 			"mandatory": false,
 			"name": "RegularExpression",
@@ -202,13 +322,11 @@
 		"apiDocumentation": "https://www.w3.org/TR/webdriver/#execute-script",
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
-	"scopes": [
-		"Web",
-		"MobileWeb"
-	],
 	"summary": [
-		"The `NewBrowserWindow` plugin automates the opening of new browser windows or tabs, enabling the creation of multi-window workflows and testing scenarios. ",
-		"It supports retrieving URLs from specified web elements, customizing the target attribute, and opening multiple windows or tabs simultaneously."
+		"The NewBrowserWindow action opens one or more new browser windows or tabs by calling `window.open()` via JavaScript, making it the dedicated action for spawning additional browsing contexts without navigating the current window.",
+		"There is no URL parameter — the URL is always `about:blank` when no element is provided, or extracted from the element's text or a named attribute and filtered by `RegularExpression` when an element is provided.",
+		"The `Target` parameter controls the `window.open()` browsing context and the `Amount` parameter controls how many windows are opened in a single step.",
+		"In RPA it enables multi-window workflows, link-driven navigation, and bulk context provisioning. In automation testing it supports multi-window testing, link target validation, and window count assertions."
 	],
 	"version": "4"
 }

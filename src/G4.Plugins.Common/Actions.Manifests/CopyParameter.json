@@ -1407,8 +1407,9 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The CopyParameter plugin automatically moves values from one part of an automation to another.",
-		"It takes a value from one step and makes it available where it's needed next."
+		"Copies a parameter value from one scope to another within automation scripts.",
+		"Supports session, application, machine, user, and process scopes with optional environment targeting.",
+		"Makes data available across workflow steps for reliable data exchange."
 	],
 	"version": "4"
 }

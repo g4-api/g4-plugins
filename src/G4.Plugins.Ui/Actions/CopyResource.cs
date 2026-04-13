@@ -9,6 +9,7 @@ using System;
 using System.Collections.Concurrent;
 using System.IO;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -16,9 +17,13 @@ namespace G4.Plugins.Ui.Actions
 {
     [G4Plugin(
         assembly: "G4.Plugins.Ui, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
-        manifest: $"G4.Plugins.Ui.Actions.Manifests.{nameof(CopyResource)}.json")]
+        manifest: $"G4.Plugins.Ui.Actions.Manifests.{NameReference}.json")]
     public class CopyResource(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        // Define a constant for the plugin name reference to ensure
+        // consistent namespacing of session parameters.
+        private const string NameReference = nameof(CopyResource);
+
         // Static instance of HttpClient for making HTTP requests.
         private static readonly HttpClient s_httpClient = new();
 
@@ -72,7 +77,10 @@ namespace G4.Plugins.Ui.Actions
             }
 
             // Store the list of copied resources in the session parameters
-            Invoker.Context.SessionParameters["CopiedResources"] = files;
+            this.AddSessionParameter(
+                @namespace: NameReference,
+                name: "CopiedResources",
+                value: JsonSerializer.Serialize(files));
 
             // Create and return a new PluginResponseModel
             return this.NewPluginResponse();
