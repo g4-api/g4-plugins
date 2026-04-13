@@ -1,0 +1,449 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"GoogleCalendar"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/NewGoogleCalendarEvent.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Google/Actions/Calendar/NewGoogleCalendarEvent.cs"
+			},
+			"rag": {
+				"description": "Create a new Google Calendar event on a target calendar (defaults to primary) during an automation run, using either a direct OAuth token or a stored credentials reference. Supports timed events (ISO 8601 dateTime) and all-day events (YYYY-MM-DD date), optional attendees as a comma-separated email list, custom time zones per start/end, and attendee notification control via SendUpdates. Saves the created event Id, HtmlLink, Status, and HangoutLink as Base64 session parameters under NewGoogleCalendarEvent:* so later workflow steps can reference them without repeating the API call.",
+				"qa": [
+					{
+						"question": "What does the NewGoogleCalendarEvent plugin do?",
+						"answer": "It creates a new event on a Google Calendar using the Calendar API v3 events.insert endpoint and stores key response fields in namespaced session parameters for later workflow steps."
+					},
+					{
+						"question": "What are the key features and parameters of NewGoogleCalendarEvent?",
+						"answer": "Start and End are required. CalendarId defaults to 'primary'. Summary, Description, Location, StartTimeZone, EndTimeZone, Attendees (comma-separated emails), and SendUpdates are optional. Authentication uses Token or Credentials (Credentials takes precedence). Outputs are written to NewGoogleCalendarEvent:Id, HtmlLink, Status, and HangoutLink."
+					},
+					{
+						"question": "How does NewGoogleCalendarEvent distinguish between timed events and all-day events?",
+						"answer": "When the Start and End values contain 'T' they are treated as ISO 8601 dateTime values for timed events. When they do not contain 'T' they are treated as YYYY-MM-DD date values for all-day events."
+					},
+					{
+						"question": "How do I invite attendees when creating a calendar event?",
+						"answer": "Pass a comma-separated list of email addresses to the Attendees parameter, e.g. --Attendees:alice@example.com,bob@example.com. Use SendUpdates:all to send invitation emails."
+					},
+					{
+						"question": "How does NewGoogleCalendarEvent fit into the integration context of an automation workflow?",
+						"answer": "It runs as an Action in a sequential workflow step (componentType 'task') using the google icon provider and the ActionRuleModel."
+					},
+					{
+						"question": "What are best practices for using NewGoogleCalendarEvent in automations?",
+						"answer": "Prefer Credentials over a raw Token for long-running runs to allow token refresh. Always provide Start and End in ISO 8601 UTC when creating timed events. Pass CalendarId explicitly when targeting a secondary calendar. Use SendUpdates:none (the default) in test runs to avoid sending spurious invitation emails."
+					},
+					{
+						"question": "What rule or schema details should I follow when configuring NewGoogleCalendarEvent?",
+						"answer": "Use $type 'Action' with pluginName 'NewGoogleCalendarEvent' and pass at minimum Start and End via argument. Consume outputs from NewGoogleCalendarEvent:Id, HtmlLink, Status, and HangoutLink session parameters."
+					},
+					{
+						"question": "What is the manifest key of this plugin?",
+						"answer": "The manifest key is 'NewGoogleCalendarEvent'."
+					},
+					{
+						"question": "What manifestVersion is used by this plugin?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What is the pluginType of NewGoogleCalendarEvent?",
+						"answer": "The pluginType is 'Action'."
+					},
+					{
+						"question": "Which platforms are supported by this plugin?",
+						"answer": "The plugin supports platforms 'Any'."
+					},
+					{
+						"question": "Which categories is this plugin associated with?",
+						"answer": "The plugin is listed under the 'GoogleCalendar' category."
+					},
+					{
+						"question": "Who is the author of this plugin manifest?",
+						"answer": "The author is Roei Sabag."
+					},
+					{
+						"question": "What is the summary of NewGoogleCalendarEvent?",
+						"answer": "It creates a new event on a Google Calendar, supports timed and all-day events, optional attendees and notifications, and stores the created event Id, HtmlLink, Status, and HangoutLink in namespaced session parameters."
+					},
+					{
+						"question": "How does NewGoogleCalendarEvent handle errors and edge cases?",
+						"answer": "It accounts for missing or invalid authentication, missing or malformed Start/End values, invalid CalendarId (API returns 404), insufficient OAuth scopes, Google Calendar API quota or non-success responses, empty attendee email entries, and invalid SendUpdates values."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "google",
+					"svg": null
+				},
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Creates a new event on a Google Calendar.",
+		"Schedules meetings, blocks time, or records events from automation workflows.",
+		"Supports timed events (ISO 8601 dateTime) and all-day events (YYYY-MM-DD date), optional attendees with invitation notifications, and per-timezone start and end times.",
+		"Authenticates via a direct OAuth access token or a stored credentials reference exchanged for a fresh token.",
+		"Key event fields from the API response are stored in session parameters for downstream access.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                              |",
+		"|----------------------------|--------------------------------------------------------------------------------------------------------------------------|",
+		"| Create timed event         | Creates an event with an ISO 8601 dateTime start and end.                                                                |",
+		"| Create all-day event       | Creates an all-day event using YYYY-MM-DD date values for start and end.                                                 |",
+		"| Calendar targeting         | Targets any accessible calendar by CalendarId; defaults to the authenticated user's primary calendar.                   |",
+		"| Attendee invitations       | Accepts a comma-separated list of attendee emails and controls notification delivery via SendUpdates.                    |",
+		"| Time zone support          | Accepts an IANA time zone identifier for start and end independently.                                                    |",
+		"| Token authentication       | Accepts a raw OAuth Bearer access token.                                                                                 |",
+		"| Credentials authentication | Accepts a credentials id/name and exchanges it for a fresh access token.                                                 |",
+		"| Result session storage     | Stores created event fields in namespaced session parameters (NewGoogleCalendarEvent:) as Base64-encoded values.         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                              | Description                                                                                       |",
+		"|---------------------------------------|---------------------------------------------------------------------------------------------------|",
+		"| Schedule automated follow-ups         | Create a calendar event when a form submission or lead is detected.                               |",
+		"| Block focus time automatically        | Add focus or out-of-office blocks to a calendar based on workload thresholds.                     |",
+		"| Sync external events to Google        | Mirror events from an external system into a shared Google Calendar.                              |",
+		"| Send meeting invitations from bots    | Create meetings with attendees and send invitations directly from automation workflows.            |",
+		"| Record SLA deadlines                  | Create an all-day event on the day a deadline is due.                                             |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Start or End is missing or empty",
+						"Start or End is not a valid ISO 8601 dateTime or YYYY-MM-DD date",
+						"Access token missing required Google Calendar API scope",
+						"Invalid or expired OAuth access token — API returns 401",
+						"CalendarId defaults to 'primary' when omitted",
+						"Summary defaults to a timestamped value when omitted",
+						"Description and Location are omitted from the request body when empty",
+						"Attendees is empty — no attendee list is sent to the API",
+						"SendUpdates defaults to 'none' — no invitation emails are sent",
+						"Google Calendar API rate limit or quota exceeded",
+						"Google Calendar API returns non-success status code",
+						"Network timeout or connection failure"
+					],
+					"expected_result": "A timed event is created on the primary calendar and NewGoogleCalendarEvent:Id, HtmlLink, Status, and HangoutLink are stored in session parameters.",
+					"notes": "Creates a minimal timed event on the primary calendar using a direct OAuth access token.",
+					"use_case": "new_calendar_event_minimal_with_token",
+					"version": "4"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Authentication",
+					"Calendar",
+					"Create",
+					"GoogleCalendar",
+					"OAuth",
+					"PrimaryCalendar",
+					"SessionParameters",
+					"TimedEvent",
+					"Token"
+				]
+			},
+			"description": [
+				"### NewGoogleCalendarEvent: Create minimal timed event using access token",
+				"",
+				"Create a timed event on the primary calendar by supplying Start and End in ISO 8601 format.",
+				"CalendarId is omitted so the plugin targets the authenticated user's primary calendar.",
+				"The created event's Id and HtmlLink are available in NewGoogleCalendarEvent:* session parameters."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Start:2026-05-01T10:00:00Z --End:2026-05-01T11:00:00Z --Summary:Team Standup --Token:ya29...}}",
+				"pluginName": "NewGoogleCalendarEvent"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials id/name not found",
+						"Credentials record missing refresh token",
+						"Refresh-token exchange fails",
+						"Google OAuth token endpoint returns non-success status code",
+						"CalendarId not found — API returns 404",
+						"CalendarId refers to a calendar the user cannot write to — API returns 403",
+						"CalendarId contains special characters that require URL encoding",
+						"Start or End is not a valid ISO 8601 dateTime",
+						"StartTimeZone or EndTimeZone is not a valid IANA identifier — API may reject the request",
+						"Attendees contains duplicate or invalid email addresses",
+						"SendUpdates:all causes invitation emails to be sent to all attendees immediately",
+						"Google Calendar API rate limit or quota exceeded",
+						"Google Calendar API returns non-success status code",
+						"Network timeout or connection failure",
+						"HangoutLink is absent in session when no conference is attached to the event"
+					],
+					"expected_result": "A timed event with attendees is created on the specified secondary calendar and invitation emails are sent. Session parameters NewGoogleCalendarEvent:Id, HtmlLink, Status, and HangoutLink are populated.",
+					"notes": "Creates a full event on a secondary calendar using stored credentials, time zones, attendees, and notification delivery.",
+					"use_case": "new_calendar_event_full_with_credentials",
+					"version": "4"
+				},
+				"labels": [
+					"ApiIntegration",
+					"Attendees",
+					"Authentication",
+					"Calendar",
+					"Create",
+					"Credentials",
+					"GoogleCalendar",
+					"Invitations",
+					"OAuth",
+					"SecondaryCalendar",
+					"SendUpdates",
+					"SessionParameters",
+					"TimedEvent",
+					"TimeZone"
+				]
+			},
+			"description": [
+				"### NewGoogleCalendarEvent: Create full event with attendees using stored credentials",
+				"",
+				"Create a timed event on a secondary calendar with a description, location, explicit time zones, attendee emails, and invitation delivery.",
+				"Stored credentials are resolved at runtime to obtain a fresh OAuth access token.",
+				"The created event's Id and HtmlLink are available in NewGoogleCalendarEvent:* session parameters."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --CalendarId:team@group.calendar.google.com --Summary:Sprint Review --Description:End of sprint demo --Location:Conference Room A --Start:2026-05-15T14:00:00 --End:2026-05-15T15:00:00 --StartTimeZone:America/New_York --EndTimeZone:America/New_York --Attendees:alice@example.com,bob@example.com --SendUpdates:all --Credentials:my-google-creds}}",
+				"pluginName": "NewGoogleCalendarEvent"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Start and End use YYYY-MM-DD format — plugin sends date field instead of dateTime",
+						"TimeZone parameters are ignored for all-day events (API ignores them for date-only fields)",
+						"Summary defaults to a timestamped value when omitted",
+						"Attendees is empty — no attendee list is sent",
+						"SendUpdates defaults to 'none' — no invitation emails are sent",
+						"Access token missing required Google Calendar API scope",
+						"Invalid or expired OAuth access token — API returns 401",
+						"CalendarId defaults to 'primary' when omitted",
+						"Google Calendar API rate limit or quota exceeded",
+						"Google Calendar API returns non-success status code",
+						"Network timeout or connection failure"
+					],
+					"expected_result": "An all-day event spanning a single calendar day is created on the primary calendar and NewGoogleCalendarEvent:Id, HtmlLink, Status, and HangoutLink are stored in session parameters.",
+					"notes": "Creates an all-day event by supplying date-only values (YYYY-MM-DD) for Start and End.",
+					"use_case": "new_calendar_event_all_day_with_token",
+					"version": "4"
+				},
+				"labels": [
+					"AllDayEvent",
+					"ApiIntegration",
+					"Authentication",
+					"Calendar",
+					"Create",
+					"GoogleCalendar",
+					"OAuth",
+					"PrimaryCalendar",
+					"SessionParameters",
+					"Token"
+				]
+			},
+			"description": [
+				"### NewGoogleCalendarEvent: Create all-day event using access token",
+				"",
+				"Create an all-day event by supplying date-only Start and End values in YYYY-MM-DD format.",
+				"When the value does not contain 'T', the plugin sends a date field instead of dateTime, producing an all-day block on the calendar.",
+				"CalendarId is omitted so the plugin targets the authenticated user's primary calendar."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Start:2026-06-01 --End:2026-06-02 --Summary:Company Holiday --Token:ya29...}}",
+				"pluginName": "NewGoogleCalendarEvent"
+			}
+		}
+	],
+	"key": "NewGoogleCalendarEvent",
+	"manifestVersion": 4,
+	"namespace": "G4.Plugins.Google",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the Google Meet or Hangouts video conference link for the created event.",
+				"Present only when the event has a conference resource attached by the Calendar API."
+			],
+			"name": "NewGoogleCalendarEvent:HangoutLink",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the absolute URL to view the created event in the Google Calendar web UI.",
+				"Use it to share or log a direct link to the event."
+			],
+			"name": "NewGoogleCalendarEvent:HtmlLink",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the unique identifier of the created event as returned by the Google Calendar API.",
+				"Use it to target the event for updates, exports, or deletion."
+			],
+			"name": "NewGoogleCalendarEvent:Id",
+			"scope": "Session",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the status of the created event as returned by the Google Calendar API.",
+				"Possible values are 'confirmed', 'tentative', and 'cancelled'.",
+				"Use it to branch on the initial event state."
+			],
+			"name": "NewGoogleCalendarEvent:Status",
+			"scope": "Session",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Comma-separated list of email addresses added as attendees to the event.",
+				"Each email address is mapped to an attendee entry in the event resource.",
+				"Use the SendUpdates parameter to control whether invitation emails are delivered to attendees."
+			],
+			"mandatory": false,
+			"name": "Attendees",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Unique identifier of the calendar on which the event will be created.",
+				"Defaults to 'primary' when not provided, targeting the authenticated user's primary calendar.",
+				"Any valid calendar identifier is accepted, including secondary calendar IDs in email-address format."
+			],
+			"mandatory": false,
+			"name": "CalendarId",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Stored credential record id or name used to obtain a fresh access token.",
+				"Avoids hardcoding tokens by exchanging the stored refresh token for a new access token when needed.",
+				"Use when access tokens may expire between steps.",
+				"Takes precedence over the Token parameter when both are provided."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Event description. HTML content is supported by the Google Calendar API.",
+				"Adds context, agenda items, or instructions visible in the event details.",
+				"Omitted from the API request body when left empty."
+			],
+			"mandatory": false,
+			"name": "Description",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"End date or date-time of the event.",
+				"Use ISO 8601 format (e.g., 2026-05-01T11:00:00Z) for timed events.",
+				"Use YYYY-MM-DD format (e.g., 2026-05-02) for all-day events — the value must not contain 'T'."
+			],
+			"mandatory": true,
+			"name": "End",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"IANA time zone identifier applied to the End dateTime (e.g., 'America/New_York').",
+				"When omitted, the calendar's default time zone is used.",
+				"Has no effect when End is a date-only value (all-day event)."
+			],
+			"mandatory": false,
+			"name": "EndTimeZone",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Geographic location of the event as free-form text.",
+				"Displayed in the event details and used by Google Calendar to show map links.",
+				"Omitted from the API request body when left empty."
+			],
+			"mandatory": false,
+			"name": "Location",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Controls whether notification emails are sent to attendees when the event is created.",
+				"Accepted values: 'all' (notify all attendees), 'externalOnly' (notify only external attendees), 'none' (send no notifications).",
+				"Defaults to 'none' to avoid sending spurious emails during automated runs."
+			],
+			"mandatory": false,
+			"name": "SendUpdates",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Start date or date-time of the event.",
+				"Use ISO 8601 format (e.g., 2026-05-01T10:00:00Z) for timed events.",
+				"Use YYYY-MM-DD format (e.g., 2026-05-01) for all-day events — the value must not contain 'T'."
+			],
+			"mandatory": true,
+			"name": "Start",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"IANA time zone identifier applied to the Start dateTime (e.g., 'Europe/London').",
+				"When omitted, the calendar's default time zone is used.",
+				"Has no effect when Start is a date-only value (all-day event)."
+			],
+			"mandatory": false,
+			"name": "StartTimeZone",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"The event title.",
+				"Controls how the event appears in the calendar UI.",
+				"Uses a timestamped default title when no value is provided to avoid creating untitled events."
+			],
+			"mandatory": false,
+			"name": "Summary",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"OAuth Bearer access token used to call the Google Calendar API.",
+				"Used when no stored credential record is available.",
+				"Ignored when Credentials is provided."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Creates a new event on a Google Calendar.",
+		"Supports timed events (ISO 8601 dateTime) and all-day events (YYYY-MM-DD date), optional attendees with configurable invitation delivery, and per-timezone start and end times.",
+		"Authenticates via a direct OAuth access token or a stored credentials reference exchanged for a fresh token, and stores the created event Id, HtmlLink, Status, and HangoutLink in namespaced session parameters."
+	]
+}
