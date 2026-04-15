@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -40,8 +40,8 @@
 						"answer": "On error it clears any stored data related to the condition, logs the exception to the workflow log stream, and allows the rest of the workflow to continue unless explicitly configured to stop."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the schema version this plugin follows."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4, indicating the schema version this plugin follows."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -86,6 +86,10 @@
 					{
 						"question": "What is the pluginType?",
 						"answer": "The pluginType is Action, meaning it performs an operation in the automation workflow."
+					},
+					{
+						"question": "What namespace is SetCondition in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -101,7 +105,8 @@
 					"name": "arrows-split-up-and-left",
 					"svg": null
 				},
-				"model": "SwitchRuleModel"
+				"model": "SwitchRuleModel",
+				"label": "Set Condition"
 			},
 			"mcp": {
 				"title": "Set Condition"
@@ -161,8 +166,7 @@
 				"### Check Welcome Message and Click “Proceed” if Present",
 				"",
 				"Verify that the welcome message displays “Welcome back!” and, if it does, click the “Proceed” button.",
-				"It uses a `SetCondition` step with `ElementText` comparison against `Welcome back!` on the element located by CSS selector `#welcomeMessage`. If the condition is true, it executes a `Click` action on the element `#proceedButton`.",
-				"Values are returned as strings for downstream processing."
+				"It uses a `SetCondition` step with `ElementText` comparison against `Welcome back!` on the element located by CSS selector `#welcomeMessage`. If the condition is true, it executes a `Click` action on the element `#proceedButton`."
 			],
 			"rule": {
 				"$type": "Switch",
@@ -205,8 +209,7 @@
 				"### Check for Cookie Consent Banner and Type “Accept” if Present",
 				"",
 				"Detect whether a cookie consent banner is displayed and, if so, type “Accept” into the consent input field.",
-				"It uses a `SetCondition` step with `AlertExists`. If true, it executes a `SendKeys` action with argument “Accept” on the element located by CSS selector `#cookieConsentInput`.",
-				"Values are returned as strings for downstream processing."
+				"It uses a `SetCondition` step with `AlertExists`. If true, it executes a `SendKeys` action with argument “Accept” on the element located by CSS selector `#cookieConsentInput`."
 			],
 			"rule": {
 				"$type": "Switch",
@@ -248,8 +251,7 @@
 				"### Check Dashboard Page and Click “Go to Dashboard” if Present",
 				"",
 				"Verify whether the current page URL matches the dashboard page, and if it does, click the “Go to Dashboard” button.",
-				"It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://myapp.com/dashboard/*` (the `NotMatch` operator causes the `false` branch to run when there is a match). If the condition is false, it executes a `Click` action on the element located by XPath `//a[@id='goToDashboard']`.",
-				"Values are returned as strings for downstream processing."
+				"It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://myapp.com/dashboard/*` (the `NotMatch` operator causes the `false` branch to run when there is a match). If the condition is false, it executes a `Click` action on the element located by XPath `//a[@id='goToDashboard']`."
 			],
 			"rule": {
 				"$type": "Switch",
@@ -290,8 +292,7 @@
 				"### Check Shopping Cart Page and Search or Click “Checkout”",
 				"",
 				"Verify whether the current page URL matches the shopping cart page and, if it does not, type “laptop” into the search box; otherwise, click the “Checkout” button.",
-				"It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://shop.example.com/cart`. If the condition is true, it executes a `SendKeys` action with argument “laptop” on the element located by ID `searchBox`; if the condition is false, it executes a `Click` action on the element located by XPath `//button[@id='checkoutButton']`.",
-				"Values are returned as strings for downstream processing."
+				"It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://shop.example.com/cart`. If the condition is true, it executes a `SendKeys` action with argument “laptop” on the element located by ID `searchBox`; if the condition is false, it executes a `Click` action on the element located by XPath `//button[@id='checkoutButton']`."
 			],
 			"rule": {
 				"$type": "Switch",

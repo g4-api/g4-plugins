@@ -1,4 +1,4 @@
-﻿{
+{
 	"aliases": [
 		"TriggerJenkinsJob",
 		"RunJenkinsBuild"
@@ -37,19 +37,19 @@
 					},
 					{
 						"question": "What rules or schema details are important?",
-						"answer": "The plugin exposes outputs JenkinsJobStatusCode, JenkinsJobDuration, JenkinsJobUrl, and JenkinsJobResponse, with extraction performed using RegularExpression and OnElement JSONPath."
+						"answer": "The plugin exposes outputs StartJenkinsJob:JenkinsJobStatusCode, StartJenkinsJob:JenkinsJobDuration, StartJenkinsJob:JenkinsJobUrl, and StartJenkinsJob:JenkinsJobResponse, with extraction performed using RegularExpression and OnElement JSONPath."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4.0."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4."
 					},
 					{
-						"question": "What additional metadata is relevant for this plugin?",
-						"answer": "Metadata such as author, key, aliases, categories, and platforms can be found within the plugin manifest."
+						"question": "What namespace is StartJenkinsJob in?",
+						"answer": "G4.Plugins.Common."
 					},
 					{
-						"question": "Where can I find source code or documentation?",
-						"answer": "Source code and documentation can be stored in your Git repository, for example: https://github.com/your-org/start-jenkins-job-plugin."
+						"question": "Where can I find the source code and documentation for StartJenkinsJob?",
+						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/StartJenkinsJob.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/StartJenkinsJob.md"
 					},
 					{
 						"question": "How does the plugin handle errors?",
@@ -57,7 +57,7 @@
 					},
 					{
 						"question": "How does output extraction work?",
-						"answer": "The value is taken from the OnElement JSONPath result and filtered using RegularExpression, then stored in JenkinsJobResponse."
+						"answer": "The value is taken from the OnElement JSONPath result and filtered using RegularExpression, then stored in StartJenkinsJob:JenkinsJobResponse."
 					},
 					{
 						"question": "How is authentication performed?",
@@ -66,6 +66,10 @@
 					{
 						"question": "What happens if Wait is false?",
 						"answer": "If Wait is false, the plugin returns immediately after triggering the job and outputs only the initial status code and job URL."
+					},
+					{
+						"question": "What namespace is StartJenkinsJob in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -76,7 +80,8 @@
 					"name": "jenkins",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Start Jenkins Job"
 			},
 			"mcp": {
 				"title": "Start Jenkins Job"
@@ -328,7 +333,7 @@
 				"Job duration tracks how long the Jenkins job ran from start to finish in milliseconds.",
 				"The value supports timing analysis and helps detect slow or failing build steps."
 			],
-			"name": "JenkinsJobDuration",
+			"name": "StartJenkinsJob:JenkinsJobDuration",
 			"type": "Number"
 		},
 		{
@@ -336,7 +341,7 @@
 				"The matched response value captures specific text extracted from the Jenkins reply.",
 				"Encoding the value in Base64 ensures safe transport even when the content includes symbols or special characters."
 			],
-			"name": "JenkinsJobResponse",
+			"name": "StartJenkinsJob:JenkinsJobResponse",
 			"type": "String"
 		},
 		{
@@ -344,7 +349,7 @@
 				"HTTP status code helps identify whether Jenkins accepted or rejected the job trigger request.",
 				"It allows workflows to react to success, failure, or unexpected responses in a predictable way."
 			],
-			"name": "JenkinsJobStatusCode",
+			"name": "StartJenkinsJob:JenkinsJobStatusCode",
 			"type": "Number"
 		},
 		{
@@ -352,7 +357,7 @@
 				"Job URL shows the exact Jenkins build instance that was triggered.",
 				"The link allows follow-up steps to query logs, artifacts, or job results directly."
 			],
-			"name": "JenkinsJobUrl",
+			"name": "StartJenkinsJob:JenkinsJobUrl",
 			"type": "String"
 		}
 	],

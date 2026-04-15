@@ -1,4 +1,4 @@
-﻿{
+{
 	"aliases": [
 		"SaveParameter",
 		"SetParameter"
@@ -44,8 +44,8 @@
 						"answer": "On failure it records exceptions to the log stream and includes error details in the response, while by default allowing workflows to continue unless configured to stop on error."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the version of the manifest schema the plugin follows."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4, indicating the version of the manifest schema the plugin follows."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -86,6 +86,10 @@
 					{
 						"question": "What protocol settings are specified?",
 						"answer": "Protocol settings show apiDocumentation as None and w3c as None, indicating it does not require external API standards or W3C validation."
+					},
+					{
+						"question": "What namespace is RegisterParameter in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -96,7 +100,8 @@
 					"name": "file-import",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Register Parameter"
 			},
 			"mcp": {
 				"title": "Register Parameter"
@@ -106,7 +111,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `RegisterParameter` plugin helps automation workflows save and manage data by name. It takes values provided by a user or extracted from a an element and stores them in a chosen scope, such as session or application. Then it generates and sends a `SetParameter` action so the data can be reused later in the automation.",
+		"Saves and manages named data in automation workflows. Captures values from user input or elements, stores them in a chosen scope such as session or application, and generates a `SetParameter` action so the data can be reused in downstream steps.",
 		"",
 		"### Key Features and Functionality",
 		"",

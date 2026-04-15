@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
 		"name": "Roei Sabag"
@@ -41,7 +41,7 @@
 					},
 					{
 						"question": "What are the aliases for this plugin?",
-						"answer": "The aliases are \"Wait\" and \"WaitForCondition\"."
+						"answer": "No aliases are defined for this plugin."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -64,12 +64,12 @@
 						"answer": "The key is SendOpenAiPrompt, which uniquely identifies this plugin in the system."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the version of the manifest schema used."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4, indicating the version of the manifest schema used."
 					},
 					{
 						"question": "What outputParameters does this plugin return?",
-						"answer": "It returns OpenAiCompletionTokens (number of response tokens), OpenAiPromptTokens (number of prompt tokens), OpenAiSystemResponse (filtered AI reply as Base64 string), OpenAiTotalTokens (total tokens used), and OpenAiThink (Base64-encoded internal reasoning notes)."
+						"answer": "It returns SendOpenAiPrompt:OpenAiCompletionTokens (number of response tokens), SendOpenAiPrompt:OpenAiPromptTokens (number of prompt tokens), SendOpenAiPrompt:OpenAiSystemResponse (filtered AI reply as Base64 string), SendOpenAiPrompt:OpenAiTotalTokens (total tokens used), and SendOpenAiPrompt:OpenAiThink (Base64-encoded internal reasoning notes)."
 					},
 					{
 						"question": "What parameters does this plugin accept?",
@@ -102,6 +102,10 @@
 					{
 						"question": "What examples are provided in the manifest?",
 						"answer": "Examples include starting a new chat with a custom system prompt, sending a prompt with custom temperature and token limits, extracting content before a <think> tag using regex, sending a prompt with TopK, and sending a prompt with TopP to a custom Open-WebUI endpoint."
+					},
+					{
+						"question": "What namespace is SendOpenAiPrompt in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -112,7 +116,8 @@
 					"name": "openai",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Send Open AI Prompt"
 			},
 			"mcp": {
 				"title": "Send Open AI Prompt"
@@ -296,7 +301,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Prompt:Analyze the following data. --ApiKey:YOUR_API_KEY }}",
+				"argument": "{{$ --Prompt:Analyze the following data. --ApiKey:YOUR_API_KEY}}",
 				"pluginName": "SendOpenAiPrompt",
 				"regularExpression": "^[^<]*"
 			}
@@ -330,7 +335,7 @@
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Prompt:Recommend a movie. --TopK:3 --ApiKey:YOUR_API_KEY }}",
+				"argument": "{{$ --Prompt:Recommend a movie. --TopK:3 --ApiKey:YOUR_API_KEY}}",
 				"pluginName": "SendOpenAiPrompt"
 			}
 		},
@@ -377,7 +382,7 @@
 				"It shows how long the reply is in token units.",
 				"Monitoring completion token usage helps manage resource consumption."
 			],
-			"name": "OpenAiCompletionTokens",
+			"name": "SendOpenAiPrompt:OpenAiCompletionTokens",
 			"type": "Number"
 		},
 		{
@@ -386,7 +391,7 @@
 				"It shows how many token units the request consumed.",
 				"Tracking prompt token usage helps control input size."
 			],
-			"name": "OpenAiPromptTokens",
+			"name": "SendOpenAiPrompt:OpenAiPromptTokens",
 			"type": "Number"
 		},
 		{
@@ -395,7 +400,7 @@
 				"Decoding yields the clean reply that the AI generated.",
 				"Filtered content ensures only the intended output is returned."
 			],
-			"name": "OpenAiSystemResponse",
+			"name": "SendOpenAiPrompt:OpenAiSystemResponse",
 			"type": "String"
 		},
 		{
@@ -404,7 +409,7 @@
 				"It indicates combined token usage for the API call.",
 				"Monitoring total tokens helps manage costs and limits."
 			],
-			"name": "OpenAiTotalTokens",
+			"name": "SendOpenAiPrompt:OpenAiTotalTokens",
 			"type": "Number"
 		},
 		{
@@ -413,7 +418,7 @@
 				"Decoding reveals the AI’s hidden annotations and thought steps.",
 				"These insights help understand how the AI arrived at its answer."
 			],
-			"name": "OpenAiThink",
+			"name": "SendOpenAiPrompt:OpenAiThink",
 			"type": "String"
 		}
 	],
@@ -530,7 +535,7 @@
 				"Template expression to pass parameters and prompt text."
 			],
 			"mandatory": false,
-			"name": "argument",
+			"name": "Argument",
 			"type": "String|Expression"
 		},
 		{
@@ -539,7 +544,7 @@
 				"Regular expression to extract the desired portion of the system response."
 			],
 			"mandatory": false,
-			"name": "regularExpression",
+			"name": "RegularExpression",
 			"type": "Regex"
 		}
 	],

@@ -1,4 +1,4 @@
-﻿{
+{
 	"aliases": [
 		"InvokeWebRequest",
 		"SendWebRequest"
@@ -33,7 +33,7 @@
 					},
 					{
 						"question": "What are best practices for configuring and using this plugin?",
-						"answer": "Use precise Url and Method values to target the correct endpoint, set ContentType to match the server expectations, include necessary headers and fields for authentication or data format, validate HttpStatusCode on response, and implement retries or timeouts to handle transient failures."
+						"answer": "Use precise Url and Method values to target the correct endpoint, set ContentType to match the server expectations, include necessary headers and fields for authentication or data format, validate SendHttpRequest:HttpStatusCode on response, and implement retries or timeouts to handle transient failures."
 					},
 					{
 						"question": "What is the structure of the plugin rule definition?",
@@ -44,8 +44,8 @@
 						"answer": "On error it logs exceptions to the workflow log stream and includes error details in the response. By default, workflows continue executing unless explicitly configured to stop on error."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the version of the manifest schema this plugin follows."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4, indicating the version of the manifest schema this plugin follows."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -65,7 +65,7 @@
 					},
 					{
 						"question": "What outputParameters does this plugin return?",
-						"answer": "It returns HttpResponse (the extracted response body), HttpResponseHeaders (response headers as key–value pairs), and HttpStatusCode (numeric HTTP status code returned by the server)."
+						"answer": "It returns SendHttpRequest:HttpResponse (the extracted response body), SendHttpRequest:HttpResponseHeaders (response headers as key–value pairs), and SendHttpRequest:HttpStatusCode (numeric HTTP status code returned by the server)."
 					},
 					{
 						"question": "What parameters does this plugin accept?",
@@ -106,6 +106,10 @@
 					{
 						"question": "What does the description section contain?",
 						"answer": "The description highlights the plugin’s purpose of automating HTTP requests, its key features such as HTTP method selection and dynamic URL configuration, and lists use cases in RPA and automation testing like API testing and data verification."
+					},
+					{
+						"question": "What namespace is SendHttpRequest in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -116,7 +120,8 @@
 					"name": "globe",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Send HTTP Request"
 			},
 			"mcp": {
 				"title": "Send HTTP Request"
@@ -127,8 +132,8 @@
 		"### Purpose",
 		"",
 		"Automates sending HTTP requests to web services and REST APIs.",
-		"It lets users choose the HTTP method (GET, POST, PUT, DELETE, PATCH, or any other supported method) and set the request URL at run time. ",
-		"It also lets users customize headers, body content, and query parameters. ",
+		"It lets users choose the HTTP method (GET, POST, PUT, DELETE, PATCH, or any other supported method) and set the request URL at run time.",
+		"It also lets users customize headers, body content, and query parameters.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -12157,7 +12162,7 @@
 				"When no extraction rules are set, the full response body is available.",
 				"Processed content returned by the HTTP call is available through this parameter."
 			],
-			"name": "HttpResponse",
+			"name": "SendHttpRequest:HttpResponse",
 			"type": "Any"
 		},
 		{
@@ -12166,7 +12171,7 @@
 				"Metadata such as content type, cache directives, and server information included.",
 				"Values available as a key–value map within the workflow."
 			],
-			"name": "HttpResponseHeaders",
+			"name": "SendHttpRequest:HttpResponseHeaders",
 			"type": "Any"
 		},
 		{
@@ -12175,7 +12180,7 @@
 				"Common codes include success (200), redirection (3xx), client errors (4xx), and server errors (5xx).",
 				"Status code values guide decision flow based on request outcome."
 			],
-			"name": "HttpStatusCode",
+			"name": "SendHttpRequest:HttpStatusCode",
 			"type": "Any"
 		}
 	],

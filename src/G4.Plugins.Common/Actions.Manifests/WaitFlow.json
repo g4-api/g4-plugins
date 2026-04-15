@@ -1,4 +1,4 @@
-﻿{
+{
 	"aliases": [
 		"Wait",
 		"WaitForCondition"
@@ -80,8 +80,8 @@
 						"answer": "The key is \"WaitFlow\", which uniquely identifies this plugin in the system."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the schema version used for this plugin."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4, indicating the schema version used for this plugin."
 					},
 					{
 						"question": "What parameters does this plugin accept?",
@@ -106,6 +106,10 @@
 					{
 						"question": "What summary is provided for this plugin?",
 						"answer": "The summary states that WaitFlow pauses a task until a watched condition is met or until a set time expires, helping synchronize steps when elements appear or events complete."
+					},
+					{
+						"question": "What namespace is WaitFlow in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -116,7 +120,8 @@
 					"name": "stopwatch",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Wait Flow"
 			},
 			"mcp": {
 				"title": "Wait Flow"
@@ -127,7 +132,7 @@
 		"### Purpose",
 		"",
 		"Pauses an automation script until a set condition is true or a timeout occurs.",
-		"This helps ensure steps run in the right order and prevents errors when waiting for something to appear or change. ",
+		"This helps ensure steps run in the right order and prevents errors when waiting for something to appear or change.",
 		"",
 		"### Key Features and Functionality",
 		"",

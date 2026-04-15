@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -44,8 +44,8 @@
 						"answer": "A rule schema includes $type, pluginName, argument, onElement, onAttribute, and optional Environment fields to fully describe the copy action."
 					},
 					{
-						"question": "What is the manifestVersion of this plugin?",
-						"answer": "The manifestVersion is 4."
+						"question": "What is the manifest version of this plugin?",
+						"answer": "The manifest version is 4."
 					},
 					{
 						"question": "Who authored the CopyParameter plugin?",
@@ -66,6 +66,14 @@
 					{
 						"question": "Where can I find the source code and documentation for CopyParameter?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/CopyParameter.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CopyParameter.md"
+					},
+					{
+						"question": "What namespace is CopyParameter in?",
+						"answer": "G4.Plugins.Common."
+					},
+					{
+						"question": "What platform does CopyParameter support?",
+						"answer": "Any."
 					}
 				]
 			},
@@ -76,7 +84,8 @@
 					"name": "clone",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Copy Parameter"
 			},
 			"mcp": {
 				"title": "Copy Parameter"

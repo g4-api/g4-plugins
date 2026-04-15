@@ -50,8 +50,8 @@
 						"answer": "The plugin key is NoAction."
 					},
 					{
-						"question": "What is the manifestVersion for NoAction?",
-						"answer": "The manifestVersion is 4."
+						"question": "What is the manifest version for NoAction?",
+						"answer": "4."
 					},
 					{
 						"question": "What pluginType is NoAction?",
@@ -63,7 +63,7 @@
 					},
 					{
 						"question": "What API documentation is available for NoAction?",
-						"answer": "Unfortunately, no API documentation is available for NoAction plugin."
+						"answer": "No API documentation is defined. The protocol field sets apiDocumentation to None."
 					},
 					{
 						"question": "What W3C protocol support is declared?",
@@ -100,6 +100,10 @@
 					{
 						"question": "What is the benefit of nesting NoAction rules?",
 						"answer": "Nesting NoAction rules lets you organize complex workflows into hierarchical groups, improving readability and maintainability."
+					},
+					{
+						"question": "What namespace is NoAction in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -287,8 +291,8 @@
 			"description": [
 				"Defines a list of steps that the plugin will perform.",
 				"Each step can be a single action or a set of actions.",
-				"Using the NoAction plugin lets you group these steps under one container.",
-				"Nested NoAction plugins let you build a tree of grouped steps."
+				"Groups steps under one logical block without producing side effects.",
+				"Nested containers build a hierarchical tree of grouped steps."
 			],
 			"mandatory": false,
 			"name": "Rules",

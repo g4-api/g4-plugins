@@ -72,8 +72,12 @@
 						"answer": "The key is \"WriteHost\", which uniquely identifies this plugin in the system."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the schema version used for this plugin."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What namespace is WriteHost in?",
+						"answer": "G4.Plugins.Common."
 					},
 					{
 						"question": "Which platforms does this plugin support?",
@@ -100,6 +104,7 @@
 					"name": "terminal",
 					"svg": null
 				},
+				"label": "Write Host",
 				"model": "ActionRuleModel"
 			},
 			"mcp": {
@@ -111,7 +116,7 @@
 		"### Purpose",
 		"",
 		"Prints informational messages during automation execution for immediate visibility.",
-		"It takes a given argument and writes it to the console/host output so users can see what happened at each step. ",
+		"It takes a given argument and writes it to the console/host output so users can see what happened at each step.",
 		"This helps track progress and diagnose issues in real time.",
 		"",
 		"### Key Features and Functionality",
@@ -151,6 +156,7 @@
 					"version": "1.0"
 				},
 				"labels": [
+					"ConsoleOutput",
 					"Logging"
 				]
 			},
@@ -195,6 +201,38 @@
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:MyParam --Scope:Session}}",
+				"pluginName": "WriteHost"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Console write failure",
+						"Expression evaluation error",
+						"Parameter not found"
+					],
+					"expected_result": "The value of the machine-scoped parameter \"JobName\" is retrieved and printed as part of a status message.",
+					"notes": "Combines a fixed string prefix with a dynamic expression. Useful for labelling output with context-specific data.",
+					"use_case": "write_host_expression_status_message",
+					"version": "1.0"
+				},
+				"labels": [
+					"ConsoleOutput",
+					"ExpressionOutput",
+					"Logging"
+				]
+			},
+			"description": [
+				"### Write an Expression-Based Status Message",
+				"",
+				"Print a status message that combines a fixed prefix with a dynamic machine-scoped parameter value.",
+				"Uses the `WriteHost` plugin with the argument `Job: {{$Get-Parameter --Name:JobName --Scope:Machine}}`.",
+				"The expression is resolved at runtime and the resulting value is printed to the console output."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Job: {{$Get-Parameter --Name:JobName --Scope:Machine}}",
 				"pluginName": "WriteHost"
 			}
 		}

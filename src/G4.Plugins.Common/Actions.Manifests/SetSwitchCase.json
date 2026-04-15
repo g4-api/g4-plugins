@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -41,7 +41,7 @@
 					},
 					{
 						"question": "What are the aliases for this plugin?",
-						"answer": "The aliases are \"SetSwitchCase\" itself appears under key but there is no dedicated aliases array; this manifest does not list aliases."
+						"answer": "No aliases are defined for this plugin."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -76,8 +76,8 @@
 						"answer": "The key is \"SetSwitchCase\", which uniquely identifies this plugin in the system."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the version of the manifest schema used for this plugin."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4, indicating the version of the manifest schema used for this plugin."
 					},
 					{
 						"question": "What parameters does this plugin accept?",
@@ -102,6 +102,10 @@
 					{
 						"question": "What summary is provided for this plugin?",
 						"answer": "The summary states: \"SetSwitchCase checks a value you give or finds on a page and runs the matching set of steps. If nothing matches, it runs a fallback set of steps. This lets your tasks follow different paths based on the information they see.\""
+					},
+					{
+						"question": "What namespace is SetSwitchCase in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -116,7 +120,8 @@
 					"name": "shuffle",
 					"svg": null
 				},
-				"model": "SwitchRuleModel"
+				"model": "SwitchRuleModel",
+				"label": "Set Switch Case"
 			},
 			"mcp": {
 				"title": "Set Switch Case"

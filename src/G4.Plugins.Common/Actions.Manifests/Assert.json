@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -142,6 +142,10 @@
 					{
 						"question": "Where can I find the source code and documentation for Assert?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/Assert.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/Assert.md"
+					},
+					{
+						"question": "What namespace is Assert in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -152,7 +156,8 @@
 					"name": "list-check",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Assert"
 			},
 			"mcp": {
 				"title": "Assert"

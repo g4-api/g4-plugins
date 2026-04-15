@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -40,8 +40,8 @@
 						"answer": "InvokeWhileLoop repeats defined actions while a condition remains true and stops automatically when the condition changes or when a timeout occurs."
 					},
 					{
-						"question": "What is the manifestVersion of this plugin?",
-						"answer": "The manifestVersion is 4."
+						"question": "What is the manifest version of this plugin?",
+						"answer": "The manifest version is 4."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -69,7 +69,7 @@
 					},
 					{
 						"question": "What API documentation is provided for InvokeWhileLoop?",
-						"answer": "Unfortunately, no API documentation is available for InvokeWhileLoop plugin."
+						"answer": "None."
 					},
 					{
 						"question": "What W3C protocol support is declared?",
@@ -78,6 +78,10 @@
 					{
 						"question": "Where can I find the source code and documentation for InvokeWhileLoop?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md"
+					},
+					{
+						"question": "What namespace is InvokeWhileLoop in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -89,7 +93,8 @@
 					"name": "repeat",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Invoke While Loop"
 			},
 			"mcp": {
 				"title": "Invoke While Loop"

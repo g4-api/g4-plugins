@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -74,6 +74,18 @@
 					{
 						"question": "Where can I find the source code and documentation for InvokeForLoop?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md"
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "4."
+					},
+					{
+						"question": "What namespace is InvokeForLoop in?",
+						"answer": "G4.Plugins.Common."
+					},
+					{
+						"question": "What platform does InvokeForLoop support?",
+						"answer": "Any platform."
 					}
 				]
 			},
@@ -85,7 +97,8 @@
 					"name": "repeat",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Invoke For Loop"
 			},
 			"mcp": {
 				"title": "Invoke For Loop"
