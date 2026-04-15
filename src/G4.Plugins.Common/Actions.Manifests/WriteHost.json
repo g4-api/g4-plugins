@@ -101,13 +101,16 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Write Host"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The WriteHost plugin prints informational messages during automation execution for immediate visibility. ",
+		"Prints informational messages during automation execution for immediate visibility.",
 		"It takes a given argument and writes it to the console/host output so users can see what happened at each step. ",
 		"This helps track progress and diagnose issues in real time.",
 		"",
@@ -154,7 +157,7 @@
 			"description": [
 				"### Write a Static Console Message",
 				"",
-				"This example demonstrates how to print a simple, static message to the console during automation execution.",
+				"Print a simple, static message to the console during automation execution.",
 				"It uses the `WriteHost` plugin with the argument set to \"Writing a simple message\".",
 				"Host output is produced for visibility during execution."
 			],
@@ -185,7 +188,7 @@
 			"description": [
 				"### Write a Dynamic Parameter Value to Console",
 				"",
-				"This example demonstrates how to retrieve a dynamic, session-scoped parameter and print its value to the console.",
+				"Retrieve a dynamic, session-scoped parameter and print its value to the console.",
 				"It uses the `WriteHost` plugin with the argument set to `{{$Get-Parameter --Name:MyParam --Scope:Session}}`.",
 				"Host output is produced for visibility during execution."
 			],

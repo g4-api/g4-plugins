@@ -93,15 +93,18 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Read JSON"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The ReadJson plugin extracts specific values from JSON data in a simple and reliable way.",
+		"Extracts specific values from JSON data in a simple and reliable way.",
 		"It can read JSON either from a file path or directly from inline content.",
-		"The plugin helps automation workflows reuse structured data without custom code.",
+		"Helps automation workflows reuse structured data without custom code.",
 		"It is useful when JSON responses need to be filtered, transformed, or passed to later steps.",
 		"",
 		"### Key Features and Functionality",

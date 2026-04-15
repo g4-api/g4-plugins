@@ -117,13 +117,16 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Wait Flow"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The WaitFlow plugin pauses an automation script until a set condition is true or a timeout occurs. ",
+		"Pauses an automation script until a set condition is true or a timeout occurs.",
 		"This helps ensure steps run in the right order and prevents errors when waiting for something to appear or change. ",
 		"",
 		"### Key Features and Functionality",
@@ -175,7 +178,7 @@
 			"description": [
 				"### Wait for Login Form to Become Visible (Millisecond Timeout)",
 				"",
-				"This example demonstrates how to wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 8,000 milliseconds (8 seconds).",
+				"Wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 8,000 milliseconds (8 seconds).",
 				"It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:8000`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in milliseconds.",
 				"Wait steps do not return a value; they only block execution until the condition is met or the timeout expires."
 			],
@@ -210,7 +213,7 @@
 			"description": [
 				"### Wait for Login Form to Become Visible (HH:MM:SS Timeout)",
 				"",
-				"This example demonstrates how to wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 00:00:08 (8 seconds).",
+				"Wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 00:00:08 (8 seconds).",
 				"It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:00:00:08`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in HH:MM:SS format.",
 				"Wait steps do not return a value; they only block execution until the condition is met or the timeout expires."
 			],
@@ -244,7 +247,7 @@
 			"description": [
 				"### Pause Execution for 4 Seconds",
 				"",
-				"This example demonstrates how to pause execution for 4 seconds before continuing to the next step.",
+				"Pause execution for 4 seconds before continuing to the next step.",
 				"It uses the `WaitFlow` plugin with an argument of `00:00:04`.",
 				"Wait steps do not return a value; they block execution for the specified duration."
 			],
@@ -281,7 +284,7 @@
 			"description": [
 				"### Wait for `data-status` Attribute to Match via XPath (Millisecond Timeout)",
 				"",
-				"This example demonstrates how to wait for the `data-status` attribute of the `<div id='dataContainer'>` element to match the pattern `data-loaded`, using a maximum timeout of 12,000 milliseconds (12 seconds).",
+				"Wait for the `data-status` attribute of the `<div id='dataContainer'>` element to match the pattern `data-loaded`, using a maximum timeout of 12,000 milliseconds (12 seconds).",
 				"It uses the `WaitFlow` plugin with `--Condition:ElementAttribute`, `--Operator:Match`, `--Expected:data-loaded`, and `--Timeout:12000`, applied to the element’s `data-status` attribute. Note that the timeout is specified in milliseconds.",
 				"Wait steps block execution until the condition is met or the timeout expires."
 			],
@@ -320,7 +323,7 @@
 			"description": [
 				"### Wait for Specific Text via CSS Selector",
 				"",
-				"This example demonstrates how to wait for the text `Order Complete` to appear in the element located by CSS selector `#statusMessage`. It uses the `WaitFlow` plugin with `--Condition:ElementText`, `--Operator:Equal`, and `--Expected:Order Complete` applied to the element. The timeout is specified as the system’s default duration.",
+				"Wait for the text `Order Complete` to appear in the element located by CSS selector `#statusMessage`. It uses the `WaitFlow` plugin with `--Condition:ElementText`, `--Operator:Equal`, and `--Expected:Order Complete` applied to the element. The timeout is specified as the system’s default duration.",
 				"Wait steps block execution until the condition is met or the system’s default timeout expires."
 			],
 			"rule": {
@@ -354,7 +357,7 @@
 			"description": [
 				"### Pause Execution for 2 Seconds",
 				"",
-				"This example demonstrates how to pause execution for 2 seconds before continuing to the next step. It uses the `WaitFlow` plugin with an argument of `2000` (milliseconds).",
+				"Pause execution for 2 seconds before continuing to the next step. It uses the `WaitFlow` plugin with an argument of `2000` (milliseconds).",
 				"Wait steps block execution for the specified duration."
 			],
 			"rule": {

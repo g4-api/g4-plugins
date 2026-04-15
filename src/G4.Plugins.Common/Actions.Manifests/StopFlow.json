@@ -81,13 +81,16 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Stop Flow"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The StopFlow plugin ends the current automation session by disposing the active WebDriver and removing its handle from the global registry. This prevents resource leaks and avoids accidental reuse of a stale driver in later steps.",
+		"Ends the current automation session by disposing the active WebDriver and removing its handle from the global registry. This prevents resource leaks and avoids accidental reuse of a stale driver in later steps.",
 		"",
 		"### Key Features and Functionality",
 		"",

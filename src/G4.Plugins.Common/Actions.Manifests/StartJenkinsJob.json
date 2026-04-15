@@ -77,13 +77,16 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Start Jenkins Job"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The StartJenkinsJob plugin sends a request to Jenkins to start a specific job and can optionally wait until the build finishes.",
+		"Sends a request to Jenkins to start a specific job and can optionally wait until the build finishes.",
 		"It supports both simple and parameterized jobs so that different Jenkins job types can be triggered from the same automation.",
 		"It captures key job details such as status, duration, and URLs so later steps in the workflow can make decisions or log results.",
 		"",

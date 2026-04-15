@@ -116,13 +116,16 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Send SMTP Mail"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The SendSmtpMail plugin sends emails through a standard SMTP server during an automation workflow.",
+		"Sends emails through a standard SMTP server during an automation workflow.",
 		"It supports secure connections, login credentials, and sending to multiple recipients.",
 		"It is useful for alerts, notifications, and automated reporting.",
 		"",

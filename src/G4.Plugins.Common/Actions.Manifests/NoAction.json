@@ -112,13 +112,16 @@
 				},
 				"label": "Actions Group",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "No Action"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The NoAction plugin does nothing on its own and serves as a placeholder in your automation script. It can wrap other steps without side effects, making it useful for grouping or testing script flow. This helps you organize complex processes and debug workflows more easily.",
+		"Does nothing on its own and serves as a placeholder in your automation script. It can wrap other steps without side effects, making it useful for grouping or testing script flow. This helps you organize complex processes and debug workflows more easily.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -167,7 +170,7 @@
 			"description": [
 				"### Placeholder Action Using NoAction Plugin",
 				"",
-				"This example demonstrates how the NoAction plugin logs execution points without performing any operations, useful for placeholder or debugging checkpoints.",
+				"Logs execution points without performing any operations, useful for placeholder or debugging checkpoints.",
 				"No action is performed; the plugin simply records the event.",
 				"Use this to mark points in the workflow where no actual action is desired."
 			],
@@ -198,7 +201,7 @@
 			"description": [
 				"### Debugging Point Using NoAction Plugin",
 				"",
-				"This example demonstrates how the NoAction plugin logs a debugging point labeled `Debugging Point` without performing any operations.",
+				"Logs a debugging point labeled `Debugging Point` without performing any operations.",
 				"No action is performed; the plugin simply records the debugging event.",
 				"Use this to insert non-invasive debug markers in the workflow."
 			],
@@ -229,7 +232,7 @@
 			"description": [
 				"### Login Steps Grouping Using NoAction Plugin",
 				"",
-				"This example demonstrates how the NoAction plugin serves as a container to group multiple login actions: sending username, sending password, and clicking the login button.",
+				"Serves as a container to group multiple login actions: sending username, sending password, and clicking the login button.",
 				"Each inner action executes in sequence: SendKeys to `#username`, SendKeys to `#password`, then Click `#loginButton`.",
 				"NoAction itself performs no operations; it simply orchestrates the contained actions.",
 				"Useful for logically grouping related steps in the workflow."

@@ -113,13 +113,16 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Send Open AI Prompt"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The SendOpenAiPrompt plugin sends user messages to the OpenAI chat API and returns the assistant’s reply. It keeps track of conversation history for each session and lets you set a custom starting message if needed. It also records token usage and any internal reasoning steps so you can use those details later.",
+		"Sends user messages to the OpenAI chat API and returns the assistant’s reply. It keeps track of conversation history for each session and lets you set a custom starting message if needed. It also records token usage and any internal reasoning steps so you can use those details later.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -219,7 +222,7 @@
 			"description": [
 				"### Start a New Chat with a Custom System Prompt",
 				"",
-				"This example demonstrates how to start a new conversation with a custom system prompt and then send a user prompt.",
+				"Start a new conversation with a custom system prompt and then send a user prompt.",
 				"It uses the `SendOpenAiPrompt` plugin with the flags `--NewChat`, `--SystemPrompt:You are a math tutor.`, and `--Prompt:Explain the Pythagorean theorem.`.",
 				"Values are returned as JSON for downstream processing."
 			],
@@ -252,7 +255,7 @@
 			"description": [
 				"### Send a Prompt with Custom Temperature and Token Limits",
 				"",
-				"This example demonstrates how to send a prompt with specific parameters for temperature and token limits.",
+				"Send a prompt with specific parameters for temperature and token limits.",
 				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Tell a joke.`, `--Temperature:0.7`, `--MaxTokens:100`, and `--Model:gpt-3.5-turbo`.",
 				"Values are returned as JSON for downstream processing."
 			],
@@ -286,7 +289,7 @@
 			"description": [
 				"### Extract Content Before `<think>` Tag from AI Response",
 				"",
-				"This example demonstrates how to send a prompt to an AI endpoint and use a regular expression to extract only the content appearing before a `<think>` tag in the response.",
+				"Send a prompt to an AI endpoint and use a regular expression to extract only the content appearing before a `<think>` tag in the response.",
 				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Analyze the following data.` and `--ApiKey:YOUR_API_KEY`, then applies the regular expression `^[^<]*` to the response text.",
 				"A regular expression `^[^<]*` is applied to capture all characters up to (but not including) the first `<` character, ensuring that only the text preceding `<think>` is returned.",
 				"Values are returned as strings for downstream processing."
@@ -321,7 +324,7 @@
 			"description": [
 				"### Send a Prompt with TopK to Limit Candidate Tokens",
 				"",
-				"This example demonstrates how to send a prompt with a TopK parameter to limit candidate tokens in the AI response.",
+				"Send a prompt with a TopK parameter to limit candidate tokens in the AI response.",
 				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Recommend a movie.`, `--TopK:3`, and `--ApiKey:YOUR_API_KEY`.",
 				"Values are returned as JSON for downstream processing."
 			],
@@ -354,7 +357,7 @@
 			"description": [
 				"### Send a Prompt with TopP to a Custom Open-WebUI Endpoint",
 				"",
-				"This example demonstrates how to send a prompt with a TopP parameter to a custom Open-WebUI endpoint rather than the OpenAI API.",
+				"Send a prompt with a TopP parameter to a custom Open-WebUI endpoint rather than the OpenAI API.",
 				"It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Summarize this article.`, `--CompletionsUri:http://localhost:3000/api/chat/completions`, `--TopP:0.8`, and `--ApiKey:YOUR_API_KEY`.",
 				"Values are returned as JSON for downstream processing."
 			],

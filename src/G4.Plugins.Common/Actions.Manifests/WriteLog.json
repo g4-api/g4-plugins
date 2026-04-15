@@ -108,13 +108,16 @@
 					"svg": null
 				},
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Write Log"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The WriteLog plugin records informational messages during automation execution for display and analysis. It takes a given argument and writes it into the system log so users can see what happened at each step. This helps track progress and diagnose issues without worrying about different log levels.",
+		"Records informational messages during automation execution for display and analysis. It takes a given argument and writes it into the system log so users can see what happened at each step. This helps track progress and diagnose issues without worrying about different log levels.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -159,7 +162,7 @@
 			"description": [
 				"### Write a Static Log Message",
 				"",
-				"This example demonstrates how to write a simple, static message to the log during automation execution.",
+				"Write a simple, static message to the log during automation execution.",
 				"It uses the `WriteLog` plugin with the argument set to \"Logging a simple message\".",
 				"Values are returned as strings for downstream processing."
 			],
@@ -190,7 +193,7 @@
 			"description": [
 				"### Write a Dynamic Parameter Value to Log",
 				"",
-				"This example demonstrates how to retrieve a dynamic, session-scoped parameter and write its value to the log.",
+				"Retrieve a dynamic, session-scoped parameter and write its value to the log.",
 				"It uses the `WriteLog` plugin with the argument set to `{{$Get-Parameter --Name:MyParam --Scope:Session}}`.",
 				"Values are returned as strings for downstream processing."
 			],
