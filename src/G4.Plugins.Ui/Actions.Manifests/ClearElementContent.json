@@ -55,6 +55,9 @@
 				},
 				"label": "Clear Element Content",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Clear Element Content"
 			}
 		}
 	},
