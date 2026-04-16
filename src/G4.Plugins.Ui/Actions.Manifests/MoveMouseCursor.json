@@ -37,6 +37,18 @@
 					{
 						"question": "What are the default values for X and Y when not provided?",
 						"answer": "When X or Y are absent from the argument, they default to 0."
+					},
+					{
+						"question": "What W3C WebDriver endpoint does MoveMouseCursor use?",
+						"answer": "MoveMouseCursor uses the W3C WebDriver POST /session/{session id}/actions endpoint."
+					},
+					{
+						"question": "What is the manifest version for MoveMouseCursor?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What locator strategies does MoveMouseCursor support when targeting an element?",
+						"answer": "It supports Xpath (default), CssSelector, Id, LinkText, and PartialLinkText via the Locator property. When OnElement is absent, element targeting is skipped and coordinates are used instead."
 					}
 				]
 			},
@@ -49,16 +61,18 @@
 				},
 				"label": "Move Mouse Cursor",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Move Mouse Cursor"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The MoveMouseCursor action moves the mouse cursor to a target web element or to a specific coordinate position on the page.",
+		"MoveMouseCursor moves the mouse cursor to a target web element or to a specific coordinate position on the page.",
 		"When an element is specified via OnElement it takes priority and the cursor moves directly to that element.",
 		"When no element is provided, X and Y coordinates define the target position and the optional Origin parameter controls whether the movement is relative to the current pointer position or to the viewport's top-left corner.",
-		"This action is the primary way to position the mouse before follow-on interactions such as hover, click, or drag operations in an automation workflow.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -102,7 +116,7 @@
 					"expected_result": "The mouse cursor moves to the element matched by the CSS selector #TooltipTarget and any hover state is activated.",
 					"notes": "When OnElement is provided, element targeting takes precedence over any coordinate arguments. The cursor is moved directly to the element without using X, Y, or Origin.",
 					"use_case": "move_cursor_to_element",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CssSelector",
@@ -139,7 +153,7 @@
 					"expected_result": "The mouse cursor moves to the offset (150, 250) relative to its current position.",
 					"notes": "When no OnElement is provided the action reads X, Y, and Origin from the argument. Origin defaults to 'pointer' when not specified, making the movement relative to the current cursor position.",
 					"use_case": "move_cursor_to_coordinates_pointer_origin",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CoordinateMove",
@@ -174,7 +188,7 @@
 					"expected_result": "The mouse cursor moves to coordinates (400, 300) measured from the top-left corner of the visible viewport.",
 					"notes": "Setting Origin to 'Viewport' anchors the movement to the viewport's top-left corner regardless of the current cursor position. Use this when target coordinates are calculated relative to the viewport.",
 					"use_case": "move_cursor_to_coordinates_viewport_origin",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CoordinateMove",
@@ -214,17 +228,13 @@
 					"description": [
 						"Movement is relative to the current position of the mouse pointer."
 					],
-					"mandatory": false,
-					"name": "Pointer",
-					"type": "String"
+					"name": "Pointer"
 				},
 				{
 					"description": [
 						"Movement is relative to the top-left corner of the visible viewport."
 					],
-					"mandatory": false,
-					"name": "Viewport",
-					"type": "String"
+					"name": "Viewport"
 				}
 			]
 		},
@@ -294,7 +304,7 @@
 		"w3c": "POST /session/{session id}/actions"
 	},
 	"summary": [
-		"The MoveMouseCursor action moves the mouse cursor to a target web element or to a specific coordinate position on the page, making it the primary way to position the mouse before hover, click, or drag interactions in an automation workflow.",
+		"MoveMouseCursor moves the mouse cursor to a target web element or to a specific coordinate position on the page, making it the primary way to position the mouse before hover, click, or drag interactions in an automation workflow.",
 		"When an element is provided via OnElement, element targeting takes precedence and the cursor moves directly to that element.",
 		"When no element is specified, X and Y coordinates define the target position and the optional Origin parameter controls whether the movement is relative to the current pointer position ('Pointer') or to the viewport's top-left corner ('Viewport')."
 	],

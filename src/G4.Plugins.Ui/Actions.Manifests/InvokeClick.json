@@ -63,6 +63,9 @@
 				},
 				"label": "Invoke Click",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Invoke Click"
 			}
 		}
 	},
@@ -116,7 +119,7 @@
 					"expected_result": "The element matched by the CSS selector #SubmitButton is clicked.",
 					"notes": "MoveToElement is called before Click to ensure the element is interactable. The locator CssSelector is used because onElement is a CSS selector.",
 					"use_case": "simple_click_by_css_selector",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CssSelector",
@@ -149,7 +152,7 @@
 					"expected_result": "A click is performed at the current mouse cursor position without locating any element.",
 					"notes": "When no OnElement is provided the action calls AddClick().Invoke() on an ActionSequence, which dispatches a click at the last known mouse position. This is useful for scripted mouse-cursor workflows.",
 					"use_case": "positional_click_no_element",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"ElementInteraction",
@@ -180,7 +183,7 @@
 					"expected_result": "The action clicks #TriggerAlert repeatedly every 1.5 seconds until an alert is present, or until 15 seconds elapse.",
 					"notes": "The AlertExists condition uses the Assert plugin internally to evaluate whether an alert is currently open. Polling defaults to 1500 ms when omitted; here it is set explicitly to 1.5 seconds via the TimeSpan shorthand.",
 					"use_case": "conditional_click_until_alert_exists",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"AlertHandling",
@@ -216,7 +219,7 @@
 					"expected_result": "The action clicks #PopAlert, dismisses any resulting alert, and repeats every 1 second until no alert appears after a click, or until 15 seconds elapse.",
 					"notes": "NoAlert, AlertNotExists, and HasNoAlert are aliases for the same handler. The handler calls WebDriver.SwitchTo().Alert().Close() when an alert is present after each click.",
 					"use_case": "conditional_click_dismiss_alert_until_gone",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"AlertDismissal",
@@ -253,7 +256,7 @@
 					"expected_result": "The action clicks #Counter every 1 second until the value attribute equals 10, or until 15 seconds elapse.",
 					"notes": "The ElementAttribute condition delegates to the Assert plugin with the same locator, onElement, onAttribute, and argument as the action rule. Equal:10 is passed as part of the argument so the assertion checks the attribute value.",
 					"use_case": "conditional_click_until_attribute_value",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"AttributeAssertion",
@@ -378,9 +381,9 @@
 		"w3c": "POST /session/{session id}/element/{element id}/click"
 	},
 	"summary": [
-		"The InvokeClick action clicks a target element or the current mouse position, making it the primary way to trigger click interactions in an automation workflow.",
+		"InvokeClick clicks a target element or the current mouse position, making it the primary way to trigger click interactions in an automation workflow.",
 		"It supports a conditional mode that repeats the click at a configurable polling interval until a named assertion — such as an alert appearing or an attribute reaching a value — passes or a timeout elapses.",
-		"In RPA it handles form submissions, modal dismissals, alert handling, and attribute-driven navigation. In automation testing it verifies click responses, dynamic state transitions, and attribute changes driven by repeated interaction."
+		"In RPA it handles form submissions, modal dismissals, alert handling, and attribute-driven navigation; in automation testing it verifies click responses, dynamic state transitions, and attribute changes driven by repeated interaction."
 	],
 	"version": "4"
 }

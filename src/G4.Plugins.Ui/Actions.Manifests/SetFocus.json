@@ -34,6 +34,18 @@
 					{
 						"question": "Where is the source code for SetFocus?",
 						"answer": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SetFocus.cs"
+					},
+					{
+						"question": "What W3C WebDriver endpoint does SetFocus use?",
+						"answer": "SetFocus uses the W3C WebDriver POST /session/{session id}/execute/sync endpoint to execute the JavaScript arguments[0].focus() call."
+					},
+					{
+						"question": "What is the manifest version for SetFocus?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What locator strategies does SetFocus support?",
+						"answer": "SetFocus supports Xpath (default), CssSelector, Id, LinkText, and PartialLinkText via the Locator property."
 					}
 				]
 			},
@@ -46,6 +58,9 @@
 				},
 				"label": "Set Focus",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Set Focus"
 			}
 		}
 	},
@@ -99,7 +114,7 @@
 					"expected_result": "The input element identified by the XPath expression receives keyboard focus and the onfocus DOM event fires.",
 					"notes": "Xpath is the default locator strategy. When onElement is an XPath expression and no explicit locator is set, the engine defaults to Xpath automatically.",
 					"use_case": "focus_input_field_by_xpath",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -142,7 +157,7 @@
 					"expected_result": "The element matching the CSS selector receives keyboard focus, activating any bound onfocus or focusin handlers.",
 					"notes": "CssSelector is set explicitly because the onElement value is a CSS selector expression. Without the explicit locator the engine would attempt to parse the value as XPath.",
 					"use_case": "focus_element_by_css_selector",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -206,7 +221,7 @@
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
 	"summary": [
-		"The SetFocus action places keyboard focus on a target web element by executing the JavaScript `focus()` method via the W3C Execute Script API.",
+		"SetFocus places keyboard focus on a target web element by executing the JavaScript `focus()` method via the W3C Execute Script API.",
 		"It fires `onfocus` and `focusin` DOM events and is used to activate input fields before typed interaction, trigger event-driven UI behaviors, and verify programmatic focusability in automation testing.",
 		"When the target element cannot be located the action exits silently without raising an exception."
 	],

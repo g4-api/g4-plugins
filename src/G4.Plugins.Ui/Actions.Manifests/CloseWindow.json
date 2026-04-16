@@ -38,6 +38,14 @@
 					{
 						"question": "Is handle matching in CloseWindow case-sensitive?",
 						"answer": "No. Handle matching uses OrdinalIgnoreCase comparison so the casing of the supplied handle string does not need to match the casing stored by the browser."
+					},
+					{
+						"question": "What W3C WebDriver endpoint does CloseWindow use?",
+						"answer": "CloseWindow uses the W3C WebDriver DELETE /session/{session id}/window endpoint to close the targeted window."
+					},
+					{
+						"question": "What is the manifest version for CloseWindow?",
+						"answer": "The manifest version is 4."
 					}
 				]
 			},
@@ -50,13 +58,16 @@
 				},
 				"label": "Close Window",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Close Window"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The CloseWindow action closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
+		"CloseWindow closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
 		"It supports three targeting modes — active window, index-based, and handle-based — providing precise window management across multi-window browser sessions.",
 		"",
 		"### Key Features and Functionality",
@@ -97,7 +108,7 @@
 					"expected_result": "The currently active browser window is closed. If it is the last window the browser session ends.",
 					"notes": "No Argument is provided. WebDriver.Close() is called on whichever window currently has driver focus.",
 					"use_case": "close_active_window",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"ActiveWindow",
@@ -129,7 +140,7 @@
 					"expected_result": "The browser window at zero-based index 1 (the second open window) is closed.",
 					"notes": "Argument '1' targets the second entry in the driver handle list. The driver switches to that window before closing.",
 					"use_case": "close_window_by_index",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BrowserManagement",
@@ -162,7 +173,7 @@
 					"expected_result": "The browser window whose handle matches CDwindow-1234 case-insensitively is closed.",
 					"notes": "Handle matching uses OrdinalIgnoreCase. The driver switches to the matched window before closing.",
 					"use_case": "close_window_by_handle",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BrowserManagement",
@@ -211,7 +222,7 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The CloseWindow action closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
+		"CloseWindow closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
 		"In robotic process automation it provides targeted window closure by index position or stored handle, enabling precise session management without disrupting other open windows.",
 		"In automation testing it removes specific windows opened during test interactions, keeping the window state clean and predictable between test steps."
 	],

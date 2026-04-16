@@ -62,13 +62,16 @@
 				},
 				"label": "Close Browser",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Close Browser"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The CloseBrowser action terminates the current browser session by closing the browser window and disposing of the WebDriver instance.",
+		"CloseBrowser terminates the current browser session by closing the browser window and disposing of the WebDriver instance.",
 		"It ensures that all browser resources are properly released, preventing orphaned processes from consuming system memory.",
 		"The action performs both a session quit and a resource disposal, guaranteeing a clean teardown regardless of the session state.",
 		"",
@@ -116,7 +119,7 @@
 					"expected_result": "The browser session is terminated and the WebDriver instance is disposed, releasing all associated resources.",
 					"notes": "The action calls WebDriver.Quit to end the session and WebDriver.Dispose in a finally block to release resources even if Quit fails. No parameters, arguments, or element targeting are accepted. The plugin can also be invoked using the aliases CloseSession and QuitSession. It maps to the W3C WebDriver DELETE /session/{session id} endpoint.",
 					"use_case": "session_teardown",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -144,6 +147,43 @@
 				"$type": "Action",
 				"pluginName": "CloseBrowser"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Session was already closed by a prior step — calling CloseBrowser again on a disposed session raises a WebDriverException from WebDriver.Quit(); Dispose is still called in the finally block",
+						"Multiple tests running in parallel — each test must use its own WebDriver instance; a shared instance closed by one test disrupts all others",
+						"Session teardown fails during CI — orphaned browser processes can accumulate if the runner is forcefully killed; the finally block mitigates this under normal shutdown"
+					],
+					"expected_result": "The browser session is terminated at the end of a test run, and the WebDriver instance is disposed to release all associated system resources.",
+					"notes": "Using QuitSession as an alias produces identical behavior. CloseBrowser, CloseSession, and QuitSession all invoke the same implementation.",
+					"use_case": "alias_session_teardown",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"Alias",
+					"BrowserManagement",
+					"Cleanup",
+					"QuitSession",
+					"ResourceManagement",
+					"SessionManagement",
+					"Teardown",
+					"UiAutomation",
+					"WebAutomation"
+				]
+			},
+			"description": [
+				"### Terminate browser session using alias QuitSession",
+				"",
+				"Closes the active browser session using the `QuitSession` alias, which resolves to the same implementation as `CloseBrowser`.",
+				"Use either alias interchangeably — the underlying Quit and Dispose sequence is identical."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "QuitSession"
+			}
 		}
 	],
 	"key": "CloseBrowser",
@@ -157,9 +197,9 @@
 		"Any"
 	],
 	"summary": [
-		"The CloseBrowser action terminates the current browser session by closing the browser window and releasing the underlying WebDriver instance.",
-		"In robotic process automation, it provides a clean session teardown that frees system resources and prevents orphaned browser processes from accumulating.",
-		"In automation testing, it ensures each test run concludes with a proper session cleanup, supporting reliable parallel execution and consistent test isolation."
+		"CloseBrowser terminates the current browser session by closing the browser window and releasing the underlying WebDriver instance.",
+		"In robotic process automation it provides a clean session teardown that frees system resources and prevents orphaned browser processes from accumulating.",
+		"In automation testing it ensures each test run concludes with a proper session cleanup, supporting reliable parallel execution and consistent test isolation."
 	],
 	"version": "4"
 }

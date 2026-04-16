@@ -43,6 +43,14 @@
 					{
 						"question": "What does the CopiedResources output parameter contain?",
 						"answer": "CopiedResources is a session parameter holding a collection of absolute file paths for every resource successfully downloaded during the action. Files that failed to download are omitted — only successfully written paths are included."
+					},
+					{
+						"question": "What is the manifest version for CopyResource?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What happens when the target directory does not exist?",
+						"answer": "The plugin creates the target directory automatically — including any missing parent directories — before writing the downloaded file. No error is raised for a new or previously absent directory."
 					}
 				]
 			},
@@ -55,6 +63,9 @@
 				},
 				"label": "Copy Resource",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Copy Resource"
 			}
 		}
 	},
@@ -105,7 +116,7 @@
 					"expected_result": "Images whose src matches the regex are downloaded in parallel and saved to /home/user/images. Their absolute file paths are stored in CopiedResources.",
 					"notes": "The --Parallel switch enables Parallel.ForEach with MaxDegreeOfParallelism = Environment.ProcessorCount. Switch parameters require no value — presence alone activates the behavior.",
 					"use_case": "parallel_image_download_from_attribute",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"AttributeExtraction",
@@ -144,7 +155,7 @@
 					"expected_result": "PDF links whose href matches the regex are downloaded sequentially and saved to /home/user/docs. Their absolute file paths are stored in CopiedResources.",
 					"notes": "Sequential mode is the default when --Parallel is absent. Use this for ordered or rate-sensitive downloads.",
 					"use_case": "sequential_document_download_from_href",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"AttributeExtraction",
@@ -181,7 +192,7 @@
 					"expected_result": "URLs found in the visible text of matched elements are downloaded sequentially and saved to /home/user/resources. File paths are stored in CopiedResources.",
 					"notes": "When OnAttribute is absent the plugin reads element.Text. The regex isolates the URL from any surrounding text content.",
 					"use_case": "text_based_url_extraction_download",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"ResourceCopy",
@@ -302,7 +313,7 @@
 		"Web"
 	],
 	"summary": [
-		"The CopyResource action downloads files from web elements and saves them to local disk, storing all successfully written file paths in the CopiedResources session parameter.",
+		"CopyResource downloads files from web elements and saves them to local disk, storing all successfully written file paths in the CopiedResources session parameter.",
 		"It resolves download URLs from element attributes or text using a regular expression, supports both HTTP/HTTPS requests and inline data URI decoding, and can process multiple elements in parallel or sequentially.",
 		"In RPA it automates bulk asset and document collection workflows; in automation testing it verifies that resource links remain functional and that downloaded content meets expected criteria."
 	],

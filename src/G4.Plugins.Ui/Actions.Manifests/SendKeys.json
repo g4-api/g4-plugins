@@ -18,35 +18,35 @@
 				"qa": [
 					{
 						"question": "What does the SendKeys action do?",
-						"answer": "SendKeys types text into a target UI element, simulating real keyboard input with configurable delay, clearing, and modifier key support."
+						"answer": "SendKeys locates a target web element and sends a text string to it character by character, with optional per-character delay, pre-clearing, and keyboard modifier combinations."
+					},
+					{
+						"question": "How is the text to send determined?",
+						"answer": "The text is taken from the Keys parameter when supplied. When Keys is absent the Argument property value is used directly as the text to type."
 					},
 					{
 						"question": "What parameters does SendKeys support?",
-						"answer": "Keys (text), Delay (typing speed), NativeClear (backspace clear), Clear (standard clear), and Modifier (Ctrl, Alt, Shift, Meta)."
+						"answer": "SendKeys supports Keys (the text string to send), Delay (per-character pause in TimeSpan or millisecond format), Clear (standard WebDriver element clear), NativeClear (backspace-simulation clear), and Modifier (one or more keyboard modifier keys such as Control, Alt, Shift, or Meta)."
 					},
 					{
-						"question": "How does element targeting work?",
-						"answer": "Elements are targeted using onElement with a locator strategy. Default locator is XPath. Regular expression patterns can filter element matching."
+						"question": "How does element targeting work in SendKeys?",
+						"answer": "The target element is identified by the OnElement property evaluated with the strategy specified by Locator. The default locator is Xpath. An optional RegularExpression property narrows element matching on the resolved attribute or text value."
 					},
 					{
-						"question": "When should NativeClear vs Clear be used?",
-						"answer": "NativeClear uses backspace simulation for custom controls. Clear uses standard WebDriver clear for simple inputs."
+						"question": "When should NativeClear be used instead of Clear?",
+						"answer": "Use NativeClear for custom controls such as content-editable divs or inputs with event handlers that ignore the standard WebDriver clear command. NativeClear simulates repeated backspace key presses. Use Clear for standard input elements that respond correctly to the WebDriver element clear method."
 					},
 					{
 						"question": "How are modifier keys specified?",
-						"answer": "Modifier accepts a single string or JSON array: Control, Alt, Shift, or Meta. Keys are held during text input."
+						"answer": "The Modifier parameter accepts a single value such as Control, or repeated --Modifier parameters that are combined into an array at runtime. All specified modifier keys are held down while the text is sent to the element."
 					},
 					{
-						"question": "What is the manifest version?",
-						"answer": "The manifestVersion is 4."
+						"question": "What is the manifest version for SendKeys?",
+						"answer": "The manifest version is 4."
 					},
 					{
 						"question": "What happens if the target element is not found?",
-						"answer": "A NoSuchElementException is logged and an empty response is returned. The workflow continues."
-					},
-					{
-						"question": "Can SendKeys handle keyboard combinations?",
-						"answer": "Yes. SendModifiedKeys holds modifiers like Ctrl+A or Ctrl+C by specifying the modifier and key together."
+						"answer": "A NoSuchElementException is wrapped in a G4ExceptionModel, added to the plugin exception list, and the action returns an empty response without sending any text."
 					}
 				]
 			},
@@ -59,17 +59,20 @@
 				},
 				"label": "Send Keys",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Send Keys"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The SendKeys action types text into a target UI element such as input fields or text areas.",
-		"It provides flexible control over typing speed, content clearing, and keyboard modifier combinations.",
-		"This action is essential for automating form filling, search box input, and any text entry workflow.",
+		"SendKeys types text into a target web element such as input fields or text areas with configurable typing speed, content clearing, and keyboard modifier combinations.",
+		"The text to send is supplied via the Keys parameter or directly as the Argument value when Keys is absent.",
 		"",
 		"### Key Features and Functionality",
+		"",
 		"| Feature              | Description                                                                |",
 		"|----------------------|----------------------------------------------------------------------------|",
 		"| Text Input           | Sends keystrokes to the element with configurable delay between characters |",
@@ -78,6 +81,7 @@
 		"| Flexible Text Source | Accepts text from the Keys parameter or rule argument                      |",
 		"",
 		"### Usages in RPA",
+		"",
 		"| Use Case          | Description                                 |",
 		"|-------------------|---------------------------------------------|",
 		"| Form Field Entry  | Automatically fill text inputs in web forms |",
@@ -85,6 +89,7 @@
 		"| Text Area Content | Enter multi-line text into text areas       |",
 		"",
 		"### Usages in Automation Testing",
+		"",
 		"| Use Case           | Description                                     |",
 		"|--------------------|-------------------------------------------------|",
 		"| Input Validation   | Test form fields with various text inputs       |",
@@ -103,7 +108,7 @@
 					"expected_result": "The text 'Hello World' is typed into the input field.",
 					"notes": "The action uses the Keys parameter from the argument macro. When Keys is empty, the argument itself is used as fallback text.",
 					"use_case": "basic_text_input",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Input",
@@ -136,7 +141,7 @@
 					"expected_result": "The input field is cleared first, then 'New Text' is entered.",
 					"notes": "NativeClear uses backspace simulation. Standard Clear uses WebDriver Clear method. Only one clear method should be used.",
 					"use_case": "clear_before_input",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Clear",
@@ -169,7 +174,7 @@
 					"expected_result": "Ctrl+A is pressed to select all text in the element.",
 					"notes": "Modifier keys are held down while the text is sent. Multiple modifiers can be provided as a JSON array.",
 					"use_case": "keyboard_shortcut_with_modifier",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"KeyboardShortcut",
@@ -202,7 +207,7 @@
 					"expected_result": "The Control and Alt modifiers are held while the key 'a' is sent to the target element.",
 					"notes": "Modifier accepts repeated parameter values that are converted into an array at runtime. The action holds all provided modifiers while sending the key value to the element.",
 					"use_case": "send_key_with_multiple_modifiers",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"KeyboardShortcut",
@@ -235,7 +240,7 @@
 					"expected_result": "The text is typed character by character with a 100ms delay between each keystroke.",
 					"notes": "Delay accepts TimeSpan format like 00:00:00.100 for 100ms between characters. Default is zero delay for instant typing.",
 					"use_case": "typed_input_with_delay",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Delay",
@@ -319,44 +324,44 @@
 	"properties": [
 		{
 			"description": [
-				"argument provides the keystroke text as a fallback when the Keys parameter is not set.",
+				"Argument provides the keystroke text as a fallback when the Keys parameter is not set.",
 				"It allows passing text directly to the element without using a named parameter.",
-				"When both argument and Keys parameter are present, Keys takes precedence."
+				"When both Argument and Keys parameter are present, Keys takes precedence."
 			],
 			"mandatory": true,
-			"name": "argument",
+			"name": "Argument",
 			"type": "String"
 		},
 		{
 			"description": [
-				"locator determines the strategy for finding the target element.",
+				"Locator determines the strategy for finding the target element.",
 				"It defaults to Xpath for element location.",
 				"Supported locators include Xpath, CssSelector, Id, LinkText, and PartialLinkText."
 			],
 			"default": "Xpath",
 			"mandatory": false,
-			"name": "locator",
+			"name": "Locator",
 			"type": "String"
 		},
 		{
 			"description": [
-				"onElement specifies the target element for sending keystrokes.",
+				"OnElement specifies the target element for sending keystrokes.",
 				"It is required for identifying which element receives the keyboard input.",
 				"The value format depends on the selected locator strategy."
 			],
 			"mandatory": true,
-			"name": "onElement",
+			"name": "OnElement",
 			"type": "String"
 		},
 		{
 			"description": [
-				"regularExpression filters element matching using pattern matching on element attributes.",
+				"RegularExpression filters element matching using pattern matching on element attributes.",
 				"It defaults to '(?si).*' to match all elements.",
 				"Use this to narrow down element selection when multiple elements match the locator."
 			],
 			"default": "(?si).*",
 			"mandatory": false,
-			"name": "regularExpression",
+			"name": "RegularExpression",
 			"type": "String"
 		}
 	],
@@ -365,10 +370,9 @@
 		"w3c": "POST /session/{session id}/element/{element id}/value"
 	},
 	"summary": [
-		"The SendKeys action sends keystrokes to a target element in the UI.",
-		"It supports typing text with configurable delay between keystrokes.",
-		"The action can clear element content before typing using native or standard clear methods.",
-		"Modifier keys like Ctrl, Alt, and Shift can be held during text input."
+		"SendKeys sends keystrokes to a target element in the UI, supporting configurable delay between characters, pre-clearing via native backspace or standard WebDriver clear, and keyboard modifier combinations.",
+		"The Keys parameter supplies the text to type; when absent the Argument value is used as a fallback.",
+		"In RPA it automates text entry in forms, search boxes, and text areas; in automation testing it verifies input field behavior, keyboard shortcuts, and typing-speed scenarios."
 	],
 	"version": "4"
 }

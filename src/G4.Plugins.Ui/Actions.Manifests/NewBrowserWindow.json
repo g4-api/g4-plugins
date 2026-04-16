@@ -43,6 +43,14 @@
 					{
 						"question": "What happens when Amount is not a valid integer?",
 						"answer": "int.TryParse fails silently and the amount variable is set to 0. The for loop runs zero iterations and no new window or tab is opened."
+					},
+					{
+						"question": "What is the manifest version for NewBrowserWindow?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What aliases can be used in place of NewBrowserWindow?",
+						"answer": "NewBrowserWindow is also accepted as NewBrowserTab, OpenBrowserWindow, and OpenBrowserTab — all resolve to identical behavior."
 					}
 				]
 			},
@@ -55,6 +63,9 @@
 				},
 				"label": "New Browser Window",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "New Browser Window"
 			}
 		}
 	},
@@ -106,7 +117,7 @@
 					"expected_result": "window.open('about:blank', '_blank') is called three times, resulting in three new browser tabs.",
 					"notes": "No element is specified so GetUrl returns about:blank unconditionally. Amount and Target are read from the CLI argument dictionary. Amount defaults to 1 when the argument is absent.",
 					"use_case": "open_multiple_blank_tabs",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Amount",
@@ -142,7 +153,7 @@
 					"expected_result": "The text content of the element matching #OpenLink is extracted and passed to window.open(text, '_blank'), opening one new tab at that URL.",
 					"notes": "OnAttribute is absent so element.Text is used as the URL source. RegularExpression default matches the entire string. Amount defaults to 1. Target defaults to _blank.",
 					"use_case": "open_from_element_text",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CssSelector",
@@ -179,7 +190,7 @@
 					"expected_result": "The href attribute of #OpenLink is extracted, the regex retains only the https URL portion, and window.open(url, '_self') loads it in the current tab.",
 					"notes": "OnAttribute is set so element.GetAttribute('href') is used instead of element.Text. RegularExpression filters the attribute value to the URL portion. Target is _self so the URL loads in the current browsing context rather than a new tab.",
 					"use_case": "open_from_element_attribute_with_regex",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"AttributeExtraction",
@@ -323,10 +334,10 @@
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
 	"summary": [
-		"The NewBrowserWindow action opens one or more new browser windows or tabs by calling `window.open()` via JavaScript, making it the dedicated action for spawning additional browsing contexts without navigating the current window.",
+		"NewBrowserWindow opens one or more new browser windows or tabs by calling `window.open()` via JavaScript, making it the dedicated action for spawning additional browsing contexts without navigating the current window.",
 		"There is no URL parameter — the URL is always `about:blank` when no element is provided, or extracted from the element's text or a named attribute and filtered by `RegularExpression` when an element is provided.",
 		"The `Target` parameter controls the `window.open()` browsing context and the `Amount` parameter controls how many windows are opened in a single step.",
-		"In RPA it enables multi-window workflows, link-driven navigation, and bulk context provisioning. In automation testing it supports multi-window testing, link target validation, and window count assertions."
+		"In RPA it enables multi-window workflows, link-driven navigation, and bulk context provisioning; in automation testing it supports multi-window testing, link target validation, and window count assertions."
 	],
 	"version": "4"
 }

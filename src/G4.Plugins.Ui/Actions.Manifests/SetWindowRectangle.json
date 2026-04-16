@@ -41,6 +41,14 @@
 					{
 						"question": "What W3C WebDriver command underlies SetWindowRectangle?",
 						"answer": "SetWindowRectangle maps to the W3C WebDriver Set Window Rect command: POST /session/{session id}/window/rect."
+					},
+					{
+						"question": "What is the manifest version for SetWindowRectangle?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What is the namespace and plugin type for SetWindowRectangle?",
+						"answer": "The namespace is G4.Plugins.Ui and the pluginType is Action."
 					}
 				]
 			},
@@ -53,6 +61,9 @@
 				},
 				"label": "Set Window Rectangle",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Set Window Rectangle"
 			}
 		}
 	},
@@ -61,7 +72,6 @@
 		"",
 		"The `SetWindowRectangle` action resizes and repositions the browser window by supplying any combination of `Height`, `Width`, `X`, and `Y` parameters.",
 		"Omitted parameters are preserved from the current window geometry, allowing size-only, position-only, or full-rect changes in a single call.",
-		"This action maps directly to the W3C WebDriver Set Window Rect command and is the primary way to enforce a specific window geometry before layout-sensitive steps.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -103,7 +113,7 @@
 					"expected_result": "The browser window is resized to 1024 × 768 pixels and moved to screen position (100, 100).",
 					"notes": "All four parameters are provided. This is the full-rect form and replaces all four window dimensions in a single call.",
 					"use_case": "set_full_window_rect",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"FullRect",
@@ -140,7 +150,7 @@
 					"expected_result": "The browser window is resized to 800 × 600 pixels. Its screen position is unchanged.",
 					"notes": "Only Height and Width are supplied. The action reads the current X and Y from the driver and reapplies them unchanged, so the window changes only in size, not position.",
 					"use_case": "resize_only",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Height",
@@ -174,7 +184,7 @@
 					"expected_result": "The browser window is moved to screen coordinates (200, 150). Its size is unchanged.",
 					"notes": "Only X and Y are supplied. The action reads the current Height and Width from the driver and reapplies them unchanged, so the window changes position only.",
 					"use_case": "reposition_only",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"MoveOnly",
@@ -208,7 +218,7 @@
 					"expected_result": "The browser window width is set to 1200 pixels and its left-edge X position is moved to 50. Height and Y position are unchanged.",
 					"notes": "Width and X are supplied but Height and Y are omitted. The current height and Y are preserved. This demonstrates mixed partial-apply across the horizontal size and position axes.",
 					"use_case": "set_width_and_x",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"HorizontalPartial",
@@ -242,7 +252,7 @@
 					"expected_result": "The browser window height is set to 700 pixels and its top-edge Y position is moved to 300. Width and X position are unchanged.",
 					"notes": "Height and Y are supplied but Width and X are omitted. The current width and X are preserved. This demonstrates mixed partial-apply across the vertical size and position axes.",
 					"use_case": "set_height_and_y",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Height",
@@ -328,9 +338,9 @@
 		"w3c": "POST /session/{session id}/window/rect"
 	},
 	"summary": [
-		"The `SetWindowRectangle` action resizes and repositions the browser window to exact pixel dimensions and screen coordinates using the W3C WebDriver Set Window Rect command.",
+		"SetWindowRectangle resizes and repositions the browser window to exact pixel dimensions and screen coordinates using the W3C WebDriver Set Window Rect command.",
 		"Any combination of Height, Width, X, and Y parameters is accepted; omitted parameters default to the current window value, enabling size-only, position-only, or full-rect changes in a single call.",
-		"In RPA and automation testing, it ensures reproducible window geometry for layout-sensitive workflows, multi-window coordination, and responsive-design verification."
+		"In RPA and automation testing it ensures reproducible window geometry for layout-sensitive workflows, multi-window coordination, and responsive-design verification."
 	],
 	"version": "4"
 }
