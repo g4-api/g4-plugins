@@ -72,7 +72,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The CopyResource action downloads files from web elements and saves them to local disk. It reads a URL from an element's text or a named attribute, applies an optional regular expression to extract the exact endpoint, and fetches the content via HTTP, HTTPS, or by decoding an inline data URI. The output directory is created automatically if it does not exist, and every successfully written file path is stored in the CopiedResources session parameter for downstream use.",
+		"Downloads files from web elements and saves them to local disk. It reads a URL from an element's text or a named attribute, applies an optional regular expression to extract the exact endpoint, and fetches the content via HTTP, HTTPS, or by decoding an inline data URI. The output directory is created automatically if it does not exist, and every successfully written file path is stored in the CopiedResources session parameter for downstream use.",
 		"",
 		"### Key Features and Functionality",
 		"",

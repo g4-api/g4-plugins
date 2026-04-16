@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeScript action executes an environment-specific script within the current WebDriver session.",
+		"Executes an environment-specific script within the current WebDriver session.",
 		"In a web browser the script is JavaScript; on iOS it is Xcode; on Windows it can be PowerShell.",
 		"The script can receive a located web element and custom argument values, making it the primary way to perform DOM manipulation, extract hidden data, or trigger JavaScript-only behaviors that native WebDriver commands cannot reach.",
 		"The return value of the script is stored in the session parameter ScriptResult and is immediately available to downstream rules.",

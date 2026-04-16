@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchAlert` plugin switches WebDriver focus to the active browser alert dialog and performs a configurable action: accept, dismiss, or no-action pass-through.",
+		"Switches WebDriver focus to the active browser alert dialog and performs a configurable action: accept, dismiss, or no-action pass-through.",
 		"An optional `Keys` parameter sends text to prompt dialogs before the action is applied.",
 		"When invoked with no argument and no parameters, the alert is dismissed by default.",
 		"",

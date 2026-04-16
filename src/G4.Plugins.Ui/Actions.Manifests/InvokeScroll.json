@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeScroll action scrolls a web page or a specific overflow element to a given pixel position using JavaScript.",
+		"Scrolls a web page or a specific overflow element to a given pixel position using JavaScript.",
 		"When an element is specified via OnElement, the action targets that element with `element.scroll()`; otherwise it scrolls the entire page via `window.scroll()`.",
 		"This makes it the primary way to programmatically position the viewport or scroll within overflow containers in automation workflows and test scripts.",
 		"",

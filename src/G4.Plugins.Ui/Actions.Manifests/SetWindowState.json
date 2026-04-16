@@ -67,7 +67,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SetWindowState` action sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
+		"Sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
 		"The `Argument` property specifies the target state and is evaluated with `OrdinalIgnoreCase`, so `maximized`, `MAXIMIZED`, and `Maximized` are all valid.",
 		"If `Argument` is absent, empty, or does not match any recognized value, the action returns a default response without error — the window state is not changed.",
 		"",

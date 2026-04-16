@@ -75,7 +75,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"ResolveOnlineFile locates and downloads a file from a direct URL or from a URL resolved via a web element.",
+		"Locates and downloads a file from a direct URL or from a URL resolved via a web element.",
 		"It applies optional regex filtering to isolate the exact endpoint, performs an HTTP GET download, Base64-encodes the file bytes, and stores the content together with file name, extension, size, and HTTP status code in dedicated session output parameters.",
 		"On failure it clears all stored session data and logs the exception, so downstream steps always encounter either valid data or an explicit failure signal.",
 		"",

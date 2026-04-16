@@ -71,7 +71,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeDoubleClick action performs a double-click on a target element or at the current mouse position when no element is specified.",
+		"Performs a double-click on a target element or at the current mouse position when no element is specified.",
 		"When an element is provided, the action first moves the mouse cursor to the element to ensure it is scrolled into view before dispatching the double-click via the WebDriver Actions API.",
 		"This makes it the primary way to trigger double-click interactions — such as opening items, entering inline edit mode, or activating double-click–driven behaviors — in an automation workflow.",
 		"For standard left-click interactions use InvokeClick. For right-click interactions use InvokeContextClick instead.",

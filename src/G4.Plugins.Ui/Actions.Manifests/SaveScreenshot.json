@@ -71,7 +71,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SaveScreenshot` plugin captures and saves a PNG screenshot of the browser viewport or a specific element during automation workflows, using the W3C WebDriver `GET /session/{session id}/screenshot` command as its underlying mechanism.",
+		"Captures and saves a PNG screenshot of the browser viewport or a specific element during automation workflows, using the W3C WebDriver `GET /session/{session id}/screenshot` command as its underlying mechanism.",
 		"It automatically creates the target directory, enforces the `.png` extension on every output file, generates a unique GUID-based file name when none is provided, and accumulates every saved absolute path in the `SaveScreenshot:Screenshots` session parameter for downstream use.",
 		"",
 		"### Key Features and Functionality",

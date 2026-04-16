@@ -72,7 +72,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The NewBrowserWindow action opens one or more new browser windows or tabs by calling `window.open(url, target)` via JavaScript execution within the current WebDriver session.",
+		"Opens one or more new browser windows or tabs by calling `window.open(url, target)` via JavaScript execution within the current WebDriver session.",
 		"Unlike `OpenUrl`, which navigates the current browsing context to a new address, `NewBrowserWindow` always opens an additional context without leaving the current page.",
 		"There is no URL parameter — the URL is exclusively derived from a located element's text or attribute, or defaults to `about:blank` when no element is provided.",
 		"`RegularExpression` is always applied to the extracted URL string; when the pattern matches the full string the complete value is passed to `window.open()`.",

@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SetWindowRectangle` action resizes and repositions the browser window by supplying any combination of `Height`, `Width`, `X`, and `Y` parameters.",
+		"Resizes and repositions the browser window by supplying any combination of `Height`, `Width`, `X`, and `Y` parameters.",
 		"Omitted parameters are preserved from the current window geometry, allowing size-only, position-only, or full-rect changes in a single call.",
 		"",
 		"### Key Features and Functionality",

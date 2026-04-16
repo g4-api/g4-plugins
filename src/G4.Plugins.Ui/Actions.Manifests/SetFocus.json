@@ -67,7 +67,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The SetFocus action programmatically places keyboard focus on a target web element by executing the JavaScript `focus()` method via the W3C Execute Script API.",
+		"Programmatically places keyboard focus on a target web element by executing the JavaScript `focus()` method via the W3C Execute Script API.",
 		"It is used to activate input fields and interactive controls before subsequent keyboard interactions, and to trigger focus-related DOM events such as `onfocus` and `focusin`.",
 		"When the target element cannot be located the action exits silently without raising an exception.",
 		"",

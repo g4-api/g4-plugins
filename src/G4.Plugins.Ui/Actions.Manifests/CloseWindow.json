@@ -67,7 +67,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"CloseWindow closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
+		"Closes a specific browser window identified by its handle or index, or closes the currently active window when no argument is supplied.",
 		"It supports three targeting modes — active window, index-based, and handle-based — providing precise window management across multi-window browser sessions.",
 		"",
 		"### Key Features and Functionality",

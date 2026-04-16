@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `UndoNavigation` plugin automates backward browser navigation, equivalent to clicking the browser's built-in back button.",
+		"Automates backward browser navigation, equivalent to clicking the browser's built-in back button.",
 		"It provides a structured way to traverse session history backward with configurable repeat counts and optional delays between steps.",
 		"",
 		"### Key Features and Functionality",

@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The SendKeyboardKey action sends one or more named keyboard keys to a target web element, simulating physical keyboard interactions.",
+		"Sends one or more named keyboard keys to a target web element, simulating physical keyboard interactions.",
 		"Each key name is resolved against WebDriver key constants and dispatched sequentially to the element.",
 		"Use this action wherever a workflow needs to trigger keyboard-driven behavior — such as submitting a form with Enter, deleting content with Backspace, or shifting focus with Tab — on a specific element.",
 		"",

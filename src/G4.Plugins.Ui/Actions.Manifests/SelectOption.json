@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The SelectOption action selects an option from a native HTML `<select>` dropdown element.",
+		"Selects an option from a native HTML `<select>` dropdown element.",
 		"The target element is validated as a `<select>` before any selection attempt, and the desired option is located using one of four strategies controlled by the `OnAttribute` property.",
 		"Use this action whenever an automation workflow must interact with dropdown menus rendered as standard HTML select elements.",
 		"",

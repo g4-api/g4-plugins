@@ -72,7 +72,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeClick action performs a click on a target element or at the current mouse position when no element is specified.",
+		"Performs a click on a target element or at the current mouse position when no element is specified.",
 		"It supports a conditional click mode that retries the click at a configurable interval until an assertion condition is met or a timeout expires.",
 		"This makes it suitable for scenarios that require waiting for a dynamic state change — such as an alert appearing or an attribute reaching a target value — before the workflow continues.",
 		"",

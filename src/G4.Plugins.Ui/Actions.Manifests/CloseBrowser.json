@@ -71,7 +71,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"CloseBrowser terminates the current browser session by closing the browser window and disposing of the WebDriver instance.",
+		"Terminates the current browser session by closing the browser window and disposing of the WebDriver instance.",
 		"It ensures that all browser resources are properly released, preventing orphaned processes from consuming system memory.",
 		"The action performs both a session quit and a resource disposal, guaranteeing a clean teardown regardless of the session state.",
 		"",

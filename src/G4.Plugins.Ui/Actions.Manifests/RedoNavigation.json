@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `RedoNavigation` plugin automates forward browser navigation, equivalent to clicking the browser's built-in forward button.",
+		"Automates forward browser navigation, equivalent to clicking the browser's built-in forward button.",
 		"It provides a structured way to advance through session history with configurable repeat counts and optional delays between steps.",
 		"",
 		"### Key Features and Functionality",

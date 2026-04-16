@@ -67,7 +67,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The NewWindow action opens a new browser tab or window in the current WebDriver session by calling `WebDriver.SwitchTo().NewWindow()`, the W3C WebDriver native new-window command.",
+		"Opens a new browser tab or window in the current WebDriver session by calling `WebDriver.SwitchTo().NewWindow()`, the W3C WebDriver native new-window command.",
 		"Unlike `NewBrowserWindow`, which uses JavaScript `window.open()`, `NewWindow` uses the browser driver's built-in context-creation mechanism — no URL, element, or JavaScript execution is required.",
 		"The new context opens blank and immediately becomes the active WebDriver window handle.",
 		"The `Argument` property controls whether a `tab` (default) or a `window` is created.",

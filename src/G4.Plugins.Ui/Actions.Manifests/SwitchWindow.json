@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchWindow` plugin switches WebDriver context to a different browser window or tab.",
+		"Switches WebDriver context to a different browser window or tab.",
 		"Mode selection is automatic: at runtime `int.TryParse(pluginData.Rule.Argument, out int index)` determines the path — a successful parse triggers the index path; a failed parse triggers the handle path.",
 		"No other parameters exist; the entire switching contract is expressed through a single `Argument` value.",
 		"",

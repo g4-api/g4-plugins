@@ -72,7 +72,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"CloseChildWindows closes all child browser windows or tabs while always preserving the main window at index zero.",
+		"Closes all child browser windows or tabs while always preserving the main window at index zero.",
 		"An optional integer Argument limits closure to an exact number of children; omitting it closes all of them.",
 		"After all targeted windows are closed the driver focus is returned to the main window, leaving the session in a consistent, single-window state.",
 		"",

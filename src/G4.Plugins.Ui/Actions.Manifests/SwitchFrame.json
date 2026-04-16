@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchFrame` plugin switches WebDriver context into a nested frame or iframe on the current page.",
+		"Switches WebDriver context into a nested frame or iframe on the current page.",
 		"It supports two mutually exclusive modes selected automatically at runtime: switching by zero-based integer index or by resolving a web element.",
 		"",
 		"### Key Features and Functionality",

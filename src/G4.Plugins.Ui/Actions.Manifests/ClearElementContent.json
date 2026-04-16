@@ -75,7 +75,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"ClearElementContent removes all text and values from a targeted web element, ensuring subsequent interactions start from a clean state.",
+		"Removes all text and values from a targeted web element, ensuring subsequent interactions start from a clean state.",
 		"It prevents errors caused by pre-filled data and provides a native clearing option for elements that do not respond to the standard WebDriver clear method.",
 		"",
 		"### Key Features and Functionality",

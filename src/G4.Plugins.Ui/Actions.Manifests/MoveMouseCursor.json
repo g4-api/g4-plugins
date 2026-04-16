@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"MoveMouseCursor moves the mouse cursor to a target web element or to a specific coordinate position on the page.",
+		"Moves the mouse cursor to a target web element or to a specific coordinate position on the page.",
 		"When an element is specified via OnElement it takes priority and the cursor moves directly to that element.",
 		"When no element is provided, X and Y coordinates define the target position and the optional Origin parameter controls whether the movement is relative to the current pointer position or to the viewport's top-left corner.",
 		"",

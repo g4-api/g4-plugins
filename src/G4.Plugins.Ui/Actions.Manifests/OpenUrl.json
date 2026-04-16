@@ -70,7 +70,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `OpenUrl` plugin navigates the current browser window to a specified URL using the WebDriver navigate-to command.",
+		"Navigates the current browser window to a specified URL using the WebDriver navigate-to command.",
 		"The URL source depends on whether a target element is provided: when no element is given the `Argument` property is used directly without regex processing; when an element is given the URL is read from the element's text content or a named attribute and `RegularExpression` is then applied to the extracted value.",
 		"`RegularExpression` is only active when an element is located — it does not process the direct `Argument` value.",
 		"",

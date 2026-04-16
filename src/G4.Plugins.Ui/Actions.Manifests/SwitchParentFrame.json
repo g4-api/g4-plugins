@@ -74,7 +74,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"SwitchParentFrame switches WebDriver context one level up from the current child frame to its direct parent frame by calling `WebDriver.SwitchTo().ParentFrame()` unconditionally.",
+		"Switches WebDriver context one level up from the current child frame to its direct parent frame by calling `WebDriver.SwitchTo().ParentFrame()` unconditionally.",
 		"It requires no parameters or configuration and always performs a single deterministic switch.",
 		"",
 		"### Key Features and Functionality",

@@ -68,7 +68,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"SendKeys types text into a target web element such as input fields or text areas with configurable typing speed, content clearing, and keyboard modifier combinations.",
+		"Types text into a target web element such as input fields or text areas with configurable typing speed, content clearing, and keyboard modifier combinations.",
 		"The text to send is supplied via the Keys parameter or directly as the Argument value when Keys is absent.",
 		"",
 		"### Key Features and Functionality",
