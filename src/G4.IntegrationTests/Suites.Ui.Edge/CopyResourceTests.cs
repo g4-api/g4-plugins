@@ -3,6 +3,7 @@
  * 
  * RESOURCES
  */
+using G4.Extensions;
 using G4.IntegrationTests.Extensions;
 using G4.IntegrationTests.Framework;
 using G4.IntegrationTests.Framework.Attributes;
@@ -10,9 +11,8 @@ using G4.IntegrationTests.Plugins.Ui.CopyResource;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.Json;
 
 namespace G4.IntegrationTests.Suites.Ui.Edge
 {
@@ -62,10 +62,14 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0001>(testOptions);
 
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["CopyResource:CopiedResources"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
+
             // Assert the expected number of resources copied
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 3,
-                actual: (response.Environment.SessionParameters["CopiedResources"] as IEnumerable<string>).Count(),
+                collection: entities,
                 message: "The expected number of resources was not copied. Check the CopyResource action.");
         }
 
@@ -99,10 +103,14 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0002>(testOptions);
 
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["CopyResource:CopiedResources"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
+
             // Assert the expected number of resources copied
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 3,
-                actual: (response.Environment.SessionParameters["CopiedResources"] as IEnumerable<string>).Count(),
+                collection: entities,
                 message: "The expected number of resources was not copied. Check the CopyResource action.");
         }
 
@@ -142,7 +150,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
 
             // Assert that the "CopiedResources" key does not exist in the session parameters
             Assert.IsFalse(
-                condition: response.Environment.SessionParameters.ContainsKey("CopiedResources"),
+                condition: response.Environment.SessionParameters.ContainsKey("CopyResource:CopiedResources"),
                 message: "Unexpected CopiedResources found. The action must not copy any resources.");
         }
 
@@ -182,7 +190,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
 
             // Assert that the "CopiedResources" key does not exist in the session parameters
             Assert.IsFalse(
-                condition: response.Environment.SessionParameters.ContainsKey("CopiedResources"),
+                condition: response.Environment.SessionParameters.ContainsKey("CopyResource:CopiedResources"),
                 message: "Unexpected CopiedResources found. The action must not copy any resources.");
         }
 
@@ -221,10 +229,14 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0005>(testOptions);
 
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["CopyResource:CopiedResources"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
+
             // Assert the expected number of resources copied
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 3,
-                actual: (response.Environment.SessionParameters["CopiedResources"] as IEnumerable<string>).Count(),
+                collection: entities,
                 message: "The expected number of resources was not copied. Check the CopyResource action.");
         }
     }

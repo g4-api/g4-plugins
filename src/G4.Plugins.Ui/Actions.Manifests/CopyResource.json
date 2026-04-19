@@ -260,7 +260,7 @@
 				"When the Path parameter is present this value is ignored as a save target.",
 				"Defaults to the current working directory when this property is also absent."
 			],
-			"mandatory": false,
+			"mandatory": true,
 			"name": "Argument",
 			"type": "String|Uri|Expression"
 		},

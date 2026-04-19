@@ -394,7 +394,7 @@ namespace G4.UnitTests.Engine
             var summary = string
                 .Join('\n', new SendKeys(pluginSetup: default).GetManifest().Summary)
                 .Replace("\n", string.Empty)
-                .Replace("  ", " ");
+                .Replace(" ", string.Empty);
 
             // Default guid pattern for matching the reference's id property with the default guid format
             const string guidPattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
@@ -408,7 +408,7 @@ namespace G4.UnitTests.Engine
             // Assert that the reference's description match the manifest summary
             Assert.AreEqual(
                 expected: summary,
-                actual: reference.Description.Replace("  ", " "),
+                actual: reference.Description.Replace(" ", string.Empty),
                 message: "Reference description must match the manifest summary.");
 
             // Assert that the reference's name is 'SendKeys'

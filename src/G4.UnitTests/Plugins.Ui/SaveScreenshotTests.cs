@@ -1,4 +1,5 @@
-﻿using G4.Plugins.Ui.Actions;
+﻿using G4.Extensions;
+using G4.Plugins.Ui.Actions;
 using G4.UnitTests.Framework;
 using G4.WebDriver.Exceptions;
 using G4.WebDriver.Extensions;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace G4.UnitTests.Plugins.Ui
@@ -54,7 +56,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -85,7 +88,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -116,7 +120,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -147,7 +152,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -178,7 +184,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -210,7 +217,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -242,7 +250,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -273,7 +282,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -298,7 +308,8 @@ namespace G4.UnitTests.Plugins.Ui
             var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
 
             // Retrieve the saved screenshots from the session parameters
-            var entities = plugin.Invoker.Context.SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved files exist
             Assert.IsTrue(entities.All(File.Exists));

@@ -60,7 +60,7 @@ namespace G4.UnitTests.Plugins.Ui.Mobile
             var response = client.Invoke(Automation).Values.First().Sessions.First().Value;
 
             // Ensure that there are exceptions in the G4Request
-            Assert.IsTrue(response.ResponseData.Exceptions.Any());
+            Assert.IsNotEmpty(response.ResponseData.Exceptions);
         }
 
         [TestMethod(DisplayName = "Verify that valid geolocation arguments do not trigger " +

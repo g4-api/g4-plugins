@@ -24,43 +24,43 @@ namespace G4.IntegrationTests.Plugins.Ui.ResolveOnlineFile
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Match --Expected:^(?!\\s*$).+}}",
-                    OnElement = "{{$Get-Parameter --Name:ResolvedFileData --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:ResolveOnlineFile:Data --Scope:Session}}"
                 },
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Equal --Expected:txt}}",
-                    OnElement = "{{$Get-Parameter --Name:ResolvedFileExtension --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:ResolveOnlineFile:Extension --Scope:Session}}"
                 },
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Equal --Expected:Example.txt}}",
-                    OnElement = "{{$Get-Parameter --Name:ResolvedFileFullName --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:ResolveOnlineFile:FullName --Scope:Session}}"
                 },
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Equal --Expected:Example}}",
-                    OnElement = "{{$Get-Parameter --Name:ResolvedFileName --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:ResolveOnlineFile:Name --Scope:Session}}"
                 },
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Greater --Expected:0}}",
-                    OnElement = "{{$Get-Parameter --Name:ResolvedFileSize --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:ResolveOnlineFile:Size --Scope:Session}}"
                 },
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Equal --Expected:200}}",
-                    OnElement = "{{$Get-Parameter --Name:ResolvedFileStatusCode --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:ResolveOnlineFile:StatusCode --Scope:Session}}"
                 },
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Match --Expected:localhost}}",
-                    OnElement = "{{$Get-Parameter --Name:ResolvedFileUri --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:ResolveOnlineFile:Uri --Scope:Session}}"
                 }
             ];
         }
