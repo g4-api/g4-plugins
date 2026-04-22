@@ -1,0 +1,245 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataConversion"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ConvertToBase64.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ConvertToBase64.cs"
+			},
+			"rag": {
+				"description": "The ConvertToBase64 plugin encodes text or expression values to Base64 during automation execution. It optionally applies a regular expression to the argument before encoding, capturing only the first matched portion. The encoded result is stored in the session parameter ConvertToBase64:Result and exposed in the response entity under the key Result for downstream use.",
+				"qa": [
+					{
+						"question": "What does the ConvertToBase64 plugin do?",
+						"answer": "It takes the value in the Argument property, optionally filters it with a RegularExpression, and converts the result to a Base64-encoded string stored in the session parameter ConvertToBase64:Result."
+					},
+					{
+						"question": "How does the RegularExpression property affect encoding?",
+						"answer": "The regex is applied to the argument before encoding. Only the first match is encoded. If the regex matches nothing, an empty string is encoded. Omit it or use (.*) to encode the full argument value."
+					},
+					{
+						"question": "Where is the encoded result available after the plugin runs?",
+						"answer": "The Base64-encoded value is stored in the session parameter ConvertToBase64:Result and is also accessible through the response entity under the key Result."
+					},
+					{
+						"question": "What does the default RegularExpression value (si).* do?",
+						"answer": "The default value (si).* is a case-insensitive, single-line pattern that matches the entire argument value. Omitting RegularExpression or leaving it at its default encodes the full argument without any filtering."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "code",
+					"svg": null
+				},
+				"label": "Convert To Base64",
+				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Convert To Base64"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Converts text or expression values to Base64 for safe transport, storage, and downstream reuse.",
+		"It takes the value of the `Argument` property, optionally filters it with a `RegularExpression`, and encodes the result.",
+		"The encoded output is stored in the session as `ConvertToBase64:Result` and exposed through the response entity.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                                                 |",
+		"|---------------------|---------------------------------------------------------------------------------------------|",
+		"| Base64 Encoding     | Converts the `Argument` value to a Base64 string.                                           |",
+		"| Regex Pre-filtering | Applies `RegularExpression` to extract a specific portion of the argument before encoding.  |",
+		"| Session Output      | Stores the encoded result in the session as `ConvertToBase64:Result` for downstream access. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case            | Description                                                                                    |",
+		"|---------------------|------------------------------------------------------------------------------------------------|",
+		"| Credential Encoding | Encode a username or password to Base64 for use in HTTP Basic Auth headers.                    |",
+		"| Data Transport      | Encode structured text before passing it to a downstream API or system requiring Base64 input. |",
+		"| Partial Extraction  | Use a regex to isolate a specific field from a longer string and encode only that portion.     |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case            | Description                                                                                    |",
+		"|---------------------|------------------------------------------------------------------------------------------------|",
+		"| Header Construction | Build Base64-encoded authorization headers for API test steps without manual encoding.         |",
+		"| Value Verification  | Encode expected values to compare against Base64-encoded API responses in assertions.          |",
+		"| Selective Encoding  | Extract a substring with regex and encode it for use in parameterized test data or assertions. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Contains the Base64-encoded string produced from the argument after optional regex pre-filtering.",
+				"The value is available in the response entity under the key `Result` and also stored in the session as `ConvertToBase64:Result`."
+			],
+			"name": "Result",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty argument produces an empty Base64 string",
+						"Argument containing special characters is encoded without alteration",
+						"Expression argument is resolved at runtime before encoding"
+					],
+					"expected_result": "The string “Hello, World!” is encoded to Base64 and stored in ConvertToBase64:Result.",
+					"notes": "No RegularExpression is specified so the full argument value is encoded.",
+					"use_case": "convert_to_base64_static_string",
+					"version": "1.0"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"StaticValue"
+				]
+			},
+			"description": [
+				"### Encode a Static String to Base64",
+				"",
+				"Encode a fixed text value to Base64 during automation execution.",
+				"It uses the `ConvertToBase64` plugin with the argument set to `Hello, World!`.",
+				"No `RegularExpression` is specified, so the full argument value is encoded.",
+				"The result is stored in the session as `ConvertToBase64:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Hello, World!",
+				"pluginName": "ConvertToBase64"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Regex matches nothing — empty string is encoded",
+						"Multiple numeric sequences present — only the first match is encoded",
+						"Non-numeric argument — regex produces no match, result is an empty Base64 string"
+					],
+					"expected_result": "The numeric portion “12345” is extracted from the argument and encoded to Base64, stored in ConvertToBase64:Result.",
+					"notes": "Only the first regex match is encoded. If the pattern matches nothing, an empty string is encoded.",
+					"use_case": "convert_to_base64_regex_filtered",
+					"version": "1.0"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"RegexFiltering"
+				]
+			},
+			"description": [
+				"### Encode a Regex-Matched Portion to Base64",
+				"",
+				"Extract a specific part of a string with a regular expression and encode only that portion.",
+				"It uses the `ConvertToBase64` plugin with the argument `Order-12345-Details` and `regularExpression` set to `\\d+`.",
+				"The first numeric sequence `12345` is matched and encoded to Base64.",
+				"The result is stored in the session as `ConvertToBase64:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Order-12345-Details",
+				"pluginName": "ConvertToBase64",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Session parameter does not exist — the expression resolves to an empty string which is then encoded",
+						"Session parameter contains special characters — the full resolved value is encoded without alteration"
+					],
+					"expected_result": "The runtime value of the Username session parameter is resolved and encoded to Base64, stored in ConvertToBase64:Result.",
+					"notes": "The argument is a G4 expression that resolves the session parameter value at runtime before encoding. No RegularExpression is specified so the full resolved value is encoded.",
+					"use_case": "convert_to_base64_expression_argument",
+					"version": "1.0"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"Expression",
+					"SessionParameter"
+				]
+			},
+			"description": [
+				"### Encode a Session Parameter Value to Base64",
+				"",
+				"Encode the runtime value of a session parameter to Base64 during automation execution.",
+				"It uses the `ConvertToBase64` plugin with the argument set to `{{$Get-Parameter --Name:Username --Scope:Session}}`.",
+				"The G4 expression is resolved at runtime, retrieving the current value of the `Username` session parameter before encoding.",
+				"No `RegularExpression` is specified, so the full resolved value is encoded and stored in the session as `ConvertToBase64:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Get-Parameter --Name:Username --Scope:Session}}",
+				"pluginName": "ConvertToBase64"
+			}
+		}
+	],
+	"key": "ConvertToBase64",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"The session parameter that holds the Base64-encoded result.",
+				"The parameter contains the encoded value produced from the argument after optional regex pre-filtering.",
+				"Its value can be referenced by other parameters or expressions in downstream workflow steps."
+			],
+			"mandatory": true,
+			"name": "ConvertToBase64:Result",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"The value to encode to Base64.",
+				"Accepts a fixed string or a G4 expression that resolves at runtime.",
+				"If a `RegularExpression` is also set, only the first matched portion of this value is encoded."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"defaultValue": "(si).*",
+			"description": [
+				"A regular expression applied to the `Argument` before encoding.",
+				"Only the first match is encoded; if there is no match, an empty string is encoded.",
+				"Omit this property or use `(si).*` to encode the entire argument value."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Encodes text or expression values to Base64 for safe transport and storage.",
+		"Applies an optional regular expression to the argument before encoding, capturing only the first matched portion.",
+		"Stores the encoded result in the session as ConvertToBase64:Result and exposes it through the response entity."
+	],
+	"version": "4"
+}
