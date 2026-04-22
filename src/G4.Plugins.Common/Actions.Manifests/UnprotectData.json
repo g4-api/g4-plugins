@@ -1,0 +1,221 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataSecurity"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/UnprotectData.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/UnprotectData.cs"
+			},
+			"rag": {
+				"description": "The UnprotectData plugin decrypts a Base64-encoded encrypted value using a caller-supplied key and stores the recovered plaintext in the session. The Value parameter supplies the Base64-encoded encrypted string and the Key parameter supplies the decryption key. The decrypted result is stored in the session parameter UnprotectData:Result and exposed in the response entity under the key Result for downstream use. It is the symmetric inverse of the ProtectData plugin.",
+				"qa": [
+					{
+						"question": "What does the UnprotectData plugin do?",
+						"answer": "It decodes the Value parameter from Base64, decrypts the result using the Key parameter, and stores the recovered plaintext in the session parameter UnprotectData:Result."
+					},
+					{
+						"question": "How are the Value and Key parameters supplied to the plugin?",
+						"answer": "Both are passed through the Argument property using the G4 parameter expression syntax, for example: {{$ --Value:SGVsbG8= --Key:MyEncryptionKey}}."
+					},
+					{
+						"question": "Where is the decrypted result available after the plugin runs?",
+						"answer": "The plaintext value is stored in the session parameter UnprotectData:Result and is also accessible through the response entity under the key Result."
+					},
+					{
+						"question": "What is the relationship between UnprotectData and ProtectData?",
+						"answer": "UnprotectData is the symmetric inverse of ProtectData. The output of ProtectData passed as Value to UnprotectData with the same Key recovers the original plaintext."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "lock-open",
+					"svg": null
+				},
+				"label": "Unprotect Data",
+				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Unprotect Data"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Decrypts a Base64-encoded encrypted value and recovers the original plaintext for use in downstream workflow steps.",
+		"It takes the `Value` and `Key` parameters from the `Argument` expression, decodes the value from Base64, and decrypts it with the supplied key.",
+		"The decrypted result is stored in the session as `UnprotectData:Result` and exposed through the response entity.",
+		"It is the symmetric inverse of the `ProtectData` plugin.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature         | Description                                                                                 |",
+		"|-----------------|---------------------------------------------------------------------------------------------|",
+		"| Base64 Decoding | Decodes the `Value` parameter from Base64 to recover the encrypted bytes.                   |",
+		"| Decryption      | Decrypts the decoded bytes using the `Key` parameter to recover the original plaintext.     |",
+		"| Session Output  | Stores the decrypted result in the session as `UnprotectData:Result` for downstream access. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                | Description                                                                                    |",
+		"|-------------------------|------------------------------------------------------------------------------------------------|",
+		"| Credential Recovery     | Decrypt a protected password or token before using it in a subsequent workflow step.           |",
+		"| Secure Data Retrieval   | Recover plaintext from an encrypted session parameter before passing it to an external system. |",
+		"| Config Value Decryption | Decrypt a protected configuration value before it is consumed by a downstream action.          |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case              | Description                                                                                        |",
+		"|-----------------------|----------------------------------------------------------------------------------------------------|",
+		"| Roundtrip Validation  | Decrypt a value encrypted by ProtectData and assert the recovered plaintext matches the original.  |",
+		"| Secret Injection      | Decrypt a test credential at runtime and inject the plaintext into a form or API call.             |",
+		"| Key Sensitivity Check | Verify that decryption with a wrong key does not produce the original plaintext.                   |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Contains the decrypted plaintext string recovered from the Base64-encoded encrypted Value parameter.",
+				"The value is available in the response entity under the key `Result` and also stored in the session as `UnprotectData:Result`."
+			],
+			"name": "Result",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Session parameter does not exist — the expression resolves to an empty string which is then decoded and decrypted",
+						"Session parameter value is not valid Base64 — decoding may fail or produce garbled input to the decrypt step",
+						"Key does not match the key used during encryption — decryption produces incorrect output"
+					],
+					"expected_result": "The value of the ProtectedToken session parameter is decoded from Base64, decrypted with 'SuperSecret', and the recovered plaintext is stored in UnprotectData:Result.",
+					"notes": "The ProtectedToken session parameter is expected to hold the Base64-encoded encrypted output of a prior ProtectData step using the same Key.",
+					"use_case": "unprotect_data_session_token",
+					"version": "1.0"
+				},
+				"labels": [
+					"DataSecurity",
+					"Decryption",
+					"SessionParameter"
+				]
+			},
+			"description": [
+				"### Decrypt a Protected Session Token",
+				"",
+				"Recover the original plaintext from a Base64-encoded encrypted value stored in a session parameter.",
+				"It uses the `UnprotectData` plugin with `--Value:{{$Get-Parameter --Name:ProtectedToken --Scope:Session}}` and `--Key:SuperSecret`.",
+				"The G4 expression resolves the `ProtectedToken` session parameter at runtime, the value is decoded from Base64 and decrypted, and the plaintext is stored in the session as `UnprotectData:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Value:{{$Get-Parameter --Name:ProtectedToken --Scope:Session}} --Key:SuperSecret}}",
+				"pluginName": "UnprotectData"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Session parameter does not exist — the expression resolves to an empty string which is then decoded and decrypted",
+						"Session parameter value is not valid Base64 — decoding may fail or produce incorrect input to the decrypt step"
+					],
+					"expected_result": "The runtime value of the EncryptedCredential session parameter is decoded from Base64, decrypted with 'VaultKey', and the plaintext is stored in UnprotectData:Result.",
+					"notes": "The G4 expression resolves the session parameter at runtime. The Value must have been produced by a prior ProtectData step using the same Key.",
+					"use_case": "unprotect_data_expression_value",
+					"version": "1.0"
+				},
+				"labels": [
+					"DataSecurity",
+					"Decryption",
+					"Expression",
+					"SessionParameter"
+				]
+			},
+			"description": [
+				"### Decrypt a Session Parameter Value",
+				"",
+				"Recover the original plaintext from a Base64-encoded encrypted value stored in a session parameter.",
+				"It uses the `UnprotectData` plugin with `--Value:{{$Get-Parameter --Name:EncryptedCredential --Scope:Session}}` and `--Key:VaultKey`.",
+				"The G4 expression is resolved at runtime, the resolved value is decoded from Base64 and decrypted, and the plaintext is stored in the session as `UnprotectData:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Value:{{$Get-Parameter --Name:EncryptedCredential --Scope:Session}} --Key:VaultKey}}",
+				"pluginName": "UnprotectData"
+			}
+		}
+	],
+	"key": "UnprotectData",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"The session parameter that holds the decrypted plaintext result.",
+				"Its value is the original plaintext recovered by decoding the Base64 input and decrypting with the supplied key.",
+				"It can be referenced by other parameters or expressions in downstream workflow steps."
+			],
+			"mandatory": true,
+			"name": "UnprotectData:Result",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Supplies the `Value` and `Key` parameters using the G4 parameter expression syntax.",
+				"Use `--Value` to provide the Base64-encoded encrypted string and `--Key` to provide the decryption key.",
+				"The `Value` must have been produced by a prior `ProtectData` step using the same `Key`."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"The Base64-encoded encrypted string to decrypt.",
+				"Must be the output of a prior `ProtectData` step that used the same encryption key.",
+				"Accepts a literal Base64 string or a G4 expression that resolves to one at runtime."
+			],
+			"mandatory": true,
+			"name": "Value",
+			"type": "String"
+		},
+		{
+			"description": [
+				"The decryption key used to recover the original plaintext.",
+				"Must be the same key that was used during the corresponding `ProtectData` step.",
+				"Using a different key will not recover the original plaintext."
+			],
+			"mandatory": true,
+			"name": "Key",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Decrypts a Base64-encoded encrypted value to recover the original plaintext.",
+		"Decodes the value from Base64 then decrypts using the supplied key.",
+		"Stores the recovered plaintext in the session as UnprotectData:Result and exposes it through the response entity."
+	],
+	"version": "4"
+}
