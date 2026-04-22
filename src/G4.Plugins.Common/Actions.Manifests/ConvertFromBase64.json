@@ -1,0 +1,245 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataConversion"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ConvertFromBase64.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ConvertFromBase64.cs"
+			},
+			"rag": {
+				"description": "The ConvertFromBase64 plugin decodes Base64-encoded text during automation execution. It decodes the Argument value from Base64 and optionally applies a regular expression to the decoded result, capturing only the first matched portion. The decoded result is stored in the session parameter ConvertFromBase64:Result and exposed in the response entity under the key Result for downstream use.",
+				"qa": [
+					{
+						"question": "What does the ConvertFromBase64 plugin do?",
+						"answer": "It decodes the Base64-encoded value in the Argument property, optionally filters the decoded result with a RegularExpression, and stores the final value in the session parameter ConvertFromBase64:Result."
+					},
+					{
+						"question": "How does the RegularExpression property affect decoding?",
+						"answer": "The regex is applied to the decoded string after Base64 decoding. Only the first match is kept. If the regex matches nothing, an empty string is stored. Omit it or use (si).* to keep the full decoded value."
+					},
+					{
+						"question": "Where is the decoded result available after the plugin runs?",
+						"answer": "The decoded value is stored in the session parameter ConvertFromBase64:Result and is also accessible through the response entity under the key Result."
+					},
+					{
+						"question": "What does the default RegularExpression value (si).* do?",
+						"answer": "The default value (si).* is a case-insensitive, single-line pattern that matches the entire decoded string. Omitting RegularExpression or leaving it at its default keeps the full decoded value without any filtering."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "code",
+					"svg": null
+				},
+				"label": "Convert From Base64",
+				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Convert From Base64"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Decodes Base64-encoded text back to its original form for further processing and downstream reuse.",
+		"It takes the Base64-encoded value of the `Argument` property, decodes it, and optionally filters the result with a `RegularExpression`.",
+		"The decoded output is stored in the session as `ConvertFromBase64:Result` and exposed through the response entity.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                                      |",
+		"|----------------------|--------------------------------------------------------------------------------------------------|",
+		"| Base64 Decoding      | Decodes the `Argument` value from Base64 back to its original string.                           |",
+		"| Regex Post-filtering | Applies `RegularExpression` to extract a specific portion of the decoded result.                 |",
+		"| Session Output       | Stores the decoded result in the session as `ConvertFromBase64:Result` for downstream access.   |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case               | Description                                                                                           |",
+		"|------------------------|-------------------------------------------------------------------------------------------------------|",
+		"| Credential Decoding    | Decode Base64-encoded credentials retrieved from a secure store before use in a workflow step.        |",
+		"| API Response Decoding  | Decode a Base64-encoded field in an API response before passing its value to subsequent actions.      |",
+		"| Partial Extraction     | Use a regex to isolate a specific field from the decoded string and pass only that portion forward.   |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case              | Description                                                                                              |",
+		"|-----------------------|----------------------------------------------------------------------------------------------------------|",
+		"| Response Verification | Decode a Base64-encoded API response field and assert its value in a test assertion.                    |",
+		"| Test Data Decoding    | Decode Base64-encoded test data stored in session parameters for use in parameterized assertions.       |",
+		"| Selective Extraction  | Extract a substring from the decoded value with regex for targeted comparison in test steps.            |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Contains the decoded string produced from the Base64 argument after optional regex post-filtering.",
+				"The value is available in the response entity under the key `Result` and also stored in the session as `ConvertFromBase64:Result`."
+			],
+			"name": "Result",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid Base64 input may produce garbled output or throw an exception",
+						"Empty argument decodes to an empty string",
+						"Padding characters missing from Base64 string may cause a decoding error"
+					],
+					"expected_result": "The Base64 string \"SGVsbG8sIFdvcmxkIQ==\" is decoded to \"Hello, World!\" and stored in ConvertFromBase64:Result.",
+					"notes": "No RegularExpression is specified so the full decoded value is kept.",
+					"use_case": "convert_from_base64_static_string",
+					"version": "1.0"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"StaticValue"
+				]
+			},
+			"description": [
+				"### Decode a Static Base64 String",
+				"",
+				"Decode a fixed Base64 value back to its original text during automation execution.",
+				"It uses the `ConvertFromBase64` plugin with the argument set to `SGVsbG8sIFdvcmxkIQ==`.",
+				"No `RegularExpression` is specified, so the full decoded value is kept.",
+				"The result is stored in the session as `ConvertFromBase64:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "SGVsbG8sIFdvcmxkIQ==",
+				"pluginName": "ConvertFromBase64"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Regex matches nothing — empty string is stored",
+						"Multiple numeric sequences present — only the first match is kept",
+						"Decoded string contains no digits — regex produces no match, result is empty"
+					],
+					"expected_result": "The Base64 string is decoded to \"Order-12345-Details\" and the numeric portion \"12345\" is extracted and stored in ConvertFromBase64:Result.",
+					"notes": "Only the first regex match of the decoded string is kept.",
+					"use_case": "convert_from_base64_regex_filtered",
+					"version": "1.0"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"RegexFiltering"
+				]
+			},
+			"description": [
+				"### Decode Base64 and Extract a Specific Portion",
+				"",
+				"Decode a Base64 string and extract only a specific part of the decoded result using a regular expression.",
+				"It uses the `ConvertFromBase64` plugin with the argument `T3JkZXItMTIzNDUtRGV0YWlscw==` and `regularExpression` set to `\\d+`.",
+				"The argument decodes to `Order-12345-Details` and the first numeric sequence `12345` is extracted.",
+				"The result is stored in the session as `ConvertFromBase64:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "T3JkZXItMTIzNDUtRGV0YWlscw==",
+				"pluginName": "ConvertFromBase64",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Session parameter does not exist — the expression resolves to an empty string which is then decoded",
+						"Session parameter value is not valid Base64 — decoding may produce garbled output"
+					],
+					"expected_result": "The runtime value of the EncodedToken session parameter is decoded from Base64 and stored in ConvertFromBase64:Result.",
+					"notes": "The argument is a G4 expression that resolves the session parameter value at runtime before decoding. No RegularExpression is specified so the full decoded value is stored.",
+					"use_case": "convert_from_base64_expression_argument",
+					"version": "1.0"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"Expression",
+					"SessionParameter"
+				]
+			},
+			"description": [
+				"### Decode a Session Parameter Value from Base64",
+				"",
+				"Decode a Base64-encoded value stored in a session parameter during automation execution.",
+				"It uses the `ConvertFromBase64` plugin with the argument set to `{{$Get-Parameter --Name:EncodedToken --Scope:Session}}`.",
+				"The G4 expression is resolved at runtime, retrieving the current Base64 value of the `EncodedToken` session parameter before decoding.",
+				"No `RegularExpression` is specified, so the full decoded value is stored in the session as `ConvertFromBase64:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Get-Parameter --Name:EncodedToken --Scope:Session}}",
+				"pluginName": "ConvertFromBase64"
+			}
+		}
+	],
+	"key": "ConvertFromBase64",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"The session parameter that holds the decoded result.",
+				"The parameter contains the value produced from the Base64 argument after decoding and optional regex post-filtering.",
+				"Its value can be referenced by other parameters or expressions in downstream workflow steps."
+			],
+			"mandatory": true,
+			"name": "ConvertFromBase64:Result",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"The Base64-encoded value to decode.",
+				"Accepts a fixed Base64 string or a G4 expression that resolves to one at runtime.",
+				"If a `RegularExpression` is also set, only the first matched portion of the decoded result is kept."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"defaultValue": "(si).*",
+			"description": [
+				"A regular expression applied to the decoded string after Base64 decoding.",
+				"Only the first match is kept; if there is no match, an empty string is stored.",
+				"Omit this property or use `(si).*` to keep the entire decoded value."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Decodes Base64-encoded text back to its original string form.",
+		"Applies an optional regular expression to the decoded result, capturing only the first matched portion.",
+		"Stores the decoded result in the session as ConvertFromBase64:Result and exposes it through the response entity."
+	],
+	"version": "4"
+}
