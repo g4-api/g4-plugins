@@ -61,13 +61,16 @@
 				},
 				"label": "Invoke Scroll",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Invoke Scroll"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeScroll action scrolls a web page or a specific overflow element to a given pixel position using JavaScript.",
+		"Scrolls a web page or a specific overflow element to a given pixel position using JavaScript.",
 		"When an element is specified via OnElement, the action targets that element with `element.scroll()`; otherwise it scrolls the entire page via `window.scroll()`.",
 		"This makes it the primary way to programmatically position the viewport or scroll within overflow containers in automation workflows and test scripts.",
 		"",
@@ -114,7 +117,7 @@
 					"expected_result": "The page scrolls vertically so that the top of the viewport is 500 pixels from the top of the document.",
 					"notes": "window.scroll() is called with {behavior: 'auto', top: 500}. Left is omitted from the script because isLeft is false. The horizontal scroll position is not affected.",
 					"use_case": "page_scroll_vertical",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"PageScroll",
@@ -148,7 +151,7 @@
 					"expected_result": "The page scrolls smoothly both vertically (300 px) and horizontally (100 px) in a single animated motion.",
 					"notes": "window.scroll() is called with {behavior: 'smooth', top: 300, left: 100}. Smooth behavior triggers a CSS-driven animation rather than an instant jump.",
 					"use_case": "page_scroll_both_axes_smooth",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BothAxes",
@@ -186,7 +189,7 @@
 					"expected_result": "The overflow container matched by #ScrollablePanel scrolls vertically so that its internal content is 150 pixels from the top of the container.",
 					"notes": "element.scroll() is called with {behavior: 'auto', top: 150}. The element must have a scrollable overflow axis for the call to produce a visible result.",
 					"use_case": "element_scroll_vertical",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CssSelector",
@@ -223,7 +226,7 @@
 					"expected_result": "The overflow container matched by #TextAreaEnabled scrolls 10 pixels from the top and 10 pixels from the left with a smooth animated transition.",
 					"notes": "element.scroll() is called with {behavior: 'smooth', top: 10, left: 10}. Both axes and the animation style are controlled explicitly. The element must support overflow on both axes for both offsets to take effect.",
 					"use_case": "element_scroll_both_axes_smooth",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BothAxes",
@@ -348,9 +351,9 @@
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
 	"summary": [
-		"The InvokeScroll action scrolls a web page or a specific overflow element to given Left and Top pixel offsets using JavaScript, making it the primary way to programmatically control scroll position in an automation workflow.",
+		"InvokeScroll scrolls a web page or a specific overflow element to given Left and Top pixel offsets using JavaScript, making it the primary way to programmatically control scroll position in an automation workflow.",
 		"When OnElement is provided the action calls `element.scroll()` on the located element; otherwise it calls `window.scroll()` to scroll the entire page. The Behavior parameter controls whether the scroll is instant, auto, or smooth.",
-		"In RPA it positions the viewport for data extraction, form navigation, and overflow panel traversal. In automation testing it drives infinite-scroll validation, responsive layout checks, and visual regression captures."
+		"In RPA it positions the viewport for data extraction, form navigation, and overflow panel traversal; in automation testing it drives infinite-scroll validation, responsive layout checks, and visual regression captures."
 	],
 	"version": "4"
 }

@@ -64,12 +64,24 @@
 						"answer": "FlowControl, with a focus on session lifecycle and resource management."
 					},
 					{
+						"question": "What are the aliases for StopFlow?",
+						"answer": "The aliases are Stop and EndFlow. All three names trigger the same dispose-and-remove behaviour."
+					},
+					{
 						"question": "What is the plugin key?",
 						"answer": "StopFlow."
 					},
 					{
-						"question": "What is the manifestVersion?",
+						"question": "What is the manifest version?",
 						"answer": "4."
+					},
+					{
+						"question": "What platform does StopFlow support?",
+						"answer": "Any platform. No platform-specific configuration is needed."
+					},
+					{
+						"question": "What namespace is StopFlow in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -80,14 +92,18 @@
 					"name": "ban",
 					"svg": null
 				},
+				"label": "Stop Flow",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Stop Flow"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The StopFlow plugin ends the current automation session by disposing the active WebDriver and removing its handle from the global registry. This prevents resource leaks and avoids accidental reuse of a stale driver in later steps.",
+		"Ends the current automation session by disposing the active WebDriver and removing its handle from the global registry. This prevents resource leaks and avoids accidental reuse of a stale driver in later steps.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -107,10 +123,18 @@
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Use Case      | Description                                                                  |",
-		"|---------------|------------------------------------------------------------------------------|",
-		"| Test Teardown | Add to teardown stages to guarantee clean driver disposal between test runs. |",
-		"| Isolation     | Reset state before starting a new test requiring a fresh browser session.    |"
+		"| Use Case        | Description                                                                    |",
+		"|-----------------|--------------------------------------------------------------------------------|",
+		"| Test Teardown   | Add to teardown stages to guarantee clean driver disposal between test runs.   |",
+		"| Isolation       | Reset state before starting a new test requiring a fresh browser session.      |",
+		"| Suite Cleanup   | Close all lingering sessions at the end of a test suite to free resources.     |",
+		"",
+		"### Aliases",
+		"",
+		"| Alias     | Notes                                      |",
+		"|-----------|--------------------------------------------|",
+		"| Stop      | Interchangeable with StopFlow.             |",
+		"| EndFlow   | Interchangeable with StopFlow.             |"
 	],
 	"examples": [
 		{
@@ -123,23 +147,83 @@
 					],
 					"expected_result": "The active WebDriver is disposed and its registry entry (by opaque key) is removed.",
 					"notes": "No arguments are required. The action returns a standard success response.",
-					"use_case": "stop_current_session",
+					"use_case": "stop_current_session_stopflow",
 					"version": "1.0"
 				},
 				"labels": [
-					"Teardown",
+					"FlowControl",
 					"ResourceManagement",
-					"FlowControl"
+					"Teardown"
 				]
 			},
 			"description": [
 				"### Stop and Dispose Current Session",
 				"",
-				"End the current browser session and clean up the driver registry entry. Use at the end of a flow or before re-initializing a new session."
+				"Disposes the active WebDriver and removes its registry entry. Use at the end of a workflow to guarantee the browser and driver are fully closed."
 			],
 			"rule": {
 				"$type": "Action",
 				"pluginName": "StopFlow"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No active session present",
+						"Driver already disposed",
+						"Registry removal returns false"
+					],
+					"expected_result": "The active WebDriver is disposed and its registry entry is removed before a new session is initialized.",
+					"notes": "Uses the Stop alias. Behaviour is identical to StopFlow. Useful before reinitializing a fresh WebDriver context mid-workflow.",
+					"use_case": "mid_flow_session_reset_stop_alias",
+					"version": "1.0"
+				},
+				"labels": [
+					"Alias",
+					"FlowControl",
+					"SessionReset"
+				]
+			},
+			"description": [
+				"### Mid-Flow Session Reset Using Stop Alias",
+				"",
+				"Tears down the current browser session mid-workflow using the `Stop` alias before a fresh session is initialized.",
+				"Behaviour is identical to `StopFlow`; aliases are interchangeable."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "Stop"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No active session present",
+						"Driver already disposed",
+						"Registry removal returns false"
+					],
+					"expected_result": "The active WebDriver is disposed and its registry entry is removed at the end of the test teardown stage.",
+					"notes": "Uses the EndFlow alias. Guarantees clean driver disposal between test runs when placed in teardown.",
+					"use_case": "test_teardown_endflow_alias",
+					"version": "1.0"
+				},
+				"labels": [
+					"Alias",
+					"FlowControl",
+					"TestTeardown"
+				]
+			},
+			"description": [
+				"### Test Teardown Using EndFlow Alias",
+				"",
+				"Disposes the active WebDriver at the end of a test run using the `EndFlow` alias.",
+				"Place in the teardown stage to guarantee clean driver disposal between test executions."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "EndFlow"
 			}
 		}
 	],

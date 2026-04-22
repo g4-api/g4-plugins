@@ -37,6 +37,18 @@
 					{
 						"question": "Does SwitchFrame produce any output parameters?",
 						"answer": "No. The plugin returns `this.NewPluginResponse()` with no additional payload. There are no output parameters or extra session-data entries added to the response."
+					},
+					{
+						"question": "What alias is available for SwitchFrame?",
+						"answer": "SwitchFrame is also accepted as SwitchToFrame — both resolve to identical behavior."
+					},
+					{
+						"question": "What is the manifest version for SwitchFrame?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What W3C WebDriver endpoint does SwitchFrame use?",
+						"answer": "SwitchFrame uses the W3C WebDriver POST /session/{session id}/frame endpoint."
 					}
 				]
 			},
@@ -49,13 +61,16 @@
 				},
 				"label": "Switch Frame",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Switch Frame"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchFrame` plugin switches WebDriver context into a nested frame or iframe on the current page.",
+		"Switches WebDriver context into a nested frame or iframe on the current page.",
 		"It supports two mutually exclusive modes selected automatically at runtime: switching by zero-based integer index or by resolving a web element.",
 		"",
 		"### Key Features and Functionality",
@@ -94,7 +109,7 @@
 					"expected_result": "WebDriver context switches into the first frame (index 0) on the page.",
 					"notes": "`int.TryParse` succeeds for any valid integer string. The zero-based index maps directly to the WebDriver frame index passed to the W3C endpoint.",
 					"use_case": "switch_by_index",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -113,6 +128,7 @@
 				"When `Argument` parses as an integer, `WebDriver.SwitchTo().Frame(index)` is called directly — no element resolution occurs."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "0",
 				"pluginName": "SwitchFrame"
 			}
@@ -129,7 +145,7 @@
 					"expected_result": "WebDriver context switches into the iframe element identified by the CSS selector `#mainFrame`.",
 					"notes": "When `Argument` is absent or non-integer, the plugin resolves the frame via `Locator` and `OnElement`. The `Locator` default is Xpath; specifying CssSelector here targets the element by its id attribute.",
 					"use_case": "switch_by_element_css",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -149,6 +165,7 @@
 				"When `Argument` is absent or cannot be parsed as an integer, the plugin resolves the element via `GetElement` using the specified `Locator` and `OnElement` values, then calls `WebDriver.SwitchTo().Frame(element)`."
 			],
 			"rule": {
+				"$type": "Action",
 				"locator": "CssSelector",
 				"onElement": "#mainFrame",
 				"pluginName": "SwitchFrame"
@@ -200,7 +217,7 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The `SwitchFrame` plugin switches WebDriver context into a nested frame or iframe on the current page.",
+		"SwitchFrame switches WebDriver context into a nested frame or iframe on the current page.",
 		"It selects the switching mode automatically: an integer `Argument` switches by zero-based frame index; a non-integer or absent `Argument` resolves the frame by element locator.",
 		"In RPA it enables interaction with frame-contained content; in automation testing it ensures comprehensive coverage across multi-frame pages."
 	],

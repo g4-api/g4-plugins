@@ -196,7 +196,7 @@
 				"The latitude coordinate to set for the device's geolocation. Represents the north-south position on the Earth's surface. ",
 				"Valid range is `-90` to `90`. Defaults to `0.0` when not specified."
 			],
-			"mandatory": false,
+			"mandatory": true,
 			"name": "Latitude",
 			"type": "Number"
 		},
@@ -205,7 +205,7 @@
 				"The longitude coordinate to set for the device's geolocation. Represents the east-west position on the Earth's surface. ",
 				"Valid range is `-180` to `180`. Defaults to `0.0` when not specified."
 			],
-			"mandatory": false,
+			"mandatory": true,
 			"name": "Longitude",
 			"type": "Number"
 		},
@@ -214,7 +214,7 @@
 				"The altitude value to set for the device's geolocation. Represents the height above the Earth's surface in metres. ",
 				"Defaults to `0.0` (sea level) when not specified."
 			],
-			"mandatory": false,
+			"mandatory": true,
 			"name": "Altitude",
 			"type": "Number"
 		}

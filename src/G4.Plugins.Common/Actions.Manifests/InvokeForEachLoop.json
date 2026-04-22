@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -68,12 +68,20 @@
 						"answer": "Set onElement to \".\" and remove the locator entry so that actions apply to every item found by the parent rule."
 					},
 					{
-						"question": "Who authored the CopyParameter plugin?",
+						"question": "Who authored the InvokeForEachLoop plugin?",
 						"answer": "The plugin was authored by Roei Sabag."
 					},
 					{
 						"question": "Where can I find the source code and documentation for InvokeForEachLoop?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForEachLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForEachLoop.md"
+					},
+					{
+						"question": "What namespace is InvokeForEachLoop in?",
+						"answer": "G4.Plugins.Common."
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "4."
 					}
 				]
 			},
@@ -85,14 +93,18 @@
 					"name": "repeat",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Invoke For Each Loop"
+			},
+			"mcp": {
+				"title": "Invoke For Each Loop"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeForEachLoop plugin finds all elements matching your locator and runs a set of actions on each one. To operate on the entire collection, set onElement to \".\" and omit the locator. You can also specify a different locator to decide where actions take place. It supports nested loops for multi-level workflows, making it easier to automate repetitive tasks in RPA and automated testing.",
+		"Finds all elements matching your locator and runs a set of actions on each one. To operate on the entire collection, set onElement to \".\" and omit the locator. You can also specify a different locator to decide where actions take place. It supports nested loops for multi-level workflows, making it easier to automate repetitive tasks in RPA and automated testing.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -142,10 +154,10 @@
 			"description": [
 				"### Click Each Pagination Button Using XPath",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin iterates over each button element matching the XPath selector `//ul[@id='Pagination1']/li/button` and performs a Click action on each.",
+				"Iterates over each button element matching the XPath selector `//ul[@id='Pagination1']/li/button` and performs a Click action on each.",
 				"The inner rule uses `.` to refer to the current element in the loop context.",
-				"If no buttons are found, an exception is added and the loop is skipped. ",
-				"If a Click action fails on any element, an exception is recorded and execution continues to the next element. ",
+				"If no buttons are found, an exception is added and the loop is skipped.",
+				"If a Click action fails on any element, an exception is recorded and execution continues to the next element.",
 				"The overall process does not stop unless explicitly configured to stop on error."
 			],
 			"rule": {
@@ -183,10 +195,10 @@
 			"description": [
 				"### Click Each Pagination Button Using CSS Selector",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin iterates over each button element matching the CSS selector `#Pagination1 > li > button` and performs a Click action on each.",
+				"Iterates over each button element matching the CSS selector `#Pagination1 > li > button` and performs a Click action on each.",
 				"The inner rule uses `.` to refer to the current element in the loop context.",
-				"If no buttons are found, an exception is added and the loop is skipped. ",
-				"If a Click action fails on any element, an exception is recorded and execution continues to the next element. ",
+				"If no buttons are found, an exception is added and the loop is skipped.",
+				"If a Click action fails on any element, an exception is recorded and execution continues to the next element.",
 				"The overall process does not stop unless explicitly configured to stop on error."
 			],
 			"rule": {
@@ -225,10 +237,10 @@
 			"description": [
 				"### Click Each Pagination Button Using XPath and Relative XPath",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the XPath selector `//ul[@class='pagination']/li` and performs a Click action on its child button element selected via relative XPath `./button`.",
+				"Iterates over each `<li>` element matching the XPath selector `//ul[@class='pagination']/li` and performs a Click action on its child button element selected via relative XPath `./button`.",
 				"The inner rule uses the XPath `./button` to reference the button within the current list item.",
-				"If no elements are found, an exception is logged and the loop is skipped. ",
-				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"If no elements are found, an exception is logged and the loop is skipped.",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
@@ -266,10 +278,10 @@
 			"description": [
 				"### Click Each Pagination Button Using XPath and CSS Selector",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the XPath selector `//ul[@class='pagination']/li` and performs a Click action on its child button element selected via CSS selector `button`.",
+				"Iterates over each `<li>` element matching the XPath selector `//ul[@class='pagination']/li` and performs a Click action on its child button element selected via CSS selector `button`.",
 				"The inner rule uses the CSS selector `button` to reference the button within the current list item.",
-				"If no elements are found, an exception is logged and the loop is skipped. ",
-				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"If no elements are found, an exception is logged and the loop is skipped.",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
@@ -308,10 +320,10 @@
 			"description": [
 				"### Click Each Pagination Button Using CSS Selector and Relative XPath",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the CSS selector `.pagination > li` and performs a Click action on its child button element selected via relative XPath `./button`.",
+				"Iterates over each `<li>` element matching the CSS selector `.pagination > li` and performs a Click action on its child button element selected via relative XPath `./button`.",
 				"The inner rule uses the XPath `./button` to reference the button within the current list item.",
-				"If no elements are found, an exception is logged and the loop is skipped. ",
-				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"If no elements are found, an exception is logged and the loop is skipped.",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
@@ -350,10 +362,10 @@
 			"description": [
 				"### Click Each Pagination Button Using CSS Selector",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin iterates over each `<li>` element matching the CSS selector `.pagination > li` and performs a Click action on its child button element selected via CSS selector `button`.",
+				"Iterates over each `<li>` element matching the CSS selector `.pagination > li` and performs a Click action on its child button element selected via CSS selector `button`.",
 				"The inner rule uses the CSS selector `button` to reference the button within the current list item.",
-				"If no elements are found, an exception is logged and the loop is skipped. ",
-				"If a Click action within any iteration throws an exception, it is recorded and the loop continues. ",
+				"If no elements are found, an exception is logged and the loop is skipped.",
+				"If a Click action within any iteration throws an exception, it is recorded and the loop continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
@@ -394,11 +406,11 @@
 			"description": [
 				"### Nested InvokeForEachLoop With XPath Selectors",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin first locates the `<ul>` element matching the XPath selector `//ul[@class='pagination']`, then within each such `<ul>`, iterates over each child `<li>/button` via `./li/button` and performs a Click action.",
+				"First locates the `<ul>` element matching the XPath selector `//ul[@class='pagination']`, then within each such `<ul>`, iterates over each child `<li>/button` via `./li/button` and performs a Click action.",
 				"The inner loop uses `./li/button` to reference the buttons relative to the current `<ul>` element.",
-				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
-				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
-				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped.",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped.",
+				"If any Click action throws an exception, it is recorded and execution continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
@@ -443,11 +455,11 @@
 			"description": [
 				"### Nested InvokeForEachLoop With XPath and CSS Selectors",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin first locates the `<ul>` element matching the XPath selector `//ul[@class='pagination']`, then within each such `<ul>`, iterates over each child `li > button` via CSS selector and performs a Click action.",
+				"First locates the `<ul>` element matching the XPath selector `//ul[@class='pagination']`, then within each such `<ul>`, iterates over each child `li > button` via CSS selector and performs a Click action.",
 				"The inner loop uses the CSS selector `li > button` to reference the button within the current list item.",
-				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
-				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
-				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped.",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped.",
+				"If any Click action throws an exception, it is recorded and execution continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
@@ -493,11 +505,11 @@
 			"description": [
 				"### Nested InvokeForEachLoop With CSS Selector and Relative XPath",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin first locates the container matching the CSS selector `.pagination`, then within each container, iterates over child buttons via relative XPath `./li/button` and performs a Click action.",
+				"First locates the container matching the CSS selector `.pagination`, then within each container, iterates over child buttons via relative XPath `./li/button` and performs a Click action.",
 				"The inner loop uses `./li/button` to reference the buttons relative to the current container.",
-				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
-				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
-				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped.",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped.",
+				"If any Click action throws an exception, it is recorded and execution continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {
@@ -543,11 +555,11 @@
 			"description": [
 				"### Nested InvokeForEachLoop With CSS Selectors",
 				"",
-				"This example demonstrates how the InvokeForEachLoop plugin first locates the container matching the CSS selector `.pagination`, then within each container, iterates over child buttons via CSS selector `li > button` and performs a Click action.",
+				"First locates the container matching the CSS selector `.pagination`, then within each container, iterates over child buttons via CSS selector `li > button` and performs a Click action.",
 				"The inner loop uses the CSS selector `li > button` scoped to the current container.",
-				"If no outer elements are found, an exception is logged and the outer loop is skipped. ",
-				"If no inner elements are found, an exception is logged and the inner loop is skipped. ",
-				"If any Click action throws an exception, it is recorded and execution continues. ",
+				"If no outer elements are found, an exception is logged and the outer loop is skipped.",
+				"If no inner elements are found, an exception is logged and the inner loop is skipped.",
+				"If any Click action throws an exception, it is recorded and execution continues.",
 				"The process does not stop unless configured to stop on error."
 			],
 			"rule": {

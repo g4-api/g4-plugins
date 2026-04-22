@@ -41,6 +41,14 @@
 					{
 						"question": "Can a key be provided as a direct argument without using the --Key parameter?",
 						"answer": "Yes. When no --Key parameter is present, the full argument string is used as the single key name. This allows compact rules such as argument: 'Enter' without any macro syntax."
+					},
+					{
+						"question": "What is the manifest version for SendKeyboardKey?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What alias is available for SendKeyboardKey?",
+						"answer": "SendKeyboardKey is also accepted as Keyboard — both resolve to identical behavior."
 					}
 				]
 			},
@@ -53,13 +61,16 @@
 				},
 				"label": "Send Keyboard Key",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Send Keyboard Key"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The SendKeyboardKey action sends one or more named keyboard keys to a target web element, simulating physical keyboard interactions.",
+		"Sends one or more named keyboard keys to a target web element, simulating physical keyboard interactions.",
 		"Each key name is resolved against WebDriver key constants and dispatched sequentially to the element.",
 		"Use this action wherever a workflow needs to trigger keyboard-driven behavior — such as submitting a form with Enter, deleting content with Backspace, or shifting focus with Tab — on a specific element.",
 		"",
@@ -104,7 +115,7 @@
 					"expected_result": "The Enter key is sent to the element matched by the CSS selector #KeyboardKeyOutcome.",
 					"notes": "The argument is the key name directly — no macro syntax is needed for a single-key, no-delay, no-clear interaction. The key name is passed to GetKeyboardKey which resolves it to the WebDriver Enter key constant.",
 					"use_case": "send_single_key_direct_argument",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -124,6 +135,7 @@
 				"No clearing or delay is applied — the key is sent immediately to the located element."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Enter",
 				"locator": "CssSelector",
 				"onElement": "#KeyboardKeyOutcome",
@@ -144,7 +156,7 @@
 					"expected_result": "Enter is sent to #KeyboardKeyOutcome, then a 500 ms pause occurs, then Backspace is sent followed by another 500 ms pause.",
 					"notes": "Multiple --Key parameters accumulate into an ordered sequence. The Delay value of 500 is interpreted as milliseconds and applied after each individual key send, emulating human pacing between key presses.",
 					"use_case": "send_multi_key_sequence_with_delay",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -166,6 +178,7 @@
 				"Use this form when the target application requires a brief pause between key events to process each input before the next arrives."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Key:Enter --Key:Backspace --Delay:500}}",
 				"locator": "CssSelector",
 				"onElement": "#KeyboardKeyOutcome",
@@ -185,7 +198,7 @@
 					"expected_result": "The contenteditable div is cleared using backspace simulation, then the Enter key is sent to it.",
 					"notes": "NativeClear calls element.SendNativeClear() before the key sequence. Any exception during clearing is caught and recorded as a G4ExceptionModel without stopping the action — the key send proceeds regardless of whether clearing succeeded.",
 					"use_case": "native_clear_then_send_key",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -207,6 +220,7 @@
 				"Use this form for elements that ignore the standard clear command, such as content-editable divs or inputs with custom event handlers."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Key:Enter --NativeClear}}",
 				"locator": "Xpath",
 				"onElement": "//div[@contenteditable='true']",
@@ -301,7 +315,7 @@
 		"w3c": "POST /session/{session id}/element/{element id}/value"
 	},
 	"summary": [
-		"The SendKeyboardKey action sends one or more named keyboard keys — such as Enter, Backspace, or Tab — to a target element, with support for sequential multi-key sequences built from repeated --Key parameters.",
+		"SendKeyboardKey sends one or more named keyboard keys — such as Enter, Backspace, or Tab — to a target element, with support for sequential multi-key sequences built from repeated --Key parameters.",
 		"An optional per-key Delay controls pacing between key presses, and pre-clearing modes (browser clear or native backspace simulation) ensure a clean element state before the sequence begins.",
 		"In RPA it drives form submission, focus navigation, and pre-cleared interactions; in automation testing it verifies keyboard event handling, backspace behavior, and multi-key state transitions."
 	],

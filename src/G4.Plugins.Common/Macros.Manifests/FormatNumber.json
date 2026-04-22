@@ -21,7 +21,7 @@
 				"qa": [
 					{
 						"question": "What does the FormatNumber macro plugin do?",
-						"answer": "It converts numeric values into locale-aware strings using standard or custom format patterns, without performing any UI actions."
+						"answer": "Converts numeric values into locale-aware strings using standard or custom format patterns, without performing any UI actions."
 					},
 					{
 						"question": "Which main features and parameters can I configure?",
@@ -49,11 +49,11 @@
 					},
 					{
 						"question": "What does the manifest summary say about FormatNumber?",
-						"answer": "It formats numbers into strings using culture settings and patterns, ensuring consistent, readable output across locales."
+						"answer": "Formats numbers into strings using culture settings and patterns, ensuring consistent, readable output across locales."
 					},
 					{
 						"question": "According to the description, what problem does the plugin solve?",
-						"answer": "It guarantees consistent numeric representation across automation tasks by applying culture-specific rules and custom patterns."
+						"answer": "Guarantees consistent numeric representation across automation tasks by applying culture-specific rules and custom patterns."
 					},
 					{
 						"question": "How does FormatNumber handle invalid input or configuration errors?",
@@ -78,7 +78,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The FormatNumber macro plugin formats numbers based on culture settings and custom formats for precise numeric representation.",
+		"Formats numbers based on culture settings and custom formats for precise numeric representation.",
 		"It ensures consistent number output across automation tasks.",
 		"",
 		"### Key Features and Functionality",
@@ -480,7 +480,7 @@
 						"Zero value"
 					],
 					"expected_result": "The Format-Number macro produces a Japanese currency string with three decimal places for -123.456, and the SendKeys plugin types that string into #inputField.",
-					"notes": "Demonstrates a macro that generates a culture-specific currency value consumed by an action; the macro itself has no UI side-effects. The `C3` precision specifier overrides the ja-JP default of zero currency-decimal digits and rounds the value to three decimals. The Japanese CurrencyNegativePattern places the minus sign before the yen symbol (\"-¥n\").",
+					"notes": "Demonstrates a macro that generates a culture-specific currency value consumed by an action; the macro itself has no UI side-effects. The `C3` precision specifier overrides the ja-JP default of zero currency-decimal digits and rounds the value to three decimals. The Japanese CurrencyNegativePattern places the minus sign before the yen symbol (“-¥n”).",
 					"use_case": "format_decimal_currency3_ja_sendkeys",
 					"version": "1.0.2"
 				},
@@ -497,7 +497,7 @@
 				"### Format a negative decimal with the currency (`C3`) specifier and Japanese culture",
 				"",
 				"The `Format-Number` macro evaluates the value `-123.456` with the `C3` format specifier and the `ja-JP` culture.",
-				"The `C3` precision specifier **overrides** Japan's default of zero currency-decimal digits and rounds the value to three fractional places before formatting.",
+				"The `C3` precision specifier **overrides** Japan’s default of zero currency-decimal digits and rounds the value to three fractional places before formatting.",
 				"The resulting string is `-¥123.456`, where the minus sign precedes the yen symbol as defined by the Japanese `CurrencyNegativePattern`.",
 				"That string replaces the macro token at runtime.",
 				"The `SendKeys` plugin then types the generated string into the element identified by the CSS selector `#inputField`.",
@@ -1083,7 +1083,7 @@
 						"Very small decimal number",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '0,46' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘0,46’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro to apply fr-FR culture and a two-decimal precision format before sending the result using the SendKeys plugin. Ensures the macro remains purely value-generating.",
 					"use_case": "format_number_with_decimal_precision_and_french_culture",
 					"version": "1.0.0"
@@ -1122,7 +1122,7 @@
 						"Very small decimal number",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '2.147.483.647' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘2.147.483.647’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro to apply es-ES culture and the #,# pattern to insert thousands separators before sending the result with the SendKeys plugin. The macro itself is side-effect-free.",
 					"use_case": "format_number_with_group_separators_spanish_culture",
 					"version": "1.0.0"
@@ -1161,7 +1161,7 @@
 						"Very small decimal number",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '36.97%' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘36.97%’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro to apply en-US culture and the #0.00% pattern to multiply by 100 and append the percent symbol before sending the result with the SendKeys plugin. The macro itself is side-effect-free.",
 					"use_case": "format_decimal_as_percentage_en_us",
 					"version": "1.0.0"
@@ -1199,7 +1199,7 @@
 						"Very small decimal number",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '36,97‰' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘36,97‰’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro to apply ru-RU culture and the #0.00‰ pattern to multiply by 1000 and append the per-mille symbol before sending the result with the SendKeys plugin. The macro itself is side-effect-free.",
 					"use_case": "format_decimal_as_per_mille_ru_ru",
 					"version": "1.0.0"
@@ -1240,7 +1240,7 @@
 						"Very small decimal number",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '1.5e+03' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘1.5e+03’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro with pattern 0.0e+00 to force one decimal place and pad the exponent to two digits while always showing a plus sign for positive values. The macro is purely value-generating.",
 					"use_case": "format_number_scientific_notation_with_two_digit_exponent",
 					"version": "1.0.0"
@@ -1280,7 +1280,7 @@
 						"Very small decimal number",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '#987654#' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘#987654#’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro with a custom pattern that escapes literal characters (\\#) to wrap the value in hash symbols. No --Culture flag is supplied; therefore, any locale setting affects parsing only—this pattern contains no group or decimal placeholders, so the output is culture-agnostic. The macro is purely value-generating.",
 					"use_case": "format_number_with_literal_characters_escape_char",
 					"version": "1.0.0"
@@ -1319,7 +1319,7 @@
 						"Positive numbers",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '**Zero**' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘**Zero**’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro with a three-section format string separated by semicolons: positive; negative; zero. The third section formats the value 0 as the literal **Zero**. The macro is purely value-generating.",
 					"use_case": "conditional_number_formatting_with_zero_literal",
 					"version": "1.0.0"
@@ -1359,7 +1359,7 @@
 						"Very small decimal number",
 						"Zero as input"
 					],
-					"expected_result": "The formatted string '123.8K' is sent as keystrokes to the element with the specified CSS selector.",
+					"expected_result": "The formatted string ‘123.8K’ is sent as keystrokes to the element with the specified CSS selector.",
 					"notes": "Uses the Format-Number macro with a custom format string `#,##0.0K`, where `K` is a literal character. No --Culture flag is supplied; any locale setting affects group or decimal separators, but the literal `K` remains unchanged. The macro is purely value-generating.",
 					"use_case": "format_number_with_k_literal_suffix",
 					"version": "1.0.0"
@@ -1376,7 +1376,7 @@
 				"",
 				"Convert the number `123.8` to a string using the custom format `#,##0.0K`, then send it via keystrokes to the specified element.",
 				"The format string components are: `#,##0` (forces at least one digit, adds group separators), `.0` (one decimal place), and `K` (a literal character that is emitted unchanged). For the input `123.8`, the macro outputs `123.8K`.",
-				"Literal characters cannot be `0`, `#`, `%`, `‰`, `'`, `\\`, `.`, `,`, or `E/e` unless escaped, so `K` may be used without escaping.",
+				"Literal characters cannot be `0`, `#`, `%`, `‰`, `‘`, `\\`, `.`, `,`, or `E/e` unless escaped, so `K` may be used without escaping.",
 				"The macro remains side-effect-free, outputting only the formatted string.",
 				"Automation passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator."
 			],
@@ -1463,7 +1463,7 @@
 				{
 					"description": [
 						"Double provides a 64-bit floating point number with high precision for decimal values.",
-						"It supports large and fractional numbers for calculations requiring detail."
+						"Supports large and fractional numbers for calculations requiring detail."
 					],
 					"name": "Double"
 				},
@@ -1500,10 +1500,10 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The FormaNumber plugin formats numeric values into strings using specified culture settings and format patterns.",
-		"It supports locale-based formatting and custom patterns to ensure numbers display correctly in different regions.",
-		"This plugin makes automation workflows produce consistent, readable numbers in reports, logs, and interfaces.",
-		"It reduces manual formatting work and minimizes errors in numeric representation across diverse locales."
+		"Formats numeric values into strings using specified culture settings and format patterns.",
+		"Supports locale-based formatting and custom patterns to ensure numbers display correctly in different regions.",
+		"Produces consistent, readable numbers in reports, logs, and interfaces across automation workflows.",
+		"Reduces manual formatting work and minimizes errors in numeric representation across diverse locales."
 	],
 	"version": "4"
 }

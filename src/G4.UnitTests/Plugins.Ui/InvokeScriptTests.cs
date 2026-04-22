@@ -148,7 +148,7 @@ namespace G4.UnitTests.Plugins.Ui
             // Extract the ScriptResult from the session parameters, defaulting to an empty string if not present
             var scriptResult = responseModel
                 .SessionParameters
-                .Get(key: "ScriptResult", defaultValue: string.Empty);
+                .Get(key: "InvokeScript:ScriptResult", defaultValue: string.Empty);
 
             // Use a regex pattern to check if the script result matches certain states of document.readyState
             var actual = Regex.IsMatch(

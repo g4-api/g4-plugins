@@ -41,6 +41,14 @@
 					{
 						"question": "What happens when Argument is an empty string or absent?",
 						"answer": "`int.TryParse(\"\", ...)` and `int.TryParse(null, ...)` both fail and return false. The plugin falls through to the handle path and calls `WebDriver.SwitchTo().Window(\"\")` or `WebDriver.SwitchTo().Window(null)` respectively. Neither is a valid window handle; WebDriver throws NoSuchWindowException or ArgumentNullException depending on the driver implementation. There is no default-window fallback in the plugin."
+					},
+					{
+						"question": "What is the manifest version for SwitchWindow?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What alias is available for SwitchWindow?",
+						"answer": "SwitchWindow is also accepted as SwitchToWindow — both resolve to identical behavior."
 					}
 				]
 			},
@@ -53,13 +61,16 @@
 				},
 				"label": "Switch Window",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Switch Window"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchWindow` plugin switches WebDriver context to a different browser window or tab.",
+		"Switches WebDriver context to a different browser window or tab.",
 		"Mode selection is automatic: at runtime `int.TryParse(pluginData.Rule.Argument, out int index)` determines the path — a successful parse triggers the index path; a failed parse triggers the handle path.",
 		"No other parameters exist; the entire switching contract is expressed through a single `Argument` value.",
 		"",
@@ -106,7 +117,7 @@
 					"expected_result": "WebDriver context switches to the second open window or tab (zero-based index 1).",
 					"notes": "`int.TryParse` succeeds for any valid integer string. The zero-based index maps directly to the position in the WebDriver window handle list passed to the W3C switch-to-window endpoint.",
 					"use_case": "switch_by_index",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -131,6 +142,7 @@
 				"Index `0` targets the first window; `1` the second, and so on."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "1",
 				"pluginName": "SwitchWindow"
 			}
@@ -151,7 +163,7 @@
 					"expected_result": "WebDriver context switches to the window identified by the handle `CDwindow-ABCD1234`.",
 					"notes": "Window handles are driver-assigned opaque strings returned by `WebDriver.WindowHandles`. Pass the exact handle string as `Argument` to target a specific window deterministically, independent of window order.",
 					"use_case": "switch_by_handle",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -178,6 +190,7 @@
 				"Obtain the handle from `WebDriver.WindowHandles` before invoking this plugin to ensure the value is current and valid."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "CDwindow-ABCD1234",
 				"pluginName": "SwitchWindow"
 			}
@@ -208,7 +221,7 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The `SwitchWindow` plugin switches WebDriver context to a different browser window or tab.",
+		"SwitchWindow switches WebDriver context to a different browser window or tab.",
 		"It selects the switching mode automatically: an integer `Argument` switches by zero-based window index; a non-integer `Argument` is passed directly to WebDriver as a window handle string.",
 		"In RPA it enables multi-window and pop-up workflows; in automation testing it provides deterministic window targeting by index or handle."
 	],

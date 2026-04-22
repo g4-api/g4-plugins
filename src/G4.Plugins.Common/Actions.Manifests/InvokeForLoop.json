@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -74,6 +74,18 @@
 					{
 						"question": "Where can I find the source code and documentation for InvokeForLoop?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeForLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeForLoop.md"
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "4."
+					},
+					{
+						"question": "What namespace is InvokeForLoop in?",
+						"answer": "G4.Plugins.Common."
+					},
+					{
+						"question": "What platform does InvokeForLoop support?",
+						"answer": "Any platform."
 					}
 				]
 			},
@@ -85,14 +97,18 @@
 					"name": "repeat",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Invoke For Loop"
+			},
+			"mcp": {
+				"title": "Invoke For Loop"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeForLoop plugin runs a set of actions a specified number of times in your automation scripts. It makes repeating tasks simple by letting you define exactly how many loops to perform. This saves time and effort when you need predictable, repeated steps. It works equally well in RPA workflows and automated tests.",
+		"Runs a set of actions a specified number of times in your automation scripts. It makes repeating tasks simple by letting you define exactly how many loops to perform. This saves time and effort when you need predictable, repeated steps. It works equally well in RPA workflows and automated tests.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -141,7 +157,7 @@
 			"description": [
 				"### Click Next Button 5 Times Using CSS Selector",
 				"",
-				"This example demonstrates how the InvokeForLoop plugin runs a loop 5 times and performs a Click action on the element matching the CSS selector `#NextBtn1` each iteration.",
+				"Runs a loop 5 times and performs a Click action on the element matching the CSS selector `#NextBtn1` each iteration.",
 				"The inner rule uses `#NextBtn1` scoped by CssSelector to locate the target button.",
 				"If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error."
 			],
@@ -181,7 +197,7 @@
 			"description": [
 				"### Click Next Button 5 Times Using XPath",
 				"",
-				"This example demonstrates how the InvokeForLoop plugin runs a loop 5 times and performs a Click action on the element matching the XPath selector `//button[@id='NextBtn1']` each iteration.",
+				"Runs a loop 5 times and performs a Click action on the element matching the XPath selector `//button[@id='NextBtn1']` each iteration.",
 				"The inner rule uses the XPath `//button[@id='NextBtn1']` to locate the target button.",
 				"If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error."
 			],
@@ -220,7 +236,7 @@
 			"description": [
 				"### Click Next Button 5 Times Using Id Locator",
 				"",
-				"This example demonstrates how the InvokeForLoop plugin runs a loop 5 times and performs a Click action on the element with Id `NextBtn1` each iteration.",
+				"Runs a loop 5 times and performs a Click action on the element with Id `NextBtn1` each iteration.",
 				"The inner rule uses `NextBtn1` scoped by Id to locate the target button.",
 				"If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error."
 			],
@@ -260,7 +276,7 @@
 			"description": [
 				"### Nested InvokeForLoop With Mixed Actions",
 				"",
-				"This example demonstrates how the InvokeForLoop plugin runs an outer loop 2 times, then within each outer iteration runs an inner loop 2 times to Click `#NextBtn2`, followed by a Click on `//button[@Id='FirstBtn2']`, then a Click on the element with Id `NextBtn1`.",
+				"Runs an outer loop 2 times, then within each outer iteration runs an inner loop 2 times to Click `#NextBtn2`, followed by a Click on `//button[@Id='FirstBtn2']`, then a Click on the element with Id `NextBtn1`.",
 				"Inner loops use their own argument and selectors as specified.",
 				"If any element is missing, an exception is logged and that iteration continues. Click failures record exceptions without stopping the outer loop. The overall process only stops if configured to stop on error."
 			],

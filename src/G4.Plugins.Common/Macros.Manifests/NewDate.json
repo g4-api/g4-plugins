@@ -17,7 +17,7 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/NewDate.cs"
 			},
 			"rag": {
-				"description": "NewDate provides automated date and time manipulation for workflows, enforcing input validation, format checks, and dynamic runtime evaluations. It supports custom formats, partial extraction of date parts, time shifts, and epoch conversions through flexible parameters. Built-in reliability mechanisms preserve workflow continuity across time zones and execution contexts.",
+				"description": "New-Date provides automated date and time manipulation for workflows, enforcing input validation, format checks, and dynamic runtime evaluations. Supports custom formats, partial extraction of date parts, time shifts, and epoch conversions through flexible parameters. Built-in reliability mechanisms preserve workflow continuity across time zones and execution contexts.",
 				"qa": [
 					{
 						"question": "What is the NewDate plugin used for?",
@@ -25,7 +25,7 @@
 					},
 					{
 						"question": "What key features and parameters does the NewDate plugin support?",
-						"answer": "It supports time adjustments via AddTime/SubtructTime, custom output with the Format pattern using .NET format strings (Custom: https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings; Standard: https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings), part extraction through DatePart (Year, Month, Day, Hour, Minute, Second, Millisecond, Nanosecond, Microsecond, Ticks), and switches for Utc, UnixEpoch, OaDate, DayOfYear, and DayOfWeek."
+						"answer": "Supports time adjustments via AddTime/SubtractTime, custom output with the Format pattern using .NET format strings (Custom: https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings; Standard: https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings), part extraction through DatePart (Year, Month, Day, Hour, Minute, Second, Millisecond, Nanosecond, Microsecond, Ticks), and switches for Utc, UnixEpoch, OaDate, DayOfYear, and DayOfWeek."
 					},
 					{
 						"question": "Where can I find the NewDate plugin’s code and documentation?",
@@ -49,27 +49,27 @@
 					},
 					{
 						"question": "Who is the author of the NewDate plugin?",
-						"answer": "The plugin is authored by Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+						"answer": "Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)"
 					},
 					{
 						"question": "What manifest version does the NewDate plugin use?",
-						"answer": "The NewDate plugin uses manifestVersion 4."
+						"answer": "4"
 					},
 					{
 						"question": "What aliases does the NewDate plugin define?",
-						"answer": "It can be invoked using the aliases \"date\" and \"NewDate\"."
+						"answer": "“date” and “NewDate”"
 					},
 					{
 						"question": "What categories is the NewDate plugin listed under?",
-						"answer": "The plugin is listed under the \"Utilities\" category."
+						"answer": "Utilities"
 					},
 					{
 						"question": "What is the key of the NewDate plugin?",
-						"answer": "The plugin’s key is \"New-Date\"."
+						"answer": "“New-Date”"
 					},
 					{
 						"question": "Which platforms does the NewDate plugin support?",
-						"answer": "The plugin supports the \"Any\" platform."
+						"answer": "Any"
 					},
 					{
 						"question": "What type of plugin is NewDate?",
@@ -77,7 +77,7 @@
 					},
 					{
 						"question": "What is the summary of the NewDate plugin?",
-						"answer": "The NewDate plugin instantly creates date and time values, including the current moment or a shifted timestamp. It can return full timestamps, individual parts like year or minute, or special formats such as Unix epoch and OLE Automation dates, with custom formatting and a UTC switch to streamline workflows."
+						"answer": "Instantly creates date and time values, including the current moment or a shifted timestamp. Returns full timestamps, individual parts like year or minute, or special formats such as Unix epoch and OLE Automation dates, with custom formatting and a UTC switch to streamline workflows."
 					}
 				]
 			}
@@ -86,7 +86,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The primary purpose of the NewDate macro plugin is to provide functionalities for date and time manipulation, including adding or subtracting time, extracting specific date parts, and formatting dates according to custom formats.",
+		"Provides date and time manipulation, including adding or subtracting time, extracting specific date parts, and formatting dates according to custom formats.",
 		"",
 		"### Key Features",
 		"",
@@ -125,7 +125,7 @@
 						"SendKeys failure"
 					],
 					"expected_result": "The plugin sends the current date and time as keystrokes to the element matching the CSS selector `.example-element`.",
-					"notes": "This example uses the `NewDate` macro (`{{$New-Date}}`) to generate the argument for the `SendKeys` plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` generates the current date-time string at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_macro",
 					"version": "1.0.0"
 				},
@@ -165,7 +165,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The RegisterParameter plugin registers a session-scoped parameter named DataParameter with the current date in yyyy-MM-dd format.",
-					"notes": "This example first evaluates the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to produce the date string, then passes that string verbatim in the argument (`--Name:DataParameter --Value:<date string> --Scope:Session`) to the `RegisterParameter` plugin.",
+					"notes": "Combines `New-Date` with `RegisterParameter`. `New-Date` produces a `yyyy-MM-dd` date string at runtime; `RegisterParameter` stores it as a session-scoped parameter named `DataParameter`.",
 					"use_case": "register_parameter_current_date_session",
 					"version": "1.0.0"
 				},
@@ -203,8 +203,8 @@
 						"Plugin not installed",
 						"Unexpected whitespace in argument"
 					],
-					"expected_result": "The WriteLog plugin writes a log entry with the message 'Log entry created at YYYY-MM-DD' to the logging system.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to produce a date string, then passes the inline message `Log entry created at {{$New-Date --Format:yyyy-MM-dd}}` (containing the macro call itself) directly to the WriteLog plugin.",
+					"expected_result": "The WriteLog plugin writes a log entry with the message ‘Log entry created at YYYY-MM-DD’ to the logging system.",
+					"notes": "Combines `New-Date` with `WriteLog`. `New-Date` produces a `yyyy-MM-dd` date string at runtime; `WriteLog` logs a message that includes the generated date.",
 					"use_case": "writelog_with_newdate_macro",
 					"version": "1.0.0"
 				},
@@ -242,7 +242,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The plugin sends the current UTC date in yyyy-MM-dd format as keystrokes to the element matching the CSS selector `.example-element`.",
-					"notes": "This example first evaluates the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd --Utc}}`) to produce a UTC date string, then passes that string as the argument to the `SendKeys` plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces a UTC `yyyy-MM-dd` date string at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_macro_utc",
 					"version": "1.0.0"
 				},
@@ -285,7 +285,7 @@
 						"Unexpected whitespace in locator"
 					],
 					"expected_result": "The Click plugin evaluates the inline NewDate macro at runtime and clicks the button whose text matches the current year.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --Format:yyyy}}`) to produce the current year string, then passes the inline locator `//button[contains(text(), '{{$New-Date --Format:yyyy}}')]` (containing the macro call itself) directly to the Click plugin.",
+					"notes": "Combines `New-Date` with `Click`. `New-Date` produces the current year at runtime; the inline macro in the XPath locator causes `Click` to locate and click the button whose text matches that year.",
 					"use_case": "click_button_current_year_xpath",
 					"version": "1.0.0"
 				},
@@ -300,12 +300,12 @@
 				"### Click Plugin with NewDate Macro for Year",
 				"",
 				"Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy}}`) to generate the current year string.",
-				"Use the `Click` plugin with the XPath locator string `//button[contains(text(), '{{$New-Date --Format:yyyy}}')]` so that the plugin evaluates the inline macro call at runtime and clicks the matching button."
+				"Use the `Click` plugin with the XPath locator string `//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]` so that the plugin evaluates the inline macro call at runtime and clicks the matching button."
 			],
 			"rule": {
 				"$type": "Action",
 				"locator": "Xpath",
-				"onElement": "//button[contains(text(), '{{$New-Date --Format:yyyy}}')]",
+				"onElement": "//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]",
 				"pluginName": "Click"
 			}
 		},
@@ -324,7 +324,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The WriteLog plugin writes a log entry containing the current date and time in Unix epoch format to the logging system.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --UnixEpoch}}`) to produce a Unix epoch timestamp, then passes the inline argument `{{$New-Date --UnixEpoch}}` (containing the macro call) directly to the WriteLog plugin.",
+					"notes": "Combines `New-Date` with `WriteLog`. `New-Date` produces a Unix epoch timestamp at runtime; `WriteLog` logs a message containing that value.",
 					"use_case": "writelog_with_unixepoch_newdate_macro",
 					"version": "1.0.0"
 				},
@@ -367,7 +367,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current date and time as an OLE Automation date value into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --OaDate}}`) to produce an OLE Automation date floating-point value, then passes the inline argument `{{$New-Date --OaDate}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces an OLE Automation date floating-point value at runtime; `SendKeys` consumes it and types it into the text field.",
 					"use_case": "sendkeys_ole_automation_date_macro",
 					"version": "1.0.0"
 				},
@@ -411,7 +411,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current year into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Year}}`) to produce the current year string, then passes the inline argument `{{$New-Date --DatePart:Year}}` (containing the macro call) directly to the SendKeys plugin to input into the element matching the CSS selector `.text-field`.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current year at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_year_macro",
 					"version": "1.0.0"
 				},
@@ -455,7 +455,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current month into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Month}}`) to produce the current month string, then passes the inline argument `{{$New-Date --DatePart:Month}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current month at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_month_macro",
 					"version": "1.0.0"
 				},
@@ -499,7 +499,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current day into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Day}}`) to produce the current day string, then passes the inline argument `{{$New-Date --DatePart:Day}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current day at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_day_macro",
 					"version": "1.0.0"
 				},
@@ -543,7 +543,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current hour into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Hour}}`) to produce the current hour string, then passes the inline argument `{{$New-Date --DatePart:Hour}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current hour at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_hour_macro",
 					"version": "1.0.0"
 				},
@@ -587,7 +587,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current minute into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Minute}}`) to produce the current minute string, then passes the inline argument `{{$New-Date --DatePart:Minute}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current minute at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_minute_macro",
 					"version": "1.0.0"
 				},
@@ -631,7 +631,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current second into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Second}}`) to produce the current second string, then passes the inline argument `{{$New-Date --DatePart:Second}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current second at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_second_macro",
 					"version": "1.0.0"
 				},
@@ -675,7 +675,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current millisecond string into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Millisecond}}`) to produce the current millisecond string, then passes the inline argument `{{$New-Date --DatePart:Millisecond}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current millisecond at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_millisecond_macro",
 					"version": "1.0.0"
 				},
@@ -719,7 +719,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current nanosecond string into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Nanosecond}}`) to produce the current nanosecond string, then passes the inline argument `{{$New-Date --DatePart:Nanosecond}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current nanosecond at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_nanosecond_macro",
 					"version": "1.0.0"
 				},
@@ -763,7 +763,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current microsecond string into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Microsecond}}`) to produce the current microsecond string, then passes the inline argument `{{$New-Date --DatePart:Microsecond}}` (containing the macro call) directly to the SendKeys plugin to input into the element matching the CSS selector `.text-field`.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current microsecond at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_microsecond_macro",
 					"version": "1.0.0"
 				},
@@ -809,7 +809,7 @@
 						"Unexpected whitespace in argument"
 					],
 					"expected_result": "The SendKeys plugin inputs the current tick count into the text field matching the CSS selector `.text-field`.",
-					"notes": "This example first evaluates the NewDate macro (`{{$New-Date --DatePart:Ticks}}`) to produce the current tick count string, then passes the inline argument `{{$New-Date --DatePart:Ticks}}` (containing the macro call) directly to the SendKeys plugin.",
+					"notes": "Combines `New-Date` with `SendKeys`. `New-Date` produces the current tick count at runtime; `SendKeys` consumes it and types it into the element.",
 					"use_case": "sendkeys_with_newdate_ticks_macro",
 					"version": "1.0.0"
 				},
@@ -885,9 +885,9 @@
 		{
 			"description": [
 				"Choose one element of the date and time, like year, month, or day, when you need only part of the full timestamp.",
-				"Selecting 'Hour' or 'Minute' lets you work with the exact time of day for scheduling or logging.",
-				"Using 'Second', 'Millisecond', or smaller units helps when you need precise timing in your application.",
-				"Specifying 'Ticks' returns the raw tick count for very fine measurements and analysis."
+				"Selecting ‘Hour’ or ’Minute’ lets you work with the exact time of day for scheduling or logging.",
+				"Using ‘Second’, ’Millisecond’, or smaller units helps when you need precise timing in your application.",
+				"Specifying ‘Ticks’ returns the raw tick count for very fine measurements and analysis."
 			],
 			"mandatory": false,
 			"name": "DatePart",
@@ -1035,8 +1035,8 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The NewDate plugin instantly creates date and time values, including the current moment or a value shifted by an amount you choose.",
-		"It can return full timestamps, individual parts such as year or minute, or special formats like Unix epoch and OLE Automation numbers.",
+		"Instantly creates date and time values, including the current moment or a value shifted by a chosen interval.",
+		"Returns full timestamps, individual parts such as year or minute, or special formats like Unix epoch and OLE Automation numbers.",
 		"Custom formatting and a UTC switch help automations stamp logs, fill inputs, and schedule tasks without hand-written date math."
 	],
 	"version": "4"

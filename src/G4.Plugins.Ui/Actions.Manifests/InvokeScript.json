@@ -61,13 +61,16 @@
 				},
 				"label": "Invoke Script",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Invoke Script"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeScript action executes an environment-specific script within the current WebDriver session.",
+		"Executes an environment-specific script within the current WebDriver session.",
 		"In a web browser the script is JavaScript; on iOS it is Xcode; on Windows it can be PowerShell.",
 		"The script can receive a located web element and custom argument values, making it the primary way to perform DOM manipulation, extract hidden data, or trigger JavaScript-only behaviors that native WebDriver commands cannot reach.",
 		"The return value of the script is stored in the session parameter ScriptResult and is immediately available to downstream rules.",
@@ -114,7 +117,7 @@
 					"expected_result": "The value property of the input element matching #InputEnabled is set to 'Foo Bar' and the script return value is stored in ScriptResult.",
 					"notes": "Script is passed as the raw Argument property value. The ScriptBlock parameter is not used. The engine reads pluginData.Rule.Argument directly as the script string when ScriptBlock is absent.",
 					"use_case": "inline_script_dom_set_value",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"DomManipulation",
@@ -152,7 +155,7 @@
 					"expected_result": "The input element #InputEnabled receives the value 'Foo Bar' passed via arguments[0], and the script return value is stored in ScriptResult.",
 					"notes": "ScriptBlock is passed explicitly as a parameter in the macro. Arguments is a JSON array string that is deserialized with JsonSerializer and provided as the args array to WebDriver.InvokeScript. The script references custom values via arguments[0], arguments[1], and so on.",
 					"use_case": "script_block_with_arguments_array",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"ArgumentsArray",
@@ -191,7 +194,7 @@
 					"expected_result": "The resolved element #InputEnabled is injected as arguments[0] and its value property is set to 'Foo Bar'. The script return value is stored in ScriptResult.",
 					"notes": "GetElement resolves the CssSelector expression to a WebElement. The element is prepended to the arguments array before InvokeScript is called. The script references it via arguments[0].",
 					"use_case": "script_with_element_as_first_argument",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CssSelector",
@@ -230,7 +233,7 @@
 					"expected_result": "The resolved element #InputEnabled is arguments[0] and 'Foo Bar' is arguments[1]. The script sets the element's value to the custom argument. The script return value is stored in ScriptResult.",
 					"notes": "Element is prepended first using the C# spread operator ([element, ..arguments]). Custom Arguments follow. arguments[0] is the WebElement; arguments[1] is the first entry of the Arguments JSON array.",
 					"use_case": "script_with_element_and_custom_arguments",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"ArgumentsArray",
@@ -340,9 +343,9 @@
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
 	"summary": [
-		"The InvokeScript action executes an environment-specific script — JavaScript in web browsers, Xcode on iOS — within the current WebDriver session, making it the primary way to perform DOM manipulation, extract hidden data, and trigger JavaScript-only behaviors that native WebDriver commands cannot reach.",
+		"InvokeScript executes an environment-specific script — JavaScript in web browsers, Xcode on iOS — within the current WebDriver session, making it the primary way to perform DOM manipulation, extract hidden data, and trigger JavaScript-only behaviors that native WebDriver commands cannot reach.",
 		"The script receives an optional located web element as arguments[0] and custom values from the Arguments JSON array at subsequent indices.",
-		"In RPA it enables DOM manipulation, data extraction, dynamic interactions, and JavaScript utility execution. In automation testing it supports DOM state validation, pre-condition setup, script return value assertions, and custom event simulation.",
+		"In RPA it enables DOM manipulation, data extraction, dynamic interactions, and JavaScript utility execution; in automation testing it supports DOM state validation, pre-condition setup, script return value assertions, and custom event simulation.",
 		"The script return value is stored in the session parameter ScriptResult and is immediately available to downstream rules."
 	],
 	"version": "4"

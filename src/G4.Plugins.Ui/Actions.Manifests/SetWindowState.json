@@ -30,6 +30,22 @@
 					{
 						"question": "Does SetWindowState produce any output parameters?",
 						"answer": "No. SetWindowState returns a default plugin response with no output parameters. The window state is changed via the driver but not echoed back into the session context."
+					},
+					{
+						"question": "What W3C WebDriver endpoints does SetWindowState use?",
+						"answer": "It uses POST /session/{session id}/window/maximize for Maximized, POST /session/{session id}/window/minimize for Minimized, and POST /session/{session id}/window/fullscreen for FullScreen."
+					},
+					{
+						"question": "What is the manifest version for SetWindowState?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What is the namespace and plugin type for SetWindowState?",
+						"answer": "The namespace is G4.Plugins.Ui and the pluginType is Action."
+					},
+					{
+						"question": "Why does SetWindowState not throw when Argument is absent or unrecognized?",
+						"answer": "All three state branches are conditional checks against the Argument value. When none of them match — because Argument is absent, empty, or an unrecognized string — all branches are skipped and the action returns a default plugin response normally. This is a deliberate safe no-op design."
 					}
 				]
 			},
@@ -42,13 +58,16 @@
 				},
 				"label": "Set Window State",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Set Window State"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `SetWindowState` action sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
+		"Sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
 		"The `Argument` property specifies the target state and is evaluated with `OrdinalIgnoreCase`, so `maximized`, `MAXIMIZED`, and `Maximized` are all valid.",
 		"If `Argument` is absent, empty, or does not match any recognized value, the action returns a default response without error — the window state is not changed.",
 		"",
@@ -91,7 +110,7 @@
 					"expected_result": "The browser window is expanded to fill the screen in maximized state.",
 					"notes": "The Argument value 'Maximized' triggers WebDriver.Manage().Window.Maximize(). The comparison is OrdinalIgnoreCase so any casing is accepted.",
 					"use_case": "maximize_window",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Maximize",
@@ -124,7 +143,7 @@
 					"expected_result": "The browser window is collapsed to the taskbar in minimized state.",
 					"notes": "The Argument value 'Minimized' triggers WebDriver.Manage().Window.Minimize(). The comparison is OrdinalIgnoreCase so any casing is accepted.",
 					"use_case": "minimize_window",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Minimize",
@@ -157,7 +176,7 @@
 					"expected_result": "The browser window enters full-screen mode, hiding OS and browser chrome.",
 					"notes": "The Argument value 'FullScreen' triggers WebDriver.Manage().Window.FullScreen(). The comparison is OrdinalIgnoreCase so any casing is accepted.",
 					"use_case": "fullscreen_window",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"FullScreen",
@@ -225,9 +244,9 @@
 		"w3c": "POST /session/{session id}/window/maximize | POST /session/{session id}/window/minimize | POST /session/{session id}/window/fullscreen"
 	},
 	"summary": [
-		"The `SetWindowState` action sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
+		"SetWindowState sets the browser window to `Maximized`, `Minimized`, or `FullScreen` by calling the corresponding W3C WebDriver window command.",
 		"The `Argument` property selects the target state and is matched case-insensitively; an unrecognized or absent value is a safe no-op that returns normally without error.",
-		"In RPA it normalizes window visibility and supports kiosk-mode presentation. In automation testing it enforces a consistent window state before screenshots, layout checks, or full-screen layout verification."
+		"In RPA it normalizes window visibility and supports kiosk-mode presentation; in automation testing it enforces a consistent window state before screenshots, layout checks, or full-screen layout verification."
 	],
 	"version": "4"
 }

@@ -22,7 +22,7 @@
 				"qa": [
 					{
 						"question": "What does the GetParameter plugin do in one sentence?",
-						"answer": "It fetches a named parameter at run-time—decoding or decrypting it if needed—and swaps the placeholder with the live value so the workflow continues without manual edits."
+						"answer": "Fetches a named parameter at run-time—decoding or decrypting it if needed—and swaps the placeholder with the live value so the workflow continues without manual edits."
 					},
 					{
 						"question": "Which core features and input parameters does GetParameter support?",
@@ -50,11 +50,11 @@
 					},
 					{
 						"question": "What summary does the manifest provide for GetParameter?",
-						"answer": "It retrieves parameters from various scopes, substitutes live values during execution, and can decode or decrypt them when needed."
+						"answer": "Retrieves parameters from various scopes, substitutes live values during execution, and can decode or decrypt them when needed."
 					},
 					{
 						"question": "Which aliases can invoke this plugin?",
-						"answer": "\"getparam\" and \"GetParameter\""
+						"answer": "“getparam” and “GetParameter”"
 					},
 					{
 						"question": "Which category does the plugin belong to?",
@@ -74,7 +74,7 @@
 					},
 					{
 						"question": "How does GetParameter handle missing parameters or invalid scope values?",
-						"answer": "It returns an empty string or explicit error, enabling the calling step to log, branch, or retry so the workflow can react gracefully."
+						"answer": "Returns an empty string or explicit error, enabling the calling step to log, branch, or retry so the workflow can react gracefully."
 					}
 				]
 			}
@@ -83,7 +83,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The GetParameter plugin fetches configuration and secret values from defined storage scopes at runtime.",
+		"Fetches configuration and secret values from defined storage scopes at runtime.",
 		"It instantly substitutes placeholders with live data so automation flows keep moving without manual edits.",
 		"It can safely decode or decrypt values that were stored in base-64 or encrypted form by the RegisterParameter plugin.",
 		"This keeps configuration handling secure, consistent, and environment-aware across robots, tests, and services.",
@@ -126,7 +126,7 @@
 						"Network latency",
 						"Parameter not found"
 					],
-					"expected_result": "The automation retrieves the 'AppVersion' parameter and types its value into the input element located by the CSS selector #appVersionInput.",
+					"expected_result": "The automation retrieves the ‘AppVersion’ parameter and types its value into the input element located by the CSS selector #appVersionInput.",
 					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
 					"use_case": "send_appversion_to_input",
 					"version": "1.0.0"
@@ -168,7 +168,7 @@
 						"Network latency",
 						"Parameter not found"
 					],
-					"expected_result": "The automation retrieves the 'AppVersion' parameter and types its value into the input element located by the CSS selector #appVersionInput.",
+					"expected_result": "The automation retrieves the ‘AppVersion’ parameter and types its value into the input element located by the CSS selector #appVersionInput.",
 					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
 					"use_case": "send_appversion_to_input",
 					"version": "1.0.0"
@@ -210,7 +210,7 @@
 						"Network latency",
 						"Parameter not found"
 					],
-					"expected_result": "The automation retrieves the 'Email' parameter and types its value into the input element located by the CSS selector #emailInput.",
+					"expected_result": "The automation retrieves the ‘Email’ parameter and types its value into the input element located by the CSS selector #emailInput.",
 					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
 					"use_case": "send_email_to_input",
 					"version": "1.0.0"
@@ -252,7 +252,7 @@
 						"Network latency",
 						"Parameter not found"
 					],
-					"expected_result": "The automation retrieves the 'MachineName' parameter and types its value into the input element located by the CSS selector #machineNameInput.",
+					"expected_result": "The automation retrieves the ‘MachineName’ parameter and types its value into the input element located by the CSS selector #machineNameInput.",
 					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
 					"use_case": "send_machinename_to_input",
 					"version": "1.0.0"
@@ -295,7 +295,7 @@
 						"Parameter not found",
 						"Process context not available"
 					],
-					"expected_result": "The automation retrieves the 'ProcessId' parameter and types its value into the input element located by the CSS selector #processIdInput.",
+					"expected_result": "The automation retrieves the ‘ProcessId’ parameter and types its value into the input element located by the CSS selector #processIdInput.",
 					"notes": "The Get-Parameter macro provides a literal string while the SendKeys action performs the user-interface interaction using that string.",
 					"use_case": "send_processid_to_input",
 					"version": "1.0.0"
@@ -339,7 +339,7 @@
 						"Network latency",
 						"Parameter not found"
 					],
-					"expected_result": "The automation retrieves the 'SecretParam' parameter, decrypts it with the provided key, and types the plaintext value into the input element located by the CSS selector #secretInput.",
+					"expected_result": "The automation retrieves the ‘SecretParam’ parameter, decrypts it with the provided key, and types the plaintext value into the input element located by the CSS selector #secretInput.",
 					"notes": "The Get-Parameter macro returns a decrypted string at runtime, while the SendKeys action performs the UI interaction using that string.",
 					"use_case": "send_secretparam_to_input",
 					"version": "1.0.0"
@@ -389,8 +389,8 @@
 			"default": "Session",
 			"description": [
 				"Indicates the storage scope to search for the parameter.",
-				"Accepts 'Application', 'User', 'Machine', 'Process', or 'Session'.",
-				"Omit this property to fall back to the 'Session' scope."
+				"Accepts ‘Application’, ’User’, ‘Machine’, ’Process’, or ‘Session’.",
+				"Omit this property to fall back to the ‘Session’ scope."
 			],
 			"mandatory": false,
 			"name": "Scope",
@@ -399,7 +399,7 @@
 		{
 			"description": [
 				"Designates the environment collection that holds the parameter.",
-				"Defaults to 'SystemParameters' when the property is not supplied."
+				"Defaults to ‘SystemParameters’ when the property is not supplied."
 			],
 			"mandatory": false,
 			"name": "Environment",
@@ -424,8 +424,8 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The GetParameter plugin fetches a named parameter from application, user, machine, process, or session scopes in any environment.",
-		"It swaps placeholders with the live value during execution, letting automation steps adjust instantly to current settings.",
-		"The plugin also decodes base64 and, with an EncryptionKey, decrypts secrets saved by RegisterParameter, keeping sensitive data secure yet usable."
+		"Fetches a named parameter from application, user, machine, process, or session scopes in any environment.",
+		"Swaps placeholders with the live value during execution, letting automation steps adjust instantly to current settings.",
+		"Also decodes base64 and, with an EncryptionKey, decrypts secrets saved by RegisterParameter, keeping sensitive data secure yet usable."
 	]
 }

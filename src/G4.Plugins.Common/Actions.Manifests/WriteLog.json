@@ -79,8 +79,8 @@
 						"answer": "The key is \"WriteLog\", which uniquely identifies this plugin in the system."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the schema version used for this plugin."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4."
 					},
 					{
 						"question": "Which platforms does this plugin support?",
@@ -97,6 +97,10 @@
 					{
 						"question": "What does the summary describe?",
 						"answer": "The summary states that WriteLog writes messages while a task runs so you can see what happened, puts the message into the system log, and makes it easy to follow steps, spot problems, and save important notes."
+					},
+					{
+						"question": "What namespace is WriteLog in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -107,14 +111,18 @@
 					"name": "file-lines",
 					"svg": null
 				},
+				"label": "Write Log",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Write Log"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The WriteLog plugin records informational messages during automation execution for display and analysis. It takes a given argument and writes it into the system log so users can see what happened at each step. This helps track progress and diagnose issues without worrying about different log levels.",
+		"Records informational messages during automation execution for display and analysis. It takes a given argument and writes it into the system log so users can see what happened at each step. This helps track progress and diagnose issues without worrying about different log levels.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -153,15 +161,16 @@
 					"version": "1.0"
 				},
 				"labels": [
-					"Logging"
+					"Logging",
+					"StaticMessage"
 				]
 			},
 			"description": [
 				"### Write a Static Log Message",
 				"",
-				"This example demonstrates how to write a simple, static message to the log during automation execution.",
+				"Write a simple, static message to the log during automation execution.",
 				"It uses the `WriteLog` plugin with the argument set to \"Logging a simple message\".",
-				"Values are returned as strings for downstream processing."
+				"The message is written to the system log as an informational entry."
 			],
 			"rule": {
 				"$type": "Action",
@@ -190,14 +199,46 @@
 			"description": [
 				"### Write a Dynamic Parameter Value to Log",
 				"",
-				"This example demonstrates how to retrieve a dynamic, session-scoped parameter and write its value to the log.",
+				"Retrieve a dynamic, session-scoped parameter and write its value to the log.",
 				"It uses the `WriteLog` plugin with the argument set to `{{$Get-Parameter --Name:MyParam --Scope:Session}}`.",
-				"Values are returned as strings for downstream processing."
+				"The message is written to the system log as an informational entry."
 			],
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$Get-Parameter --Name:MyParam --Scope:Session}}",
 				"pluginName": "WriteLog"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Log write failure",
+						"Expression evaluation error",
+						"Parameter not found"
+					],
+					"expected_result": "The value of the application-scoped parameter \"AppVersion\" is retrieved and written to the log using the Log alias.",
+					"notes": "Uses the Log alias. Behaviour is identical to WriteLog. Useful for shorter plugin references in scripts.",
+					"use_case": "write_log_alias_log_application_param",
+					"version": "1.0"
+				},
+				"labels": [
+					"Alias",
+					"Logging",
+					"ParameterRetrieval"
+				]
+			},
+			"description": [
+				"### Log an Application-Scoped Parameter Using the Log Alias",
+				"",
+				"Write the value of an application-scoped parameter to the log using the `Log` alias.",
+				"Uses the `Log` plugin name with the argument `{{$Get-Parameter --Name:AppVersion --Scope:Application}}`.",
+				"The `Log` alias is interchangeable with `WriteLog`; the message is written to the system log as an informational entry."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application}}",
+				"pluginName": "Log"
 			}
 		}
 	],

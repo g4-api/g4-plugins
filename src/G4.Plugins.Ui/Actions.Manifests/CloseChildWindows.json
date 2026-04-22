@@ -43,6 +43,14 @@
 					{
 						"question": "What aliases can be used in place of CloseChildWindows?",
 						"answer": "The action can also be invoked using CloseAllChildWindows, CloseAllTabs, or CloseTabs."
+					},
+					{
+						"question": "What W3C WebDriver endpoint does CloseChildWindows use?",
+						"answer": "CloseChildWindows calls the W3C WebDriver DELETE /session/{session id}/window endpoint for each child window closure."
+					},
+					{
+						"question": "What is the manifest version for CloseChildWindows?",
+						"answer": "The manifest version is 4."
 					}
 				]
 			},
@@ -55,13 +63,16 @@
 				},
 				"label": "Close Child Windows",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Close Child Windows"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The CloseChildWindows action closes all child browser windows or tabs while always preserving the main window at index zero.",
+		"Closes all child browser windows or tabs while always preserving the main window at index zero.",
 		"An optional integer Argument limits closure to an exact number of children; omitting it closes all of them.",
 		"After all targeted windows are closed the driver focus is returned to the main window, leaving the session in a consistent, single-window state.",
 		"",
@@ -104,7 +115,7 @@
 					"expected_result": "All child browser windows are closed and WebDriver focus returns to the main window.",
 					"notes": "Closes all non-main window handles. Failures on individual windows do not stop execution.",
 					"use_case": "close_all_child_windows",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BrowserManagement",
@@ -136,7 +147,7 @@
 					"expected_result": "The specified number of child browser windows are closed and WebDriver focus returns to the main window.",
 					"notes": "The Argument limits how many child windows are closed. The value is normalized when out of range.",
 					"use_case": "close_specific_count_child_windows",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"ArgumentControl",
@@ -184,9 +195,9 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The CloseChildWindows action closes all child browser windows or a specified number of them, always preserving the main window at index zero and returning driver focus to it after completion.",
-		"In robotic process automation, it enforces a focused single-window session state by removing unwanted popup or tab windows without disrupting the primary workflow context.",
-		"In automation testing, it provides clean window teardown between test steps and test cases, preventing residual child windows from leaking state into subsequent validations."
+		"CloseChildWindows closes all child browser windows or a specified number of them, always preserving the main window at index zero and returning driver focus to it after completion.",
+		"In robotic process automation it enforces a focused single-window session state by removing unwanted popup or tab windows without disrupting the primary workflow context.",
+		"In automation testing it provides clean window teardown between test steps and test cases, preventing residual child windows from leaking state into subsequent validations."
 	],
 	"version": "4"
 }

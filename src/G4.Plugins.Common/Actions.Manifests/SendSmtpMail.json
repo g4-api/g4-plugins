@@ -1,4 +1,4 @@
-﻿{
+{
 	"aliases": [
 		"SendMail"
 	],
@@ -20,7 +20,7 @@
 				"qa": [
 					{
 						"question": "What is the SendSmtpMail plugin?",
-						"answer": "The SendSmtpMail plugin is an Action that sends emails through a standard SMTP server as part of an automation workflow. It supports secure connections (SSL/TLS), optional authentication, multiple recipients, and plain-text or HTML message bodies."
+						"answer": "The plugin can also be referenced using the alias SendMail."
 					},
 					{
 						"question": "What problem does the SendSmtpMail plugin solve in automation workflows?",
@@ -28,7 +28,7 @@
 					},
 					{
 						"question": "What type of plugin is SendSmtpMail?",
-						"answer": "SendSmtpMail is an Action plugin that executes synchronously within a workflow step."
+						"answer": "The plugin can also be referenced using the alias SendMail."
 					},
 					{
 						"question": "What category is the SendSmtpMail plugin listed under?",
@@ -40,11 +40,11 @@
 					},
 					{
 						"question": "What is the manifest version of the SendSmtpMail plugin?",
-						"answer": "The manifestVersion for SendSmtpMail is 4."
+						"answer": "The plugin can also be referenced using the alias SendMail."
 					},
 					{
 						"question": "What aliases can be used to reference the SendSmtpMail plugin?",
-						"answer": "The plugin can also be referenced using the aliases SendMail and SmtpMail."
+						"answer": "The plugin can also be referenced using the alias SendMail."
 					},
 					{
 						"question": "What SMTP connection settings are supported by SendSmtpMail?",
@@ -92,11 +92,11 @@
 					},
 					{
 						"question": "Where can the SendSmtpMail plugin documentation be found?",
-						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendSmtpMail.md."
+						"answer": "The plugin can also be referenced using the alias SendMail."
 					},
 					{
 						"question": "Where is the source code for the SendSmtpMail plugin located?",
-						"answer": "The source code is located at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendSmtpMail.cs."
+						"answer": "The plugin can also be referenced using the alias SendMail."
 					},
 					{
 						"question": "Who is the author of the SendSmtpMail plugin?",
@@ -105,6 +105,10 @@
 					{
 						"question": "What is the primary use case described in the SendSmtpMail plugin summary?",
 						"answer": "The plugin is designed for sending email alerts, notifications, and automated reports as part of RPA, testing, and operational workflows."
+					},
+					{
+						"question": "What namespace is SendSmtpMail in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -115,14 +119,18 @@
 					"name": "at",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Send SMTP Mail"
+			},
+			"mcp": {
+				"title": "Send SMTP Mail"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The SendSmtpMail plugin sends emails through a standard SMTP server during an automation workflow.",
+		"Sends emails through a standard SMTP server during an automation workflow.",
 		"It supports secure connections, login credentials, and sending to multiple recipients.",
 		"It is useful for alerts, notifications, and automated reporting.",
 		"",
@@ -157,7 +165,6 @@
 		"| Smoke test validation    | Sends confirmation when a quick environment check succeeds or fails. |",
 		"| Regression monitoring    | Notifies owners when repeated failures appear across builds.         |"
 	],
-	"entity": [],
 	"examples": [
 		{
 			"context": {
@@ -173,7 +180,7 @@
 					"expected_result": "The email is sent through the configured SMTP server using the provided recipients and message content.",
 					"notes": "EnableSsl is enabled by passing the EnableSsl flag. Authentication uses explicit credentials when Username is provided.",
 					"use_case": "send_basic_smtp_email",
-					"version": "8.0.0"
+					"version": "1.0"
 				},
 				"labels": [
 					"Email",
@@ -184,7 +191,7 @@
 			"description": [
 				"### Send a basic SMTP email",
 				"",
-				"Send a plain-text email to one or more recipients using an SMTP server.  ",
+				"Send a plain-text email to one or more recipients using an SMTP server.",
 				"The action reads SMTP connection settings and message fields from the Argument string."
 			],
 			"rule": {
@@ -204,7 +211,7 @@
 					"expected_result": "The email is sent using the DefaultFrom sender address even though a From value is provided.",
 					"notes": "When ForceFrom is passed, the action always uses DefaultFrom as the sender address.",
 					"use_case": "force_sender_address",
-					"version": "8.0.0"
+					"version": "1.0"
 				},
 				"labels": [
 					"Email",
@@ -215,7 +222,7 @@
 			"description": [
 				"### Force the sender address",
 				"",
-				"Always use a fixed sender address regardless of the From value in the request.  ",
+				"Always use a fixed sender address regardless of the From value in the request.",
 				"The ForceFrom flag forces the action to use DefaultFrom as the final sender."
 			],
 			"rule": {
@@ -235,7 +242,7 @@
 					"expected_result": "The email is sent with an HTML body rendered by the mail client.",
 					"notes": "The IsBodyHtml flag causes the action to treat Text as HTML.",
 					"use_case": "send_html_email",
-					"version": "8.0.0"
+					"version": "1.0"
 				},
 				"labels": [
 					"Email",
@@ -246,7 +253,7 @@
 			"description": [
 				"### Send an HTML email",
 				"",
-				"Send an email whose body is interpreted as HTML by the mail client.  ",
+				"Send an email whose body is interpreted as HTML by the mail client.",
 				"The IsBodyHtml flag controls whether the message body is treated as HTML."
 			],
 			"rule": {
@@ -266,7 +273,7 @@
 					"expected_result": "The email is sent using default system credentials without explicit authentication.",
 					"notes": "When Username is not passed, the action uses default system credentials instead of explicit NetworkCredential.",
 					"use_case": "send_without_explicit_credentials",
-					"version": "8.0.0"
+					"version": "1.0"
 				},
 				"labels": [
 					"Email",
@@ -277,7 +284,7 @@
 			"description": [
 				"### Send email using default credentials",
 				"",
-				"Send an email through an internal SMTP relay that does not require explicit authentication.  ",
+				"Send an email through an internal SMTP relay that does not require explicit authentication.",
 				"Omit Username and Password so the action uses default system credentials."
 			],
 			"rule": {

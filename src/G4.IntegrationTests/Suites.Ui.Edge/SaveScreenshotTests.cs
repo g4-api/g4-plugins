@@ -1,4 +1,5 @@
-﻿using G4.IntegrationTests.Extensions;
+﻿using G4.Extensions;
+using G4.IntegrationTests.Extensions;
 using G4.IntegrationTests.Framework;
 using G4.IntegrationTests.Framework.Attributes;
 using G4.IntegrationTests.Plugins.Ui.SaveScreenshot;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace G4.IntegrationTests.Suites.Ui.Edge
@@ -64,10 +66,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0001>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved screenshots exist and follow the expected naming conventions
             Assert.IsTrue(entities.All(File.Exists));
@@ -104,10 +105,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0002>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Verify that all saved screenshots exist and have the expected file path
             Assert.IsTrue(entities.All(File.Exists));
@@ -142,10 +142,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0003>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved screenshots exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -183,10 +182,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0004>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved screenshots exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -228,10 +226,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0005>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved screenshots exist and follow the expected naming conventions
             Assert.IsTrue(entities.All(File.Exists));
@@ -268,10 +265,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0006>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Verify that all saved screenshots exist and have the expected file path
             Assert.IsTrue(entities.All(File.Exists));
@@ -306,10 +302,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0007>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved screenshots exist
             Assert.IsTrue(entities.All(File.Exists));
@@ -347,10 +342,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             // Invoking the test with the constructed test options
             var response = Invoke<C0008>(testOptions);
 
-            // Get saved screenshots from response
-            var entities = response
-                .Environment
-                .SessionParameters["SavedScreenshots"] as IEnumerable<string>;
+            // Retrieve the saved screenshots from the session parameters
+            var value = (response.Environment.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
 
             // Assert that all saved screenshots exist
             Assert.IsTrue(entities.All(File.Exists));

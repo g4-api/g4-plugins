@@ -41,6 +41,14 @@
 					{
 						"question": "What is the difference between PartialText and exact text selection?",
 						"answer": "PartialText uses XPath ./option[contains(.,'argument')], which matches any option whose visible text contains the supplied substring. The default exact text mode uses ./option[.='argument'], which requires the full visible text to match exactly. Both comparisons are case-sensitive."
+					},
+					{
+						"question": "What is the manifest version for SelectOption?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What alias is available for SelectOption?",
+						"answer": "SelectOption is also accepted as SelectFromComboBox — both resolve to identical behavior."
 					}
 				]
 			},
@@ -53,13 +61,16 @@
 				},
 				"label": "Select Option",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Select Option"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The SelectOption action selects an option from a native HTML `<select>` dropdown element.",
+		"Selects an option from a native HTML `<select>` dropdown element.",
 		"The target element is validated as a `<select>` before any selection attempt, and the desired option is located using one of four strategies controlled by the `OnAttribute` property.",
 		"Use this action whenever an automation workflow must interact with dropdown menus rendered as standard HTML select elements.",
 		"",
@@ -106,7 +117,7 @@
 					"expected_result": "The option at zero-based index 1 (the second option) is clicked in the dropdown matching #SelectElement.",
 					"notes": "Index selection uses ElementAt(index) on the found ./option child elements and calls Click(). Any exception during parsing or element access is caught and recorded as a G4ExceptionModel without rethrowing.",
 					"use_case": "select_by_index",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -127,6 +138,7 @@
 				"If the argument is not a valid integer or the index is out of range, the exception is caught and recorded without interrupting the workflow."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "1",
 				"locator": "CssSelector",
 				"onAttribute": "Index",
@@ -150,7 +162,7 @@
 					"expected_result": "The option whose value attribute equals 'option2' is clicked in the dropdown identified by id 'SelectElement'.",
 					"notes": "Value selection uses the XPath ./option[@value='argument'] scoped to the located select element. The first matching option is clicked. Matching is exact and case-sensitive.",
 					"use_case": "select_by_value_attribute",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -172,6 +184,7 @@
 				"Use this mode when the value attribute is stable and predictable, regardless of the option's visible text."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "option2",
 				"locator": "Id",
 				"onAttribute": "Value",
@@ -195,7 +208,7 @@
 					"expected_result": "The first option whose visible text contains 'Option 2' is clicked in the dropdown at the specified XPath.",
 					"notes": "PartialText selection uses XPath ./option[contains(.,'argument')] scoped to the located select element. The match is case-sensitive. When multiple options match, the first in DOM order is clicked.",
 					"use_case": "select_by_partial_text",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -218,6 +231,7 @@
 				"Use this mode when only a portion of the option text is known or when option labels are generated dynamically."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Option 2",
 				"locator": "Xpath",
 				"onAttribute": "PartialText",
@@ -241,7 +255,7 @@
 					"expected_result": "The option whose full visible text equals 'Option 2' is clicked in the dropdown matching #SelectElement.",
 					"notes": "Exact text is the default mode activated when OnAttribute is absent, empty, or any value other than Index, Value, or PartialText (case-insensitive). The XPath is ./option[.='argument'] scoped to the located select element.",
 					"use_case": "select_by_exact_text",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -263,6 +277,7 @@
 				"Use this mode when the complete option text is known in advance and must match precisely."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "Option 2",
 				"locator": "CssSelector",
 				"onElement": "#SelectElement",
@@ -345,8 +360,8 @@
 		"w3c": "POST /session/{session id}/element/{element id}/click"
 	},
 	"summary": [
-		"The SelectOption action selects an option from a native HTML `<select>` dropdown element using one of four strategies: zero-based index, value attribute, partial text match, or exact text match (default).",
-		"It validates that the target element is a `<select>` before selection, and handles index errors gracefully by recording exceptions without rethrowing.",
+		"SelectOption selects an option from a native HTML `<select>` dropdown element using one of four strategies: zero-based index, value attribute, partial text match, or exact text match (default).",
+		"It validates that the target element is a `<select>` before selection and handles index errors gracefully by recording exceptions without rethrowing.",
 		"In RPA it automates form dropdown interactions; in automation testing it verifies option selection across all four selection modes."
 	],
 	"version": "4"

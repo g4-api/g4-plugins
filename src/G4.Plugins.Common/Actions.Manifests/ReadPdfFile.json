@@ -1,4 +1,4 @@
-{
+﻿{
 	"aliases": [],
 	"author": {
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
@@ -47,6 +47,34 @@
 					{
 						"question": "What happens if the regular expression does not match any content?",
 						"answer": "When no match is found the result falls back to an empty string; the plugin completes without throwing an error."
+					},
+					{
+						"question": "Why is the extracted content stored as Base64?",
+						"answer": "Base64 encoding ensures the extracted text can be safely transported and stored even when it contains special characters, line breaks, or binary sequences."
+					},
+					{
+						"question": "What is the entity field Content?",
+						"answer": "The entity field Content holds the full raw text extracted from the file before any regular expression filtering. Access it when you need the unfiltered content alongside the filtered session parameter."
+					},
+					{
+						"question": "What happens if the file does not exist at the given path?",
+						"answer": "The plugin raises an exception and adds it to the response error list. Workflow continuation depends on the runner's failure-handling configuration."
+					},
+					{
+						"question": "What happens if a non-PDF file is provided?",
+						"answer": "Non-PDF files bypass PdfPig and are read directly as plain text using the system default encoding. The same regular expression filtering and Base64 conversion apply."
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "4."
+					},
+					{
+						"question": "What namespace is ReadPdfFile in?",
+						"answer": "G4.Plugins.Common."
+					},
+					{
+						"question": "How do I reference the extracted content in downstream steps?",
+						"answer": "Use the session parameter key ReadPdfFile:Content. Decode the Base64 value before use if you need the plain text string."
 					}
 				]
 			},
@@ -59,6 +87,9 @@
 				},
 				"label": "Read PDF File",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Read PDF File"
 			}
 		}
 	},
@@ -121,7 +152,7 @@
 					"expected_result": "All text from the PDF is extracted and stored in the session parameter ReadPdfFile:Content.",
 					"notes": "The argument must be a valid path to a PDF file. PdfPig reads each page and joins word tokens into a single string. The default regular expression matches all extracted content.",
 					"use_case": "read_pdf_full_content",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"DataExtraction",
@@ -131,7 +162,7 @@
 				]
 			},
 			"description": [
-				"### Extract full text from a PDF file",
+				"### Extract Full Text from a PDF File",
 				"",
 				"Reads all pages of the PDF at the given path using PdfPig and joins word tokens into a single text block.",
 				"No custom regular expression is supplied, so the default `(?si).*` pattern matches all extracted content.",
@@ -154,7 +185,7 @@
 					"expected_result": "Only the portion of the extracted content matching the regular expression is converted to Base64 and stored in ReadPdfFile:Content.",
 					"notes": "When regularExpression is set, only the first match is used. Non-PDF files bypass PdfPig and are read as plain text; the same regex applies regardless of file type.",
 					"use_case": "read_file_filtered_content",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"DataExtraction",
@@ -164,7 +195,7 @@
 				]
 			},
 			"description": [
-				"### Extract filtered content using a regular expression",
+				"### Extract Filtered Content Using a Regular Expression",
 				"",
 				"Reads the file at the given path and applies a regular expression to the extracted text.",
 				"A regular expression `Invoice\\s+#\\d+` is applied to the extracted content to isolate matching invoice identifiers.",

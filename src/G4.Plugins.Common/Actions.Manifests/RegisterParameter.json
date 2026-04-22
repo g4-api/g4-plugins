@@ -44,8 +44,8 @@
 						"answer": "On failure it records exceptions to the log stream and includes error details in the response, while by default allowing workflows to continue unless configured to stop on error."
 					},
 					{
-						"question": "What is the manifestVersion?",
-						"answer": "The manifestVersion is 4, indicating the version of the manifest schema the plugin follows."
+						"question": "What is the manifest version?",
+						"answer": "The manifest version is 4, indicating the version of the manifest schema the plugin follows."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -86,6 +86,10 @@
 					{
 						"question": "What protocol settings are specified?",
 						"answer": "Protocol settings show apiDocumentation as None and w3c as None, indicating it does not require external API standards or W3C validation."
+					},
+					{
+						"question": "What namespace is RegisterParameter in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -96,14 +100,18 @@
 					"name": "file-import",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Register Parameter"
+			},
+			"mcp": {
+				"title": "Register Parameter"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `RegisterParameter` plugin helps automation workflows save and manage data by name. It takes values provided by a user or extracted from a an element and stores them in a chosen scope, such as session or application. Then it generates and sends a `SetParameter` action so the data can be reused later in the automation.",
+		"Saves and manages named data in automation workflows. Captures values from user input or elements, stores them in a chosen scope such as session or application, and generates a `SetParameter` action so the data can be reused in downstream steps.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -163,7 +171,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -200,7 +208,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -238,7 +246,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope for the `Development` environment.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope for the `Development` environment.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -277,7 +285,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -312,7 +320,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Machine` scope.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Machine` scope.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -349,7 +357,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -385,7 +393,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Process` scope.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Process` scope.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -422,7 +430,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -458,7 +466,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Session` scope.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Session` scope.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -495,7 +503,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -531,7 +539,7 @@
 			"description": [
 				"### RegisterParameter: User Scope",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `User` scope.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `User` scope.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -568,7 +576,7 @@
 			"description": [
 				"### RegisterParameter: User Scope with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` with the value `parameterValue` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` with the value `parameterValue` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -606,7 +614,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -648,7 +656,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -688,7 +696,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -730,7 +738,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -770,7 +778,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -812,7 +820,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -856,7 +864,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via CSS Selector",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
 			"rule": {
@@ -901,7 +909,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via CSS Selector with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
 			"rule": {
@@ -944,7 +952,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via XPath",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
 			"rule": {
@@ -989,7 +997,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via XPath with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
 			"rule": {
@@ -1032,7 +1040,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via Id Locator",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
 			"rule": {
@@ -1077,7 +1085,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via Id Locator with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
 			"rule": {
@@ -1119,7 +1127,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via CSS Selector",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -1162,7 +1170,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via CSS Selector with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -1203,7 +1211,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via XPath",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -1246,7 +1254,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via XPath with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -1287,7 +1295,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via Id Locator",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -1330,7 +1338,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via Id Locator with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -1372,7 +1380,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via CSS Selector",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -1415,7 +1423,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via CSS Selector with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -1457,7 +1465,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via XPath",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -1499,7 +1507,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via XPath with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -1541,7 +1549,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via Id Locator",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -1584,7 +1592,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via Id Locator with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -1626,7 +1634,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via CSS Selector",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -1669,7 +1677,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via CSS Selector with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -1711,7 +1719,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via XPath",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -1754,7 +1762,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via XPath with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -1796,7 +1804,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via Id Locator",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -1839,7 +1847,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via Id Locator with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -1881,7 +1889,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via CSS Selector",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -1924,7 +1932,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via CSS Selector with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -1966,7 +1974,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via XPath",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -2009,7 +2017,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via XPath with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -2051,7 +2059,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via Id Locator",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -2094,7 +2102,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via Id Locator with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -2136,7 +2144,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2180,7 +2188,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2223,7 +2231,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2267,7 +2275,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2310,7 +2318,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2354,7 +2362,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2398,7 +2406,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2443,7 +2451,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2487,7 +2495,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2532,7 +2540,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2576,7 +2584,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2621,7 +2629,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
 			"rule": {
@@ -2665,7 +2673,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via CSS Selector (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Machine` scope.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -2710,7 +2718,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via CSS Selector (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -2754,7 +2762,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via XPath (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Machine` scope.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -2799,7 +2807,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via XPath (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -2843,7 +2851,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via Id Locator (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Machine` scope.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -2888,7 +2896,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via Id Locator (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
 			"rule": {
@@ -2932,7 +2940,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via CSS Selector (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Process` scope.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -2977,7 +2985,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via CSS Selector (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -3021,7 +3029,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via XPath (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Process` scope.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -3066,7 +3074,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via XPath (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -3110,7 +3118,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via Id Locator (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Process` scope.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -3155,7 +3163,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via Id Locator (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
 			"rule": {
@@ -3199,7 +3207,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via CSS Selector (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -3244,7 +3252,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via CSS Selector (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -3288,7 +3296,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via XPath (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -3333,7 +3341,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via XPath (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -3377,7 +3385,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via Id Locator (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -3422,7 +3430,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via Id Locator (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
 			"rule": {
@@ -3466,7 +3474,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via CSS Selector (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -3511,7 +3519,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via CSS Selector (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -3555,7 +3563,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via XPath (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -3600,7 +3608,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via XPath (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -3644,7 +3652,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via Id Locator (href attribute)",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -3689,7 +3697,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via Id Locator (href attribute) with Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -3734,7 +3742,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
@@ -3781,7 +3789,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via CSS Selector with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
@@ -3827,7 +3835,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
@@ -3874,7 +3882,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via XPath with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
@@ -3920,7 +3928,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
@@ -3967,7 +3975,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope via Id Locator with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for subsequent actions."
 			],
@@ -4015,7 +4023,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via CSS Selector with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
@@ -4064,7 +4072,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via CSS Selector with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
@@ -4112,7 +4120,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via XPath with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
@@ -4161,7 +4169,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via XPath with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
@@ -4209,7 +4217,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via Id Locator with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
@@ -4258,7 +4266,7 @@
 			"description": [
 				"### RegisterParameter: Application Scope with Development Environment via Id Locator with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Application scope for the Development environment for subsequent actions."
 			],
@@ -4304,7 +4312,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via CSS Selector with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
@@ -4351,7 +4359,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via CSS Selector with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
@@ -4397,7 +4405,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via XPath with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
@@ -4444,7 +4452,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via XPath with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
@@ -4490,7 +4498,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via Id Locator with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
@@ -4537,7 +4545,7 @@
 			"description": [
 				"### RegisterParameter: Machine Scope via Id Locator with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Machine scope for subsequent actions."
 			],
@@ -4583,7 +4591,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via CSS Selector with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
@@ -4630,7 +4638,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via CSS Selector with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
@@ -4676,7 +4684,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via XPath with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
@@ -4723,7 +4731,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via XPath with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
@@ -4769,7 +4777,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via Id Locator with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
@@ -4816,7 +4824,7 @@
 			"description": [
 				"### RegisterParameter: Process Scope via Id Locator with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Process scope for subsequent actions."
 			],
@@ -4862,7 +4870,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via CSS Selector with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
@@ -4909,7 +4917,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via CSS Selector with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
@@ -4955,7 +4963,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via XPath with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
@@ -5002,7 +5010,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via XPath with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
@@ -5048,7 +5056,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via Id Locator with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
@@ -5095,7 +5103,7 @@
 			"description": [
 				"### RegisterParameter: Session Scope via Id Locator with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.",
 				"A regular expression `\\d+` is applied to the inner text to extract matching digits into a capture group.",
 				"After execution, the parameter is available in the Session scope for subsequent actions."
 			],
@@ -5143,7 +5151,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via CSS Selector with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope using the regex `\\d+` to extract digits.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope using the regex `\\d+` to extract digits.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -5191,7 +5199,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via CSS Selector with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\\d+`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\\d+`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -5238,7 +5246,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via XPath with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope using the regex `\\d+` to extract digits.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope using the regex `\\d+` to extract digits.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -5286,7 +5294,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via XPath with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\\d+`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\\d+`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -5333,7 +5341,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via Id Locator with Regex",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope using the regex `\\d+` to extract digits.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope using the regex `\\d+` to extract digits.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {
@@ -5381,7 +5389,7 @@
 			"description": [
 				"### RegisterParameter: User Scope via Id Locator with Regex and Encryption",
 				"",
-				"This example demonstrates how to register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\\d+`.",
+				"Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\\d+`.",
 				"After execution, the parameter is available in the User scope for subsequent actions."
 			],
 			"rule": {

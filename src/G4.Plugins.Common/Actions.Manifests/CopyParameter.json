@@ -44,8 +44,8 @@
 						"answer": "A rule schema includes $type, pluginName, argument, onElement, onAttribute, and optional Environment fields to fully describe the copy action."
 					},
 					{
-						"question": "What is the manifestVersion of this plugin?",
-						"answer": "The manifestVersion is 4."
+						"question": "What is the manifest version of this plugin?",
+						"answer": "The manifest version is 4."
 					},
 					{
 						"question": "Who authored the CopyParameter plugin?",
@@ -66,6 +66,14 @@
 					{
 						"question": "Where can I find the source code and documentation for CopyParameter?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/CopyParameter.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CopyParameter.md"
+					},
+					{
+						"question": "What namespace is CopyParameter in?",
+						"answer": "G4.Plugins.Common."
+					},
+					{
+						"question": "What platform does CopyParameter support?",
+						"answer": "Any."
 					}
 				]
 			},
@@ -76,14 +84,18 @@
 					"name": "clone",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Copy Parameter"
+			},
+			"mcp": {
+				"title": "Copy Parameter"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The CopyParameter plugin helps move values from one parameter to another within automation scripts. It makes it easy to share data between steps by copying values across different scopes. You can set or rely on default source and target scopes to keep your data organized. This ensures that scripts run smoothly with the right information in the right place.",
+		"Helps move values from one parameter to another within automation scripts. It makes it easy to share data between steps by copying values across different scopes. You can set or rely on default source and target scopes to keep your data organized. This ensures that scripts run smoothly with the right information in the right place.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -132,7 +144,7 @@
 			"description": [
 				"### Session Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into another session parameter named `TargetParam`.",
+				"Takes the full text value of the session parameter `SourceParam` and stores it into another session parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as-is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -169,7 +181,7 @@
 			"description": [
 				"### Session to Application Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the session parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails."
@@ -205,7 +217,7 @@
 			"description": [
 				"### Session to Application Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the session parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails."
@@ -243,7 +255,7 @@
 				"### Session to Machine Parameter Copy Action",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the session parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails."
@@ -281,7 +293,7 @@
 				"### Session to User Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the session parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the user‑scoped target parameter can be written; otherwise, it fails."
@@ -317,7 +329,7 @@
 			"description": [
 				"### Session to Process Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the session parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the session parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the process‑scoped target parameter can be written; otherwise, it fails."
@@ -353,7 +365,7 @@
 			"description": [
 				"### Application to Session Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -389,7 +401,7 @@
 			"description": [
 				"### Application to Application Parameter Copy Action in BotRepository",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the target environment is valid; otherwise, it fails."
@@ -424,7 +436,7 @@
 			"description": [
 				"### Application to Application Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into another application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into another application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -463,7 +475,7 @@
 				"### Application to Machine Parameter Copy Action in BotRepository",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails."
@@ -501,7 +513,7 @@
 				"### Application to Machine Parameter Copy Action",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails."
@@ -539,7 +551,7 @@
 				"### Application to User Parameter Copy Action in BotRepository",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the user‑scoped target parameter can be written; otherwise, it fails."
@@ -577,7 +589,7 @@
 				"### Application to User Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -614,7 +626,7 @@
 			"description": [
 				"### Application to Process Parameter Copy Action in BotRepository",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the process‑scoped target parameter can be written; otherwise, it fails."
@@ -650,7 +662,7 @@
 			"description": [
 				"### Application to Process Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -688,7 +700,7 @@
 				"### Machine to Session Parameter Copy Action",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -727,7 +739,7 @@
 				"### Machine to Application Parameter Copy Action in BotRepository",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails."
@@ -765,7 +777,7 @@
 				"### Machine to Application Parameter Copy Action",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -802,7 +814,7 @@
 				"### Machine to Machine Parameter Copy Action",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into another machine‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into another machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -840,7 +852,7 @@
 				"### Machine to User Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -877,7 +889,7 @@
 			"description": [
 				"### Machine to Process Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -915,7 +927,7 @@
 				"### User to Session Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -954,7 +966,7 @@
 				"### User to Application Parameter Copy Action in BotRepository",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails."
@@ -992,7 +1004,7 @@
 				"### User to Application Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1029,7 +1041,7 @@
 				"### User to Machine Parameter Copy Action",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1066,7 +1078,7 @@
 				"### User to User Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into another user‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into another user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1103,7 +1115,7 @@
 				"### User to Process Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1139,7 +1151,7 @@
 			"description": [
 				"### Process to Session Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1176,7 +1188,7 @@
 			"description": [
 				"### Process to Application Parameter Copy Action in BotRepository",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
+				"Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails."
@@ -1212,7 +1224,7 @@
 			"description": [
 				"### Process to Application Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
+				"Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1250,7 +1262,7 @@
 				"### Process to Machine Parameter Copy Action",
 				"",
 				"Machine scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1288,7 +1300,7 @@
 				"### Process to User Parameter Copy Action",
 				"",
 				"User scopes are only valid on Windows environments.",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."
@@ -1323,7 +1335,7 @@
 			"description": [
 				"### Process to Process Parameter Copy Action",
 				"",
-				"This example demonstrates how the CopyParameter plugin takes the full text value of the process‑scoped parameter `SourceParam` and stores it into another process‑scoped parameter named `TargetParam`.",
+				"Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into another process‑scoped parameter named `TargetParam`.",
 				"The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.",
 				"No value transformation occurs; the entire text is copied as‑is.",
 				"The action succeeds only if `SourceParam` exists; otherwise, it fails."

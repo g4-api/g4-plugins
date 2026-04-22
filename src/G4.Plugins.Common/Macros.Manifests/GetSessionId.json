@@ -1,0 +1,182 @@
+{
+	"aliases": [
+		"GetSessionId",
+		"sessionid"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Utilities"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Get-SessionId.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/GetSessionId.cs"
+			},
+			"rag": {
+				"description": "Get-SessionId retrieves the WebDriver session ID for the currently running automation session. Required when performing session-specific actions, routing session-specific API calls, or mounting an existing driver between jobs or stages.",
+				"qa": [
+					{
+						"question": "What is the basic functionality of the GetSessionId macro plugin?",
+						"answer": "Retrieves the WebDriver session ID for the currently active automation session at runtime."
+					},
+					{
+						"question": "Does the GetSessionId plugin require any parameters?",
+						"answer": "No parameters are required. Returns the current session ID immediately."
+					},
+					{
+						"question": "When should I use the GetSessionId plugin?",
+						"answer": "Use Get-SessionId when the session ID is needed to perform session-specific actions, directly interact with the driver, route session-specific API calls, or mount an existing driver between jobs or stages."
+					},
+					{
+						"question": "How is the GetSessionId plugin integrated into workflows?",
+						"answer": "Resolved as a macro at runtime, injecting the session ID dynamically so downstream actions or log steps can consume it."
+					},
+					{
+						"question": "What platforms are supported by the GetSessionId plugin?",
+						"answer": "Any"
+					},
+					{
+						"question": "What is the plugin type for GetSessionId?",
+						"answer": "Macro"
+					},
+					{
+						"question": "Who authored the GetSessionId plugin?",
+						"answer": "Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)"
+					},
+					{
+						"question": "What categories does the GetSessionId plugin belong to?",
+						"answer": "Utilities"
+					},
+					{
+						"question": "Where can I find the source and documentation for the GetSessionId plugin?",
+						"answer": "Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/GetSessionId.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Get-SessionId.md"
+					},
+					{
+						"question": "How does the GetSessionId plugin handle errors?",
+						"answer": "If the underlying WebDriver does not implement IWebDriverSession, the cast will throw an InvalidCastException. Ensure the driver in use exposes session information."
+					}
+				]
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Retrieves the WebDriver session ID for the currently active automation session.",
+		"The session ID uniquely identifies the running driver instance and is required when performing session-specific operations outside the normal plugin pipeline.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                                |",
+		"|----------------------|--------------------------------------------------------------------------------------------|",
+		"| Session ID Retrieval | Returns the opaque session ID string assigned to the current WebDriver session at runtime. |",
+		"| No Parameters        | Requires no input — the value is resolved automatically from the active driver instance.   |",
+		"| Workflow Integration | Injects the session ID into any argument or action that accepts a macro placeholder.       |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                   | Description                                                                                 |",
+		"|----------------------------|---------------------------------------------------------------------------------------------|",
+		"| Session-Specific API Calls | Supplies the session ID to REST endpoints or scripts that target a specific driver session. |",
+		"| Driver Mounting            | Allows a downstream job or stage to attach to an already-running driver by session ID.      |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case           | Description                                                                               |",
+		"|--------------------|-------------------------------------------------------------------------------------------|",
+		"| Session Handover   | Passes the session ID between test stages so they share the same browser or app instance. |",
+		"| Diagnostic Logging | Logs the active session ID alongside test results for easier debugging and traceability.  |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Driver does not expose session information",
+						"Log write failure",
+						"No active session"
+					],
+					"expected_result": "The WriteLog plugin logs the current WebDriver session ID.",
+					"notes": "Combines `Get-SessionId` with `WriteLog`. `Get-SessionId` resolves the session ID without side effects; `WriteLog` consumes the result.",
+					"use_case": "log_session_id",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"GetSessionId",
+					"Logging",
+					"Macro",
+					"SessionId",
+					"WriteLog"
+				]
+			},
+			"description": [
+				"### Retrieve and Log the Current Session ID",
+				"",
+				"Invoke `Get-SessionId` to obtain the current WebDriver session ID at runtime.",
+				"Log the session ID using the `WriteLog` plugin."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Current session ID is {{$Get-SessionId}}",
+				"pluginName": "WriteLog"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Driver does not expose session information",
+						"Element not found",
+						"No active session",
+						"SendKeys plugin failure"
+					],
+					"expected_result": "The SendKeys plugin sends the current WebDriver session ID as keystrokes to the specified element.",
+					"notes": "Combines `Get-SessionId` with `SendKeys`. `Get-SessionId` resolves the session ID without side effects; `SendKeys` consumes the result and sends it as keystrokes.",
+					"use_case": "send_session_id_to_element",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"CssSelector",
+					"GetSessionId",
+					"Macro",
+					"SendKeys",
+					"SessionId"
+				]
+			},
+			"description": [
+				"### Retrieve Session ID and Send It to an Input",
+				"",
+				"Invoke `Get-SessionId` to obtain the current WebDriver session ID at runtime.",
+				"Send the session ID as keystrokes to the element located by the CSS selector `#sessionInput` using the `SendKeys` plugin."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Get-SessionId}}",
+				"locator": "CssSelector",
+				"onElement": "#sessionInput",
+				"pluginName": "SendKeys"
+			}
+		}
+	],
+	"key": "Get-SessionId",
+	"namespace": "G4.Plugins.Common",
+	"parameters": [],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Macro",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Retrieves the WebDriver session ID for the currently active automation session.",
+		"No parameters are required — the session ID is resolved automatically from the running driver instance.",
+		"Suitable for session-specific API interactions, mounting existing driver sessions across jobs or stages, and diagnostic logging."
+	],
+	"version": "4"
+}

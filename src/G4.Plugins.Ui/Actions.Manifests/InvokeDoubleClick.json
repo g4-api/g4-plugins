@@ -34,6 +34,22 @@
 					{
 						"question": "What aliases does InvokeDoubleClick accept?",
 						"answer": "InvokeDoubleClick is also accepted as DoubleClick and DoubleLeftClick — both resolve to identical behavior."
+					},
+					{
+						"question": "What W3C WebDriver endpoint does InvokeDoubleClick use?",
+						"answer": "InvokeDoubleClick uses the W3C WebDriver POST /session/{session id}/actions endpoint, dispatching the double-click through the Actions API."
+					},
+					{
+						"question": "What locator strategies does InvokeDoubleClick support?",
+						"answer": "It supports Xpath (default), CssSelector, Id, LinkText, and PartialLinkText via the Locator property. Locator is only evaluated when OnElement is also provided."
+					},
+					{
+						"question": "What is the manifest version for InvokeDoubleClick?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "Does InvokeDoubleClick produce any output parameters?",
+						"answer": "No. InvokeDoubleClick returns a standard plugin response with no additional output parameters."
 					}
 				]
 			},
@@ -46,13 +62,16 @@
 				},
 				"label": "Invoke Double Click",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Invoke Double Click"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeDoubleClick action performs a double-click on a target element or at the current mouse position when no element is specified.",
+		"Performs a double-click on a target element or at the current mouse position when no element is specified.",
 		"When an element is provided, the action first moves the mouse cursor to the element to ensure it is scrolled into view before dispatching the double-click via the WebDriver Actions API.",
 		"This makes it the primary way to trigger double-click interactions — such as opening items, entering inline edit mode, or activating double-click–driven behaviors — in an automation workflow.",
 		"For standard left-click interactions use InvokeClick. For right-click interactions use InvokeContextClick instead.",
@@ -97,7 +116,7 @@
 					"expected_result": "The element matched by the CSS selector #EditableCell receives a double-click and enters inline edit mode.",
 					"notes": "MoveToElement is called before AddDoubleClick to ensure the element is in view and interactable. CssSelector is used because onElement is a CSS selector expression.",
 					"use_case": "double_click_by_css_selector",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CssSelector",
@@ -132,7 +151,7 @@
 					"expected_result": "A double-click is performed at the current mouse cursor position without locating any element.",
 					"notes": "When no OnElement is provided the action calls AddDoubleClick().Invoke() on an ActionSequence, dispatching a double-click at the last known mouse position. Useful for scripted mouse-cursor workflows where the position was set by a preceding MoveMouseCursor action.",
 					"use_case": "positional_double_click_no_element",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"ActionSequence",
@@ -189,9 +208,9 @@
 		"w3c": "POST /session/{session id}/actions"
 	},
 	"summary": [
-		"The InvokeDoubleClick action performs a double-click on a target element or at the current mouse position when no element is specified, making it the primary way to trigger double-click interactions in an automation workflow.",
+		"InvokeDoubleClick performs a double-click on a target element or at the current mouse position when no element is specified, making it the primary way to trigger double-click interactions in an automation workflow.",
 		"When an element is provided, the action moves the mouse to it first to ensure viewport visibility before dispatching the double-click via the WebDriver Actions API.",
-		"In RPA it automates file and item opening, inline edit activation, and positional double-click workflows. In automation testing it verifies double-click behavior, inline edit activation, and viewport-scroll interactions."
+		"In RPA it automates file and item opening, inline edit activation, and positional double-click workflows; in automation testing it verifies double-click behavior, inline edit activation, and viewport-scroll interactions."
 	],
 	"version": "4"
 }

@@ -37,6 +37,18 @@
 					{
 						"question": "What is the difference between OpenUrl and NewBrowserWindow?",
 						"answer": "OpenUrl navigates the current browser window to the specified URL, replacing the current page, using the WebDriver navigate-to command. NewBrowserWindow calls window.open() via JavaScript to open a new browser tab or window without navigating away from the current page. They share element and regex extraction logic but use different navigation mechanisms."
+					},
+					{
+						"question": "What W3C WebDriver endpoint does OpenUrl use?",
+						"answer": "OpenUrl maps to the W3C WebDriver POST /session/{session id}/url endpoint."
+					},
+					{
+						"question": "What is the manifest version for OpenUrl?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What alias can be used in place of OpenUrl?",
+						"answer": "OpenUrl is also accepted as GoToUrl — both resolve to identical behavior."
 					}
 				]
 			},
@@ -49,13 +61,16 @@
 				},
 				"label": "Open URL",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Open URL"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `OpenUrl` plugin navigates the current browser window to a specified URL using the WebDriver navigate-to command.",
+		"Navigates the current browser window to a specified URL using the WebDriver navigate-to command.",
 		"The URL source depends on whether a target element is provided: when no element is given the `Argument` property is used directly without regex processing; when an element is given the URL is read from the element's text content or a named attribute and `RegularExpression` is then applied to the extracted value.",
 		"`RegularExpression` is only active when an element is located — it does not process the direct `Argument` value.",
 		"",
@@ -98,7 +113,7 @@
 					"expected_result": "The browser navigates to http://example.com in the current window without any element lookup or regex processing.",
 					"notes": "No element is specified so the URL is taken directly from the Argument property. RegularExpression is never applied on the direct-argument path.",
 					"use_case": "direct_url_navigation",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Argument",
@@ -134,7 +149,7 @@
 					"expected_result": "The text content of the element matching #LinkToOpen is extracted, RegularExpression is applied (default matches the full string), and the browser navigates to that URL.",
 					"notes": "OnAttribute is absent so element.Text is used as the URL source. RegularExpression is always applied when an element is present; the default pattern matches the entire string so the full text value is passed to WebDriver.OpenUrl.",
 					"use_case": "navigate_from_element_text",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"CssSelector",
@@ -173,7 +188,7 @@
 					"expected_result": "The href attribute of the element matching #LinkToOpen is extracted, the regex retains only the http(s) URL portion, and the browser navigates to that URL in the current window.",
 					"notes": "OnAttribute is set so element.GetAttribute('href') is used instead of element.Text. RegularExpression then filters the attribute value to the URL portion before passing it to WebDriver.OpenUrl.",
 					"use_case": "navigate_from_element_attribute_with_regex",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"AttributeExtraction",
@@ -266,9 +281,9 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The `OpenUrl` plugin navigates the current browser window to a URL using the WebDriver navigate-to command.",
+		"OpenUrl navigates the current browser window to a URL using the WebDriver navigate-to command.",
 		"The URL is taken directly from the `Argument` property when no element is provided, or extracted from an element's text content or a named attribute and filtered by `RegularExpression` when `OnElement` is specified.",
-		"Unlike `NewBrowserWindow`, `OpenUrl` always navigates the current browsing context without opening a new window or tab."
+		"Unlike `NewBrowserWindow`, OpenUrl always navigates the current browsing context without opening a new window or tab."
 	],
 	"version": "4"
 }

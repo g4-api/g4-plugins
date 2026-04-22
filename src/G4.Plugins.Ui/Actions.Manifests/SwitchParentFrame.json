@@ -37,6 +37,22 @@
 					{
 						"question": "Does SwitchParentFrame move to default content or only one level up?",
 						"answer": "It moves exactly one level up in the frame hierarchy — to the immediate parent frame. If nested more than one level deep, multiple sequential calls are required to reach default content."
+					},
+					{
+						"question": "What alias is available for SwitchParentFrame?",
+						"answer": "SwitchParentFrame is also accepted as SwitchToParentFrame — both resolve to identical behavior."
+					},
+					{
+						"question": "What is the manifest version for SwitchParentFrame?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "What W3C WebDriver endpoint does SwitchParentFrame use?",
+						"answer": "SwitchParentFrame uses the W3C WebDriver POST /session/{session id}/frame/parent endpoint."
+					},
+					{
+						"question": "Does SwitchParentFrame accept any Argument, Locator, or OnElement?",
+						"answer": "No. SwitchParentFrame has no parameters and no properties. It always performs a single unconditional call to WebDriver.SwitchTo().ParentFrame() with no configuration."
 					}
 				]
 			},
@@ -49,13 +65,16 @@
 				},
 				"label": "Switch Parent Frame",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Switch Parent Frame"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `SwitchParentFrame` plugin switches WebDriver context one level up from the current child frame to its direct parent frame by calling `WebDriver.SwitchTo().ParentFrame()` unconditionally.",
+		"Switches WebDriver context one level up from the current child frame to its direct parent frame by calling `WebDriver.SwitchTo().ParentFrame()` unconditionally.",
 		"It requires no parameters or configuration and always performs a single deterministic switch.",
 		"",
 		"### Key Features and Functionality",
@@ -94,7 +113,7 @@
 					"expected_result": "WebDriver context moves one level up from the active child frame to its direct parent frame.",
 					"notes": "No Argument, Locator, or OnElement values are needed. The switch is unconditional and applies to whatever frame context the driver is currently in.",
 					"use_case": "switch_to_parent_frame",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"Action",
@@ -115,6 +134,44 @@
 				"No configuration is required — the plugin calls `WebDriver.SwitchTo().ParentFrame()` unconditionally."
 			],
 			"rule": {
+				"$type": "Action",
+				"pluginName": "SwitchParentFrame"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Three levels deep — three sequential calls to SwitchParentFrame are required to return to default content",
+						"Intermediate frame has been removed by JavaScript — switching to its parent may raise a StaleElementReferenceException or similar error",
+						"Parent frame content changed during child frame work — element references obtained before entering the child frame may be stale after returning"
+					],
+					"expected_result": "WebDriver context moves up two levels from a doubly nested child frame to the top-level parent frame by invoking SwitchParentFrame twice in sequence.",
+					"notes": "Each SwitchParentFrame call moves exactly one level up. For a frame nested two levels deep, two sequential invocations are required to return to default content.",
+					"use_case": "multi_level_frame_traversal",
+					"version": "1.0"
+				},
+				"labels": [
+					"Action",
+					"ContextSwitch",
+					"FrameNavigation",
+					"IFrame",
+					"MultiLevel",
+					"NestedFrame",
+					"ParentFrame",
+					"UiAutomation",
+					"WebAutomation",
+					"WebDriver"
+				]
+			},
+			"description": [
+				"### Traverse up multiple frame levels",
+				"",
+				"Invoke SwitchParentFrame twice in sequence to move from a doubly nested child frame up to the top-level document context.",
+				"Each invocation moves exactly one level up, so the number of calls required equals the nesting depth."
+			],
+			"rule": {
+				"$type": "Action",
 				"pluginName": "SwitchParentFrame"
 			}
 		}
@@ -133,7 +190,7 @@
 		"MobileWeb"
 	],
 	"summary": [
-		"The `SwitchParentFrame` plugin switches WebDriver context one level up from the current child frame to its direct parent frame by calling `WebDriver.SwitchTo().ParentFrame()` unconditionally.",
+		"SwitchParentFrame switches WebDriver context one level up from the current child frame to its direct parent frame by calling `WebDriver.SwitchTo().ParentFrame()` unconditionally.",
 		"It requires no parameters or properties and performs a single deterministic switch with no branching.",
 		"In RPA it enables efficient frame traversal after working in child frames; in automation testing it restores context to the parent frame for assertions or further interactions."
 	],

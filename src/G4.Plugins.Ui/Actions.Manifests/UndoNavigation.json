@@ -61,15 +61,17 @@
 				},
 				"label": "Undo Navigation",
 				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Undo Navigation"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The `UndoNavigation` plugin automates backward browser navigation, equivalent to clicking the browser's built-in back button.",
+		"Automates backward browser navigation, equivalent to clicking the browser's built-in back button.",
 		"It provides a structured way to traverse session history backward with configurable repeat counts and optional delays between steps.",
-		"The plugin supports both simple single-step navigation and multi-step sequences with per-iteration timing control.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -107,7 +109,7 @@
 					"expected_result": "The browser navigates backward by one step in session history.",
 					"notes": "When no argument or parameters are supplied the plugin navigates back exactly once with no delay. This is equivalent to a single back button click.",
 					"use_case": "default_backward_navigation",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BackNavigation",
@@ -126,6 +128,7 @@
 				"No repeat count or delay is configured, so the action executes once immediately."
 			],
 			"rule": {
+				"$type": "Action",
 				"pluginName": "UndoNavigation"
 			}
 		},
@@ -141,7 +144,7 @@
 					"expected_result": "The browser navigates backward three times in succession with no delay between steps.",
 					"notes": "Passing a plain integer as the argument is the legacy shorthand for the Repeat count. It is equivalent to `{{$ --Repeat:3}}` but requires no parameter expression syntax.",
 					"use_case": "backward_navigation_integer_argument",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BackNavigation",
@@ -161,6 +164,7 @@
 				"The integer is interpreted directly as the repeat count without requiring parameter expression syntax."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "3",
 				"pluginName": "UndoNavigation"
 			}
@@ -178,7 +182,7 @@
 					"expected_result": "The browser navigates backward three times, pausing 1000 milliseconds between each step.",
 					"notes": "The `{{$ --Repeat:3 --Delay:1000}}` expression sets both the repeat count and the inter-step delay in milliseconds. The Delay parameter also accepts a time span string such as `00:00:01` for the same one-second pause.",
 					"use_case": "backward_navigation_repeat_with_delay",
-					"version": "4"
+					"version": "1.0"
 				},
 				"labels": [
 					"BackNavigation",
@@ -200,6 +204,7 @@
 				"The `{{$ --Repeat:3 --Delay:1000}}` argument expression sets both the repeat count and the inter-step delay in a single value."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Repeat:3 --Delay:1000}}",
 				"pluginName": "UndoNavigation"
 			}
@@ -254,7 +259,7 @@
 		"w3c": "POST /session/{session id}/back"
 	},
 	"summary": [
-		"The `UndoNavigation` plugin navigates the browser backward in session history, equivalent to clicking the browser's built-in back button.",
+		"UndoNavigation navigates the browser backward in session history, equivalent to clicking the browser's built-in back button.",
 		"It supports configurable repeat counts and optional delays between steps, enabling controlled multi-step backward navigation in automation workflows.",
 		"Common uses include returning to a previous page in RPA flows and managing browser state during end-to-end testing."
 	],

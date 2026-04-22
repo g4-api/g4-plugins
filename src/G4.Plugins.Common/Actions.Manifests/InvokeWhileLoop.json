@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -40,8 +40,8 @@
 						"answer": "InvokeWhileLoop repeats defined actions while a condition remains true and stops automatically when the condition changes or when a timeout occurs."
 					},
 					{
-						"question": "What is the manifestVersion of this plugin?",
-						"answer": "The manifestVersion is 4."
+						"question": "What is the manifest version of this plugin?",
+						"answer": "The manifest version is 4."
 					},
 					{
 						"question": "Who is the author of this plugin?",
@@ -69,7 +69,7 @@
 					},
 					{
 						"question": "What API documentation is provided for InvokeWhileLoop?",
-						"answer": "Unfortunately, no API documentation is available for InvokeWhileLoop plugin."
+						"answer": "None."
 					},
 					{
 						"question": "What W3C protocol support is declared?",
@@ -78,6 +78,10 @@
 					{
 						"question": "Where can I find the source code and documentation for InvokeWhileLoop?",
 						"answer": "Source code: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeWhileLoop.cs; Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeWhileLoop.md"
+					},
+					{
+						"question": "What namespace is InvokeWhileLoop in?",
+						"answer": "G4.Plugins.Common."
 					}
 				]
 			},
@@ -89,14 +93,18 @@
 					"name": "repeat",
 					"svg": null
 				},
-				"model": "ActionRuleModel"
+				"model": "ActionRuleModel",
+				"label": "Invoke While Loop"
+			},
+			"mcp": {
+				"title": "Invoke While Loop"
 			}
 		}
 	},
 	"description": [
 		"### Purpose",
 		"",
-		"The InvokeWhileLoop plugin runs actions repeatedly while a specified condition remains true and stops when the condition becomes false. It adapts to changing situations during execution and stops automatically if it takes too long. It also records data and performance details for each iteration.",
+		"Runs actions repeatedly while a specified condition remains true and stops when the condition becomes false. It adapts to changing situations during execution and stops automatically if it takes too long. It also records data and performance details for each iteration.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -148,7 +156,7 @@
 			"description": [
 				"### Click Next While Not Active Using CSS Selector",
 				"",
-				"This example demonstrates how the InvokeWhileLoop plugin repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching CSS selector `#NextBtn1`.",
+				"Repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching CSS selector `#NextBtn1`.",
 				"A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.",
 				"The loop continues until the condition no longer holds or if configured to stop on error.",
 				"All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop."
@@ -193,7 +201,7 @@
 			"description": [
 				"### Click Next While Not Active Using XPath",
 				"",
-				"This example demonstrates how the InvokeWhileLoop plugin repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching XPath `//button[@id='NextBtn1']`.",
+				"Repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching XPath `//button[@id='NextBtn1']`.",
 				"A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.",
 				"The loop continues until the condition no longer holds or if configured to stop on error.",
 				"All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop."
@@ -238,7 +246,7 @@
 			"description": [
 				"### Click Next While Not Active Using CSS Selector nth-child",
 				"",
-				"This example demonstrates how the InvokeWhileLoop plugin repeatedly checks the `class` attribute of the element matching CSS selector `#Pagination1 > li:nth-child(6) > button`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching CSS selector `#NextBtn1`.",
+				"Repeatedly checks the `class` attribute of the element matching CSS selector `#Pagination1 > li:nth-child(6) > button`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching CSS selector `#NextBtn1`.",
 				"A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.",
 				"The loop continues until the condition no longer holds or if configured to stop on error.",
 				"All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop."
@@ -283,7 +291,7 @@
 			"description": [
 				"### Click Next While Not Active Using CSS Selector with XPath Click",
 				"",
-				"This example demonstrates how the InvokeWhileLoop plugin repeatedly checks the `class` attribute of the element matching CSS selector `#Pagination1 > li:nth-child(6) > button`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching XPath `//button[@id='NextBtn1']`.",
+				"Repeatedly checks the `class` attribute of the element matching CSS selector `#Pagination1 > li:nth-child(6) > button`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching XPath `//button[@id='NextBtn1']`.",
 				"A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.",
 				"The loop continues until the condition no longer holds or if configured to stop on error.",
 				"All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop."
@@ -327,7 +335,7 @@
 			"description": [
 				"### Nested InvokeWhileLoop for Two-Level Active-Class Validation",
 				"",
-				"This example demonstrates how the InvokeWhileLoop plugin first checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='3']`, and while it matches the regex `(?i)active`, it enters an inner loop that checks the `class` attribute of elements matching XPath `//ul[@id='Pagination2']/li/button[.='3']` and clicks `#NextBtn2` on each inner iteration.",
+				"First checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='3']`, and while it matches the regex `(?i)active`, it enters an inner loop that checks the `class` attribute of elements matching XPath `//ul[@id='Pagination2']/li/button[.='3']` and clicks `#NextBtn2` on each inner iteration.",
 				"After the inner loop completes for each outer iteration, it clicks `#FirstBtn2` and then `#NextBtn1`.",
 				"A regular expression `(?i)active` is applied to the `class` attribute in both loops to check for a case‑insensitive match.",
 				"The loops continue until their conditions no longer hold or if configured to stop on error.",
@@ -395,7 +403,7 @@
 			"description": [
 				"### InvokeWhileLoop with Timeout for Active-Class Check",
 				"",
-				"This example demonstrates how the InvokeWhileLoop plugin repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it matches the regex `(?i)foo`, performs a Click action on the element matching CSS selector `#NextBtn1`.",
+				"Repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it matches the regex `(?i)foo`, performs a Click action on the element matching CSS selector `#NextBtn1`.",
 				"A regular expression `(?i)foo` is applied to the `class` attribute to check for a case‑insensitive match with a timeout of 5000 milliseconds per iteration.",
 				"The loop continues until the condition no longer holds or if configured to stop on error.",
 				"All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop."
