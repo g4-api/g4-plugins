@@ -14,6 +14,7 @@ namespace G4.Plugins.Common.Actions
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
+            "".Encrypt(key: "123");
             // Apply the regular expression to the argument value before encoding.
             // If the pattern matches, only the matched portion is encoded.
             var value = Regex
