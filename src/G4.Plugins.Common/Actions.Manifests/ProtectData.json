@@ -1,0 +1,220 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataSecurity"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ProtectData.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ProtectData.cs"
+			},
+			"rag": {
+				"description": "The ProtectData plugin encrypts a plaintext value using a caller-supplied key and encodes the encrypted output as Base64. The Value parameter supplies the plaintext and the Key parameter supplies the encryption key. The protected result is stored in the session parameter ProtectData:Result and exposed in the response entity under the key Result for downstream use.",
+				"qa": [
+					{
+						"question": "What does the ProtectData plugin do?",
+						"answer": "It encrypts the Value parameter with the Key parameter and stores the Base64-encoded encrypted result in the session parameter ProtectData:Result."
+					},
+					{
+						"question": "How are the Value and Key parameters supplied to the plugin?",
+						"answer": "Both are passed through the Argument property using the G4 parameter expression syntax, for example: {{$ --Value:MySecret --Key:MyEncryptionKey}}."
+					},
+					{
+						"question": "Where is the protected result available after the plugin runs?",
+						"answer": "The Base64-encoded encrypted value is stored in the session parameter ProtectData:Result and is also accessible through the response entity under the key Result."
+					},
+					{
+						"question": "How can the protected result be recovered?",
+						"answer": "Decode the session parameter value from Base64 using ConvertFromBase64, then decrypt the result with the same key that was used during encryption."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "lock",
+					"svg": null
+				},
+				"label": "Protect Data",
+				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Protect Data"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Encrypts a plaintext value with a caller-supplied key and encodes the result to Base64 for safe storage and transport.",
+		"It takes the `Value` and `Key` parameters from the `Argument` expression, applies symmetric encryption, and stores the protected output.",
+		"The encoded result is stored in the session as `ProtectData:Result` and exposed through the response entity.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature         | Description                                                                               |",
+		"|-----------------|-------------------------------------------------------------------------------------------|",
+		"| Encryption      | Encrypts the `Value` parameter using the `Key` parameter before encoding.                 |",
+		"| Base64 Encoding | Encodes the encrypted output to Base64 for safe transport and storage.                    |",
+		"| Session Output  | Stores the protected result in the session as `ProtectData:Result` for downstream access. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                | Description                                                                               |",
+		"|-------------------------|-------------------------------------------------------------------------------------------|",
+		"| Credential Protection   | Encrypt passwords or tokens before storing them in session parameters.                    |",
+		"| Secure Data Hand-off    | Pass encrypted values between workflow steps without exposing plaintext in logs or state. |",
+		"| Config Value Protection | Protect sensitive configuration values before writing them to shared storage.             |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case               | Description                                                                                     |",
+		"|------------------------|-------------------------------------------------------------------------------------------------|",
+		"| Test Secret Management | Encrypt test credentials at runtime so they are never present in plaintext during a test run.   |",
+		"| Roundtrip Validation   | Encrypt a known value and assert that decryption with the same key recovers the original input. |",
+		"| Key Sensitivity Check  | Verify that different encryption keys produce different protected outputs for the same value.   |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Contains the Base64-encoded encrypted string produced from the Value parameter.",
+				"The value is available in the response entity under the key `Result` and also stored in the session as `ProtectData:Result`."
+			],
+			"name": "Result",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty Value produces an encrypted empty string encoded to Base64",
+						"Empty Key may result in unkeyed or weakly keyed encryption depending on the underlying algorithm",
+						"Value containing special characters is encrypted and encoded without alteration"
+					],
+					"expected_result": "The value 'MySecret' is encrypted with the key 'SuperSecret' and the Base64-encoded result is stored in ProtectData:Result.",
+					"notes": "The plaintext value is never stored; only the encrypted Base64 output is retained.",
+					"use_case": "protect_data_static_value",
+					"version": "1.0"
+				},
+				"labels": [
+					"DataSecurity",
+					"Encryption",
+					"StaticValue"
+				]
+			},
+			"description": [
+				"### Encrypt a Static Value",
+				"",
+				"Encrypt a fixed plaintext value using a known key during automation execution.",
+				"It uses the `ProtectData` plugin with `--Value:MySecret` and `--Key:SuperSecret`.",
+				"The value is encrypted and the result is Base64-encoded before being stored in the session as `ProtectData:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Value:MySecret --Key:SuperSecret}}",
+				"pluginName": "ProtectData"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Session parameter does not exist — the expression resolves to an empty string which is then encrypted",
+						"Session parameter value contains special characters — encryption handles the full resolved value"
+					],
+					"expected_result": "The runtime value of the Password session parameter is encrypted with the key 'VaultKey' and stored as Base64 in ProtectData:Result.",
+					"notes": "The G4 expression resolves the session parameter value at runtime before encryption. The plaintext is never retained in the output.",
+					"use_case": "protect_data_expression_value",
+					"version": "1.0"
+				},
+				"labels": [
+					"DataSecurity",
+					"Encryption",
+					"Expression",
+					"SessionParameter"
+				]
+			},
+			"description": [
+				"### Encrypt a Session Parameter Value",
+				"",
+				"Encrypt the runtime value of a session parameter using a known key.",
+				"It uses the `ProtectData` plugin with `--Value:{{$Get-Parameter --Name:Password --Scope:Session}}` and `--Key:VaultKey`.",
+				"The G4 expression is resolved at runtime, the resolved value is encrypted, and the Base64 result is stored in the session as `ProtectData:Result`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Value:{{$Get-Parameter --Name:Password --Scope:Session}} --Key:VaultKey}}",
+				"pluginName": "ProtectData"
+			}
+		}
+	],
+	"key": "ProtectData",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"The session parameter that holds the Base64-encoded encrypted result.",
+				"Its value can be decoded from Base64 and decrypted with the original key to recover the plaintext.",
+				"It can be referenced by other parameters or expressions in downstream workflow steps."
+			],
+			"mandatory": true,
+			"name": "ProtectData:Result",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Supplies the `Value` and `Key` parameters using the G4 parameter expression syntax.",
+				"Use `--Value` to provide the plaintext to encrypt and `--Key` to provide the encryption key.",
+				"Both parameters are required; omitting either will result in an empty or unkeyed encryption."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"The plaintext value to encrypt.",
+				"Accepts a literal string or a G4 expression that resolves at runtime.",
+				"This value is never stored in plaintext; only the encrypted Base64 output is retained."
+			],
+			"mandatory": true,
+			"name": "Value",
+			"type": "String"
+		},
+		{
+			"description": [
+				"The encryption key used to protect the value.",
+				"Must be the same key used during any subsequent decryption step.",
+				"Keep this key secure; loss of the key makes the encrypted value unrecoverable."
+			],
+			"mandatory": true,
+			"name": "Key",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Encrypts a plaintext value with a caller-supplied key and encodes the result to Base64.",
+		"Stores the protected output in the session as ProtectData:Result for downstream access.",
+		"The original value can be recovered by decoding from Base64 and decrypting with the same key."
+	],
+	"version": "4"
+}
