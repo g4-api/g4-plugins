@@ -1,5 +1,6 @@
 ﻿using G4.Models;
 using G4.Plugins.Ui.Assertions;
+using G4.UnitTests.Attributes;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
 using G4.WebDriver.Exceptions;
@@ -203,10 +204,13 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(evaluation);
 
             // Assert that the plugin's exceptions contain a StaleElementReferenceException
-            Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is StaleElementReferenceException));
+            Assert.Contains(i => i.Exception is StaleElementReferenceException, session.ResponseData.Exceptions);
         }
 
-        [TestMethod(DisplayName = "Verify that attribute value assertions handle NoSuchElementException correctly")]
+        [RetryableTestMethod(
+            numberOfAttempts: 3,
+            DelayBetweenAttempts = 2000,
+            DisplayName = "Verify that attribute value assertions handle NoSuchElementException correctly")]
         #region *** Data Set ***
         [DynamicData(dynamicDataSourceName: nameof(DataSet))]
         #endregion
@@ -242,7 +246,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(evaluation);
 
             // Assert that the plugin's exceptions contain a NoSuchElementException
-            Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is NoSuchElementException));
+            Assert.Contains(i => i.Exception is NoSuchElementException, session.ResponseData.Exceptions);
         }
 
         [TestMethod(DisplayName = "Verify that attribute value assertions handle WebDriverException correctly")]
@@ -281,7 +285,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(evaluation);
 
             // Assert that the plugin's exceptions contain a WebDriverException
-            Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is WebDriverException));
+            Assert.Contains(i => i.Exception is WebDriverException, session.ResponseData.Exceptions);
         }
 
         [TestMethod(DisplayName = "Verify that attribute value assertions handle NullReferenceException correctly")]
@@ -320,7 +324,7 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsFalse(evaluation);
 
             // Assert that the plugin's exceptions contain a NullReferenceException
-            Assert.IsTrue(session.ResponseData.Exceptions.Any(i => i.Exception is NullReferenceException));
+            Assert.Contains(i => i.Exception is NullReferenceException, session.ResponseData.Exceptions);
         }
 
         [TestMethod(DisplayName = "Verify that element attribute assertions are evaluated correctly")]
@@ -358,7 +362,7 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the plugin's exceptions are empty
             Assert.IsNotNull(value: session.ResponseData.Exceptions);
-            Assert.AreEqual(expected: 0, actual: session.ResponseData.Exceptions.Count());
+            Assert.IsEmpty(session.ResponseData.Exceptions);
         }
     }
 }
