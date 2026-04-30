@@ -32,11 +32,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Api" Version="2026.4.14.43" />
-		<PackageReference Include="G4.Plugins" Version="2026.4.22.64" />
-		<PackageReference Include="G4.Converters" Version="2026.4.22.64" />
+		<PackageReference Include="G4.Api" Version="2026.4.22.44" />
+		<PackageReference Include="G4.Plugins" Version="2026.4.29.65" />
+		<PackageReference Include="G4.Converters" Version="2026.4.29.65" />
 		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.7" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
 		<PackageReference Include="MSTest.TestAdapter" Version="4.2.1" />
 		<PackageReference Include="MSTest.TestFramework" Version="4.2.1" />
 		<PackageReference Include="coverlet.collector" Version="10.0.0">
