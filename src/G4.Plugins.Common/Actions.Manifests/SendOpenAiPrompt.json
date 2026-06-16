@@ -69,7 +69,7 @@
 					},
 					{
 						"question": "What outputParameters does this plugin return?",
-						"answer": "It returns SendOpenAiPrompt:OpenAiCompletionTokens (number of response tokens), SendOpenAiPrompt:OpenAiPromptTokens (number of prompt tokens), SendOpenAiPrompt:OpenAiSystemResponse (filtered AI reply as Base64 string), SendOpenAiPrompt:OpenAiTotalTokens (total tokens used), and SendOpenAiPrompt:OpenAiThink (Base64-encoded internal reasoning notes)."
+						"answer": "It returns SendOpenAiPrompt:CompletionTokens (number of response tokens), SendOpenAiPrompt:PromptTokens (number of prompt tokens), SendOpenAiPrompt:SystemResponse (filtered AI reply as Base64 string), SendOpenAiPrompt:TotalTokens (total tokens used), and SendOpenAiPrompt:Think (Base64-encoded internal reasoning notes)."
 					},
 					{
 						"question": "What parameters does this plugin accept?",
@@ -382,7 +382,7 @@
 				"It shows how long the reply is in token units.",
 				"Monitoring completion token usage helps manage resource consumption."
 			],
-			"name": "SendOpenAiPrompt:OpenAiCompletionTokens",
+			"name": "SendOpenAiPrompt:CompletionTokens",
 			"type": "Number"
 		},
 		{
@@ -391,7 +391,7 @@
 				"It shows how many token units the request consumed.",
 				"Tracking prompt token usage helps control input size."
 			],
-			"name": "SendOpenAiPrompt:OpenAiPromptTokens",
+			"name": "SendOpenAiPrompt:PromptTokens",
 			"type": "Number"
 		},
 		{
@@ -400,7 +400,7 @@
 				"Decoding yields the clean reply that the AI generated.",
 				"Filtered content ensures only the intended output is returned."
 			],
-			"name": "SendOpenAiPrompt:OpenAiSystemResponse",
+			"name": "SendOpenAiPrompt:SystemResponse",
 			"type": "String"
 		},
 		{
@@ -409,7 +409,7 @@
 				"It indicates combined token usage for the API call.",
 				"Monitoring total tokens helps manage costs and limits."
 			],
-			"name": "SendOpenAiPrompt:OpenAiTotalTokens",
+			"name": "SendOpenAiPrompt:TotalTokens",
 			"type": "Number"
 		},
 		{
@@ -418,7 +418,7 @@
 				"Decoding reveals the AI’s hidden annotations and thought steps.",
 				"These insights help understand how the AI arrived at its answer."
 			],
-			"name": "SendOpenAiPrompt:OpenAiThink",
+			"name": "SendOpenAiPrompt:Think",
 			"type": "String"
 		}
 	],

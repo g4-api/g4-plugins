@@ -2,6 +2,10 @@
 using G4.Extensions;
 using G4.Models;
 using G4.WebDriver.Extensions;
+using G4.WebDriver.Models;
+using G4.WebDriver.Remote;
+
+using Microsoft.Extensions.Logging;
 
 using System;
 using System.Collections.Generic;
@@ -21,38 +25,91 @@ namespace G4.Plugins.Ui.Actions
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Retrieve screenshot-related arguments from the plugin data
-            var directory = pluginData.Parameters.Get(key: "Directory", defaultValue: Environment.CurrentDirectory);
+            // Continue only when the active WebDriver supports screenshots.
+            if (WebDriver is not ITakesScreenshot driver)
+            {
+                Logger.LogWarning("WebDriver is not available or not suitable for taking a screenshot.");
+                return this.NewPluginResponse();
+            }
+
+            // Resolve the target directory from the plugin parameters.
+            // If no directory is provided, use the current process directory.
+            var directory = pluginData.Parameters.Get(
+                key: "Directory",
+                defaultValue: Environment.CurrentDirectory);
+
+            // Resolve and normalize the screenshot file name.
             var fileName = FormatFileName(pluginData);
+
+            // Read the existing screenshot list from the session.
+            // The value is stored as JSON so multiple screenshots can be tracked.
             var screenshots = Invoker.Context.SessionParameters.Get(
                 key: $"{NameReference}:Screenshots",
                 defaultValue: "[]");
+
+            // Build the full screenshot path from the target directory and file name.
             var path = Path.Combine(directory, fileName);
+
+            // Try to resolve the target element from the current rule and element data.
+            // When an element exists, the screenshot will be scoped to that element.
             var element = this.GetElement(pluginData.Rule, pluginData.Element);
 
-            // Save the screenshot using the WebDriver
-            Directory.CreateDirectory(directory);
+            // Initialize a variable to hold the screenshot model, which will
+            // be populated based on whether an element was resolved.
+            ScreenshotModel screenshot;
+
+            // Capture an element-level screenshot when an element was resolved.
+            // Otherwise, fallback to a full WebDriver screenshot.
             if (element != null)
             {
-                element.SaveScreenshot(fileName: path);
+                screenshot = element.GetScreenshot();
             }
             else
             {
-                WebDriver.SaveScreenshot(fileName: path);
+                screenshot = driver.GetScreenshot();
             }
 
-            // Add the path of the saved screenshot to the list of screenshots
-            var list = JsonSerializer.Deserialize<List<string>>(screenshots) ?? [];
-            list.Add(path);
+            // Determine the output mode from the plugin's own Base64 switch.
+            // This keeps the plugin self-contained: its behavior is driven by its
+            // own argument rather than the automation-wide ScreenshotsSettings.
+            var isBase64 = pluginData.Parameters.ContainsKey("Base64");
 
-            // Update the session parameters with the updated list of saved screenshots
+            // Store either the base64 screenshot content or the screenshot path,
+            // depending on whether the Base64 switch was supplied.
+            var value = isBase64
+                ? screenshot.Base64
+                : path;
+
+            // When not returning base64, write to disk: ensure the target directory
+            // exists and persist the screenshot bytes to the resolved file path.
+            if (!isBase64)
+            {
+                Directory.CreateDirectory(directory);
+                screenshot.Save(path);
+            }
+
+            // Deserialize the current screenshot list and append the new value.
+            var list = JsonSerializer.Deserialize<List<string>>(screenshots.ConvertFromBase64()) ?? [];
+            list.Add(value);
+
+            // Save the updated screenshot list back into the session parameters.
             this.AddSessionParameter(
                 @namespace: NameReference,
                 name: "Screenshots",
                 value: JsonSerializer.Serialize(list));
 
-            // Return a new plugin response indicating success
-            return this.NewPluginResponse();
+            // Build a successful plugin response.
+            var response = this.NewPluginResponse();
+
+            // Expose the recorded value (file path or base64 content) on the response
+            // entity so downstream plugins can access the latest screenshot directly.
+            response.Entity = new Dictionary<string, object>
+            {
+                ["Screenshot"] = value
+            };
+
+            // Return the plugin response to the caller.
+            return response;
         }
 
         // Formats the file name based on the specified plugin data, ensuring it ends with ".png".

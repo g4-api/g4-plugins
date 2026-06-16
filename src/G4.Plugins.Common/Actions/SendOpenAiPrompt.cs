@@ -17,12 +17,18 @@ using System.Threading.Tasks;
 
 namespace G4.Plugins.Common.Actions
 {
+    // TODO: Add namespace to the output parameters
     [G4Plugin(
         assembly: "G4.Plugins.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Common.Actions.Manifests.{nameof(SendOpenAiPrompt)}.json")]
     public class SendOpenAiPrompt(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
-        #region *** Fields             ***
+        #region *** Constants    ***
+        // The plugin name used as the namespace for session parameter storage.
+        private const string NameReference = nameof(SendOpenAiPrompt);
+        #endregion
+
+        #region *** Fields       ***
         // Static dictionary to hold conversation histories for each user session, keyed by user ID.
         private static readonly ConcurrentDictionary<string, List<Message>> s_conversationHistories = new(StringComparer.OrdinalIgnoreCase);
 
@@ -36,7 +42,7 @@ namespace G4.Plugins.Common.Actions
         };
         #endregion
 
-        #region *** Methods: Protected ***
+        #region *** Methods      ***
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Retrieve the API key from plugin parameters (or null if not provided)
@@ -137,9 +143,7 @@ namespace G4.Plugins.Common.Actions
             // Create and return a PluginResponseModel populated with tokens, think data, and system response
             return NewPluginResponse(plugin: this, pluginData, chatResponse, input);
         }
-        #endregion
 
-        #region *** Methods: Private   ***
         // Initializes or retrieves the message history for a user and ensures a system prompt is present.
         private static List<Message> InitializeHistory(
             ConcurrentDictionary<string, List<Message>> conversationHistories, string userId, string systemPrompt)
@@ -218,45 +222,60 @@ namespace G4.Plugins.Common.Actions
             ChatResponse chatResponse,
             string input)
         {
-            // Define regex options to ignore case and treat input as a single line
+            // Define regex options to ignore casing and allow "." to match new lines.
             const RegexOptions regexOptions = RegexOptions.IgnoreCase | RegexOptions.Singleline;
 
-            // Extract content enclosed within <think>...</think> tags from the input
+            // Extract the content inside <think>...</think> tags, if such a section exists.
             var think = Regex
                 .Match(input, pattern: @"(?<=<think>).*(?=<\/think>)", options: regexOptions)
                 .Value
                 .Trim();
 
-            // Remove any <think>...</think> sections from the input to isolate the system response
+            // Remove the <think>...</think> section so only the visible/system response remains.
             var systemResponse = Regex
                 .Replace(input, pattern: @"<think>.*<\/think>", replacement: string.Empty, options: regexOptions)
                 .Trim();
 
-            // Extract token usage statistics from the chat response, defaulting to zero if not present
-            var completionTokens = chatResponse?.Usage.CompletionTokens ?? 0;
-            var promptTokens = chatResponse?.Usage.PromptTokens ?? 0;
-            var totalTokens = chatResponse?.Usage.TotalTokens ?? 0;
+            // Extract token usage statistics from the chat response.
+            // Default to zero when the response or usage metadata is not available.
+            var completionTokens = chatResponse?.Usage?.CompletionTokens ?? 0;
+            var promptTokens = chatResponse?.Usage?.PromptTokens ?? 0;
+            var totalTokens = chatResponse?.Usage?.TotalTokens ?? 0;
 
-            // Store token usage values into session parameters for later reference
-            plugin.Invoker.Context.SessionParameters["OpenAiCompletionTokens"] = completionTokens;
-            plugin.Invoker.Context.SessionParameters["OpenAiPromptTokens"] = promptTokens;
-            plugin.Invoker.Context.SessionParameters["OpenAiTotalTokens"] = totalTokens;
+            // Store completion token usage in the plugin session for later rule/macro access.
+            plugin.Invoker.Context.SessionParameters[$"{NameReference}:CompletionTokens"] = completionTokens;
 
-            // Store the extracted think content into a session parameter
-            plugin.Invoker.Context.SessionParameters["OpenAiThink"] = think?.ConvertToBase64() ?? string.Empty;
+            // Store prompt token usage in the plugin session for later rule/macro access.
+            plugin.Invoker.Context.SessionParameters[$"{NameReference}:PromptTokens"] = $"{promptTokens}";
 
-            // Apply the rule's regular expression to the system response, convert the match to Base64, 
-            // and store it into a session parameter (or store an empty string if no match)
+            // Store total token usage in the plugin session for later rule/macro access.
+            plugin.Invoker.Context.SessionParameters[$"{NameReference}:TotalTokens"] = totalTokens;
+
+            // Store the extracted thinking content in the plugin session.
+            // If no thinking content was found, store an empty value.
+            plugin.AddSessionParameter(
+                @namespace: NameReference,
+                name: "Think",
+                value: string.IsNullOrEmpty(think) ? string.Empty : think
+            );
+
+            // Apply the rule regular expression to the visible/system response.
+            // If there is no match, store an empty string.
             var openAiSystemResponse = Regex
                 .Match(input: systemResponse, pattern: pluginData.Rule.RegularExpression)?
-                .Value
-                .ConvertToBase64() ?? string.Empty;
-            plugin.Invoker.Context.SessionParameters["OpenAiSystemResponse"] = openAiSystemResponse;
+                .Value ?? string.Empty;
 
-            // Create a new PluginResponseModel to hold the response data
+            // Store the extracted system response in the plugin session for later rule/macro access.
+            plugin.AddSessionParameter(
+                @namespace: NameReference,
+                name: "SystemResponse",
+                value: openAiSystemResponse
+            );
+
+            // Create a new plugin response model using the plugin response factory.
             var pluginResponse = plugin.NewPluginResponse();
 
-            // Populate the Entity property with relevant data extracted from the chat response
+            // Add the processed AI response data to the response entity.
             pluginResponse.Entity = new Dictionary<string, object>
             {
                 ["CompletionTokens"] = completionTokens,
@@ -266,7 +285,7 @@ namespace G4.Plugins.Common.Actions
                 ["Think"] = think
             };
 
-            // Return a new PluginResponseModel based on the plugin context and processed data
+            // Return the populated plugin response model.
             return pluginResponse;
         }
 
@@ -303,7 +322,7 @@ namespace G4.Plugins.Common.Actions
         }
         #endregion
 
-        #region *** Nested Types       ***
+        #region *** Nested Types ***
         // Represents a single choice returned by the API, including its message content, index, and finish reason.
         private class Choice
         {

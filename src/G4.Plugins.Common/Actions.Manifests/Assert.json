@@ -11507,6 +11507,7 @@
 			"type": "String"
 		},
 		{
+			"default": "(?si).*",
 			"description": [
 				"Applies a pattern to element values to test or extract specific parts.",
 				"Use it to focus on a substring before the assertion runs.",

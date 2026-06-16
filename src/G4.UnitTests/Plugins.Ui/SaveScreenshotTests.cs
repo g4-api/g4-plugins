@@ -1,4 +1,5 @@
 ﻿using G4.Extensions;
+using G4.Models;
 using G4.Plugins.Ui.Actions;
 using G4.UnitTests.Framework;
 using G4.WebDriver.Exceptions;
@@ -295,6 +296,210 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsTrue(entities.All((i) => Regex.IsMatch(input: Path.GetFileName(i), pattern: @"^(\w{8}-)(\w{4}-){3}(\w{12})\.png$")));
         }
 
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action returns base64 content " +
+            "and skips the disk write when the Base64 switch is supplied.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Directory:Screenshots --FileName:$[FileName] --Base64}}""}", "PageScreenshot-$[Guid].png")]
+        #endregion
+        public void SaveScreenshotBase64Test(string ruleJson, string fileName)
+        {
+            // Replace $[Guid] with a new Guid in the file name
+            fileName = fileName.Replace("$[Guid]", Guid.NewGuid().ToString());
+
+            // Replace $[FileName] with the updated file name in the action rule
+            ruleJson = ruleJson.Replace("$[FileName]", fileName);
+
+            // Invoke the SaveScreenshot action with the Base64 switch and get the plugin.
+            var plugin = Invoke<SaveScreenshot>(ruleJson).Plugin;
+
+            // Retrieve the saved screenshots from the session parameters.
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
+
+            // Assert that no files were written to disk (the switch skips the disk write,
+            // so the Directory and FileName arguments are ignored for file output).
+            Assert.IsTrue(entities.All(e => !File.Exists(e)));
+
+            // Assert that all stored values decode as valid base64.
+            Assert.IsTrue(entities.All(ConfirmBase64String));
+        }
+
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action returns base64 content " +
+            "and skips the disk write when the Base64 switch is supplied and an element is specified.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Directory:Screenshots --FileName:$[FileName] --Base64}}""}", "PageScreenshot-$[Guid].png")]
+        #endregion
+        public void SaveScreenshotBase64ElementTest(string ruleJson, string fileName)
+        {
+            // Replace $[Guid] with a new Guid in the file name
+            fileName = fileName.Replace("$[Guid]", Guid.NewGuid().ToString());
+
+            // Replace $[FileName] with the updated file name in the action rule
+            ruleJson = ruleJson.Replace("$[FileName]", fileName);
+
+            // Invoke the SaveScreenshot action with the Base64 switch against a resolved
+            // element so the scoped capture is encoded as base64 instead of being saved.
+            var plugin = Invoke<SaveScreenshot>(ruleJson, By.Custom.Positive()).Plugin;
+
+            // Retrieve the saved screenshots from the session parameters.
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
+
+            // Assert that no files were written to disk.
+            Assert.IsTrue(entities.All(e => !File.Exists(e)));
+
+            // Assert that all stored values decode as valid base64.
+            Assert.IsTrue(entities.All(ConfirmBase64String));
+        }
+
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action exposes the base64 image " +
+            "on the response entity when the Base64 switch is supplied.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Base64}}""}")]
+        #endregion
+        public void SaveScreenshotBase64EntityTest(string ruleJson)
+        {
+            // Invoke the SaveScreenshot action with the Base64 switch and get the response.
+            var entity = Invoke<SaveScreenshot>(ruleJson).Response.Entity;
+
+            // Assert that the screenshot value is present on the response entity.
+            Assert.IsTrue(entity.ContainsKey("Screenshot"));
+
+            // Resolve the recorded value from the response entity.
+            var screenshot = $"{entity["Screenshot"]}";
+
+            // Assert that the response entity carries the embedded image as base64, not a file path.
+            Assert.IsFalse(File.Exists(screenshot));
+
+            // Assert that the embedded value decodes as valid base64.
+            Assert.IsTrue(ConfirmBase64String(screenshot));
+        }
+
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action exposes the saved file path " +
+            "on the response entity when the Base64 switch is omitted.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Directory:Screenshots}}""}")]
+        #endregion
+        public void SaveScreenshotEntityPathTest(string ruleJson)
+        {
+            // Default directory for saving screenshots
+            const string directory = "Screenshots";
+
+            // Invoke the SaveScreenshot action without the Base64 switch and get the response.
+            var entity = Invoke<SaveScreenshot>(ruleJson).Response.Entity;
+
+            // Resolve the recorded value from the response entity.
+            var screenshot = $"{entity["Screenshot"]}";
+
+            // Assert that the response entity carries the on-disk file path and the file exists.
+            Assert.IsTrue(File.Exists(screenshot));
+
+            // Assert that the recorded path is under the specified directory.
+            Assert.IsTrue(screenshot.StartsWith(directory, StringComparison.OrdinalIgnoreCase));
+        }
+
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action accumulates base64 values " +
+            "across repeated invocations when the Base64 switch is supplied.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Base64}}""}")]
+        #endregion
+        public void SaveScreenshotBase64AccumulationTest(string ruleJson)
+        {
+            // Deserialize the rule and assign a reference so the extraction model can be built.
+            var ruleModel = (G4RuleModelBase)JsonSerializer.Deserialize<ActionRuleModel>(ruleJson, JsonOptions);
+            ruleModel.Reference = new G4PluginReferenceModel { Id = $"{Guid.NewGuid()}" };
+
+            // Create a single plugin instance so both invocations share the same session context.
+            var plugin = NewPlugin<SaveScreenshot>(Automation);
+            var pluginData = new PluginDataModel { Rule = ruleModel };
+
+            // Invoke the plugin twice to simulate multiple base64 captures within the same session.
+            plugin.Send(pluginData);
+            plugin.Send(pluginData);
+
+            // Retrieve the saved screenshots from the session parameters.
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value).ToList();
+
+            // Assert that both invocations were tracked in the session list.
+            Assert.HasCount(2, entities);
+
+            // Assert that no files were written to disk.
+            Assert.IsTrue(entities.All(e => !File.Exists(e)));
+
+            // Assert that all accumulated values decode as valid base64.
+            Assert.IsTrue(entities.All(ConfirmBase64String));
+        }
+
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action accumulates multiple " +
+            "screenshots in the session list across repeated invocations.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Directory:Screenshots --FileName:$[FileName]}}""}", "PageScreenshot-$[Guid].png")]
+        #endregion
+        public void SaveScreenshotAccumulationTest(string ruleJson, string fileName)
+        {
+            // Default directory for saving screenshots
+            const string directory = "Screenshots";
+
+            // Replace $[Guid] with a new Guid in the file name
+            fileName = fileName.Replace("$[Guid]", Guid.NewGuid().ToString());
+
+            // Replace $[FileName] with the updated file name in the action rule
+            ruleJson = ruleJson.Replace("$[FileName]", fileName);
+
+            // Deserialize the rule and assign a reference so the extraction model can be built.
+            var ruleModel = (G4RuleModelBase)JsonSerializer.Deserialize<ActionRuleModel>(ruleJson, JsonOptions);
+            ruleModel.Reference = new G4PluginReferenceModel { Id = $"{Guid.NewGuid()}" };
+
+            // Create a single plugin instance so both invocations share the same session context.
+            var plugin = NewPlugin<SaveScreenshot>(Automation);
+            var pluginData = new PluginDataModel { Rule = ruleModel };
+
+            // Invoke the plugin twice to simulate multiple screenshot captures within the same session.
+            plugin.Send(pluginData);
+            plugin.Send(pluginData);
+
+            // Retrieve the saved screenshots from the session parameters.
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value).ToList();
+
+            // Assert that both invocations were tracked in the session list.
+            Assert.HasCount(2, entities);
+
+            // Assert that all saved files exist on disk.
+            Assert.IsTrue(entities.All(File.Exists));
+
+            // Assert that all file paths start with the specified directory.
+            Assert.IsTrue(entities.All(e => e.StartsWith(directory, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        [TestMethod(DisplayName = "Verify that the SaveScreenshot action appends the .png extension " +
+            "when the file name does not include one.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Directory:Screenshots --FileName:NoExtensionScreenshot}}""}")]
+        #endregion
+        public void SaveScreenshotFileNameNoExtensionTest(string ruleJson)
+        {
+            // Default directory for saving screenshots
+            const string directory = "Screenshots";
+
+            // Invoke the SaveScreenshot action and get the plugin
+            var plugin = Invoke<SaveScreenshot>(ruleJson).Plugin;
+
+            // Retrieve the saved screenshots from the session parameters
+            var value = (plugin.Invoker.Context.SessionParameters["SaveScreenshot:Screenshots"] as string).ConvertFromBase64();
+            var entities = JsonSerializer.Deserialize<IEnumerable<string>>(value);
+
+            // Assert that all saved files exist on disk.
+            Assert.IsTrue(entities.All(File.Exists));
+
+            // Assert that all file paths start with the specified directory.
+            Assert.IsTrue(entities.All(e => e.StartsWith(directory, StringComparison.OrdinalIgnoreCase)));
+
+            // Assert that the .png extension was automatically appended to the file name.
+            Assert.IsTrue(entities.All(e => e.EndsWith("NoExtensionScreenshot.png", StringComparison.OrdinalIgnoreCase)));
+        }
+
         [TestMethod(DisplayName = "Verify that the SaveScreenshot action throws exceptions with null elements.")]
         #region *** Data Set ***
         [DataRow(@"{""argument"":null, ""onElement"":""null""}")]
@@ -355,6 +560,24 @@ namespace G4.UnitTests.Plugins.Ui
             // Invoke the action to get the plugin
             Assert.Throws<WebDriverException>(() =>
                 Invoke<SaveScreenshot>(ruleJson, By.Custom.Exception()));
+        }
+
+        // Returns true when the provided string decodes as valid base64 content.
+        private static bool ConfirmBase64String(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return false;
+            }
+            try
+            {
+                Convert.FromBase64String(value);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }
