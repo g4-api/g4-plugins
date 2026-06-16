@@ -9,7 +9,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -160,7 +159,11 @@ namespace G4.UnitTests.Engine
                 .Exceptions;
 
             // Assert that the count of exceptions in the flat request is 4
-            Assert.AreEqual(expected: 4, actual: flatRequest.Count());
+            Assert.HasCount(
+                expected: 4,
+                collection: flatRequest,
+                message: "Count of exceptions in the flat request must be 4."
+            );
         }
 
         [TestMethod(DisplayName = "Verify the count of performance points in the flat request when data is provided")]
@@ -184,7 +187,11 @@ namespace G4.UnitTests.Engine
                 .PerformancePoints;
 
             // Assert that the count of performance points in the flat request is 48
-            Assert.AreEqual(expected: 48, actual: flatRequest.Count());
+            Assert.HasCount(
+                expected: 48,
+                collection: flatRequest,
+                message: "Count of performance points in the flat request must be 48."
+            );
         }
 
         [TestMethod(DisplayName = "Verify the response size of the flat request when data is provided")]
@@ -383,14 +390,6 @@ namespace G4.UnitTests.Engine
                 .First())
                 .Reference;
 
-            // Get the summary from the SendKeys plugin manifest and join it with a
-            // newline character to form a string summary of the plugin manifest for
-            // comparison with the reference's description property later on in the test method
-            var summary = string
-                .Join('\n', new SendKeys(pluginSetup: default).GetManifest().Summary)
-                .Replace("\n", string.Empty)
-                .Replace(" ", string.Empty);
-
             // Default guid pattern for matching the reference's id property with the default guid format
             const string guidPattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
 
@@ -526,7 +525,11 @@ namespace G4.UnitTests.Engine
                 .SelectMany(i => i.ResponseData.Exceptions);
 
             // Assert that the count of exceptions in the flattened collection is 12
-            Assert.AreEqual(expected: 12, actual: exceptions.Count());
+            Assert.HasCount(
+                expected: 12,
+                collection: exceptions,
+                message: "Count of exceptions in the flattened collection must be 12."
+            );
         }
 
         [RetryableTestMethod(
@@ -545,7 +548,11 @@ namespace G4.UnitTests.Engine
             var session = client.Automation.Invoke(automation).First().Value.Sessions.First().Value;
 
             // Assert that the count of exceptions in the session's flat request is 4
-            Assert.AreEqual(expected: 4, actual: session.ResponseData.Exceptions.Count());
+            Assert.HasCount(
+                expected: 4,
+                collection: session.ResponseData.Exceptions,
+                message: "Count of exceptions in the session's flat request must be 4."
+            );
         }
 
         [TestMethod(DisplayName = "Verify the count of performance points in the sessions when data is provided")]
@@ -566,7 +573,11 @@ namespace G4.UnitTests.Engine
                 .SelectMany(i => i.ResponseData.PerformancePoints);
 
             // Assert that the count of performance points in the flattened collection is 144
-            Assert.AreEqual(expected: 144, actual: performancePoints.Count());
+            Assert.HasCount(
+                expected: 144,
+                collection: performancePoints,
+                message: "Count of performance points in the flattened collection must be 144."
+            );
         }
 
         [TestMethod(DisplayName = "Verify the count of performance points in the sessions when no data is provided")]
@@ -587,7 +598,11 @@ namespace G4.UnitTests.Engine
                 .SelectMany(i => i.ResponseData.PerformancePoints);
 
             // Assert that the count of performance points in the flattened collection is 48
-            Assert.AreEqual(expected: 48, actual: performancePoints.Count());
+            Assert.HasCount(
+                expected: 48,
+                collection: performancePoints,
+                message: "Count of performance points in the flattened collection must be 48."
+            );
         }
 
         [RetryableTestMethod(
@@ -671,7 +686,11 @@ namespace G4.UnitTests.Engine
             // Assert that each stage in the structured request has 2 jobs
             foreach (var stage in stages)
             {
-                Assert.AreEqual(expected: 2, actual: stage.Jobs.Count());
+                Assert.HasCount(
+                    expected: 2,
+                    collection: stage.Jobs,
+                    message: "Count of jobs in the stage must be 2."
+                );
             }
         }
 
@@ -773,7 +792,11 @@ namespace G4.UnitTests.Engine
                 .Stages;
 
             // Assert that the count of stages in the structured request is 4
-            Assert.AreEqual(expected: 4, actual: stages.Count());
+            Assert.HasCount(
+                expected: 4,
+                collection: stages,
+                message: "Count of stages in the structured request must be 4."
+            );
         }
 
         [TestMethod(DisplayName = "Verify the stage details of a stage in the structured request when data is provided")]
@@ -811,7 +834,11 @@ namespace G4.UnitTests.Engine
                 Assert.IsTrue(condition: Regex.IsMatch(stage.Id, guidPattern), message: "Reference id must match the default guid format.");
 
                 // Assert that the stage's jobs count is 2
-                Assert.AreEqual(expected: 2, actual: stage.Jobs.Count());
+                Assert.HasCount(
+                    expected: 2,
+                    collection: stage.Jobs,
+                    message: "Count of jobs in the stage must be 2."
+                );
             }
         }
 
