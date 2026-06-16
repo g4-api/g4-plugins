@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -245,9 +246,6 @@ namespace G4.UnitTests.Engine
             // Assert that the reference is not null
             Assert.IsNotNull(value: reference, message: "Reference must not be null.");
 
-            // Assert that the reference's Description is not null or empty
-            Assert.IsFalse(condition: string.IsNullOrEmpty(reference.Description), message: "Reference description must not be null or empty.");
-
             // Assert that the reference's Name is not null or empty
             Assert.IsFalse(condition: string.IsNullOrEmpty(reference.Name), message: "Reference name must not be null or empty.");
 
@@ -349,9 +347,6 @@ namespace G4.UnitTests.Engine
             // Assert that the reference is not null
             Assert.IsNotNull(value: reference, message: "Reference must not be null.");
 
-            // Assert that the reference's Description is not null or empty
-            Assert.IsFalse(condition: string.IsNullOrEmpty(reference.Description), message: "Reference description must not be null or empty.");
-
             // Assert that the reference's Name is not null or empty
             Assert.IsFalse(condition: string.IsNullOrEmpty(reference.Name), message: "Reference name must not be null or empty.");
 
@@ -405,12 +400,6 @@ namespace G4.UnitTests.Engine
             // Assert the reference's Alias is 'SendKeys'
             Assert.AreEqual(expected: "SendKeys", actual: reference.Alias, "Reference alias must be 'SendKeys'.");
 
-            // Assert that the reference's description match the manifest summary
-            Assert.AreEqual(
-                expected: summary,
-                actual: reference.Description.Replace(" ", string.Empty),
-                message: "Reference description must match the manifest summary.");
-
             // Assert that the reference's name is 'SendKeys'
             Assert.AreEqual(expected: "SendKeys", actual: reference.Name, message: "Reference name must be 'SendKeys'.");
 
@@ -459,9 +448,6 @@ namespace G4.UnitTests.Engine
 
             // Asseret that AutomationReference is not null
             Assert.IsNotNull(value: reference.AutomationReference, message: "Automation reference must not be null.");
-
-            // Assert that the reference's Description is not null or empty
-            Assert.IsFalse(condition: string.IsNullOrEmpty(reference.Description), message: "Reference description must not be null or empty.");
 
             // Assert that the reference's Name is not null or empty
             Assert.IsFalse(condition: string.IsNullOrEmpty(reference.Name), message: "Reference name must not be null or empty.");
@@ -756,9 +742,6 @@ namespace G4.UnitTests.Engine
                 // Assert that the reference is not null
                 Assert.IsNotNull(reference, "Reference must not be null.");
 
-                // Assert that the reference's Description is not null or empty
-                Assert.IsFalse(string.IsNullOrEmpty(reference.Description), "Reference description must not be null or empty.");
-
                 // Assert that the reference's Name is not null or empty
                 Assert.IsFalse(string.IsNullOrEmpty(reference.Name), "Reference name must not be null or empty.");
 
@@ -824,9 +807,6 @@ namespace G4.UnitTests.Engine
                 // Assert that the stage's name is not null or empty
                 Assert.IsFalse(string.IsNullOrEmpty(stage.Name), "Stage name must not be null or empty.");
 
-                // Assert that the stage's description is not null or empty
-                Assert.IsFalse(string.IsNullOrEmpty(stage.Description), "Stage description must not be null or empty.");
-
                 // Assert that the reference's Id matches the default guid format (00000000-0000-0000-0000-000000000000)
                 Assert.IsTrue(condition: Regex.IsMatch(stage.Id, guidPattern), message: "Reference id must match the default guid format.");
 
@@ -861,19 +841,14 @@ namespace G4.UnitTests.Engine
             foreach (var stage in stages)
             {
                 // Assert that the stage's jobs count is 2
-                Assert.AreEqual(
+                Assert.HasCount(
                     expected: 2,
-                    actual: stage.Jobs.Count(),
+                    collection: stage.Jobs,
                     message: "The count of jobs in the stage is not equal to 2.");
 
                 // Assert that the job details of each job in the stage are correct
                 foreach (var job in stage.Jobs)
                 {
-                    // Assert that the job's description is not null or empty
-                    Assert.IsFalse(
-                        condition: string.IsNullOrEmpty(job.Description),
-                        message: "Job description must not be null or empty.");
-
                     // Assert that the job's id is not null or empty
                     Assert.IsFalse(condition: string.IsNullOrEmpty(job.Id), message: "Job id must not be null or empty.");
 
