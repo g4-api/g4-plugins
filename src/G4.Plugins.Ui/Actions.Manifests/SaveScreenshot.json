@@ -17,15 +17,15 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/SaveScreenshot.cs"
 			},
 			"rag": {
-				"description": "The SaveScreenshot action (aliases: GetScreenshot, TakeScreenshot) captures and saves a PNG screenshot to disk using the W3C WebDriver GET /session/{session id}/screenshot command. It supports full-page viewport captures and element-level screenshots when OnElement and Locator are supplied. The target directory is created automatically via Directory.CreateDirectory including any missing parent directories. The file name defaults to a new GUID and always receives a .png extension if not already present (case-insensitive). If a locator is supplied but GetElement returns null the plugin falls back to a full-page screenshot unconditionally. Every saved absolute path is appended to the SaveScreenshot:Screenshots session parameter, accumulating across all invocations in the session.",
+				"description": "The SaveScreenshot action (aliases: GetScreenshot, TakeScreenshot) captures a PNG screenshot using the W3C WebDriver GET /session/{session id}/screenshot command. It supports full-page viewport captures and element-level screenshots when OnElement and Locator are supplied. By default the screenshot is saved to disk: the target directory is created automatically via Directory.CreateDirectory including any missing parent directories, the file name defaults to a new GUID and always receives a .png extension if not already present (case-insensitive), and the saved absolute path is the recorded value. When the optional Base64 switch is supplied (e.g. {{$ --Base64}}) no file is written; instead the screenshot is encoded as a base64 PNG string and that string becomes the recorded value. The plugin is self-contained and decides between disk and base64 output solely from its own Base64 switch, independent of the automation-wide screenshot settings. If a locator is supplied but GetElement returns null the plugin falls back to a full-page screenshot unconditionally. The recorded value (path or base64) is appended to the SaveScreenshot:Screenshots session parameter, accumulating across all invocations in the session, and is also exposed as the Screenshot key on the plugin response entity.",
 				"qa": [
 					{
 						"question": "What does the SaveScreenshot plugin do?",
-						"answer": "It captures a PNG screenshot of either the full browser viewport or a specific element and saves it to disk using the W3C WebDriver screenshot command. The output directory is created automatically if absent, and every saved absolute path is appended to the SaveScreenshot:Screenshots session parameter. The action is also known by aliases GetScreenshot and TakeScreenshot."
+						"answer": "It captures a PNG screenshot of either the full browser viewport or a specific element using the W3C WebDriver screenshot command. By default it saves the image to disk (creating the output directory if absent) and records the file path; when the Base64 switch is supplied it skips the disk write and records the screenshot as a base64 PNG string instead. The recorded value is appended to the SaveScreenshot:Screenshots session parameter and exposed as the Screenshot key on the plugin response entity. The action is also known by aliases GetScreenshot and TakeScreenshot."
 					},
 					{
 						"question": "What parameters does SaveScreenshot accept?",
-						"answer": "It accepts two optional parameters: Directory (the folder to save the screenshot into, defaulting to Environment.CurrentDirectory) and FileName (the file name, defaulting to a new GUID string with .png appended automatically when the name does not already end with .png)."
+						"answer": "It accepts three optional parameters: Directory (the folder to save the screenshot into, defaulting to Environment.CurrentDirectory), FileName (the file name, defaulting to a new GUID string with .png appended automatically when the name does not already end with .png), and Base64 (a switch that, when present, returns the screenshot as a base64 PNG string instead of writing a file to disk)."
 					},
 					{
 						"question": "How does SaveScreenshot choose between a full-page and an element screenshot?",
@@ -33,7 +33,7 @@
 					},
 					{
 						"question": "What is the SaveScreenshot:Screenshots output parameter?",
-						"answer": "SaveScreenshot:Screenshots is a session parameter holding a JSON array of absolute file paths for every screenshot saved during the session. Each invocation deserializes the existing list, appends the new path, and re-serializes it, so the parameter accumulates paths across multiple calls rather than replacing them."
+						"answer": "SaveScreenshot:Screenshots is a session parameter holding a JSON array of the recorded values for every screenshot captured during the session. Each value is an absolute file path by default, or a base64 PNG string when the Base64 switch is used. Each invocation deserializes the existing list, appends the new value, and re-serializes it, so the parameter accumulates values across multiple calls rather than replacing them."
 					},
 					{
 						"question": "How is the file name determined and what extension is enforced?",
@@ -45,7 +45,11 @@
 					},
 					{
 						"question": "What is the manifest version for SaveScreenshot?",
-						"answer": "The manifest version is 4."
+						"answer": "The manifest version is 5."
+					},
+					{
+						"question": "What does the Base64 switch do?",
+						"answer": "When the Base64 switch is supplied (e.g. {{$ --Base64}}) the plugin skips writing a file to disk and instead encodes the screenshot as a base64 PNG string. That base64 string becomes the recorded value: it is appended to the SaveScreenshot:Screenshots session parameter and exposed as the Screenshot key on the plugin response entity. This is designed to embed the image inside the response for later processing, so downstream plugins can read it directly from the response without relying on the file system. The switch is self-contained and does not depend on the automation-wide screenshot settings; when omitted the screenshot is saved to disk and the file path is recorded instead."
 					},
 					{
 						"question": "What aliases are available for SaveScreenshot?",
@@ -84,7 +88,8 @@
 		"| Auto Directory Creation | Calls Directory.CreateDirectory before writing, creating the target directory and any missing parent directories automatically.                                |",
 		"| Auto File Naming        | Generates a unique GUID-based file name when FileName is omitted, preventing accidental overwrites across repeated invocations.                               |",
 		"| PNG Enforcement         | Always appends .png to the output file name if it does not already end with .png (case-insensitive), ensuring every saved file is a valid PNG.                |",
-		"| Session Output          | Appends each saved absolute path to the SaveScreenshot:Screenshots session parameter, accumulating a complete path list across all invocations in the session. |",
+		"| Session Output          | Appends each recorded value (file path, or base64 string when Base64 is used) to the SaveScreenshot:Screenshots session parameter, accumulating a complete list across all invocations in the session. |",
+		"| Base64 Embedding        | When the Base64 switch is supplied, skips the disk write and records the screenshot as a base64 PNG string, embedding the image in the response via the Screenshot response entity key for downstream processing.            |",
 		"",
 		"### Usages in RPA",
 		"",
@@ -101,6 +106,17 @@
 		"| Visual Regression Testing  | Capture screenshots at fixed checkpoints across test runs and compare the accumulated SaveScreenshot:Screenshots paths to detect unintended UI changes. |",
 		"| Cross-Browser Verification | Save viewport and element screenshots across browser configurations to confirm consistent rendering and layout behaviour.                              |",
 		"| Failure Evidence           | Collect a screenshot immediately at the point of assertion failure to provide a reproducible visual artifact for root-cause analysis.                  |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Screenshot is the response entity key that holds the recorded value of the most recent screenshot captured by the SaveScreenshot plugin.",
+				"When the Base64 switch is not used this value is the absolute file path where the screenshot was saved. When the Base64 switch is supplied the value is a base64-encoded PNG string representing the screenshot content.",
+				"This entity allows downstream steps to access the latest screenshot directly from the plugin response, independent of the SaveScreenshot:Screenshots session parameter which accumulates all values across invocations."
+			],
+			"name": "Screenshot",
+			"type": "String"
+		}
 	],
 	"examples": [
 		{
@@ -230,6 +246,46 @@
 				"onElement": "#ClickButton",
 				"pluginName": "SaveScreenshot"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No file is written to disk — Directory and FileName are ignored for the disk write because the Base64 switch skips file output entirely",
+						"Session parameter SaveScreenshot:Screenshots already contains values — the base64 string is appended to the existing JSON array, mixing paths and base64 values when earlier calls did not use the switch",
+						"OnElement is supplied — the Base64 switch applies equally to element-level captures; the scoped screenshot is encoded as base64 instead of being saved",
+						"WebDriver session is unexpectedly terminated — the screenshot call throws a WebDriverException before any value is recorded"
+					],
+					"expected_result": "No file is written to disk. The full-page screenshot is encoded as a base64 PNG string, appended to the SaveScreenshot:Screenshots session parameter, and exposed as the Screenshot key on the plugin response entity.",
+					"notes": "The Base64 switch is self-contained and governs the plugin's behavior directly, independent of the automation-wide screenshot settings. Use it to embed the image in the response entity for downstream processing rather than persisting it to disk.",
+					"use_case": "full_page_screenshot_as_base64_response_entity",
+					"version": "1.0"
+				},
+				"labels": [
+					"Base64",
+					"BrowserScreenshot",
+					"EmbeddedImage",
+					"FullPage",
+					"InMemory",
+					"NoDiskWrite",
+					"ResponseEntity",
+					"ScreenCapture",
+					"SessionOutput",
+					"WebDriver"
+				]
+			},
+			"description": [
+				"### Full-page screenshot returned as base64",
+				"",
+				"Captures a screenshot of the full browser viewport and returns it as a base64-encoded PNG string instead of writing a file to disk.",
+				"When the `--Base64` switch is supplied the plugin skips the disk write and records the base64 content as the value.",
+				"The base64 string is appended to the `SaveScreenshot:Screenshots` session parameter and exposed as the `Screenshot` key on the plugin response entity, embedding the image in the response for downstream processing."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Base64}}",
+				"pluginName": "SaveScreenshot"
+			}
 		}
 	],
 	"key": "SaveScreenshot",
@@ -237,9 +293,10 @@
 	"outputParameters": [
 		{
 			"description": [
-				"A JSON array of absolute file paths for every screenshot saved during the automation session.",
-				"Each invocation of SaveScreenshot appends the new path to the existing list, so the parameter accumulates paths across multiple calls in the same session.",
-				"Use this parameter in downstream steps to validate, move, rename, or attach the saved screenshots."
+				"A JSON array of the recorded value for every screenshot captured during the automation session.",
+				"Each value is an absolute file path by default, or a base64-encoded PNG string when the Base64 switch is supplied.",
+				"Each invocation of SaveScreenshot appends the new value to the existing list, so the parameter accumulates values across multiple calls in the same session.",
+				"Use this parameter in downstream steps to validate, move, rename, attach, or embed the captured screenshots."
 			],
 			"name": "SaveScreenshot:Screenshots",
 			"type": "Array"
@@ -264,6 +321,18 @@
 			"mandatory": false,
 			"name": "FileName",
 			"type": "String"
+		},
+		{
+			"description": [
+				"When present, the screenshot is returned as a base64-encoded PNG string instead of being written to disk.",
+				"The base64 content is exposed as the `Screenshot` key on the plugin response entity and appended to the `SaveScreenshot:Screenshots` session parameter, allowing the embedded image to be carried inside the response for downstream processing.",
+				"Downstream plugins can read the image directly from the response entity without relying on the file system.",
+				"When omitted the screenshot is saved to disk and the resolved file path is used instead.",
+				"This switch is self-contained: it governs the plugin's behavior directly and does not depend on the automation-wide screenshot settings."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
 		}
 	],
 	"pluginType": "Action",
@@ -298,8 +367,9 @@
 	],
 	"summary": [
 		"SaveScreenshot (also accepted as GetScreenshot and TakeScreenshot) captures and saves a PNG screenshot of the full browser viewport or a specific element to disk during automation workflows.",
-		"It automatically creates the target directory, enforces the `.png` extension on every output file, generates a unique GUID-based file name when none is provided, and appends every saved absolute path to the `SaveScreenshot:Screenshots` session parameter for downstream consumption.",
-		"Use this action whenever visual evidence, regression baselines, element-level captures, or screenshot audit trails are required in RPA workflows or automated test suites."
+		"It automatically creates the target directory, enforces the `.png` extension on every output file, generates a unique GUID-based file name when none is provided, and appends every recorded value to the `SaveScreenshot:Screenshots` session parameter while also exposing it as the `Screenshot` key on the plugin response entity for downstream consumption.",
+		"When the `--Base64` switch is supplied the plugin skips the disk write and records the screenshot as a base64-encoded PNG string, embedding the image in the response for later processing.",
+		"Use this action whenever visual evidence, regression baselines, element-level captures, embedded base64 images, or screenshot audit trails are required in RPA workflows or automated test suites."
 	],
-	"version": "4"
+	"version": "5"
 }

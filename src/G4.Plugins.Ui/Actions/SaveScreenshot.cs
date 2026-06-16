@@ -5,6 +5,8 @@ using G4.WebDriver.Extensions;
 using G4.WebDriver.Models;
 using G4.WebDriver.Remote;
 
+using Microsoft.Extensions.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +25,13 @@ namespace G4.Plugins.Ui.Actions
 
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
+            // Continue only when the active WebDriver supports screenshots.
+            if (WebDriver is not ITakesScreenshot driver)
+            {
+                Logger.LogWarning("WebDriver is not available or not suitable for taking a screenshot.");
+                return this.NewPluginResponse();
+            }
+
             // Resolve the target directory from the plugin parameters.
             // If no directory is provided, use the current process directory.
             var directory = pluginData.Parameters.Get(
@@ -57,18 +66,23 @@ namespace G4.Plugins.Ui.Actions
             }
             else
             {
-                screenshot = ((ITakesScreenshot)WebDriver).GetScreenshot();
+                screenshot = driver.GetScreenshot();
             }
 
+            // Determine the output mode from the plugin's own Base64 switch.
+            // This keeps the plugin self-contained: its behavior is driven by its
+            // own argument rather than the automation-wide ScreenshotsSettings.
+            var isBase64 = pluginData.Parameters.ContainsKey("Base64");
+
             // Store either the base64 screenshot content or the screenshot path,
-            // depending on the configured screenshot settings.
-            var value = Automation.Settings.ScreenshotsSettings.ConvertToBase64
+            // depending on whether the Base64 switch was supplied.
+            var value = isBase64
                 ? screenshot.Base64
                 : path;
 
-            // When writing to disk, ensure the target directory exists and
-            // persist the screenshot bytes to the resolved file path.
-            if (!Automation.Settings.ScreenshotsSettings.ConvertToBase64)
+            // When not returning base64, write to disk: ensure the target directory
+            // exists and persist the screenshot bytes to the resolved file path.
+            if (!isBase64)
             {
                 Directory.CreateDirectory(directory);
                 screenshot.Save(path);
@@ -84,32 +98,18 @@ namespace G4.Plugins.Ui.Actions
                 name: "Screenshots",
                 value: JsonSerializer.Serialize(list));
 
-            // Build the extraction entity content that will be exposed to report builders
-            // or downstream consumers.
-            var entityContent = new Dictionary<string, object>
+            // Build a successful plugin response.
+            var response = this.NewPluginResponse();
+
+            // Expose the recorded value (file path or base64 content) on the response
+            // entity so downstream plugins can access the latest screenshot directly.
+            response.Entity = new Dictionary<string, object>
             {
-                ["screenshot"] = value
+                ["Screenshot"] = value
             };
 
-            // Resolve the current WebDriver session identifier for extraction metadata.
-            var session = $"{WebDriver?.Invoker.Session}";
-
-            // Create a default extraction model for this rule execution.
-            var extraction = new G4ExtractionModel().SetDefault(
-                session,
-                pluginData.Rule.Reference);
-
-            // Add the screenshot entity to the extraction result.
-            extraction.Entities =
-            [
-                new G4EntityModel { Content = entityContent }
-            ];
-
-            // Register the extraction on the plugin response context.
-            Extractions.Add(extraction);
-
-            // Return a successful plugin response.
-            return this.NewPluginResponse();
+            // Return the plugin response to the caller.
+            return response;
         }
 
         // Formats the file name based on the specified plugin data, ensuring it ends with ".png".
