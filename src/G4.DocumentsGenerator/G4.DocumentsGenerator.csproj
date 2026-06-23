@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="G4.Abstraction.Cli" Version="2026.4.29.20" />
-		<PackageReference Include="G4.Converters" Version="2026.6.15.66" />
+		<PackageReference Include="G4.Converters" Version="2026.6.23.68" />
 		<PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.9" />
 	</ItemGroup>
 
