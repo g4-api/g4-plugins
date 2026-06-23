@@ -809,10 +809,10 @@ namespace G4.UnitTests.Framework
             }
 
             // Assert that the plugin has a description
-            Assert.IsTrue(attribute.Description.Any(), "Plugin must have a description.");
+            Assert.IsNotEmpty(attribute.Description, "Plugin must have a description.");
 
             // Assert that the plugin has a summary
-            Assert.IsTrue(attribute.Summary.Any(), "Plugin must have a summary.");
+            Assert.IsNotEmpty(attribute.Summary, "Plugin must have a summary.");
 
             // If a custom plugin name is provided, check if it matches the plugin's key
             if (pluginName != null)
@@ -821,7 +821,7 @@ namespace G4.UnitTests.Framework
             }
 
             // Assert that the plugin has at least one example
-            Assert.IsTrue(attribute.Examples.Any(), "Plugin must have at least one example.");
+            Assert.IsNotEmpty(attribute.Examples, "Plugin must have at least one example.");
 
             // Assert that all examples have at least one action rule
             Assert.IsTrue(attribute.Examples.All(i => i.Rule != null), "Plugin example must have at least one action rule.");
@@ -848,7 +848,7 @@ namespace G4.UnitTests.Framework
             Assert.AreNotEqual(notExpected: default, actual: action, message: "Plugin was not generated correctly.");
 
             // Assert that plugin types have been loaded into the cache manager
-            Assert.AreNotEqual(notExpected: 0, actual: CacheManager.Types.Count, message: "Plugin types were not loaded.");
+            Assert.IsNotEmpty(CacheManager.Types, "Plugin types were not loaded.");
 
             // If the action is derived from PluginBase, assert that its WebDriver property is not null
             if (action is PluginBase)
@@ -963,7 +963,7 @@ namespace G4.UnitTests.Framework
                 }
 
                 // Filter out null parameters and return the matched parameters as an array
-                return parametersResult.Where(i => i != null).ToArray();
+                return [.. parametersResult.Where(i => i != null)];
             }
 
             // Get the constructor with the most parameters for the specified plugin type

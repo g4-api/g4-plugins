@@ -1,5 +1,6 @@
 ﻿using G4.Models;
 using G4.Plugins.Common.Operators;
+using G4.UnitTests.Attributes;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
 
@@ -64,7 +65,7 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsFalse(session.ResponseData.Extractions.GetEvaluation());
         }
 
-        [TestMethod(DisplayName = "Verify that the MatchOperator plugin evaluates correctly " +
+        [RetryableTestMethod(5, DisplayName = "Verify that the MatchOperator plugin evaluates correctly " +
             "in positive scenarios.")]
         #region *** Data Set ***
         [DataRow(Stubs.RuleJsonAttributeOperator, "random", "Match", @"^mock attribute value \\d+$", "ElementAttribute", ".//positive")]

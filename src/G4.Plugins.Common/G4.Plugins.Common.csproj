@@ -25,9 +25,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.6.23.68" />
-		<PackageReference Include="G4.Extensions" Version="2026.6.23.68" />
-		<PackageReference Include="G4.Plugins" Version="2026.6.23.68" />
+		<PackageReference Include="G4.Converters" Version="2026.6.23.69" />
+		<PackageReference Include="G4.Extensions" Version="2026.6.23.69" />
+		<PackageReference Include="G4.Plugins" Version="2026.6.23.69" />
 		<PackageReference Include="PdfPig" Version="0.1.14" />
 		<PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.9" />
 	</ItemGroup>
