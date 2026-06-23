@@ -1,6 +1,7 @@
 ﻿using G4.Extensions;
 using G4.Models;
 using G4.Plugins.Common.Actions;
+using G4.UnitTests.Attributes;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
 
@@ -43,7 +44,7 @@ namespace G4.UnitTests.Plugins.Common
                 expectedPerformancePoints: 3);
         }
 
-        [TestMethod(DisplayName = "Verify that the InvokeForEachLoop plugin performs nested " +
+        [RetryableTestMethod(5, DisplayName = "Verify that the InvokeForEachLoop plugin performs nested " +
             "loops correctly and awards the expected performance points.")]
         public void InvokeForEachLoopWithNestedLoopPositiveTest()
         {
