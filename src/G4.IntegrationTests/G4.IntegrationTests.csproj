@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Api" Version="2026.6.16.46" />
+		<PackageReference Include="G4.Api" Version="2026.6.24.47" />
 		<PackageReference Include="G4.Plugins" Version="2026.6.23.69" />
 		<PackageReference Include="G4.Converters" Version="2026.6.23.69" />
 		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.9" PrivateAssets="all" />
