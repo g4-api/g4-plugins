@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 
 namespace G4.Plugins.Common.Actions
 {
-    // TODO: Add namespace to the output parameters
     [G4Plugin(
         assembly: "G4.Plugins.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null",
         manifest: $"G4.Plugins.Common.Actions.Manifests.{nameof(SendOpenAiPrompt)}.json")]

@@ -1,0 +1,329 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataManagement"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WriteFile.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WriteFile.cs"
+			},
+			"mcp": {
+				"title": "Write File"
+			},
+			"rag": {
+				"description": "WriteFile lets automation workflows save UTF-8 text to validated absolute or relative paths. It creates missing directories, supports Base64 decoding and optional encryption, and reliably overwrites existing files so downstream steps use the latest content.",
+				"qa": [
+					{
+						"question": "What is the WriteFile plugin?",
+						"answer": "WriteFile is an action plugin that creates or overwrites a text file at a configured path."
+					},
+					{
+						"question": "Which parameters does WriteFile support?",
+						"answer": "Path and Content are required. Relative, Base64, and EncryptionKey optionally control path resolution and content processing."
+					},
+					{
+						"question": "How does WriteFile integrate with G4 workflows?",
+						"answer": "WriteFile is an Action task using ActionRuleModel. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/WriteFile.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/WriteFile.cs"
+					},
+					{
+						"question": "What are the best practices for using WriteFile?",
+						"answer": "Use a fully qualified Path unless working-directory resolution is intentional, and supply valid Base64 text whenever Base64 is present."
+					},
+					{
+						"question": "How are WriteFile parameters represented in an action rule?",
+						"answer": "The Argument property uses G4 parameter syntax such as {{$ --Path:C:\\Automation\\output.txt --Content:Hello --Base64}}. Switch parameters are enabled by their presence."
+					},
+					{
+						"question": "What metadata identifies the WriteFile manifest?",
+						"answer": "The key is WriteFile, the manifest version is 4, the plugin type is Action, and the namespace is G4.Plugins.Common."
+					},
+					{
+						"question": "What behavior does the WriteFile manifest describe?",
+						"answer": "WriteFile validates the path, optionally decodes and encrypts Content, creates missing parent directories, and writes UTF-8 text by replacing any existing file."
+					},
+					{
+						"question": "What errors can stop WriteFile?",
+						"answer": "Execution fails when Path is empty or relative without Relative. Invalid Base64, encryption failures, and file-system errors also stop the write."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "file-pen",
+					"svg": null
+				},
+				"label": "Write File",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Writes text content to an absolute or explicitly relative file path.",
+		"It creates missing parent directories before saving the file.",
+		"Files with the same name at the target path are overwritten.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                  | Description                                                                                  |",
+		"|--------------------------|----------------------------------------------------------------------------------------------|",
+		"| Absolute Paths           | Requires a fully qualified path unless the `Relative` switch is present.                     |",
+		"| Relative Paths           | Resolves the path from the process working directory when `Relative` is present.             |",
+		"| Directory Creation       | Creates missing parent directories with `Directory.CreateDirectory`.                         |",
+		"| Base64 Decoding          | Decodes `Content` with `ConvertFromBase64()` when `Base64` is present.                        |",
+		"| Optional Encryption      | Encrypts the final content with `Encrypt(key)` when `EncryptionKey` is provided.              |",
+		"| Overwrite Existing Files | Replaces an existing file with the same name instead of appending to it.                      |",
+		"| UTF-8 Output             | Writes the final value as UTF-8 text without a byte-order mark.                               |",
+		"",
+		"### Processing Order",
+		"",
+		"1. Resolve and validate the target path.",
+		"2. Decode `Content` when `Base64` is present.",
+		"3. Encrypt the resulting value when `EncryptionKey` is provided.",
+		"4. Create the parent directory when it does not exist.",
+		"5. Write or overwrite the target file."
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"An existing file at the target path is overwritten",
+						"Missing parent directories are created",
+						"Path must be fully qualified when Relative is absent"
+					],
+					"expected_result": "The target file contains Hello from G4 and replaces any file previously stored at that path.",
+					"notes": "Path and Content are bound from the parameter expression. Without Relative, Path must be fully qualified.",
+					"use_case": "write_plain_text_to_absolute_path",
+					"version": "4"
+				},
+				"labels": [
+					"AbsolutePath",
+					"DirectoryCreation",
+					"FileSystem",
+					"Overwrite",
+					"Text"
+				]
+			},
+			"description": [
+				"### Write plain text to an absolute path",
+				"",
+				"Bind `Path` and `Content` through the parameter expression to write UTF-8 text.",
+				"WriteFile creates missing parent directories and overwrites an existing file at the target path."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Path:C:\\Automation\\output.txt --Content:Hello from G4}}",
+				"pluginName": "WriteFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parent traversal segments are normalized",
+						"Relative paths are resolved from the process working directory",
+						"Target directories are created when missing"
+					],
+					"expected_result": "The target file is written at the normalized path relative to the process working directory.",
+					"notes": "Relative enables working-directory path resolution. Parent traversal segments such as `..` remain subject to normal path normalization.",
+					"use_case": "write_text_to_relative_path",
+					"version": "4"
+				},
+				"labels": [
+					"DirectoryCreation",
+					"FileSystem",
+					"RelativePath",
+					"Text"
+				]
+			},
+			"description": [
+				"### Write text to a relative path",
+				"",
+				"Enable `Relative` to resolve `Path` from the process working directory.",
+				"WriteFile normalizes the resulting path and creates missing parent directories."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Path:..\\..\\docs\\output.txt --Content:Hello from G4 --Relative}}",
+				"pluginName": "WriteFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Content must contain valid Base64 text",
+						"Decoded Unicode text is written as UTF-8",
+						"Existing target files are overwritten"
+					],
+					"expected_result": "The decoded text Hello from G4 is written to the target file.",
+					"notes": "Base64 changes how Content is interpreted before writing. Invalid Base64 input stops the action.",
+					"use_case": "decode_base64_and_write_text",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"FileSystem",
+					"Text"
+				]
+			},
+			"description": [
+				"### Decode Base64 content before writing",
+				"",
+				"Enable `Base64` to decode `Content` with `ConvertFromBase64()`.",
+				"WriteFile writes the decoded value as UTF-8 text."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Path:C:\\Automation\\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}",
+				"pluginName": "WriteFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"An empty EncryptionKey skips encryption",
+						"Encryption occurs before file writing",
+						"The encryption result is not Base64-encoded again"
+					],
+					"expected_result": "The encrypted form of Sensitive text is written directly to the target file.",
+					"notes": "A non-empty EncryptionKey enables encryption. The encryption result is written directly without additional Base64 encoding.",
+					"use_case": "encrypt_and_write_text",
+					"version": "4"
+				},
+				"labels": [
+					"DataSecurity",
+					"Encryption",
+					"FileSystem",
+					"Text"
+				]
+			},
+			"description": [
+				"### Encrypt content before writing",
+				"",
+				"Provide `EncryptionKey` to encrypt `Content` before writing it.",
+				"WriteFile stores the encryption result directly without another Base64 conversion."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Path:C:\\Automation\\secret.txt --Content:Sensitive text --EncryptionKey:g4}}",
+				"pluginName": "WriteFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 decoding must succeed before encryption",
+						"Encryption uses the decoded text",
+						"The stored encrypted value is not Base64-encoded again"
+					],
+					"expected_result": "The decoded text Decode before encryption is encrypted with g4 and written directly to the target file.",
+					"notes": "Base64 decoding runs before EncryptionKey processing. The encrypted result is written without another Base64 conversion.",
+					"use_case": "decode_encrypt_and_write_text",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"DataSecurity",
+					"Encryption",
+					"FileSystem"
+				]
+			},
+			"description": [
+				"### Decode and encrypt content before writing",
+				"",
+				"Enable `Base64` and provide `EncryptionKey` to process `Content` in the required order.",
+				"WriteFile decodes the value, encrypts the decoded text, and writes the encryption result directly."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Path:C:\\Automation\\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}",
+				"pluginName": "WriteFile"
+			}
+		}
+	],
+	"key": "WriteFile",
+	"namespace": "G4.Plugins.Common",
+	"parameters": [
+		{
+			"description": [
+				"The target file path.",
+				"The path must be fully qualified unless `Relative` is present."
+			],
+			"mandatory": true,
+			"name": "Path",
+			"type": "String"
+		},
+		{
+			"description": [
+				"The text content to write.",
+				"The value is decoded first when `Base64` is present and then encrypted when `EncryptionKey` is provided."
+			],
+			"mandatory": true,
+			"name": "Content",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Treats `Path` as relative to the process working directory when present."
+			],
+			"mandatory": false,
+			"name": "Relative",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Decodes `Content` with `ConvertFromBase64()` before any encryption and file writing."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"An optional key used to encrypt the decoded or original content before writing.",
+				"The result of `Encrypt(key)` is written directly without additional Base64 encoding."
+			],
+			"mandatory": false,
+			"name": "EncryptionKey",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Provides the `Path`, `Content`, `Relative`, `Base64`, and `EncryptionKey` parameters through a G4 parameter expression."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Writes text content to an absolute or explicitly relative file path.",
+		"Optionally decodes Base64 content and encrypts the resulting value before writing.",
+		"Creates missing parent directories and overwrites files with the same name."
+	],
+	"version": "4"
+}

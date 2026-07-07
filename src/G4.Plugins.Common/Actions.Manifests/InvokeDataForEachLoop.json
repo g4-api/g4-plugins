@@ -1,0 +1,416 @@
+{
+	"author": {
+		"name": "Roei Sabag",
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+	},
+	"categories": [
+		"Loops"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeDataForEachLoop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/InvokeDataForEachLoop.cs"
+			},
+			"rag": {
+				"description": "The InvokeDataForEachLoop plugin iterates over the records of a JSON or XML data payload and runs a set of child rules once per record. Before each iteration it injects the current record's values into the child rules through {{$ --Field}}, {{$ --Path}}, and {{$ --Item}} tokens, enabling data-driven RPA and automated testing without scripting each step manually.",
+				"qa": [
+					{
+						"question": "What is the InvokeDataForEachLoop plugin?",
+						"answer": "It is an automation action that parses a JSON or XML payload into records and runs a series of child rules on each record in sequence, injecting the record's values into those rules first."
+					},
+					{
+						"question": "How is InvokeDataForEachLoop different from InvokeForEachLoop?",
+						"answer": "InvokeForEachLoop iterates over DOM elements found by a locator, while InvokeDataForEachLoop iterates over data records parsed from a JSON or XML payload."
+					},
+					{
+						"question": "Where does the data payload come from?",
+						"answer": "When the Base64 switch is absent the payload is taken from Argument as raw content or a file path; when Base64 is present the payload is taken from the DataSource parameter and decoded from Base64."
+					},
+					{
+						"question": "Which data formats are supported?",
+						"answer": "JSON and XML. The format is auto-detected (JSON first, then XML) and the action throws when the content is neither valid JSON nor valid XML."
+					},
+					{
+						"question": "What happens when a single object is provided instead of an array?",
+						"answer": "A single JSON object or value, or a non-repeating XML root, is wrapped into a one-item collection and iterated exactly once."
+					},
+					{
+						"question": "How does the plugin identify records in XML?",
+						"answer": "Repeated same-named child elements of the root are treated as an array of records; any other root shape is treated as a single object and wrapped as one record."
+					},
+					{
+						"question": "How do I read a field of the current record inside a child rule?",
+						"answer": "Use the token {{$ --Field:name }}, which resolves to the named JSON member or the matching XML child element (then attribute) of the current record."
+					},
+					{
+						"question": "How do I read a nested value from the current record?",
+						"answer": "Use {{$ --Path:expr }}, which evaluates a JSONPath expression for JSON records and an XPath expression for XML records."
+					},
+					{
+						"question": "How do I inject the whole current record?",
+						"answer": "Use {{$ --Item }}, which injects the current record as a string: minified JSON or XML for complex records, or the scalar text for a simple-array value."
+					},
+					{
+						"question": "What happens if a token cannot be resolved?",
+						"answer": "A missing field or unmatched path leaves the token unchanged so a nested InvokeDataForEachLoop can resolve it against its own record, while a field that exists but resolves to null or throws yields an empty string."
+					},
+					{
+						"question": "Can InvokeDataForEachLoop be nested?",
+						"answer": "Yes. Because unresolved tokens are kept as-is, an outer loop injects only the values it owns and a nested loop resolves its own tokens against its own records."
+					},
+					{
+						"question": "Who authored the InvokeDataForEachLoop plugin?",
+						"answer": "The plugin was authored by Roei Sabag."
+					},
+					{
+						"question": "What namespace is InvokeDataForEachLoop in?",
+						"answer": "G4.Plugins.Common."
+					},
+					{
+						"question": "What is the manifest version?",
+						"answer": "4."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentSubType": "loop",
+				"componentType": "container",
+				"iconProvider": {
+					"name": "repeat",
+					"svg": null
+				},
+				"model": "ActionRuleModel",
+				"label": "Invoke Data For Each Loop"
+			},
+			"mcp": {
+				"title": "Invoke Data For Each Loop"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Iterates over the records of a JSON or XML payload and runs a set of child rules on each record. Before every iteration the current record's values are injected into the child rules through `{{$ --Field}}`, `{{$ --Path}}`, and `{{$ --Item}}` tokens. It supports nested loops for multi-level, data-driven workflows, making it easier to automate repetitive tasks in RPA and automated testing.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                                     |",
+		"|------------------------|---------------------------------------------------------------------------------|",
+		"| Record Iteration       | Parses a JSON or XML payload into records and loops through each one.           |",
+		"| Value Injection        | Replaces `--Field`, `--Path`, and `--Item` tokens with the current record data. |",
+		"| Format Auto-Detection  | Detects JSON or XML automatically and throws when the content matches neither.  |",
+		"| Nested Loop Capability | Allows data loops inside loops, each resolving its own tokens per record.       |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case          | Description                                                                       |",
+		"|-------------------|-----------------------------------------------------------------------------------|",
+		"| Data Processing   | Process each record in a JSON or XML result by running data entry or validation.  |",
+		"| Batch Operations  | Perform a series of tasks on each item returned from a script or an API response. |",
+		"| Data-Driven Flows | Drive downstream rules with values taken from each record in turn.                |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case            | Description                                                                 |",
+		"|---------------------|-----------------------------------------------------------------------------|",
+		"| Data-Driven Testing | Run the same steps across every record in a data set.                       |",
+		"| Fixture Expansion   | Expand a single object or a small array into repeated, parameterized steps. |",
+		"| Result Verification | Verify downstream behavior for each record produced by a previous action.   |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty array payload",
+						"Missing field on a record",
+						"Invalid JSON or XML payload",
+						"Child rule failure"
+					],
+					"expected_result": "For each object in the array, a RegisterParameter rule runs with the record's `firstName` value injected into its argument.",
+					"notes": "InvokeDataForEachLoop parses the JSON array into two records and runs the child RegisterParameter once per record. The `{{$ --Field:firstName}}` token is replaced with the current record's `firstName` value before the child rule executes.",
+					"use_case": "invoke_data_foreach_json_field",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeDataForEachLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Iterate JSON Objects And Inject A Field",
+				"",
+				"Iterates over each object in the JSON array supplied through the argument and runs a RegisterParameter action for each one.",
+				"The child rule uses `{{$ --Field:firstName}}` to inject the current record's `firstName` value into its argument before it runs.",
+				"If a record is missing the `firstName` field, the token is kept as-is for the child rule to handle."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "[{\"firstName\":\"Alice\",\"role\":\"Admin\"},{\"firstName\":\"Bob\",\"role\":\"User\"}]",
+				"pluginName": "InvokeDataForEachLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --Name:CurrentUser --Value:{{$ --Field:firstName}}}}",
+						"pluginName": "RegisterParameter"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Path matches no node",
+						"Nested value is null",
+						"Invalid JSONPath expression",
+						"Child rule failure"
+					],
+					"expected_result": "For each record, a RegisterParameter rule runs with the nested `user.email` value injected via JSONPath.",
+					"notes": "InvokeDataForEachLoop parses the JSON array into records and resolves `{{$ --Path:$.user.email}}` as a JSONPath expression against each record, injecting the nested email into the child rule.",
+					"use_case": "invoke_data_foreach_json_path",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeDataForEachLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Iterate JSON Objects And Inject A Nested Value With JSONPath",
+				"",
+				"Iterates over each object in the JSON array and runs a RegisterParameter action for each one.",
+				"The child rule uses `{{$ --Path:$.user.email}}` to resolve the nested `user.email` value from the current record via JSONPath.",
+				"If the path matches no node, the token is kept as-is so a nested data loop can resolve it later."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "[{\"user\":{\"email\":\"alice@example.com\"}},{\"user\":{\"email\":\"bob@example.com\"}}]",
+				"pluginName": "InvokeDataForEachLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --Name:Email --Value:{{$ --Path:$.user.email}}}}",
+						"pluginName": "RegisterParameter"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty array payload",
+						"Non-string array items",
+						"Invalid JSON payload",
+						"Child rule failure"
+					],
+					"expected_result": "For each value in the simple array, a WriteLog rule logs the current item.",
+					"notes": "InvokeDataForEachLoop iterates over a simple JSON array of strings and injects each value through `{{$ --Item}}`, which resolves to the scalar text of the current record.",
+					"use_case": "invoke_data_foreach_json_item",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeDataForEachLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Iterate A Simple Array And Inject Each Item",
+				"",
+				"Iterates over each value in the simple JSON string array and runs a WriteLog action for each one.",
+				"The child rule uses `{{$ --Item}}` to inject the current value, which resolves to the scalar text of a simple-array record.",
+				"Complex records injected through `{{$ --Item}}` are emitted as minified JSON or XML instead."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "[\"apple\",\"banana\",\"cherry\"]",
+				"pluginName": "InvokeDataForEachLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --Item}}",
+						"pluginName": "WriteLog"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Single object payload",
+						"Missing element on a record",
+						"Invalid XML payload",
+						"Child rule failure"
+					],
+					"expected_result": "For each `<user>` element, a RegisterParameter rule runs with the record's `name` element value injected into its argument.",
+					"notes": "InvokeDataForEachLoop treats the repeated same-named `<user>` elements as an array of records and resolves `{{$ --Field:name}}` as the matching XML child element of each record.",
+					"use_case": "invoke_data_foreach_xml_field",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeDataForEachLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Iterate XML Records And Inject A Child Element",
+				"",
+				"Parses the XML payload and iterates over each repeated `<user>` element as a record, running a RegisterParameter action for each one.",
+				"The child rule uses `{{$ --Field:name}}` to inject the current record's `name` child element value before it runs.",
+				"A non-repeating XML root is instead treated as a single record and iterated exactly once."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "<users><user><name>Alice</name></user><user><name>Bob</name></user></users>",
+				"pluginName": "InvokeDataForEachLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --Name:UserName --Value:{{$ --Field:name}}}}",
+						"pluginName": "RegisterParameter"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Invalid Base64 value",
+						"DataSource file not found",
+						"Empty decoded payload",
+						"Child rule failure"
+					],
+					"expected_result": "The Base64 DataSource is decoded to a JSON array, and a RegisterParameter rule runs for each record with the `name` value injected.",
+					"notes": "With the Base64 switch present, InvokeDataForEachLoop reads the DataSource parameter, decodes it from Base64 into `[{\"name\":\"Alice\"},{\"name\":\"Bob\"}]`, and iterates the resulting records. An invalid Base64 value throws.",
+					"use_case": "invoke_data_foreach_base64_datasource",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeDataForEachLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Iterate A Base64-Encoded Payload From DataSource",
+				"",
+				"Reads the payload from the `DataSource` parameter and decodes it from Base64 because the `Base64` switch is present.",
+				"The decoded JSON array is iterated, and the child RegisterParameter action injects each record's `name` value through `{{$ --Field:name}}`.",
+				"When `Base64` is present and the value is not valid Base64, the action throws."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --DataSource:W3sibmFtZSI6IkFsaWNlIn0seyJuYW1lIjoiQm9iIn1d --Base64}}",
+				"pluginName": "InvokeDataForEachLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --Name:UserName --Value:{{$ --Field:name}}}}",
+						"pluginName": "RegisterParameter"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Array payload with several objects",
+						"Missing field on the object",
+						"Invalid JSON payload",
+						"Child rule failure"
+					],
+					"expected_result": "The single JSON object is wrapped into a one-item collection, and a WriteLog rule runs once with the `name` value injected.",
+					"notes": "InvokeDataForEachLoop wraps a single JSON object into a one-item array and iterates exactly once, resolving `{{$ --Field:name}}` against that single record.",
+					"use_case": "invoke_data_foreach_single_object",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeDataForEachLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Iterate A Single Object By Wrapping It Into One Record",
+				"",
+				"Accepts a single JSON object and wraps it into a one-item collection so the child rules run exactly once.",
+				"The child WriteLog action uses `{{$ --Field:name}}` to inject the object's `name` value.",
+				"This tolerance keeps passing a lone object simple when data comes from a script result."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{\"name\":\"Solo\"}",
+				"pluginName": "InvokeDataForEachLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --Field:name}}",
+						"pluginName": "WriteLog"
+					}
+				]
+			}
+		}
+	],
+	"key": "InvokeDataForEachLoop",
+	"namespace": "G4.Plugins.Common",
+	"parameters": [
+		{
+			"description": [
+				"The JSON or XML payload to iterate, used only when the `Base64` switch is present.",
+				"Accepts a raw Base64 value or a file path whose contents are Base64; the value is decoded from Base64 before parsing.",
+				"An invalid Base64 value throws and stops the action."
+			],
+			"mandatory": false,
+			"name": "DataSource",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Reads the payload from `DataSource` and decodes it from Base64 before parsing and iterating.",
+				"When omitted, the payload is taken from `Argument` as raw content or a file path.",
+				"Throws when the resolved value is not valid Base64."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Provides the JSON or XML payload to iterate when the `Base64` switch is absent, as raw content or a file path.",
+				"Supersedes `DataSource`, which is only used in Base64 mode."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"The set of child rules to run once per record.",
+				"Before each record, the `{{$ --Field}}`, `{{$ --Path}}`, and `{{$ --Item}}` tokens inside these rules are replaced with values from the current record."
+			],
+			"mandatory": true,
+			"name": "Rules",
+			"type": "Array"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Iterates over the records of a JSON or XML payload and runs child rules on each one sequentially.",
+		"Injects each record's values into the child rules through `--Field`, `--Path`, and `--Item` tokens.",
+		"Supports Base64-encoded input, single-object normalization, and nested data loops."
+	],
+	"version": "4"
+}
