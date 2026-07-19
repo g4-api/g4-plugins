@@ -1,0 +1,334 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"User32"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeUser32ContextClick.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/InvokeUser32ContextClick.cs"
+			},
+			"rag": {
+				"description": "Performs native Windows context clicks at viewport coordinates or on UI Automation elements. Alignment and offset parameters support precise element targeting, while explicit target validation prevents ambiguous execution and keeps desktop automation workflows reliable.",
+				"qa": [
+					{
+						"answer": "InvokeUser32ContextClick opens native context menus by sending a Windows right-click at coordinates or on a UI Automation element.",
+						"question": "What does InvokeUser32ContextClick do?"
+					},
+					{
+						"answer": "X and Y select viewport coordinates, while Alignment, OffsetX, and OffsetY control the position used for an element target.",
+						"question": "What targeting parameters does InvokeUser32ContextClick support?"
+					},
+					{
+						"answer": "It runs as a WindowsNative task action; source is at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/InvokeUser32ContextClick.cs and documentation is at https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeUser32ContextClick.md.",
+						"question": "Where does InvokeUser32ContextClick run and where are its GitHub resources?"
+					},
+					{
+						"answer": "Use an OnElement locator for resilient element targeting, or provide a non-zero X or Y coordinate when no stable element is available.",
+						"question": "How do I choose between element and coordinate targeting?"
+					},
+					{
+						"answer": "OnElement uses the Xpath locator by default, and Argument binds the Alignment, OffsetX, OffsetY, X, and Y parameters.",
+						"question": "Which rule properties does InvokeUser32ContextClick use?"
+					},
+					{
+						"answer": "The manifest version is 4 and the plugin type is Action.",
+						"question": "What manifest metadata identifies InvokeUser32ContextClick?"
+					},
+					{
+						"answer": "It performs one native right-click after positioning the system pointer at the requested viewport coordinates or aligned element location.",
+						"question": "How is InvokeUser32ContextClick described by its source contract?"
+					},
+					{
+						"answer": "A non-User32 driver produces an empty response, while a missing element and zero coordinates produce a validation error.",
+						"question": "How does InvokeUser32ContextClick handle unsupported or incomplete input?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "arrow-pointer",
+					"svg": null
+				},
+				"label": "Invoke User32 Context Click",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Performs a native Windows context click at viewport coordinates or on a UI Automation element.",
+		"It opens context menus and other right-click interactions in desktop automation workflows.",
+		"Element alignment and pixel offsets provide precise control over the click location.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Native Context Click | Sends a Windows right-button press and release through the User32-compatible driver. |",
+		"| Coordinate Targeting | Moves the pointer to absolute viewport coordinates before performing the context click. |",
+		"| Element Targeting | Locates a UI Automation element and moves to its selected alignment point before clicking. |",
+		"| Position Adjustment | Applies horizontal and vertical pixel offsets to an element alignment point. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Native Context Menus | Opens context menus in Windows desktop applications for later menu selection. |",
+		"| Coordinate-Only Interfaces | Right-clicks a known screen location when no stable element locator is available. |",
+		"| Precise Element Interaction | Targets a specific area of a large or segmented native control. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Context Menu Testing | Verifies that a native element exposes the expected right-click menu. |",
+		"| Alignment Testing | Confirms that different element alignment points trigger the intended interaction area. |",
+		"| Desktop Regression Testing | Repeats native context-click behavior after application changes. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A coordinate outside the visible desktop may produce no visible interaction",
+						"A non-User32 driver returns an empty response without moving the pointer",
+						"Either X or Y being non-zero activates coordinate mode when no element is targeted",
+						"Zero values for both coordinates require an element target"
+					],
+					"expected_result": "The system pointer moves to viewport coordinates (120, 240) and opens the context menu at that position.",
+					"notes": "Coordinate mode requires no element target and at least one non-zero coordinate. The parameter expression binds X and Y into the runtime parameter dictionary.",
+					"use_case": "context_click_at_viewport_coordinates",
+					"version": "4"
+				},
+				"labels": [
+					"ContextClick",
+					"CoordinateTargeting",
+					"DesktopAutomation",
+					"User32",
+					"WindowsNative"
+				]
+			},
+			"description": [
+				"### Open a context menu at viewport coordinates",
+				"",
+				"Moves the system pointer to coordinates (120, 240) measured from the viewport origin and performs a native context click.",
+				"The `{{$ --X:120 --Y:240}}` expression binds the coordinate parameters before execution."
+			],
+			"rule": {
+				"argument": "{{$ --X:120 --Y:240}}",
+				"pluginName": "InvokeUser32ContextClick"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A missing element raises the driver element lookup error",
+						"A non-User32 driver returns an empty response without moving the pointer",
+						"Offsets can place the context click outside the element bounds",
+						"The element target takes precedence when coordinate parameters are also present"
+					],
+					"expected_result": "The pointer moves to the target element's top-left alignment point plus the configured offsets and opens its context menu.",
+					"notes": "Element mode uses Xpath by default and applies Alignment before OffsetX and OffsetY. Element targeting takes precedence over coordinate parameters.",
+					"use_case": "context_click_on_aligned_element",
+					"version": "4"
+				},
+				"labels": [
+					"Alignment",
+					"ContextClick",
+					"DesktopAutomation",
+					"ElementTargeting",
+					"User32"
+				]
+			},
+			"description": [
+				"### Open a context menu on an aligned element position",
+				"",
+				"Locates the target button and moves the pointer to its top-left alignment point with horizontal and vertical offsets.",
+				"The native context click opens the menu at the adjusted element position."
+			],
+			"rule": {
+				"argument": "{{$ --Alignment:TopLeft --OffsetX:10 --OffsetY:20}}",
+				"locator": "Xpath",
+				"onElement": "//Button[@AutomationId='SubmitButton']",
+				"pluginName": "InvokeUser32ContextClick"
+			}
+		}
+	],
+	"key": "InvokeUser32ContextClick",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"default": "MiddleCenter",
+			"description": [
+				"Alignment selects the reference point inside the target element before the context click.",
+				"It matters when the interaction must occur near a specific edge, corner, or center position.",
+				"OffsetX and OffsetY adjust the final pointer location after alignment is applied."
+			],
+			"mandatory": false,
+			"name": "Alignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"BottomCenter positions the pointer at the bottom edge and horizontal center of the element.",
+						"It helps target controls located along the lower middle boundary."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"BottomLeft positions the pointer at the lower-left corner of the element.",
+						"It helps target controls located near the lower-left boundary."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"BottomRight positions the pointer at the lower-right corner of the element.",
+						"It helps target controls located near the lower-right boundary."
+					],
+					"name": "BottomRight"
+				},
+				{
+					"description": [
+						"MiddleCenter positions the pointer at the horizontal and vertical center of the element.",
+						"It provides the default location for standard context-click interactions."
+					],
+					"name": "MiddleCenter"
+				},
+				{
+					"description": [
+						"MiddleLeft positions the pointer at the left edge and vertical center of the element.",
+						"It helps target controls located along the middle-left boundary."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"MiddleRight positions the pointer at the right edge and vertical center of the element.",
+						"It helps target controls located along the middle-right boundary."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"TopCenter positions the pointer at the top edge and horizontal center of the element.",
+						"It helps target controls located along the upper middle boundary."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"TopLeft positions the pointer at the upper-left corner of the element.",
+						"It helps target controls located near the upper-left boundary."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"TopRight positions the pointer at the upper-right corner of the element.",
+						"It helps target controls located near the upper-right boundary."
+					],
+					"name": "TopRight"
+				}
+			]
+		},
+		{
+			"default": "0",
+			"description": [
+				"OffsetX shifts the context-click position horizontally from the selected alignment point.",
+				"Positive values move right and negative values move left.",
+				"It matters when the active area is not centered on the alignment point."
+			],
+			"mandatory": false,
+			"name": "OffsetX",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"OffsetY shifts the context-click position vertically from the selected alignment point.",
+				"Positive values move down and negative values move up.",
+				"It matters when the active area is above or below the alignment point."
+			],
+			"mandatory": false,
+			"name": "OffsetY",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"X sets the horizontal viewport coordinate used when no element is targeted.",
+				"It is measured in pixels from the left edge of the viewport.",
+				"A non-zero X value activates coordinate mode when OnElement is absent."
+			],
+			"mandatory": false,
+			"name": "X",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Y sets the vertical viewport coordinate used when no element is targeted.",
+				"It is measured in pixels from the top edge of the viewport.",
+				"A non-zero Y value activates coordinate mode when OnElement is absent."
+			],
+			"mandatory": false,
+			"name": "Y",
+			"type": "Number"
+		}
+	],
+	"platforms": [
+		"WindowsNative"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Argument binds Alignment, OffsetX, OffsetY, X, and Y values into the runtime parameter dictionary.",
+				"It matters because the action reads positioning values from that dictionary before selecting its target mode."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Locator selects the strategy used to resolve the native element named by OnElement.",
+				"Xpath is the supported default for UI Automation element targeting."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"OnElement identifies the UI Automation element that receives the context click.",
+				"It matters because element mode applies alignment and offsets before sending the right-button sequence."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Performs a native Windows context click at viewport coordinates or on a UI Automation element.",
+		"Supports precise element targeting with alignment and horizontal or vertical pixel offsets.",
+		"Opens context menus and other right-click interactions in desktop automation workflows."
+	],
+	"version": "4"
+}
