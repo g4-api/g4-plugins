@@ -2,45 +2,51 @@
 
 [Table of Content](../Home.md)  
 
-~18 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~19 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `SelectOption` plugin serves the purpose of automating the selection of options within `<select>` elements on web pages. 
-Its primary goal is to streamline and automate the process of interacting with dropdown menus, enhancing the efficiency and accuracy of web-based tasks in RPA and automation testing scenarios.
+Selects an option from a native HTML `<select>` dropdown element.
+The target element is validated as a `<select>` before any selection attempt, and the desired option is located using one of four strategies controlled by the `OnAttribute` property.
+Use this action whenever an automation workflow must interact with dropdown menus rendered as standard HTML select elements.
 
 ### Key Features and Functionality
 
-| Feature                    | Description                                                                                                                                                                                                                                               |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Element Validation         | The plugin validates that the targeted element is indeed a `<select>` element before attempting the selection operation, ensuring that the automation process is applied only to appropriate elements.                                                    |
-| Multiple Selection Methods | It provides flexibility by offering various methods to select options, including by index, value, partial text, or exact text match. This versatility accommodates different use cases and scenarios encountered in RPA and automation testing workflows. |
-| Error Handling             | The plugin incorporates robust error handling mechanisms to capture and handle exceptions that may arise during the selection process, enhancing the reliability and resilience of automation workflows.                                                  |
+| Feature               | Description                                                                                                                                      |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Element Validation    | Throws `InvalidOperationException` if the target is not a `<select>` element, preventing silent failures on wrong element types.                 |
+| Index Selection       | Selects the option at the specified zero-based position. Out-of-range and parse errors are caught and recorded as exceptions without rethrowing. |
+| Value Selection       | Selects the option whose `value` attribute matches `Argument` exactly using XPath `./option[@value='…']`.                                        |
+| PartialText Selection | Selects the first option whose visible text contains `Argument` as a substring using XPath `./option[contains(.,'…')]`.                          |
+| Exact Text Selection  | Default mode. Selects the first option whose full visible text equals `Argument` using XPath `./option[.='…']`.                                  |
 
 ### Usages in RPA
 
-| Usage            | Description                                                                                                                                                                                                                                         |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Form Submission  | In RPA processes involving form submissions, the `SelectOption` plugin can automate the selection of dropdown menu options, enabling seamless completion of form fields with minimal manual intervention.                                           |
-| Data Entry       | When dealing with web applications that utilize dropdown menus for data entry, the plugin automates the selection of predefined options, accelerating data input tasks and reducing processing time.                                                |
-| User Interaction | RPA bots can use the `SelectOption` plugin to interact with web interfaces in a manner similar to human users, facilitating the execution of complex workflows that involve selecting options from dropdown menus as part of user-driven processes. |
+| Use Case        | Description                                                                                                    |
+|-----------------|----------------------------------------------------------------------------------------------------------------|
+| Form Completion | Select a country, state, or category from a dropdown as part of a multi-field form submission workflow.        |
+| Data Entry      | Automate selection of predefined options in data-entry screens where dropdown values are process-controlled.   |
+| User Simulation | Reproduce exact user interactions with dropdown menus to drive downstream page updates or validation triggers. |
 
 ### Usages in Automation Testing
 
-| Usage                  | Description                                                                                                                                                                                                                                                              |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| User Interface Testing | In automated UI testing scenarios, the `SelectOption` plugin enables testers to validate the behavior of dropdown menus by selecting options based on different criteria such as index, value, or text match.                                                            |
-| Form Field Validation  | Automation scripts can utilize the plugin to validate the functionality of form fields that rely on dropdown menus for user input, ensuring that the correct options are selected and processed accurately.                                                              |
-| End-to-End Testing     | When conducting end-to-end testing of web applications, the plugin contributes to comprehensive test coverage by automating the selection of dropdown menu options as part of user interaction scenarios, verifying the application's behavior under various conditions. |
+| Use Case              | Description                                                                                                              |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Dropdown Behavior     | Verify that selecting each option triggers the correct page update, form state, or API call.                             |
+| Boundary Testing      | Test index-boundary conditions — first option, last option, and out-of-range index — to confirm error handling behavior. |
+| Data-Driven Selection | Drive option selection from a test data set using value attributes to ensure each option is reachable by value.          |
 
 ## Examples
 
 ### Example No.1
 
-Select the option at index 1 (i.e., the second option) from the dropdown menu identified by the CSS selector `#SelectElement`. 
-This configuration is useful for automating tasks where the selection of options from dropdown menus needs to be performed based on their positions within the menu.
+### Select an option by index
+
+Selects the option at zero-based index `1` (the second option) from the dropdown identified by the CSS selector `#SelectElement`.
+The `onAttribute` is set to `Index`, so the `argument` is parsed as an integer and used to click the option at that position.
+If the argument is not a valid integer or the index is out of range, the exception is caught and recorded without interrupting the workflow.
 
 _**CSharp**_
 
@@ -103,8 +109,11 @@ action_rule = {
 ```
 ### Example No.2
 
-Select the option with a value attribute of `option2` from the dropdown menu identified by the CSS selector `#SelectElement`. 
-This configuration is useful when the selection needs to be made based on the values associated with the options in the dropdown menu.
+### Select an option by value attribute
+
+Selects the option whose `value` attribute equals `option2` from the dropdown identified by element id `SelectElement`.
+The `onAttribute` is set to `Value`, so the action matches against each option's `value` attribute using XPath `./option[@value='option2']`.
+Use this mode when the value attribute is stable and predictable, regardless of the option's visible text.
 
 _**CSharp**_
 
@@ -113,9 +122,9 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SelectOption",
     Argument = "option2",
-    Locator = "CssSelector",
+    Locator = "Id",
     OnAttribute = "Value",
-    OnElement = "#SelectElement"
+    OnElement = "SelectElement"
 };
 ```
 
@@ -125,9 +134,9 @@ _**Java**_
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SelectOption")
     .setArgument("option2")
-    .setLocator("CssSelector")
+    .setLocator("Id")
     .setOnAttribute("Value")
-    .setOnElement("#SelectElement");
+    .setOnElement("SelectElement");
 ```
 
 _**Javascript**_
@@ -136,9 +145,9 @@ _**Javascript**_
 var actionRule = {
     pluginName: "SelectOption",
     argument: "option2",
-    locator: "CssSelector",
+    locator: "Id",
     onAttribute: "Value",
-    onElement: "#SelectElement"
+    onElement: "SelectElement"
 };
 ```
 
@@ -148,9 +157,9 @@ _**JSON**_
 {
     "pluginName": "SelectOption",
     "argument": "option2",
-    "locator": "CssSelector",
+    "locator": "Id",
     "onAttribute": "Value",
-    "onElement": "#SelectElement"
+    "onElement": "SelectElement"
 }
 ```
 
@@ -160,15 +169,18 @@ _**Python**_
 action_rule = {
     "pluginName": "SelectOption",
     "argument": "option2",
-    "locator": "CssSelector",
+    "locator": "Id",
     "onAttribute": "Value",
-    "onElement": "#SelectElement"
+    "onElement": "SelectElement"
 }
 ```
 ### Example No.3
 
-Select the option from the dropdown menu identified by the CSS selector `#SelectElement`, where the option's text contains the partial text `2`. 
-This configuration is useful when the option's text is dynamic or when only a portion of the text is known beforehand.
+### Select an option by partial text
+
+Selects the first option whose visible text contains the substring `Option 2` from the dropdown located by XPath.
+The `onAttribute` is set to `PartialText`, so the action uses XPath `./option[contains(.,'Option 2')]` scoped to the `<select>` element.
+Use this mode when only a portion of the option text is known or when option labels are generated dynamically.
 
 _**CSharp**_
 
@@ -176,10 +188,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SelectOption",
-    Argument = "2",
-    Locator = "CssSelector",
+    Argument = "Option 2",
     OnAttribute = "PartialText",
-    OnElement = "#SelectElement"
+    OnElement = "//select[@id='SelectElement']"
 };
 ```
 
@@ -188,10 +199,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SelectOption")
-    .setArgument("2")
-    .setLocator("CssSelector")
+    .setArgument("Option 2")
     .setOnAttribute("PartialText")
-    .setOnElement("#SelectElement");
+    .setOnElement("//select[@id='SelectElement']");
 ```
 
 _**Javascript**_
@@ -199,10 +209,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SelectOption",
-    argument: "2",
-    locator: "CssSelector",
+    argument: "Option 2",
     onAttribute: "PartialText",
-    onElement: "#SelectElement"
+    onElement: "//select[@id='SelectElement']"
 };
 ```
 
@@ -211,10 +220,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "SelectOption",
-    "argument": "2",
-    "locator": "CssSelector",
+    "argument": "Option 2",
     "onAttribute": "PartialText",
-    "onElement": "#SelectElement"
+    "onElement": "//select[@id='SelectElement']"
 }
 ```
 
@@ -223,16 +231,18 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SelectOption",
-    "argument": "2",
-    "locator": "CssSelector",
+    "argument": "Option 2",
     "onAttribute": "PartialText",
-    "onElement": "#SelectElement"
+    "onElement": "//select[@id='SelectElement']"
 }
 ```
 ### Example No.4
 
-Select the option from the dropdown menu identified by the CSS selector `#SelectElement`, where the option's text matches exactly `Option 2`. 
-This configuration is useful when the exact text of the option to be selected is known in advance.
+### Select an option by exact text (default mode)
+
+Selects the option whose full visible text equals `Option 2` from the dropdown matching the CSS selector `#SelectElement`.
+No `onAttribute` is specified, so the action uses the default exact text mode with XPath `./option[.='Option 2']`.
+Use this mode when the complete option text is known in advance and must match precisely.
 
 _**CSharp**_
 
@@ -301,8 +311,8 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-The `Argument` property specifies the value that the plugin will use to select an option from a dropdown menu. 
-Depending on the specified `OnAttribute` property, the `Argument` can represent different criteria for selecting an option.
+Argument specifies the value used to select an option from the dropdown.
+Its meaning depends on the OnAttribute property: an integer for Index mode, a value attribute string for Value mode, a substring for PartialText mode, or a full visible text string for the default exact text mode.
 
 ### Locator (Locator)
 
@@ -314,7 +324,9 @@ Depending on the specified `OnAttribute` property, the `Argument` can represent 
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the type of locator used to identify the target dropdown menu element on the web page.
+Locator specifies the strategy used to find the target `<select>` element.
+Accepted values are Xpath, CssSelector, Id, LinkText, and PartialLinkText.
+When absent the default Xpath strategy is used.
 
 ### On Attribute (OnAttribute)
 
@@ -326,23 +338,23 @@ Specifies the type of locator used to identify the target dropdown menu element 
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the attribute of the options within the dropdown menu that will be used as the basis for selecting an option. 
-It determines how the plugin should interpret the `Argument` property when selecting an option.
+OnAttribute determines which selection strategy is applied when locating the target option.
+When absent or set to any value other than Index, Value, or PartialText, the default exact text match strategy is used.
 
 #### Values
 
 ##### Index
 
-The plugin will interpret the `Argument` property as the index of the option to be selected within the dropdown menu. 
-For example, an `Argument` of `2` would select the third option in the menu (assuming zero-based indexing).
-##### Partial Text
-
-The plugin will interpret the `Argument` property as the partial text that the option's text content should contain. 
-It will select the option whose text contains the specified partial text.
+Parses `Argument` as a zero-based integer index and clicks the option at that position.
+Out-of-range or non-integer values are caught and recorded as plugin exceptions without rethrowing.
 ##### Value
 
-The plugin will interpret the `Argument` property as the value attribute of the option to be selected. 
-It will search for an option whose value attribute matches the specified argument.
+Selects the first option whose `value` HTML attribute equals `Argument` exactly.
+Uses XPath `./option[@value='…']` scoped to the `<select>` element. Matching is case-sensitive.
+##### Partial Text
+
+Selects the first option whose visible text contains `Argument` as a substring.
+Uses XPath `./option[contains(.,'…')]` scoped to the `<select>` element. Matching is case-sensitive.
 
 ### On Element (OnElement)
 
@@ -354,8 +366,8 @@ It will search for an option whose value attribute matches the specified argumen
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the target dropdown menu element on the web page where the selection action will be performed. 
-It indicates the HTML element that contains the options within the dropdown menu.
+OnElement provides the locator expression that identifies the `<select>` element.
+The element must be a `<select>` tag — any other tag type causes an `InvalidOperationException` before any selection logic runs.
 
 ## Scope
 

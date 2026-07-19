@@ -8,38 +8,42 @@
 
 ### Purpose
 
-The `NoAction` plugin represents a plugin that performs no action. It is used primarily as a placeholder, a container for other plugins, or for testing purposes within automation scripts.
+Does nothing on its own and serves as a placeholder in your automation script. It can wrap other steps without side effects, making it useful for grouping or testing script flow. This helps you organize complex processes and debug workflows more easily.
 
 ### Key Features and Functionality
 
-| Feature             | Description                                                                                                   |
-|---------------------|---------------------------------------------------------------------------------------------------------------|
-| No Operation        | Executes without performing any action, serving as a placeholder or a test step.                              |
-| Rule Invocation     | Sets the invoke rules to true, allowing the rules under this action to be invoked.                            |
-| Logging             | Logs the execution of the action with its name and argument for debugging and tracking purposes.              |
-| Container for Rules | Can be used as a container to organize other plugins, wrapping multiple steps into a single logical grouping. |
+| Feature         | Description                                                  |
+|-----------------|--------------------------------------------------------------|
+| No Operation    | Runs without performing any action, acting as a placeholder. |
+| Rule Invocation | Triggers attached rules when conditions are met.             |
+| Logging         | Records execution details for tracking and debugging.        |
+| Container       | Groups multiple steps under one logical block.               |
 
 ### Usages in RPA
 
-| Usage               | Description                                                                                                                                                                          |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Placeholder Step    | Use the `NoAction` plugin as a placeholder step in automation scripts where an action might be added later.                                                                          |
-| Debugging           | Employ the `NoAction` plugin to test the flow of automation scripts without performing any actual operations.                                                                        |
-| Container for Steps | Utilize the `NoAction` plugin to group multiple steps into a single logical unit, such as wrapping all login steps under a single `NoAction` plugin with the argument 'Login Steps'. |
+| Use Case         | Description                                                   |
+|------------------|---------------------------------------------------------------|
+| Placeholder Step | Reserve a spot in a script where actions will be added later. |
+| Debug Flow       | Test script logic without executing real operations.          |
+| Step Grouping    | Combine related steps into one block for clarity.             |
 
 ### Usages in Automation Testing
 
-| Usage               | Description                                                                                                                                    |
-|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| Test Initialization | Use the `NoAction` plugin at the beginning of tests to ensure the setup is correct before performing actual actions.                           |
-| Flow Verification   | Utilize the `NoAction` plugin to verify the logical flow of test scripts without executing real actions.                                       |
-| Grouping Test Steps | Organize related test steps under a single `NoAction` plugin to create a logical grouping, making the test script easier to read and maintain. |
+| Use Case          | Description                                                                |
+|-------------------|----------------------------------------------------------------------------|
+| Test Setup        | Mark the start of tests and verify the environment before running actions. |
+| Flow Verification | Check test logic without performing actual steps.                          |
+| Test Grouping     | Organize related test steps under one marker for better readability.       |
 
 ## Examples
 
 ### Example No.1
 
-This configuration uses the `NoAction` plugin as a placeholder within an automation script.
+### Placeholder Action Using NoAction Plugin
+
+Logs execution points without performing any operations, useful for placeholder or debugging checkpoints.
+No action is performed; the plugin simply records the event.
+Use this to mark points in the workflow where no actual action is desired.
 
 _**CSharp**_
 
@@ -47,7 +51,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "NoAction",
-    Argument = "Placeholder Argument"
+    Argument = "This is a Placeholder Action"
 };
 ```
 
@@ -56,7 +60,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("NoAction")
-    .setArgument("Placeholder Argument");
+    .setArgument("This is a Placeholder Action");
 ```
 
 _**Javascript**_
@@ -64,7 +68,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "NoAction",
-    argument: "Placeholder Argument"
+    argument: "This is a Placeholder Action"
 };
 ```
 
@@ -73,7 +77,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "NoAction",
-    "argument": "Placeholder Argument"
+    "argument": "This is a Placeholder Action"
 }
 ```
 
@@ -82,12 +86,16 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "NoAction",
-    "argument": "Placeholder Argument"
+    "argument": "This is a Placeholder Action"
 }
 ```
 ### Example No.2
 
-This configuration uses the `NoAction` plugin for debugging purposes, logging the execution without performing any operations.
+### Debugging Point Using NoAction Plugin
+
+Logs a debugging point labeled `Debugging Point` without performing any operations.
+No action is performed; the plugin simply records the debugging event.
+Use this to insert non-invasive debug markers in the workflow.
 
 _**CSharp**_
 
@@ -95,7 +103,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "NoAction",
-    Argument = "Debugging Argument"
+    Argument = "Debugging Point"
 };
 ```
 
@@ -104,7 +112,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("NoAction")
-    .setArgument("Debugging Argument");
+    .setArgument("Debugging Point");
 ```
 
 _**Javascript**_
@@ -112,7 +120,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "NoAction",
-    argument: "Debugging Argument"
+    argument: "Debugging Point"
 };
 ```
 
@@ -121,7 +129,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "NoAction",
-    "argument": "Debugging Argument"
+    "argument": "Debugging Point"
 }
 ```
 
@@ -130,12 +138,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "NoAction",
-    "argument": "Debugging Argument"
+    "argument": "Debugging Point"
 }
 ```
 ### Example No.3
 
-This configuration uses the `NoAction` plugin as a container to group login steps.
+### Login Steps Grouping Using NoAction Plugin
+
+Serves as a container to group multiple login actions: sending username, sending password, and clicking the login button.
+Each inner action executes in sequence: SendKeys to `#username`, SendKeys to `#password`, then Click `#loginButton`.
+NoAction itself performs no operations; it simply orchestrates the contained actions.
+Useful for logically grouping related steps in the workflow.
 
 _**CSharp**_
 
@@ -150,17 +163,20 @@ var actionRule = new ActionRuleModel
         {
             PluginName = "SendKeys",
             Argument = "Username",
+            Locator = "CssSelector",
             OnElement = "#username"
         },
         new ActionRuleModel
         {
             PluginName = "SendKeys",
             Argument = "Password",
+            Locator = "CssSelector",
             OnElement = "#password"
         }
         new ActionRuleModel
         {
             PluginName = "Click",
+            Locator = "CssSelector",
             OnElement = "#loginButton"
         }
     }
@@ -178,14 +194,17 @@ ActionRuleModel actionRule = new ActionRuleModel()
         new ActionRuleModel()        
             .setPluginName("SendKeys")
             .setArgument("Username")
+            .setLocator("CssSelector")
             .setOnElement("#username"),
 
         new ActionRuleModel()        
             .setPluginName("SendKeys")
             .setArgument("Password")
+            .setLocator("CssSelector")
             .setOnElement("#password"))
         new ActionRuleModel()        
             .setPluginName("Click")
+            .setLocator("CssSelector")
             .setOnElement("#loginButton");
 ```
 
@@ -199,15 +218,18 @@ var actionRule = {
         {
             pluginName: "SendKeys",
             argument: "Username",
+            locator: "CssSelector",
             onElement: "#username"
         },
         {
             pluginName: "SendKeys",
             argument: "Password",
+            locator: "CssSelector",
             onElement: "#password"
         }
         {
             pluginName: "Click",
+            locator: "CssSelector",
             onElement: "#loginButton"
         }
     ]
@@ -224,15 +246,18 @@ _**JSON**_
         {
             "pluginName": "SendKeys",
             "argument": "Username",
+            "locator": "CssSelector",
             "onElement": "#username"
         },
         {
             "pluginName": "SendKeys",
             "argument": "Password",
+            "locator": "CssSelector",
             "onElement": "#password"
         }
         {
             "pluginName": "Click",
+            "locator": "CssSelector",
             "onElement": "#loginButton"
         }
     ]
@@ -249,15 +274,18 @@ action_rule = {
         {
             "pluginName": "SendKeys",
             "argument": "Username",
+            "locator": "CssSelector",
             "onElement": "#username"
         },
         {
             "pluginName": "SendKeys",
             "argument": "Password",
+            "locator": "CssSelector",
             "onElement": "#password"
         }
         {
             "pluginName": "Click",
+            "locator": "CssSelector",
             "onElement": "#loginButton"
         }
     ]
@@ -276,7 +304,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the argument value that will be logged during the execution of the plugin.
+Sets the text or data that the plugin will log.
+Log entries help you track what happened during execution.
+You must provide this value for the plugin to record.
 
 ### Rules (Rules)
 
@@ -284,11 +314,14 @@ Specifies the argument value that will be logged during the execution of the plu
 |-------------------|-------------------|
 | **Default Value** | Null              |
 | **Depends On**    | None              |
-| **Mandatory**     | Yes               |
+| **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | Array             |
 
-Specifies an array of rules (steps) that will be invoked by this plugin. Each rule can represent an action or a sequence of actions. When the `NoAction` plugin executes, it can serve as a container for these defined rules, organizing multiple steps under a single logical grouping.
+Defines a list of steps that the plugin will perform.
+Each step can be a single action or a set of actions.
+Groups steps under one logical block without producing side effects.
+Nested containers build a hierarchical tree of grouped steps.
 
 ## Scope
 

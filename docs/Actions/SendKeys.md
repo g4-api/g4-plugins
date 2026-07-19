@@ -2,103 +2,48 @@
 
 [Table of Content](../Home.md)  
 
-~27 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `SendKeys` plugin is to provide automation scripts with the capability to send text inputs to specified elements. 
-This is particularly important in scenarios where user interactions involve input fields, requiring precise control over text entry to simulate user behavior. 
-The plugin aims to streamline automation workflows by facilitating seamless text inputs.
+Types text into a target web element such as input fields or text areas with configurable typing speed, content clearing, and keyboard modifier combinations.
+The text to send is supplied via the Keys parameter or directly as the Argument value when Keys is absent.
 
 ### Key Features and Functionality
 
-| Feature               | Description                                                                                                |
-|-----------------------|------------------------------------------------------------------------------------------------------------|
-| Dynamic Configuration | Supports dynamic configuration through parameters such as `Keys`, `Delay`, `Clear`, and `NativeClear`.     |
-| Robust Error Handling | Includes mechanisms for handling exceptions, ensuring reliable execution of text inputs.                   |
-| Modifier Keys Support | Allows sending text with modifier keys such as `Shift`, `Ctrl`, or `Alt` for complex text entry scenarios. |
+| Feature              | Description                                                                |
+|----------------------|----------------------------------------------------------------------------|
+| Text Input           | Sends keystrokes to the element with configurable delay between characters |
+| Clear Before Typing  | Supports native backspace clear and standard WebDriver clear               |
+| Modifier Keys        | Press Ctrl, Alt, Shift, or Meta while sending text for shortcuts           |
+| Flexible Text Source | Accepts text from the Keys parameter or rule argument                      |
 
-### Usage in RPA
+### Usages in RPA
 
-| Usage                 | Description                                                                                                               |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
-| Filling Forms         | Enables RPA processes to simulate user-like text entries, such as filling out forms or entering data into web elements.   |
-| Data Entry Automation | Helps in automating data entry tasks, ensuring that text is accurately entered into input fields, reducing manual effort. |
-| Triggering Events     | Triggers keyboard events such as `input`, `change`, and `keydown` events, simulating user interactions with the page.     |
+| Use Case          | Description                                 |
+|-------------------|---------------------------------------------|
+| Form Field Entry  | Automatically fill text inputs in web forms |
+| Search Box Input  | Type search queries into search fields      |
+| Text Area Content | Enter multi-line text into text areas       |
 
-### Usage in Automation Testing
+### Usages in Automation Testing
 
-| Usage                     | Description                                                                                                                                    |
-|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| Form Field Testing        | Allows dynamic control of text inputs, leading to more thorough test coverage in scenarios involving text input fields.                        |
-| UI Stability Verification | Ensures that the user interface remains stable after text inputs for accurate validation of input handling by the application.                 |
-| Event Handling Testing    | Verifies that keyboard events are properly triggered and handled by the application, ensuring comprehensive testing of event-driven behaviors. |
+| Use Case           | Description                                     |
+|--------------------|-------------------------------------------------|
+| Input Validation   | Test form fields with various text inputs       |
+| Keyboard Shortcuts | Test Ctrl+A, Ctrl+C type combinations           |
+| Type Speed Testing | Verify typing behavior with configurable delays |
 
 ## Examples
 
 ### Example No.1
 
-Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput`.
+### Send text to an input field
 
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SendKeys",
-    Argument = "Hello World",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("Hello World")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SendKeys",
-    argument: "Hello World",
-    locator: "CssSelector",
-    onElement: "#TextInput"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SendKeys",
-    "argument": "Hello World",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "Hello World",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
-}
-```
-### Example No.2
-
-Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput` using a parameterized argument.
+The rule targets an input element using XPath and sends the text 'Hello World' to it.
+The element is located using the default Xpath locator strategy.
 
 _**CSharp**_
 
@@ -107,8 +52,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
     Argument = "{{$ --Keys:Hello World}}",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
+    OnElement = "//input[@id='username']"
 };
 ```
 
@@ -118,8 +62,7 @@ _**Java**_
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
     .setArgument("{{$ --Keys:Hello World}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
+    .setOnElement("//input[@id='username']");
 ```
 
 _**Javascript**_
@@ -128,8 +71,7 @@ _**Javascript**_
 var actionRule = {
     pluginName: "SendKeys",
     argument: "{{$ --Keys:Hello World}}",
-    locator: "CssSelector",
-    onElement: "#TextInput"
+    onElement: "//input[@id='username']"
 };
 ```
 
@@ -139,8 +81,7 @@ _**JSON**_
 {
     "pluginName": "SendKeys",
     "argument": "{{$ --Keys:Hello World}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "onElement": "//input[@id='username']"
 }
 ```
 
@@ -150,13 +91,71 @@ _**Python**_
 action_rule = {
     "pluginName": "SendKeys",
     "argument": "{{$ --Keys:Hello World}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "onElement": "//input[@id='username']"
+}
+```
+### Example No.2
+
+### Clear and type new content
+
+The rule clears the target element using native backspace simulation before sending the new text.
+This is useful when replacing existing content in an input field.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "SendKeys",
+    Argument = "{{$ --Keys:New Text --NativeClear}}",
+    OnElement = "//textarea[@name='description']"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("SendKeys")
+    .setArgument("{{$ --Keys:New Text --NativeClear}}")
+    .setOnElement("//textarea[@name='description']");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "SendKeys",
+    argument: "{{$ --Keys:New Text --NativeClear}}",
+    onElement: "//textarea[@name='description']"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "SendKeys",
+    "argument": "{{$ --Keys:New Text --NativeClear}}",
+    "onElement": "//textarea[@name='description']"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "SendKeys",
+    "argument": "{{$ --Keys:New Text --NativeClear}}",
+    "onElement": "//textarea[@name='description']"
 }
 ```
 ### Example No.3
 
-First clear the content of the input element identified by the CSS selector `#TextInput` and then send the text `Hello World`.
+### Send keys with a modifier
+
+The rule holds the Ctrl modifier while sending 'a' to trigger a Select All keyboard shortcut.
+The modifier is provided as a JSON array containing Control.
 
 _**CSharp**_
 
@@ -164,9 +163,8 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$ --Keys:Hello World --Clear}}",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
+    Argument = "{{$ --Keys:a --Modifier:Control}}",
+    OnElement = "//div[@contenteditable='true']"
 };
 ```
 
@@ -175,9 +173,8 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$ --Keys:Hello World --Clear}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
+    .setArgument("{{$ --Keys:a --Modifier:Control}}")
+    .setOnElement("//div[@contenteditable='true']");
 ```
 
 _**Javascript**_
@@ -185,9 +182,8 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$ --Keys:Hello World --Clear}}",
-    locator: "CssSelector",
-    onElement: "#TextInput"
+    argument: "{{$ --Keys:a --Modifier:Control}}",
+    onElement: "//div[@contenteditable='true']"
 };
 ```
 
@@ -196,9 +192,8 @@ _**JSON**_
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello World --Clear}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "argument": "{{$ --Keys:a --Modifier:Control}}",
+    "onElement": "//div[@contenteditable='true']"
 }
 ```
 
@@ -207,14 +202,16 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello World --Clear}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "argument": "{{$ --Keys:a --Modifier:Control}}",
+    "onElement": "//div[@contenteditable='true']"
 }
 ```
 ### Example No.4
 
-First clear the content of the input element identified by the CSS selector `#TextInput` using `NativeClear` functionality and then send the text `Hello World`.
+### Send a key with multiple modifiers
+
+The rule holds the Control and Alt modifiers while sending the key `a` to the target element.
+The repeated `--Modifier` parameters are converted into an array at runtime and applied together during the key send.
 
 _**CSharp**_
 
@@ -222,9 +219,8 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$ --Keys:Hello World --NativeClear}}",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
+    Argument = "{{$ --Keys:a --Modifier:Control --Modifier:Alt}}",
+    OnElement = "//div[@contenteditable='true']"
 };
 ```
 
@@ -233,9 +229,8 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$ --Keys:Hello World --NativeClear}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
+    .setArgument("{{$ --Keys:a --Modifier:Control --Modifier:Alt}}")
+    .setOnElement("//div[@contenteditable='true']");
 ```
 
 _**Javascript**_
@@ -243,9 +238,8 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$ --Keys:Hello World --NativeClear}}",
-    locator: "CssSelector",
-    onElement: "#TextInput"
+    argument: "{{$ --Keys:a --Modifier:Control --Modifier:Alt}}",
+    onElement: "//div[@contenteditable='true']"
 };
 ```
 
@@ -254,9 +248,8 @@ _**JSON**_
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello World --NativeClear}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "argument": "{{$ --Keys:a --Modifier:Control --Modifier:Alt}}",
+    "onElement": "//div[@contenteditable='true']"
 }
 ```
 
@@ -265,14 +258,16 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello World --NativeClear}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "argument": "{{$ --Keys:a --Modifier:Control --Modifier:Alt}}",
+    "onElement": "//div[@contenteditable='true']"
 }
 ```
 ### Example No.5
 
-Send the text `Hello World` to the HTML element identified by the CSS selector `#TextInput` with a delay of 2000 milliseconds between each character.
+### Type text with character delay
+
+The rule sends text to an element with a 100ms delay between each keystroke.
+This simulates human typing speed for applications that require realistic input timing.
 
 _**CSharp**_
 
@@ -280,9 +275,8 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$ --Keys:Hello World --Delay:2000}}",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
+    Argument = "{{$ --Keys:Slow Type --Delay:00:00:00.100}}",
+    OnElement = "//input[@id='search']"
 };
 ```
 
@@ -291,9 +285,8 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$ --Keys:Hello World --Delay:2000}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
+    .setArgument("{{$ --Keys:Slow Type --Delay:00:00:00.100}}")
+    .setOnElement("//input[@id='search']");
 ```
 
 _**Javascript**_
@@ -301,9 +294,8 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$ --Keys:Hello World --Delay:2000}}",
-    locator: "CssSelector",
-    onElement: "#TextInput"
+    argument: "{{$ --Keys:Slow Type --Delay:00:00:00.100}}",
+    onElement: "//input[@id='search']"
 };
 ```
 
@@ -312,9 +304,8 @@ _**JSON**_
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello World --Delay:2000}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "argument": "{{$ --Keys:Slow Type --Delay:00:00:00.100}}",
+    "onElement": "//input[@id='search']"
 }
 ```
 
@@ -323,131 +314,14 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello World --Delay:2000}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
-}
-```
-### Example No.6
-
-Send the text `Hello` while holding down the `Shift` key to the HTML element identified by the CSS selector `#TextInput`. This will send the text `Hello` with the `Shift` key pressed, resulting in `HELLO` being typed.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SendKeys",
-    Argument = "{{$ --Keys:Hello --Modifier:Shift}}",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("{{$ --Keys:Hello --Modifier:Shift}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SendKeys",
-    argument: "{{$ --Keys:Hello --Modifier:Shift}}",
-    locator: "CssSelector",
-    onElement: "#TextInput"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello --Modifier:Shift}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello --Modifier:Shift}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
-}
-```
-### Example No.7
-
-Send the text `Hello` while holding down both the `Ctrl` and `Alt` keys to the HTML element identified by the CSS selector `#TextInput`. This demonstrates sending text with multiple modifier keys pressed simultaneously.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SendKeys",
-    Argument = "{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SendKeys",
-    argument: "{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}",
-    locator: "CssSelector",
-    onElement: "#TextInput"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "{{$ --Keys:Hello --Modifier:Ctrl --Modifier:Alt}}",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "argument": "{{$ --Keys:Slow Type --Delay:00:00:00.100}}",
+    "onElement": "//input[@id='search']"
 }
 ```
 
 ## Properties
 
-### Argument (argument)
+### Argument (Argument)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -455,12 +329,13 @@ action_rule = {
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| **Value Type**    | String            |
 
-Specifies the set of instructions or parameters for the text inputs to be simulated during automation. 
-It allows you to define a sequence of text interactions, including the text to be entered and any additional actions.
+Argument provides the keystroke text as a fallback when the Keys parameter is not set.
+It allows passing text directly to the element without using a named parameter.
+When both Argument and Keys parameter are present, Keys takes precedence.
 
-### Locator (locator)
+### Locator (Locator)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -470,9 +345,11 @@ It allows you to define a sequence of text interactions, including the text to b
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the strategy or method used to locate the element on which the text inputs will be simulated during automation.
+Locator determines the strategy for finding the target element.
+It defaults to Xpath for element location.
+Supported locators include Xpath, CssSelector, Id, LinkText, and PartialLinkText.
 
-### On Element (onElement)
+### On Element (OnElement)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
@@ -482,8 +359,23 @@ Specifies the strategy or method used to locate the element on which the text in
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the identifier or locator for the element on which the text inputs defined in the plugin's `Argument` property will be simulated during web automation. 
-It indicates the target element where the simulated text interactions should take place.
+OnElement specifies the target element for sending keystrokes.
+It is required for identifying which element receives the keyboard input.
+The value format depends on the selected locator strategy.
+
+### Regular Expression (RegularExpression)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | (?si).*           |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+RegularExpression filters element matching using pattern matching on element attributes.
+It defaults to '(?si).*' to match all elements.
+Use this to narrow down element selection when multiple elements match the locator.
 
 ## Parameters
 
@@ -497,8 +389,9 @@ It indicates the target element where the simulated text interactions should tak
 | **Multiple**      | No                |
 | **Value Type**    | Switch            |
 
-Indicates that a clearing action will consistently be executed before any subsequent text inputs on the targeted input element. 
-This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data.
+Clear triggers a standard WebDriver clear operation before sending keys.
+It removes existing content from input fields when present.
+Use NativeClear for custom controls that do not respond to standard clear.
 
 ### Delay (Delay)
 
@@ -508,11 +401,11 @@ This flag ensures that the content of the input field is emptied or cleared, sim
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Time|Number       |
+| **Value Type**    | String            |
 
-Used to introduce a time pause after each simulated keyboard action. 
-This delay ensures a controlled pacing between consecutive text inputs during web automation. 
-The purpose is to emulate a more human-like interaction flow by allowing specified intervals between keyboard actions.
+Delay sets the time interval between each keystroke.
+Accepts TimeSpan format like 00:00:00.100 for 100ms delay between characters.
+Set to 00:00:00 for instant typing without any delay.
 
 ### Keys (Keys)
 
@@ -524,20 +417,9 @@ The purpose is to emulate a more human-like interaction flow by allowing specifi
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Used to specify the text that should be sent to a targeted element during an automation task.
-
-### Native Clear (NativeClear)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Switch            |
-
-Indicates that a native clearing action will consistently be executed before any subsequent text inputs on the targeted input element. 
-This flag ensures that the content of the input field is emptied or cleared, simulating the effect of manually erasing any existing text or data.
+Keys specifies the text string to send to the element.
+This is the primary way to provide input text via parameter macro syntax.
+When empty, the rule argument is used as the text to send.
 
 ### Modifier (Modifier)
 
@@ -549,8 +431,23 @@ This flag ensures that the content of the input field is emptied or cleared, sim
 | **Multiple**      | No                |
 | **Value Type**    | Array             |
 
-Used to specify modifier keys (such as `Shift`, `Ctrl`, `Alt`) to be held down while sending the text inputs. 
-This allows for complex text entry scenarios where modifiers are required.
+Modifier specifies one or more keyboard modifier keys to hold while the key value is sent to the target element.
+It accepts repeated parameter values that are converted into an array at runtime, such as `--Modifier:Control --Modifier:Alt`.
+Use Modifier for keyboard combinations like Control+A, Shift+Tab, or multi-modifier shortcuts.
+
+### Native Clear (NativeClear)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Switch            |
+
+NativeClear triggers a native backspace-based clear before sending keys.
+It provides better compatibility with custom input controls.
+Use this instead of Clear for elements that do not respond to standard clearing.
 
 ## Scope
 

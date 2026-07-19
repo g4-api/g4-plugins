@@ -2,43 +2,91 @@
 
 [Table of Content](../Home.md)  
 
-~9 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~12 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `SwitchParentFrame` plugin is designed to automate the process of switching from a child frame back to its parent frame within a web page. 
-It streamlines navigation in web automation workflows, ensuring that scripts can efficiently interact with elements outside of nested frames.
+Switches WebDriver context one level up from the current child frame to its direct parent frame by calling `WebDriver.SwitchTo().ParentFrame()` unconditionally.
+It requires no parameters or configuration and always performs a single deterministic switch.
 
 ### Key Features and Functionality
 
-| Feature          | Description                                                               |
-|------------------|---------------------------------------------------------------------------|
-| Switch to Parent | Switches from a child frame to the parent frame, facilitating navigation. |
+| Feature          | Description                                                                                                             |
+|------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Switch to Parent | Calls `WebDriver.SwitchTo().ParentFrame()` unconditionally, moving context exactly one level up in the frame hierarchy. |
 
 ### Usages in RPA
 
 | Usage            | Description                                                                                   |
 |------------------|-----------------------------------------------------------------------------------------------|
-| Frame Navigation | Automates the process of switching back to the parent frame within a web page.                |
-| Data Extraction  | Facilitates data extraction from multiple frames by allowing movement to parent frame.        |
-| Form Interaction | Allows RPA bots to interact with elements in the parent frame after working in a child frame. |
+| Frame Navigation | Switches context back to the parent frame after completing work inside a child frame.         |
+| Data Extraction  | Returns the driver to the parent frame so content outside the child frame can be accessed.    |
+| Form Interaction | Allows bots to interact with parent-frame elements after completing actions in a child frame. |
 
 ### Usages in Automation Testing
 
-| Usage                | Description                                                                                                       |
-|----------------------|-------------------------------------------------------------------------------------------------------------------|
-| UI Testing           | Enables automated tests to navigate back to the parent frame, ensuring comprehensive coverage.                    |
-| Frame Verification   | Helps in verifying the functionality of switching back to parent frames during tests.                             |
-| Multi-Frame Handling | Supports testing scenarios involving multiple frames, ensuring each frame and parent frame interaction is tested. |
+| Usage                | Description                                                                                                   |
+|----------------------|---------------------------------------------------------------------------------------------------------------|
+| UI Testing           | Enables tests to navigate back to the parent frame for assertions or actions outside the current child frame. |
+| Frame Verification   | Confirms that frame switching correctly restores context to the parent frame during test execution.           |
+| Multi-Frame Handling | Supports step-by-step traversal of nested frame hierarchies by repeatedly switching up one level at a time.   |
 
 ## Examples
 
 ### Example No.1
 
-Switch from the current child frame back to its parent frame. 
-This is useful for navigating out of a nested frame to continue interactions with elements in the parent frame.
+### Switch from a child frame back to its parent frame
+
+Switch WebDriver context one level up from the currently active child frame to its direct parent frame.
+No configuration is required — the plugin calls `WebDriver.SwitchTo().ParentFrame()` unconditionally.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "SwitchParentFrame"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("SwitchParentFrame");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "SwitchParentFrame"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "SwitchParentFrame"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "SwitchParentFrame"
+}
+```
+### Example No.2
+
+### Traverse up multiple frame levels
+
+Invoke SwitchParentFrame twice in sequence to move from a doubly nested child frame up to the top-level document context.
+Each invocation moves exactly one level up, so the number of calls required equals the nesting depth.
 
 _**CSharp**_
 

@@ -2,47 +2,45 @@
 
 [Table of Content](../Home.md)  
 
-~15 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~12 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `GetApplicationParameter` plugin is to fetch application parameters that are shared across all automation instances, providing flexibility in configuration based on different environments. This plugin allows the retrieval of parameters like connection strings, API keys, or other configuration settings essential for automation workflows.
+The GetApplicationParameter plugin retrieves shared settings used by automation tasks, such as connection strings and API keys. It supports different environments like Dev and Prod, ensuring each workflow uses the right configuration. By centralizing parameters, it keeps setups consistent and easy to manage.
 
 ### Key Features and Functionality
 
-| Feature                        | Description                                                                                               |
-|------------------------------- |-----------------------------------------------------------------------------------------------------------|
-| Parameter Retrieval            | Fetches application parameters from specified environments.                                               |
-| Environment-Based Parameters   | Supports retrieval of parameters specific to different environments (e.g., Prod, Dev).                    |
-| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |
+| Feature             | Description                                                      |
+|---------------------|------------------------------------------------------------------|
+| Parameter Retrieval | Fetches settings like connection strings, API keys, and more.    |
+| Environment Support | Gets parameters tailored to each environment (Dev, Prod, etc.).  |
+| Plugin Integration  | Works with other plugins to apply parameters in various actions. |
 
 ### Usages in RPA
 
-| Usage                         | Description                                                                                            |
-|------------------------------ |--------------------------------------------------------------------------------------------------------|
-| Dynamic Configuration         | Retrieve and use configuration settings dynamically based on the environment.                          |
-| Centralized Parameter Storage | Use a centralized location for storing and accessing parameters across different automation instances. |
+| Use Case                | Description                                                       |
+|-------------------------|-------------------------------------------------------------------|
+| Dynamic Configuration   | Load settings at runtime to adapt workflows for different stages. |
+| Central Parameter Store | Keep all automation instances using the same source for settings. |
 
 ### Usages in Automation Testing
 
-| Usage                        | Description                                                                                               |
-|------------------------------|-----------------------------------------------------------------------------------------------------------|
-| Environment-Specific Testing | Retrieve parameters specific to test environments, enabling more accurate and environment-specific tests. |
-| Configuration Management     | Simplify configuration management by fetching parameters directly within test scripts.                    |
+| Use Case                     | Description                                                       |
+|------------------------------|-------------------------------------------------------------------|
+| Environment-Specific Testing | Load test environment settings to run accurate, real-world tests. |
+| Test Script Configuration    | Fetch parameters directly within test scripts to simplify setup.  |
 
 ## Examples
 
 ### Example No.1
 
-This example demonstrates the usage of the `Application` plugin to fetch a parameter named `ConnectionString` from the `Prod` environment and use it directly.
+### Retrieve ConnectionString Parameter
 
-| Field      | Description                                                            |
-|------------|------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `Application`. |
-| argument   | Specifies the environment from which to fetch the parameter.           |
-| onElement  | Specifies the name of the parameter to be fetched.                     |
+This example demonstrates how to retrieve the 'ConnectionString' parameter using the Application plugin’s GetParameter action with the argument `--Environment:Prod`.
+It targets the `ConnectionString` parameter name and invokes the plugin in production scope.
+The argument `--Environment:Prod` specifies the production environment for the parameter retrieval.
 
 _**CSharp**_
 
@@ -95,24 +93,19 @@ action_rule = {
 ```
 ### Example No.2
 
-This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `ConnectionString` from the `Prod` environment and use it in a `SendKeys` action.
+### Retrieve ConnectionString Parameter with Default Environment
 
-| Field      | Description                                                                                             |
-|------------|---------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |
-| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |
-| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |
-| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |
+The retrieved ConnectionString value is trimmed to remove whitespace.
+This example demonstrates how to retrieve the 'ConnectionString' parameter using the Application plugin’s GetParameter action, defaulting to the SystemParameters environment.
+It targets the `ConnectionString` parameter name without specifying an environment argument, relying on the default environment.
 
 _**CSharp**_
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "SendKeys",
-    Argument = "{{$Get-Parameter --Name:ConnectionString --Scope:Application --Environment:Prod}}",
-    Locator = "CssSelector",
-    OnElement = "#someElement"
+    PluginName = "Application",
+    OnElement = "ConnectionString"
 };
 ```
 
@@ -120,20 +113,16 @@ _**Java**_
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("{{$Get-Parameter --Name:ConnectionString --Scope:Application --Environment:Prod}}")
-    .setLocator("CssSelector")
-    .setOnElement("#someElement");
+    .setPluginName("Application")
+    .setOnElement("ConnectionString");
 ```
 
 _**Javascript**_
 
 ```js
 var actionRule = {
-    pluginName: "SendKeys",
-    argument: "{{$Get-Parameter --Name:ConnectionString --Scope:Application --Environment:Prod}}",
-    locator: "CssSelector",
-    onElement: "#someElement"
+    pluginName: "Application",
+    onElement: "ConnectionString"
 };
 ```
 
@@ -141,10 +130,8 @@ _**JSON**_
 
 ```js
 {
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application --Environment:Prod}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
+    "pluginName": "Application",
+    "onElement": "ConnectionString"
 }
 ```
 
@@ -152,75 +139,8 @@ _**Python**_
 
 ```python
 action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application --Environment:Prod}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
-### Example No.3
-
-This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `ConnectionString` from the default `SystemParameters` environment and use it in a `SendKeys` action.
-
-| Field      | Description                                                                                             |
-|------------|---------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |
-| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |
-| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |
-| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SendKeys",
-    Argument = "{{$Get-Parameter --Name:ConnectionString --Scope:Application}}",
-    Locator = "CssSelector",
-    OnElement = "#someElement"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("{{$Get-Parameter --Name:ConnectionString --Scope:Application}}")
-    .setLocator("CssSelector")
-    .setOnElement("#someElement");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SendKeys",
-    argument: "{{$Get-Parameter --Name:ConnectionString --Scope:Application}}",
-    locator: "CssSelector",
-    onElement: "#someElement"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:ConnectionString --Scope:Application}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
+    "pluginName": "Application",
+    "onElement": "ConnectionString"
 }
 ```
 
@@ -234,9 +154,11 @@ action_rule = {
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Expression        |
+| **Value Type**    | String|Expression |
 
-The `Argument` property specifies the environment from which to fetch the parameter.
+Argument tells the system where to look for your setting so it finds the correct value.
+Picking the right location helps you avoid missing or wrong information.
+A wrong location can cause errors when the system tries to retrieve your data.
 
 ### On Element (OnElement)
 
@@ -248,7 +170,9 @@ The `Argument` property specifies the environment from which to fetch the parame
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-The `OnElement` property specifies the name of the parameter to be retrieved.
+OnElement tells the system which parameter you want so it can provide you with the right value.
+Choosing the correct name helps you get accurate data.
+A wrong name can lead to missing or incorrect results.
 
 ## Parameters
 
@@ -262,7 +186,8 @@ The `OnElement` property specifies the name of the parameter to be retrieved.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the environment from which to fetch the parameter. If not specified, the `SystemParameters` environment will be used.
+Environment sets which list of values to use so you get parameters from the right place and avoid missing information.
+Leaving it blank picks SystemParameters so you still get a basic set of values and avoid surprises.
 
 ## Scope
 

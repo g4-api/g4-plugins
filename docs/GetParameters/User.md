@@ -2,49 +2,47 @@
 
 [Table of Content](../Home.md)  
 
-~12 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~9 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
-> [!IMPORTANT]
-> This plugin is supported on Windows machines only.
-
 ### Purpose
 
-The primary purpose of the `GetUserParameter` plugin is to fetch user-level parameters that are scoped to the current user's environment. This allows for user-specific configuration settings, such as user preferences or user-specific API keys, to be retrieved and used within automation workflows.
+This plugin lets automation workflows get values stored in the environment of the current user. 
+It makes per-user settings—like themes or API keys—available without exposing them to other users. 
+By keeping user data private, workflows can run with personalized configurations safely.
 
 ### Key Features and Functionality
 
-| Feature                        | Description                                                                                               |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------|
-| Parameter Retrieval            | Fetches user-specific parameters from the environment variables of the current user.                      |
-| User-Specific Configuration    | Supports retrieval of parameters that are specific to the logged-in user.                                 |
-| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |
+| Feature                 | Description                                                                         |
+|-------------------------|-------------------------------------------------------------------------------------|
+| Parameter retrieval     | Reads named values from the active user’s environment variables.                    |
+| User context isolation  | Keeps values visible only to the current user, preventing cross-user data access.   |
+| Dynamic value injection | Passes the retrieved value into following steps for personalized workflow behavior. |
 
 ### Usages in RPA
 
-| Usage                   | Description                                                                            |
-|-------------------------|----------------------------------------------------------------------------------------|
-| User Preferences        | Retrieve and apply user-specific preferences within automation workflows.              |
-| Personalized Automation | Use user-level parameters to personalize automation actions based on the current user. |
+| Use Case                | Description                                                                |
+|-------------------------|----------------------------------------------------------------------------|
+| User preference loading | Applies per-user settings like themes or shortcuts during automation runs. |
+| Personalized workflows  | Drives actions using user-specific data such as API keys or user IDs.      |
 
 ### Usages in Automation Testing
 
-| Usage                    | Description                                                                                          |
-|--------------------------|------------------------------------------------------------------------------------------------------|
-| User-Specific Testing    | Retrieve parameters specific to the logged-in user, enabling personalized and user-specific tests.   |
-| Configuration Management | Simplify configuration management by fetching user-specific parameters directly within test scripts. |
+| Use Case                 | Description                                                                       |
+|--------------------------|-----------------------------------------------------------------------------------|
+| User-specific testing    | Runs tests under the correct user context by fetching user-level configurations.  |
+| Test configuration setup | Simplifies test setup by pulling user environment parameters directly in scripts. |
 
 ## Examples
 
 ### Example No.1
 
-This example demonstrates the usage of the `User` plugin to fetch a parameter named `UserApiKey` directly.
+### Retrieve User API Key Parameter
 
-| Field      | Description                                                     |
-|------------|-----------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `User`. |
-| onElement  | Specifies the name of the parameter to be fetched.              |
+This example demonstrates how to retrieve a user-level parameter named `UserApiKey` using the User plugin’s GetParameter action.
+It retrieves the raw value of `UserApiKey` from the user scope for use in downstream workflows.
+The retrieved value is available in the `Result` output field for subsequent steps.
 
 _**CSharp**_
 
@@ -90,71 +88,6 @@ action_rule = {
     "onElement": "UserApiKey"
 }
 ```
-### Example No.2
-
-This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `UserApiKey` from the user environment and use it in a `SendKeys` action.
-
-| Field      | Description                                                                                             |
-|------------|---------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |
-| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |
-| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |
-| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SendKeys",
-    Argument = "{{$Get-Parameter --Name:UserApiKey --Scope:User}}",
-    Locator = "CssSelector",
-    OnElement = "#someElement"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("{{$Get-Parameter --Name:UserApiKey --Scope:User}}")
-    .setLocator("CssSelector")
-    .setOnElement("#someElement");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SendKeys",
-    argument: "{{$Get-Parameter --Name:UserApiKey --Scope:User}}",
-    locator: "CssSelector",
-    onElement: "#someElement"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:UserApiKey --Scope:User}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:UserApiKey --Scope:User}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
 
 ## Properties
 
@@ -168,8 +101,10 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the name of the user parameter to be fetched.
+OnElement names the user parameter to fetch.
+Workflows use this name to load the correct user value when they run.
+Using the right name ensures workflows retrieve the intended information for each user.
 
 ## Scope
 
-* Any
+* Windows

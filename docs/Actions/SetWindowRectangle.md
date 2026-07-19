@@ -2,44 +2,49 @@
 
 [Table of Content](../Home.md)  
 
-~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~22 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `SetWindowRectangle` plugin is designed to automate the resizing and repositioning of the browser window within web automation workflows. 
-It provides a seamless way to set the window's size and position, ensuring optimal layout and visibility for automated tasks.
+Resizes and repositions the browser window by supplying any combination of `Height`, `Width`, `X`, and `Y` parameters.
+Omitted parameters are preserved from the current window geometry, allowing size-only, position-only, or full-rect changes in a single call.
 
 ### Key Features and Functionality
 
-| Feature              | Description                                                                           |
-|----------------------|---------------------------------------------------------------------------------------|
-| Window Resizing      | Allows precise control over the height and width of the browser window.               |
-| Window Repositioning | Enables setting the X and Y coordinates of the browser window for accurate placement. |
+| Feature               | Description                                                                                                        |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------|
+| Precise Resizing      | Sets window height and width to exact pixel values using `--Height` and `--Width`.                                 |
+| Precise Repositioning | Sets the window's screen position to exact coordinates using `--X` (left edge) and `--Y` (top edge).               |
+| Partial Apply         | Omitted parameters fall back to the current window value — one call can change only size, only position, or both.  |
+| Flexible Combinations | Any subset of the four parameters is valid, enabling targeted adjustments without disturbing unrelated dimensions. |
 
 ### Usages in RPA
 
-| Usage                   | Description                                                                                        |
-|-------------------------|----------------------------------------------------------------------------------------------------|
-| Screen Layout           | Optimizes the layout of the browser window for better visibility and interaction during RPA tasks. |
-| Multi-Window Management | Manages multiple browser windows by setting specific sizes and positions.                          |
-| Data Entry              | Facilitates data entry tasks by ensuring the browser window is appropriately sized and positioned. |
+| Use Case               | Description                                                                                                  |
+|------------------------|--------------------------------------------------------------------------------------------------------------|
+| Screen Layout Control  | Position and size the browser window to avoid overlap with other application windows during RPA workflows.   |
+| Multi-Window Placement | Tile or stack browser windows at known coordinates for multi-window automation scenarios.                    |
+| Pre-Task Normalization | Establish a known window geometry before executing form-fill or scraping steps that rely on full visibility. |
 
 ### Usages in Automation Testing
 
-| Usage               | Description                                                                                      |
-|---------------------|--------------------------------------------------------------------------------------------------|
-| UI Testing          | Ensures consistent testing conditions by setting the window size and position before tests.      |
-| Responsive Design   | Tests different window sizes to verify the responsiveness of web applications.                   |
-| Layout Verification | Verifies that web application layouts behave correctly under various window sizes and positions. |
+| Use Case                  | Description                                                                                                         |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------|
+| Responsive Design Testing | Resize the window to standard breakpoints (e.g. 1024×768, 1920×1080) to verify responsive layout rules.             |
+| Layout Regression Testing | Enforce a fixed window size before taking screenshots or running visual comparisons.                                |
+| Viewport Boundary Tests   | Position the window at edge coordinates to verify element visibility and scroll behaviour near viewport boundaries. |
+| Window Geometry Assertion | Resize and then read back the window rect via another action to assert the driver applied the requested dimensions. |
 
 ## Examples
 
 ### Example No.1
 
-Set the browser window size to 1024x768 pixels and position it at coordinates (100, 100). 
-This configuration is useful for ensuring that the window is of a specific size and located at a particular position on the screen.
+### Set full window geometry — size and position in one call
+
+Resizes the browser window to 1024 × 768 pixels and moves it to screen coordinates (100, 100).
+All four parameters are provided, making this the full-rect form that controls both size and position simultaneously.
 
 _**CSharp**_
 
@@ -87,8 +92,10 @@ action_rule = {
 ```
 ### Example No.2
 
-Resize the browser window to 800x600 pixels without changing its current position. 
-This configuration is useful for testing scenarios that require a specific window size without repositioning the window.
+### Resize the window without changing its position
+
+Resizes the browser window to 800 × 600 pixels while keeping its current screen position.
+Use this form when only the window size needs to change and the position should remain where it is.
 
 _**CSharp**_
 
@@ -136,8 +143,10 @@ action_rule = {
 ```
 ### Example No.3
 
-Reposition the browser window to coordinates (200, 150) without changing its current size. 
-This configuration is useful for organizing multiple windows on the screen by setting their specific positions.
+### Reposition the window without changing its size
+
+Moves the browser window to screen coordinates (200, 150) while keeping its current width and height.
+Use this form when only the window position needs to change and the size should remain as-is.
 
 _**CSharp**_
 
@@ -185,8 +194,10 @@ action_rule = {
 ```
 ### Example No.4
 
-Set the browser window width to 1200 pixels and reposition it to the X coordinate 50, keeping the current height and Y position. 
-This combination allows for adjusting the window width and horizontal position while maintaining the existing height and vertical position.
+### Set window width and horizontal position together
+
+Sets the browser window width to 1200 pixels and moves its left edge to X coordinate 50, while leaving the height and Y position unchanged.
+Use this form to adjust only the horizontal geometry — width and X — in a single call.
 
 _**CSharp**_
 
@@ -234,8 +245,10 @@ action_rule = {
 ```
 ### Example No.5
 
-Set the browser window height to 700 pixels and reposition it to the Y coordinate 300, keeping the current width and X position. 
-This combination allows for adjusting the window height and vertical position while maintaining the existing width and horizontal position.
+### Set window height and vertical position together
+
+Sets the browser window height to 700 pixels and moves its top edge to Y coordinate 300, while leaving the width and X position unchanged.
+Use this form to adjust only the vertical geometry — height and Y — in a single call.
 
 _**CSharp**_
 
@@ -294,9 +307,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | Expression        |
 
-The `Argument` property allows for customization of the plugin's behavior by providing specific instructions or parameters. 
-In the case of the `SetWindowRectangle` plugin, it defines the height, width, and position coordinates (X, Y) of the browser window. 
-This flexibility ensures the plugin's adaptability to various scenarios encountered during automation workflows.
+Argument provides the CLI-formatted parameter string for setting the window rectangle.
+Accepted parameters are --Height, --Width, --X, and --Y.
+Any combination of the four parameters is valid; omitted parameters fall back to the current window value read from the driver.
 
 ## Parameters
 
@@ -311,6 +324,7 @@ This flexibility ensures the plugin's adaptability to various scenarios encounte
 | **Value Type**    | Number            |
 
 Specifies the height of the browser window in pixels.
+When absent, the current window height is read from the driver and preserved unchanged.
 
 ### Width (Width)
 
@@ -323,6 +337,7 @@ Specifies the height of the browser window in pixels.
 | **Value Type**    | Number            |
 
 Specifies the width of the browser window in pixels.
+When absent, the current window width is read from the driver and preserved unchanged.
 
 ### X (X)
 
@@ -334,7 +349,8 @@ Specifies the width of the browser window in pixels.
 | **Multiple**      | No                |
 | **Value Type**    | Number            |
 
-Specifies the X coordinate of the browser window's position.
+Specifies the X coordinate of the browser window's left edge on the screen.
+When absent, the current window X position is read from the driver and preserved unchanged.
 
 ### Y (Y)
 
@@ -346,7 +362,8 @@ Specifies the X coordinate of the browser window's position.
 | **Multiple**      | No                |
 | **Value Type**    | Number            |
 
-Specifies the Y coordinate of the browser window's position.
+Specifies the Y coordinate of the browser window's top edge on the screen.
+When absent, the current window Y position is read from the driver and preserved unchanged.
 
 ## Scope
 

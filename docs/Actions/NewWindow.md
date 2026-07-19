@@ -2,53 +2,58 @@
 
 [Table of Content](../Home.md)  
 
-~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `NewWindow` plugin is to automate the opening of a new browser window or tab. 
-This plugin provides a mechanism to programmatically open a new browser window or tab, which can be part of automated workflows or tests.
+Opens a new browser tab or window in the current WebDriver session by calling `WebDriver.SwitchTo().NewWindow()`, the W3C WebDriver native new-window command.
+Unlike `NewBrowserWindow`, which uses JavaScript `window.open()`, `NewWindow` uses the browser driver's built-in context-creation mechanism — no URL, element, or JavaScript execution is required.
+The new context opens blank and immediately becomes the active WebDriver window handle.
+The `Argument` property controls whether a `tab` (default) or a `window` is created.
 
 ### Key Features and Functionality
 
-| Feature             | Description                                                                 |
-|---------------------|-----------------------------------------------------------------------------|
-| Open New Window/Tab | Automates the opening of a new browser window or tab.                       |
-| Customizable Type   | Allows specifying the type of new window to open (e.g., `tab` or `window`). |
+| Feature          | Description                                                                                       |
+|------------------|---------------------------------------------------------------------------------------------------|
+| Native WebDriver | Uses `WebDriver.SwitchTo().NewWindow()` — the W3C standard command, not JavaScript execution.     |
+| Tab or Window    | Opens either a new tab or a new browser window depending on the `Argument` value.                 |
+| Default to Tab   | When `Argument` is absent or empty, a new tab is opened automatically.                            |
+| Active Context   | The new tab or window immediately becomes the active WebDriver handle after the action completes. |
 
 ### Usages in RPA
 
-| Usage                  | Description                                                                                  |
-|------------------------|----------------------------------------------------------------------------------------------|
-| Multi-Window Workflows | Automating workflows that require interacting with multiple browser windows or tabs.         |
-| Data Collection        | Opening a new tab to collect data from another source while keeping the original tab intact. |
-| Navigation Automation  | Navigating to a different URL in a new window or tab as part of an automated process.        |
+| Use Case               | Description                                                                                                                                |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Multi-Window Workflows | Open a new tab or window to begin a parallel navigation path while the original context remains reachable by handle.                       |
+| Context Isolation      | Isolate a new browsing context from the current page for unrelated data collection or independent interaction.                             |
+| Sequential Navigation  | After opening a new tab, switch back to the original handle to continue its workflow, then switch to the new handle when that step begins. |
 
 ### Usages in Automation Testing
 
-| Usage                | Description                                                                  |
-|----------------------|------------------------------------------------------------------------------|
-| Multi-Window Testing | Testing web applications that involve multiple browser windows or tabs.      |
-| UI Testing           | Verifying the behavior of web applications when opening new windows or tabs. |
-| Functional Testing   | Ensuring that links and buttons correctly open new windows or tabs.          |
+| Use Case             | Description                                                                                               |
+|----------------------|-----------------------------------------------------------------------------------------------------------|
+| Multi-Window Testing | Verify that the application correctly handles workflows spanning multiple browser windows or tabs.        |
+| Handle Count Testing | Assert that the expected number of window handles is present after opening a new tab or window.           |
+| Window Type Testing  | Confirm that passing `tab` opens a tab and `window` opens a separate window, subject to browser behavior. |
 
 ## Examples
 
 ### Example No.1
 
-Open a new browser tab. 
-This action simulates the behavior of a user manually opening a new tab in the browser. 
-Useful for scenarios where you need to keep the current page open while navigating to a new page in a separate tab.
+### Open a new browser tab (default)
+
+Calls `WebDriver.SwitchTo().NewWindow('tab')` via the W3C new-window command to open a new blank browser tab in the current WebDriver session.
+No `Argument` is supplied so the action defaults to `tab`.
+The new tab handle is appended to `driver.WindowHandles` and immediately becomes `driver.CurrentWindowHandle`.
 
 _**CSharp**_
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "NewWindow",
-    Argument = "tab"
+    PluginName = "NewWindow"
 };
 ```
 
@@ -56,16 +61,14 @@ _**Java**_
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("NewWindow")
-    .setArgument("tab");
+    .setPluginName("NewWindow");
 ```
 
 _**Javascript**_
 
 ```js
 var actionRule = {
-    pluginName: "NewWindow",
-    argument: "tab"
+    pluginName: "NewWindow"
 };
 ```
 
@@ -73,8 +76,7 @@ _**JSON**_
 
 ```js
 {
-    "pluginName": "NewWindow",
-    "argument": "tab"
+    "pluginName": "NewWindow"
 }
 ```
 
@@ -82,15 +84,16 @@ _**Python**_
 
 ```python
 action_rule = {
-    "pluginName": "NewWindow",
-    "argument": "tab"
+    "pluginName": "NewWindow"
 }
 ```
 ### Example No.2
 
-Open a new browser window. 
-This action is similar to a user opening a completely new browser window, separate from the current one. 
-It is helpful for tests or automation workflows that need to interact with multiple browser windows independently.
+### Open a new browser window
+
+Calls `WebDriver.SwitchTo().NewWindow('window')` via the W3C new-window command to open a new separate browser window in the current WebDriver session.
+The `Argument` is set to `window` to request a distinct window rather than a tab.
+The new window handle is appended to `driver.WindowHandles`, becomes `driver.CurrentWindowHandle`, and all previous handles remain accessible for switching.
 
 _**CSharp**_
 
@@ -136,51 +139,6 @@ action_rule = {
     "argument": "window"
 }
 ```
-### Example No.3
-
-Open a new browser tab. 
-If no specific argument is provided, the default action is to open a new tab. 
-This is useful for creating additional tabs without specifying the type explicitly.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "NewWindow"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("NewWindow");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "NewWindow"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "NewWindow"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "NewWindow"
-}
-```
 
 ## Properties
 
@@ -194,16 +152,19 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the type of new window to open (`tab` or `window`).
+Argument specifies the type of new browsing context to open.
+Accepted values are `tab` and `window`.
+When absent or empty the value defaults to `tab`.
+The actual behavior for `window` may depend on browser settings — some browsers open a tab regardless of the requested type.
 
 #### Values
 
 ##### Tab
 
-Open a new browser tab.
+Opens a new browser tab in the current WebDriver session.
 ##### Window
 
-Open a new browser window.
+Opens a new browser window separate from the current one.
 
 ## Scope
 

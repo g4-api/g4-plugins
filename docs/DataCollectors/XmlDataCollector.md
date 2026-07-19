@@ -2,48 +2,47 @@
 
 [Table of Content](../Home.md)  
 
-~9 min · DataCollector Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~12 min · DataCollector Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `XmlDataCollector` is to collect data and organize it in a structured format, typically as XML (Extensible Markup Language). 
-XML is a flexible and widely-used data interchange format, making it suitable for various applications, including automation and data integration.
+XmlDataCollector takes your extraction-rule outputs and saves them into an XML file. It opens or creates the specified file, wraps records in a default root element, and either appends each record element as it’s extracted or writes the full document at the end of the run. This format simplifies integration with XML-based services and tools.
 
 ### Key Features and Functionality
 
-| Feature               | Description                                                                                                            |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------|
-| Data Storage          | Storing data collected from various sources in a structured format, making it easier to manage, retrieve, and analyze. |
-| Data Integration      | Facilitating the integration of data from multiple systems or sources into a single, consistent format.                |
-| Automation            | Supporting automation and RPA processes by collecting and formatting data for further use in automated workflows.      |
+| Feature                | Description                                                                             |
+|------------------------|-----------------------------------------------------------------------------------------|
+| Extraction Integration | Hooks into your extraction rules so every item becomes an XML element.                  |
+| Write Modes            | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run. |
 
 ### Usages in RPA
 
-| Usage                            | Description                                                                                                                                                             |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Web Scraping and Data Extraction | Collect data from websites and save it in XML format. Data collected can include product information, news articles, weather data, etc.                                 |
-| RPA Data Management              | Gather data during automated tasks and workflows, storing it as XML for further processing or reporting.                                                                |
-| Data Aggregation                 | Aggregate data from multiple sources into a single XML format.                                                                                                          |
-| Data Export and Reporting        | Export data collected from various sources to XML format for reporting and analysis. XML is commonly used for transmitting data between systems and generating reports. |
+| Use Case           | Description                                                                |
+|--------------------|----------------------------------------------------------------------------|
+| Web Scraping       | Serializes scraped items into XML for legacy system ingestion or analysis. |
+| Real-Time Capture  | Streams each record as an XML element for live dashboards.                 |
+| Data Aggregation   | Collects outputs from multiple sources into a single XML document.         |
+| System Interchange | Produces XML files consumable by other services or microservices.          |
 
 ### Usages in Automation Testing
 
-| Usage                  | Description                                                                                                                                    |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| Data-Driven Testing    | Use the `XmlDataCollector` plugin to collect test data during test execution and save it in XML format for further analysis.                   |
-| Test Data Management   | Manage and store test data in a structured XML format, facilitating easy retrieval and use in various test scenarios.                          |
-| Dynamic Test Execution | Enable dynamic test execution by collecting and storing runtime data in XML format, allowing for flexible test configurations and validations. |
+| Use Case           | Description                                                           |
+|--------------------|-----------------------------------------------------------------------|
+| Test Result Export | Records pass/fail status as XML elements for CI systems or reporting. |
+| Metrics Collection | Captures timing and resource usage in XML for downstream analysis.    |
 
 ## Examples
 
 ### Example No.1
 
-Defines an extraction rule that extracts location information from a web page. 
-The extracted data is labeled as `Location`, and it is collected using an `XmlDataCollector` into an XML file named `DataFile.xml`. 
-The extraction process is defined within a specific scope and starts from a `<div>` element with the class `hotel`. 
-The use of regular expressions and XPath expressions allows for precise data extraction and formatting.
+### Stream Hotel Locations to XML
+
+Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).
+This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and stream each as an XML element into `DataFile.xml` in real time.
+It uses `extractionScope: "Elements"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming writes.
+A regular expression `(?<=\\w+:).*` is applied to the text content to extract the substring following the label into a capture group.
 
 _**CSharp**_
 
@@ -58,7 +57,7 @@ var actionRule = new ActionRuleModel
         {
             PluginName = "",
             OnElement = ".//p[starts-with(.,'Location:')]",
-            RegularExpression = "(?<=\w+:).*"
+            RegularExpression = "(?<=\\w+:).*"
         }
     }
 };
@@ -74,7 +73,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
         new ActionRuleModel()        
             .setPluginName("")
             .setOnElement(".//p[starts-with(.,'Location:')]")
-            .setRegularExpression("(?<=\w+:).*");
+            .setRegularExpression("(?<=\\w+:).*");
 ```
 
 _**Javascript**_
@@ -87,7 +86,7 @@ var actionRule = {
         {
             pluginName: "",
             onElement: ".//p[starts-with(.,'Location:')]",
-            regularExpression: "(?<=\w+:).*"
+            regularExpression: "(?<=\\w+:).*"
         }
     ]
 };
@@ -103,7 +102,7 @@ _**JSON**_
         {
             "pluginName": "",
             "onElement": ".//p[starts-with(.,'Location:')]",
-            "regularExpression": "(?<=\w+:).*"
+            "regularExpression": "(?<=\\w+:).*"
         }
     ]
 }
@@ -119,13 +118,114 @@ action_rule = {
         {
             "pluginName": "",
             "onElement": ".//p[starts-with(.,'Location:')]",
-            "regularExpression": "(?<=\w+:).*"
+            "regularExpression": "(?<=\\w+:).*"
+        }
+    ]
+}
+```
+### Example No.2
+
+### Bulk Hotel Locations to XML
+
+Text is trimmed to remove whitespace, converted to a string, then regex-extracted (up to 100 characters).
+This example demonstrates how to extract hotel locations from each `<div class='hotel'>` element and write them all as XML elements under a `<Records>` root in `DataFile.xml` upon completion.
+It uses `extractionScope: "Elements"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.
+A regular expression `(?<=\\w+:).*` is applied to the text content to extract the substring following the label into a capture group.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "",
+    OnElement = "//div[@class='hotel']",
+    Rules = new[]
+    {
+        new ActionRuleModel
+        {
+            PluginName = "",
+            OnElement = ".//p[starts-with(.,'Location:')]",
+            RegularExpression = "(?<=\\w+:).*"
+        }
+    }
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("")
+    .setOnElement("//div[@class='hotel']")
+    .setActions()
+        new ActionRuleModel()        
+            .setPluginName("")
+            .setOnElement(".//p[starts-with(.,'Location:')]")
+            .setRegularExpression("(?<=\\w+:).*");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "",
+    onElement: "//div[@class='hotel']",
+    rules: [
+        {
+            pluginName: "",
+            onElement: ".//p[starts-with(.,'Location:')]",
+            regularExpression: "(?<=\\w+:).*"
+        }
+    ]
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "",
+    "onElement": "//div[@class='hotel']",
+    "rules": [
+        {
+            "pluginName": "",
+            "onElement": ".//p[starts-with(.,'Location:')]",
+            "regularExpression": "(?<=\\w+:).*"
         }
     ]
 }
 ```
 
-## Parameters
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "",
+    "onElement": "//div[@class='hotel']",
+    "rules": [
+        {
+            "pluginName": "",
+            "onElement": ".//p[starts-with(.,'Location:')]",
+            "regularExpression": "(?<=\\w+:).*"
+        }
+    ]
+}
+```
+
+## Properties
+
+### For Entity (ForEntity)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Boolean           |
+
+Set to “true” to write each record as soon as it is ready so you can see results right away and start using them without waiting.
+Set to “false” to wait until all records are ready before writing so you can view everything at once and keep your file complete.
 
 ### Source (Source)
 
@@ -137,7 +237,22 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the output destination where the collected data will be saved (e.g., `/Path/To/My/File/DataFile.xml`).
+Enter the path where your XML file will be saved so you know where to find it later and keep your files organized.
+If the file does not exist, a new one is created at that location so you do not have to set it up yourself.
+
+### Type (Type)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | Yes               |
+| **Multiple**      | No                |
+| **Value Type**    | DataCollector     |
+
+Use the value “XmlDataCollector” so the system writes your file in the correct format and avoids errors.
+Choosing a different value will use another process and may store your data in the wrong place.
+The list of values updates on its own when new options are added so you always have the latest choices.
 
 ## Scope
 

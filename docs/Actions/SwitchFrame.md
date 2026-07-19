@@ -8,38 +8,40 @@
 
 ### Purpose
 
-The `SwitchFrame` plugin is designed to automate the process of switching between different frames or iframes within a web page. 
-It simplifies navigating web content contained in frames, ensuring that automation scripts can interact with elements inside these frames effectively.
+Switches WebDriver context into a nested frame or iframe on the current page.
+It supports two mutually exclusive modes selected automatically at runtime: switching by zero-based integer index or by resolving a web element.
 
 ### Key Features and Functionality
 
-| Feature           | Description                                                                   |
-|-------------------|-------------------------------------------------------------------------------|
-| Switch by Index   | Switches to a frame using its index, allowing for straightforward navigation. |
-| Switch by Element | Switches to a frame using a specified web element, enhancing flexibility.     |
+| Feature           | Description                                                                                                                |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Switch by Index   | When `Argument` parses as an integer, calls `WebDriver.SwitchTo().Frame(index)` directly — no element resolution.          |
+| Switch by Element | When `Argument` is absent or non-integer, resolves a frame element via `GetElement` and calls `SwitchTo().Frame(element)`. |
 
 ### Usages in RPA
 
 | Usage            | Description                                                                        |
 |------------------|------------------------------------------------------------------------------------|
-| Frame Navigation | Automates the process of switching to different frames within a web page.          |
-| Data Extraction  | Facilitates data extraction from content within frames by ensuring accurate focus. |
-| Form Interaction | Allows RPA bots to interact with forms and inputs contained within iframes.        |
+| Frame Navigation | Automates switching into frames by index or element locator during page workflows. |
+| Data Extraction  | Focuses the driver context on frame-contained content before extracting data.      |
+| Form Interaction | Enables bots to interact with forms and inputs contained within iframes.           |
 
 ### Usages in Automation Testing
 
-| Usage                | Description                                                                                       |
-|----------------------|---------------------------------------------------------------------------------------------------|
-| UI Testing           | Enables automated tests to interact with elements inside frames, ensuring comprehensive coverage. |
-| Frame Verification   | Helps in verifying that frame elements are correctly loaded and interactable during tests.        |
-| Multi-Frame Handling | Supports testing scenarios involving multiple frames, ensuring each is tested appropriately.      |
+| Usage                | Description                                                                                 |
+|----------------------|---------------------------------------------------------------------------------------------|
+| UI Testing           | Enables automated tests to interact with elements inside frames for comprehensive coverage. |
+| Frame Verification   | Verifies that frame elements are correctly loaded and interactable during test execution.   |
+| Multi-Frame Handling | Supports testing scenarios involving multiple frames by switching context as required.      |
 
 ## Examples
 
 ### Example No.1
 
-Switch to the frame using its index `0`. 
-This is useful for navigating to the first frame on the page to interact with its content.
+### Switch to the first frame by index
+
+Switch WebDriver context into the first frame on the page by passing its zero-based index `0` as the `Argument`.
+When `Argument` parses as an integer, `WebDriver.SwitchTo().Frame(index)` is called directly — no element resolution occurs.
 
 _**CSharp**_
 
@@ -87,8 +89,10 @@ action_rule = {
 ```
 ### Example No.2
 
-Switch to a frame using a specified element identified by the CSS selector `#frameElement`. 
-This allows for precise navigation to a frame using an element locator, enhancing flexibility.
+### Switch to a frame by element (CSS selector)
+
+Switch WebDriver context into the iframe element identified by the CSS selector `#mainFrame`.
+When `Argument` is absent or cannot be parsed as an integer, the plugin resolves the element via `GetElement` using the specified `Locator` and `OnElement` values, then calls `WebDriver.SwitchTo().Frame(element)`.
 
 _**CSharp**_
 
@@ -97,7 +101,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SwitchFrame",
     Locator = "CssSelector",
-    OnElement = "#frameElement"
+    OnElement = "#mainFrame"
 };
 ```
 
@@ -107,7 +111,7 @@ _**Java**_
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SwitchFrame")
     .setLocator("CssSelector")
-    .setOnElement("#frameElement");
+    .setOnElement("#mainFrame");
 ```
 
 _**Javascript**_
@@ -116,7 +120,7 @@ _**Javascript**_
 var actionRule = {
     pluginName: "SwitchFrame",
     locator: "CssSelector",
-    onElement: "#frameElement"
+    onElement: "#mainFrame"
 };
 ```
 
@@ -126,7 +130,7 @@ _**JSON**_
 {
     "pluginName": "SwitchFrame",
     "locator": "CssSelector",
-    "onElement": "#frameElement"
+    "onElement": "#mainFrame"
 }
 ```
 
@@ -136,7 +140,7 @@ _**Python**_
 action_rule = {
     "pluginName": "SwitchFrame",
     "locator": "CssSelector",
-    "onElement": "#frameElement"
+    "onElement": "#mainFrame"
 }
 ```
 
@@ -152,8 +156,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-The `Argument` property allows you to specify the frame to switch to by its index. 
-If an index is provided, the plugin switches to the frame at that index.
+Specifies the frame to switch to.
+When the value parses as an integer, the plugin switches by zero-based frame index via `WebDriver.SwitchTo().Frame(index)`.
+When the value is absent or non-integer, the plugin resolves the frame element using `Locator` and `OnElement` instead.
 
 ### Locator (Locator)
 
@@ -166,6 +171,7 @@ If an index is provided, the plugin switches to the frame at that index.
 | **Value Type**    | String            |
 
 Specifies the locator strategy used to identify the target frame element defined by the `OnElement` property.
+Applies only when `Argument` is absent or not parseable as an integer.
 
 ### On Element (OnElement)
 
@@ -177,7 +183,9 @@ Specifies the locator strategy used to identify the target frame element defined
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the target frame element on the web page where the switching action will be performed.
+Specifies the selector expression used to identify the target frame element on the page.
+Evaluated using the strategy defined by the `Locator` property.
+Applies only when `Argument` is absent or not parseable as an integer.
 
 ## Scope
 

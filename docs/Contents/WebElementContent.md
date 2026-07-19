@@ -267,7 +267,7 @@ If not provided, the plugin will extract the inner text of the element.
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |

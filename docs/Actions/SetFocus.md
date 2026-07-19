@@ -2,45 +2,49 @@
 
 [Table of Content](../Home.md)  
 
-~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `SetFocus` plugin is to automate the process of setting focus on specific web elements. 
-This functionality is crucial in scenarios where user interactions involve input fields or other elements that need to be active for subsequent actions. 
-The plugin aims to streamline automation workflows by ensuring that the necessary elements are focused before further interactions.
+Programmatically places keyboard focus on a target web element by executing the JavaScript `focus()` method via the W3C Execute Script API.
+It is used to activate input fields and interactive controls before subsequent keyboard interactions, and to trigger focus-related DOM events such as `onfocus` and `focusin`.
+When the target element cannot be located the action exits silently without raising an exception.
 
 ### Key Features and Functionality
 
-| Feature           | Description                                                                  |
-|-------------------|------------------------------------------------------------------------------|
-| Element Focusing  | Automates the process of setting focus on specified web elements.            |
-| Dynamic Targeting | Supports dynamic targeting of elements using various locators and selectors. |
+| Feature            | Description                                                                              |
+|--------------------|------------------------------------------------------------------------------------------|
+| JavaScript Focus   | Calls `arguments[0].focus()` on the located element via the W3C Execute Script API.      |
+| Event Triggering   | Fires `onfocus` and `focusin` DOM events, activating any handlers bound to those events. |
+| Graceful No-Op     | Returns an empty response without throwing when the target element is not found.         |
+| Locator Strategies | Supports Xpath, CssSelector, Id, LinkText, and PartialLinkText for element targeting.    |
 
 ### Usages in RPA
 
-| Usage                   | Description                                                                                |
-|-------------------------|--------------------------------------------------------------------------------------------|
-| Form Filling Automation | Ensures input fields are focused before entering data, improving accuracy in form filling. |
-| Interactive Workflows   | Automates focus setting for elements in complex interactive workflows.                     |
-| Event Triggering        | Sets focus on elements to trigger associated events, such as onfocus or onblur events.     |
+| Use Case              | Description                                                                                     |
+|-----------------------|-------------------------------------------------------------------------------------------------|
+| Form Field Activation | Focuses an input field before typed or scripted text entry to ensure keystrokes land correctly. |
+| Event-Driven Workflow | Triggers onfocus handlers that load dynamic content, suggestions, or validation feedback.       |
+| Multi-Step Forms      | Moves focus to the next field in sequence to simulate natural tab-order navigation.             |
 
 ### Usages in Automation Testing
 
-| Usage                       | Description                                                                                     |
-|-----------------------------|-------------------------------------------------------------------------------------------------|
-| UI Interaction Testing      | Verifies that elements can be focused programmatically, ensuring proper UI behavior.            |
-| Form Field Validation       | Ensures that input fields can be focused and interacted with during automated tests.            |
-| Event Handling Verification | Tests if focus-related events (e.g., onfocus, onblur) are correctly handled by the application. |
+| Use Case                 | Description                                                                                                    |
+|--------------------------|----------------------------------------------------------------------------------------------------------------|
+| Focus Event Verification | Confirms that onfocus and focusin handlers fire and produce expected UI changes when an element is focused.    |
+| Input Readiness Testing  | Verifies that an input element is reachable and focusable before asserting keyboard interaction behavior.      |
+| Accessibility Compliance | Tests that interactive elements are programmatically focusable, meeting WCAG keyboard navigation requirements. |
 
 ## Examples
 
 ### Example No.1
 
-Set focus on the HTML element identified by the CSS selector `#TextInput`. 
-This is useful for scenarios where focus needs to be set on a specific input field before performing further actions.
+### Focus an input field using XPath
+
+Locates the element matching `//input[@name='email']` using the default Xpath strategy and calls `focus()` on it.
+Use this form when an XPath expression uniquely identifies the target input and no explicit locator override is needed.
 
 _**CSharp**_
 
@@ -48,8 +52,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SetFocus",
-    Locator = "CssSelector",
-    OnElement = "#TextInput"
+    OnElement = "//input[@name='email']"
 };
 ```
 
@@ -58,8 +61,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SetFocus")
-    .setLocator("CssSelector")
-    .setOnElement("#TextInput");
+    .setOnElement("//input[@name='email']");
 ```
 
 _**Javascript**_
@@ -67,8 +69,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SetFocus",
-    locator: "CssSelector",
-    onElement: "#TextInput"
+    onElement: "//input[@name='email']"
 };
 ```
 
@@ -77,8 +78,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "SetFocus",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "onElement": "//input[@name='email']"
 }
 ```
 
@@ -87,63 +87,15 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SetFocus",
-    "locator": "CssSelector",
-    "onElement": "#TextInput"
+    "onElement": "//input[@name='email']"
 }
 ```
 ### Example No.2
 
-Set focus on the HTML element identified by the XPath `//input[@name='username']`. 
-This configuration is useful for scenarios where the element needs to be focused using an XPath locator.
+### Focus an element using a CSS selector
 
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SetFocus",
-    OnElement = "//input[@name='username']"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SetFocus")
-    .setOnElement("//input[@name='username']");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SetFocus",
-    onElement: "//input[@name='username']"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SetFocus",
-    "onElement": "//input[@name='username']"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SetFocus",
-    "onElement": "//input[@name='username']"
-}
-```
-### Example No.3
-
-Set focus on the HTML element identified by the CSS selector `#EventElement` to trigger the `onfocus` event. 
-This is useful for scenarios where focusing on an element is required to trigger associated events for testing or interaction purposes.
+Locates the element matching `#username` using the CssSelector strategy and calls `focus()` on it.
+Use this form when targeting an element by its ID or CSS expression is more convenient or reliable than an XPath.
 
 _**CSharp**_
 
@@ -152,7 +104,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SetFocus",
     Locator = "CssSelector",
-    OnElement = "#EventElement"
+    OnElement = "#username"
 };
 ```
 
@@ -162,7 +114,7 @@ _**Java**_
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SetFocus")
     .setLocator("CssSelector")
-    .setOnElement("#EventElement");
+    .setOnElement("#username");
 ```
 
 _**Javascript**_
@@ -171,7 +123,7 @@ _**Javascript**_
 var actionRule = {
     pluginName: "SetFocus",
     locator: "CssSelector",
-    onElement: "#EventElement"
+    onElement: "#username"
 };
 ```
 
@@ -181,7 +133,7 @@ _**JSON**_
 {
     "pluginName": "SetFocus",
     "locator": "CssSelector",
-    "onElement": "#EventElement"
+    "onElement": "#username"
 }
 ```
 
@@ -191,7 +143,7 @@ _**Python**_
 action_rule = {
     "pluginName": "SetFocus",
     "locator": "CssSelector",
-    "onElement": "#EventElement"
+    "onElement": "#username"
 }
 ```
 
@@ -207,7 +159,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the strategy or method used to locate the element on which focus will be set.
+Locator specifies the strategy used to find the target element.
+Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.
+When absent the default Xpath strategy is used.
 
 ### On Element (OnElement)
 
@@ -219,8 +173,9 @@ Specifies the strategy or method used to locate the element on which focus will 
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the identifier or locator for the element on which the focus action will be performed. 
-It indicates the target element where the focus should be set.
+OnElement provides the locator expression that identifies the element to receive focus.
+It is evaluated using the strategy defined by the Locator property.
+When the element cannot be located the action exits without throwing an exception.
 
 ## Scope
 

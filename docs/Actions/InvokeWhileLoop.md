@@ -2,47 +2,49 @@
 
 [Table of Content](../Home.md)  
 
-~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `InvokeWhileLoop` plugin serves a crucial purpose in both Robotic Process Automation (RPA) and automation testing contexts. 
-Its primary objective is to enable dynamic and repetitive execution of actions within automation scripts, providing a versatile solution for handling iterative tasks based on specified conditions.
+Runs actions repeatedly while a specified condition remains true and stops when the condition becomes false. It adapts to changing situations during execution and stops automatically if it takes too long. It also records data and performance details for each iteration.
 
 ### Key Features and Functionality
 
-| Feature                           | Description                                                                                                                                                                   |
-|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Dynamic Iteration                 | Enables dynamic iteration over a series of actions, allowing automation scripts to adapt to changing conditions during runtime.                                               |
-| Conditional Execution             | Governs the while loop with user-defined conditions, making it ideal for scenarios where actions need to be repeated until a specific state is achieved.                      |
-| Timeout Handling                  | Provides a mechanism to specify a timeout for the loop, preventing infinite loops and allowing for graceful termination if conditions are not met within a defined timeframe. |
-| Extraction and Performance Points | Seamlessly integrates with the automation framework to synchronize extractions and performance points during each iteration, enhancing insights into the execution flow.      |
-| Session Parameter Management      | Efficiently handles session parameters, ensuring adaptability to changes in the environment during runtime and enhancing the flexibility of automation scripts.               |
+| Feature                      | Description                                                         |
+|------------------------------|---------------------------------------------------------------------|
+| Dynamic Iteration            | Runs steps in a loop that adapts to changing conditions at runtime. |
+| Conditional Execution        | Continues looping while your specified condition remains true.      |
+| Timeout Handling             | Stops the loop automatically if it exceeds a set time limit.        |
+| Execution Insights           | Records data and performance details during each iteration.         |
 
 ### Usages in RPA
 
-| Use Case                   | Description                                                                                                                                                                  |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Data Validation            | Utilize the `InvokeWhileLoop` plugin for iterating through datasets, performing validation checks until specific data conditions are met.                                    |
-| Dynamic Process Automation | Employ the while loop to automate repetitive tasks within a business process, dynamically responding to changing conditions and ensuring robust and adaptable RPA solutions. |
-| Conditional Flow Control   | Integrate the plugin for conditional flow control in RPA scenarios, allowing automation scripts to dynamically respond to varying conditions during execution.               |
+| Use Case                   | Description                                                     |
+|----------------------------|-----------------------------------------------------------------|
+| Data Validation            | Checks data repeatedly until it meets your criteria.            |
+| Dynamic Process Automation | Automatically repeats tasks based on live conditions.           |
+| Conditional Flow Control   | Lets scripts change course by checking conditions during a run. |
 
 ### Usages in Automation Testing
 
-| Use Case                   | Description                                                                                                                                                                              |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Dynamic Testing            | In automated testing, leverage the `InvokeWhileLoop` plugin to iteratively interact with an application until a desired state is achieved, accommodating dynamic UI changes.             |
-| Repetitive Task Automation | Automate repetitive tasks in automation testing by utilizing the while loop to execute a set of actions until predefined conditions are satisfied, ensuring comprehensive test coverage. |
-| Conditional Flow Testing   | Enhance automation testing scenarios by integrating the plugin for conditional flow testing, allowing dynamic responses to changing conditions during the test execution process.        |
+| Use Case                   | Description                                                    |
+|----------------------------|----------------------------------------------------------------|
+| Dynamic Testing            | Keeps testing until the application reaches the desired state. |
+| Repetitive Task Automation | Repeats test steps until a condition is satisfied.             |
+| Conditional Flow Testing   | Allows tests to adapt on the fly based on changing conditions. |
 
 ## Examples
 
 ### Example No.1
 
-Iteratively click the `Next` button until a specific condition, checking for the presence of the word `active` in the `class` attribute of a designated button element, is met. 
-The `InvokeWhileLoop` plugin orchestrates this repetitive clicking action, providing a flexible mechanism for dynamically handling conditions within automation workflows.
+### Click Next While Not Active Using CSS Selector
+
+Repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching CSS selector `#NextBtn1`.
+A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.
+The loop continues until the condition no longer holds or if configured to stop on error.
+All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
 _**CSharp**_
 
@@ -50,7 +52,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeWhileLoop",
-    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}",
+    Argument = "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
     OnAttribute = "class",
     OnElement = "//ul[@id='Pagination1']/li/button[.='6']",
     Rules = new[]
@@ -70,7 +72,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeWhileLoop")
-    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}")
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}")
     .setOnAttribute("class")
     .setOnElement("//ul[@id='Pagination1']/li/button[.='6']")
     .setActions()
@@ -85,7 +87,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "InvokeWhileLoop",
-    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}",
+    argument: "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
     onAttribute: "class",
     onElement: "//ul[@id='Pagination1']/li/button[.='6']",
     rules: [
@@ -103,7 +105,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "InvokeWhileLoop",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
     "onAttribute": "class",
     "onElement": "//ul[@id='Pagination1']/li/button[.='6']",
     "rules": [
@@ -121,7 +123,7 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "InvokeWhileLoop",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
     "onAttribute": "class",
     "onElement": "//ul[@id='Pagination1']/li/button[.='6']",
     "rules": [
@@ -135,34 +137,297 @@ action_rule = {
 ```
 ### Example No.2
 
-This configuration represents a nested usage of the `InvokeWhileLoop` plugin along with other actions in an automation scenario.
+### Click Next While Not Active Using XPath
 
-1. **Outer Loop:**
-   - The outer loop is initiated by the `InvokeWhileLoop` plugin.
-   - It checks a condition: whether the `class` attribute of a button element with text content `3` within an unordered list (`ul`) with id `Pagination1` contains the word `active`.
+Repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching XPath `//button[@id='NextBtn1']`.
+A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.
+The loop continues until the condition no longer holds or if configured to stop on error.
+All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
-2. **Outer Loop Action:**
-   - If the condition is met, the inner loop is executed.
-   - If not, the script proceeds to the next action outside the loop.
+_**CSharp**_
 
-3. **Inner Loop:**
-   - Within the outer loop, there's another `InvokeWhileLoop` plugin.
-   - This inner loop also checks a condition: whether the `class` attribute of a button element with text content `3` within an unordered list (`ul`) with id `Pagination2` contains the word `active`.
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeWhileLoop",
+    Argument = "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    OnAttribute = "class",
+    OnElement = "//ul[@id='Pagination1']/li/button[.='6']",
+    Rules = new[]
+    {
+        new ActionRuleModel
+        {
+            PluginName = "Click",
+            OnElement = "//button[@id='NextBtn1']"
+        }
+    }
+};
+```
 
-4. **Inner Loop Action:**
-   - If the condition in the inner loop is met, a click action is performed on the element with the CSS selector `#NextBtn2`.
-   - This action is repeated until the condition is no longer satisfied.
+_**Java**_
 
-5. **Next Action:**
-   - If the condition in the inner loop is not met, or after the inner loop completes, the script proceeds to the next action outside the inner loop.
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeWhileLoop")
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}")
+    .setOnAttribute("class")
+    .setOnElement("//ul[@id='Pagination1']/li/button[.='6']")
+    .setActions()
+        new ActionRuleModel()        
+            .setPluginName("Click")
+            .setOnElement("//button[@id='NextBtn1']");
+```
 
-6. **Further Actions:**
-   - After the inner loop (and potentially the outer loop) completes, additional actions are performed.
-   - These actions include clicking on elements with CSS selectors `#FirstBtn2` and `#NextBtn1`.
+_**Javascript**_
 
-In summary, this configuration orchestrates a complex automation scenario where the script iteratively performs actions based on conditions. 
-The outer and inner loops, controlled by the `InvokeWhileLoop` plugin, navigate through elements and perform actions dynamically. 
-This approach enables the automation script to adapt to changing conditions and execute actions efficiently within the defined workflow.
+```js
+var actionRule = {
+    pluginName: "InvokeWhileLoop",
+    argument: "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    onAttribute: "class",
+    onElement: "//ul[@id='Pagination1']/li/button[.='6']",
+    rules: [
+        {
+            pluginName: "Click",
+            onElement: "//button[@id='NextBtn1']"
+        }
+    ]
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "InvokeWhileLoop",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    "onAttribute": "class",
+    "onElement": "//ul[@id='Pagination1']/li/button[.='6']",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "onElement": "//button[@id='NextBtn1']"
+        }
+    ]
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "InvokeWhileLoop",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    "onAttribute": "class",
+    "onElement": "//ul[@id='Pagination1']/li/button[.='6']",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "onElement": "//button[@id='NextBtn1']"
+        }
+    ]
+}
+```
+### Example No.3
+
+### Click Next While Not Active Using CSS Selector nth-child
+
+Repeatedly checks the `class` attribute of the element matching CSS selector `#Pagination1 > li:nth-child(6) > button`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching CSS selector `#NextBtn1`.
+A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.
+The loop continues until the condition no longer holds or if configured to stop on error.
+All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeWhileLoop",
+    Argument = "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    OnAttribute = "class",
+    OnElement = "#Pagination1 > li:nth-child(6) > button",
+    Rules = new[]
+    {
+        new ActionRuleModel
+        {
+            PluginName = "Click",
+            Locator = "CssSelector",
+            OnElement = "#NextBtn1"
+        }
+    }
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeWhileLoop")
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}")
+    .setOnAttribute("class")
+    .setOnElement("#Pagination1 > li:nth-child(6) > button")
+    .setActions()
+        new ActionRuleModel()        
+            .setPluginName("Click")
+            .setLocator("CssSelector")
+            .setOnElement("#NextBtn1");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "InvokeWhileLoop",
+    argument: "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    onAttribute: "class",
+    onElement: "#Pagination1 > li:nth-child(6) > button",
+    rules: [
+        {
+            pluginName: "Click",
+            locator: "CssSelector",
+            onElement: "#NextBtn1"
+        }
+    ]
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "InvokeWhileLoop",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    "onAttribute": "class",
+    "onElement": "#Pagination1 > li:nth-child(6) > button",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "locator": "CssSelector",
+            "onElement": "#NextBtn1"
+        }
+    ]
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "InvokeWhileLoop",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    "onAttribute": "class",
+    "onElement": "#Pagination1 > li:nth-child(6) > button",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "locator": "CssSelector",
+            "onElement": "#NextBtn1"
+        }
+    ]
+}
+```
+### Example No.4
+
+### Click Next While Not Active Using CSS Selector with XPath Click
+
+Repeatedly checks the `class` attribute of the element matching CSS selector `#Pagination1 > li:nth-child(6) > button`, and while it does not match the regex `(?i)active`, performs a Click action on the element matching XPath `//button[@id='NextBtn1']`.
+A regular expression `(?i)active` is applied to the `class` attribute to check for a case‑insensitive match.
+The loop continues until the condition no longer holds or if configured to stop on error.
+All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeWhileLoop",
+    Argument = "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    OnAttribute = "class",
+    OnElement = "#Pagination1 > li:nth-child(6) > button",
+    Rules = new[]
+    {
+        new ActionRuleModel
+        {
+            PluginName = "Click",
+            OnElement = "//button[@id='NextBtn1']"
+        }
+    }
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeWhileLoop")
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}")
+    .setOnAttribute("class")
+    .setOnElement("#Pagination1 > li:nth-child(6) > button")
+    .setActions()
+        new ActionRuleModel()        
+            .setPluginName("Click")
+            .setOnElement("//button[@id='NextBtn1']");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "InvokeWhileLoop",
+    argument: "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    onAttribute: "class",
+    onElement: "#Pagination1 > li:nth-child(6) > button",
+    rules: [
+        {
+            pluginName: "Click",
+            onElement: "//button[@id='NextBtn1']"
+        }
+    ]
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "InvokeWhileLoop",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    "onAttribute": "class",
+    "onElement": "#Pagination1 > li:nth-child(6) > button",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "onElement": "//button[@id='NextBtn1']"
+        }
+    ]
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "InvokeWhileLoop",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:NotMatch --Expected:(?i)active}}",
+    "onAttribute": "class",
+    "onElement": "#Pagination1 > li:nth-child(6) > button",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "onElement": "//button[@id='NextBtn1']"
+        }
+    ]
+}
+```
+### Example No.5
+
+### Nested InvokeWhileLoop for Two-Level Active-Class Validation
+
+First checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='3']`, and while it matches the regex `(?i)active`, it enters an inner loop that checks the `class` attribute of elements matching XPath `//ul[@id='Pagination2']/li/button[.='3']` and clicks `#NextBtn2` on each inner iteration.
+After the inner loop completes for each outer iteration, it clicks `#FirstBtn2` and then `#NextBtn1`.
+A regular expression `(?i)active` is applied to the `class` attribute in both loops to check for a case‑insensitive match.
+The loops continue until their conditions no longer hold or if configured to stop on error.
+All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
 _**CSharp**_
 
@@ -345,29 +610,14 @@ action_rule = {
     ]
 }
 ```
-### Example No.3
+### Example No.6
 
-Repetitively click the `Next` button until a specific condition is met or a timeout period is reached.  
+### InvokeWhileLoop with Timeout for Active-Class Check
 
-**Condition Evaluation:**  
-The condition to be evaluated is specified within the `InvokeWhileLoop` plugin configuration. It checks whether the `class` attribute of a button element with the text content `6` within an unordered list (`ul`) with id `Pagination1` contains the word `foo`. 
-This condition is evaluated repeatedly until it is satisfied or a timeout period of **5000 milliseconds** (5 seconds) is reached.
-
-**Target Element:**  
-The condition is applied to a button element identified by the XPath expression: `//ul[@id='Pagination1']/li/button[.='6']`.
-This XPath expression targets a button with the text content `6` within the context of an unordered list (`ul`) with the id `Pagination1`.
-
-**Plugin Usage:**  
-The `InvokeWhileLoop` plugin is invoked to handle the repetitive clicking action until the condition is met or the timeout period is reached. 
-This plugin facilitates dynamic iteration over actions based on specified conditions, ensuring efficient script execution.
-
-**Action Rule:**  
-Within the loop managed by `InvokeWhileLoop`, there's a rule defined to click the `Next` button (`#NextBtn1`) when the condition is met. 
-This click action is performed repeatedly until the condition is satisfied or the timeout period is reached.
-
-**Summary:**  
-In essence, this example demonstrates an automation scenario where the script continuously clicks the `Next` button until the class attribute of a specific button element contains the word `foo`, or until a timeout period of **5000 milliseconds** is reached. 
-The `InvokeWhileLoop` plugin orchestrates this repetitive clicking behavior, providing a flexible mechanism for dynamically handling conditions within automation workflows, with a specified timeout to ensure efficient script execution.
+Repeatedly checks the `class` attribute of the element matching XPath `//ul[@id='Pagination1']/li/button[.='6']`, and while it matches the regex `(?i)foo`, performs a Click action on the element matching CSS selector `#NextBtn1`.
+A regular expression `(?i)foo` is applied to the `class` attribute to check for a case‑insensitive match with a timeout of 5000 milliseconds per iteration.
+The loop continues until the condition no longer holds or if configured to stop on error.
+All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
 _**CSharp**_
 
@@ -471,7 +721,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | Expression        |
 
-Defines a condition or criteria that guides the behavior of a plugin during execution.
+Specifies the exact expression to use when asserting a result.
+It tells the system what value or pattern to evaluate.
+This expression guides whether the assertion is true or false.
 
 ### Locator (Locator)
 
@@ -483,7 +735,9 @@ Defines a condition or criteria that guides the behavior of a plugin during exec
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies how elements should be located on a webpage or within an application.
+Defines how to locate the element on the screen before running the assertion.
+Choices include Xpath, CSS, or ID.
+Xpath is used by default.
 
 ### On Attribute (OnAttribute)
 
@@ -495,7 +749,9 @@ Specifies how elements should be located on a webpage or within an application.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the attribute of the target element that will be interacted with or evaluated during automation.
+Specifies which part of the element to assert.
+Examples include the element's text, link address, or stored value.
+The assertion focuses on only that part.
 
 ### On Element (OnElement)
 
@@ -507,7 +763,23 @@ Specifies the attribute of the target element that will be interacted with or ev
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the target element on which conditions will be evaluated during the automation process.
+Specifies which element to use in the assertion.
+It identifies where that element is located in the page or app.
+The assertion then runs on that element.
+
+### Regular Expression (RegularExpression)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Regex             |
+
+Applies a pattern to element values to test or extract specific parts.
+Use it to focus on a substring before the assertion runs.
+This makes checks easier by narrowing down to the exact text you need.
 
 ### Rules (Rules)
 
@@ -519,7 +791,9 @@ Specifies the target element on which conditions will be evaluated during the au
 | **Multiple**      | No                |
 | **Value Type**    | Array             |
 
-Define a sequence of actions or instructions to be executed within a loop or under specific conditions.
+Lists the actions the system runs while the condition is true.
+Actions run in order as long as the condition stays true.
+When the condition becomes false, the loop stops.
 
 ## Parameters
 
@@ -533,7 +807,10 @@ Define a sequence of actions or instructions to be executed within a loop or und
 | **Multiple**      | No                |
 | **Value Type**    | Assertion         |
 
-Specifies the criteria or state that must be evaluated or met during the execution of a plugin or action.
+Tells the system which type of assertion to run.
+It updates itself when new assertion options become available.
+No manual edits are needed to keep it current.
+It keeps checks up to date with the latest options.
 
 ### Expected (Expected)
 
@@ -545,7 +822,10 @@ Specifies the criteria or state that must be evaluated or met during the executi
 | **Multiple**      | No                |
 | **Value Type**    | Any               |
 
-Specifies the value or pattern that the automation script expects to find or match during the execution of a condition.
+Holds the value you expect the system to assert against.
+The system compares this value to the actual result.
+Matching values make the assertion return true.
+Non-matching values make the assertion return false.
 
 ### Operator (Operator)
 
@@ -557,7 +837,10 @@ Specifies the value or pattern that the automation script expects to find or mat
 | **Multiple**      | No                |
 | **Value Type**    | Operator          |
 
-Specifies the type of comparison or operation to be performed when evaluating a condition.
+Chooses which comparison to use in an assertion.
+It gathers all available options automatically.
+Common options include Lower, Equal, and NotEqual.
+No manual updates are needed to keep the list current.
 
 ### Timeout (Timeout)
 
@@ -569,7 +852,9 @@ Specifies the type of comparison or operation to be performed when evaluating a 
 | **Multiple**      | No                |
 | **Value Type**    | Number|Time       |
 
-Specifies the maximum duration the automation script should wait for a condition to be met before proceeding with the next step, after which it will terminate.
+Controls how long the system waits for an assertion to be false before stopping the loop.
+Once time runs out, the system gracefully breaks the loop.
+It stops the system from hanging if the condition never goes false.
 
 ## Scope
 

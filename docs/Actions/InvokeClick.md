@@ -2,48 +2,55 @@
 
 [Table of Content](../Home.md)  
 
-~22 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `InvokeClick` plugin is to perform click actions on specified web elements. It supports conditional clicks, allowing the action to be retried until a specified condition is met or a timeout occurs.
+Performs a click on a target element or at the current mouse position when no element is specified.
+It supports a conditional click mode that retries the click at a configurable interval until an assertion condition is met or a timeout expires.
+This makes it suitable for scenarios that require waiting for a dynamic state change — such as an alert appearing or an attribute reaching a target value — before the workflow continues.
 
 ### Key Features and Functionality
 
-| Feature             | Description                                                                                  |
-|---------------------|----------------------------------------------------------------------------------------------|
-| Click Action        | Performs a click action on the specified web element.                                        |
-| Conditional Click   | Supports conditional clicks, where the action is retried until a specified condition is met. |
-| Element Handling    | Handles web elements based on provided locators and attributes.                              |
-| Timeout and Polling | Allows specification of timeout and polling intervals for conditional clicks.                |
+| Feature              | Description                                                                                                  |
+|----------------------|--------------------------------------------------------------------------------------------------------------|
+| Simple Click         | Moves to the target element and performs a left click.                                                       |
+| Positional Click     | Clicks at the current mouse position when no element locator is provided.                                    |
+| Conditional Click    | Repeats the click until a named assertion condition passes or the timeout elapses.                           |
+| Alert Dismissal      | The NoAlert condition automatically closes browser alerts between retries.                                   |
+| Configurable Polling | The interval between retries is set by the Polling parameter, defaulting to 1500 ms.                         |
+| Configurable Timeout | The maximum wait duration is set by the Timeout parameter, defaulting to the automation LoadTimeout setting. |
 
 ### Usages in RPA
 
-| Usage               | Description                                                                                                  |
-|---------------------|--------------------------------------------------------------------------------------------------------------|
-| Element Interaction | Interact with web elements by performing click actions as part of automated workflows.                       |
-| Conditional Actions | Automate conditional click actions, ensuring certain conditions are met before proceeding with the workflow. |
-| Form Submission     | Automatically submit forms by clicking submit buttons after populating fields.                               |
-| Modal Handling      | Close modal dialogs by clicking the close button or overlay.                                                 |
-| Navigation          | Navigate through multi-step processes by clicking next buttons or links.                                     |
+| Use Case         | Description                                                                                    |
+|------------------|------------------------------------------------------------------------------------------------|
+| Form Submission  | Click a submit button after populating form fields to trigger a page transition.               |
+| Modal Dismissal  | Click a close button or overlay to dismiss a modal dialog before the workflow continues.       |
+| Alert Handling   | Repeatedly click an element and dismiss the resulting alert until the alert no longer appears. |
+| Attribute-Driven | Click an element repeatedly until an attribute reaches a target value, then proceed.           |
+| Step Navigation  | Click next or continue buttons to advance through multi-step forms or wizards.                 |
 
 ### Usages in Automation Testing
 
-| Usage                       | Description                                                                                                                                |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| UI Testing                  | Perform click actions on web elements to test user interface interactions.                                                                 |
-| Conditional Testing         | Test scenarios where actions depend on specific conditions being met, such as waiting for alerts to close or elements to become clickable. |
-| Regression Testing          | Ensure that click functionalities work as expected after changes or updates to the web application.                                        |
-| Dynamic Content Testing     | Handle dynamic content by clicking on elements that appear or change based on user interactions or server responses.                       |
-| Interactive Element Testing | Verify the functionality of interactive elements such as dropdowns, checkboxes, radio buttons, and sliders by performing click actions.    |
+| Use Case                  | Description                                                                                            |
+|---------------------------|--------------------------------------------------------------------------------------------------------|
+| UI Interaction Testing    | Verify that clickable elements respond correctly to user interaction.                                  |
+| Conditional State Testing | Test scenarios where a condition must be satisfied after one or more clicks before assertions can run. |
+| Alert Presence Testing    | Confirm that an alert appears after clicking a trigger element.                                        |
+| Attribute Value Testing   | Click a counter or toggle element and verify that its attribute value changes as expected.             |
+| Regression Testing        | Ensure click behavior on interactive elements remains consistent after application updates.            |
 
 ## Examples
 
 ### Example No.1
 
-Perform a `Click` action on a web element with the `ID` attribute `ClickButton`, using a CSS selector to locate the element.
+### Click an element using a CSS selector
+
+Locates the element matching `#SubmitButton` using the CssSelector strategy and performs a left click.
+Use this form for any straightforward single-click interaction on a known stable element.
 
 _**CSharp**_
 
@@ -52,7 +59,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeClick",
     Locator = "CssSelector",
-    OnElement = "#ClickButton"
+    OnElement = "#SubmitButton"
 };
 ```
 
@@ -62,7 +69,7 @@ _**Java**_
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeClick")
     .setLocator("CssSelector")
-    .setOnElement("#ClickButton");
+    .setOnElement("#SubmitButton");
 ```
 
 _**Javascript**_
@@ -71,7 +78,7 @@ _**Javascript**_
 var actionRule = {
     pluginName: "InvokeClick",
     locator: "CssSelector",
-    onElement: "#ClickButton"
+    onElement: "#SubmitButton"
 };
 ```
 
@@ -81,7 +88,7 @@ _**JSON**_
 {
     "pluginName": "InvokeClick",
     "locator": "CssSelector",
-    "onElement": "#ClickButton"
+    "onElement": "#SubmitButton"
 }
 ```
 
@@ -91,13 +98,15 @@ _**Python**_
 action_rule = {
     "pluginName": "InvokeClick",
     "locator": "CssSelector",
-    "onElement": "#ClickButton"
+    "onElement": "#SubmitButton"
 }
 ```
 ### Example No.2
 
-Perform a `Click` action at the last known mouse location. 
-While this approach might be suitable for certain scenarios, it's generally less reliable and less commonly used in automation testing compared to locating and interacting with elements using locators.
+### Click at the current mouse position
+
+Performs a click at the last known mouse cursor position without locating or targeting any element.
+Use this form when mouse position has been set by a preceding move action and no element reference is needed.
 
 _**CSharp**_
 
@@ -140,9 +149,10 @@ action_rule = {
 ```
 ### Example No.3
 
-Perform a `Click` action on a web element with the ID attribute `PopAlert`. 
-The script is configured to click repeatedly at 1-second intervals until an alert associated with the clicked element exists, allowing a maximum of 15 seconds for the alert to appear. 
-This configuration is particularly useful for scenarios where an action triggers an alert, and the automation script needs to wait for that alert to become present before proceeding further.
+### Click repeatedly until an alert appears
+
+Clicks the element matching `#TriggerAlert` every 1.5 seconds until a browser alert is detected or 15 seconds elapse.
+The `Condition:AlertExists` argument causes the action to assert alert presence after each click before deciding whether to stop.
 
 _**CSharp**_
 
@@ -150,9 +160,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeClick",
-    Argument = "{{$ --Polling:1.0 --Condition:AlertExists --Timeout:00:00:15}}",
-    Locator = "Id",
-    OnElement = "PopAlert"
+    Argument = "{{$ --Condition:AlertExists --Polling:1.5 --Timeout:00:00:15}}",
+    Locator = "CssSelector",
+    OnElement = "#TriggerAlert"
 };
 ```
 
@@ -161,9 +171,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeClick")
-    .setArgument("{{$ --Polling:1.0 --Condition:AlertExists --Timeout:00:00:15}}")
-    .setLocator("Id")
-    .setOnElement("PopAlert");
+    .setArgument("{{$ --Condition:AlertExists --Polling:1.5 --Timeout:00:00:15}}")
+    .setLocator("CssSelector")
+    .setOnElement("#TriggerAlert");
 ```
 
 _**Javascript**_
@@ -171,9 +181,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "InvokeClick",
-    argument: "{{$ --Polling:1.0 --Condition:AlertExists --Timeout:00:00:15}}",
-    locator: "Id",
-    onElement: "PopAlert"
+    argument: "{{$ --Condition:AlertExists --Polling:1.5 --Timeout:00:00:15}}",
+    locator: "CssSelector",
+    onElement: "#TriggerAlert"
 };
 ```
 
@@ -182,9 +192,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "InvokeClick",
-    "argument": "{{$ --Polling:1.0 --Condition:AlertExists --Timeout:00:00:15}}",
-    "locator": "Id",
-    "onElement": "PopAlert"
+    "argument": "{{$ --Condition:AlertExists --Polling:1.5 --Timeout:00:00:15}}",
+    "locator": "CssSelector",
+    "onElement": "#TriggerAlert"
 }
 ```
 
@@ -193,18 +203,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "InvokeClick",
-    "argument": "{{$ --Polling:1.0 --Condition:AlertExists --Timeout:00:00:15}}",
-    "locator": "Id",
-    "onElement": "PopAlert"
+    "argument": "{{$ --Condition:AlertExists --Polling:1.5 --Timeout:00:00:15}}",
+    "locator": "CssSelector",
+    "onElement": "#TriggerAlert"
 }
 ```
 ### Example No.4
 
-Perform a `Click` action on a web element with the ID attribute `PopAlert`. 
-The script is configured to repetitively perform the `Click` action at 1-second intervals. 
-If an alert associated with the clicked element appears after each click, the automation script will automatically dismiss the alert until it is no longer triggered by the click action. 
-The script will continue this process for a maximum duration of 15 seconds. 
-This configuration is particularly useful for scenarios where an action's effects are expected to trigger an alert that needs to be handled before proceeding further with the automation test.
+### Click and dismiss alerts until none remains
+
+Clicks the element with id `PopAlert`, dismisses any browser alert that appears, and repeats every 1 second until a click triggers no alert.
+The `Condition:NoAlert` argument activates the alert-dismissal handler, which closes any open alert between retries.
 
 _**CSharp**_
 
@@ -212,7 +221,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeClick",
-    Argument = "{{$ --Polling:1.0 --Condition:AlertNotExists --Timeout:00:00:15}}",
+    Argument = "{{$ --Condition:NoAlert --Polling:1.0 --Timeout:00:00:15}}",
     Locator = "Id",
     OnElement = "PopAlert"
 };
@@ -223,7 +232,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeClick")
-    .setArgument("{{$ --Polling:1.0 --Condition:AlertNotExists --Timeout:00:00:15}}")
+    .setArgument("{{$ --Condition:NoAlert --Polling:1.0 --Timeout:00:00:15}}")
     .setLocator("Id")
     .setOnElement("PopAlert");
 ```
@@ -233,7 +242,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "InvokeClick",
-    argument: "{{$ --Polling:1.0 --Condition:AlertNotExists --Timeout:00:00:15}}",
+    argument: "{{$ --Condition:NoAlert --Polling:1.0 --Timeout:00:00:15}}",
     locator: "Id",
     onElement: "PopAlert"
 };
@@ -244,7 +253,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "InvokeClick",
-    "argument": "{{$ --Polling:1.0 --Condition:AlertNotExists --Timeout:00:00:15}}",
+    "argument": "{{$ --Condition:NoAlert --Polling:1.0 --Timeout:00:00:15}}",
     "locator": "Id",
     "onElement": "PopAlert"
 }
@@ -255,16 +264,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "InvokeClick",
-    "argument": "{{$ --Polling:1.0 --Condition:AlertNotExists --Timeout:00:00:15}}",
+    "argument": "{{$ --Condition:NoAlert --Polling:1.0 --Timeout:00:00:15}}",
     "locator": "Id",
     "onElement": "PopAlert"
 }
 ```
 ### Example No.5
 
-Perform a `Click` action on a web element identified by the CSS selector `#UntilAttribute`. 
-The script is configured to repetitively perform the `Click` action at 1-second intervals until the value of the `value` attribute on the element equals `10`, or until a maximum of 15 seconds has elapsed. 
-This configuration is useful for scenarios where the value of a specific attribute on an element needs to be modified by repeated clicking, and the script waits until the desired attribute value is achieved before proceeding further with the automation.
+### Click until an element attribute reaches a target value
+
+Clicks the element matching `#Counter` every 1 second until its `value` attribute equals `10`, or until 15 seconds elapse.
+The `Condition:ElementAttribute` and `Equal:10` arguments configure the internal assertion that evaluates the attribute after each click.
 
 _**CSharp**_
 
@@ -272,10 +282,10 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeClick",
-    Argument = "{{$ --Polling:1.0 --Condition:ElementAttribute --Equal:10 --Timeout:00:00:15}}",
+    Argument = "{{$ --Condition:ElementAttribute --Equal:10 --Polling:1.0 --Timeout:00:00:15}}",
     Locator = "CssSelector",
     OnAttribute = "value",
-    OnElement = "#UntilAttribute"
+    OnElement = "#Counter"
 };
 ```
 
@@ -284,10 +294,10 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeClick")
-    .setArgument("{{$ --Polling:1.0 --Condition:ElementAttribute --Equal:10 --Timeout:00:00:15}}")
+    .setArgument("{{$ --Condition:ElementAttribute --Equal:10 --Polling:1.0 --Timeout:00:00:15}}")
     .setLocator("CssSelector")
     .setOnAttribute("value")
-    .setOnElement("#UntilAttribute");
+    .setOnElement("#Counter");
 ```
 
 _**Javascript**_
@@ -295,10 +305,10 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "InvokeClick",
-    argument: "{{$ --Polling:1.0 --Condition:ElementAttribute --Equal:10 --Timeout:00:00:15}}",
+    argument: "{{$ --Condition:ElementAttribute --Equal:10 --Polling:1.0 --Timeout:00:00:15}}",
     locator: "CssSelector",
     onAttribute: "value",
-    onElement: "#UntilAttribute"
+    onElement: "#Counter"
 };
 ```
 
@@ -307,10 +317,10 @@ _**JSON**_
 ```js
 {
     "pluginName": "InvokeClick",
-    "argument": "{{$ --Polling:1.0 --Condition:ElementAttribute --Equal:10 --Timeout:00:00:15}}",
+    "argument": "{{$ --Condition:ElementAttribute --Equal:10 --Polling:1.0 --Timeout:00:00:15}}",
     "locator": "CssSelector",
     "onAttribute": "value",
-    "onElement": "#UntilAttribute"
+    "onElement": "#Counter"
 }
 ```
 
@@ -319,10 +329,10 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "InvokeClick",
-    "argument": "{{$ --Polling:1.0 --Condition:ElementAttribute --Equal:10 --Timeout:00:00:15}}",
+    "argument": "{{$ --Condition:ElementAttribute --Equal:10 --Polling:1.0 --Timeout:00:00:15}}",
     "locator": "CssSelector",
     "onAttribute": "value",
-    "onElement": "#UntilAttribute"
+    "onElement": "#Counter"
 }
 ```
 
@@ -338,8 +348,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Specifies the details for the click action, including parameters like timeout, polling interval, and condition. 
-It includes a template or variable structure `{{$...}}` to allow dynamic values.
+Argument passes parameters to the conditional click mode using the `{{$ --Name:Value}}` macro format.
+It accepts Condition, Polling, and Timeout parameters that control retry behavior.
+When Argument is absent the action performs a single non-conditional click.
 
 ### Locator (Locator)
 
@@ -351,7 +362,23 @@ It includes a template or variable structure `{{$...}}` to allow dynamic values.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the locator strategy to find the web element to be clicked. Supported locator types include `CssSelector`, `XPath`, `LinkText`, etc.
+Locator specifies the strategy used to find the target element.
+Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.
+When absent the default Xpath strategy is used.
+
+### On Attribute (OnAttribute)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+OnAttribute names the HTML attribute read from the element when evaluating the conditional assertion.
+It is forwarded to the internal Assert rule and controls which attribute value is compared against the condition.
+When absent the assertion operates on the element's default value or text content.
 
 ### On Element (OnElement)
 
@@ -363,34 +390,11 @@ Specifies the locator strategy to find the web element to be clicked. Supported 
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the actual element identifier using the locator strategy defined. 
-For example, if the locator is `CssSelector`, this would be a CSS selector string.
+OnElement provides the locator expression that identifies the element to click.
+It is evaluated using the strategy defined by the Locator property.
+When absent the action clicks at the current mouse position instead.
 
 ## Parameters
-
-### Timeout (Timeout)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Number            |
-
-Specifies the timeout duration in milliseconds for the click action. If not specified, the default timeout which is based on the automation 'LoadTimeout' settings, will be used.
-
-### Polling (Polling)
-
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | 1500              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Number            |
-
-Specifies the polling interval in milliseconds for conditional clicks. If not specified, a default polling interval will be used.
 
 ### Condition (Condition)
 
@@ -402,13 +406,45 @@ Specifies the polling interval in milliseconds for conditional clicks. If not sp
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the condition that must be met for the click action to be considered successful. If not specified, the click action will be performed once.
+Condition names the assertion that must pass for the conditional click loop to stop.
+When Condition is absent the action performs a single click with no retry loop.
+Supplying Condition but leaving its value empty causes a MissingMandatoryParameterException at runtime.
 
 #### Values
 
 ##### No Alert
 
-Continue clicking on the specified element and dismissing the alert until it no longer appears.
+NoAlert repeats the click and dismisses any browser alert that appears until no alert is triggered by the click.
+It is also accepted as AlertNotExists or HasNoAlert — all three resolve to the same handler.
+Use this condition when an action repeatedly triggers alerts that must be cleared before proceeding.
+
+### Polling (Polling)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | 1500              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+Polling sets the wait duration in milliseconds between click retries in conditional mode.
+It controls how frequently the action clicks and re-evaluates the condition.
+When absent the default interval of 1500 milliseconds is used.
+
+### Timeout (Timeout)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+Timeout sets the maximum duration the conditional click loop is allowed to run.
+When the timeout elapses the loop exits regardless of whether the condition was met.
+When absent the automation LoadTimeout setting is used as the timeout value.
 
 ## Scope
 

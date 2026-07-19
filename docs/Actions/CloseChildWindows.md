@@ -2,41 +2,51 @@
 
 [Table of Content](../Home.md)  
 
-~12 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `CloseChildWindows` plugin is to close all child browser windows while keeping the main window open. This is useful for cleaning up and managing browser sessions that involve multiple windows.
+Closes all child browser windows or tabs while always preserving the main window at index zero.
+An optional integer Argument limits closure to an exact number of children; omitting it closes all of them.
+After all targeted windows are closed the driver focus is returned to the main window, leaving the session in a consistent, single-window state.
 
 ### Key Features and Functionality
 
-| Feature              | Description                                                              |
-|----------------------|--------------------------------------------------------------------------|
-| Close Child Windows  | Closes all child browser windows, retaining only the main window.        |
-| Window Management    | Ensures that the main window remains active after closing child windows. |
-| Exception Handling   | Handles any exceptions that occur during the window closing process.     |
+| Feature                   | Description                                                                                                     |
+|---------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Selective Closure         | Optional Argument limits closure to an exact number of child windows; omit to close all children.               |
+| Main Window Preservation  | The window at index zero is always retained and receives driver focus after all closures complete.              |
+| Reverse-Order Processing  | Child handles are iterated in reverse order for consistent stack-based closing behavior.                        |
+| Per-Window Error Capture  | Exceptions thrown during individual window closures are captured and stored without aborting the overall loop.  |
+| Paced Execution           | A 100 ms delay between each closure reduces race conditions with the browser window management layer.           |
+| Single-Window No-Op Guard | When only one window handle exists the action returns immediately, making it safe to call in any session state. |
 
 ### Usages in RPA
 
-| Usage             | Description                                                                        |
-|-------------------|------------------------------------------------------------------------------------|
-| Session Cleanup   | Close all child windows at the end of an automation session to clean up resources. |
-| Window Management | Ensure only the main window remains open during the automation process.            |
+| Use Case       | Description                                                                                             |
+|----------------|---------------------------------------------------------------------------------------------------------|
+| Popup Cleanup  | Remove advertisement or notification popups spawned during a workflow before continuing processing.     |
+| Tab Management | Reduce open tabs to the primary context after a subprocess opens temporary browser windows.             |
+| Session Reset  | Enforce a single-window state at the start of each automation iteration without restarting the session. |
 
 ### Usages in Automation Testing
 
-| Usage               | Description                                                                                 |
-|---------------------|---------------------------------------------------------------------------------------------|
-| Test Cleanup        | Close all child windows at the end of tests to ensure no windows remain open between tests. |
-| Resource Management | Ensure proper management of browser windows during test execution.                          |
+| Use Case                    | Description                                                                                            |
+|-----------------------------|--------------------------------------------------------------------------------------------------------|
+| Post-Test Window Teardown   | Remove all child windows left open by a test step to prevent state leakage into the next test case.    |
+| Partial Window Cleanup      | Close a known subset of popup windows opened during a test flow without closing the main test session. |
+| Window State Assertion Prep | Reset to a single-window state before asserting the expected window count in a multi-window flow test. |
 
 ## Examples
 
 ### Example No.1
 
-Use the `CloseChildWindows` plugin to close all child browser windows, keeping the main window open.
+### Close all child browser windows
+
+Closes every child window or tab beyond the main window.
+Execution continues even if individual window closures fail.
 
 _**CSharp**_
 
@@ -79,7 +89,10 @@ action_rule = {
 ```
 ### Example No.2
 
-Use the `CloseChildWindows` plugin to close a specified number of child browser windows.
+### Close a specific number of child browser windows
+
+Closes a defined number of child windows based on the provided argument.
+Values outside the valid range are normalized automatically.
 
 _**CSharp**_
 
@@ -87,7 +100,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "CloseChildWindows",
-    Argument = "2"
+    Argument = "{{$ --Argument:3}}"
 };
 ```
 
@@ -96,7 +109,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CloseChildWindows")
-    .setArgument("2");
+    .setArgument("{{$ --Argument:3}}");
 ```
 
 _**Javascript**_
@@ -104,7 +117,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "CloseChildWindows",
-    argument: "2"
+    argument: "{{$ --Argument:3}}"
 };
 ```
 
@@ -113,7 +126,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "CloseChildWindows",
-    "argument": "2"
+    "argument": "{{$ --Argument:3}}"
 }
 ```
 
@@ -122,7 +135,7 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "CloseChildWindows",
-    "argument": "2"
+    "argument": "{{$ --Argument:3}}"
 }
 ```
 
@@ -138,9 +151,10 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | Number            |
 
-The `Argument` property specifies the number of child browser windows to close. 
-It accepts a number. If the argument is not provided or is set to a value greater than the number of child windows, all child windows will be closed. 
-Providing a negative value will result in no windows being closed.
+Argument specifies the maximum number of child browser windows to close.
+When omitted or non-numeric, all child windows beyond the main window are closed.
+A value greater than the number of available children is silently clamped to that count.
+A negative value is normalized to zero, resulting in no closures.
 
 ## Scope
 

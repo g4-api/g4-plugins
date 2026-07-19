@@ -6,11 +6,9 @@
 
 ## Description
 
-The NewDate macro plugin serves as a versatile tool for manipulating date and time within automation workflows and testing scenarios.
-
 ### Purpose
 
-The primary purpose of the NewDate macro plugin is to provide functionalities for date and time manipulation, including adding or subtracting time, extracting specific date parts, and formatting dates according to custom formats.
+Provides date and time manipulation, including adding or subtracting time, extracting specific date parts, and formatting dates according to custom formats.
 
 ### Key Features
 
@@ -40,16 +38,10 @@ The primary purpose of the NewDate macro plugin is to provide functionalities fo
 
 ### Example No.1
 
-This example demonstrates the usage of the `SendKeys` plugin with the `{{$New-Date}}` macro as the argument.
+### SendKeys Plugin with NewDate Macro
 
-| Field      | Description                                                                                                                                                                       |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes to a specified element.                                       |
-| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element where the keystrokes will be sent.                                                    |
-| onElement  | Indicates the value of the locator, representing the element where the keystrokes will be sent.                                                                                   |
-| argument   | The macro token `{{$NewDate}}` represents the default usage of the `NewDate` macro plugin, which retrieves the current date and time in the format `yyyy-MM-ddTHH:mm:ss.ffffffK`. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to send the current date and time obtained from the `NewDate` macro to the specified element.
+Use the `SendKeys` plugin to send the current date and time to the specified element matching the CSS selector `.example-element`.
+Generate the argument by applying the `NewDate` macro (`{{$New-Date}}`), which returns the current local date and time as a string.
 
 _**CSharp**_
 
@@ -107,14 +99,10 @@ action_rule = {
 ```
 ### Example No.2
 
-This example demonstrates the usage of the `RegisterParameter` plugin to register a parameter named `DataParameter` with the current date obtained from the `NewDate` macro plugin in the format `yyyy-MM-dd`.
+### RegisterParameter Plugin with NewDate Macro
 
-| Field      | Description                                                                                                                                                                                                                                                                                                                                                                         |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `RegisterParameter`. This plugin is used to register a parameter for later use in the automation workflow.                                                                                                                                                                                                                  |
-| argument   | The macro token `{{$ --Name:DataParameter --Value:{{$New-Date --Format:yyyy-MM-dd}} --Scope:Session}}` represents the registration of a parameter named `DataParameter` with the current date obtained from the `NewDate` macro plugin in the format `yyyy-MM-dd`. The parameter's scope is set to `Session`, indicating that it will be available for the duration of the session. |
-
-This example instructs the automation system to utilize the `RegisterParameter` plugin to register the current date with the format `yyyy-MM-dd` as a parameter named `DataParameter` for later use within the session.
+Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to produce a date string in `yyyy-MM-dd` format.
+Pass the verbatim argument string (`{{$ --Name:DataParameter --Value:<date string> --Scope:Session}}`) to the `RegisterParameter` plugin to register a session-scoped parameter named `DataParameter` with the generated date string.
 
 _**CSharp**_
 
@@ -162,14 +150,10 @@ action_rule = {
 ```
 ### Example No.3
 
-This example demonstrates the usage of the `WriteLog` plugin to log a meaningful message including the current date obtained from the `NewDate` macro plugin.
+### WriteLog Plugin with NewDate Macro
 
-| Field      | Description                                                                                                                                                                                                                                                                      |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `WriteLog`. This plugin is used to write information to the host console.                                                                                                                                                 |
-| argument   | The macro token `{{$New-Date --Format:yyyy-MM-dd}}` represents the usage of the `NewDate` macro plugin to retrieve the current date in the format `yyyy-MM-dd`. In this example, the argument is used to write a log entry with a meaningful message including the current date. |
-
-This example instructs the automation system to utilize the `WriteLog` plugin to write a log entry including the current date obtained from the `NewDate` macro plugin.
+Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to generate the current date string in `yyyy-MM-dd` format.
+Pass the message `Log entry created at {{$New-Date --Format:yyyy-MM-dd}}` to the `WriteLog` plugin to write a log entry that includes the generated date.
 
 _**CSharp**_
 
@@ -217,16 +201,10 @@ action_rule = {
 ```
 ### Example No.4
 
-This example demonstrates the usage of the `SendKeys` plugin with the `{{$New-Date --Format:yyyy-MM-dd --Utc}}` macro as the argument.
+### SendKeys Plugin with NewDate Macro in UTC
 
-| Field      | Description                                                                                                                                                                                               |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.                                                                        |
-| locator    | Specifies the locating mechanism, such as CSS selector, XPath, etc., for the target element where the keystrokes will be sent.                                                                            |
-| onElement  | Indicates the value of the locator, representing the element where the keystrokes will be sent.                                                                                                           |
-| argument   | The macro token `{{$New-Date --Format:yyyy-MM-dd --Utc}}` represents the usage of the `NewDate` macro plugin to retrieve the current date in the format `yyyy-MM-dd` in UTC (Coordinated Universal Time). |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to send the current date obtained from the `NewDate` macro plugin in UTC format to the specified element.
+Use the `SendKeys` plugin to send the current UTC date to the element matching the CSS selector `.example-element`.
+Generate the argument by applying the `NewDate` macro with format and UTC flag (`{{$New-Date --Format:yyyy-MM-dd --Utc}}`).
 
 _**CSharp**_
 
@@ -284,15 +262,10 @@ action_rule = {
 ```
 ### Example No.5
 
-This example demonstrates the usage of the `Click` plugin to click on a button containing the current year as its value, using the `{{$New-Date --Format:yyyy}}` macro as part of the XPath locator.
+### Click Plugin with NewDate Macro for Year
 
-| Field      | Description                                                                                                                                |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `Click`. This plugin is used to perform a click action on a specified element.     |
-| locator    | Specifies the locating mechanism, which is XPath in this case, for the target element where the click action will be performed.            |
-| onElement  | Indicates the value of the locator, representing the XPath expression that identifies the button containing the current year as its value. |
-
-This example instructs the automation system to utilize the `Click` plugin to click on a button containing the current year as its value, using the `{{$New-Date --Format:yyyy}}` macro to dynamically construct the XPath locator.
+Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy}}`) to generate the current year string.
+Use the `Click` plugin with the XPath locator string `//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]` so that the plugin evaluates the inline macro call at runtime and clicks the matching button.
 
 _**CSharp**_
 
@@ -300,7 +273,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Click",
-    OnElement = "//button[contains(text(), '{{$New-Date --Format:yyyy}}')]"
+    OnElement = "//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]"
 };
 ```
 
@@ -309,7 +282,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Click")
-    .setOnElement("//button[contains(text(), '{{$New-Date --Format:yyyy}}')]");
+    .setOnElement("//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]");
 ```
 
 _**Javascript**_
@@ -317,7 +290,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Click",
-    onElement: "//button[contains(text(), '{{$New-Date --Format:yyyy}}')]"
+    onElement: "//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]"
 };
 ```
 
@@ -326,7 +299,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "Click",
-    "onElement": "//button[contains(text(), '{{$New-Date --Format:yyyy}}')]"
+    "onElement": "//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]"
 }
 ```
 
@@ -335,19 +308,15 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Click",
-    "onElement": "//button[contains(text(), '{{$New-Date --Format:yyyy}}')]"
+    "onElement": "//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]"
 }
 ```
 ### Example No.6
 
-This example demonstrates the usage of the `WriteLog` plugin to log the current date and time in Unix epoch format, obtained from the `NewDate` macro plugin.
+### WriteLog Plugin with NewDate Macro for Unix Epoch
 
-| Field      | Description                                                                                                                                                |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `WriteLog`. This plugin is used to write information to the host console.                           |
-| argument   | The macro token `{{$New-Date --UnixEpoch}}` represents the usage of the `NewDate` macro plugin to retrieve the current date and time in Unix epoch format. |
-
-This example instructs the automation system to utilize the `WriteLog` plugin to log the current date and time in Unix epoch format.
+Evaluate the `NewDate` macro (`{{$New-Date --UnixEpoch}}`) to generate the current Unix epoch timestamp.
+Pass the argument `{{$New-Date --UnixEpoch}}` to the `WriteLog` plugin so that the plugin evaluates the macro call at runtime and writes a log entry containing the generated timestamp.
 
 _**CSharp**_
 
@@ -395,18 +364,10 @@ action_rule = {
 ```
 ### Example No.7
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current date and time in OLE Automation Date format, obtained from the `NewDate` macro plugin, into a text field.
+### SendKeys Plugin with NewDate Macro for OLE Automation Date
 
-| Field      | Description                                                                                                                                                      |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.                               |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                                    |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                                               |
-| argument   | The macro token `{{$New-Date --OaDate}}` represents the usage of the `NewDate` macro plugin to retrieve the current date and time in OLE Automation Date format. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current date and time in OLE Automation Date format into a text field.
-
-In OLE Automation, dates are represented as floating-point numbers, where the integer part represents the number of days since December 30, 1899, and the fractional part represents the time of day.
+Evaluate the `NewDate` macro (`{{$New-Date --OaDate}}`) to generate the current date and time as an OLE Automation date value.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --OaDate}}` so that the plugin inputs the generated OLE Automation date value into the text field.
 
 _**CSharp**_
 
@@ -464,16 +425,10 @@ action_rule = {
 ```
 ### Example No.8
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current year obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Year
 
-| Field      | Description                                                                                                                        |
-|------------|------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |
-| argument   | The macro token `{{$New-Date --DatePart:Year}}` represents the usage of the `NewDate` macro plugin to retrieve the current year.   |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current year obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Year}}`) to generate the current year string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Year}}` so that the plugin inputs the generated year into the text field.
 
 _**CSharp**_
 
@@ -531,16 +486,10 @@ action_rule = {
 ```
 ### Example No.9
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current month obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Month
 
-| Field      | Description                                                                                                                        |
-|------------|------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |
-| argument   | The macro token `{{$New-Date --DatePart:Month}}` represents the usage of the `NewDate` macro plugin to retrieve the current month. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current month obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Month}}`) to generate the current month string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Month}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated month into the text field.
 
 _**CSharp**_
 
@@ -598,16 +547,10 @@ action_rule = {
 ```
 ### Example No.10
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current day obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Day
 
-| Field      | Description                                                                                                                        |
-|------------|------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |
-| argument   | The macro token `{{$New-Date --DatePart:Day}}` represents the usage of the `NewDate` macro plugin to retrieve the current day.     |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current day obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Day}}`) to generate the current day string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Day}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated day into the text field.
 
 _**CSharp**_
 
@@ -665,16 +608,10 @@ action_rule = {
 ```
 ### Example No.11
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current hour obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Hour
 
-| Field       | Description                                                                                                                        |
-|-------------|------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName  | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |
-| locator     | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |
-| onElement   | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |
-| argument    | The macro token `{{$New-Date --DatePart:Hour}}` represents the usage of the `NewDate` macro plugin to retrieve the current hour.   |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current hour obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Hour}}`) to generate the current hour string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Hour}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated hour into the text field.
 
 _**CSharp**_
 
@@ -732,16 +669,10 @@ action_rule = {
 ```
 ### Example No.12
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current minute obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Minute
 
-| Field      | Description                                                                                                                          |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.   |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                        |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                   |
-| argument   | The macro token `{{$New-Date --DatePart:Minute}}` represents the usage of the `NewDate` macro plugin to retrieve the current minute. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current minute obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Minute}}`) to generate the current minute string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Minute}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated minute into the text field.
 
 _**CSharp**_
 
@@ -799,16 +730,10 @@ action_rule = {
 ```
 ### Example No.13
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current second obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Second
 
-| Field      | Description                                                                                                                          |
-|------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.   |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                        |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                   |
-| argument   | The macro token `{{$New-Date --DatePart:Second}}` represents the usage of the `NewDate` macro plugin to retrieve the current second. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current second obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Second}}`) to generate the current second string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Second}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated second into the text field.
 
 _**CSharp**_
 
@@ -866,16 +791,10 @@ action_rule = {
 ```
 ### Example No.14
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current millisecond obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Millisecond
 
-| Field      | Description                                                                                                                                    |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.             |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                  |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                             |
-| argument   | The macro token `{{$New-Date --DatePart:Millisecond}}` represents the usage of the `NewDate` macro plugin to retrieve the current millisecond. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current millisecond obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Millisecond}}`) to generate the current millisecond string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Millisecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated millisecond into the text field.
 
 _**CSharp**_
 
@@ -933,16 +852,10 @@ action_rule = {
 ```
 ### Example No.15
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current nanosecond obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Nanosecond
 
-| Field      | Description                                                                                                                                  |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.           |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                           |
-| argument   | The macro token `{{$New-Date --DatePart:Nanosecond}}` represents the usage of the `NewDate` macro plugin to retrieve the current nanosecond. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current nanosecond obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Nanosecond}}`) to generate the current nanosecond string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Nanosecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated nanosecond into the text field.
 
 _**CSharp**_
 
@@ -1000,16 +913,10 @@ action_rule = {
 ```
 ### Example No.16
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current microsecond obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Microsecond
 
-| Field      | Description                                                                                                                                    |
-|------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element.             |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                                  |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                             |
-| argument   | The macro token `{{$New-Date --DatePart:Microsecond}}` represents the usage of the `NewDate` macro plugin to retrieve the current microsecond. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current microsecond obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Microsecond}}`) to generate the current microsecond string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Microsecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated microsecond into the text field.
 
 _**CSharp**_
 
@@ -1067,16 +974,10 @@ action_rule = {
 ```
 ### Example No.17
 
-This example demonstrates the usage of the `SendKeys` plugin to input the current ticks obtained from the `NewDate` macro plugin into a text field.
+### SendKeys Plugin with NewDate Macro for Ticks
 
-| Field      | Description                                                                                                                        |
-|------------|------------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This plugin is used to send keystrokes to a specified element. |
-| locator    | Specifies the locating mechanism for the target text field where the keystrokes will be sent.                                      |
-| onElement  | Indicates the value of the locator, representing the text field where the keystrokes will be sent.                                 |
-| argument   | The macro token `{{$New-Date --DatePart:Ticks}}` represents the usage of the `NewDate` macro plugin to retrieve the current ticks. |
-
-This example instructs the automation system to utilize the `SendKeys` plugin to input the current ticks obtained from the `NewDate` macro plugin into a text field.
+Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Ticks}}`) to generate the current tick count string.
+Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Ticks}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated tick count into the text field.
 
 _**CSharp**_
 
@@ -1145,7 +1046,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | Time              |
 
-Specifies the duration to add to or subtract from the current date and time.
+Amount of time to add to the current date and time.
+Use positive or negative values to move the timestamp forward or backward.
+Supports durations such as days, hours, minutes, and seconds.
 
 ### Subtruct Time (SubtructTime)
 
@@ -1157,19 +1060,23 @@ Specifies the duration to add to or subtract from the current date and time.
 | **Multiple**      | No                |
 | **Value Type**    | Time              |
 
-Specifies the duration to subtract from the current date and time.
+Amount of time to subtract from the current date and time.
+Define the duration in units like days, hours, minutes, or seconds.
+Creates a past timestamp relative to now.
 
 ### Format (Format)
 
-| Attribute         | Value             |
-|-------------------|-------------------|
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
+| Attribute                   | Value                       |
+|-----------------------------|-----------------------------|
+| **Default Value**           | yyyy-MM-ddTHH:mm:ss.ffffffK |
+| **Depends On**              | None                        |
+| **Mandatory**               | No                          |
+| **Multiple**                | No                          |
+| **Value Type**              | String                      |
 
-Specifies the custom format for formatting the date and time. If not provided, the default format is used.
+Custom pattern that dictates how the date and time are displayed.
+Uses standard .NET format tokens for precise control over order, separators, and precision.
+Defaults to `yyyy-MM-ddTHH:mm:ss.ffffffK` when no format is provided.
 
 ### Date Part (DatePart)
 
@@ -1181,40 +1088,63 @@ Specifies the custom format for formatting the date and time. If not provided, t
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the specific part of the date and time to extract, such as year, month, day, etc.
+Choose one element of the date and time, like year, month, or day, when you need only part of the full timestamp.
+Selecting ‘Hour’ or ’Minute’ lets you work with the exact time of day for scheduling or logging.
+Using ‘Second’, ’Millisecond’, or smaller units helps when you need precise timing in your application.
+Specifying ‘Ticks’ returns the raw tick count for very fine measurements and analysis.
 
 #### Values
 
 ##### Year
 
-The year component of the date and time.
+Extracts the year from the date and time input.
+Using the year value helps group or filter data by calendar year.
+Value appears as a four-digit number like 2025.
 ##### Month
 
-The month component of the date and time, where January is represented as 1 and December is represented as 12.
+Extracts the month number from the date and time, where January is 1 and December is 12.
+Month values help sort events or data within a single year.
+Useful for generating monthly reports or determining seasonal patterns.
 ##### Day
 
-The day component of the date and time.
+Extracts the day of the month from the date and time.
+Day values range from 1 to 31 depending on the month.
+Scheduling or tracking tasks on specific dates becomes easier.
 ##### Hour
 
-The hour component of the time.
+Extracts the hour part of the time using a 24-hour clock.
+Hour values range from 0 to 23.
+This is useful when you need to trigger actions at a specific hour.
 ##### Minute
 
-The minute component of the time.
+Extracts the minute part of the time, ranging from 0 to 59.
+Using minutes allows finer-grained time schedules or logs.
+Combining with hours defines precise times like 14:30.
 ##### Second
 
-The second component of the time.
+Extracts the second part of the time, ranging from 0 to 59.
+Seconds allow tracking events at a one-second resolution.
+Useful for timestamping or measuring short delays.
 ##### Millisecond
 
-The millisecond component of the time.
+Extracts the millisecond part of the time, ranging from 0 to 999.
+Milliseconds help measure short intervals with high precision.
+Essential for applications that record or analyze rapid events.
 ##### Nanosecond
 
-The nanosecond component of the time.
+Extracts the nanosecond component, measuring one billionth of a second.
+Nanoseconds provide extremely fine timing for specialized scenarios.
+Useful for high-resolution timestamps in scientific or performance analysis.
 ##### Microsecond
 
-The microsecond component of the time.
+Extracts the microsecond component, measuring one millionth of a second.
+Microseconds allow very precise time calculations below the millisecond level.
+Helpful for profiling code performance or detailed logging.
 ##### Ticks
 
-The number of ticks representing the time interval.
+Extracts the total number of ticks from the time value, where each tick is 100 nanoseconds.
+Ticks provide the raw count of time intervals for maximum precision.
+Useful for comparing or calculating time spans at the lowest resolution.
 
 ### Utc (Utc)
 
@@ -1226,7 +1156,9 @@ The number of ticks representing the time interval.
 | **Multiple**      | No                |
 | **Value Type**    | Switch            |
 
-Indicates whether the date and time should be in UTC (Coordinated Universal Time). If not specified, local time is used.
+Records date and time values using Coordinated Universal Time instead of the local time zone.
+Standardizing on UTC helps avoid errors caused by time zone differences.
+A universal time reference improves consistency when processing timestamps across regions.
 
 ### Unix Epoch (UnixEpoch)
 
@@ -1238,7 +1170,9 @@ Indicates whether the date and time should be in UTC (Coordinated Universal Time
 | **Multiple**      | No                |
 | **Value Type**    | Switch            |
 
-Indicates whether the date and time should be converted to Unix epoch time.
+Converts date and time values into the number of seconds that have elapsed since January 1, 1970 (the Unix epoch).
+Epoch time is a common format for storing and comparing timestamps across systems.
+Using a numeric timestamp simplifies interoperability across platforms and languages.
 
 ### Oa Date (OaDate)
 
@@ -1250,7 +1184,9 @@ Indicates whether the date and time should be converted to Unix epoch time.
 | **Multiple**      | No                |
 | **Value Type**    | Switch            |
 
-Indicates whether the date and time should be converted to OLE Automation Date format.
+Transforms date and time values into OLE Automation Date format, which represents dates as floating-point numbers.
+The integer part counts days since December 30, 1899 and the fractional part represents the time of day.
+Many Microsoft automation tools use this format to maintain compatibility.
 
 ### Day Of Year (DayOfYear)
 
@@ -1262,7 +1198,9 @@ Indicates whether the date and time should be converted to OLE Automation Date f
 | **Multiple**      | No                |
 | **Value Type**    | Switch            |
 
-Indicates whether to retrieve the day of the year.
+Returns the day number within the year for the given date and time.
+Day-of-year values help compute spans and filter data across an annual period.
+Continuous day counts support features like annual reports and milestone tracking.
 
 ### Day Of Week (DayOfWeek)
 
@@ -1274,7 +1212,9 @@ Indicates whether to retrieve the day of the year.
 | **Multiple**      | No                |
 | **Value Type**    | Switch            |
 
-Indicates whether to retrieve the day of the week.
+Retrieves the day of the week for the provided date and time.
+Weekday information helps schedule tasks and enforce business rules.
+Calendar views and weekly summaries depend on accurate weekday values.
 
 ## Scope
 
