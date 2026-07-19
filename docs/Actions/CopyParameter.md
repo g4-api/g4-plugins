@@ -2,44 +2,48 @@
 
 [Table of Content](../Home.md)  
 
-~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~105 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `CopyParameter` plugin facilitates the copying of parameters within automation scripts.
-Its primary objective is to enable efficient and controlled copying of parameter values from a source to a target across different scopes.
+Helps move values from one parameter to another within automation scripts. It makes it easy to share data between steps by copying values across different scopes. You can set or rely on default source and target scopes to keep your data organized. This ensures that scripts run smoothly with the right information in the right place.
 
 ### Key Features and Functionality
 
-| Feature               | Description                                                                                                                    |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| Source to Target Copy | Copies the value of a parameter from a defined source to a defined target across different scopes.                             |
-| Scope Management      | Allows for the specification of scopes for both source and target parameters, with default values if not specified.            |
-| Dynamic Environment   | Supports the retrieval and setting of parameters within different environments, particularly when using the Application scope. |
+| Feature               | Description                                                                         |
+|-----------------------|-------------------------------------------------------------------------------------|
+| Copy Parameter Values | Moves a parameter's value from a source location to a target location.              |
+| Scope Management      | Lets you specify or default source and target scopes for parameters.                |
+| Environment Support   | Retrieves and sets parameters in various environments, including application scope. |
 
 ### Usages in RPA
 
-| Usage                     | Description                                                                                                                                                                           |
-|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Data Transfer             | Utilize the `CopyParameter` plugin to transfer data between different parts of an automation script. This can help in processes where data needs to be shared across different steps. |
-| Session Management        | Efficiently handle session parameters by copying values as needed, ensuring that session-specific data is correctly propagated.                                                       |
-| Parameter Synchronization | Synchronize parameters between different automation components or systems to maintain data consistency.                                                                               |
+| Use Case                  | Description                                                     |
+|---------------------------|-----------------------------------------------------------------|
+| Data Transfer             | Share data between script steps by copying parameter values.    |
+| Session Management        | Propagate session-specific values to maintain consistent state. |
+| Parameter Synchronization | Keep parameters in sync across different automation components. |
 
 ### Usages in Automation Testing
 
-| Usage                     | Description                                                                                                                                                |
-|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Test Data Management      | Use the `CopyParameter` plugin to manage test data by copying values between different test cases or test steps.                                           |
-| Environment Configuration | Facilitate the setup of test environments by copying configuration parameters to the required locations.                                                   |
-| Dynamic Test Execution    | Enable dynamic test execution by copying runtime parameters that are needed for various test scenarios, ensuring tests are executed with the correct data. |
+| Use Case           | Description                                                  |
+|--------------------|--------------------------------------------------------------|
+| Test Data Handling | Copy values between test cases or steps to set up test data. |
+| Environment Setup  | Move configuration parameters to prepare test environments.  |
+| Dynamic Test Runs  | Transfer runtime values to support varied test scenarios.    |
 
 ## Examples
 
 ### Example No.1
 
-This configuration copies a parameter from a source within the session scope to a target within the same session scope.
+### Session Parameter Copy Action
+
+Takes the full text value of the session parameter `SourceParam` and stores it into another session parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as-is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
 _**CSharp**_
 
@@ -47,9 +51,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyParameter",
-    Argument = "{{$ --TargetParameter:targetParam --TargetScope:Session}}",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
     OnAttribute = "Session",
-    OnElement = "sourceParam"
+    OnElement = "SourceParam"
 };
 ```
 
@@ -58,9 +62,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyParameter")
-    .setArgument("{{$ --TargetParameter:targetParam --TargetScope:Session}}")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Session}}")
     .setOnAttribute("Session")
-    .setOnElement("sourceParam");
+    .setOnElement("SourceParam");
 ```
 
 _**Javascript**_
@@ -68,9 +72,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "CopyParameter",
-    argument: "{{$ --TargetParameter:targetParam --TargetScope:Session}}",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
     onAttribute: "Session",
-    onElement: "sourceParam"
+    onElement: "SourceParam"
 };
 ```
 
@@ -79,9 +83,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --TargetScope:Session}}",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
     "onAttribute": "Session",
-    "onElement": "sourceParam"
+    "onElement": "SourceParam"
 }
 ```
 
@@ -90,14 +94,19 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --TargetScope:Session}}",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
     "onAttribute": "Session",
-    "onElement": "sourceParam"
+    "onElement": "SourceParam"
 }
 ```
 ### Example No.2
 
-This configuration copies a parameter from a source within the application scope to a target within the user scope, using the system parameters environment.
+### Session to Application Parameter Copy Action
+
+Takes the full text value of the session parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
 
 _**CSharp**_
 
@@ -105,9 +114,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyParameter",
-    Argument = "{{$ --TargetParameter:targetParam --Environment:SystemParameters --TargetScope:User}}",
-    OnAttribute = "Application",
-    OnElement = "sourceParam"
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    OnAttribute = "Session",
+    OnElement = "SourceParam"
 };
 ```
 
@@ -116,9 +125,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyParameter")
-    .setArgument("{{$ --TargetParameter:targetParam --Environment:SystemParameters --TargetScope:User}}")
-    .setOnAttribute("Application")
-    .setOnElement("sourceParam");
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}")
+    .setOnAttribute("Session")
+    .setOnElement("SourceParam");
 ```
 
 _**Javascript**_
@@ -126,9 +135,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "CopyParameter",
-    argument: "{{$ --TargetParameter:targetParam --Environment:SystemParameters --TargetScope:User}}",
-    onAttribute: "Application",
-    onElement: "sourceParam"
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    onAttribute: "Session",
+    onElement: "SourceParam"
 };
 ```
 
@@ -137,9 +146,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --Environment:SystemParameters --TargetScope:User}}",
-    "onAttribute": "Application",
-    "onElement": "sourceParam"
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
 }
 ```
 
@@ -148,14 +157,19 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --Environment:SystemParameters --TargetScope:User}}",
-    "onAttribute": "Application",
-    "onElement": "sourceParam"
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
 }
 ```
 ### Example No.3
 
-This configuration copies a parameter from a source within the machine scope to a target within the process scope.
+### Session to Application Parameter Copy Action
+
+Takes the full text value of the session parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
 
 _**CSharp**_
 
@@ -163,9 +177,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyParameter",
-    Argument = "{{$ --TargetParameter:targetParam --TargetScope:Process}}",
-    OnAttribute = "Machine",
-    OnElement = "sourceParam"
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    OnAttribute = "Session",
+    OnElement = "SourceParam"
 };
 ```
 
@@ -174,9 +188,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyParameter")
-    .setArgument("{{$ --TargetParameter:targetParam --TargetScope:Process}}")
-    .setOnAttribute("Machine")
-    .setOnElement("sourceParam");
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Application}}")
+    .setOnAttribute("Session")
+    .setOnElement("SourceParam");
 ```
 
 _**Javascript**_
@@ -184,9 +198,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "CopyParameter",
-    argument: "{{$ --TargetParameter:targetParam --TargetScope:Process}}",
-    onAttribute: "Machine",
-    onElement: "sourceParam"
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    onAttribute: "Session",
+    onElement: "SourceParam"
 };
 ```
 
@@ -195,9 +209,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --TargetScope:Process}}",
-    "onAttribute": "Machine",
-    "onElement": "sourceParam"
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
 }
 ```
 
@@ -206,14 +220,20 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --TargetScope:Process}}",
-    "onAttribute": "Machine",
-    "onElement": "sourceParam"
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
 }
 ```
 ### Example No.4
 
-This configuration copies a parameter from a source within the user scope to a target within the application scope, using the custom environment.
+### Session to Machine Parameter Copy Action
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the session parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails.
 
 _**CSharp**_
 
@@ -221,9 +241,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyParameter",
-    Argument = "{{$ --TargetParameter:targetParam --Environment:CustomEnvironment --TargetScope:Application}}",
-    OnAttribute = "User",
-    OnElement = "sourceParam"
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    OnAttribute = "Session",
+    OnElement = "SourceParam"
 };
 ```
 
@@ -232,9 +252,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyParameter")
-    .setArgument("{{$ --TargetParameter:targetParam --Environment:CustomEnvironment --TargetScope:Application}}")
-    .setOnAttribute("User")
-    .setOnElement("sourceParam");
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Machine}}")
+    .setOnAttribute("Session")
+    .setOnElement("SourceParam");
 ```
 
 _**Javascript**_
@@ -242,9 +262,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "CopyParameter",
-    argument: "{{$ --TargetParameter:targetParam --Environment:CustomEnvironment --TargetScope:Application}}",
-    onAttribute: "User",
-    onElement: "sourceParam"
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    onAttribute: "Session",
+    onElement: "SourceParam"
 };
 ```
 
@@ -253,9 +273,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --Environment:CustomEnvironment --TargetScope:Application}}",
-    "onAttribute": "User",
-    "onElement": "sourceParam"
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
 }
 ```
 
@@ -264,14 +284,20 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --Environment:CustomEnvironment --TargetScope:Application}}",
-    "onAttribute": "User",
-    "onElement": "sourceParam"
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
 }
 ```
 ### Example No.5
 
-This configuration copies a parameter from a source within the process scope to a target within the machine scope.
+### Session to User Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the session parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the user‑scoped target parameter can be written; otherwise, it fails.
 
 _**CSharp**_
 
@@ -279,9 +305,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyParameter",
-    Argument = "{{$ --TargetParameter:targetParam --TargetScope:Machine}}",
-    OnAttribute = "Process",
-    OnElement = "sourceParam"
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    OnAttribute = "Session",
+    OnElement = "SourceParam"
 };
 ```
 
@@ -290,9 +316,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyParameter")
-    .setArgument("{{$ --TargetParameter:targetParam --TargetScope:Machine}}")
-    .setOnAttribute("Process")
-    .setOnElement("sourceParam");
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:User}}")
+    .setOnAttribute("Session")
+    .setOnElement("SourceParam");
 ```
 
 _**Javascript**_
@@ -300,9 +326,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "CopyParameter",
-    argument: "{{$ --TargetParameter:targetParam --TargetScope:Machine}}",
-    onAttribute: "Process",
-    onElement: "sourceParam"
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    onAttribute: "Session",
+    onElement: "SourceParam"
 };
 ```
 
@@ -311,9 +337,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --TargetScope:Machine}}",
-    "onAttribute": "Process",
-    "onElement": "sourceParam"
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
 }
 ```
 
@@ -322,9 +348,1790 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "CopyParameter",
-    "argument": "{{$ --TargetParameter:targetParam --TargetScope:Machine}}",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
+}
+```
+### Example No.6
+
+### Session to Process Parameter Copy Action
+
+Takes the full text value of the session parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the process‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    OnAttribute = "Session",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Process}}")
+    .setOnAttribute("Session")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    onAttribute: "Session",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Session",
+    "onElement": "SourceParam"
+}
+```
+### Example No.7
+
+### Application to Session Parameter Copy Action
+
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Session}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.8
+
+### Application to Application Parameter Copy Action in BotRepository
+
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the target environment is valid; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.9
+
+### Application to Application Parameter Copy Action
+
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into another application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Application}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.10
+
+### Application to Machine Parameter Copy Action in BotRepository
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Machine}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Machine}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Machine}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Machine}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Machine}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.11
+
+### Application to Machine Parameter Copy Action
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Machine}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.12
+
+### Application to User Parameter Copy Action in BotRepository
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the user‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:User}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:User}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:User}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:User}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:User}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.13
+
+### Application to User Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:User}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.14
+
+### Application to Process Parameter Copy Action in BotRepository
+
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the process‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Process}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Process}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Process}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Process}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Process}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.15
+
+### Application to Process Parameter Copy Action
+
+Takes the full text value of the application‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    OnAttribute = "Application",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Process}}")
+    .setOnAttribute("Application")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    onAttribute: "Application",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Application",
+    "onElement": "SourceParam"
+}
+```
+### Example No.16
+
+### Machine to Session Parameter Copy Action
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    OnAttribute = "Machine",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Session}}")
+    .setOnAttribute("Machine")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    onAttribute: "Machine",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+### Example No.17
+
+### Machine to Application Parameter Copy Action in BotRepository
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    OnAttribute = "Machine",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}")
+    .setOnAttribute("Machine")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    onAttribute: "Machine",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+### Example No.18
+
+### Machine to Application Parameter Copy Action
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    OnAttribute = "Machine",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Application}}")
+    .setOnAttribute("Machine")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    onAttribute: "Machine",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+### Example No.19
+
+### Machine to Machine Parameter Copy Action
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into another machine‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    OnAttribute = "Machine",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Machine}}")
+    .setOnAttribute("Machine")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    onAttribute: "Machine",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+### Example No.20
+
+### Machine to User Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    OnAttribute = "Machine",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:User}}")
+    .setOnAttribute("Machine")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    onAttribute: "Machine",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+### Example No.21
+
+### Machine to Process Parameter Copy Action
+
+Takes the full text value of the machine‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    OnAttribute = "Machine",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Process}}")
+    .setOnAttribute("Machine")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    onAttribute: "Machine",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Machine",
+    "onElement": "SourceParam"
+}
+```
+### Example No.22
+
+### User to Session Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    OnAttribute = "User",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Session}}")
+    .setOnAttribute("User")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    onAttribute: "User",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+### Example No.23
+
+### User to Application Parameter Copy Action in BotRepository
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    OnAttribute = "User",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}")
+    .setOnAttribute("User")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    onAttribute: "User",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+### Example No.24
+
+### User to Application Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    OnAttribute = "User",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Application}}")
+    .setOnAttribute("User")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    onAttribute: "User",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+### Example No.25
+
+### User to Machine Parameter Copy Action
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    OnAttribute = "User",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Machine}}")
+    .setOnAttribute("User")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    onAttribute: "User",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+### Example No.26
+
+### User to User Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into another user‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    OnAttribute = "User",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:User}}")
+    .setOnAttribute("User")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    onAttribute: "User",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+### Example No.27
+
+### User to Process Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the user‑scoped parameter `SourceParam` and stores it into a process‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    OnAttribute = "User",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Process}}")
+    .setOnAttribute("User")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    onAttribute: "User",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "User",
+    "onElement": "SourceParam"
+}
+```
+### Example No.28
+
+### Process to Session Parameter Copy Action
+
+Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a session‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    OnAttribute = "Process",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Session}}")
+    .setOnAttribute("Process")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    onAttribute: "Process",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
     "onAttribute": "Process",
-    "onElement": "sourceParam"
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Session}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+### Example No.29
+
+### Process to Application Parameter Copy Action in BotRepository
+
+Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` within the `BotRepository` environment.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    OnAttribute = "Process",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}")
+    .setOnAttribute("Process")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    onAttribute: "Process",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --Environment:BotRepository --TargetScope:Application}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+### Example No.30
+
+### Process to Application Parameter Copy Action
+
+Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into an application‑scoped parameter named `TargetParam` in the default application environment `SystemParameters`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    OnAttribute = "Process",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Application}}")
+    .setOnAttribute("Process")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    onAttribute: "Process",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Application}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+### Example No.31
+
+### Process to Machine Parameter Copy Action
+
+Machine scopes are only valid on Windows environments.
+Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a machine‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    OnAttribute = "Process",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Machine}}")
+    .setOnAttribute("Process")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    onAttribute: "Process",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Machine}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+### Example No.32
+
+### Process to User Parameter Copy Action
+
+User scopes are only valid on Windows environments.
+Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into a user‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    OnAttribute = "Process",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:User}}")
+    .setOnAttribute("Process")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    onAttribute: "Process",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:User}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+### Example No.33
+
+### Process to Process Parameter Copy Action
+
+Takes the full text value of the process‑scoped parameter `SourceParam` and stores it into another process‑scoped parameter named `TargetParam`.
+The operation uses the complete text value of `SourceParam`, including any whitespace or formatting.
+No value transformation occurs; the entire text is copied as‑is.
+The action succeeds only if `SourceParam` exists; otherwise, it fails.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "CopyParameter",
+    Argument = "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    OnAttribute = "Process",
+    OnElement = "SourceParam"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("CopyParameter")
+    .setArgument("{{$ --TargetParameter:TargetParam --TargetScope:Process}}")
+    .setOnAttribute("Process")
+    .setOnElement("SourceParam");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "CopyParameter",
+    argument: "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    onAttribute: "Process",
+    onElement: "SourceParam"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "CopyParameter",
+    "argument": "{{$ --TargetParameter:TargetParam --TargetScope:Process}}",
+    "onAttribute": "Process",
+    "onElement": "SourceParam"
 }
 ```
 
@@ -340,7 +2147,10 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | GetParameter      |
 
-Specifies the scope of the source parameter. The scope defines where the parameter is stored and can be one of several predefined scopes such as 'Session', 'SystemScope', etc.
+Sets where to find the original value.
+Options include Session, User, and others.
+New options appear automatically when they are added.
+No manual updates are needed to keep the list current.
 
 ### On Element (OnElement)
 
@@ -352,7 +2162,9 @@ Specifies the scope of the source parameter. The scope defines where the paramet
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the source parameter whose value will be copied.
+Names the source parameter for the value copy.
+The system uses this name to locate and copy the value.
+Missing this setting stops the operation from running.
 
 ## Parameters
 
@@ -366,8 +2178,10 @@ Specifies the source parameter whose value will be copied.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the environment in which the parameters are managed. It allows for defining different contexts or environments where the parameters are stored and retrieved from.
-This parameter is relevant only when using the Application scope. It allows managing multiple environments that can hold different values while using the same parameter names or a completely different parameter set.
+Determines where parameters are stored and retrieved.
+Each environment represents a different context for parameter values.
+Only applies when Application scope is used.
+No manual updates are needed when contexts change.
 
 ### Target Parameter (TargetParameter)
 
@@ -379,7 +2193,9 @@ This parameter is relevant only when using the Application scope. It allows mana
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the target parameter to which the value will be copied. This is the parameter that will receive the value from the source parameter.
+Names the parameter that will receive the copied value.
+The system copies the source value into this parameter.
+Copy operation cannot run without this parameter.
 
 ### Target Scope (TargetScope)
 
@@ -391,7 +2207,10 @@ Specifies the target parameter to which the value will be copied. This is the pa
 | **Multiple**      | No                |
 | **Value Type**    | SetParameter      |
 
-Specifies the scope of the target parameter. The scope defines where the parameter is stored and can be one of several predefined scopes such as 'Session', 'UserScope', etc.
+Automatically gathers available scope options from SetParameter plugins.
+Each plugin adds a new scope like Session or User scope.
+Options update on their own when plugins change.
+This keeps your list of scopes current without manual updates.
 
 ## Scope
 

@@ -2,51 +2,53 @@
 
 [Table of Content](../Home.md)  
 
-~31 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~19 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `InvokeScroll` plugin is to automate scrolling actions on web pages. 
-In both RPA and automation testing, interacting with web pages often involves scrolling to view hidden or off-screen elements, simulate user behavior, or verify the appearance of elements at different scroll positions. 
-This plugin provides a mechanism to perform such scrolling actions programmatically as part of automated workflows or tests.
+Scrolls a web page or a specific overflow element to a given pixel position using JavaScript.
+When an element is specified via OnElement, the action targets that element with `element.scroll()`; otherwise it scrolls the entire page via `window.scroll()`.
+This makes it the primary way to programmatically position the viewport or scroll within overflow containers in automation workflows and test scripts.
 
 ### Key Features and Functionality
 
-| Feature       | Description                                                                                                                                   |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Scalability   | The plugin can handle scrolling for both specific elements and entire pages, making it versatile for various automation scenarios.            |
-| Customization | It allows customization of scrolling behavior by accepting arguments such as behavior type (smooth, auto, etc.), left offset, and top offset. |
-| Reusable      | The plugin encapsulates scrolling logic into reusable components, reducing code duplication and enhancing maintainability.                    |
-| Reliability   | By leveraging JavaScript-based scrolling, the plugin ensures reliable scrolling behavior across different web browsers and environments.      |
+| Feature           | Description                                                                                                           |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Page Scroll       | Scrolls the entire page to the specified Left and Top pixel offsets using `window.scroll()`.                          |
+| Element Scroll    | Scrolls within a specific overflow element using `element.scroll()`, targeting it via any supported locator strategy. |
+| Behavior Control  | Accepts `auto`, `instant`, and `smooth` scroll behaviors to control animation.                                        |
+| Axis Independence | Left and Top offsets are independently optional — supply one or both depending on the scroll direction required.      |
+| No-Op Guard       | When neither Left nor Top is provided the action takes no effect, preventing unintended scroll resets.                |
 
 ### Usages in RPA
 
-| Usage                | Description                                                                                                 |
-|----------------------|-------------------------------------------------------------------------------------------------------------|
-| Data Extraction      | Scrolling through web pages to extract relevant data from tables, lists, or grids.                          |
-| Silent Paging        | Navigating through paginated content to collect comprehensive datasets.                                     |
-| Multi-Step Workflows | Automating scrolling actions as part of broader RPA processes to navigate through multi-step workflows.     |
-| Forms & Data         | Completing forms or interacting with web-based applications that require scrolling beyond the initial view. |
+| Use Case             | Description                                                                                                    |
+|----------------------|----------------------------------------------------------------------------------------------------------------|
+| Data Extraction      | Scroll through paginated tables or lazy-loaded lists to expose additional rows before data collection.         |
+| Form Navigation      | Scroll to a specific section of a long form to bring off-screen fields into view before interaction.           |
+| Overflow Navigation  | Scroll within a fixed-height panel, textarea, or scrollable container to reach content below the visible fold. |
+| Multi-Step Workflows | Position the viewport as part of a broader workflow that chains scroll with click or extract actions.          |
 
 ### Usages in Automation Testing
 
-| Usage                        | Description                                                                                                                               |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| Responsive Design Testing    | Simulate scrolling actions on different screen sizes and devices, ensuring application responsiveness across various viewport dimensions. |
-| Accessibility Testing        | Scroll through web pages and verify the accessibility of interactive elements for individuals with disabilities.                          |
-| Automation Test Scripts      | Integrate scrolling actions into automated test scripts to interact with dynamic web elements effectively.                                |
-| Infinite Scroll Handling     | Automate scrolling to test and validate the functionality of infinite scroll features during automated testing.                           |
-| Visual Testing               | Scroll through web pages and capture screenshots for visual regression testing.                                                           |
-| Dynamic Content Verification | Automate scrolling actions to verify the presence and behavior of dynamically loaded content during automated tests.                      |
+| Use Case                   | Description                                                                                                          |
+|----------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Infinite Scroll Testing    | Scroll to the bottom of the page repeatedly to trigger and validate lazy-loaded or infinite-scroll content.          |
+| Responsive Design Testing  | Scroll to specific offsets on different viewport sizes to verify element visibility and layout at each position.     |
+| Overflow Element Testing   | Scroll within a container to verify that content below the fold is rendered and accessible to assertions.            |
+| Visual Regression Testing  | Scroll to a defined position and capture a screenshot to compare layout against a baseline.                          |
+| Smooth Scroll Verification | Use Behavior:smooth and assert the scroll offset over time to confirm animated scrolling is functioning as expected. |
 
 ## Examples
 
 ### Example No.1
 
-Scroll the web page, moving the view to a position where the top offset is 10 pixels from the top of the page. 
-This could be useful, for example, if you need to scroll down the page by a specific distance to reveal certain content or elements.
+### Scroll the page vertically to a specific offset
+
+Scrolls the entire page so the top of the viewport is 500 pixels from the top of the document.
+Use this form to bring off-screen content into view or to position the viewport at a known vertical coordinate.
 
 _**CSharp**_
 
@@ -54,7 +56,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeScroll",
-    Argument = "{{$ --Top:10}}"
+    Argument = "{{$ --Top:500}}"
 };
 ```
 
@@ -63,7 +65,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeScroll")
-    .setArgument("{{$ --Top:10}}");
+    .setArgument("{{$ --Top:500}}");
 ```
 
 _**Javascript**_
@@ -71,7 +73,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "InvokeScroll",
-    argument: "{{$ --Top:10}}"
+    argument: "{{$ --Top:500}}"
 };
 ```
 
@@ -80,7 +82,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10}}"
+    "argument": "{{$ --Top:500}}"
 }
 ```
 
@@ -89,13 +91,15 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10}}"
+    "argument": "{{$ --Top:500}}"
 }
 ```
 ### Example No.2
 
-Scroll the web page, moving the view horizontally to a position where the left offset is 10 pixels from the left edge of the page. 
-This could be useful, for instance, if you need to shift the view horizontally to focus on a particular section or element of the page.
+### Scroll the page on both axes with smooth animation
+
+Scrolls the entire page to 300 pixels from the top and 100 pixels from the left using a smooth animated transition.
+Use this form when the scroll direction, offset, and animation style all need explicit control.
 
 _**CSharp**_
 
@@ -103,7 +107,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeScroll",
-    Argument = "{{$ --Left:10}}"
+    Argument = "{{$ --Top:300 --Left:100 --Behavior:smooth}}"
 };
 ```
 
@@ -112,7 +116,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeScroll")
-    .setArgument("{{$ --Left:10}}");
+    .setArgument("{{$ --Top:300 --Left:100 --Behavior:smooth}}");
 ```
 
 _**Javascript**_
@@ -120,7 +124,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "InvokeScroll",
-    argument: "{{$ --Left:10}}"
+    argument: "{{$ --Top:300 --Left:100 --Behavior:smooth}}"
 };
 ```
 
@@ -129,7 +133,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "InvokeScroll",
-    "argument": "{{$ --Left:10}}"
+    "argument": "{{$ --Top:300 --Left:100 --Behavior:smooth}}"
 }
 ```
 
@@ -138,13 +142,15 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "InvokeScroll",
-    "argument": "{{$ --Left:10}}"
+    "argument": "{{$ --Top:300 --Left:100 --Behavior:smooth}}"
 }
 ```
 ### Example No.3
 
-Scroll the web page, moving the view both vertically and horizontally to a position where the top offset is 10 pixels from the top of the page and the left offset is 10 pixels from the left edge of the page. 
-This could be useful, for example, when you need to precisely position the view to focus on a specific area or element of the page.
+### Scroll within a specific overflow element vertically
+
+Locates the element matching `#ScrollablePanel` using the CssSelector strategy and scrolls its internal content 150 pixels from the top.
+Use this form when the scroll target is an overflow container rather than the full page.
 
 _**CSharp**_
 
@@ -152,7 +158,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeScroll",
-    Argument = "{{$ --Top:10 --Left:10}}"
+    Argument = "{{$ --Top:150}}",
+    Locator = "CssSelector",
+    OnElement = "#ScrollablePanel"
 };
 ```
 
@@ -161,7 +169,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeScroll")
-    .setArgument("{{$ --Top:10 --Left:10}}");
+    .setArgument("{{$ --Top:150}}")
+    .setLocator("CssSelector")
+    .setOnElement("#ScrollablePanel");
 ```
 
 _**Javascript**_
@@ -169,7 +179,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "InvokeScroll",
-    argument: "{{$ --Top:10 --Left:10}}"
+    argument: "{{$ --Top:150}}",
+    locator: "CssSelector",
+    onElement: "#ScrollablePanel"
 };
 ```
 
@@ -178,7 +190,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10 --Left:10}}"
+    "argument": "{{$ --Top:150}}",
+    "locator": "CssSelector",
+    "onElement": "#ScrollablePanel"
 }
 ```
 
@@ -187,243 +201,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10 --Left:10}}"
+    "argument": "{{$ --Top:150}}",
+    "locator": "CssSelector",
+    "onElement": "#ScrollablePanel"
 }
 ```
 ### Example No.4
 
-Scroll the web page, moving the view both vertically and horizontally to a position where the top offset is 10 pixels from the top of the page and the left offset is 10 pixels from the left edge of the page. 
-Additionally, the scrolling action will be performed smoothly with animation. 
-This could be useful for creating a more visually appealing scrolling experience for users.
+### Scroll within a specific overflow element on both axes with smooth animation
 
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "InvokeScroll",
-    Argument = "{{$ --Top:10 --Left:10 --Behavior:smooth}}"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("InvokeScroll")
-    .setArgument("{{$ --Top:10 --Left:10 --Behavior:smooth}}");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "InvokeScroll",
-    argument: "{{$ --Top:10 --Left:10 --Behavior:smooth}}"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10 --Left:10 --Behavior:smooth}}"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10 --Left:10 --Behavior:smooth}}"
-}
-```
-### Example No.5
-
-Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it vertically so that the content shifts down by 10 pixels from its original position. 
-This could be useful for scenarios where the content within a specific element overflows, such as in a textarea, and you need to scroll it to reveal additional content or ensure visibility of specific elements within the overflow area.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "InvokeScroll",
-    Argument = "{{$ --Top:10}}",
-    Locator = "CssSelector",
-    OnElement = "#TextAreaEnabled"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("InvokeScroll")
-    .setArgument("{{$ --Top:10}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextAreaEnabled");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "InvokeScroll",
-    argument: "{{$ --Top:10}}",
-    locator: "CssSelector",
-    onElement: "#TextAreaEnabled"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10}}",
-    "locator": "CssSelector",
-    "onElement": "#TextAreaEnabled"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10}}",
-    "locator": "CssSelector",
-    "onElement": "#TextAreaEnabled"
-}
-```
-### Example No.6
-
-Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it horizontally so that the content shifts to the right by 10 pixels from its original position. 
-This could be useful for scenarios where the content within a specific element overflows horizontally, such as in a textarea, and you need to scroll it to reveal additional content or ensure visibility of specific elements within the overflow area.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "InvokeScroll",
-    Argument = "{{$ --Left:10}}",
-    Locator = "CssSelector",
-    OnElement = "#TextAreaEnabled"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("InvokeScroll")
-    .setArgument("{{$ --Left:10}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextAreaEnabled");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "InvokeScroll",
-    argument: "{{$ --Left:10}}",
-    locator: "CssSelector",
-    onElement: "#TextAreaEnabled"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Left:10}}",
-    "locator": "CssSelector",
-    "onElement": "#TextAreaEnabled"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Left:10}}",
-    "locator": "CssSelector",
-    "onElement": "#TextAreaEnabled"
-}
-```
-### Example No.7
-
-Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it both vertically and horizontally. 
-The content will shift down by 10 pixels from its original position (top offset), and it will also shift to the right by 10 pixels from its original position (left offset). 
-This could be useful for scenarios where the content within a specific element overflows both vertically and horizontally, such as in a textarea, and you need to scroll it to reveal additional content or ensure visibility of specific elements within the overflow area.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "InvokeScroll",
-    Argument = "{{$ --Top:10 --Left:10}}",
-    Locator = "CssSelector",
-    OnElement = "#TextAreaEnabled"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("InvokeScroll")
-    .setArgument("{{$ --Top:10 --Left:10}}")
-    .setLocator("CssSelector")
-    .setOnElement("#TextAreaEnabled");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "InvokeScroll",
-    argument: "{{$ --Top:10 --Left:10}}",
-    locator: "CssSelector",
-    onElement: "#TextAreaEnabled"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10 --Left:10}}",
-    "locator": "CssSelector",
-    "onElement": "#TextAreaEnabled"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "InvokeScroll",
-    "argument": "{{$ --Top:10 --Left:10}}",
-    "locator": "CssSelector",
-    "onElement": "#TextAreaEnabled"
-}
-```
-### Example No.8
-
-Scroll the content within the overflow element with the ID `TextAreaEnabled`, moving it both vertically and horizontally. 
-The content will shift down by 10 pixels from its original position (top offset), and it will also shift to the right by 10 pixels from its original position (left offset). 
-Additionally, the scrolling action will be performed smoothly, providing a gradual animation effect. 
-This configuration is useful for scenarios where smooth scrolling is desired, enhancing the user experience by providing fluid navigation within the overflow content.
+Locates the element matching `#TextAreaEnabled` using the CssSelector strategy and scrolls its content 10 pixels from the top and 10 pixels from the left with smooth animation.
+Use this form when element-level scrolling must control both axes and the visual animation style simultaneously.
 
 _**CSharp**_
 
@@ -488,11 +276,13 @@ action_rule = {
 |-------------------|-------------------|
 | **Default Value** | Null              |
 | **Depends On**    | None              |
-| **Mandatory**     | Yes               |
+| **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Provides additional instructions or parameters to control the behavior of the scrolling action.
+Argument passes the scroll parameters using the `{{$ --Name:Value}}` macro format.
+It accepts the Behavior, Left, and Top parameters that control the scroll target and animation.
+When neither Left nor Top is supplied via Argument the action takes no effect.
 
 ### Locator (Locator)
 
@@ -504,7 +294,10 @@ Provides additional instructions or parameters to control the behavior of the sc
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the type of locator used to identify the target element defined by the `OnElement` property.
+Locator specifies the strategy used to find the target element for element-level scrolling.
+Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.
+When absent the default Xpath strategy is used.
+Locator is only evaluated when OnElement is also provided.
 
 ### On Element (OnElement)
 
@@ -516,7 +309,9 @@ Specifies the type of locator used to identify the target element defined by the
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the target element to which the scrolling action should be applied.
+OnElement provides the locator expression that identifies the overflow container to scroll.
+It is evaluated using the strategy defined by the Locator property.
+When absent the action scrolls the entire page via `window.scroll()` instead of a specific element.
 
 ## Parameters
 
@@ -530,19 +325,21 @@ Specifies the target element to which the scrolling action should be applied.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the scrolling behavior. Possible values are `auto`, `instant`, and `smooth`.
+Specifies the scrolling animation style.
+Accepted values are `auto` (default — follows the computed CSS scroll-behavior), `instant` (single-jump, no animation), and `smooth` (animated transition).
+When absent the value defaults to `auto`.
 
 #### Values
 
 ##### Auto
 
-Scroll behavior is determined by the computed value of [scroll-behavior](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior).
+Scroll behavior is determined by the computed value of the [scroll-behavior](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior) CSS property on the target.
 ##### Instant
 
-Scrolling happens instantly in a single jump.
+Scrolling happens instantly in a single jump with no animation.
 ##### Smooth
 
-Scrolling animates smoothly.
+Scrolling animates smoothly to the target offset.
 
 ### Left (Left)
 
@@ -554,7 +351,8 @@ Scrolling animates smoothly.
 | **Multiple**      | No                |
 | **Value Type**    | Number            |
 
-Specifies the horizontal scrolling offset from the left edge of the overflow element or the page to which the scrolling action is applied.
+Specifies the horizontal pixel offset from the left edge of the scroll container (the page or the target element) to scroll to.
+When absent the horizontal position is not changed.
 
 ### Top (Top)
 
@@ -566,7 +364,8 @@ Specifies the horizontal scrolling offset from the left edge of the overflow ele
 | **Multiple**      | No                |
 | **Value Type**    | Number            |
 
-Specifies the vertical scrolling offset from the top of the overflow element or top of the page to which the scrolling action is applied.
+Specifies the vertical pixel offset from the top of the scroll container (the page or the target element) to scroll to.
+When absent the vertical position is not changed.
 
 ## Scope
 

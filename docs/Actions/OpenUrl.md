@@ -2,45 +2,50 @@
 
 [Table of Content](../Home.md)  
 
-~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `OpenUrl` plugin is to automate the navigation to a specified URL within the browser. 
-This plugin provides a mechanism to programmatically navigate to a new URL, which can be part of automated workflows or tests.
+Navigates the current browser window to a specified URL using the WebDriver navigate-to command.
+The URL source depends on whether a target element is provided: when no element is given the `Argument` property is used directly without regex processing; when an element is given the URL is read from the element's text content or a named attribute and `RegularExpression` is then applied to the extracted value.
+`RegularExpression` is only active when an element is located — it does not process the direct `Argument` value.
 
 ### Key Features and Functionality
 
-| Feature           | Description                                                                             |
-|-------------------|-----------------------------------------------------------------------------------------|
-| URL Navigation    | Automates the process of navigating to a specified URL in the browser.                  |
-| Element-Based URL | Retrieves URLs from specified web elements or attributes to navigate.                   |
-| Regex Extraction  | Supports extracting URLs using regular expressions from the element text or attributes. |
+| Feature          | Description                                                                                         |
+|------------------|-----------------------------------------------------------------------------------------------------|
+| Direct URL       | Navigates to the URL supplied via `Argument` when no element is specified; regex is not applied.    |
+| Element Text URL | Reads the URL from a located element's text content when `OnAttribute` is absent.                   |
+| Attribute URL    | Reads the URL from a named element attribute via `OnAttribute` when the element is located.         |
+| Regex Filtering  | Applies `RegularExpression` to the element-sourced URL so only the matched portion is navigated to. |
+| Current Context  | Always navigates the current browsing context — it does not open a new window or tab.               |
 
 ### Usages in RPA
 
-| Usage                | Description                                                                     |
-|----------------------|---------------------------------------------------------------------------------|
-| Data Collection      | Navigate to different URLs to collect data from multiple sources automatically. |
-| Multi-Page Workflows | Automate workflows that require navigation across multiple pages.               |
-| Form Submissions     | Navigate to specific URLs after form submissions or other interactions.         |
+| Use Case             | Description                                                                                     |
+|----------------------|-------------------------------------------------------------------------------------------------|
+| Data Collection      | Navigate to different URLs in sequence to collect data from multiple sources automatically.     |
+| Multi-Page Workflows | Drive workflows that require moving through several pages by navigating programmatically.       |
+| Link-Driven Flow     | Extract a URL from a page element and navigate to it without requiring manual URL construction. |
 
 ### Usages in Automation Testing
 
-| Usage                 | Description                                                                         |
-|-----------------------|-------------------------------------------------------------------------------------|
-| Functional Testing    | Verify that web applications correctly navigate to specified URLs.                  |
-| Link Verification     | Ensure that links and buttons direct to the correct URLs.                           |
-| Multi-Page UI Testing | Test the UI and functionality across multiple pages by navigating programmatically. |
+| Use Case              | Description                                                                                  |
+|-----------------------|----------------------------------------------------------------------------------------------|
+| Functional Testing    | Verify that web applications navigate to the correct URL when triggered programmatically.    |
+| Link Verification     | Confirm that element-extracted URLs resolve to the expected destinations.                    |
+| Multi-Page UI Testing | Drive multi-page test flows by navigating to each page URL under controlled test conditions. |
 
 ## Examples
 
 ### Example No.1
 
-Navigate to the URL `http://example.com`. 
-This example demonstrates how to open a specific URL directly without relying on any web element.
+### Navigate directly to a URL
+
+Navigates the current browser window to `http://example.com` using the `Argument` property.
+No element is involved and `RegularExpression` is not applied — the argument value is passed to `WebDriver.OpenUrl` as-is.
 
 _**CSharp**_
 
@@ -88,8 +93,11 @@ action_rule = {
 ```
 ### Example No.2
 
-Navigate to the URL specified by the element identified by the CSS selector `#LinkToOpen`. 
-This example shows how to retrieve the URL from the text content or attribute of a specified web element.
+### Navigate to a URL read from an element's text content
+
+Locates the element matching `#LinkToOpen` using the CssSelector strategy and reads its text content as the navigation URL.
+`RegularExpression` is applied to the text — the default pattern matches the full string so the entire text value is used.
+Use this form when the target URL is stored as the visible text of a page element.
 
 _**CSharp**_
 
@@ -142,67 +150,11 @@ action_rule = {
 ```
 ### Example No.3
 
-Navigate to the URL specified in the `href` attribute of the element identified by the CSS selector `#LinkToOpen`. 
-This example demonstrates how to retrieve the URL from a specific attribute of a web element.
+### Navigate to a URL extracted from an element attribute via regex
 
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "OpenUrl",
-    Locator = "CssSelector",
-    OnAttribute = "href",
-    OnElement = "#LinkToOpen"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("OpenUrl")
-    .setLocator("CssSelector")
-    .setOnAttribute("href")
-    .setOnElement("#LinkToOpen");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "OpenUrl",
-    locator: "CssSelector",
-    onAttribute: "href",
-    onElement: "#LinkToOpen"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "OpenUrl",
-    "locator": "CssSelector",
-    "onAttribute": "href",
-    "onElement": "#LinkToOpen"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "OpenUrl",
-    "locator": "CssSelector",
-    "onAttribute": "href",
-    "onElement": "#LinkToOpen"
-}
-```
-### Example No.4
-
-Navigate to the URL extracted from the `href` attribute of the element identified by the CSS selector `#LinkToOpen`, using a regular expression to match and extract the desired URL pattern. 
-This example highlights how to use a regular expression to precisely match and extract the URL from an attribute.
+Locates the element matching `#LinkToOpen`, reads its `href` attribute, and applies the regular expression `https?://.*` to extract the URL portion.
+Calls `WebDriver.OpenUrl` with the matched value to navigate the current window.
+Use this form when the attribute value may contain surrounding text and only the URL portion is needed.
 
 _**CSharp**_
 
@@ -259,65 +211,6 @@ action_rule = {
     "pluginName": "OpenUrl",
     "locator": "CssSelector",
     "onAttribute": "href",
-    "onElement": "#LinkToOpen",
-    "regularExpression": "https?://.*"
-}
-```
-### Example No.5
-
-Navigate to the URL extracted from the text content of the element identified by the CSS selector `#LinkToOpen`, using a regular expression to match and extract the desired URL pattern. 
-This example demonstrates how to use a regular expression to retrieve the URL directly from the text content of a web element without specifying an attribute.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "OpenUrl",
-    Locator = "CssSelector",
-    OnElement = "#LinkToOpen",
-    RegularExpression = "https?://.*"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("OpenUrl")
-    .setLocator("CssSelector")
-    .setOnElement("#LinkToOpen")
-    .setRegularExpression("https?://.*");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "OpenUrl",
-    locator: "CssSelector",
-    onElement: "#LinkToOpen",
-    regularExpression: "https?://.*"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "OpenUrl",
-    "locator": "CssSelector",
-    "onElement": "#LinkToOpen",
-    "regularExpression": "https?://.*"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "OpenUrl",
-    "locator": "CssSelector",
     "onElement": "#LinkToOpen",
     "regularExpression": "https?://.*"
 }
@@ -335,7 +228,8 @@ action_rule = {
 | **Multiple**          | No                    |
 | **Value Type**        | String|Uri|Expression |
 
-Specifies the URL to navigate to if no element is provided or if a direct URL is needed.
+Argument specifies the URL to navigate to when no element is provided.
+This value is used directly as the navigation URL without any regex processing when OnElement is absent or the element cannot be resolved.
 
 ### Locator (Locator)
 
@@ -347,7 +241,10 @@ Specifies the URL to navigate to if no element is provided or if a direct URL is
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifying the type of locator used to identify the target element defined by the `OnElement` property.
+Locator specifies the strategy used to find the target element when `OnElement` is provided.
+Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.
+When absent the default Xpath strategy is used.
+Locator has no effect when OnElement is not set.
 
 ### On Attribute (OnAttribute)
 
@@ -359,7 +256,9 @@ Specifying the type of locator used to identify the target element defined by th
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Retrieves the URL from the specified attribute of the target element.
+OnAttribute specifies the element attribute from which the URL is read when an element is located.
+When set, `element.GetAttribute(OnAttribute)` is called instead of reading `element.Text`.
+OnAttribute has no effect when OnElement is not set.
 
 ### On Element (OnElement)
 
@@ -371,7 +270,8 @@ Retrieves the URL from the specified attribute of the target element.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifying the target element from which the URL should be retrieved for navigation.
+OnElement provides the locator expression that identifies the element from which the URL is extracted.
+When absent no element is resolved and the URL is taken from Argument directly without regex processing.
 
 ### Regular Expression (RegularExpression)
 
@@ -383,7 +283,9 @@ Specifying the target element from which the URL should be retrieved for navigat
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Uses a regular expression to match and extract the desired part of the URL from the target element.
+RegularExpression is applied to the URL extracted from the element via `Regex.Match` and only `match.Value` is passed to `WebDriver.OpenUrl`.
+RegularExpression is not applied on the direct-argument path — it only processes element-sourced URLs.
+When the pattern does not match, `match.Value` is an empty string and the browser receives an empty URL.
 
 ## Scope
 

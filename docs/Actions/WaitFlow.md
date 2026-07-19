@@ -2,45 +2,49 @@
 
 [Table of Content](../Home.md)  
 
-~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `WaitFlow` plugin is essential for managing the execution flow in both Robotic Process Automation (RPA) and automation testing. 
-Its primary objective is to pause the execution of an automation script until a specified condition is met or a timeout duration has elapsed.
+Pauses an automation script until a set condition is true or a timeout occurs.
+This helps ensure steps run in the right order and prevents errors when waiting for something to appear or change.
 
 ### Key Features and Functionality
 
-| Feature                     | Description                                                                                              |
-|-----------------------------|----------------------------------------------------------------------------------------------------------|
-| Conditional Waiting         | Waits until a specified condition is met, allowing for dynamic flow control based on runtime conditions. |
-| Timeout Handling            | Implements simple delays using specified timeout durations, ensuring controlled execution timing.        |
-| Meta Action                 | Creates, sends, and evaluates assertion plugins to determine whether to proceed based on conditions.     |
-| Integration with Assertions | Utilizes assertion plugins to evaluate conditions, ensuring flexible and dynamic waiting logic.          |
+| Feature               | Description                                                            |
+|-----------------------|------------------------------------------------------------------------|
+| Conditional Waiting   | Pause execution until a given condition is met at runtime.             |
+| Timeout Handling      | Use a set delay to wait a fixed amount of time before continuing.      |
+| Assertion Integration | Use assertion plugins to check conditions and control when to proceed. |
+| Meta Action Creation  | Build and run assertion steps dynamically to decide flow.              |
 
 ### Usages in RPA
 
-| Usage                    | Description                                                                                        |
-|--------------------------|--------------------------------------------------------------------------------------------------- |
-| Conditional Flow Control | Pause execution until specific conditions are met, ensuring proper sequencing in automation tasks. |
-| Timed Delays             | Implement delays in the workflow to avoid race conditions or ensure timing between steps.          |
-| Dynamic Task Management  | Manage dynamic tasks that require waiting for certain conditions to be true before proceeding.     |
+| Use Case                 | Description                                                         |
+|--------------------------|---------------------------------------------------------------------|
+| Conditional Flow Control | Stop a robot until data or a page element meets a required state.   |
+| Timed Delays             | Wait a fixed time between steps to prevent race conditions.         |
+| Dynamic Task Management  | Hold off on actions until external events or data become available. |
 
 ### Usages in Automation Testing
 
-| Usage                       | Description                                                                                                           |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| Wait for Element Visibility | Wait for elements to become visible on the page before interacting with them, ensuring stable and reliable tests.     |
-| Synchronization Points      | Introduce synchronization points in test scripts, waiting for specific conditions to be met before continuing.        |
-| Handle Asynchronous Events  | Manage asynchronous events by waiting for conditions to be met, ensuring tests adapt to dynamic application behavior. |
+| Use Case                    | Description                                                               |
+|-----------------------------|---------------------------------------------------------------------------|
+| Wait for Element Visibility | Pause a test until a page element appears before continuing.              |
+| Synchronization Points      | Insert waits to keep tests in sync with the application under test.       |
+| Handle Asynchronous Events  | Wait for background actions or data loads before moving to the next step. |
 
 ## Examples
 
 ### Example No.1
 
-Wait for the element with the CSS selector `#loading` to become visible, with a maximum timeout of 10 seconds.
+### Wait for Login Form to Become Visible (Millisecond Timeout)
+
+Wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 8,000 milliseconds (8 seconds).
+It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:8000`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in milliseconds.
+Wait steps do not return a value; they only block execution until the condition is met or the timeout expires.
 
 _**CSharp**_
 
@@ -48,9 +52,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "WaitFlow",
-    Argument = "{{$ --Condition:ElementVisible --Timeout:10000}}",
+    Argument = "{{$ --Condition:ElementVisible --Timeout:8000}}",
     Locator = "CssSelector",
-    OnElement = "#loading"
+    OnElement = "#loginForm"
 };
 ```
 
@@ -59,9 +63,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WaitFlow")
-    .setArgument("{{$ --Condition:ElementVisible --Timeout:10000}}")
+    .setArgument("{{$ --Condition:ElementVisible --Timeout:8000}}")
     .setLocator("CssSelector")
-    .setOnElement("#loading");
+    .setOnElement("#loginForm");
 ```
 
 _**Javascript**_
@@ -69,9 +73,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "WaitFlow",
-    argument: "{{$ --Condition:ElementVisible --Timeout:10000}}",
+    argument: "{{$ --Condition:ElementVisible --Timeout:8000}}",
     locator: "CssSelector",
-    onElement: "#loading"
+    onElement: "#loginForm"
 };
 ```
 
@@ -80,9 +84,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "WaitFlow",
-    "argument": "{{$ --Condition:ElementVisible --Timeout:10000}}",
+    "argument": "{{$ --Condition:ElementVisible --Timeout:8000}}",
     "locator": "CssSelector",
-    "onElement": "#loading"
+    "onElement": "#loginForm"
 }
 ```
 
@@ -91,14 +95,18 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "WaitFlow",
-    "argument": "{{$ --Condition:ElementVisible --Timeout:10000}}",
+    "argument": "{{$ --Condition:ElementVisible --Timeout:8000}}",
     "locator": "CssSelector",
-    "onElement": "#loading"
+    "onElement": "#loginForm"
 }
 ```
 ### Example No.2
 
-Pause execution for 5 seconds before proceeding to the next action.
+### Wait for Login Form to Become Visible (HH:MM:SS Timeout)
+
+Wait for the login form with the CSS selector `#loginForm` to become visible, using a maximum timeout of 00:00:08 (8 seconds).
+It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:00:00:08`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in HH:MM:SS format.
+Wait steps do not return a value; they only block execution until the condition is met or the timeout expires.
 
 _**CSharp**_
 
@@ -106,7 +114,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "WaitFlow",
-    Argument = "00:00:05"
+    Argument = "{{$ --Condition:ElementVisible --Timeout:00:00:08}}",
+    Locator = "CssSelector",
+    OnElement = "#loginForm"
 };
 ```
 
@@ -115,7 +125,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WaitFlow")
-    .setArgument("00:00:05");
+    .setArgument("{{$ --Condition:ElementVisible --Timeout:00:00:08}}")
+    .setLocator("CssSelector")
+    .setOnElement("#loginForm");
 ```
 
 _**Javascript**_
@@ -123,7 +135,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "WaitFlow",
-    argument: "00:00:05"
+    argument: "{{$ --Condition:ElementVisible --Timeout:00:00:08}}",
+    locator: "CssSelector",
+    onElement: "#loginForm"
 };
 ```
 
@@ -132,7 +146,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "WaitFlow",
-    "argument": "00:00:05"
+    "argument": "{{$ --Condition:ElementVisible --Timeout:00:00:08}}",
+    "locator": "CssSelector",
+    "onElement": "#loginForm"
 }
 ```
 
@@ -141,12 +157,18 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "WaitFlow",
-    "argument": "00:00:05"
+    "argument": "{{$ --Condition:ElementVisible --Timeout:00:00:08}}",
+    "locator": "CssSelector",
+    "onElement": "#loginForm"
 }
 ```
 ### Example No.3
 
-Wait for the attribute `class` of the element with the XPath `//div[@id='status']` to match the regular expression `completed`, with a timeout of 15 seconds.
+### Pause Execution for 4 Seconds
+
+Pause execution for 4 seconds before continuing to the next step.
+It uses the `WaitFlow` plugin with an argument of `00:00:04`.
+Wait steps do not return a value; they block execution for the specified duration.
 
 _**CSharp**_
 
@@ -154,9 +176,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "WaitFlow",
-    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:completed --Timeout:15000}}",
-    OnAttribute = "class",
-    OnElement = "//div[@id='status']"
+    Argument = "00:00:04"
 };
 ```
 
@@ -165,9 +185,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WaitFlow")
-    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:completed --Timeout:15000}}")
-    .setOnAttribute("class")
-    .setOnElement("//div[@id='status']");
+    .setArgument("00:00:04");
 ```
 
 _**Javascript**_
@@ -175,9 +193,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "WaitFlow",
-    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:completed --Timeout:15000}}",
-    onAttribute: "class",
-    onElement: "//div[@id='status']"
+    argument: "00:00:04"
 };
 ```
 
@@ -186,9 +202,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "WaitFlow",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:completed --Timeout:15000}}",
-    "onAttribute": "class",
-    "onElement": "//div[@id='status']"
+    "argument": "00:00:04"
 }
 ```
 
@@ -197,14 +211,16 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "WaitFlow",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:completed --Timeout:15000}}",
-    "onAttribute": "class",
-    "onElement": "//div[@id='status']"
+    "argument": "00:00:04"
 }
 ```
 ### Example No.4
 
-Wait for a specific text `Success` to be present in the element with the CSS selector `#result` before proceeding.
+### Wait for `data-status` Attribute to Match via XPath (Millisecond Timeout)
+
+Wait for the `data-status` attribute of the `<div id='dataContainer'>` element to match the pattern `data-loaded`, using a maximum timeout of 12,000 milliseconds (12 seconds).
+It uses the `WaitFlow` plugin with `--Condition:ElementAttribute`, `--Operator:Match`, `--Expected:data-loaded`, and `--Timeout:12000`, applied to the element’s `data-status` attribute. Note that the timeout is specified in milliseconds.
+Wait steps block execution until the condition is met or the timeout expires.
 
 _**CSharp**_
 
@@ -212,9 +228,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "WaitFlow",
-    Argument = "{{$ --Condition:ElementText --Operator:Equal --Expected:Success}}",
-    Locator = "CssSelector",
-    OnElement = "#result"
+    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:data-loaded --Timeout:12000}}",
+    OnAttribute = "data-status",
+    OnElement = "//div[@id='dataContainer']"
 };
 ```
 
@@ -223,9 +239,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WaitFlow")
-    .setArgument("{{$ --Condition:ElementText --Operator:Equal --Expected:Success}}")
-    .setLocator("CssSelector")
-    .setOnElement("#result");
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:data-loaded --Timeout:12000}}")
+    .setOnAttribute("data-status")
+    .setOnElement("//div[@id='dataContainer']");
 ```
 
 _**Javascript**_
@@ -233,9 +249,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "WaitFlow",
-    argument: "{{$ --Condition:ElementText --Operator:Equal --Expected:Success}}",
-    locator: "CssSelector",
-    onElement: "#result"
+    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:data-loaded --Timeout:12000}}",
+    onAttribute: "data-status",
+    onElement: "//div[@id='dataContainer']"
 };
 ```
 
@@ -244,9 +260,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "WaitFlow",
-    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Success}}",
-    "locator": "CssSelector",
-    "onElement": "#result"
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:data-loaded --Timeout:12000}}",
+    "onAttribute": "data-status",
+    "onElement": "//div[@id='dataContainer']"
 }
 ```
 
@@ -255,14 +271,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "WaitFlow",
-    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Success}}",
-    "locator": "CssSelector",
-    "onElement": "#result"
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:data-loaded --Timeout:12000}}",
+    "onAttribute": "data-status",
+    "onElement": "//div[@id='dataContainer']"
 }
 ```
 ### Example No.5
 
-Pause execution for 3 seconds before proceeding to the next action.
+### Wait for Specific Text via CSS Selector
+
+Wait for the text `Order Complete` to appear in the element located by CSS selector `#statusMessage`. It uses the `WaitFlow` plugin with `--Condition:ElementText`, `--Operator:Equal`, and `--Expected:Order Complete` applied to the element. The timeout is specified as the system’s default duration.
+Wait steps block execution until the condition is met or the system’s default timeout expires.
 
 _**CSharp**_
 
@@ -270,7 +289,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "WaitFlow",
-    Argument = "3000"
+    Argument = "{{$ --Condition:ElementText --Operator:Equal --Expected:Order Complete}}",
+    Locator = "CssSelector",
+    OnElement = "#statusMessage"
 };
 ```
 
@@ -279,7 +300,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WaitFlow")
-    .setArgument("3000");
+    .setArgument("{{$ --Condition:ElementText --Operator:Equal --Expected:Order Complete}}")
+    .setLocator("CssSelector")
+    .setOnElement("#statusMessage");
 ```
 
 _**Javascript**_
@@ -287,7 +310,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "WaitFlow",
-    argument: "3000"
+    argument: "{{$ --Condition:ElementText --Operator:Equal --Expected:Order Complete}}",
+    locator: "CssSelector",
+    onElement: "#statusMessage"
 };
 ```
 
@@ -296,7 +321,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "WaitFlow",
-    "argument": "3000"
+    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Order Complete}}",
+    "locator": "CssSelector",
+    "onElement": "#statusMessage"
 }
 ```
 
@@ -305,7 +332,60 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "WaitFlow",
-    "argument": "3000"
+    "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:Order Complete}}",
+    "locator": "CssSelector",
+    "onElement": "#statusMessage"
+}
+```
+### Example No.6
+
+### Pause Execution for 2 Seconds
+
+Pause execution for 2 seconds before continuing to the next step. It uses the `WaitFlow` plugin with an argument of `2000` (milliseconds).
+Wait steps block execution for the specified duration.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "WaitFlow",
+    Argument = "2000"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("WaitFlow")
+    .setArgument("2000");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "WaitFlow",
+    argument: "2000"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "WaitFlow",
+    "argument": "2000"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "WaitFlow",
+    "argument": "2000"
 }
 ```
 
@@ -321,7 +401,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | Number|Expression |
 
-Defines the duration to wait or the condition to evaluate, based on the type of wait specified. For time-based waits, it takes a `TimeSpan` format. For condition-based waits, it specifies the condition and parameters.
+A value that sets how long to pause or what condition to check before continuing.
+Fixed waits use a time span format to define the pause duration.
+Conditional waits specify what to look for and any needed parameters.
 
 ### Locator (Locator)
 
@@ -333,7 +415,9 @@ Defines the duration to wait or the condition to evaluate, based on the type of 
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies how elements should be located on a webpage or within an application.
+Method used to find an item on a page or in an app.
+Common methods include XPath, CSS selectors, or IDs.
+Choosing the correct method ensures the right element is found.
 
 ### On Attribute (OnAttribute)
 
@@ -345,7 +429,9 @@ Specifies how elements should be located on a webpage or within an application.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the attribute of the target element that will be interacted with or evaluated during automation.
+Name of the element’s property whose value will be used or checked.
+It identifies which piece of the element the system needs.
+Picking the correct property ensures the right data is accessed.
 
 ### On Element (OnElement)
 
@@ -357,7 +443,9 @@ Specifies the attribute of the target element that will be interacted with or ev
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the target element on which conditions will be evaluated during the automation process.
+Specifies which element the system will check or interact with.
+It points to the item on a page or in an application where conditions apply.
+Targeting the correct element ensures accurate automation behavior.
 
 ## Parameters
 
@@ -371,7 +459,9 @@ Specifies the target element on which conditions will be evaluated during the au
 | **Multiple**      | No                |
 | **Value Type**    | Assertion         |
 
-Specifies the criteria or state that must be evaluated or met during the execution of a plugin or action.
+A rule that tells the system what must be true for an action to proceed.
+It sets the situation or threshold to check before moving on.
+Clear conditions help the automation follow the correct path.
 
 ### Expected (Expected)
 
@@ -383,7 +473,9 @@ Specifies the criteria or state that must be evaluated or met during the executi
 | **Multiple**      | No                |
 | **Value Type**    | Any               |
 
-Specifies the value or pattern that the automation script expects to find or match during the execution of a condition.
+The value or pattern the script looks for when checking a condition.
+It defines what outcome counts as a match.
+Clear expected values ensure accurate checks.
 
 ### Operator (Operator)
 
@@ -395,7 +487,9 @@ Specifies the value or pattern that the automation script expects to find or mat
 | **Multiple**      | No                |
 | **Value Type**    | Operator          |
 
-Specifies the type of comparison or operation to be performed when evaluating a condition.
+How the system compares the actual result to the expected value.
+It can check for equality, greater than, or other comparisons.
+Picking the right comparison type makes sure decisions are correct.
 
 ### Timeout (Timeout)
 
@@ -407,7 +501,9 @@ Specifies the type of comparison or operation to be performed when evaluating a 
 | **Multiple**      | No                |
 | **Value Type**    | Number|Time       |
 
-Specifies the maximum duration the automation script should wait for a condition to be met before proceeding with the next step, after which it will terminate.
+The longest time the script waits for a condition before moving on.
+It prevents the process from hanging indefinitely.
+After this time, the script moves to the next step even if the condition is not met.
 
 ## Scope
 

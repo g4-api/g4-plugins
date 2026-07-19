@@ -2,46 +2,51 @@
 
 [Table of Content](../Home.md)  
 
-~12 min · Operator Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~13 min · Operator Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the LowerEqualOperator plugin is to compare two numeric values and determine if the first value is less than or equal to the second value, using a numerical comparison.
+The LowerEqualOperator plugin compares two values and checks whether the first value is less than or equal to the second value.
+It is used to evaluate numeric conditions in automation workflows.
+This helps workflows make decisions based on thresholds, limits, or maximum allowed values.
 
-### Key Features
+### Key Features and Functionality
 
-| Feature              | Description                                                       |
-|----------------------|-------------------------------------------------------------------|
-| Numerical Comparison | Performs a numerical comparison of two values.                    |
-| Integration          | Can be used under condition expressions by other plugins.         |
+| Feature                       | Description                                                                                 |
+|-------------------------------|---------------------------------------------------------------------------------------------|
+| Less-than-or-equal comparison | Compares two numeric values using the less-than-or-equal (<=) operator.                     |
+| Numeric validation            | Ensures both input values can be safely converted to numbers before comparison.             |
+| Boolean evaluation result     | Returns true when the left value is less than or equal to the right value, otherwise false. |
+| Operator integration          | Integrates with the operator framework to return a standard comparison result.              |
 
 ### Usages in RPA
 
-| Usage              | Description                                                                            |
-|--------------------|----------------------------------------------------------------------------------------|
-| Numeric Comparison | Validate if one numeric value is less than or equal to another numeric value.          |
-| Conditional Logic  | Use in conditional expressions to control workflow logic based on numeric comparisons. |
+| Use Case              | Description                                                                   |
+|-----------------------|-------------------------------------------------------------------------------|
+| Threshold checks      | Verify that a value does not exceed a defined maximum.                        |
+| Data validation       | Ensure numeric inputs are within allowed limits before continuing a workflow. |
+| Conditional branching | Decide workflow paths based on numeric comparisons.                           |
 
 ### Usages in Automation Testing
 
-| Usage              | Description                                                               |
-|--------------------|---------------------------------------------------------------------------|
-| Validation         | Validate output or state by comparing expected and actual numeric values. |
-| Dynamic Conditions | Create dynamic conditions based on numeric comparisons.                   |
+| Use Case          | Description                                                            |
+|-------------------|------------------------------------------------------------------------|
+| Assertion logic   | Validate that actual values are less than or equal to expected values. |
+| Boundary testing  | Check upper boundary conditions in numeric test scenarios.             |
+| Test flow control | Control test execution paths based on comparison outcomes.             |
 
 ## Examples
 
 ### Example No.1
 
-This example demonstrates the usage of the `LowerEqual` plugin to compare two numeric values and determine if the first value is less than or equal to the second value.
+### Compare two numeric values using LowerEqual
 
-| Field      | Description                                                                                                                      |
-|------------|----------------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `LowerEqual`. This signifies the action of comparing two numeric values. |
-| LeftHand   | Specifies the first numeric value to be compared. For example, `5`.                                                              |
-| RightHand  | Specifies the second numeric value to be compared. For example, `10`.                                                            |
+Compare a left-hand numeric value to a right-hand numeric value.
+The rule evaluates to true only when the left-hand value is less than or equal to the right-hand value.
+A macro produces runtime values that are substituted where the token appears.
+The LowerEqual action consumes the macro output to perform the comparison.
 
 _**CSharp**_
 
@@ -49,7 +54,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "LowerEqual",
-    Argument = "{{$ --LeftHand:5 --RightHand:10}}"
+    Argument = "{{$--LeftHand:5 --RightHand:10}}"
 };
 ```
 
@@ -58,7 +63,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("LowerEqual")
-    .setArgument("{{$ --LeftHand:5 --RightHand:10}}");
+    .setArgument("{{$--LeftHand:5 --RightHand:10}}");
 ```
 
 _**Javascript**_
@@ -66,7 +71,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "LowerEqual",
-    argument: "{{$ --LeftHand:5 --RightHand:10}}"
+    argument: "{{$--LeftHand:5 --RightHand:10}}"
 };
 ```
 
@@ -75,7 +80,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "LowerEqual",
-    "argument": "{{$ --LeftHand:5 --RightHand:10}}"
+    "argument": "{{$--LeftHand:5 --RightHand:10}}"
 }
 ```
 
@@ -84,18 +89,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "LowerEqual",
-    "argument": "{{$ --LeftHand:5 --RightHand:10}}"
+    "argument": "{{$--LeftHand:5 --RightHand:10}}"
 }
 ```
 ### Example No.2
 
-This example demonstrates the usage of the `LowerEqualOperator` plugin within another plugin, such as `Assert`, to compare two numeric values and determine if the first value is less than or equal to the second value.
+### Assert a LowerEqual condition
 
-| Field     | Description                                                                                                                                |
-|-----------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| Condition | Identifies the specific operator being utilized, which is `LowerEqualOperator`. This signifies the action of comparing two numeric values. |
-| LeftHand  | Specifies the first numeric value to be compared. For example, `5`.                                                                        |
-| RightHand | Specifies the second numeric value to be compared. For example, `10`.                                                                      |
+Evaluate a numeric comparison as part of an assertion.
+The assertion passes only when the left-hand value is less than or equal to the right-hand value.
+A macro produces runtime values that are substituted where the token appears.
+The Assert action consumes the macro output and applies the LowerEqual comparison.
 
 _**CSharp**_
 
@@ -103,7 +107,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
+    Argument = "{{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
 };
 ```
 
@@ -112,7 +116,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:LowerEqual --LeftHand:5 --RightHand:10}}");
+    .setArgument("{{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}}");
 ```
 
 _**Javascript**_
@@ -120,7 +124,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
+    argument: "{{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
 };
 ```
 
@@ -129,7 +133,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
+    "argument": "{{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
 }
 ```
 
@@ -138,7 +142,7 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
+    "argument": "{{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}}"
 }
 ```
 
@@ -152,9 +156,12 @@ action_rule = {
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
-| **Value Type**    | Number            |
+| **Value Type**    | String            |
 
-Specifies the first numeric value to be compared in the less than or equal to check.
+LeftHand is the value on the left side of the <= comparison.
+The value is treated as text and must successfully parse to a double at runtime.
+Parsing uses the current machine culture, so decimal separators and formatting must match the environment.
+If parsing fails for either side of the comparison, the operator returns false.
 
 ### Right Hand (RightHand)
 
@@ -164,9 +171,12 @@ Specifies the first numeric value to be compared in the less than or equal to ch
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
-| **Value Type**    | Number            |
+| **Value Type**    | String            |
 
-Specifies the second numeric value to be compared in the less than or equal to check.
+RightHand is the value on the right side of the <= comparison.
+The value is treated as text and must successfully parse to a double at runtime.
+Parsing uses the current machine culture, so decimal separators and formatting must match the environment.
+If parsing fails for either side of the comparison, the operator returns false.
 
 ## Scope
 

@@ -2,46 +2,51 @@
 
 [Table of Content](../Home.md)  
 
-~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `InvokeDoubleClick` plugin is to perform double-click actions on specified web elements.
+Performs a double-click on a target element or at the current mouse position when no element is specified.
+When an element is provided, the action first moves the mouse cursor to the element to ensure it is scrolled into view before dispatching the double-click via the WebDriver Actions API.
+This makes it the primary way to trigger double-click interactions — such as opening items, entering inline edit mode, or activating double-click–driven behaviors — in an automation workflow.
+For standard left-click interactions use InvokeClick. For right-click interactions use InvokeContextClick instead.
 
 ### Key Features and Functionality
 
-| Feature             | Description                                                     |
-|---------------------|-----------------------------------------------------------------|
-| Double Click Action | Performs a double-click action on the specified web element.    |
-| Element Handling    | Handles web elements based on provided locators and attributes. |
+| Feature             | Description                                                                                      |
+|---------------------|--------------------------------------------------------------------------------------------------|
+| Double Click        | Performs a double-click on the target element using the WebDriver Actions API.                   |
+| Auto Scroll         | Calls MoveToElement before clicking to scroll the element into view and ensure interactability.  |
+| Positional Click    | Double-clicks at the current mouse position when no element locator is provided.                 |
+| Locator Flexibility | Supports Xpath, CssSelector, Id, LinkText, and PartialLinkText locator strategies.               |
 
 ### Usages in RPA
 
-| Usage               | Description                                                                                             |
-|---------------------|---------------------------------------------------------------------------------------------------------|
-| Element Interaction | Interact with web elements by performing double-click actions as part of automated workflows.           |
-| Selection Actions   | Automate actions that require double-clicking on elements to trigger selections or open detailed views. |
-| File Management     | Double-click on file icons to open or execute files within a file management system.                    |
-| Form Interactions   | Double-click on form fields to activate editing modes or open additional input options.                 |
+| Use Case                | Description                                                                                             |
+|-------------------------|---------------------------------------------------------------------------------------------------------|
+| File or Item Opening    | Double-click a file, folder, or list item to open it as part of an automated workflow.                  |
+| Inline Edit Activation  | Double-click a cell or label to enter inline edit mode in a grid or table.                              |
+| Positional Double-Click | Double-click at a scripted mouse position when no stable element reference is available.                |
 
 ### Usages in Automation Testing
 
-| Usage                       | Description                                                                                                |
-|-----------------------------|------------------------------------------------------------------------------------------------------------|
-| UI Testing                  | Perform double-click actions on web elements to test user interface interactions.                          |
-| Complex Interaction Testing | Test scenarios where actions depend on double-clicking elements to trigger further interactions.           |
-| Regression Testing          | Ensure that double-click functionalities work as expected after changes or updates to the web application. |
-| Menu Navigation Testing     | Double-click on menu items to test navigation within an application.                                       |
-| Drag and Drop Testing       | Initiate drag and drop actions by double-clicking on draggable elements, ensuring they move as expected.   |
-| Content Selection Testing   | Test text or content selection functionalities that are triggered by double-clicking on the content.       |
+| Use Case                | Description                                                                                                 |
+|-------------------------|-------------------------------------------------------------------------------------------------------------|
+| Double-Click Testing    | Verify that double-clickable elements respond correctly to user interaction.                                 |
+| Inline Edit Testing     | Confirm that double-clicking a cell or label activates the expected inline edit control.                    |
+| Viewport Scroll Testing | Validate that MoveToElement correctly scrolls off-screen elements into view before the double-click occurs. |
+| Regression Testing      | Ensure double-click behavior on interactive elements remains consistent after application updates.          |
 
 ## Examples
 
 ### Example No.1
 
-Perform a `DoubleClick` action on a web element with the `ID` attribute `DoubleClickButton`, using a CSS selector to locate the element.
+### Double-click an element using a CSS selector
+
+Locates the element matching `#EditableCell` using the CssSelector strategy, moves the mouse to it, and performs a double-click.
+Use this form for any straightforward double-click interaction on a known stable element, such as activating inline edit mode on a table cell.
 
 _**CSharp**_
 
@@ -50,7 +55,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeDoubleClick",
     Locator = "CssSelector",
-    OnElement = "#DoubleClickButton"
+    OnElement = "#EditableCell"
 };
 ```
 
@@ -60,7 +65,7 @@ _**Java**_
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeDoubleClick")
     .setLocator("CssSelector")
-    .setOnElement("#DoubleClickButton");
+    .setOnElement("#EditableCell");
 ```
 
 _**Javascript**_
@@ -69,7 +74,7 @@ _**Javascript**_
 var actionRule = {
     pluginName: "InvokeDoubleClick",
     locator: "CssSelector",
-    onElement: "#DoubleClickButton"
+    onElement: "#EditableCell"
 };
 ```
 
@@ -79,7 +84,7 @@ _**JSON**_
 {
     "pluginName": "InvokeDoubleClick",
     "locator": "CssSelector",
-    "onElement": "#DoubleClickButton"
+    "onElement": "#EditableCell"
 }
 ```
 
@@ -89,13 +94,15 @@ _**Python**_
 action_rule = {
     "pluginName": "InvokeDoubleClick",
     "locator": "CssSelector",
-    "onElement": "#DoubleClickButton"
+    "onElement": "#EditableCell"
 }
 ```
 ### Example No.2
 
-Perform a `DoubleClick` action at the last known mouse location. 
-While this approach might be suitable for certain scenarios, it's generally less reliable and less commonly used in automation testing compared to locating and interacting with elements using locators.
+### Double-click at the current mouse position
+
+Performs a double-click at the last known mouse cursor position without locating or targeting any element.
+Use this form when the mouse position has been set by a preceding move action and no element reference is needed.
 
 _**CSharp**_
 
@@ -136,59 +143,6 @@ action_rule = {
     "pluginName": "InvokeDoubleClick"
 }
 ```
-### Example No.3
-
-Perform a `DoubleClick` action on a web element with the ID attribute `DoubleClickArea`, using an ID locator to find the element.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "InvokeDoubleClick",
-    Locator = "Id",
-    OnElement = "DoubleClickArea"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("InvokeDoubleClick")
-    .setLocator("Id")
-    .setOnElement("DoubleClickArea");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "InvokeDoubleClick",
-    locator: "Id",
-    onElement: "DoubleClickArea"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "InvokeDoubleClick",
-    "locator": "Id",
-    "onElement": "DoubleClickArea"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "InvokeDoubleClick",
-    "locator": "Id",
-    "onElement": "DoubleClickArea"
-}
-```
 
 ## Properties
 
@@ -202,7 +156,10 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the locator strategy used to find the target element for the double-click action. The default is `Xpath`.
+Locator specifies the strategy used to find the target element for the double-click.
+Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.
+When absent the default Xpath strategy is used.
+Locator is only evaluated when OnElement is also provided; it has no effect in positional-click mode.
 
 ### On Element (OnElement)
 
@@ -214,7 +171,9 @@ Specifies the locator strategy used to find the target element for the double-cl
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the target element for the double-click action, located using the specified locator strategy.
+OnElement provides the locator expression that identifies the element to double-click.
+It is evaluated using the strategy defined by the Locator property.
+When absent the action performs a double-click at the current mouse position instead.
 
 ## Scope
 

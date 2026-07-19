@@ -2,44 +2,46 @@
 
 [Table of Content](../Home.md)  
 
-~18 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `RedoNavigation` plugin is to automate the process of navigating forward within a web browser. 
-It provides a structured and configurable way to perform the `forward` action, enabling automation scripts to simulate user interactions with precision. 
-The plugin caters to scenarios where navigating forward multiple steps with optional delays between actions is a requirement.
+Automates forward browser navigation, equivalent to clicking the browser's built-in forward button.
+It provides a structured way to advance through session history with configurable repeat counts and optional delays between steps.
 
 ### Key Features and Functionality
 
-| Feature             | Description                                                                                                                |
-|---------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Dynamic Repeats     | Allows specifying the number of times the browser should navigate forward, adapting to various automation needs.           |
-| Configurable Delays | Introduces delays between each navigation step, enhancing flexibility and preventing interference with web responsiveness. |
-| Intuitive Logging   | Incorporates logging capabilities, providing insights and transparency into the execution process.                         |
+| Feature             | Description                                                                                                                  |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------|
+| Dynamic Repeats     | Configures how many times the browser navigates forward in a single action invocation.                                       |
+| Configurable Delays | Introduces a pause between each forward step, in milliseconds or time span format, to control navigation pace.               |
+| Legacy Argument     | Accepts a plain integer directly as the repeat count for backwards-compatible usage.                                         |
+| Delay Safeguard     | Logs a warning and resets the delay to zero when the configured value exceeds the maximum allowed integer millisecond range. |
 
 ### Usages in RPA
 
-| Usage                | Description                                                                                                      |
-|----------------------|------------------------------------------------------------------------------------------------------------------|
-| Multi-Step Processes | Streamlines multi-step workflows that involve navigating through multiple pages.                                 |
-| Error Handling       | Navigates forward to a known state for retrying or taking alternative actions if certain conditions are not met. |
+| Use Case             | Description                                                                                               |
+|----------------------|-----------------------------------------------------------------------------------------------------------|
+| Multi-Step Traversal | Advances through a sequence of previously visited pages in a single action without manual forward clicks. |
+| State Restoration    | Navigates forward to restore a known browser state after automated back navigation.                       |
 
 ### Usages in Automation Testing
 
-| Usage                    | Description                                                                           |
-|--------------------------|---------------------------------------------------------------------------------------|
-| Browser State Management | Manages the state of the browser in end-to-end tests involving complex user journeys. |
-| Performance Testing      | Simulates realistic user interactions with controlled navigation forward and delays.  |
+| Use Case                | Description                                                                                                    |
+|-------------------------|----------------------------------------------------------------------------------------------------------------|
+| Browser History Testing | Verifies that the browser correctly restores pages when navigating forward after a programmatic back sequence. |
+| Navigation Flow Testing | Simulates realistic forward navigation patterns with controlled delays for performance test accuracy.          |
 
 ## Examples
 
 ### Example No.1
 
-Perform a default browser forward navigation. 
-This is useful for simple scenarios where returning to the previous web page is required without specifying additional parameters.
+### Default single forward navigation
+
+Navigates the browser forward by one step using default settings.
+No repeat count or delay is configured, so the action executes once immediately.
 
 _**CSharp**_
 
@@ -82,8 +84,10 @@ action_rule = {
 ```
 ### Example No.2
 
-Navigate the web browser forward by three steps. 
-The provided argument, `3`, specifies the number of repeats for the navigation action.
+### Forward navigation using an integer argument
+
+Navigates the browser forward three times by passing `3` as a plain integer argument.
+The integer is interpreted directly as the repeat count without requiring parameter expression syntax.
 
 _**CSharp**_
 
@@ -131,9 +135,10 @@ action_rule = {
 ```
 ### Example No.3
 
-Command the `RedoNavigation` plugin to conduct a series of forward navigations in the web browser. 
-The provided argument, `{{$ --Repeat:3 --Delay:1000}}`, precisely dictates three repetitions with a `1000-millisecond` delay between each step. 
-This configuration grants meticulous control over the forward navigation process, including the number of repeats and inter-step delays.
+### Forward navigation with repeat count and delay
+
+Navigates the browser forward three times, pausing 1000 milliseconds between each step.
+The `{{$ --Repeat:3 --Delay:1000}}` argument expression sets both the repeat count and the inter-step delay in a single value.
 
 _**CSharp**_
 
@@ -179,56 +184,6 @@ action_rule = {
     "argument": "{{$ --Repeat:3 --Delay:1000}}"
 }
 ```
-### Example No.4
-
-Command the `RedoNavigation` plugin to execute a sequence of forward navigations in the web browser. 
-The provided argument, `{{$ --Repeat:3 --Delay:00:00:01}}`, dictates three repetitions with a `1-second` delay between each step. 
-This example showcases how the plugin can be configured with supplementary parameters, offering precise control over the navigation process.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "RedoNavigation",
-    Argument = "{{$ --Repeat:3 --Delay:00:00:01}}"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("RedoNavigation")
-    .setArgument("{{$ --Repeat:3 --Delay:00:00:01}}");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "RedoNavigation",
-    argument: "{{$ --Repeat:3 --Delay:00:00:01}}"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "RedoNavigation",
-    "argument": "{{$ --Repeat:3 --Delay:00:00:01}}"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "RedoNavigation",
-    "argument": "{{$ --Repeat:3 --Delay:00:00:01}}"
-}
-```
 
 ## Properties
 
@@ -242,8 +197,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | Number|Expression |
 
-Allow users to customize the behavior of the plugin by providing supplementary information or instructions. 
-It acts as a configurable parameter, enabling users to tailor the plugin's action to meet specific requirements.
+Provides the primary input for the forward navigation action.
+Accepts either a plain integer as the repeat count or a parameter expression such as `{{$ --Repeat:3 --Delay:1000}}` for combined repeat and delay control.
+When a plain integer is supplied and no `Repeat` parameter is present, the integer is used directly as the repeat count.
 
 ## Parameters
 
@@ -257,8 +213,9 @@ It acts as a configurable parameter, enabling users to tailor the plugin's actio
 | **Multiple**      | No                |
 | **Value Type**    | Number|Time       |
 
-Specifies the pause or waiting period between each step of the forward navigation process. 
-This parameter allows users to specify a duration, either in milliseconds or a formatted time expression, to control the pace of the navigation.
+Controls the pause between each forward navigation step.
+Accepts a value in milliseconds or a time span string such as `00:00:01` for one second.
+When the configured delay exceeds the maximum allowed integer millisecond value, a warning is logged and the delay resets to zero.
 
 ### Repeat (Repeat)
 
@@ -270,8 +227,9 @@ This parameter allows users to specify a duration, either in milliseconds or a f
 | **Multiple**      | No                |
 | **Value Type**    | Number            |
 
-The number of iterations for the forward navigation process. 
-It is instrumental in scenarios where repetitive navigation actions are essential for achieving specific automation objectives.
+Sets how many times the browser navigates forward in one action invocation.
+Useful when advancing through multiple pages is required without issuing separate forward commands.
+When no valid value is provided, the browser navigates forward exactly once.
 
 ## Scope
 

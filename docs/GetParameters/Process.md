@@ -2,46 +2,48 @@
 
 [Table of Content](../Home.md)  
 
-~12 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~9 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `GetProcessParameter` plugin is to fetch environment variables that are specific to the current process. This allows for the dynamic retrieval of parameters that may vary during the execution of a process, such as temporary paths, session-specific tokens, or other environment-specific settings.
+This plugin lets automation workflows retrieve parameters stored in the G4 Hub process scope, making values like temporary settings or session tokens available to every workflow on the hub. These values persist until the hub restarts, so workflows can share data without manual steps. It works like machine-level parameters but without OS restrictions, offering a simple cross-workflow sharing mechanism.
 
 ### Key Features and Functionality
 
-| Feature                        | Description                                                                                               |
-|------------------------------- |-----------------------------------------------------------------------------------------------------------|
-| Parameter Retrieval            | Fetches environment variables specific to the current process.                                            |
-| Dynamic Parameter Handling     | Retrieves process-specific parameters that can change during runtime.                                     |
-| Integration with Other Plugins | Can be used in conjunction with other plugins to dynamically use retrieved parameters in various actions. |
+| Feature                          | Description                                                                         |
+|----------------------------------|-------------------------------------------------------------------------------------|
+| Hub-level variable access        | Reads values stored at the G4 Hub process level for all workflows until restart.    |
+| Temporary machine-level behavior | Acts like machine-scope parameters on any OS and resets when the hub restarts.      |
+| Live updates during runtime      | Picks up changes to hub-scoped parameters immediately for running workflows.        |
+| Output mapping                   | Exposes the fetched value in the `Result` output field for use by downstream steps. |
 
 ### Usages in RPA
 
-| Usage                  | Description                                                                                                 |
-|------------------------|-------------------------------------------------------------------------------------------------------------|
-| Dynamic Configuration  | Retrieve and use process-specific environment variables dynamically based on the process execution context. |
-| Temporary Data Storage | Use process-level environment variables for temporary data storage and retrieval within a process.          |
+| Use Case                         | Description                                                                                  |
+|----------------------------------|----------------------------------------------------------------------------------------------|
+| Shared settings across workflows | Provides a common source of values for all workflows running on the G4 Hub.                  |
+| Dynamic configuration            | Loads temporary hub parameters into tasks so workflows adapt to changing values at runtime.  |
+| Cross-workflow data exchange     | Uses hub-scoped variables to pass data between different workflows without external storage. |
 
 ### Usages in Automation Testing
 
-| Usage                      | Description                                                                                          |
-|----------------------------|------------------------------------------------------------------------------------------------------|
-| Session-Specific Testing   | Retrieve parameters specific to the test session, enabling more accurate and session-specific tests. |
-| Dynamic Test Configuration | Simplify test configuration by fetching process-specific parameters directly within test scripts.    |
+| Use Case                 | Description                                                                                |
+|--------------------------|--------------------------------------------------------------------------------------------|
+| Shared test parameters   | Supplies consistent values to all test workflows on the hub for uniform test runs.         |
+| Data-driven test inputs  | Feeds hub-scoped variables into tests to drive different scenarios without script changes. |
+| Pre-run parameter checks | Verifies required hub variables are set before test execution to avoid failures.           |
 
 ## Examples
 
 ### Example No.1
 
-This example demonstrates the usage of the `Process` plugin to fetch a parameter named `TempPath` directly.
+### Retrieve Process-Level Environment Variable
 
-| Field      | Description                                                        |
-|------------|--------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `Process`. |
-| onElement  | Specifies the name of the parameter to be fetched.                 |
+This example demonstrates how to retrieve a process-level environment variable named `TempPath` using the Process plugin’s GetParameter action.
+It retrieves the raw value of `TempPath` from the process scope for use in downstream workflows.
+The retrieved value is available in the `Result` output field for subsequent steps.
 
 _**CSharp**_
 
@@ -87,71 +89,6 @@ action_rule = {
     "onElement": "TempPath"
 }
 ```
-### Example No.2
-
-This example demonstrates the usage of the `Get-Parameter` macro to fetch a parameter named `TempPath` from the process environment and use it in a `SendKeys` action.
-
-| Field      | Description                                                                                             |
-|------------|---------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`.                                     |
-| argument   | Specifies the use of the `Get-Parameter` macro to fetch the parameter value dynamically.                |
-| onElement  | Specifies the target element on which the keystrokes will be sent, identified by its CSS selector.      |
-| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example. |
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SendKeys",
-    Argument = "{{$Get-Parameter --Name:TempPath --Scope:Process}}",
-    Locator = "CssSelector",
-    OnElement = "#someElement"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("{{$Get-Parameter --Name:TempPath --Scope:Process}}")
-    .setLocator("CssSelector")
-    .setOnElement("#someElement");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SendKeys",
-    argument: "{{$Get-Parameter --Name:TempPath --Scope:Process}}",
-    locator: "CssSelector",
-    onElement: "#someElement"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:TempPath --Scope:Process}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:TempPath --Scope:Process}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
 
 ## Properties
 
@@ -165,7 +102,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the name of the environment variable to be fetched from the process environment.
+OnElement names the environment variable that workflows will fetch.
+Workflows use this name to load the correct value when they run.
+Using the right name ensures the workflow finds the intended setting every time.
 
 ## Scope
 

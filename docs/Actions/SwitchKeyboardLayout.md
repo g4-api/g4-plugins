@@ -2,41 +2,46 @@
 
 [Table of Content](../Home.md)  
 
-~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `SwitchKeyboardLayout` plugin switches the keyboard layout using the User32 API. It's essential for automation scenarios that require precise control over input languages in native Windows applications.
+The `SwitchKeyboardLayout` plugin switches the active OS-level keyboard layout in native Windows applications using the Windows User32 API.
+It is designed for automation workflows that require precise control over input language settings in desktop applications that do not support standard WebDriver keyboard layout control.
 
 ### Key Features and Functionality
 
-| Feature                 | Description                                                             |
-|-------------------------|-------------------------------------------------------------------------|
-| Dynamic Switching       | Dynamically switches keyboard layouts based on automation requirements. |
-| User32 Integration      | Utilizes User32 API calls to reliably change layouts at the OS level.   |
-| Supports Custom Layouts | Supports specifying different keyboard layouts dynamically.             |
+| Feature                | Description                                                                                                     |
+|------------------------|-----------------------------------------------------------------------------------------------------------------|
+| OS-Level Layout Switch | Posts a layout change request to the User32 server, activating the specified locale as the active input method. |
+| BCP-47 Locale Support  | Accepts standard BCP-47 locale identifiers such as `en-US` and `he-IL` for precise language targeting.          |
+| Flexible Input         | Accepts the layout via the `KeyboardLayout` parameter or a raw `Argument` fallback, defaulting to `en-US`.      |
+| Safe Guard             | Returns an empty response without error when the WebDriver does not implement `IUser32Driver`.                  |
 
 ### Usage in RPA
 
-| Usage                          | Description                                                    |
-|--------------------------------|----------------------------------------------------------------|
-| Multilingual Automation        | Facilitates automation scenarios involving multiple languages. |
-| Legacy Application Integration | Enables precise keyboard layout control in legacy apps.        |
+| Usage                    | Description                                                                                                        |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Multilingual Workflows   | Switches between keyboard layouts during automation flows that process input in multiple languages.                |
+| Legacy Application Input | Ensures correct input encoding for legacy Windows applications that require a specific OS keyboard layout setting. |
 
 ### Usage in Automation Testing
 
-| Usage               | Description                                                            |
-|---------------------|------------------------------------------------------------------------|
-| UI Language Testing | Ensures correct keyboard layout during UI tests.                       |
-| Input Validation    | Validates multilingual input scenarios with accurate layout switching. |
+| Usage                     | Description                                                                                                        |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------|
+| UI Localization Testing   | Validates application behavior and character rendering when the keyboard layout changes between test scenarios.    |
+| Input Encoding Validation | Confirms that the application accepts and displays characters correctly under non-default locale keyboard layouts. |
 
 ## Examples
 
 ### Example No.1
 
-Switch keyboard layout to Hebrew Standard.
+### Switch to Hebrew Standard layout via parameter expression
+
+Switch the active keyboard layout to Hebrew Standard (`he-IL`) using the `--KeyboardLayout` parameter inside a `{{$ ...}}` expression.
+This is the canonical form for explicit layout selection and takes priority over any raw `Argument` value.
 
 _**CSharp**_
 
@@ -84,103 +89,10 @@ action_rule = {
 ```
 ### Example No.2
 
-Switch keyboard layout to English (US).
+### Switch to Hebrew Standard layout via direct Argument
 
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SwitchKeyboardLayout",
-    Argument = "{{$ --KeyboardLayout:en-US}}"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SwitchKeyboardLayout")
-    .setArgument("{{$ --KeyboardLayout:en-US}}");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SwitchKeyboardLayout",
-    argument: "{{$ --KeyboardLayout:en-US}}"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SwitchKeyboardLayout",
-    "argument": "{{$ --KeyboardLayout:en-US}}"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SwitchKeyboardLayout",
-    "argument": "{{$ --KeyboardLayout:en-US}}"
-}
-```
-### Example No.3
-
-Switch keyboard layout to English (US).
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SwitchKeyboardLayout",
-    Argument = "en-US"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SwitchKeyboardLayout")
-    .setArgument("en-US");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SwitchKeyboardLayout",
-    argument: "en-US"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SwitchKeyboardLayout",
-    "argument": "en-US"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SwitchKeyboardLayout",
-    "argument": "en-US"
-}
-```
-### Example No.4
-
-Switch keyboard layout to Hebrew Standard.
+Switch the active keyboard layout to Hebrew Standard (`he-IL`) by passing the locale identifier directly as the raw `Argument` value.
+This simplified form is equivalent to the parameter-expression form but does not support combining additional options.
 
 _**CSharp**_
 
@@ -226,9 +138,12 @@ action_rule = {
     "argument": "he-IL"
 }
 ```
-### Example No.5
+### Example No.3
 
-Switch keyboard layout to English (US).
+### Reset keyboard layout to default (en-US)
+
+Invoke `SwitchKeyboardLayout` without any argument to reset the active keyboard layout to the default `en-US` (English United States).
+This is useful at the end of a multilingual input sequence to restore the expected layout for subsequent steps.
 
 _**CSharp**_
 
@@ -282,7 +197,10 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Defines the keyboard layout identifier to switch to.
+Carries the keyboard layout identifier directly, or a `{{$ --KeyboardLayout:...}}` parameter expression.
+When used without a parameter expression, the raw Argument value is treated as the BCP-47 layout identifier.
+When the `KeyboardLayout` parameter is supplied inside a `{{$ ...}}` expression, the Argument acts as the expression carrier and the parameter value takes priority.
+When both this property and the `KeyboardLayout` parameter are absent or empty, the plugin defaults to `en-US`.
 
 ## Parameters
 
@@ -296,13 +214,16 @@ Defines the keyboard layout identifier to switch to.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the keyboard layout to activate.
+Specifies the BCP-47 locale identifier for the keyboard layout to activate.
+When present and non-empty, this parameter takes priority over the raw `Argument` value.
+When omitted, the plugin falls back to the `Argument` value, then defaults to `en-US` if that is also empty.
+Use `en-US` for English (United States) input and `he-IL` for Hebrew Standard input.
 
 #### Values
 
 ##### En Us
 
-English (US) keyboard layout.
+English (United States) keyboard layout. This is the default value.
 ##### He Il
 
 Hebrew Standard keyboard layout.

@@ -38,8 +38,10 @@ The plugin aims to optimize mobile automation flows by seamlessly managing the v
 
 ### Example No.1
 
-Hide the on-screen keyboard in a mobile automation scenario. 
-The absence of specific arguments implies that the plugin will use default strategies or configurations to hide the keyboard.
+### Hide the on-screen keyboard using the driver default
+
+Hide the on-screen keyboard without specifying any parameters.
+The absence of arguments causes the plugin to pass a fully-null `HideKeyboardModel` to the driver, which uses its own default dismissal method.
 
 _**CSharp**_
 
@@ -82,8 +84,10 @@ action_rule = {
 ```
 ### Example No.2
 
-Hide the on-screen keyboard using the `swipeDown` strategy. 
-This tailored approach provides flexibility in adapting the automation script to the desired user interaction patterns.
+### Hide the on-screen keyboard using the SwipeDown strategy
+
+Hide the on-screen keyboard by specifying `Strategy:swipeDown`.
+This tailored approach simulates a downward swipe gesture, providing flexibility in adapting the automation script to the desired user interaction patterns.
 
 _**CSharp**_
 
@@ -131,8 +135,10 @@ action_rule = {
 ```
 ### Example No.3
 
-Hide the on-screen keyboard using the `pressKey` strategy with `KeyCode:4`. 
-This configuration simulates pressing a specific key (key code 4) to hide the on-screen keyboard after interacting with an input field.
+### Hide the on-screen keyboard using PressKey with KeyCode
+
+Hide the on-screen keyboard using the `pressKey` strategy with `KeyCode:4`.
+This configuration simulates pressing Android key code 4 (the Back key) to dismiss the on-screen keyboard after interacting with an input field.
 
 _**CSharp**_
 
@@ -180,8 +186,10 @@ action_rule = {
 ```
 ### Example No.4
 
-Hide the on-screen keyboard using the `pressKey` strategy with `KeyName:Back`. 
-This configuration simulates pressing the `Back` key to hide the on-screen keyboard after interacting with an input field.
+### Hide the on-screen keyboard using PressKey with KeyName
+
+Hide the on-screen keyboard using the `pressKey` strategy with `KeyName:Back`.
+This configuration simulates pressing the `Back` key by name to hide the on-screen keyboard after interacting with an input field.
 
 _**CSharp**_
 
@@ -229,8 +237,10 @@ action_rule = {
 ```
 ### Example No.5
 
-Hide the on-screen keyboard using the `pressKey` strategy with `Key:Back`. 
-This configuration simulates pressing the `Back` key to hide the on-screen keyboard after interacting with an input field.
+### Hide the on-screen keyboard using PressKey with Key
+
+Hide the on-screen keyboard using the `pressKey` strategy with `Key:Back`.
+This configuration passes the key value directly via `HideKeyboardModel.Key`, which some Appium drivers require instead of the `KeyName` field.
 
 _**CSharp**_
 

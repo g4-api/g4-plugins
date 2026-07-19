@@ -2,53 +2,52 @@
 
 [Table of Content](../Home.md)  
 
-~21 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~25 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `GetParameter` plugin is an indispensable tool in the realm of Robotic Process Automation (RPA) and automation testing. 
-It empowers automation scripts and RPA bots to dynamically retrieve essential parameter values from the environment, facilitating seamless execution of tasks and actions.
+Fetches configuration and secret values from defined storage scopes at runtime.
+It instantly substitutes placeholders with live data so automation flows keep moving without manual edits.
+It can safely decode or decrypt values that were stored in base-64 or encrypted form by the RegisterParameter plugin.
+This keeps configuration handling secure, consistent, and environment-aware across robots, tests, and services.
 
-### Key Features
+### Key Features and Functionality
 
-| Feature                                  | Description                                                                                                                                                                                                                                                                        |
-|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Environment Parameter Retrieval          | Obtain parameter values from the environment effortlessly, enabling RPA bots and automation scripts to adapt dynamically to various environmental configurations.                                                                                                                  |
-| Dynamic Value Injection                  | Inject retrieved parameter values seamlessly into automation steps or actions, ensuring flexibility and customization in automation workflows.                                                                                                                                     |
-| Encoding Support                         | Robust support for encoding schemes such as base64 ensures compatibility with encoded parameter values stored in the environment.                                                                                                                                                  |
-| Environment-Specific Parameter Retrieval | When utilizing the application scope, the plugin allows for the specification of an 'EnvironmentName' parameter, facilitating the retrieval of values from different environments (e.g., test, prod). If not specified, the plugin defaults to the 'SystemParameters' environment. |
+| Feature                     | Description                                                                             |
+|-----------------------------|-----------------------------------------------------------------------------------------|
+| Environment-Scope Retrieval | Pulls parameters from Application, User, Machine, Process, or Session scopes.           |
+| Environment Targeting       | Directs lookups to specific stores such as test, staging, or prod for clean separation. |
+| Dynamic Injection           | Replaces tokens in workflow inputs or outputs on the fly to keep data current.          |
+| Encoding Support            | Decodes or encodes base-64 strings to ensure safe transport and storage.                |
+| Encryption Support          | Decrypts values protected by RegisterParameter when given a valid EncryptionKey.        |
 
 ### Usages in RPA
 
-| Usage                           | Description                                                                                                                                                                              |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Task Orchestration              | Streamline task execution by dynamically retrieving parameters required for different stages of RPA workflows, enhancing efficiency and adaptability.                                    |
-| Environment-Specific Automation | Configure RPA bots to operate seamlessly across multiple environments by retrieving environment-specific parameter values, ensuring consistency and reliability in automation processes. |
+| Use Case                        | Description                                                                          |
+|---------------------------------|--------------------------------------------------------------------------------------|
+| Task Orchestration              | Supplies critical runtime parameters so multi-step bots execute with the right data. |
+| Environment-Specific Automation | Adapts bots to different environments by pulling the matching configuration set.     |
 
 ### Usages in Automation Testing
 
-| Usage                           | Description                                                                                                         |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| Data-Driven Testing             | Fetch test data stored as parameters in the environment, enabling data-driven testing approaches and scenarios, which are fundamental to comprehensive automation testing strategies. |
-| Configuration Management        | Retrieve dynamic configuration parameters required for automation testing, enabling flexible and customizable testing frameworks that can adapt to changing testing requirements.     |
-| Environment-Based Customization | Customize automation testing behavior based on environmental variables, facilitating environment-specific testing scenarios and enhancing test coverage and reliability.              |
+| Use Case                        | Description                                                                            |
+|---------------------------------|----------------------------------------------------------------------------------------|
+| Data-Driven Testing             | Retrieves test data parameters to generate scenarios on demand.                        |
+| Configuration Management        | Injects current runtime settings so tests adjust automatically to changing conditions. |
+| Environment-Based Customization | Pulls environment-specific values to tailor test runs for accurate coverage.           |
 
 ## Examples
 
 ### Example No.1
 
-This example configures the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'AppVersion' parameter in the 'SystemParameters' environment within the application scope to a specific element identified by its CSS selector.
-Here's the breakdown:
+### Retrieve parameter value and inject it into an input
 
-- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the exact action the plugin will undertake.
-- **argument**: Specifies the keystrokes to be sent by the `SendKeys` plugin, where the value is dynamically obtained from the 'AppVersion' parameter in the 'SystemParameters' environment within the application scope. For example, `{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}`.
-- **onElement**: Indicates the target element on the web page to which the keystrokes will be sent, identified by its CSS selector.
-- **locator**: Specifies the type of locator used to identify the target element. In this case, it is set to `CssSelector`.
-
-This example instructs the automation system to utilize the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'AppVersion' parameter in the 'SystemParameters' environment within the application scope to the element identified by its CSS selector. 
-The retrieved value will be dynamically inserted into the specified element, allowing for precise interaction within the automation workflow.
+The example fetches the text from the AppVersion parameter stored in the Application scope of the SystemParameters environment.
+A macro invocation {{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}} is applied to the argument attribute.
+The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #appVersionInput.
+The action passes when the input receives the expected version string.
 
 _**CSharp**_
 
@@ -106,16 +105,12 @@ action_rule = {
 ```
 ### Example No.2
 
-This example configures the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'AppVersion' parameter in the default 'SystemParameters' environment within the application scope to a specific element identified by its CSS selector.
-Here's the breakdown:
+### Retrieve parameter value and inject it into an input
 
-- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the exact action the plugin will undertake.
-- **argument**: Specifies the keystrokes to be sent by the `SendKeys` plugin, where the value is dynamically obtained from the 'AppVersion' parameter in the default 'SystemParameters' environment within the application scope. For example, `{{$Get-Parameter --Name:AppVersion --Scope:Application}}`.
-- **onElement**: Indicates the target element on the web page to which the keystrokes will be sent, identified by its CSS selector.
-- **locator**: Specifies the type of locator used to identify the target element. In this case, it is set to `CssSelector`.
-
-This example instructs the automation system to utilize the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'AppVersion' parameter in the default 'SystemParameters' environment within the application scope to the element identified by its CSS selector. 
-The retrieved value will be dynamically inserted into the specified element, allowing for precise interaction within the automation workflow.
+The example fetches the text from the `AppVersion` parameter stored in the *Application* scope of the `SystemParameters` environment.
+A macro invocation `{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}` is applied to the `argument` attribute.
+The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#appVersionInput`.
+The action passes when the input receives the expected version string.
 
 _**CSharp**_
 
@@ -123,7 +118,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$Get-Parameter --Name:AppVersion --Scope:Application}}",
+    Argument = "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
     Locator = "CssSelector",
     OnElement = "#appVersionInput"
 };
@@ -134,7 +129,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$Get-Parameter --Name:AppVersion --Scope:Application}}")
+    .setArgument("{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}")
     .setLocator("CssSelector")
     .setOnElement("#appVersionInput");
 ```
@@ -144,7 +139,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$Get-Parameter --Name:AppVersion --Scope:Application}}",
+    argument: "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
     locator: "CssSelector",
     onElement: "#appVersionInput"
 };
@@ -155,7 +150,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application}}",
+    "argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
     "locator": "CssSelector",
     "onElement": "#appVersionInput"
 }
@@ -166,23 +161,19 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application}}",
+    "argument": "{{$Get-Parameter --Name:AppVersion --Scope:Application --Environment:SystemParameters}}",
     "locator": "CssSelector",
     "onElement": "#appVersionInput"
 }
 ```
 ### Example No.3
 
-This example configures the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'Email' parameter in the user environment to a specific element identified by its CSS selector.
-Here's the breakdown:
+### Retrieve parameter value and inject it into an input
 
-- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the exact action the plugin will undertake.
-- **argument**: Specifies the keystrokes to be sent by the `SendKeys` plugin, where the value is dynamically obtained from the 'Email' parameter in the user environment. For example, `{{$Get-Parameter --Name:Email --Scope:User}}`.
-- **onElement**: Indicates the target element on the web page to which the keystrokes will be sent, identified by its CSS selector.
-- **locator**: Specifies the type of locator used to identify the target element. In this case, it is set to `CssSelector`.
-
-This example instructs the automation system to utilize the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'Email' parameter in the user environment to the element identified by its CSS selector. 
-The retrieved value will be dynamically inserted into the specified element, allowing for precise interaction within the automation workflow.
+The example fetches the text from the Email parameter stored in the User scope.
+A macro invocation {{$Get-Parameter --Name:Email --Scope:User}} is applied to the argument attribute.
+The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #emailInput.
+The action passes when the input receives the expected email address.
 
 _**CSharp**_
 
@@ -240,16 +231,12 @@ action_rule = {
 ```
 ### Example No.4
 
-This example configures the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'MachineName' parameter in the machine environment to a specific element identified by its CSS selector.
-Here's the breakdown:
+### Retrieve parameter value and inject it into an input
 
-- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the exact action the plugin will undertake.
-- **argument**: Specifies the keystrokes to be sent by the `SendKeys` plugin, where the value is dynamically obtained from the 'MachineName' parameter in the machine environment. For example, `{{$Get-Parameter --Name:MachineName --Scope:Machine}}`.
-- **onElement**: Indicates the target element on the web page to which the keystrokes will be sent, identified by its CSS selector.
-- **locator**: Specifies the type of locator used to identify the target element. In this case, it is set to `CssSelector`.
-
-This example instructs the automation system to utilize the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'MachineName' parameter in the machine environment to the element identified by its CSS selector. 
-The retrieved value will be dynamically inserted into the specified element, allowing for precise interaction within the automation workflow.
+The example fetches the text from the `MachineName` parameter stored in the *Machine* scope.
+A macro invocation `{{$Get-Parameter --Name:MachineName --Scope:Machine}}` is applied to the `argument` attribute.
+The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#machineNameInput`.
+The action passes when the input receives the expected machine name.
 
 _**CSharp**_
 
@@ -307,16 +294,12 @@ action_rule = {
 ```
 ### Example No.5
 
-This example configures the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'ProcessId' parameter in the process environment to a specific element identified by its CSS selector.
-Here's the breakdown:
+### Retrieve parameter value and inject it into an input
 
-- **pluginName**: Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the exact action the plugin will undertake.
-- **argument**: Specifies the keystrokes to be sent by the `SendKeys` plugin, where the value is dynamically obtained from the 'ProcessId' parameter in the process environment. For example, `{{$Get-Parameter --Name:ProcessId --Scope:Process}}`.
-- **onElement**: Indicates the target element on the web page to which the keystrokes will be sent, identified by its CSS selector.
-- **locator**: Specifies the type of locator used to identify the target element. In this case, it is set to `CssSelector`.
-
-This example instructs the automation system to utilize the `SendKeys` plugin to send keystrokes representing the value retrieved from the 'ProcessId' parameter in the process environment to the element identified by its CSS selector. 
-The retrieved value will be dynamically inserted into the specified element, allowing for precise interaction within the automation workflow.
+The example fetches the text from the ProcessId parameter stored in the Process scope.
+A macro invocation {{$Get-Parameter --Name:ProcessId --Scope:Process}} is applied to the argument attribute.
+The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #processIdInput.
+The action passes when the input receives the expected process ID.
 
 _**CSharp**_
 
@@ -372,6 +355,69 @@ action_rule = {
     "onElement": "#processIdInput"
 }
 ```
+### Example No.6
+
+### Retrieve and decrypt parameter value, then inject it into an input
+
+The example fetches the encrypted text from the SecretParam parameter stored in the Application scope of the SystemParameters environment.
+A macro invocation {{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}} is applied to the argument attribute.
+The macro evaluates to the decrypted secret string, which the SendKeys plugin consumes and sends to the element located by the CSS selector #secretInput.
+The action passes when the input receives the expected secret value.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "SendKeys",
+    Argument = "{{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}}",
+    Locator = "CssSelector",
+    OnElement = "#secretInput"
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("SendKeys")
+    .setArgument("{{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}}")
+    .setLocator("CssSelector")
+    .setOnElement("#secretInput");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "SendKeys",
+    argument: "{{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}}",
+    locator: "CssSelector",
+    onElement: "#secretInput"
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "SendKeys",
+    "argument": "{{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}}",
+    "locator": "CssSelector",
+    "onElement": "#secretInput"
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "SendKeys",
+    "argument": "{{$Get-Parameter --Name:SecretParam --Scope:Application --Environment:SystemParameters --EncryptionKey:myEncryptionKey}}",
+    "locator": "CssSelector",
+    "onElement": "#secretInput"
+}
+```
 
 ## Parameters
 
@@ -385,21 +431,22 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the name of the parameter from which to retrieve the value.
+Identifies the parameter whose value you want to fetch.
+Accurate naming ensures the plugin locates the correct stored value.
 
 ### Scope (Scope)
 
 | Attribute         | Value             |
 |-------------------|-------------------|
-| **Default Value** | Null              |
+| **Default Value** | Session           |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | GetParameter      |
 
-Specifies the scope from which to retrieve the parameter value.
-The scope can be 'Application', 'User', 'Machine', 'Process', or 'Session'.
-If not specified, the default scope 'Session' will be used.
+Indicates the storage scope to search for the parameter.
+Accepts ‘Application’, ’User’, ‘Machine’, ’Process’, or ‘Session’.
+Omit this property to fall back to the ‘Session’ scope.
 
 ### Environment (Environment)
 
@@ -411,8 +458,21 @@ If not specified, the default scope 'Session' will be used.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the environment name from which to retrieve the parameter value.
-If not specified, the default environment name 'SystemParameters' will be used.
+Designates the environment collection that holds the parameter.
+Defaults to ‘SystemParameters’ when the property is not supplied.
+
+### Encryption Key (EncryptionKey)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Provides the symmetric key used to decrypt secure parameter values.
+Include this key only when the value was encrypted by the RegisterParameter plugin.
 
 ## Scope
 

@@ -2,42 +2,51 @@
 
 [Table of Content](../Home.md)  
 
-~12 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The `SwitchWindow` plugin automates the process of switching between different browser windows or tabs during web-based automation tasks. 
-This functionality is essential for workflows that involve multiple windows or tabs, ensuring that the correct window is focused and interacted with as needed.
+Switches WebDriver context to a different browser window or tab.
+Mode selection is automatic: at runtime `int.TryParse(pluginData.Rule.Argument, out int index)` determines the path — a successful parse triggers the index path; a failed parse triggers the handle path.
+No other parameters exist; the entire switching contract is expressed through a single `Argument` value.
 
 ### Key Features and Functionality
 
-| Feature                | Description                                                                                        |
-|------------------------|----------------------------------------------------------------------------------------------------|
-| Index-based Switching  | Allows switching to a window using its index, facilitating navigation among multiple open windows. |
-| Handle-based Switching | Enables switching to a window using its handle, providing flexibility in window management.        |
+| Feature                  | Description                                                                                                                                  |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Automatic Mode Selection | `int.TryParse` is the sole gate: integer strings use the index path; all other strings use the handle path. No explicit mode flag is needed. |
+| Switch by Index          | When `Argument` parses as an integer, calls `WebDriver.SwitchTo().Window(index)` using the zero-based index — no handle resolution occurs.   |
+| Switch by Handle         | When `Argument` is non-integer, calls `WebDriver.SwitchTo().Window(handle)` passing the raw string as a WebDriver window handle.             |
 
 ### Usages in RPA
 
-| Usage                                 | Description                                                                                   |
-|---------------------------------------|-----------------------------------------------------------------------------------------------|
-| Multi-Window Workflows                | Automates the process of switching between multiple windows or tabs during complex workflows. |
-| Data Collection from Multiple Sources | Facilitates the collection of data from different windows or tabs simultaneously.             |
+| Usage                          | Description                                                                                                                        |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Multi-Window Workflows         | Automates switching to a specific window or tab during complex workflows that span multiple browser contexts.                      |
+| Data Collection Across Sources | Focuses driver context on a target window to extract or interact with content before returning to the main session.                |
+| Pop-up Handling                | Switches to a newly opened pop-up window triggered by a page action, performs work, and returns to the parent tab.                 |
+| Sequential Tab Processing      | Iterates through open tabs by incrementing the index argument, allowing bots to process each tab in order without storing handles. |
 
 ### Usages in Automation Testing
 
-| Usage              | Description                                                                                               |
-|--------------------|-----------------------------------------------------------------------------------------------------------|
-| UI Testing         | Validates the behavior of applications across multiple windows or tabs by switching context as needed.    |
-| End-to-End Testing | Ensures comprehensive test coverage by automating window switching as part of user interaction scenarios. |
+| Usage                | Description                                                                                                                            |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| UI Testing           | Validates application behavior across multiple windows or tabs by switching driver context as part of test flows.                      |
+| End-to-End Testing   | Ensures comprehensive coverage by automating window switches that mirror real user interactions with the browser.                      |
+| Handle-Based Control | Targets a specific window by its known handle for deterministic test isolation when multiple windows are open.                         |
+| Window Order Testing | Verifies that the application opens and maintains windows in the expected order by switching via index and asserting content or state. |
 
 ## Examples
 
 ### Example No.1
 
-Switch to the window with index `1`. 
-This is useful for navigating to a specific window when multiple windows are open.
+### Switch to a window by index
+
+Switch WebDriver context to the second open window or tab by passing its zero-based index `1` as the `Argument`.
+When `Argument` parses as an integer, `WebDriver.SwitchTo().Window(index)` is called directly — no handle resolution occurs.
+Index `0` targets the first window; `1` the second, and so on.
 
 _**CSharp**_
 
@@ -85,8 +94,11 @@ action_rule = {
 ```
 ### Example No.2
 
-Switch to the window with the handle `CDwindow-1234`. 
-This is useful for switching to a window with a known handle, ensuring the correct window is focused.
+### Switch to a window by handle
+
+Switch WebDriver context to the window identified by the handle `CDwindow-ABCD1234`.
+When `Argument` cannot be parsed as an integer, the raw string is passed directly to `WebDriver.SwitchTo().Window(handle)`.
+Obtain the handle from `WebDriver.WindowHandles` before invoking this plugin to ensure the value is current and valid.
 
 _**CSharp**_
 
@@ -94,7 +106,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "SwitchWindow",
-    Argument = "CDwindow-1234"
+    Argument = "CDwindow-ABCD1234"
 };
 ```
 
@@ -103,7 +115,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SwitchWindow")
-    .setArgument("CDwindow-1234");
+    .setArgument("CDwindow-ABCD1234");
 ```
 
 _**Javascript**_
@@ -111,7 +123,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "SwitchWindow",
-    argument: "CDwindow-1234"
+    argument: "CDwindow-ABCD1234"
 };
 ```
 
@@ -120,7 +132,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "SwitchWindow",
-    "argument": "CDwindow-1234"
+    "argument": "CDwindow-ABCD1234"
 }
 ```
 
@@ -129,7 +141,7 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "SwitchWindow",
-    "argument": "CDwindow-1234"
+    "argument": "CDwindow-ABCD1234"
 }
 ```
 
@@ -145,8 +157,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Specifies the identifier for the window to switch to. 
-It can be either an index (e.g., `1`) or a window handle (e.g., `CDwindow-1234`).
+Specifies the target window to switch to.
+When the value parses as an integer, the plugin switches by zero-based window index via `WebDriver.SwitchTo().Window(index)`.
+When the value is non-integer, the plugin passes the raw string to `WebDriver.SwitchTo().Window(handle)` as a WebDriver window handle.
 
 ## Scope
 

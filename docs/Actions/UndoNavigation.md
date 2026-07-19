@@ -2,44 +2,46 @@
 
 [Table of Content](../Home.md)  
 
-~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `UndoNavigation` plugin is to automate the process of navigating backward within a web browser. 
-It provides a structured and configurable way to perform the `back` action, enabling automation scripts to simulate user interactions with precision. 
-The plugin caters to scenarios where navigating back multiple steps with optional delays between actions is a requirement.
+Automates backward browser navigation, equivalent to clicking the browser's built-in back button.
+It provides a structured way to traverse session history backward with configurable repeat counts and optional delays between steps.
 
 ### Key Features and Functionality
 
-| Feature             | Description                                                                                  |
-|---------------------|----------------------------------------------------------------------------------------------|
-| Dynamic Repeats     | Allows users to specify the number of times the browser should navigate back.                |
-| Configurable Delays | Users can introduce delays between each navigation step, enhancing the plugin's flexibility. |
-| Intuitive Logging   | Logs a warning if the specified delay exceeds the maximum allowed value.                     |
+| Feature             | Description                                                                                                                  |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------|
+| Dynamic Repeats     | Configures how many times the browser navigates back in a single action invocation.                                          |
+| Configurable Delays | Introduces a pause between each backward step, in milliseconds or time span format, to control navigation pace.              |
+| Legacy Argument     | Accepts a plain integer directly as the repeat count for backwards-compatible usage.                                         |
+| Delay Safeguard     | Logs a warning and resets the delay to zero when the configured value exceeds the maximum allowed integer millisecond range. |
 
 ### Usages in RPA
 
-| Usage                | Description                                                                                      |
-|----------------------|--------------------------------------------------------------------------------------------------|
-| Multi-Step Processes | Streamlines automation scripts by automating backward navigation through multiple pages.         |
-| Error Handling       | Utilized in error-handling mechanisms to navigate back to a known state before retrying actions. |
+| Use Case             | Description                                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Multi-Step Traversal | Navigates back through a sequence of previously visited pages in a single action without repeated manual back clicks. |
+| Error Recovery       | Returns the browser to a known stable state before retrying a failed automation sequence.                             |
 
 ### Usages in Automation Testing
 
-| Usage                    | Description                                                                                      |
-|--------------------------|--------------------------------------------------------------------------------------------------|
-| Browser State Management | Aids in managing the state of the browser during complex user journeys in automated test suites. |
-| Performance Testing      | Contributes to a more accurate representation of user behavior by controlling navigation delays. |
+| Use Case                | Description                                                                                                        |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Browser History Testing | Verifies that the browser correctly restores pages when navigating backward after a programmatic forward sequence. |
+| Navigation Flow Testing | Simulates realistic back navigation patterns with controlled delays for performance test accuracy.                 |
 
 ## Examples
 
 ### Example No.1
 
-Perform a default browser back navigation. 
-This is useful for simple scenarios where returning to the previous web page is required without specifying additional parameters.
+### Default single backward navigation
+
+Navigates the browser backward by one step using default settings.
+No repeat count or delay is configured, so the action executes once immediately.
 
 _**CSharp**_
 
@@ -82,8 +84,10 @@ action_rule = {
 ```
 ### Example No.2
 
-Navigate the web browser back by three steps. 
-The provided argument, `3`, specifies the number of repeats for the navigation action.
+### Backward navigation using an integer argument
+
+Navigates the browser backward three times by passing `3` as a plain integer argument.
+The integer is interpreted directly as the repeat count without requiring parameter expression syntax.
 
 _**CSharp**_
 
@@ -131,58 +135,10 @@ action_rule = {
 ```
 ### Example No.3
 
-Navigate the web browser back by three steps. 
-The argument `--Repeat:3` explicitly designates the number of repetitions for the navigation action.
+### Backward navigation with repeat count and delay
 
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "UndoNavigation",
-    Argument = "3"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("UndoNavigation")
-    .setArgument("3");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "UndoNavigation",
-    argument: "3"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "UndoNavigation",
-    "argument": "3"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "UndoNavigation",
-    "argument": "3"
-}
-```
-### Example No.4
-
-Command the `UndoNavigation` plugin to conduct a series of backward navigations in the web browser. 
-The provided argument, `{{$ --Repeat:3 --Delay:1000}}`, precisely dictates three repetitions with a `1000-millisecond` delay between each step. 
-This instance exemplifies how the UndoNavigation plugin can be finely configured with supplementary parameters, granting meticulous control over the backward navigation process, including the number of repeats and inter-step delays.
+Navigates the browser backward three times, pausing 1000 milliseconds between each step.
+The `{{$ --Repeat:3 --Delay:1000}}` argument expression sets both the repeat count and the inter-step delay in a single value.
 
 _**CSharp**_
 
@@ -228,56 +184,6 @@ action_rule = {
     "argument": "{{$ --Repeat:3 --Delay:1000}}"
 }
 ```
-### Example No.5
-
-Command the `UndoNavigation` plugin to execute a sequence of backward navigations in the web browser. 
-The provided argument, `{{$ --Repeat:3 --Delay:00:00:01}}`, precisely dictates three repetitions with a `1-second` delay between each step. 
-This example showcases how the `UndoNavigation` plugin can be meticulously configured with supplementary parameters, offering precise control over the backward navigation process, including the number of repeats and inter-step delays specified in a time format.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "UndoNavigation",
-    Argument = "{{$ --Repeat:3 --Delay:00:00:01}}"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("UndoNavigation")
-    .setArgument("{{$ --Repeat:3 --Delay:00:00:01}}");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "UndoNavigation",
-    argument: "{{$ --Repeat:3 --Delay:00:00:01}}"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "UndoNavigation",
-    "argument": "{{$ --Repeat:3 --Delay:00:00:01}}"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "UndoNavigation",
-    "argument": "{{$ --Repeat:3 --Delay:00:00:01}}"
-}
-```
 
 ## Properties
 
@@ -289,10 +195,11 @@ action_rule = {
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| **Value Type**    | Number|Expression |
 
-Allows users to customize the behavior of the plugin by providing supplementary information or instructions. 
-It acts as a configurable parameter, enabling users to tailor the plugin's action to meet specific requirements.
+Provides the primary input for the backward navigation action.
+Accepts either a plain integer as the repeat count or a parameter expression such as `{{$ --Repeat:3 --Delay:1000}}` for combined repeat and delay control.
+When a plain integer is supplied and no `Repeat` parameter is present, the integer is used directly as the repeat count.
 
 ## Parameters
 
@@ -306,8 +213,9 @@ It acts as a configurable parameter, enabling users to tailor the plugin's actio
 | **Multiple**      | No                |
 | **Value Type**    | Number|Time       |
 
-Specifies the pause or waiting period between each step of the backward navigation process. 
-This parameter allows users to specify a duration, either in milliseconds or a formatted time expression, to control the pace of the navigation.
+Controls the pause between each backward navigation step.
+Accepts a value in milliseconds or a time span string such as `00:00:01` for one second.
+When the configured delay exceeds the maximum allowed integer millisecond value, a warning is logged and the delay resets to zero.
 
 ### Repeat (Repeat)
 
@@ -319,8 +227,9 @@ This parameter allows users to specify a duration, either in milliseconds or a f
 | **Multiple**      | No                |
 | **Value Type**    | Number            |
 
-The number of iterations for the backward navigation process. 
-It is instrumental in scenarios where repetitive navigation actions are essential for achieving specific automation objectives.
+Sets how many times the browser navigates backward in one action invocation.
+Useful when traversing multiple pages back is required without issuing separate back commands.
+When no valid value is provided, the browser navigates backward exactly once.
 
 ## Scope
 

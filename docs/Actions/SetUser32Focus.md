@@ -8,14 +8,15 @@
 
 ### Purpose
 
-The primary purpose of the `SetUser32Focus` plugin is to set focus on a UI element using the Windows User32 API. 
+The primary purpose of the `SetUser32Focus` plugin is to set keyboard focus on a UI element using the Windows User32 API.
 This ensures that the target element becomes active and ready for subsequent user interactions or automated actions.
 
 ### Key Features and Functionality
 
-| Feature          | Description                                                                                    |
-|------------------|------------------------------------------------------------------------------------------------|
-| Set Focus Action | Activates the target UI element by setting focus on it, preparing it for further interactions. |
+| Feature          | Description                                                                                             |
+|------------------|---------------------------------------------------------------------------------------------------------|
+| Set Focus Action | Activates the target UI element by setting keyboard focus on it, preparing it for further interactions. |
+| Silent Skip      | If the target element is not found, the plugin exits silently without raising an error.                 |
 
 ### Usage in RPA
 
@@ -37,7 +38,10 @@ This plugin is designed to work on **Windows** only.
 
 ### Example No.1
 
-Set focus on a UI element identified by the XPath `//input[@id='Username']`.
+### Set focus on a UI element
+
+The plugin locates the element at `//input[@id='Username']` using the Xpath locator and sets keyboard focus on it.
+The `Locator` property defaults to `Xpath` and does not need to be specified explicitly.
 
 _**CSharp**_
 
@@ -96,7 +100,8 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the locator strategy to find the UI element. The only supported locator is `Xpath`.
+Specifies the locator strategy used to find the target UI element.
+Xpath is the only supported locator strategy for User32 elements.
 
 ### On Element (OnElement)
 
@@ -108,7 +113,8 @@ Specifies the locator strategy to find the UI element. The only supported locato
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the XPath for the target UI element on which focus will be set. This property is required to identify the element.
+Specifies the XPath expression that identifies the target UI element on which focus will be set.
+This property is required to identify the element.
 
 ## Scope
 

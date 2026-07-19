@@ -2,46 +2,51 @@
 
 [Table of Content](../Home.md)  
 
-~31 min · HttpMethod Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~28 min · HttpMethod Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-The primary purpose of the `Patch` plugin is to partially update data on a server or API endpoint by sending an HTTP PATCH request. 
-This request is a standard method in the HTTP protocol for making partial updates to a specified resource on the server. 
-The `Patch` plugin streamlines the process of making programmatically controlled PATCH requests.
+The Patch plugin lets automation workflows update only the parts of a resource they need on a server or API.
+It uses the standard HTTP PATCH method to apply partial changes, so you don't have to send the whole resource every time.
+This plugin makes building partial updates simple and reliable across different automation tasks.
 
 ### Key Features and Functionality
 
-| Feature                    | Description                                                              |
-|----------------------------|--------------------------------------------------------------------------|
-| Data Update                | Sends HTTP PATCH requests to partially update data on servers or APIs.   |
-| Dynamic Requests           | Supports dynamic URL construction and payload handling.                  |
-| Custom Headers             | Allows inclusion of multiple custom headers in the request.              |
-| Content Types and Encoding | Supports various content types and encoding methods for payloads.        |
-| Response Handling          | Captures HTTP response, headers, and status code for further processing. |
+| Feature                    | Description                                                                     |
+|----------------------------|---------------------------------------------------------------------------------|
+| Data Update                | Sends HTTP PATCH requests to partially update data on servers or APIs.          |
+| Dynamic Requests           | Builds request URLs dynamically and lets you send different payloads as needed. |
+| Custom Headers             | Lets you include any custom headers in the request.                             |
+| Content Types and Encoding | Supports different data formats and encoding options in the request body.       |
+| Response Handling          | Captures status code, headers, and body of responses for further processing.    |
 
 ### Usages in RPA
 
-| Usage                | Description                                                                                                           |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------|
-| Data Management      | Partially update existing data in external systems or APIs, such as updating customer records or product information. |
-| Workflow Adjustments | Dynamically adjust actions based on the data updated, triggering subsequent workflow steps.                           |
+| Use Case             | Description                                                                                         |
+|----------------------|-----------------------------------------------------------------------------------------------------|
+| Data Management      | Partially update records in other systems or APIs, like updating user profiles or inventory counts. |
+| Workflow Adjustments | Use updated data to decide the next steps in your automation flow.                                  |
 
 ### Usages in Automation Testing
 
-| Usage                              | Description                                                                                                                                                                                                                                                           |
-|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| API Data Update                    | Automated test scripts can leverage the `Patch` rule to send PATCH requests to API endpoints, updating data needed for testing scenarios. This ensures accurate and up-to-date test data for each test iteration.                                                     |
-| Data Integrity Checks              | Automation tests often involve verifying the accuracy of data updates on the server. The `Patch` rule, combined with appropriate validation techniques, allows for precise confirmation that the specified data has been accurately updated, ensuring data integrity. |
-| Regression Testing for Data Update | Ensuring that data update functionalities continue to work as expected after updates or changes to external systems.                                                                                                                                                  |
+| Use Case                       | Description                                                                         |
+|--------------------------------|-------------------------------------------------------------------------------------|
+| API Data Update                | Use PATCH requests in tests to set up or modify test data on the server.            |
+| Data Integrity Checks          | Confirm that only the intended fields were changed on the server.                   |
+| Regression Testing for Updates | Check that partial update features keep working after code changes or new releases. |
 
 ## Examples
 
 ### Example No.1
 
-Use the `Patch` plugin to send a simple HTTP PATCH request to a specified URL.
+### PATCH request with request body and content type
+
+Use the `Patch` plugin to send an HTTP PATCH request with a request body and content type.
+Specify the endpoint URL via the `--Url` option in the `argument` field.
+Provide the request body with the `--Body` option containing a JSON object.
+Set the content type header with the `--ContentType` option.
 
 _**CSharp**_
 
@@ -49,7 +54,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "http://localhost:9002/api/hotels/12345"
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
 };
 ```
 
@@ -58,7 +63,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("http://localhost:9002/api/hotels/12345");
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}");
 ```
 
 _**Javascript**_
@@ -66,7 +71,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "http://localhost:9002/api/hotels/12345"
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
 };
 ```
 
@@ -75,7 +80,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "Patch",
-    "argument": "http://localhost:9002/api/hotels/12345"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
 }
 ```
 
@@ -84,12 +89,18 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "http://localhost:9002/api/hotels/12345"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
 }
 ```
 ### Example No.2
 
-Use the `Patch` plugin to send an HTTP PATCH request with specified headers.
+### PATCH request with encoding
+
+Use the `Patch` plugin to send an HTTP PATCH request with a specified encoding.
+Specify the endpoint URL via the `--Url` option in the `argument` field.
+Provide the request body with the `--Body` option containing a JSON object.
+Set the content type header with the `--ContentType` option.
+Set the request encoding using the `--Encoding` option.
 
 _**CSharp**_
 
@@ -97,7 +108,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://localhost:9002/api/hotels/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}"
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
 };
 ```
 
@@ -106,7 +117,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://localhost:9002/api/hotels/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}");
 ```
 
 _**Javascript**_
@@ -114,7 +125,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://localhost:9002/api/hotels/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}"
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
 };
 ```
 
@@ -123,7 +134,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
 }
 ```
 
@@ -132,12 +143,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
 }
 ```
 ### Example No.3
 
-Use the `Patch` plugin to send an HTTP PATCH request with a request body and content type.
+### PATCH request with form fields
+
+Use the `Patch` plugin to send an HTTP PATCH request with form fields.
+Specify the endpoint URL via the `--Url` option in the `argument` field.
+Provide form fields using the `--Field` option with key=value pairs.
+Include multiple form fields by repeating the `--Field` option.
 
 _**CSharp**_
 
@@ -145,7 +161,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://localhost:9002/api/hotels/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
 };
 ```
 
@@ -154,7 +170,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://localhost:9002/api/hotels/12345 --Body:{"status":"updated"} --ContentType:application/json}}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}");
 ```
 
 _**Javascript**_
@@ -162,7 +178,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://localhost:9002/api/hotels/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
 };
 ```
 
@@ -171,7 +187,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
 }
 ```
 
@@ -180,12 +196,18 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
 }
 ```
 ### Example No.4
 
-Use the `Patch` plugin to send an HTTP PATCH request with a specified encoding.
+### PATCH request with response extraction
+
+Use the `Patch` plugin to send an HTTP PATCH request and extract a specific attribute from the response.
+Specify the endpoint URL via the `--Url` option in the `argument` field.
+Provide the request body with the `--Body` option containing a JSON object.
+Set the content type header with the `--ContentType` option.
+Extract the attribute by setting `onElement` to the target element path and `onAttribute` to the attribute name.
 
 _**CSharp**_
 
@@ -193,7 +215,9 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://localhost:9002/api/hotels/12345 --Encoding:UTF8}}"
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    OnAttribute = "status",
+    OnElement = "//response"
 };
 ```
 
@@ -202,7 +226,9 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://localhost:9002/api/hotels/12345 --Encoding:UTF8}}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}")
+    .setOnAttribute("status")
+    .setOnElement("//response");
 ```
 
 _**Javascript**_
@@ -210,7 +236,9 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://localhost:9002/api/hotels/12345 --Encoding:UTF8}}"
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    onAttribute: "status",
+    onElement: "//response"
 };
 ```
 
@@ -219,7 +247,9 @@ _**JSON**_
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Encoding:UTF8}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    "onAttribute": "status",
+    "onElement": "//response"
 }
 ```
 
@@ -228,12 +258,18 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Encoding:UTF8}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    "onAttribute": "status",
+    "onElement": "//response"
 }
 ```
 ### Example No.5
 
-Use the `Patch` plugin to send an HTTP PATCH request with form fields.
+### PATCH request targeting elements
+
+Use the `Patch` plugin to send an HTTP PATCH request and target response elements using an XPath expression.
+Specify the endpoint URL and form fields via the `--Url` and `--Field` options in the `argument` field.
+Set the XPath expression for element targeting with the `onElement` field.
 
 _**CSharp**_
 
@@ -241,108 +277,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://localhost:9002/api/hotels/12345 --Field:status=updated}}"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://localhost:9002/api/hotels/12345 --Field:status=updated}}");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "Patch",
-    argument: "{{$ --Url:http://localhost:9002/api/hotels/12345 --Field:status=updated}}"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Field:status=updated}}"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345 --Field:status=updated}}"
-}
-```
-### Example No.6
-
-Use the `Patch` plugin to send an HTTP PATCH request and extract a specific attribute from the response.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "Patch",
-    Argument = "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    OnAttribute = "status"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://localhost:9002/api/hotels/12345}}")
-    .setOnAttribute("status");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "Patch",
-    argument: "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    onAttribute: "status"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    "onAttribute": "status"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    "onAttribute": "status"
-}
-```
-### Example No.7
-
-Use the `Patch` plugin to send an HTTP PATCH request and target elements using XPath.
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "Patch",
-    Argument = "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
     OnElement = "//response/status"
 };
 ```
@@ -352,7 +287,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://localhost:9002/api/hotels/12345}}")
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}")
     .setOnElement("//response/status");
 ```
 
@@ -361,7 +296,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
     onElement: "//response/status"
 };
 ```
@@ -371,7 +306,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
     "onElement": "//response/status"
 }
 ```
@@ -381,13 +316,17 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
     "onElement": "//response/status"
 }
 ```
-### Example No.8
+### Example No.6
 
-Use the `Patch` plugin to send an HTTP PATCH request and apply a regular expression to extract specific data from the response.
+### PATCH request targeting elements with JSONPath
+
+Use the `Patch` plugin to send an HTTP PATCH request and target response elements using a JSONPath expression.
+Specify the endpoint URL and form fields via the `--Url` and `--Field` options in the `argument` field.
+Set the JSONPath expression for element targeting with the `onJsonPath` field.
 
 _**CSharp**_
 
@@ -395,8 +334,7 @@ _**CSharp**_
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    RegularExpression = "\d{3}"
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
 };
 ```
 
@@ -405,8 +343,7 @@ _**Java**_
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://localhost:9002/api/hotels/12345}}")
-    .setRegularExpression("\d{3}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}");
 ```
 
 _**Javascript**_
@@ -414,8 +351,7 @@ _**Javascript**_
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    regularExpression: "\d{3}"
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
 };
 ```
 
@@ -424,8 +360,7 @@ _**JSON**_
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    "regularExpression": "\d{3}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
 }
 ```
 
@@ -434,8 +369,65 @@ _**Python**_
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://localhost:9002/api/hotels/12345}}",
-    "regularExpression": "\d{3}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}"
+}
+```
+### Example No.7
+
+### PATCH request with regex extraction
+
+Use the `Patch` plugin to send an HTTP PATCH request and apply a regular expression to extract specific data from the response.
+Specify the endpoint URL and form fields via the `--Url` and `--Field` options in the `argument` field.
+Set the regular expression for data extraction with the `regularExpression` field.
+The regex `"id":\s*"(\d+)"` extracts the numeric ID value from a JSON response.
+
+_**CSharp**_
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "Patch",
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
+    RegularExpression = "\"id\":\s*\"(\d+)\""
+};
+```
+
+_**Java**_
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("Patch")
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}")
+    .setRegularExpression("\"id\":\s*\"(\d+)\"");
+```
+
+_**Javascript**_
+
+```js
+var actionRule = {
+    pluginName: "Patch",
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
+    regularExpression: "\"id\":\s*\"(\d+)\""
+};
+```
+
+_**JSON**_
+
+```js
+{
+    "pluginName": "Patch",
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
+    "regularExpression": "\"id\":\s*\"(\d+)\""
+}
+```
+
+_**Python**_
+
+```python
+action_rule = {
+    "pluginName": "Patch",
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
+    "regularExpression": "\"id\":\s*\"(\d+)\""
 }
 ```
 
@@ -451,11 +443,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | Any               |
 
-Holds the results of the HTTP request after `OnElement`, `OnAttribute`, and `RegularExpression` have been applied. 
-If none of these properties are provided, then the entire response body is stored in the `HttpResponse` parameter.  
-
-This means that the `HttpResponse` parameter captures the content resulting from any data extraction or processing performed by the specified properties (`OnElement`, `OnAttribute`, `RegularExpression`). 
-It provides a way to access the modified or processed content of the HTTP response within the automation workflow.
+Holds the content returned from an HTTP request after any specified extraction or processing rules have been applied.
+Provides a way to work with the processed response data instead of the raw body.
+Enables automation workflows to access the exact information they need from the HTTP response.
 
 ### Http Response Headers (HttpResponseHeaders)
 
@@ -467,8 +457,9 @@ It provides a way to access the modified or processed content of the HTTP respon
 | **Multiple**      | No                |
 | **Value Type**    | Any               |
 
-Holds the HTTP response headers obtained from the HTTP PATCH request. 
-These headers provide additional information about the server's response and are sent along with the actual content of the response.
+Holds the HTTP response headers returned from an HTTP request.
+Contains key-value pairs that provide metadata about the response such as content type, date, and length.
+Enables workflows to inspect response details for logging or conditional logic.
 
 ### Http Status Code (HttpStatusCode)
 
@@ -480,8 +471,10 @@ These headers provide additional information about the server's response and are
 | **Multiple**      | No                |
 | **Value Type**    | Any               |
 
-Holds the HTTP status code obtained from the HTTP PATCH request. 
-The HTTP status code is a three-digit numeric code returned by the server indicating the outcome of the request.
+Holds the HTTP status code returned from an HTTP request.
+Represents the outcome of the request using a three-digit numeric code.
+Enables automation flows to check for success or failure of the HTTP operation.
+Supports error handling in workflows based on the status code value.
 
 ## Properties
 
@@ -495,8 +488,23 @@ The HTTP status code is a three-digit numeric code returned by the server indica
 | **Multiple**      | No                |
 | **Value Type**    | Uri|Expression    |
 
-Specifies the details for the HTTP PATCH request. 
-It includes a template or variable structure `{{$...}}` to allow dynamic values.
+Specifies where to send the HTTP PATH request and what data to include.
+Allows dynamic values through templates or variable placeholders in the format {{$...}}.
+Makes it possible to customize the request URL or payload at runtime.
+
+### On Attribute (OnAttribute)
+
+| Attribute         | Value             |
+|-------------------|-------------------|
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Specifies the attribute whose value should be extracted from an element identified by the `OnElement` expression.
+Works with XML or HTML responses, returning the value of the given attribute.
+Enables precise retrieval of metadata embedded in tags for downstream workflow processing.
 
 ### On Element (OnElement)
 
@@ -508,8 +516,10 @@ It includes a template or variable structure `{{$...}}` to allow dynamic values.
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Used to target elements using either XPath or JSONPath expressions, depending on the type of response the API returns (XML or JSON). 
-This flexibility allows the rule to handle different response formats appropriately.
+Targets specific parts of an API response by using XPath or JSONPath expressions.
+Works with both XML and JSON responses.
+Adapts to the response format to locate the right element.
+Helps ensure the correct data is extracted regardless of the API’s output format.
 
 ### Regular Expression (RegularExpression)
 
@@ -521,8 +531,10 @@ This flexibility allows the rule to handle different response formats appropriat
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Used for pattern matching and extraction of specific data from a text response. 
-It allows for the definition of a regular expression that captures and extracts relevant information from the content retrieved by the HTTP PATCH request.
+Defines a pattern for capturing and extracting specific data from a text response.
+Uses standard regular expression syntax to match and retrieve the parts you need.
+Enables precise extraction of values embedded in the response.
+Helps automate parsing of complex text outputs.
 
 ## Parameters
 
@@ -536,8 +548,9 @@ It allows for the definition of a regular expression that captures and extracts 
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the payload or data that you want to include in the body of the request. 
-The request body is typically used to send data to the server when making HTTP requests, especially for operations like `POST` or `PUT`.
+Defines the data payload sent with a DELETE request.
+Includes extra details the server may need to carry out the deletion.
+Helps ensure the API has the context required to process the delete operation.
 
 ### Content Type (ContentType)
 
@@ -549,66 +562,64 @@ The request body is typically used to send data to the server when making HTTP r
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the type of data that is included in the body of the request. 
-It indicates the format or encoding of the content being sent, allowing the server to interpret and process the data appropriately.  
-
-The ContentType parameter is crucial because it tells the server how to parse and handle the incoming data. 
-Different types of data, such as JSON, XML, form-urlencoded, or plain text, have different syntax and structures. 
-By specifying the content type, you inform the server about the expected format of the data in the request body.
+Indicates the format of data sent in the request body.
+Helps the server understand how to parse and handle the payload.
+Supports formats such as JSON, XML, form data, and plain text.
 
 #### Values
 
 ##### Applicationjson
 
-JavaScript Object Notation (JSON) is a lightweight data interchange format. 
-It is easy for humans to read and write and easy for machines to parse and generate. 
-JSON is often used for representing structured data in web applications.
+Represents JSON data encoded as JavaScript Object Notation.
+Allows for structured data that is easy to read and parse.
 ##### Applicationoctetstream
 
-This content type is a generic binary format. 
-It is often used when the content type is not known or when transferring arbitrary binary data that doesn't fit into other more specific categories.
+Denotes a generic binary data stream when the format is unknown.
+Enables transferring files or data without predefined structure.
 ##### Applicationpdf
 
-Portable Document Format (PDF) is a file format that captures all the elements of a printed document as an electronic image. 
-It is widely used for documents intended for printing, such as brochures, manuals, and forms.
+Identifies Portable Document Format files for documents and forms.
+Ensures consistent rendering of printable content.
 ##### Applicationxml
 
-Extensible Markup Language (XML) is a markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable. 
-It is often used for representing structured data in a generic way.
+Marks XML data formatted with Extensible Markup Language.
+Provides a generic way to represent structured data.
 ##### Audiompeg
 
-MP3 is a widely used audio compression format that allows for the storage of music and audio files with relatively high audio quality in a compact size.
+Specifies MPEG audio encoded in MP3 format.
+Offers compressed audio suitable for music and podcasts.
 ##### Imagejpeg
 
-JPEG (Joint Photographic Experts Group) is a commonly used method of lossy compression for digital images. 
-It is suitable for photographs and images with complex colors.
+Indicates JPEG images compressed for photographs.
+Balances image quality with file size.
 ##### Imagepng
 
-PNG (Portable Network Graphics) is a raster graphics file format that supports lossless data compression. 
-It is commonly used for images on the web and supports transparent backgrounds.
+Signals PNG images with lossless compression.
+Supports transparent backgrounds for web graphics.
 ##### Multipartformdata
 
-This content type is used when submitting forms that contain files or binary data along with other text form fields. 
-It allows for the encapsulation of multiple sets of data in a single body.
+Used for form submissions that include files and text fields.
+Allows combining different data types in one request.
 ##### Textcss
 
-Cascading Style Sheets (CSS) is a style sheet language used for describing the look and formatting of a document written in HTML. 
-It defines styles for elements, including layout, colors, and fonts.
+Defines stylesheet content for web page styling in CSS.
+Controls layout, colors, and fonts of HTML documents.
 ##### Texthtml
 
-Hypertext Markup Language (HTML) is used to structure content on the web. 
-It provides a way to create structured documents by denoting structural semantics for text such as headings, paragraphs, lists, links, quotes, and other items.
+Represents HTML content to structure web pages.
+Defines elements like headings, paragraphs, and links.
 ##### Textplain
 
-This content type is used for plain, unformatted text. 
-It is often used for simple textual data that doesn't require any special formatting or styling.
+Denotes plain text without special formatting.
+Serves simple messages or logs in text form.
 ##### Applicationxwwwformurlencoded
 
-This content type is used for sending form data in the body of an HTTP request. 
-Data is URL-encoded, where special characters are replaced with `%` followed by two hexadecimal digits.
+Encodes URL-encoded form data in key-value pairs.
+Pairs are separated by ampersands and percent-encoded if needed.
 ##### Videomp4
 
-MP4 (MPEG-4 Part 14) is a multimedia container format commonly used for storing video and audio, as well as other data such as subtitles and still images.
+Specifies MP4 multimedia container for video and audio.
+Supports subtitles and still images within the file.
 
 ### Encoding (Encoding)
 
@@ -620,46 +631,47 @@ MP4 (MPEG-4 Part 14) is a multimedia container format commonly used for storing 
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies how text data in the request body is represented as binary code, ensuring accurate interpretation by both the sender and receiver.
+Explains how text characters are converted to binary code for transmission.
+Ensures the data is encoded and decoded correctly by both sender and receiver.
+Allows different encoding standards to maintain compatibility across systems.
 
 #### Values
 
 ##### Ascii
 
-ASCII is a basic character encoding standard that represents characters using 7 bits, providing codes for 128 characters.
-It includes standard English letters, digits, and some special characters.
-ASCII is a subset of UTF-8, and UTF-8 is designed to be backward-compatible with ASCII.
-It forms the foundation for many character encodings and is widely used, especially in English-language content.
+Uses 7-bit codes to represent 128 common characters such as letters, digits, and symbols.
+Forms the basis for many modern text encoding systems.
+Remains compatible with Unicode formats like UTF-8.
 ##### Big Endian Unicode
 
-BigEndianUnicode is a specific form of UTF-16 where the most significant byte is stored first.
-It is used in specific platforms, particularly those employing big-endian byte order.
-Represents characters using 16-bit code units, with a specific byte order in storage.
+Stores each character in 16 bits with the most significant byte first.
+Commonly used on platforms that follow big-endian byte ordering.
+Ensures consistent decoding when big-endian formats are required.
 ##### Latin1
 
-ISO-8859-1, also known as Latin-1, covers a subset of characters from the Latin alphabet, including many Western European languages.
-It uses a fixed single-byte encoding.
-While not as versatile as UTF-8 for handling diverse character sets, it is used in certain contexts, especially when compatibility with legacy systems is a concern.
+Also called ISO-8859-1 and covers many Western European languages.
+Uses one byte per character for a total of 256 symbols.
+Often used for legacy data but supports fewer characters than Unicode.
 ##### Unicode
 
-Unicode is a comprehensive character encoding standard assigning a unique code point to every character.
-It provides a universal representation of characters from diverse languages and scripts.
-Enables global character representation, fostering internationalization and multilingual content in various applications.
+Assigns a unique code point to every character in most writing systems.
+Supports global text representation in a single standard.
+Forms the foundation for encodings like UTF-8 and UTF-16.
 ##### Utf7
 
-UTF-7 is a variable-length encoding designed for environments restricting the use of 8-bit data.
-Although less common today, it finds applications in email.
-Utilizes a 7-bit code, making it suitable for environments with limitations on 8-bit data transmission.
+Encodes text using only 7-bit ASCII characters for safe transmission in restricted systems.
+Was originally designed for email use where 8-bit data could be problematic.
+Rarely used today because it is less efficient than modern encodings.
 ##### Utf8
 
-UTF-8 is the most widely used character encoding on the web.
-It can represent virtually all characters in the Unicode character set, making it suitable for internationalization and multilingual content.
-Each character is represented by a variable number of bytes, with ASCII characters represented by a single byte.
+Variable-length encoding that uses one to four bytes per character.
+Covers all Unicode code points and is backward-compatible with ASCII.
+Widely adopted as the standard text format on the web.
 ##### Utf32
 
-UTF-32 uses a fixed 32-bit code point to represent each character.
-It offers a straightforward mapping of characters but may be less space-efficient compared to UTF-8 and UTF-16.
-Provides a direct correspondence between code points and characters, ensuring simplicity in character representation.
+Uses a fixed four bytes for each character’s code point.
+Simplifies text processing by providing a constant width per character.
+Consumes more memory but offers straightforward character indexing.
 
 ### Field (Field)
 
@@ -669,9 +681,11 @@ Provides a direct correspondence between code points and characters, ensuring si
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Key/Value         |
+| **Value Type**    | KeyValue          |
 
-Specifies a form field that you include in the body of the request when making a `POST` or `PUT` request with `form-urlencoded` data.
+Defines a form field to include in the request body using key=value pairs.
+Encodes each field correctly so the server can read the data.
+Lets you send extra parameters when the server requires them during a delete operation.
 
 ### Header (Header)
 
@@ -681,11 +695,12 @@ Specifies a form field that you include in the body of the request when making a
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Key/Value         |
+| **Value Type**    | KeyValue          |
 
-Allows the inclusion of multiple headers in the HTTP PATCH request. 
-Each header is specified as a key-value pair, separated by an equal sign. 
-Multiple headers can be added using the syntax `{{$ --Header:header1name=header1value --Header:header2name=header2value ...}}`.
+Enables adding custom headers to an HTTP DELETE request.
+Each header uses a name=value format so the server can read it correctly.
+Allows you to repeat the parameter to include multiple headers.
+Custom headers let you send extra information like authentication tokens or tracing data.
 
 ### Url (Url)
 
@@ -697,7 +712,10 @@ Multiple headers can be added using the syntax `{{$ --Header:header1name=header1
 | **Multiple**      | No                |
 | **Value Type**    | Uri|String        |
 
-Specifies the target URL for the HTTP PATCH request.
+Defines the web address where the delete request is sent.
+Tells the server which resource should be removed.
+Ensures the correct endpoint is targeted for deletion.
+Using an accurate URL helps prevent errors or deleting the wrong resource.
 
 ## Scope
 

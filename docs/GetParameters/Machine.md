@@ -2,52 +2,47 @@
 
 [Table of Content](../Home.md)  
 
-~16 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~9 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
-> [!IMPORTANT]
-> This plugin is supported on Windows machines only.
-
 ### Purpose
 
-The primary purpose of the GetMachineParameter plugin is to retrieve machine-level environment variables. This allows for the extraction of environment-specific values within automation workflows.
+This plugin lets automation workflows retrieve system-wide settings defined on Windows computers. It reads environment variables defined for every user under the machine scope in the Windows registry. By pulling shared values like paths or feature flags, workflows can run with the correct setup without extra steps.
 
 ### Key Features and Functionality
 
-| Feature                    | Description                                                                                      |
-|----------------------------|--------------------------------------------------------------------------------------------------|
-| Retrieve Environment Value | Retrieves the value of a specified environment variable from the machine's environment settings. |
-| Integration                | Can be used within other plugins to dynamically fetch machine-specific parameters.               |
+| Feature                | Description                                                           |
+|------------------------|-----------------------------------------------------------------------|
+| Global variable access | Reads values defined for all users on the Windows machine.            |
+| Empty value handling   | Returns an empty string when the variable is missing or has no value. |
+| Result output field    | Makes the fetched value available for use in later workflow steps.    |
 
 ### Usages in RPA
 
-| Usage                      | Description                                                                            |
-|----------------------------|----------------------------------------------------------------------------------------|
-| Environment Configuration  | Fetch environment-specific configurations for use in automation workflows.             |
-| Dynamic Data Handling      | Retrieve machine-level parameters dynamically during automation execution.             |
-| System Diagnostics         | Use machine parameters to assess and respond to system state or configuration changes. |
-| Security and Compliance    | Access machine environment variables for security settings and compliance checks.      |
+| Use Case                     | Description                                                                               |
+|------------------------------|-------------------------------------------------------------------------------------------|
+| Global configuration loading | Loads shared Windows settings like paths or service URLs so workflows match system setup. |
+| Live value retrieval         | Gets the latest Windows environment values at runtime for up-to-date workflow behavior.   |
+| System health checks         | Reads global settings to verify required variables are set and correct.                   |
 
 ### Usages in Automation Testing
 
-| Usage                  | Description                                                                          |
-|------------------------|--------------------------------------------------------------------------------------|
-| Test Environment Setup | Configure test environments dynamically by retrieving environment variable values.   |
-| Parameterized Testing  | Use machine-specific parameters to drive parameterized testing scenarios.            |
-| Automated Monitoring   | Automate monitoring of environment variables to ensure consistency across test runs. |
-| Resource Management    | Manage and allocate resources efficiently based on machine-level parameters.         |
+| Use Case                 | Description                                                                                 |
+|--------------------------|---------------------------------------------------------------------------------------------|
+| Test setup configuration | Configures test runs using Windows system-wide settings like API addresses and credentials. |
+| Data-driven tests        | Uses Windows environment values to run tests with different inputs automatically.           |
+| Pre-run checks           | Verifies required Windows variables exist before starting tests to avoid failures.          |
 
 ## Examples
 
 ### Example No.1
 
-This example demonstrates the usage of the `GetMachineParameter` plugin to retrieve the value of a machine-level environment variable named `MyMachineParam`.
+### Retrieve Machine-Level Environment Variable
 
-| Field      | Description                                                                                                         |
-|------------|---------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `Machine`. This signifies the action of getting the parameter. |
-| onElement  | Specifies the name of the environment variable, which is `MyMachineParam`.                                           |
+This example demonstrates how to retrieve a machine-level environment variable named `MyMachineParam` using the Machine plugin’s GetParameter action.
+It returns the raw value of the `MyMachineParam` variable from the machine scope for use in downstream workflows.
+The retrieved value is available in the `Result` output field for subsequent steps.
 
 _**CSharp**_
 
@@ -93,124 +88,6 @@ action_rule = {
     "onElement": "MyMachineParam"
 }
 ```
-### Example No.2
-
-This example demonstrates the usage of the `GetMachineParameter` plugin within an automation flow to send the retrieved parameter value as keystrokes to an element.
-
-| Field      | Description                                                                                                          |
-|------------|----------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `SendKeys`. This signifies the action of sending keystrokes. |
-| argument   | Specifies the use of the `GetMachineParameter` plugin to fetch the environment variable value dynamically.           |
-| onElement  | Specifies the target element on which the keystrokes will be sent, which is identified by its CSS selector.          |
-| locator    | Specifies the locator type used to identify the target element, which is `CssSelector` in this example.              |
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "SendKeys",
-    Argument = "{{$Get-Parameter --Name:MyMachineParam --Scope:Machine}}",
-    Locator = "CssSelector",
-    OnElement = "#someElement"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("SendKeys")
-    .setArgument("{{$Get-Parameter --Name:MyMachineParam --Scope:Machine}}")
-    .setLocator("CssSelector")
-    .setOnElement("#someElement");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "SendKeys",
-    argument: "{{$Get-Parameter --Name:MyMachineParam --Scope:Machine}}",
-    locator: "CssSelector",
-    onElement: "#someElement"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:MyMachineParam --Scope:Machine}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "SendKeys",
-    "argument": "{{$Get-Parameter --Name:MyMachineParam --Scope:Machine}}",
-    "locator": "CssSelector",
-    "onElement": "#someElement"
-}
-```
-### Example No.3
-
-This example demonstrates the usage of the `GetMachineParameter` plugin to retrieve a machine-level environment variable without specifying any additional parameters.
-
-| Field      | Description                                                                                                            |
-|------------|------------------------------------------------------------------------------------------------------------------------|
-| pluginName | Identifies the specific plugin being utilized, which is `Machine`. This signifies the action of getting the parameter. |
-| onElement  | Specifies the name of the environment variable, which is `DefaultMachineParam`.                                        |
-
-_**CSharp**_
-
-```csharp
-var actionRule = new ActionRuleModel
-{
-    PluginName = "Machine",
-    OnElement = "DefaultMachineParam"
-};
-```
-
-_**Java**_
-
-```java
-ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("Machine")
-    .setOnElement("DefaultMachineParam");
-```
-
-_**Javascript**_
-
-```js
-var actionRule = {
-    pluginName: "Machine",
-    onElement: "DefaultMachineParam"
-};
-```
-
-_**JSON**_
-
-```js
-{
-    "pluginName": "Machine",
-    "onElement": "DefaultMachineParam"
-}
-```
-
-_**Python**_
-
-```python
-action_rule = {
-    "pluginName": "Machine",
-    "onElement": "DefaultMachineParam"
-}
-```
 
 ## Properties
 
@@ -224,8 +101,9 @@ action_rule = {
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-The `OnElement` property specifies the name of the environment variable to be retrieved.
+OnElement names the environment variable to retrieve.
+Workflows use this name to find the right value when they run.
 
 ## Scope
 
-* Any
+* Windows
