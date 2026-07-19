@@ -400,9 +400,9 @@ namespace G4.Plugins.Common.HttpMethods.Abstraction
             PluginBase plugin, PluginDataModel pluginData, HttpResponseMessage responseMessage, string input)
         {
             // Store the HTTP status code and processed response data in session parameters.
-            plugin.Invoker.Context.SessionParameters["HttpStatusCode"] = (int)responseMessage.StatusCode;
-            plugin.Invoker.Context.SessionParameters["HttpResponseHeaders"] = responseMessage.Headers.ToDictionary();
-            plugin.Invoker.Context.SessionParameters["HttpResponse"] = Regex
+            plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"] = (int)responseMessage.StatusCode;
+            plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponseHeaders"] = responseMessage.Headers.ToDictionary();
+            plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"] = Regex
                 .Match(input, pattern: pluginData.Rule.RegularExpression)?
                 .Value
                 .ConvertToBase64() ?? string.Empty;
