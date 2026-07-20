@@ -1,4 +1,4 @@
-﻿using G4.Extensions;
+using G4.Extensions;
 using G4.Models;
 using G4.Plugins.Common.HttpMethods;
 using G4.UnitTests.Framework;
@@ -44,8 +44,8 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpPatchMethod>(ruleJson).Plugin;
 
             // Retrieve the status code and response from the plugin's session parameters
-            var statusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
-            var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
+            var statusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
+            var response = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"];
 
             // Assert that the status code is 200
             Assert.AreEqual(expected: 200, actual: statusCode);
@@ -75,7 +75,7 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpPatchMethod>(ruleJson).Plugin;
 
             // Get the actual HTTP status code from the session parameters.
-            var actualStatusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
+            var actualStatusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
 
             // Assert that the actual status code matches the expected status code.
             Assert.AreEqual(expectedStatusCode, actualStatusCode);
@@ -98,8 +98,8 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpPatchMethod>(ruleJson).Plugin;
 
             // Retrieve the status code and response from the plugin's session parameters
-            var statusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
-            var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
+            var statusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
+            var response = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"];
 
             // Assert that the status code is 200
             Assert.AreEqual(expected: 200, actual: statusCode);
@@ -124,8 +124,8 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpPatchMethod>(ruleJson).Plugin;
 
             // Retrieve the status code and response from the plugin's session parameters
-            var statusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
-            var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
+            var statusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
+            var response = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"];
 
             // Assert that the status code is 200
             Assert.AreEqual(expected: 200, actual: statusCode);
@@ -151,8 +151,8 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpPatchMethod>(ruleJson).Plugin;
 
             // Retrieve the HTTP status code and response from the plugin context
-            var statusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
-            var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
+            var statusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
+            var response = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"];
 
             // Assert that the HTTP status code is 200 (OK)
             Assert.AreEqual(expected: 200, actual: statusCode);
@@ -177,8 +177,8 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpPatchMethod>(ruleJson).Plugin;
 
             // Retrieve the status code and response from the plugin's session parameters
-            var statusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
-            var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
+            var statusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
+            var response = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"];
 
             // Assert that the status code is 200
             Assert.AreEqual(expected: 200, actual: statusCode);
