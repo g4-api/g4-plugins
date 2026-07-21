@@ -15,6 +15,57 @@ namespace G4.Extensions
     /// </summary>
     internal static class LocalExtensions
     {
+        // Maps recorder- and layout-supplied key labels (case-insensitive) to the driver's canonical
+        // key vocabulary. Authoring clients capture key names from the operating system via
+        // GetKeyNameText, which yields display spellings such as "Num Enter", "Page Down", or
+        // "Delete"; the driver's scan-code maps use canonical tokens such as "Enter", "PgDn", and
+        // "Del". Only labels that differ from the canonical vocabulary are listed; every other label
+        // passes through unchanged so an already-canonical token or a plain character is never altered.
+        private static readonly Dictionary<string, string> CanonicalKeys = new(StringComparer.OrdinalIgnoreCase)
+        {
+            // Enter and editing keys.
+            ["Num Enter"] = "Enter",
+            ["Insert"] = "Ins",
+            ["Delete"] = "Del",
+            ["Num Del"] = "Del",
+
+            // Navigation keys.
+            ["PageUp"] = "PgUp",
+            ["Page Up"] = "PgUp",
+            ["PageDown"] = "PgDn",
+            ["Page Down"] = "PgDn",
+
+            // Lock keys.
+            ["NumLock"] = "Num",
+            ["Num Lock"] = "Num",
+            ["ScrollLock"] = "Scroll",
+            ["Scroll Lock"] = "Scroll",
+
+            // System keys.
+            ["PrintScreen"] = "PrtSc",
+            ["Print Screen"] = "PrtSc",
+            ["Prnt Scrn"] = "PrtSc",
+
+            // Text and whitespace keys.
+            ["Caps Lock"] = "CapsLock",
+            ["Space"] = "Spacebar",
+
+            // Modifier fallback (a standalone modifier normally never reaches this layer).
+            ["Shift"] = "LShift",
+
+            // Numeric keypad digits.
+            ["Num 0"] = "0",
+            ["Num 1"] = "1",
+            ["Num 2"] = "2",
+            ["Num 3"] = "3",
+            ["Num 4"] = "4",
+            ["Num 5"] = "5",
+            ["Num 6"] = "6",
+            ["Num 7"] = "7",
+            ["Num 8"] = "8",
+            ["Num 9"] = "9"
+        };
+
         /// <summary>
         /// Determines whether the specified <see cref="PluginDataModel"/> has no associated element or action.
         /// </summary>
@@ -51,6 +102,32 @@ namespace G4.Extensions
             // Return true if neither an element is associated nor an action is defined
             // otherwise, return false.
             return !(isElement || isFromAction);
+        }
+
+        /// <summary>
+        /// Converts a recorder- or layout-supplied key label to the driver's canonical key token.
+        /// </summary>
+        /// <param name="key">The key label supplied by the authoring client.</param>
+        /// <returns>The canonical token when the label is a known display spelling; otherwise the original label.</returns>
+        /// <remarks>
+        /// This is the shared vocabulary layer between authoring clients and the driver: clients send raw
+        /// key labels (for example "Num Enter") and this conversion resolves them to the tokens the
+        /// driver's scan-code maps understand (for example "Enter"). Unknown labels pass through so a
+        /// label that is already canonical, or a plain typed character, is never altered.
+        /// </remarks>
+        public static string ConvertToCanonicalKey(this string key)
+        {
+            // Preserve a null or empty value unchanged; there is nothing to convert.
+            if (string.IsNullOrEmpty(key))
+            {
+                return key;
+            }
+
+            // Return the canonical token for a known display spelling, or the original label when it is
+            // already canonical or a plain typed character.
+            return CanonicalKeys.TryGetValue(key, out var canonicalKey)
+                ? canonicalKey
+                : key;
         }
 
         /// <summary>

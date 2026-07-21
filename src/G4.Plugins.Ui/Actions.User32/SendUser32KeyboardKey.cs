@@ -55,6 +55,11 @@ namespace G4.Plugins.Ui.Actions.User32
                 ? JsonSerializer.Deserialize<string[]>(keysData)
                 : [keysData];
 
+            // Normalize each key label to the driver's canonical vocabulary so recorder/display
+            // spellings (for example "Num Enter") resolve consistently for every client. This is the
+            // shared normalization layer; the driver map stays minimal and the clients stay thin.
+            var normalizedKeys = Array.ConvertAll(keys ?? [], key => key.ConvertToCanonicalKey());
+
             // Retrieve the delay parameter from the plugin data, defaulting to "0" if not provided.
             var delayData = pluginData.Parameters.Get("Delay", "0");
 
@@ -63,7 +68,7 @@ namespace G4.Plugins.Ui.Actions.User32
             var delay = (int)delayData.ConvertToTimeSpan(defaultValue: TimeSpan.Zero).TotalMilliseconds;
 
             // Send the key inputs using the specified WebDriver, keys, delay, and sticky keys flag.
-            SendInputs(WebDriver, keyboardLayout, keys, delay, stickyKeys);
+            SendInputs(WebDriver, keyboardLayout, normalizedKeys, delay, stickyKeys);
 
             // Return a new plugin response indicating that the operation completed successfully.
             return this.NewPluginResponse();
