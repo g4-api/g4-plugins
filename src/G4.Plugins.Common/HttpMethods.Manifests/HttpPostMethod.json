@@ -1,4 +1,4 @@
-﻿{
+{
 	"author": {
 		"name": "Roei Sabag",
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/"
@@ -440,7 +440,7 @@
 				"Provides a way to work with the processed response data instead of the raw body.",
 				"Enables automation workflows to access the exact information they need from the HTTP response."
 			],
-			"name": "HttpResponse",
+			"name": "SendHttpRequest:HttpResponse",
 			"type": "Any"
 		},
 		{
@@ -449,7 +449,7 @@
 				"Contains key-value pairs that provide metadata about the response such as content type, date, and length.",
 				"Enables workflows to inspect response details for logging or conditional logic."
 			],
-			"name": "HttpResponseHeaders",
+			"name": "SendHttpRequest:HttpResponseHeaders",
 			"type": "Any"
 		},
 		{
@@ -459,7 +459,7 @@
 				"Enables automation flows to check for success or failure of the HTTP operation.",
 				"Supports error handling in workflows based on the status code value."
 			],
-			"name": "HttpStatusCode",
+			"name": "SendHttpRequest:HttpStatusCode",
 			"type": "Any"
 		}
 	],

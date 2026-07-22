@@ -1,7 +1,5 @@
 ﻿using G4.Api;
-using G4.Extensions;
 using G4.Models;
-using G4.Plugins.Ui.Actions;
 using G4.UnitTests.Attributes;
 using G4.UnitTests.Framework;
 

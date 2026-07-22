@@ -1,4 +1,4 @@
-﻿using G4.Extensions;
+using G4.Extensions;
 using G4.IntegrationTests.Framework;
 using G4.Models;
 
@@ -33,7 +33,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Eq --Expected:200}}",
-                    OnElement = "{{$Get-Parameter --Name:HttpStatusCode --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:SendHttpRequest:HttpStatusCode --Scope:Session}}"
                 },
                 // Assert action: Asserts that the response confirms the booking for the specified hotel and room type
                 new ActionRuleModel
@@ -43,7 +43,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
                         "--Condition:Text " +
                         "--Operator:" + assertionOperation + " " +
                         "--Expected:(?s)Booking confirmed for Luxury Hotel, Suite}}",
-                    OnElement = "{{$Get-Parameter --Name:HttpResponse --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:SendHttpRequest:HttpResponse --Scope:Session}}"
                 }
             ];
         }

@@ -1,4 +1,4 @@
-﻿using G4.Extensions;
+using G4.Extensions;
 using G4.IntegrationTests.Framework;
 using G4.Models;
 
@@ -32,14 +32,14 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Ne --Expected:200}}",
-                    OnElement = "{{$Get-Parameter --Name:HttpStatusCode --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:SendHttpRequest:HttpStatusCode --Scope:Session}}"
                 },
                 // Assert action: Asserts that the HTTP response matches a specific pattern based on the assertion operation
                 new ActionRuleModel
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:" + assertionOperation + @" --Expected:(?<=Basic\s+)([A-Za-z0-9+/=]+)}}",
-                    OnElement = "{{$Get-Parameter --Name:HttpResponse --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:SendHttpRequest:HttpResponse --Scope:Session}}"
                 }
             ];
         }

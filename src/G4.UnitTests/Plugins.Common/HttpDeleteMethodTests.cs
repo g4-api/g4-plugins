@@ -1,4 +1,4 @@
-﻿using G4.Extensions;
+using G4.Extensions;
 using G4.Models;
 using G4.Plugins.Common.HttpMethods;
 using G4.UnitTests.Framework;
@@ -46,8 +46,8 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpDeleteMethod>(ruleJson).Plugin;
 
             // Retrieve the status code and response from the plugin's session parameters
-            var statusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
-            var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
+            var statusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
+            var response = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"];
 
             // Assert that the status code is as expected
             Assert.AreEqual(expected: expectedStatusCode, actual: statusCode);
@@ -77,8 +77,8 @@ namespace G4.UnitTests.Plugins.Common
             var plugin = Invoke<HttpDeleteMethod>(ruleJson).Plugin;
 
             // Retrieve the status code and response from the plugin's session parameters
-            var statusCode = plugin.Invoker.Context.SessionParameters["HttpStatusCode"];
-            var response = plugin.Invoker.Context.SessionParameters["HttpResponse"];
+            var statusCode = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpStatusCode"];
+            var response = plugin.Invoker.Context.SessionParameters["SendHttpRequest:HttpResponse"];
 
             // Assert that the status code is as expected
             Assert.AreEqual(expected: expectedStatusCode, actual: statusCode);

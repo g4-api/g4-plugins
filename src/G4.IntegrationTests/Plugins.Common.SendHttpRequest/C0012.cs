@@ -1,4 +1,4 @@
-﻿/*
+/*
  * CHANGE LOG - keep only last 5 threads
  * 
  * RESOURCES
@@ -40,7 +40,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
                 {
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:Text --Operator:Eq --Expected:200}}",
-                    OnElement = "{{$Get-Parameter --Name:HttpStatusCode --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:SendHttpRequest:HttpStatusCode --Scope:Session}}"
                 },
                 // Assert action: Asserts that the response confirms the booking for the
                 // specified hotel and room type
@@ -51,7 +51,7 @@ namespace G4.IntegrationTests.Plugins.Common.SendHttpRequest
                         "--Condition:Text " +
                         "--Operator:" + assertionOperation + " " +
                         "--Expected:(?s)Booking confirmed for Luxury Hotel, Suite}}",
-                    OnElement = "{{$Get-Parameter --Name:HttpResponse --Scope:Session}}"
+                    OnElement = "{{$Get-Parameter --Name:SendHttpRequest:HttpResponse --Scope:Session}}"
                 }
             ];
         }
