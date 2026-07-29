@@ -15,22 +15,6 @@ namespace G4.UnitTests.Engine
     [TestCategory("UnitTest")]
     public class AssembliesLoaderTests
     {
-        [TestMethod]
-        public void A()
-        {
-            var path = @"E:\customers\m-card\red-teams\src\bots\get-emails.json";
-            var json = System.IO.File.ReadAllText(path);
-            var automation = JsonSerializer.Deserialize<G4AutomationModel>(json, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-            var client = new G4Client();
-            var r = client.Automation.Invoke(automation);
-
-            var b = "";
-        }
-
         [TestMethod(DisplayName = "Verify that the number of imported assemblies and types " +
             "meets certain criteria.")]
         public void AssembliesNumberTest()
@@ -42,7 +26,7 @@ namespace G4.UnitTests.Engine
             var actual = loader.ImportAssemblies();
 
             // Assert that the count of imported assemblies is not zero
-            Assert.AreNotEqual(notExpected: 0, actual: actual.Count);
+            Assert.IsNotEmpty(actual);
 
             // Assert that the count of unique assemblies is greater than 5
             Assert.IsGreaterThan(5, actual.Select(i => i.Value.Assembly).Count());
@@ -68,8 +52,8 @@ namespace G4.UnitTests.Engine
             loader.ImportAssemblies();
 
             // Assert that the event arguments contain information about loaded files, directories, and the base directory
-            Assert.IsTrue(actual.Files.Any());
-            Assert.IsFalse(actual.Directories.Any());
+            Assert.IsNotEmpty(actual.Files);
+            Assert.IsEmpty(actual.Directories);
             Assert.IsFalse(string.IsNullOrEmpty(actual.Directory));
         }
     }
