@@ -6,8 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace G4.IntegrationTests.Suites.Ui.Edge
 {
-    [DoNotParallelize]
     [TestClass]
+    [Retry(maxRetryAttempts: 3)]
     [TestCategory("System")]
     [TestCategory("Integration")]
     [TestCategory("MicrosoftEdge")]
@@ -45,7 +45,6 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             Invoke<C0001>(testOptions);
         }
 
-        [Retry(maxRetryAttempts: 3)]
         [TestMethod(DisplayName = "As an automation engineer using the G4™ platform, I need " +
             "to verify that the InvokeContextClick plugin accurately simulates a context-click " +
             "action at the last known mouse cursor position.")]
