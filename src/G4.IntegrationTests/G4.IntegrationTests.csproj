@@ -32,9 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Api" Version="2026.7.22.50" />
-		<PackageReference Include="G4.Plugins" Version="2026.7.29.71" />
-		<PackageReference Include="G4.Converters" Version="2026.7.29.71" />
+		<PackageReference Include="G4.Api" Version="2026.7.30.51" />
+		<PackageReference Include="G4.Plugins" Version="2026.7.30.72" />
+		<PackageReference Include="G4.Converters" Version="2026.7.30.72" />
 		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.10" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
 		<PackageReference Include="MSTest.TestAdapter" Version="4.3.3" />
