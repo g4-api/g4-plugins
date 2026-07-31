@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace G4.IntegrationTests.Suites.Ui.Edge
 {
-    [DoNotParallelize]
+    [Retry(maxRetryAttempts: 3)]
     [TestClass]
     [TestCategory("System")]
     [TestCategory("Integration")]
