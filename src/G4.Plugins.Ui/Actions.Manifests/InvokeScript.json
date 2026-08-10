@@ -49,6 +49,10 @@
 					{
 						"question": "What is the ExecuteScript alias?",
 						"answer": "ExecuteScript is an alias for InvokeScript — both resolve to identical behavior."
+					},
+					{
+						"question": "How is a Base64-encoded script provided?",
+						"answer": "Add the Base64 switch and pass the script as a Base64 value through ScriptBlock or the Argument property. The action decodes the value with ConvertFromBase64 before execution, and invalid Base64 input is used as-is without raising an error."
 					}
 				]
 			},
@@ -81,6 +85,7 @@
 		"|-------------------|--------------------------------------------------------------------------------------------------------|",
 		"| Script Execution  | Executes environment-specific scripts synchronously within the current session via WebDriver.          |",
 		"| Flexible Input    | Script can be supplied inline as the Argument value or explicitly via the ScriptBlock parameter.       |",
+		"| Base64 Input      | The Base64 switch decodes a Base64-encoded ScriptBlock value before the script executes.               |",
 		"| Element Injection | When OnElement is provided the resolved element is prepended to the arguments array as arguments[0].   |",
 		"| Custom Arguments  | The Arguments parameter accepts a JSON array whose values are appended to the script's arguments list. |",
 		"| Result Storage    | The script return value is stored in SessionParameters[\"ScriptResult\"] for use by downstream rules.  |",
@@ -261,6 +266,41 @@
 				"onElement": "#InputEnabled",
 				"pluginName": "InvokeScript"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Arguments parameter is combined with Base64 — only the ScriptBlock value is decoded, Arguments stay a JSON array",
+						"Base64 switch is absent — the encoded text is executed literally instead of the decoded script",
+						"Decoded script is empty or whitespace — the driver executes a no-op and ScriptResult is null",
+						"Invalid Base64 value — the input is used as-is and executed without a decoding error"
+					],
+					"expected_result": "The Base64 value is decoded to the original script, the input element #InputEnabled value is set to 'Foo Bar', and the return value is stored in ScriptResult.",
+					"notes": "The Base64 switch decodes the ScriptBlock value before execution using ConvertFromBase64. Encoding the script protects characters that the command-line parser would otherwise split. Invalid Base64 input is left unchanged and runs as-is.",
+					"use_case": "base64_encoded_script_block",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"DataConversion",
+					"JavaScript",
+					"NoElement",
+					"ScriptBlock",
+					"ScriptResult"
+				]
+			},
+			"description": [
+				"### Execute a Base64-encoded script block",
+				"",
+				"Passes the script through the ScriptBlock parameter as a Base64 value and enables the Base64 switch to decode it before execution.",
+				"The decoded script sets the input value and the return value is stored in the ScriptResult session parameter."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlPSdGb28gQmFyJzs= --Base64}}",
+				"pluginName": "InvokeScript"
+			}
 		}
 	],
 	"key": "InvokeScript",
@@ -276,6 +316,17 @@
 			"mandatory": false,
 			"name": "Arguments",
 			"type": "String|Json"
+		},
+		{
+			"description": [
+				"Base64 decodes the ScriptBlock value from Base64 before the script runs.",
+				"Encoding the script as Base64 matters because it can carry characters that the command-line parser would otherwise split or misread.",
+				"When the switch is absent the script value runs exactly as provided.",
+				"Invalid Base64 input is left unchanged and runs as-is, so a malformed value raises no error."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
 		},
 		{
 			"description": [
@@ -348,5 +399,5 @@
 		"In RPA it enables DOM manipulation, data extraction, dynamic interactions, and JavaScript utility execution; in automation testing it supports DOM state validation, pre-condition setup, script return value assertions, and custom event simulation.",
 		"The script return value is stored in the session parameter ScriptResult and is immediately available to downstream rules."
 	],
-	"version": "4"
+	"version": "5"
 }
