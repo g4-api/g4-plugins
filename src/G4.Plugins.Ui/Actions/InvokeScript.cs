@@ -17,7 +17,7 @@ namespace G4.Plugins.Ui.Actions
         private const string NameReference = nameof(InvokeScript);
 
         // JSON serialization options for customizing the behavior of the JSON serializer.
-        private static readonly JsonSerializerOptions s_jsonSerializerOptions = new()
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
         {
             // Allow trailing commas in JSON objects and arrays.
             AllowTrailingCommas = true,
@@ -39,13 +39,20 @@ namespace G4.Plugins.Ui.Actions
                 .Parameters
                 .Get(key: "ScriptBlock", defaultValue: pluginData.Rule.Argument);
 
+            // Decode the script from Base64 when the Base64 switch is provided so a script carrying characters
+            // the CLI parser would otherwise split can be supplied safely as a single encoded value.
+            // ConvertFromBase64 returns the original text on a decoding failure, leaving invalid input untouched.
+            script = pluginData.Parameters.ContainsKey(key: "Base64")
+                ? script.ConvertFromBase64()
+                : script;
+
             // Retrieve the target element based on the rule and element specified in the plugin data
             var element = this.GetElement(pluginData.Rule, pluginData.Element);
 
             // Extract and deserialize the arguments data, defaulting to null if not provided or invalid JSON
             var argumentsData = pluginData.Parameters.Get("Arguments", defaultValue: default(string));
             var arguments = !string.IsNullOrEmpty(argumentsData) && argumentsData.AssertJson()
-                ? JsonSerializer.Deserialize<object[]>(argumentsData, s_jsonSerializerOptions)
+                ? JsonSerializer.Deserialize<object[]>(argumentsData, _jsonSerializerOptions)
                 : [];
 
             // If both element and arguments are present, prepend the element to the arguments array
