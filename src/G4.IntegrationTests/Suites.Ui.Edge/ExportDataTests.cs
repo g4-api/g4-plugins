@@ -366,7 +366,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataJson.Order());
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the JSON data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the JSON data.");
             Assert.AreEqual(expected, actual, message: "JSON data does not match the expected data.");
         }
 
@@ -414,7 +414,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataJson.Order());
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the JSON data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the JSON data.");
             Assert.AreEqual(expected, actual, message: "JSON data does not match the expected data.");
         }
 
@@ -463,7 +463,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataXml.Order());
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the XML data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the XML data.");
             Assert.AreEqual(expected, actual, message: "XML data does not match the expected data.");
         }
 
@@ -511,7 +511,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataXml.Order());
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the XML data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the XML data.");
             Assert.AreEqual(expected, actual, message: "XML data does not match the expected data.");
         }
 
@@ -560,7 +560,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataCsv.Order());
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the CSV data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the CSV data.");
             Assert.AreEqual(expected, actual, message: "CSV data does not match the expected data.");
         }
 
@@ -609,7 +609,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataCsv.Order());
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the CSV data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the CSV data.");
             Assert.AreEqual(expected, actual, message: "CSV data does not match the expected data.");
         }
 
@@ -660,7 +660,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataCsv.Order()).Trim();
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the CSV data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the CSV data.");
             Assert.AreEqual(expected, actual, message: "CSV data does not match the expected data.");
         }
 
@@ -711,7 +711,7 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(dataCsv.Order()).Trim();
 
             // Assert the conditions to validate the test result.
-            Assert.AreEqual(expected: 2, actual: entities.Count(), message: "Expected two entities in the CSV data.");
+            Assert.HasCount(expected: 2, collection: entities, message: "Expected two entities in the CSV data.");
             Assert.AreEqual(expected, actual, message: "CSV data does not match the expected data.");
         }
 
@@ -754,7 +754,10 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var entity = environment.GetEntities().FirstOrDefault(i => i.Content.Count == 12)?.Content;
 
             // Check if there are 12 entities in the CSV data.
-            Assert.AreNotEqual(notExpected: default, actual: entity, message: "Expected 12 entities in the CSV data.");
+            Assert.AreNotSequenceEqual(
+                notExpected: default,
+                actual: entity,
+                message: "Expected 12 entities in the CSV data.");
 
             // Assert that the CheckOut field matches the expected value
             Assert.AreEqual(
@@ -862,9 +865,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(actualData.Order());
 
             // Verify two records were inserted
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 2,
-                actual: entities.Count(),
+                collection: entities,
                 message: "Expected two records in the SQLite database table.");
 
             // Verify stored data matches the expected payload
@@ -923,9 +926,9 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             var actual = string.Concat(actualData.Order());
 
             // Verify that two records were written into the SQLite table
-            Assert.AreEqual(
+            Assert.HasCount(
                 expected: 2,
-                actual: entities.Count(),
+                collection: entities,
                 message: "Expected two records in the SQLite database table.");
 
             // Verify that the stored data matches exactly what was expected
