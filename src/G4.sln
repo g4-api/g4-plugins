@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".test", ".test", "{8E72DDF2-2337-4AF2-AA6C-E5D29DFC4702}"
 	ProjectSection(SolutionItems) = preProject
 		..\test\Settings\Default.runsettings = ..\test\Settings\Default.runsettings
+		..\test\Settings\Local.runsettings = ..\test\Settings\Local.runsettings
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".git", ".git", "{23DD73C8-1A2F-4596-998A-26B3F8A190B8}"
