@@ -59,6 +59,20 @@
 	</div>
 
 	<div>
+		<input title="DoubleClickOutcome"
+			   placeholder="DoubleClickOutcome"
+			   type="text"
+			   id="DoubleClickOutcome" />
+	</div>
+
+	<div>
+		<input title="ContextClickOutcome"
+			   placeholder="ContextClickOutcome"
+			   type="text"
+			   id="ContextClickOutcome" />
+	</div>
+
+	<div>
 		<input title="ScrollOutcomeY"
 			   placeholder="ScrollOutcomeY"
 			   type="text"
@@ -215,11 +229,13 @@
 	<script>
 		/**
 		 * Attaches an event listener to the body element to handle the contextmenu event.
-		 * It prevents the default action and updates the EventOutcome input field value.
+		 * It prevents the default action and updates the ContextClickOutcome input field value.
+		 * A dedicated field is used (instead of EventOutcome) so the assertion is not clobbered by the
+		 * asynchronous resize/windowMoved/visibilitychange handlers that also write to EventOutcome.
 		 */
 		document.querySelector("body").addEventListener("contextmenu", function (event) {
-			// Set the value of the EventOutcome input field to indicate the contextmenu event on the body
-			document.getElementById('EventOutcome').setAttribute('value', "context on body");
+			// Set the value of the ContextClickOutcome input field to indicate the contextmenu event on the body
+			document.getElementById('ContextClickOutcome').setAttribute('value', "context on body");
 
 			// Prevent the default context menu behavior
 			event.preventDefault();
@@ -242,11 +258,13 @@
 
 		/**
 		 * Attaches an event listener to the body element to handle the dblclick event.
-		 * It updates the EventOutcome input field value when a double-click event occurs on the body.
+		 * It updates the DoubleClickOutcome input field value when a double-click event occurs on the body.
+		 * A dedicated field is used (instead of EventOutcome) so the assertion is not clobbered by the
+		 * asynchronous resize/windowMoved/visibilitychange handlers that also write to EventOutcome.
 		 */
 		document.querySelector("body").addEventListener("dblclick", function (event) {
-			// Update the value of the EventOutcome input field to indicate a double click on the body
-			document.getElementById('EventOutcome').setAttribute('value', "double on body");
+			// Update the value of the DoubleClickOutcome input field to indicate a double click on the body
+			document.getElementById('DoubleClickOutcome').setAttribute('value', "double on body");
 
 			// Prevent the default action for the dblclick event
 			event.preventDefault();

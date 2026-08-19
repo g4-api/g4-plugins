@@ -21,7 +21,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeContextClick
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:ElementAttribute --Operator:Equal}}",
                     OnAttribute = "value",
-                    OnElement = "#EventOutcome",
+                    OnElement = "#ContextClickOutcome",
                     Locator = Locators.CssSelector
                 },
                 // SetWindowState action: Maximizes the browser window
@@ -47,7 +47,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeContextClick
                     PluginName = "Assert",
                     Argument = "{{$ --Condition:ElementAttribute --Operator:Equal --Expected:context on body}}",
                     OnAttribute = "value",
-                    OnElement = "#EventOutcome",
+                    OnElement = "#ContextClickOutcome",
                     Locator = Locators.CssSelector
                 }
             ];
