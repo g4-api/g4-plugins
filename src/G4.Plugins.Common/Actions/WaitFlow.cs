@@ -27,10 +27,13 @@ namespace G4.Plugins.Common.Actions
         // Executes a wait timeout for the specified duration.
         private static PluginResponseModel WaitTimeout(PluginBase plugin, PluginDataModel pluginData)
         {
+            // A constant string representing the key for the timeout parameter
+            const string Timeout = "Timeout";
+
             // Determine the timeout duration, either from plugin arguments or using the default timeout
-            var timeout = pluginData.Parameters.Keys.Any(i => i.Equals("Timeout", StringComparison.OrdinalIgnoreCase))
-                ? pluginData.Parameters.Get(key: "Timeout", defaultValue: "0").ConvertToTimeSpan()
-                : TimeSpan.FromSeconds(0);
+            var timeout = pluginData.Parameters.Keys.Any(i => i.Equals(Timeout, StringComparison.OrdinalIgnoreCase))
+                    ? pluginData.Parameters.Get(key: Timeout, defaultValue: "0").ConvertToTimeSpan()
+                    : TimeSpan.FromSeconds(0);
 
             // Extract the timeout duration from the plugin data rule argument and convert it to a TimeSpan
             if (timeout == TimeSpan.FromSeconds(0))
@@ -51,12 +54,18 @@ namespace G4.Plugins.Common.Actions
         // Waits until a condition is met or a timeout occurs.
         private static PluginResponseModel WaitCondition(PluginBase plugin, PluginDataModel pluginData)
         {
+            // A constant string representing the key for the timeout parameter
+            const string Timeout = "Timeout";
+
+            // A constant string representing the key for the evaluation parameter
+            const string Evaluation = "Evaluation";
+
             // Retrieve the default timeout from the engine configuration
             var defaultTimeout = plugin.Automation.Settings.AutomationSettings.SearchTimeout;
 
             // Determine the timeout duration, either from plugin arguments or using the default timeout
-            var timeout = pluginData.Parameters.ContainsKey("Timeout")
-                ? pluginData.Parameters.Get(key: "Timeout", defaultValue: "0").ConvertToTimeSpan()
+            var timeout = pluginData.Parameters.ContainsKey(Timeout)
+                ? pluginData.Parameters.Get(key: Timeout, defaultValue: "0").ConvertToTimeSpan()
                 : TimeSpan.FromMilliseconds(defaultTimeout);
 
             // Calculate the end time for the timeout
@@ -66,7 +75,7 @@ namespace G4.Plugins.Common.Actions
             var conditionMet = plugin
                 .Assert(pluginData, addExtractions: false)
                 .Entity
-                .Get(key: "Evaluation", defaultValue: false);
+                .Get(key: Evaluation, defaultValue: false);
 
             // Loop until the condition is met or the timeout expires
             while (!conditionMet && DateTime.UtcNow < endTime)
@@ -78,7 +87,7 @@ namespace G4.Plugins.Common.Actions
                 conditionMet = plugin
                     .Assert(pluginData, addExtractions: false)
                     .Entity
-                    .Get(key: "Evaluation", defaultValue: false);
+                    .Get(key: Evaluation, defaultValue: false);
             }
 
             // Return a new plugin response indicating the completion of the wait operation
