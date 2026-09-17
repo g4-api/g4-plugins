@@ -1,10 +1,15 @@
 ﻿using G4.Plugins.Common.Actions;
+using G4.Models;
 using G4.UnitTests.Extensions;
 using G4.UnitTests.Framework;
+using G4.WebDriver.Exceptions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
@@ -41,6 +46,81 @@ namespace G4.UnitTests.Plugins.Common
         public override void ManifestComplianceTest()
         {
             AssertManifest<WaitFlow>();
+        }
+
+        [TestMethod(DisplayName = "Verify that WaitFlow keeps pre-existing exceptions and last distinct key lookup failures.")]
+        public void WaitFlowPollingExceptionNormalizationTest()
+        {
+            // Arrange: create a plugin and rule context that matches the report-visible exception identity.
+            var plugin = NewPlugin<WaitFlow>();
+            var rule = new ActionRuleModel(pluginName: "WaitFlow")
+            {
+                OnElement = "//positive"
+            };
+            var pluginData = new PluginDataModel
+            {
+                Rule = rule
+            };
+
+            // Arrange: model the exception state before polling and the noisy assertion failures produced by intervals.
+            var originalException = new G4ExceptionModel(rule, new InvalidOperationException("Original failure."));
+            var firstKeyFailure = new G4ExceptionModel(rule, new KeyNotFoundException("Repeated key failure."));
+            var lastKeyFailure = new G4ExceptionModel(rule, new KeyNotFoundException("Repeated key failure."));
+            var distinctKeyFailure = new G4ExceptionModel(rule, new KeyNotFoundException("Distinct key failure."));
+            var ignoredPollingFailure = new G4ExceptionModel(rule, new InvalidOperationException("Ignored polling failure."));
+
+            // Act: invoke the normalization helper directly so the test isolates the compaction contract.
+            typeof(WaitFlow)
+                .GetMethod(name: "NormalizePollingExceptions", BindingFlags.NonPublic | BindingFlags.Static)
+                .Invoke(
+                    obj: default,
+                    parameters:
+                    [
+                        plugin,
+                        pluginData,
+                        new[] { originalException },
+                        new[] { firstKeyFailure, lastKeyFailure, distinctKeyFailure, ignoredPollingFailure }
+                    ]);
+
+            // Assert: pre-existing exceptions remain and non-key polling failures are discarded.
+            var exceptions = plugin.Exceptions.ToArray();
+
+            Assert.AreEqual(expected: 3, actual: exceptions.Length);
+            Assert.IsTrue(exceptions.Contains(originalException));
+            Assert.IsFalse(exceptions.Contains(ignoredPollingFailure));
+
+            // Assert: repeated key lookup failures keep only the last item for the distinct identity.
+            Assert.IsFalse(exceptions.Contains(firstKeyFailure));
+            Assert.IsTrue(exceptions.Contains(lastKeyFailure));
+            Assert.IsTrue(exceptions.Contains(distinctKeyFailure));
+        }
+
+        [TestMethod(DisplayName = "Verify that WaitFlow reports one timeout when a wait condition expires.")]
+        public void WaitFlowTimeoutExceptionTest()
+        {
+            // Arrange: use a condition that stays false so the wait path reaches its timeout branch.
+            var ruleJson =
+                "{\n" +
+                "    \"$type\":\"Action\",\n" +
+                "    \"pluginName\":\"WaitFlow\",\n" +
+                "    \"argument\":\"{{$ --Condition:PageTitle --Expected:FooBar --Timeout:300}}\",\n" +
+                "    \"onElement\":\"//positive\"\n" +
+                "}";
+
+            // Act: invoke the wait path long enough to poll more than once and then time out.
+            var exceptions = Invoke(ruleJson).GetExceptions().ToArray();
+
+            // Assert: the failed wait reports exactly one timeout with the configured duration and element.
+            var timeoutExceptions = exceptions
+                .Where(i => i.Exception is WebDriverTimeoutException)
+                .ToArray();
+
+            Assert.AreEqual(expected: 1, actual: timeoutExceptions.Length);
+            Assert.AreEqual(expected: 1, actual: exceptions.Length);
+
+            var timeoutException = (WebDriverTimeoutException)timeoutExceptions[0].Exception;
+            Assert.AreEqual(expected: TimeSpan.FromMilliseconds(300), actual: timeoutException.Timeout);
+            StringAssert.Contains(value: timeoutExceptions[0].ReasonPhrase, substring: "//positive");
         }
 
         [TestMethod(DisplayName = "Verify that the WaitFlow plugin meets boolean conditions within the timeout period.")]

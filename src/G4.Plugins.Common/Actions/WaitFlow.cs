@@ -1,8 +1,11 @@
 ﻿using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
+using G4.WebDriver.Exceptions;
 
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -71,9 +74,12 @@ namespace G4.Plugins.Common.Actions
             // Calculate the end time for the timeout
             var endTime = DateTime.UtcNow.Add(timeout);
 
+            // Snapshot exceptions before polling so WaitFlow compacts only the transient assertion failures it owns.
+            var originalExceptions = plugin.Exceptions.ToArray();
+            var pollingExceptions = new List<G4ExceptionModel>();
+
             // Check if the condition has been met
-            var conditionMet = plugin
-                .Assert(pluginData, addExtractions: false)
+            var conditionMet = InvokeAssertion(plugin, pluginData, pollingExceptions)
                 .Entity
                 .Get(key: Evaluation, defaultValue: false);
 
@@ -84,14 +90,86 @@ namespace G4.Plugins.Common.Actions
                 Thread.Sleep(millisecondsTimeout: 100);
 
                 // Check the condition again
-                conditionMet = plugin
-                    .Assert(pluginData, addExtractions: false)
+                conditionMet = InvokeAssertion(plugin, pluginData, pollingExceptions)
                     .Entity
                     .Get(key: Evaluation, defaultValue: false);
             }
 
+            // Replace repeated polling failures with their last distinct KeyNotFoundException entries.
+            NormalizePollingExceptions(plugin, pluginData, originalExceptions, pollingExceptions);
+
+            if (!conditionMet)
+            {
+                // Report the wait timeout once after noisy polling failures have been compacted.
+                AddTimeoutException(plugin, pluginData, timeout);
+            }
+
             // Return a new plugin response indicating the completion of the wait operation
             return plugin.NewPluginResponse();
+        }
+
+        // Adds the final timeout failure produced by WaitFlow after assertion polling exhausts the timeout.
+        private static void AddTimeoutException(PluginBase plugin, PluginDataModel pluginData, TimeSpan timeout)
+        {
+            // Create one timeout diagnostic so the response records the wait failure without interval duplicates.
+            var condition = pluginData.Parameters.Get(key: "Condition", defaultValue: string.Empty);
+            var message = $"WaitFlow condition '{condition}' timed out after '{timeout}' " +
+                $"for element '{pluginData.Rule.OnElement}'.";
+            var exception = new WebDriverTimeoutException(message, timeout);
+
+            plugin.Exceptions.Add(new G4ExceptionModel(pluginData.Rule, exception));
+        }
+
+        // Invokes the assertion and captures the assertion response exceptions in polling order.
+        private static PluginResponseModel InvokeAssertion(
+            PluginBase plugin,
+            PluginDataModel pluginData,
+            ICollection<G4ExceptionModel> pollingExceptions)
+        {
+            // Preserve per-interval assertion exceptions before WaitFlow compacts the plugin exception bag.
+            var assertion = plugin.Assert(pluginData, addExtractions: false);
+
+            foreach (var exception in assertion.Exceptions ?? [])
+            {
+                pollingExceptions.Add(exception);
+            }
+
+            return assertion;
+        }
+
+        // Keeps pre-existing exceptions and the last distinct polling KeyNotFoundException entries.
+        private static void NormalizePollingExceptions(
+            PluginBase plugin,
+            PluginDataModel pluginData,
+            IEnumerable<G4ExceptionModel> originalExceptions,
+            IEnumerable<G4ExceptionModel> pollingExceptions)
+        {
+            // Retain only the final KeyNotFoundException for each report-visible identity and element.
+            var distinctExceptions = new Dictionary<string, G4ExceptionModel>(StringComparer.Ordinal);
+            foreach (var exception in pollingExceptions)
+            {
+                if (exception.Exception is not KeyNotFoundException)
+                {
+                    continue;
+                }
+
+                var key = GetExceptionKey(exception, pluginData.Rule.OnElement);
+                distinctExceptions[key] = exception;
+            }
+
+            // Replace the bag in one step so non-KeyNotFound polling noise is excluded from the final response.
+            plugin.Exceptions = new ConcurrentBag<G4ExceptionModel>(originalExceptions.Concat(distinctExceptions.Values));
+        }
+
+        // Returns the identity used to collapse repeated polling exceptions for one WaitFlow invocation.
+        private static string GetExceptionKey(G4ExceptionModel exception, string onElement)
+        {
+            return string.Join(
+                separator: "\u001F",
+                exception.PluginName,
+                exception.Type,
+                exception.ReasonPhrase,
+                onElement);
         }
     }
 }
