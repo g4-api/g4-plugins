@@ -29,7 +29,7 @@ namespace G4.IntegrationTests.Plugins.Ui.InvokeClick
                 new ActionRuleModel
                 {
                     PluginName = "InvokeClick",
-                    Argument = "{{$ --Polling:1.0 --Condition:" + condition + "}}",
+                    Argument = "{{$ --Polling:00:00:01 --Condition:" + condition + "}}",
                     OnElement = "#UntilDisabled",
                     OnAttribute = "value",
                     Locator = Locators.CssSelector
