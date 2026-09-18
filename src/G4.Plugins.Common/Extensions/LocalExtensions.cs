@@ -20,6 +20,10 @@ namespace G4.Extensions
         /// <returns>A tuple indicating whether it's a boolean assertion and the evaluation value.</returns>
         public static (bool IsBoolean, bool Evaluation) ConfirmBooleanAssertion(this PluginResponseModel response)
         {
+            // Constants for assertion types.
+            const string boolean = "Boolean";
+            const string none = "None";
+
             // Get the evaluation value from the response entity.
             var evaluationValue = response.Entity.Get(key: AssertionProperties.Evaluation, defaultValue: default(bool));
 
@@ -30,10 +34,19 @@ namespace G4.Extensions
             var evaluation = evaluationValue != actual ? actual : evaluationValue;
 
             // Retrieve the operator and expected values from the response entity.
-            var @operator = $"{response.Entity.Get(key: AssertionProperties.Operator, defaultValue: "Boolean")}";
+            var @operator = $"{response.Entity.Get(key: AssertionProperties.Operator, defaultValue: boolean)}";
+
+            // A List of values that indicate a boolean assertion.
+            var booleanIncluded = new[]
+            {
+                boolean,
+                string.Empty,
+                null,
+                none
+            };
 
             // Determine if the assertion is a boolean assertion based on the operator and expected values.
-            var isBoolean = @operator.Equals("Boolean", StringComparison.OrdinalIgnoreCase);
+            var isBoolean = booleanIncluded.Contains(@operator, StringComparer.OrdinalIgnoreCase);
 
             // Return a tuple with information about whether it's a boolean assertion and the evaluation value.
             return (isBoolean, isBoolean && evaluation);
