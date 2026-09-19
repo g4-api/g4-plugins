@@ -56,8 +56,12 @@ namespace G4.Extensions
                 // with the response and set the evaluation result in the entity
                 if (isBoolean)
                 {
-                    assertion = response; // Update the assertion model with the response
+                    // Update the assertion model with the response
+                    assertion = response;
                     assertion.Entity[AssertionProperties.Evaluation] = evaluation;
+
+                    // Clear the entity to avoid storing unnecessary data for boolean assertions
+                    assertion.Entity[AssertionProperties.Operator] = null;
                 }
                 else
                 {
