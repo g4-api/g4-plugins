@@ -11,9 +11,17 @@ namespace G4.Plugins.Ui.Assertions
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
+            // Return a new assertion response indicating whether the
+            // specified element exists using the provided plugin data.
             return this.NewAssertResponse(
                 pluginData,
-                factory: () => this.FindElement(pluginData.Rule, pluginData.Element) != null);
+                factory: () => Factory(this, pluginData));
+
+            // Assertion logic to check if the specified element exists using the provided plugin data.
+            static bool Factory(PluginBase plugin, PluginDataModel pluginData)
+            {
+                return plugin.FindElement(pluginData.Rule, pluginData.Element) != null;
+            }
         }
     }
 }
