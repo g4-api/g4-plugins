@@ -32,13 +32,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Api" Version="2026.8.19.56" />
-		<PackageReference Include="G4.Plugins" Version="2026.8.20.77" />
-		<PackageReference Include="G4.Converters" Version="2026.8.20.77" />
-		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.11" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="4.3.3" />
-		<PackageReference Include="MSTest.TestFramework" Version="4.3.3" />
+		<PackageReference Include="G4.Api" Version="2026.8.20.57" />
+		<PackageReference Include="G4.Plugins" Version="2026.9.18.79" />
+		<PackageReference Include="G4.Converters" Version="2026.9.18.79" />
+		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.12" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="4.4.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="4.4.1" />
 		<PackageReference Include="coverlet.collector" Version="10.0.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

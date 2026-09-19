@@ -124,7 +124,7 @@ namespace G4.Plugins.Common.Actions
         private static PluginResponseModel InvokeAssertion(
             PluginBase plugin,
             PluginDataModel pluginData,
-            ICollection<G4ExceptionModel> pollingExceptions)
+            List<G4ExceptionModel> pollingExceptions)
         {
             // Preserve per-interval assertion exceptions before WaitFlow compacts the plugin exception bag.
             var assertion = plugin.Assert(pluginData, addExtractions: false);
