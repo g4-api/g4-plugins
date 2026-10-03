@@ -95,6 +95,58 @@ namespace G4.UnitTests.Plugins.Common
             Assert.IsTrue(exceptions.Contains(distinctKeyFailure));
         }
 
+        [TestMethod(DisplayName = "Verify that WaitFlow combines repeated polling points into one child action.")]
+        public void WaitFlowPollingPerformanceAggregationTest()
+        {
+            // Arrange: create one WaitFlow reference and two ElementExists polling measurements beneath it.
+            var plugin = NewPlugin<WaitFlow>();
+            var parentReference = new G4PluginReferenceModel
+            {
+                Id = "wait-flow"
+            };
+            var rule = new ActionRuleModel(pluginName: "WaitFlow")
+            {
+                Reference = parentReference
+            };
+            var pluginData = new PluginDataModel
+            {
+                Rule = rule
+            };
+            var start = DateTime.UtcNow;
+            var firstPollingPoint = NewPollingPoint(parentReference, start, runTime: 200);
+            var secondPollingPoint = NewPollingPoint(parentReference, start.AddMilliseconds(300), runTime: 300);
+            var unrelatedPoint = NewPollingPoint(new G4PluginReferenceModel { Id = "other-action" }, start, runTime: 400);
+            var session = $"{plugin.WebDriver?.Invoker.Session}";
+
+            plugin.Invoker.Sessions[session] = new G4ResponseModel
+            {
+                ResponseData = new G4ResponseDatatModel
+                {
+                    PerformancePoints = [firstPollingPoint, secondPollingPoint, unrelatedPoint]
+                }
+            };
+
+            // Act: consolidate the repeated measurements associated with the current WaitFlow reference.
+            typeof(WaitFlow)
+                .GetMethod(name: "ConsolidatePollingPerformancePoints", BindingFlags.NonPublic | BindingFlags.Static)
+                .Invoke(obj: default, parameters: [plugin, pluginData]);
+
+            // Assert: one ElementExists child retains the total active probe time and WaitFlow parent reference.
+            var performancePoints = plugin.Invoker.Sessions[session].ResponseData.PerformancePoints
+                .OfType<G4PluginPerformancePointModel>()
+                .ToArray();
+            var pollingPoints = performancePoints
+                .Where(i => i.Reference.ParentReference?.Id == parentReference.Id)
+                .ToArray();
+
+            Assert.AreEqual(expected: 1, actual: pollingPoints.Length);
+            Assert.AreEqual(expected: 500d, actual: pollingPoints[0].RunTime);
+            Assert.AreEqual(expected: parentReference.Id, actual: pollingPoints[0].Reference.ParentReference.Id);
+
+            // Assert: performance points outside the active WaitFlow hierarchy remain unmodified.
+            Assert.IsTrue(performancePoints.Contains(unrelatedPoint));
+        }
+
         [TestMethod(DisplayName = "Verify that WaitFlow reports one timeout when a wait condition expires.")]
         public void WaitFlowTimeoutExceptionTest()
         {
@@ -475,6 +527,29 @@ namespace G4.UnitTests.Plugins.Common
 
             // Assert that the elapsed time is greater than 3000 milliseconds (3 seconds)
             Assert.IsGreaterThan(3000, runtime / TimeSpan.TicksPerMillisecond);
+        }
+
+        // Creates a deterministic child performance point that represents one assertion polling attempt.
+        // The helper keeps test data focused on aggregation and does not invoke WebDriver or timing infrastructure.
+        private static G4PluginPerformancePointModel NewPollingPoint(
+            G4PluginReferenceModel parentReference,
+            DateTime start,
+            double runTime)
+        {
+            // Return one ElementExists point with a separate child reference for the polling sample.
+            return new G4PluginPerformancePointModel
+            {
+                End = start.AddMilliseconds(runTime),
+                Reference = new G4PluginReferenceModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "ElementExists",
+                    ParentReference = parentReference,
+                    Type = "Assertion"
+                },
+                RunTime = runTime,
+                Start = start
+            };
         }
     }
 }

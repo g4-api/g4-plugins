@@ -98,6 +98,9 @@ namespace G4.Plugins.Common.Actions
             // Replace repeated polling failures with their last distinct KeyNotFoundException entries.
             NormalizePollingExceptions(plugin, pluginData, originalExceptions, pollingExceptions);
 
+            // Combine repeated polling probes into one child action while retaining their accumulated execution time.
+            ConsolidatePollingPerformancePoints(plugin, pluginData);
+
             if (!conditionMet)
             {
                 // Report the wait timeout once after noisy polling failures have been compacted.
@@ -135,6 +138,66 @@ namespace G4.Plugins.Common.Actions
             }
 
             return assertion;
+        }
+
+        // Combines the current wait's repeated child probes into one report-visible child action.
+        // The consolidated point retains the active time spent in each probe while WaitFlow retains the inclusive wait duration.
+        private static void ConsolidatePollingPerformancePoints(PluginBase plugin, PluginDataModel pluginData)
+        {
+            // Resolve the session that received the nested assertion points during the current WaitFlow invocation.
+            var session = $"{plugin.WebDriver?.Invoker.Session}";
+            var parentReferenceId = pluginData.Rule.Reference?.Id;
+            var hasParentReference = !string.IsNullOrEmpty(parentReferenceId);
+
+            if (!hasParentReference || !plugin.Invoker.Sessions.TryGetValue(session, out var response))
+            {
+                return;
+            }
+
+            // Snapshot the session points before replacing only probes that belong to this exact WaitFlow action.
+            var points = response.ResponseData?.PerformancePoints?.ToList() ?? [];
+            var pollingPoints = points
+                .OfType<G4PluginPerformancePointModel>()
+                .Where(i => i.Reference?.ParentReference?.Id == parentReferenceId)
+                .ToArray();
+
+            if (pollingPoints.Length < 2)
+            {
+                return;
+            }
+
+            // Retain one child for each assertion or operator type and accumulate all active probe measurements.
+            var consolidatedPoints = pollingPoints
+                .GroupBy(i => $"{i.Reference.Name}\u001F{i.Reference.Type}")
+                .Select(ConsolidatePerformancePoints)
+                .Cast<G4PerformancePointModelBase>()
+                .ToArray();
+
+            // Replace at the first child position so timeline ordering remains stable for unrelated actions.
+            var firstPollingIndex = points.IndexOf(pollingPoints[0]);
+            points.RemoveAll(pollingPoints.Contains);
+            points.InsertRange(firstPollingIndex, consolidatedPoints);
+            response.ResponseData.PerformancePoints = points;
+        }
+
+        // Creates one inclusive child timeline entry from repeated polling measurements of the same plugin type.
+        private static G4PluginPerformancePointModel ConsolidatePerformancePoints(
+            IGrouping<string, G4PluginPerformancePointModel> performancePoints)
+        {
+            // Reuse the first point's reference and rule identity so the child remains attached to WaitFlow.
+            var consolidated = performancePoints.First();
+
+            // Preserve the full sampled span while summing the work completed across individual polling attempts.
+            consolidated.Start = performancePoints.Min(i => i.Start);
+            consolidated.End = performancePoints.Max(i => i.End);
+            consolidated.SetupDelegationTime = performancePoints.Sum(i => i.SetupDelegationTime);
+            consolidated.SetupTime = performancePoints.Sum(i => i.SetupTime);
+            consolidated.TeardownDelegationTime = performancePoints.Sum(i => i.TeardownDelegationTime);
+            consolidated.TeardownTime = performancePoints.Sum(i => i.TeardownTime);
+            consolidated.RunTime = performancePoints.Sum(i => i.RunTime);
+            consolidated.Timeouts = performancePoints.Sum(i => i.Timeouts);
+
+            return consolidated;
         }
 
         // Keeps pre-existing exceptions and the last distinct polling KeyNotFoundException entries.
