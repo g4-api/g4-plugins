@@ -21,7 +21,7 @@
 					},
 					{
 						"question": "How do its main capabilities work and what are its primary parameters?",
-						"answer": "It connects to a central parameter store and retrieves values based on the Environment parameter (default SystemParameters). Main parameters are Environment (optional, selects which values to use), OnElement (the parameter name), and Argument (optional expression to refine retrieval)."
+						"answer": "It connects to a central parameter store and retrieves values based on the Environment parameter (default: the automation’s default environment, otherwise SystemParameters). Main parameters are Environment (optional, selects which values to use), OnElement (the parameter name), and Argument (optional expression to refine retrieval)."
 					},
 					{
 						"question": "How does GetApplicationParameter embed into external tools or workflow designers?",
@@ -73,7 +73,7 @@
 					},
 					{
 						"question": "What parameters are defined?",
-						"answer": "Parameters include Environment (String, optional, defaults to SystemParameters), which selects which set of values to use."
+						"answer": "Parameters include Environment (String, optional, defaults to the automation’s default environment, otherwise SystemParameters), which selects which set of values to use."
 					},
 					{
 						"question": "What properties are defined?",
@@ -214,7 +214,7 @@
 			"default": "SystemParameters",
 			"description": [
 				"Environment sets which list of values to use so you get parameters from the right place and avoid missing information.",
-				"Leaving it blank picks SystemParameters so you still get a basic set of values and avoid surprises."
+				"Leaving it blank picks the automation’s default environment (settings.environmentsSettings.defaultEnvironment), or SystemParameters when none is set."
 			],
 			"mandatory": false,
 			"name": "Environment",

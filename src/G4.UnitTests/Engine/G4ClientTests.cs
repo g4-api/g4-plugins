@@ -1208,14 +1208,14 @@ namespace G4.UnitTests.Engine
             // Rule for sending keys to the username input field.
             new ActionRuleModel
             {
-                Argument = "{{@Name}}",
+                Argument = "{{$ columns.Name }}",
                 OnElement = "//positive[@id='{{$New-Date}}']",
                 PluginName = "SendKeys"
             },
             // Rule for sending keys to the password input field.
             new ActionRuleModel
             {
-                Argument = "{{@Id}}",
+                Argument = "{{$ columns.Id }}",
                 OnElement = "//input[@id='none']",
                 PluginName = "SendKeys"
             },
