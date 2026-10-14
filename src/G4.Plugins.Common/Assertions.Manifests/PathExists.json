@@ -1,0 +1,136 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"FileSystem",
+		"Validations"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Assertions/PathExists.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Assertions/PathExists.cs"
+			},
+			"rag": {
+				"description": "PathExists is an assertion plugin that evaluates to true when a file or a directory exists at the path supplied in onElement. It accepts absolute, UNC, and relative paths, resolving relative paths from the process working directory. It runs on the machine that executes the automation, so the path must be reachable from that machine, either locally or through a shared network location.",
+				"qa": [
+					{
+						"question": "What does the PathExists assertion check?",
+						"answer": "It evaluates to true when either a file or a directory exists at the path supplied in onElement."
+					},
+					{
+						"question": "How is PathExists used in a rule?",
+						"answer": "Use the Assert plugin with argument {{$ --Condition:PathExists}} and set onElement to the path to check."
+					},
+					{
+						"question": "Which paths does PathExists accept?",
+						"answer": "Absolute, UNC, and relative paths. Relative paths are resolved from the process working directory."
+					},
+					{
+						"question": "What happens when onElement is empty?",
+						"answer": "The assertion records an exception and evaluates to false."
+					},
+					{
+						"question": "How does PathExists behave for an unreachable network share?",
+						"answer": "An unreachable share or denied access is reported as a missing path, so PathExists evaluates to false."
+					}
+				]
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Asserts that a file or a directory exists at the path supplied in `onElement`.",
+		"It runs on the machine that executes the automation, so it applies when the G4 Hub or worker and the automation share a machine or can both reach a shared physical location.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature           | Description                                                                                           |",
+		"|-------------------|-------------------------------------------------------------------------------------------------------|",
+		"| File Or Directory | Evaluates to true when either a file or a directory exists at the path.                               |",
+		"| Path Resolution   | Accepts absolute, UNC, and relative paths; relative paths resolve from the process working directory. |",
+		"| Dynamic Paths     | Accepts macros and parameters in `onElement`, such as a path stored in a session parameter.           |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case            | Description                                                                        |",
+		"|---------------------|------------------------------------------------------------------------------------|",
+		"| Output Verification | Confirms that a report, export, or download was produced at the expected location. |",
+		"| Copy Verification   | Confirms that files copied by `CopyFiles` reached their destination.               |",
+		"",
+		"### Limitations",
+		"",
+		"An unreachable network share or denied access is reported as a missing path, so the assertion evaluates to false."
+	],
+	"examples": [
+		{
+			"description": [
+				"### Assert that an exported report exists",
+				"",
+				"Use the `Assert` plugin with the `PathExists` condition and set `onElement` to the expected file path.",
+				"The assertion passes when the file exists."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PathExists}}",
+				"onElement": "C:\\Automation\\Exports\\report.csv",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"### Assert that a shared results folder exists",
+				"",
+				"Set `onElement` to a UNC directory path to verify that a shared location is available.",
+				"The assertion passes when the directory exists and is reachable."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PathExists}}",
+				"onElement": "\\\\fileserver\\share\\Results",
+				"pluginName": "Assert"
+			}
+		},
+		{
+			"description": [
+				"### Assert that a downloaded file stored in a session parameter exists",
+				"",
+				"Resolve the path at run time with the `Get-Parameter` macro.",
+				"The assertion passes when the file at the stored path exists."
+			],
+			"rule": {
+				"argument": "{{$ --Condition:PathExists}}",
+				"onElement": "{{$Get-Parameter --Name:DownloadedFile --Scope:Session}}",
+				"pluginName": "Assert"
+			}
+		}
+	],
+	"key": "PathExists",
+	"namespace": "G4.Plugins.Common",
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Assertion",
+	"properties": [
+		{
+			"description": [
+				"The file or directory path to check.",
+				"Absolute, UNC, and relative paths are accepted; relative paths resolve from the process working directory."
+			],
+			"mandatory": true,
+			"name": "OnElement",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Asserts that a file or a directory exists at the path supplied in onElement.",
+		"Accepts absolute, UNC, and relative paths resolved from the process working directory.",
+		"Applies when the automation and the checked location are reachable from the same machine."
+	],
+	"version": "4"
+}

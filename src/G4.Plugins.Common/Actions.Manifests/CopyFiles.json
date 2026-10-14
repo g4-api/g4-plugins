@@ -1,0 +1,337 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataManagement",
+		"FileSystem"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CopyFiles.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/CopyFiles.cs"
+			},
+			"mcp": {
+				"title": "Copy Files"
+			},
+			"rag": {
+				"description": "CopyFiles copies a file, a directory, or a wildcard pattern to a destination using cp-style semantics. It resolves relative paths from the process working directory, creates missing folders, overwrites existing files unless NoClobber is present, and reports the copied and skipped destination paths through the session and the response entity. It runs on the machine that executes the automation, so source and destination must be reachable from that machine, either locally or through a shared network location.",
+				"qa": [
+					{
+						"question": "What is the CopyFiles plugin?",
+						"answer": "CopyFiles is an action plugin that copies a file, a directory, or a wildcard pattern to a destination path, mirroring the cp and copy commands."
+					},
+					{
+						"question": "Which parameters does CopyFiles support?",
+						"answer": "Source and Destination are required. Recursive copies directories and pattern matches from all subfolders, and NoClobber skips files that already exist at the destination."
+					},
+					{
+						"question": "How does CopyFiles resolve the destination path?",
+						"answer": "An existing folder, or a path ending with a directory separator, receives the copy under the original name. Any other path becomes the new file or folder name. Pattern sources always treat Destination as a folder, and missing parent folders are created."
+					},
+					{
+						"question": "What happens when the source is a directory without Recursive?",
+						"answer": "Only the files at the top level of that directory are copied. Subdirectories and their files are ignored."
+					},
+					{
+						"question": "Where are the CopyFiles results available after it runs?",
+						"answer": "The session parameters CopyFiles:Count and CopyFiles:Files hold the number of copied files and a JSON array of their destination paths. The response entity exposes Count, Files, and Skipped, where Skipped lists destination paths preserved by NoClobber."
+					},
+					{
+						"question": "What errors can stop CopyFiles?",
+						"answer": "Execution fails when Source or Destination is empty, when the source file or directory does not exist, or when the folder that hosts a wildcard pattern does not exist. A pattern that matches no files succeeds with a count of zero. File-system errors such as denied access also stop the copy."
+					},
+					{
+						"question": "When can CopyFiles be used from a G4 Hub or worker?",
+						"answer": "CopyFiles runs on the machine that executes the automation. It is relevant when the hub or worker and the automation run on the same machine, or when both can reach a shared physical location such as a UNC network share."
+					},
+					{
+						"question": "How does CopyFiles integrate with G4 workflows?",
+						"answer": "CopyFiles is an Action task using ActionRuleModel. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/CopyFiles.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/CopyFiles.cs"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "copy",
+					"svg": null
+				},
+				"label": "Copy Files",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Copies a file, a directory, or a wildcard pattern to a destination, mirroring the `cp` and `copy` commands.",
+		"It runs on the machine that executes the automation, so it applies when the G4 Hub or worker and the automation share a machine or can both reach a shared physical location.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature            | Description                                                                                               |",
+		"|--------------------|-----------------------------------------------------------------------------------------------------------|",
+		"| Single File Copy   | Copies one file onto a new file name, or into an existing folder or a path ending with a separator.       |",
+		"| Directory Copy     | Copies the top-level files of a directory, or the complete tree including empty folders with `Recursive`. |",
+		"| Wildcard Patterns  | Copies files that match `*` and `?` in the last `Source` segment into the `Destination` folder.           |",
+		"| Recursive Patterns | Matches the pattern in every subfolder with `Recursive` and keeps the relative folder structure.          |",
+		"| Overwrite Control  | Overwrites existing files by default and preserves them when `NoClobber` is present.                      |",
+		"| Path Resolution    | Accepts absolute, UNC, and relative paths; relative paths resolve from the process working directory.     |",
+		"| Result Reporting   | Publishes the copied count and paths to the session and the copied and skipped paths to the entity.       |",
+		"",
+		"### Destination Rules",
+		"",
+		"| Source    | Destination Exists As Folder              | Destination Does Not Exist                      |",
+		"|-----------|-------------------------------------------|-------------------------------------------------|",
+		"| File      | Copied into the folder with its own name. | Copied to the destination as the new file name. |",
+		"| Directory | Copied into the folder as a child folder. | The destination becomes the copied folder.      |",
+		"| Pattern   | Matches are copied into the folder.       | The folder is created and receives the matches. |",
+		"",
+		"### Failure Behavior",
+		"",
+		"1. An empty `Source` or `Destination` stops the action.",
+		"2. A missing source file or directory stops the action.",
+		"3. A missing folder that hosts a wildcard pattern stops the action.",
+		"4. A pattern that matches no files succeeds and reports a count of zero."
+	],
+	"entity": [
+		{
+			"description": [
+				"The number of files copied by the action.",
+				"Files skipped because of `NoClobber` are not counted."
+			],
+			"name": "Count",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"A JSON array of the destination paths of every copied file.",
+				"The same value is stored in the session as `CopyFiles:Files`."
+			],
+			"name": "Files",
+			"type": "String"
+		},
+		{
+			"description": [
+				"A JSON array of the destination paths preserved because `NoClobber` is present.",
+				"The array is empty when `NoClobber` is absent or no target file existed."
+			],
+			"name": "Skipped",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"An existing destination folder receives the file under its original name",
+						"An existing destination file is overwritten",
+						"Missing parent folders are created"
+					],
+					"expected_result": "The file report.pdf is copied to C:\\Archive\\report-copy.pdf and CopyFiles:Count is 1.",
+					"notes": "Destination is treated as the new file name because it is not an existing folder and does not end with a separator.",
+					"use_case": "copy_single_file_to_new_name",
+					"version": "4"
+				},
+				"labels": [
+					"Copy",
+					"File",
+					"FileSystem"
+				]
+			},
+			"description": [
+				"### Copy a single file to a new name",
+				"",
+				"Bind `Source` to a file and `Destination` to a path that does not exist as a folder.",
+				"CopyFiles writes the file to that path and creates any missing parent folders."
+			],
+			"rule": {
+				"argument": "{{$ --Source:C:\\Reports\\report.pdf --Destination:C:\\Archive\\report-copy.pdf}}",
+				"pluginName": "CopyFiles"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty subfolders are recreated",
+						"An existing destination folder receives a child folder named after the source",
+						"Existing files are overwritten"
+					],
+					"expected_result": "The complete Results tree, including empty folders, is copied to the shared location.",
+					"notes": "Recursive copies every subfolder. The UNC share must be reachable from the machine that executes the automation.",
+					"use_case": "copy_directory_tree_to_network_share",
+					"version": "4"
+				},
+				"labels": [
+					"Directory",
+					"FileSystem",
+					"NetworkShare",
+					"Recursive"
+				]
+			},
+			"description": [
+				"### Copy a directory tree to a network share",
+				"",
+				"Enable `Recursive` to copy a directory with all of its subfolders.",
+				"CopyFiles mirrors the tree, including empty folders, at the shared destination."
+			],
+			"rule": {
+				"argument": "{{$ --Source:C:\\Automation\\Results --Destination:\\\\fileserver\\share\\Results --Recursive}}",
+				"pluginName": "CopyFiles"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A pattern that matches nothing succeeds with a count of zero",
+						"Destination is always treated as a folder",
+						"Existing log files are preserved"
+					],
+					"expected_result": "Every .log file under C:\\Logs, including subfolders, is copied to C:\\Collected while existing targets are listed in Skipped.",
+					"notes": "Wildcards are supported only in the last Source segment. Recursive keeps the relative folder structure of the matches.",
+					"use_case": "collect_log_files_without_overwrite",
+					"version": "4"
+				},
+				"labels": [
+					"FileSystem",
+					"NoClobber",
+					"Pattern",
+					"Recursive"
+				]
+			},
+			"description": [
+				"### Collect log files without overwriting existing copies",
+				"",
+				"Use a wildcard pattern with `Recursive` to gather matching files from every subfolder.",
+				"Enable `NoClobber` so files that already exist at the destination are skipped and reported."
+			],
+			"rule": {
+				"argument": "{{$ --Source:C:\\Logs\\*.log --Destination:C:\\Collected --Recursive --NoClobber}}",
+				"pluginName": "CopyFiles"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Parent traversal segments are normalized",
+						"Relative paths resolve from the process working directory",
+						"Subfolders are ignored without Recursive"
+					],
+					"expected_result": "The top-level files of the input folder are copied into the output folder relative to the working directory.",
+					"notes": "A directory source without Recursive copies only its top-level files.",
+					"use_case": "copy_top_level_files_with_relative_paths",
+					"version": "4"
+				},
+				"labels": [
+					"Directory",
+					"FileSystem",
+					"RelativePath"
+				]
+			},
+			"description": [
+				"### Copy top-level files using relative paths",
+				"",
+				"Provide relative `Source` and `Destination` paths to resolve them from the process working directory.",
+				"Without `Recursive`, CopyFiles copies only the files at the top level of the source directory."
+			],
+			"rule": {
+				"argument": "{{$ --Source:.\\input --Destination:..\\output}}",
+				"pluginName": "CopyFiles"
+			}
+		}
+	],
+	"key": "CopyFiles",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"The number of files copied by the action.",
+				"Files skipped because of `NoClobber` are not counted."
+			],
+			"mandatory": true,
+			"name": "CopyFiles:Count",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"A JSON array of the destination paths of every copied file.",
+				"It can be referenced by downstream rules, for example to assert or process each copied file."
+			],
+			"mandatory": true,
+			"name": "CopyFiles:Files",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"The source file, directory, or wildcard pattern to copy.",
+				"Wildcards `*` and `?` are supported only in the last path segment.",
+				"Absolute, UNC, and relative paths are accepted; relative paths resolve from the process working directory."
+			],
+			"mandatory": true,
+			"name": "Source",
+			"type": "String"
+		},
+		{
+			"description": [
+				"The target file or folder using cp-style rules.",
+				"An existing folder or a path ending with a separator receives the copy; any other path becomes the new name.",
+				"Missing parent folders are created."
+			],
+			"mandatory": true,
+			"name": "Destination",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Copies directories with all subfolders, including empty ones, when present.",
+				"With a wildcard pattern, it also matches files in every subfolder and keeps their relative structure."
+			],
+			"mandatory": false,
+			"name": "Recursive",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Skips files that already exist at the destination instead of overwriting them when present.",
+				"Skipped destination paths are reported in the entity `Skipped` field."
+			],
+			"mandatory": false,
+			"name": "NoClobber",
+			"type": "Switch"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Provides the `Source`, `Destination`, `Recursive`, and `NoClobber` parameters through a G4 parameter expression."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Copies a file, a directory, or a wildcard pattern to a destination using cp-style rules.",
+		"Supports recursive copies, overwrites existing files unless NoClobber is present, and creates missing folders.",
+		"Reports the copied count and destination paths through the session and the response entity."
+	],
+	"version": "4"
+}
