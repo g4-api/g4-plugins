@@ -14,27 +14,39 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Assertions/PathExists.cs"
 			},
 			"rag": {
-				"description": "PathExists is an assertion plugin that evaluates to true when a file or a directory exists at the path supplied in onElement. It accepts absolute, UNC, and relative paths, resolving relative paths from the process working directory. It runs on the machine that executes the automation, so the path must be reachable from that machine, either locally or through a shared network location.",
+				"description": "PathExists checks that a file or folder is present before a workflow continues. The path in onElement can come from macros or parameters, and relative paths resolve from the working directory. A missing path, an unreachable share, or an empty value fails the check, which keeps file-based steps reliable.",
 				"qa": [
 					{
 						"question": "What does the PathExists assertion check?",
 						"answer": "It evaluates to true when either a file or a directory exists at the path supplied in onElement."
 					},
 					{
+						"question": "Which paths does PathExists accept?",
+						"answer": "Absolute, UNC, and relative paths, including values built with macros. Relative paths resolve from the process working directory."
+					},
+					{
+						"question": "Where can PathExists run in a G4 environment?",
+						"answer": "PathExists checks the file system of the machine that executes the automation, so it applies when the G4 Hub or worker and the automation share a machine or can both reach a shared location. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Assertions/PathExists.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Assertions/PathExists.cs"
+					},
+					{
+						"question": "When should PathExists be used in a workflow?",
+						"answer": "Place it right after a step that creates, downloads, or copies a file to confirm the output before later steps depend on it."
+					},
+					{
 						"question": "How is PathExists used in a rule?",
 						"answer": "Use the Assert plugin with argument {{$ --Condition:PathExists}} and set onElement to the path to check."
 					},
 					{
-						"question": "Which paths does PathExists accept?",
-						"answer": "Absolute, UNC, and relative paths. Relative paths are resolved from the process working directory."
+						"question": "What is the PathExists manifest version and author?",
+						"answer": "The manifest version is 4 and the author is Roei Sabag."
 					},
 					{
-						"question": "What happens when onElement is empty?",
-						"answer": "The assertion records an exception and evaluates to false."
+						"question": "How does the PathExists manifest summarize the assertion?",
+						"answer": "It asserts that a file or directory exists at the onElement path and accepts absolute, UNC, and relative paths."
 					},
 					{
-						"question": "How does PathExists behave for an unreachable network share?",
-						"answer": "An unreachable share or denied access is reported as a missing path, so PathExists evaluates to false."
+						"question": "How does PathExists handle errors?",
+						"answer": "An empty onElement records an exception and evaluates to false. An unreachable share or denied access is reported as a missing path, so the assertion also evaluates to false."
 					}
 				]
 			}
@@ -54,6 +66,13 @@
 		"| Path Resolution   | Accepts absolute, UNC, and relative paths; relative paths resolve from the process working directory. |",
 		"| Dynamic Paths     | Accepts macros and parameters in `onElement`, such as a path stored in a session parameter.           |",
 		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case           | Description                                                               |",
+		"|--------------------|---------------------------------------------------------------------------|",
+		"| Input Availability | Confirms that an input file is present before a process reads it.         |",
+		"| Share Availability | Confirms that a shared folder is reachable before files are copied there. |",
+		"",
 		"### Usages in Automation Testing",
 		"",
 		"| Use Case            | Description                                                                        |",
@@ -67,6 +86,25 @@
 	],
 	"examples": [
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A directory at the same path also passes",
+						"A missing file evaluates to false",
+						"An empty path evaluates to false"
+					],
+					"expected_result": "The assertion passes when report.csv exists in C:\\Automation\\Exports.",
+					"notes": "The literal path is checked on the machine that executes the automation. Files and directories both satisfy the condition.",
+					"use_case": "assert_exported_file_exists",
+					"version": "4"
+				},
+				"labels": [
+					"Assert",
+					"File",
+					"FileSystem",
+					"Validation"
+				]
+			},
 			"description": [
 				"### Assert that an exported report exists",
 				"",
@@ -80,6 +118,26 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A file at the same path also passes",
+						"An unreachable share evaluates to false",
+						"Denied access evaluates to false"
+					],
+					"expected_result": "The assertion passes when the Results folder on the file server exists and is reachable.",
+					"notes": "UNC paths are checked from the machine that executes the automation. Reachability and permissions on that machine decide the result.",
+					"use_case": "assert_shared_folder_reachable",
+					"version": "4"
+				},
+				"labels": [
+					"Assert",
+					"Directory",
+					"FileSystem",
+					"NetworkShare",
+					"Validation"
+				]
+			},
 			"description": [
 				"### Assert that a shared results folder exists",
 				"",
@@ -93,6 +151,26 @@
 			}
 		},
 		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A relative stored path resolves from the process working directory",
+						"An empty resolved path evaluates to false",
+						"The stored file was removed before the check"
+					],
+					"expected_result": "The assertion passes when the file at the path stored in the DownloadedFile session parameter exists.",
+					"notes": "The Get-Parameter macro executes first and replaces the token with the stored path. The assertion then checks the resolved path.",
+					"use_case": "assert_file_from_session_parameter",
+					"version": "4"
+				},
+				"labels": [
+					"Assert",
+					"File",
+					"Macro",
+					"SessionParameter",
+					"Validation"
+				]
+			},
 			"description": [
 				"### Assert that a downloaded file stored in a session parameter exists",
 				"",
