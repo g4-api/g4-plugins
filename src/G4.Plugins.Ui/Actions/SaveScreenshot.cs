@@ -56,7 +56,7 @@ namespace G4.Plugins.Ui.Actions
 
             // Initialize a variable to hold the screenshot model, which will
             // be populated based on whether an element was resolved.
-            ScreenshotModel screenshot;
+            G4.WebDriver.Models.ScreenshotModel screenshot;
 
             // Capture an element-level screenshot when an element was resolved.
             // Otherwise, fallback to a full WebDriver screenshot.

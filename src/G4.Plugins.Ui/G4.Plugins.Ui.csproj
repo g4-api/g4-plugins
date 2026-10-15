@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.9.18.79" />
+		<PackageReference Include="G4.Converters" Version="2026.10.14.81" />
 	</ItemGroup>
 
 	<ItemGroup>
