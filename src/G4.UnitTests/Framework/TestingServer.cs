@@ -840,21 +840,25 @@ namespace G4.UnitTests.Framework
         [
             new G4PluginAttribute
             {
+                Examples = [],
                 Key = "ExternalTestAction",
                 PluginType = "Action"
             },
             new G4PluginAttribute
             {
+                Examples = [],
                 Key = "ExternalDemoAction",
                 PluginType = "Action"
             },
             new G4PluginAttribute
             {
+                Examples = [],
                 Key = "ExternalAssertion",
                 PluginType = "Assertion"
             },
             new G4PluginAttribute
             {
+                Examples = [],
                 Key = "Between",
                 PluginType = "Operator"
             }
@@ -1022,6 +1026,7 @@ namespace G4.UnitTests.Framework
                 {
                     new G4PluginAttribute
                     {
+                        Examples = [],
                         Key = "ExternalAssertion"
                     }
                 });
@@ -1169,16 +1174,19 @@ namespace G4.UnitTests.Framework
                 {
                     new G4PluginAttribute
                     {
+                        Examples = [],
                         Key = "ExternalOperator",
                         PluginType = "Operator"
                     },
                     new G4PluginAttribute
                     {
+                        Examples = [],
                         Key = "Between",
                         PluginType = "Operator"
                     },
                     new G4PluginAttribute
                     {
+                        Examples = [],
                         Key = "NoType"
                     }
                 };
