@@ -14,9 +14,15 @@ namespace G4.Plugins.Common.GetParameter
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
+            // Without an explicit --Environment, read from the automation's default environment
+            // (as SetApplicationParameter writes to it), falling back to SystemParameters.
+            var defaultEnvironment = string.IsNullOrEmpty(Automation?.Settings?.EnvironmentsSettings?.DefaultEnvironment)
+                ? "SystemParameters"
+                : Automation.Settings.EnvironmentsSettings.DefaultEnvironment;
+
             // Retrieve the application parameter based on the provided element name
             var parameters = G4Environment.ApplicationParameters;
-            var environment = pluginData.Parameters.Get("Environment", "SystemParameters");
+            var environment = pluginData.Parameters.Get("Environment", defaultEnvironment);
 
             var value = parameters.TryGetValue(environment, out ApplicationParametersModel valueOut)
                 ? valueOut.Parameters.Get(pluginData.Rule.OnElement, default(object))

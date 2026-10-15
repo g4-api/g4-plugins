@@ -13,47 +13,39 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/SendUser32KeyboardKey.cs"
 			},
 			"rag": {
-				"description": "SendUser32KeyboardKey sends keyboard scan codes to native Windows applications via the User32 API. It supports single or multi-key sequences, sticky mode for simultaneous key combinations (shortcuts), configurable inter-key delays, and keyboard layout selection. Keys are specified by name using the Key parameter or directly as the Argument value. Requires a User32-compatible WebDriver and runs exclusively on Windows.",
+				"description": "SendUser32KeyboardKey sends keys and shortcuts to native Windows applications through the User32 API. Keys come from the Key parameter or the Argument, so values can be built at run time. Sticky mode holds keys for shortcuts, and delays and layout selection keep keyboard automation reliable.",
 				"qa": [
 					{
 						"question": "What does SendUser32KeyboardKey do?",
-						"answer": "It sends one or more keyboard scan codes to a native Windows application using the User32 API, supporting sequential key presses, simultaneous shortcut combinations via sticky mode, configurable inter-key delays, and keyboard layout selection."
+						"answer": "It sends one or more keyboard keys to the active native Windows application through the User32 API."
 					},
 					{
-						"question": "What parameters does SendUser32KeyboardKey support?",
-						"answer": "Key (repeatable, specifies the key name to press), Delay (milliseconds between key inputs, default 0), Sticky (switch that holds all keys down simultaneously then releases them together), and KeyboardLayout (BCP-47 locale for scan code interpretation, default en-US)."
+						"question": "Which parameters does SendUser32KeyboardKey support?",
+						"answer": "Key (repeatable key name), Delay (pause between keys), Sticky (hold keys together), and KeyboardLayout (en-US or he-IL)."
 					},
 					{
-						"question": "What is sticky mode and when should it be used?",
-						"answer": "Sticky mode is activated by the Sticky switch parameter. All specified keys are held down simultaneously and released together at the end, enabling keyboard shortcuts like Ctrl+C, Alt+F4, or Win+R that require concurrent key presses."
+						"question": "What does SendUser32KeyboardKey need to run?",
+						"answer": "A User32-compatible UIA driver session on Windows; with any other driver it returns without sending keys. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendUser32KeyboardKey.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/SendUser32KeyboardKey.cs"
 					},
 					{
-						"question": "What is the difference between sticky and non-sticky key sending?",
-						"answer": "Non-sticky mode presses each key independently in sequence with the configured delay between each press. Sticky mode holds all keys down simultaneously and releases them all at once, which is required for keyboard shortcuts that depend on modifier keys being held."
+						"question": "How do I send a plain letter key without Shift?",
+						"answer": "Use the lowercase letter, such as --Key:c, because an uppercase letter without Sticky is sent as Shift plus the letter."
 					},
 					{
-						"question": "How does the Key parameter interact with the Argument property?",
-						"answer": "The Key parameter is preferred when present. If Key is not specified as a parameter, the plugin falls back to the rule Argument value as the key to send. The Argument also serves as the carrier for the {{$ ...}} parameter expression syntax."
+						"question": "How is a SendUser32KeyboardKey rule defined?",
+						"answer": "Use pluginName SendUser32KeyboardKey with a single key name as the argument, or with an expression such as {{$ --Key:Ctrl --Key:C --Sticky}}."
 					},
 					{
-						"question": "What keyboard layouts are supported?",
-						"answer": "en-US (English United States, default) and he-IL (Hebrew Standard). The layout controls how key names are mapped to scan codes, which is important for locale-specific key behavior and multilingual automation."
+						"question": "What is the SendUser32KeyboardKey manifest version and author?",
+						"answer": "The manifest version is 4 and the author is Roei Sabag."
 					},
 					{
-						"question": "What happens when the WebDriver does not support IUser32Driver?",
-						"answer": "The plugin returns an empty response immediately and performs no keyboard action. This guard prevents execution in incompatible driver environments."
+						"question": "How does the SendUser32KeyboardKey manifest summarize the plugin?",
+						"answer": "It sends keyboard keys and shortcuts to native Windows applications, in sequence or held together with Sticky, with configurable delays and layouts."
 					},
 					{
-						"question": "How does the Delay parameter affect key input?",
-						"answer": "Delay specifies the pause in milliseconds between consecutive key inputs. It accepts a time string or a numeric millisecond value. Default is 0. Use it to simulate realistic typing cadence or to ensure the application processes each key before the next is sent."
-					},
-					{
-						"question": "Can SendUser32KeyboardKey type text strings?",
-						"answer": "No. This plugin sends individual key scan codes. For typing text character-by-character, use the SendUser32Keys plugin instead."
-					},
-					{
-						"question": "What is the manifest version?",
-						"answer": "The manifest version is 4."
+						"question": "What happens when a key name is not recognized?",
+						"answer": "No error is reported: without Sticky nothing is sent, and with Sticky an invalid scan code is sent for that key."
 					}
 				]
 			},
@@ -72,55 +64,58 @@
 	"description": [
 		"### Purpose",
 		"",
-		"The `SendUser32KeyboardKey` plugin simulates keyboard inputs using the Windows User32 API, targeting native application elements.",
-		"It is designed for scenarios where automation must interact with native or legacy Windows applications that lack standard WebDriver support.",
+		"Sends keyboard keys and shortcuts to the active native Windows application through the User32 API.",
+		"It drives native or legacy applications that cannot be controlled through standard WebDriver keyboard input.",
 		"",
 		"### Key Features and Functionality",
 		"",
-		"| Feature                    | Description                                                                                           |",
-		"|----------------------------|-------------------------------------------------------------------------------------------------------|",
-		"| Native Application Support | Sends keyboard scan codes to native Windows application windows via the User32 API.                   |",
-		"| Multi-Key Sequences        | Supports repeating the `Key` parameter to build ordered sequences of key presses.                     |",
-		"| Sticky Mode                | Holds all specified keys down simultaneously and releases them together, enabling keyboard shortcuts. |",
-		"| Configurable Delay         | Introduces a per-key delay in milliseconds to simulate realistic interaction timing.                  |",
-		"| Keyboard Layout Selection  | Maps key names to scan codes using the specified locale, supporting multilingual keyboard inputs.     |",
+		"| Feature                    | Description                                                                    |",
+		"|----------------------------|--------------------------------------------------------------------------------|",
+		"| Native Application Support | Sends hardware scan codes to the active native Windows application.            |",
+		"| Multi-Key Sequences        | Repeats the `Key` parameter to press several keys in order.                    |",
+		"| Sticky Mode                | Holds all keys down together and releases them in reverse order for shortcuts. |",
+		"| Configurable Delay         | Sets the pause between keys; a value of 0 uses 100 milliseconds.               |",
+		"| Keyboard Layout Selection  | Switches between the `en-US` and `he-IL` layouts before sending keys.          |",
+		"| Alternate Key Names        | Accepts common spellings such as `Delete`, `PageDown`, and `Space`.            |",
 		"",
-		"### Usage in RPA",
+		"### Usages in RPA",
 		"",
-		"| Usage                 | Description                                                                                                    |",
-		"|-----------------------|----------------------------------------------------------------------------------------------------------------|",
-		"| Native App Automation | Enables RPA workflows to interact with native application UI via keyboard shortcuts, navigation, and commands. |",
-		"| Legacy Systems        | Facilitates automation of legacy systems that cannot be driven through standard WebDriver keyboard APIs.       |",
+		"| Use Case              | Description                                                                                   |",
+		"|-----------------------|-----------------------------------------------------------------------------------------------|",
+		"| Native App Automation | Drives native application menus, dialogs, and commands with keyboard shortcuts.               |",
+		"| Legacy Systems        | Automates legacy applications that cannot be driven through standard WebDriver keyboard APIs. |",
 		"",
-		"### Usage in Automation Testing",
+		"### Usages in Automation Testing",
 		"",
-		"| Usage                   | Description                                                                                                           |",
-		"|-------------------------|-----------------------------------------------------------------------------------------------------------------------|",
-		"| Application UI Testing  | Validates keyboard-driven interactions with native application elements using realistic OS-level key simulation.      |",
-		"| Comprehensive Scenarios | Expands test coverage to keyboard actions inaccessible through standard WebDriver, including shortcuts and modifiers. |"
+		"| Use Case                     | Description                                                                                     |",
+		"|------------------------------|-------------------------------------------------------------------------------------------------|",
+		"| Keyboard Interaction Testing | Verifies keyboard-driven behavior of native applications with operating-system-level key input. |",
+		"| Shortcut Coverage            | Tests shortcuts and modifier combinations that standard WebDriver keyboard input cannot reach.  |",
+		"",
+		"### Limitations",
+		"",
+		"An unknown key name is not reported as an error: without `Sticky` it sends nothing, and with `Sticky` it sends an invalid scan code."
 	],
 	"examples": [
 		{
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Empty or null Argument — key resolution falls back to an empty string and the server may reject the request",
-						"Non-IUser32Driver detected — plugin returns empty response with no key sent",
-						"Key name not recognized by the server — the server may raise an error or silently ignore the scan code"
+						"A non-User32 driver returns without sending the key",
+						"An empty Argument sends no key",
+						"An unknown key name sends nothing without Sticky"
 					],
-					"expected_result": "The F5 key scan code is sent to the active native application window, triggering a refresh or other F5-bound action.",
-					"notes": "When no parameter expression is used, the Argument value is treated directly as the single key name. This is the simplest form of the plugin requiring no parameter syntax.",
+					"expected_result": "The F5 key is sent to the active native application window, triggering its F5 action such as a refresh.",
+					"notes": "Without a parameter expression, the Argument value is sent as one key name. It is the simplest form of the plugin.",
 					"use_case": "single_key_press_via_plain_argument",
 					"version": "4"
 				},
 				"labels": [
-					"F5",
 					"FunctionKey",
 					"KeyboardInput",
 					"NativeApp",
 					"SingleKey",
-					"User32",
-					"WindowsNative"
+					"User32"
 				]
 			},
 			"description": [
@@ -130,7 +125,6 @@
 				"The key name is passed directly as the Argument value without any parameter expression, making this the simplest form of the plugin."
 			],
 			"rule": {
-				"$type": "Action",
 				"argument": "F5",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -139,34 +133,31 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Both key names must be recognized — an unknown name causes a server-side error",
-						"Non-IUser32Driver detected — plugin returns empty response with no keys sent",
-						"Sticky mode with a single Key entry is valid but behaves identically to non-sticky"
+						"A non-User32 driver returns without sending keys",
+						"An unknown key name sends an invalid scan code with Sticky",
+						"Sticky with a single key behaves like a normal key press"
 					],
-					"expected_result": "Ctrl and C are held down simultaneously and then released together, sending the copy shortcut to the active native window.",
-					"notes": "Sticky mode holds all specified keys down simultaneously and releases them at once. Use it for any shortcut that requires modifier keys to be held while pressing a regular key.",
+					"expected_result": "Ctrl and C are held down together and then released, sending the copy shortcut to the active native window.",
+					"notes": "Sticky presses the keys in order, holds them, and releases them in reverse order. Use it for any shortcut that needs a modifier key held down.",
 					"use_case": "sticky_two_key_shortcut_ctrl_c",
 					"version": "4"
 				},
 				"labels": [
 					"Copy",
-					"CtrlC",
 					"KeyboardShortcut",
 					"ModifierKey",
 					"NativeApp",
 					"Sticky",
-					"User32",
-					"WindowsNative"
+					"User32"
 				]
 			},
 			"description": [
 				"### Sticky keyboard shortcut — Ctrl+C",
 				"",
 				"Simulate pressing `Ctrl + C` simultaneously using sticky mode to send the copy shortcut to the active native application.",
-				"The `--Sticky` switch holds all specified keys down at once and releases them together, which is required for modifier-key combinations."
+				"The `--Sticky` switch holds both keys down and then releases them in reverse order, which modifier-key combinations require."
 			],
 			"rule": {
-				"$type": "Action",
 				"argument": "{{$ --Key:Ctrl --Key:C --Sticky}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -175,12 +166,12 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Delay of 0 sends all keys back-to-back without any pause between them",
-						"Non-IUser32Driver detected — plugin returns empty response with no keys sent",
-						"Repeating the same key name multiple times is valid and each occurrence is sent as an individual press"
+						"A Delay of 0 still waits 100 milliseconds between keys",
+						"A non-User32 driver returns without sending keys",
+						"Repeating the same key name sends it once per occurrence"
 					],
-					"expected_result": "The Tab key is pressed three times in sequence with 300 ms between each press, advancing focus through three input fields.",
-					"notes": "In non-sticky mode, each key is pressed and released individually in the order specified. Repeat --Key to build a sequence of any length.",
+					"expected_result": "The Tab key is pressed three times with 300 milliseconds between presses, moving focus across three fields.",
+					"notes": "Without Sticky, each key is pressed and released on its own in the order given. Repeat --Key to build a sequence of any length.",
 					"use_case": "sequential_tab_navigation_with_delay",
 					"version": "4"
 				},
@@ -190,9 +181,7 @@
 					"KeyboardInput",
 					"NativeApp",
 					"Sequential",
-					"Tab",
-					"User32",
-					"WindowsNative"
+					"User32"
 				]
 			},
 			"description": [
@@ -202,7 +191,6 @@
 				"In non-sticky mode each key is pressed and released individually in the order specified."
 			],
 			"rule": {
-				"$type": "Action",
 				"argument": "{{$ --Key:Tab --Key:Tab --Key:Tab --Delay:300}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -211,35 +199,30 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Unsupported KeyboardLayout value — the server defaults to en-US or raises an error",
-						"Non-IUser32Driver detected — plugin returns empty response with no keys sent",
-						"The OS must have the he-IL keyboard layout installed for the layout switch to succeed"
+						"A non-User32 driver returns without sending keys",
+						"Latin letter names are not mapped in the he-IL layout",
+						"The he-IL layout must be installed on the machine"
 					],
-					"expected_result": "Alt and Shift are held down simultaneously and released, triggering the keyboard layout switch to Hebrew Standard at the OS level.",
-					"notes": "KeyboardLayout controls how key names are mapped to scan codes server-side. Specifying he-IL is necessary when the automation targets a Hebrew layout or must switch the OS layout using locale-aware scan codes.",
+					"expected_result": "The driver switches the input language to Hebrew Standard, then Alt and Shift are pressed together, which toggles to the next installed input language.",
+					"notes": "KeyboardLayout switches the input language before any key is sent and selects the he-IL key map. Alt+Shift then uses the Windows shortcut for changing the input language.",
 					"use_case": "sticky_layout_switch_alt_shift_hebrew",
 					"version": "4"
 				},
 				"labels": [
-					"AltShift",
-					"HebrewLayout",
 					"KeyboardLayout",
 					"KeyboardShortcut",
-					"LayoutSwitch",
 					"Multilingual",
 					"Sticky",
-					"User32",
-					"WindowsNative"
+					"User32"
 				]
 			},
 			"description": [
-				"### Sticky layout switch — Alt+Shift with Hebrew keyboard layout",
+				"### Sticky input language switch — Alt+Shift with the Hebrew layout",
 				"",
-				"Simulate pressing `Alt + Shift` simultaneously using sticky mode to switch the OS keyboard layout to Hebrew Standard.",
-				"The `--KeyboardLayout:he-IL` parameter instructs the server to map key names using the Hebrew Standard scan code table."
+				"Select the `he-IL` layout and press `Alt + Shift` together with `Sticky`.",
+				"The driver switches to the Hebrew layout first, and Alt+Shift then toggles to the next installed input language."
 			],
 			"rule": {
-				"$type": "Action",
 				"argument": "{{$ --Key:Alt --Key:Shift --Sticky --KeyboardLayout:he-IL}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -248,34 +231,30 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"All three key names must be recognized — an unknown name causes a server-side error",
-						"Non-IUser32Driver detected — plugin returns empty response with no keys sent",
-						"System-level shortcuts like Ctrl+Shift+Esc may be intercepted by the OS before reaching the target application"
+						"A non-User32 driver returns without sending keys",
+						"Shift is sent as the Left Shift key",
+						"System shortcuts such as Ctrl+Shift+Esc are handled by Windows before the application"
 					],
-					"expected_result": "Ctrl, Shift, and Esc are held down simultaneously and released together, opening the Windows Task Manager.",
-					"notes": "Three-key sticky combinations follow the same pattern as two-key shortcuts. All keys are pressed simultaneously regardless of the number of Key parameters.",
+					"expected_result": "Ctrl, Shift, and Esc are held down together and then released in reverse order, opening the Windows Task Manager.",
+					"notes": "Three-key Sticky combinations follow the same pattern as two-key shortcuts. All keys are held together regardless of how many Key parameters are given.",
 					"use_case": "sticky_three_key_combination_task_manager",
 					"version": "4"
 				},
 				"labels": [
-					"CtrlShiftEsc",
 					"KeyboardShortcut",
 					"NativeApp",
 					"Sticky",
 					"TaskManager",
-					"ThreeKey",
-					"User32",
-					"WindowsNative"
+					"User32"
 				]
 			},
 			"description": [
 				"### Three-key sticky combination — Ctrl+Shift+Esc",
 				"",
 				"Simulate pressing `Ctrl + Shift + Esc` simultaneously using sticky mode to open the Windows Task Manager.",
-				"All three keys are held down at once and released together, which is required for this system-level keyboard shortcut."
+				"All three keys are held down and then released in reverse order, which this system-level keyboard shortcut requires."
 			],
 			"rule": {
-				"$type": "Action",
 				"argument": "{{$ --Key:Ctrl --Key:Shift --Key:Esc --Sticky}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -286,10 +265,10 @@
 	"parameters": [
 		{
 			"description": [
-				"Specifies the pause in milliseconds between consecutive key inputs during sequential (non-sticky) key sending.",
-				"Accepts a time string (e.g., `00:00:00.300`) or a numeric value representing milliseconds.",
-				"Default is `0`, meaning keys are sent back-to-back without any pause.",
-				"Use this parameter to simulate realistic human interaction cadence or to ensure the target application processes each key before the next one arrives."
+				"Sets the pause between keys in milliseconds, given as a number or a time string such as `00:00:00.300`.",
+				"A value of `0`, the default, uses the driver minimum of 100 milliseconds between keys.",
+				"With `Sticky`, the pause applies between key presses, and the keys are then released without a pause.",
+				"Increase it when the target application needs more time to process each key."
 			],
 			"mandatory": false,
 			"name": "Delay",
@@ -297,562 +276,596 @@
 		},
 		{
 			"description": [
-				"Specifies the keyboard key to press, identified by its key name.",
-				"Repeat this parameter for each key in the sequence; each occurrence adds one key to the scan code list sent to the driver.",
-				"If not provided, the plugin falls back to the rule Argument value as the key source.",
-				"Use the values list to identify supported key names for the target keyboard layout."
+				"Names one key to press, such as `Enter`, `Ctrl`, or `F5`; repeat the parameter to send several keys in order.",
+				"When the parameter is omitted, the rule `Argument` value is used as a single key name.",
+				"Common alternate spellings, such as `Delete`, `PageDown`, or `Space`, are accepted and converted before sending.",
+				"Without `Sticky`, an uppercase letter is sent as Shift plus that letter, so use a lowercase letter for a plain key press."
 			],
 			"mandatory": false,
 			"name": "Key",
 			"type": "Array",
 			"values": [
 				{
-					"name": " ",
 					"description": [
-						"Represents the Spacebar key."
-					]
+						"Represents the Spacebar key.",
+						"Also accepted as `Space`."
+					],
+					"name": "Spacebar"
 				},
 				{
-					"name": "'",
 					"description": [
-						"Represents the Apostrophe (`'`) key."
-					]
+						"Represents the Apostrophe (`'`) key.",
+						"In the `he-IL` layout, this name is sent through a different physical key."
+					],
+					"name": "'"
 				},
 				{
-					"name": ",",
 					"description": [
-						"Represents the Comma (`,`) key."
-					]
+						"Represents the Comma (`,`) key.",
+						"In the `he-IL` layout, this name is sent through a different physical key."
+					],
+					"name": ","
 				},
 				{
-					"name": "-",
 					"description": [
-						"Represents the Hyphen (`-`) key." 
-					]
+						"Represents the Hyphen (`-`) key.",
+						"It sends the same physical key in every supported layout."
+					],
+					"name": "-"
 				},
 				{
-					"name": ".",
 					"description": [
-						"Represents the Period (`.`) key."
-					]
+						"Represents the Period (`.`) key.",
+						"In the `he-IL` layout, this name is sent through a different physical key."
+					],
+					"name": "."
 				},
 				{
-					"name": "/",
 					"description": [
-						"Represents the Slash (`/`) key."
-					]
+						"Represents the Slash (`/`) key.",
+						"In the `he-IL` layout, this name is sent through a different physical key."
+					],
+					"name": "/"
 				},
 				{
-					"name": "0",
 					"description": [
-						"Represents the `0` key."
-					]
+						"Represents the Semicolon (`;`) key.",
+						"It sends the same physical key in every supported layout."
+					],
+					"name": ";"
 				},
 				{
-					"name": "1",
 					"description": [
-						"Represents the `1` key."
-					]
+						"Represents the Equals (`=`) key.",
+						"It sends the same physical key in every supported layout."
+					],
+					"name": "="
 				},
 				{
-					"name": "2",
 					"description": [
-						"Represents the `2` key."
-					]
+						"Represents the Open bracket (`[`) key.",
+						"In the `he-IL` layout, this name is sent through a different physical key."
+					],
+					"name": "["
 				},
 				{
-					"name": "3",
 					"description": [
-						"Represents the `3` key."
-					]
+						"Represents the Backslash (`\\`) key.",
+						"It sends the same physical key in every supported layout."
+					],
+					"name": "\\"
 				},
 				{
-					"name": "4",
 					"description": [
-						"Represents the `4` key."
-					]
+						"Represents the Close bracket (`]`) key.",
+						"In the `he-IL` layout, this name is sent through a different physical key."
+					],
+					"name": "]"
 				},
 				{
-					"name": "5",
 					"description": [
-						"Represents the `5` key."
-					]
+						"Represents the Grave accent (`` ` ``) key.",
+						"It sends the same physical key in every supported layout."
+					],
+					"name": "`"
 				},
 				{
-					"name": "6",
 					"description": [
-						"Represents the `6` key."
-					]
+						"Represents the `0` key on the main keyboard row.",
+						"Also accepted as `Num 0`, which sends the same main-row key."
+					],
+					"name": "0"
 				},
 				{
-					"name": "7",
 					"description": [
-						"Represents the `7` key."
-					]
+						"Represents the `1` key on the main keyboard row.",
+						"Also accepted as `Num 1`, which sends the same main-row key."
+					],
+					"name": "1"
 				},
 				{
-					"name": "8",
 					"description": [
-						"Represents the `8` key."
-					]
+						"Represents the `2` key on the main keyboard row.",
+						"Also accepted as `Num 2`, which sends the same main-row key."
+					],
+					"name": "2"
 				},
 				{
-					"name": "9",
 					"description": [
-						"Represents the `9` key."
-					]
+						"Represents the `3` key on the main keyboard row.",
+						"Also accepted as `Num 3`, which sends the same main-row key."
+					],
+					"name": "3"
 				},
 				{
-					"name": ";",
 					"description": [
-						"Represents the Semicolon (`;`) key."
-					]
+						"Represents the `4` key on the main keyboard row.",
+						"Also accepted as `Num 4`, which sends the same main-row key."
+					],
+					"name": "4"
 				},
 				{
-					"name": "=",
 					"description": [
-						"Represents the Equals (`=`) key."
-					]
+						"Represents the `5` key on the main keyboard row.",
+						"Also accepted as `Num 5`, which sends the same main-row key."
+					],
+					"name": "5"
 				},
 				{
-					"name": "[",
 					"description": [
-						"Represents the Open bracket (`[`) key."
-					]
+						"Represents the `6` key on the main keyboard row.",
+						"Also accepted as `Num 6`, which sends the same main-row key."
+					],
+					"name": "6"
 				},
 				{
-					"name": "\\",
 					"description": [
-						"Represents the Backslash (`\\`) key."
-					]
+						"Represents the `7` key on the main keyboard row.",
+						"Also accepted as `Num 7`, which sends the same main-row key."
+					],
+					"name": "7"
 				},
 				{
-					"name": "]",
 					"description": [
-						"Represents the Close bracket (`]`) key."
-					]
+						"Represents the `8` key on the main keyboard row.",
+						"Also accepted as `Num 8`, which sends the same main-row key."
+					],
+					"name": "8"
 				},
 				{
-					"name": "`",
 					"description": [
-						"Represents the Grave accent (`` ` ``) key."
-					]
+						"Represents the `9` key on the main keyboard row.",
+						"Also accepted as `Num 9`, which sends the same main-row key."
+					],
+					"name": "9"
 				},
 				{
-					"name": "A",
 					"description": [
-						"Represents the `A` key."
-					]
+						"Represents the `A` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+A, so use `a` for a plain key press."
+					],
+					"name": "A"
 				},
 				{
-					"name": "B",
 					"description": [
-						"Represents the `B` key."
-					]
+						"Represents the `B` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+B, so use `b` for a plain key press."
+					],
+					"name": "B"
 				},
 				{
-					"name": "C",
 					"description": [
-						"Represents the `C` key."
-					]
+						"Represents the `C` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+C, so use `c` for a plain key press."
+					],
+					"name": "C"
 				},
 				{
-					"name": "D",
 					"description": [
-						"Represents the `D` key."
-					]
+						"Represents the `D` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+D, so use `d` for a plain key press."
+					],
+					"name": "D"
 				},
 				{
-					"name": "E",
 					"description": [
-						"Represents the `E` key."
-					]
+						"Represents the `E` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+E, so use `e` for a plain key press."
+					],
+					"name": "E"
 				},
 				{
-					"name": "F",
 					"description": [
-						"Represents the `F` key."
-					]
+						"Represents the `F` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+F, so use `f` for a plain key press."
+					],
+					"name": "F"
 				},
 				{
-					"name": "G",
 					"description": [
-						"Represents the `G` key."
-					]
+						"Represents the `G` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+G, so use `g` for a plain key press."
+					],
+					"name": "G"
 				},
 				{
-					"name": "H",
 					"description": [
-						"Represents the `H` key."
-					]
+						"Represents the `H` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+H, so use `h` for a plain key press."
+					],
+					"name": "H"
 				},
 				{
-					"name": "I",
 					"description": [
-						"Represents the `I` key."
-					]
+						"Represents the `I` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+I, so use `i` for a plain key press."
+					],
+					"name": "I"
 				},
 				{
-					"name": "J",
 					"description": [
-						"Represents the `J` key."
-					]
+						"Represents the `J` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+J, so use `j` for a plain key press."
+					],
+					"name": "J"
 				},
 				{
-					"name": "K",
 					"description": [
-						"Represents the `K` key."
-					]
+						"Represents the `K` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+K, so use `k` for a plain key press."
+					],
+					"name": "K"
 				},
 				{
-					"name": "L",
 					"description": [
-						"Represents the `L` key."
-					]
+						"Represents the `L` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+L, so use `l` for a plain key press."
+					],
+					"name": "L"
 				},
 				{
-					"name": "M",
 					"description": [
-						"Represents the `M` key."
-					]
+						"Represents the `M` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+M, so use `m` for a plain key press."
+					],
+					"name": "M"
 				},
 				{
-					"name": "N",
 					"description": [
-						"Represents the `N` key."
-					]
+						"Represents the `N` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+N, so use `n` for a plain key press."
+					],
+					"name": "N"
 				},
 				{
-					"name": "O",
 					"description": [
-						"Represents the `O` key."
-					]
+						"Represents the `O` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+O, so use `o` for a plain key press."
+					],
+					"name": "O"
 				},
 				{
-					"name": "P",
 					"description": [
-						"Represents the `P` key."
-					]
+						"Represents the `P` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+P, so use `p` for a plain key press."
+					],
+					"name": "P"
 				},
 				{
-					"name": "Q",
 					"description": [
-						"Represents the `Q` key."
-					]
+						"Represents the `Q` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+Q, so use `q` for a plain key press."
+					],
+					"name": "Q"
 				},
 				{
-					"name": "R",
 					"description": [
-						"Represents the `R` key."
-					]
+						"Represents the `R` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+R, so use `r` for a plain key press."
+					],
+					"name": "R"
 				},
 				{
-					"name": "S",
 					"description": [
-						"Represents the `S` key."
-					]
+						"Represents the `S` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+S, so use `s` for a plain key press."
+					],
+					"name": "S"
 				},
 				{
-					"name": "T",
 					"description": [
-						"Represents the `T` key."
-					]
+						"Represents the `T` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+T, so use `t` for a plain key press."
+					],
+					"name": "T"
 				},
 				{
-					"name": "U",
 					"description": [
-						"Represents the `U` key."
-					]
+						"Represents the `U` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+U, so use `u` for a plain key press."
+					],
+					"name": "U"
 				},
 				{
-					"name": "V",
 					"description": [
-						"Represents the `V` key."
-					]
+						"Represents the `V` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+V, so use `v` for a plain key press."
+					],
+					"name": "V"
 				},
 				{
-					"name": "W",
 					"description": [
-						"Represents the `W` key."
-					]
+						"Represents the `W` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+W, so use `w` for a plain key press."
+					],
+					"name": "W"
 				},
 				{
-					"name": "X",
 					"description": [
-						"Represents the `X` key."
-					]
+						"Represents the `X` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+X, so use `x` for a plain key press."
+					],
+					"name": "X"
 				},
 				{
-					"name": "Y",
 					"description": [
-						"Represents the `Y` key."
-					]
+						"Represents the `Y` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+Y, so use `y` for a plain key press."
+					],
+					"name": "Y"
 				},
 				{
-					"name": "Z",
 					"description": [
-						"Represents the `Z` key."
-					]
+						"Represents the `Z` key.",
+						"Without `Sticky`, this uppercase name is sent as Shift+Z, so use `z` for a plain key press."
+					],
+					"name": "Z"
 				},
 				{
-					"name": "Alt",
 					"description": [
-						"Represents the Alt key."
-					]
+						"Represents the left Alt key.",
+						"Hold it with `Sticky` for shortcuts such as `Alt+F4` or `Alt+Tab`."
+					],
+					"name": "Alt"
 				},
 				{
-					"name": "ArrowDown",
 					"description": [
-						"Represents the Down arrow key (Arrow prefix form)."
-					]
+						"Represents the Backspace key.",
+						"Use it to delete the character before the cursor."
+					],
+					"name": "Backspace"
 				},
 				{
-					"name": "ArrowLeft",
 					"description": [
-						"Represents the Left arrow key (Arrow prefix form)."
-					]
+						"Represents the Caps Lock key.",
+						"Also accepted as `Caps Lock`."
+					],
+					"name": "CapsLock"
 				},
 				{
-					"name": "ArrowRight",
 					"description": [
-						"Represents the Right arrow key (Arrow prefix form)."
-					]
+						"Represents the numeric keypad 5 (Center) key.",
+						"It is sent as a keypad key, so its effect depends on the Num Lock state."
+					],
+					"name": "Center"
 				},
 				{
-					"name": "ArrowUp",
 					"description": [
-						"Represents the Up arrow key (Arrow prefix form)."
-					]
+						"Represents the left Control key.",
+						"Hold it with `Sticky` for shortcuts such as `Ctrl+C` or `Ctrl+S`."
+					],
+					"name": "Ctrl"
 				},
 				{
-					"name": "Backspace",
 					"description": [
-						"Represents the Backspace key."
-					]
+						"Represents the Delete key.",
+						"Also accepted as `Delete` or `Num Del`."
+					],
+					"name": "Del"
 				},
 				{
-					"name": "CapsLock",
 					"description": [
-						"Represents the Caps Lock key."
-					]
+						"Represents the Down arrow key.",
+						"Use it to move the cursor or selection down."
+					],
+					"name": "Down"
 				},
 				{
-					"name": "Center",
 					"description": [
-						"Represents the Center key."
-					]
+						"Represents the End key.",
+						"Use it to move the cursor to the end of a line or list."
+					],
+					"name": "End"
 				},
 				{
-					"name": "Control",
 					"description": [
-						"Represents the Control key (full-name form of Ctrl)."
-					]
+						"Represents the Enter key.",
+						"Also accepted as `Num Enter`, which sends the main Enter key."
+					],
+					"name": "Enter"
 				},
 				{
-					"name": "Ctrl",
 					"description": [
-						"Represents the Control (Ctrl) key."
-					]
+						"Represents the Escape key.",
+						"Use it to close dialogs or cancel the current operation."
+					],
+					"name": "Esc"
 				},
 				{
-					"name": "Del",
 					"description": [
-						"Represents the Delete key."
-					]
+						"Represents the F1 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F1"
 				},
 				{
-					"name": "Down",
 					"description": [
-						"Represents the Down arrow key."
-					]
+						"Represents the F2 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F2"
 				},
 				{
-					"name": "End",
 					"description": [
-						"Represents the End key."
-					]
+						"Represents the F3 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F3"
 				},
 				{
-					"name": "Enter",
 					"description": [
-						"Represents the Enter key."
-					]
+						"Represents the F4 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F4"
 				},
 				{
-					"name": "Esc",
 					"description": [
-						"Represents the Escape (Esc) key."
-					]
+						"Represents the F5 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F5"
 				},
 				{
-					"name": "F1",
 					"description": [
-						"Represents the F1 key."
-					]
+						"Represents the F6 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F6"
 				},
 				{
-					"name": "F2",
 					"description": [
-						"Represents the F2 key."
-					]
+						"Represents the F7 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F7"
 				},
 				{
-					"name": "F3",
 					"description": [
-						"Represents the F3 key."
-					]
+						"Represents the F8 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F8"
 				},
 				{
-					"name": "F4",
 					"description": [
-						"Represents the F4 key."
-					]
+						"Represents the F9 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F9"
 				},
 				{
-					"name": "F5",
 					"description": [
-						"Represents the F5 key."
-					]
+						"Represents the F10 function key.",
+						"Its effect depends on the shortcut the target application assigns to it."
+					],
+					"name": "F10"
 				},
 				{
-					"name": "F6",
 					"description": [
-						"Represents the F6 key."
-					]
+						"Represents the Home key.",
+						"Use it to move the cursor to the start of a line or list."
+					],
+					"name": "Home"
 				},
 				{
-					"name": "F7",
 					"description": [
-						"Represents the F7 key."
-					]
+						"Represents the Insert key.",
+						"Also accepted as `Insert`."
+					],
+					"name": "Ins"
 				},
 				{
-					"name": "F8",
 					"description": [
-						"Represents the F8 key."
-					]
+						"Represents the Left arrow key.",
+						"Use it to move the cursor or selection left."
+					],
+					"name": "Left"
 				},
 				{
-					"name": "F9",
 					"description": [
-						"Represents the F9 key."
-					]
+						"Represents the Left Shift key.",
+						"Hold it with `Sticky` to combine it with another key."
+					],
+					"name": "LShift"
 				},
 				{
-					"name": "F10",
 					"description": [
-						"Represents the F10 key."
-					]
+						"Represents the Num Lock key.",
+						"Also accepted as `NumLock` or `Num Lock`."
+					],
+					"name": "Num"
 				},
 				{
-					"name": "F11",
 					"description": [
-						"Represents the F11 key."
-					]
+						"Represents the Page Down key.",
+						"Also accepted as `PageDown` or `Page Down`."
+					],
+					"name": "PgDn"
 				},
 				{
-					"name": "F12",
 					"description": [
-						"Represents the F12 key."
-					]
+						"Represents the Page Up key.",
+						"Also accepted as `PageUp` or `Page Up`."
+					],
+					"name": "PgUp"
 				},
 				{
-					"name": "Home",
 					"description": [
-						"Represents the Home key."
-					]
+						"Represents the Print Screen key.",
+						"Also accepted as `PrintScreen`, `Print Screen`, or `Prnt Scrn`."
+					],
+					"name": "PrtSc"
 				},
 				{
-					"name": "Ins",
 					"description": [
-						"Represents the Insert key."
-					]
+						"Represents the Right arrow key.",
+						"Use it to move the cursor or selection right."
+					],
+					"name": "Right"
 				},
 				{
-					"name": "Left",
 					"description": [
-						"Represents the Left arrow key."
-					]
+						"Represents the Right Shift key.",
+						"Hold it with `Sticky` to combine it with another key."
+					],
+					"name": "RShift"
 				},
 				{
-					"name": "LShift",
 					"description": [
-						"Represents the Left Shift key."
-					]
+						"Represents the Scroll Lock key.",
+						"Also accepted as `ScrollLock` or `Scroll Lock`."
+					],
+					"name": "Scroll"
 				},
 				{
-					"name": "Meta",
 					"description": [
-						"Represents the Windows (Meta/Super) key."
-					]
+						"Represents the Shift key and is sent as the Left Shift key (`LShift`).",
+						"Hold it with `Sticky` for shortcuts such as `Ctrl+Shift+Esc`."
+					],
+					"name": "Shift"
 				},
 				{
-					"name": "Num",
 					"description": [
-						"Represents the Num Lock key."
-					]
+						"Represents the Tab key.",
+						"Use it to move focus to the next field or control."
+					],
+					"name": "Tab"
 				},
 				{
-					"name": "PgDn",
 					"description": [
-						"Represents the Page Down key."
-					]
-				},
-				{
-					"name": "PgUp",
-					"description": [
-						"Represents the Page Up key."
-					]
-				},
-				{
-					"name": "PrtSc",
-					"description": [
-						"Represents the Print Screen key."
-					]
-				},
-				{
-					"name": "Right",
-					"description": [
-						"Represents the Right arrow key."
-					]
-				},
-				{
-					"name": "RShift",
-					"description": [
-						"Represents the Right Shift key."
-					]
-				},
-				{
-					"name": "Scroll",
-					"description": [
-						"Represents the Scroll Lock key."
-					]
-				},
-				{
-					"name": "Shift",
-					"description": [
-						"Represents the Shift key (generic, applies to either left or right Shift)."
-					]
-				},
-				{
-					"name": "Tab",
-					"description": [
-						"Represents the Tab key."
-					]
-				},
-				{
-					"name": "Up",
-					"description": [
-						"Represents the Up arrow key."
-					]
+						"Represents the Up arrow key.",
+						"Use it to move the cursor or selection up."
+					],
+					"name": "Up"
 				}
 			]
 		},
 		{
 			"description": [
-				"When present, enables sticky mode: all specified keys are pressed down simultaneously and released together at the end of the sequence.",
-				"Use sticky mode for keyboard shortcuts that require modifier keys to be held while pressing a regular key, such as `Ctrl+C`, `Alt+F4`, or `Win+R`.",
-				"Without this switch, each key is pressed and released individually in the order specified."
+				"Presses all keys in order and holds them, then releases them in reverse order when present.",
+				"Use it for shortcuts that need modifier keys held down, such as `Ctrl+C`, `Alt+F4`, or `Alt+Tab`.",
+				"Without the switch, each key is pressed and released on its own in the order given."
 			],
 			"mandatory": false,
 			"name": "Sticky",
@@ -860,22 +873,28 @@
 		},
 		{
 			"description": [
-				"Specifies the BCP-47 locale identifier used to map key names to OS-level scan codes.",
-				"Use `en-US` for standard English keyboard input and `he-IL` for Hebrew Standard keyboard layout.",
-				"The default layout is `en-US` when this parameter is omitted.",
-				"Specifying the correct layout is important when sending keys on non-English systems or when triggering OS layout-switch shortcuts."
+				"Sets the keyboard layout used to switch the system input language and map key names to scan codes.",
+				"Use `en-US` for English keys and `he-IL` for the Hebrew Standard layout; the default is `en-US`.",
+				"The `he-IL` layout maps Hebrew letters instead of Latin letters and sends `/`, `'`, `,`, `.`, `[`, and `]` through different physical keys.",
+				"The driver switches to the selected layout before it sends any key."
 			],
 			"mandatory": false,
 			"name": "KeyboardLayout",
 			"type": "String",
 			"values": [
 				{
-					"name": "en-US",
-					"description": [ "English (United States) keyboard layout. This is the default." ]
+					"description": [
+						"Selects the English (United States) keyboard layout.",
+						"It is used when the parameter is omitted."
+					],
+					"name": "en-US"
 				},
 				{
-					"name": "he-IL",
-					"description": [ "Hebrew Standard keyboard layout." ]
+					"description": [
+						"Selects the Hebrew Standard keyboard layout.",
+						"Latin letter names are not mapped in this layout, so use the Hebrew letters or switch to `en-US` for them."
+					],
+					"name": "he-IL"
 				}
 			]
 		}
@@ -884,10 +903,9 @@
 	"properties": [
 		{
 			"description": [
-				"Carries the parameter expression or the direct key name to send via the User32 API.",
-				"Use the `{{$ --Key:Name}}` expression format to specify key names and options as runtime parameters.",
-				"When no parameter expression is used, the raw Argument value is treated as the single key name to press.",
-				"This property is the primary input for the plugin when the Key parameter is not specified inline."
+				"Carries the `{{$ --Key:Name}}` parameter expression or a single key name to send through the User32 API.",
+				"When no parameter expression is used, the raw Argument value is sent as one key name.",
+				"Use the expression form to send several keys or to set `Sticky`, `Delay`, or `KeyboardLayout`."
 			],
 			"mandatory": true,
 			"name": "Argument",
@@ -902,8 +920,9 @@
 		"WindowsNative"
 	],
 	"summary": [
-		"The `SendUser32KeyboardKey` plugin simulates keyboard inputs using the Windows User32 API, targeting native application elements.",
-		"It supports sequential or simultaneous (sticky) key combinations, configurable inter-key delays, and keyboard layout selection for accurate scan code mapping."
+		"Sends keyboard keys and shortcuts to native Windows applications through the User32 API.",
+		"Presses keys in sequence or holds them together with `Sticky` for shortcuts such as `Ctrl+C`.",
+		"Supports configurable delays and the `en-US` and `he-IL` keyboard layouts for reliable keyboard automation."
 	],
 	"version": "4"
 }
