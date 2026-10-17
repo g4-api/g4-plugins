@@ -94,6 +94,7 @@
 					"Type": "JsonDataCollector"
 				},
 				"extractionScope": "PageSource",
+				"pluginName": "PageSource",
 				"onElement": "//div[@class='hotel']"
 			}
 		}
