@@ -101,6 +101,7 @@
 					"Type": "JsonDataCollector"
 				},
 				"extractionScope": "BodyHtml",
+				"pluginName": "BodyHtml",
 				"onElement": "//div[@class='hotel']"
 			}
 		}

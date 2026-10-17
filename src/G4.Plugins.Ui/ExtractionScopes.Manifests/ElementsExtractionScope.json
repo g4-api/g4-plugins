@@ -85,6 +85,7 @@
 					"Type": "JsonDataCollector"
 				},
 				"extractionScope": "Elements",
+				"pluginName": "Elements",
 				"onElement": "//div[@class='hotel']"
 			}
 		}

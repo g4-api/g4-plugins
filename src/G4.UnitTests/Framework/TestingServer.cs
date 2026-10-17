@@ -852,7 +852,21 @@ namespace G4.UnitTests.Framework
             },
             new G4PluginAttribute
             {
-                Examples = [],
+                Description = ["Returns a simulated attribute value for external assertion tests."],
+                Examples =
+                [
+                    new PluginExampleModel
+                    {
+                        Description = ["Read the simulated index attribute and compare it with zero."],
+                        Rule = new RuleExampleModel
+                        {
+                            PluginName = "ExternalAssertion",
+                            Argument = "{{$ --Operator:Equal --Expected:0}}",
+                            OnAttribute = "index",
+                            OnElement = ".//positive"
+                        }
+                    }
+                ],
                 Key = "ExternalAssertion",
                 PluginType = "Assertion"
             },
@@ -1021,15 +1035,8 @@ namespace G4.UnitTests.Framework
                 // Log an informational message with host and port details
                 _logger.LogInformation("Request to get available assertion methods received from {host}:{port}.", host, port);
 
-                // Return the list of available assertion methods
-                return Ok(new[]
-                {
-                    new G4PluginAttribute
-                    {
-                        Examples = [],
-                        Key = "ExternalAssertion"
-                    }
-                });
+                // Reuse the documented manifests so assertion discovery satisfies plugin admission requirements.
+                return Ok(s_plugins.Where(plugin => plugin.PluginType.Equals("Assertion", Compare)));
             }
             catch (Exception e)
             {
