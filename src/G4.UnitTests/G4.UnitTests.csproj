@@ -33,13 +33,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="G4.Abstraction.Logging" Version="2026.8.20.23" />
-		<PackageReference Include="G4.Api" Version="2026.10.15.59" />
-		<PackageReference Include="G4.Converters" Version="2026.10.15.82" />
-		<PackageReference Include="G4.Plugins" Version="2026.10.15.82" />
-		<PackageReference Include="G4.Extensions" Version="2026.10.15.82" />
-		<PackageReference Include="G4.Models" Version="2026.10.15.82" />
-		<PackageReference Include="G4.Settings" Version="2026.10.15.82" />
-		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.13" PrivateAssets="all" />
+		<PackageReference Include="G4.Api" Version="2026.10.18.60" />
+		<PackageReference Include="G4.Converters" Version="2026.10.25.86" />
+		<PackageReference Include="G4.Plugins" Version="2026.10.25.86" />
+		<PackageReference Include="G4.Extensions" Version="2026.10.25.86" />
+		<PackageReference Include="G4.Models" Version="2026.10.25.86" />
+		<PackageReference Include="G4.Settings" Version="2026.10.25.86" />
+		<PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="10.0.14" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="4.5.1" />
 		<PackageReference Include="MSTest.TestFramework" Version="4.5.1" />
@@ -47,7 +47,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
