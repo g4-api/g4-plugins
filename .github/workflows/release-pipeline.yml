@@ -21,6 +21,7 @@ on:
       - main
     paths:
       - 'src/**'
+  workflow_dispatch:
 
 env:
   #
@@ -94,38 +95,22 @@ jobs:
       with:
         dotnet-version: "${{ env.DOTNET_VERSION }}"
 
-    # Fallback when the default feeds fail (HTTP 409 from dotnetorigin.blob.core.windows.net)
+    # Fallback when the default feeds fail (e.g. HTTP 409 from dotnetorigin.blob.core.windows.net)
     - name: Setup .NET (Fallback to builds.dotnet.microsoft.com)
       if: ${{ steps.setup-dotnet.outcome == 'failure' }}
-      shell: pwsh
+      shell: bash
       working-directory: ${{ github.workspace }}
       run: |
-        $feed    = 'https://builds.dotnet.microsoft.com/dotnet'
-        $parts   = '${{ env.DOTNET_VERSION }}'.Split('.')
-        $minor   = if ($parts.Count -gt 1 -and $parts[1] -ne 'x') { $parts[1] } else { '0' }
-        $channel = "$($parts[0]).$minor"
-
-        # dotnet-install resolves the SDK through aka.ms, which redirects to the blocked dotnetorigin host,
+        # dotnet-install.sh resolves "latest" through aka.ms, which redirects to the blocked dotnetorigin host,
         # so resolve the version and download the SDK directly from the CDN.
-        $sdk = (New-Object System.Net.WebClient).DownloadString("$feed/Sdk/$channel/latest.version").Trim().Split("`n")[-1].Trim()
-        $arch = if ([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture -eq 'Arm64') { 'arm64' } else { 'x64' }
-        $rid = if ($IsWindows) { "win-$arch" } elseif ($IsMacOS) { "osx-$arch" } else { "linux-$arch" }
-        $ext = if ($IsWindows) { 'zip' } else { 'tar.gz' }
-        $archive = Join-Path $env:RUNNER_TEMP "dotnet-sdk.$ext"
-        $root = Join-Path $HOME '.dotnet'
-
-        Write-Host "Installing .NET SDK $sdk ($rid) from $feed"
-        for ($attempt = 1; $attempt -le 5; $attempt++) {
-            try { Invoke-WebRequest -Uri "$feed/Sdk/$sdk/dotnet-sdk-$sdk-$rid.$ext" -OutFile $archive; break }
-            catch { if ($attempt -eq 5) { throw }; Start-Sleep -Seconds (5 * $attempt) }
-        }
-
-        New-Item -ItemType Directory -Force -Path $root | Out-Null
-        if ($IsWindows) { Expand-Archive -Path $archive -DestinationPath $root -Force } else { tar -xzf $archive -C $root }
-
-        & (Join-Path $root 'dotnet') --version
-        "DOTNET_ROOT=$root" | Out-File -FilePath $env:GITHUB_ENV  -Encoding utf8 -Append
-        $root               | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        FEED="https://builds.dotnet.microsoft.com/dotnet"
+        SDK_VERSION="$(curl -sSL --retry 5 --retry-all-errors "$FEED/Sdk/${DOTNET_VERSION%.x}/latest.version" | tail -n 1 | tr -d '[:space:]')"
+        echo "Installing .NET SDK $SDK_VERSION from $FEED"
+        mkdir -p "$HOME/.dotnet"
+        curl -sSL --retry 5 --retry-all-errors "$FEED/Sdk/$SDK_VERSION/dotnet-sdk-$SDK_VERSION-linux-x64.tar.gz" | tar -xz -C "$HOME/.dotnet"
+        "$HOME/.dotnet/dotnet" --version
+        echo "DOTNET_ROOT=$HOME/.dotnet" >> "$GITHUB_ENV"
+        echo "$HOME/.dotnet" >> "$GITHUB_PATH"
 
     - name: Restore Dependencies
       shell: pwsh 
@@ -395,38 +380,22 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      # Fallback when the default feeds fail (HTTP 409 from dotnetorigin.blob.core.windows.net)
+      # Fallback when the default feeds fail (e.g. HTTP 409 from dotnetorigin.blob.core.windows.net)
       - name: Setup .NET (Fallback to builds.dotnet.microsoft.com)
         if: ${{ steps.setup-dotnet.outcome == 'failure' }}
-        shell: pwsh
+        shell: bash
         working-directory: ${{ github.workspace }}
         run: |
-          $feed    = 'https://builds.dotnet.microsoft.com/dotnet'
-          $parts   = '${{ env.DOTNET_VERSION }}'.Split('.')
-          $minor   = if ($parts.Count -gt 1 -and $parts[1] -ne 'x') { $parts[1] } else { '0' }
-          $channel = "$($parts[0]).$minor"
-
-          # dotnet-install resolves the SDK through aka.ms, which redirects to the blocked dotnetorigin host,
+          # dotnet-install.sh resolves "latest" through aka.ms, which redirects to the blocked dotnetorigin host,
           # so resolve the version and download the SDK directly from the CDN.
-          $sdk = (New-Object System.Net.WebClient).DownloadString("$feed/Sdk/$channel/latest.version").Trim().Split("`n")[-1].Trim()
-          $arch = if ([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture -eq 'Arm64') { 'arm64' } else { 'x64' }
-          $rid = if ($IsWindows) { "win-$arch" } elseif ($IsMacOS) { "osx-$arch" } else { "linux-$arch" }
-          $ext = if ($IsWindows) { 'zip' } else { 'tar.gz' }
-          $archive = Join-Path $env:RUNNER_TEMP "dotnet-sdk.$ext"
-          $root = Join-Path $HOME '.dotnet'
-
-          Write-Host "Installing .NET SDK $sdk ($rid) from $feed"
-          for ($attempt = 1; $attempt -le 5; $attempt++) {
-              try { Invoke-WebRequest -Uri "$feed/Sdk/$sdk/dotnet-sdk-$sdk-$rid.$ext" -OutFile $archive; break }
-              catch { if ($attempt -eq 5) { throw }; Start-Sleep -Seconds (5 * $attempt) }
-          }
-
-          New-Item -ItemType Directory -Force -Path $root | Out-Null
-          if ($IsWindows) { Expand-Archive -Path $archive -DestinationPath $root -Force } else { tar -xzf $archive -C $root }
-
-          & (Join-Path $root 'dotnet') --version
-          "DOTNET_ROOT=$root" | Out-File -FilePath $env:GITHUB_ENV  -Encoding utf8 -Append
-          $root               | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          FEED="https://builds.dotnet.microsoft.com/dotnet"
+          SDK_VERSION="$(curl -sSL --retry 5 --retry-all-errors "$FEED/Sdk/${DOTNET_VERSION%.x}/latest.version" | tail -n 1 | tr -d '[:space:]')"
+          echo "Installing .NET SDK $SDK_VERSION from $FEED"
+          mkdir -p "$HOME/.dotnet"
+          curl -sSL --retry 5 --retry-all-errors "$FEED/Sdk/$SDK_VERSION/dotnet-sdk-$SDK_VERSION-linux-x64.tar.gz" | tar -xz -C "$HOME/.dotnet"
+          "$HOME/.dotnet/dotnet" --version
+          echo "DOTNET_ROOT=$HOME/.dotnet" >> "$GITHUB_ENV"
+          echo "$HOME/.dotnet" >> "$GITHUB_PATH"
       
       - name: Checkout repository
         uses: actions/checkout@v7

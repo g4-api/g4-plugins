@@ -1,10 +1,13 @@
-﻿using G4.Cache;
+﻿using G4.Api;
+using G4.Cache;
 using G4.Models;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace G4.UnitTests.Engine
 {
