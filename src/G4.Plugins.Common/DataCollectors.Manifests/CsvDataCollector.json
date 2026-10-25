@@ -162,6 +162,7 @@
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
+				"pluginName": "ExportData",
 				"rules": [
 					{
 						"$type": "Content",
@@ -213,6 +214,7 @@
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
+				"pluginName": "ExportData",
 				"rules": [
 					{
 						"$type": "Content",
