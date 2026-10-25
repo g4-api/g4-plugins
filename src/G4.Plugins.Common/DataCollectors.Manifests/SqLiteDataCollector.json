@@ -1,4 +1,7 @@
 {
+	"aliases": [
+		"SqLightDataCollector"
+	],
 	"author": {
 		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
 		"name": "Roei Sabag"
@@ -10,21 +13,21 @@
 		"integration": {
 			"github": {
 				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/SqLightDataCollector.md",
-				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/SqLightDataCollector.cs"
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/SqLiteDataCollector.cs"
 			},
 			"rag": {
-				"description": "SqLightDataCollector writes extraction-rule outputs into a SQLite database table, supporting both streaming inserts and bulk transactions. It hooks into extraction rules, manages database and table creation automatically, and provides flexible parameters to ensure reliable local data persistence and integration with downstream workflows.",
+				"description": "SqLiteDataCollector writes extraction-rule outputs into a SQLite database table, supporting both streaming inserts and bulk transactions. It hooks into extraction rules, manages database and table creation automatically, and provides flexible parameters to ensure reliable local data persistence and integration with downstream workflows.",
 				"qa": [
 					{
-						"question": "What is the SqLightDataCollector plugin and why does it matter?",
-						"answer": "SqLightDataCollector converts extracted data items into rows in a SQLite table, enabling efficient local persistence, analysis, and reuse in subsequent automation steps."
+						"question": "What is the SqLiteDataCollector plugin and why does it matter?",
+						"answer": "SqLiteDataCollector converts extracted data items into rows in a SQLite table, enabling efficient local persistence, analysis, and reuse in subsequent automation steps."
 					},
 					{
 						"question": "How do its main capabilities work and what are its primary parameters?",
-						"answer": "It integrates via a dataCollector object. Key parameters are ForEntity (true for per-row streaming inserts, false for bulk inserts), Source (SQLite connection string), Repository (table name), and Type (must be SqLightDataCollector)."
+						"answer": "It integrates via a dataCollector object. Key parameters are ForEntity (true for per-row streaming inserts, false for bulk inserts), Source (SQLite connection string), Repository (table name), and Type (must be SqLiteDataCollector)."
 					},
 					{
-						"question": "How does SqLightDataCollector embed into external tools or workflow designers?",
+						"question": "How does SqLiteDataCollector embed into external tools or workflow designers?",
 						"answer": "In workflow definitions it appears as a DataCollector step. You configure the connection string, table name, and insert mode in a low-code interface without writing SQL manually."
 					},
 					{
@@ -61,15 +64,15 @@
 					},
 					{
 						"question": "What is the key for this plugin?",
-						"answer": "The key is SqLightDataCollector, which is used to reference this plugin in workflow definitions."
+						"answer": "The key is SqLiteDataCollector, which is used to reference this plugin in workflow definitions."
 					},
 					{
 						"question": "What is the summary?",
-						"answer": "“The SqLightDataCollector plugin writes extraction outputs into a SQLite table using the provided connection string. Supports streaming inserts for large data sets or bulk inserts in a single transaction. Automatically creates the database file and table if they don’t exist.”"
+						"answer": "“The SqLiteDataCollector plugin writes extraction outputs into a SQLite table using the provided connection string. Supports streaming inserts for large data sets or bulk inserts in a single transaction. Automatically creates the database file and table if they don’t exist.”"
 					},
 					{
 						"question": "What properties are defined?",
-						"answer": "Properties include ForEntity (Boolean, optional, toggles streaming vs buffered inserts), Repository (String, mandatory, table name), Source (String, mandatory, connection string), and Type (DataCollector, mandatory, must be SqLightDataCollector)."
+						"answer": "Properties include ForEntity (Boolean, optional, toggles streaming vs buffered inserts), Repository (String, mandatory, table name), Source (String, mandatory, connection string), and Type (DataCollector, mandatory, must be SqLiteDataCollector)."
 					},
 					{
 						"question": "What parameters are defined?",
@@ -81,11 +84,11 @@
 					},
 					{
 						"question": "Where can I find the GitHub documentation?",
-						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/SqLightDataCollector.md"
+						"answer": "Documentation is available at https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/SqLiteDataCollector.md"
 					},
 					{
 						"question": "Where can I find the source code?",
-						"answer": "Source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/SqLightDataCollector.cs"
+						"answer": "Source code is available at https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/DataCollectors/SqLiteDataCollector.cs"
 					}
 				]
 			}
@@ -94,7 +97,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"SqLightDataCollector takes your extraction-rule outputs and writes them into a SQLite database table. It uses the provided connection string to open or create the database file, creates the target table if it doesn’t exist, and inserts each record either immediately or in bulk at the end of the run.",
+		"SqLiteDataCollector takes your extraction-rule outputs and writes them into a SQLite database table. It uses the provided connection string to open or create the database file, creates the target table if it doesn’t exist, and inserts each record either immediately or in bulk at the end of the run.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -164,7 +167,7 @@
 					"forEntity": true,
 					"repository": "HotelLocations",
 					"source": "Data Source=Data.db;Version=3;",
-					"type": "SqLightDataCollector"
+					"type": "SqLiteDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -222,7 +225,7 @@
 					"forEntity": false,
 					"repository": "HotelLocations",
 					"source": "Data Source=Data.db;Version=3;",
-					"type": "SqLightDataCollector"
+					"type": "SqLiteDataCollector"
 				},
 				"extractionScope": "Elements",
 				"onElement": "//div[@class='hotel']",
@@ -238,7 +241,7 @@
 			}
 		}
 	],
-	"key": "SqLightDataCollector",
+	"key": "SqLiteDataCollector",
 	"namespace": "G4.Plugins.Common",
 	"platforms": [
 		"Any"
@@ -274,7 +277,7 @@
 		},
 		{
 			"description": [
-				"Enter “SqLightDataCollector” so the system knows how to handle your data correctly and save it here.",
+				"Enter “SqLiteDataCollector” so the system knows how to handle your data correctly and save it here.",
 				"Choosing a different option will make the system use something else and may keep your data from saving in this place.",
 				"The list of options updates automatically when you add new ones so you always have the latest choices."
 			],
@@ -288,7 +291,7 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"The SqLightDataCollector plugin writes extraction outputs into a SQLite table using the provided connection string.",
+		"The SqLiteDataCollector plugin writes extraction outputs into a SQLite table using the provided connection string.",
 		"Supports streaming inserts for large data sets or bulk inserts in a single transaction.",
 		"Automatically creates the database file and table if they don’t exist."
 	],
