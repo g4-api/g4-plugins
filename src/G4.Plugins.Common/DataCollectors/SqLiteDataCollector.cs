@@ -22,15 +22,18 @@ namespace G4.Plugins.Common.DataCollectors
             var tempPath = Path.GetTempPath();
             var defaultDbPath = Path.Combine(tempPath, "G4DataCollector.db");
 
-            // Read the 'Source' parameter, falling back to the default database path if missing
-            var dbPath = pluginData.Parameters.Get(
-                key: "Source",
-                defaultValue: defaultDbPath);
+            // Get the data collector rule that carries the 'Source' and 'Repository' properties
+            var rule = (DataCollectorRuleModel)pluginData.Rule;
 
-            // Read the 'Repository' parameter to use as the table name, defaulting if absent
-            var tableName = pluginData.Parameters.Get(
-                key: "Repository",
-                defaultValue: "default-warehouse");
+            // Read the 'Source' property, falling back to the default database path if missing
+            var dbPath = string.IsNullOrEmpty(rule.Source)
+                ? defaultDbPath
+                : rule.Source;
+
+            // Read the 'Repository' property to use as the table name, defaulting if absent
+            var tableName = string.IsNullOrEmpty(rule.Repository)
+                ? "default-warehouse"
+                : rule.Repository;
 
             // Build the SQLite connection string using the resolved file path
             var connectionString = $"Data Source={dbPath}";

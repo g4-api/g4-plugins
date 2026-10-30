@@ -30,8 +30,11 @@ namespace G4.Plugins.Ui.ExtractionScopes
         #region *** Methods: Protected ***
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Cast the rule to an ExtractionRuleModel for easier access to specific properties.
+            // Get the extraction scope rule.
             var extraction = pluginData.Rule;
+
+            // Get the data collector carried by the extraction scope action, if any.
+            var dataCollector = (extraction as ActionRuleModel)?.DataCollector;
 
             // Update the root elements and associated elements based on the provided PluginDataModel.
             UpdateRootElements(pluginData);
@@ -82,12 +85,12 @@ namespace G4.Plugins.Ui.ExtractionScopes
                 Extractions.Add(pluginData.Extraction);
 
                 // If data collection is not set for individual entities, write content data for all entities.
-                if (extraction.DataCollector?.ForEntity == false)
+                if (dataCollector?.ForEntity == false)
                 {
                     WriteContent(
                         plugin: this,
                         pluginData,
-                        dataCollector: extraction.DataCollector);
+                        dataCollector);
                 }
             }
 
@@ -148,10 +151,13 @@ namespace G4.Plugins.Ui.ExtractionScopes
             // Writes content data for the plugin based on the provided plugin data.
             static void Write(PluginBase plugin, PluginDataModel pluginData)
             {
+                // Get the data collector carried by the extraction scope action, if any.
+                var dataCollector = (pluginData.Rule as ActionRuleModel)?.DataCollector;
+
                 // If the rule's data collector is set for individual entities, write content data.
-                if (pluginData.Rule.DataCollector?.ForEntity == true)
+                if (dataCollector?.ForEntity == true)
                 {
-                    WriteContent(plugin, pluginData, dataCollector: pluginData.Rule.DataCollector);
+                    WriteContent(plugin, pluginData, dataCollector);
                 }
             }
 
@@ -291,18 +297,8 @@ namespace G4.Plugins.Ui.ExtractionScopes
             PluginDataModel pluginData,
             G4DataProviderModel dataCollector)
         {
-            // Argument for the collector rule.
-            var argument = "{{$ " +
-                "--Source:" + dataCollector.Source + " " +
-                "--Repository:" + dataCollector.Repository + " " +
-                "--Filter:" + dataCollector.Filter + "}}";
-
-            // Create a collector rule for the plugin.
-            var collectorRule = new ActionRuleModel
-            {
-                PluginName = dataCollector.Type,
-                Argument = argument
-            };
+            // Create a data collector rule for the plugin from the data collector.
+            var collectorRule = new DataCollectorRuleModel(dataCollector);
 
             // Generate a unique reference for the collector rule based on the job reference
             collectorRule.Reference = collectorRule.NewReference(pluginData.Rule.Reference.JobReference);
