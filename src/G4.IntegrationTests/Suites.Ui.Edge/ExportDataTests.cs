@@ -55,6 +55,14 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
             ["BodyHtml", "HtmlContent", "ExpectedSqLightDataPageSource.txt"]
         ];
 
+        private static IEnumerable<object[]> DataSetWriteSqlLightFile =>
+        [
+            ["Elements", "WebElementContent", false],
+            ["Elements", "WebElementContent", true],
+            ["PageSource", "HtmlContent", false],
+            ["PageSource", "HtmlContent", true]
+        ];
+
         private static IEnumerable<object[]> DataSetWriteXml =>
         [
             ["Elements", "WebElementContent", "ExpectedXmlDataElements.txt"],
@@ -936,6 +944,65 @@ namespace G4.IntegrationTests.Suites.Ui.Edge
                 expected,
                 actual,
                 message: "Data read from SQLite does not match the expected JSON payload.");
+        }
+
+        [Ignore(message: "This test is currently skipped in the production environment due to an unknown issue not related to the actual functionality.")]
+        [TestMethod(DisplayName = "As an automation engineer utilizing the G4™ platform, I need to verify that the " +
+            "SqlLiteDataCollector plugin, when invoked from an Extraction rule, creates the SQLite database file " +
+            "and writes the extracted rows into the repository table.")]
+        #region *** Criteria ***
+        [AcceptanceCriteria(criteria: "Data Collector Invocation: The SqlLiteDataCollector plugin receives its Source, Repository, and Type from the Extraction rule's data collector and is not rejected for missing mandatory properties.")]
+        [AcceptanceCriteria(criteria: "File Creation: The SQLite database file named by the data collector Source exists after the extraction.")]
+        [AcceptanceCriteria(criteria: "Data Writing: The repository table contains one row per extracted entity, with the extracted values populated.")]
+        [AcceptanceCriteria(criteria: "Write Modes: Both per-entity (ForEntity=true) and per-extraction (ForEntity=false) writes produce the file and the rows.")]
+        [AcceptanceCriteria(criteria: "Extraction Scope: Both the elements scope and the HTML scopes write through the data collector.")]
+        #endregion
+        #region *** Data     ***
+        [DynamicData(dynamicDataSourceName: nameof(DataSetWriteSqlLightFile))]
+        #endregion
+        public void T0006C(string extractionScope, string contentType, bool forEntity)
+        {
+            // Set up an automation environment with the needed test parameters
+            var environment = new AutomationEnvironment(TestContext);
+            environment.TestParameters["clearLinesBreak"] = true;
+            environment.TestParameters["trim"] = true;
+            environment.TestParameters["forEntity"] = forEntity;
+            environment.TestParameters["fileName"] = Guid.NewGuid();
+            environment.TestParameters["extractionScope"] = extractionScope;
+            environment.TestParameters["contentType"] = contentType;
+
+            // Configure browser and page under test
+            var testOptions = new EdgeTestOptions(environment, sut: "ExportData.html");
+
+            // Execute the extraction scenario (fails on any engine exception, such as a rejected data collector)
+            Invoke<C0006>(testOptions);
+
+            // Resolve the SQLite database file named by the data collector Source
+            var dbFile = Path.GetFullPath($"{environment.TestParameters["fileName"]}.db");
+
+            // Verify the data collector created the database file; checked before reading, because
+            // opening a connection to a missing file would create an empty database
+            Assert.IsTrue(
+                condition: File.Exists(dbFile),
+                message: $"The SQLite database file '{dbFile}' was not created by the data collector.");
+
+            // Read rows back from the SQLite database table "TestData"
+            var actualData = ReadAsJson(dbFile, "TestData");
+
+            // Deserialize the JSON-formatted rows into dictionaries
+            var entities = JsonSerializer
+                .Deserialize<List<Dictionary<string, JsonElement>>>(actualData);
+
+            // Verify that one row was written per extracted hotel
+            Assert.HasCount(
+                expected: 2,
+                collection: entities,
+                message: "Expected two records in the SQLite database table.");
+
+            // Verify that every row carries the extracted location value
+            Assert.IsTrue(
+                condition: entities.All(i => !string.IsNullOrWhiteSpace($"{i.GetValueOrDefault("Location")}")),
+                message: "Expected every SQLite record to contain an extracted 'Location' value.");
         }
 
         // Reads all rows from the specified SQLite table and returns them as a JSON string.

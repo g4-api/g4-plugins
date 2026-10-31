@@ -16,8 +16,8 @@ namespace G4.Plugins.Common.DataCollectors
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Get the file path from the arguments.
-            var filePath = pluginData.Parameters["Source"];
+            // Get the file path from the data collector.
+            var filePath = ((DataCollectorRuleModel)pluginData.Rule).Source;
 
             // Extract content from the extraction entities.
             var content = pluginData.Extraction.Entities.Select(entity => entity.Content);
