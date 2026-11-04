@@ -6,6 +6,8 @@ using G4.UnitTests.Framework;
 using G4.WebDriver.Exceptions;
 using G4.WebDriver.Extensions;
 using G4.WebDriver.Models;
+using G4.WebDriver.Remote;
+using G4.WebDriver.Simulator;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -304,6 +306,75 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.Throws<WebDriverException>(() => Invoke<InvokeScript>(ruleModel));
         }
 
+        [TestMethod(DisplayName = "Verify the InvokeScript method injects the context element as " +
+            "arguments[0] when OnElement is '.'.")]
+        public void InvokeScriptContextElementTest()
+        {
+            // Arrange: a script with '.' requesting the context element.
+            const string ruleJson = @"{""onElement"":""."",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}";
+
+            // Act: invoke the plugin with a context element, as a loop or an extraction scope would.
+            var arguments = InvokeRecordedScript(testBase: this, ruleJson);
+
+            // Assert: the context element is the only script argument.
+            Assert.HasCount(expected: 1, collection: arguments);
+            Assert.IsInstanceOfType<IWebElement>(arguments[0], "The context element was not injected for '.'.");
+        }
+
+        [TestMethod(DisplayName = "Verify the InvokeScript method fails when OnElement is '.' and " +
+            "there is no context element.")]
+        public void InvokeScriptContextElementMissingTest()
+        {
+            // Arrange: a script requesting the context element outside a loop or an extraction scope.
+            const string ruleJson = @"{""onElement"":""."",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}";
+
+            // Act and Assert: the plugin rejects the request instead of running the script without the element.
+            Assert.ThrowsExactly<NoSuchElementException>(() => Invoke<InvokeScript>(ruleJson));
+        }
+
+        [TestMethod(DisplayName = "Verify the InvokeScript method does not inject the context element " +
+            "when OnElement is empty.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}")]
+        [DataRow(@"{""onElement"":"""",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}")]
+        #endregion
+        public void InvokeScriptEmptyOnElementTest(string ruleJson)
+        {
+            // Act: invoke the plugin with a context element, as a loop or an extraction scope would.
+            var arguments = InvokeRecordedScript(testBase: this, ruleJson);
+
+            // Assert: the script ran on the driver without any element argument.
+            Assert.IsEmpty(arguments, "The context element was injected for an empty OnElement.");
+        }
+
+        [TestMethod(DisplayName = "Verify the InvokeScript method injects an explicitly located element " +
+            "when a context element exists.")]
+        public void InvokeScriptExplicitElementTest()
+        {
+            // Arrange: a script with an explicit element locator.
+            const string ruleJson = @"{""onElement"":""//positive"",""argument"":""{{$ --ScriptBlock:return document.readyState;}}""}";
+
+            // Act: invoke the plugin with a context element, as a loop or an extraction scope would.
+            var arguments = InvokeRecordedScript(testBase: this, ruleJson);
+
+            // Assert: the located element is the only script argument.
+            Assert.HasCount(expected: 1, collection: arguments);
+            Assert.IsInstanceOfType<IWebElement>(arguments[0], "The explicitly located element was not injected.");
+        }
+
+        // Invokes the plugin with a context element on a recording driver and returns the script arguments.
+        private static object[] InvokeRecordedScript(TestBase testBase, string ruleJson)
+        {
+            // Create a driver that records the arguments of every script call.
+            var driver = new RecordingSimulatorDriver();
+
+            // Invoke the plugin with the positive element as the context element.
+            testBase.Invoke<InvokeScript>(driver, ruleJson, By.Custom.Positive());
+
+            // Return the arguments of the script call.
+            return driver.ScriptArguments;
+        }
+
         // Invokes the script block test with the specified test base and action rule.
         private static void InvokeScriptTest(TestBase testBase, string ruleJson, bool onElement)
         {
@@ -324,6 +395,31 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Assert that the actual result matches the expected pattern
             Assert.IsTrue(actual, "The InvokeScript method did not return the expected document.readyState value.");
+        }
+
+        // A simulator driver that records the arguments of the last script call. It re-implements the script
+        // interface so the plugin's calls through IWebDriver reach the recording method.
+        private sealed class RecordingSimulatorDriver() : SimulatorDriver(NewSession()), IJavaScriptInvoker
+        {
+            // Gets the arguments of the last script call.
+            public object[] ScriptArguments { get; private set; } = [];
+
+            // Records the script arguments and returns a fixed ready state. The simulator resolves its script
+            // handlers from the runtime type, so a derived driver cannot delegate the call to the base driver.
+            public new object InvokeScript(string script, params object[] args)
+            {
+                ScriptArguments = args ?? [];
+                return "complete";
+            }
+
+            // Creates an empty simulator session.
+            private static SessionModel NewSession() => new()
+            {
+                Capabilities = new CapabilitiesModel
+                {
+                    AlwaysMatch = new Dictionary<string, object>()
+                }
+            };
         }
     }
 }
