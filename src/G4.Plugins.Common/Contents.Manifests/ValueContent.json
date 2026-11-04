@@ -1,0 +1,207 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataExtraction"
+	],
+	"context": {
+		"integration": {
+			"sequentialWorkflow": {
+				"$type": "Content",
+				"branches": [
+					"Actions",
+					"Transformers"
+				],
+				"componentType": "task",
+				"containerable": true,
+				"iconProvider": {
+					"name": "file-lines",
+					"svg": null
+				},
+				"model": "ContentRuleModel",
+				"switchable": true
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"The `ValueContent` plugin stores a value passed in the rule's `Argument` as a field of the extracted entity.",
+		"It does not read any element: use it to add user data, parameters, macros, or data-source values to an extraction next to fields read from the page.",
+		"The argument is resolved by the engine before the plugin runs, so expressions such as `{{$Get-Parameter ...}}` are stored as their runtime values.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                | Description                                                                                       |",
+		"|------------------------|---------------------------------------------------------------------------------------------------|",
+		"| Element-Free Content   | Stores the `Argument` value without locating or reading any element.                              |",
+		"| Expression Support     | Parameters, macros, and data-source tokens in the argument are resolved before the value is set.  |",
+		"| Regex Extraction       | Applies `RegularExpression` to the argument to keep only the matched portion.                     |",
+		"| Data Type Conversion   | Converts the value to `String`, `Number`, `Boolean`, or `DateTime`.                               |",
+		"| Consistent Fields      | An empty argument is stored as an empty string, so every entity keeps the same fields.            |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Usage                  | Description                                                                                       |",
+		"|------------------------|---------------------------------------------------------------------------------------------------|",
+		"| Record Enrichment      | Add a batch id, user name, or run date to every extracted record.                                 |",
+		"| Data Source Values     | Store the current data-source row values next to the data extracted from the page.                |",
+		"| Static Columns         | Add fixed values such as a source system name to exported data.                                   |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Usage                  | Description                                                                                       |",
+		"|------------------------|---------------------------------------------------------------------------------------------------|",
+		"| Test Context Columns   | Store the test case id or environment name with every extracted entity.                           |",
+		"| Expected Values        | Store expected values next to actual extracted values for later comparison.                       |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Represents the data extracted by the plugin as a key-value pair.",
+				"",
+				"The entity object contains the following fields:",
+				"",
+				"| Field  | Description                                                                                            |",
+				"|--------|--------------------------------------------------------------------------------------------------------|",
+				"| `name` | The key under which the extracted data is stored. This is specified by the `Key` property in the rule. |",
+				"| `value`| The extracted data obtained by the plugin after applying any specified transformations.                |",
+				"| `type` | The data type of the extracted value, corresponding to the `DataType` property specified in the rule.  |"
+			],
+			"name": "<Key>",
+			"type": "<DataType>",
+			"value": "<ExtractedValue>"
+		}
+	],
+	"examples": [
+		{
+			"description": [
+				"Store a fixed value in every extracted entity.",
+				"",
+				"The `ValueContent` plugin stores the argument `Web Shop` under the `Source` key.",
+				"No element is read; the value is added next to the fields extracted from the page."
+			],
+			"rule": {
+				"$type": "Content",
+				"argument": "Web Shop",
+				"dataType": "String",
+				"key": "Source",
+				"pluginName": "ValueContent"
+			}
+		},
+		{
+			"description": [
+				"Store the value of a session parameter in every extracted entity.",
+				"",
+				"The `ValueContent` plugin stores the runtime value of the `CustomerName` session parameter under the `Customer` key.",
+				"The expression is resolved by the engine before the value is stored."
+			],
+			"rule": {
+				"$type": "Content",
+				"argument": "{{$Get-Parameter --Name:CustomerName --Scope:Session}}",
+				"dataType": "String",
+				"key": "Customer",
+				"pluginName": "ValueContent"
+			}
+		},
+		{
+			"description": [
+				"Store a numeric part of a value.",
+				"",
+				"The `ValueContent` plugin applies the regular expression to the argument `Order-12345` and keeps `12345`.",
+				"The value is converted to a number and stored under the `OrderId` key."
+			],
+			"rule": {
+				"$type": "Content",
+				"argument": "Order-12345",
+				"dataType": "Number",
+				"key": "OrderId",
+				"pluginName": "ValueContent",
+				"regularExpression": "\\d+"
+			}
+		}
+	],
+	"key": "ValueContent",
+	"namespace": "G4.Plugins.Common",
+	"parameters": [],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Content",
+	"properties": [
+		{
+			"description": [
+				"Specifies the value to store.",
+				"Accepts a fixed text or an expression that the engine resolves before the plugin runs.",
+				"If not provided, an empty string is stored."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Specifies the data type to which the extracted value should be converted.",
+				"Supported data types include `String`, `Number`, `Boolean` and  `DateTime`."
+			],
+			"mandatory": false,
+			"name": "DataType",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Textual data."
+					],
+					"name": "String"
+				},
+				{
+					"description": [
+						"Whole numbers or numeric values with decimal points."
+					],
+					"name": "Number"
+				},
+				{
+					"description": [
+						"True or False values."
+					],
+					"name": "Boolean"
+				},
+				{
+					"description": [
+						"Date and/or time values."
+					],
+					"name": "DateTime"
+				}
+			]
+		},
+		{
+			"description": [
+				"Specifies the key under which the extracted data will be stored.",
+				"This key can be used to reference the data in subsequent steps."
+			],
+			"mandatory": true,
+			"name": "Key",
+			"type": "String"
+		},
+		{
+			"default": "(?s).*",
+			"description": [
+				"Specifies the regular expression pattern to apply to the argument value.",
+				"Only the first match is stored; if there is no match, an empty string is stored."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Stores the rule's argument value as an extracted field without reading any element, with optional regular expression and data type conversion."
+	],
+	"version": "4"
+}
