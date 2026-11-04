@@ -63,7 +63,7 @@ namespace G4.Plugins.Common.Actions
             // Create a local copy of the branches dictionary (or an empty one if not a SwitchRuleModel).
             var branches = isSwitchRule
                 ? new Dictionary<string, IEnumerable<G4RuleModelBase>>(((SwitchRuleModel)pluginData.Rule).Branches, comparer)
-                : [with(comparer)];
+                : new Dictionary<string, IEnumerable<G4RuleModelBase>>(comparer);
 
             // Retrieve the rules for FALSE and TRUE branches; defaults to an empty collection if not found.
             var falseRules = branches.Get(key: "FALSE", defaultValue: Enumerable.Empty<G4RuleModelBase>());
