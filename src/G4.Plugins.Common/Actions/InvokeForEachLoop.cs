@@ -52,16 +52,12 @@ namespace G4.Plugins.Common.Actions
             // Iterates through each rule to set the current iteration context.
             foreach (var rule in rules)
             {
-                // Assigns the current iteration number to the rule and its reference.
-                rule.Iteration = iteration;
-                rule.Reference.Iteration = iteration;
-                rule.Context[RuleProperties.WebElement] = element;
+                // Stamps the iteration on the rule and its entire subtree (child rules, transformers and switch
+                // branches), linking each descendant to its parent's live reference for a unique runtime identifier.
+                rule.SetIterationContext(iteration);
 
-                // If the rule has child rules, sets their parent references appropriately.
-                foreach (var childRule in rule.Rules ?? [])
-                {
-                    childRule.Reference.ParentReference = rule.Reference;
-                }
+                // Assigns the current element to the rule's context.
+                rule.Context[RuleProperties.WebElement] = element;
 
                 // Enables the invocation of rules now that the context is properly set.
                 rule.SetInvokeRules(true);

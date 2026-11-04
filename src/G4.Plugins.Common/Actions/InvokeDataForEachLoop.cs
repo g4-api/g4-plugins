@@ -26,7 +26,9 @@ namespace G4.Plugins.Common.Actions
         // switches while the embedded data token is resolved against the current record.
         private static readonly Regex s_dataToken = new(
             pattern: @"\{\{\$(?:(?!\{\{\$)(?!\}\}).)*\}\}",
-            options: RegexOptions.Compiled);
+            options: RegexOptions.Compiled,
+            matchTimeout: TimeSpan.FromSeconds(30)
+        );
 
         // Serialization options that mirror the engine's rule contract (camelCase
         // property names with case-insensitive binding) so a rule can be round-tripped
@@ -97,7 +99,7 @@ namespace G4.Plugins.Common.Actions
 
         // Normalizes a raw JSON or XML payload into a uniform sequence of records,
         // throwing when the content matches neither supported format.
-        private static IEnumerable<object> NewRecords(string data)
+        private static object[] NewRecords(string data)
         {
             // A valid JSON document is projected into its element sequence, wrapping a single
             // object or value as a one-item array.
@@ -120,7 +122,7 @@ namespace G4.Plugins.Common.Actions
 
         // Parses a JSON payload into records, projecting an array into its items and wrapping
         // any single object or value into a one-item collection.
-        private static IEnumerable<object> NewJsonRecords(string data)
+        private static object[] NewJsonRecords(string data)
         {
             // Parse the payload into a JSON node graph.
             var node = JsonNode.Parse(data);
@@ -128,13 +130,13 @@ namespace G4.Plugins.Common.Actions
             // An array iterates over its items; anything else is treated as a single record
             // so lone objects and values still run exactly one iteration.
             return node is JsonArray array
-                ? array.Cast<object>().ToArray()
+                ? [.. array.Cast<object>()]
                 : [node];
         }
 
         // Parses an XML payload into records, treating repeated same-named root children as an
         // array of objects and any other shape as a single wrapped object.
-        private static IEnumerable<object> NewXmlRecords(string data)
+        private static object[] NewXmlRecords(string data)
         {
             // Parse the payload into an XML document and inspect its root element.
             var root = XDocument.Parse(data).Root;
@@ -146,7 +148,7 @@ namespace G4.Plugins.Common.Actions
                 && children.All(i => i.Name == children[0].Name);
 
             return isArray
-                ? children.Cast<object>().ToArray()
+                ? [.. children.Cast<object>()]
                 : [root];
         }
 
@@ -170,18 +172,14 @@ namespace G4.Plugins.Common.Actions
                 var resolvedJson = ResolveTokens(plugin, ruleJson, record);
                 var rule = (G4RuleModelBase)JsonSerializer.Deserialize(resolvedJson, template.GetType(), s_ruleOptions);
 
-                // Assign the current iteration and element context to the cloned rule.
-                rule.Iteration = iteration;
-                rule.Reference.Iteration = iteration;
+                // Stamp the iteration on the cloned rule and its entire subtree (child rules, transformers and
+                // switch branches), re-linking each descendant to the clone's references so nested hierarchies
+                // resolve their parents correctly and every iteration gets a unique runtime identifier.
+                rule.SetIterationContext(iteration);
+
+                // Assign the element context to the cloned rule.
                 rule.Context[RuleProperties.WebElement] = pluginData.Element;
                 rule.Context[RuleProperties.HtmlNode] = pluginData.HtmlNode;
-
-                // Re-link any child rules to the cloned rule's reference so nested
-                // hierarchies resolve their parents correctly.
-                foreach (var childRule in rule.Rules ?? [])
-                {
-                    childRule.Reference.ParentReference = rule.Reference;
-                }
 
                 // Enable the invocation of the cloned rule now that its context is set.
                 rule.SetInvokeRules(invoke: true);
@@ -274,7 +272,7 @@ namespace G4.Plugins.Common.Actions
                 var attribute = element.Attributes().FirstOrDefault(i => i.Name.LocalName == name);
 
                 return attribute != null
-                    ? (Found: true, Value: attribute.Value)
+                    ? (Found: true, attribute.Value)
                     : (Found: false, Value: null);
             }
 
@@ -348,7 +346,7 @@ namespace G4.Plugins.Common.Actions
             // An attribute injects its value.
             if (node is XAttribute attribute)
             {
-                return (Found: true, Value: attribute.Value);
+                return (Found: true, attribute.Value);
             }
 
             // Any other node type (text, comment) injects its string form.

@@ -27,6 +27,10 @@ namespace G4.Plugins.Common.Actions
             // Avoid redundant invocation of the rules by setting 'InvokeRules' to false.
             pluginData.Rule.SetInvokeRules(false);
 
+            // Stamp this rule's iteration on its branch rules and link them to its live reference, so a branch
+            // invoked inside a loop gets a unique runtime identifier on every iteration.
+            pluginData.Rule.SetIterationContext(iteration: pluginData.Rule.Iteration);
+
             // Get the positive and negative actions associated with the plugin data.
             var (positiveActions, negativeActions) = GetActions(pluginData);
 
@@ -59,7 +63,7 @@ namespace G4.Plugins.Common.Actions
             // Create a local copy of the branches dictionary (or an empty one if not a SwitchRuleModel).
             var branches = isSwitchRule
                 ? new Dictionary<string, IEnumerable<G4RuleModelBase>>(((SwitchRuleModel)pluginData.Rule).Branches, comparer)
-                : new Dictionary<string, IEnumerable<G4RuleModelBase>>(comparer);
+                : [with(comparer)];
 
             // Retrieve the rules for FALSE and TRUE branches; defaults to an empty collection if not found.
             var falseRules = branches.Get(key: "FALSE", defaultValue: Enumerable.Empty<G4RuleModelBase>());
