@@ -67,6 +67,10 @@ namespace G4.Plugins.Common.Actions
             // Disable further invocation of child rules on the original rule node
             pluginData.Rule.SetInvokeRules(false);
 
+            // Stamp this rule's iteration on its branch rules and link them to its live reference, so a branch
+            // invoked inside a loop gets a unique runtime identifier on every iteration
+            pluginData.Rule.SetIterationContext(iteration: pluginData.Rule.Iteration);
+
             // Invoke all retrieved child rules in order
             Invoker.Invoke([.. rulesToInvoke]);
 
@@ -94,7 +98,10 @@ namespace G4.Plugins.Common.Actions
             // Use regular expression to match and extract the desired part of the key.
             var match = Regex.Match(
                 input: key,
-                pattern: rule.RegularExpression);
+                pattern: rule.RegularExpression,
+                options: RegexOptions.None,
+                matchTimeout: TimeSpan.FromSeconds(30)
+            );
 
             // Return the desired part of the key.
             return match.Value;

@@ -21,13 +21,13 @@
 		<Copyright>Copyright 2023 (c) Roei Sabag &amp; HRC Corporation. All rights reserved.</Copyright>
 
 		<!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/syslib-diagnostics/syslib1040-1049 -->
-		<NoWarn>$(NoWarn);SYSLIB1045;IDE0130;CA1873</NoWarn>
+		<NoWarn>$(NoWarn);SYSLIB1045;IDE0130;CA1873;S3220</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.11.3.90" />
-		<PackageReference Include="G4.Extensions" Version="2026.11.3.90" />
-		<PackageReference Include="G4.Plugins" Version="2026.11.3.90" />
+		<PackageReference Include="G4.Converters" Version="2026.11.4.91" />
+		<PackageReference Include="G4.Extensions" Version="2026.11.4.91" />
+		<PackageReference Include="G4.Plugins" Version="2026.11.4.91" />
 		<PackageReference Include="PdfPig" Version="0.1.16" />
 		<PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.14" />
 	</ItemGroup>
