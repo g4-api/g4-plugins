@@ -301,6 +301,46 @@
 				"argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlPSdGb28gQmFyJzs= --Base64}}",
 				"pluginName": "InvokeScript"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"OnElement is empty inside the loop: no element is injected and arguments[0] is undefined",
+						"OnElement is '.' outside a loop or an extraction scope: the rule fails with a NoSuchElementException",
+						"The script switches windows before running: an empty OnElement avoids injecting an element from another window"
+					],
+					"expected_result": "Each element found by the loop is injected as arguments[0] and receives a red border.",
+					"notes": "The '.' OnElement passes the context element of the enclosing loop or extraction scope as is, without a new lookup. An empty OnElement never injects the context element.",
+					"use_case": "inject_context_element_in_loop",
+					"version": "4"
+				},
+				"labels": [
+					"ContextElement",
+					"ElementInteraction",
+					"JavaScript",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Inject the current loop element into a script",
+				"",
+				"Runs a script on every element found by an `InvokeForEachLoop` rule.",
+				"The `.` OnElement injects the current loop element as arguments[0]; without it, the script would receive no element."
+			],
+			"rule": {
+				"$type": "Action",
+				"onElement": "//div[@class='product']",
+				"pluginName": "InvokeForEachLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --ScriptBlock:arguments[0].style.border='2px solid red';}}",
+						"onElement": ".",
+						"pluginName": "InvokeScript"
+					}
+				]
+			}
 		}
 	],
 	"key": "InvokeScript",
@@ -381,8 +421,9 @@
 		{
 			"description": [
 				"OnElement provides the locator expression that identifies the element to inject into the script as arguments[0].",
-				"It is evaluated using the strategy defined by the Locator property.",
-				"When absent no element is prepended to the arguments array."
+				"It is evaluated using the strategy defined by the Locator property, relative to the context element when the rule runs inside a loop or an extraction scope.",
+				"When absent or empty no element is prepended to the arguments array, even inside a loop or an extraction scope, so the script runs on the driver only.",
+				"Use `.` to inject the context element of the enclosing loop or extraction scope as is; outside such a context `.` fails with a NoSuchElementException."
 			],
 			"mandatory": false,
 			"name": "OnElement",

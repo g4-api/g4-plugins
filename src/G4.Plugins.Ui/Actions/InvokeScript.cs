@@ -1,7 +1,10 @@
 ﻿using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
+using G4.WebDriver.Exceptions;
+using G4.WebDriver.Remote;
 
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -46,8 +49,8 @@ namespace G4.Plugins.Ui.Actions
                 ? script.ConvertFromBase64()
                 : script;
 
-            // Retrieve the target element based on the rule and element specified in the plugin data
-            var element = this.GetElement(pluginData.Rule, pluginData.Element);
+            // Resolve the element to inject as arguments[0]; the context element is passed only on request
+            var element = ResolveScriptElement(plugin: this, pluginData);
 
             // Extract and deserialize the arguments data, defaulting to null if not provided or invalid JSON
             var argumentsData = pluginData.Parameters.Get("Arguments", defaultValue: default(string));
@@ -66,6 +69,42 @@ namespace G4.Plugins.Ui.Actions
 
             // Create and return a new PluginResponseModel
             return this.NewPluginResponse();
+        }
+
+        // Resolves the element to inject into the script as arguments[0]. An empty OnElement passes no element,
+        // even when the rule runs inside a loop or an extraction scope, so a script never receives an inherited
+        // element it did not ask for (for example, one from another window after a SwitchWindow). A "." OnElement
+        // passes the context element as is, and any other OnElement is located as usual.
+        private static IWebElement ResolveScriptElement(PluginBase plugin, PluginDataModel pluginData)
+        {
+            // The OnElement value that selects the context element.
+            const string ContextElement = ".";
+
+            // Read the requested element locator from the rule.
+            var onElement = pluginData.Rule.OnElement;
+
+            // Pass no element when none is requested, ignoring any inherited context element.
+            if (string.IsNullOrEmpty(onElement))
+            {
+                return null;
+            }
+
+            // Locate any explicit element, relative to the context element when one exists.
+            if (!onElement.Equals(ContextElement, StringComparison.Ordinal))
+            {
+                return plugin.GetElement(pluginData.Rule, pluginData.Element);
+            }
+
+            // Pass the context element when one exists.
+            if (pluginData.Element != null)
+            {
+                return pluginData.Element;
+            }
+
+            // Fail loudly when the context element is requested outside a loop or an extraction scope.
+            var message = "The OnElement value '.' requires a context element, " +
+                "but the rule does not run inside a loop or an extraction scope.";
+            throw new NoSuchElementException(message);
         }
     }
 }
