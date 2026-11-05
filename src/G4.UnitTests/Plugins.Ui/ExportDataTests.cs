@@ -84,5 +84,55 @@ namespace G4.UnitTests.Plugins.Ui
             // Assert that the number of extractions is 2
             Assert.HasCount(expected: 2, collection: extractions);
         }
+
+        [TestMethod(DisplayName = "Verify that WebElementContent extracts an empty value instead of " +
+            "failing when the requested attribute is missing on the element.")]
+        [DoNotParallelize]
+        public void ExportDataMissingAttributeTest()
+        {
+            // Arrange: request the "value" attribute, which the simulator reports as missing (null)
+            // when the element does not carry it, alongside a regular text content rule.
+            var action = new ActionRuleModel
+            {
+                PluginName = "NoAction",
+                Argument = "Export Data Container",
+                Rules =
+                [
+                    new ExtractionRuleModel
+                    {
+                        Argument = "{{$ --Scope:Elements}}",
+                        OnElement = "//positive",
+                        Rules =
+                        [
+                            new ContentRuleModel
+                            {
+                                OnElement = ".//positive",
+                                OnAttribute = "value",
+                                Key = "MissingAttribute",
+                                PluginName = "WebElementContent"
+                            },
+                            new ContentRuleModel
+                            {
+                                OnElement = ".//positive",
+                                Key = "Description",
+                                PluginName = "WebElementContent"
+                            }
+                        ]
+                    }
+                ]
+            };
+
+            // Act: invoke the export and read the extracted entities from the session.
+            var session = Invoke([action]).Response.Values.First().Sessions.First().Value;
+            var entities = session.ResponseData.Extractions.First().Entities.ToList();
+
+            // Assert: every entity keeps the missing-attribute key with an empty value.
+            Assert.HasCount(expected: 2, collection: entities);
+            foreach (var entity in entities)
+            {
+                Assert.IsTrue(entity.Content.ContainsKey("MissingAttribute"));
+                Assert.AreEqual(expected: string.Empty, actual: $"{entity.Content["MissingAttribute"]}");
+            }
+        }
     }
 }

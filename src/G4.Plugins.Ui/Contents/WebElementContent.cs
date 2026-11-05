@@ -29,9 +29,11 @@ namespace G4.Plugins.Ui.Contents
                 var onElement = this.GetElement(contentRule, pluginData.Element);
 
                 // Extract the value from the specified attribute or the inner text of the element.
-                value = !string.IsNullOrEmpty(contentRule.OnAttribute)
+                // A missing attribute comes back as null; fall back to an empty string so the
+                // regular expression below yields an empty value instead of failing the rule.
+                value = (!string.IsNullOrEmpty(contentRule.OnAttribute)
                     ? onElement.GetAttribute(contentRule.OnAttribute)
-                    : onElement.Text;
+                    : onElement.Text) ?? string.Empty;
             }
             catch (Exception e)
             {
