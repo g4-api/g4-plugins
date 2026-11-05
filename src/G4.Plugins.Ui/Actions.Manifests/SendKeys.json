@@ -264,7 +264,7 @@
 		}
 	],
 	"key": "SendKeys",
-	"namespace": "G4.Plugins.Ui.Actions",
+	"namespace": "G4.Plugins.Ui",
 	"parameters": [
 		{
 			"description": [
