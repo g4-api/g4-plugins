@@ -1,6 +1,6 @@
 # Invoke For Loop (InvokeForLoop)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~18 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Runs a set of actions a specified number of times in your automation scripts. It
 ### Key Features and Functionality
 
 | Feature                 | Description                                                             |
-|-------------------------|-------------------------------------------------------------------------|
+| --- | --- |
 | Controlled Iteration    | Runs actions for a fixed number of loops as defined by the user.        |
 | Sequential Execution    | Executes each step in order within the loop for consistent outcomes.    |
 | Parameterized Iteration | Adjusts loop variables dynamically based on input values or conditions. |
@@ -21,7 +21,7 @@ Runs a set of actions a specified number of times in your automation scripts. It
 ### Usages in RPA
 
 | Use Case                | Description                                                           |
-|-------------------------|-----------------------------------------------------------------------|
+| --- | --- |
 | Data Processing         | Iterate over records or items to enter, validate, or transform data.  |
 | Batch Processing        | Perform a series of tasks on a predefined data set within a workflow. |
 | Parameterized Iteration | Change loop values at runtime to handle varying input automatically.  |
@@ -29,7 +29,7 @@ Runs a set of actions a specified number of times in your automation scripts. It
 ### Usages in Automation Testing
 
 | Use Case            | Description                                                                          |
-|---------------------|--------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Case Iteration | Run test steps repeatedly to cover multiple scenarios.                               |
 | Data-Driven Testing | Loop through different data sets to verify application behavior under varied inputs. |
 | Load Testing        | Simulate repeated user actions to measure system performance under load.             |
@@ -44,7 +44,7 @@ Runs a loop 5 times and performs a Click action on the element matching the CSS 
 The inner rule uses `#NextBtn1` scoped by CssSelector to locate the target button.
 If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -63,7 +63,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -76,7 +76,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("#NextBtn1");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -92,7 +92,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -108,7 +108,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -123,6 +123,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.2
 
 ### Click Next Button 5 Times Using XPath
@@ -131,7 +132,7 @@ Runs a loop 5 times and performs a Click action on the element matching the XPat
 The inner rule uses the XPath `//button[@id='NextBtn1']` to locate the target button.
 If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -149,7 +150,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -161,7 +162,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("//button[@id='NextBtn1']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -176,7 +177,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -191,7 +192,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -205,6 +206,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.3
 
 ### Click Next Button 5 Times Using Id Locator
@@ -213,7 +215,7 @@ Runs a loop 5 times and performs a Click action on the element with Id `NextBtn1
 The inner rule uses `NextBtn1` scoped by Id to locate the target button.
 If no element is found, an exception is logged and the iteration continues. If a Click action throws an exception, it is recorded and the loop proceeds. The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -232,7 +234,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -245,7 +247,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("NextBtn1");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -261,7 +263,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -277,7 +279,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -292,6 +294,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.4
 
 ### Nested InvokeForLoop With Mixed Actions
@@ -300,7 +303,7 @@ Runs an outer loop 2 times, then within each outer iteration runs an inner loop 
 Inner loops use their own argument and selectors as specified.
 If any element is missing, an exception is logged and that iteration continues. Click failures record exceptions without stopping the outer loop. The overall process only stops if configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -338,7 +341,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -364,7 +367,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("NextBtn1");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -395,7 +398,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -426,7 +429,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -462,7 +465,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -477,7 +480,7 @@ It ensures tasks run the exact number of times you want.
 ### Rules (Rules)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

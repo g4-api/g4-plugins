@@ -1,6 +1,6 @@
 # Send Keys (SendKeys)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ The text to send is supplied via the Keys parameter or directly as the Argument 
 ### Key Features and Functionality
 
 | Feature              | Description                                                                |
-|----------------------|----------------------------------------------------------------------------|
+| --- | --- |
 | Text Input           | Sends keystrokes to the element with configurable delay between characters |
 | Clear Before Typing  | Supports native backspace clear and standard WebDriver clear               |
 | Modifier Keys        | Press Ctrl, Alt, Shift, or Meta while sending text for shortcuts           |
@@ -23,7 +23,7 @@ The text to send is supplied via the Keys parameter or directly as the Argument 
 ### Usages in RPA
 
 | Use Case          | Description                                 |
-|-------------------|---------------------------------------------|
+| --- | --- |
 | Form Field Entry  | Automatically fill text inputs in web forms |
 | Search Box Input  | Type search queries into search fields      |
 | Text Area Content | Enter multi-line text into text areas       |
@@ -31,7 +31,7 @@ The text to send is supplied via the Keys parameter or directly as the Argument 
 ### Usages in Automation Testing
 
 | Use Case           | Description                                     |
-|--------------------|-------------------------------------------------|
+| --- | --- |
 | Input Validation   | Test form fields with various text inputs       |
 | Keyboard Shortcuts | Test Ctrl+A, Ctrl+C type combinations           |
 | Type Speed Testing | Verify typing behavior with configurable delays |
@@ -45,7 +45,7 @@ The text to send is supplied via the Keys parameter or directly as the Argument 
 The rule targets an input element using XPath and sends the text 'Hello World' to it.
 The element is located using the default Xpath locator strategy.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -75,7 +75,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -85,7 +85,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -94,6 +94,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.2
 
 ### Clear and type new content
@@ -101,7 +102,7 @@ action_rule = {
 The rule clears the target element using native backspace simulation before sending the new text.
 This is useful when replacing existing content in an input field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -112,7 +113,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -121,7 +122,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//textarea[@name='description']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -131,7 +132,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -141,7 +142,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -150,6 +151,7 @@ action_rule = {
     "onElement": "//textarea[@name='description']"
 }
 ```
+
 ### Example No.3
 
 ### Send keys with a modifier
@@ -157,7 +159,7 @@ action_rule = {
 The rule holds the Ctrl modifier while sending 'a' to trigger a Select All keyboard shortcut.
 The modifier is provided as a JSON array containing Control.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -168,7 +170,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -177,7 +179,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@contenteditable='true']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -187,7 +189,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -197,7 +199,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -206,6 +208,7 @@ action_rule = {
     "onElement": "//div[@contenteditable='true']"
 }
 ```
+
 ### Example No.4
 
 ### Send a key with multiple modifiers
@@ -213,7 +216,7 @@ action_rule = {
 The rule holds the Control and Alt modifiers while sending the key `a` to the target element.
 The repeated `--Modifier` parameters are converted into an array at runtime and applied together during the key send.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -224,7 +227,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -233,7 +236,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@contenteditable='true']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -243,7 +246,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -253,7 +256,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -262,6 +265,7 @@ action_rule = {
     "onElement": "//div[@contenteditable='true']"
 }
 ```
+
 ### Example No.5
 
 ### Type text with character delay
@@ -269,7 +273,7 @@ action_rule = {
 The rule sends text to an element with a 100ms delay between each keystroke.
 This simulates human typing speed for applications that require realistic input timing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -280,7 +284,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -289,7 +293,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='search']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -299,7 +303,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -309,7 +313,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -324,7 +328,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -338,7 +342,7 @@ When both Argument and Keys parameter are present, Keys takes precedence.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -352,7 +356,7 @@ Supported locators include Xpath, CssSelector, Id, LinkText, and PartialLinkText
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -366,7 +370,7 @@ The value format depends on the selected locator strategy.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?si).*           |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -382,7 +386,7 @@ Use this to narrow down element selection when multiple elements match the locat
 ### Clear (Clear)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -396,7 +400,7 @@ Use NativeClear for custom controls that do not respond to standard clear.
 ### Delay (Delay)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -410,7 +414,7 @@ Set to 00:00:00 for instant typing without any delay.
 ### Keys (Keys)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -424,7 +428,7 @@ When empty, the rule argument is used as the text to send.
 ### Modifier (Modifier)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -438,7 +442,7 @@ Use Modifier for keyboard combinations like Control+A, Shift+Tab, or multi-modif
 ### Native Clear (NativeClear)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -452,6 +456,7 @@ Use this instead of Clear for elements that do not respond to standard clearing.
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-send-keys](https://www.w3.org/TR/webdriver/#element-send-keys)

@@ -1,6 +1,6 @@
 # Text (Text)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~33 min · Assertion Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ The Text plugin returns a piece of text—either a fixed value or one built at r
 ### Key Features and Functionality
 
 | Feature                 | Description                                                                                         |
-|-------------------------|-----------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Static and Dynamic Text | Provide a fixed text string or build text on the fly using macros or data provider values.          |
 | Macro Support           | Use macro expressions (e.g., `{{$Get-Parameter ...}}`) to assemble or modify text at run time.      |
 | Data Provider Binding   | Pull values directly from data provider columns (e.g., `{{$ Columns.ColumnName }}`) for text input. |
@@ -21,14 +21,14 @@ The Text plugin returns a piece of text—either a fixed value or one built at r
 ### Usages in RPA
 
 | Use Case          | Description                                                                       |
-|-------------------|-----------------------------------------------------------------------------------|
+| --- | --- |
 | Provide Assertion | Supply a static or generated text value as the Actual parameter for an assertion. |
 | Parameter Binding | Return a parameter’s value as text so other plugins can feed it into assertions.  |
 
 ### Usages in Automation Testing
 
 | Use Case            | Description                                                                                                   |
-|---------------------|---------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Assertion Input     | Provide the Actual text value that assertion plugins will compare to an Expected value.                       |
 | Data-Driven Testing | Feed text from macros or data provider into assertion steps so tests validate different inputs automatically. |
 
@@ -42,7 +42,7 @@ This example demonstrates how to assert that the order confirmation number retri
 It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:ActualOrderID --Scope:Session}}` and argument `{{$ --Operator:Equal --Expected:{{$ Columns.ExpectedOrderID }}}}`.
 The assertion passes only if the session parameter value, when compared as a string, equals the expected value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -62,7 +62,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:ActualOrderID --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -72,7 +72,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:ActualOrderID --Scope:Session}}"
 }
 ```
+
 ### Example No.2
 
 ### Assert Error Message Is Not Default Placeholder
@@ -99,7 +100,7 @@ This example demonstrates how to assert that the error message stored in the ses
 It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:LastErrorMessage --Scope:Session}}` and argument `{{$ --Operator:NotEqual --Expected:Error occurred}}`.
 The assertion passes only if the session parameter value, when compared as a string, does not equal the placeholder.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -110,7 +111,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -119,7 +120,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:LastErrorMessage --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -129,7 +130,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -139,7 +140,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -148,6 +149,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:LastErrorMessage --Scope:Session}}"
 }
 ```
+
 ### Example No.3
 
 ### Assert Session Parameter SSN Matches Valid Format
@@ -157,7 +159,7 @@ It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:UserS
 A regular expression `\d{3}-\d{2}-\d{4}` is applied to the parameter value to ensure it conforms to the expected pattern.
 The assertion passes only if the session parameter value, when compared as a string, matches the pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -168,7 +170,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -177,7 +179,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:UserSSN --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -187,7 +189,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -197,7 +199,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -206,6 +208,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:UserSSN --Scope:Session}}"
 }
 ```
+
 ### Example No.4
 
 ### Assert Placeholder SSN Does Not Match Valid Format
@@ -215,7 +218,7 @@ It uses the `Text` plugin with `onElement` set to `000-00-0000` and applies the 
 A regular expression `\d{3}-\d{2}-\d{4}` is applied to the literal value to ensure it does not conform to the SSN pattern.
 The assertion passes only if the value, when compared as a string, does not match the pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -226,7 +229,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -235,7 +238,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("000-00-0000");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -245,7 +248,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -255,7 +258,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -264,6 +267,7 @@ action_rule = {
     "onElement": "000-00-0000"
 }
 ```
+
 ### Example No.5
 
 ### Assert Total Order Amount Exceeds Free-Shipping Threshold
@@ -272,7 +276,7 @@ This example demonstrates how to assert that the total order amount stored in th
 It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}` and argument `{{$ --Operator:Greater --Expected:50}}`.
 The assertion passes only if the session parameter value, when compared as a number, is greater than 50.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -283,7 +287,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -292,7 +296,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -302,7 +306,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -312,7 +316,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -321,6 +325,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}"
 }
 ```
+
 ### Example No.6
 
 ### Assert Available Stock Is Below Reorder Threshold
@@ -329,7 +334,7 @@ This example demonstrates how to assert that the available stock level stored in
 It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:AvailableStock --Scope:Session}}` and argument `{{$ --Operator:Lower --Expected:20}}`.
 The assertion passes only if the session parameter value, when compared as a number, is less than 20.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -340,7 +345,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -349,7 +354,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:AvailableStock --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -359,7 +364,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -369,7 +374,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -378,6 +383,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:AvailableStock --Scope:Session}}"
 }
 ```
+
 ### Example No.7
 
 ### Assert Total Order Amount Meets Free-Shipping Threshold
@@ -386,7 +392,7 @@ This example demonstrates how to assert that the total order amount stored in th
 It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}` and argument `{{$ --Operator:GreaterEqual --Expected:{{$ Columns.FreeShippingThreshold }}}}`.
 The assertion passes only if the session parameter value, when compared as a number, is greater than or equal to the expected threshold.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -397,7 +403,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -406,7 +412,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -416,7 +422,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -426,7 +432,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -435,6 +441,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:TotalOrderAmount --Scope:Session}}"
 }
 ```
+
 ### Example No.8
 
 ### Assert Available Stock Does Not Exceed Warehouse Capacity
@@ -443,7 +450,7 @@ This example demonstrates how to assert that the available stock level stored in
 It uses the `Text` plugin with `onElement` set to `{{$Get-Parameter --Name:AvailableStock --Scope:Session}}` and argument `{{$ --Operator:LowerEqual --Expected:{{$ Columns.WarehouseCapacity }}}}`.
 The assertion passes only if the session parameter value, when compared as a number, is less than or equal to the expected capacity.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -454,7 +461,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -463,7 +470,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:AvailableStock --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -473,7 +480,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -483,7 +490,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -492,6 +499,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:AvailableStock --Scope:Session}}"
 }
 ```
+
 ### Example No.9
 
 ### Extract Numeric Value from Price and Assert Equality
@@ -500,7 +508,7 @@ This example demonstrates how to extract the numeric value from the static price
 It uses the `Text` plugin with `onElement` set to `$1,000.00`, applies the regex `\d+(?:,\d{3})*` (configured in the rule’s `regularExpression` field) to extract the numeric portion (ignoring commas), and then uses the operator `Equal` against the expected value `1000`.
 The assertion passes only if the extracted numeric value, when compared as a string, equals `1000`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -512,7 +520,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -522,7 +530,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+(?:,\d{3})*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -533,7 +541,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -544,7 +552,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -560,7 +568,7 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -574,7 +582,7 @@ Accurate values ensure the comparison works correctly.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -590,7 +598,7 @@ Pattern matching helps focus the comparison on relevant text.
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -604,7 +612,7 @@ Clear expected values help avoid missed matches or false positives.
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

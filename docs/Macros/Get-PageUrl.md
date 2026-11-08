@@ -1,6 +1,6 @@
 # Get Page Url (Get-PageUrl)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,13 +8,13 @@
 
 ### Purpose
 
-The `Get-PageUrl` plugin is designed to retrieve the URL of the current web page within automation workflows. 
+The `Get-PageUrl` plugin is designed to retrieve the URL of the current web page within automation workflows.
 It enables dynamic actions based on the URL, making it a valuable tool for scenarios where navigation and validation of URLs are required.
 
 ### Key Features and Functionality
 
 | Feature                | Description                                                                                     |
-|------------------------|-------------------------------------------------------------------------------------------------|
+| --- | --- |
 | URL Retrieval          | Retrieves the URL of the current web page, allowing automation scripts to interact dynamically. |
 | Dynamic Interaction    | Enables dynamic interaction with elements or navigation based on the retrieved URL.             |
 | URL Verification       | Verifies that the correct URL is loaded during testing scenarios, ensuring accuracy.            |
@@ -23,7 +23,7 @@ It enables dynamic actions based on the URL, making it a valuable tool for scena
 ### Usages in RPA
 
 | Usage                     | Description                                                                                            |
-|---------------------------|--------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Navigation and Validation | Use the retrieved URL to navigate to specific pages and validate content dynamically.                  |
 | Dynamic Interaction       | Interact with web elements based on the current URL, enhancing the adaptability of automation scripts. |
 | URL Verification          | Ensure that the correct URLs are accessed during automation, improving test coverage and reliability.  |
@@ -32,7 +32,7 @@ It enables dynamic actions based on the URL, making it a valuable tool for scena
 ### Usages in Automation Testing
 
 | Usage               | Description                                                                              |
-|---------------------|------------------------------------------------------------------------------------------|
+| --- | --- |
 | URL Logging         | Log the current URL during testing to track navigation and verify test flow accuracy.    |
 | Conditional Testing | Perform conditional testing based on the retrieved URL, allowing for dynamic test flows. |
 
@@ -40,10 +40,10 @@ It enables dynamic actions based on the URL, making it a valuable tool for scena
 
 ### Example No.1
 
-Retrieve the URL of the current web page and utilize it in a navigation scenario. 
+Retrieve the URL of the current web page and utilize it in a navigation scenario.
 This example demonstrates how to use the `Get-PageUrl` plugin with the `OpenUrl` plugin to navigate to the retrieved URL.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$Get-PageUrl}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -79,7 +79,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -87,12 +87,13 @@ action_rule = {
     "argument": "{{$Get-PageUrl}}"
 }
 ```
+
 ### Example No.2
 
-Retrieve a specific portion of the URL using a custom regex pattern and log the result. 
+Retrieve a specific portion of the URL using a custom regex pattern and log the result.
 This example demonstrates how to use the `Get-PageUrl` plugin with the `WriteLog` plugin to log the matched pattern from the URL.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -102,7 +103,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -110,7 +111,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("The matched pattern of the URL is {{$Get-PageUrl --Pattern:"^https:\/\/example.com"}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -119,7 +120,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -128,7 +129,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -142,7 +143,7 @@ action_rule = {
 ### Pattern (Pattern)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -155,6 +156,7 @@ Specifies the regex pattern used to match and extract the desired portion of the
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-current-url](https://www.w3.org/TR/webdriver/#get-current-url)

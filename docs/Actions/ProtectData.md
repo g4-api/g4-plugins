@@ -1,6 +1,6 @@
 # Protect Data (ProtectData)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ The encoded result is stored in the session as `ProtectData:Result` and exposed 
 ### Key Features and Functionality
 
 | Feature         | Description                                                                               |
-|-----------------|-------------------------------------------------------------------------------------------|
+| --- | --- |
 | Encryption      | Encrypts the `Value` parameter using the `Key` parameter before encoding.                 |
 | Base64 Encoding | Encodes the encrypted output to Base64 for safe transport and storage.                    |
 | Session Output  | Stores the protected result in the session as `ProtectData:Result` for downstream access. |
@@ -23,7 +23,7 @@ The encoded result is stored in the session as `ProtectData:Result` and exposed 
 ### Usages in RPA
 
 | Use Case                | Description                                                                               |
-|-------------------------|-------------------------------------------------------------------------------------------|
+| --- | --- |
 | Credential Protection   | Encrypt passwords or tokens before storing them in session parameters.                    |
 | Secure Data Hand-off    | Pass encrypted values between workflow steps without exposing plaintext in logs or state. |
 | Config Value Protection | Protect sensitive configuration values before writing them to shared storage.             |
@@ -31,7 +31,7 @@ The encoded result is stored in the session as `ProtectData:Result` and exposed 
 ### Usages in Automation Testing
 
 | Use Case               | Description                                                                                     |
-|------------------------|-------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Secret Management | Encrypt test credentials at runtime so they are never present in plaintext during a test run.   |
 | Roundtrip Validation   | Encrypt a known value and assert that decryption with the same key recovers the original input. |
 | Key Sensitivity Check  | Verify that different encryption keys produce different protected outputs for the same value.   |
@@ -46,7 +46,7 @@ Encrypt a fixed plaintext value using a known key during automation execution.
 It uses the `ProtectData` plugin with `--Value:MySecret` and `--Key:SuperSecret`.
 The value is encrypted and the result is Base64-encoded before being stored in the session as `ProtectData:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -64,7 +64,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Value:MySecret --Key:SuperSecret}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,6 +90,7 @@ action_rule = {
     "argument": "{{$ --Value:MySecret --Key:SuperSecret}}"
 }
 ```
+
 ### Example No.2
 
 ### Encrypt a Session Parameter Value
@@ -98,7 +99,7 @@ Encrypt the runtime value of a session parameter using a known key.
 It uses the `ProtectData` plugin with `--Value:{{$Get-Parameter --Name:Password --Scope:Session}}` and `--Key:VaultKey`.
 The G4 expression is resolved at runtime, the resolved value is encrypted, and the Base64 result is stored in the session as `ProtectData:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -108,7 +109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -116,7 +117,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Value:{{$Get-Parameter --Name:Password --Scope:Session}} --Key:VaultKey}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -125,7 +126,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -134,7 +135,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -148,7 +149,7 @@ action_rule = {
 ### Protect Data Result (ProtectData:Result)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -164,7 +165,7 @@ It can be referenced by other parameters or expressions in downstream workflow s
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -180,7 +181,7 @@ Both parameters are required; omitting either will result in an empty or unkeyed
 ### Value (Value)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -194,7 +195,7 @@ This value is never stored in plaintext; only the encrypted Base64 output is ret
 ### Key (Key)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

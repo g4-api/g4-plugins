@@ -1,6 +1,6 @@
 # Post (Post)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~31 min · HttpMethod Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This makes it simple and reliable to automate data submissions across different 
 ### Key Features and Functionality
 
 | Feature                    | Description                                                         |
-|----------------------------|---------------------------------------------------------------------|
+| --- | --- |
 | Data Submission            | Sends data to a server or API using an HTTP POST request.           |
 | Dynamic URLs and Payloads  | Builds requests with changing URLs and data as needed.              |
 | Custom Headers             | Lets you add any HTTP headers to control the request.               |
@@ -25,14 +25,14 @@ This makes it simple and reliable to automate data submissions across different 
 ### Usages in RPA
 
 | Use Case         | Description                                                                              |
-|------------------|------------------------------------------------------------------------------------------|
+| --- | --- |
 | Data Submission  | Submit customer details or form entries to external systems or APIs.                     |
 | Workflow Actions | Trigger next steps based on the results of the data submission in an automated workflow. |
 
 ### Usages in Automation Testing
 
 | Use Case                               | Description                                                                                |
-|----------------------------------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | API Data Creation                      | Automated tests send POST requests to create or update test data before running scenarios. |
 | Data Integrity Checks                  | Tests verify that the server processed the submitted data correctly.                       |
 | Regression Testing for Data Submission | Checks that data submission features still work correctly after system changes.            |
@@ -46,7 +46,7 @@ This makes it simple and reliable to automate data submissions across different 
 The `Post` plugin sends an HTTP POST request to the specified URL using the `argument` field.
 This example does not include a request body or custom headers.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -64,7 +64,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("http://api.example.com/v1/connect");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,6 +90,7 @@ action_rule = {
     "argument": "http://api.example.com/v1/connect"
 }
 ```
+
 ### Example No.2
 
 ### HTTP POST Request with Headers
@@ -98,7 +99,7 @@ The `Post` plugin sends an HTTP POST request to the specified URL and includes h
 It sets the `Authorization` header using the Basic scheme with credentials formatted as `username:password`.
 This example does not include a request body.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -108,7 +109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -116,7 +117,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/connect --Header:Authorization=Basic username:password}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -125,7 +126,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -134,7 +135,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -142,6 +143,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/connect --Header:Authorization=Basic username:password}}"
 }
 ```
+
 ### Example No.3
 
 ### HTTP POST Request with Body and Content Type
@@ -150,7 +152,7 @@ The `Post` plugin sends an HTTP POST request to the specified URL using the `arg
 It includes a JSON-formatted request body and sets the `Content-Type` header accordingly.
 This example does not include additional custom headers.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -160,7 +162,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -168,7 +170,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --ContentType:application/json}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -177,7 +179,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -186,7 +188,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -194,6 +196,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --ContentType:application/json}}"
 }
 ```
+
 ### Example No.4
 
 ### HTTP POST Request with Specified Encoding
@@ -202,7 +205,7 @@ The `Post` plugin sends an HTTP POST request to the specified URL using the flag
 It includes a JSON-formatted request body and uses the specified text encoding for the request.
 This example sets the encoding to UTF8 and does not include custom headers.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -212,7 +215,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -220,7 +223,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --Encoding:UTF8}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -229,7 +232,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -238,7 +241,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -246,6 +249,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --Encoding:UTF8}}"
 }
 ```
+
 ### Example No.5
 
 ### HTTP POST Request with Form Fields
@@ -254,7 +258,7 @@ The `Post` plugin sends an HTTP POST request to the specified URL with form fiel
 It sets the `Content-Type` header to application/x-www-form-urlencoded and adds fields with the `--Field` flag.
 This example does not include a JSON body.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -264,7 +268,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -272,7 +276,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/book/encoded --ContentType:application/x-www-form-urlencoded --Field:HotelName=Luxury Hotel --Field:RoomType=Suite}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -281,7 +285,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -290,7 +294,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -298,6 +302,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --ContentType:application/x-www-form-urlencoded --Field:HotelName=Luxury Hotel --Field:RoomType=Suite}}"
 }
 ```
+
 ### Example No.6
 
 ### HTTP POST Request with Attribute Extraction
@@ -307,7 +312,7 @@ It extracts the `status` attribute from the element selected by the XPath `//res
 It returns the value of that attribute.
 This example uses no custom headers or content type flags.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -319,7 +324,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -329,7 +334,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//response");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -340,7 +345,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -351,7 +356,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -361,6 +366,7 @@ action_rule = {
     "onElement": "//response"
 }
 ```
+
 ### Example No.7
 
 ### HTTP POST Request with XPath Element Targeting
@@ -369,7 +375,7 @@ The `Post` plugin sends an HTTP POST request to the specified URL with the provi
 It selects elements matching the XPath `//response/HotelName` using the `onElement` setting and returns their text content.
 This example uses no custom headers or content type flags.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -380,7 +386,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -389,7 +395,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//response/HotelName");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -399,7 +405,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -409,7 +415,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -418,6 +424,7 @@ action_rule = {
     "onElement": "//response/HotelName"
 }
 ```
+
 ### Example No.8
 
 ### HTTP POST Request with Regex Extraction
@@ -426,7 +433,7 @@ The `Post` plugin sends an HTTP POST request to the specified URL with the provi
 It applies the regular expression `<bookingReference>([A-Z0-9]{6})</bookingReference>` to the response text and returns the first captured group, which represents the booking reference code.
 This example does not include custom headers or content type flags.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -437,7 +444,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -446,7 +453,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("<bookingReference>([A-Z0-9]{6})</bookingReference>");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -456,7 +463,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -466,7 +473,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -478,10 +485,10 @@ action_rule = {
 
 ## Output Parameter
 
-### Http Response (HttpResponse)
+### Send Http Request Http Response (SendHttpRequest:HttpResponse)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -492,10 +499,10 @@ Holds the content returned from an HTTP request after any specified extraction o
 Provides a way to work with the processed response data instead of the raw body.
 Enables automation workflows to access the exact information they need from the HTTP response.
 
-### Http Response Headers (HttpResponseHeaders)
+### Send Http Request Http Response Headers (SendHttpRequest:HttpResponseHeaders)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -506,10 +513,10 @@ Holds the HTTP response headers returned from an HTTP request.
 Contains key-value pairs that provide metadata about the response such as content type, date, and length.
 Enables workflows to inspect response details for logging or conditional logic.
 
-### Http Status Code (HttpStatusCode)
+### Send Http Request Http Status Code (SendHttpRequest:HttpStatusCode)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -526,7 +533,7 @@ Supports error handling in workflows based on the status code value.
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -540,7 +547,7 @@ Makes it possible to customize the request URL or payload at runtime.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -554,7 +561,7 @@ Enables precise retrieval of metadata embedded in tags for downstream workflow p
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -569,7 +576,7 @@ Helps ensure the correct data is extracted regardless of the API’s output form
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -586,7 +593,7 @@ Helps automate parsing of complex text outputs.
 ### Body (Body)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -600,7 +607,7 @@ Helps ensure the API has the context required to process the delete operation.
 ### Content Type (ContentType)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -617,50 +624,62 @@ Supports formats such as JSON, XML, form data, and plain text.
 
 Represents JSON data encoded as JavaScript Object Notation.
 Allows for structured data that is easy to read and parse.
+
 ##### Applicationoctetstream
 
 Denotes a generic binary data stream when the format is unknown.
 Enables transferring files or data without predefined structure.
+
 ##### Applicationpdf
 
 Identifies Portable Document Format files for documents and forms.
 Ensures consistent rendering of printable content.
+
 ##### Applicationxml
 
 Marks XML data formatted with Extensible Markup Language.
 Provides a generic way to represent structured data.
+
 ##### Audiompeg
 
 Specifies MPEG audio encoded in MP3 format.
 Offers compressed audio suitable for music and podcasts.
+
 ##### Imagejpeg
 
 Indicates JPEG images compressed for photographs.
 Balances image quality with file size.
+
 ##### Imagepng
 
 Signals PNG images with lossless compression.
 Supports transparent backgrounds for web graphics.
+
 ##### Multipartformdata
 
 Used for form submissions that include files and text fields.
 Allows combining different data types in one request.
+
 ##### Textcss
 
 Defines stylesheet content for web page styling in CSS.
 Controls layout, colors, and fonts of HTML documents.
+
 ##### Texthtml
 
 Represents HTML content to structure web pages.
 Defines elements like headings, paragraphs, and links.
+
 ##### Textplain
 
 Denotes plain text without special formatting.
 Serves simple messages or logs in text form.
+
 ##### Applicationxwwwformurlencoded
 
 Encodes URL-encoded form data in key-value pairs.
 Pairs are separated by ampersands and percent-encoded if needed.
+
 ##### Videomp4
 
 Specifies MP4 multimedia container for video and audio.
@@ -669,7 +688,7 @@ Supports subtitles and still images within the file.
 ### Encoding (Encoding)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -687,31 +706,37 @@ Allows different encoding standards to maintain compatibility across systems.
 Uses 7-bit codes to represent 128 common characters such as letters, digits, and symbols.
 Forms the basis for many modern text encoding systems.
 Remains compatible with Unicode formats like UTF-8.
+
 ##### Big Endian Unicode
 
 Stores each character in 16 bits with the most significant byte first.
 Commonly used on platforms that follow big-endian byte ordering.
 Ensures consistent decoding when big-endian formats are required.
+
 ##### Latin1
 
 Also called ISO-8859-1 and covers many Western European languages.
 Uses one byte per character for a total of 256 symbols.
 Often used for legacy data but supports fewer characters than Unicode.
+
 ##### Unicode
 
 Assigns a unique code point to every character in most writing systems.
 Supports global text representation in a single standard.
 Forms the foundation for encodings like UTF-8 and UTF-16.
+
 ##### Utf7
 
 Encodes text using only 7-bit ASCII characters for safe transmission in restricted systems.
 Was originally designed for email use where 8-bit data could be problematic.
 Rarely used today because it is less efficient than modern encodings.
+
 ##### Utf8
 
 Variable-length encoding that uses one to four bytes per character.
 Covers all Unicode code points and is backward-compatible with ASCII.
 Widely adopted as the standard text format on the web.
+
 ##### Utf32
 
 Uses a fixed four bytes for each character’s code point.
@@ -721,7 +746,7 @@ Consumes more memory but offers straightforward character indexing.
 ### Field (Field)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -735,7 +760,7 @@ Lets you send extra parameters when the server requires them during a delete ope
 ### Header (Header)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -750,7 +775,7 @@ Custom headers let you send extra information like authentication tokens or trac
 ### Url (Url)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

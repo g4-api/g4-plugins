@@ -1,6 +1,6 @@
 # Resolve Online File (ResolveOnlineFile)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~25 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ On failure it clears all stored session data and logs the exception, so downstre
 ### Key Features and Functionality
 
 | Feature                       | Description                                                                      |
-|-------------------------------|----------------------------------------------------------------------------------|
+| --- | --- |
 | UI Element URL Resolution     | Locate URL from a web element's text or specified attribute.                     |
 | Regular Expression Extraction | Extract or filter the exact URL using a provided regex.                          |
 | HTTP File Download            | Download the file content via an HTTP GET request.                               |
@@ -26,7 +26,7 @@ On failure it clears all stored session data and logs the exception, so downstre
 ### Usages in RPA
 
 | Use Case                       | Description                                                           |
-|--------------------------------|-----------------------------------------------------------------------|
+| --- | --- |
 | UI-Driven File Download        | Download files linked in web apps by resolving elements at runtime.   |
 | Dynamic URL Extraction         | Fetch resources when URLs are embedded in element text or attributes. |
 | Regex-Based Resource Filtering | Use a regex to isolate and download specific URL segments.            |
@@ -34,7 +34,7 @@ On failure it clears all stored session data and logs the exception, so downstre
 ### Usages in Automation Testing
 
 | Use Case               | Description                                                           |
-|------------------------|-----------------------------------------------------------------------|
+| --- | --- |
 | Test Asset Retrieval   | Retrieve test documents or binaries from UI elements for validation.  |
 | Content Verification   | Download and inspect file contents returned by the system under test. |
 | Data-Driven Test Input | Supply downloaded files as inputs for parameterized test runs.        |
@@ -48,7 +48,7 @@ On failure it clears all stored session data and logs the exception, so downstre
 It uses the `ResolveOnlineFile` plugin with the argument set to the file URL `http://io.files/g4.pdf`.
 Values are returned as binary data (e.g. PDF bytes) for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("http://io.files/g4.pdf");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -75,7 +75,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -84,7 +84,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -92,6 +92,7 @@ action_rule = {
     "argument": "http://io.files/g4.pdf"
 }
 ```
+
 ### Example No.2
 
 ### Resolve an Online File URL and Extract a Link via XPath
@@ -99,7 +100,7 @@ action_rule = {
 It uses the `ResolveOnlineFile` plugin to download the file, then applies the XPath `//a[@data-automation-id='direct-url-link']` to locate the desired link.
 Values are returned as strings (e.g. "G4 Tutorial Guide") for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -109,7 +110,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -117,7 +118,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@data-automation-id='direct-url-link']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -126,7 +127,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -135,7 +136,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -143,6 +144,7 @@ action_rule = {
     "onElement": "//a[@data-automation-id='direct-url-link']"
 }
 ```
+
 ### Example No.3
 
 ### Resolve an Online File URL and Extract a Link via CSS Selector
@@ -150,7 +152,7 @@ action_rule = {
 It uses the `ResolveOnlineFile` plugin to download the file from `http://io.files/g4.pdf`, then applies the CSS selector `a.tutorial-link` to locate the desired link.
 Values are returned as strings (e.g. link text `G4 Tutorial Guide`) for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -161,7 +163,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -170,7 +172,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("a.tutorial-link");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -180,7 +182,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -190,7 +192,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -199,6 +201,7 @@ action_rule = {
     "onElement": "a.tutorial-link"
 }
 ```
+
 ### Example No.4
 
 ### Resolve an Online File URL and Extract a Matching URL with Regex via XPath
@@ -207,7 +210,7 @@ It uses the `ResolveOnlineFile` plugin to download the file, applies the XPath `
 Values are returned as strings for downstream processing.
 The `?` quantifier makes the `s` optional in `https`, and the non-greedy `+?` match avoids capturing extra characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -218,7 +221,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -227,7 +230,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("https?://[^\s"']+?/g4\.pdf");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -237,7 +240,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -247,7 +250,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -256,6 +259,7 @@ action_rule = {
     "regularExpression": "https?://[^\s"']+?/g4\.pdf"
 }
 ```
+
 ### Example No.5
 
 ### Resolve an Online File URL and Extract an Attribute via XPath
@@ -263,7 +267,7 @@ action_rule = {
 It uses the `ResolveOnlineFile` plugin, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, then retrieves its `href` attribute.
 Values are returned as strings for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -274,7 +278,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -283,7 +287,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[contains(.,'g4.pdf')]");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -293,7 +297,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -303,7 +307,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -312,6 +316,7 @@ action_rule = {
     "onElement": "//a[contains(.,'g4.pdf')]"
 }
 ```
+
 ### Example No.6
 
 ### Resolve an Online File URL and Clean an Attribute with Regex via XPath
@@ -319,7 +324,7 @@ action_rule = {
 It uses the `ResolveOnlineFile` plugin to download the file, applies the XPath `//a[contains(.,'g4.pdf')]` to locate the link element, retrieves its `href` attribute, and then applies the regex `[^?\"]+\.pdf` to strip any query parameters (in JSON the quote is double-escaped, but at runtime the pattern is `[^?"]+\.pdf`).
 Values are returned as strings for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -331,7 +336,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -341,7 +346,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("[^?\"]+\.pdf");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -352,7 +357,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -363,7 +368,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -379,7 +384,7 @@ action_rule = {
 ### Resolve Online File Data (ResolveOnlineFile:Data)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -393,7 +398,7 @@ Keeping file data in text form helps scripts move it without breaking.
 ### Resolve Online File Extension (ResolveOnlineFile:Extension)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -407,7 +412,7 @@ It determines how the file can be processed or displayed.
 ### Resolve Online File Full Name (ResolveOnlineFile:FullName)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -421,7 +426,7 @@ It comes directly from the resource's address.
 ### Resolve Online File Name (ResolveOnlineFile:Name)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -435,7 +440,7 @@ It makes it easier to organize files by name only.
 ### Resolve Online File Size (ResolveOnlineFile:Size)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -449,7 +454,7 @@ Scripts can use this value to enforce limits or display progress information.
 ### Resolve Online File Status Code (ResolveOnlineFile:StatusCode)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -463,7 +468,7 @@ Scripts can check this value to decide what to do next.
 ### Resolve Online File Uri (ResolveOnlineFile:Uri)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -479,7 +484,7 @@ Using the URI makes auditing and debugging more reliable.
 ### Argument (Argument)
 
 | Attribute             | Value                 |
-|-----------------------|-----------------------|
+| --------------------- | --------------------- |
 | **Default Value**     | Null                  |
 | **Depends On**        | None                  |
 | **Mandatory**         | No                    |
@@ -492,7 +497,7 @@ Explicit URLs make file downloads more reliable.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -506,7 +511,7 @@ Choosing the right locator ensures the correct element is used.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -520,7 +525,7 @@ Correct attribute selection ensures the right address is captured.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -533,7 +538,7 @@ Accurate element selection ensures the correct URL is used.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

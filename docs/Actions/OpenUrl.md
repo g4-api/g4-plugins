@@ -1,6 +1,6 @@
 # Open Url (OpenUrl)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ The URL source depends on whether a target element is provided: when no element 
 ### Key Features and Functionality
 
 | Feature          | Description                                                                                         |
-|------------------|-----------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Direct URL       | Navigates to the URL supplied via `Argument` when no element is specified; regex is not applied.    |
 | Element Text URL | Reads the URL from a located element's text content when `OnAttribute` is absent.                   |
 | Attribute URL    | Reads the URL from a named element attribute via `OnAttribute` when the element is located.         |
@@ -25,7 +25,7 @@ The URL source depends on whether a target element is provided: when no element 
 ### Usages in RPA
 
 | Use Case             | Description                                                                                     |
-|----------------------|-------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Data Collection      | Navigate to different URLs in sequence to collect data from multiple sources automatically.     |
 | Multi-Page Workflows | Drive workflows that require moving through several pages by navigating programmatically.       |
 | Link-Driven Flow     | Extract a URL from a page element and navigate to it without requiring manual URL construction. |
@@ -33,7 +33,7 @@ The URL source depends on whether a target element is provided: when no element 
 ### Usages in Automation Testing
 
 | Use Case              | Description                                                                                  |
-|-----------------------|----------------------------------------------------------------------------------------------|
+| --- | --- |
 | Functional Testing    | Verify that web applications navigate to the correct URL when triggered programmatically.    |
 | Link Verification     | Confirm that element-extracted URLs resolve to the expected destinations.                    |
 | Multi-Page UI Testing | Drive multi-page test flows by navigating to each page URL under controlled test conditions. |
@@ -47,7 +47,7 @@ The URL source depends on whether a target element is provided: when no element 
 Navigates the current browser window to `http://example.com` using the `Argument` property.
 No element is involved and `RegularExpression` is not applied — the argument value is passed to `WebDriver.OpenUrl` as-is.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("http://example.com");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -83,7 +83,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "argument": "http://example.com"
 }
 ```
+
 ### Example No.2
 
 ### Navigate to a URL read from an element's text content
@@ -99,7 +100,7 @@ Locates the element matching `#LinkToOpen` using the CssSelector strategy and re
 `RegularExpression` is applied to the text — the default pattern matches the full string so the entire text value is used.
 Use this form when the target URL is stored as the visible text of a page element.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -110,7 +111,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -119,7 +120,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#LinkToOpen");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -129,7 +130,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -139,7 +140,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -148,6 +149,7 @@ action_rule = {
     "onElement": "#LinkToOpen"
 }
 ```
+
 ### Example No.3
 
 ### Navigate to a URL extracted from an element attribute via regex
@@ -156,7 +158,7 @@ Locates the element matching `#LinkToOpen`, reads its `href` attribute, and appl
 Calls `WebDriver.OpenUrl` with the matched value to navigate the current window.
 Use this form when the attribute value may contain surrounding text and only the URL portion is needed.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -169,7 +171,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -180,7 +182,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("https?://.*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -192,7 +194,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -204,7 +206,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -221,7 +223,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute             | Value                 |
-|-----------------------|-----------------------|
+| --------------------- | --------------------- |
 | **Default Value**     | Null                  |
 | **Depends On**        | None                  |
 | **Mandatory**         | No                    |
@@ -234,7 +236,7 @@ This value is used directly as the navigation URL without any regex processing w
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -249,7 +251,7 @@ Locator has no effect when OnElement is not set.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -263,7 +265,7 @@ OnAttribute has no effect when OnElement is not set.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -276,7 +278,7 @@ When absent no element is resolved and the URL is taken from Argument directly w
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -291,6 +293,7 @@ When the pattern does not match, `match.Value` is an empty string and the browse
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#navigate-to](https://www.w3.org/TR/webdriver/#navigate-to)

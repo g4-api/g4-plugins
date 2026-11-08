@@ -1,6 +1,6 @@
 # Invoke Data For Each Loop (InvokeDataForEachLoop)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Iterates over the records of a JSON or XML payload and runs a set of child rules
 ### Key Features and Functionality
 
 | Feature                | Description                                                                     |
-|------------------------|---------------------------------------------------------------------------------|
+| --- | --- |
 | Record Iteration       | Parses a JSON or XML payload into records and loops through each one.           |
 | Value Injection        | Replaces `--Field`, `--Path`, and `--Item` tokens with the current record data. |
 | Format Auto-Detection  | Detects JSON or XML automatically and throws when the content matches neither.  |
@@ -22,7 +22,7 @@ Iterates over the records of a JSON or XML payload and runs a set of child rules
 ### Usages in RPA
 
 | Use Case          | Description                                                                       |
-|-------------------|-----------------------------------------------------------------------------------|
+| --- | --- |
 | Data Processing   | Process each record in a JSON or XML result by running data entry or validation.  |
 | Batch Operations  | Perform a series of tasks on each item returned from a script or an API response. |
 | Data-Driven Flows | Drive downstream rules with values taken from each record in turn.                |
@@ -30,7 +30,7 @@ Iterates over the records of a JSON or XML payload and runs a set of child rules
 ### Usages in Automation Testing
 
 | Use Case            | Description                                                                 |
-|---------------------|-----------------------------------------------------------------------------|
+| --- | --- |
 | Data-Driven Testing | Run the same steps across every record in a data set.                       |
 | Fixture Expansion   | Expand a single object or a small array into repeated, parameterized steps. |
 | Result Verification | Verify downstream behavior for each record produced by a previous action.   |
@@ -45,7 +45,7 @@ Iterates over each object in the JSON array supplied through the argument and ru
 The child rule uses `{{$ --Field:firstName}}` to inject the current record's `firstName` value into its argument before it runs.
 If a record is missing the `firstName` field, the token is kept as-is for the child rule to handle.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -63,7 +63,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -75,7 +75,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setArgument("{{$ --Name:CurrentUser --Value:{{$ --Field:firstName}}}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -90,7 +90,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -105,7 +105,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -119,6 +119,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.2
 
 ### Iterate JSON Objects And Inject A Nested Value With JSONPath
@@ -127,7 +128,7 @@ Iterates over each object in the JSON array and runs a RegisterParameter action 
 The child rule uses `{{$ --Path:$.user.email}}` to resolve the nested `user.email` value from the current record via JSONPath.
 If the path matches no node, the token is kept as-is so a nested data loop can resolve it later.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -145,7 +146,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -157,7 +158,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setArgument("{{$ --Name:Email --Value:{{$ --Path:$.user.email}}}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -172,7 +173,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -187,7 +188,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -201,6 +202,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.3
 
 ### Iterate A Simple Array And Inject Each Item
@@ -209,7 +211,7 @@ Iterates over each value in the simple JSON string array and runs a WriteLog act
 The child rule uses `{{$ --Item}}` to inject the current value, which resolves to the scalar text of a simple-array record.
 Complex records injected through `{{$ --Item}}` are emitted as minified JSON or XML instead.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -227,7 +229,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -239,7 +241,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setArgument("{{$ --Item}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -254,7 +256,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -269,7 +271,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -283,6 +285,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.4
 
 ### Iterate XML Records And Inject A Child Element
@@ -291,7 +294,7 @@ Parses the XML payload and iterates over each repeated `<user>` element as a rec
 The child rule uses `{{$ --Field:name}}` to inject the current record's `name` child element value before it runs.
 A non-repeating XML root is instead treated as a single record and iterated exactly once.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -309,7 +312,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -321,7 +324,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setArgument("{{$ --Name:UserName --Value:{{$ --Field:name}}}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -336,7 +339,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -351,7 +354,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -365,6 +368,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.5
 
 ### Iterate A Base64-Encoded Payload From DataSource
@@ -373,7 +377,7 @@ Reads the payload from the `DataSource` parameter and decodes it from Base64 bec
 The decoded JSON array is iterated, and the child RegisterParameter action injects each record's `name` value through `{{$ --Field:name}}`.
 When `Base64` is present and the value is not valid Base64, the action throws.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -391,7 +395,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -403,7 +407,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setArgument("{{$ --Name:UserName --Value:{{$ --Field:name}}}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -418,7 +422,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -433,7 +437,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -447,6 +451,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.6
 
 ### Iterate A Single Object By Wrapping It Into One Record
@@ -455,7 +460,7 @@ Accepts a single JSON object and wraps it into a one-item collection so the chil
 The child WriteLog action uses `{{$ --Field:name}}` to inject the object's `name` value.
 This tolerance keeps passing a lone object simple when data comes from a script result.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -473,7 +478,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -485,7 +490,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setArgument("{{$ --Field:name}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -500,7 +505,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -515,7 +520,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -535,7 +540,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -548,7 +553,7 @@ Supersedes `DataSource`, which is only used in Base64 mode.
 ### Rules (Rules)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -563,7 +568,7 @@ Before each record, the `{{$ --Field}}`, `{{$ --Path}}`, and `{{$ --Item}}` toke
 ### Data Source (DataSource)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -577,7 +582,7 @@ An invalid Base64 value throws and stops the action.
 ### Base64 (Base64)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

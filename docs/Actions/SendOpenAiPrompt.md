@@ -1,6 +1,6 @@
 # Send Open Ai Prompt (SendOpenAiPrompt)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~22 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Sends user messages to the OpenAI chat API and returns the assistant’s reply. 
 ### Key Features and Functionality
 
 | Feature                | Description                                                                                          |
-|------------------------|------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Conversation History   | Keep track of user and system messages for each session.                                             |
 | Custom System Prompt   | Let users supply a starting instruction, or default to a helpful assistant message.                  |
 | Completion Settings    | Control response length and behavior with parameters like MaxTokens, Model, Temperature, TopK, TopP. |
@@ -23,7 +23,7 @@ Sends user messages to the OpenAI chat API and returns the assistant’s reply. 
 ### Usages in RPA
 
 | Use Case               | Description                                                                                 |
-|------------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | User Support Chatbot   | Let a robot chat with people, answer questions, or gather information in real time.         |
 | Dynamic Form Filling   | Ask the API how to fill web forms and use that guidance in an automated workflow.           |
 | Email Draft Generation | Automatically generate or suggest email drafts based on user prompts.                       |
@@ -32,7 +32,7 @@ Sends user messages to the OpenAI chat API and returns the assistant’s reply. 
 ### Usages in Automation Testing
 
 | Use Case                  | Description                                                                                 |
-|---------------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Data Generation      | Ask the API to create sample inputs (names, addresses, etc.) for use in automated tests.    |
 | Response Validation       | Compare the API’s reply to expected patterns to check if the integration works correctly.   |
 | Error Handling Simulation | Trigger error messages from the API to test how the system handles bad or unexpected input. |
@@ -48,7 +48,7 @@ Start a new conversation with a custom system prompt and then send a user prompt
 It uses the `SendOpenAiPrompt` plugin with the flags `--NewChat`, `--SystemPrompt:You are a math tutor.`, and `--Prompt:Explain the Pythagorean theorem.`.
 Values are returned as JSON for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --NewChat --SystemPrompt:You are a math tutor. --Prompt:Explain the Pythagorean theorem. --ApiKey:YOUR_API_KEY}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -75,7 +75,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -84,7 +84,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -92,6 +92,7 @@ action_rule = {
     "argument": "{{$ --NewChat --SystemPrompt:You are a math tutor. --Prompt:Explain the Pythagorean theorem. --ApiKey:YOUR_API_KEY}}"
 }
 ```
+
 ### Example No.2
 
 ### Send a Prompt with Custom Temperature and Token Limits
@@ -100,7 +101,7 @@ Send a prompt with specific parameters for temperature and token limits.
 It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Tell a joke.`, `--Temperature:0.7`, `--MaxTokens:100`, and `--Model:gpt-3.5-turbo`.
 Values are returned as JSON for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -110,7 +111,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -118,7 +119,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Prompt:Tell a joke. --Temperature:0.7 --MaxTokens:100 --Model:gpt-3.5-turbo --ApiKey:YOUR_API_KEY}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -127,7 +128,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -136,7 +137,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -144,6 +145,7 @@ action_rule = {
     "argument": "{{$ --Prompt:Tell a joke. --Temperature:0.7 --MaxTokens:100 --Model:gpt-3.5-turbo --ApiKey:YOUR_API_KEY}}"
 }
 ```
+
 ### Example No.3
 
 ### Extract Content Before `<think>` Tag from AI Response
@@ -153,7 +155,7 @@ It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Analyze the follo
 A regular expression `^[^<]*` is applied to capture all characters up to (but not including) the first `<` character, ensuring that only the text preceding `<think>` is returned.
 Values are returned as strings for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -164,7 +166,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -173,7 +175,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("^[^<]*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -183,7 +185,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -193,7 +195,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -202,6 +204,7 @@ action_rule = {
     "regularExpression": "^[^<]*"
 }
 ```
+
 ### Example No.4
 
 ### Send a Prompt with TopK to Limit Candidate Tokens
@@ -210,7 +213,7 @@ Send a prompt with a TopK parameter to limit candidate tokens in the AI response
 It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Recommend a movie.`, `--TopK:3`, and `--ApiKey:YOUR_API_KEY`.
 Values are returned as JSON for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -220,7 +223,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -228,7 +231,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Prompt:Recommend a movie. --TopK:3 --ApiKey:YOUR_API_KEY}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -237,7 +240,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -246,7 +249,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -254,6 +257,7 @@ action_rule = {
     "argument": "{{$ --Prompt:Recommend a movie. --TopK:3 --ApiKey:YOUR_API_KEY}}"
 }
 ```
+
 ### Example No.5
 
 ### Send a Prompt with TopP to a Custom Open-WebUI Endpoint
@@ -262,7 +266,7 @@ Send a prompt with a TopP parameter to a custom Open-WebUI endpoint rather than 
 It uses the `SendOpenAiPrompt` plugin with the flags `--Prompt:Summarize this article.`, `--CompletionsUri:http://localhost:3000/api/chat/completions`, `--TopP:0.8`, and `--ApiKey:YOUR_API_KEY`.
 Values are returned as JSON for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -272,7 +276,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -280,7 +284,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Prompt:Summarize this article. --CompletionsUri:http://localhost:3000/api/chat/completions --TopP:0.8 --ApiKey:YOUR_API_KEY}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -289,7 +293,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -298,7 +302,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -312,7 +316,7 @@ action_rule = {
 ### Send Open Ai Prompt Completion Tokens (SendOpenAiPrompt:CompletionTokens)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -326,7 +330,7 @@ Monitoring completion token usage helps manage resource consumption.
 ### Send Open Ai Prompt Prompt Tokens (SendOpenAiPrompt:PromptTokens)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -340,7 +344,7 @@ Tracking prompt token usage helps control input size.
 ### Send Open Ai Prompt System Response (SendOpenAiPrompt:SystemResponse)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -354,7 +358,7 @@ Filtered content ensures only the intended output is returned.
 ### Send Open Ai Prompt Total Tokens (SendOpenAiPrompt:TotalTokens)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -368,7 +372,7 @@ Monitoring total tokens helps manage costs and limits.
 ### Send Open Ai Prompt Think (SendOpenAiPrompt:Think)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -384,7 +388,7 @@ These insights help understand how the AI arrived at its answer.
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -396,7 +400,7 @@ Template expression to pass parameters and prompt text.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -410,7 +414,7 @@ Regular expression to extract the desired portion of the system response.
 ### Api Key (ApiKey)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -424,7 +428,7 @@ Keeping a valid key protects your account.
 ### Completions Uri (CompletionsUri)
 
 | Attribute                                  | Value                                      |
-|--------------------------------------------|--------------------------------------------|
+| ------------------------------------------ | ------------------------------------------ |
 | **Default Value**                          | https://api.openai.com/v1/chat/completions |
 | **Depends On**                             | None                                       |
 | **Mandatory**                              | No                                         |
@@ -437,7 +441,7 @@ The default points to OpenAI’s official chat endpoint.
 ### Max Tokens (MaxTokens)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -450,7 +454,7 @@ It controls how many tokens the reply can include.
 ### Model (Model)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | gpt-4.1-mini      |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -464,7 +468,7 @@ Choosing a higher-capability model can produce more detailed answers.
 ### New Chat (NewChat)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -478,7 +482,7 @@ Turning it on makes each prompt treated independently.
 ### Prompt (Prompt)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -492,7 +496,7 @@ Providing a clear message leads to more relevant answers.
 ### System Prompt (SystemPrompt)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -506,7 +510,7 @@ Using a clear prompt helps the AI understand what style or information to priori
 ### Temperature (Temperature)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -520,7 +524,7 @@ Lower values keep replies more focused and consistent.
 ### Top K (TopK)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -534,7 +538,7 @@ Larger values allow more variety in word selection.
 ### Top P (TopP)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -549,6 +553,7 @@ Higher numbers let the AI include more word options, making responses more varie
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://platform.openai.com/docs/api-reference/chat/create](https://platform.openai.com/docs/api-reference/chat/create)

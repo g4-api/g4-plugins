@@ -1,6 +1,6 @@
 # Csv Data Collector (CsvDataCollector)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · DataCollector Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ The CsvDataCollector plugin takes data from your extraction rules and saves it i
 ### Key Features and Functionality
 
 | Feature                | Description                                                                                    |
-|------------------------|------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Extraction Integration | Works with your extraction rules so every item you collect goes straight to the CSV file.      |
 | Write Modes            | Lets you write each record in real time or save all of them at once at the end of the run.     |
 | Unified Data Storage   | Merges information from web pages, APIs, databases, or files into a single CSV table.          |
@@ -22,7 +22,7 @@ The CsvDataCollector plugin takes data from your extraction rules and saves it i
 ### Usages in RPA
 
 | Use Case                | Description                                                                                   |
-|-------------------------|-----------------------------------------------------------------------------------------------|
+| --- | --- |
 | Web Scraping            | Sends lists of products, articles, or other page data directly into a CSV for later review.   |
 | In-Process Data Capture | Records items like invoices or customer records during a workflow and saves them immediately. |
 | Data Aggregation        | Gathers data from multiple targets into a single CSV for unified output.                      |
@@ -31,7 +31,7 @@ The CsvDataCollector plugin takes data from your extraction rules and saves it i
 ### Usages in Automation Testing
 
 | Use Case            | Description                                                                                    |
-|---------------------|------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Result Logging | Records pass/fail status and error details in a CSV for easy review and audit.                 |
 | Performance Metrics | Captures timing and resource usage during tests and exports the results to a CSV for analysis. |
 
@@ -48,12 +48,12 @@ By default, line breaks and leading/trailing whitespace are preserved.
 Records are written individually to `DataFile.csv` as each location is extracted.
 Immediate writes avoid high memory usage when scraping large pages.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "",
+    PluginName = "ExportData",
     OnElement = "//div[@class='hotel']",
     Rules = new[]
     {
@@ -67,11 +67,11 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("")
+    .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
         new ActionRuleModel()        
@@ -80,11 +80,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setRegularExpression("(?<=\w+:).*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
-    pluginName: "",
+    pluginName: "ExportData",
     onElement: "//div[@class='hotel']",
     rules: [
         {
@@ -96,11 +96,11 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -112,11 +112,11 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -127,6 +127,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.2
 
 ### Extract Hotel Location with Bulk Write
@@ -138,12 +139,12 @@ By default, line breaks and leading/trailing whitespace are preserved.
 All records are written together to `DataFile.csv` once extraction completes.
 Bulk writes minimize I/O calls for small datasets.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "",
+    PluginName = "ExportData",
     OnElement = "//div[@class='hotel']",
     Rules = new[]
     {
@@ -157,11 +158,11 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("")
+    .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
         new ActionRuleModel()        
@@ -170,11 +171,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setRegularExpression("(?<=\w+:).*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
-    pluginName: "",
+    pluginName: "ExportData",
     onElement: "//div[@class='hotel']",
     rules: [
         {
@@ -186,11 +187,11 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -202,11 +203,11 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -223,7 +224,7 @@ action_rule = {
 ### For Entity (ForEntity)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -236,7 +237,7 @@ It lets you see data in the file as it arrives instead of waiting until everythi
 ### Source (Source)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -249,7 +250,7 @@ It creates the file automatically if it does not exist.
 ### Type (Type)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

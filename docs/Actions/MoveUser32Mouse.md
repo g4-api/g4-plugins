@@ -1,6 +1,6 @@
 # Move User32 Mouse (MoveUser32Mouse)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ Automation scripts can control the cursor position for native desktop applicatio
 ### Key Features and Functionality
 
 | Feature                    | Description                                                                                                                          |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Coordinate Movement        | Moves the mouse cursor to specific (X, Y) absolute coordinates on the viewport when no element is targeted.                          |
 | Pointer-Offset Movement    | Moves the mouse cursor relative to its current position when OffsetX or OffsetY is non-zero and no element is targeted.              |
 | Element-Targeted Movement  | Moves the cursor to the alignment point on a target UI element bounding box, adjusted by optional OffsetX and OffsetY pixel offsets. |
@@ -23,14 +23,14 @@ Automation scripts can control the cursor position for native desktop applicatio
 ### Usage in RPA
 
 | Usage                   | Description                                                                                                              |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Desktop Automation      | Integrate with RPA workflows to position the mouse precisely on native desktop UI elements using the Windows User32 API. |
 | Precise Pointer Control | Use absolute coordinates or element-relative offsets to position the cursor at runtime-determined locations.             |
 
 ### Usage in Automation Testing
 
 | Usage              | Description                                                                                                          |
-|--------------------|----------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Testing         | Simulate hover and focus behaviors by moving the mouse to specific screen areas or within UI elements.               |
 | Regression Testing | Validate consistent mouse positioning across application states by automating cursor movements using the User32 API. |
 
@@ -47,7 +47,7 @@ This plugin is designed to work on **Windows** only.
 The plugin moves the system mouse cursor to position (300, 400) on the viewport.
 No element is targeted; the `{{$ --X:300 --Y:400}}` syntax binds X and Y as a parameters dictionary that activates coordinate mode at runtime.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --X:300 --Y:400}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -83,7 +83,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "argument": "{{$ --X:300 --Y:400}}"
 }
 ```
+
 ### Example No.2
 
 ### Move mouse by offset relative to current cursor position
@@ -98,7 +99,7 @@ action_rule = {
 The plugin moves the system mouse cursor 15 pixels right and 25 pixels down from its current position.
 No element is targeted; the `{{$ --OffsetX:15 --OffsetY:25}}` syntax binds the offsets as a parameters dictionary that activates pointer-offset mode at runtime.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -108,7 +109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -116,7 +117,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --OffsetX:15 --OffsetY:25}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -125,7 +126,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -134,7 +135,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -142,6 +143,7 @@ action_rule = {
     "argument": "{{$ --OffsetX:15 --OffsetY:25}}"
 }
 ```
+
 ### Example No.3
 
 ### Move mouse to element with alignment and offset
@@ -149,7 +151,7 @@ action_rule = {
 The plugin locates the element at `//div[@id='InteractivePanel']` using the Xpath locator, moves the mouse to the BottomCenter alignment point with a 10-pixel horizontal and 20-pixel vertical offset.
 The `{{$ --OffsetX:10 --OffsetY:20 --Alignment:BottomCenter}}` syntax binds the parameters as a dictionary before execution.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -160,7 +162,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -169,7 +171,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='InteractivePanel']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -179,7 +181,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -189,7 +191,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -204,7 +206,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -218,7 +220,7 @@ The expression is parsed into a parameters dictionary before the plugin executes
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -231,7 +233,7 @@ Xpath is the only supported locator strategy for User32 elements in this plugin.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -247,7 +249,7 @@ Omit this property to use coordinate-based or pointer-offset movement with the X
 ### Alignment (Alignment)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | MiddleCenter      |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -265,34 +267,42 @@ Use MiddleCenter for standard centered positioning or edge and corner values for
 
 Positions the cursor at the bottom center of the element bounding box.
 Use this alignment when the target position is near the lower middle edge of the element.
+
 ##### Bottom Left
 
 Positions the cursor at the bottom left corner of the element bounding box.
 Use this alignment when the target position is near the lower left boundary of the element.
+
 ##### Bottom Right
 
 Positions the cursor at the bottom right corner of the element bounding box.
 Use this alignment when the target position is near the lower right boundary of the element.
+
 ##### Middle Center
 
 Positions the cursor at the horizontal and vertical center of the element bounding box.
 This is the default alignment and works well for most standard mouse-move interactions.
+
 ##### Middle Left
 
 Positions the cursor at the left edge and vertical center of the element bounding box.
 Use this alignment when the target position is near the left side of the element.
+
 ##### Middle Right
 
 Positions the cursor at the right edge and vertical center of the element bounding box.
 Use this alignment when the target position is near the right side of the element.
+
 ##### Top Center
 
 Positions the cursor at the top center of the element bounding box.
 Use this alignment when the target position is near the upper middle edge of the element.
+
 ##### Top Left
 
 Positions the cursor at the top left corner of the element bounding box.
 Use this alignment when the target position is near the upper left boundary of the element.
+
 ##### Top Right
 
 Positions the cursor at the top right corner of the element bounding box.
@@ -301,7 +311,7 @@ Use this alignment when the target position is near the upper right boundary of 
 ### Offset X (OffsetX)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -316,7 +326,7 @@ Use this parameter when the move must land slightly away from the default alignm
 ### Offset Y (OffsetY)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -331,7 +341,7 @@ Use this parameter when the move must land slightly away from the default alignm
 ### X (X)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -345,7 +355,7 @@ Set X and Y together to trigger coordinate-based movement without element target
 ### Y (Y)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

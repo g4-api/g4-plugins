@@ -1,6 +1,6 @@
 # Not Equal (NotEqual)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Operator Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,21 +13,21 @@ The primary purpose of the NotEqualOperator plugin is to compare two string valu
 ### Key Features
 
 | Feature           | Description                                               |
-|-------------------|-----------------------------------------------------------|
+| --- | --- |
 | String Comparison | Performs a comparison between two string values.          |
 | Integration       | Can be used under condition expressions by other plugins. |
 
 ### Usages in RPA
 
 | Usage             | Description                                                                           |
-|-------------------|---------------------------------------------------------------------------------------|
+| --- | --- |
 | String Comparison | Validate if two string values are not equal.                                          |
 | Conditional Logic | Use in conditional expressions to control workflow logic based on string comparisons. |
 
 ### Usages in Automation Testing
 
 | Usage              | Description                                                                                |
-|--------------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | Validation         | Validate output or state by comparing expected string values to ensure they are not equal. |
 | Dynamic Conditions | Create dynamic conditions based on string comparisons.                                     |
 
@@ -38,12 +38,12 @@ The primary purpose of the NotEqualOperator plugin is to compare two string valu
 This example demonstrates the usage of the `NotEqual` plugin to compare two string values.
 
 | Field      | Description                                                                                                                   |
-|------------|-------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | pluginName | Identifies the specific plugin being utilized, which is `NotEqual`. This signifies the action of comparing two string values. |
 | LeftHand   | Specifies the first string value to be compared. For example, `"value1"`.                                                   |
 | RightHand  | Specifies the second string value to be compared against. For example, `"value2"`.                                          |
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --LeftHand:"value1" --RightHand:"value2"}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -79,7 +79,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -87,17 +87,18 @@ action_rule = {
     "argument": "{{$ --LeftHand:"value1" --RightHand:"value2"}}"
 }
 ```
+
 ### Example No.2
 
 This example demonstrates the usage of the `NotEqualOperator` plugin within another plugin, such as `Assert`, to compare two string values.
 
 | Field     | Description                                                                                                                             |
-|-----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Condition | Identifies the specific operator being utilized, which is `NotEqualOperator`. This signifies the action of comparing two string values. |
 | LeftHand  | Specifies the first string value to be compared. For example, `"value1"`.                                                             |
 | RightHand | Specifies the second string value to be compared against. For example, `"value2"`.                                                    |
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -107,7 +108,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:NotEqual --LeftHand:"value1" --RightHand:"value2"}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -124,7 +125,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -133,7 +134,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -147,7 +148,7 @@ action_rule = {
 ### Left Hand (LeftHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -159,7 +160,7 @@ Specifies the first string value to be compared in the not equal check.
 ### Right Hand (RightHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

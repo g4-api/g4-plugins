@@ -1,6 +1,6 @@
 # Web Element Content (WebElementContent)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Content Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This plugin supports all WebDriver locators and works with all WebDriver-complia
 ### Key Features and Functionality
 
 | Feature              | Description                                                                                  |
-|----------------------|----------------------------------------------------------------------------------------------|
+| --- | --- |
 | Element Selection    | Selects elements using any WebDriver locator specified in `OnElement` and `Locator`.         |
 | Attribute Extraction | Extracts values from specified attributes or inner text if `OnAttribute` is not provided.    |
 | Regular Expression   | Applies a regular expression to the extracted value for precise data extraction.             |
@@ -25,7 +25,7 @@ This plugin supports all WebDriver locators and works with all WebDriver-complia
 ### Usages in RPA
 
 | Usage                       | Description                                                                                     |
-|-----------------------------|-------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Web Data Extraction         | Extract specific information from web pages during automated browsing sessions.                 |
 | Application Data Extraction | Extract data from native applications using drivers like Appium and Windows Application Driver. |
 | Dynamic Content Scraping    | Scrape content that is dynamically loaded or requires user interaction.                         |
@@ -34,7 +34,7 @@ This plugin supports all WebDriver locators and works with all WebDriver-complia
 ### Usages in Automation Testing
 
 | Usage                  | Description                                                                              |
-|------------------------|------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Testing             | Automate testing of UI components by extracting and validating their properties.         |
 | Functional Testing     | Verify that applications respond correctly to user interactions by extracting live data. |
 | Cross-Platform Testing | Perform tests across web, mobile, and desktop applications using various drivers.        |
@@ -48,7 +48,7 @@ Extract the text content of an element using an ID locator.
 The `WebElementContent` plugin selects an element by its `id` and extracts its inner text.
 This allows you to retrieve specific information from the web page or application during an active session.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -59,7 +59,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("productName");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -78,7 +78,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -88,7 +88,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -97,6 +97,7 @@ action_rule = {
     "onElement": "productName"
 }
 ```
+
 ### Example No.2
 
 Extract the value of an attribute from an element using a locator supported by mobile applications.
@@ -104,7 +105,7 @@ Extract the value of an attribute from an element using a locator supported by m
 The `WebElementContent` plugin selects an element in a mobile application and extracts the value of a specified attribute.
 This is useful for retrieving properties from elements in mobile apps.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -116,7 +117,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -126,7 +127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("accessibilityId:loginButton");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -137,7 +138,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -148,7 +149,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -158,6 +159,7 @@ action_rule = {
     "onElement": "accessibilityId:loginButton"
 }
 ```
+
 ### Example No.3
 
 Extract a numeric value from an element's text in a desktop application using a Windows locator.
@@ -165,7 +167,7 @@ Extract a numeric value from an element's text in a desktop application using a 
 The `WebElementContent` plugin extracts the inner text of an element in a Windows application and applies a regular expression to retrieve a numeric value.
 The extracted value is then converted to the specified data type.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -177,7 +179,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -187,7 +189,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+\.\d{2}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -198,7 +200,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -209,7 +211,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -225,7 +227,7 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -239,7 +241,7 @@ Supports all WebDriver locators, including those for web, mobile, and desktop ap
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -253,7 +255,7 @@ Examples include `Id`, `Name`, `ClassName`, `TagName`, `LinkText`, `PartialLinkT
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -266,7 +268,7 @@ If not provided, the plugin will extract the inner text of the element.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -279,7 +281,7 @@ This allows for precise data extraction from the text or attribute value.
 ### Key (Key)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -292,7 +294,7 @@ This key can be used to reference the data in subsequent steps.
 ### Data Type (DataType)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -307,12 +309,15 @@ Supported data types include `String`, `Number`, `Boolean` and  `DateTime`.
 ##### String
 
 Textual data.
+
 ##### Number
 
 Whole numbers or numeric values with decimal points.
+
 ##### Boolean
 
 True or False values.
+
 ##### Date Time
 
 Date and/or time values.
@@ -320,6 +325,7 @@ Date and/or time values.
 ## Scope
 
 * Any
+
 ## See Also
 
 w3c: [https://www.w3.org/TR/webdriver/](https://www.w3.org/TR/webdriver/)

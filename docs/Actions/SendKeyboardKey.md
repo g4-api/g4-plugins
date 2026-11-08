@@ -1,6 +1,6 @@
 # Send Keyboard Key (SendKeyboardKey)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min Â· Action Plugin Â· [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ Use this action wherever a workflow needs to trigger keyboard-driven behavior â€
 ### Key Features and Functionality
 
 | Feature            | Description                                                                                                                                      |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Single Key         | Supply a key name directly as the argument for a compact single-key interaction without macro syntax.                                            |
 | Multi-Key Sequence | Repeat the --Key parameter to build an ordered sequence of key presses dispatched one at a time.                                                 |
 | Per-Key Delay      | The Delay parameter inserts a pause after each key send, accepting milliseconds or TimeSpan format, to emulate human typing pacing.              |
@@ -26,7 +26,7 @@ Use this action wherever a workflow needs to trigger keyboard-driven behavior â€
 ### Usages in RPA
 
 | Use Case          | Description                                                                                                |
-|-------------------|------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Form Submission   | Press Enter on an input field to submit a form without clicking a submit button.                           |
 | Focus Navigation  | Send Tab or Arrow keys to move focus through interactive controls in a web form.                           |
 | Pre-Cleared Entry | Use NativeClear to remove existing content and then send a key such as Enter to confirm the cleared state. |
@@ -34,7 +34,7 @@ Use this action wherever a workflow needs to trigger keyboard-driven behavior â€
 ### Usages in Automation Testing
 
 | Use Case                | Description                                                                                                         |
-|-------------------------|---------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Keyboard Event Testing  | Verify that an input element correctly handles key events such as Enter triggering form submission or validation.   |
 | Backspace Behavior      | Test that Backspace removes characters as expected and the resulting element state matches the expected value.      |
 | Sequence State Testing  | Confirm that a multi-key sequence â€” such as Enter followed by Backspace â€” produces the correct UI state transition. |
@@ -49,7 +49,7 @@ Sends the `Enter` key to the element matched by the CSS selector `#KeyboardKeyOu
 The key name is passed directly as the argument with no macro syntax, which is the simplest form of this action.
 No clearing or delay is applied â€” the key is sent immediately to the located element.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -61,7 +61,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -71,7 +71,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#KeyboardKeyOutcome");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -82,7 +82,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -93,7 +93,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -103,6 +103,7 @@ action_rule = {
     "onElement": "#KeyboardKeyOutcome"
 }
 ```
+
 ### Example No.2
 
 ### Send a multi-key sequence with a per-key delay
@@ -111,7 +112,7 @@ Sends `Enter` and then `Backspace` to the element matched by `#KeyboardKeyOutcom
 The `--Key` parameter is repeated to build an ordered sequence, and `--Delay:500` controls the per-key pacing.
 Use this form when the target application requires a brief pause between key events to process each input before the next arrives.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -123,7 +124,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -133,7 +134,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#KeyboardKeyOutcome");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -144,7 +145,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -155,7 +156,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -165,6 +166,7 @@ action_rule = {
     "onElement": "#KeyboardKeyOutcome"
 }
 ```
+
 ### Example No.3
 
 ### Clear element content natively and then send a key
@@ -173,7 +175,7 @@ Clears the content of a `contenteditable` div using native backspace simulation 
 The `--NativeClear` switch triggers `element.SendNativeClear()` before the key sequence begins, bypassing the standard WebDriver clear method.
 Use this form for elements that ignore the standard clear command, such as content-editable divs or inputs with custom event handlers.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -184,7 +186,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -193,7 +195,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@contenteditable='true']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -203,7 +205,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -213,7 +215,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -228,7 +230,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -242,7 +244,7 @@ The macro format {{$ --Key:Enter --Delay:500}} is required when combining multip
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -256,7 +258,7 @@ When absent the default Xpath strategy is used.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -272,7 +274,7 @@ When the element is not found a NoSuchElementException is recorded and the actio
 ### Clear (Clear)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -286,7 +288,7 @@ Use Clear for standard input elements that respond to the WebDriver clear comman
 ### Delay (Delay)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -300,7 +302,7 @@ When absent or zero, keys are sent back-to-back with no pause between them.
 ### Key (Key)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -314,7 +316,7 @@ When Key is absent, the action uses the full argument string as a single key nam
 ### Native Clear (NativeClear)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -328,6 +330,7 @@ Any exception raised during native clearing is caught, recorded as a G4Exception
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-send-keys](https://www.w3.org/TR/webdriver/#element-send-keys)

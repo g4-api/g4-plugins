@@ -1,24 +1,24 @@
 # Body Html (BodyHtml)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~15 min · ExtractionScope Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > This scope creates an internal DOM object and only supports XPath expressions.
 
 ### Purpose
 
-The `BodyHtml` extraction scope is designed for web scraping tasks focused on collecting data from the fully rendered, static content within the body of an HTML document. 
-It ensures that the extracted data includes all initial dynamic content and represents the web page's state as it appears to the user after all initial client-side processing has completed. 
+The `BodyHtml` extraction scope is designed for web scraping tasks focused on collecting data from the fully rendered, static content within the body of an HTML document.
+It ensures that the extracted data includes all initial dynamic content and represents the web page's state as it appears to the user after all initial client-side processing has completed.
 This scope is particularly valuable for gathering information from standard web pages, offering performance benefits through element caching and being especially useful when dealing with content-heavy websites.
 
 ### Key Features and Functionality
 
 | Feature                             | Description                                                                                                                    |
-|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Capture Fully Rendered Content      | Extracts data from the web page's main content, including all elements fully rendered after the page has loaded.               |
 | Extraction After Dynamic Processing | Captures data generated or modified by client-side technologies like JavaScript and AJAX during page load.                     |
 | Standard Web Pages                  | Suitable for scraping data from standard web pages with conventional HTML structures within the body.                          |
@@ -29,7 +29,7 @@ This scope is particularly valuable for gathering information from standard web 
 ### Usages in RPA
 
 | Usage                   | Description                                                                                                               |
-|-------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Data Collection         | Used to collect and extract data from fully rendered web pages, ensuring that all dynamic content is included.            |
 | Automated Reporting     | Ideal for scenarios where data from various web pages needs to be aggregated and analyzed for automated reporting tasks.  |
 | Monitoring and Analysis | Suitable for monitoring changes in web content over time, such as tracking updates to a product catalog or news articles. |
@@ -37,14 +37,14 @@ This scope is particularly valuable for gathering information from standard web 
 ### Usages in Automation Testing
 
 | Usage                 | Description                                                                                                                  |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Page State Validation | Used to validate the final rendered state of a web page in end-to-end tests, ensuring that all content loads as expected.    |
 | Regression Testing    | Helps in regression testing by capturing the HTML body content before and after changes to ensure no unintended alterations. |
 | Load Testing          | Useful in load testing to ensure that the body content remains consistent and performs well under different loads.           |
 
 ### Performance Considerations
 
-An advantage of the `BodyHtml` scope is that it often caches fully rendered elements, which can lead to better performance compared to the `Elements` scope. 
+An advantage of the `BodyHtml` scope is that it often caches fully rendered elements, which can lead to better performance compared to the `Elements` scope.
 Caching reduces the need to re-fetch or re-render elements, improving data extraction efficiency.
 
 ### See Also
@@ -56,11 +56,11 @@ Caching reduces the need to re-fetch or re-render elements, improving data extra
 
 ### Example No.1
 
-Extract the text associated with the `Location` label from the `ExportData.html` web page. 
-This example demonstrates how to call the `BodyHtml` plugin directly, specifying the `onElement`, `contentRules`, and `dataCollector` properties. 
+Extract the text associated with the `Location` label from the `ExportData.html` web page.
+This example demonstrates how to call the `BodyHtml` plugin directly, specifying the `onElement`, `contentRules`, and `dataCollector` properties.
 The `Location` text within a `div` element with the class `hotel` is located, a regular expression is applied to capture the text following the label, and the extracted data is stored in JSON format in the `DataFile.json` file.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -70,7 +70,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -78,7 +78,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@class='hotel']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -87,7 +87,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -96,7 +96,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -104,53 +104,54 @@ action_rule = {
     "onElement": "//div[@class='hotel']"
 }
 ```
+
 ### Example No.2
 
-Extract the text associated with the `Location` label from the `ExportData.html` web page as part of an extraction rule within an automation request. 
-This example shows how to use the `BodyHtml` plugin within an extraction rule setup. 
+Extract the text associated with the `Location` label from the `ExportData.html` web page as part of an extraction rule within an automation request.
+This example shows how to use the `BodyHtml` plugin within an extraction rule setup.
 It locates the `Location` text within a `div` element with the class `hotel`, applies a regular expression to capture the text following the label, and stores the extracted data in JSON format in the `DataFile.json` file.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "",
+    PluginName = "BodyHtml",
     OnElement = "//div[@class='hotel']"
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("")
+    .setPluginName("BodyHtml")
     .setOnElement("//div[@class='hotel']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
-    pluginName: "",
+    pluginName: "BodyHtml",
     onElement: "//div[@class='hotel']"
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
-    "pluginName": "",
+    "pluginName": "BodyHtml",
     "onElement": "//div[@class='hotel']"
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
-    "pluginName": "",
+    "pluginName": "BodyHtml",
     "onElement": "//div[@class='hotel']"
 }
 ```
@@ -160,7 +161,7 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -172,7 +173,7 @@ Specifies the target element within the body of the HTML document from which dat
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -184,7 +185,7 @@ Specifies the locator strategy used to identify the target elements within the b
 ### Rules (Rules)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -196,20 +197,20 @@ Defines the rules for extracting content from the specified element, such as app
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Specifies a regular expression to be applied to the extracted content before further processing. 
+Specifies a regular expression to be applied to the extracted content before further processing.
 This allows for more flexible data extraction by capturing specific patterns within the content.
 
 ### Data Collector (DataCollector)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -221,6 +222,7 @@ Specifies how the extracted data will be collected and stored, such as saving it
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://html-agility-pack.net/documentation](https://html-agility-pack.net/documentation)

@@ -1,6 +1,6 @@
 # New Date (New-Date)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~57 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Provides date and time manipulation, including adding or subtracting time, extra
 ### Key Features
 
 | Feature              | Description                                                                 |
-|----------------------|-----------------------------------------------------------------------------|
+| --- | --- |
 | Date Manipulation    | Add or subtract time from the current date and time.                        |
 | Date Formatting      | Format dates according to custom formats.                                   |
 | Date Part Extraction | Extract specific parts of the date and time, such as year, month, day, etc. |
@@ -21,7 +21,7 @@ Provides date and time manipulation, including adding or subtracting time, extra
 ### Usages in RPA
 
 | Usage            | Description                                                             |
-|------------------|-------------------------------------------------------------------------|
+| --- | --- |
 | Date Calculation | Perform calculations involving dates and times in automation workflows. |
 | Date Formatting  | Format dates for logging or display purposes.                           |
 | Data Processing  | Extract specific date parts for further processing or validation.       |
@@ -29,7 +29,7 @@ Provides date and time manipulation, including adding or subtracting time, extra
 ### Usages in Automation Testing
 
 | Usage             | Description                                                                                |
-|-------------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | Date Verification | Verify date-related behaviors or outputs during automated testing.                         |
 | Data Generation   | Generate test data involving dates and times.                                              |
 | Test Scheduling   | Schedule tests to run at specific dates or times for regression testing or other purposes. |
@@ -43,7 +43,7 @@ Provides date and time manipulation, including adding or subtracting time, extra
 Use the `SendKeys` plugin to send the current date and time to the specified element matching the CSS selector `.example-element`.
 Generate the argument by applying the `NewDate` macro (`{{$New-Date}}`), which returns the current local date and time as a string.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -55,7 +55,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".example-element");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -76,7 +76,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -87,7 +87,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -97,6 +97,7 @@ action_rule = {
     "onElement": ".example-element"
 }
 ```
+
 ### Example No.2
 
 ### RegisterParameter Plugin with NewDate Macro
@@ -104,7 +105,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to produce a date string in `yyyy-MM-dd` format.
 Pass the verbatim argument string (`{{$ --Name:DataParameter --Value:<date string> --Scope:Session}}`) to the `RegisterParameter` plugin to register a session-scoped parameter named `DataParameter` with the generated date string.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -114,7 +115,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -122,7 +123,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:DataParameter --Value:{{$New-Date --Format:yyyy-MM-dd}} --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -131,7 +132,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -140,7 +141,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -148,6 +149,7 @@ action_rule = {
     "argument": "{{$ --Name:DataParameter --Value:{{$New-Date --Format:yyyy-MM-dd}} --Scope:Session}}"
 }
 ```
+
 ### Example No.3
 
 ### WriteLog Plugin with NewDate Macro
@@ -155,7 +157,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy-MM-dd}}`) to generate the current date string in `yyyy-MM-dd` format.
 Pass the message `Log entry created at {{$New-Date --Format:yyyy-MM-dd}}` to the `WriteLog` plugin to write a log entry that includes the generated date.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -165,7 +167,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -173,7 +175,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Log entry created at {{$New-Date --Format:yyyy-MM-dd}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -182,7 +184,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -191,7 +193,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -199,6 +201,7 @@ action_rule = {
     "argument": "Log entry created at {{$New-Date --Format:yyyy-MM-dd}}"
 }
 ```
+
 ### Example No.4
 
 ### SendKeys Plugin with NewDate Macro in UTC
@@ -206,7 +209,7 @@ action_rule = {
 Use the `SendKeys` plugin to send the current UTC date to the element matching the CSS selector `.example-element`.
 Generate the argument by applying the `NewDate` macro with format and UTC flag (`{{$New-Date --Format:yyyy-MM-dd --Utc}}`).
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -218,7 +221,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -228,7 +231,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".example-element");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -239,7 +242,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -250,7 +253,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -260,6 +263,7 @@ action_rule = {
     "onElement": ".example-element"
 }
 ```
+
 ### Example No.5
 
 ### Click Plugin with NewDate Macro for Year
@@ -267,7 +271,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --Format:yyyy}}`) to generate the current year string.
 Use the `Click` plugin with the XPath locator string `//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]` so that the plugin evaluates the inline macro call at runtime and clicks the matching button.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -277,7 +281,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -285,7 +289,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -294,7 +298,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -303,7 +307,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -311,6 +315,7 @@ action_rule = {
     "onElement": "//button[contains(text(), ‘{{$New-Date --Format:yyyy}}’)]"
 }
 ```
+
 ### Example No.6
 
 ### WriteLog Plugin with NewDate Macro for Unix Epoch
@@ -318,7 +323,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --UnixEpoch}}`) to generate the current Unix epoch timestamp.
 Pass the argument `{{$New-Date --UnixEpoch}}` to the `WriteLog` plugin so that the plugin evaluates the macro call at runtime and writes a log entry containing the generated timestamp.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -328,7 +333,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -336,7 +341,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$New-Date --UnixEpoch}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -345,7 +350,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -354,7 +359,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -362,6 +367,7 @@ action_rule = {
     "argument": "{{$New-Date --UnixEpoch}}"
 }
 ```
+
 ### Example No.7
 
 ### SendKeys Plugin with NewDate Macro for OLE Automation Date
@@ -369,7 +375,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --OaDate}}`) to generate the current date and time as an OLE Automation date value.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --OaDate}}` so that the plugin inputs the generated OLE Automation date value into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -381,7 +387,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -391,7 +397,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -402,7 +408,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -413,7 +419,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -423,6 +429,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.8
 
 ### SendKeys Plugin with NewDate Macro for Year
@@ -430,7 +437,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Year}}`) to generate the current year string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Year}}` so that the plugin inputs the generated year into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -442,7 +449,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -452,7 +459,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -463,7 +470,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -474,7 +481,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -484,6 +491,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.9
 
 ### SendKeys Plugin with NewDate Macro for Month
@@ -491,7 +499,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Month}}`) to generate the current month string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Month}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated month into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -503,7 +511,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -513,7 +521,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -524,7 +532,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -535,7 +543,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -545,6 +553,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.10
 
 ### SendKeys Plugin with NewDate Macro for Day
@@ -552,7 +561,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Day}}`) to generate the current day string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Day}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated day into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -564,7 +573,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -574,7 +583,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -585,7 +594,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -596,7 +605,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -606,6 +615,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.11
 
 ### SendKeys Plugin with NewDate Macro for Hour
@@ -613,7 +623,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Hour}}`) to generate the current hour string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Hour}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated hour into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -625,7 +635,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -635,7 +645,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -646,7 +656,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -657,7 +667,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -667,6 +677,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.12
 
 ### SendKeys Plugin with NewDate Macro for Minute
@@ -674,7 +685,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Minute}}`) to generate the current minute string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Minute}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated minute into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -686,7 +697,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -696,7 +707,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -707,7 +718,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -718,7 +729,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -728,6 +739,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.13
 
 ### SendKeys Plugin with NewDate Macro for Second
@@ -735,7 +747,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Second}}`) to generate the current second string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Second}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated second into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -747,7 +759,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -757,7 +769,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -768,7 +780,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -779,7 +791,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -789,6 +801,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.14
 
 ### SendKeys Plugin with NewDate Macro for Millisecond
@@ -796,7 +809,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Millisecond}}`) to generate the current millisecond string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Millisecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated millisecond into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -808,7 +821,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -818,7 +831,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -829,7 +842,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -840,7 +853,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -850,6 +863,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.15
 
 ### SendKeys Plugin with NewDate Macro for Nanosecond
@@ -857,7 +871,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Nanosecond}}`) to generate the current nanosecond string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Nanosecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated nanosecond into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -869,7 +883,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -879,7 +893,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -890,7 +904,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -901,7 +915,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -911,6 +925,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.16
 
 ### SendKeys Plugin with NewDate Macro for Microsecond
@@ -918,7 +933,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Microsecond}}`) to generate the current microsecond string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Microsecond}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated microsecond into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -930,7 +945,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -940,7 +955,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -951,7 +966,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -962,7 +977,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -972,6 +987,7 @@ action_rule = {
     "onElement": ".text-field"
 }
 ```
+
 ### Example No.17
 
 ### SendKeys Plugin with NewDate Macro for Ticks
@@ -979,7 +995,7 @@ action_rule = {
 Evaluate the `NewDate` macro (`{{$New-Date --DatePart:Ticks}}`) to generate the current tick count string.
 Use the `SendKeys` plugin with the CSS selector `.text-field` and the argument `{{$New-Date --DatePart:Ticks}}` so that the plugin evaluates the inline macro call at runtime and inputs the generated tick count into the text field.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -991,7 +1007,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1001,7 +1017,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".text-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1012,7 +1028,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1023,7 +1039,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1039,7 +1055,7 @@ action_rule = {
 ### Add Time (AddTime)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1053,7 +1069,7 @@ Supports durations such as days, hours, minutes, and seconds.
 ### Subtruct Time (SubtructTime)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1067,7 +1083,7 @@ Creates a past timestamp relative to now.
 ### Format (Format)
 
 | Attribute                   | Value                       |
-|-----------------------------|-----------------------------|
+| --------------------------- | --------------------------- |
 | **Default Value**           | yyyy-MM-ddTHH:mm:ss.ffffffK |
 | **Depends On**              | None                        |
 | **Mandatory**               | No                          |
@@ -1081,7 +1097,7 @@ Defaults to `yyyy-MM-ddTHH:mm:ss.ffffffK` when no format is provided.
 ### Date Part (DatePart)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1100,46 +1116,55 @@ Specifying ‘Ticks’ returns the raw tick count for very fine measurements and
 Extracts the year from the date and time input.
 Using the year value helps group or filter data by calendar year.
 Value appears as a four-digit number like 2025.
+
 ##### Month
 
 Extracts the month number from the date and time, where January is 1 and December is 12.
 Month values help sort events or data within a single year.
 Useful for generating monthly reports or determining seasonal patterns.
+
 ##### Day
 
 Extracts the day of the month from the date and time.
 Day values range from 1 to 31 depending on the month.
 Scheduling or tracking tasks on specific dates becomes easier.
+
 ##### Hour
 
 Extracts the hour part of the time using a 24-hour clock.
 Hour values range from 0 to 23.
 This is useful when you need to trigger actions at a specific hour.
+
 ##### Minute
 
 Extracts the minute part of the time, ranging from 0 to 59.
 Using minutes allows finer-grained time schedules or logs.
 Combining with hours defines precise times like 14:30.
+
 ##### Second
 
 Extracts the second part of the time, ranging from 0 to 59.
 Seconds allow tracking events at a one-second resolution.
 Useful for timestamping or measuring short delays.
+
 ##### Millisecond
 
 Extracts the millisecond part of the time, ranging from 0 to 999.
 Milliseconds help measure short intervals with high precision.
 Essential for applications that record or analyze rapid events.
+
 ##### Nanosecond
 
 Extracts the nanosecond component, measuring one billionth of a second.
 Nanoseconds provide extremely fine timing for specialized scenarios.
 Useful for high-resolution timestamps in scientific or performance analysis.
+
 ##### Microsecond
 
 Extracts the microsecond component, measuring one millionth of a second.
 Microseconds allow very precise time calculations below the millisecond level.
 Helpful for profiling code performance or detailed logging.
+
 ##### Ticks
 
 Extracts the total number of ticks from the time value, where each tick is 100 nanoseconds.
@@ -1149,7 +1174,7 @@ Useful for comparing or calculating time spans at the lowest resolution.
 ### Utc (Utc)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1163,7 +1188,7 @@ A universal time reference improves consistency when processing timestamps acros
 ### Unix Epoch (UnixEpoch)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1177,7 +1202,7 @@ Using a numeric timestamp simplifies interoperability across platforms and langu
 ### Oa Date (OaDate)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1191,7 +1216,7 @@ Many Microsoft automation tools use this format to maintain compatibility.
 ### Day Of Year (DayOfYear)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1205,7 +1230,7 @@ Continuous day counts support features like annual reports and milestone trackin
 ### Day Of Week (DayOfWeek)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

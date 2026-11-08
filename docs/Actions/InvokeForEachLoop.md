@@ -1,6 +1,6 @@
 # Invoke For Each Loop (InvokeForEachLoop)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~36 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Finds all elements matching your locator and runs a set of actions on each one. 
 ### Key Features and Functionality
 
 | Feature                     | Description                                                         |
-|-----------------------------|---------------------------------------------------------------------|
+| --- | --- |
 | Element Iteration           | Finds all elements matching the locator and loops through each one. |
 | Sequential Execution        | Runs actions in order on each element for a clear workflow.         |
 | Alternative Locator Support | Lets you specify a different locator for where actions run.         |
@@ -22,7 +22,7 @@ Finds all elements matching your locator and runs a set of actions on each one. 
 ### Usages in RPA
 
 | Use Case            | Description                                                                       |
-|---------------------|-----------------------------------------------------------------------------------|
+| --- | --- |
 | Data Processing     | Process each item in a list by running data entry, validation, or transformation. |
 | Batch Operations    | Perform a series of tasks on groups of files, records, or transactions in order.  |
 | Dynamic Interaction | Work with UI items created at runtime by clicking, typing, or checking content.   |
@@ -30,7 +30,7 @@ Finds all elements matching your locator and runs a set of actions on each one. 
 ### Usages in Automation Testing
 
 | Use Case               | Description                                                                 |
-|------------------------|-----------------------------------------------------------------------------|
+| --- | --- |
 | Element Verification   | Check each UI element to confirm its state or value matches expectations.   |
 | Data-Driven Testing    | Run tests across different data sets by looping through inputs and actions. |
 | UI Interaction Testing | Simulate user steps like clicks or form entries on each element.            |
@@ -47,7 +47,7 @@ If no buttons are found, an exception is added and the loop is skipped.
 If a Click action fails on any element, an exception is recorded and execution continues to the next element.
 The overall process does not stop unless explicitly configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -65,7 +65,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -77,7 +77,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement(".");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -92,7 +92,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -107,7 +107,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -121,6 +121,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.2
 
 ### Click Each Pagination Button Using CSS Selector
@@ -131,7 +132,7 @@ If no buttons are found, an exception is added and the loop is skipped.
 If a Click action fails on any element, an exception is recorded and execution continues to the next element.
 The overall process does not stop unless explicitly configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -150,7 +151,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -163,7 +164,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement(".");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -179,7 +180,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -195,7 +196,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -210,6 +211,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.3
 
 ### Click Each Pagination Button Using XPath and Relative XPath
@@ -220,7 +222,7 @@ If no elements are found, an exception is logged and the loop is skipped.
 If a Click action within any iteration throws an exception, it is recorded and the loop continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -238,7 +240,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -250,7 +252,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("./button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -265,7 +267,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -280,7 +282,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -294,6 +296,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.4
 
 ### Click Each Pagination Button Using XPath and CSS Selector
@@ -304,7 +307,7 @@ If no elements are found, an exception is logged and the loop is skipped.
 If a Click action within any iteration throws an exception, it is recorded and the loop continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -323,7 +326,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -336,7 +339,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -352,7 +355,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -368,7 +371,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -383,6 +386,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.5
 
 ### Click Each Pagination Button Using CSS Selector and Relative XPath
@@ -393,7 +397,7 @@ If no elements are found, an exception is logged and the loop is skipped.
 If a Click action within any iteration throws an exception, it is recorded and the loop continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -412,7 +416,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -425,7 +429,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("./button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -441,7 +445,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -457,7 +461,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -472,6 +476,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.6
 
 ### Click Each Pagination Button Using CSS Selector
@@ -482,7 +487,7 @@ If no elements are found, an exception is logged and the loop is skipped.
 If a Click action within any iteration throws an exception, it is recorded and the loop continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -502,7 +507,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -516,7 +521,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -533,7 +538,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -550,7 +555,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -566,6 +571,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.7
 
 ### Nested InvokeForEachLoop With XPath Selectors
@@ -577,7 +583,7 @@ If no inner elements are found, an exception is logged and the inner loop is ski
 If any Click action throws an exception, it is recorded and execution continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -602,7 +608,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -617,7 +623,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
                     .setPluginName("Click");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -637,7 +643,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -657,7 +663,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -676,6 +682,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.8
 
 ### Nested InvokeForEachLoop With XPath and CSS Selectors
@@ -687,7 +694,7 @@ If no inner elements are found, an exception is logged and the inner loop is ski
 If any Click action throws an exception, it is recorded and execution continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -713,7 +720,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -729,7 +736,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
                     .setPluginName("Click");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -750,7 +757,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -771,7 +778,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -791,6 +798,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.9
 
 ### Nested InvokeForEachLoop With CSS Selector and Relative XPath
@@ -802,7 +810,7 @@ If no inner elements are found, an exception is logged and the inner loop is ski
 If any Click action throws an exception, it is recorded and execution continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -828,7 +836,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -844,7 +852,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
                     .setPluginName("Click");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -865,7 +873,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -886,7 +894,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -906,6 +914,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.10
 
 ### Nested InvokeForEachLoop With CSS Selectors
@@ -917,7 +926,7 @@ If no inner elements are found, an exception is logged and the inner loop is ski
 If any Click action throws an exception, it is recorded and execution continues.
 The process does not stop unless configured to stop on error.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -944,7 +953,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -961,7 +970,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
                     .setPluginName("Click");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -983,7 +992,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1005,7 +1014,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1032,7 +1041,7 @@ action_rule = {
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1046,7 +1055,7 @@ Default is Xpath unless another method is chosen.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -1060,7 +1069,7 @@ The assertion then runs on that element.
 ### Rules (Rules)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

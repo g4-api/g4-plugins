@@ -1,6 +1,6 @@
 # Trim Start (TrimStart)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~15 min · Transformer Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ This is particularly useful in scenarios where text data needs to be cleaned or 
 ### Key Features and Functionality
 
 | Feature               | Description                                                                                |
-|-----------------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | Leading Whitespace Removal | Removes all leading whitespace characters from the input text.                        |
 | Custom Character Trim | Removes specified characters from the beginning of the input text.                         |
 | Easy Integration      | Simple to incorporate into automation workflows for text data cleaning and transformation. |
@@ -22,7 +22,7 @@ This is particularly useful in scenarios where text data needs to be cleaned or 
 ### Usages in RPA
 
 | Usage                 | Description                                                                                                                      |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Data Cleaning         | Preprocess text data by trimming leading whitespace or specific characters before inputting into systems or databases.           |
 | Formatting Automation | Normalize text formats when copying or transferring data between applications.                                                   |
 | Logging and Reporting | Prepare text data for logging or reporting where extra spaces or specific characters at the start might cause formatting issues. |
@@ -30,7 +30,7 @@ This is particularly useful in scenarios where text data needs to be cleaned or 
 ### Usages in Automation Testing
 
 | Usage                  | Description                                                                                            |
-|------------------------|--------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Data Preparation  | Clean test input data to ensure consistency across different test cases.                               |
 | Validation Testing     | Verify that applications handle text inputs without leading spaces or specific characters as expected. |
 | Output Normalization   | Normalize outputs before comparing them to expected results in assertions.                             |
@@ -44,7 +44,7 @@ Remove all leading whitespace from a text input.
 The `TrimStart` transformer is utilized to remove all leading whitespace characters from the provided text.
 If whitespace is present at the beginning, it is removed; otherwise, the text remains unchanged.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -54,7 +54,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -62,7 +62,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("   This is a sample text with spaces at the start.");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -71,7 +71,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,7 +80,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -88,6 +88,7 @@ action_rule = {
     "onElement": "   This is a sample text with spaces at the start."
 }
 ```
+
 ### Example No.2
 
 Trim specific characters from the beginning of the `UserInput` field extracted from content.
@@ -95,7 +96,7 @@ Trim specific characters from the beginning of the `UserInput` field extracted f
 The `TrimStart` transformer is applied to the `UserInput` field to remove specified characters from the start of the text.
 This ensures the `UserInput` field is clean and free from unwanted leading characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -105,7 +106,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -113,7 +114,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".//input[@id='UserInput']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -122,7 +123,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -131,7 +132,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -139,6 +140,7 @@ action_rule = {
     "onElement": ".//input[@id='UserInput']"
 }
 ```
+
 ### Example No.3
 
 Remove leading line breaks and whitespace from the `Comment` field.
@@ -146,7 +148,7 @@ Remove leading line breaks and whitespace from the `Comment` field.
 The `TrimStart` transformer is used to remove any leading whitespace and line breaks from the `Comment` field.
 This ensures the `Comment` field does not have unnecessary blank lines or spaces at the start.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -156,7 +158,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -164,7 +166,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".//textarea[@id='Comment']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -173,7 +175,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -182,7 +184,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -196,7 +198,7 @@ action_rule = {
 ### Transformer Result (TransformerResult)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -211,7 +213,7 @@ This value can be of any type, depending on the context in which the transformer
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Entity            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -227,6 +229,7 @@ This property allows you to choose whether to transform data from the entity con
 
 The transformer acts on the entity fields created by the previous action.
 This is the default behavior.
+
 ##### Session
 
 The transformer acts on a session parameter whose name is specified in the `OnElement` property.
@@ -234,7 +237,7 @@ The transformer acts on a session parameter whose name is specified in the `OnEl
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -249,7 +252,7 @@ In the context of transformers used after a rule execution, `OnElement` refers t
 ### Trim Chars (TrimChars)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

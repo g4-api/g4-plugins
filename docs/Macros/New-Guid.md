@@ -1,6 +1,6 @@
 # New Guid (New-Guid)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~24 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -16,7 +16,7 @@ A custom regex pattern can be applied to extract specific parts of the generated
 ### Key Features and Functionality
 
 | Feature                      | Description                                                                           |
-|------------------------------|---------------------------------------------------------------------------------------|
+| --- | --- |
 | Unique Identifier Generation | Creates a new GUID for use as a unique reference in workflows.                        |
 | Format Options               | Offers multiple output formats (D, N, B, P, X) to meet different system requirements. |
 | Pattern-Based Extraction     | Allows custom regex patterns to extract specific parts of the GUID as needed.         |
@@ -25,14 +25,14 @@ A custom regex pattern can be applied to extract specific parts of the generated
 ### Usages in RPA
 
 | Use Case               | Description                                                                       |
-|------------------------|-----------------------------------------------------------------------------------|
+| --- | --- |
 | Element Identification | Assigns unique IDs to UI elements for reliable selection and interaction.         |
 | Transaction Tracking   | Tags transactions or records with GUIDs to ensure accurate tracking and auditing. |
 
 ### Usages in Automation Testing
 
 | Use Case             | Description                                                                      |
-|----------------------|----------------------------------------------------------------------------------|
+| --- | --- |
 | Test Data Generation | Produces unique data values to avoid duplicates in test scenarios.               |
 | Test Case Management | Uses GUIDs to label and manage test cases for better organization and reporting. |
 
@@ -45,7 +45,7 @@ A custom regex pattern can be applied to extract specific parts of the generated
 Invoke `New-Guid` to obtain a GUID value in `N` format (32 digits) at runtime and send it as keystrokes using the `SendKeys` plugin.
 Target the element specified by the `CssSelector` `#inputField`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -67,7 +67,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -78,7 +78,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -89,7 +89,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -99,6 +99,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.2
 
 ### Generate and Send Hyphenated GUID
@@ -106,7 +107,7 @@ action_rule = {
 Invoke `New-Guid` to obtain a GUID value in `D` format (32 digits separated by hyphens) at runtime and send it as keystrokes using the `SendKeys` plugin.
 Target the element specified by the `CssSelector` `#inputField`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -118,7 +119,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -128,7 +129,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -139,7 +140,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -150,7 +151,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -160,6 +161,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.3
 
 ### Generate and Send Braced GUID
@@ -167,7 +169,7 @@ action_rule = {
 Invoke `New-Guid` to obtain a GUID value in `B` format (32 digits separated by hyphens, enclosed in braces) at runtime and send it as keystrokes using the `SendKeys` plugin.
 Target the element specified by the `CssSelector` `#inputField`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -179,7 +181,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -189,7 +191,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -200,7 +202,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -211,7 +213,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -221,6 +223,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.4
 
 ### Generate and Send Parenthesized GUID
@@ -228,7 +231,7 @@ action_rule = {
 Invoke `New-Guid` to obtain a GUID value in `P` format (32 digits separated by hyphens, enclosed in parentheses) at runtime and send it as keystrokes using the `SendKeys` plugin.
 Target the element specified by the `CssSelector` `#inputField`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -240,7 +243,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -250,7 +253,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -261,7 +264,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -272,7 +275,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -282,6 +285,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.5
 
 ### Generate and Send Formatted GUID
@@ -289,7 +293,7 @@ action_rule = {
 Invoke `New-Guid` to obtain a GUID value in `X` format (four hexadecimal values enclosed in braces) at runtime and send it as keystrokes using the `SendKeys` plugin.
 Target the element specified by the `CssSelector` `#inputField`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -301,7 +305,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -311,7 +315,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -322,7 +326,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -333,7 +337,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -343,6 +347,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.6
 
 ### Extract and Log GUID Prefix
@@ -352,7 +357,7 @@ Apply the regular expression `^\w{8}` to the GUID value in the `argument` attrib
 Extract the first eight alphanumeric characters of the GUID.
 Log the extracted GUID prefix using the `WriteLog` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -362,7 +367,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -370,7 +375,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\w{8}}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -379,7 +384,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -388,7 +393,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -402,7 +407,7 @@ action_rule = {
 ### Format (Format)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | D                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -420,21 +425,25 @@ Selecting a compatible format ensures the GUID meets the requirements of differe
 Formats the GUID as 32 hexadecimal digits separated by hyphens and enclosed in braces.
 Output looks like {123e4567-e89b-12d3-a456-426614174000}.
 Enclosing braces are useful in environments that require explicit GUID delimiters.
+
 ##### D
 
 Formats the GUID as 32 hexadecimal digits separated by hyphens.
 Output looks like 123e4567-e89b-12d3-a456-426614174000.
 That pattern is commonly used in API requests and logging scenarios.
+
 ##### N
 
 Formats the GUID as 32 continuous hexadecimal digits without any separators.
 Output looks like 123e4567e89b12d3a456426614174000.
 Compact representation helps when string length needs to be minimized.
+
 ##### P
 
 Formats the GUID as 32 hexadecimal digits separated by hyphens and enclosed in parentheses.
 Output looks like (123e4567-e89b-12d3-a456-426614174000).
 Parentheses help indicate the GUID as a grouped identifier in certain contexts.
+
 ##### X
 
 Formats the GUID as four hexadecimal values wrapped in braces and separated by commas.
@@ -444,7 +453,7 @@ That detailed representation is useful for low-level programming tasks requiring
 ### Pattern (Pattern)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

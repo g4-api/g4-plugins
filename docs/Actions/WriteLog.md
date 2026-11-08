@@ -1,6 +1,6 @@
 # Write Log (WriteLog)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,14 +13,14 @@ Records informational messages during automation execution for display and analy
 ### Key Features and Functionality
 
 | Feature           | Description                                                             |
-|-------------------|-------------------------------------------------------------------------|
+| --- | --- |
 | Informational Log | Write the content of the `Argument` property as an informational entry. |
 | Debugging Aid     | Capture key events and details to help diagnose and fix issues.         |
 
 ### Usages in RPA
 
 | Use Case            | Description                                                                |
-|---------------------|----------------------------------------------------------------------------|
+| --- | --- |
 | Execution Tracking  | Log key points to see the flow of an automated task and confirm steps ran. |
 | Debugging           | Capture messages that help identify where and why a process failed.        |
 | Information Logging | Record important data or status updates during automation.                 |
@@ -28,7 +28,7 @@ Records informational messages during automation execution for display and analy
 ### Usages in Automation Testing
 
 | Use Case            | Description                                                                            |
-|---------------------|----------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Execution Logs | Record messages during test runs to understand test flow and state.                    |
 | Debugging Tests     | Log details that help pinpoint failures or unexpected behavior in automated tests.     |
 | Recording Test Data | Save test inputs, outputs, and results to the log for later analysis and verification. |
@@ -43,7 +43,7 @@ Write a simple, static message to the log during automation execution.
 It uses the `WriteLog` plugin with the argument set to "Logging a simple message".
 The message is written to the system log as an informational entry.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Logging a simple message");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -79,7 +79,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -87,6 +87,7 @@ action_rule = {
     "argument": "Logging a simple message"
 }
 ```
+
 ### Example No.2
 
 ### Write a Dynamic Parameter Value to Log
@@ -95,7 +96,7 @@ Retrieve a dynamic, session-scoped parameter and write its value to the log.
 It uses the `WriteLog` plugin with the argument set to `{{$Get-Parameter --Name:MyParam --Scope:Session}}`.
 The message is written to the system log as an informational entry.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -105,7 +106,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -113,7 +114,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$Get-Parameter --Name:MyParam --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -122,7 +123,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -131,7 +132,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -139,6 +140,7 @@ action_rule = {
     "argument": "{{$Get-Parameter --Name:MyParam --Scope:Session}}"
 }
 ```
+
 ### Example No.3
 
 ### Log an Application-Scoped Parameter Using the Log Alias
@@ -147,7 +149,7 @@ Write the value of an application-scoped parameter to the log using the `Log` al
 Uses the `Log` plugin name with the argument `{{$Get-Parameter --Name:AppVersion --Scope:Application}}`.
 The `Log` alias is interchangeable with `WriteLog`; the message is written to the system log as an informational entry.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -157,7 +159,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -165,7 +167,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$Get-Parameter --Name:AppVersion --Scope:Application}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -174,7 +176,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -183,7 +185,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -197,7 +199,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

@@ -1,6 +1,6 @@
 # No Action (NoAction)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Does nothing on its own and serves as a placeholder in your automation script. I
 ### Key Features and Functionality
 
 | Feature         | Description                                                  |
-|-----------------|--------------------------------------------------------------|
+| --- | --- |
 | No Operation    | Runs without performing any action, acting as a placeholder. |
 | Rule Invocation | Triggers attached rules when conditions are met.             |
 | Logging         | Records execution details for tracking and debugging.        |
@@ -22,7 +22,7 @@ Does nothing on its own and serves as a placeholder in your automation script. I
 ### Usages in RPA
 
 | Use Case         | Description                                                   |
-|------------------|---------------------------------------------------------------|
+| --- | --- |
 | Placeholder Step | Reserve a spot in a script where actions will be added later. |
 | Debug Flow       | Test script logic without executing real operations.          |
 | Step Grouping    | Combine related steps into one block for clarity.             |
@@ -30,7 +30,7 @@ Does nothing on its own and serves as a placeholder in your automation script. I
 ### Usages in Automation Testing
 
 | Use Case          | Description                                                                |
-|-------------------|----------------------------------------------------------------------------|
+| --- | --- |
 | Test Setup        | Mark the start of tests and verify the environment before running actions. |
 | Flow Verification | Check test logic without performing actual steps.                          |
 | Test Grouping     | Organize related test steps under one marker for better readability.       |
@@ -45,7 +45,7 @@ Logs execution points without performing any operations, useful for placeholder 
 No action is performed; the plugin simply records the event.
 Use this to mark points in the workflow where no actual action is desired.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -55,7 +55,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -63,7 +63,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("This is a Placeholder Action");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -72,7 +72,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -81,7 +81,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -89,6 +89,7 @@ action_rule = {
     "argument": "This is a Placeholder Action"
 }
 ```
+
 ### Example No.2
 
 ### Debugging Point Using NoAction Plugin
@@ -97,7 +98,7 @@ Logs a debugging point labeled `Debugging Point` without performing any operatio
 No action is performed; the plugin simply records the debugging event.
 Use this to insert non-invasive debug markers in the workflow.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -107,7 +108,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Debugging Point");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -124,7 +125,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -133,7 +134,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -141,6 +142,7 @@ action_rule = {
     "argument": "Debugging Point"
 }
 ```
+
 ### Example No.3
 
 ### Login Steps Grouping Using NoAction Plugin
@@ -150,7 +152,7 @@ Each inner action executes in sequence: SendKeys to `#username`, SendKeys to `#p
 NoAction itself performs no operations; it simply orchestrates the contained actions.
 Useful for logically grouping related steps in the workflow.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -183,7 +185,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -208,7 +210,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("#loginButton");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -236,7 +238,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -264,7 +266,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -297,7 +299,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -311,7 +313,7 @@ You must provide this value for the plugin to record.
 ### Rules (Rules)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

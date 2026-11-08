@@ -1,6 +1,6 @@
 # User (User)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~9 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,14 +8,14 @@
 
 ### Purpose
 
-This plugin lets automation workflows get values stored in the environment of the current user. 
-It makes per-user settings—like themes or API keys—available without exposing them to other users. 
+This plugin lets automation workflows get values stored in the environment of the current user.
+It makes per-user settings—like themes or API keys—available without exposing them to other users.
 By keeping user data private, workflows can run with personalized configurations safely.
 
 ### Key Features and Functionality
 
 | Feature                 | Description                                                                         |
-|-------------------------|-------------------------------------------------------------------------------------|
+| --- | --- |
 | Parameter retrieval     | Reads named values from the active user’s environment variables.                    |
 | User context isolation  | Keeps values visible only to the current user, preventing cross-user data access.   |
 | Dynamic value injection | Passes the retrieved value into following steps for personalized workflow behavior. |
@@ -23,14 +23,14 @@ By keeping user data private, workflows can run with personalized configurations
 ### Usages in RPA
 
 | Use Case                | Description                                                                |
-|-------------------------|----------------------------------------------------------------------------|
+| --- | --- |
 | User preference loading | Applies per-user settings like themes or shortcuts during automation runs. |
 | Personalized workflows  | Drives actions using user-specific data such as API keys or user IDs.      |
 
 ### Usages in Automation Testing
 
 | Use Case                 | Description                                                                       |
-|--------------------------|-----------------------------------------------------------------------------------|
+| --- | --- |
 | User-specific testing    | Runs tests under the correct user context by fetching user-level configurations.  |
 | Test configuration setup | Simplifies test setup by pulling user environment parameters directly in scripts. |
 
@@ -44,7 +44,7 @@ This example demonstrates how to retrieve a user-level parameter named `UserApiK
 It retrieves the raw value of `UserApiKey` from the user scope for use in downstream workflows.
 The retrieved value is available in the `Result` output field for subsequent steps.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -54,7 +54,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -62,7 +62,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("UserApiKey");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -71,7 +71,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,7 +80,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -94,7 +94,7 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

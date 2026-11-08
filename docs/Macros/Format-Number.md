@@ -1,6 +1,6 @@
 # Format Number (Format-Number)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~94 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,21 +14,21 @@ It ensures consistent number output across automation tasks.
 ### Key Features and Functionality
 
 | Feature                     | Description                                                                     |
-|-----------------------------|---------------------------------------------------------------------------------|
+| --- | --- |
 | Culture-specific Formatting | Formats numbers according to the specified culture for accurate representation. |
 | Custom Format               | Applies custom format strings to meet specific formatting requirements.         |
 
 ### Usages in RPA
 
 | Use Case             | Description                                                                 |
-|----------------------|-----------------------------------------------------------------------------|
+| --- | --- |
 | Financial Automation | Formats currency values using local conventions and culture-specific rules. |
 | Data Reporting       | Standardizes numeric data presentation in reports and dashboards.           |
 
 ### Usages in Automation Testing
 
 | Use Case          | Description                                                                 |
-|-------------------|-----------------------------------------------------------------------------|
+| --- | --- |
 | Data Validation   | Applies specific formats to verify numeric data consistency during testing. |
 | Result Formatting | Structures test results in a clear and standardized numeric format.         |
 
@@ -49,7 +49,7 @@ The resulting text is inserted where the macro token appears, providing a precis
 Macros do not perform actions; they only generate values. Their output can be reused wherever a literal value is accepted, not just with `SendKeys`.
 While `R` preserves exact precision, you may prefer `G17` for `Double` or `G9` for `Single` values when performance is critical.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -61,7 +61,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -71,7 +71,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -82,7 +82,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -93,7 +93,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -103,6 +103,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.2
 
 ### Format an integer with the binary (`B`) specifier
@@ -114,7 +115,7 @@ Macros do not perform actions; they only supply values and can be reused anywher
 The `B` format specifier converts integral numbers to binary digits and is supported on .NET 8 and later.
 When a precision specifier is provided, the result is padded with leading zeros to reach the requested length, following the current `NumberFormatInfo` settings.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -126,7 +127,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -136,7 +137,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -147,7 +148,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -158,7 +159,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -168,6 +169,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.3
 
 ### Format an integer with a 16-digit binary (`b16`) specifier
@@ -179,7 +181,7 @@ Macros only generate values; they never perform UI actions and can be reused any
 The binary (`b`) format converts integral numbers to binary digits and is supported on .NET 8 and later.
 When a precision specifier is provided, the result is padded with leading zeros to reach the requested length, following the current `NumberFormatInfo` settings.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -191,7 +193,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -201,7 +203,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -212,7 +214,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -223,7 +225,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -233,6 +235,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.4
 
 ### Format an integer with the decimal (`D`) specifier
@@ -244,7 +247,7 @@ Macros only generate values; they never perform UI actions and can be reused any
 The `D` specifier converts integral numbers to decimal digits and is supported for integral types only.
 A precision specifier pads the number with leading zeros to reach the requested length, according to the current `NumberFormatInfo` settings.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -256,7 +259,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -266,7 +269,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -277,7 +280,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -288,7 +291,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -298,6 +301,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.5
 
 ### Format an integer with the `D6` decimal specifier
@@ -309,7 +313,7 @@ Macros only generate values; they never perform UI actions and can be reused any
 The `D` specifier converts integral numbers to decimal digits and is supported for integral types only.
 A precision specifier pads the number with leading zeros to reach the requested length, according to the current `NumberFormatInfo` settings.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -321,7 +325,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -331,7 +335,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -342,7 +346,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -353,7 +357,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -363,6 +367,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.6
 
 ### Format an unsigned byte with the hexadecimal (`X`) specifier
@@ -374,7 +379,7 @@ Macros only generate values; they never perform UI actions and can be reused any
 The `X` specifier converts integral numbers to hexadecimal digits (0-9, A-F).
 Formatting respects the current `NumberFormatInfo` settings.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -386,7 +391,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -396,7 +401,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -407,7 +412,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -418,7 +423,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -428,6 +433,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.7
 
 ### Format an integer with the `X8` hexadecimal specifier
@@ -438,7 +444,7 @@ The `SendKeys` plugin then types the generated string into the element identifie
 Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.
 The `X` specifier converts integral numbers to hexadecimal digits (0-9, A-F), and a precision specifier pads the result to the requested length according to the current `NumberFormatInfo` settings.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -450,7 +456,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -460,7 +466,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -471,7 +477,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -482,7 +488,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -492,6 +498,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.8
 
 ### Format a decimal with the currency (`C`) specifier and French culture
@@ -502,7 +509,7 @@ The `SendKeys` plugin then types the generated string into the element identifie
 Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.
 The `C` specifier formats numbers according to the currency pattern of the chosen culture, including the proper symbol, decimal separator, and grouping.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -514,7 +521,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -524,7 +531,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -535,7 +542,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -546,7 +553,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -556,6 +563,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.9
 
 ### Format a negative decimal with the currency (`C3`) specifier and Japanese culture
@@ -568,7 +576,7 @@ The `SendKeys` plugin then types the generated string into the element identifie
 Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.
 If the source number contains more than three fractional digits (for example, `-123.4567`), it is first rounded to three decimals (`-123.457`) before being formatted.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -580,7 +588,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -590,7 +598,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -601,7 +609,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -612,7 +620,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -622,6 +630,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.10
 
 ### Format a decimal with the scientific (E) specifier and US culture
@@ -632,7 +641,7 @@ The SendKeys plugin then types the generated string into the element identified 
 Macros only generate values; they never perform UI actions and can be reused anywhere a literal value is accepted.
 The E specifier expresses numbers in scientific notation (d.dddE±ddd), rounding to the appropriate number of significant digits when necessary, and follows the formatting rules of the specified culture.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -644,7 +653,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -654,7 +663,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -665,7 +674,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -676,7 +685,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -686,6 +695,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.11
 
 ### Format a negative decimal with the `e2` specifier and US culture
@@ -697,7 +707,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused in any context where literal values are allowed.
 The `e2` specifier formats numbers in exponential form (`d.dddde±dd`) with two digits after the decimal point and two digits in the exponent.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -709,7 +719,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -719,7 +729,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -730,7 +740,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -741,7 +751,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -751,6 +761,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.12
 
 ### Format a decimal with the `F` specifier and German culture
@@ -762,7 +773,7 @@ The `SendKeys` plugin types the generated string into the element identified by 
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `F` format specifier formats numbers using fixed-point notation and rounds to two decimal places by default.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -774,7 +785,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -784,7 +795,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -795,7 +806,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -806,7 +817,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -816,6 +827,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.13
 
 ### Format a negative decimal with the `F4` specifier and US culture
@@ -827,7 +839,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `F4` specifier formats numbers using fixed-point notation and pads to four decimal places.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -839,7 +851,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -849,7 +861,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -860,7 +872,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -871,7 +883,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -881,6 +893,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.14
 
 ### Format a decimal with the `G` specifier
@@ -892,7 +905,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `G` specifier returns either fixed-point or exponential notation, preserving up to 15–17 significant digits when no precision specifier is supplied.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -904,7 +917,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -914,7 +927,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -925,7 +938,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -936,7 +949,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -946,6 +959,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.15
 
 ### Format a decimal with the `G4` specifier and Swedish culture
@@ -957,7 +971,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `G` specifier returns either fixed-point or exponential notation depending on the number’s magnitude; the precision specifier (`4`) limits the output to four significant digits.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -969,7 +983,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -979,7 +993,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -990,7 +1004,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1001,7 +1015,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1011,6 +1025,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.16
 
 ### Format a decimal with the `N` specifier and Russian culture
@@ -1022,7 +1037,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `N` specifier formats numbers with thousands separators and two decimal places by default, following the rules of the specified culture.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1034,7 +1049,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1044,7 +1059,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1055,7 +1070,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1066,7 +1081,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1076,6 +1091,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.17
 
 ### Format a negative decimal with the `N3` specifier and US culture
@@ -1087,7 +1103,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `N3` specifier formats numbers with thousands separators and exactly three decimal digits, following the rules of the specified culture.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1099,7 +1115,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1109,7 +1125,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1120,7 +1136,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1131,7 +1147,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1141,6 +1157,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.18
 
 ### Format the number 1 as a percentage with French culture
@@ -1152,7 +1169,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `P` specifier multiplies the input by 100 and formats it as a localized percentage string according to the specified culture.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1164,7 +1181,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1174,7 +1191,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1185,7 +1202,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1196,7 +1213,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1206,6 +1223,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.19
 
 ### Format a negative decimal with the `P1` specifier and US culture
@@ -1217,7 +1235,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 The `P1` specifier multiplies the input by 100 and formats it as a localized percentage string with exactly one decimal digit.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1229,7 +1247,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1239,7 +1257,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1250,7 +1268,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1261,7 +1279,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1271,6 +1289,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.20
 
 ### Format a decimal with a custom `00.0000` specifier and US culture
@@ -1285,7 +1304,7 @@ In the format pattern `00.0000`, each `0` is a zero-placeholder symbol:
 - Two zeros before the decimal ensure at least two integer digits, padded with leading zeros.
 - Four zeros after the decimal guarantee exactly four fractional digits, rounding as needed.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1297,7 +1316,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1307,7 +1326,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1318,7 +1337,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1329,7 +1348,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1339,6 +1358,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.21
 
 ### Format a phone number with the `(###) ###-####` pattern
@@ -1350,7 +1370,7 @@ The `SendKeys` plugin types this string into the element identified by the CSS s
 Macros only generate values and can be reused anywhere literal values are accepted.
 In the pattern `(###) ###-####`, digit-placeholder symbols (`#`) map the first ten digits of the input to their respective positions, while any extra digits are dropped.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1362,7 +1382,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1372,7 +1392,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1383,7 +1403,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1394,7 +1414,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1404,6 +1424,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.22
 
 ### Format and send a number localized for French (France)
@@ -1414,7 +1435,7 @@ If the original number were `-0.45678`, the output would be `-0,46`, showing tha
 The macro remains side-effect-free, purely outputting the formatted string.
 The automation then passes that value to the `SendKeys` plugin, which sends the keystrokes to the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1426,7 +1447,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1436,7 +1457,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1447,7 +1468,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1458,7 +1479,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1468,6 +1489,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.23
 
 ### Format and send a grouped number localized for Spanish (Spain)
@@ -1478,7 +1500,7 @@ Using `#,#` avoids the ×1 000 scaling that an extra comma (for example `#,#,,`)
 The macro remains side-effect-free, only outputting the formatted string.
 Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1490,7 +1512,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1500,7 +1522,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1511,7 +1533,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1522,7 +1544,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1532,6 +1554,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.24
 
 ### Format and send a percentage localized for English (United States)
@@ -1541,7 +1564,7 @@ The `Format-Number` macro applies the pattern `#0.00%` with culture `en-US`, mul
 The macro remains side-effect-free, only outputting the formatted string.
 Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1553,7 +1576,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1563,7 +1586,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1574,7 +1597,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1585,7 +1608,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1595,6 +1618,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.25
 
 ### Format and send a per-mille value localized for Russian (Russia)
@@ -1606,7 +1630,7 @@ The per-mille sign (`‰`) is supplied by the culture’s `NumberFormatInfo.PerM
 The macro remains side-effect-free, only outputting the formatted string.
 Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1618,7 +1642,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1628,7 +1652,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1639,7 +1663,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1650,7 +1674,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1660,6 +1684,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.26
 
 ### Format and send a scientific-notation value
@@ -1670,7 +1695,7 @@ When formatted, the value becomes `1.5e+03`, since 1503.92311 equals 1.5 × 10³
 The macro remains side-effect-free, only outputting the formatted string.
 Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1682,7 +1707,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1692,7 +1717,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1703,7 +1728,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1714,7 +1739,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1724,6 +1749,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.27
 
 ### Format and send a number with literal characters
@@ -1734,7 +1760,7 @@ The pattern contains no group or decimal placeholders, so the output remains the
 The macro remains side-effect-free, outputting only the formatted string.
 Automation then passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1746,7 +1772,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1756,7 +1782,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1767,7 +1793,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1778,7 +1804,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1788,6 +1814,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.28
 
 ### Format and send a number with conditional formatting
@@ -1797,7 +1824,7 @@ The format string sections are separated by semicolons: the first (`##`) applies
 The macro remains side-effect-free, outputting only the formatted string.
 Automation passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1809,7 +1836,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1819,7 +1846,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1830,7 +1857,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1841,7 +1868,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1851,6 +1878,7 @@ action_rule = {
     "onElement": "#inputField"
 }
 ```
+
 ### Example No.29
 
 ### Format and send a number with a literal suffix
@@ -1861,7 +1889,7 @@ Literal characters cannot be `0`, `#`, `%`, `‰`, `‘`, `\`, `.`, `,`, or `E/e
 The macro remains side-effect-free, outputting only the formatted string.
 Automation passes this string to the `SendKeys` plugin, which types it into the element identified by the `CssSelector` locator.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1873,7 +1901,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1883,7 +1911,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#inputField");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1894,7 +1922,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1905,7 +1933,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1921,7 +1949,7 @@ action_rule = {
 ### Culture (Culture)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1936,7 +1964,7 @@ If no culture is specified, the system uses the invariant culture to provide a c
 ### Number (Number)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -1950,7 +1978,7 @@ Valid numeric input prevents errors during the formatting process.
 ### Format (Format)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | None              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1965,7 +1993,7 @@ If no format string is provided, the original numeric value is returned without 
 ### Number Type (NumberType)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Integer           |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -1983,18 +2011,22 @@ Leaving it unset uses Integer by default to handle whole numbers safely.
 
 Byte represents an 8-bit unsigned integer that holds values from 0 to 255.
 Using Byte reduces memory usage when only small positive whole numbers are needed.
+
 ##### Double
 
 Double provides a 64-bit floating point number with high precision for decimal values.
 Supports large and fractional numbers for calculations requiring detail.
+
 ##### Integer
 
 Integer stores a 32-bit signed whole number between -2,147,483,648 and 2,147,483,647.
 It suits counting, indexing, and scenarios where decimal precision is not required.
+
 ##### Long
 
 Long uses 64 bits to represent signed whole numbers in a very large range.
 It prevents overflow when Integer cannot hold large values.
+
 ##### S Byte
 
 SByte represents an 8-bit signed whole number with a range from -128 to 127.

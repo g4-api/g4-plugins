@@ -1,6 +1,6 @@
 # Json Data Collector (JsonDataCollector)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · DataCollector Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ JsonDataCollector captures the output of your extraction rules and writes it int
 ### Key Features and Functionality
 
 | Feature                | Description                                                                                |
-|------------------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | Extraction Integration | Hooks into your extraction rules so every item is automatically turned into a JSON object. |
 | Write Modes            | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run.    |
 | Array Management       | Automatically opens and closes the JSON array wrapper, ensuring valid JSON output.         |
@@ -21,7 +21,7 @@ JsonDataCollector captures the output of your extraction rules and writes it int
 ### Usages in RPA
 
 | Use Case               | Description                                                                    |
-|------------------------|--------------------------------------------------------------------------------|
+| --- | --- |
 | Web Scraping           | Serializes scraped item lists into JSON for API ingestion or analytics.        |
 | Real-Time Data Capture | Streams each transaction or record immediately for monitoring dashboards.      |
 | Data Aggregation       | Collects outputs from multiple sources into one unified JSON document.         |
@@ -30,7 +30,7 @@ JsonDataCollector captures the output of your extraction rules and writes it int
 ### Usages in Automation Testing
 
 | Use Case           | Description                                                                          |
-|--------------------|--------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Result Export | Records pass/fail status as JSON objects for CI systems or custom reporting tools.   |
 | Metrics Collection | Captures timing, resource usage, and custom metrics in JSON for downstream analysis. |
 
@@ -45,12 +45,12 @@ This example demonstrates how to extract hotel locations from each `<div class='
 It uses `extractionScope: "Elements"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming writes.
 A regular expression `(?<=\\w+:).*` is applied to the text content to extract the substring following the label into a capture group.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "",
+    PluginName = "ExportData",
     OnElement = "//div[@class='hotel']",
     Rules = new[]
     {
@@ -64,11 +64,11 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("")
+    .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
         new ActionRuleModel()        
@@ -77,11 +77,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setRegularExpression("(?<=\\w+:).*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
-    pluginName: "",
+    pluginName: "ExportData",
     onElement: "//div[@class='hotel']",
     rules: [
         {
@@ -93,11 +93,11 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -109,11 +109,11 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -124,6 +124,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.2
 
 ### Bulk Hotel Locations to JSON
@@ -133,12 +134,12 @@ This example demonstrates how to extract hotel locations from each `<div class='
 It uses `extractionScope: "Elements"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.
 A regular expression `(?<=\\w+:).*` is applied to the text content to extract the substring following the label into a capture group.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "",
+    PluginName = "ExportData",
     OnElement = "//div[@class='hotel']",
     Rules = new[]
     {
@@ -152,11 +153,11 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("")
+    .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
         new ActionRuleModel()        
@@ -165,11 +166,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setRegularExpression("(?<=\\w+:).*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
-    pluginName: "",
+    pluginName: "ExportData",
     onElement: "//div[@class='hotel']",
     rules: [
         {
@@ -181,11 +182,11 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -197,11 +198,11 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -218,7 +219,7 @@ action_rule = {
 ### For Entity (ForEntity)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -231,7 +232,7 @@ Keeping it off waits until everything is ready so you review all items at once a
 ### Source (Source)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -244,7 +245,7 @@ Using a new location creates the file automatically and prevents errors from mis
 ### Type (Type)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

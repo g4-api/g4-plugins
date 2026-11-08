@@ -1,6 +1,6 @@
 # Read Pdf File (ReadPdfFile)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -16,7 +16,7 @@ Makes it straightforward to pull specific data from documents inside automation 
 ### Key Features and Functionality
 
 | Feature                      | Description                                                                           |
-|------------------------------|---------------------------------------------------------------------------------------|
+| --- | --- |
 | PDF Text Extraction          | Reads all pages of a PDF using PdfPig and joins word tokens into a single text block. |
 | Plain Text File Reading      | Reads non-PDF files directly using the system default encoding.                       |
 | Regular Expression Filtering | Applies a regex to the extracted content to isolate a specific portion of the text.   |
@@ -26,7 +26,7 @@ Makes it straightforward to pull specific data from documents inside automation 
 ### Usages in RPA
 
 | Use Case                 | Description                                                                                 |
-|--------------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | Invoice Data Extraction  | Pull invoice numbers, totals, or dates from PDF invoices during document processing runs.   |
 | Report Parsing           | Read summary sections from generated PDF reports and pass values to downstream steps.       |
 | Text File Processing     | Extract specific lines or values from plain text log or configuration files.                |
@@ -35,7 +35,7 @@ Makes it straightforward to pull specific data from documents inside automation 
 ### Usages in Automation Testing
 
 | Use Case                 | Description                                                                                       |
-|--------------------------|---------------------------------------------------------------------------------------------------|
+| --- | --- |
 | PDF Content Assertion    | Verify that a generated PDF contains expected text such as a confirmation number or status label. |
 | Report Validation        | Read values from exported PDF reports and compare them against expected test data.                |
 | File Output Verification | Check that a workflow-generated text file contains the correct content after processing.          |
@@ -51,7 +51,7 @@ Reads all pages of the PDF at the given path using PdfPig and joins word tokens 
 No custom regular expression is supplied, so the default `(?si).*` pattern matches all extracted content.
 The full text is stored in the session parameter `ReadPdfFile:Content` for use in downstream steps.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -61,7 +61,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -69,7 +69,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("C:/Reports/document.pdf");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -78,7 +78,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -87,7 +87,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -95,6 +95,7 @@ action_rule = {
     "argument": "C:/Reports/document.pdf"
 }
 ```
+
 ### Example No.2
 
 ### Extract Filtered Content Using a Regular Expression
@@ -103,7 +104,7 @@ Reads the file at the given path and applies a regular expression to the extract
 A regular expression `Invoice\s+#\d+` is applied to the extracted content to isolate matching invoice identifiers.
 The first match is converted to Base64 and stored in the session parameter `ReadPdfFile:Content`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -114,7 +115,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -123,7 +124,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("Invoice\s+#\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -133,7 +134,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -143,7 +144,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -158,7 +159,7 @@ action_rule = {
 ### Read Pdf File Content (ReadPdfFile:Content)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -174,7 +175,7 @@ Set every time the plugin runs, regardless of the regular expression configured.
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -188,7 +189,7 @@ All other file types are read as plain text using the system default encoding.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?si).*           |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

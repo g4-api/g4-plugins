@@ -1,6 +1,6 @@
 # Clear Lines (ClearLines)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Transformer Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ This is particularly useful in scenarios where text data needs to be cleaned or 
 ### Key Features and Functionality
 
 | Feature                   | Description                                                                                |
-|---------------------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | Line Break Removal        | Removes all carriage return (`\r`) and newline (`\n`) characters from the input text.    |
 | Regular Expression Usage  | Utilizes regular expressions for efficient pattern matching and text replacement.          |
 | Easy Integration          | Simple to incorporate into automation workflows for text data cleaning and transformation. |
@@ -22,7 +22,7 @@ This is particularly useful in scenarios where text data needs to be cleaned or 
 ### Usages in RPA
 
 | Usage                    | Description                                                                                 |
-|--------------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | Data Cleaning            | Preprocess text data by removing line breaks before inputting into systems or databases.    |
 | Formatting Automation    | Normalize text formats when copying or transferring data between applications.              |
 | Logging and Reporting    | Prepare text data for logging or reporting where line breaks might cause formatting issues. |
@@ -30,7 +30,7 @@ This is particularly useful in scenarios where text data needs to be cleaned or 
 ### Usages in Automation Testing
 
 | Usage                     | Description                                                                  |
-|---------------------------|------------------------------------------------------------------------------|
+| --- | --- |
 | Test Data Preparation     | Clean test input data to ensure consistency across different test cases.     |
 | Validation Testing        | Verify that applications handle text inputs without line breaks as expected. |
 | Output Normalization      | Normalize outputs before comparing them to expected results in assertions.   |
@@ -44,7 +44,7 @@ Remove all line breaks from a multiline text input.
 The `ClearLines` transformer is utilized to remove all carriage return and newline characters from the provided text.
 If line breaks are present, they are removed; otherwise, the text remains unchanged.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ Some lines end with different line breaks."
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -66,7 +66,7 @@ It contains multiple lines.
 Some lines end with different line breaks.");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -77,7 +77,7 @@ Some lines end with different line breaks."
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -88,7 +88,7 @@ Some lines end with different line breaks."
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -98,6 +98,7 @@ It contains multiple lines.
 Some lines end with different line breaks."
 }
 ```
+
 ### Example No.2
 
 Clean the `Location` field extracted from content by removing line breaks and trimming whitespace.
@@ -106,7 +107,7 @@ The `ClearLines` transformer is applied to the `Location` field to remove any li
 Subsequently, the `Trim` transformer removes leading and trailing whitespace.
 This ensures the `Location` field is clean and ready for further processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -117,7 +118,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -126,7 +127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?<=\w+:).*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -136,7 +137,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -146,7 +147,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -161,7 +162,7 @@ action_rule = {
 ### Transformer Result (TransformerResult)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -176,7 +177,7 @@ This value can be of any type, depending on the context in which the transformer
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Entity            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -192,6 +193,7 @@ This property allows you to choose whether to transform data from the entity con
 
 The transformer acts on the entity fields created by the previous action.
 This is the default behavior.
+
 ##### Session
 
 The transformer acts on a session parameter whose name is specified in the `OnElement` property.
@@ -199,7 +201,7 @@ The transformer acts on a session parameter whose name is specified in the `OnEl
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

@@ -1,6 +1,6 @@
 # Delete (Delete)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~31 min · HttpMethod Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This plugin simplifies programmatic data deletion and ensures consistency in aut
 ### Key Features and Functionality
 
 | Feature                    | Description                                                              |
-|----------------------------|--------------------------------------------------------------------------|
+| --- | --- |
 | Data Deletion              | Sends HTTP DELETE requests to remove data from servers or APIs.          |
 | Dynamic Requests           | Supports dynamic URL construction and payload handling.                  |
 | Custom Headers             | Allows inclusion of custom headers in the request.                       |
@@ -25,14 +25,14 @@ This plugin simplifies programmatic data deletion and ensures consistency in aut
 ### Usages in RPA
 
 | Use Case            | Description                                                                                                                |
-|---------------------|----------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Data Management     | Remove outdated or unnecessary data from external systems or APIs, such as outdated customer records or redundant entries. |
 | Workflow Adjustments| Dynamically adjust subsequent workflow actions based on deletion requirements.                                             |
 
 ### Usages in Automation Testing
 
 | Use Case                         | Description                                                                                                                                      |
-|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | API Cleanup in Testing           | Use DELETE requests in automated tests to clean up data created during test execution, ensuring a controlled environment for each test run.      |
 | Data Integrity Checks            | Combine deletion requests with validation steps to confirm that specified data has been accurately removed, ensuring system consistency.         |
 | Regression Testing for Deletion  | Verify that deletion functionality remains intact after system updates or changes by replaying delete requests and confirming expected outcomes. |
@@ -46,7 +46,7 @@ This plugin simplifies programmatic data deletion and ensures consistency in aut
 Use the `Delete` plugin to send an HTTP DELETE request to a specific URL.
 Delete the resource at that URL and capture the response.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -64,7 +64,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("http://api.example.com/v1/delete/12345");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,6 +90,7 @@ action_rule = {
     "argument": "http://api.example.com/v1/delete/12345"
 }
 ```
+
 ### Example No.2
 
 ### DELETE request with custom headers
@@ -97,7 +98,7 @@ action_rule = {
 Use the `Delete` plugin to send an HTTP DELETE request to a specific URL with custom headers.
 Delete the resource at that URL and capture the response.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -107,7 +108,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/delete/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -124,7 +125,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -133,7 +134,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -141,6 +142,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/delete/12345 --Header:Authorization=Bearer token123 --Header:Custom-Header=CustomValue}}"
 }
 ```
+
 ### Example No.3
 
 ### DELETE request with JSON body and content type
@@ -148,7 +150,7 @@ action_rule = {
 Send an HTTP DELETE request to the specified URL with a JSON payload in the request body and the appropriate Content-Type header.
 Return the response from the server.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -158,7 +160,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -166,7 +168,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/delete --Body:{"id":12345} --ContentType:application/json}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -175,7 +177,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -184,7 +186,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -192,6 +194,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/delete --Body:{"id":12345} --ContentType:application/json}}"
 }
 ```
+
 ### Example No.4
 
 ### DELETE request with specified encoding
@@ -199,7 +202,7 @@ action_rule = {
 Send an HTTP DELETE request to the specified URL using the given encoding for the request.
 Return the response from the server.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -209,7 +212,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -217,7 +220,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/delete/12345 --Encoding:UTF8}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -226,7 +229,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -235,7 +238,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -243,6 +246,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/delete/12345 --Encoding:UTF8}}"
 }
 ```
+
 ### Example No.5
 
 ### DELETE request with form fields
@@ -251,7 +255,7 @@ Send an HTTP DELETE request to the specified URL with form fields.
 If no `--ContentType` flag is provided, the request defaults to `application/json`.
 Return the response from the server.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -261,7 +265,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -269,7 +273,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:http://api.example.com/v1/delete --Field:id=12345}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -278,7 +282,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -287,7 +291,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -295,6 +299,7 @@ action_rule = {
     "argument": "{{$ --Url:http://api.example.com/v1/delete --Field:id=12345}}"
 }
 ```
+
 ### Example No.6
 
 ### DELETE request with attribute extraction
@@ -303,7 +308,7 @@ Send an HTTP DELETE request to the specified URL.
 Extract the `status` attribute from the element identified by the XPath `//response` in the XML or HTML response.
 Return the extracted attribute value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -315,7 +320,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -325,7 +330,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//response");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -336,7 +341,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -347,7 +352,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -357,6 +362,7 @@ action_rule = {
     "onElement": "//response"
 }
 ```
+
 ### Example No.7
 
 ### DELETE request with JSONPath extraction
@@ -365,7 +371,7 @@ Send an HTTP DELETE request to the specified URL.
 Extract the value at the JSONPath `$.data.id` from the JSON response using the onElement property.
 Return the extracted value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -376,7 +382,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -385,7 +391,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("$.data.id");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -395,7 +401,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -405,7 +411,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -414,6 +420,7 @@ action_rule = {
     "onElement": "$.data.id"
 }
 ```
+
 ### Example No.8
 
 ### DELETE request with regex extraction for deleted count
@@ -422,7 +429,7 @@ Send an HTTP DELETE request to the specified hotel-booking endpoint.
 Extract the number of deleted records from the JSON response using the regular expression `"deletedCount":\s*(\d+)`.
 Return the first matching count; ignore any additional matches.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -433,7 +440,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -442,7 +449,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\"deletedCount\":\s*(\d+)");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -452,7 +459,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -462,7 +469,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -474,10 +481,10 @@ action_rule = {
 
 ## Output Parameter
 
-### Http Response (HttpResponse)
+### Send Http Request Http Response (SendHttpRequest:HttpResponse)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -488,10 +495,10 @@ Holds the content returned from an HTTP request after any specified extraction o
 Provides a way to work with the processed response data instead of the raw body.
 Enables automation workflows to access the exact information they need from the HTTP response.
 
-### Http Response Headers (HttpResponseHeaders)
+### Send Http Request Http Response Headers (SendHttpRequest:HttpResponseHeaders)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -502,10 +509,10 @@ Holds the HTTP response headers returned from an HTTP request.
 Contains key-value pairs that provide metadata about the response such as content type, date, and length.
 Enables workflows to inspect response details for logging or conditional logic.
 
-### Http Status Code (HttpStatusCode)
+### Send Http Request Http Status Code (SendHttpRequest:HttpStatusCode)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -522,7 +529,7 @@ Supports error handling in workflows based on the status code value.
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -536,7 +543,7 @@ Makes it possible to customize the request URL or payload at runtime.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -550,7 +557,7 @@ Enables precise retrieval of metadata embedded in tags for downstream workflow p
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -565,7 +572,7 @@ Helps ensure the correct data is extracted regardless of the API’s output form
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -582,7 +589,7 @@ Helps automate parsing of complex text outputs.
 ### Body (Body)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -596,7 +603,7 @@ Helps ensure the API has the context required to process the delete operation.
 ### Content Type (ContentType)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -613,50 +620,62 @@ Supports formats such as JSON, XML, form data, and plain text.
 
 Represents JSON data encoded as JavaScript Object Notation.
 Allows for structured data that is easy to read and parse.
+
 ##### Applicationoctetstream
 
 Denotes a generic binary data stream when the format is unknown.
 Enables transferring files or data without predefined structure.
+
 ##### Applicationpdf
 
 Identifies Portable Document Format files for documents and forms.
 Ensures consistent rendering of printable content.
+
 ##### Applicationxml
 
 Marks XML data formatted with Extensible Markup Language.
 Provides a generic way to represent structured data.
+
 ##### Audiompeg
 
 Specifies MPEG audio encoded in MP3 format.
 Offers compressed audio suitable for music and podcasts.
+
 ##### Imagejpeg
 
 Indicates JPEG images compressed for photographs.
 Balances image quality with file size.
+
 ##### Imagepng
 
 Signals PNG images with lossless compression.
 Supports transparent backgrounds for web graphics.
+
 ##### Multipartformdata
 
 Used for form submissions that include files and text fields.
 Allows combining different data types in one request.
+
 ##### Textcss
 
 Defines stylesheet content for web page styling in CSS.
 Controls layout, colors, and fonts of HTML documents.
+
 ##### Texthtml
 
 Represents HTML content to structure web pages.
 Defines elements like headings, paragraphs, and links.
+
 ##### Textplain
 
 Denotes plain text without special formatting.
 Serves simple messages or logs in text form.
+
 ##### Applicationxwwwformurlencoded
 
 Encodes URL-encoded form data in key-value pairs.
 Pairs are separated by ampersands and percent-encoded if needed.
+
 ##### Videomp4
 
 Specifies MP4 multimedia container for video and audio.
@@ -665,7 +684,7 @@ Supports subtitles and still images within the file.
 ### Encoding (Encoding)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -683,31 +702,37 @@ Allows different encoding standards to maintain compatibility across systems.
 Uses 7-bit codes to represent 128 common characters such as letters, digits, and symbols.
 Forms the basis for many modern text encoding systems.
 Remains compatible with Unicode formats like UTF-8.
+
 ##### Big Endian Unicode
 
 Stores each character in 16 bits with the most significant byte first.
 Commonly used on platforms that follow big-endian byte ordering.
 Ensures consistent decoding when big-endian formats are required.
+
 ##### Latin1
 
 Also called ISO-8859-1 and covers many Western European languages.
 Uses one byte per character for a total of 256 symbols.
 Often used for legacy data but supports fewer characters than Unicode.
+
 ##### Unicode
 
 Assigns a unique code point to every character in most writing systems.
 Supports global text representation in a single standard.
 Forms the foundation for encodings like UTF-8 and UTF-16.
+
 ##### Utf7
 
 Encodes text using only 7-bit ASCII characters for safe transmission in restricted systems.
 Was originally designed for email use where 8-bit data could be problematic.
 Rarely used today because it is less efficient than modern encodings.
+
 ##### Utf8
 
 Variable-length encoding that uses one to four bytes per character.
 Covers all Unicode code points and is backward-compatible with ASCII.
 Widely adopted as the standard text format on the web.
+
 ##### Utf32
 
 Uses a fixed four bytes for each character’s code point.
@@ -717,7 +742,7 @@ Consumes more memory but offers straightforward character indexing.
 ### Field (Field)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -731,7 +756,7 @@ Lets you send extra parameters when the server requires them during a delete ope
 ### Header (Header)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -746,7 +771,7 @@ Custom headers let you send extra information like authentication tokens or trac
 ### Url (Url)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

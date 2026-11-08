@@ -1,6 +1,6 @@
 # Invoke User32 Double Click (InvokeUser32DoubleClick)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ Automation scripts can interact with native UI elements in desktop applications 
 ### Key Features and Functionality
 
 | Feature                          | Description                                                                                                     |
-|----------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Native Double-Click Action       | Executes double-click actions using the User32 API for native Windows UI elements.                              |
 | Coordinate-based Double-Clicking | Supports double-clicking at specific (X, Y) coordinates when no target element is provided.                     |
 | Element-specific Double-Clicking | Moves the mouse to a target element with configurable offsets and alignment before performing the double-click. |
@@ -22,14 +22,14 @@ Automation scripts can interact with native UI elements in desktop applications 
 ### Usage in RPA
 
 | Usage                | Description                                                                                                              |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Desktop Automation   | Integrate with RPA workflows to perform double-click actions on native desktop UI elements using the Windows User32 API. |
 | Flexible Interaction | Automate complex scenarios by specifying exact double-click coordinates or targeting specific UI elements with offsets.  |
 
 ### Usage in Automation Testing
 
 | Usage              | Description                                                                                                                  |
-|--------------------|------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Testing         | Verify the functionality of native UI components by simulating double-click actions with configurable offsets and alignment. |
 | Regression Testing | Ensure consistent behavior of UI elements after updates by automating double-click sequences using the User32 API.           |
 
@@ -46,7 +46,7 @@ This plugin is designed to work on **Windows** only.
 The plugin moves the system mouse cursor to position (100, 200) on the viewport and performs a double-click.
 No element is targeted; the `{{$ --X:100 --Y:200}}` syntax binds X and Y as a parameters dictionary that activates coordinate mode at runtime.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -64,7 +64,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --X:100 --Y:200}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,6 +90,7 @@ action_rule = {
     "argument": "{{$ --X:100 --Y:200}}"
 }
 ```
+
 ### Example No.2
 
 ### Double-click on element with alignment and offset
@@ -97,7 +98,7 @@ action_rule = {
 The plugin locates the element at `//button[@id='SubmitButton']` using the Xpath locator, moves the mouse to the TopLeft alignment point with a 10-pixel horizontal and 20-pixel vertical offset, then performs a double-click.
 The `{{$ --OffsetX:10 --OffsetY:20 --Alignment:TopLeft}}` syntax binds the parameters as a dictionary before execution.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -108,7 +109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -117,7 +118,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button[@id='SubmitButton']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -127,7 +128,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -137,7 +138,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -152,7 +153,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -166,7 +167,7 @@ The expression is parsed into a parameters dictionary before the plugin executes
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -179,7 +180,7 @@ Xpath is the only supported locator strategy for User32 elements in this plugin.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -195,7 +196,7 @@ Omit this property to use coordinate-based double-clicking with the X and Y para
 ### Alignment (Alignment)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | MiddleCenter      |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -213,34 +214,42 @@ Use MiddleCenter for standard centered double-clicks or edge and corner values f
 
 Positions the cursor at the bottom center of the element bounding box.
 Use this alignment when the target action is near the lower middle edge of the element.
+
 ##### Bottom Left
 
 Positions the cursor at the bottom left corner of the element bounding box.
 Use this alignment when the target action is near the lower left boundary of the element.
+
 ##### Bottom Right
 
 Positions the cursor at the bottom right corner of the element bounding box.
 Use this alignment when the target action is near the lower right boundary of the element.
+
 ##### Middle Center
 
 Positions the cursor at the horizontal and vertical center of the element bounding box.
 This is the default alignment and works well for most standard double-click interactions.
+
 ##### Middle Left
 
 Positions the cursor at the left edge and vertical center of the element bounding box.
 Use this alignment when the target action is near the left side of the element.
+
 ##### Middle Right
 
 Positions the cursor at the right edge and vertical center of the element bounding box.
 Use this alignment when the target action is near the right side of the element.
+
 ##### Top Center
 
 Positions the cursor at the top center of the element bounding box.
 Use this alignment when the target action is near the upper middle edge of the element.
+
 ##### Top Left
 
 Positions the cursor at the top left corner of the element bounding box.
 Use this alignment when the target action is near the upper left boundary of the element.
+
 ##### Top Right
 
 Positions the cursor at the top right corner of the element bounding box.
@@ -249,7 +258,7 @@ Use this alignment when the target action is near the upper right boundary of th
 ### Offset X (OffsetX)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -263,7 +272,7 @@ Use this parameter when the double-click must land slightly away from the defaul
 ### Offset Y (OffsetY)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -277,7 +286,7 @@ Use this parameter when the double-click must land slightly away from the defaul
 ### X (X)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -291,7 +300,7 @@ Set X and Y together to trigger coordinate-based double-clicking without element
 ### Y (Y)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 0                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

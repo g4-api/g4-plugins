@@ -1,6 +1,6 @@
 # Match (Match)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Operator Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,21 +13,21 @@ The primary purpose of the MatchOperator plugin is to compare a string value aga
 ### Key Features
 
 | Feature                     | Description                                                              |
-|-----------------------------|--------------------------------------------------------------------------|
+| --- | --- |
 | String and Regex Comparison | Performs a comparison between a string and a regular expression pattern. |
 | Integration                 | Can be used under condition expressions by other plugins.                |
 
 ### Usages in RPA
 
 | Usage                       | Description                                                                          |
-|-----------------------------|--------------------------------------------------------------------------------------|
+| --- | --- |
 | String and Regex Comparison | Validate if a string matches a regular expression pattern.                           |
 | Conditional Logic           | Use in conditional expressions to control workflow logic based on regex comparisons. |
 
 ### Usages in Automation Testing
 
 | Usage              | Description                                                                          |
-|--------------------|--------------------------------------------------------------------------------------|
+| --- | --- |
 | Validation         | Validate output or state by comparing expected string values against regex patterns. |
 | Dynamic Conditions | Create dynamic conditions based on regex comparisons.                                |
 
@@ -38,12 +38,12 @@ The primary purpose of the MatchOperator plugin is to compare a string value aga
 This example demonstrates the usage of the `Match` plugin to compare a string value against a regular expression pattern.
 
 | Field      | Description                                                                                                                                     |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | pluginName | Identifies the specific plugin being utilized, which is `Match`. This signifies the action of comparing a string value against a regex pattern. |
 | LeftHand   | Specifies the string value to be compared. For example, `"hello123"`.                                                                         |
 | RightHand  | Specifies the regular expression pattern to be compared against. For example, `"^hello\d+$"`.                                                |
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --LeftHand:"hello123" --RightHand:"^hello\d+$"}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -79,7 +79,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -87,17 +87,18 @@ action_rule = {
     "argument": "{{$ --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
 }
 ```
+
 ### Example No.2
 
 This example demonstrates the usage of the `MatchOperator` plugin within another plugin, such as `Assert`, to compare a string value against a regular expression pattern.
 
 | Field     | Description                                                                                                                                               |
-|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Condition | Identifies the specific operator being utilized, which is `MatchOperator`. This signifies the action of comparing a string value against a regex pattern. |
 | LeftHand  | Specifies the string value to be compared. For example, `"hello123"`.                                                                                   |
 | RightHand | Specifies the regular expression pattern to be compared against. For example, `"^hello\d+$"`.                                                          |
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -107,7 +108,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:Match --LeftHand:"hello123" --RightHand:"^hello\d+$"}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -124,7 +125,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -133,7 +134,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -147,7 +148,7 @@ action_rule = {
 ### Left Hand (LeftHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -159,7 +160,7 @@ Specifies the string value to be compared in the match check.
 ### Right Hand (RightHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

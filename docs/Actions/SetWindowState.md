@@ -1,6 +1,6 @@
 # Set Window State (SetWindowState)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ If `Argument` is absent, empty, or does not match any recognized value, the acti
 ### Key Features and Functionality
 
 | Feature                | Description                                                                                                                  |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Maximize               | Calls `WebDriver.Manage().Window.Maximize()` to expand the browser window to fill the screen.                                |
 | Minimize               | Calls `WebDriver.Manage().Window.Minimize()` to collapse the browser window to the taskbar.                                  |
 | Full Screen            | Calls `WebDriver.Manage().Window.FullScreen()` to enter true full-screen mode, hiding OS and browser chrome.                 |
@@ -25,7 +25,7 @@ If `Argument` is absent, empty, or does not match any recognized value, the acti
 ### Usages in RPA
 
 | Use Case                   | Description                                                                                                            |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Workflow Normalization     | Maximize the browser window before starting a workflow to ensure consistent element visibility and layout.             |
 | Background Task Management | Minimize the browser window to move it out of view while other applications or steps are active.                       |
 | Kiosk Mode                 | Switch to `FullScreen` to present a page without OS or browser chrome, simulating a kiosk or presentation environment. |
@@ -33,7 +33,7 @@ If `Argument` is absent, empty, or does not match any recognized value, the acti
 ### Usages in Automation Testing
 
 | Use Case                    | Description                                                                                                            |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Consistent Screenshot State | Maximize the window before taking screenshots to avoid layout shifts caused by non-standard window sizes.              |
 | Minimize Interaction Test   | Minimize the window and verify that subsequent element interactions behave as expected when the window is not visible. |
 | Full-Screen Layout Test     | Enter full-screen mode to verify that the application layout adapts correctly when OS and browser toolbars are hidden. |
@@ -47,7 +47,7 @@ If `Argument` is absent, empty, or does not match any recognized value, the acti
 Sets the browser window to maximized state by calling `WebDriver.Manage().Window.Maximize()`.
 The `Argument` value `Maximized` is matched case-insensitively.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Maximized");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -83,7 +83,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "argument": "Maximized"
 }
 ```
+
 ### Example No.2
 
 ### Minimize the browser window
@@ -98,7 +99,7 @@ action_rule = {
 Collapses the browser window to the taskbar by calling `WebDriver.Manage().Window.Minimize()`.
 The `Argument` value `Minimized` is matched case-insensitively.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -108,7 +109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -116,7 +117,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Minimized");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -125,7 +126,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -134,7 +135,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -142,6 +143,7 @@ action_rule = {
     "argument": "Minimized"
 }
 ```
+
 ### Example No.3
 
 ### Enter full-screen mode
@@ -149,7 +151,7 @@ action_rule = {
 Switches the browser window to full-screen mode by calling `WebDriver.Manage().Window.FullScreen()`.
 The `Argument` value `FullScreen` is matched case-insensitively.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -159,7 +161,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -167,7 +169,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("FullScreen");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -176,7 +178,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -185,7 +187,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -199,7 +201,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -216,9 +218,11 @@ If Argument is absent, empty, or set to an unrecognized value, no state change o
 ##### Maximized
 
 Expands the browser window to fill the screen by calling `WebDriver.Manage().Window.Maximize()`.
+
 ##### Minimized
 
 Collapses the browser window to the taskbar by calling `WebDriver.Manage().Window.Minimize()`.
+
 ##### Full Screen
 
 Switches the browser window to full-screen mode, hiding OS and browser chrome, by calling `WebDriver.Manage().Window.FullScreen()`.
@@ -227,6 +231,7 @@ Switches the browser window to full-screen mode, hiding OS and browser chrome, b
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#resizing-and-positioning-windows](https://www.w3.org/TR/webdriver/#resizing-and-positioning-windows)

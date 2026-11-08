@@ -1,6 +1,6 @@
 # Assert (Assert)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~894 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Checks that values or page elements match your expectations during automated run
 ### Key Features and Functionality
 
 | Feature          | Description                                                                       |
-|------------------|-----------------------------------------------------------------------------------|
+| --- | --- |
 | Meta Action      | Automatically builds and runs the correct assertion steps based on your settings. |
 | Condition Types  | Checks text, numbers, or element properties against expected values.              |
 | Regex Extraction | Uses patterns to find and verify specific parts of text.                          |
@@ -24,13 +24,13 @@ Checks that values or page elements match your expectations during automated run
 ### Usages in RPA
 
 | Use Case          | Description                                                         |
-|-------------------|---------------------------------------------------------------------|
+| --- | --- |
 | Data Verification | Checks that required information or fields are present and correct. |
 
 ### Usages in Automation Testing
 
 | Use Case                | Description                                             |
-|-------------------------|---------------------------------------------------------|
+| --- | --- |
 | Functional Verification | Checks that UI elements and workflows work as intended. |
 | Regression Verification | Verifies that updates have not introduced new errors.   |
 | Data Integrity Checks   | Ensures calculations and data transfers are accurate.   |
@@ -44,7 +44,7 @@ Checks that values or page elements match your expectations during automated run
 Verifies that an alert is present.
 If an alert is detected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -54,7 +54,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -62,7 +62,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:AlertExists}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -71,7 +71,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,7 +80,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -88,6 +88,7 @@ action_rule = {
     "argument": "{{$ --Condition:AlertExists}}"
 }
 ```
+
 ### Example No.2
 
 ### Alert Absence Check
@@ -95,7 +96,7 @@ action_rule = {
 Verifies that no alert is present.
 If no alert is detected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -105,7 +106,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -113,7 +114,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:AlertNotExists}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -122,7 +123,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -131,7 +132,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -139,6 +140,7 @@ action_rule = {
     "argument": "{{$ --Condition:AlertNotExists}}"
 }
 ```
+
 ### Example No.3
 
 ### Driver Type Validation
@@ -147,7 +149,7 @@ Verifies the driver's type using an equality check.
 It asserts that the actual driver's type exactly matches the expected value 'G4.WebDriver.Simulator.SimulatorDriver'.
 If the actual value exactly equals the expected value, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -157,7 +159,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -165,7 +167,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:DriverTypeName --Expected:G4.WebDriver.Simulator.SimulatorDriver --Operator:Equal}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -174,7 +176,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -183,7 +185,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -191,6 +193,7 @@ action_rule = {
     "argument": "{{$ --Condition:DriverTypeName --Expected:G4.WebDriver.Simulator.SimulatorDriver --Operator:Equal}}"
 }
 ```
+
 ### Example No.4
 
 ### Driver Type Mismatch Validation
@@ -199,7 +202,7 @@ Verifies that the driver's type does not match the expected value using a not-eq
 It asserts that the actual driver's type is different from 'G4.WebDriver.Simulator.SimulatorDriver'.
 If the actual value does not equal the expected value, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -209,7 +212,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -217,7 +220,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:DriverTypeName --Expected:G4.WebDriver.Simulator.SimulatorDriver --Operator:NotEqual}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -226,7 +229,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -235,7 +238,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -243,6 +246,7 @@ action_rule = {
     "argument": "{{$ --Condition:DriverTypeName --Expected:G4.WebDriver.Simulator.SimulatorDriver --Operator:NotEqual}}"
 }
 ```
+
 ### Example No.5
 
 ### Driver Type Regex Match Validation
@@ -251,7 +255,7 @@ Verifies that the driver's type matches a regular expression pattern.
 It asserts that the actual driver's type conforms to the regex pattern `.*SimulatorDriver` using the Match operator.
 If the actual value matches the regular expression, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -261,7 +265,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -269,7 +273,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:DriverTypeName --Expected:.*SimulatorDriver --Operator:Match}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -278,7 +282,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -287,7 +291,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -295,6 +299,7 @@ action_rule = {
     "argument": "{{$ --Condition:DriverTypeName --Expected:.*SimulatorDriver --Operator:Match}}"
 }
 ```
+
 ### Example No.6
 
 ### Driver Type Regex NotMatch Validation
@@ -303,7 +308,7 @@ Verifies that the driver's type does not match a regular expression pattern.
 It asserts that the actual driver's type does not conform to the regex pattern `.*ChromeDriver` using the NotMatch operator.
 If the actual value does not match the regular expression, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -313,7 +318,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -321,7 +326,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:DriverTypeName --Expected:.*ChromeDriver --Operator:NotMatch}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -330,7 +335,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -339,7 +344,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -347,6 +352,7 @@ action_rule = {
     "argument": "{{$ --Condition:DriverTypeName --Expected:.*ChromeDriver --Operator:NotMatch}}"
 }
 ```
+
 ### Example No.7
 
 ### Element Active Validation
@@ -355,7 +361,7 @@ Verifies that a specific element is active.
 The condition `ElementActive` is applied to the element identified by the CSS selector `#ElementActive`.
 If the element is active, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -367,7 +373,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -377,7 +383,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#ElementActive");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -388,7 +394,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -399,7 +405,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -409,6 +415,7 @@ action_rule = {
     "onElement": "#ElementActive"
 }
 ```
+
 ### Example No.8
 
 ### Element Active Validation Using Xpath
@@ -417,7 +424,7 @@ Verifies that a specific element is active.
 The condition `ElementActive` is applied to the element identified by the Xpath selector `//*[@id='ElementActive']`.
 If the element is active, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -428,7 +435,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -437,7 +444,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='ElementActive']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -447,7 +454,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -457,7 +464,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -466,6 +473,7 @@ action_rule = {
     "onElement": "//*[@id='ElementActive']"
 }
 ```
+
 ### Example No.9
 
 ### Element Active Validation Using Id
@@ -474,7 +482,7 @@ Verifies that a specific element is active using the Id locator.
 It asserts that the condition `ElementActive` is applied to the element with the Id `ElementActive`.
 If the element is active, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -486,7 +494,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -496,7 +504,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("ElementActive");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -507,7 +515,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -518,7 +526,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -528,6 +536,7 @@ action_rule = {
     "onElement": "ElementActive"
 }
 ```
+
 ### Example No.10
 
 ### Element Attribute Equality Validation
@@ -536,7 +545,7 @@ Verifies that a specified attribute of an element equals a given value.
 It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is equal to `0` using the Equal operator.
 If the attribute value exactly equals `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -549,7 +558,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -560,7 +569,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -572,7 +581,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -584,7 +593,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -595,6 +604,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.11
 
 ### Element Attribute Equality Validation Using Xpath
@@ -603,7 +613,7 @@ Verifies that a specified attribute of an element equals a given value using the
 It asserts that the attribute `index` of the element identified by the Xpath `//*[@id='elementId']` is equal to `0` using the Equal operator.
 If the attribute value exactly equals `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -615,7 +625,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -625,7 +635,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -636,7 +646,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -647,7 +657,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -657,6 +667,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.12
 
 ### Element Attribute Equality Validation Using Id
@@ -665,7 +676,7 @@ Verifies that a specified attribute of an element equals a given value using the
 It asserts that the attribute `index` of the element with Id `elementId` is equal to `0` using the Equal operator.
 If the attribute value exactly equals `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -678,7 +689,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -689,7 +700,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -701,7 +712,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -713,7 +724,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -724,6 +735,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.13
 
 ### Element Attribute NotEqual Validation Using CssSelector
@@ -732,7 +744,7 @@ Verifies that a specified attribute of an element is not equal to a given value 
 It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is not equal to `0`.
 If the attribute value does not equal `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -745,7 +757,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -756,7 +768,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -768,7 +780,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -780,7 +792,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -791,6 +803,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.14
 
 ### Element Attribute NotEqual Validation Using Xpath
@@ -799,7 +812,7 @@ Verifies that a specified attribute of an element is not equal to a given value 
 It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is not equal to `0`.
 If the attribute value does not equal `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -811,7 +824,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -821,7 +834,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -832,7 +845,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -843,7 +856,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -853,6 +866,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.15
 
 ### Element Attribute NotEqual Validation Using Id
@@ -861,7 +875,7 @@ Verifies that a specified attribute of an element is not equal to a given value 
 It asserts that the attribute `index` of the element with Id `elementId` is not equal to `0`.
 If the attribute value does not equal `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -874,7 +888,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -885,7 +899,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -897,7 +911,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -909,7 +923,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -920,6 +934,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.16
 
 ### Element Attribute Greater Validation Using CssSelector
@@ -928,7 +943,7 @@ Verifies that a specified attribute of an element is greater than a given value.
 It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is greater than `0` using the Greater operator.
 If the attribute value is greater than `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -941,7 +956,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -952,7 +967,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -964,7 +979,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -976,7 +991,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -987,6 +1002,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.17
 
 ### Element Attribute Greater Validation Using Xpath
@@ -995,7 +1011,7 @@ Verifies that a specified attribute of an element is greater than a given value 
 It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is greater than `0` using the Greater operator.
 If the attribute value is greater than `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1007,7 +1023,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1017,7 +1033,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1028,7 +1044,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1039,7 +1055,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1049,6 +1065,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.18
 
 ### Element Attribute Greater Validation Using Id
@@ -1057,7 +1074,7 @@ Verifies that a specified attribute of an element is greater than a given value 
 It asserts that the attribute `index` of the element with Id `elementId` is greater than `0` using the Greater operator.
 If the attribute value is greater than `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1070,7 +1087,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1081,7 +1098,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1093,7 +1110,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1105,7 +1122,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1116,6 +1133,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.19
 
 ### Element Attribute Lower Validation Using CssSelector
@@ -1124,7 +1142,7 @@ Verifies that a specified attribute of an element is lower than a given value.
 It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is lower than `0` using the Lower operator.
 If the attribute value is lower than `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1137,7 +1155,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1148,7 +1166,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1160,7 +1178,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1172,7 +1190,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1183,6 +1201,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.20
 
 ### Element Attribute Lower Validation Using Xpath
@@ -1191,7 +1210,7 @@ Verifies that a specified attribute of an element is lower than a given value us
 It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is lower than `0` using the Lower operator.
 If the attribute value is lower than `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1203,7 +1222,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1213,7 +1232,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1224,7 +1243,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1235,7 +1254,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1245,6 +1264,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.21
 
 ### Element Attribute Lower Validation Using Id
@@ -1253,7 +1273,7 @@ Verifies that a specified attribute of an element is lower than a given value us
 It asserts that the attribute `index` of the element with Id `elementId` is lower than `0` using the Lower operator.
 If the attribute value is lower than `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1266,7 +1286,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1277,7 +1297,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1289,7 +1309,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1301,7 +1321,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1312,6 +1332,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.22
 
 ### Element Attribute GreaterEqual Validation Using CssSelector
@@ -1320,7 +1341,7 @@ Verifies that a specified attribute of an element is greater than or equal to a 
 It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is greater than or equal to `0` using the GreaterEqual operator.
 If the attribute value is greater than or equal to `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1333,7 +1354,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1344,7 +1365,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1356,7 +1377,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1368,7 +1389,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1379,6 +1400,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.23
 
 ### Element Attribute GreaterEqual Validation Using Xpath
@@ -1387,7 +1409,7 @@ Verifies that a specified attribute of an element is greater than or equal to a 
 It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is greater than or equal to `0` using the GreaterEqual operator.
 If the attribute value is greater than or equal to `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1399,7 +1421,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1409,7 +1431,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1420,7 +1442,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1431,7 +1453,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1441,6 +1463,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.24
 
 ### Element Attribute GreaterEqual Validation Using Id
@@ -1449,7 +1472,7 @@ Verifies that a specified attribute of an element is greater than or equal to a 
 It asserts that the attribute `index` of the element with Id `elementId` is greater than or equal to `0` using the GreaterEqual operator.
 If the attribute value is greater than or equal to `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1462,7 +1485,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1473,7 +1496,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1485,7 +1508,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1497,7 +1520,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1508,6 +1531,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.25
 
 ### Element Attribute LowerEqual Validation Using CssSelector
@@ -1516,7 +1540,7 @@ Verifies that a specified attribute of an element is lower than or equal to a gi
 It asserts that the attribute `index` of the element identified by the CSS selector `#elementId` is lower than or equal to `0` using the LowerEqual operator.
 If the attribute value is lower than or equal to `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1529,7 +1553,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1540,7 +1564,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1552,7 +1576,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1564,7 +1588,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1575,6 +1599,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.26
 
 ### Element Attribute LowerEqual Validation Using Xpath
@@ -1583,7 +1608,7 @@ Verifies that a specified attribute of an element is lower than or equal to a gi
 It asserts that the attribute `index` of the element identified by the Xpath selector `//*[@id='elementId']` is lower than or equal to `0` using the LowerEqual operator.
 If the attribute value is lower than or equal to `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1595,7 +1620,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1605,7 +1630,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1616,7 +1641,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1627,7 +1652,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1637,6 +1662,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.27
 
 ### Element Attribute LowerEqual Validation Using Id
@@ -1645,7 +1671,7 @@ Verifies that a specified attribute of an element is lower than or equal to a gi
 It asserts that the attribute `index` of the element with Id `elementId` is lower than or equal to `0` using the LowerEqual operator.
 If the attribute value is lower than or equal to `0`, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1658,7 +1684,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1669,7 +1695,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1681,7 +1707,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1693,7 +1719,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1704,6 +1730,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.28
 
 ### Element Attribute Regex Match Validation Using CssSelector
@@ -1712,7 +1739,7 @@ Verifies that the attribute `index` of an element matches the regex pattern `^\d
 It asserts that the attribute value conforms to the pattern using the Match operator.
 If the attribute value matches the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1725,7 +1752,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1736,7 +1763,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1748,7 +1775,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1760,7 +1787,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1771,6 +1798,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.29
 
 ### Element Attribute Regex Match Validation Using Xpath
@@ -1779,7 +1807,7 @@ Verifies that the attribute `index` of an element matches the regex pattern `^\d
 It asserts that the attribute value conforms to the pattern using the Match operator with an Xpath locator.
 If the attribute value matches the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1791,7 +1819,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1801,7 +1829,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1812,7 +1840,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1823,7 +1851,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1833,6 +1861,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.30
 
 ### Element Attribute Regex Match Validation Using Id
@@ -1841,7 +1870,7 @@ Verifies that the attribute `index` of an element matches the regex pattern `^\d
 It asserts that the attribute value for the element with Id `elementId` conforms to the pattern using the Match operator.
 If the attribute value matches the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1854,7 +1883,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1865,7 +1894,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1877,7 +1906,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1889,7 +1918,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1900,6 +1929,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.31
 
 ### Element Attribute NotMatch Regex Validation Using CssSelector
@@ -1908,7 +1938,7 @@ Verifies that the attribute `index` of an element does not match the regex patte
 It asserts that the attribute value fails to conform to the pattern using the NotMatch operator.
 If the attribute value does not match the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1921,7 +1951,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1932,7 +1962,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1944,7 +1974,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1956,7 +1986,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1967,6 +1997,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.32
 
 ### Element Attribute NotMatch Regex Validation Using Xpath
@@ -1975,7 +2006,7 @@ Verifies that the attribute `index` of an element does not match the regex patte
 It asserts that the attribute value fails to conform to the pattern using the NotMatch operator with an Xpath locator.
 If the attribute value does not match the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1987,7 +2018,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1997,7 +2028,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2008,7 +2039,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2019,7 +2050,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2029,6 +2060,7 @@ action_rule = {
     "onElement": "//*[@id='elementId']"
 }
 ```
+
 ### Example No.33
 
 ### Element Attribute NotMatch Regex Validation Using Id
@@ -2037,7 +2069,7 @@ Verifies that the attribute `index` of an element does not match the regex patte
 It asserts that the attribute value for the element with Id `elementId` fails to conform to the pattern using the NotMatch operator.
 If the attribute value does not match the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2050,7 +2082,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2061,7 +2093,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2073,7 +2105,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2085,7 +2117,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2096,6 +2128,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.34
 
 ### Element Count Equal Validation Using CssSelector
@@ -2103,7 +2136,7 @@ action_rule = {
 Verifies that the number of elements matching the CSS selector `.primary-button` is exactly 2.
 If the element count equals 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2115,7 +2148,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2125,7 +2158,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2136,7 +2169,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2147,7 +2180,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2157,6 +2190,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.35
 
 ### Element Count Equal Validation Using Xpath
@@ -2164,7 +2198,7 @@ action_rule = {
 Verifies that the number of elements matching the Xpath selector `//button` is exactly 2.
 If the element count equals 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2175,7 +2209,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2184,7 +2218,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2194,7 +2228,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2204,7 +2238,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2213,6 +2247,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.36
 
 ### Element Count Equal Validation Using TagName
@@ -2221,7 +2256,7 @@ Verifies that the number of elements matching the TagName selector is exactly 2.
 It asserts that the element count for elements with tag name `button` equals 2.
 If the element count equals 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2233,7 +2268,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2243,7 +2278,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2254,7 +2289,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2265,7 +2300,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2275,6 +2310,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.37
 
 ### Element Count NotEqual Validation Using CssSelector
@@ -2282,7 +2318,7 @@ action_rule = {
 Verifies that the number of elements matching the CSS selector `.primary-button` is not equal to 2.
 If the element count is different from 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2294,7 +2330,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2304,7 +2340,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2315,7 +2351,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2326,7 +2362,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2336,6 +2372,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.38
 
 ### Element Count NotEqual Validation Using Xpath
@@ -2343,7 +2380,7 @@ action_rule = {
 Verifies that the number of elements matching the Xpath selector `//button` is not equal to 2.
 If the element count is different from 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2354,7 +2391,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2363,7 +2400,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2373,7 +2410,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2383,7 +2420,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2392,6 +2429,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.39
 
 ### Element Count NotEqual Validation Using TagName
@@ -2399,7 +2437,7 @@ action_rule = {
 Verifies that the number of elements matching the TagName selector for `button` is not equal to 2.
 If the element count is different from 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2411,7 +2449,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2421,7 +2459,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2432,7 +2470,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2443,7 +2481,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2453,6 +2491,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.40
 
 ### Element Count Greater Validation Using CssSelector
@@ -2460,7 +2499,7 @@ action_rule = {
 Verifies that the number of elements matching the CSS selector `.primary-button` is greater than 2.
 If the element count exceeds 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2472,7 +2511,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2482,7 +2521,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2493,7 +2532,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2504,7 +2543,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2514,6 +2553,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.41
 
 ### Element Count Greater Validation Using Xpath
@@ -2521,7 +2561,7 @@ action_rule = {
 Verifies that the number of elements matching the Xpath selector `//button` is greater than 2.
 If the element count exceeds 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2532,7 +2572,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2541,7 +2581,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2551,7 +2591,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2561,7 +2601,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2570,6 +2610,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.42
 
 ### Element Count Greater Validation Using TagName
@@ -2577,7 +2618,7 @@ action_rule = {
 Verifies that the number of elements with the tag name `button` is greater than 2.
 If the element count exceeds 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2589,7 +2630,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2599,7 +2640,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2610,7 +2651,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2621,7 +2662,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2631,6 +2672,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.43
 
 ### Element Count Lower Validation Using CssSelector
@@ -2638,7 +2680,7 @@ action_rule = {
 Verifies that the number of elements matching the CSS selector `.primary-button` is lower than 2.
 If the element count is less than 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2650,7 +2692,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2660,7 +2702,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2671,7 +2713,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2682,7 +2724,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2692,6 +2734,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.44
 
 ### Element Count Lower Validation Using Xpath
@@ -2699,7 +2742,7 @@ action_rule = {
 Verifies that the number of elements matching the Xpath selector `//button` is lower than 2.
 If the element count is less than 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2710,7 +2753,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2719,7 +2762,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2729,7 +2772,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2739,7 +2782,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2748,6 +2791,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.45
 
 ### Element Count Lower Validation Using TagName
@@ -2755,7 +2799,7 @@ action_rule = {
 Verifies that the number of elements matching the TagName selector for `button` is lower than 2.
 If the element count is less than 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2767,7 +2811,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2777,7 +2821,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2788,7 +2832,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2799,7 +2843,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2809,6 +2853,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.46
 
 ### Element Count GreaterEqual Validation Using CssSelector
@@ -2816,7 +2861,7 @@ action_rule = {
 Verifies that the number of elements matching the CSS selector `.primary-button` is greater than or equal to 2.
 If the element count is greater than or equal to 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2828,7 +2873,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2838,7 +2883,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2849,7 +2894,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2860,7 +2905,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2870,6 +2915,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.47
 
 ### Element Count GreaterEqual Validation Using Xpath
@@ -2877,7 +2923,7 @@ action_rule = {
 Verifies that the number of elements matching the Xpath selector `//button` is greater than or equal to 2.
 If the element count is greater than or equal to 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2888,7 +2934,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2897,7 +2943,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2907,7 +2953,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2917,7 +2963,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2926,6 +2972,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.48
 
 ### Element Count GreaterEqual Validation Using TagName
@@ -2933,7 +2980,7 @@ action_rule = {
 Verifies that the number of elements with the tag name `button` is greater than or equal to 2.
 If the element count is greater than or equal to 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2945,7 +2992,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2955,7 +3002,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2966,7 +3013,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2977,7 +3024,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2987,6 +3034,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.49
 
 ### Element Count LowerEqual Validation Using CssSelector
@@ -2994,7 +3042,7 @@ action_rule = {
 Verifies that the number of elements matching the CSS selector `.primary-button` is lower than or equal to 2.
 If the element count is lower than or equal to 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3006,7 +3054,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3016,7 +3064,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3027,7 +3075,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3038,7 +3086,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3048,6 +3096,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.50
 
 ### Element Count LowerEqual Validation Using Xpath
@@ -3055,7 +3104,7 @@ action_rule = {
 Verifies that the number of elements matching the Xpath selector `//button` is lower than or equal to 2.
 If the element count is lower than or equal to 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3066,7 +3115,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3075,7 +3124,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3085,7 +3134,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3095,7 +3144,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3104,6 +3153,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.51
 
 ### Element Count LowerEqual Validation Using TagName
@@ -3111,7 +3161,7 @@ action_rule = {
 Verifies that the number of elements with the tag name `button` is lower than or equal to 2.
 If the element count is lower than or equal to 2, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3123,7 +3173,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3133,7 +3183,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3144,7 +3194,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3155,7 +3205,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3165,6 +3215,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.52
 
 ### Element Count Regex Match Validation Using CssSelector
@@ -3173,7 +3224,7 @@ Verifies that the element count for the selector `.primary-button` matches the r
 It asserts that the element count is a positive integer using the Match operator.
 If the element count matches the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3185,7 +3236,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3195,7 +3246,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3206,7 +3257,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3217,7 +3268,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3227,6 +3278,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.53
 
 ### Element Count Regex Match Validation Using Xpath
@@ -3235,7 +3287,7 @@ Verifies that the element count for the Xpath selector `//button` matches the re
 It asserts that the element count is a positive integer using the Match operator.
 If the element count matches the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3246,7 +3298,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3255,7 +3307,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3265,7 +3317,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3275,7 +3327,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3284,6 +3336,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.54
 
 ### Element Count Regex Match Validation Using TagName
@@ -3292,7 +3345,7 @@ Verifies that the element count for elements with the tag name `button` matches 
 It asserts that the element count is a positive integer using the Match operator.
 If the element count matches the regex pattern, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3304,7 +3357,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3314,7 +3367,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3325,7 +3378,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3336,7 +3389,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3346,6 +3399,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.55
 
 ### Element Count NotMatch Regex Validation Using CssSelector
@@ -3354,7 +3408,7 @@ Verifies that the element count for the selector `.primary-button` is strictly n
 It asserts that the element count does not match the regex pattern `.*[a-zA-Z]+.*` using the NotMatch operator.
 If the element count is strictly numeric, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3366,7 +3420,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3376,7 +3430,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".primary-button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3387,7 +3441,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3398,7 +3452,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3408,6 +3462,7 @@ action_rule = {
     "onElement": ".primary-button"
 }
 ```
+
 ### Example No.56
 
 ### Element Count NotMatch Regex Validation Using Xpath
@@ -3416,7 +3471,7 @@ Verifies that the element count for the Xpath selector `//button` is strictly nu
 It asserts that the element count does not match the regex pattern `.*[a-zA-Z]+.*` using the NotMatch operator.
 If the element count is strictly numeric, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3427,7 +3482,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3436,7 +3491,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3446,7 +3501,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3456,7 +3511,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3465,6 +3520,7 @@ action_rule = {
     "onElement": "//button"
 }
 ```
+
 ### Example No.57
 
 ### Element Count NotMatch Regex Validation Using TagName
@@ -3473,7 +3529,7 @@ Verifies that the element count for elements with the tag name `button` is stric
 It asserts that the element count does not match the regex pattern `.*[a-zA-Z]+.*` using the NotMatch operator.
 If the element count is strictly numeric, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3485,7 +3541,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3495,7 +3551,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("button");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3506,7 +3562,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3517,7 +3573,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3527,6 +3583,7 @@ action_rule = {
     "onElement": "button"
 }
 ```
+
 ### Example No.58
 
 ### Element Disabled Validation Using CssSelector
@@ -3534,7 +3591,7 @@ action_rule = {
 Verifies that the element identified by the CSS selector `#username` is disabled.
 If the element is disabled, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3546,7 +3603,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3556,7 +3613,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3567,7 +3624,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3578,7 +3635,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3588,6 +3645,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.59
 
 ### Element Disabled Validation Using Xpath
@@ -3595,7 +3653,7 @@ action_rule = {
 Verifies that the element identified by the Xpath selector `//input[@id='username']` is disabled.
 If the element is disabled, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3606,7 +3664,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3615,7 +3673,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3625,7 +3683,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3635,7 +3693,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3644,6 +3702,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.60
 
 ### Element Disabled Validation Using Id
@@ -3651,7 +3710,7 @@ action_rule = {
 Verifies that the element with the Id `username` is disabled.
 If the element is disabled, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3663,7 +3722,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3673,7 +3732,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3684,7 +3743,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3695,7 +3754,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3705,6 +3764,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.61
 
 ### Element Enabled Validation Using CssSelector
@@ -3712,7 +3772,7 @@ action_rule = {
 Verifies that the element identified by the CSS selector `#username` is enabled.
 If the element is enabled, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3724,7 +3784,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3734,7 +3794,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3745,7 +3805,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3756,7 +3816,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3766,6 +3826,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.62
 
 ### Element Enabled Validation Using Xpath
@@ -3773,7 +3834,7 @@ action_rule = {
 Verifies that the element identified by the Xpath selector `//input[@id='username']` is enabled.
 If the element is enabled, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3784,7 +3845,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3793,7 +3854,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3803,7 +3864,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3813,7 +3874,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3822,6 +3883,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.63
 
 ### Element Enabled Validation Using Id
@@ -3829,7 +3891,7 @@ action_rule = {
 Verifies that the element with the Id `username` is enabled.
 If the element is enabled, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3841,7 +3903,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3851,7 +3913,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3862,7 +3924,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3873,7 +3935,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3883,6 +3945,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.64
 
 ### Element Exists Validation Using CssSelector
@@ -3890,7 +3953,7 @@ action_rule = {
 Verifies that an element identified by the CSS selector `#username` exists in the DOM.
 If the element exists, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3902,7 +3965,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3912,7 +3975,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3923,7 +3986,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3934,7 +3997,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3944,6 +4007,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.65
 
 ### Element Exists Validation Using Xpath
@@ -3951,7 +4015,7 @@ action_rule = {
 Verifies that an element identified by the Xpath selector `//input[@id='username']` exists in the DOM.
 If the element exists, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3962,7 +4026,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3971,7 +4035,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3981,7 +4045,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3991,7 +4055,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4000,6 +4064,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.66
 
 ### Element Exists Validation Using Id
@@ -4007,7 +4072,7 @@ action_rule = {
 Verifies that an element with the Id `username` exists in the DOM.
 If the element exists, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4019,7 +4084,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4029,7 +4094,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4040,7 +4105,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4051,7 +4116,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4061,6 +4126,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.67
 
 ### Element Not Active Validation Using CssSelector
@@ -4068,7 +4134,7 @@ action_rule = {
 Verifies that the element identified by the CSS selector `#username` is not active.
 If the element is not active, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4080,7 +4146,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4090,7 +4156,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4101,7 +4167,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4112,7 +4178,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4122,6 +4188,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.68
 
 ### Element Not Active Validation Using Xpath
@@ -4129,7 +4196,7 @@ action_rule = {
 Verifies that the element identified by the Xpath selector `//input[@id='username']` is not active.
 If the element is not active, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4140,7 +4207,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4149,7 +4216,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4159,7 +4226,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4169,7 +4236,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4178,6 +4245,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.69
 
 ### Element Not Active Validation Using Id
@@ -4185,7 +4253,7 @@ action_rule = {
 Verifies that the element with the Id `username` is not active.
 If the element is not active, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4197,7 +4265,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4207,7 +4275,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4218,7 +4286,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4229,7 +4297,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4239,6 +4307,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.70
 
 ### Element Not Exists Validation Using CssSelector
@@ -4246,7 +4315,7 @@ action_rule = {
 Verifies that an element identified by the CSS selector `#username` does not exist in the DOM.
 If the element is absent, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4258,7 +4327,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4268,7 +4337,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4279,7 +4348,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4290,7 +4359,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4300,6 +4369,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.71
 
 ### Element Not Exists Validation Using Xpath
@@ -4307,7 +4377,7 @@ action_rule = {
 Verifies that an element identified by the Xpath selector `//input[@id='username']` does not exist in the DOM.
 If the element is absent, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4318,7 +4388,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4327,7 +4397,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4337,7 +4407,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4347,7 +4417,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4356,6 +4426,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.72
 
 ### Element Not Exists Validation Using Id
@@ -4363,7 +4434,7 @@ action_rule = {
 Verifies that an element with the Id `username` does not exist in the DOM.
 If the element is absent, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4375,7 +4446,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4385,7 +4456,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4396,7 +4467,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4407,7 +4478,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4417,6 +4488,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.73
 
 ### Element Not Selected Validation Using CssSelector
@@ -4424,7 +4496,7 @@ action_rule = {
 Verifies that the element identified by the CSS selector `#acceptTerms` is not selected.
 If the element is not selected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4436,7 +4508,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4446,7 +4518,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#acceptTerms");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4457,7 +4529,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4468,7 +4540,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4478,6 +4550,7 @@ action_rule = {
     "onElement": "#acceptTerms"
 }
 ```
+
 ### Example No.74
 
 ### Element Not Selected Validation Using Xpath
@@ -4485,7 +4558,7 @@ action_rule = {
 Verifies that the element identified by the Xpath selector `//input[@id='acceptTerms']` is not selected.
 If the element is not selected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4496,7 +4569,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4505,7 +4578,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='acceptTerms']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4515,7 +4588,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4525,7 +4598,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4534,6 +4607,7 @@ action_rule = {
     "onElement": "//input[@id='acceptTerms']"
 }
 ```
+
 ### Example No.75
 
 ### Element Not Selected Validation Using Id
@@ -4541,7 +4615,7 @@ action_rule = {
 Verifies that the element with the Id `acceptTerms` is not selected.
 If the element is not selected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4553,7 +4627,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4563,7 +4637,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("acceptTerms");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4574,7 +4648,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4585,7 +4659,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4595,6 +4669,7 @@ action_rule = {
     "onElement": "acceptTerms"
 }
 ```
+
 ### Example No.76
 
 ### Element Not Visible Validation Using CssSelector
@@ -4603,7 +4678,7 @@ Verifies that the element identified by the CSS selector `#username` is not visi
 Visibility may be determined by properties such as `display: none`, `visibility: hidden`, or off-screen positioning.
 If the element is not visible, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4615,7 +4690,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4625,7 +4700,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4636,7 +4711,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4647,7 +4722,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4657,6 +4732,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.77
 
 ### Element Not Visible Validation Using Xpath
@@ -4665,7 +4741,7 @@ Verifies that the element identified by the Xpath selector `//input[@id='usernam
 Visibility may be determined by properties such as `display: none`, `visibility: hidden`, or off-screen positioning.
 If the element is not visible, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4676,7 +4752,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4685,7 +4761,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4695,7 +4771,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4705,7 +4781,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4714,6 +4790,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.78
 
 ### Element Not Visible Validation Using Id
@@ -4722,7 +4799,7 @@ Verifies that the element with the Id `username` is not visible in the DOM.
 Visibility may be determined by properties such as `display: none`, `visibility: hidden`, or off-screen positioning.
 If the element is not visible, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4734,7 +4811,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4744,7 +4821,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4755,7 +4832,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4766,7 +4843,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4776,6 +4853,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.79
 
 ### Element Selected Validation Using CssSelector
@@ -4784,7 +4862,7 @@ Verifies that the element identified by the CSS selector `#acceptTerms` is selec
 The ElementSelected condition only applies to elements such as `<input type="checkbox">`, `<input type="radio">`, or `<option selected>`.
 If the element is selected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4796,7 +4874,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4806,7 +4884,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#acceptTerms");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4817,7 +4895,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4828,7 +4906,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4838,6 +4916,7 @@ action_rule = {
     "onElement": "#acceptTerms"
 }
 ```
+
 ### Example No.80
 
 ### Element Selected Validation Using Xpath
@@ -4846,7 +4925,7 @@ Verifies that the element identified by the Xpath selector `//input[@id='acceptT
 The ElementSelected condition only applies to elements such as `<input type="checkbox">`, `<input type="radio">`, or `<option selected>`.
 If the element is selected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4857,7 +4936,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4866,7 +4945,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='acceptTerms']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4876,7 +4955,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4886,7 +4965,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4895,6 +4974,7 @@ action_rule = {
     "onElement": "//input[@id='acceptTerms']"
 }
 ```
+
 ### Example No.81
 
 ### Element Selected Validation Using Id
@@ -4903,7 +4983,7 @@ Verifies that the element with the Id `acceptTerms` is selected.
 The ElementSelected condition only applies to elements such as `<input type="checkbox">`, `<input type="radio">`, or `<option selected>`.
 If the element is selected, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4915,7 +4995,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4925,7 +5005,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("acceptTerms");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4936,7 +5016,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4947,7 +5027,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4957,6 +5037,7 @@ action_rule = {
     "onElement": "acceptTerms"
 }
 ```
+
 ### Example No.82
 
 ### Element Stale Validation Using CssSelector
@@ -4964,7 +5045,7 @@ action_rule = {
 Verifies that the element identified by the CSS selector `#username` is stale.
 If the element is stale, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4976,7 +5057,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4986,7 +5067,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4997,7 +5078,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5008,7 +5089,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5018,6 +5099,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.83
 
 ### Element Stale Validation Using Xpath
@@ -5025,7 +5107,7 @@ action_rule = {
 Verifies that the element identified by the Xpath selector `//input[@id='username']` is stale.
 If the element is stale, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5036,7 +5118,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5045,7 +5127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5055,7 +5137,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5065,7 +5147,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5074,6 +5156,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.84
 
 ### Element Stale Validation Using Id
@@ -5081,7 +5164,7 @@ action_rule = {
 Verifies that the element with the Id `username` is stale.
 If the element is stale, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5093,7 +5176,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5103,7 +5186,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5114,7 +5197,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5125,7 +5208,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5135,6 +5218,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.85
 
 ### Element Text Length Equal Validation Using CssSelector
@@ -5143,7 +5227,7 @@ Verifies that the text length of the element identified by the CSS selector `#co
 The computed text length excludes HTML tags and counts only the visible text as returned by the WebDriver Get Element Text endpoint. For nested HTML, the length is determined by concatenating the visible text from all child elements.
 If the text length equals 255, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5155,7 +5239,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5165,7 +5249,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5176,7 +5260,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5187,7 +5271,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5197,6 +5281,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.86
 
 ### Element Text Length Equal Validation Using Xpath
@@ -5205,7 +5290,7 @@ Verifies that the text length of the element identified by the Xpath selector `/
 The computed text length excludes HTML tags and counts only the visible text as returned by the WebDriver Get Element Text endpoint. For nested HTML, the length is determined by concatenating the visible text from all child elements.
 If the text length equals 255, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5216,7 +5301,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5225,7 +5310,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5235,7 +5320,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5245,7 +5330,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5254,6 +5339,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.87
 
 ### Element Text Length Equal Validation Using Id
@@ -5262,7 +5348,7 @@ Verifies that the text length of the element with the Id `content` is exactly 25
 The computed text length excludes HTML tags and counts only the visible text as returned by the WebDriver Get Element Text endpoint. For nested HTML, the length is determined by concatenating the visible text from all child elements.
 If the text length equals 255, the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5274,7 +5360,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5284,7 +5370,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5295,7 +5381,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5306,7 +5392,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5316,6 +5402,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.88
 
 ### Element Text Length Equal with Regex Validation Using CssSelector
@@ -5325,7 +5412,7 @@ The text length is computed by excluding HTML tags and counting only the visible
 A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the visible text.
 The assertion evaluates to `true` only if the length of the extracted string is exactly 100. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5338,7 +5425,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5349,7 +5436,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5361,7 +5448,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5373,7 +5460,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5384,6 +5471,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.89
 
 ### Element Text Length Equal with Regex Validation Using Xpath
@@ -5393,7 +5481,7 @@ The computed text length excludes HTML tags and counts only the visible text as 
 A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the visible text.
 The assertion evaluates to `true` only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5405,7 +5493,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5415,7 +5503,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5426,7 +5514,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5437,7 +5525,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5447,6 +5535,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.90
 
 ### Element Text Length Equal with Regex Validation Using Id
@@ -5456,7 +5545,7 @@ The text length is calculated by excluding HTML tags and considering only the vi
 A regular expression `(?s)^(.{0,100})` is applied to extract up to 100 characters from the visible text.
 The assertion evaluates to `true` only if the extracted string is exactly 100 characters long. If the element contains fewer than 100 visible characters, the regex match group will capture fewer than 100 characters, causing the assertion to fail.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5469,7 +5558,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5480,7 +5569,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5492,7 +5581,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5504,7 +5593,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5515,6 +5604,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.91
 
 ### Input Value Text Length Equal Validation Using CssSelector
@@ -5523,7 +5613,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The text length is computed solely from the value attribute, excluding any HTML markup.
 If the value attribute contains exactly 150 characters (regardless of visual presentation), the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5536,7 +5626,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5547,7 +5637,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("input#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5559,7 +5649,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5571,7 +5661,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5582,6 +5672,7 @@ action_rule = {
     "onElement": "input#content"
 }
 ```
+
 ### Example No.92
 
 ### Input Value Text Length Equal Validation Using Xpath
@@ -5590,7 +5681,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The text length is computed solely from the value attribute, excluding any HTML markup.
 If the value attribute contains exactly 150 characters (regardless of visual presentation), the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5602,7 +5693,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5612,7 +5703,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5623,7 +5714,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5634,7 +5725,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5644,6 +5735,7 @@ action_rule = {
     "onElement": "//input[@id='content']"
 }
 ```
+
 ### Example No.93
 
 ### Input Value Text Length Equal Validation Using Id
@@ -5652,7 +5744,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The text length is computed solely from the value attribute, excluding any HTML markup.
 If the value attribute contains exactly 150 characters (regardless of visual presentation), the assert evaluates to `true`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5665,7 +5757,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5676,7 +5768,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5688,7 +5780,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5700,7 +5792,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5711,6 +5803,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.94
 
 ### Input Value Text Length Equal Validation Using CssSelector
@@ -5720,7 +5813,7 @@ The text length is computed solely from the attribute value, excluding any HTML 
 A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured.
 If the extracted match is shorter than 100 characters, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5734,7 +5827,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5746,7 +5839,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5759,7 +5852,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5772,7 +5865,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5784,6 +5877,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.95
 
 ### Input Value Text Length Equal Validation Using Xpath
@@ -5793,7 +5887,7 @@ The text length is computed solely from the attribute value, excluding any HTML 
 A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured.
 If the extracted match is shorter than 100 characters, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5806,7 +5900,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5817,7 +5911,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5829,7 +5923,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5841,7 +5935,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5852,6 +5946,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.96
 
 ### Input Value Text Length Equal Validation Using Id
@@ -5861,7 +5956,7 @@ The text length is computed solely from the attribute value, excluding any HTML 
 A regular expression `(?s)^(.{0,100})` is used to extract up to 100 characters, and the assertion passes only if exactly 100 characters are captured.
 If the extracted match is shorter than 100 characters, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5875,7 +5970,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5887,7 +5982,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5900,7 +5995,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5913,7 +6008,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5925,6 +6020,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.97
 
 ### Element Text Length NotEqual Validation Using CssSelector
@@ -5933,7 +6029,7 @@ Verifies that the visible text content of the element identified by the CSS sele
 The length is based solely on the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is different from 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5945,7 +6041,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5955,7 +6051,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5966,7 +6062,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5977,7 +6073,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5987,6 +6083,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.98
 
 ### Element Text Length NotEqual Validation Using Xpath
@@ -5995,7 +6092,7 @@ Verifies that the visible text content of the element identified by the Xpath se
 The length is based solely on the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is different from 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6006,7 +6103,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6015,7 +6112,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6025,7 +6122,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6035,7 +6132,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6044,6 +6141,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.99
 
 ### Element Text Length NotEqual Validation Using Id
@@ -6052,7 +6150,7 @@ Verifies that the visible text content of the element with the Id `content` does
 The length is based solely on the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is different from 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6064,7 +6162,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6074,7 +6172,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6085,7 +6183,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6096,7 +6194,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6106,6 +6204,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.100
 
 ### Element Text Length NotEqual with Regex Validation Using CssSelector
@@ -6115,7 +6214,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if fewer than 100 characters are captured or if no match occurs; it fails if exactly 100 characters are captured.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6128,7 +6227,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6139,7 +6238,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6151,7 +6250,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6163,7 +6262,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6174,6 +6273,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.101
 
 ### Element Text Length NotEqual with Regex Validation Using Xpath
@@ -6183,7 +6283,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if fewer than 100 characters are captured or if no match occurs; it fails if exactly 100 characters are captured.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6195,7 +6295,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6205,7 +6305,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6216,7 +6316,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6227,7 +6327,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6237,6 +6337,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.102
 
 ### Element Text Length NotEqual with Regex Validation Using Id
@@ -6246,7 +6347,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if fewer than 100 characters are captured or if no match occurs; it fails if exactly 100 characters are captured.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6259,7 +6360,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6270,7 +6371,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6282,7 +6383,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6294,7 +6395,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6305,6 +6406,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.103
 
 ### Input Value Text Length NotEqual Validation Using CssSelector
@@ -6313,7 +6415,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is not exactly 150 characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6326,7 +6428,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6337,7 +6439,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("input#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6349,7 +6451,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6361,7 +6463,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6372,6 +6474,7 @@ action_rule = {
     "onElement": "input#content"
 }
 ```
+
 ### Example No.104
 
 ### Input Value Text Length NotEqual Validation Using Xpath
@@ -6380,7 +6483,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is not exactly 150 characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6392,7 +6495,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6402,7 +6505,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6413,7 +6516,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6424,7 +6527,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6434,6 +6537,7 @@ action_rule = {
     "onElement": "//input[@id='content']"
 }
 ```
+
 ### Example No.105
 
 ### Input Value Text Length NotEqual Validation Using Id
@@ -6442,7 +6546,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is not exactly 150 characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6455,7 +6559,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6466,7 +6570,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6478,7 +6582,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6490,7 +6594,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6501,6 +6605,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.106
 
 ### Input Value Text Length NotEqual Validation Using CssSelector
@@ -6510,7 +6615,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if the length of the regex capture group is not exactly 100; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6524,7 +6629,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6536,7 +6641,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6549,7 +6654,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6562,7 +6667,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6574,6 +6679,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.107
 
 ### Input Value Text Length NotEqual Validation Using Xpath
@@ -6583,7 +6689,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if the length of the regex capture group is not exactly 100; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6596,7 +6702,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6607,7 +6713,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6619,7 +6725,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6631,7 +6737,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6642,6 +6748,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.108
 
 ### Input Value Text Length NotEqual Validation Using Id
@@ -6651,7 +6758,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if the length of the regex capture group is not exactly 100; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6665,7 +6772,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6677,7 +6784,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6690,7 +6797,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6703,7 +6810,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6715,6 +6822,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.109
 
 ### Element Text Length Greater Validation Using CssSelector
@@ -6723,7 +6831,7 @@ Verifies that the visible text content of the element identified by the CSS sele
 The length is based solely on the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6735,7 +6843,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6745,7 +6853,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6756,7 +6864,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6767,7 +6875,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6777,6 +6885,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.110
 
 ### Element Text Length Greater Validation Using Xpath
@@ -6785,7 +6894,7 @@ Verifies that the visible text content of the element identified by the Xpath se
 The length is based solely on the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6796,7 +6905,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6805,7 +6914,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6815,7 +6924,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6825,7 +6934,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6834,6 +6943,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.111
 
 ### Element Text Length Greater Validation Using Id
@@ -6842,7 +6952,7 @@ Verifies that the visible text content of the element with the Id `content` is g
 The length is based solely on the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6854,7 +6964,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6864,7 +6974,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6875,7 +6985,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6886,7 +6996,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6896,6 +7006,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.112
 
 ### Input Value Text Length Greater Validation Using CssSelector
@@ -6905,7 +7016,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if more than 100 characters are captured; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6919,7 +7030,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6931,7 +7042,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6944,7 +7055,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6957,7 +7068,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6969,6 +7080,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.113
 
 ### Input Value Text Length Greater Validation Using Xpath
@@ -6978,7 +7090,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if more than 100 characters are captured; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6991,7 +7103,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7002,7 +7114,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7014,7 +7126,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7026,7 +7138,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7037,6 +7149,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.114
 
 ### Input Value Text Length Greater Validation Using Id
@@ -7046,7 +7159,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if more than 100 characters are captured; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7060,7 +7173,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7072,7 +7185,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7085,7 +7198,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7098,7 +7211,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7110,6 +7223,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.115
 
 ### Textarea Value Text Length Greater Validation Using CssSelector
@@ -7119,7 +7233,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,200})` is applied to the `value` attribute to extract up to 200 characters into a capture group.
 The assertion passes only if the computed length is greater than 150; if exactly 150 characters are captured or fewer, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7133,7 +7247,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7145,7 +7259,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,200})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7158,7 +7272,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7171,7 +7285,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7183,6 +7297,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,200})"
 }
 ```
+
 ### Example No.116
 
 ### Textarea Value Text Length Greater Validation Using Xpath
@@ -7192,7 +7307,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,200})` is applied to the `value` attribute to extract up to 200 characters into a capture group.
 The assertion passes only if the computed length is greater than 150; if exactly 150 characters are captured or fewer, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7205,7 +7320,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7216,7 +7331,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,200})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7228,7 +7343,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7240,7 +7355,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7251,6 +7366,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,200})"
 }
 ```
+
 ### Example No.117
 
 ### Textarea Value Text Length Greater Validation Using Id
@@ -7260,7 +7376,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,200})` is applied to the `value` attribute to extract up to 200 characters into a capture group.
 The assertion passes only if the computed length is greater than 150; if exactly 150 characters are captured or fewer, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7274,7 +7390,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7286,7 +7402,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,200})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7299,7 +7415,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7312,7 +7428,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7324,6 +7440,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,200})"
 }
 ```
+
 ### Example No.118
 
 ### Textarea Value Text Length Greater Validation Using CssSelector
@@ -7333,7 +7450,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if more than 100 characters are captured; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7347,7 +7464,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7359,7 +7476,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7372,7 +7489,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7385,7 +7502,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7397,6 +7514,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.119
 
 ### Textarea Value Text Length Greater Validation Using Xpath
@@ -7406,7 +7524,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if more than 100 characters are captured; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7419,7 +7537,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7430,7 +7548,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7442,7 +7560,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7454,7 +7572,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7465,6 +7583,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.120
 
 ### Textarea Value Text Length Greater Validation Using Id
@@ -7474,7 +7593,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,110})` is applied to the `value` attribute to extract up to 110 characters into a capture group.
 The assertion passes only if more than 100 characters are captured; if exactly 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7488,7 +7607,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7500,7 +7619,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,110})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7513,7 +7632,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7526,7 +7645,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7538,6 +7657,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,110})"
 }
 ```
+
 ### Example No.121
 
 ### Element Text Length GreaterEqual Validation Using CssSelector
@@ -7546,7 +7666,7 @@ Verifies that the visible text content of the element identified by the CSS sele
 The length is computed from the visible text only, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than or equal to 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7558,7 +7678,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7568,7 +7688,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7579,7 +7699,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7590,7 +7710,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7600,6 +7720,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.122
 
 ### Element Text Length GreaterEqual Validation Using Xpath
@@ -7608,7 +7729,7 @@ Verifies that the visible text content of the element identified by the Xpath se
 The length is computed from the visible text only, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than or equal to 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7619,7 +7740,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7628,7 +7749,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7638,7 +7759,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7648,7 +7769,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7657,6 +7778,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.123
 
 ### Element Text Length GreaterEqual Validation Using Id
@@ -7665,7 +7787,7 @@ Verifies that the visible text content of the element with the Id `content` is g
 The length is computed from the visible text only, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than or equal to 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7677,7 +7799,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7687,7 +7809,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7698,7 +7820,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7709,7 +7831,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7719,6 +7841,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.124
 
 ### Element Text Length GreaterEqual Validation Using CssSelector
@@ -7728,7 +7851,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is greater than or equal to 100; if fewer than 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7741,7 +7864,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7752,7 +7875,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7764,7 +7887,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7776,7 +7899,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7787,6 +7910,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.125
 
 ### Element Text Length GreaterEqual Validation Using Xpath
@@ -7796,7 +7920,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is greater than or equal to 100; if fewer than 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7808,7 +7932,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7818,7 +7942,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7829,7 +7953,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7840,7 +7964,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7850,6 +7974,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.126
 
 ### Element Text Length GreaterEqual Validation Using Id
@@ -7859,7 +7984,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is greater than or equal to 100; if fewer than 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7872,7 +7997,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7883,7 +8008,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7895,7 +8020,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7907,7 +8032,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7918,6 +8043,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.127
 
 ### Textarea Value Text Length GreaterEqual Validation Using CssSelector
@@ -7926,7 +8052,7 @@ Verifies that the text length of the value attribute of a textarea element, iden
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than or equal to 150.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7939,7 +8065,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7950,7 +8076,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("textarea#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7962,7 +8088,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7974,7 +8100,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7985,6 +8111,7 @@ action_rule = {
     "onElement": "textarea#content"
 }
 ```
+
 ### Example No.128
 
 ### Textarea Value Text Length GreaterEqual Validation Using Xpath
@@ -7993,7 +8120,7 @@ Verifies that the text length of the value attribute of a textarea element, iden
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than or equal to 150.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8005,7 +8132,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8015,7 +8142,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//textarea[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8026,7 +8153,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8037,7 +8164,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8047,6 +8174,7 @@ action_rule = {
     "onElement": "//textarea[@id='content']"
 }
 ```
+
 ### Example No.129
 
 ### Textarea Value Text Length GreaterEqual Validation Using Id
@@ -8055,7 +8183,7 @@ Verifies that the text length of the value attribute of a textarea, with the Id 
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is greater than or equal to 150.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8068,7 +8196,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8079,7 +8207,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8091,7 +8219,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8103,7 +8231,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8114,6 +8242,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.130
 
 ### Textarea Value Text Length GreaterEqual Validation Using CssSelector
@@ -8123,7 +8252,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,})` is applied to the `value` attribute to extract the full visible text into a capture group.
 The assertion passes only if the computed length is greater than or equal to 100 characters; it fails if fewer than 100 characters are captured.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8137,7 +8266,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8149,7 +8278,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8162,7 +8291,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8175,7 +8304,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8187,6 +8316,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,})"
 }
 ```
+
 ### Example No.131
 
 ### Textarea Value Text Length GreaterEqual Validation Using Xpath
@@ -8196,7 +8326,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,})` is applied to the `value` attribute to extract the full visible text into a capture group.
 The assertion passes only if the computed length is greater than or equal to 100 characters; it fails if fewer than 100 characters are captured.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8209,7 +8339,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8220,7 +8350,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8232,7 +8362,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8244,7 +8374,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8255,6 +8385,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,})"
 }
 ```
+
 ### Example No.132
 
 ### Textarea Value Text Length GreaterEqual Validation Using Id
@@ -8264,7 +8395,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,})` is applied to the `value` attribute to extract the full visible text into a capture group.
 The assertion passes only if the computed length is greater than or equal to 100 characters; it fails if fewer than 100 characters are captured.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8278,7 +8409,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8290,7 +8421,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8303,7 +8434,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8316,7 +8447,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8328,6 +8459,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,})"
 }
 ```
+
 ### Example No.133
 
 ### Element Text Length LowerEqual Validation Using CssSelector
@@ -8336,7 +8468,7 @@ Verifies that the visible text content of the element identified by the CSS sele
 The length is determined solely from the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than or equal to 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8348,7 +8480,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8358,7 +8490,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8369,7 +8501,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8380,7 +8512,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8390,6 +8522,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.134
 
 ### Element Text Length LowerEqual Validation Using Xpath
@@ -8398,7 +8531,7 @@ Verifies that the visible text content of the element identified by the Xpath se
 The length is determined solely from the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than or equal to 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8409,7 +8542,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8418,7 +8551,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8428,7 +8561,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8438,7 +8571,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8447,6 +8580,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.135
 
 ### Element Text Length LowerEqual Validation Using Id
@@ -8455,7 +8589,7 @@ Verifies that the visible text content of the element with the Id `content` is l
 The length is determined solely from the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than or equal to 255.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8467,7 +8601,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8477,7 +8611,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8488,7 +8622,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8499,7 +8633,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8509,6 +8643,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.136
 
 ### Element Text Length LowerEqual Validation Using CssSelector
@@ -8518,7 +8653,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to the visible text to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, the regex fails to match.
 The assertion passes only if the regex successfully captures text and the computed length is less than or equal to 100 characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8531,7 +8666,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8542,7 +8677,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(?=.{0,100}$)(.*)$");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8554,7 +8689,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8566,7 +8701,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8577,6 +8712,7 @@ action_rule = {
     "regularExpression": "(?s)^(?=.{0,100}$)(.*)$"
 }
 ```
+
 ### Example No.137
 
 ### Element Text Length LowerEqual Validation Using Xpath
@@ -8586,7 +8722,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to the visible text to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, the regex fails to match.
 The assertion passes only if the regex successfully captures text and the computed length is less than or equal to 100 characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8598,7 +8734,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8608,7 +8744,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(?=.{0,100}$)(.*)$");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8619,7 +8755,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8630,7 +8766,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8640,6 +8776,7 @@ action_rule = {
     "regularExpression": "(?s)^(?=.{0,100}$)(.*)$"
 }
 ```
+
 ### Example No.138
 
 ### Element Text Length LowerEqual Validation Using Id
@@ -8649,7 +8786,7 @@ The length is based solely on the visible text, excluding any HTML markup or tag
 A regular expression `(?s)^(?=.{0,100}$)(.*)$` is applied to the visible text to capture the entire text only if its length is at most 100 characters; if the text exceeds 100 characters, the regex fails to match.
 The assertion passes only if the regex successfully captures text and the computed length is less than or equal to 100 characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8662,7 +8799,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8673,7 +8810,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(?=.{0,100}$)(.*)$");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8685,7 +8822,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8697,7 +8834,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8708,6 +8845,7 @@ action_rule = {
     "regularExpression": "(?s)^(?=.{0,100}$)(.*)$"
 }
 ```
+
 ### Example No.139
 
 ### Input Value Text Length LowerEqual Validation Using CssSelector
@@ -8716,7 +8854,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than or equal to 150.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8729,7 +8867,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8740,7 +8878,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("input#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8752,7 +8890,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8764,7 +8902,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8775,6 +8913,7 @@ action_rule = {
     "onElement": "input#content"
 }
 ```
+
 ### Example No.140
 
 ### Input Value Text Length LowerEqual Validation Using Xpath
@@ -8783,7 +8922,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than or equal to 150.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8795,7 +8934,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8805,7 +8944,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8816,7 +8955,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8827,7 +8966,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8837,6 +8976,7 @@ action_rule = {
     "onElement": "//input[@id='content']"
 }
 ```
+
 ### Example No.141
 
 ### Input Value Text Length LowerEqual Validation Using Id
@@ -8845,7 +8985,7 @@ Verifies that the text length of the value attribute of an input element (of typ
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than or equal to 150.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8858,7 +8998,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8869,7 +9009,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8881,7 +9021,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8893,7 +9033,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8904,6 +9044,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.142
 
 ### Textarea Value Text Length LowerEqual Validation Using CssSelector
@@ -8912,7 +9053,7 @@ Verifies that the visible text of a textarea's value attribute, identified by th
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract only the first 100 characters, so that even if the full text is longer, only these 100 characters are evaluated.
 The assertion passes only if the computed length from this capture group is less than or equal to 100 characters; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8926,7 +9067,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -8938,7 +9079,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -8951,7 +9092,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -8964,7 +9105,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -8976,6 +9117,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.143
 
 ### Textarea Value Text Length LowerEqual Validation Using Xpath
@@ -8984,7 +9126,7 @@ Verifies that the visible text of a textarea's value attribute, identified by th
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract only the first 100 characters, so that even if the full text is longer, only these 100 characters are evaluated.
 The assertion passes only if the computed length from this capture group is less than or equal to 100 characters; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -8997,7 +9139,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9008,7 +9150,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9020,7 +9162,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9032,7 +9174,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9043,6 +9185,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.144
 
 ### Textarea Value Text Length LowerEqual Validation Using Id
@@ -9051,7 +9194,7 @@ Verifies that the visible text of a textarea's value attribute, with the Id `con
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract only the first 100 characters, so that even if the full text is longer, only these 100 characters are evaluated.
 The assertion passes only if the computed length from this capture group is less than or equal to 100 characters; if more than 100 characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9065,7 +9208,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9077,7 +9220,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9090,7 +9233,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9103,7 +9246,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9115,6 +9258,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.145
 
 ### Element Text Length Lower Validation Using CssSelector
@@ -9123,7 +9267,7 @@ Verifies that the visible text of the element identified by the CSS selector `#c
 The length is computed from the visible text only, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than 255; if it is greater than or equal to 255, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9135,7 +9279,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9145,7 +9289,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9156,7 +9300,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9167,7 +9311,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9177,6 +9321,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.146
 
 ### Element Text Length Lower Validation Using Xpath
@@ -9185,7 +9330,7 @@ Verifies that the visible text of the element identified by the Xpath selector `
 The length is computed from the visible text only, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than 255; if it is greater than or equal to 255, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9196,7 +9341,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9205,7 +9350,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9215,7 +9360,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9225,7 +9370,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9234,6 +9379,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.147
 
 ### Element Text Length Lower Validation Using Id
@@ -9242,7 +9388,7 @@ Verifies that the visible text of the element with the Id `content` is less than
 The length is computed from the visible text only, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than 255; if it is greater than or equal to 255, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9254,7 +9400,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9264,7 +9410,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9275,7 +9421,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9286,7 +9432,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9296,6 +9442,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.148
 
 ### Element Text Length Lower Validation Using CssSelector
@@ -9305,7 +9452,7 @@ The length is determined solely from the visible text, excluding any HTML markup
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9318,7 +9465,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9329,7 +9476,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9341,7 +9488,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9353,7 +9500,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9364,6 +9511,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.149
 
 ### Element Text Length Lower Validation Using Xpath
@@ -9373,7 +9521,7 @@ The length is determined solely from the visible text, excluding any HTML markup
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9385,7 +9533,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9395,7 +9543,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9406,7 +9554,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9417,7 +9565,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9427,6 +9575,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.150
 
 ### Element Text Length Lower Validation Using Id
@@ -9436,7 +9585,7 @@ The length is determined solely from the visible text, excluding any HTML markup
 A regular expression `(?s)^(.{0,100})` is applied to the visible text to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9449,7 +9598,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9460,7 +9609,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9472,7 +9621,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9484,7 +9633,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9495,6 +9644,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.151
 
 ### Textarea Value Text Length Lower Validation Using CssSelector
@@ -9503,7 +9653,7 @@ Verifies that the text length of the value attribute of a textarea element ident
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than 150; if 150 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9516,7 +9666,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9527,7 +9677,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("textarea#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9539,7 +9689,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9551,7 +9701,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9562,6 +9712,7 @@ action_rule = {
     "onElement": "textarea#content"
 }
 ```
+
 ### Example No.152
 
 ### Textarea Value Text Length Lower Validation Using Xpath
@@ -9570,7 +9721,7 @@ Verifies that the text length of the value attribute of a textarea element ident
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than 150; if 150 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9582,7 +9733,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9592,7 +9743,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//textarea[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9603,7 +9754,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9614,7 +9765,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9624,6 +9775,7 @@ action_rule = {
     "onElement": "//textarea[@id='content']"
 }
 ```
+
 ### Example No.153
 
 ### Textarea Value Text Length Lower Validation Using Id
@@ -9632,7 +9784,7 @@ Verifies that the text length of the value attribute of a textarea with the Id `
 The length is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes only if the computed length is less than 150; if 150 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9645,7 +9797,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9656,7 +9808,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9668,7 +9820,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9680,7 +9832,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9691,6 +9843,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.154
 
 ### Input Value Text Length Lower Validation Using CssSelector
@@ -9700,7 +9853,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9714,7 +9867,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9726,7 +9879,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9739,7 +9892,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9752,7 +9905,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9764,6 +9917,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.155
 
 ### Input Value Text Length Lower Validation Using Xpath
@@ -9773,7 +9927,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9786,7 +9940,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9797,7 +9951,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9809,7 +9963,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9821,7 +9975,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9832,6 +9986,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.156
 
 ### Input Value Text Length Lower Validation Using Id
@@ -9841,7 +9996,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length is less than 100; if 100 or more characters are captured, the assertion fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9855,7 +10010,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9867,7 +10022,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9880,7 +10035,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9893,7 +10048,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9905,6 +10060,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.157
 
 ### Element Text Length Match Validation Using CssSelector
@@ -9914,7 +10070,7 @@ The length is computed from the visible text only, excluding any HTML markup or 
 The regular expression is used to validate that the computed length (converted to a string) begins with the digit 2 and is followed by one or more digits.
 The assertion passes only if the computed length exactly matches this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9926,7 +10082,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9936,7 +10092,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -9947,7 +10103,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -9958,7 +10114,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -9968,6 +10124,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.158
 
 ### Element Text Length Match Validation Using Xpath
@@ -9977,7 +10134,7 @@ The length is computed from the visible text only, excluding any HTML markup or 
 The regular expression is used to validate that the computed length (as a string) begins with the digit 2 and is followed by one or more digits.
 The assertion passes only if the computed length exactly matches this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -9988,7 +10145,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -9997,7 +10154,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10007,7 +10164,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10017,7 +10174,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10026,6 +10183,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.159
 
 ### Element Text Length Match Validation Using Id
@@ -10035,7 +10193,7 @@ The length is computed from the visible text only, excluding any HTML markup or 
 The regular expression is used to confirm that the computed length (converted to a string) starts with the digit 2 followed by one or more digits.
 The assertion passes only if the computed length exactly matches this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10047,7 +10205,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10057,7 +10215,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10068,7 +10226,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10079,7 +10237,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10089,6 +10247,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.160
 
 ### Input Value Text Length Match Validation (Failure Expected) Using CssSelector
@@ -10098,7 +10257,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.
 Because the regex limits the extraction to 100 characters, the computed length will never begin with '15', and therefore the assertion is expected to fail.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10112,7 +10271,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10124,7 +10283,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10137,7 +10296,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10150,7 +10309,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10162,6 +10321,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.161
 
 ### Input Value Text Length Match Validation (Failure Expected) Using Xpath
@@ -10171,7 +10331,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.
 Because the regex restricts the capture to 100 characters, the computed length will never meet the expected pattern, and the assertion is designed to fail.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10184,7 +10344,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10195,7 +10355,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10207,7 +10367,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10219,7 +10379,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10230,6 +10390,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.162
 
 ### Element Text Length Match Validation (Failure Expected) Using Id
@@ -10239,7 +10400,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group.
 Given that the extraction is capped at 100 characters, the computed length will never fulfill the pattern, causing the assertion to fail.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10253,7 +10414,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10265,7 +10426,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10278,7 +10439,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10291,7 +10452,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10303,6 +10464,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.163
 
 ### Input Value Text Length Match Validation Using CssSelector
@@ -10312,7 +10474,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 The expected outcome is that the computed length, when converted to a string, will begin with '15' (for example, '150', '151', etc.).
 The assertion passes only if the computed length meets this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10325,7 +10487,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10336,7 +10498,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("input#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10348,7 +10510,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10360,7 +10522,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10371,6 +10533,7 @@ action_rule = {
     "onElement": "input#content"
 }
 ```
+
 ### Example No.164
 
 ### Input Value Text Length Match Validation Using Xpath
@@ -10380,7 +10543,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 The expected outcome is that the computed length, when converted to a string, will start with '15' (for example, '150', '151', etc.).
 The assertion passes only if the computed length meets this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10392,7 +10555,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10402,7 +10565,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10413,7 +10576,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10424,7 +10587,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10434,6 +10597,7 @@ action_rule = {
     "onElement": "//input[@id='content']"
 }
 ```
+
 ### Example No.165
 
 ### Element Text Length Match Validation Using Id
@@ -10443,7 +10607,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 The expected outcome is that the computed length, when converted to a string, will start with '15' (for example, '150', '151', etc.).
 The assertion passes only if the computed length meets this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10456,7 +10620,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10467,7 +10631,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10479,7 +10643,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10491,7 +10655,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10502,6 +10666,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.166
 
 ### Input Value Text Length Match Validation Using CssSelector
@@ -10511,7 +10676,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group. The computed length, when converted to a string, must match the pattern `^1\d+$` (for example, '10', '11', '150', etc.).
 The assertion passes only if the computed length matches this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10525,7 +10690,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10537,7 +10702,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10550,7 +10715,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10563,7 +10728,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10575,6 +10740,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.167
 
 ### Input Value Text Length Match Validation Using Xpath
@@ -10584,7 +10750,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group. The computed length, when converted to a string, must match the pattern `^1\d+$` (for example, '10', '11', '150', etc.).
 The assertion passes only if the computed length matches this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10597,7 +10763,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10608,7 +10774,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10620,7 +10786,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10632,7 +10798,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10643,6 +10809,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.168
 
 ### Element Text Length Match Validation Using Id
@@ -10652,7 +10819,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the `value` attribute to extract up to 100 characters into a capture group. The computed length, when converted to a string, must match the pattern `^1\d+$` (for example, '10', '11', '150', etc.).
 The assertion passes only if the computed length matches this pattern.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10666,7 +10833,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10678,7 +10845,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10691,7 +10858,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10704,7 +10871,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10716,6 +10883,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.169
 
 ### Element Text Length NotMatch Validation Using CssSelector
@@ -10724,7 +10892,7 @@ Verifies that the computed length of the visible text of the element identified 
 The length is determined solely from the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length, when converted to a string, does not begin with the digit '2'.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10736,7 +10904,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10746,7 +10914,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10757,7 +10925,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10768,7 +10936,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10778,6 +10946,7 @@ action_rule = {
     "onElement": "#content"
 }
 ```
+
 ### Example No.170
 
 ### Element Text Length NotMatch Validation Using Xpath
@@ -10786,7 +10955,7 @@ Verifies that the computed length of the visible text of the element identified 
 The length is determined solely from the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length, when converted to a string, does not begin with the digit '2'.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10797,7 +10966,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10806,7 +10975,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10816,7 +10985,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10826,7 +10995,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10835,6 +11004,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.171
 
 ### Element Text Length NotMatch Validation Using Id
@@ -10843,7 +11013,7 @@ Verifies that the computed length of the visible text of the element with the Id
 The length is determined solely from the visible text, excluding any HTML markup or tags.
 The assertion passes only if the computed length, when converted to a string, does not begin with the digit '2'.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10855,7 +11025,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10865,7 +11035,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10876,7 +11046,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10887,7 +11057,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10897,6 +11067,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.172
 
 ### Input Value Text Length NotMatch Validation Using CssSelector
@@ -10906,7 +11077,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10920,7 +11091,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -10932,7 +11103,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -10945,7 +11116,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -10958,7 +11129,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -10970,6 +11141,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.173
 
 ### Input Value Text Length NotMatch Validation Using Xpath
@@ -10979,7 +11151,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -10992,7 +11164,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11003,7 +11175,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11015,7 +11187,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11027,7 +11199,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11038,6 +11210,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.174
 
 ### Element Text Length NotMatch Validation Using Id
@@ -11047,7 +11220,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11061,7 +11234,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11073,7 +11246,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11086,7 +11259,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11099,7 +11272,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11111,6 +11284,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.175
 
 ### Element Text Length NotMatch Validation Using CssSelector
@@ -11120,7 +11294,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11133,7 +11307,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11144,7 +11318,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("textarea#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11156,7 +11330,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11168,7 +11342,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11179,6 +11353,7 @@ action_rule = {
     "onElement": "textarea#content"
 }
 ```
+
 ### Example No.176
 
 ### Element Text Length NotMatch Validation Using Xpath
@@ -11188,7 +11363,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11200,7 +11375,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11210,7 +11385,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//textarea[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11221,7 +11396,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11232,7 +11407,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11242,6 +11417,7 @@ action_rule = {
     "onElement": "//textarea[@id='content']"
 }
 ```
+
 ### Example No.177
 
 ### Element Text Length NotMatch Validation Using Id
@@ -11251,7 +11427,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^15\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11264,7 +11440,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11275,7 +11451,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11287,7 +11463,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11299,7 +11475,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11310,6 +11486,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.178
 
 ### Element Text Length NotMatch Validation Using CssSelector
@@ -11319,7 +11496,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^1\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11333,7 +11510,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11345,7 +11522,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11358,7 +11535,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11371,7 +11548,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11383,6 +11560,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.179
 
 ### Element Text Length NotMatch Validation Using Xpath
@@ -11392,7 +11570,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^1\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11405,7 +11583,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11416,7 +11594,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11428,7 +11606,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11440,7 +11618,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11451,6 +11629,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.180
 
 ### Element Text Length NotMatch Validation Using Id
@@ -11460,7 +11639,7 @@ The length is based solely on the text from the `value` attribute, excluding any
 A regular expression `(?s)^(.{0,100})` is applied to the value attribute to extract up to 100 characters into a capture group.
 The assertion passes only if the computed length, when converted to a string, does not match the pattern `^1\d+$`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11474,7 +11653,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11486,7 +11665,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,100})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11499,7 +11678,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11512,7 +11691,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11524,6 +11703,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,100})"
 }
 ```
+
 ### Example No.181
 
 ### Element Visible Validation Using CssSelector
@@ -11532,7 +11712,7 @@ Verifies that an element identified by the CSS selector `#username` is visible i
 Visibility is determined solely based on the element's presence and rendering state, excluding any hidden or collapsed styling.
 The assertion passes if the element is visible; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11544,7 +11724,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11554,7 +11734,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11565,7 +11745,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11576,7 +11756,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11586,6 +11766,7 @@ action_rule = {
     "onElement": "#username"
 }
 ```
+
 ### Example No.182
 
 ### Element Visible Validation Using Xpath
@@ -11594,7 +11775,7 @@ Verifies that an element identified by the XPath locator `//input[@id='username'
 Visibility is determined solely based on the element's presence and rendering state, excluding any hidden or collapsed styling.
 The assertion passes if the element is visible; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11605,7 +11786,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11614,7 +11795,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11624,7 +11805,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11634,7 +11815,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11643,6 +11824,7 @@ action_rule = {
     "onElement": "//input[@id='username']"
 }
 ```
+
 ### Example No.183
 
 ### Element Visible Validation Using Id
@@ -11651,7 +11833,7 @@ Verifies that an element identified by the Id `username` is visible in the DOM.
 Visibility is determined solely based on the element's presence and rendering state, excluding any hidden or collapsed styling.
 The assertion passes if the element is visible; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11663,7 +11845,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11673,7 +11855,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11684,7 +11866,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11695,7 +11877,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11705,6 +11887,7 @@ action_rule = {
     "onElement": "username"
 }
 ```
+
 ### Example No.184
 
 ### Element Text Equal Validation Using CssSelector
@@ -11713,7 +11896,7 @@ Verifies that the computed text from the element identified by the CssSelector `
 The validation is based solely on the element's visible text content, excluding any HTML markup or tags.
 The assertion passes if the element text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11725,7 +11908,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11735,7 +11918,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("div#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11746,7 +11929,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11757,7 +11940,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11767,6 +11950,7 @@ action_rule = {
     "onElement": "div#content"
 }
 ```
+
 ### Example No.185
 
 ### Element Text Equal Validation Using Xpath
@@ -11775,7 +11959,7 @@ Verifies that the computed text from the element identified by the XPath locator
 The validation is based solely on the element's visible text content, excluding any HTML markup or tags.
 The assertion passes if the element text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11786,7 +11970,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11795,7 +11979,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11805,7 +11989,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11815,7 +11999,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11824,6 +12008,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.186
 
 ### Element Text Equal Validation Using Id
@@ -11832,7 +12017,7 @@ Verifies that the computed text from the element identified by the Id `content` 
 The validation is based solely on the element's visible text content, excluding any HTML markup or tags.
 The assertion passes if the element text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11844,7 +12029,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11854,7 +12039,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11865,7 +12050,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11876,7 +12061,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11886,6 +12071,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.187
 
 ### Element Text Equal Validation Using CssSelector
@@ -11895,7 +12081,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the element's text content to extract up to 10 characters into a capture group.
 The assertion passes if the element text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11908,7 +12094,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11919,7 +12105,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11931,7 +12117,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -11943,7 +12129,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -11954,6 +12140,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.188
 
 ### Element Text Equal Validation Using Xpath
@@ -11963,7 +12150,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the element's text content to extract up to 10 characters into a capture group.
 The assertion passes if the element text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -11975,7 +12162,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -11985,7 +12172,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -11996,7 +12183,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12007,7 +12194,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12017,6 +12204,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.189
 
 ### Element Text Equal Validation Using Id
@@ -12026,7 +12214,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the element's text content to extract up to 10 characters into a capture group.
 The assertion passes if the element text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12039,7 +12227,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12050,7 +12238,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12062,7 +12250,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12074,7 +12262,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12085,6 +12273,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.190
 
 ### Element Text Equal Validation Using CssSelector
@@ -12093,7 +12282,7 @@ Verifies that the computed text from the `value` attribute of the element identi
 The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes if the text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12106,7 +12295,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12117,7 +12306,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("textarea#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12129,7 +12318,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12141,7 +12330,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12152,6 +12341,7 @@ action_rule = {
     "onElement": "textarea#content"
 }
 ```
+
 ### Example No.191
 
 ### Element Text Equal Validation Using Xpath
@@ -12160,7 +12350,7 @@ Verifies that the computed text from the `value` attribute of the element identi
 The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes if the text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12172,7 +12362,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12182,7 +12372,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//textarea[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12193,7 +12383,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12204,7 +12394,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12214,6 +12404,7 @@ action_rule = {
     "onElement": "//textarea[@id='content']"
 }
 ```
+
 ### Example No.192
 
 ### Element Text Equal Validation Using Id
@@ -12222,7 +12413,7 @@ Verifies that the computed text from the `value` attribute of the element identi
 The validation is based solely on the text from the `value` attribute, excluding any HTML markup or tags.
 The assertion passes if the text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12235,7 +12426,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12246,7 +12437,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12258,7 +12449,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12270,7 +12461,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12281,6 +12472,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.193
 
 ### Element Text Equal Validation Using CssSelector
@@ -12290,7 +12482,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12304,7 +12496,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12316,7 +12508,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12329,7 +12521,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12342,7 +12534,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12354,6 +12546,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.194
 
 ### Element Text Equal Validation Using Xpath
@@ -12363,7 +12556,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12376,7 +12569,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12387,7 +12580,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12399,7 +12592,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12411,7 +12604,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12422,6 +12615,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.195
 
 ### Element Text Equal Validation Using Id
@@ -12431,7 +12625,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text exactly matches the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12445,7 +12639,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12457,7 +12651,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12470,7 +12664,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12483,7 +12677,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12495,6 +12689,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.196
 
 ### Element Text NotEqual Validation Using CssSelector
@@ -12503,7 +12698,7 @@ Verifies that the computed text from the element identified by the CssSelector `
 The validation is based solely on the element's visible text content, excluding any HTML markup or tags.
 The assertion passes if the element text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12515,7 +12710,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12525,7 +12720,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("div#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12536,7 +12731,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12547,7 +12742,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12557,6 +12752,7 @@ action_rule = {
     "onElement": "div#content"
 }
 ```
+
 ### Example No.197
 
 ### Element Text NotEqual Validation Using Xpath
@@ -12565,7 +12761,7 @@ Verifies that the computed text from the element identified by the XPath locator
 The validation is based solely on the element's visible text content, excluding any HTML markup or tags.
 The assertion passes if the element text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12576,7 +12772,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12585,7 +12781,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12595,7 +12791,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12605,7 +12801,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12614,6 +12810,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.198
 
 ### Element Text NotEqual Validation Using Id
@@ -12622,7 +12819,7 @@ Verifies that the computed text from the element identified by the Id `content` 
 The validation is based solely on the element's visible text content, excluding any HTML markup or tags.
 The assertion passes if the element text does not exactly match the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12634,7 +12831,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12644,7 +12841,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12655,7 +12852,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12666,7 +12863,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12676,6 +12873,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.199
 
 ### Element Text NotEqual Validation Using CssSelector
@@ -12685,7 +12883,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12698,7 +12896,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12709,7 +12907,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12721,7 +12919,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12733,7 +12931,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12744,6 +12942,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.200
 
 ### Element Text NotEqual Validation Using Xpath
@@ -12753,7 +12952,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12765,7 +12964,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12775,7 +12974,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12786,7 +12985,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12797,7 +12996,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12807,6 +13006,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.201
 
 ### Element Text NotEqual Validation Using Id
@@ -12816,7 +13016,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12829,7 +13029,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12840,7 +13040,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12852,7 +13052,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12864,7 +13064,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12875,6 +13075,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.202
 
 ### Element Text NotEqual Validation Using CssSelector
@@ -12884,7 +13085,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12897,7 +13098,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12908,7 +13109,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12920,7 +13121,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12932,7 +13133,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -12943,6 +13144,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.203
 
 ### Element Text NotEqual Validation Using Xpath
@@ -12952,7 +13154,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -12964,7 +13166,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -12974,7 +13176,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -12985,7 +13187,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -12996,7 +13198,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13006,6 +13208,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.204
 
 ### Element Text NotEqual Validation Using Id
@@ -13015,7 +13218,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not match the expected value exactly; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13028,7 +13231,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13039,7 +13242,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13051,7 +13254,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13063,7 +13266,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13074,6 +13277,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.205
 
 ### Element Text NotEqual Validation Using CssSelector
@@ -13083,7 +13287,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not exactly match the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13096,7 +13300,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13107,7 +13311,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13119,7 +13323,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13131,7 +13335,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13142,6 +13346,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.206
 
 ### Element Text NotEqual Validation Using Xpath
@@ -13151,7 +13356,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not exactly match the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13163,7 +13368,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13173,7 +13378,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13184,7 +13389,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13195,7 +13400,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13205,6 +13410,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.207
 
 ### Element Text NotEqual Validation Using Id
@@ -13214,7 +13420,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `(?s)^(.{0,10})` is applied to the text content to extract up to 10 characters into a capture group.
 The assertion passes if the extracted text does not exactly match the expected value; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13227,7 +13433,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13238,7 +13444,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13250,7 +13456,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13262,7 +13468,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13273,6 +13479,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.208
 
 ### Element Text Greater Validation Using CssSelector
@@ -13281,7 +13488,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text content is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13294,7 +13501,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13305,7 +13512,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13317,7 +13524,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13329,7 +13536,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13340,6 +13547,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.209
 
 ### Element Text Greater Validation Using Xpath
@@ -13348,7 +13556,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text content is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13360,7 +13568,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13370,7 +13578,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13381,7 +13589,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13392,7 +13600,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13402,6 +13610,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.210
 
 ### Element Text Greater Validation Using Id
@@ -13410,7 +13619,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text content is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13423,7 +13632,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13434,7 +13643,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13446,7 +13655,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13458,7 +13667,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13469,6 +13678,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.211
 
 ### Element Text Greater Validation Using CssSelector
@@ -13478,7 +13688,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the text content to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13492,7 +13702,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13504,7 +13714,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13517,7 +13727,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13530,7 +13740,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13542,6 +13752,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.212
 
 ### Element Text Greater Validation Using Xpath
@@ -13551,7 +13762,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the text content to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13564,7 +13775,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13575,7 +13786,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13587,7 +13798,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13599,7 +13810,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13610,6 +13821,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.213
 
 ### Element Text Greater Validation Using Id
@@ -13619,7 +13831,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the text content to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13633,7 +13845,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13645,7 +13857,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13658,7 +13870,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13671,7 +13883,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13683,6 +13895,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.214
 
 ### Element Text GreaterEqual Validation Using CssSelector
@@ -13691,7 +13904,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text content is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13704,7 +13917,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13715,7 +13928,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13727,7 +13940,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13739,7 +13952,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13750,6 +13963,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.215
 
 ### Element Text GreaterEqual Validation Using Xpath
@@ -13758,7 +13972,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text content is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13770,7 +13984,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13780,7 +13994,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13791,7 +14005,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13802,7 +14016,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13812,6 +14026,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.216
 
 ### Element Text GreaterEqual Validation Using Id
@@ -13820,7 +14035,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text content is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13833,7 +14048,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13844,7 +14059,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13856,7 +14071,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13868,7 +14083,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13879,6 +14094,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.217
 
 ### Element Text GreaterEqual Validation Using CssSelector
@@ -13888,7 +14104,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13902,7 +14118,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13914,7 +14130,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13927,7 +14143,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -13940,7 +14156,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -13952,6 +14168,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.218
 
 ### Element Text GreaterEqual Validation Using Xpath
@@ -13961,7 +14178,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -13974,7 +14191,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -13985,7 +14202,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -13997,7 +14214,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14009,7 +14226,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14020,6 +14237,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.219
 
 ### Element Text GreaterEqual Validation Using Id
@@ -14029,7 +14247,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is greater than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14043,7 +14261,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14055,7 +14273,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14068,7 +14286,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14081,7 +14299,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14093,6 +14311,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.220
 
 ### Element Text Lower Validation Using CssSelector
@@ -14101,7 +14320,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14114,7 +14333,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14125,7 +14344,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14137,7 +14356,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14149,7 +14368,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14160,6 +14379,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.221
 
 ### Element Text Lower Validation Using Xpath
@@ -14168,7 +14388,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14180,7 +14400,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14190,7 +14410,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14201,7 +14421,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14212,7 +14432,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14222,6 +14442,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.222
 
 ### Element Text Lower Validation Using Id
@@ -14230,7 +14451,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14243,7 +14464,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14254,7 +14475,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14266,7 +14487,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14278,7 +14499,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14289,6 +14510,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.223
 
 ### Element Text Lower Validation Using CssSelector
@@ -14298,7 +14520,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14312,7 +14534,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14324,7 +14546,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14337,7 +14559,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14350,7 +14572,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14362,6 +14584,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.224
 
 ### Element Text Lower Validation Using Xpath
@@ -14371,7 +14594,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14384,7 +14607,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14395,7 +14618,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14407,7 +14630,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14419,7 +14642,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14430,6 +14653,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.225
 
 ### Element Text Lower Validation Using Id
@@ -14439,7 +14663,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14453,7 +14677,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14465,7 +14689,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14478,7 +14702,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14491,7 +14715,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14503,6 +14727,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.226
 
 ### Element Text LowerEqual Validation Using CssSelector
@@ -14511,7 +14736,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14524,7 +14749,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14535,7 +14760,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14547,7 +14772,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14559,7 +14784,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14570,6 +14795,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.227
 
 ### Element Text LowerEqual Validation Using Xpath
@@ -14578,7 +14804,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14590,7 +14816,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14600,7 +14826,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14611,7 +14837,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14622,7 +14848,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14632,6 +14858,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.228
 
 ### Element Text LowerEqual Validation Using Id
@@ -14640,7 +14867,7 @@ Verifies that the numeric value extracted from the visible text content of the e
 The visible text is processed using the regular expression `\d+` to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14653,7 +14880,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14664,7 +14891,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14676,7 +14903,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14688,7 +14915,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14699,6 +14926,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.229
 
 ### Element Text LowerEqual Validation Using CssSelector
@@ -14708,7 +14936,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14722,7 +14950,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14734,7 +14962,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14747,7 +14975,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14760,7 +14988,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14772,6 +15000,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.230
 
 ### Element Text LowerEqual Validation Using Xpath
@@ -14781,7 +15010,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14794,7 +15023,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14805,7 +15034,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14817,7 +15046,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14829,7 +15058,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14840,6 +15069,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.231
 
 ### Element Text LowerEqual Validation Using Id
@@ -14849,7 +15079,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `\d+` is applied to the attribute text to extract a numeric value.
 The assertion passes if the extracted numeric value is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14863,7 +15093,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14875,7 +15105,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14888,7 +15118,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14901,7 +15131,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14913,6 +15143,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.232
 
 ### Element Text Match Validation Using CssSelector
@@ -14922,7 +15153,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a match.
 The assertion passes only if the element text matches the pattern; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14934,7 +15165,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -14944,7 +15175,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("div#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -14955,7 +15186,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -14966,7 +15197,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -14976,6 +15207,7 @@ action_rule = {
     "onElement": "div#content"
 }
 ```
+
 ### Example No.233
 
 ### Element Text Match Validation Using Xpath
@@ -14985,7 +15217,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a match.
 The assertion passes only if the element text matches the pattern; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -14996,7 +15228,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15005,7 +15237,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15015,7 +15247,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15025,7 +15257,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15034,6 +15266,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.234
 
 ### Element Text Match Validation Using Id
@@ -15043,7 +15276,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a match.
 The assertion passes only if the element text matches the pattern; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15055,7 +15288,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15065,7 +15298,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15076,7 +15309,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15087,7 +15320,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15097,6 +15330,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.235
 
 ### Element Text Match Validation Using CssSelector
@@ -15107,7 +15341,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract 
 A regular expression `^Lorem ipsu$` is then applied to the extracted text to test for an exact match.
 The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15120,7 +15354,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15131,7 +15365,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15143,7 +15377,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15155,7 +15389,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15166,6 +15400,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.236
 
 ### Element Text Match Validation Using Xpath
@@ -15176,7 +15411,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract 
 A regular expression `^Lorem ipsu$` is then applied to the extracted text to test for an exact match.
 The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15188,7 +15423,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15198,7 +15433,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15209,7 +15444,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15220,7 +15455,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15230,6 +15465,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.237
 
 ### Element Text Match Validation Using Id
@@ -15240,7 +15476,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract 
 A regular expression `^Lorem ipsu$` is then applied to the extracted text to test for an exact match.
 The assertion passes only if the extracted text matches the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15253,7 +15489,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15264,7 +15500,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15276,7 +15512,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15288,7 +15524,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15299,6 +15535,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.238
 
 ### Element Text Match Validation Using CssSelector
@@ -15308,7 +15545,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `^Lorem ipsum dolor.*` is applied to the text from the `value` attribute to test for a match.
 The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15321,7 +15558,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15332,7 +15569,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("textarea#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15344,7 +15581,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15356,7 +15593,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15367,6 +15604,7 @@ action_rule = {
     "onElement": "textarea#content"
 }
 ```
+
 ### Example No.239
 
 ### Element Text Match Validation Using Xpath
@@ -15376,7 +15614,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `^Lorem ipsum dolor.*` is applied to the text from the `value` attribute to test for a match.
 The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15388,7 +15626,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15398,7 +15636,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//textarea[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15409,7 +15647,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15420,7 +15658,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15430,6 +15668,7 @@ action_rule = {
     "onElement": "//textarea[@id='content']"
 }
 ```
+
 ### Example No.240
 
 ### Element Text Match Validation Using Id
@@ -15439,7 +15678,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `^Lorem ipsum dolor.*` is applied to the text from the `value` attribute to test for a match.
 The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15452,7 +15691,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15463,7 +15702,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15475,7 +15714,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15487,7 +15726,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15498,6 +15737,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.241
 
 ### Element Text Match Validation Using CssSelector
@@ -15508,7 +15748,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to ext
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.
 The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15522,7 +15762,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15534,7 +15774,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15547,7 +15787,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15560,7 +15800,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15572,6 +15812,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.242
 
 ### Element Text Match Validation Using Xpath
@@ -15582,7 +15823,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to ext
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.
 The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15595,7 +15836,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15606,7 +15847,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15618,7 +15859,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15630,7 +15871,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15641,6 +15882,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.243
 
 ### Element Text Match Validation Using Id
@@ -15651,7 +15893,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to ext
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.
 The assertion passes only if the text from the `value` attribute matches the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15665,7 +15907,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15677,7 +15919,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15690,7 +15932,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15703,7 +15945,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15715,6 +15957,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.244
 
 ### Element Text NotMatch Validation Using CssSelector
@@ -15724,7 +15967,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a non-match.
 The assertion passes only if the text does not match the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15736,7 +15979,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15746,7 +15989,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("div#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15757,7 +16000,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15768,7 +16011,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15778,6 +16021,7 @@ action_rule = {
     "onElement": "div#content"
 }
 ```
+
 ### Example No.245
 
 ### Element Text NotMatch Validation Using Xpath
@@ -15787,7 +16031,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a non-match.
 The assertion passes only if the text does not match the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15798,7 +16042,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15807,7 +16051,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15817,7 +16061,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15827,7 +16071,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15836,6 +16080,7 @@ action_rule = {
     "onElement": "//div[@id='content']"
 }
 ```
+
 ### Example No.246
 
 ### Element Text NotMatch Validation Using Id
@@ -15845,7 +16090,7 @@ The validation is based solely on the element's visible text content, excluding 
 A regular expression `^Lorem ipsum dolor.*` is applied to the visible text to test for a non-match.
 The assertion passes only if the text does not match the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15857,7 +16102,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15867,7 +16112,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15878,7 +16123,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15889,7 +16134,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15899,6 +16144,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.247
 
 ### Element Text NotMatch Validation Using CssSelector
@@ -15909,7 +16155,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract 
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15922,7 +16168,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -15933,7 +16179,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -15945,7 +16191,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -15957,7 +16203,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -15968,6 +16214,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.248
 
 ### Element Text NotMatch Validation Using Xpath
@@ -15978,7 +16225,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract 
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -15990,7 +16237,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16000,7 +16247,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16011,7 +16258,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16022,7 +16269,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16032,6 +16279,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.249
 
 ### Element Text NotMatch Validation Using Id
@@ -16042,7 +16290,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the visible text to extract 
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16055,7 +16303,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16066,7 +16314,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16078,7 +16326,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16090,7 +16338,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16101,6 +16349,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.250
 
 ### Element Text NotMatch Validation Using CssSelector
@@ -16110,7 +16359,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `^Lorem ipsum dolor.*` is applied to the text from the `value` attribute to test for a non-match.
 The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16123,7 +16372,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16134,7 +16383,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("textarea#content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16146,7 +16395,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16158,7 +16407,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16169,6 +16418,7 @@ action_rule = {
     "onElement": "textarea#content"
 }
 ```
+
 ### Example No.251
 
 ### Element Text NotMatch Validation Using Xpath
@@ -16178,7 +16428,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `^Lorem ipsum dolor.*` is applied to the text from the `value` attribute to test for a non-match.
 The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16190,7 +16440,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16200,7 +16450,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//textarea[@id='content']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16211,7 +16461,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16222,7 +16472,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16232,6 +16482,7 @@ action_rule = {
     "onElement": "//textarea[@id='content']"
 }
 ```
+
 ### Example No.252
 
 ### Element Text NotMatch Validation Using Id
@@ -16241,7 +16492,7 @@ The validation is based solely on the text from the `value` attribute, excluding
 A regular expression `^Lorem ipsum dolor.*` is applied to the text from the `value` attribute to test for a non-match.
 The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16254,7 +16505,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16265,7 +16516,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("content");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16277,7 +16528,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16289,7 +16540,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16300,6 +16551,7 @@ action_rule = {
     "onElement": "content"
 }
 ```
+
 ### Example No.253
 
 ### Element Text NotMatch Validation Using CssSelector
@@ -16310,7 +16562,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to ext
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16324,7 +16576,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16336,7 +16588,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16349,7 +16601,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16362,7 +16614,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16374,6 +16626,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.254
 
 ### Element Text NotMatch Validation Using Xpath
@@ -16384,7 +16637,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to ext
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16397,7 +16650,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16408,7 +16661,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16420,7 +16673,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16432,7 +16685,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16443,6 +16696,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.255
 
 ### Element Text NotMatch Validation Using Id
@@ -16453,7 +16707,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the `value` attribute to ext
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the text from the `value` attribute does not match the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16467,7 +16721,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16479,7 +16733,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16492,7 +16746,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16505,7 +16759,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16517,6 +16771,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.256
 
 ### Page Title Equal Validation
@@ -16525,7 +16780,7 @@ Verifies that the computed page title is equal to the expected text 'Lorem ipsum
 The validation is based solely on the page title, excluding any HTML markup or tags.
 The assertion passes only if the page title exactly matches the expected text; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16535,7 +16790,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16543,7 +16798,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageTitle --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16552,7 +16807,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16561,7 +16816,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16569,6 +16824,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageTitle --Operator:Equal --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}"
 }
 ```
+
 ### Example No.257
 
 ### Page Title Equal Validation With Extraction
@@ -16578,7 +16834,7 @@ Verifies that the computed page title, after extracting up to 10 characters, mat
 A regular expression `(?s)^(.{0,10})` is applied to the page title to extract up to 10 characters into a capture group.
 The assertion passes only if the extracted 10-character capture group exactly matches 'Lorem ipsu'; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16589,7 +16845,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16598,7 +16854,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16608,7 +16864,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16618,7 +16874,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16627,6 +16883,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.258
 
 ### Page Title NotEqual Validation
@@ -16635,7 +16892,7 @@ Verifies that the computed page title is not equal to the expected text 'Lorem i
 The validation is based solely on the page title, excluding any HTML markup or tags.
 The assertion passes only if the page title differs from the expected text; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16645,7 +16902,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16653,7 +16910,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageTitle --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16662,7 +16919,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16671,7 +16928,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16679,6 +16936,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageTitle --Operator:NotEqual --Expected:Lorem ipsum dolor sit amet, consectetur adipiscing elit. 42.}}"
 }
 ```
+
 ### Example No.259
 
 ### Page Title NotEqual Validation With Extraction
@@ -16688,7 +16946,7 @@ Verifies that the computed page title, after extracting up to 10 characters, doe
 A regular expression `(?s)^(.{0,10})` is applied to the page title to extract up to 10 characters into a capture group.
 The assertion passes only if that extracted 10-character capture group does not equal 'Lorem ipsu'; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16699,7 +16957,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16708,7 +16966,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16718,7 +16976,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16728,7 +16986,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16737,6 +16995,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.260
 
 ### Page Title Greater Validation With Extraction
@@ -16746,7 +17005,7 @@ Verifies that the numeric value extracted from the page title is greater than th
 A regular expression `\d+` is applied to the page title to extract the first numeric sequence into a capture group.
 The assertion passes only if that extracted number is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16757,7 +17016,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16766,7 +17025,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16776,7 +17035,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16786,7 +17045,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16795,6 +17054,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.261
 
 ### Page Title Greater Equal Validation With Extraction
@@ -16804,7 +17064,7 @@ Verifies that the numeric value extracted from the page title is greater than or
 A regular expression `\d+` is applied to the page title to extract the first numeric sequence into a capture group.
 The assertion passes only if that extracted number is greater than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16815,7 +17075,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16824,7 +17084,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16834,7 +17094,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16844,7 +17104,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16853,6 +17113,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.262
 
 ### Page Title Lower Validation With Extraction
@@ -16862,7 +17123,7 @@ Verifies that the numeric value extracted from the page title is lower than the 
 A regular expression `\d+` is applied to the page title to extract the first numeric sequence into a capture group.
 The assertion passes only if that extracted number is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16873,7 +17134,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16882,7 +17143,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16892,7 +17153,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16902,7 +17163,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16911,6 +17172,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.263
 
 ### Page Title Lower Equal Validation With Extraction
@@ -16920,7 +17182,7 @@ Verifies that the numeric value extracted from the page title is lower than or e
 A regular expression `\d+` is applied to the page title to extract the first numeric sequence into a capture group.
 The assertion passes only if that extracted number is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16931,7 +17193,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16940,7 +17202,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -16950,7 +17212,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -16960,7 +17222,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -16969,6 +17231,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.264
 
 ### Page Title Match Validation
@@ -16978,7 +17241,7 @@ The validation is based solely on the page title, excluding any HTML markup or t
 A regular expression `^Lorem ipsum dolor.*` is applied to the page title to test for a match.
 The assertion passes only if the page title matches the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -16988,7 +17251,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -16996,7 +17259,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageTitle --Operator:Match --Expected:^Lorem ipsum dolor.*}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17005,7 +17268,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17014,7 +17277,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17022,6 +17285,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:^Lorem ipsum dolor.*}}"
 }
 ```
+
 ### Example No.265
 
 ### Page Title Match Validation With Extraction
@@ -17032,7 +17296,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the page title to extract up
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for an exact match.
 The assertion passes only if the extracted 10-character capture group matches the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17043,7 +17307,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17052,7 +17316,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17062,7 +17326,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17072,7 +17336,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17081,6 +17345,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.266
 
 ### Page Title NotMatch Validation
@@ -17090,7 +17355,7 @@ The validation is based solely on the page title, excluding any HTML markup or t
 A regular expression `^Lorem ipsum dolor.*` is applied to the page title to test for a non-match.
 The assertion passes only if the page title does not match the pattern `^Lorem ipsum dolor.*`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17100,7 +17365,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17108,7 +17373,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageTitle --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17117,7 +17382,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17126,7 +17391,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17134,6 +17399,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:^Lorem ipsum dolor.*}}"
 }
 ```
+
 ### Example No.267
 
 ### Page Title NotMatch Validation With Extraction
@@ -17144,7 +17410,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the page title to extract up
 A regular expression `^Lorem ipsu$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the extracted 10-character capture group does not match the pattern `^Lorem ipsu$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17155,7 +17421,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17164,7 +17430,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17174,7 +17440,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17184,7 +17450,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17193,6 +17459,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.268
 
 ### Page URL Equal Validation
@@ -17201,7 +17468,7 @@ Verifies that the current page URL is equal to the expected URL `https://example
 The validation is based solely on the page URL, excluding any URL fragments or query parameters unless explicitly part of the expected value.
 The assertion passes only if the page URL exactly matches `https://example42.com/page/`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17211,7 +17478,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17219,7 +17486,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageUrl --Operator:Equal --Expected:https://example42.com/page/}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17228,7 +17495,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17237,7 +17504,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17245,6 +17512,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageUrl --Operator:Equal --Expected:https://example42.com/page/}}"
 }
 ```
+
 ### Example No.269
 
 ### Page URL Equal Validation With Extraction
@@ -17254,7 +17522,7 @@ Verifies that the current page URL, after extracting up to 10 characters, matche
 A regular expression `(?s)^(.{0,10})` is applied to the page URL to extract up to 10 characters into a capture group.
 The assertion passes only if that extracted 10-character capture group exactly matches `https://ex`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17265,7 +17533,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17274,7 +17542,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17284,7 +17552,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17294,7 +17562,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17303,6 +17571,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.270
 
 ### Page URL NotEqual Validation
@@ -17311,7 +17580,7 @@ Verifies that the current page URL is not equal to the expected URL `https://exa
 The validation is based solely on the page URL, excluding any URL fragments or query parameters unless explicitly part of the expected value.
 The assertion passes only if the page URL differs from `https://example42.com/page/`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17321,7 +17590,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17329,7 +17598,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageUrl --Operator:NotEqual --Expected:https://example42.com/page/}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17338,7 +17607,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17347,7 +17616,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17355,6 +17624,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageUrl --Operator:NotEqual --Expected:https://example42.com/page/}}"
 }
 ```
+
 ### Example No.271
 
 ### Page URL NotEqual Validation With Extraction
@@ -17364,7 +17634,7 @@ Verifies that the current page URL, after extracting up to 10 characters, does n
 A regular expression `(?s)^(.{0,10})` is applied to the page URL to extract up to 10 characters into a capture group.
 The assertion passes only if the extracted 10-character capture group does not match `https://ex`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17375,7 +17645,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17384,7 +17654,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17394,7 +17664,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17404,7 +17674,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17413,6 +17683,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.272
 
 ### Page URL Greater Validation With Extraction
@@ -17422,7 +17693,7 @@ Verifies that the numeric value extracted from the page URL is greater than the 
 A regular expression `\d+` is applied to the page URL to extract the first numeric sequence into a capture group.
 The assertion passes only if the extracted number is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17433,7 +17704,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17442,7 +17713,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17452,7 +17723,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17462,7 +17733,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17471,6 +17742,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.273
 
 ### Page URL Greater Validation With Extraction
@@ -17480,7 +17752,7 @@ Verifies that the numeric value extracted from the page URL is greater than the 
 A regular expression `\d+` is applied to the page URL to extract the first numeric sequence into a capture group.
 The assertion passes only if the extracted number is greater than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17491,7 +17763,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17500,7 +17772,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17510,7 +17782,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17520,7 +17792,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17529,6 +17801,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.274
 
 ### Page URL Lower Validation With Extraction
@@ -17538,7 +17811,7 @@ Verifies that the numeric value extracted from the page URL is lower than the ex
 A regular expression `\d+` is applied to the page URL to extract the first numeric sequence into a capture group.
 The assertion passes only if the extracted number is lower than 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17549,7 +17822,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17558,7 +17831,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17568,7 +17841,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17578,7 +17851,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17587,6 +17860,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.275
 
 ### Page URL LowerEqual Validation With Extraction
@@ -17596,7 +17870,7 @@ Verifies that the numeric value extracted from the page URL is lower than or equ
 A regular expression `\d+` is applied to the page URL to extract the first numeric sequence into a capture group.
 The assertion passes only if the extracted number is lower than or equal to 42; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17607,7 +17881,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17616,7 +17890,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17626,7 +17900,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17636,7 +17910,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17645,6 +17919,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.276
 
 ### Page URL Match Validation
@@ -17654,7 +17929,7 @@ The validation is based solely on the page URL, excluding any URL fragments or q
 A regular expression `^https://example42.com/page/$` is applied to the page URL to test for a match.
 The assertion passes only if the page URL matches the pattern `^https://example42.com/page/$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17664,7 +17939,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17672,7 +17947,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageUrl --Operator:Match --Expected:^https://example42.com/page/$}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17681,7 +17956,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17690,7 +17965,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17698,6 +17973,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageUrl --Operator:Match --Expected:^https://example42.com/page/$}}"
 }
 ```
+
 ### Example No.277
 
 ### Page URL Match Validation With Extraction
@@ -17708,7 +17984,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the page URL to extract up t
 A regular expression `^https://ex$` is then applied to the extracted 10-character capture group to test for an exact match.
 The assertion passes only if the extracted 10-character capture group matches the pattern `^https://ex$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17719,7 +17995,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17728,7 +18004,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17738,7 +18014,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17748,7 +18024,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17757,6 +18033,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.278
 
 ### Page URL NotMatch Validation
@@ -17766,7 +18043,7 @@ Verifies that the current page URL does not match the expected pattern `^https:/
 A regular expression `^https://example42.com/page/$` is applied to the page URL to test for a non-match.
 The assertion passes only if the page URL does not match the pattern `^https://example42.com/page/$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17776,7 +18053,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17784,7 +18061,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageUrl --Operator:NotMatch --Expected:^https://example42.com/page/$}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17793,7 +18070,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17802,7 +18079,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17810,6 +18087,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:^https://example42.com/page/$}}"
 }
 ```
+
 ### Example No.279
 
 ### Page URL NotMatch Validation With Extraction
@@ -17820,7 +18098,7 @@ A regular expression `(?s)^(.{0,10})` is applied to the page URL to extract up t
 A regular expression `^https://ex$` is then applied to the extracted 10-character capture group to test for a non-match.
 The assertion passes only if the extracted 10-character capture group does not match the pattern `^https://ex$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17831,7 +18109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17840,7 +18118,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("(?s)^(.{0,10})");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17850,7 +18128,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17860,7 +18138,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17869,6 +18147,7 @@ action_rule = {
     "regularExpression": "(?s)^(.{0,10})"
 }
 ```
+
 ### Example No.280
 
 ### Window Count Equal Validation
@@ -17877,7 +18156,7 @@ Verifies that the computed number of open browser windows is equal to the expect
 The validation is based solely on the count of open browser windows.
 The assertion passes only if the number of open windows is exactly 1; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17887,7 +18166,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17895,7 +18174,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:WindowCount --Operator:Equal --Expected:1}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17904,7 +18183,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17913,7 +18192,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17921,6 +18200,7 @@ action_rule = {
     "argument": "{{$ --Condition:WindowCount --Operator:Equal --Expected:1}}"
 }
 ```
+
 ### Example No.281
 
 ### Window Count NotEqual Validation
@@ -17929,7 +18209,7 @@ Verifies that the computed number of open browser windows is not equal to the ex
 The validation is based solely on the count of open browser windows.
 The assertion passes only if the number of open windows differs from 1; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17939,7 +18219,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17947,7 +18227,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:WindowCount --Operator:NotEqual --Expected:1}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -17956,7 +18236,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -17965,7 +18245,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -17973,6 +18253,7 @@ action_rule = {
     "argument": "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:1}}"
 }
 ```
+
 ### Example No.282
 
 ### Window Count Greater Validation
@@ -17981,7 +18262,7 @@ Verifies that the computed number of open browser windows is greater than the ex
 The validation is based solely on the count of open browser windows.
 The assertion passes only if the number of open windows is greater than 1; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -17991,7 +18272,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -17999,7 +18280,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:WindowCount --Operator:Greater --Expected:1}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18008,7 +18289,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18017,7 +18298,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18025,6 +18306,7 @@ action_rule = {
     "argument": "{{$ --Condition:WindowCount --Operator:Greater --Expected:1}}"
 }
 ```
+
 ### Example No.283
 
 ### Window Count GreaterEqual Validation
@@ -18033,7 +18315,7 @@ Verifies that the computed number of open browser windows is greater than or equ
 The validation is based solely on the count of open browser windows.
 The assertion passes only if the number of open windows is greater than or equal to 1; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18043,7 +18325,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18051,7 +18333,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:WindowCount --Operator:GreaterEqual --Expected:1}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18060,7 +18342,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18069,7 +18351,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18077,6 +18359,7 @@ action_rule = {
     "argument": "{{$ --Condition:WindowCount --Operator:GreaterEqual --Expected:1}}"
 }
 ```
+
 ### Example No.284
 
 ### Window Count LowerEqual Validation
@@ -18085,7 +18368,7 @@ Verifies that the computed number of open browser windows is lower than or equal
 The validation is based solely on the count of open browser windows.
 The assertion passes only if the number of open windows is lower than or equal to 1; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18095,7 +18378,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18103,7 +18386,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:WindowCount --Operator:LowerEqual --Expected:1}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18112,7 +18395,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18121,7 +18404,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18129,6 +18412,7 @@ action_rule = {
     "argument": "{{$ --Condition:WindowCount --Operator:LowerEqual --Expected:1}}"
 }
 ```
+
 ### Example No.285
 
 ### Window Count Lower Validation
@@ -18137,7 +18421,7 @@ Verifies that the computed number of open browser windows is lower than the expe
 The validation is based solely on the count of open browser windows.
 The assertion passes only if the number of open windows is lower than 1; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18147,7 +18431,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18155,7 +18439,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:WindowCount --Operator:Lower --Expected:1}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18164,7 +18448,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18173,7 +18457,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18181,6 +18465,7 @@ action_rule = {
     "argument": "{{$ --Condition:WindowCount --Operator:Lower --Expected:1}}"
 }
 ```
+
 ### Example No.286
 
 ### Window Count Match Validation
@@ -18190,7 +18475,7 @@ The validation is based solely on the count of open browser windows, converted t
 A regular expression `^1\d+?$` is applied to the string representation of the window count to test for a match.
 The assertion passes only if the string representation of the window count matches the pattern `^1\d+?$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18201,7 +18486,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18210,7 +18495,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("^1\d+?$");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18220,7 +18505,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18230,7 +18515,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18239,6 +18524,7 @@ action_rule = {
     "regularExpression": "^1\d+?$"
 }
 ```
+
 ### Example No.287
 
 ### Window Count NotMatch Validation
@@ -18248,7 +18534,7 @@ The validation is based solely on the count of open browser windows, converted t
 A regular expression `^1\d+?$` is applied to the string representation of the window count to test for a non-match.
 The assertion passes only if the string representation of the window count does not match the pattern `^1\d+?$`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18258,7 +18544,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18266,7 +18552,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\d+?$}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18275,7 +18561,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18284,7 +18570,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18292,6 +18578,7 @@ action_rule = {
     "argument": "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\d+?$}}"
 }
 ```
+
 ### Example No.288
 
 ### Text Equal Validation Using Session Parameter Value
@@ -18300,7 +18587,7 @@ Verifies that the text value returned by the session parameter `MyParameter` mat
 The validation uses the full text value returned by the session parameter, including any whitespace or formatting.
 The assertion passes only if that parameter value exactly matches `ExpectedValue`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18311,7 +18598,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18320,7 +18607,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("{{$Get-Parameter --Name:MyParameter --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18330,7 +18617,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18340,7 +18627,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18349,6 +18636,7 @@ action_rule = {
     "onElement": "{{$Get-Parameter --Name:MyParameter --Scope:Session}}"
 }
 ```
+
 ### Example No.289
 
 ### Text NotEqual Validation With Static Text
@@ -18357,7 +18645,7 @@ Verifies that the provided text value `Static Text` does not equal the expected 
 The validation uses the full provided text string, including any whitespace or formatting.
 The assertion passes only if the provided text value differs from `Static Text`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18368,7 +18656,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18377,7 +18665,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("Static Text");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18387,7 +18675,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18397,7 +18685,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18406,6 +18694,7 @@ action_rule = {
     "onElement": "Static Text"
 }
 ```
+
 ### Example No.290
 
 ### Text Match Validation With Static Text
@@ -18415,7 +18704,7 @@ The validation uses the full provided text string, including any whitespace or f
 A regular expression `\d{3}-\d{2}-\d{4}` is applied to the provided text to test for a match.
 The assertion passes only if the provided text value matches the pattern `\d{3}-\d{2}-\d{4}`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18426,7 +18715,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18435,7 +18724,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("123-45-6789");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18445,7 +18734,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18455,7 +18744,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18464,6 +18753,7 @@ action_rule = {
     "onElement": "123-45-6789"
 }
 ```
+
 ### Example No.291
 
 ### Text NotMatch Validation With Static Text
@@ -18473,7 +18763,7 @@ The validation uses the full provided text string, including any whitespace or f
 A regular expression `\d{3}-\d{2}-\d{4}` is applied to the provided text to test for a non-match.
 The assertion passes only if the provided text value does not match the pattern `\d{3}-\d{2}-\d{4}`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18484,7 +18774,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18493,7 +18783,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("123-45-6789");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18503,7 +18793,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18513,7 +18803,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18522,6 +18812,7 @@ action_rule = {
     "onElement": "123-45-6789"
 }
 ```
+
 ### Example No.292
 
 ### Text Greater Validation With Static Text
@@ -18530,7 +18821,7 @@ Verifies that the provided text value `20` is greater than the expected value 10
 The validation uses the full provided text string, interpreting it as a numeric value.
 The assertion passes only if that numeric value is greater than 10; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18541,7 +18832,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18550,7 +18841,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("20");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18560,7 +18851,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18570,7 +18861,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18579,6 +18870,7 @@ action_rule = {
     "onElement": "20"
 }
 ```
+
 ### Example No.293
 
 ### Text Lower Validation With Static Text
@@ -18587,7 +18879,7 @@ Verifies that the provided text value `5` is lower than the expected value 10.
 The validation uses the full provided text string, interpreting it as a numeric value.
 The assertion passes only if that numeric value is lower than 10; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18598,7 +18890,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18607,7 +18899,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("5");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18617,7 +18909,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18627,7 +18919,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18636,6 +18928,7 @@ action_rule = {
     "onElement": "5"
 }
 ```
+
 ### Example No.294
 
 ### Text GreaterEqual Validation With Static Text
@@ -18644,7 +18937,7 @@ Verifies that the provided text value `10` is greater than or equal to the expec
 The validation uses the full provided text string, interpreting it as a numeric value.
 The assertion passes only if that numeric value is greater than or equal to 10; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18655,7 +18948,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18664,7 +18957,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("10");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18674,7 +18967,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18684,7 +18977,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18693,6 +18986,7 @@ action_rule = {
     "onElement": "10"
 }
 ```
+
 ### Example No.295
 
 ### Text LowerEqual Validation With Static Text
@@ -18701,7 +18995,7 @@ Verifies that the provided text value `10` is lower than or equal to the expecte
 The validation uses the full provided text string, interpreting it as a numeric value.
 The assertion passes only if that numeric value is lower than or equal to 10; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18712,7 +19006,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18721,7 +19015,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("10");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18731,7 +19025,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18741,7 +19035,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18750,6 +19044,7 @@ action_rule = {
     "onElement": "10"
 }
 ```
+
 ### Example No.296
 
 ### Text Equal Validation With Extraction
@@ -18759,7 +19054,7 @@ Verifies that the provided text value `1000`, after applying a regular expressio
 A regular expression `\d{3}` is applied to the provided text to extract a three‑digit numeric sequence into a capture group.
 The assertion passes only if that extracted capture group matches the pattern `100`; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -18771,7 +19066,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -18781,7 +19076,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d{3}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -18792,7 +19087,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -18803,7 +19098,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -18819,7 +19114,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -18833,7 +19128,7 @@ This expression guides whether the assertion passes or fails.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -18847,7 +19142,7 @@ Xpath is used by default.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -18861,7 +19156,7 @@ The assertion focuses on only that part.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -18875,7 +19170,7 @@ The assertion then runs on that element.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?si).*           |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -18891,7 +19186,7 @@ This makes checks easier by narrowing down to the exact text you need.
 ### Condition (Condition)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -18906,7 +19201,7 @@ This keeps your setup up to date with the latest assertions.
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -18921,7 +19216,7 @@ Different values make the assertion fail.
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

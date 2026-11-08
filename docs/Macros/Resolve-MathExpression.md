@@ -1,6 +1,6 @@
 # Resolve Math Expression (Resolve-MathExpression)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~46 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -16,7 +16,7 @@ Numeric data is handled flexibly and accurately without external calculation too
 ### Key Features and Functionality
 
 | Feature                       | Description                                                                           |
-|-------------------------------|---------------------------------------------------------------------------------------|
+| --- | --- |
 | Dynamic Expression Resolution | Calculate expressions on the fly within automation steps.                             |
 | Arithmetic Operations         | Support addition, subtraction, multiplication, division, exponentiation, and modulus. |
 | Input Sorting                 | Arrange numbers in ascending or descending order before computing.                    |
@@ -27,7 +27,7 @@ Numeric data is handled flexibly and accurately without external calculation too
 ### Usages in RPA
 
 | Use Case                 | Description                                                  |
-|--------------------------|--------------------------------------------------------------|
+| --- | --- |
 | Real-Time Calculations   | Perform on-the-fly arithmetic within RPA processes.          |
 | Dynamic Data Generation  | Compute values based on inputs that change during execution. |
 | Conditional Flow Control | Use computed results to drive decision points in workflows.  |
@@ -35,7 +35,7 @@ Numeric data is handled flexibly and accurately without external calculation too
 ### Usages in Automation Testing
 
 | Use Case                  | Description                                                |
-|---------------------------|------------------------------------------------------------|
+| --- | --- |
 | Test Data Generation      | Generate numeric inputs for test scenarios dynamically.    |
 | Output Verification       | Validate expected numeric outcomes within automated tests. |
 | Parameterized Test Inputs | Create test cases with calculated parameter values.        |
@@ -46,10 +46,10 @@ Numeric data is handled flexibly and accurately without external calculation too
 
 ### Compute 2 minus 10 at runtime and send the result to a web element
 
-Execute the `ResolveMathExpression` macro with X=2, Y=10, and Operation ‘-’ to compute 2 minus 10 at runtime, returning only the numeric result without side effects.  
-Then have the `SendKeys` plugin consume that result and send it as keystrokes into the element matching the `.result-field` CSS selector.  
+Execute the `ResolveMathExpression` macro with X=2, Y=10, and Operation ‘-’ to compute 2 minus 10 at runtime, returning only the numeric result without side effects.
+Then have the `SendKeys` plugin consume that result and send it as keystrokes into the element matching the `.result-field` CSS selector.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -61,7 +61,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -71,7 +71,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -82,7 +82,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -93,7 +93,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -103,14 +103,15 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.2
 
 ### Compute 10 divided by 2 at runtime and send the result to a web element
 
-Execute the `ResolveMathExpression` macro with X=10, Y=2, and Operation ‘/’ to compute 10 divided by 2 at runtime, returning only the numeric result without side effects.  
-Then have the `SendKeys` plugin consume that result and send it as keystrokes into the element matching the `.result-field` CSS selector.  
+Execute the `ResolveMathExpression` macro with X=10, Y=2, and Operation ‘/’ to compute 10 divided by 2 at runtime, returning only the numeric result without side effects.
+Then have the `SendKeys` plugin consume that result and send it as keystrokes into the element matching the `.result-field` CSS selector.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -122,7 +123,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -132,7 +133,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -143,7 +144,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -154,7 +155,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -164,6 +165,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.3
 
 ### Compute 10 modulo 3 at runtime and send the result to a web element
@@ -171,7 +173,7 @@ action_rule = {
 Execute the `ResolveMathExpression` macro with X=10, Y=3, and Operation ‘%’ to compute 10 modulo 3 at runtime, returning only the numeric result without side effects.
 Then send that result using the `SendKeys` plugin into the element matching the `.result-field` CSS selector.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -183,7 +185,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -193,7 +195,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -204,7 +206,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -215,7 +217,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -225,6 +227,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.4
 
 ### Compute the product of 10 and 2 at runtime and send the result to a web element
@@ -232,7 +235,7 @@ action_rule = {
 Execute the `ResolveMathExpression` macro with X=10, Y=2, and Operation ‘*’ to compute 10 multiplied by 2 at runtime, returning only the numeric result without side effects.
 Then send that result using the `SendKeys` plugin into the element matching the `.result-field` CSS selector.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -244,7 +247,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -254,7 +257,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -265,7 +268,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -276,7 +279,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -286,6 +289,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.5
 
 ### Compute the remainder of the smaller number modulo the larger number at runtime and send the result to a web element
@@ -293,7 +297,7 @@ action_rule = {
 Execute the `ResolveMathExpression` macro with X=10, Y=3, Operation ‘%’, and Asc flag to sort inputs ascending, compute 3 modulo 10 at runtime, and return only the numeric result without side effects.
 Then send that result using the `SendKeys` plugin into the element matching the `.result-field` CSS selector.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -305,7 +309,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -315,7 +319,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -326,7 +330,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -337,7 +341,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -347,6 +351,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.6
 
 ### Compute the modulus of sorted inputs at runtime and send the result to a web element
@@ -354,7 +359,7 @@ action_rule = {
 Execute the `ResolveMathExpression` macro with X=10, Y=3, Operation ‘%’, and Asc flag to sort values in ascending order (3, 10), compute their modulus at runtime, and return only the numeric result without side effects.
 Then send that result using the `SendKeys` plugin into the element matching the `.result-field` CSS selector.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -366,7 +371,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -376,7 +381,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -387,7 +392,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -398,7 +403,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -408,14 +413,15 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.7
 
 ### Compute a number raised to a power and send the result to a web element
 
-Use the `ResolveMathExpression` macro to raise 10 to the power of 2 at runtime, returning only the numeric result without side effects.  
-Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.  
+Use the `ResolveMathExpression` macro to raise 10 to the power of 2 at runtime, returning only the numeric result without side effects.
+Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -427,7 +433,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -437,7 +443,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -448,7 +454,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -459,7 +465,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -469,6 +475,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.8
 
 ### Compute a rounded division result and send it to a web element
@@ -476,7 +483,7 @@ action_rule = {
 Use the `ResolveMathExpression` macro to divide 10 by 3 at runtime, round to two decimal places, and return only the numeric result without side effects.
 Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -488,7 +495,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -498,7 +505,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -509,7 +516,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -520,7 +527,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -530,6 +537,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.9
 
 ### Compute the absolute value of a subtraction result and send it to a web element
@@ -537,7 +545,7 @@ action_rule = {
 Use the `ResolveMathExpression` macro to subtract 10 from 2 at runtime, apply absolute to the result, and return only the numeric value without side effects.
 Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -549,7 +557,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -559,7 +567,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -570,7 +578,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -581,7 +589,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -591,6 +599,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.10
 
 ### Compute a nested arithmetic expression and send the result to a web element
@@ -598,7 +607,7 @@ action_rule = {
 Use the `ResolveMathExpression` macro to add 2 and 3 at runtime, then divide the sum by 5, returning only the numeric result without side effects.
 Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -610,7 +619,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -620,7 +629,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -631,7 +640,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -642,7 +651,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -652,6 +661,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.11
 
 ### Compute a nested subtraction and multiplication result and send it to a web element
@@ -659,7 +669,7 @@ action_rule = {
 Use the `ResolveMathExpression` macro to subtract 5 from 10 at runtime, then multiply that result by 3, returning only the numeric value without side effects.
 Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -671,7 +681,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -681,7 +691,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -692,7 +702,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -703,7 +713,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -713,6 +723,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.12
 
 ### Compute a nested exponentiation and modulus result and send it to a web element
@@ -720,7 +731,7 @@ action_rule = {
 Use the `ResolveMathExpression` macro to raise 2 to the power of 3 at runtime, then compute the modulus of that result with 5, returning only the numeric value without side effects.
 Then send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -732,7 +743,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -742,7 +753,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -753,7 +764,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -764,7 +775,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -774,6 +785,7 @@ action_rule = {
     "onElement": ".result-field"
 }
 ```
+
 ### Example No.13
 
 ### Extract the integer part of a multiplication result and send it to a web element
@@ -782,7 +794,7 @@ Use the `ResolveMathExpression` macro to multiply 5.5 by 2.5 at runtime and retu
 Next, apply a regular expression `\d+` to extract the integer part of that result.
 Finally, send that value as keystrokes into the element matching the `.result-field` CSS selector using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -794,7 +806,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -804,7 +816,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement(".result-field");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -815,7 +827,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -826,7 +838,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -842,7 +854,7 @@ action_rule = {
 ### Abs (Abs)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -856,7 +868,7 @@ This can be useful in workflows where only the magnitude of the result is releva
 ### Asc (Asc)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -870,7 +882,7 @@ Use Asc to guarantee numbers are always processed from smallest to largest.
 ### Desc (Desc)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -884,7 +896,7 @@ This is helpful for workflows that require prioritizing the largest values first
 ### Operation (Operation)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | +                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -898,27 +910,20 @@ Selecting the correct operation is essential for achieving the desired computati
 
 #### Values
 
-##### 
-
 Add combines X and Y to produce their sum.
 This operation is used when you want to calculate the total of two numbers.
-##### 
 
 Subtract finds the difference between X and Y.
 Use this operation to determine how much one number exceeds or falls short of the other.
-##### 
 
 Multiply computes the product of X and Y.
 Choose this to scale a number by another, such as calculating area or repeated addition.
-##### 
 
 Divide finds how many times Y fits into X or the ratio of X to Y.
 This operation is used for distributing quantities or comparing proportions.
-##### 
 
 Exponentiate raises X to the power of Y.
 Use this operation for exponential growth, scientific notation, or advanced calculations.
-##### 
 
 Modulus returns the remainder when X is divided by Y.
 This operation is helpful for cyclic calculations or checking divisibility.
@@ -926,7 +931,7 @@ This operation is helpful for cyclic calculations or checking divisibility.
 ### Pattern (Pattern)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -940,7 +945,7 @@ Using Pattern can help isolate or validate the numeric result according to custo
 ### Round (Round)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -954,7 +959,7 @@ This can make results easier to read or compare in subsequent automation steps.
 ### X (X)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -968,7 +973,7 @@ Specifying X is required to define the starting point for the calculation.
 ### Y (Y)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

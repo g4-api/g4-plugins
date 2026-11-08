@@ -1,6 +1,6 @@
 # Start Jenkins Job (StartJenkinsJob)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ It captures key job details such as status, duration, and URLs so later steps in
 ### Key Features and Functionality
 
 | Feature               | Description                                                                  |
-|-----------------------|------------------------------------------------------------------------------|
+| --- | --- |
 | Jenkins Job Trigger   | Starts a Jenkins job using the standard build or buildWithParameters API.    |
 | Parameter Support     | Detects parameterized jobs and sends the request to the correct endpoint.    |
 | Wait for Completion   | Optionally polls Jenkins until the build is finished or a timeout occurs.    |
@@ -28,7 +28,7 @@ It captures key job details such as status, duration, and URLs so later steps in
 ### Usages in RPA
 
 | Use Case                            | Description                                                                                  |
-|-------------------------------------|----------------------------------------------------------------------------------------------|
+| --- | --- |
 | Trigger nightly maintenance jobs    | Start scheduled Jenkins jobs that perform system cleanups, backups, or maintenance actions.  |
 | Orchestrate multi-step DevOps flows | Call Jenkins jobs from larger RPA flows that also touch issue trackers and deployment tools. |
 | Environment preparation jobs        | Run Jenkins jobs that prepare test or staging environments before other automated steps run. |
@@ -38,7 +38,7 @@ It captures key job details such as status, duration, and URLs so later steps in
 ### Usages in Automation Testing
 
 | Use Case                                  | Description                                                                                          |
-|-------------------------------------------|------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Trigger automated test suites             | Start Jenkins jobs that run unit, integration, or end-to-end test suites from a central test runner. |
 | Run smoke tests before deployments        | Launch Jenkins smoke-test jobs and wait for completion before allowing deployment steps to proceed.  |
 | Collect timing metrics for test runs      | Use stored duration to measure how long Jenkins test jobs take and track performance over time.      |
@@ -56,7 +56,7 @@ Use the macro in the argument property to pass the URL, job path, username, toke
 When Wait is present, the action polls Jenkins until the job finishes or the timeout elapses, then returns the HTTP status code, computed duration, job URL, and raw response body.
 The macro only produces the argument string at runtime, and the StartJenkinsJob action consumes this value to perform the Jenkins HTTP request.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -66,7 +66,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -74,7 +74,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -83,7 +83,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -92,7 +92,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -100,6 +100,7 @@ action_rule = {
     "argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}"
 }
 ```
+
 ### Example No.2
 
 ### Trigger Jenkins job with a custom polling interval
@@ -108,7 +109,7 @@ Start a Jenkins job and specify how often the action polls Jenkins for build sta
 A macro supplies URL, job path, credentials, the Wait flag, and the PollingInterval value. The macro only produces the argument text at runtime, and the action uses it to perform the Jenkins requests.
 The action continues polling at the specified interval until the job finishes or a timeout occurs, then outputs the status code, computed duration, job URL, and response body.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -118,7 +119,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -126,7 +127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait --PollingInterval:5000}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -135,7 +136,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -144,7 +145,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -152,6 +153,7 @@ action_rule = {
     "argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait --PollingInterval:5000}}"
 }
 ```
+
 ### Example No.3
 
 ### Trigger a parameterized Jenkins job using multiple Field parameters
@@ -160,7 +162,7 @@ Start a Jenkins job that requires parameters by using the Field property to spec
 A macro supplies the URL, job path, credentials, Wait flag, and multiple Field parameters. The macro only produces the argument text, and the action consumes it to perform the Jenkins request.
 The action submits the Field parameters to Jenkins, waits for job completion, and then returns the status code, computed duration, job URL, and response body.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -170,7 +172,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -178,7 +180,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://jenkins.example.com --JobPath:my-parameterized-job --Username:admin --Token:apitoken --Wait --Field:env=production --Field:retryCount=3}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -187,7 +189,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -196,7 +198,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -204,6 +206,7 @@ action_rule = {
     "argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-parameterized-job --Username:admin --Token:apitoken --Wait --Field:env=production --Field:retryCount=3}}"
 }
 ```
+
 ### Example No.4
 
 ### Extract build number using JPath and regular expression
@@ -213,7 +216,7 @@ A regular expression `build-(\d+)` is applied to the value attribute to extract 
 The final extracted value is stored in the JenkinsJobResponse output parameter.
 The macro in the argument only produces the text value at runtime, and the StartJenkinsJob action performs the extraction logic using that value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -225,7 +228,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -235,7 +238,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("build-(\d+)");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -246,7 +249,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -257,7 +260,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -267,6 +270,7 @@ action_rule = {
     "regularExpression": "build-(\d+)"
 }
 ```
+
 ### Example No.5
 
 ### Trigger Jenkins job without waiting for completion
@@ -276,7 +280,7 @@ The action posts the job to Jenkins and returns the initial HTTP response with s
 Because the Wait flag is not set, no polling or duration computation is performed; the action returns as soon as Jenkins accepts the job.
 The macro only generates the argument string at runtime, and the action uses this value to send the request.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -286,7 +290,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -294,7 +298,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -303,7 +307,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -312,7 +316,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -326,7 +330,7 @@ action_rule = {
 ### Start Jenkins Job Jenkins Job Duration (StartJenkinsJob:JenkinsJobDuration)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -339,7 +343,7 @@ The value supports timing analysis and helps detect slow or failing build steps.
 ### Start Jenkins Job Jenkins Job Response (StartJenkinsJob:JenkinsJobResponse)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -352,7 +356,7 @@ Encoding the value in Base64 ensures safe transport even when the content includ
 ### Start Jenkins Job Jenkins Job Status Code (StartJenkinsJob:JenkinsJobStatusCode)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -365,7 +369,7 @@ It allows workflows to react to success, failure, or unexpected responses in a p
 ### Start Jenkins Job Jenkins Job Url (StartJenkinsJob:JenkinsJobUrl)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -380,7 +384,7 @@ The link allows follow-up steps to query logs, artifacts, or job results directl
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -393,7 +397,7 @@ The value is optional and helps capture targeted information such as IDs, URLs, 
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -408,7 +412,7 @@ The value is optional and is useful when the response contains nested JSON and o
 ### Field (Field)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -421,7 +425,7 @@ The value lets you pass dynamic inputs, such as branch names or environment flag
 ### Job Path (JobPath)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -434,7 +438,7 @@ The value allows the automation to target the correct pipeline or build definiti
 ### Polling Interval (PollingInterval)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 5000              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -447,7 +451,7 @@ The default value of 5000 milliseconds balances timely feedback with reduced loa
 ### Timeout (Timeout)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 600000            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -460,7 +464,7 @@ The default value of 600000 milliseconds (10 minutes) prevents workflows from ha
 ### Token (Token)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -473,7 +477,7 @@ The value must be kept secret because it grants access to trigger jobs and read 
 ### Url (Url)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -486,7 +490,7 @@ The value is used to build all Jenkins API requests, so it must be reachable fro
 ### Username (Username)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -499,7 +503,7 @@ The value controls which permissions are applied when triggering and monitoring 
 ### Wait (Wait)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | false             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

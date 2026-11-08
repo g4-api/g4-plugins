@@ -1,6 +1,6 @@
 # Copy Parameter (CopyParameter)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~105 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Helps move values from one parameter to another within automation scripts. It ma
 ### Key Features and Functionality
 
 | Feature               | Description                                                                         |
-|-----------------------|-------------------------------------------------------------------------------------|
+| --- | --- |
 | Copy Parameter Values | Moves a parameter's value from a source location to a target location.              |
 | Scope Management      | Lets you specify or default source and target scopes for parameters.                |
 | Environment Support   | Retrieves and sets parameters in various environments, including application scope. |
@@ -21,7 +21,7 @@ Helps move values from one parameter to another within automation scripts. It ma
 ### Usages in RPA
 
 | Use Case                  | Description                                                     |
-|---------------------------|-----------------------------------------------------------------|
+| --- | --- |
 | Data Transfer             | Share data between script steps by copying parameter values.    |
 | Session Management        | Propagate session-specific values to maintain consistent state. |
 | Parameter Synchronization | Keep parameters in sync across different automation components. |
@@ -29,7 +29,7 @@ Helps move values from one parameter to another within automation scripts. It ma
 ### Usages in Automation Testing
 
 | Use Case           | Description                                                  |
-|--------------------|--------------------------------------------------------------|
+| --- | --- |
 | Test Data Handling | Copy values between test cases or steps to set up test data. |
 | Environment Setup  | Move configuration parameters to prepare test environments.  |
 | Dynamic Test Runs  | Transfer runtime values to support varied test scenarios.    |
@@ -45,7 +45,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as-is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -67,7 +67,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -78,7 +78,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -89,7 +89,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -99,6 +99,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.2
 
 ### Session to Application Parameter Copy Action
@@ -108,7 +109,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -120,7 +121,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -130,7 +131,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -141,7 +142,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -152,7 +153,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -162,6 +163,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.3
 
 ### Session to Application Parameter Copy Action
@@ -171,7 +173,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -183,7 +185,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -193,7 +195,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -204,7 +206,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -215,7 +217,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -225,6 +227,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.4
 
 ### Session to Machine Parameter Copy Action
@@ -235,7 +238,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -247,7 +250,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -257,7 +260,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -268,7 +271,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -279,7 +282,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -289,6 +292,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.5
 
 ### Session to User Parameter Copy Action
@@ -299,7 +303,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the user‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -311,7 +315,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -321,7 +325,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -332,7 +336,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -343,7 +347,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -353,6 +357,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.6
 
 ### Session to Process Parameter Copy Action
@@ -362,7 +367,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the process‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -374,7 +379,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -384,7 +389,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -395,7 +400,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -406,7 +411,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -416,6 +421,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.7
 
 ### Application to Session Parameter Copy Action
@@ -425,7 +431,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -437,7 +443,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -447,7 +453,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -458,7 +464,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -469,7 +475,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -479,6 +485,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.8
 
 ### Application to Application Parameter Copy Action in BotRepository
@@ -488,7 +495,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the target environment is valid; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -500,7 +507,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -510,7 +517,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -521,7 +528,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -532,7 +539,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -542,6 +549,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.9
 
 ### Application to Application Parameter Copy Action
@@ -551,7 +559,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -563,7 +571,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -573,7 +581,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -584,7 +592,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -595,7 +603,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -605,6 +613,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.10
 
 ### Application to Machine Parameter Copy Action in BotRepository
@@ -615,7 +624,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -627,7 +636,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -637,7 +646,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -648,7 +657,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -659,7 +668,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -669,6 +678,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.11
 
 ### Application to Machine Parameter Copy Action
@@ -679,7 +689,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the machine‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -691,7 +701,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -701,7 +711,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -712,7 +722,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -723,7 +733,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -733,6 +743,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.12
 
 ### Application to User Parameter Copy Action in BotRepository
@@ -743,7 +754,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the user‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -755,7 +766,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -765,7 +776,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -776,7 +787,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -787,7 +798,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -797,6 +808,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.13
 
 ### Application to User Parameter Copy Action
@@ -807,7 +819,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -819,7 +831,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -829,7 +841,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -840,7 +852,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -851,7 +863,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -861,6 +873,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.14
 
 ### Application to Process Parameter Copy Action in BotRepository
@@ -870,7 +883,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the process‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -882,7 +895,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -892,7 +905,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -903,7 +916,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -914,7 +927,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -924,6 +937,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.15
 
 ### Application to Process Parameter Copy Action
@@ -933,7 +947,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -945,7 +959,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -955,7 +969,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -966,7 +980,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -977,7 +991,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -987,6 +1001,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.16
 
 ### Machine to Session Parameter Copy Action
@@ -997,7 +1012,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1009,7 +1024,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1019,7 +1034,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1030,7 +1045,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1041,7 +1056,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1051,6 +1066,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.17
 
 ### Machine to Application Parameter Copy Action in BotRepository
@@ -1061,7 +1077,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1073,7 +1089,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1083,7 +1099,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1094,7 +1110,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1105,7 +1121,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1115,6 +1131,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.18
 
 ### Machine to Application Parameter Copy Action
@@ -1125,7 +1142,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1137,7 +1154,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1147,7 +1164,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1158,7 +1175,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1169,7 +1186,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1179,6 +1196,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.19
 
 ### Machine to Machine Parameter Copy Action
@@ -1189,7 +1207,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1201,7 +1219,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1211,7 +1229,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1222,7 +1240,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1233,7 +1251,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1243,6 +1261,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.20
 
 ### Machine to User Parameter Copy Action
@@ -1253,7 +1272,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1265,7 +1284,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1275,7 +1294,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1286,7 +1305,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1297,7 +1316,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1307,6 +1326,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.21
 
 ### Machine to Process Parameter Copy Action
@@ -1316,7 +1336,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1328,7 +1348,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1338,7 +1358,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1349,7 +1369,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1360,7 +1380,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1370,6 +1390,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.22
 
 ### User to Session Parameter Copy Action
@@ -1380,7 +1401,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1392,7 +1413,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1402,7 +1423,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1413,7 +1434,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1424,7 +1445,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1434,6 +1455,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.23
 
 ### User to Application Parameter Copy Action in BotRepository
@@ -1444,7 +1466,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1456,7 +1478,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1466,7 +1488,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1477,7 +1499,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1488,7 +1510,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1498,6 +1520,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.24
 
 ### User to Application Parameter Copy Action
@@ -1508,7 +1531,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1520,7 +1543,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1530,7 +1553,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1541,7 +1564,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1552,7 +1575,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1562,6 +1585,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.25
 
 ### User to Machine Parameter Copy Action
@@ -1572,7 +1596,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1584,7 +1608,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1594,7 +1618,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1605,7 +1629,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1616,7 +1640,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1626,6 +1650,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.26
 
 ### User to User Parameter Copy Action
@@ -1636,7 +1661,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1648,7 +1673,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1658,7 +1683,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1669,7 +1694,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1680,7 +1705,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1690,6 +1715,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.27
 
 ### User to Process Parameter Copy Action
@@ -1700,7 +1726,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1712,7 +1738,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1722,7 +1748,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1733,7 +1759,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1744,7 +1770,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1754,6 +1780,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.28
 
 ### Process to Session Parameter Copy Action
@@ -1763,7 +1790,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1775,7 +1802,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1785,7 +1812,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1796,7 +1823,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1807,7 +1834,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1817,6 +1844,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.29
 
 ### Process to Application Parameter Copy Action in BotRepository
@@ -1826,7 +1854,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists and the application‑scoped target parameter can be written; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1838,7 +1866,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1848,7 +1876,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1859,7 +1887,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1870,7 +1898,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1880,6 +1908,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.30
 
 ### Process to Application Parameter Copy Action
@@ -1889,7 +1918,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1901,7 +1930,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1911,7 +1940,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1922,7 +1951,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1933,7 +1962,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1943,6 +1972,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.31
 
 ### Process to Machine Parameter Copy Action
@@ -1953,7 +1983,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1965,7 +1995,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1975,7 +2005,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1986,7 +2016,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1997,7 +2027,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2007,6 +2037,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.32
 
 ### Process to User Parameter Copy Action
@@ -2017,7 +2048,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2029,7 +2060,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2039,7 +2070,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2050,7 +2081,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2061,7 +2092,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2071,6 +2102,7 @@ action_rule = {
     "onElement": "SourceParam"
 }
 ```
+
 ### Example No.33
 
 ### Process to Process Parameter Copy Action
@@ -2080,7 +2112,7 @@ The operation uses the complete text value of `SourceParam`, including any white
 No value transformation occurs; the entire text is copied as‑is.
 The action succeeds only if `SourceParam` exists; otherwise, it fails.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2092,7 +2124,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2102,7 +2134,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SourceParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2113,7 +2145,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2124,7 +2156,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2140,7 +2172,7 @@ action_rule = {
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Session           |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -2155,7 +2187,7 @@ No manual updates are needed to keep the list current.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -2171,7 +2203,7 @@ Missing this setting stops the operation from running.
 ### Environment (Environment)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | SystemParameters  |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -2186,7 +2218,7 @@ No manual updates are needed when contexts change.
 ### Target Parameter (TargetParameter)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -2200,7 +2232,7 @@ Copy operation cannot run without this parameter.
 ### Target Scope (TargetScope)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

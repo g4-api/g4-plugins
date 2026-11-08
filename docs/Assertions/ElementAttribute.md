@@ -1,6 +1,6 @@
 # Element Attribute (ElementAttribute)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~31 min · Assertion Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,13 +8,13 @@
 
 ### Purpose
 
-The `ElementAttribute` plugin is designed to validate the attributes of web elements within automation scripts. 
+The `ElementAttribute` plugin is designed to validate the attributes of web elements within automation scripts.
 It provides a robust mechanism to assert that an element's attribute meets specific conditions, making it an essential tool for ensuring the correctness of element properties in various automation scenarios.
 
 ### Key Features and Functionality
 
 | Feature                    | Description                                                                                                 |
-|----------------------------|-------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Attribute Validation       | Validates that an element's attribute matches expected conditions, supporting both numeric and text values. |
 | Regular Expression Support | Applies regular expressions to attribute values before performing assertions, enabling complex validations. |
 | Flexible Assertions        | Supports a range of operators, including equality, inequality, pattern matching, and numeric comparisons.   |
@@ -22,7 +22,7 @@ It provides a robust mechanism to assert that an element's attribute meets speci
 ### Usages in RPA
 
 | Usage                      | Description                                                                                                                                 |
-|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Attribute Presence Check   | Verifies that a specific attribute exists on an element and meets the expected value, ensuring accurate data entry in forms.                |
 | Dynamic Content Validation | Ensures that dynamically generated content or attributes on a page match expected criteria, preventing errors in automated workflows.       |
 | Input Value Verification   | Validates attributes like `value` in text boxes and other input controllers, ensuring that user inputs or default values are correctly set. |
@@ -30,7 +30,7 @@ It provides a robust mechanism to assert that an element's attribute meets speci
 ### Usages in Automation Testing
 
 | Usage                        | Description                                                                                                                                                       |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Accessibility Testing        | Validates that accessibility attributes (like `aria-hidden`, `role`, etc.) are correctly set, ensuring compliance with accessibility standards.                   |
 | UI Consistency Verification  | Ensures that visual and functional attributes of elements remain consistent across different environments and test runs.                                          |
 | Version Control in Elements  | Verifies that version-related attributes (like `data-version`, `version`) meet the expected criteria, ensuring compatibility and correctness.                     |
@@ -41,10 +41,10 @@ It provides a robust mechanism to assert that an element's attribute meets speci
 
 ### Example No.1
 
-Assert that the 'data-value' attribute of an element, after applying the regular expression '\d+', equals '123'. 
+Assert that the 'data-value' attribute of an element, after applying the regular expression '\d+', equals '123'.
 This is useful for extracting numeric values from the attribute and ensuring they meet the expected condition.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -80,7 +80,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -92,7 +92,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -103,12 +103,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.2
 
-Ensure that the 'class' attribute of an element contains the text 'active'. 
+Ensure that the 'class' attribute of an element contains the text 'active'.
 This assertion checks if the class attribute matches the exact expected value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -120,7 +121,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -130,7 +131,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='statusElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -141,7 +142,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -152,7 +153,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -162,12 +163,13 @@ action_rule = {
     "onElement": "//*[@id='statusElement']"
 }
 ```
+
 ### Example No.3
 
-Perform an assertion to ensure that the 'data-percentage' attribute of an element, after extracting the numeric part using the regular expression '\d+', is greater than '50'. 
+Perform an assertion to ensure that the 'data-percentage' attribute of an element, after extracting the numeric part using the regular expression '\d+', is greater than '50'.
 This is useful for scenarios where the script needs to validate that a percentage value extracted from the attribute exceeds a certain threshold.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -180,7 +182,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -191,7 +193,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -203,7 +205,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -215,7 +217,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -226,12 +228,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.4
 
-Assert that the 'data-price' attribute of an element, after extracting the numeric part using the regular expression '\d+\.\d{2}', is lower than '100.00'. 
+Assert that the 'data-price' attribute of an element, after extracting the numeric part using the regular expression '\d+\.\d{2}', is lower than '100.00'.
 This validation ensures that the price extracted from the attribute is less than a specific value, confirming that the element meets pricing criteria.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -244,7 +247,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -255,7 +258,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+\.\d{2}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -267,7 +270,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -279,7 +282,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -290,12 +293,13 @@ action_rule = {
     "regularExpression": "\d+\.\d{2}"
 }
 ```
+
 ### Example No.5
 
-Perform an assertion to ensure the 'version' attribute of an element, after extracting the major version number using the regular expression '\d+', is greater than or equal to '2'. 
+Perform an assertion to ensure the 'version' attribute of an element, after extracting the major version number using the regular expression '\d+', is greater than or equal to '2'.
 This is useful for validating that an element's version attribute is at least a certain version.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -308,7 +312,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -319,7 +323,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -331,7 +335,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -343,7 +347,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -354,12 +358,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.6
 
-Assert that the 'data-length' attribute of an element, after applying the regular expression '\d+', is less than or equal to '50'. 
+Assert that the 'data-length' attribute of an element, after applying the regular expression '\d+', is less than or equal to '50'.
 This ensures that the length value extracted from the attribute does not exceed a specific threshold, confirming correct element configuration.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -372,7 +377,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -383,7 +388,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -395,7 +400,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -407,7 +412,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -418,11 +423,12 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.7
 
 Check that the 'data-type' attribute of an element does not match the regular expression '^[A-Za-z]+$', ensuring the value is not purely alphabetical.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -434,7 +440,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -444,7 +450,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='typeElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -455,7 +461,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -466,7 +472,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -476,12 +482,13 @@ action_rule = {
     "onElement": "//*[@id='typeElement']"
 }
 ```
+
 ### Example No.8
 
-Assert that the 'aria-hidden' attribute of an element is set to 'true'. 
+Assert that the 'aria-hidden' attribute of an element is set to 'true'.
 This validation is essential for ensuring the accessibility state of an element is correctly configured.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -493,7 +500,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -503,7 +510,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='hiddenElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -514,7 +521,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -525,7 +532,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -541,20 +548,20 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Specifies the condition under which the assertion will pass or fail. 
+Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the attribute.
 
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -566,7 +573,7 @@ Specifies the web element's attribute to be validated. This attribute will be ch
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -578,7 +585,7 @@ Specifies the web element to be validated. This can be defined using a locator s
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -590,14 +597,14 @@ Defines the locator strategy used to identify the target element on the web page
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Specifies a regular expression to be applied to the attribute value before performing the assertion. 
+Specifies a regular expression to be applied to the attribute value before performing the assertion.
 This allows for more flexible validation of attribute values that may require pattern matching.
 
 ## Parameters
@@ -605,7 +612,7 @@ This allows for more flexible validation of attribute values that may require pa
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -617,7 +624,7 @@ Specifies the type of comparison or operation to be performed when evaluating th
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -630,6 +637,7 @@ Specifies the value or pattern that the element's attribute is expected to match
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-element-attribute](https://www.w3.org/TR/webdriver/#get-element-attribute)

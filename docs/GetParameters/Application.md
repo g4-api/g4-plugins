@@ -1,6 +1,6 @@
 # Application (Application)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ The GetApplicationParameter plugin retrieves shared settings used by automation 
 ### Key Features and Functionality
 
 | Feature             | Description                                                      |
-|---------------------|------------------------------------------------------------------|
+| --- | --- |
 | Parameter Retrieval | Fetches settings like connection strings, API keys, and more.    |
 | Environment Support | Gets parameters tailored to each environment (Dev, Prod, etc.).  |
 | Plugin Integration  | Works with other plugins to apply parameters in various actions. |
@@ -21,14 +21,14 @@ The GetApplicationParameter plugin retrieves shared settings used by automation 
 ### Usages in RPA
 
 | Use Case                | Description                                                       |
-|-------------------------|-------------------------------------------------------------------|
+| --- | --- |
 | Dynamic Configuration   | Load settings at runtime to adapt workflows for different stages. |
 | Central Parameter Store | Keep all automation instances using the same source for settings. |
 
 ### Usages in Automation Testing
 
 | Use Case                     | Description                                                       |
-|------------------------------|-------------------------------------------------------------------|
+| --- | --- |
 | Environment-Specific Testing | Load test environment settings to run accurate, real-world tests. |
 | Test Script Configuration    | Fetch parameters directly within test scripts to simplify setup.  |
 
@@ -42,7 +42,7 @@ This example demonstrates how to retrieve the 'ConnectionString' parameter using
 It targets the `ConnectionString` parameter name and invokes the plugin in production scope.
 The argument `--Environment:Prod` specifies the production environment for the parameter retrieval.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -62,7 +62,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("ConnectionString");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -72,7 +72,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "onElement": "ConnectionString"
 }
 ```
+
 ### Example No.2
 
 ### Retrieve ConnectionString Parameter with Default Environment
@@ -99,7 +100,7 @@ The retrieved ConnectionString value is trimmed to remove whitespace.
 This example demonstrates how to retrieve the 'ConnectionString' parameter using the Application plugin’s GetParameter action, defaulting to the SystemParameters environment.
 It targets the `ConnectionString` parameter name without specifying an environment argument, relying on the default environment.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -109,7 +110,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -117,7 +118,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("ConnectionString");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -126,7 +127,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -135,7 +136,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -149,7 +150,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -163,7 +164,7 @@ A wrong location can cause errors when the system tries to retrieve your data.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -179,7 +180,7 @@ A wrong name can lead to missing or incorrect results.
 ### Environment (Environment)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | SystemParameters  |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -187,7 +188,7 @@ A wrong name can lead to missing or incorrect results.
 | **Value Type**    | String            |
 
 Environment sets which list of values to use so you get parameters from the right place and avoid missing information.
-Leaving it blank picks SystemParameters so you still get a basic set of values and avoid surprises.
+Leaving it blank picks the automation’s default environment (settings.environmentsSettings.defaultEnvironment), or SystemParameters when none is set.
 
 ## Scope
 

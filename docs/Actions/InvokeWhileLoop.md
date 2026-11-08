@@ -1,6 +1,6 @@
 # Invoke While Loop (InvokeWhileLoop)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Runs actions repeatedly while a specified condition remains true and stops when 
 ### Key Features and Functionality
 
 | Feature                      | Description                                                         |
-|------------------------------|---------------------------------------------------------------------|
+| --- | --- |
 | Dynamic Iteration            | Runs steps in a loop that adapts to changing conditions at runtime. |
 | Conditional Execution        | Continues looping while your specified condition remains true.      |
 | Timeout Handling             | Stops the loop automatically if it exceeds a set time limit.        |
@@ -22,7 +22,7 @@ Runs actions repeatedly while a specified condition remains true and stops when 
 ### Usages in RPA
 
 | Use Case                   | Description                                                     |
-|----------------------------|-----------------------------------------------------------------|
+| --- | --- |
 | Data Validation            | Checks data repeatedly until it meets your criteria.            |
 | Dynamic Process Automation | Automatically repeats tasks based on live conditions.           |
 | Conditional Flow Control   | Lets scripts change course by checking conditions during a run. |
@@ -30,7 +30,7 @@ Runs actions repeatedly while a specified condition remains true and stops when 
 ### Usages in Automation Testing
 
 | Use Case                   | Description                                                    |
-|----------------------------|----------------------------------------------------------------|
+| --- | --- |
 | Dynamic Testing            | Keeps testing until the application reaches the desired state. |
 | Repetitive Task Automation | Repeats test steps until a condition is satisfied.             |
 | Conditional Flow Testing   | Allows tests to adapt on the fly based on changing conditions. |
@@ -46,7 +46,7 @@ A regular expression `(?i)active` is applied to the `class` attribute to check f
 The loop continues until the condition no longer holds or if configured to stop on error.
 All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -67,7 +67,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -82,7 +82,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("#NextBtn1");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -100,7 +100,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -118,7 +118,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -135,6 +135,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.2
 
 ### Click Next While Not Active Using XPath
@@ -144,7 +145,7 @@ A regular expression `(?i)active` is applied to the `class` attribute to check f
 The loop continues until the condition no longer holds or if configured to stop on error.
 All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -164,7 +165,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -178,7 +179,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("//button[@id='NextBtn1']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -195,7 +196,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -212,7 +213,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -228,6 +229,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.3
 
 ### Click Next While Not Active Using CSS Selector nth-child
@@ -237,7 +239,7 @@ A regular expression `(?i)active` is applied to the `class` attribute to check f
 The loop continues until the condition no longer holds or if configured to stop on error.
 All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -258,7 +260,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -273,7 +275,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("#NextBtn1");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -291,7 +293,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -309,7 +311,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -326,6 +328,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.4
 
 ### Click Next While Not Active Using CSS Selector with XPath Click
@@ -335,7 +338,7 @@ A regular expression `(?i)active` is applied to the `class` attribute to check f
 The loop continues until the condition no longer holds or if configured to stop on error.
 All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -355,7 +358,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -369,7 +372,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("//button[@id='NextBtn1']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -386,7 +389,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -403,7 +406,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -419,6 +422,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.5
 
 ### Nested InvokeWhileLoop for Two-Level Active-Class Validation
@@ -429,7 +433,7 @@ A regular expression `(?i)active` is applied to the `class` attribute in both lo
 The loops continue until their conditions no longer hold or if configured to stop on error.
 All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -472,7 +476,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -503,7 +507,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("#NextBtn1");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -539,7 +543,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -575,7 +579,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -610,6 +614,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.6
 
 ### InvokeWhileLoop with Timeout for Active-Class Check
@@ -619,7 +624,7 @@ A regular expression `(?i)foo` is applied to the `class` attribute to check for 
 The loop continues until the condition no longer holds or if configured to stop on error.
 All conditions supported by Assert plugins (plugins with `Assert` as their plugin type) can be used here as well to control the loop.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -640,7 +645,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -655,7 +660,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setOnElement("#NextBtn1");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -673,7 +678,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -691,7 +696,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -714,7 +719,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -728,7 +733,7 @@ This expression guides whether the assertion is true or false.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -742,7 +747,7 @@ Xpath is used by default.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -756,7 +761,7 @@ The assertion focuses on only that part.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -770,7 +775,7 @@ The assertion then runs on that element.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -784,7 +789,7 @@ This makes checks easier by narrowing down to the exact text you need.
 ### Rules (Rules)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -800,7 +805,7 @@ When the condition becomes false, the loop stops.
 ### Condition (Condition)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -815,7 +820,7 @@ It keeps checks up to date with the latest options.
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -830,7 +835,7 @@ Non-matching values make the assertion return false.
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -845,7 +850,7 @@ No manual updates are needed to keep the list current.
 ### Timeout (Timeout)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

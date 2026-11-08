@@ -1,6 +1,6 @@
 # Send User32 Keys (SendUser32Keys)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ It is designed for automation scenarios that require character-by-character text
 ### Key Features and Functionality
 
 | Feature                    | Description                                                                                                                   |
-|----------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Character-by-Character     | Sends each character of the text string individually, mimicking human typing behavior.                                        |
 | Optional Element Targeting | Accepts an `OnElement` locator to focus a specific element before typing; omitting it sends to the currently focused element. |
 | Configurable Delay         | Supports a per-character delay in milliseconds to simulate realistic typing speed or satisfy application timing requirements. |
@@ -29,14 +29,14 @@ It is designed for automation scenarios that require character-by-character text
 ### Usage in RPA
 
 | Usage                 | Description                                                                                                     |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Text Input Automation | Enables RPA workflows to type text realistically into native application input fields, forms, and search boxes. |
 | Multilingual Input    | Supports typing in non-Latin scripts such as Hebrew by specifying the appropriate keyboard layout.              |
 
 ### Usage in Automation Testing
 
 | Usage                     | Description                                                                                                    |
-|---------------------------|----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Native UI Text Validation | Validates text input handling in native Windows applications by simulating realistic OS-level character input. |
 | Timing-Sensitive Testing  | Uses per-character delay to test application behavior under realistic or throttled typing conditions.          |
 
@@ -50,7 +50,7 @@ Send the text `Hello User32` to the native input element identified by the XPath
 The Argument value is used directly as the text string because no `--Keys` parameter is specified.
 The element receives focus automatically before typing begins.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -61,7 +61,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -70,7 +70,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='User32Input']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -80,7 +80,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -90,7 +90,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -99,6 +99,7 @@ action_rule = {
     "onElement": "//input[@id='User32Input']"
 }
 ```
+
 ### Example No.2
 
 ### Type text with per-character delay into a native element
@@ -106,7 +107,7 @@ action_rule = {
 Send the text `Hello User32` to the native input element identified by the XPath `//input[@id='User32Input']`, with a 500-millisecond delay between each character.
 The `--Keys` parameter carries the text and `--Delay:500` sets the inter-character pause inside the `{{$ ...}}` expression.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -117,7 +118,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -126,7 +127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='User32Input']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -136,7 +137,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -146,7 +147,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -155,6 +156,7 @@ action_rule = {
     "onElement": "//input[@id='User32Input']"
 }
 ```
+
 ### Example No.3
 
 ### Type Hebrew text into the currently focused element
@@ -162,7 +164,7 @@ action_rule = {
 Send the Hebrew text `שלום` (Hello) into whichever element currently holds focus in the native application, using the Hebrew Standard keyboard layout.
 No `onElement` is specified, so the plugin sends keystrokes directly to the focused element without calling `SetFocus`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -172,7 +174,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -180,7 +182,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Keys:שלום --KeyboardLayout:he-IL}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -189,7 +191,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -198,7 +200,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -212,7 +214,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -227,7 +229,7 @@ This property is the primary input for the plugin when the `Keys` parameter is n
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -242,7 +244,7 @@ This property is only relevant when `OnElement` is also provided.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -259,7 +261,7 @@ Pair with the `Locator` property to select the appropriate element-finding strat
 ### Delay (Delay)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -274,7 +276,7 @@ Use this parameter to simulate realistic human typing cadence or to ensure the t
 ### Keys (Keys)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -289,7 +291,7 @@ Use the `{{$ --Keys:your text}}` expression syntax to combine this parameter wit
 ### Keyboard Layout (KeyboardLayout)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -306,6 +308,7 @@ Specifying the correct layout is critical when typing characters on non-English 
 ##### En Us
 
 English (United States) keyboard layout. This is the default.
+
 ##### He Il
 
 Hebrew Standard keyboard layout.
@@ -313,6 +316,7 @@ Hebrew Standard keyboard layout.
 ## Scope
 
 * Windows Native
+
 ## See Also
 
 apiDocumentation: [https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendinput](https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendinput)

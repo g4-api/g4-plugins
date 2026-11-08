@@ -1,6 +1,6 @@
 # Set User32 Focus (SetUser32Focus)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~9 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,20 +14,20 @@ This ensures that the target element becomes active and ready for subsequent use
 ### Key Features and Functionality
 
 | Feature          | Description                                                                                             |
-|------------------|---------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Set Focus Action | Activates the target UI element by setting keyboard focus on it, preparing it for further interactions. |
 | Silent Skip      | If the target element is not found, the plugin exits silently without raising an error.                 |
 
 ### Usage in RPA
 
 | Usage              | Description                                                                                         |
-|--------------------|-----------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Element Activation | Use the plugin to ensure a specific UI element is focused before executing further automated tasks. |
 
 ### Usage in Automation Testing
 
 | Usage              | Description                                                                           |
-|--------------------|---------------------------------------------------------------------------------------|
+| --- | --- |
 | Focus Verification | Confirm that the desired UI element receives focus as expected during test execution. |
 
 ### Platform
@@ -43,7 +43,7 @@ This plugin is designed to work on **Windows** only.
 The plugin locates the element at `//input[@id='Username']` using the Xpath locator and sets keyboard focus on it.
 The `Locator` property defaults to `Xpath` and does not need to be specified explicitly.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@id='Username']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -79,7 +79,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -93,7 +93,7 @@ action_rule = {
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -106,7 +106,7 @@ Xpath is the only supported locator strategy for User32 elements.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

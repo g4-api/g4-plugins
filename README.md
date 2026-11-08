@@ -124,3 +124,7 @@ to explore the code and make it part of your G4 journey.
 ## License
 
 G4 Plugins is available under the [Apache License 2.0](./LICENSE).
+
+## Contributing and builds
+
+Build tools, test commands, version numbers, Docker images and development ports are in the [build, test and release guide](../g4-github-actions/docs/build-test-release.md).
