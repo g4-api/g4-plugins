@@ -1,6 +1,6 @@
 # Get Parameter (Get-Parameter)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~25 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -16,7 +16,7 @@ This keeps configuration handling secure, consistent, and environment-aware acro
 ### Key Features and Functionality
 
 | Feature                     | Description                                                                             |
-|-----------------------------|-----------------------------------------------------------------------------------------|
+| --- | --- |
 | Environment-Scope Retrieval | Pulls parameters from Application, User, Machine, Process, or Session scopes.           |
 | Environment Targeting       | Directs lookups to specific stores such as test, staging, or prod for clean separation. |
 | Dynamic Injection           | Replaces tokens in workflow inputs or outputs on the fly to keep data current.          |
@@ -26,14 +26,14 @@ This keeps configuration handling secure, consistent, and environment-aware acro
 ### Usages in RPA
 
 | Use Case                        | Description                                                                          |
-|---------------------------------|--------------------------------------------------------------------------------------|
+| --- | --- |
 | Task Orchestration              | Supplies critical runtime parameters so multi-step bots execute with the right data. |
 | Environment-Specific Automation | Adapts bots to different environments by pulling the matching configuration set.     |
 
 ### Usages in Automation Testing
 
 | Use Case                        | Description                                                                            |
-|---------------------------------|----------------------------------------------------------------------------------------|
+| --- | --- |
 | Data-Driven Testing             | Retrieves test data parameters to generate scenarios on demand.                        |
 | Configuration Management        | Injects current runtime settings so tests adjust automatically to changing conditions. |
 | Environment-Based Customization | Pulls environment-specific values to tailor test runs for accurate coverage.           |
@@ -49,7 +49,7 @@ A macro invocation {{$Get-Parameter --Name:AppVersion --Scope:Application --Envi
 The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #appVersionInput.
 The action passes when the input receives the expected version string.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -61,7 +61,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -71,7 +71,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#appVersionInput");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -82,7 +82,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -93,7 +93,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -103,6 +103,7 @@ action_rule = {
     "onElement": "#appVersionInput"
 }
 ```
+
 ### Example No.2
 
 ### Retrieve parameter value and inject it into an input
@@ -112,7 +113,7 @@ A macro invocation `{{$Get-Parameter --Name:AppVersion --Scope:Application --Env
 The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#appVersionInput`.
 The action passes when the input receives the expected version string.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -124,7 +125,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -134,7 +135,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#appVersionInput");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -145,7 +146,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -156,7 +157,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -166,6 +167,7 @@ action_rule = {
     "onElement": "#appVersionInput"
 }
 ```
+
 ### Example No.3
 
 ### Retrieve parameter value and inject it into an input
@@ -175,7 +177,7 @@ A macro invocation {{$Get-Parameter --Name:Email --Scope:User}} is applied to th
 The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #emailInput.
 The action passes when the input receives the expected email address.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -187,7 +189,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -197,7 +199,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#emailInput");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -208,7 +210,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -219,7 +221,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -229,6 +231,7 @@ action_rule = {
     "onElement": "#emailInput"
 }
 ```
+
 ### Example No.4
 
 ### Retrieve parameter value and inject it into an input
@@ -238,7 +241,7 @@ A macro invocation `{{$Get-Parameter --Name:MachineName --Scope:Machine}}` is ap
 The `SendKeys` plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector `#machineNameInput`.
 The action passes when the input receives the expected machine name.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -250,7 +253,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -260,7 +263,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#machineNameInput");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -271,7 +274,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -282,7 +285,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -292,6 +295,7 @@ action_rule = {
     "onElement": "#machineNameInput"
 }
 ```
+
 ### Example No.5
 
 ### Retrieve parameter value and inject it into an input
@@ -301,7 +305,7 @@ A macro invocation {{$Get-Parameter --Name:ProcessId --Scope:Process}} is applie
 The SendKeys plugin consumes the macro’s output and sends the resulting text to the element located by the CSS selector #processIdInput.
 The action passes when the input receives the expected process ID.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -313,7 +317,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -323,7 +327,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#processIdInput");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -334,7 +338,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -345,7 +349,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -355,6 +359,7 @@ action_rule = {
     "onElement": "#processIdInput"
 }
 ```
+
 ### Example No.6
 
 ### Retrieve and decrypt parameter value, then inject it into an input
@@ -364,7 +369,7 @@ A macro invocation {{$Get-Parameter --Name:SecretParam --Scope:Application --Env
 The macro evaluates to the decrypted secret string, which the SendKeys plugin consumes and sends to the element located by the CSS selector #secretInput.
 The action passes when the input receives the expected secret value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -376,7 +381,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -386,7 +391,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#secretInput");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -397,7 +402,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -408,7 +413,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -424,7 +429,7 @@ action_rule = {
 ### Name (Name)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -437,7 +442,7 @@ Accurate naming ensures the plugin locates the correct stored value.
 ### Scope (Scope)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Session           |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -451,7 +456,7 @@ Omit this property to fall back to the ‘Session’ scope.
 ### Environment (Environment)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -464,7 +469,7 @@ Defaults to ‘SystemParameters’ when the property is not supplied.
 ### Encryption Key (EncryptionKey)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

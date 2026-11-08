@@ -1,6 +1,6 @@
 # Machine (Machine)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~9 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ This plugin lets automation workflows retrieve system-wide settings defined on W
 ### Key Features and Functionality
 
 | Feature                | Description                                                           |
-|------------------------|-----------------------------------------------------------------------|
+| --- | --- |
 | Global variable access | Reads values defined for all users on the Windows machine.            |
 | Empty value handling   | Returns an empty string when the variable is missing or has no value. |
 | Result output field    | Makes the fetched value available for use in later workflow steps.    |
@@ -21,7 +21,7 @@ This plugin lets automation workflows retrieve system-wide settings defined on W
 ### Usages in RPA
 
 | Use Case                     | Description                                                                               |
-|------------------------------|-------------------------------------------------------------------------------------------|
+| --- | --- |
 | Global configuration loading | Loads shared Windows settings like paths or service URLs so workflows match system setup. |
 | Live value retrieval         | Gets the latest Windows environment values at runtime for up-to-date workflow behavior.   |
 | System health checks         | Reads global settings to verify required variables are set and correct.                   |
@@ -29,7 +29,7 @@ This plugin lets automation workflows retrieve system-wide settings defined on W
 ### Usages in Automation Testing
 
 | Use Case                 | Description                                                                                 |
-|--------------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | Test setup configuration | Configures test runs using Windows system-wide settings like API addresses and credentials. |
 | Data-driven tests        | Uses Windows environment values to run tests with different inputs automatically.           |
 | Pre-run checks           | Verifies required Windows variables exist before starting tests to avoid failures.          |
@@ -44,7 +44,7 @@ This example demonstrates how to retrieve a machine-level environment variable n
 It returns the raw value of the `MyMachineParam` variable from the machine scope for use in downstream workflows.
 The retrieved value is available in the `Result` output field for subsequent steps.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -54,7 +54,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -62,7 +62,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("MyMachineParam");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -71,7 +71,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,7 +80,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -94,7 +94,7 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

@@ -1,6 +1,6 @@
 # Set Focus (SetFocus)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ When the target element cannot be located the action exits silently without rais
 ### Key Features and Functionality
 
 | Feature            | Description                                                                              |
-|--------------------|------------------------------------------------------------------------------------------|
+| --- | --- |
 | JavaScript Focus   | Calls `arguments[0].focus()` on the located element via the W3C Execute Script API.      |
 | Event Triggering   | Fires `onfocus` and `focusin` DOM events, activating any handlers bound to those events. |
 | Graceful No-Op     | Returns an empty response without throwing when the target element is not found.         |
@@ -24,7 +24,7 @@ When the target element cannot be located the action exits silently without rais
 ### Usages in RPA
 
 | Use Case              | Description                                                                                     |
-|-----------------------|-------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Form Field Activation | Focuses an input field before typed or scripted text entry to ensure keystrokes land correctly. |
 | Event-Driven Workflow | Triggers onfocus handlers that load dynamic content, suggestions, or validation feedback.       |
 | Multi-Step Forms      | Moves focus to the next field in sequence to simulate natural tab-order navigation.             |
@@ -32,7 +32,7 @@ When the target element cannot be located the action exits silently without rais
 ### Usages in Automation Testing
 
 | Use Case                 | Description                                                                                                    |
-|--------------------------|----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Focus Event Verification | Confirms that onfocus and focusin handlers fire and produce expected UI changes when an element is focused.    |
 | Input Readiness Testing  | Verifies that an input element is reachable and focusable before asserting keyboard interaction behavior.      |
 | Accessibility Compliance | Tests that interactive elements are programmatically focusable, meeting WCAG keyboard navigation requirements. |
@@ -46,7 +46,7 @@ When the target element cannot be located the action exits silently without rais
 Locates the element matching `//input[@name='email']` using the default Xpath strategy and calls `focus()` on it.
 Use this form when an XPath expression uniquely identifies the target input and no explicit locator override is needed.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -64,7 +64,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//input[@name='email']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,6 +90,7 @@ action_rule = {
     "onElement": "//input[@name='email']"
 }
 ```
+
 ### Example No.2
 
 ### Focus an element using a CSS selector
@@ -97,7 +98,7 @@ action_rule = {
 Locates the element matching `#username` using the CssSelector strategy and calls `focus()` on it.
 Use this form when targeting an element by its ID or CSS expression is more convenient or reliable than an XPath.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -108,7 +109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -117,7 +118,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#username");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -127,7 +128,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -137,7 +138,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -152,7 +153,7 @@ action_rule = {
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -166,7 +167,7 @@ When absent the default Xpath strategy is used.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -181,6 +182,7 @@ When the element cannot be located the action exits without throwing an exceptio
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#execute-script](https://www.w3.org/TR/webdriver/#execute-script)

@@ -38,8 +38,8 @@ if (arguments.ContainsKey("Help"))
 }
 
 #region *** Interactive Wizard ***
-// Check if the "OutputFolder" key is not present in the arguments dictionary
-if (!arguments.ContainsKey("OutputFolder"))
+// Check if the "OutputDirectory" key is not present in the arguments dictionary
+if (!arguments.ContainsKey("OutputDirectory"))
 {
     // Prompt the user to specify an output folder or use the default
     Console.Write($"Enter the output folder path or press Enter to use the default ({outputDirectory}) > ");
@@ -56,8 +56,8 @@ if (!arguments.ContainsKey("OutputFolder"))
     Console.WriteLine("");
 }
 
-// Check if the "DocsFolder" key is not present in the arguments dictionary
-if (!arguments.ContainsKey("DocsFolder"))
+// Check if the "DocsBaseDirectory" key is not present in the arguments dictionary
+if (!arguments.ContainsKey("DocsBaseDirectory"))
 {
     // Prompt the user to specify an input documents folder or use the default
     Console.Write($"Enter the input documents folder path or press Enter to use the default ({docsBaseDirectory}) > ");
@@ -350,8 +350,8 @@ static void WriteDocuments(IEnumerable<(string Directory, string File, string Co
             // Combine filename with the existing directory path
             var path = Path.Combine(directory, file);
 
-            // Write the content to the specified file path
-            File.WriteAllText(path, content);
+            // Write the content with exactly one final newline so every generated page ends the same way
+            File.WriteAllText(path, content.TrimEnd() + "\n");
         }
     }
 }

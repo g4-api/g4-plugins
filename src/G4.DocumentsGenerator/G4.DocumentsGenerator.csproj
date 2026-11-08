@@ -23,6 +23,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
+		<ProjectReference Include="..\G4.Plugins.Google\G4.Plugins.Google.csproj" />
 		<ProjectReference Include="..\G4.Plugins.Ui\G4.Plugins.Ui.csproj" />
 	</ItemGroup>
 

@@ -1,6 +1,6 @@
 # Register Parameter (RegisterParameter)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~367 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Saves and manages named data in automation workflows. Captures values from user 
 ### Key Features and Functionality
 
 | Feature             | Description                                                                        |
-|---------------------|------------------------------------------------------------------------------------|
+| --- | --- |
 | Parameter Capture   | Get a value from a user argument or an element.                                    |
 | Scope Selection     | Choose where to store the value (session, application, machine, user, or process). |
 | Environment Targets | Handle parameters across different environments.                                   |
@@ -25,7 +25,7 @@ Saves and manages named data in automation workflows. Captures values from user 
 ### Usages in RPA
 
 | Use Case             | Description                                                        |
-|----------------------|--------------------------------------------------------------------|
+| --- | --- |
 | Data Handoff         | Save data from one automation step to use in later steps.          |
 | Environment Setup    | Register settings like URLs or credentials before running actions. |
 | Value Extraction     | Use regex to filter and store data from web pages.                 |
@@ -34,7 +34,7 @@ Saves and manages named data in automation workflows. Captures values from user 
 ### Usages in Automation Testing
 
 | Use Case                  | Description                                                  |
-|---------------------------|--------------------------------------------------------------|
+| --- | --- |
 | Test Data Setup           | Store input values needed for automated test cases.          |
 | Environment Configuration | Register URLs or credentials for test environments.          |
 | Runtime Parameterization  | Save variables at runtime to drive different test scenarios. |
@@ -49,7 +49,7 @@ Saves and manages named data in automation workflows. Captures values from user 
 Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -59,7 +59,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -67,7 +67,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Application}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -76,7 +76,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -85,7 +85,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -93,6 +93,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Application}}"
 }
 ```
+
 ### Example No.2
 
 ### RegisterParameter: Application Scope with Encryption
@@ -100,7 +101,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -110,7 +111,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -118,7 +119,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Application --EncryptionKey:myEncryptionKey}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -127,7 +128,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -136,7 +137,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -144,6 +145,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Application --EncryptionKey:myEncryptionKey}}"
 }
 ```
+
 ### Example No.3
 
 ### RegisterParameter: Application Scope with Development Environment
@@ -151,7 +153,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope for the `Development` environment.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -161,7 +163,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -169,7 +171,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Application --Environment:Development}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -178,7 +180,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -187,7 +189,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -195,6 +197,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Application --Environment:Development}}"
 }
 ```
+
 ### Example No.4
 
 ### RegisterParameter: Application Scope with Development Environment and Encryption
@@ -202,7 +205,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -212,7 +215,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -220,7 +223,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -229,7 +232,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -238,7 +241,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -246,6 +249,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}"
 }
 ```
+
 ### Example No.5
 
 ### RegisterParameter: Machine Scope
@@ -253,7 +257,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Machine` scope.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -263,7 +267,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -271,7 +275,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Machine}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -280,7 +284,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -289,7 +293,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -297,6 +301,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Machine}}"
 }
 ```
+
 ### Example No.6
 
 ### RegisterParameter: Machine Scope with Encryption
@@ -304,7 +309,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -314,7 +319,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -322,7 +327,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Machine --EncryptionKey:myEncryptionKey}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -331,7 +336,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -340,7 +345,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -348,6 +353,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Machine --EncryptionKey:myEncryptionKey}}"
 }
 ```
+
 ### Example No.7
 
 ### RegisterParameter: Process Scope
@@ -355,7 +361,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Process` scope.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -365,7 +371,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -373,7 +379,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Process}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -382,7 +388,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -391,7 +397,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -399,6 +405,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Process}}"
 }
 ```
+
 ### Example No.8
 
 ### RegisterParameter: Process Scope with Encryption
@@ -406,7 +413,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Process` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -416,7 +423,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -424,7 +431,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Process --EncryptionKey:myEncryptionKey}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -433,7 +440,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -442,7 +449,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -450,6 +457,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Process --EncryptionKey:myEncryptionKey}}"
 }
 ```
+
 ### Example No.9
 
 ### RegisterParameter: Session Scope
@@ -457,7 +465,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Session` scope.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -467,7 +475,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -475,7 +483,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -484,7 +492,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -493,7 +501,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -501,6 +509,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Session}}"
 }
 ```
+
 ### Example No.10
 
 ### RegisterParameter: Session Scope with Encryption
@@ -508,7 +517,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `Session` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -518,7 +527,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -526,7 +535,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:Session --EncryptionKey:myEncryptionKey}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -535,7 +544,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -544,7 +553,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -552,6 +561,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:Session --EncryptionKey:myEncryptionKey}}"
 }
 ```
+
 ### Example No.11
 
 ### RegisterParameter: User Scope
@@ -559,7 +569,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `User` scope.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -569,7 +579,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -577,7 +587,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:User}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -586,7 +596,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -595,7 +605,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -603,6 +613,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:User}}"
 }
 ```
+
 ### Example No.12
 
 ### RegisterParameter: User Scope with Encryption
@@ -610,7 +621,7 @@ action_rule = {
 Register a parameter named `parameterName` with the value `parameterValue` in the `User` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -620,7 +631,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -628,7 +639,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Value:parameterValue --Scope:User --EncryptionKey:myEncryptionKey}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -637,7 +648,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -646,7 +657,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -654,6 +665,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Value:parameterValue --Scope:User --EncryptionKey:myEncryptionKey}}"
 }
 ```
+
 ### Example No.13
 
 ### RegisterParameter: Application Scope via CSS Selector
@@ -661,7 +673,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -673,7 +685,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -683,7 +695,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -694,7 +706,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -705,7 +717,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -715,6 +727,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.14
 
 ### RegisterParameter: Application Scope via CSS Selector with Encryption
@@ -722,7 +735,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -734,7 +747,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -744,7 +757,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -755,7 +768,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -766,7 +779,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -776,6 +789,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.15
 
 ### RegisterParameter: Application Scope via XPath
@@ -783,7 +797,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -794,7 +808,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -803,7 +817,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -813,7 +827,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -823,7 +837,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -832,6 +846,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.16
 
 ### RegisterParameter: Application Scope via XPath with Encryption
@@ -839,7 +854,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -850,7 +865,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -859,7 +874,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -869,7 +884,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -879,7 +894,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -888,6 +903,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.17
 
 ### RegisterParameter: Application Scope via Id Locator
@@ -895,7 +911,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -907,7 +923,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -917,7 +933,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -928,7 +944,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -939,7 +955,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -949,6 +965,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.18
 
 ### RegisterParameter: Application Scope via Id Locator with Encryption
@@ -956,7 +973,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -968,7 +985,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -978,7 +995,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -989,7 +1006,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1000,7 +1017,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1010,6 +1027,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.19
 
 ### RegisterParameter: Application Scope with Development Environment via CSS Selector
@@ -1017,7 +1035,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1029,7 +1047,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1039,7 +1057,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1050,7 +1068,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1061,7 +1079,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1071,6 +1089,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.20
 
 ### RegisterParameter: Application Scope with Development Environment via CSS Selector with Encryption
@@ -1078,7 +1097,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1090,7 +1109,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1100,7 +1119,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1111,7 +1130,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1122,7 +1141,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1132,6 +1151,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.21
 
 ### RegisterParameter: Application Scope with Development Environment via XPath
@@ -1139,7 +1159,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1150,7 +1170,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1159,7 +1179,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1169,7 +1189,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1179,7 +1199,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1188,6 +1208,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.22
 
 ### RegisterParameter: Application Scope with Development Environment via XPath with Encryption
@@ -1195,7 +1216,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1206,7 +1227,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1215,7 +1236,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1225,7 +1246,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1235,7 +1256,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1244,6 +1265,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.23
 
 ### RegisterParameter: Application Scope with Development Environment via Id Locator
@@ -1251,7 +1273,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1263,7 +1285,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1273,7 +1295,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1284,7 +1306,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1295,7 +1317,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1305,6 +1327,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.24
 
 ### RegisterParameter: Application Scope with Development Environment via Id Locator with Encryption
@@ -1312,7 +1335,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Application` scope for the `Development` environment and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1324,7 +1347,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1334,7 +1357,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1345,7 +1368,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1356,7 +1379,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1366,6 +1389,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.25
 
 ### RegisterParameter: Machine Scope via CSS Selector
@@ -1373,7 +1397,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1385,7 +1409,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1395,7 +1419,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1406,7 +1430,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1417,7 +1441,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1427,6 +1451,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.26
 
 ### RegisterParameter: Machine Scope via CSS Selector with Encryption
@@ -1434,7 +1459,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1446,7 +1471,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1456,7 +1481,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1467,7 +1492,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1478,7 +1503,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1488,6 +1513,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.27
 
 ### RegisterParameter: Machine Scope via XPath
@@ -1495,7 +1521,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1506,7 +1532,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1515,7 +1541,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1525,7 +1551,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1535,7 +1561,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1544,6 +1570,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.28
 
 ### RegisterParameter: Machine Scope via XPath with Encryption
@@ -1551,7 +1578,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1562,7 +1589,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1571,7 +1598,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1581,7 +1608,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1591,7 +1618,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1600,6 +1627,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.29
 
 ### RegisterParameter: Machine Scope via Id Locator
@@ -1607,7 +1635,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1619,7 +1647,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1629,7 +1657,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1640,7 +1668,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1651,7 +1679,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1661,6 +1689,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.30
 
 ### RegisterParameter: Machine Scope via Id Locator with Encryption
@@ -1668,7 +1697,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1680,7 +1709,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1690,7 +1719,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1701,7 +1730,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1712,7 +1741,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1722,6 +1751,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.31
 
 ### RegisterParameter: Process Scope via CSS Selector
@@ -1729,7 +1759,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1741,7 +1771,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1751,7 +1781,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1762,7 +1792,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1773,7 +1803,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1783,6 +1813,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.32
 
 ### RegisterParameter: Process Scope via CSS Selector with Encryption
@@ -1790,7 +1821,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1802,7 +1833,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1812,7 +1843,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1823,7 +1854,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1834,7 +1865,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1844,6 +1875,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.33
 
 ### RegisterParameter: Process Scope via XPath
@@ -1851,7 +1883,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1862,7 +1894,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1871,7 +1903,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1881,7 +1913,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1891,7 +1923,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1900,6 +1932,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.34
 
 ### RegisterParameter: Process Scope via XPath with Encryption
@@ -1907,7 +1940,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1918,7 +1951,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1927,7 +1960,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1937,7 +1970,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -1947,7 +1980,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -1956,6 +1989,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.35
 
 ### RegisterParameter: Process Scope via Id Locator
@@ -1963,7 +1997,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -1975,7 +2009,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -1985,7 +2019,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -1996,7 +2030,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2007,7 +2041,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2017,6 +2051,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.36
 
 ### RegisterParameter: Process Scope via Id Locator with Encryption
@@ -2024,7 +2059,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2036,7 +2071,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2046,7 +2081,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2057,7 +2092,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2068,7 +2103,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2078,6 +2113,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.37
 
 ### RegisterParameter: Session Scope via CSS Selector
@@ -2085,7 +2121,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2097,7 +2133,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2107,7 +2143,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2118,7 +2154,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2129,7 +2165,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2139,6 +2175,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.38
 
 ### RegisterParameter: Session Scope via CSS Selector with Encryption
@@ -2146,7 +2183,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2158,7 +2195,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2168,7 +2205,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2179,7 +2216,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2190,7 +2227,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2200,6 +2237,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.39
 
 ### RegisterParameter: Session Scope via XPath
@@ -2207,7 +2245,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2218,7 +2256,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2227,7 +2265,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2237,7 +2275,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2247,7 +2285,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2256,6 +2294,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.40
 
 ### RegisterParameter: Session Scope via XPath with Encryption
@@ -2263,7 +2302,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2274,7 +2313,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2283,7 +2322,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2293,7 +2332,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2303,7 +2342,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2312,6 +2351,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.41
 
 ### RegisterParameter: Session Scope via Id Locator
@@ -2319,7 +2359,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2331,7 +2371,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2341,7 +2381,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2352,7 +2392,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2363,7 +2403,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2373,6 +2413,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.42
 
 ### RegisterParameter: Session Scope via Id Locator with Encryption
@@ -2380,7 +2421,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2392,7 +2433,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2402,7 +2443,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2413,7 +2454,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2424,7 +2465,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2434,6 +2475,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.43
 
 ### RegisterParameter: User Scope via CSS Selector
@@ -2441,7 +2483,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2453,7 +2495,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2463,7 +2505,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2474,7 +2516,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2485,7 +2527,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2495,6 +2537,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.44
 
 ### RegisterParameter: User Scope via CSS Selector with Encryption
@@ -2502,7 +2545,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2514,7 +2557,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2524,7 +2567,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2535,7 +2578,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2546,7 +2589,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2556,6 +2599,7 @@ action_rule = {
     "onElement": "#elementId"
 }
 ```
+
 ### Example No.45
 
 ### RegisterParameter: User Scope via XPath
@@ -2563,7 +2607,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2574,7 +2618,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2583,7 +2627,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2593,7 +2637,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2603,7 +2647,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2612,6 +2656,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.46
 
 ### RegisterParameter: User Scope via XPath with Encryption
@@ -2619,7 +2664,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2630,7 +2675,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2639,7 +2684,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='elementId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2649,7 +2694,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2659,7 +2704,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2668,6 +2713,7 @@ action_rule = {
     "onElement": "//a[@id='elementId']"
 }
 ```
+
 ### Example No.47
 
 ### RegisterParameter: User Scope via Id Locator
@@ -2675,7 +2721,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2687,7 +2733,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2697,7 +2743,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2708,7 +2754,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2719,7 +2765,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2729,6 +2775,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.48
 
 ### RegisterParameter: User Scope via Id Locator with Encryption
@@ -2736,7 +2783,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2748,7 +2795,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2758,7 +2805,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("elementId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2769,7 +2816,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2780,7 +2827,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2790,6 +2837,7 @@ action_rule = {
     "onElement": "elementId"
 }
 ```
+
 ### Example No.49
 
 ### RegisterParameter: Application Scope via CSS Selector (href attribute)
@@ -2797,7 +2845,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2810,7 +2858,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2821,7 +2869,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2833,7 +2881,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2845,7 +2893,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2856,6 +2904,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.50
 
 ### RegisterParameter: Application Scope via CSS Selector (href attribute) with Encryption
@@ -2863,7 +2912,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2876,7 +2925,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2887,7 +2936,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2899,7 +2948,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2911,7 +2960,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2922,6 +2971,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.51
 
 ### RegisterParameter: Application Scope via XPath (href attribute)
@@ -2929,7 +2979,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -2941,7 +2991,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -2951,7 +3001,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -2962,7 +3012,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -2973,7 +3023,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -2983,6 +3033,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.52
 
 ### RegisterParameter: Application Scope via XPath (href attribute) with Encryption
@@ -2990,7 +3041,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3002,7 +3053,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3012,7 +3063,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3023,7 +3074,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3034,7 +3085,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3044,6 +3095,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.53
 
 ### RegisterParameter: Application Scope via Id Locator (href attribute)
@@ -3051,7 +3103,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3064,7 +3116,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3075,7 +3127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3087,7 +3139,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3099,7 +3151,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3110,6 +3162,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.54
 
 ### RegisterParameter: Application Scope via Id Locator (href attribute) with Encryption
@@ -3117,7 +3170,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3130,7 +3183,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3141,7 +3194,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3153,7 +3206,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3165,7 +3218,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3176,6 +3229,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.55
 
 ### RegisterParameter: Application Scope via CSS Selector (href attribute)
@@ -3183,7 +3237,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3196,7 +3250,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3207,7 +3261,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3219,7 +3273,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3231,7 +3285,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3242,6 +3296,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.56
 
 ### RegisterParameter: Application Scope via CSS Selector (href attribute) with Encryption
@@ -3249,7 +3304,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3262,7 +3317,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3273,7 +3328,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3285,7 +3340,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3297,7 +3352,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3308,6 +3363,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.57
 
 ### RegisterParameter: Application Scope via XPath (href attribute)
@@ -3315,7 +3371,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3327,7 +3383,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3337,7 +3393,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3348,7 +3404,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3359,7 +3415,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3369,6 +3425,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.58
 
 ### RegisterParameter: Application Scope via XPath (href attribute) with Encryption
@@ -3376,7 +3433,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3388,7 +3445,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3398,7 +3455,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3409,7 +3466,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3420,7 +3477,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3430,6 +3487,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.59
 
 ### RegisterParameter: Application Scope via Id Locator (href attribute)
@@ -3437,7 +3495,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3450,7 +3508,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3461,7 +3519,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3473,7 +3531,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3485,7 +3543,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3496,6 +3554,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.60
 
 ### RegisterParameter: Application Scope via Id Locator (href attribute) with Encryption
@@ -3503,7 +3562,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Application` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3516,7 +3575,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3527,7 +3586,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3539,7 +3598,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3551,7 +3610,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3562,6 +3621,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.61
 
 ### RegisterParameter: Machine Scope via CSS Selector (href attribute)
@@ -3569,7 +3629,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Machine` scope.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3582,7 +3642,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3593,7 +3653,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3605,7 +3665,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3617,7 +3677,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3628,6 +3688,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.62
 
 ### RegisterParameter: Machine Scope via CSS Selector (href attribute) with Encryption
@@ -3635,7 +3696,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3648,7 +3709,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3659,7 +3720,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3671,7 +3732,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3683,7 +3744,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3694,6 +3755,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.63
 
 ### RegisterParameter: Machine Scope via XPath (href attribute)
@@ -3701,7 +3763,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Machine` scope.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3713,7 +3775,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3723,7 +3785,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3734,7 +3796,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3745,7 +3807,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3755,6 +3817,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.64
 
 ### RegisterParameter: Machine Scope via XPath (href attribute) with Encryption
@@ -3762,7 +3825,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3774,7 +3837,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3784,7 +3847,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3795,7 +3858,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3806,7 +3869,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3816,6 +3879,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.65
 
 ### RegisterParameter: Machine Scope via Id Locator (href attribute)
@@ -3823,7 +3887,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Machine` scope.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3836,7 +3900,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3847,7 +3911,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3859,7 +3923,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3871,7 +3935,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3882,6 +3946,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.66
 
 ### RegisterParameter: Machine Scope via Id Locator (href attribute) with Encryption
@@ -3889,7 +3954,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Machine` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3902,7 +3967,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3913,7 +3978,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3925,7 +3990,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -3937,7 +4002,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -3948,6 +4013,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.67
 
 ### RegisterParameter: Process Scope via CSS Selector (href attribute)
@@ -3955,7 +4021,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Process` scope.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -3968,7 +4034,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -3979,7 +4045,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -3991,7 +4057,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4003,7 +4069,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4014,6 +4080,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.68
 
 ### RegisterParameter: Process Scope via CSS Selector (href attribute) with Encryption
@@ -4021,7 +4088,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4034,7 +4101,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4045,7 +4112,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4057,7 +4124,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4069,7 +4136,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4080,6 +4147,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.69
 
 ### RegisterParameter: Process Scope via XPath (href attribute)
@@ -4087,7 +4155,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Process` scope.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4099,7 +4167,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4109,7 +4177,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4120,7 +4188,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4131,7 +4199,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4141,6 +4209,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.70
 
 ### RegisterParameter: Process Scope via XPath (href attribute) with Encryption
@@ -4148,7 +4217,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Process` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4160,7 +4229,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4170,7 +4239,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4181,7 +4250,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4192,7 +4261,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4202,6 +4271,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.71
 
 ### RegisterParameter: Process Scope via Id Locator (href attribute)
@@ -4209,7 +4279,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Process` scope.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4222,7 +4292,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4233,7 +4303,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4245,7 +4315,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4257,7 +4327,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4268,6 +4338,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.72
 
 ### RegisterParameter: Process Scope via Id Locator (href attribute) with Encryption
@@ -4275,7 +4346,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Process` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4288,7 +4359,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4299,7 +4370,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4311,7 +4382,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4323,7 +4394,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4334,6 +4405,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.73
 
 ### RegisterParameter: Session Scope via CSS Selector (href attribute)
@@ -4341,7 +4413,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4354,7 +4426,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4365,7 +4437,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4377,7 +4449,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4389,7 +4461,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4400,6 +4472,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.74
 
 ### RegisterParameter: Session Scope via CSS Selector (href attribute) with Encryption
@@ -4407,7 +4480,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4420,7 +4493,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4431,7 +4504,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4443,7 +4516,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4455,7 +4528,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4466,6 +4539,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.75
 
 ### RegisterParameter: Session Scope via XPath (href attribute)
@@ -4473,7 +4547,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4485,7 +4559,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4495,7 +4569,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4506,7 +4580,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4517,7 +4591,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4527,6 +4601,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.76
 
 ### RegisterParameter: Session Scope via XPath (href attribute) with Encryption
@@ -4534,7 +4609,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `Session` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4546,7 +4621,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4556,7 +4631,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4567,7 +4642,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4578,7 +4653,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4588,6 +4663,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.77
 
 ### RegisterParameter: Session Scope via Id Locator (href attribute)
@@ -4595,7 +4671,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4608,7 +4684,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4619,7 +4695,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4631,7 +4707,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4643,7 +4719,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4654,6 +4730,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.78
 
 ### RegisterParameter: Session Scope via Id Locator (href attribute) with Encryption
@@ -4661,7 +4738,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `Session` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4674,7 +4751,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4685,7 +4762,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4697,7 +4774,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4709,7 +4786,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4720,6 +4797,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.79
 
 ### RegisterParameter: User Scope via CSS Selector (href attribute)
@@ -4727,7 +4805,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4740,7 +4818,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4751,7 +4829,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4763,7 +4841,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4775,7 +4853,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4786,6 +4864,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.80
 
 ### RegisterParameter: User Scope via CSS Selector (href attribute) with Encryption
@@ -4793,7 +4872,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by CSS selector `#linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4806,7 +4885,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4817,7 +4896,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4829,7 +4908,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4841,7 +4920,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4852,6 +4931,7 @@ action_rule = {
     "onElement": "#linkId"
 }
 ```
+
 ### Example No.81
 
 ### RegisterParameter: User Scope via XPath (href attribute)
@@ -4859,7 +4939,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4871,7 +4951,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4881,7 +4961,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4892,7 +4972,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4903,7 +4983,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4913,6 +4993,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.82
 
 ### RegisterParameter: User Scope via XPath (href attribute) with Encryption
@@ -4920,7 +5001,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by XPath `//a[@id='linkId']` in the `User` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4932,7 +5013,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -4942,7 +5023,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@id='linkId']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -4953,7 +5034,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -4964,7 +5045,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -4974,6 +5055,7 @@ action_rule = {
     "onElement": "//a[@id='linkId']"
 }
 ```
+
 ### Example No.83
 
 ### RegisterParameter: User Scope via Id Locator (href attribute)
@@ -4981,7 +5063,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -4994,7 +5076,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5005,7 +5087,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5017,7 +5099,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5029,7 +5111,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5040,6 +5122,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.84
 
 ### RegisterParameter: User Scope via Id Locator (href attribute) with Encryption
@@ -5047,7 +5130,7 @@ action_rule = {
 Register a parameter named `parameterName` from the href attribute of the element identified by Id `linkId` in the `User` scope and apply encryption using the key `myEncryptionKey`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5060,7 +5143,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5071,7 +5154,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("linkId");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5083,7 +5166,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5095,7 +5178,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5106,6 +5189,7 @@ action_rule = {
     "onElement": "linkId"
 }
 ```
+
 ### Example No.85
 
 ### RegisterParameter: Application Scope via CSS Selector with Regex
@@ -5114,7 +5198,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5127,7 +5211,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5138,7 +5222,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5150,7 +5234,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5162,7 +5246,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5173,6 +5257,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.86
 
 ### RegisterParameter: Application Scope via CSS Selector with Regex and Encryption
@@ -5181,7 +5266,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5194,7 +5279,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5205,7 +5290,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5217,7 +5302,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5229,7 +5314,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5240,6 +5325,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.87
 
 ### RegisterParameter: Application Scope via XPath with Regex
@@ -5248,7 +5334,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5260,7 +5346,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5270,7 +5356,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5281,7 +5367,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5292,7 +5378,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5302,6 +5388,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.88
 
 ### RegisterParameter: Application Scope via XPath with Regex and Encryption
@@ -5310,7 +5397,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5322,7 +5409,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5332,7 +5419,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5343,7 +5430,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5354,7 +5441,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5364,6 +5451,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.89
 
 ### RegisterParameter: Application Scope via Id Locator with Regex
@@ -5372,7 +5460,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5385,7 +5473,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5396,7 +5484,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5408,7 +5496,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5420,7 +5508,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5431,6 +5519,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.90
 
 ### RegisterParameter: Application Scope via Id Locator with Regex and Encryption
@@ -5439,7 +5528,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5452,7 +5541,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5463,7 +5552,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5475,7 +5564,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5487,7 +5576,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5498,6 +5587,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.91
 
 ### RegisterParameter: Application Scope with Development Environment via CSS Selector with Regex
@@ -5506,7 +5596,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5519,7 +5609,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5530,7 +5620,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5542,7 +5632,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5554,7 +5644,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5565,6 +5655,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.92
 
 ### RegisterParameter: Application Scope with Development Environment via CSS Selector with Regex and Encryption
@@ -5573,7 +5664,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5586,7 +5677,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5597,7 +5688,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5609,7 +5700,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5621,7 +5712,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5632,6 +5723,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.93
 
 ### RegisterParameter: Application Scope with Development Environment via XPath with Regex
@@ -5640,7 +5732,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5652,7 +5744,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5662,7 +5754,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5673,7 +5765,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5684,7 +5776,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5694,6 +5786,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.94
 
 ### RegisterParameter: Application Scope with Development Environment via XPath with Regex and Encryption
@@ -5702,7 +5795,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5714,7 +5807,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5724,7 +5817,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5735,7 +5828,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5746,7 +5839,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5756,6 +5849,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.95
 
 ### RegisterParameter: Application Scope with Development Environment via Id Locator with Regex
@@ -5764,7 +5858,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5777,7 +5871,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5788,7 +5882,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5800,7 +5894,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5812,7 +5906,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5823,6 +5917,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.96
 
 ### RegisterParameter: Application Scope with Development Environment via Id Locator with Regex and Encryption
@@ -5831,7 +5926,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Application scope for the Development environment for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5844,7 +5939,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5855,7 +5950,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5867,7 +5962,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5879,7 +5974,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5890,6 +5985,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.97
 
 ### RegisterParameter: Machine Scope via CSS Selector with Regex
@@ -5898,7 +5994,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5911,7 +6007,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5922,7 +6018,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -5934,7 +6030,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -5946,7 +6042,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -5957,6 +6053,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.98
 
 ### RegisterParameter: Machine Scope via CSS Selector with Regex and Encryption
@@ -5965,7 +6062,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -5978,7 +6075,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -5989,7 +6086,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6001,7 +6098,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6013,7 +6110,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6024,6 +6121,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.99
 
 ### RegisterParameter: Machine Scope via XPath with Regex
@@ -6032,7 +6130,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6044,7 +6142,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6054,7 +6152,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6065,7 +6163,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6076,7 +6174,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6086,6 +6184,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.100
 
 ### RegisterParameter: Machine Scope via XPath with Regex and Encryption
@@ -6094,7 +6193,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6106,7 +6205,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6116,7 +6215,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6127,7 +6226,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6138,7 +6237,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6148,6 +6247,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.101
 
 ### RegisterParameter: Machine Scope via Id Locator with Regex
@@ -6156,7 +6256,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6169,7 +6269,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6180,7 +6280,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6192,7 +6292,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6204,7 +6304,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6215,6 +6315,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.102
 
 ### RegisterParameter: Machine Scope via Id Locator with Regex and Encryption
@@ -6223,7 +6324,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Machine scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6236,7 +6337,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6247,7 +6348,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6259,7 +6360,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6271,7 +6372,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6282,6 +6383,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.103
 
 ### RegisterParameter: Process Scope via CSS Selector with Regex
@@ -6290,7 +6392,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6303,7 +6405,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6314,7 +6416,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6326,7 +6428,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6338,7 +6440,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6349,6 +6451,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.104
 
 ### RegisterParameter: Process Scope via CSS Selector with Regex and Encryption
@@ -6357,7 +6460,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6370,7 +6473,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6381,7 +6484,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6393,7 +6496,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6405,7 +6508,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6416,6 +6519,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.105
 
 ### RegisterParameter: Process Scope via XPath with Regex
@@ -6424,7 +6528,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6436,7 +6540,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6446,7 +6550,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6457,7 +6561,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6468,7 +6572,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6478,6 +6582,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.106
 
 ### RegisterParameter: Process Scope via XPath with Regex and Encryption
@@ -6486,7 +6591,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6498,7 +6603,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6508,7 +6613,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6519,7 +6624,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6530,7 +6635,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6540,6 +6645,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.107
 
 ### RegisterParameter: Process Scope via Id Locator with Regex
@@ -6548,7 +6654,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6561,7 +6667,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6572,7 +6678,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6584,7 +6690,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6596,7 +6702,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6607,6 +6713,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.108
 
 ### RegisterParameter: Process Scope via Id Locator with Regex and Encryption
@@ -6615,7 +6722,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Process scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6628,7 +6735,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6639,7 +6746,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6651,7 +6758,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6663,7 +6770,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6674,6 +6781,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.109
 
 ### RegisterParameter: Session Scope via CSS Selector with Regex
@@ -6682,7 +6790,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6695,7 +6803,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6706,7 +6814,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6718,7 +6826,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6730,7 +6838,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6741,6 +6849,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.110
 
 ### RegisterParameter: Session Scope via CSS Selector with Regex and Encryption
@@ -6749,7 +6858,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6762,7 +6871,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6773,7 +6882,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6785,7 +6894,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6797,7 +6906,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6808,6 +6917,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.111
 
 ### RegisterParameter: Session Scope via XPath with Regex
@@ -6816,7 +6926,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6828,7 +6938,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6838,7 +6948,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6849,7 +6959,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6860,7 +6970,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6870,6 +6980,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.112
 
 ### RegisterParameter: Session Scope via XPath with Regex and Encryption
@@ -6878,7 +6989,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6890,7 +7001,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6900,7 +7011,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6911,7 +7022,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6922,7 +7033,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6932,6 +7043,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.113
 
 ### RegisterParameter: Session Scope via Id Locator with Regex
@@ -6940,7 +7052,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -6953,7 +7065,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -6964,7 +7076,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -6976,7 +7088,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -6988,7 +7100,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -6999,6 +7111,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.114
 
 ### RegisterParameter: Session Scope via Id Locator with Regex and Encryption
@@ -7007,7 +7120,7 @@ Register a parameter named `parameterName` from the inner text of the element id
 A regular expression `\d+` is applied to the inner text to extract matching digits into a capture group.
 After execution, the parameter is available in the Session scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7020,7 +7133,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7031,7 +7144,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7043,7 +7156,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7055,7 +7168,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7066,6 +7179,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.115
 
 ### RegisterParameter: User Scope via CSS Selector with Regex
@@ -7073,7 +7187,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope using the regex `\d+` to extract digits.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7086,7 +7200,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7097,7 +7211,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7109,7 +7223,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7121,7 +7235,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7132,6 +7246,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.116
 
 ### RegisterParameter: User Scope via CSS Selector with Regex and Encryption
@@ -7139,7 +7254,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by CSS selector `#elementId` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\d+`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7152,7 +7267,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7163,7 +7278,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7175,7 +7290,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7187,7 +7302,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7198,6 +7313,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.117
 
 ### RegisterParameter: User Scope via XPath with Regex
@@ -7205,7 +7321,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope using the regex `\d+` to extract digits.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7217,7 +7333,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7227,7 +7343,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7238,7 +7354,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7249,7 +7365,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7259,6 +7375,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.118
 
 ### RegisterParameter: User Scope via XPath with Regex and Encryption
@@ -7266,7 +7383,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by XPath `//a[@id='elementId']` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\d+`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7278,7 +7395,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7288,7 +7405,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7299,7 +7416,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7310,7 +7427,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7320,6 +7437,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.119
 
 ### RegisterParameter: User Scope via Id Locator with Regex
@@ -7327,7 +7445,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope using the regex `\d+` to extract digits.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7340,7 +7458,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7351,7 +7469,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7363,7 +7481,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7375,7 +7493,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7386,6 +7504,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.120
 
 ### RegisterParameter: User Scope via Id Locator with Regex and Encryption
@@ -7393,7 +7512,7 @@ action_rule = {
 Register a parameter named `parameterName` from the inner text of the element identified by Id `elementId` in the `User` scope, apply encryption using the key `myEncryptionKey`, and extract digits using the regex `\d+`.
 After execution, the parameter is available in the User scope for subsequent actions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -7406,7 +7525,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -7417,7 +7536,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -7429,7 +7548,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -7441,7 +7560,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -7458,7 +7577,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -7472,7 +7591,7 @@ A clear name makes it easier to find and reuse the saved data later.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7486,7 +7605,7 @@ A precise choice helps capture the correct data.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7500,7 +7619,7 @@ Choosing the right attribute ensures the correct data is captured.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7514,7 +7633,7 @@ Pointing to the right element ensures the correct information is used.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7530,7 +7649,7 @@ The result is then turned into Base64 so it can be stored safely.
 ### Name (Name)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7544,7 +7663,7 @@ Fixed text or expressions enable dynamic label creation.
 ### Scope (Scope)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7559,7 +7678,7 @@ Automatic updates ensure the setup stays current without manual changes.
 ### Environment (Environment)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | SystemParameters  |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7573,7 +7692,7 @@ Separate environments prevent test values from mixing with live data.
 ### Value (Value)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -7587,7 +7706,7 @@ Correct values ensure scripts can reuse data accurately.
 ### Encryption Key (EncryptionKey)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

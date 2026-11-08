@@ -1,6 +1,6 @@
 # Invoke Context Click (InvokeContextClick)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -16,7 +16,7 @@ For standard left-click interactions, use InvokeClick instead.
 ### Key Features and Functionality
 
 | Feature             | Description                                                                                     |
-|---------------------|-------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Context Click       | Performs a right-click on the target element using the WebDriver Actions API.                   |
 | Auto Scroll         | Calls MoveToElement before clicking to scroll the element into view and ensure interactability. |
 | Positional Click    | Right-clicks at the current mouse position when no element locator is provided.                 |
@@ -25,7 +25,7 @@ For standard left-click interactions, use InvokeClick instead.
 ### Usages in RPA
 
 | Use Case                 | Description                                                                                            |
-|--------------------------|--------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Context Menu Access      | Right-click an element to open its context menu and select an option as part of an automated workflow. |
 | Secondary Action Trigger | Trigger secondary actions exposed only through right-click menus, such as copy, paste, or inspect.     |
 | Positional Right-Click   | Right-click at a scripted mouse position when no stable element reference is available.                |
@@ -33,7 +33,7 @@ For standard left-click interactions, use InvokeClick instead.
 ### Usages in Automation Testing
 
 | Use Case                | Description                                                                                                |
-|-------------------------|------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Context Menu Testing    | Verify that right-clicking an element opens the expected context menu with the correct options.            |
 | UI Interaction Testing  | Confirm that right-click–sensitive elements respond correctly to user interaction.                         |
 | Viewport Scroll Testing | Validate that MoveToElement correctly scrolls off-screen elements into view before the right-click occurs. |
@@ -48,7 +48,7 @@ For standard left-click interactions, use InvokeClick instead.
 Locates the element matching `#RightClickButton` using the CssSelector strategy, moves the mouse to it, and performs a right-click.
 Use this form for any straightforward context-click interaction on a known stable element to open its context menu.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -59,7 +59,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#RightClickButton");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -78,7 +78,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -88,7 +88,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -97,6 +97,7 @@ action_rule = {
     "onElement": "#RightClickButton"
 }
 ```
+
 ### Example No.2
 
 ### Context-click at the current mouse position
@@ -104,7 +105,7 @@ action_rule = {
 Performs a right-click at the last known mouse cursor position without locating or targeting any element.
 Use this form when the mouse position has been set by a preceding move action and no element reference is needed.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -113,14 +114,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeContextClick");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -128,7 +129,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -136,7 +137,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -149,7 +150,7 @@ action_rule = {
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -164,7 +165,7 @@ Locator is only evaluated when OnElement is also provided; it has no effect in p
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -178,6 +179,7 @@ When absent the action performs a context-click at the current mouse position in
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#actions](https://www.w3.org/TR/webdriver/#actions)

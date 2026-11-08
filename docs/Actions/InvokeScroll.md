@@ -1,6 +1,6 @@
 # Invoke Scroll (InvokeScroll)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~19 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This makes it the primary way to programmatically position the viewport or scrol
 ### Key Features and Functionality
 
 | Feature           | Description                                                                                                           |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Page Scroll       | Scrolls the entire page to the specified Left and Top pixel offsets using `window.scroll()`.                          |
 | Element Scroll    | Scrolls within a specific overflow element using `element.scroll()`, targeting it via any supported locator strategy. |
 | Behavior Control  | Accepts `auto`, `instant`, and `smooth` scroll behaviors to control animation.                                        |
@@ -25,7 +25,7 @@ This makes it the primary way to programmatically position the viewport or scrol
 ### Usages in RPA
 
 | Use Case             | Description                                                                                                    |
-|----------------------|----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Data Extraction      | Scroll through paginated tables or lazy-loaded lists to expose additional rows before data collection.         |
 | Form Navigation      | Scroll to a specific section of a long form to bring off-screen fields into view before interaction.           |
 | Overflow Navigation  | Scroll within a fixed-height panel, textarea, or scrollable container to reach content below the visible fold. |
@@ -34,7 +34,7 @@ This makes it the primary way to programmatically position the viewport or scrol
 ### Usages in Automation Testing
 
 | Use Case                   | Description                                                                                                          |
-|----------------------------|----------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Infinite Scroll Testing    | Scroll to the bottom of the page repeatedly to trigger and validate lazy-loaded or infinite-scroll content.          |
 | Responsive Design Testing  | Scroll to specific offsets on different viewport sizes to verify element visibility and layout at each position.     |
 | Overflow Element Testing   | Scroll within a container to verify that content below the fold is rendered and accessible to assertions.            |
@@ -50,7 +50,7 @@ This makes it the primary way to programmatically position the viewport or scrol
 Scrolls the entire page so the top of the viewport is 500 pixels from the top of the document.
 Use this form to bring off-screen content into view or to position the viewport at a known vertical coordinate.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -60,7 +60,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Top:500}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -77,7 +77,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -86,7 +86,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -94,6 +94,7 @@ action_rule = {
     "argument": "{{$ --Top:500}}"
 }
 ```
+
 ### Example No.2
 
 ### Scroll the page on both axes with smooth animation
@@ -101,7 +102,7 @@ action_rule = {
 Scrolls the entire page to 300 pixels from the top and 100 pixels from the left using a smooth animated transition.
 Use this form when the scroll direction, offset, and animation style all need explicit control.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -111,7 +112,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -119,7 +120,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Top:300 --Left:100 --Behavior:smooth}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -128,7 +129,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -137,7 +138,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -145,6 +146,7 @@ action_rule = {
     "argument": "{{$ --Top:300 --Left:100 --Behavior:smooth}}"
 }
 ```
+
 ### Example No.3
 
 ### Scroll within a specific overflow element vertically
@@ -152,7 +154,7 @@ action_rule = {
 Locates the element matching `#ScrollablePanel` using the CssSelector strategy and scrolls its internal content 150 pixels from the top.
 Use this form when the scroll target is an overflow container rather than the full page.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -164,7 +166,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -174,7 +176,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#ScrollablePanel");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -185,7 +187,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -196,7 +198,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -206,6 +208,7 @@ action_rule = {
     "onElement": "#ScrollablePanel"
 }
 ```
+
 ### Example No.4
 
 ### Scroll within a specific overflow element on both axes with smooth animation
@@ -213,7 +216,7 @@ action_rule = {
 Locates the element matching `#TextAreaEnabled` using the CssSelector strategy and scrolls its content 10 pixels from the top and 10 pixels from the left with smooth animation.
 Use this form when element-level scrolling must control both axes and the visual animation style simultaneously.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -225,7 +228,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -235,7 +238,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#TextAreaEnabled");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -246,7 +249,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -257,7 +260,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -273,7 +276,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -287,7 +290,7 @@ When neither Left nor Top is supplied via Argument the action takes no effect.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -302,7 +305,7 @@ Locator is only evaluated when OnElement is also provided.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -318,7 +321,7 @@ When absent the action scrolls the entire page via `window.scroll()` instead of 
 ### Behavior (Behavior)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -334,9 +337,11 @@ When absent the value defaults to `auto`.
 ##### Auto
 
 Scroll behavior is determined by the computed value of the [scroll-behavior](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior) CSS property on the target.
+
 ##### Instant
 
 Scrolling happens instantly in a single jump with no animation.
+
 ##### Smooth
 
 Scrolling animates smoothly to the target offset.
@@ -344,7 +349,7 @@ Scrolling animates smoothly to the target offset.
 ### Left (Left)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -357,7 +362,7 @@ When absent the horizontal position is not changed.
 ### Top (Top)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -371,6 +376,7 @@ When absent the vertical position is not changed.
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#execute-script](https://www.w3.org/TR/webdriver/#execute-script)

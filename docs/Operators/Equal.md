@@ -1,6 +1,6 @@
 # Equal (Equal)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~10 min · Operator Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -21,21 +21,21 @@ This capability is essential for building reliable conditional logic.
 ### Key Features and Functionality
 
 | Feature                   | Description                                                                                        |
-|---------------------------|----------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Case-Sensitive Comparison | Performs a case-sensitive comparison of two strings to check for exact equality.                   |
 | Integration               | Can be used within conditional expressions by other plugins to enable flexible workflow decisions. |
 
 ### Usages in RPA
 
 | Use Case          | Description                                                                           |
-|-------------------|---------------------------------------------------------------------------------------|
+| --- | --- |
 | String Comparison | Validate that two string values are exactly the same to guide workflow steps.         |
 | Conditional Logic | Use the comparison result to control the flow of automation based on string equality. |
 
 ### Usages in Automation Testing
 
 | Use Case           | Description                                                                          |
-|--------------------|--------------------------------------------------------------------------------------|
+| --- | --- |
 | Validation         | Compare expected and actual string values to assert correctness in tests.            |
 | Dynamic Conditions | Create test conditions based on string comparisons for more flexible test scenarios. |
 
@@ -48,7 +48,7 @@ This capability is essential for building reliable conditional logic.
 Uses the `Equal` plugin to determine if two strings are exactly equal, such as comparing an actual result with an expected value.
 The plugin checks if the values of 'LeftHand' and 'RightHand' match, using a case-sensitive comparison. This comparison is valid only when used inside a caller plugin that supports operator logic.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --LeftHand:ActualResult --RightHand:ExpectedValue}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -75,7 +75,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -84,7 +84,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -98,7 +98,7 @@ action_rule = {
 ### Left Hand (LeftHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -113,7 +113,7 @@ Both strings must match exactly for the result to be true.
 ### Right Hand (RightHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

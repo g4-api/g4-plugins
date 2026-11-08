@@ -1,6 +1,6 @@
 # Set Window Rectangle (SetWindowRectangle)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~22 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ Omitted parameters are preserved from the current window geometry, allowing size
 ### Key Features and Functionality
 
 | Feature               | Description                                                                                                        |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Precise Resizing      | Sets window height and width to exact pixel values using `--Height` and `--Width`.                                 |
 | Precise Repositioning | Sets the window's screen position to exact coordinates using `--X` (left edge) and `--Y` (top edge).               |
 | Partial Apply         | Omitted parameters fall back to the current window value — one call can change only size, only position, or both.  |
@@ -23,7 +23,7 @@ Omitted parameters are preserved from the current window geometry, allowing size
 ### Usages in RPA
 
 | Use Case               | Description                                                                                                  |
-|------------------------|--------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Screen Layout Control  | Position and size the browser window to avoid overlap with other application windows during RPA workflows.   |
 | Multi-Window Placement | Tile or stack browser windows at known coordinates for multi-window automation scenarios.                    |
 | Pre-Task Normalization | Establish a known window geometry before executing form-fill or scraping steps that rely on full visibility. |
@@ -31,7 +31,7 @@ Omitted parameters are preserved from the current window geometry, allowing size
 ### Usages in Automation Testing
 
 | Use Case                  | Description                                                                                                         |
-|---------------------------|---------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Responsive Design Testing | Resize the window to standard breakpoints (e.g. 1024×768, 1920×1080) to verify responsive layout rules.             |
 | Layout Regression Testing | Enforce a fixed window size before taking screenshots or running visual comparisons.                                |
 | Viewport Boundary Tests   | Position the window at edge coordinates to verify element visibility and scroll behaviour near viewport boundaries. |
@@ -46,7 +46,7 @@ Omitted parameters are preserved from the current window geometry, allowing size
 Resizes the browser window to 1024 × 768 pixels and moves it to screen coordinates (100, 100).
 All four parameters are provided, making this the full-rect form that controls both size and position simultaneously.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -64,7 +64,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Height:768 --Width:1024 --X:100 --Y:100}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -82,7 +82,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,6 +90,7 @@ action_rule = {
     "argument": "{{$ --Height:768 --Width:1024 --X:100 --Y:100}}"
 }
 ```
+
 ### Example No.2
 
 ### Resize the window without changing its position
@@ -97,7 +98,7 @@ action_rule = {
 Resizes the browser window to 800 × 600 pixels while keeping its current screen position.
 Use this form when only the window size needs to change and the position should remain where it is.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -107,7 +108,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Height:600 --Width:800}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -124,7 +125,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -133,7 +134,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -141,6 +142,7 @@ action_rule = {
     "argument": "{{$ --Height:600 --Width:800}}"
 }
 ```
+
 ### Example No.3
 
 ### Reposition the window without changing its size
@@ -148,7 +150,7 @@ action_rule = {
 Moves the browser window to screen coordinates (200, 150) while keeping its current width and height.
 Use this form when only the window position needs to change and the size should remain as-is.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -158,7 +160,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -166,7 +168,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --X:200 --Y:150}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -175,7 +177,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -184,7 +186,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -192,6 +194,7 @@ action_rule = {
     "argument": "{{$ --X:200 --Y:150}}"
 }
 ```
+
 ### Example No.4
 
 ### Set window width and horizontal position together
@@ -199,7 +202,7 @@ action_rule = {
 Sets the browser window width to 1200 pixels and moves its left edge to X coordinate 50, while leaving the height and Y position unchanged.
 Use this form to adjust only the horizontal geometry — width and X — in a single call.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -209,7 +212,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -217,7 +220,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Width:1200 --X:50}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -226,7 +229,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -235,7 +238,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -243,6 +246,7 @@ action_rule = {
     "argument": "{{$ --Width:1200 --X:50}}"
 }
 ```
+
 ### Example No.5
 
 ### Set window height and vertical position together
@@ -250,7 +254,7 @@ action_rule = {
 Sets the browser window height to 700 pixels and moves its top edge to Y coordinate 300, while leaving the width and X position unchanged.
 Use this form to adjust only the vertical geometry — height and Y — in a single call.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -260,7 +264,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -268,7 +272,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Height:700 --Y:300}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -277,7 +281,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -286,7 +290,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -300,7 +304,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -316,7 +320,7 @@ Any combination of the four parameters is valid; omitted parameters fall back to
 ### Height (Height)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -329,7 +333,7 @@ When absent, the current window height is read from the driver and preserved unc
 ### Width (Width)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -342,7 +346,7 @@ When absent, the current window width is read from the driver and preserved unch
 ### X (X)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -355,7 +359,7 @@ When absent, the current window X position is read from the driver and preserved
 ### Y (Y)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -369,6 +373,7 @@ When absent, the current window Y position is read from the driver and preserved
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#set-window-rect](https://www.w3.org/TR/webdriver/#set-window-rect)

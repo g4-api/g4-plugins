@@ -1,6 +1,6 @@
 # Element Count (ElementCount)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~30 min · Assertion Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,13 +8,13 @@
 
 ### Purpose
 
-The `ElementCount` plugin is designed to validate the number of elements matching a specified locator within automation scripts. 
+The `ElementCount` plugin is designed to validate the number of elements matching a specified locator within automation scripts.
 It provides a robust mechanism to assert that the number of elements meets specific conditions, making it essential for scenarios where the presence of multiple elements needs to be verified.
 
 ### Key Features and Functionality
 
 | Feature                    | Description                                                                                                |
-|----------------------------|------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Count Validation           | Validates that the number of elements matching the locator meets the expected condition.                   |
 | Flexible Assertions        | Supports a range of operators, including equality, inequality, and numeric comparisons.                    |
 | Regular Expression Support | Applies regular expressions to the count value before performing assertions, enabling complex validations. |
@@ -22,14 +22,14 @@ It provides a robust mechanism to assert that the number of elements meets speci
 ### Usages in RPA
 
 | Usage                        | Description                                                                                                                      |
-|------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Presence Validation          | Ensures that a specified number of elements exist, crucial for verifying the presence of items like list entries or form fields. |
 | Dynamic Content Verification | Validates that dynamically generated elements match the expected count, preventing errors in automated workflows.                |
 
 ### Usages in Automation Testing
 
 | Usage                        | Description                                                                                                                            |
-|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Consistency Verification  | Ensures that the expected number of UI elements are present across different environments and test runs.                               |
 | Regression Testing           | Validates that changes to the application do not affect the expected count of elements, ensuring consistency in user interfaces.       |
 | Performance Data Validation  | Checks that the number of elements loaded on the page matches the expected performance metrics, ensuring optimal application behavior. |
@@ -38,10 +38,10 @@ It provides a robust mechanism to assert that the number of elements meets speci
 
 ### Example No.1
 
-Assert that the count of elements matching the locator `//*[@class='item']` equals `5`. 
+Assert that the count of elements matching the locator `//*[@class='item']` equals `5`.
 This is useful for scenarios where the script needs to ensure that exactly 5 elements with the class `item` are present on the page.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -52,7 +52,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@class='item']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -71,7 +71,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -81,7 +81,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,12 +90,13 @@ action_rule = {
     "onElement": "//*[@class='item']"
 }
 ```
+
 ### Example No.2
 
-Ensure that the count of elements matching the locator `//*[@class='active-item']` is greater than `10`. 
+Ensure that the count of elements matching the locator `//*[@class='active-item']` is greater than `10`.
 This assertion checks if the number of active items on the page exceeds 10, confirming the correct dynamic loading of content.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -106,7 +107,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@class='active-item']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -125,7 +126,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -135,7 +136,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -144,12 +145,13 @@ action_rule = {
     "onElement": "//*[@class='active-item']"
 }
 ```
+
 ### Example No.3
 
-Perform an assertion to ensure that the count of elements matching the locator `//*[@class='error']` is less than or equal to `3`. 
+Perform an assertion to ensure that the count of elements matching the locator `//*[@class='error']` is less than or equal to `3`.
 This is useful for scenarios where the script needs to confirm that the number of error messages displayed does not exceed a specific threshold.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -160,7 +162,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -169,7 +171,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@class='error']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -179,7 +181,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -189,7 +191,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -198,12 +200,13 @@ action_rule = {
     "onElement": "//*[@class='error']"
 }
 ```
+
 ### Example No.4
 
-Assert that the count of elements matching the CSS selector `.list-item`, after applying the regular expression '\d+', is not equal to `0`. 
+Assert that the count of elements matching the CSS selector `.list-item`, after applying the regular expression '\d+', is not equal to `0`.
 This validation ensures that the list contains items, preventing scenarios where the list might be empty unexpectedly.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -216,7 +219,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -227,7 +230,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -239,7 +242,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -251,7 +254,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -262,12 +265,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.5
 
-Perform an assertion to ensure that the count of elements matching the locator `//*[@data-status='completed']` is greater than or equal to `5`. 
+Perform an assertion to ensure that the count of elements matching the locator `//*[@data-status='completed']` is greater than or equal to `5`.
 This is useful for validating that the number of completed items on the page meets or exceeds a specific value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -278,7 +282,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -287,7 +291,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@data-status='completed']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -297,7 +301,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -307,7 +311,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -316,12 +320,13 @@ action_rule = {
     "onElement": "//*[@data-status='completed']"
 }
 ```
+
 ### Example No.6
 
-Assert that the count of elements matching the locator `//*[@class='entry']` is lower than `20`. 
+Assert that the count of elements matching the locator `//*[@class='entry']` is lower than `20`.
 This validation ensures that the number of entries displayed on the page does not exceed a certain limit, confirming the correct pagination or loading behavior.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -332,7 +337,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -341,7 +346,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@class='entry']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -351,7 +356,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -361,7 +366,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -370,11 +375,12 @@ action_rule = {
     "onElement": "//*[@class='entry']"
 }
 ```
+
 ### Example No.7
 
 Check that the count of elements matching the locator `//*[@id='section']//div` matches the regular expression '\d+', ensuring that the count is purely numeric.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -385,7 +391,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -394,7 +400,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='section']//div");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -404,7 +410,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -414,7 +420,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -423,12 +429,13 @@ action_rule = {
     "onElement": "//*[@id='section']//div"
 }
 ```
+
 ### Example No.8
 
-Assert that the count of elements matching the locator `//*[@class='active-item']` is not equal to `0`. 
+Assert that the count of elements matching the locator `//*[@class='active-item']` is not equal to `0`.
 This validation is essential for ensuring that at least one active item is present on the page.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -439,7 +446,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -448,7 +455,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@class='active-item']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -458,7 +465,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -468,7 +475,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -483,20 +490,20 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Specifies the condition under which the assertion will pass or fail. 
+Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the element count.
 
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -508,7 +515,7 @@ Specifies the locator strategy used to identify the target elements on the web p
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -520,14 +527,14 @@ Specifies the web elements to be counted. This can be defined using a locator st
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Specifies a regular expression to be applied to the element count before performing the assertion. 
+Specifies a regular expression to be applied to the element count before performing the assertion.
 This allows for more flexible validation of the count values that may require pattern matching.
 
 ## Parameters
@@ -535,7 +542,7 @@ This allows for more flexible validation of the count values that may require pa
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -547,7 +554,7 @@ Specifies the type of comparison or operation to be performed when evaluating th
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -559,6 +566,7 @@ Specifies the expected count value that the elements matching the locator should
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#find-elements](https://www.w3.org/TR/webdriver/#find-elements)

@@ -1,6 +1,6 @@
 # Write File (WriteFile)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ Files with the same name at the target path are overwritten.
 ### Key Features and Functionality
 
 | Feature                  | Description                                                                                  |
-|--------------------------|----------------------------------------------------------------------------------------------|
+| --- | --- |
 | Absolute Paths           | Requires a fully qualified path unless the `Relative` switch is present.                     |
 | Relative Paths           | Resolves the path from the process working directory when `Relative` is present.             |
 | Directory Creation       | Creates missing parent directories with `Directory.CreateDirectory`.                         |
@@ -41,7 +41,7 @@ Files with the same name at the target path are overwritten.
 Bind `Path` and `Content` through the parameter expression to write UTF-8 text.
 WriteFile creates missing parent directories and overwrites an existing file at the target path.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -51,7 +51,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -59,7 +59,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Path:C:\Automation\output.txt --Content:Hello from G4}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -68,7 +68,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -77,7 +77,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -85,6 +85,7 @@ action_rule = {
     "argument": "{{$ --Path:C:\Automation\output.txt --Content:Hello from G4}}"
 }
 ```
+
 ### Example No.2
 
 ### Write text to a relative path
@@ -92,7 +93,7 @@ action_rule = {
 Enable `Relative` to resolve `Path` from the process working directory.
 WriteFile normalizes the resulting path and creates missing parent directories.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -102,7 +103,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -110,7 +111,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Path:..\..\docs\output.txt --Content:Hello from G4 --Relative}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -119,7 +120,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -128,7 +129,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -136,6 +137,7 @@ action_rule = {
     "argument": "{{$ --Path:..\..\docs\output.txt --Content:Hello from G4 --Relative}}"
 }
 ```
+
 ### Example No.3
 
 ### Decode Base64 content before writing
@@ -143,7 +145,7 @@ action_rule = {
 Enable `Base64` to decode `Content` with `ConvertFromBase64()`.
 WriteFile writes the decoded value as UTF-8 text.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -153,7 +155,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -161,7 +163,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Path:C:\Automation\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -170,7 +172,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -179,7 +181,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -187,6 +189,7 @@ action_rule = {
     "argument": "{{$ --Path:C:\Automation\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
 }
 ```
+
 ### Example No.4
 
 ### Encrypt content before writing
@@ -194,7 +197,7 @@ action_rule = {
 Provide `EncryptionKey` to encrypt `Content` before writing it.
 WriteFile stores the encryption result directly without another Base64 conversion.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -204,7 +207,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -212,7 +215,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Path:C:\Automation\secret.txt --Content:Sensitive text --EncryptionKey:g4}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -221,7 +224,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -230,7 +233,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -238,6 +241,7 @@ action_rule = {
     "argument": "{{$ --Path:C:\Automation\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
 }
 ```
+
 ### Example No.5
 
 ### Decode and encrypt content before writing
@@ -245,7 +249,7 @@ action_rule = {
 Enable `Base64` and provide `EncryptionKey` to process `Content` in the required order.
 WriteFile decodes the value, encrypts the decoded text, and writes the encryption result directly.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -255,7 +259,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -263,7 +267,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Path:C:\Automation\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -272,7 +276,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -281,7 +285,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -295,7 +299,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -309,7 +313,7 @@ Provides the `Path`, `Content`, `Relative`, `Base64`, and `EncryptionKey` parame
 ### Path (Path)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -322,7 +326,7 @@ The path must be fully qualified unless `Relative` is present.
 ### Content (Content)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -335,7 +339,7 @@ The value is decoded first when `Base64` is present and then encrypted when `Enc
 ### Relative (Relative)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -347,7 +351,7 @@ Treats `Path` as relative to the process working directory when present.
 ### Base64 (Base64)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -359,7 +363,7 @@ Decodes `Content` with `ConvertFromBase64()` before any encryption and file writ
 ### Encryption Key (EncryptionKey)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

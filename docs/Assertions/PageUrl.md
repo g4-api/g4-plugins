@@ -1,6 +1,6 @@
 # Page Url (PageUrl)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~27 min · Assertion Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,13 +8,13 @@
 
 ### Purpose
 
-The `PageUrl` plugin is designed to validate the URL of the current web page against specific conditions. 
+The `PageUrl` plugin is designed to validate the URL of the current web page against specific conditions.
 It provides a robust mechanism to assert that the page URL meets expected conditions, such as matching a particular pattern, containing specific segments, or being equal to a given URL.
 
 ### Key Features and Functionality
 
 | Feature                    | Description                                                                                                         |
-|----------------------------|---------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | URL Validation             | Validates the current page URL against expected conditions, supporting both exact matches and pattern-based checks. |
 | Regular Expression Support | Applies regular expressions to the URL before performing assertions, enabling complex validations.                  |
 | Flexible Assertions        | Supports a range of operators, including equality, inequality, and pattern matching, for versatile URL validation.  |
@@ -22,14 +22,14 @@ It provides a robust mechanism to assert that the page URL meets expected condit
 ### Usages in RPA
 
 | Usage                   | Description                                                                                                                    |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Navigation Verification | Ensures that the web page navigates to the correct URL during automation workflows, crucial for verifying link correctness.    |
 | Dynamic URL Validation  | Validates that the dynamically generated or redirected URLs match expected patterns, preventing errors in automated workflows. |
 
 ### Usages in Automation Testing
 
 | Usage                       | Description                                                                                                                                  |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | SEO Compliance Verification | Ensures that page URLs adhere to SEO best practices, including structure, format, and content relevance.                                     |
 | Localization Testing        | Verifies that localized versions of the website navigate to the correct URLs, ensuring consistent behavior across different regions.         |
 | Functional Testing          | Validates that user actions lead to the correct pages by checking the resulting URL, ensuring accuracy in navigation and link functionality. |
@@ -38,10 +38,10 @@ It provides a robust mechanism to assert that the page URL meets expected condit
 
 ### Example No.1
 
-Ensure that the extracted numeric value from the URL is greater than `100`. 
+Ensure that the extracted numeric value from the URL is greater than `100`.
 The regular expression `\d+` is used to extract numeric values from the URL, and the assertion checks that the extracted number exceeds `100`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -52,7 +52,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -71,7 +71,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -81,7 +81,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -90,12 +90,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.2
 
-Assert that the numeric value extracted from the URL is less than `50`. 
+Assert that the numeric value extracted from the URL is less than `50`.
 This validation ensures that the extracted numeric value, identified by the regular expression `\d+`, is below `50`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -106,7 +107,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -125,7 +126,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -135,7 +136,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -144,12 +145,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.3
 
-Validate that the numeric value extracted from the URL is greater than or equal to `200`. 
+Validate that the numeric value extracted from the URL is greater than or equal to `200`.
 The regular expression `\d+` extracts the numeric part of the URL, and the assertion confirms that it meets or exceeds `200`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -160,7 +162,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -169,7 +171,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -179,7 +181,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -189,7 +191,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -198,12 +200,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.4
 
-Check that the numeric value extracted from the URL is less than or equal to `300`. 
+Check that the numeric value extracted from the URL is less than or equal to `300`.
 The regular expression `\d+` is applied to extract the number, and the assertion verifies that it does not exceed `300`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -214,7 +217,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -223,7 +226,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -233,7 +236,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -243,7 +246,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -252,12 +255,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.5
 
-Assert that the current page URL is equal to 'https://example.com/home'. 
+Assert that the current page URL is equal to 'https://example.com/home'.
 This is useful for scenarios where the script needs to confirm that the user has navigated to the correct page.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -267,7 +271,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -275,7 +279,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Operator:Equal --Expected:https://example.com/home}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -284,7 +288,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -293,7 +297,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -301,12 +305,13 @@ action_rule = {
     "argument": "{{$ --Operator:Equal --Expected:https://example.com/home}}"
 }
 ```
+
 ### Example No.6
 
-Check that the current page URL does not match the pattern 'https://example.com/404'. 
+Check that the current page URL does not match the pattern 'https://example.com/404'.
 This ensures that the script has not navigated to an error page.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -316,7 +321,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -324,7 +329,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Operator:NotMatch --Expected:https://example.com/404}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -333,7 +338,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -342,7 +347,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -350,12 +355,13 @@ action_rule = {
     "argument": "{{$ --Operator:NotMatch --Expected:https://example.com/404}}"
 }
 ```
+
 ### Example No.7
 
-Ensure that the URL contains the text 'dashboard'. 
+Ensure that the URL contains the text 'dashboard'.
 This is useful for validating that the user is on the dashboard page or a related section.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -365,7 +371,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -373,7 +379,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Operator:Match --Expected:dashboard}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -382,7 +388,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -391,7 +397,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -405,14 +411,14 @@ action_rule = {
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Specifies a regular expression to be applied to the page URL before performing the assertion. 
+Specifies a regular expression to be applied to the page URL before performing the assertion.
 This allows for more flexible validation of URL patterns.
 
 ## Parameters
@@ -420,7 +426,7 @@ This allows for more flexible validation of URL patterns.
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -432,7 +438,7 @@ Specifies the type of comparison or operation to be performed when evaluating th
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -445,6 +451,7 @@ Specifies the expected URL or pattern that the current page URL is expected to m
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-current-url](https://www.w3.org/TR/webdriver/#get-current-url)

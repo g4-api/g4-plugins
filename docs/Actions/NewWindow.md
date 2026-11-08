@@ -1,6 +1,6 @@
 # New Window (NewWindow)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -16,7 +16,7 @@ The `Argument` property controls whether a `tab` (default) or a `window` is crea
 ### Key Features and Functionality
 
 | Feature          | Description                                                                                       |
-|------------------|---------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Native WebDriver | Uses `WebDriver.SwitchTo().NewWindow()` — the W3C standard command, not JavaScript execution.     |
 | Tab or Window    | Opens either a new tab or a new browser window depending on the `Argument` value.                 |
 | Default to Tab   | When `Argument` is absent or empty, a new tab is opened automatically.                            |
@@ -25,7 +25,7 @@ The `Argument` property controls whether a `tab` (default) or a `window` is crea
 ### Usages in RPA
 
 | Use Case               | Description                                                                                                                                |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Multi-Window Workflows | Open a new tab or window to begin a parallel navigation path while the original context remains reachable by handle.                       |
 | Context Isolation      | Isolate a new browsing context from the current page for unrelated data collection or independent interaction.                             |
 | Sequential Navigation  | After opening a new tab, switch back to the original handle to continue its workflow, then switch to the new handle when that step begins. |
@@ -33,7 +33,7 @@ The `Argument` property controls whether a `tab` (default) or a `window` is crea
 ### Usages in Automation Testing
 
 | Use Case             | Description                                                                                               |
-|----------------------|-----------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Multi-Window Testing | Verify that the application correctly handles workflows spanning multiple browser windows or tabs.        |
 | Handle Count Testing | Assert that the expected number of window handles is present after opening a new tab or window.           |
 | Window Type Testing  | Confirm that passing `tab` opens a tab and `window` opens a separate window, subject to browser behavior. |
@@ -48,7 +48,7 @@ Calls `WebDriver.SwitchTo().NewWindow('tab')` via the W3C new-window command to 
 No `Argument` is supplied so the action defaults to `tab`.
 The new tab handle is appended to `driver.WindowHandles` and immediately becomes `driver.CurrentWindowHandle`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,14 +57,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("NewWindow");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -72,7 +72,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,13 +80,14 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
     "pluginName": "NewWindow"
 }
 ```
+
 ### Example No.2
 
 ### Open a new browser window
@@ -95,7 +96,7 @@ Calls `WebDriver.SwitchTo().NewWindow('window')` via the W3C new-window command 
 The `Argument` is set to `window` to request a distinct window rather than a tab.
 The new window handle is appended to `driver.WindowHandles`, becomes `driver.CurrentWindowHandle`, and all previous handles remain accessible for switching.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -105,7 +106,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -113,7 +114,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("window");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -122,7 +123,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -131,7 +132,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -145,7 +146,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | tab               |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -162,6 +163,7 @@ The actual behavior for `window` may depend on browser settings — some browser
 ##### Tab
 
 Opens a new browser tab in the current WebDriver session.
+
 ##### Window
 
 Opens a new browser window separate from the current one.
@@ -170,6 +172,7 @@ Opens a new browser window separate from the current one.
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#new-window](https://www.w3.org/TR/webdriver/#new-window)

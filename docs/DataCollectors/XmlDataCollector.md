@@ -1,6 +1,6 @@
 # Xml Data Collector (XmlDataCollector)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · DataCollector Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,14 +13,14 @@ XmlDataCollector takes your extraction-rule outputs and saves them into an XML f
 ### Key Features and Functionality
 
 | Feature                | Description                                                                             |
-|------------------------|-----------------------------------------------------------------------------------------|
+| --- | --- |
 | Extraction Integration | Hooks into your extraction rules so every item becomes an XML element.                  |
 | Write Modes            | Supports streaming (`ForEntity=true`) or bulk writes (`ForEntity=false`) at end of run. |
 
 ### Usages in RPA
 
 | Use Case           | Description                                                                |
-|--------------------|----------------------------------------------------------------------------|
+| --- | --- |
 | Web Scraping       | Serializes scraped items into XML for legacy system ingestion or analysis. |
 | Real-Time Capture  | Streams each record as an XML element for live dashboards.                 |
 | Data Aggregation   | Collects outputs from multiple sources into a single XML document.         |
@@ -29,7 +29,7 @@ XmlDataCollector takes your extraction-rule outputs and saves them into an XML f
 ### Usages in Automation Testing
 
 | Use Case           | Description                                                           |
-|--------------------|-----------------------------------------------------------------------|
+| --- | --- |
 | Test Result Export | Records pass/fail status as XML elements for CI systems or reporting. |
 | Metrics Collection | Captures timing and resource usage in XML for downstream analysis.    |
 
@@ -44,12 +44,12 @@ This example demonstrates how to extract hotel locations from each `<div class='
 It uses `extractionScope: "Elements"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `true` for streaming writes.
 A regular expression `(?<=\\w+:).*` is applied to the text content to extract the substring following the label into a capture group.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "",
+    PluginName = "ExportData",
     OnElement = "//div[@class='hotel']",
     Rules = new[]
     {
@@ -63,11 +63,11 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("")
+    .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
         new ActionRuleModel()        
@@ -76,11 +76,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setRegularExpression("(?<=\\w+:).*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
-    pluginName: "",
+    pluginName: "ExportData",
     onElement: "//div[@class='hotel']",
     rules: [
         {
@@ -92,11 +92,11 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -108,11 +108,11 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -123,6 +123,7 @@ action_rule = {
     ]
 }
 ```
+
 ### Example No.2
 
 ### Bulk Hotel Locations to XML
@@ -132,12 +133,12 @@ This example demonstrates how to extract hotel locations from each `<div class='
 It uses `extractionScope: "Elements"` with XPath `//div[@class='hotel']`, applies a nested rule to the `<p>` elements starting with `Location:`, and sets `forEntity` to `false` for bulk buffering.
 A regular expression `(?<=\\w+:).*` is applied to the text content to extract the substring following the label into a capture group.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
 {
-    PluginName = "",
+    PluginName = "ExportData",
     OnElement = "//div[@class='hotel']",
     Rules = new[]
     {
@@ -151,11 +152,11 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
-    .setPluginName("")
+    .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
         new ActionRuleModel()        
@@ -164,11 +165,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
             .setRegularExpression("(?<=\\w+:).*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
-    pluginName: "",
+    pluginName: "ExportData",
     onElement: "//div[@class='hotel']",
     rules: [
         {
@@ -180,11 +181,11 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -196,11 +197,11 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
-    "pluginName": "",
+    "pluginName": "ExportData",
     "onElement": "//div[@class='hotel']",
     "rules": [
         {
@@ -217,7 +218,7 @@ action_rule = {
 ### For Entity (ForEntity)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -230,7 +231,7 @@ Set to “false” to wait until all records are ready before writing so you can
 ### Source (Source)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -243,7 +244,7 @@ If the file does not exist, a new one is created at that location so you do not 
 ### Type (Type)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

@@ -1,6 +1,6 @@
 # Close Browser (CloseBrowser)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ The action performs both a session quit and a resource disposal, guaranteeing a 
 ### Key Features and Functionality
 
 | Feature             | Description                                                                                    |
-|---------------------|------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Session Termination | Calls the WebDriver Quit method to end the active browser session.                             |
 | Resource Disposal   | Disposes of the WebDriver instance to release all associated system resources.                 |
 | Safe Teardown       | Uses a finally block to ensure disposal occurs even if the quit operation encounters an error. |
@@ -23,14 +23,14 @@ The action performs both a session quit and a resource disposal, guaranteeing a 
 ### Usages in RPA
 
 | Use Case            | Description                                                                                       |
-|---------------------|---------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Workflow Completion | Closing the browser at the end of a robotic process to free resources for the next scheduled run. |
 | Resource Management | Preventing orphaned browser processes from accumulating during long-running automation cycles.    |
 
 ### Usages in Automation Testing
 
 | Use Case           | Description                                                                                            |
-|--------------------|--------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Test Teardown      | Ensuring each test ends with a properly closed session to avoid state leakage between test cases.      |
 | Parallel Execution | Releasing browser instances promptly so that parallel test runners do not exhaust available resources. |
 
@@ -45,7 +45,7 @@ It calls Quit to end the session and Dispose to free all associated system resou
 No parameters or element targeting are required because the action operates on the current session directly.
 This is the standard teardown step placed at the end of an automation workflow or test execution to prevent orphaned browser processes.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -54,14 +54,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CloseBrowser");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -69,7 +69,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -77,13 +77,14 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
     "pluginName": "CloseBrowser"
 }
 ```
+
 ### Example No.2
 
 ### Terminate browser session using alias QuitSession
@@ -91,7 +92,7 @@ action_rule = {
 Closes the active browser session using the `QuitSession` alias, which resolves to the same implementation as `CloseBrowser`.
 Use either alias interchangeably — the underlying Quit and Dispose sequence is identical.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -100,14 +101,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("QuitSession");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -115,7 +116,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -123,7 +124,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -134,6 +135,7 @@ action_rule = {
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#delete-session](https://www.w3.org/TR/webdriver/#delete-session)

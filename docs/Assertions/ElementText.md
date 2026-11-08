@@ -1,6 +1,6 @@
 # Element Text (ElementText)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~33 min · Assertion Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,13 +8,13 @@
 
 ### Purpose
 
-The `ElementText` plugin is designed to validate the text content of web elements within automation scripts. 
+The `ElementText` plugin is designed to validate the text content of web elements within automation scripts.
 It provides a robust mechanism to assert that the text of an element meets specific conditions, making it essential for scenarios where accurate text content is critical to the workflow.
 
 ### Key Features and Functionality
 
 | Feature                    | Description                                                                                                                    |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Text Validation            | Validates that the text content of an element matches expected conditions, supporting both exact matches and pattern matching. |
 | Regular Expression Support | Applies regular expressions to the text content before performing assertions, enabling complex validations.                    |
 | Flexible Assertions        | Supports a range of operators, including equality, inequality, and pattern matching.                                           |
@@ -22,14 +22,14 @@ It provides a robust mechanism to assert that the text of an element meets speci
 ### Usages in RPA
 
 | Usage                | Description                                                                                                                       |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Content Verification | Ensures that the text content of specific elements matches the expected value, crucial for verifying dynamic content or messages. |
 | Form Validation      | Validates that text fields contain the correct information before submission, ensuring accuracy in automated form submissions.    |
 
 ### Usages in Automation Testing
 
 | Usage                       | Description                                                                                                    |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Consistency Verification | Ensures that the text content of UI elements remains consistent across different environments and test runs.   |
 | Localization Testing        | Validates that the text content of elements matches the expected localized text in various languages.          |
 | Error Message Validation    | Checks that error messages or notifications displayed to the user are accurate and meet the expected criteria. |
@@ -38,10 +38,10 @@ It provides a robust mechanism to assert that the text of an element meets speci
 
 ### Example No.1
 
-Assert that the text content of an element, after applying the regular expression '\d+', equals '123'. 
+Assert that the text content of an element, after applying the regular expression '\d+', equals '123'.
 This is useful for scenarios where the script needs to extract numeric values from the element's text and validate them against expected criteria.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -63,7 +63,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -85,7 +85,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -95,12 +95,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.2
 
-Ensure that the text content of an element matches the exact value 'Hello World'. 
+Ensure that the text content of an element matches the exact value 'Hello World'.
 This assertion checks if the text content of the specified element is exactly as expected.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -111,7 +112,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -120,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='textElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -130,7 +131,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -140,7 +141,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -149,12 +150,13 @@ action_rule = {
     "onElement": "//*[@id='textElement']"
 }
 ```
+
 ### Example No.3
 
-Perform an assertion to ensure that the text content of an element using the CSS selector `.price`, after extracting the numeric part using the regular expression '\d+', is greater than '100'. 
+Perform an assertion to ensure that the text content of an element using the CSS selector `.price`, after extracting the numeric part using the regular expression '\d+', is greater than '100'.
 This is useful for scenarios where the script needs to validate that a numeric value extracted from the text content exceeds a certain threshold.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -167,7 +169,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -178,7 +180,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -190,7 +192,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -202,7 +204,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -213,12 +215,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.4
 
-Assert that the text content of an element is not equal to 'Error'. 
+Assert that the text content of an element is not equal to 'Error'.
 This validation ensures that the element does not contain an error message, confirming the expected state of the page.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -229,7 +232,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -238,7 +241,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='statusTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -248,7 +251,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -258,7 +261,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -267,11 +270,12 @@ action_rule = {
     "onElement": "//*[@id='statusTextElement']"
 }
 ```
+
 ### Example No.5
 
 Perform an assertion to ensure that the text content of an element matches the regular expression '^[A-Za-z]+$', validating that it contains only alphabetic characters.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -282,7 +286,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -291,7 +295,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='alphabeticTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -301,7 +305,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -311,7 +315,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -320,12 +324,13 @@ action_rule = {
     "onElement": "//*[@id='alphabeticTextElement']"
 }
 ```
+
 ### Example No.6
 
-Assert that the text content of an element is lower than '500'. 
+Assert that the text content of an element is lower than '500'.
 This validation ensures that the numeric value represented by the text content does not exceed a certain limit.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -336,7 +341,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -345,7 +350,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='valueTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -355,7 +360,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -365,7 +370,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -374,11 +379,12 @@ action_rule = {
     "onElement": "//*[@id='valueTextElement']"
 }
 ```
+
 ### Example No.7
 
 Check that the text content of an element matches the regular expression '\d+\.\d{2}', ensuring it is a correctly formatted decimal number.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -389,7 +395,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -398,7 +404,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='decimalTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -408,7 +414,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -418,7 +424,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -427,12 +433,13 @@ action_rule = {
     "onElement": "//*[@id='decimalTextElement']"
 }
 ```
+
 ### Example No.8
 
-Assert that the text content of an element is greater than or equal to '10'. 
+Assert that the text content of an element is greater than or equal to '10'.
 This validation ensures that the numeric value represented by the text content meets or exceeds a specific threshold.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -443,7 +450,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -452,7 +459,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='thresholdTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -462,7 +469,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -472,7 +479,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -481,12 +488,13 @@ action_rule = {
     "onElement": "//*[@id='thresholdTextElement']"
 }
 ```
+
 ### Example No.9
 
-Ensure that the text content of an element is less than or equal to '50'. 
+Ensure that the text content of an element is less than or equal to '50'.
 This is useful for scenarios where the script needs to confirm that the text value does not exceed a certain upper limit.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -497,7 +505,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -506,7 +514,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='limitTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -516,7 +524,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -526,7 +534,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -541,20 +549,20 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Specifies the condition under which the assertion will pass or fail. 
+Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the text content.
 
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -566,7 +574,7 @@ Specifies the web element whose text content will be validated. This can be defi
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -578,14 +586,14 @@ Specifies the locator strategy used to identify the target element on the web pa
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Specifies a regular expression to be applied to the text content before performing the assertion. 
+Specifies a regular expression to be applied to the text content before performing the assertion.
 This allows for more flexible validation of the text values that may require pattern matching.
 
 ## Parameters
@@ -593,7 +601,7 @@ This allows for more flexible validation of the text values that may require pat
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -605,7 +613,7 @@ Specifies the type of comparison or operation to be performed when evaluating th
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -617,6 +625,7 @@ Specifies the expected value or pattern that the element's text content should m
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-element-text](https://www.w3.org/TR/webdriver/#get-element-text)

@@ -1,6 +1,6 @@
 # Stop Flow (StopFlow)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Ends the current automation session by disposing the active WebDriver and removi
 ### Key Features and Functionality
 
 | Feature               | Description                                                         |
-|-----------------------|---------------------------------------------------------------------|
+| --- | --- |
 | Safe Teardown         | Disposes the active WebDriver instance and cleans up references.    |
 | Idempotent Operation  | Multiple calls are safe; no error if the session is already closed. |
 | Registry Cleanup      | Removes the driver from the global registry to prevent later reuse. |
@@ -22,14 +22,14 @@ Ends the current automation session by disposing the active WebDriver and removi
 ### Usages in RPA
 
 | Use Case         | Description                                                            |
-|------------------|------------------------------------------------------------------------|
+| --- | --- |
 | Flow Termination | Place as the final step to ensure browser and driver are fully closed. |
 | Resource Hygiene | Free system resources in long-running robots or shared environments.   |
 
 ### Usages in Automation Testing
 
 | Use Case        | Description                                                                    |
-|-----------------|--------------------------------------------------------------------------------|
+| --- | --- |
 | Test Teardown   | Add to teardown stages to guarantee clean driver disposal between test runs.   |
 | Isolation       | Reset state before starting a new test requiring a fresh browser session.      |
 | Suite Cleanup   | Close all lingering sessions at the end of a test suite to free resources.     |
@@ -37,7 +37,7 @@ Ends the current automation session by disposing the active WebDriver and removi
 ### Aliases
 
 | Alias     | Notes                                      |
-|-----------|--------------------------------------------|
+| --- | --- |
 | Stop      | Interchangeable with StopFlow.             |
 | EndFlow   | Interchangeable with StopFlow.             |
 
@@ -49,7 +49,7 @@ Ends the current automation session by disposing the active WebDriver and removi
 
 Disposes the active WebDriver and removes its registry entry. Use at the end of a workflow to guarantee the browser and driver are fully closed.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -58,14 +58,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("StopFlow");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -81,13 +81,14 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
     "pluginName": "StopFlow"
 }
 ```
+
 ### Example No.2
 
 ### Mid-Flow Session Reset Using Stop Alias
@@ -95,7 +96,7 @@ action_rule = {
 Tears down the current browser session mid-workflow using the `Stop` alias before a fresh session is initialized.
 Behaviour is identical to `StopFlow`; aliases are interchangeable.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -104,14 +105,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Stop");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -119,7 +120,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -127,13 +128,14 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
     "pluginName": "Stop"
 }
 ```
+
 ### Example No.3
 
 ### Test Teardown Using EndFlow Alias
@@ -141,7 +143,7 @@ action_rule = {
 Disposes the active WebDriver at the end of a test run using the `EndFlow` alias.
 Place in the teardown stage to guarantee clean driver disposal between test executions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -150,14 +152,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("EndFlow");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -165,7 +167,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -173,7 +175,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {

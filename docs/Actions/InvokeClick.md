@@ -1,6 +1,6 @@
 # Invoke Click (InvokeClick)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This makes it suitable for scenarios that require waiting for a dynamic state ch
 ### Key Features and Functionality
 
 | Feature              | Description                                                                                                  |
-|----------------------|--------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Simple Click         | Moves to the target element and performs a left click.                                                       |
 | Positional Click     | Clicks at the current mouse position when no element locator is provided.                                    |
 | Conditional Click    | Repeats the click until a named assertion condition passes or the timeout elapses.                           |
@@ -26,7 +26,7 @@ This makes it suitable for scenarios that require waiting for a dynamic state ch
 ### Usages in RPA
 
 | Use Case         | Description                                                                                    |
-|------------------|------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Form Submission  | Click a submit button after populating form fields to trigger a page transition.               |
 | Modal Dismissal  | Click a close button or overlay to dismiss a modal dialog before the workflow continues.       |
 | Alert Handling   | Repeatedly click an element and dismiss the resulting alert until the alert no longer appears. |
@@ -36,7 +36,7 @@ This makes it suitable for scenarios that require waiting for a dynamic state ch
 ### Usages in Automation Testing
 
 | Use Case                  | Description                                                                                            |
-|---------------------------|--------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Interaction Testing    | Verify that clickable elements respond correctly to user interaction.                                  |
 | Conditional State Testing | Test scenarios where a condition must be satisfied after one or more clicks before assertions can run. |
 | Alert Presence Testing    | Confirm that an alert appears after clicking a trigger element.                                        |
@@ -52,7 +52,7 @@ This makes it suitable for scenarios that require waiting for a dynamic state ch
 Locates the element matching `#SubmitButton` using the CssSelector strategy and performs a left click.
 Use this form for any straightforward single-click interaction on a known stable element.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -63,7 +63,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -72,7 +72,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#SubmitButton");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -82,7 +82,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -92,7 +92,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -101,6 +101,7 @@ action_rule = {
     "onElement": "#SubmitButton"
 }
 ```
+
 ### Example No.2
 
 ### Click at the current mouse position
@@ -108,7 +109,7 @@ action_rule = {
 Performs a click at the last known mouse cursor position without locating or targeting any element.
 Use this form when mouse position has been set by a preceding move action and no element reference is needed.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -117,14 +118,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeClick");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -132,7 +133,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -140,13 +141,14 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
     "pluginName": "InvokeClick"
 }
 ```
+
 ### Example No.3
 
 ### Click repeatedly until an alert appears
@@ -154,7 +156,7 @@ action_rule = {
 Clicks the element matching `#TriggerAlert` every 1.5 seconds until a browser alert is detected or 15 seconds elapse.
 The `Condition:AlertExists` argument causes the action to assert alert presence after each click before deciding whether to stop.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -166,7 +168,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -176,7 +178,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#TriggerAlert");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -187,7 +189,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -198,7 +200,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -208,6 +210,7 @@ action_rule = {
     "onElement": "#TriggerAlert"
 }
 ```
+
 ### Example No.4
 
 ### Click and dismiss alerts until none remains
@@ -215,7 +218,7 @@ action_rule = {
 Clicks the element with id `PopAlert`, dismisses any browser alert that appears, and repeats every 1 second until a click triggers no alert.
 The `Condition:NoAlert` argument activates the alert-dismissal handler, which closes any open alert between retries.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -227,7 +230,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -237,7 +240,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("PopAlert");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -248,7 +251,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -259,7 +262,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -269,6 +272,7 @@ action_rule = {
     "onElement": "PopAlert"
 }
 ```
+
 ### Example No.5
 
 ### Click until an element attribute reaches a target value
@@ -276,7 +280,7 @@ action_rule = {
 Clicks the element matching `#Counter` every 1 second until its `value` attribute equals `10`, or until 15 seconds elapse.
 The `Condition:ElementAttribute` and `Equal:10` arguments configure the internal assertion that evaluates the attribute after each click.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -289,7 +293,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -300,7 +304,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#Counter");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -312,7 +316,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -324,7 +328,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -341,7 +345,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -355,7 +359,7 @@ When Argument is absent the action performs a single non-conditional click.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -369,7 +373,7 @@ When absent the default Xpath strategy is used.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -383,7 +387,7 @@ When absent the assertion operates on the element's default value or text conten
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -399,7 +403,7 @@ When absent the action clicks at the current mouse position instead.
 ### Condition (Condition)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -421,7 +425,7 @@ Use this condition when an action repeatedly triggers alerts that must be cleare
 ### Polling (Polling)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 1500              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -435,7 +439,7 @@ When absent the default interval of 1500 milliseconds is used.
 ### Timeout (Timeout)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -449,6 +453,7 @@ When absent the automation LoadTimeout setting is used as the timeout value.
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-click](https://www.w3.org/TR/webdriver/#element-click)

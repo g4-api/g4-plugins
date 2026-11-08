@@ -1,6 +1,6 @@
 # Convert To Base64 (ConvertToBase64)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ The encoded output is stored in the session as `ConvertToBase64:Result` and expo
 ### Key Features and Functionality
 
 | Feature             | Description                                                                                 |
-|---------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | Base64 Encoding     | Converts the `Argument` value to a Base64 string.                                           |
 | Regex Pre-filtering | Applies `RegularExpression` to extract a specific portion of the argument before encoding.  |
 | Session Output      | Stores the encoded result in the session as `ConvertToBase64:Result` for downstream access. |
@@ -23,7 +23,7 @@ The encoded output is stored in the session as `ConvertToBase64:Result` and expo
 ### Usages in RPA
 
 | Use Case            | Description                                                                                    |
-|---------------------|------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Credential Encoding | Encode a username or password to Base64 for use in HTTP Basic Auth headers.                    |
 | Data Transport      | Encode structured text before passing it to a downstream API or system requiring Base64 input. |
 | Partial Extraction  | Use a regex to isolate a specific field from a longer string and encode only that portion.     |
@@ -31,7 +31,7 @@ The encoded output is stored in the session as `ConvertToBase64:Result` and expo
 ### Usages in Automation Testing
 
 | Use Case            | Description                                                                                    |
-|---------------------|------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Header Construction | Build Base64-encoded authorization headers for API test steps without manual encoding.         |
 | Value Verification  | Encode expected values to compare against Base64-encoded API responses in assertions.          |
 | Selective Encoding  | Extract a substring with regex and encode it for use in parameterized test data or assertions. |
@@ -47,7 +47,7 @@ It uses the `ConvertToBase64` plugin with the argument set to `Hello, World!`.
 No `RegularExpression` is specified, so the full argument value is encoded.
 The result is stored in the session as `ConvertToBase64:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Hello, World!");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -83,7 +83,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "argument": "Hello, World!"
 }
 ```
+
 ### Example No.2
 
 ### Encode a Regex-Matched Portion to Base64
@@ -100,7 +101,7 @@ It uses the `ConvertToBase64` plugin with the argument `Order-12345-Details` and
 The first numeric sequence `12345` is matched and encoded to Base64.
 The result is stored in the session as `ConvertToBase64:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -111,7 +112,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -120,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -130,7 +131,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -140,7 +141,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -149,6 +150,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.3
 
 ### Encode a Session Parameter Value to Base64
@@ -158,7 +160,7 @@ It uses the `ConvertToBase64` plugin with the argument set to `{{$Get-Parameter 
 The G4 expression is resolved at runtime, retrieving the current value of the `Username` session parameter before encoding.
 No `RegularExpression` is specified, so the full resolved value is encoded and stored in the session as `ConvertToBase64:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -168,7 +170,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -176,7 +178,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$Get-Parameter --Name:Username --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -185,7 +187,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -194,7 +196,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -208,7 +210,7 @@ action_rule = {
 ### Convert To Base64 Result (ConvertToBase64:Result)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -224,7 +226,7 @@ Its value can be referenced by other parameters or expressions in downstream wor
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -238,7 +240,7 @@ If a `RegularExpression` is also set, only the first matched portion of this val
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

@@ -1,6 +1,6 @@
 # Convert From Base64 (ConvertFromBase64)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ The decoded output is stored in the session as `ConvertFromBase64:Result` and ex
 ### Key Features and Functionality
 
 | Feature              | Description                                                                                      |
-|----------------------|--------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Base64 Decoding      | Decodes the `Argument` value from Base64 back to its original string.                           |
 | Regex Post-filtering | Applies `RegularExpression` to extract a specific portion of the decoded result.                 |
 | Session Output       | Stores the decoded result in the session as `ConvertFromBase64:Result` for downstream access.   |
@@ -23,7 +23,7 @@ The decoded output is stored in the session as `ConvertFromBase64:Result` and ex
 ### Usages in RPA
 
 | Use Case               | Description                                                                                           |
-|------------------------|-------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Credential Decoding    | Decode Base64-encoded credentials retrieved from a secure store before use in a workflow step.        |
 | API Response Decoding  | Decode a Base64-encoded field in an API response before passing its value to subsequent actions.      |
 | Partial Extraction     | Use a regex to isolate a specific field from the decoded string and pass only that portion forward.   |
@@ -31,7 +31,7 @@ The decoded output is stored in the session as `ConvertFromBase64:Result` and ex
 ### Usages in Automation Testing
 
 | Use Case              | Description                                                                                              |
-|-----------------------|----------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Response Verification | Decode a Base64-encoded API response field and assert its value in a test assertion.                    |
 | Test Data Decoding    | Decode Base64-encoded test data stored in session parameters for use in parameterized assertions.       |
 | Selective Extraction  | Extract a substring from the decoded value with regex for targeted comparison in test steps.            |
@@ -47,7 +47,7 @@ It uses the `ConvertFromBase64` plugin with the argument set to `SGVsbG8sIFdvcmx
 No `RegularExpression` is specified, so the full decoded value is kept.
 The result is stored in the session as `ConvertFromBase64:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("SGVsbG8sIFdvcmxkIQ==");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -83,7 +83,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "argument": "SGVsbG8sIFdvcmxkIQ=="
 }
 ```
+
 ### Example No.2
 
 ### Decode Base64 and Extract a Specific Portion
@@ -100,7 +101,7 @@ It uses the `ConvertFromBase64` plugin with the argument `T3JkZXItMTIzNDUtRGV0YW
 The argument decodes to `Order-12345-Details` and the first numeric sequence `12345` is extracted.
 The result is stored in the session as `ConvertFromBase64:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -111,7 +112,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -120,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -130,7 +131,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -140,7 +141,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -149,6 +150,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.3
 
 ### Decode a Session Parameter Value from Base64
@@ -158,7 +160,7 @@ It uses the `ConvertFromBase64` plugin with the argument set to `{{$Get-Paramete
 The G4 expression is resolved at runtime, retrieving the current Base64 value of the `EncodedToken` session parameter before decoding.
 No `RegularExpression` is specified, so the full decoded value is stored in the session as `ConvertFromBase64:Result`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -168,7 +170,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -176,7 +178,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$Get-Parameter --Name:EncodedToken --Scope:Session}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -185,7 +187,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -194,7 +196,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -208,7 +210,7 @@ action_rule = {
 ### Convert From Base64 Result (ConvertFromBase64:Result)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -224,7 +226,7 @@ Its value can be referenced by other parameters or expressions in downstream wor
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -238,7 +240,7 @@ If a `RegularExpression` is also set, only the first matched portion of the deco
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

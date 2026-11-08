@@ -1,6 +1,6 @@
 # Get Session Id (Get-SessionId)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Macro Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ The session ID uniquely identifies the running driver instance and is required w
 ### Key Features and Functionality
 
 | Feature              | Description                                                                                |
-|----------------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | Session ID Retrieval | Returns the opaque session ID string assigned to the current WebDriver session at runtime. |
 | No Parameters        | Requires no input — the value is resolved automatically from the active driver instance.   |
 | Workflow Integration | Injects the session ID into any argument or action that accepts a macro placeholder.       |
@@ -22,14 +22,14 @@ The session ID uniquely identifies the running driver instance and is required w
 ### Usages in RPA
 
 | Use Case                   | Description                                                                                 |
-|----------------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | Session-Specific API Calls | Supplies the session ID to REST endpoints or scripts that target a specific driver session. |
 | Driver Mounting            | Allows a downstream job or stage to attach to an already-running driver by session ID.      |
 
 ### Usages in Automation Testing
 
 | Use Case           | Description                                                                               |
-|--------------------|-------------------------------------------------------------------------------------------|
+| --- | --- |
 | Session Handover   | Passes the session ID between test stages so they share the same browser or app instance. |
 | Diagnostic Logging | Logs the active session ID alongside test results for easier debugging and traceability.  |
 
@@ -42,7 +42,7 @@ The session ID uniquely identifies the running driver instance and is required w
 Invoke `Get-SessionId` to obtain the current WebDriver session ID at runtime.
 Log the session ID using the `WriteLog` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -52,7 +52,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -60,7 +60,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Current session ID is {{$Get-SessionId}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -69,7 +69,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -78,7 +78,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -86,6 +86,7 @@ action_rule = {
     "argument": "Current session ID is {{$Get-SessionId}}"
 }
 ```
+
 ### Example No.2
 
 ### Retrieve Session ID and Send It to an Input
@@ -93,7 +94,7 @@ action_rule = {
 Invoke `Get-SessionId` to obtain the current WebDriver session ID at runtime.
 Send the session ID as keystrokes to the element located by the CSS selector `#sessionInput` using the `SendKeys` plugin.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -105,7 +106,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -115,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#sessionInput");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -126,7 +127,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -137,7 +138,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {

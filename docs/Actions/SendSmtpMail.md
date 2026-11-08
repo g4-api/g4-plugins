@@ -1,6 +1,6 @@
 # Send Smtp Mail (SendSmtpMail)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ It is useful for alerts, notifications, and automated reporting.
 ### Key Features and Functionality
 
 | Feature                   | Description                                                              |
-|---------------------------|--------------------------------------------------------------------------|
+| --- | --- |
 | SMTP server configuration | Sends email using a configured host and port.                            |
 | Secure connection option  | Supports SSL or TLS when enabled.                                        |
 | SMTP authentication       | Logs in using a username and password when provided.                     |
@@ -28,7 +28,7 @@ It is useful for alerts, notifications, and automated reporting.
 ### Usages in RPA
 
 | Use Case                | Description                                                         |
-|-------------------------|---------------------------------------------------------------------|
+| --- | --- |
 | Send operational alerts | Notifies operators when an automated task fails or needs attention. |
 | Email generated reports | Sends daily or weekly reports created by a workflow.                |
 | Notify stakeholders     | Sends status updates to business users after a process completes.   |
@@ -37,7 +37,7 @@ It is useful for alerts, notifications, and automated reporting.
 ### Usages in Automation Testing
 
 | Use Case                 | Description                                                          |
-|--------------------------|----------------------------------------------------------------------|
+| --- | --- |
 | Test run summary email   | Sends pass and fail results after a test run completes.              |
 | CI failure notifications | Alerts the team when a pipeline test stage fails.                    |
 | Smoke test validation    | Sends confirmation when a quick environment check succeeds or fails. |
@@ -52,7 +52,7 @@ It is useful for alerts, notifications, and automated reporting.
 Send a plain-text email to one or more recipients using an SMTP server.
 The action reads SMTP connection settings and message fields from the Argument string.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -62,7 +62,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -70,7 +70,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Host:smtp.mail.io --Port:587 --Username:no-reply@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:no-reply@mail.io --To:user1@mail.io;user2@mail.io --Subject:Build completed --Text:The nightly build finished successfully.}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -79,7 +79,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -88,7 +88,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -96,6 +96,7 @@ action_rule = {
     "argument": "{{$ --Host:smtp.mail.io --Port:587 --Username:no-reply@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:no-reply@mail.io --To:user1@mail.io;user2@mail.io --Subject:Build completed --Text:The nightly build finished successfully.}}"
 }
 ```
+
 ### Example No.2
 
 ### Force the sender address
@@ -103,7 +104,7 @@ action_rule = {
 Always use a fixed sender address regardless of the From value in the request.
 The ForceFrom flag forces the action to use DefaultFrom as the final sender.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -113,7 +114,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -121,7 +122,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Host:smtp.mail.io --Port:587 --Username:system@mail.io --Password:APP_PASSWORD --EnableSsl --ForceFrom --DefaultFrom:system@mail.io --From:user@mail.io --To:audit@mail.io --Subject:Security alert --Text:A privileged operation was executed.}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -130,7 +131,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -139,7 +140,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -147,6 +148,7 @@ action_rule = {
     "argument": "{{$ --Host:smtp.mail.io --Port:587 --Username:system@mail.io --Password:APP_PASSWORD --EnableSsl --ForceFrom --DefaultFrom:system@mail.io --From:user@mail.io --To:audit@mail.io --Subject:Security alert --Text:A privileged operation was executed.}}"
 }
 ```
+
 ### Example No.3
 
 ### Send an HTML email
@@ -154,7 +156,7 @@ action_rule = {
 Send an email whose body is interpreted as HTML by the mail client.
 The IsBodyHtml flag controls whether the message body is treated as HTML.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -164,7 +166,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -172,7 +174,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Host:smtp.mail.io --Port:465 --Username:reports@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:reports@mail.io --To:manager@mail.io --Cc:lead@mail.io;qa@mail.io --Subject:Weekly report --IsBodyHtml --Text:<h1>Report</h1><p>All systems operational.</p>}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -181,7 +183,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -190,7 +192,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -198,6 +200,7 @@ action_rule = {
     "argument": "{{$ --Host:smtp.mail.io --Port:465 --Username:reports@mail.io --Password:APP_PASSWORD --EnableSsl --DefaultFrom:reports@mail.io --To:manager@mail.io --Cc:lead@mail.io;qa@mail.io --Subject:Weekly report --IsBodyHtml --Text:<h1>Report</h1><p>All systems operational.</p>}}"
 }
 ```
+
 ### Example No.4
 
 ### Send email using default credentials
@@ -205,7 +208,7 @@ action_rule = {
 Send an email through an internal SMTP relay that does not require explicit authentication.
 Omit Username and Password so the action uses default system credentials.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -215,7 +218,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -223,7 +226,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Host:mail.internal.local --Port:25 --DefaultFrom:automation@internal.local --To:ops@internal.local --Subject:Service restarted --Text:The service was restarted automatically.}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -232,7 +235,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -241,7 +244,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -255,7 +258,7 @@ action_rule = {
 ### Bcc (Bcc)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -269,7 +272,7 @@ This parameter is useful for silently notifying additional parties without expos
 ### Cc (Cc)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -283,7 +286,7 @@ This parameter is commonly used to keep stakeholders informed without making the
 ### Default From (DefaultFrom)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -297,7 +300,7 @@ It helps prevent delivery failures caused by missing sender information.
 ### Enable Ssl (EnableSsl)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -311,7 +314,7 @@ This setting is required by most modern SMTP servers.
 ### Force From (ForceFrom)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -325,7 +328,7 @@ This helps enforce consistent sender identity and avoid spoofing issues.
 ### From (From)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -339,7 +342,7 @@ Providing this allows per-message sender customization when permitted.
 ### Host (Host)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -353,7 +356,7 @@ Correct configuration is required for successful email delivery.
 ### Is Body Html (IsBodyHtml)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -367,7 +370,7 @@ This allows rich text emails with styling and links.
 ### Password (Password)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -381,7 +384,7 @@ Secure handling of this value is important to protect email credentials.
 ### Port (Port)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -395,7 +398,7 @@ Using the correct port ensures compatibility with the SMTP server configuration.
 ### Subject (Subject)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -409,7 +412,7 @@ A clear subject improves message visibility and understanding.
 ### Text (Text)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -423,7 +426,7 @@ It contains the primary information conveyed by the email.
 ### To (To)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -437,7 +440,7 @@ These addresses represent the main targets of the email message.
 ### Username (Username)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

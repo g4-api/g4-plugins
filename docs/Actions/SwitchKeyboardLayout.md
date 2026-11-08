@@ -1,6 +1,6 @@
 # Switch Keyboard Layout (SwitchKeyboardLayout)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~15 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ It is designed for automation workflows that require precise control over input 
 ### Key Features and Functionality
 
 | Feature                | Description                                                                                                     |
-|------------------------|-----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | OS-Level Layout Switch | Posts a layout change request to the User32 server, activating the specified locale as the active input method. |
 | BCP-47 Locale Support  | Accepts standard BCP-47 locale identifiers such as `en-US` and `he-IL` for precise language targeting.          |
 | Flexible Input         | Accepts the layout via the `KeyboardLayout` parameter or a raw `Argument` fallback, defaulting to `en-US`.      |
@@ -23,14 +23,14 @@ It is designed for automation workflows that require precise control over input 
 ### Usage in RPA
 
 | Usage                    | Description                                                                                                        |
-|--------------------------|--------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Multilingual Workflows   | Switches between keyboard layouts during automation flows that process input in multiple languages.                |
 | Legacy Application Input | Ensures correct input encoding for legacy Windows applications that require a specific OS keyboard layout setting. |
 
 ### Usage in Automation Testing
 
 | Usage                     | Description                                                                                                        |
-|---------------------------|--------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Localization Testing   | Validates application behavior and character rendering when the keyboard layout changes between test scenarios.    |
 | Input Encoding Validation | Confirms that the application accepts and displays characters correctly under non-default locale keyboard layouts. |
 
@@ -43,7 +43,7 @@ It is designed for automation workflows that require precise control over input 
 Switch the active keyboard layout to Hebrew Standard (`he-IL`) using the `--KeyboardLayout` parameter inside a `{{$ ...}}` expression.
 This is the canonical form for explicit layout selection and takes priority over any raw `Argument` value.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --KeyboardLayout:he-IL}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -79,7 +79,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -87,6 +87,7 @@ action_rule = {
     "argument": "{{$ --KeyboardLayout:he-IL}}"
 }
 ```
+
 ### Example No.2
 
 ### Switch to Hebrew Standard layout via direct Argument
@@ -94,7 +95,7 @@ action_rule = {
 Switch the active keyboard layout to Hebrew Standard (`he-IL`) by passing the locale identifier directly as the raw `Argument` value.
 This simplified form is equivalent to the parameter-expression form but does not support combining additional options.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -104,7 +105,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -112,7 +113,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("he-IL");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -121,7 +122,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -130,7 +131,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -138,6 +139,7 @@ action_rule = {
     "argument": "he-IL"
 }
 ```
+
 ### Example No.3
 
 ### Reset keyboard layout to default (en-US)
@@ -145,7 +147,7 @@ action_rule = {
 Invoke `SwitchKeyboardLayout` without any argument to reset the active keyboard layout to the default `en-US` (English United States).
 This is useful at the end of a multilingual input sequence to restore the expected layout for subsequent steps.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -154,14 +156,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SwitchKeyboardLayout");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -169,7 +171,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -177,7 +179,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -190,7 +192,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -207,7 +209,7 @@ When both this property and the `KeyboardLayout` parameter are absent or empty, 
 ### Keyboard Layout (KeyboardLayout)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | en-US             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -224,6 +226,7 @@ Use `en-US` for English (United States) input and `he-IL` for Hebrew Standard in
 ##### En Us
 
 English (United States) keyboard layout. This is the default value.
+
 ##### He Il
 
 Hebrew Standard keyboard layout.
@@ -231,6 +234,7 @@ Hebrew Standard keyboard layout.
 ## Scope
 
 * Windows Native
+
 ## See Also
 
 apiDocumentation: [https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadkeyboardlayoutw](https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadkeyboardlayoutw)

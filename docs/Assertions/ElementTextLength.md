@@ -1,6 +1,6 @@
 # Element Text Length (ElementTextLength)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~24 min · Assertion Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,13 +8,13 @@
 
 ### Purpose
 
-The `ElementTextLength` plugin is designed to validate the length of the text content of web elements within automation scripts. 
+The `ElementTextLength` plugin is designed to validate the length of the text content of web elements within automation scripts.
 It provides a robust mechanism to assert that the length of an element's text meets specific conditions, making it essential for scenarios where text length is critical to the workflow.
 
 ### Key Features and Functionality
 
 | Feature                    | Description                                                                                                              |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Text Length Validation     | Validates that the length of the text content of an element matches expected conditions, supporting numeric comparisons. |
 | Regular Expression Support | Applies regular expressions to the text content before calculating its length, enabling complex validations.             |
 | Flexible Assertions        | Supports a range of operators, including equality, inequality, and numeric comparisons.                                  |
@@ -22,14 +22,14 @@ It provides a robust mechanism to assert that the length of an element's text me
 ### Usages in RPA
 
 | Usage                       | Description                                                                                                                                      |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Content Length Verification | Ensures that the length of the text content of specific elements meets the expected value, crucial for verifying dynamic content or form inputs. |
 | Form Validation             | Validates that the length of text fields is within acceptable limits before submission, ensuring accuracy in automated form submissions.         |
 
 ### Usages in Automation Testing
 
 | Usage                       | Description                                                                                                                                  |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Consistency Verification | Ensures that the length of text content in UI elements remains consistent across different environments and test runs.                       |
 | Localization Testing        | Validates that the length of text content in elements matches the expected length for localized text in various languages.                   |
 | Error Message Length Check  | Checks that error messages or notifications displayed to the user have the correct length, ensuring they are neither too short nor too long. |
@@ -38,10 +38,10 @@ It provides a robust mechanism to assert that the length of an element's text me
 
 ### Example No.1
 
-Assert that the length of the text content of an element, after applying the regular expression '\d+', equals '3'. 
+Assert that the length of the text content of an element, after applying the regular expression '\d+', equals '3'.
 This is useful for scenarios where the script needs to extract numeric values from the element's text and validate their length against expected criteria.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -63,7 +63,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -85,7 +85,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -95,12 +95,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.2
 
-Ensure that the length of the text content of an element matches the exact value '11'. 
+Ensure that the length of the text content of an element matches the exact value '11'.
 This assertion checks if the length of the text content of the specified element is exactly as expected.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -111,7 +112,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -120,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='textLengthElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -130,7 +131,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -140,7 +141,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -149,12 +150,13 @@ action_rule = {
     "onElement": "//*[@id='textLengthElement']"
 }
 ```
+
 ### Example No.3
 
-Perform an assertion to ensure that the length of the text content of an element using the CSS selector `.price`, after extracting the numeric part using the regular expression '\d+', is greater than '2'. 
+Perform an assertion to ensure that the length of the text content of an element using the CSS selector `.price`, after extracting the numeric part using the regular expression '\d+', is greater than '2'.
 This is useful for scenarios where the script needs to validate that a numeric value extracted from the text content has a length greater than a certain threshold.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -167,7 +169,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -178,7 +180,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -190,7 +192,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -202,7 +204,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -213,12 +215,13 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.4
 
-Assert that the length of the text content of an element is less than or equal to '50'. 
+Assert that the length of the text content of an element is less than or equal to '50'.
 This validation ensures that the text content length does not exceed a specific upper limit.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -229,7 +232,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -238,7 +241,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='lengthTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -248,7 +251,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -258,7 +261,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -267,11 +270,12 @@ action_rule = {
     "onElement": "//*[@id='lengthTextElement']"
 }
 ```
+
 ### Example No.5
 
 Check that the length of the text content of an element matches the regular expression '\d{2}', ensuring it is exactly two digits long.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -282,7 +286,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -291,7 +295,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='twoDigitTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -301,7 +305,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -311,7 +315,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -320,12 +324,13 @@ action_rule = {
     "onElement": "//*[@id='twoDigitTextElement']"
 }
 ```
+
 ### Example No.6
 
-Assert that the length of the text content of an element is greater than or equal to '5'. 
+Assert that the length of the text content of an element is greater than or equal to '5'.
 This validation ensures that the text content length meets or exceeds a specific minimum threshold.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -336,7 +341,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -345,7 +350,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//*[@id='minLengthTextElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -355,7 +360,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -365,7 +370,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -380,20 +385,20 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Specifies the condition under which the assertion will pass or fail. 
+Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected length for the text content.
 
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -405,7 +410,7 @@ Specifies the web element whose text content length will be validated. This can 
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -417,14 +422,14 @@ Specifies the locator strategy used to identify the target element on the web pa
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | Regex             |
 
-Specifies a regular expression to be applied to the text content before calculating its length. 
+Specifies a regular expression to be applied to the text content before calculating its length.
 This allows for more flexible validation of text lengths that may require pattern matching.
 
 ## Parameters
@@ -432,7 +437,7 @@ This allows for more flexible validation of text lengths that may require patter
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -444,7 +449,7 @@ Specifies the type of comparison or operation to be performed when evaluating th
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -456,6 +461,7 @@ Specifies the expected length value that the element's text content should meet 
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#get-element-text](https://www.w3.org/TR/webdriver/#get-element-text)

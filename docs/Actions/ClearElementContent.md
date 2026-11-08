@@ -1,6 +1,6 @@
 # Clear Element Content (ClearElementContent)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~18 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ It prevents errors caused by pre-filled data and provides a native clearing opti
 ### Key Features and Functionality
 
 | Feature        | Description                                                                                |
-|----------------|--------------------------------------------------------------------------------------------|
+| --- | --- |
 | Standard Clear | Uses the built-in browser clear method to remove element content.                          |
 | Native Clear   | Simulates backspace key presses to clear elements that do not respond to standard methods. |
 | Delay Support  | Allows specifying a wait time before the clear operation occurs.                           |
@@ -22,14 +22,14 @@ It prevents errors caused by pre-filled data and provides a native clearing opti
 ### Usages in RPA
 
 | Use Case           | Description                                                                   |
-|--------------------|-------------------------------------------------------------------------------|
+| --- | --- |
 | Form Reset         | Clearing all input fields in a web form before entering new transaction data. |
 | Search Box Cleanup | Removing previous search terms before initiating a new lookup.                |
 
 ### Usages in Automation Testing
 
 | Use Case         | Description                                                                  |
-|------------------|------------------------------------------------------------------------------|
+| --- | --- |
 | Input Validation | Ensuring a field is empty before testing mandatory field constraints.        |
 | Data Integrity   | Clearing persistent user profile fields before updating them with test data. |
 
@@ -43,7 +43,7 @@ Clears all existing text from the target input element located by a CSS selector
 No additional parameters are passed, so the standard browser clear method is used.
 Use this form for straightforward input fields that respond correctly to the WebDriver clear command.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -54,7 +54,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -63,7 +63,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("input[name='user-name']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -73,7 +73,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -83,7 +83,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -92,6 +92,7 @@ action_rule = {
     "onElement": "input[name='user-name']"
 }
 ```
+
 ### Example No.2
 
 ### Clear element using native keyboard events
@@ -99,7 +100,7 @@ action_rule = {
 The `NativeClear` parameter simulates physical keyboard interactions to clear elements that resist the standard browser clear method.
 The action sends backspace commands to the content-editable element until all text is removed, bypassing standard clearing limitations.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -110,7 +111,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -119,7 +120,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@contenteditable='true']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -129,7 +130,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -139,7 +140,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -148,6 +149,7 @@ action_rule = {
     "onElement": "//div[@contenteditable='true']"
 }
 ```
+
 ### Example No.3
 
 ### Clear search box with delay
@@ -156,7 +158,7 @@ The rule applies a two-second delay before performing the clear operation on the
 The `Delay` parameter is set to `00:00:02` using the `{{$ ...}}` macro format to pass the value at runtime.
 It helps synchronize the automation with the application state, ensuring the element is ready to be cleared.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -168,7 +170,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -178,7 +180,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("search-box");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -189,7 +191,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -200,7 +202,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -210,6 +212,7 @@ action_rule = {
     "onElement": "search-box"
 }
 ```
+
 ### Example No.4
 
 ### Clear field for input validation
@@ -218,7 +221,7 @@ The action clears a mandatory email field to prepare for a validation check.
 The element is located using a CSS selector targeting the `#user-email` ID.
 It ensures that subsequent steps can verify if the application correctly identifies the missing required data.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -229,7 +232,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -238,7 +241,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#user-email");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -248,7 +251,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -258,7 +261,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -273,7 +276,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -287,7 +290,7 @@ Both parameters can be combined in a single argument such as `{{$ --NativeClear 
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -300,7 +303,7 @@ It determines how the automation engine identifies the element on the page.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -315,7 +318,7 @@ It points the action to the exact location where the clear operation should occu
 ### Delay (Delay)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 00:00:00          |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -329,7 +332,7 @@ Using a delay can improve reliability when interacting with dynamic elements tha
 ### Native Clear (NativeClear)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

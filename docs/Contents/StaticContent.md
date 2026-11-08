@@ -1,6 +1,6 @@
 # Static Content (StaticContent)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Content Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This plugin works with HTML content from various scopes, such as the page source
 ### Key Features and Functionality
 
 | Feature              | Description                                                                               |
-|----------------------|-------------------------------------------------------------------------------------------|
+| --- | --- |
 | XPath Selection      | Selects HTML elements using XPath selectors specified in `OnElement`.                     |
 | Attribute Extraction | Extracts values from specified attributes or inner text if `OnAttribute` is not provided. |
 | Regular Expression   | Applies a regular expression to the extracted value for precise data extraction.          |
@@ -25,7 +25,7 @@ This plugin works with HTML content from various scopes, such as the page source
 ### Usages in RPA
 
 | Usage                | Description                                                                    |
-|----------------------|--------------------------------------------------------------------------------|
+| --- | --- |
 | Web Data Extraction  | Extract specific information from web pages for processing or storage.         |
 | Content Scraping     | Scrape content from websites by targeting elements and attributes using XPath. |
 | Form Data Retrieval  | Extract values from form fields or other interactive elements on a web page.   |
@@ -33,7 +33,7 @@ This plugin works with HTML content from various scopes, such as the page source
 ### Usages in Automation Testing
 
 | Usage            | Description                                                                               |
-|------------------|-------------------------------------------------------------------------------------------|
+| --- | --- |
 | DOM Verification | Validate the presence and content of specific elements within the HTML structure.         |
 | Data Validation  | Verify that web applications render content correctly by extracting and asserting values. |
 | UI Testing       | Automate testing of UI components by extracting and validating their properties.          |
@@ -47,7 +47,7 @@ Extract the text content of an element using an XPath selector.
 The `HtmlContent` plugin is used to select an element by its XPath and extract its inner text.
 This allows you to retrieve specific information from the HTML document.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@class='product-name']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -74,7 +74,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -83,7 +83,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -91,6 +91,7 @@ action_rule = {
     "onElement": "//div[@class='product-name']"
 }
 ```
+
 ### Example No.2
 
 Extract the value of an attribute from an element using an XPath selector.
@@ -98,7 +99,7 @@ Extract the value of an attribute from an element using an XPath selector.
 The `HtmlContent` plugin selects an element using an XPath selector and extracts the value of a specified attribute.
 This is useful for retrieving properties like URLs from links or source paths from images.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -110,7 +111,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -120,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//a[@class='download-link']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -131,7 +132,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -142,7 +143,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -152,6 +153,7 @@ action_rule = {
     "onElement": "//a[@class='download-link']"
 }
 ```
+
 ### Example No.3
 
 Extract a numeric value from an element's text using a regular expression.
@@ -159,7 +161,7 @@ Extract a numeric value from an element's text using a regular expression.
 The `HtmlContent` plugin extracts the inner text of an element and applies a regular expression to retrieve a numeric value.
 The extracted value is then converted to the specified data type.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -171,7 +173,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -181,7 +183,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+\.\d{2}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -192,7 +194,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -203,7 +205,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -219,7 +221,7 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -232,7 +234,7 @@ Use `.` to select the first child of the current node.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -245,7 +247,7 @@ If not provided, the plugin will extract the inner text of the element.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -258,7 +260,7 @@ This allows for precise data extraction from the text or attribute value.
 ### Key (Key)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -271,7 +273,7 @@ This key can be used to reference the data in subsequent steps.
 ### Data Type (DataType)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -286,12 +288,15 @@ Supported data types include `String`, `Number`, `Boolean` and  `DateTime`.
 ##### String
 
 Textual data.
+
 ##### Number
 
 Whole numbers or numeric values with decimal points.
+
 ##### Boolean
 
 True or False values.
+
 ##### Date Time
 
 Date and/or time values.

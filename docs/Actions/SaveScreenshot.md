@@ -1,6 +1,6 @@
 # Save Screenshot (SaveScreenshot)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~19 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ It automatically creates the target directory, enforces the `.png` extension on 
 ### Key Features and Functionality
 
 | Feature                 | Description                                                                                                                                                    |
-|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Full-Page Screenshot    | Captures the entire browser viewport as a PNG file when no target element is specified.                                                                        |
 | Element Screenshot      | Captures only the specified element when OnElement and Locator are supplied, using the element-level screenshot call.                                          |
 | Null-Element Fallback   | Falls back to a full-page screenshot when a locator is supplied but GetElement returns null, making the action unconditionally safe to invoke.                 |
@@ -27,7 +27,7 @@ It automatically creates the target directory, enforces the `.png` extension on 
 ### Usages in RPA
 
 | Use Case              | Description                                                                                                                               |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Audit Trail           | Capture screenshots at key workflow steps to create a visual record for compliance review and process documentation.                      |
 | Error Documentation   | Take a screenshot when an unexpected state is detected to provide visual evidence that pinpoints the exact failure point for analysis.     |
 | Step Evidence Capture | Save a screenshot after a critical form submission or navigation to confirm the application transitioned to the expected state.            |
@@ -35,7 +35,7 @@ It automatically creates the target directory, enforces the `.png` extension on 
 ### Usages in Automation Testing
 
 | Use Case                   | Description                                                                                                                                            |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Visual Regression Testing  | Capture screenshots at fixed checkpoints across test runs and compare the accumulated SaveScreenshot:Screenshots paths to detect unintended UI changes. |
 | Cross-Browser Verification | Save viewport and element screenshots across browser configurations to confirm consistent rendering and layout behaviour.                              |
 | Failure Evidence           | Collect a screenshot immediately at the point of assertion failure to provide a reproducible visual artifact for root-cause analysis.                  |
@@ -49,7 +49,7 @@ It automatically creates the target directory, enforces the `.png` extension on 
 Captures a screenshot of the full browser viewport and saves it as `PageScreenshot.png` in the `Screenshots` directory.
 The saved absolute path is appended to the `SaveScreenshot:Screenshots` session parameter.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -59,7 +59,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -67,7 +67,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Directory:Screenshots --FileName:PageScreenshot.png}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -76,7 +76,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -85,7 +85,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -93,6 +93,7 @@ action_rule = {
     "argument": "{{$ --Directory:Screenshots --FileName:PageScreenshot.png}}"
 }
 ```
+
 ### Example No.2
 
 ### Full-page screenshot with default settings
@@ -100,7 +101,7 @@ action_rule = {
 Captures a screenshot of the full browser viewport using all default settings.
 This is the simplest invocation — no directory or file name configuration is required.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -109,14 +110,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SaveScreenshot");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -124,7 +125,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -132,13 +133,14 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
     "pluginName": "SaveScreenshot"
 }
 ```
+
 ### Example No.3
 
 ### Element-level screenshot with CSS selector
@@ -148,7 +150,7 @@ When `OnElement` and `Locator` are provided the plugin calls `element.SaveScreen
 If the element is not found by the locator the plugin falls back to a full-page screenshot.
 The saved absolute path is appended to the `SaveScreenshot:Screenshots` session parameter.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -160,7 +162,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -170,7 +172,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#ClickButton");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -181,7 +183,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -192,7 +194,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -202,6 +204,7 @@ action_rule = {
     "onElement": "#ClickButton"
 }
 ```
+
 ### Example No.4
 
 ### Full-page screenshot returned as base64
@@ -210,7 +213,7 @@ Captures a screenshot of the full browser viewport and returns it as a base64-en
 When the `--Base64` switch is supplied the plugin skips the disk write and records the base64 content as the value.
 The base64 string is appended to the `SaveScreenshot:Screenshots` session parameter and exposed as the `Screenshot` key on the plugin response entity, embedding the image in the response for downstream processing.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -220,7 +223,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -228,7 +231,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Base64}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -237,7 +240,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -246,7 +249,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -260,7 +263,7 @@ action_rule = {
 ### Save Screenshot Screenshots (SaveScreenshot:Screenshots)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -277,7 +280,7 @@ Use this parameter in downstream steps to validate, move, rename, attach, or emb
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -290,7 +293,7 @@ When OnElement is absent this property is ignored and the plugin takes a full-pa
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -306,7 +309,7 @@ When the element cannot be found the plugin falls back to a full-page screenshot
 ### Directory (Directory)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | .                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -319,7 +322,7 @@ Defaults to the current working directory when omitted.
 ### File Name (FileName)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -332,7 +335,7 @@ When omitted a new GUID string is used as the file name.
 ### Base64 (Base64)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -348,6 +351,7 @@ This switch is self-contained: it governs the plugin's behavior directly and doe
 ## Scope
 
 * Any
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#take-screenshot](https://www.w3.org/TR/webdriver/#take-screenshot)

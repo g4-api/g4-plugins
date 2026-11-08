@@ -1,6 +1,6 @@
 # Lower Equal (LowerEqual)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~13 min · Operator Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This helps workflows make decisions based on thresholds, limits, or maximum allo
 ### Key Features and Functionality
 
 | Feature                       | Description                                                                                 |
-|-------------------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | Less-than-or-equal comparison | Compares two numeric values using the less-than-or-equal (<=) operator.                     |
 | Numeric validation            | Ensures both input values can be safely converted to numbers before comparison.             |
 | Boolean evaluation result     | Returns true when the left value is less than or equal to the right value, otherwise false. |
@@ -24,7 +24,7 @@ This helps workflows make decisions based on thresholds, limits, or maximum allo
 ### Usages in RPA
 
 | Use Case              | Description                                                                   |
-|-----------------------|-------------------------------------------------------------------------------|
+| --- | --- |
 | Threshold checks      | Verify that a value does not exceed a defined maximum.                        |
 | Data validation       | Ensure numeric inputs are within allowed limits before continuing a workflow. |
 | Conditional branching | Decide workflow paths based on numeric comparisons.                           |
@@ -32,7 +32,7 @@ This helps workflows make decisions based on thresholds, limits, or maximum allo
 ### Usages in Automation Testing
 
 | Use Case          | Description                                                            |
-|-------------------|------------------------------------------------------------------------|
+| --- | --- |
 | Assertion logic   | Validate that actual values are less than or equal to expected values. |
 | Boundary testing  | Check upper boundary conditions in numeric test scenarios.             |
 | Test flow control | Control test execution paths based on comparison outcomes.             |
@@ -48,7 +48,7 @@ The rule evaluates to true only when the left-hand value is less than or equal t
 A macro produces runtime values that are substituted where the token appears.
 The LowerEqual action consumes the macro output to perform the comparison.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$--LeftHand:5 --RightHand:10}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -75,7 +75,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -84,7 +84,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -92,6 +92,7 @@ action_rule = {
     "argument": "{{$--LeftHand:5 --RightHand:10}}"
 }
 ```
+
 ### Example No.2
 
 ### Assert a LowerEqual condition
@@ -101,7 +102,7 @@ The assertion passes only when the left-hand value is less than or equal to the 
 A macro produces runtime values that are substituted where the token appears.
 The Assert action consumes the macro output and applies the LowerEqual comparison.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -111,7 +112,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -119,7 +120,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$--Condition:LowerEqual --LeftHand:5 --RightHand:10}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -128,7 +129,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -137,7 +138,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -151,7 +152,7 @@ action_rule = {
 ### Left Hand (LeftHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -166,7 +167,7 @@ If parsing fails for either side of the comparison, the operator returns false.
 ### Right Hand (RightHand)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |

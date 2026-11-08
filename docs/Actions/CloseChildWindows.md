@@ -1,6 +1,6 @@
 # Close Child Windows (CloseChildWindows)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ After all targeted windows are closed the driver focus is returned to the main w
 ### Key Features and Functionality
 
 | Feature                   | Description                                                                                                     |
-|---------------------------|-----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Selective Closure         | Optional Argument limits closure to an exact number of child windows; omit to close all children.               |
 | Main Window Preservation  | The window at index zero is always retained and receives driver focus after all closures complete.              |
 | Reverse-Order Processing  | Child handles are iterated in reverse order for consistent stack-based closing behavior.                        |
@@ -26,7 +26,7 @@ After all targeted windows are closed the driver focus is returned to the main w
 ### Usages in RPA
 
 | Use Case       | Description                                                                                             |
-|----------------|---------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Popup Cleanup  | Remove advertisement or notification popups spawned during a workflow before continuing processing.     |
 | Tab Management | Reduce open tabs to the primary context after a subprocess opens temporary browser windows.             |
 | Session Reset  | Enforce a single-window state at the start of each automation iteration without restarting the session. |
@@ -34,7 +34,7 @@ After all targeted windows are closed the driver focus is returned to the main w
 ### Usages in Automation Testing
 
 | Use Case                    | Description                                                                                            |
-|-----------------------------|--------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Post-Test Window Teardown   | Remove all child windows left open by a test step to prevent state leakage into the next test case.    |
 | Partial Window Cleanup      | Close a known subset of popup windows opened during a test flow without closing the main test session. |
 | Window State Assertion Prep | Reset to a single-window state before asserting the expected window count in a multi-window flow test. |
@@ -48,7 +48,7 @@ After all targeted windows are closed the driver focus is returned to the main w
 Closes every child window or tab beyond the main window.
 Execution continues even if individual window closures fail.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -57,14 +57,14 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CloseChildWindows");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -72,7 +72,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,13 +80,14 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
     "pluginName": "CloseChildWindows"
 }
 ```
+
 ### Example No.2
 
 ### Close a specific number of child browser windows
@@ -94,7 +95,7 @@ action_rule = {
 Closes a defined number of child windows based on the provided argument.
 Values outside the valid range are normalized automatically.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -104,7 +105,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -112,7 +113,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Argument:3}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -121,7 +122,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -130,7 +131,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -144,7 +145,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -160,6 +161,7 @@ A negative value is normalized to zero, resulting in no closures.
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#close-window](https://www.w3.org/TR/webdriver/#close-window)

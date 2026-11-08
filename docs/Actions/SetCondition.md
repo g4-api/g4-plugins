@@ -1,6 +1,6 @@
 # Set Condition (SetCondition)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~18 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Lets automation scripts choose between two paths based on a condition, similar t
 ### Key Features and Functionality
 
 | Feature                | Description                                                            |
-|------------------------|------------------------------------------------------------------------|
+| --- | --- |
 | True/False Branching   | Run one group of actions when a condition is true, another when false. |
 | Assertion-Based Checks | Use assertion plugins to evaluate expressions reliably.                |
 | Meta Plugin Creation   | Build and send assertion actions to decide which branch to execute.    |
@@ -21,7 +21,7 @@ Lets automation scripts choose between two paths based on a condition, similar t
 ### Usages in RPA
 
 | Use Case            | Description                                                                      |
-|---------------------|----------------------------------------------------------------------------------|
+| --- | --- |
 | Conditional Actions | Perform steps under one branch if data meets criteria, else run alternate steps. |
 | Dynamic Workflows   | Direct workflow into different paths based on real-time checks.                  |
 | Error Handling      | Run recovery actions when an error flag is set, skip them otherwise.             |
@@ -29,7 +29,7 @@ Lets automation scripts choose between two paths based on a condition, similar t
 ### Usages in Automation Testing
 
 | Use Case              | Description                                                                   |
-|-----------------------|-------------------------------------------------------------------------------|
+| --- | --- |
 | Conditional Test Runs | Execute one set of tests when prerequisites are met, else run fallback tests. |
 | Dynamic Test Flows    | Switch between test steps based on the outcome of prior assertions.           |
 | Validation Branching  | Perform extra checks if initial assertions pass, or log issues if they fail.  |
@@ -43,7 +43,7 @@ Lets automation scripts choose between two paths based on a condition, similar t
 Verify that the welcome message displays “Welcome back!” and, if it does, click the “Proceed” button.
 It uses a `SetCondition` step with `ElementText` comparison against `Welcome back!` on the element located by CSS selector `#welcomeMessage`. If the condition is true, it executes a `Click` action on the element `#proceedButton`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -55,7 +55,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#welcomeMessage");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -76,7 +76,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -87,7 +87,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -97,6 +97,7 @@ action_rule = {
     "onElement": "#welcomeMessage"
 }
 ```
+
 ### Example No.2
 
 ### Check for Cookie Consent Banner and Type “Accept” if Present
@@ -104,7 +105,7 @@ action_rule = {
 Detect whether a cookie consent banner is displayed and, if so, type “Accept” into the consent input field.
 It uses a `SetCondition` step with `AlertExists`. If true, it executes a `SendKeys` action with argument “Accept” on the element located by CSS selector `#cookieConsentInput`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -114,7 +115,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -122,7 +123,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:AlertExists}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -131,7 +132,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -140,7 +141,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -148,6 +149,7 @@ action_rule = {
     "argument": "{{$ --Condition:AlertExists}}"
 }
 ```
+
 ### Example No.3
 
 ### Check Dashboard Page and Click “Go to Dashboard” if Present
@@ -155,7 +157,7 @@ action_rule = {
 Verify whether the current page URL matches the dashboard page, and if it does, click the “Go to Dashboard” button.
 It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://myapp.com/dashboard/*` (the `NotMatch` operator causes the `false` branch to run when there is a match). If the condition is false, it executes a `Click` action on the element located by XPath `//a[@id='goToDashboard']`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -165,7 +167,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -173,7 +175,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://myapp.com/dashboard/*}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -182,7 +184,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -191,7 +193,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -199,6 +201,7 @@ action_rule = {
     "argument": "{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://myapp.com/dashboard/*}}"
 }
 ```
+
 ### Example No.4
 
 ### Check Shopping Cart Page and Search or Click “Checkout”
@@ -206,7 +209,7 @@ action_rule = {
 Verify whether the current page URL matches the shopping cart page and, if it does not, type “laptop” into the search box; otherwise, click the “Checkout” button.
 It uses a `SetCondition` step with `PageUrl` and the `NotMatch` operator against `https://shop.example.com/cart`. If the condition is true, it executes a `SendKeys` action with argument “laptop” on the element located by ID `searchBox`; if the condition is false, it executes a `Click` action on the element located by XPath `//button[@id='checkoutButton']`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -216,7 +219,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -224,7 +227,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:PageUrl --Operator:NotMatch --Expected:https://shop.example.com/cart}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -233,7 +236,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -242,7 +245,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -256,7 +259,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -270,7 +273,7 @@ Clear instructions help the plugin determine if the check passes.
 ### Branches (Branches)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -284,7 +287,7 @@ Organized actions ensure the plugin follows the correct flow.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -298,7 +301,7 @@ Picking the right method makes sure the plugin targets the correct item.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -312,7 +315,7 @@ Choosing the correct property ensures the right data is captured.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -326,7 +329,7 @@ Pointing to the right element ensures accurate results.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -342,7 +345,7 @@ Using a clear pattern helps the system work with the exact text needed.
 ### Condition (Condition)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -357,7 +360,7 @@ Clear conditions help keep the automation on the right path.
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -371,7 +374,7 @@ Precise expected values help avoid errors.
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

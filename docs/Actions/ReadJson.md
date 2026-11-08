@@ -1,6 +1,6 @@
 # Read Json (ReadJson)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -16,7 +16,7 @@ It is useful when JSON responses need to be filtered, transformed, or passed to 
 ### Key Features and Functionality
 
 | Feature                        | Description                                                                      |
-|--------------------------------|----------------------------------------------------------------------------------|
+| --- | --- |
 | File or Inline JSON Input      | Reads JSON from a file if the path exists, or treats the input as raw JSON text. |
 | JSONPath Selection             | Extracts one or more values using a JSONPath expression.                         |
 | Automatic Result Normalization | Returns a single object or an array, depending on how many values are matched.   |
@@ -27,7 +27,7 @@ It is useful when JSON responses need to be filtered, transformed, or passed to 
 ### Usages in RPA
 
 | Use Case                   | Description                                                             |
-|----------------------------|-------------------------------------------------------------------------|
+| --- | --- |
 | API Response Parsing       | Extract specific fields from API JSON responses during automation runs. |
 | Configuration Reading      | Read values from JSON configuration files used by bots.                 |
 | Dynamic Decision Making    | Use extracted JSON values to drive conditional workflow logic.          |
@@ -36,7 +36,7 @@ It is useful when JSON responses need to be filtered, transformed, or passed to 
 ### Usages in Automation Testing
 
 | Use Case              | Description                                                   |
-|-----------------------|---------------------------------------------------------------|
+| --- | --- |
 | Test Data Extraction  | Read expected values from JSON test data files.               |
 | API Validation        | Extract and validate fields from JSON API responses in tests. |
 | Assertion Preparation | Prepare filtered JSON values for comparison and assertions.   |
@@ -54,7 +54,7 @@ The selected value is serialized as JSON before further processing.
 A regular expression `"[^"]+"` is applied to the value attribute to extract the inner string.
 The extracted value is converted to Base64 and stored in the session parameter `ReadJson:ReadJsonResult`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -66,7 +66,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -76,7 +76,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression(""[^"]+"");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -87,7 +87,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -98,7 +98,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -108,6 +108,7 @@ action_rule = {
     "regularExpression": ""[^"]+""
 }
 ```
+
 ### Example No.2
 
 ### Extract Multiple Values from a JSON Array
@@ -118,7 +119,7 @@ The selected tokens are serialized into a JSON array.
 A regular expression `\d+` is applied to the value attribute to extract numeric content.
 The matched value is converted to Base64 and written to the session parameter `ReadJson:ReadJsonResult`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -130,7 +131,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -140,7 +141,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("\d+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -151,7 +152,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -162,7 +163,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -172,6 +173,7 @@ action_rule = {
     "regularExpression": "\d+"
 }
 ```
+
 ### Example No.3
 
 ### Extract JSON Data without a Regular Expression
@@ -182,7 +184,7 @@ The selected result is serialized as JSON.
 No filtering is applied because no regular expression is provided.
 The serialized JSON is converted to Base64 and saved in the session parameter `ReadJson:ReadJsonResult`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -193,7 +195,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -202,7 +204,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("$.config");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -212,7 +214,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -222,7 +224,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -237,7 +239,7 @@ action_rule = {
 ### Read Json Read Json Result (ReadJson:ReadJsonResult)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -253,7 +255,7 @@ Its value can be referenced by other parameters or expressions in the workflow.
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -267,7 +269,7 @@ This flexibility allows workflows to read JSON from disk or from dynamically gen
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -281,7 +283,7 @@ Using a precise path ensures only the relevant data is read and passed to later 
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

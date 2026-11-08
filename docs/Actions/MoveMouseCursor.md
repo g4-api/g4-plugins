@@ -1,6 +1,6 @@
 # Move Mouse Cursor (MoveMouseCursor)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ When no element is provided, X and Y coordinates define the target position and 
 ### Key Features and Functionality
 
 | Feature              | Description                                                                                                                                       |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Element Targeting    | Moves the cursor to a specified web element using any supported locator strategy.                                                                 |
 | Coordinate Targeting | Moves the cursor to explicit X and Y coordinates when no element is provided.                                                                     |
 | Origin Control       | Accepts 'Pointer' (relative to current cursor position) or 'Viewport' (relative to the viewport top-left corner) as the movement reference point. |
@@ -24,7 +24,7 @@ When no element is provided, X and Y coordinates define the target position and 
 ### Usages in RPA
 
 | Use Case              | Description                                                                                             |
-|-----------------------|---------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Hover Interaction     | Position the cursor over an element to trigger hover states, tooltips, or dropdown menus in a workflow. |
 | Mouse Pre-Positioning | Move the cursor to a known coordinate before a scripted click or drag action.                           |
 | Tooltip Data Access   | Hover over elements to reveal hidden data or tooltip content for downstream extraction.                 |
@@ -32,7 +32,7 @@ When no element is provided, X and Y coordinates define the target position and 
 ### Usages in Automation Testing
 
 | Use Case                    | Description                                                                                                  |
-|-----------------------------|--------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Hover State Testing         | Verify that hover-triggered elements such as tooltips, dropdowns, or overlays appear correctly.              |
 | Coordinate Movement Testing | Validate that cursor movement to absolute or relative coordinates behaves as expected.                       |
 | Origin Mode Testing         | Confirm that Pointer-relative and Viewport-relative movements produce distinct and correct cursor positions. |
@@ -47,7 +47,7 @@ When no element is provided, X and Y coordinates define the target position and 
 Locates the element matching `#TooltipTarget` using the CssSelector strategy and moves the mouse cursor to it.
 Use this form to hover over a specific element to trigger hover states, reveal tooltips, or prepare for a follow-on click or drag action.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -67,7 +67,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#TooltipTarget");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -77,7 +77,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -87,7 +87,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -96,6 +96,7 @@ action_rule = {
     "onElement": "#TooltipTarget"
 }
 ```
+
 ### Example No.2
 
 ### Move the cursor to explicit coordinates
@@ -103,7 +104,7 @@ action_rule = {
 Moves the mouse cursor by (150, 250) relative to the current pointer position (the default Origin).
 Use this form to position the cursor at a known offset from its current location before a follow-on interaction.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -113,7 +114,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -121,7 +122,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --X:150 --Y:250}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -130,7 +131,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -139,7 +140,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -147,6 +148,7 @@ action_rule = {
     "argument": "{{$ --X:150 --Y:250}}"
 }
 ```
+
 ### Example No.3
 
 ### Move the cursor to viewport-relative coordinates
@@ -154,7 +156,7 @@ action_rule = {
 Moves the mouse cursor to coordinates (400, 300) measured from the top-left corner of the visible viewport by setting Origin to 'Viewport'.
 Use this form when target coordinates are calculated relative to the viewport rather than the current cursor position.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -164,7 +166,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -172,7 +174,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --X:400 --Y:300 --Origin:Viewport}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -181,7 +183,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -190,7 +192,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -204,7 +206,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -218,7 +220,7 @@ Argument is only evaluated when OnElement is absent; it is ignored when an eleme
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -233,7 +235,7 @@ Locator is only evaluated when OnElement is also provided.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -249,7 +251,7 @@ When provided, element targeting takes precedence over X, Y, and Origin.
 ### Origin (Origin)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -265,6 +267,7 @@ Ignored when OnElement is specified.
 ##### Pointer
 
 Movement is relative to the current position of the mouse pointer.
+
 ##### Viewport
 
 Movement is relative to the top-left corner of the visible viewport.
@@ -272,7 +275,7 @@ Movement is relative to the top-left corner of the visible viewport.
 ### X (X)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -286,7 +289,7 @@ Ignored when OnElement is specified.
 ### Y (Y)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -302,6 +305,7 @@ Ignored when OnElement is specified.
 * Mobile Web
 * Os Native
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#actions](https://www.w3.org/TR/webdriver/#actions)

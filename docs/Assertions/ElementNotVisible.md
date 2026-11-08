@@ -1,6 +1,6 @@
 # Element Not Visible (ElementNotVisible)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Assertion Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -8,13 +8,13 @@
 
 ### Purpose
 
-The `ElementNotVisible` plugin is designed to assert that a specified web element is not visible within a web browser during automated tasks. 
+The `ElementNotVisible` plugin is designed to assert that a specified web element is not visible within a web browser during automated tasks.
 This plugin is essential for scenarios where ensuring an element is not visible is necessary before proceeding with automation workflows.
 
 ### Key Features and Functionality
 
 | Feature               | Description                                                                     |
-|-----------------------|---------------------------------------------------------------------------------|
+| --- | --- |
 | Visibility Validation | Validates that the specified web element is not visible during execution.       |
 | Seamless Integration  | Integrates smoothly with automation workflows to ensure elements remain hidden. |
 | Reliable Assertion    | Provides a reliable mechanism to confirm the non-visibility of web elements.    |
@@ -22,14 +22,14 @@ This plugin is essential for scenarios where ensuring an element is not visible 
 ### Usages in RPA
 
 | Usage                | Description                                                                                     |
-|----------------------|-------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Ensure Hidden State  | Confirms that specific elements are not visible, preventing unintended actions in workflows.    |
 | Process Flow Control | Validates that elements remain hidden to ensure the correct progression of automated processes. |
 
 ### Usages in Automation Testing
 
 | Usage                     | Description                                                                                         |
-|---------------------------|-----------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Non-Visibility Validation | Ensures that specific elements are not visible during test scenarios, validating user interactions. |
 | Workflow Verification     | Confirms that workflows proceed with the correct elements hidden, ensuring accurate test outcomes.  |
 
@@ -37,10 +37,10 @@ This plugin is essential for scenarios where ensuring an element is not visible 
 
 ### Example No.1
 
-Assert that a specific web element is not visible during the execution of automated tasks. 
+Assert that a specific web element is not visible during the execution of automated tasks.
 This is useful for validating scenarios where an element should remain hidden to prevent unwanted interactions.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -51,7 +51,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -60,7 +60,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#hiddenElement");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,7 +80,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -89,12 +89,13 @@ action_rule = {
     "onElement": "#hiddenElement"
 }
 ```
+
 ### Example No.2
 
-Perform an assertion to ensure a specific web element is not visible, validating that it remains hidden during the execution of the automation script. 
+Perform an assertion to ensure a specific web element is not visible, validating that it remains hidden during the execution of the automation script.
 The `Assert` plugin is used to check this condition, and if the element is not visible, the assertion passes.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -106,7 +107,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -116,7 +117,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#hiddenElement");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -127,7 +128,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -138,7 +139,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -154,33 +155,34 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Specifies the web element that is being validated for its non-visibility. 
+Specifies the web element that is being validated for its non-visibility.
 This can be a CSS selector, XPath, or other locator strategy to identify the element.
 
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Specifies the locator strategy used to identify the element for the non-visibility validation. 
+Specifies the locator strategy used to identify the element for the non-visibility validation.
 Common strategies include CSS selectors, XPath, ID, and others.
 
 ## Scope
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#find-element](https://www.w3.org/TR/webdriver/#find-element)

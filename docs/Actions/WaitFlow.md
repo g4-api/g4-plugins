@@ -1,6 +1,6 @@
 # Wait Flow (WaitFlow)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,7 +14,7 @@ This helps ensure steps run in the right order and prevents errors when waiting 
 ### Key Features and Functionality
 
 | Feature               | Description                                                            |
-|-----------------------|------------------------------------------------------------------------|
+| --- | --- |
 | Conditional Waiting   | Pause execution until a given condition is met at runtime.             |
 | Timeout Handling      | Use a set delay to wait a fixed amount of time before continuing.      |
 | Assertion Integration | Use assertion plugins to check conditions and control when to proceed. |
@@ -23,7 +23,7 @@ This helps ensure steps run in the right order and prevents errors when waiting 
 ### Usages in RPA
 
 | Use Case                 | Description                                                         |
-|--------------------------|---------------------------------------------------------------------|
+| --- | --- |
 | Conditional Flow Control | Stop a robot until data or a page element meets a required state.   |
 | Timed Delays             | Wait a fixed time between steps to prevent race conditions.         |
 | Dynamic Task Management  | Hold off on actions until external events or data become available. |
@@ -31,7 +31,7 @@ This helps ensure steps run in the right order and prevents errors when waiting 
 ### Usages in Automation Testing
 
 | Use Case                    | Description                                                               |
-|-----------------------------|---------------------------------------------------------------------------|
+| --- | --- |
 | Wait for Element Visibility | Pause a test until a page element appears before continuing.              |
 | Synchronization Points      | Insert waits to keep tests in sync with the application under test.       |
 | Handle Asynchronous Events  | Wait for background actions or data loads before moving to the next step. |
@@ -46,7 +46,7 @@ Wait for the login form with the CSS selector `#loginForm` to become visible, us
 It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:8000`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in milliseconds.
 Wait steps do not return a value; they only block execution until the condition is met or the timeout expires.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#loginForm");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -79,7 +79,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -90,7 +90,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -100,6 +100,7 @@ action_rule = {
     "onElement": "#loginForm"
 }
 ```
+
 ### Example No.2
 
 ### Wait for Login Form to Become Visible (HH:MM:SS Timeout)
@@ -108,7 +109,7 @@ Wait for the login form with the CSS selector `#loginForm` to become visible, us
 It uses the `WaitFlow` plugin with `--Condition:ElementVisible` and `--Timeout:00:00:08`, applied to the element located by CSS selector `#loginForm`. Note that this timeout is specified in HH:MM:SS format.
 Wait steps do not return a value; they only block execution until the condition is met or the timeout expires.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -120,7 +121,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -130,7 +131,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#loginForm");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -141,7 +142,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -152,7 +153,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -162,6 +163,7 @@ action_rule = {
     "onElement": "#loginForm"
 }
 ```
+
 ### Example No.3
 
 ### Pause Execution for 4 Seconds
@@ -170,7 +172,7 @@ Pause execution for 4 seconds before continuing to the next step.
 It uses the `WaitFlow` plugin with an argument of `00:00:04`.
 Wait steps do not return a value; they block execution for the specified duration.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -180,7 +182,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -188,7 +190,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("00:00:04");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -197,7 +199,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -206,7 +208,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -214,6 +216,7 @@ action_rule = {
     "argument": "00:00:04"
 }
 ```
+
 ### Example No.4
 
 ### Wait for `data-status` Attribute to Match via XPath (Millisecond Timeout)
@@ -222,7 +225,7 @@ Wait for the `data-status` attribute of the `<div id='dataContainer'>` element t
 It uses the `WaitFlow` plugin with `--Condition:ElementAttribute`, `--Operator:Match`, `--Expected:data-loaded`, and `--Timeout:12000`, applied to the element’s `data-status` attribute. Note that the timeout is specified in milliseconds.
 Wait steps block execution until the condition is met or the timeout expires.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -234,7 +237,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -244,7 +247,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@id='dataContainer']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -255,7 +258,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -266,7 +269,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -276,6 +279,7 @@ action_rule = {
     "onElement": "//div[@id='dataContainer']"
 }
 ```
+
 ### Example No.5
 
 ### Wait for Specific Text via CSS Selector
@@ -283,7 +287,7 @@ action_rule = {
 Wait for the text `Order Complete` to appear in the element located by CSS selector `#statusMessage`. It uses the `WaitFlow` plugin with `--Condition:ElementText`, `--Operator:Equal`, and `--Expected:Order Complete` applied to the element. The timeout is specified as the system’s default duration.
 Wait steps block execution until the condition is met or the system’s default timeout expires.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -295,7 +299,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -305,7 +309,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#statusMessage");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -316,7 +320,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -327,7 +331,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -337,6 +341,7 @@ action_rule = {
     "onElement": "#statusMessage"
 }
 ```
+
 ### Example No.6
 
 ### Pause Execution for 2 Seconds
@@ -344,7 +349,7 @@ action_rule = {
 Pause execution for 2 seconds before continuing to the next step. It uses the `WaitFlow` plugin with an argument of `2000` (milliseconds).
 Wait steps block execution for the specified duration.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -354,7 +359,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -362,7 +367,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("2000");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -371,7 +376,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -380,7 +385,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -394,7 +399,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -408,7 +413,7 @@ Conditional waits specify what to look for and any needed parameters.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -422,7 +427,7 @@ Choosing the correct method ensures the right element is found.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -436,7 +441,7 @@ Picking the correct property ensures the right data is accessed.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -452,7 +457,7 @@ Targeting the correct element ensures accurate automation behavior.
 ### Condition (Condition)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -466,7 +471,7 @@ Clear conditions help the automation follow the correct path.
 ### Expected (Expected)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -480,7 +485,7 @@ Clear expected values ensure accurate checks.
 ### Operator (Operator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -494,7 +499,7 @@ Picking the right comparison type makes sure decisions are correct.
 ### Timeout (Timeout)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |

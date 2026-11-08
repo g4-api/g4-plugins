@@ -1,6 +1,6 @@
 # Switch Frame (SwitchFrame)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~12 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -14,14 +14,14 @@ It supports two mutually exclusive modes selected automatically at runtime: swit
 ### Key Features and Functionality
 
 | Feature           | Description                                                                                                                |
-|-------------------|----------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Switch by Index   | When `Argument` parses as an integer, calls `WebDriver.SwitchTo().Frame(index)` directly — no element resolution.          |
 | Switch by Element | When `Argument` is absent or non-integer, resolves a frame element via `GetElement` and calls `SwitchTo().Frame(element)`. |
 
 ### Usages in RPA
 
 | Usage            | Description                                                                        |
-|------------------|------------------------------------------------------------------------------------|
+| --- | --- |
 | Frame Navigation | Automates switching into frames by index or element locator during page workflows. |
 | Data Extraction  | Focuses the driver context on frame-contained content before extracting data.      |
 | Form Interaction | Enables bots to interact with forms and inputs contained within iframes.           |
@@ -29,7 +29,7 @@ It supports two mutually exclusive modes selected automatically at runtime: swit
 ### Usages in Automation Testing
 
 | Usage                | Description                                                                                 |
-|----------------------|---------------------------------------------------------------------------------------------|
+| --- | --- |
 | UI Testing           | Enables automated tests to interact with elements inside frames for comprehensive coverage. |
 | Frame Verification   | Verifies that frame elements are correctly loaded and interactable during test execution.   |
 | Multi-Frame Handling | Supports testing scenarios involving multiple frames by switching context as required.      |
@@ -43,7 +43,7 @@ It supports two mutually exclusive modes selected automatically at runtime: swit
 Switch WebDriver context into the first frame on the page by passing its zero-based index `0` as the `Argument`.
 When `Argument` parses as an integer, `WebDriver.SwitchTo().Frame(index)` is called directly — no element resolution occurs.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -61,7 +61,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("0");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -70,7 +70,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -79,7 +79,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -87,6 +87,7 @@ action_rule = {
     "argument": "0"
 }
 ```
+
 ### Example No.2
 
 ### Switch to a frame by element (CSS selector)
@@ -94,7 +95,7 @@ action_rule = {
 Switch WebDriver context into the iframe element identified by the CSS selector `#mainFrame`.
 When `Argument` is absent or cannot be parsed as an integer, the plugin resolves the element via `GetElement` using the specified `Locator` and `OnElement` values, then calls `WebDriver.SwitchTo().Frame(element)`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -105,7 +106,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -114,7 +115,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#mainFrame");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -124,7 +125,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -134,7 +135,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -149,7 +150,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -163,7 +164,7 @@ When the value is absent or non-integer, the plugin resolves the frame element u
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -176,7 +177,7 @@ Applies only when `Argument` is absent or not parseable as an integer.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -191,6 +192,7 @@ Applies only when `Argument` is absent or not parseable as an integer.
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#switch-to-frame](https://www.w3.org/TR/webdriver/#switch-to-frame)

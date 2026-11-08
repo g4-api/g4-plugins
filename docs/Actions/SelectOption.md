@@ -1,6 +1,6 @@
 # Select Option (SelectOption)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~19 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ Use this action whenever an automation workflow must interact with dropdown menu
 ### Key Features and Functionality
 
 | Feature               | Description                                                                                                                                      |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Element Validation    | Throws `InvalidOperationException` if the target is not a `<select>` element, preventing silent failures on wrong element types.                 |
 | Index Selection       | Selects the option at the specified zero-based position. Out-of-range and parse errors are caught and recorded as exceptions without rethrowing. |
 | Value Selection       | Selects the option whose `value` attribute matches `Argument` exactly using XPath `./option[@value='…']`.                                        |
@@ -25,7 +25,7 @@ Use this action whenever an automation workflow must interact with dropdown menu
 ### Usages in RPA
 
 | Use Case        | Description                                                                                                    |
-|-----------------|----------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Form Completion | Select a country, state, or category from a dropdown as part of a multi-field form submission workflow.        |
 | Data Entry      | Automate selection of predefined options in data-entry screens where dropdown values are process-controlled.   |
 | User Simulation | Reproduce exact user interactions with dropdown menus to drive downstream page updates or validation triggers. |
@@ -33,7 +33,7 @@ Use this action whenever an automation workflow must interact with dropdown menu
 ### Usages in Automation Testing
 
 | Use Case              | Description                                                                                                              |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Dropdown Behavior     | Verify that selecting each option triggers the correct page update, form state, or API call.                             |
 | Boundary Testing      | Test index-boundary conditions — first option, last option, and out-of-range index — to confirm error handling behavior. |
 | Data-Driven Selection | Drive option selection from a test data set using value attributes to ensure each option is reachable by value.          |
@@ -48,7 +48,7 @@ Selects the option at zero-based index `1` (the second option) from the dropdown
 The `onAttribute` is set to `Index`, so the `argument` is parsed as an integer and used to click the option at that position.
 If the argument is not a valid integer or the index is out of range, the exception is caught and recorded without interrupting the workflow.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -61,7 +61,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -72,7 +72,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#SelectElement");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -84,7 +84,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -96,7 +96,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -107,6 +107,7 @@ action_rule = {
     "onElement": "#SelectElement"
 }
 ```
+
 ### Example No.2
 
 ### Select an option by value attribute
@@ -115,7 +116,7 @@ Selects the option whose `value` attribute equals `option2` from the dropdown id
 The `onAttribute` is set to `Value`, so the action matches against each option's `value` attribute using XPath `./option[@value='option2']`.
 Use this mode when the value attribute is stable and predictable, regardless of the option's visible text.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -128,7 +129,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -139,7 +140,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("SelectElement");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -151,7 +152,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -163,7 +164,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -174,6 +175,7 @@ action_rule = {
     "onElement": "SelectElement"
 }
 ```
+
 ### Example No.3
 
 ### Select an option by partial text
@@ -182,7 +184,7 @@ Selects the first option whose visible text contains the substring `Option 2` fr
 The `onAttribute` is set to `PartialText`, so the action uses XPath `./option[contains(.,'Option 2')]` scoped to the `<select>` element.
 Use this mode when only a portion of the option text is known or when option labels are generated dynamically.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -194,7 +196,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -204,7 +206,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//select[@id='SelectElement']");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -215,7 +217,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -226,7 +228,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -236,6 +238,7 @@ action_rule = {
     "onElement": "//select[@id='SelectElement']"
 }
 ```
+
 ### Example No.4
 
 ### Select an option by exact text (default mode)
@@ -244,7 +247,7 @@ Selects the option whose full visible text equals `Option 2` from the dropdown m
 No `onAttribute` is specified, so the action uses the default exact text mode with XPath `./option[.='Option 2']`.
 Use this mode when the complete option text is known in advance and must match precisely.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -256,7 +259,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -266,7 +269,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#SelectElement");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -277,7 +280,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -288,7 +291,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -304,7 +307,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -317,7 +320,7 @@ Its meaning depends on the OnAttribute property: an integer for Index mode, a va
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -331,7 +334,7 @@ When absent the default Xpath strategy is used.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -347,10 +350,12 @@ When absent or set to any value other than Index, Value, or PartialText, the def
 
 Parses `Argument` as a zero-based integer index and clicks the option at that position.
 Out-of-range or non-integer values are caught and recorded as plugin exceptions without rethrowing.
+
 ##### Value
 
 Selects the first option whose `value` HTML attribute equals `Argument` exactly.
 Uses XPath `./option[@value='…']` scoped to the `<select>` element. Matching is case-sensitive.
+
 ##### Partial Text
 
 Selects the first option whose visible text contains `Argument` as a substring.
@@ -359,7 +364,7 @@ Uses XPath `./option[contains(.,'…')]` scoped to the `<select>` element. Match
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
@@ -373,6 +378,7 @@ The element must be a `<select>` tag — any other tag type causes an `InvalidOp
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#element-click](https://www.w3.org/TR/webdriver/#element-click)

@@ -1,6 +1,6 @@
 # Copy Resource (CopyResource)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -13,7 +13,7 @@ Downloads files from web elements and saves them to local disk. It reads a URL f
 ### Key Features and Functionality
 
 | Feature                 | Description                                                                                   |
-|-------------------------|-----------------------------------------------------------------------------------------------|
+| --- | --- |
 | Element URL Resolution  | Reads the download URL from a named attribute or element text content.                        |
 | Regex URL Extraction    | Applies a regular expression to isolate the exact URL from surrounding text or markup.        |
 | HTTP/HTTPS Download     | Fetches file content via an HttpClient GET request and writes bytes directly to disk.         |
@@ -25,7 +25,7 @@ Downloads files from web elements and saves them to local disk. It reads a URL f
 ### Usages in RPA
 
 | Use Case            | Description                                                                                            |
-|---------------------|--------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Bulk Asset Download | Download images, PDFs, or other files listed on a page into a local folder as part of an RPA workflow. |
 | Document Collection | Harvest linked documents from a content portal and store them locally for further processing.          |
 | Media Archival      | Capture media files from web pages into a structured archive directory.                                |
@@ -33,7 +33,7 @@ Downloads files from web elements and saves them to local disk. It reads a URL f
 ### Usages in Automation Testing
 
 | Use Case              | Description                                                                                              |
-|-----------------------|----------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Resource Verification | Download advertised resources and verify their content or file size against expected values.             |
 | Download Regression   | Confirm that file download links continue to resolve correctly after application changes.                |
 | Performance Baseline  | Measure resource download durations against an established baseline using parallel and sequential modes. |
@@ -47,7 +47,7 @@ Downloads files from web elements and saves them to local disk. It reads a URL f
 Selects all `img` elements with a `src` attribute using an XPath locator, reads the `src` attribute from each, matches the URL with the supplied regular expression, and downloads each image to `/home/user/images` in parallel.
 The `--Parallel` switch activates concurrent processing via `Parallel.ForEach`, which is useful when downloading many resources at once.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -60,7 +60,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -71,7 +71,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("https?://.*");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -83,7 +83,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -95,7 +95,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -106,6 +106,7 @@ action_rule = {
     "regularExpression": "https?://.*"
 }
 ```
+
 ### Example No.2
 
 ### Download documents from href attributes sequentially
@@ -113,7 +114,7 @@ action_rule = {
 Selects `a` elements whose `href` ends with `.pdf` using a CSS selector, reads the `href` attribute from each, extracts the URL with the regular expression, and saves each document to `/home/user/docs` one at a time.
 Sequential mode is the default when `--Parallel` is omitted.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -127,7 +128,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -139,7 +140,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("https?://[^\s]+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -152,7 +153,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -165,7 +166,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -177,6 +178,7 @@ action_rule = {
     "regularExpression": "https?://[^\s]+"
 }
 ```
+
 ### Example No.3
 
 ### Download resources extracted from element text content
@@ -184,7 +186,7 @@ action_rule = {
 Selects elements matching the CSS selector `div.resource-link`, reads their visible text, applies the regular expression to extract the embedded URL, and downloads the resolved resource to `/home/user/resources`.
 Use this mode when the download URL is embedded in element text rather than an HTML attribute.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -197,7 +199,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -208,7 +210,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("https?://[^\s]+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -220,7 +222,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -232,7 +234,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -249,7 +251,7 @@ action_rule = {
 ### Copy Resource Copied Resources (CopyResource:CopiedResources)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -265,7 +267,7 @@ Use this parameter in downstream steps to validate, move, or further process the
 ### Argument (Argument)
 
 | Attribute             | Value                 |
-|-----------------------|-----------------------|
+| --------------------- | --------------------- |
 | **Default Value**     | Null                  |
 | **Depends On**        | None                  |
 | **Mandatory**         | Yes                   |
@@ -279,7 +281,7 @@ Defaults to the current working directory when this property is also absent.
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -292,7 +294,7 @@ Defaults to Xpath when not provided.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -305,7 +307,7 @@ When absent the plugin reads the element's visible text content instead.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -318,7 +320,7 @@ Each matched element contributes one download attempt.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -334,7 +336,7 @@ Defaults to `(?s).*`, which matches and returns the entire value unchanged.
 ### Path (Path)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -348,7 +350,7 @@ If neither provides a usable path the current working directory is used and the 
 ### Parallel (Parallel)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -363,6 +365,7 @@ Results are accumulated in a thread-safe ConcurrentBag regardless of mode.
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#find-elements](https://www.w3.org/TR/webdriver/#find-elements)

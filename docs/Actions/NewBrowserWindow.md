@@ -1,6 +1,6 @@
 # New Browser Window (NewBrowserWindow)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~16 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -17,7 +17,7 @@ The `Target` parameter controls the `window.open()` target context and the `Amou
 ### Key Features and Functionality
 
 | Feature              | Description                                                                                                       |
-|----------------------|-------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Blank Window Opening | Opens a new blank window or tab (`about:blank`) when no element is provided.                                     |
 | Element URL Source   | Reads the URL from an element's text content or a named attribute when `OnElement` is specified.                  |
 | Regex Filtering      | Always applies `RegularExpression` to the extracted URL so only the matched portion is passed to `window.open()`. |
@@ -27,7 +27,7 @@ The `Target` parameter controls the `window.open()` target context and the `Amou
 ### Usages in RPA
 
 | Use Case                   | Description                                                                                                           |
-|----------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Multi-Window Workflows     | Open several blank tabs or element-sourced URLs simultaneously as part of a parallel processing workflow.             |
 | Link-Driven Navigation     | Programmatically open a URL extracted from a page element in a new tab without navigating away from the current page. |
 | Bulk Context Provisioning  | Pre-open a fixed number of blank windows that subsequent steps populate by switching handles and navigating each one. |
@@ -35,7 +35,7 @@ The `Target` parameter controls the `window.open()` target context and the `Amou
 ### Usages in Automation Testing
 
 | Use Case                | Description                                                                                                                  |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| --- | --- |
 | Multi-Window Testing    | Verify that an application correctly handles workflows that span multiple browser windows or tabs.                            |
 | Link Target Testing     | Confirm that element-extracted URLs open in the expected target context (`_blank`, `_self`, etc.) when the action runs.      |
 | Window Count Validation | Open a known number of tabs with `Amount` and assert the resulting window handle count to validate multi-window bookkeeping. |
@@ -50,7 +50,7 @@ Calls `window.open('about:blank', '_blank')` three times to open three new brows
 No element is required — the URL is always `about:blank` when `OnElement` is absent.
 Use this form when the goal is to pre-open a set of blank tabs as part of a multi-window workflow.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -60,7 +60,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Amount:3 --Target:_blank}}");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -77,7 +77,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -86,7 +86,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -94,6 +94,7 @@ action_rule = {
     "argument": "{{$ --Amount:3 --Target:_blank}}"
 }
 ```
+
 ### Example No.2
 
 ### Open a new tab using a URL from element text
@@ -102,7 +103,7 @@ Locates the element matching `#OpenLink` using the CssSelector strategy and read
 Calls `window.open(url, '_blank')` once to open a new tab at that address.
 Use this form when the target URL is stored as the visible text of a page element.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -113,7 +114,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -122,7 +123,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("#OpenLink");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -132,7 +133,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -142,7 +143,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -151,6 +152,7 @@ action_rule = {
     "onElement": "#OpenLink"
 }
 ```
+
 ### Example No.3
 
 ### Open a URL from an element attribute filtered by regex
@@ -159,7 +161,7 @@ Locates the element matching `#OpenLink`, reads its `href` attribute, and applie
 Calls `window.open(url, '_self')` to load the extracted URL in the current tab.
 Use this form when the attribute value contains surrounding text and only the URL portion should be passed to `window.open()`.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -173,7 +175,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -185,7 +187,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setRegularExpression("https?://[^\s]+");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -198,7 +200,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -211,7 +213,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -229,7 +231,7 @@ action_rule = {
 ### Argument (Argument)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -242,7 +244,7 @@ When absent both parameters take their default values: Amount = 1 and Target = _
 ### Locator (Locator)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Xpath             |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -257,7 +259,7 @@ Locator has no effect when OnElement is not set.
 ### On Attribute (OnAttribute)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -272,7 +274,7 @@ OnAttribute has no effect when OnElement is not set.
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -285,7 +287,7 @@ When absent no element is resolved and the URL defaults to `about:blank`.
 ### Regular Expression (RegularExpression)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -301,7 +303,7 @@ When absent the default pattern matches the full string so the complete extracte
 ### Amount (Amount)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | 1                 |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -316,7 +318,7 @@ When the value cannot be parsed as an integer the call count is 0 and no window 
 ### Target (Target)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | _blank            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
@@ -331,12 +333,15 @@ When absent the value defaults to `_blank`.
 ##### Blank
 
 Opens the URL in a new tab or window.
+
 ##### Self
 
 Opens the URL in the current tab or window.
+
 ##### Parent
 
 Opens the URL in the parent frame.
+
 ##### Top
 
 Opens the URL in the topmost frame.
@@ -345,6 +350,7 @@ Opens the URL in the topmost frame.
 
 * Mobile Web
 * Web
+
 ## See Also
 
 apiDocumentation: [https://www.w3.org/TR/webdriver/#execute-script](https://www.w3.org/TR/webdriver/#execute-script)

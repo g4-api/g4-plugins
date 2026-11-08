@@ -1,6 +1,6 @@
 # Session (Session)
 
-[Table of Content](../Home.md)  
+[Table of Content](../Home.md)
 
 ~9 min · GetParameter Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
@@ -15,7 +15,7 @@ This makes sure every run uses the right data without conflicts.
 ### Key Features and Functionality
 
 | Feature             | Description                                                          |
-|---------------------|----------------------------------------------------------------------|
+| --- | --- |
 | Parameter retrieval | Reads values specific to the current automation session.             |
 | Live updates        | Picks up changes to session parameters during the run.               |
 | Plugin integration  | Works with other plugins to pass session values into workflow steps. |
@@ -23,14 +23,14 @@ This makes sure every run uses the right data without conflicts.
 ### Usages in RPA
 
 | Use Case               | Description                                                     |
-|------------------------|-----------------------------------------------------------------|
+| --- | --- |
 | Dynamic configuration  | Loads session values so workflows adapt to each run’s settings. |
 | Session data isolation | Keeps each session’s data separate to avoid mixing values.      |
 
 ### Usages in Automation Testing
 
 | Use Case               | Description                                                     |
-|------------------------|-----------------------------------------------------------------|
+| --- | --- |
 | Isolated test sessions | Uses session values to keep data separate during parallel runs. |
 | Dynamic test setup     | Fetches session values to configure tests on the fly.           |
 
@@ -44,7 +44,7 @@ This example demonstrates how to retrieve a session-level environment variable n
 It retrieves the raw value of `UserToken` from the session scope for use in downstream workflows.
 The retrieved value is available in the `Result` output field for subsequent steps.
 
-_**CSharp**_
+**CSharp:**
 
 ```csharp
 var actionRule = new ActionRuleModel
@@ -54,7 +54,7 @@ var actionRule = new ActionRuleModel
 };
 ```
 
-_**Java**_
+**Java:**
 
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
@@ -62,7 +62,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("UserToken");
 ```
 
-_**Javascript**_
+**Javascript:**
 
 ```js
 var actionRule = {
@@ -71,7 +71,7 @@ var actionRule = {
 };
 ```
 
-_**JSON**_
+**JSON:**
 
 ```js
 {
@@ -80,7 +80,7 @@ _**JSON**_
 }
 ```
 
-_**Python**_
+**Python:**
 
 ```python
 action_rule = {
@@ -94,7 +94,7 @@ action_rule = {
 ### On Element (OnElement)
 
 | Attribute         | Value             |
-|-------------------|-------------------|
+| ----------------- | ----------------- |
 | **Default Value** | Null              |
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
