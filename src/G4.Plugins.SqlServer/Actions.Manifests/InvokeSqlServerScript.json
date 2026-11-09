@@ -1,0 +1,535 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"SqlServer"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeSqlServerScript.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/InvokeSqlServerScript.cs"
+			},
+			"mcp": {
+				"title": "Invoke SQL Server Script"
+			},
+			"rag": {
+				"description": "Run multi-batch SQL Server scripts from an automation run, split on GO and GO n lines like sqlcmd. Scripts come from a .sql file or inline text, an optional transaction rolls back every batch on failure, and batch and row totals stay available to later steps for checks.",
+				"qa": [
+					{
+						"question": "What does the InvokeSqlServerScript plugin do?",
+						"answer": "It runs a SQL Server script split into batches on GO separator lines and reports the batch count and changed rows."
+					},
+					{
+						"question": "Which parameters does InvokeSqlServerScript support?",
+						"answer": "CommandText or CommandFile supplies the script, the Base64 switch decodes a Base64-encoded CommandText, and CommandTimeout, Transaction, and NoEntity tune the run. Credentials, ConnectionString, or discrete values such as Server and Database select the connection."
+					},
+					{
+						"question": "How does InvokeSqlServerScript integrate with G4 workflows?",
+						"answer": "It is an Action task that uses ActionRuleModel and writes InvokeSqlServerScript:BatchCount and InvokeSqlServerScript:RowsAffected as Base64-encoded session parameters."
+					},
+					{
+						"question": "What are best practices for InvokeSqlServerScript?",
+						"answer": "Use CommandFile for long scripts, use CommandFile or a Base64-encoded CommandText with the Base64 switch for SQL that contains ` --` or `}}`, and add Transaction so a failing batch leaves no partial changes."
+					},
+					{
+						"question": "How does InvokeSqlServerScript run an inline script that contains ` --` or `}}`?",
+						"answer": "Encode the whole script, GO lines included, as UTF-8 Base64, pass it as CommandText, and add the Base64 switch. The script is decoded first and then split into batches, while CommandFile content is always read as plain text."
+					},
+					{
+						"question": "How is an InvokeSqlServerScript rule and script written?",
+						"answer": "Use $type Action, pluginName InvokeSqlServerScript, and an argument such as {{$ --CommandFile:C:\\Scripts\\deploy.sql --Credentials:sql-production --Transaction}}. Inside the script, a line that holds only GO ends a batch, GO n runs the preceding batch n times, and splitting is line based like sqlcmd."
+					},
+					{
+						"question": "What metadata identifies the InvokeSqlServerScript manifest?",
+						"answer": "The key is InvokeSqlServerScript, the version is 4, the plugin type is Action, the namespace is G4.Plugins.SqlServer, the category is SqlServer, and the author is Roei Sabag."
+					},
+					{
+						"question": "What behavior does the InvokeSqlServerScript manifest describe?",
+						"answer": "It describes running multi-batch deployment, migration, and seeding scripts in order and reporting batch and row totals to later steps. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeSqlServerScript.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/InvokeSqlServerScript.cs"
+					},
+					{
+						"question": "What errors can stop InvokeSqlServerScript?",
+						"answer": "The step fails when neither CommandText nor CommandFile is set, the file is missing, CommandText is not valid Base64 while the Base64 switch is set, no server is resolved, or a batch fails. Batches after the failing one do not run, and Transaction rolls back the earlier ones."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Invoke SQL Server Script",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Runs a multi-batch SQL Server script, split on GO separator lines the same way sqlcmd splits it.",
+		"Runs deployment, migration, and seeding scripts from a .sql file or inline text, optionally inside one transaction.",
+		"Reports how many batches ran and how many rows changed so later steps can confirm the result.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature              | Description                                                                                          |",
+		"|----------------------|------------------------------------------------------------------------------------------------------|",
+		"| Batch splitting      | Splits the script on lines that hold only `GO` or `GO n`, in any letter case.                        |",
+		"| Batch repetition     | Runs the preceding batch `n` times for a `GO n` separator.                                            |",
+		"| Script sources       | Reads the script from `CommandText`, Base64 `CommandText` with `Base64`, or the UTF-8 `CommandFile`. |",
+		"| Ordered execution    | Runs batches in script order on one connection and stops at the first failing batch.                  |",
+		"| Optional transaction | Commits after the last batch or rolls back every batch on failure when `Transaction` is present.      |",
+		"| Per-batch timeout    | Applies `CommandTimeout` to each batch separately.                                                   |",
+		"| Run totals           | Returns `BatchCount` and the summed `RowsAffected`.                                                  |",
+		"| Flexible connection  | Connects through a credentials record, a connection string, discrete values, or a Microsoft Entra token. |",
+		"| Entity control       | Omits the response entity when `NoEntity` is present while still writing session parameters.         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                  | Description                                                                         |",
+		"|---------------------------|-------------------------------------------------------------------------------------|",
+		"| Deploy database changes   | Apply versioned schema scripts with `GO` separators as one transactional step.       |",
+		"| Load reference data       | Run seeding scripts that insert lookup values before a business process starts.     |",
+		"| Run maintenance scripts   | Execute cleanup or index maintenance scripts on a schedule.                          |",
+		"| Reuse existing SSMS files | Run scripts written for SQL Server Management Studio or sqlcmd without editing them. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case                | Description                                                                        |",
+		"|-------------------------|------------------------------------------------------------------------------------|",
+		"| Build a test database   | Create tables, views, and seed rows before a test suite runs.                      |",
+		"| Reset test data         | Truncate and reload tables between test runs to keep results repeatable.           |",
+		"| Generate load data      | Repeat an insert batch with `GO n` to create many rows for volume tests.           |",
+		"| Verify migration safety | Run a migration with `Transaction` and confirm that a failure leaves no changes.   |",
+		"",
+		"### Batch Splitting",
+		"",
+		"- A separator is a line that holds only `GO`, optionally followed by a repeat count, such as `GO 3`.",
+		"- `GO` is not case sensitive and may have surrounding spaces, but a separator line cannot hold other text or a comment.",
+		"- `GO n` runs the preceding batch `n` times, and each repetition counts toward `BatchCount`.",
+		"- Splitting is line based like sqlcmd, so a `GO` line inside a block comment or a multi-line string is still a separator.",
+		"- Batches that hold only white space are skipped, and sqlcmd commands such as `:setvar` or `:r` are not supported.",
+		"- With the `Base64` switch, `CommandText` is decoded from UTF-8 Base64 first and then split the same way.",
+		"",
+		"### Connection Resolution",
+		"",
+		"1. `Credentials` selects a stored SQL Server credentials record by name or id.",
+		"2. When no record matches, a `Credentials` value that contains `=` is used as a raw connection string, and any other value is used as a raw Microsoft Entra access token.",
+		"3. Without `Credentials`, `ConnectionString` supplies the baseline connection.",
+		"4. `Server`, `Port`, `Database`, `Authentication`, `Username`, `Password`, `Encrypt`, `TrustServerCertificate`, and `Token` override the baseline values they set.",
+		"5. The step fails when no server is resolved.",
+		"",
+		"Session parameters are named `InvokeSqlServerScript:<Name>` and are Base64-encoded, so decode them before use."
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the number of batches the script ran, as plain integer text.",
+				"Counts each repetition of a GO n separator as a separate batch, and empty batches are not counted.",
+				"Returned in plain text in the response entity unless NoEntity is set."
+			],
+			"name": "BatchCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the total number of rows changed by INSERT, UPDATE, DELETE, and MERGE statements across all batches, as plain integer text.",
+				"Batches that report no row count, such as DDL statements or batches under SET NOCOUNT ON, add 0 to the total.",
+				"Returned in plain text in the response entity unless NoEntity is set."
+			],
+			"name": "RowsAffected",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A failing batch rolls back every earlier batch",
+						"CommandFile points to a missing file",
+						"Script contains a statement that cannot run inside a transaction"
+					],
+					"expected_result": "Every batch of deploy.sql runs in one committed transaction, and the batch count and changed rows are stored in InvokeSqlServerScript:BatchCount and InvokeSqlServerScript:RowsAffected.",
+					"notes": "deploy.sql holds a CREATE TABLE batch, a CREATE VIEW batch, and an INSERT batch separated by GO lines, so BatchCount is 3. The stored record sql-production supplies the server localhost,1433 and the login. CommandTimeout of 120 seconds applies to each batch separately.",
+					"use_case": "deploy_script_file_in_transaction",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Deployment",
+					"SqlScript",
+					"SqlServer",
+					"StoredCredentials",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Deploy a script file in one transaction",
+				"",
+				"Runs C:\\Scripts\\deploy.sql through the stored credentials record sql-production, batch by batch in script order.",
+				"Transaction commits after the last batch succeeds and rolls back every batch when one fails."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --CommandFile:C:\\Scripts\\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}",
+				"pluginName": "InvokeSqlServerScript"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"GO line with trailing text is not a separator",
+						"Plain inline SQL with a space followed by two dashes ends the argument value early unless it is Base64-encoded",
+						"SET NOCOUNT ON makes RowsAffected report 0"
+					],
+					"expected_result": "The table batch runs once and the insert batch runs five times, so InvokeSqlServerScript:BatchCount is 6 and InvokeSqlServerScript:RowsAffected is 5, and the response has no entity.",
+					"notes": "The Credentials value contains equals signs and matches no stored record, so it is used as a raw connection string. The inline script uses line breaks, a GO line, and a final GO 5 line. NoEntity keeps the results only in session parameters.",
+					"use_case": "repeat_inline_batch_with_raw_connection_string",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"SqlScript",
+					"SqlServer",
+					"TestData"
+				]
+			},
+			"description": [
+				"### Repeat an inline batch with a raw connection string",
+				"",
+				"Creates dbo.LoadProbe when missing, then repeats a single-row insert five times with a `GO 5` separator.",
+				"The Credentials value is a raw connection string to localhost,1433, and NoEntity omits the response entity."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);\nGO\nINSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());\nGO 5 --NoEntity}}",
+				"pluginName": "InvokeSqlServerScript"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the encoded text is sent as SQL and the step fails",
+						"CommandText is not valid Base64, so the step fails before connecting",
+						"GO line that also holds a comment is not a separator, so comments stay on statement lines"
+					],
+					"expected_result": "Both batches run in one committed transaction, so InvokeSqlServerScript:BatchCount is 2 and InvokeSqlServerScript:RowsAffected is 1.",
+					"notes": "The Base64 switch decodes CommandText from UTF-8 Base64 before the script is split, so the ` --` comments and line breaks travel inline without ending the argument value. The decoded script holds two batches separated by GO lines, and Transaction rolls both back when either one fails.",
+					"use_case": "run_base64_multi_batch_script_with_comments",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"Credentials",
+					"Database",
+					"Deployment",
+					"SqlScript",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Run a Base64-encoded two-batch script with comments",
+				"",
+				"The argument binds the stored credentials record sql-production, a Base64 CommandText, and the Base64 and Transaction switches.",
+				"The decoded script creates dbo.DeployLog when missing and then inserts one row, with a ` --` comment after each statement and a GO line closing each batch."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:SUYgT0JKRUNUX0lEKE4nZGJvLkRlcGxveUxvZycpIElTIE5VTEwgQ1JFQVRFIFRBQkxFIGRiby5EZXBsb3lMb2cgKElkIElOVCBJREVOVElUWSBQUklNQVJZIEtFWSwgTm90ZSBOVkFSQ0hBUigxMDApIE5PVCBOVUxMKTsgLS0gZmlyc3QgYmF0Y2ggY3JlYXRlcyB0aGUgdGFibGUKR08KSU5TRVJUIElOVE8gZGJvLkRlcGxveUxvZyAoTm90ZSkgVkFMVUVTIChOJ1NjcmlwdCBhcHBsaWVkJyk7IC0tIHNlY29uZCBiYXRjaCByZWNvcmRzIHRoZSBydW4KR08= --Base64 --Transaction}}",
+				"pluginName": "InvokeSqlServerScript"
+			}
+		}
+	],
+	"key": "InvokeSqlServerScript",
+	"namespace": "G4.Plugins.SqlServer",
+	"outputParameters": [
+		{
+			"description": [
+				"Holds the number of batches the script ran, as plain integer text.",
+				"Counts each repetition of a GO n separator as a separate batch, and empty batches are not counted.",
+				"Helps confirm that the whole script was split and executed as expected.",
+				"Stored as a Base64-encoded session parameter, so decode it before use."
+			],
+			"name": "InvokeSqlServerScript:BatchCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the total number of rows changed by INSERT, UPDATE, DELETE, and MERGE statements across all batches, as plain integer text.",
+				"Batches that report no row count, such as DDL statements or batches under SET NOCOUNT ON, add 0 to the total.",
+				"Stored as a Base64-encoded session parameter, so decode it before use."
+			],
+			"name": "InvokeSqlServerScript:RowsAffected",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Selects the sign-in method used to connect to SQL Server.",
+				"Overrides the method from the credentials record or the connection string, so one target can switch between SQL logins, Windows sign-in, and Microsoft Entra sign-in.",
+				"Leave it empty to keep the method the baseline connection already defines."
+			],
+			"mandatory": false,
+			"name": "Authentication",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a SQL Server login name and password.",
+						"Supply the login through Username and Password or through the credentials record."
+					],
+					"name": "Sql Password"
+				},
+				{
+					"description": [
+						"Signs in with the Windows account that runs the automation.",
+						"No user name or password is sent to the server."
+					],
+					"name": "Integrated"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra default credential chain, such as environment settings, a managed identity, or a developer tool sign-in.",
+						"Fits services that already carry a Microsoft Entra identity."
+					],
+					"name": "Active Directory Default"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra identity of the current domain-joined Windows user.",
+						"No password is passed in the step."
+					],
+					"name": "Active Directory Integrated"
+				},
+				{
+					"description": [
+						"Signs in through an interactive Microsoft Entra prompt.",
+						"Fits attended runs where a person can complete multi-factor sign-in."
+					],
+					"name": "Active Directory Interactive"
+				},
+				{
+					"description": [
+						"Signs in with the managed identity of the Azure host that runs the automation.",
+						"Username can carry the client id of a user-assigned identity."
+					],
+					"name": "Active Directory Managed Identity"
+				},
+				{
+					"description": [
+						"Signs in with a Microsoft Entra user name and password.",
+						"Accounts that require multi-factor authentication cannot use this method."
+					],
+					"name": "Active Directory Password"
+				},
+				{
+					"description": [
+						"Signs in as a Microsoft Entra application.",
+						"Username carries the application client id and Password carries the client secret."
+					],
+					"name": "Active Directory Service Principal"
+				}
+			]
+		},
+		{
+			"description": [
+				"Decodes the CommandText value from UTF-8 Base64 before the script is split into batches.",
+				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
+				"Only CommandText is decoded, so CommandFile content is always read as plain text.",
+				"Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Points to a UTF-8 .sql file that holds the script, such as C:\\Scripts\\deploy.sql.",
+				"Supports long multi-line scripts, SQL comments, and characters that cannot travel inside an inline argument.",
+				"Used only when CommandText is empty, and a missing file fails the step."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Provides the script inline, with batches separated by lines that hold only GO or GO followed by a repeat count.",
+				"Takes priority over CommandFile, and one of the two is required.",
+				"When the SQL contains a space followed by two dashes or two closing braces, use CommandFile or pass the script as UTF-8 Base64 with the Base64 switch, because those characters end an inline argument value."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String|Expression"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets how many seconds each batch of the script may run before the step fails with a timeout error.",
+				"Defaults to 30 seconds per batch, and the value 0 waits without a time limit.",
+				"Missing, negative, or non-numeric values fall back to the 30-second default."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full ADO.NET connection string, such as Server=localhost,1433;Database=Sales;Integrated Security=true.",
+				"Used only when Credentials is not set, and discrete values such as Server or Database still override its parts."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored SQL Server credentials record by its name or id, such as sql-production.",
+				"Keeps server addresses, logins, and secrets out of the flow because the record supplies the connection at runtime.",
+				"When no record matches, a value that contains an equals sign is used as a raw connection string and any other value is used as a raw Microsoft Entra access token.",
+				"Takes priority over ConnectionString when both are set."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the connection opens, overriding the database from the credentials record or the connection string.",
+				"Lets one stored login reach several databases on the same server."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets how the connection encrypts traffic between the automation and SQL Server.",
+				"Overrides the encryption mode from the credentials record or the connection string."
+			],
+			"mandatory": false,
+			"name": "Encrypt",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
+						"Matches the default of the Microsoft SQL Server data provider."
+					],
+					"name": "Mandatory"
+				},
+				{
+					"description": [
+						"Encrypts traffic only when the server asks for it.",
+						"Suits older or internal servers that do not offer encryption."
+					],
+					"name": "Optional"
+				},
+				{
+					"description": [
+						"Uses TDS 8.0 strict encryption, where the secure handshake happens before any login data is sent.",
+						"Requires SQL Server 2022 or Azure SQL and always validates the server certificate."
+					],
+					"name": "Strict"
+				}
+			]
+		},
+		{
+			"description": [
+				"Omits the response entity so the step returns its results only as session parameters.",
+				"Keeps the response small when results are large and only later steps read them.",
+				"Session parameters such as InvokeSqlServerScript:BatchCount are still written."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password for the SQL Server or Microsoft Entra login, overriding the password from the credentials record or the connection string.",
+				"Prefer Credentials over an inline password so secrets stay out of the flow definition."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port added to Server, such as 1433 for a default SQL Server instance.",
+				"Applies only when Server is set in the same step, and values of 0 or less are ignored."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the SQL Server host name, address, or named instance, such as localhost or db01\\SQLEXPRESS.",
+				"Overrides the server from the credentials record or the connection string and is required when neither supplies one.",
+				"Combine it with Port to reach a specific TCP port."
+			],
+			"mandatory": false,
+			"name": "Server",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies a raw Microsoft Entra access token that authenticates the connection.",
+				"Fits pipelines that already hold a token for the database resource, and needs Server or a connection string because a token carries no server address.",
+				"Do not combine it with Password or an Authentication value, because the data provider rejects a connection that sets both."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Runs every batch of the script inside one transaction that commits after the last batch succeeds.",
+				"Rolls back all earlier batches when any batch fails, so the database never keeps a half-applied script.",
+				"Statements that SQL Server does not allow inside a transaction, such as CREATE DATABASE, fail when the switch is present."
+			],
+			"mandatory": false,
+			"name": "Transaction",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Accepts the server certificate without checking it against a trusted certificate authority.",
+				"Needed for local or test servers that use a self-signed certificate, such as a developer instance on localhost,1433.",
+				"Avoid it on production servers because it removes protection against impersonated servers."
+			],
+			"mandatory": false,
+			"name": "TrustServerCertificate",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, overriding the user from the credentials record or the connection string.",
+				"For a Microsoft Entra service principal, the value carries the application client id."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Runs multi-batch SQL Server scripts from a .sql file or inline text, split on GO and GO n lines like sqlcmd.",
+		"Applies deployments, migrations, and seed data in order, with an optional transaction that rolls back every batch on failure.",
+		"Reports the batch count and changed rows as session parameters so later steps can verify the run."
+	],
+	"version": "4"
+}

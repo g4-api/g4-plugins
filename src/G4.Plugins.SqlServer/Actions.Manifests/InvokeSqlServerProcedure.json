@@ -1,0 +1,559 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"SqlServer"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeSqlServerProcedure.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/InvokeSqlServerProcedure.cs"
+			},
+			"mcp": {
+				"title": "Invoke SQL Server Procedure"
+			},
+			"rag": {
+				"description": "Call SQL Server stored procedures from an automation run with named JSON inputs. The procedure signature is read from the server, unknown input names are rejected before execution, and an optional transaction rolls back failures, while results, output parameters, and the return value stay available to later steps.",
+				"qa": [
+					{
+						"question": "What does the InvokeSqlServerProcedure plugin do?",
+						"answer": "It runs a SQL Server stored procedure and returns its result sets, output parameters, and return value."
+					},
+					{
+						"question": "Which parameters does InvokeSqlServerProcedure support?",
+						"answer": "Procedure is required, Parameters passes inputs as a JSON object, and CommandTimeout, Transaction, and NoEntity tune the call. Credentials, ConnectionString, or discrete values such as Server and Database select the connection."
+					},
+					{
+						"question": "How does InvokeSqlServerProcedure integrate with G4 workflows?",
+						"answer": "It is an Action task that uses ActionRuleModel and writes InvokeSqlServerProcedure:Result, ResultSets, OutputParameters, and ReturnValue as Base64-encoded session parameters."
+					},
+					{
+						"question": "What are best practices for InvokeSqlServerProcedure?",
+						"answer": "Use a stored credentials record such as sql-production instead of inline passwords, and pass every input whose procedure default matters, because omitted inputs are sent as NULL."
+					},
+					{
+						"question": "How is an InvokeSqlServerProcedure rule written?",
+						"answer": "Use $type Action, pluginName InvokeSqlServerProcedure, and an argument such as {{$ --Procedure:dbo.GetCustomerOrders --Parameters:{\"CustomerId\":7} --Credentials:sql-production}}. Result and ResultSets hold minified JSON rows, OutputParameters holds a JSON object such as {\"TotalCount\":12}, and ReturnValue holds integer text such as 0."
+					},
+					{
+						"question": "What metadata identifies the InvokeSqlServerProcedure manifest?",
+						"answer": "The key is InvokeSqlServerProcedure, the version is 4, the plugin type is Action, the namespace is G4.Plugins.SqlServer, the category is SqlServer, and the author is Roei Sabag."
+					},
+					{
+						"question": "What behavior does the InvokeSqlServerProcedure manifest describe?",
+						"answer": "It describes calling a stored procedure with named JSON inputs and returning rows, output parameters, and the return code to later steps. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeSqlServerProcedure.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/InvokeSqlServerProcedure.cs"
+					},
+					{
+						"question": "What errors can stop InvokeSqlServerProcedure?",
+						"answer": "The step fails when Procedure is empty, no server is resolved, the procedure does not exist, or Parameters names an input the procedure does not declare. With Transaction, a failure rolls back every change."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Invoke SQL Server Procedure",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Runs a SQL Server stored procedure with named input values and returns its result sets, output parameters, and return value.",
+		"Reads the procedure signature from the server, so output parameters work without declaring their types.",
+		"Stores every result as a session parameter for later steps and, by default, also returns it in the response entity.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                 | Description                                                                                                  |",
+		"|-------------------------|--------------------------------------------------------------------------------------------------------------|",
+		"| Signature discovery     | Reads input parameters, output parameters, and the return value of `Procedure` from the server.               |",
+		"| Named input values      | Binds `Parameters` JSON properties to procedure inputs by name, without regard to case or the `@` prefix.     |",
+		"| Strict input matching   | Fails before execution when `Parameters` names an input the procedure does not declare.                      |",
+		"| NULL for omitted inputs | Sends every input that `Parameters` leaves out as NULL.                                                      |",
+		"| All result sets         | Returns the first result set as `Result` and every result set as `ResultSets`.                               |",
+		"| Output parameters       | Returns output parameters as one JSON object in `OutputParameters`.                                          |",
+		"| Return value            | Returns the procedure status code in `ReturnValue`.                                                          |",
+		"| Optional transaction    | Commits on success and rolls back on failure when `Transaction` is present.                                  |",
+		"| Flexible connection     | Connects through a credentials record, a connection string, discrete values, or a Microsoft Entra token.     |",
+		"| Entity control          | Omits the response entity when `NoEntity` is present while still writing session parameters.                 |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                    | Description                                                                                 |",
+		"|-----------------------------|---------------------------------------------------------------------------------------------|",
+		"| Look up business records    | Call a lookup procedure, such as orders for a customer, and feed the rows into later steps. |",
+		"| Run business operations     | Call procedures that post invoices, close orders, or archive data inside a transaction.     |",
+		"| Read status codes           | Branch the workflow on the return value or an output parameter set by the procedure.        |",
+		"| Trigger batch jobs          | Start nightly refresh or cleanup procedures with a longer `CommandTimeout`.                 |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case                 | Description                                                                                  |",
+		"|--------------------------|----------------------------------------------------------------------------------------------|",
+		"| Verify backend results   | Compare procedure rows or output parameters with values shown in the application under test. |",
+		"| Prepare test data        | Call seeding or reset procedures before a test and roll back failures with `Transaction`.    |",
+		"| Validate procedure logic | Assert return codes and output parameters for known inputs.                                  |",
+		"| Check data after actions | Confirm that a user action in the UI produced the expected database state.                   |",
+		"",
+		"### Connection Resolution",
+		"",
+		"1. `Credentials` selects a stored SQL Server credentials record by name or id.",
+		"2. When no record matches, a `Credentials` value that contains `=` is used as a raw connection string, and any other value is used as a raw Microsoft Entra access token.",
+		"3. Without `Credentials`, `ConnectionString` supplies the baseline connection.",
+		"4. `Server`, `Port`, `Database`, `Authentication`, `Username`, `Password`, `Encrypt`, `TrustServerCertificate`, and `Token` override the baseline values they set.",
+		"5. The step fails when no server is resolved.",
+		"",
+		"### Output Shapes",
+		"",
+		"| Output             | Shape                                                                                       |",
+		"|--------------------|---------------------------------------------------------------------------------------------|",
+		"| `Result`           | JSON array of row objects from the first result set, such as `[{\"OrderId\":1001,\"Total\":250.00}]`. |",
+		"| `ResultSets`       | JSON array of row arrays, one per result set, such as `[[{\"OrderId\":1001}],[{\"Lines\":3}]]`.   |",
+		"| `OutputParameters` | JSON object of output parameters without the `@` prefix, such as `{\"TotalCount\":12}`.          |",
+		"| `ReturnValue`      | Plain integer text, such as `0`.                                                              |",
+		"",
+		"Session parameters are named `InvokeSqlServerProcedure:<Name>` and are Base64-encoded, so decode them before use.",
+		"JSON values map NULL to null, dates to ISO 8601 text, binary data to Base64, and unique identifiers to strings."
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the procedure output parameters as a minified JSON object keyed by parameter name without the @ prefix, such as {\"TotalCount\":12}.",
+				"Values follow the same JSON mapping as result rows, so NULL becomes null and dates use ISO 8601 text.",
+				"Returned in plain text in the response entity unless NoEntity is set."
+			],
+			"name": "OutputParameters",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the rows of the first result set as a minified JSON array of row objects keyed by column name.",
+				"Holds an empty array [] when the procedure returns no result set.",
+				"Returned in plain text in the response entity unless NoEntity is set."
+			],
+			"name": "Result",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds every result set the procedure returns as a minified JSON array of row arrays, in server order.",
+				"Lets later steps read the second and later result sets that Result does not include.",
+				"Returned in plain text in the response entity unless NoEntity is set."
+			],
+			"name": "ResultSets",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the integer status the procedure returns with RETURN, as plain text such as 0.",
+				"SQL Server returns 0 when the procedure has no explicit RETURN statement.",
+				"Returned in plain text in the response entity unless NoEntity is set."
+			],
+			"name": "ReturnValue",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials name matches no stored record and the value is treated as an access token",
+						"Parameters names an input the procedure does not declare",
+						"Procedure does not exist on the server",
+						"Procedure returns no result set and Result holds []"
+					],
+					"expected_result": "The rows of dbo.GetCustomerOrders for customer 7 are stored in InvokeSqlServerProcedure:Result, the output parameter is stored as {\"TotalCount\":12} in InvokeSqlServerProcedure:OutputParameters, and the status 0 is stored in InvokeSqlServerProcedure:ReturnValue.",
+					"notes": "The procedure is declared as dbo.GetCustomerOrders @CustomerId INT, @TotalCount INT OUTPUT and returns one row per order. The stored record sql-production supplies the server localhost,1433, the database, and the login. TotalCount needs no declaration because the signature is read from the server.",
+					"use_case": "get_customer_orders_with_stored_credentials",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"OutputParameters",
+					"SqlServer",
+					"StoredCredentials",
+					"StoredProcedure"
+				]
+			},
+			"description": [
+				"### Call a lookup procedure with stored credentials",
+				"",
+				"Runs dbo.GetCustomerOrders with CustomerId 7 through the stored credentials record sql-production.",
+				"The orders, the TotalCount output parameter, and the return value are written to session parameters and the response entity."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{\"CustomerId\":7} --Credentials:sql-production}}",
+				"pluginName": "InvokeSqlServerProcedure"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection string has no Server value and the step fails",
+						"Procedure fails midway and the transaction rolls back",
+						"Procedure starts its own transaction inside the outer transaction"
+					],
+					"expected_result": "dbo.ArchiveClosedOrders runs in one committed transaction, its outputs are stored only as InvokeSqlServerProcedure:* session parameters, and the response has no entity.",
+					"notes": "The raw connection string targets localhost,1433 with Windows sign-in and trusts the local self-signed certificate. Transaction rolls back every change when the procedure fails. NoEntity keeps the response small while session parameters are still written.",
+					"use_case": "archive_orders_in_transaction_with_connection_string",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"SqlServer",
+					"StoredProcedure",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Archive orders in a transaction with a connection string",
+				"",
+				"Runs dbo.ArchiveClosedOrders with a cutoff date and batch size through a raw connection string.",
+				"Transaction commits the work only on success, and NoEntity returns the results only as session parameters."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{\"BeforeDate\":\"2026-01-01\",\"BatchSize\":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}",
+				"pluginName": "InvokeSqlServerProcedure"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Port is ignored when Server is not set in the same step",
+						"Procedure runs longer than CommandTimeout and the step fails",
+						"Self-signed server certificate without TrustServerCertificate fails the connection"
+					],
+					"expected_result": "dbo.RefreshDailyTotals runs on localhost,1433 in the Sales database, and its status code is stored in InvokeSqlServerProcedure:ReturnValue.",
+					"notes": "Server, Port, Database, and Authentication build the connection without a credentials record. Integrated sign-in uses the Windows account that runs the automation. CommandTimeout raises the limit to 120 seconds for a long refresh.",
+					"use_case": "refresh_totals_with_discrete_connection",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"IntegratedSecurity",
+					"ReturnValue",
+					"SqlServer",
+					"StoredProcedure"
+				]
+			},
+			"description": [
+				"### Run a parameterless procedure with discrete connection values",
+				"",
+				"Runs dbo.RefreshDailyTotals on localhost,1433 with Windows sign-in and a 120-second timeout.",
+				"No Parameters value is passed, so any procedure inputs are sent as NULL."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Procedure:dbo.RefreshDailyTotals --Server:localhost --Port:1433 --Database:Sales --Authentication:Integrated --TrustServerCertificate --CommandTimeout:120}}",
+				"pluginName": "InvokeSqlServerProcedure"
+			}
+		}
+	],
+	"key": "InvokeSqlServerProcedure",
+	"namespace": "G4.Plugins.SqlServer",
+	"outputParameters": [
+		{
+			"description": [
+				"Holds the procedure output parameters as a minified JSON object keyed by parameter name without the @ prefix, such as {\"TotalCount\":12}.",
+				"Values follow the same JSON mapping as result rows, so NULL becomes null and dates use ISO 8601 text.",
+				"Holds an empty object {} when the procedure declares no output parameters.",
+				"Stored as a Base64-encoded session parameter, so decode it before use."
+			],
+			"name": "InvokeSqlServerProcedure:OutputParameters",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the rows of the first result set as a minified JSON array of row objects keyed by column name.",
+				"Holds an empty array [] when the procedure returns no result set.",
+				"Gives later steps the main query output without parsing every result set.",
+				"Stored as a Base64-encoded session parameter, so decode it before use."
+			],
+			"name": "InvokeSqlServerProcedure:Result",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds every result set the procedure returns as a minified JSON array of row arrays, in server order.",
+				"Lets later steps read the second and later result sets that Result does not include.",
+				"Stored as a Base64-encoded session parameter, so decode it before use."
+			],
+			"name": "InvokeSqlServerProcedure:ResultSets",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the integer status the procedure returns with RETURN, as plain text such as 0.",
+				"SQL Server returns 0 when the procedure has no explicit RETURN statement.",
+				"Lets later steps branch on success or failure codes defined by the procedure.",
+				"Stored as a Base64-encoded session parameter, so decode it before use."
+			],
+			"name": "InvokeSqlServerProcedure:ReturnValue",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Selects the sign-in method used to connect to SQL Server.",
+				"Overrides the method from the credentials record or the connection string, so one target can switch between SQL logins, Windows sign-in, and Microsoft Entra sign-in.",
+				"Leave it empty to keep the method the baseline connection already defines."
+			],
+			"mandatory": false,
+			"name": "Authentication",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a SQL Server login name and password.",
+						"Supply the login through Username and Password or through the credentials record."
+					],
+					"name": "Sql Password"
+				},
+				{
+					"description": [
+						"Signs in with the Windows account that runs the automation.",
+						"No user name or password is sent to the server."
+					],
+					"name": "Integrated"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra default credential chain, such as environment settings, a managed identity, or a developer tool sign-in.",
+						"Fits services that already carry a Microsoft Entra identity."
+					],
+					"name": "Active Directory Default"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra identity of the current domain-joined Windows user.",
+						"No password is passed in the step."
+					],
+					"name": "Active Directory Integrated"
+				},
+				{
+					"description": [
+						"Signs in through an interactive Microsoft Entra prompt.",
+						"Fits attended runs where a person can complete multi-factor sign-in."
+					],
+					"name": "Active Directory Interactive"
+				},
+				{
+					"description": [
+						"Signs in with the managed identity of the Azure host that runs the automation.",
+						"Username can carry the client id of a user-assigned identity."
+					],
+					"name": "Active Directory Managed Identity"
+				},
+				{
+					"description": [
+						"Signs in with a Microsoft Entra user name and password.",
+						"Accounts that require multi-factor authentication cannot use this method."
+					],
+					"name": "Active Directory Password"
+				},
+				{
+					"description": [
+						"Signs in as a Microsoft Entra application.",
+						"Username carries the application client id and Password carries the client secret."
+					],
+					"name": "Active Directory Service Principal"
+				}
+			]
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets how many seconds the procedure may run before the step fails with a timeout error.",
+				"Defaults to 30 seconds, and the value 0 waits without a time limit.",
+				"Missing, negative, or non-numeric values fall back to the 30-second default."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full ADO.NET connection string, such as Server=localhost,1433;Database=Sales;Integrated Security=true.",
+				"Used only when Credentials is not set, and discrete values such as Server or Database still override its parts."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored SQL Server credentials record by its name or id, such as sql-production.",
+				"Keeps server addresses, logins, and secrets out of the flow because the record supplies the connection at runtime.",
+				"When no record matches, a value that contains an equals sign is used as a raw connection string and any other value is used as a raw Microsoft Entra access token.",
+				"Takes priority over ConnectionString when both are set."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the connection opens, overriding the database from the credentials record or the connection string.",
+				"Lets one stored login reach several databases on the same server."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets how the connection encrypts traffic between the automation and SQL Server.",
+				"Overrides the encryption mode from the credentials record or the connection string."
+			],
+			"mandatory": false,
+			"name": "Encrypt",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
+						"Matches the default of the Microsoft SQL Server data provider."
+					],
+					"name": "Mandatory"
+				},
+				{
+					"description": [
+						"Encrypts traffic only when the server asks for it.",
+						"Suits older or internal servers that do not offer encryption."
+					],
+					"name": "Optional"
+				},
+				{
+					"description": [
+						"Uses TDS 8.0 strict encryption, where the secure handshake happens before any login data is sent.",
+						"Requires SQL Server 2022 or Azure SQL and always validates the server certificate."
+					],
+					"name": "Strict"
+				}
+			]
+		},
+		{
+			"description": [
+				"Omits the response entity so the step returns its results only as session parameters.",
+				"Keeps the response small when results are large and only later steps read them.",
+				"Session parameters such as InvokeSqlServerProcedure:Result are still written."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Provides input values as a JSON object whose property names match procedure parameter names, such as {\"CustomerId\":7}.",
+				"Names match without regard to case and with or without the @ prefix, and a name the procedure does not declare fails the step before anything runs.",
+				"Inputs left out are sent as NULL, so declared parameter defaults do not apply.",
+				"Values are bound as typed parameters and are never joined into SQL text."
+			],
+			"mandatory": false,
+			"name": "Parameters",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the password for the SQL Server or Microsoft Entra login, overriding the password from the credentials record or the connection string.",
+				"Prefer Credentials over an inline password so secrets stay out of the flow definition."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port added to Server, such as 1433 for a default SQL Server instance.",
+				"Applies only when Server is set in the same step, and values of 0 or less are ignored."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Names the stored procedure to run, optionally with its schema, such as dbo.GetCustomerOrders.",
+				"The parameter list, output parameters, and return value are read from the server, so no parameter types need to be declared.",
+				"The step fails before connecting when the name is empty."
+			],
+			"mandatory": true,
+			"name": "Procedure",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the SQL Server host name, address, or named instance, such as localhost or db01\\SQLEXPRESS.",
+				"Overrides the server from the credentials record or the connection string and is required when neither supplies one.",
+				"Combine it with Port to reach a specific TCP port."
+			],
+			"mandatory": false,
+			"name": "Server",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies a raw Microsoft Entra access token that authenticates the connection.",
+				"Fits pipelines that already hold a token for the database resource, and needs Server or a connection string because a token carries no server address.",
+				"Do not combine it with Password or an Authentication value, because the data provider rejects a connection that sets both."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Runs the procedure inside one transaction that commits when the call succeeds and rolls back when it fails.",
+				"Protects data from partial changes when the procedure does not manage its own transaction."
+			],
+			"mandatory": false,
+			"name": "Transaction",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Accepts the server certificate without checking it against a trusted certificate authority.",
+				"Needed for local or test servers that use a self-signed certificate, such as a developer instance on localhost,1433.",
+				"Avoid it on production servers because it removes protection against impersonated servers."
+			],
+			"mandatory": false,
+			"name": "TrustServerCertificate",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, overriding the user from the credentials record or the connection string.",
+				"For a Microsoft Entra service principal, the value carries the application client id."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Runs a SQL Server stored procedure with named JSON input values and reads its signature from the server.",
+		"Returns result sets as JSON rows, output parameters as one JSON object, and the procedure return code.",
+		"Stores every result as a session parameter so later steps can check, branch on, or reuse database data."
+	],
+	"version": "4"
+}

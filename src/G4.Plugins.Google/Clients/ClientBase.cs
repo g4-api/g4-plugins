@@ -86,11 +86,13 @@ namespace G4.Plugins.Google.Clients
                 key: "google",
                 defaultValue: "https://oauth2.googleapis.com/token");
 
-            // Find a credential record by id or by name from the in-memory credentials cache.
+            // Find an OAuth credential record by id or by name in the OAuth partition of the credentials cache.
+            // The cache is partitioned by credential type, so other types (for example SQL Server) are never read.
             var credentials = CacheManager
                 .Instance
-                .CredentialsCache
+                .CredentialsCache[CredentialTypes.OAuth]
                 .Values
+                .OfType<OAuthCredentialModel>()
                 .FirstOrDefault(i => i.Name == value || i.Id == value);
 
             // If no credential record is found, assume the provided value is a raw access token and return it as-is.

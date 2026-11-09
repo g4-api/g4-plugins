@@ -141,7 +141,7 @@ jobs:
         test-project:
           - name                  : 'G4.UnitTests'
             type                  : 'csproj'
-            filter                : ''
+            filter                : 'TestCategory!=SqlServerLive'
             prefix                : 'unit-tests'
             artifact              : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
             report                : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
@@ -311,12 +311,59 @@ jobs:
               $content | Add-Content -Path $env:GITHUB_STEP_SUMMARY -Encoding utf8
           }
 
+  # Linux is required for the SQL Server tests, which run SQL Server in a Linux Docker container
+  InvokeSqlServerTests:
+    name: Invoke SQL Server Tests & Publish Results
+    runs-on: ubuntu-latest
+    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
+    needs:
+      - NewBuild
+      - NewVersion
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    env:
+      BUILD_VERSION: ${{ needs.NewVersion.outputs.buildVersion }}
+      G4_SQLSERVER_REQUIRED: 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "${{ env.DOTNET_VERSION }}"
+
+      - name: Pull SQL Server Image
+        shell: bash
+        run: docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: Invoke SQL Server Tests
+        shell: pwsh
+        run: |
+          $projectFilePath    = (Get-ChildItem -Path . -Filter 'G4.UnitTests.csproj' -Recurse).FullName
+          $testReportFilePath = "${{ env.STAGE_DIRECTORY }}/sqlserver-tests-results-v${{ env.BUILD_VERSION }}.trx"
+
+          dotnet test $projectFilePath --filter "TestCategory=SqlServerLive" -l:"trx;LogFileName=$testReportFilePath"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Publish SQL Server Tests Artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: sqlserver-tests-drop-v${{ env.BUILD_VERSION }}
+          path: ${{ env.STAGE_DIRECTORY }}/sqlserver-tests*.*
+
   PublishNugetPackages:
     name: Publish & Push NuGet Packages v${{ needs.NewVersion.outputs.buildVersion }}
     runs-on: ubuntu-latest
-    if: ${{ needs.InvokeTests.result == 'success' }}
+    if: ${{ needs.InvokeTests.result == 'success' && needs.InvokeSqlServerTests.result == 'success' }}
     needs: 
       - InvokeTests
+      - InvokeSqlServerTests
       - NewVersion
 
     defaults:

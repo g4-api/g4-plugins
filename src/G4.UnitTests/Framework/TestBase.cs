@@ -1202,8 +1202,8 @@ namespace G4.UnitTests.Framework
             // Cache key convention: "<name>;<id>" (lowercase for normalization).
             var key = $"{oauth.Name};{oauth.Id}".ToLowerInvariant();
 
-            // Seed the credentials cache with secured secrets.
-            CacheManager.Instance.CredentialsCache[key] = new()
+            // Seed the OAuth partition of the credentials cache with secured secrets.
+            CacheManager.Instance.CredentialsCache[CredentialTypes.OAuth][key] = new OAuthCredentialModel
             {
                 AccessToken = string.Empty,
                 ClientId = oauth.ClientId,
