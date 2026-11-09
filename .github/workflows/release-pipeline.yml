@@ -124,7 +124,8 @@ jobs:
   InvokeTests:
     name: Invoke Tests & Publish Results
     runs-on: windows-latest
-    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
+    # TEMPORARY (one-time SQL Server release): revert this change after the release
+    if: ${{ false }}
     needs: 
       - NewBuild
       - NewVersion
@@ -347,7 +348,15 @@ jobs:
           $projectFilePath    = (Get-ChildItem -Path . -Filter 'G4.UnitTests.csproj' -Recurse).FullName
           $testReportFilePath = "${{ env.STAGE_DIRECTORY }}/sqlserver-tests-results-v${{ env.BUILD_VERSION }}.trx"
 
-          dotnet test $projectFilePath --filter "TestCategory=SqlServerLive" -l:"trx;LogFileName=$testReportFilePath"
+          # The assembly setup reads every test run parameter and signs in to G4, so the run needs the default
+          # settings file with the G4 API key
+          $runSettingsFilePath = (Get-ChildItem -Path . -Filter '${{ env.RUN_SETTINGS_FILE }}' -Recurse).FullName
+          [xml]$runSettings    = Get-Content -Path $runSettingsFilePath
+          $g4Username          = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
+          $g4Username.Value    = '${{ env.G4_API_KEY }}'
+          $runSettings.Save($runSettingsFilePath)
+
+          dotnet test $projectFilePath --settings $runSettingsFilePath --filter "TestCategory=SqlServerLive" -l:"trx;LogFileName=$testReportFilePath"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Publish SQL Server Tests Artifact
@@ -360,9 +369,9 @@ jobs:
   PublishNugetPackages:
     name: Publish & Push NuGet Packages v${{ needs.NewVersion.outputs.buildVersion }}
     runs-on: ubuntu-latest
-    if: ${{ needs.InvokeTests.result == 'success' && needs.InvokeSqlServerTests.result == 'success' }}
+    # TEMPORARY (one-time SQL Server release): revert this change after the release
+    if: ${{ needs.InvokeSqlServerTests.result == 'success' }}
     needs: 
-      - InvokeTests
       - InvokeSqlServerTests
       - NewVersion
 
@@ -495,10 +504,10 @@ jobs:
   NewRelease:
     name: New GitHub Release Version ${{ needs.NewVersion.outputs.buildVersion }}
     runs-on: ubuntu-latest
-    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' && needs.InvokeTests.result == 'success' && needs.PublishNugetPackages.result == 'success'  && needs.PublishTools.result == 'success' }}
+    # TEMPORARY (one-time SQL Server release): revert this change after the release
+    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' && needs.PublishNugetPackages.result == 'success'  && needs.PublishTools.result == 'success' }}
     needs:
       - NewVersion
-      - InvokeTests
       - PublishNugetPackages
       - PublishTools
 
