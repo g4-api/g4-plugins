@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".scripts", ".scripts", "{7E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G4.Plugins.Google", "G4.Plugins.Google\G4.Plugins.Google.csproj", "{5FB2DCFC-83FE-4022-9263-591626C26AB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G4.Plugins.SqlServer", "G4.Plugins.SqlServer\G4.Plugins.SqlServer.csproj", "{BC046999-A625-4DB0-A515-28329E827CE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{5FB2DCFC-83FE-4022-9263-591626C26AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FB2DCFC-83FE-4022-9263-591626C26AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FB2DCFC-83FE-4022-9263-591626C26AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC046999-A625-4DB0-A515-28329E827CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC046999-A625-4DB0-A515-28329E827CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC046999-A625-4DB0-A515-28329E827CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC046999-A625-4DB0-A515-28329E827CE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

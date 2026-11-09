@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="G4.Abstraction.Cli" Version="2026.11.8.25" />
-		<PackageReference Include="G4.Converters" Version="2026.11.8.97" />
+		<PackageReference Include="G4.Converters" Version="2026.11.9.98" />
 		<PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.14" />
 	</ItemGroup>
 
@@ -25,6 +25,7 @@
 		<ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
 		<ProjectReference Include="..\G4.Plugins.Google\G4.Plugins.Google.csproj" />
 		<ProjectReference Include="..\G4.Plugins.Ui\G4.Plugins.Ui.csproj" />
+		<ProjectReference Include="..\G4.Plugins.SqlServer\G4.Plugins.SqlServer.csproj" />
 	</ItemGroup>
 
 </Project>

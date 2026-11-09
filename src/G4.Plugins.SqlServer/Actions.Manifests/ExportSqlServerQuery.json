@@ -1,0 +1,645 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"SqlServer"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportSqlServerQuery.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/ExportSqlServerQuery.cs"
+			},
+			"rag": {
+				"description": "Run a SELECT query against Microsoft SQL Server and export the rows as JSON for later steps. Values are bound as typed parameters, every result set is kept, and the column names and row count are stored even for empty results, so checks and data handoffs stay predictable and the workflow stays reliable.",
+				"qa": [
+					{
+						"answer": "It runs a query on Microsoft SQL Server and exports the returned rows, column names, and row count as JSON outputs.",
+						"question": "What does the ExportSqlServerQuery plugin do?"
+					},
+					{
+						"answer": "CommandText or CommandFile supplies the query, the Base64 switch decodes a Base64-encoded CommandText, Parameters binds named values as a JSON object, CommandTimeout limits run time, and NoEntity omits the response entity.",
+						"question": "What are the key parameters of ExportSqlServerQuery?"
+					},
+					{
+						"answer": "Result holds the first result set as a JSON array of row objects, ResultSets holds every result set, Columns holds the first result set column names, and RowCount holds its row count.",
+						"question": "Which outputs does ExportSqlServerQuery produce?"
+					},
+					{
+						"answer": "Credentials is read first, then ConnectionString, and Server, Port, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, and Token override the parts they set.",
+						"question": "How does ExportSqlServerQuery choose the SQL Server connection?"
+					},
+					{
+						"answer": "It is an Action task step with the database icon, deserialized as ActionRuleModel, and later steps read its results from the ExportSqlServerQuery:* session parameters.",
+						"question": "How does ExportSqlServerQuery fit into a sequential workflow?"
+					},
+					{
+						"answer": "Pass filter values through Parameters instead of writing them into the SQL, select only the needed columns, and use CommandFile or a Base64-encoded CommandText with the Base64 switch for SQL that contains ' --' or '}}'.",
+						"question": "What are best practices for using ExportSqlServerQuery?"
+					},
+					{
+						"answer": "Encode the SQL as UTF-8 Base64, pass it as CommandText, and add the Base64 switch, or put the SQL in a CommandFile. Only CommandText is decoded, so CommandFile content is read as plain text and the Parameters JSON stays plain.",
+						"question": "How does ExportSqlServerQuery run inline SQL that contains ' --' or '}}'?"
+					},
+					{
+						"answer": "Use $type Action with pluginName ExportSqlServerQuery and pass the inputs in the argument as --Name:Value flags and bare switches, such as --Credentials:sql-production --NoEntity.",
+						"question": "What rule shape does ExportSqlServerQuery use?"
+					},
+					{
+						"answer": "Each output is stored as a Base64-encoded session parameter named ExportSqlServerQuery:<Name> and, unless NoEntity is set, as plain text in the response entity.",
+						"question": "How are the ExportSqlServerQuery outputs stored?"
+					},
+					{
+						"answer": "Database nulls become null, dates use ISO 8601, binary values use Base64, decimals stay exact numbers, uniqueidentifier values become strings, and other provider types become text.",
+						"question": "How are SQL Server values written to the exported JSON?"
+					},
+					{
+						"answer": "Result is [], RowCount is 0, and Columns still lists the column names of the first result set.",
+						"question": "What does ExportSqlServerQuery return when the query has no rows?"
+					},
+					{
+						"answer": "The manifest key is ExportSqlServerQuery.",
+						"question": "What is the manifest key of this plugin?"
+					},
+					{
+						"answer": "The manifest version is 4.",
+						"question": "What manifest version does this plugin use?"
+					},
+					{
+						"answer": "The pluginType is Action.",
+						"question": "What is the pluginType of ExportSqlServerQuery?"
+					},
+					{
+						"answer": "The namespace is G4.Plugins.SqlServer.",
+						"question": "Which namespace does ExportSqlServerQuery belong to?"
+					},
+					{
+						"answer": "The plugin supports the Any platform.",
+						"question": "Which platforms does ExportSqlServerQuery support?"
+					},
+					{
+						"answer": "The plugin is listed under the SqlServer category.",
+						"question": "Which category is ExportSqlServerQuery listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag, https://www.linkedin.com/in/roei-sabag-247aa18/.",
+						"question": "Who is the author of the ExportSqlServerQuery manifest?"
+					},
+					{
+						"answer": "It runs a parameterized query and stores the rows, all result sets, the column names, and the row count as JSON for later steps.",
+						"question": "What is the summary of ExportSqlServerQuery?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportSqlServerQuery.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/ExportSqlServerQuery.cs.",
+						"question": "Where are the documentation and source code of ExportSqlServerQuery?"
+					},
+					{
+						"answer": "The step fails when no server is resolved, no SQL is supplied, CommandFile is missing, CommandText is not valid Base64 while the Base64 switch is set, Parameters is not a JSON object, or SQL Server rejects the query.",
+						"question": "How does ExportSqlServerQuery handle errors?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Export SQL Server Query",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Runs a query on Microsoft SQL Server and exports the returned rows as JSON.",
+		"Gives later steps the rows, every result set, the column names, and the row count without writing any parsing code.",
+		"Binds every input value as a typed SQL parameter, which keeps the query safe from SQL injection.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                   | Description                                                                                                                                                                   |",
+		"| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |",
+		"| Query export              | Runs a SELECT query, or any batch that returns rows, and exports the rows of the first result set as JSON.                                                                    |",
+		"| Multiple result sets      | Keeps every result set of a multi-statement query in ResultSets, in server order.                                                                                             |",
+		"| Result shape              | Reports the column names of the first result set even when the query returns no rows.                                                                                         |",
+		"| Flexible connection       | Connects through a stored credentials record, a raw connection string, a raw Microsoft Entra access token, or discrete Server, Port, and Database values.                     |",
+		"| Connection overrides      | Server, Port, Database, Authentication, Username, Password, Encrypt, and TrustServerCertificate replace the parts of the base connection they set.                            |",
+		"| Parameter binding         | Binds the properties of a Parameters JSON object to named placeholders such as @Country, keeping strings, numbers, booleans, and null typed.                                  |",
+		"| Inline or file SQL        | Reads the query from CommandText, a Base64-encoded CommandText with the Base64 switch, or a UTF-8 CommandFile, for SQL that contains ' --' or '}}'.                           |",
+		"| Stable JSON values        | Writes nulls as null, dates as ISO 8601, binary as Base64, decimals as exact numbers, and uniqueidentifier values as strings.                                                 |",
+		"| Session and entity output | Stores Result, ResultSets, Columns, and RowCount as Base64-encoded ExportSqlServerQuery:* session parameters and as plain text in the response entity unless NoEntity is set. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case               | Description                                                                           |",
+		"| ---------------------- | ------------------------------------------------------------------------------------- |",
+		"| Load work items        | Reads pending orders, tickets, or invoices that a bot processes one by one.           |",
+		"| Look up reference data | Fetches customer, product, or account details needed to fill a form or a document.    |",
+		"| Export reports         | Pulls report rows from a stored SQL file and hands them to a file, mail, or API step. |",
+		"| Feed data loops        | Supplies a JSON array of rows to a later loop or data-driven step.                    |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| ----------------------- | ------------------------------------------------------------------------------------ |",
+		"| Verify persisted data   | Reads back the rows an application saved and compares them with the expected values. |",
+		"| Check result size       | Uses RowCount to assert that a query returns the expected number of rows or no rows. |",
+		"| Validate schema         | Uses Columns to confirm that a view or query exposes the expected columns.           |",
+		"| Drive data-driven tests | Reads test input rows from a database table and passes them to test steps.           |",
+		"",
+		"### Output Shapes",
+		"",
+		"Result, ResultSets, and Columns hold minified JSON text, and RowCount holds a number as text.",
+		"The sample below lists each value for a query that returns two customers, after Base64 decoding of the session parameters.",
+		"",
+		"```text",
+		"Result     = [{\"Id\":1,\"Name\":\"Contoso\"},{\"Id\":2,\"Name\":\"Fabrikam\"}]",
+		"ResultSets = [[{\"Id\":1,\"Name\":\"Contoso\"},{\"Id\":2,\"Name\":\"Fabrikam\"}]]",
+		"Columns    = [\"Id\",\"Name\"]",
+		"RowCount   = 2",
+		"```",
+		"",
+		"When the query returns no result set at all, Result, ResultSets, and Columns are [] and RowCount is 0.",
+		"Session parameters are Base64-encoded, so decode an ExportSqlServerQuery:* value before parsing it."
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the column names of the first result set as a minified JSON array, such as [\"Id\",\"Name\"].",
+				"Columns are reported even when the query returns no rows, so later steps can still check the result shape.",
+				"Unnamed columns are named by position, such as Column3 for the third column, and repeated names receive a number suffix such as Name2."
+			],
+			"mandatory": false,
+			"name": "Columns",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the rows of the first result set as a minified JSON array of row objects keyed by column name.",
+				"Gives later steps the main query result in one value that is easy to parse, loop over, or assert.",
+				"Database nulls become null, dates use ISO 8601, and binary values use Base64."
+			],
+			"mandatory": false,
+			"name": "Result",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds every result set of the query as a minified JSON array of row arrays, in server order.",
+				"Keeps all results of a multi-statement query or batch, while Result keeps only the first one."
+			],
+			"mandatory": false,
+			"name": "ResultSets",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the number of rows in the first result set as text, such as 2.",
+				"Lets later steps check for an empty result or an expected size without parsing the JSON."
+			],
+			"mandatory": false,
+			"name": "RowCount",
+			"type": "Number"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials value matches no stored record and is treated as an access token",
+						"No customer matches the country, so Result is [] and Columns is still reported",
+						"Parameter name without @ is bound to the @-prefixed placeholder"
+					],
+					"expected_result": "Customers in Germany are exported to ExportSqlServerQuery:Result as a JSON array, with ExportSqlServerQuery:Columns holding [\"Id\",\"Name\"].",
+					"notes": "The Credentials value sql-production resolves a stored SQL Server credentials record by name or id. The Parameters JSON binds Country as a string to the @Country placeholder, so the filter value never becomes part of the SQL text. CommandTimeout follows Parameters so the closing brace never touches the closing }} of the argument.",
+					"use_case": "export_filtered_rows_with_credentials",
+					"version": "4"
+				},
+				"labels": [
+					"Credentials",
+					"Database",
+					"DataExport",
+					"ParameterBinding",
+					"Query",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Export filtered rows with stored credentials",
+				"",
+				"The argument uses parameter syntax that binds Credentials, the SELECT statement, its @Country value, and a 60-second CommandTimeout.",
+				"The matching customer rows are exported as JSON together with the column names and row count."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{\"Country\":\"Germany\"} --CommandTimeout:60}}",
+				"pluginName": "ExportSqlServerQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection string has no server, so the step fails before connecting",
+						"First result set is empty, so Result is [] while ResultSets still holds both sets",
+						"Second result set is empty and appears as [] in ResultSets"
+					],
+					"expected_result": "ExportSqlServerQuery:ResultSets holds two row arrays, while ExportSqlServerQuery:Result, Columns, and RowCount describe the customers result set.",
+					"notes": "No credentials record is used, so the raw ConnectionString with Integrated Security signs in as the Windows runner account. The two SELECT statements return two result sets, and only the first one drives Result, Columns, and RowCount.",
+					"use_case": "export_multiple_result_sets_with_connection_string",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"DataExport",
+					"MultipleResultSets",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Export several result sets with a raw connection string",
+				"",
+				"The argument uses parameter syntax that binds a full ADO.NET ConnectionString and a CommandText with two SELECT statements.",
+				"Both result sets are kept in ResultSets, while Result keeps the first one."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:SELECT Id, Name FROM dbo.Customers; SELECT Id, Total FROM dbo.Orders WHERE Total > 1000}}",
+				"pluginName": "ExportSqlServerQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CommandFile path does not exist",
+						"CommandText is also set and wins over CommandFile",
+						"Large result exported only to session parameters"
+					],
+					"expected_result": "The report rows from monthly-sales.sql are stored in the ExportSqlServerQuery:* session parameters and the response entity stays empty.",
+					"notes": "CommandFile carries SQL that cannot travel as plain inline text, such as -- comments or }} sequences, and is read as UTF-8 without Base64 decoding. Database overrides the database of the stored credentials, so one login can read the Reporting database. NoEntity keeps a large result out of the response while the session parameters are still written.",
+					"use_case": "export_report_from_sql_file_without_entity",
+					"version": "4"
+				},
+				"labels": [
+					"CommandFile",
+					"Database",
+					"DataExport",
+					"Reporting",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Export a report from a SQL file without a response entity",
+				"",
+				"The argument uses parameter syntax that binds Credentials, a Database override, a CommandFile path, and the NoEntity switch.",
+				"The query from the file runs in the Reporting database, and only the session parameters receive the results."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --Database:Reporting --CommandFile:C:\\automation\\sql\\monthly-sales.sql --NoEntity}}",
+				"pluginName": "ExportSqlServerQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the encoded text is sent as SQL and the step fails",
+						"CommandText is not valid Base64, so the step fails before connecting",
+						"Parameters JSON is not decoded and binds @Country as plain JSON"
+					],
+					"expected_result": "The decoded query runs with @Country bound to Germany, and the matching customers sorted by name are stored in ExportSqlServerQuery:Result with ExportSqlServerQuery:Columns holding [\"Id\",\"Name\"].",
+					"notes": "The Base64 switch decodes CommandText from UTF-8 Base64 before the query runs, so the ' --' comment travels inline without ending the argument value. Only CommandText is decoded, and the Parameters JSON stays plain. Base64 follows Parameters so the closing brace never touches the closing }} of the argument.",
+					"use_case": "export_base64_query_with_comment",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"Credentials",
+					"DataExport",
+					"Database",
+					"ParameterBinding",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Export rows from a Base64-encoded query with a comment",
+				"",
+				"The argument uses parameter syntax that binds Credentials, a Base64 CommandText, its @Country value, and the Base64 switch.",
+				"The decoded SQL is `SELECT Id, Name FROM dbo.Customers -- customers in the requested country` followed by a `WHERE Country = @Country ORDER BY Name` line."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{\"Country\":\"Germany\"} --Base64}}",
+				"pluginName": "ExportSqlServerQuery"
+			}
+		}
+	],
+	"key": "ExportSqlServerQuery",
+	"namespace": "G4.Plugins.SqlServer",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the column names of the first result set as a Base64-encoded minified JSON array, such as [\"Id\",\"Name\"] after decoding.",
+				"Columns are reported even when the query returns no rows, so later steps can still check the result shape."
+			],
+			"mandatory": false,
+			"name": "ExportSqlServerQuery:Columns",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the rows of the first result set as a Base64-encoded minified JSON array of row objects keyed by column name.",
+				"Gives later steps the main query result in one value that is easy to decode, parse, loop over, or assert."
+			],
+			"mandatory": false,
+			"name": "ExportSqlServerQuery:Result",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores every result set of the query as a Base64-encoded minified JSON array of row arrays, in server order.",
+				"Keeps all results of a multi-statement query, while ExportSqlServerQuery:Result keeps only the first one."
+			],
+			"mandatory": false,
+			"name": "ExportSqlServerQuery:ResultSets",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of rows in the first result set as a Base64-encoded number, such as 2 after decoding.",
+				"Lets later steps check for an empty result or an expected size without parsing the JSON."
+			],
+			"mandatory": false,
+			"name": "ExportSqlServerQuery:RowCount",
+			"type": "Number"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Chooses how the connection signs in to SQL Server, such as a SQL login, the Windows identity, or a Microsoft Entra method.",
+				"Overrides the sign-in method of the stored credentials or connection string, so one target can be reached with a different identity.",
+				"Leave it empty to keep the method that the credentials or connection string already define."
+			],
+			"mandatory": false,
+			"name": "Authentication",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with the first Microsoft Entra identity found in the environment, such as a managed identity or a developer login.",
+						"Suits pipelines that run under different identities without code changes."
+					],
+					"name": "Active Directory Default"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra identity of the signed-in Windows user.",
+						"Suits domain-joined machines that are federated with Microsoft Entra ID."
+					],
+					"name": "Active Directory Integrated"
+				},
+				{
+					"description": [
+						"Opens an interactive Microsoft Entra sign-in prompt for the user named in Username.",
+						"Suits attended runs where a person can complete multi-factor sign-in."
+					],
+					"name": "Active Directory Interactive"
+				},
+				{
+					"description": [
+						"Signs in with the Azure managed identity of the host; Username can carry a user-assigned identity client id.",
+						"Suits unattended runs on Azure hosts without any stored secret."
+					],
+					"name": "Active Directory Managed Identity"
+				},
+				{
+					"description": [
+						"Signs in with a Microsoft Entra user name and password taken from Username and Password.",
+						"Suits accounts that do not require multi-factor sign-in."
+					],
+					"name": "Active Directory Password"
+				},
+				{
+					"description": [
+						"Signs in as a Microsoft Entra application, with the client id in Username and the client secret in Password.",
+						"Suits unattended service runs that use an app registration."
+					],
+					"name": "Active Directory Service Principal"
+				},
+				{
+					"description": [
+						"Signs in with the Windows identity that runs the automation (Integrated Security).",
+						"Avoids storing any password when the runner account has database access."
+					],
+					"name": "Integrated"
+				},
+				{
+					"description": [
+						"Signs in with a SQL Server login taken from Username and Password.",
+						"Suits servers that use SQL Server authentication."
+					],
+					"name": "Sql Password"
+				}
+			]
+		},
+		{
+			"description": [
+				"Decodes the CommandText value from UTF-8 Base64 before the query runs.",
+				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
+				"Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.",
+				"Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Gives the path of a UTF-8 text file whose content is the SQL statement to run.",
+				"Use it for SQL that contains a space followed by two dashes or a double closing brace, because those sequences end an inline argument value.",
+				"CommandText wins when both are set, and the step fails when the file does not exist."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the SQL statement to run, written inline in the step argument.",
+				"Reference input values as named placeholders such as @Id and supply them through Parameters instead of joining them into the text.",
+				"Either CommandText or CommandFile is required, and CommandText wins when both are set.",
+				"For SQL that contains a space followed by two dashes or a double closing brace, use CommandFile or pass the text as UTF-8 Base64 together with the Base64 switch."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets how many seconds the statement may run before SQL Server cancels it.",
+				"Raise it for long statements so they finish, or keep it low to fail fast on blocked queries.",
+				"The value 0 waits without limit, and a missing or invalid value falls back to 30 seconds."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Holds a full ADO.NET connection string, such as Server=localhost,1433;Database=Sales;Integrated Security=True.",
+				"Use it when no stored credentials record is set, because Credentials takes priority over it.",
+				"Server, Database, and the other connection parameters still override the parts they set."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names a stored SQL Server credentials record by name or id, so the login never appears in the automation definition.",
+				"A value that matches no record and contains an equals sign is used as a raw connection string.",
+				"Any other unmatched value is used as a raw Microsoft Entra access token, and Credentials takes priority over ConnectionString."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets the database the statement runs in, overriding the database of the credentials or connection string.",
+				"Lets one stored login reach several databases on the same server."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets how the connection encrypts traffic to SQL Server.",
+				"Overrides the encryption mode of the credentials or connection string, so security rules can be met per step."
+			],
+			"mandatory": false,
+			"name": "Encrypt",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
+						"Matches the provider default for new connections."
+					],
+					"name": "Mandatory"
+				},
+				{
+					"description": [
+						"Encrypts only when the server requires it.",
+						"Suits older servers on trusted networks."
+					],
+					"name": "Optional"
+				},
+				{
+					"description": [
+						"Uses TDS 8.0 strict encryption, where the connection is encrypted before any sign-in data is sent.",
+						"Requires SQL Server 2022 or Azure SQL and always validates the server certificate."
+					],
+					"name": "Strict"
+				}
+			]
+		},
+		{
+			"description": [
+				"Leaves the response entity empty while the session parameters are still written.",
+				"Use it for large results or sensitive data that should not travel in the response payload."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Holds a JSON object whose properties are bound to the named placeholders of the statement, such as {\"Id\":42} for @Id.",
+				"Values are sent as typed SQL parameters and never joined into the SQL text, which blocks SQL injection.",
+				"Strings, booleans, numbers, and null keep their type, and nested objects or arrays are sent as JSON text."
+			],
+			"mandatory": false,
+			"name": "Parameters",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets the password or client secret used with Username, overriding the value of the credentials or connection string.",
+				"Prefer a stored credentials record so the secret stays out of the automation definition."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets the TCP port of SQL Server, such as 1433.",
+				"Applies together with Server, which receives the port as server,port."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the SQL Server host name or address, such as localhost or db01.contoso.local\\SQLEXPRESS.",
+				"Overrides the server of the credentials or connection string, so one stored login can target another server.",
+				"The step fails when no server results from Credentials, ConnectionString, or Server."
+			],
+			"mandatory": false,
+			"name": "Server",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Supplies a raw Microsoft Entra access token that signs in the connection.",
+				"Do not combine it with a password or an Authentication method, because SQL Server rejects that combination."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Accepts the server certificate without validating it against a trusted authority.",
+				"Use it only for local or test servers with self-signed certificates, because it weakens protection against impersonation."
+			],
+			"mandatory": false,
+			"name": "TrustServerCertificate",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name, Microsoft Entra user, or application client id used to sign in.",
+				"Overrides the user of the credentials or connection string."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Runs a query on Microsoft SQL Server and exports the returned rows as JSON for later steps.",
+		"Keeps every result set, the column names, and the row count, even when the query returns no rows.",
+		"Binds input values as typed parameters and connects through stored credentials, a connection string, an access token, or discrete server settings.",
+		"Stores Result, ResultSets, Columns, and RowCount in session parameters for lookups, checks, and data handoffs."
+	],
+	"version": "4"
+}

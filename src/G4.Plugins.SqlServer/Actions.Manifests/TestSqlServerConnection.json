@@ -1,0 +1,520 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"SqlServer"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/TestSqlServerConnection.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/TestSqlServerConnection.cs"
+			},
+			"rag": {
+				"description": "Check that a SQL Server database is reachable before an automation reads or writes data. The step reports success or the exact failure reason instead of stopping the flow, accepts stored credentials, connection strings, or discrete settings, and keeps workflows reliable by letting them branch on the result.",
+				"qa": [
+					{
+						"question": "What does the TestSqlServerConnection plugin do?",
+						"answer": "It opens and closes a connection to SQL Server and reports whether the connection succeeded, without failing the flow on a rejected or unreachable server."
+					},
+					{
+						"question": "What are the key parameters and outputs of TestSqlServerConnection?",
+						"answer": "Credentials, ConnectionString, or Server select the target, with optional Port, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, Token, and NoEntity. Outputs are Connected, Database, ServerVersion, and Error."
+					},
+					{
+						"question": "How does TestSqlServerConnection fit into an automation workflow?",
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, usually before steps that query or change data."
+					},
+					{
+						"question": "What are best practices for using TestSqlServerConnection?",
+						"answer": "Use a stored Credentials name instead of a plain password, and branch on the decoded TestSqlServerConnection:Connected value before running data steps."
+					},
+					{
+						"question": "How is a TestSqlServerConnection rule configured?",
+						"answer": "Use $type “Action” with pluginName “TestSqlServerConnection” and pass inputs in the argument, such as {{$ --Credentials:sql-production}}."
+					},
+					{
+						"question": "What is the manifest key of TestSqlServerConnection?",
+						"answer": "The manifest key is “TestSqlServerConnection”."
+					},
+					{
+						"question": "What manifestVersion is used by TestSqlServerConnection?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What is the pluginType of TestSqlServerConnection?",
+						"answer": "The pluginType is “Action”."
+					},
+					{
+						"question": "Which platforms does TestSqlServerConnection support?",
+						"answer": "It supports the platform “Any”."
+					},
+					{
+						"question": "Which category is TestSqlServerConnection listed under?",
+						"answer": "It is listed under the “SqlServer” category."
+					},
+					{
+						"question": "Who is the author of the TestSqlServerConnection manifest?",
+						"answer": "The author is Roei Sabag."
+					},
+					{
+						"question": "What author link is provided in the TestSqlServerConnection manifest?",
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What is the summary of TestSqlServerConnection?",
+						"answer": "Tests a SQL Server connection and reports whether it opened, without failing the flow when the server rejects the login or cannot be reached. Connects with a stored credentials name, a connection string, or discrete server, database, and sign-in settings. Stores the connection result, database name, server version, and error message as session parameters for health checks and conditional branching."
+					},
+					{
+						"question": "Where are the TestSqlServerConnection documentation and source code?",
+						"answer": "It is documented as a non-failing SQL Server connection check. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/TestSqlServerConnection.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/TestSqlServerConnection.cs."
+					},
+					{
+						"question": "How does TestSqlServerConnection handle errors?",
+						"answer": "A rejected login or unreachable server sets Connected to false and stores the client message in Error, while a step with no resolvable server fails immediately."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Test SQL Server Connection",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Tests whether an automation can open a connection to a SQL Server database.",
+		"Reports the result as data instead of failing the step, so a flow can check database availability before it reads or writes data.",
+		"Supports stored credentials, full connection strings, and discrete server, database, and sign-in settings.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                          |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Connection check           | Opens and immediately closes a connection to confirm that the server accepts the login.                                                              |",
+		"| Non-failing result         | Reports `Connected` as `false` with the client error message when SQL Server rejects the login or cannot be reached.                                 |",
+		"| Flexible connection input  | Resolves the target from a credentials name or id, a raw connection string, or a raw Microsoft Entra access token.                                   |",
+		"| Discrete overrides         | Applies Server, Port, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, and Token on top of the resolved connection.    |",
+		"| Server details             | Returns the database name and server version reported by the opened connection.                                                                      |",
+		"| Session and entity outputs | Stores outputs as Base64 session parameters named `TestSqlServerConnection:<Name>` and returns them in the response entity unless `NoEntity` is set. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                 | Description                                                                                  |",
+		"|--------------------------|----------------------------------------------------------------------------------------------|",
+		"| Pre-run health check     | Confirm that the reporting database is reachable before a bot starts a long data job.        |",
+		"| Conditional fallback     | Branch to a retry, a notification, or a secondary server when `Connected` is `false`.        |",
+		"| Environment verification | Confirm that a credentials record reaches the expected database before deployment steps run. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case                   | Description                                                                 |",
+		"|----------------------------|-----------------------------------------------------------------------------|",
+		"| Test environment readiness | Verify that the test database is up before data-driven test suites run.     |",
+		"| Credentials validation     | Check that stored test credentials still sign in after a password rotation. |",
+		"| Version gating             | Skip or adapt tests based on the reported SQL Server version.               |",
+		"",
+		"### Notes",
+		"",
+		"A step that resolves no server from Credentials, ConnectionString, or Server fails instead of reporting `Connected` as `false`.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores `true` when the connection opened and `false` when SQL Server rejected the login or could not be reached.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Connected",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the name of the database the connection opened in.",
+				"Confirms which database the login reached, including the login default database when none was requested.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the SQL Server client message when the connection fails, such as a login failure or a network error.",
+				"Stays empty when the connection succeeds.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Error",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the SQL Server version reported by the server, such as `16.00.1000`.",
+				"Helps checks confirm that a server meets a version requirement.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "ServerVersion",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials name does not match a stored record",
+						"Login rejected by SQL Server",
+						"Server unreachable or connection timeout"
+					],
+					"expected_result": "The step stores `TestSqlServerConnection:Connected` as `true` with the database name and server version, or `false` with the client message in `TestSqlServerConnection:Error`.",
+					"notes": "The credentials record supplies the server, database, and login, so no secret appears in the rule. A rejected login or unreachable server is reported through the outputs instead of failing the step.",
+					"use_case": "test_connection_with_credentials_name",
+					"version": "4"
+				},
+				"labels": [
+					"Connectivity",
+					"Credentials",
+					"Database",
+					"HealthCheck",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Test a connection with a credentials name",
+				"",
+				"The `{{$ --Credentials:sql-production}}` argument binds the stored credentials record named `sql-production` at runtime.",
+				"The step reports whether the connection opened and stores the result in session parameters and the response entity."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production}}",
+				"pluginName": "TestSqlServerConnection"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection string contains an unknown keyword",
+						"Connection string has no server",
+						"Integrated Security account has no access to the database"
+					],
+					"expected_result": "The step stores the connection result in `TestSqlServerConnection:*` session parameters and returns no response entity.",
+					"notes": "The raw connection string is used because no Credentials value is set. The `NoEntity` switch omits the response entity, so later steps read only the Base64 session parameters.",
+					"use_case": "test_connection_with_connection_string_without_entity",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Connectivity",
+					"Database",
+					"HealthCheck",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Test a connection string without a response entity",
+				"",
+				"The argument binds a full connection string to `localhost,1433` with Windows sign-in and the `NoEntity` switch.",
+				"The outputs are stored only as session parameters."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --NoEntity}}",
+				"pluginName": "TestSqlServerConnection"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Self-signed certificate rejected without TrustServerCertificate",
+						"Windows identity has no access to the Sales database",
+						"Windows identity has no login on the server"
+					],
+					"expected_result": "The step stores `TestSqlServerConnection:Connected` as `true` when the Windows identity can open the `Sales` database on `localhost,1433`.",
+					"notes": "The server, port, database, and sign-in method are passed as separate parameters without a credentials record. The `TrustServerCertificate` switch accepts a self-signed certificate on a development server.",
+					"use_case": "test_connection_with_discrete_settings",
+					"version": "4"
+				},
+				"labels": [
+					"Connectivity",
+					"Database",
+					"Encryption",
+					"HealthCheck",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Test a connection with discrete settings",
+				"",
+				"The argument binds Server, Port, Database, Authentication, and Encrypt values plus the `TrustServerCertificate` switch.",
+				"The step signs in with the Windows identity and reports the result."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Server:localhost --Port:1433 --Database:Sales --Authentication:Integrated --Encrypt:Mandatory --TrustServerCertificate}}",
+				"pluginName": "TestSqlServerConnection"
+			}
+		}
+	],
+	"key": "TestSqlServerConnection",
+	"namespace": "G4.Plugins.SqlServer",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores `true` when the connection opened and `false` when SQL Server rejected the login or could not be reached.",
+				"Lets later steps branch on database availability without failing the flow.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestSqlServerConnection:Connected",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the name of the database the connection opened in.",
+				"Confirms which database the login reached, including the login default database when none was requested.",
+				"Stays empty when the connection fails.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestSqlServerConnection:Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the SQL Server client message when the connection fails, such as a login failure or a network error.",
+				"Stays empty when the connection succeeds.",
+				"Gives reports and logs a clear reason for an unreachable server.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestSqlServerConnection:Error",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the SQL Server version reported by the server, such as `16.00.1000`.",
+				"Helps checks confirm that a server meets a version requirement.",
+				"Stays empty when the connection fails.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestSqlServerConnection:ServerVersion",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Selects how the connection signs in to SQL Server, such as a SQL login, the Windows identity, or a Microsoft Entra method.",
+				"Overrides the authentication method from the credentials or the connection string for this step only.",
+				"Choosing the right method avoids login failures on servers that accept only certain sign-in types."
+			],
+			"mandatory": false,
+			"name": "Authentication",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a SQL Server login name and password.",
+						"Use it together with the Username and Password parameters."
+					],
+					"name": "Sql Password"
+				},
+				{
+					"description": [
+						"Signs in with the Windows identity of the account that runs the automation.",
+						"No user name or password is sent with the connection."
+					],
+					"name": "Integrated"
+				},
+				{
+					"description": [
+						"Signs in with the first available Microsoft Entra identity on the machine, such as a managed identity or developer tool sign-in.",
+						"Suits automation that moves between local machines and cloud hosts."
+					],
+					"name": "Active Directory Default"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra identity of the signed-in Windows user.",
+						"Works on domain-joined or Entra-joined machines without a password."
+					],
+					"name": "Active Directory Integrated"
+				},
+				{
+					"description": [
+						"Opens a Microsoft Entra sign-in prompt for the user.",
+						"Fits attended runs where a person can complete the sign-in, including multi-factor prompts."
+					],
+					"name": "Active Directory Interactive"
+				},
+				{
+					"description": [
+						"Signs in with the managed identity of the Azure resource that runs the automation.",
+						"Keeps stored secrets out of cloud-hosted runs."
+					],
+					"name": "Active Directory Managed Identity"
+				},
+				{
+					"description": [
+						"Signs in with a Microsoft Entra user name and password.",
+						"Use it together with the Username and Password parameters."
+					],
+					"name": "Active Directory Password"
+				},
+				{
+					"description": [
+						"Signs in as a Microsoft Entra application.",
+						"Pass the application id as Username and the client secret as Password."
+					],
+					"name": "Active Directory Service Principal"
+				}
+			]
+		},
+		{
+			"description": [
+				"Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Server or Database still override the matching parts of the string."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.",
+				"When no record matches, a value that contains `=` is used as a raw connection string and any other value is used as a raw Microsoft Entra access token.",
+				"Takes priority over ConnectionString, while discrete parameters such as Database still override the resolved values."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the connection opens in, such as `Sales`.",
+				"Overrides the database from the credentials or connection string, so one stored login can reach several databases."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the encryption setting from the credentials or connection string when a server requires a specific mode."
+			],
+			"mandatory": false,
+			"name": "Encrypt",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
+						"Fits most production servers."
+					],
+					"name": "Mandatory"
+				},
+				{
+					"description": [
+						"Encrypts the connection only when the server requires it.",
+						"Suits local development servers without a trusted certificate."
+					],
+					"name": "Optional"
+				},
+				{
+					"description": [
+						"Encrypts the connection before login and always validates the server certificate.",
+						"Requires a server that supports TDS 8.0, such as SQL Server 2022 or Azure SQL Database."
+					],
+					"name": "Strict"
+				}
+			]
+		},
+		{
+			"description": [
+				"Omits the response entity, so the outputs are stored only as session parameters.",
+				"Keeps responses small when later steps read only the session parameters."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password used with the Username login.",
+				"Overrides the password from the credentials or connection string for this step.",
+				"Prefer Credentials over a plain password so secrets are not stored in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the server, such as `1433`, and joins it to Server as `server,port`.",
+				"Applies only when Server is set in the same step, because the port is combined with that server name."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the SQL Server host name or address, such as `localhost` or `db01\\SQLEXPRESS`.",
+				"Overrides the server from the credentials or connection string.",
+				"The step fails when no server is resolved from Credentials, ConnectionString, or Server."
+			],
+			"mandatory": false,
+			"name": "Server",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies a raw Microsoft Entra access token that signs in the connection.",
+				"Enables token sign-in without a stored password.",
+				"Do not combine it with Password or Authentication, because the SQL Server client rejects that mix when the connection opens."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Accepts the server certificate without validating it against a trusted authority.",
+				"Helps connect to development servers that use a self-signed certificate.",
+				"Avoid it in production, because it removes protection against a spoofed server."
+			],
+			"mandatory": false,
+			"name": "TrustServerCertificate",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a SQL login or a Microsoft Entra user or application id.",
+				"Overrides the user name from the credentials or connection string for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Tests a SQL Server connection and reports whether it opened, without failing the flow when the server rejects the login or cannot be reached.",
+		"Connects with a stored credentials name, a connection string, or discrete server, database, and sign-in settings.",
+		"Stores the connection result, database name, server version, and error message as session parameters for health checks and conditional branching."
+	],
+	"version": "4"
+}

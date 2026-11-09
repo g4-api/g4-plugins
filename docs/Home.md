@@ -20,7 +20,10 @@
   * [Export Google Calendar List (ExportGoogleCalendarList)](./Actions/ExportGoogleCalendarList.md)
   * [Export Google Task Lists (ExportGoogleTaskLists)](./Actions/ExportGoogleTaskLists.md)
   * [Export Google Tasks (ExportGoogleTasks)](./Actions/ExportGoogleTasks.md)
+  * [Export Sql Server Query (ExportSqlServerQuery)](./Actions/ExportSqlServerQuery.md)
+  * [Get Sql Server Scalar (GetSqlServerScalar)](./Actions/GetSqlServerScalar.md)
   * [Hide Soft Keyboard (HideSoftKeyboard)](./Actions/HideSoftKeyboard.md)
+  * [Import Sql Server Data (ImportSqlServerData)](./Actions/ImportSqlServerData.md)
   * [Invoke Click (InvokeClick)](./Actions/InvokeClick.md)
   * [Invoke Context Click (InvokeContextClick)](./Actions/InvokeContextClick.md)
   * [Invoke Data For Each Loop (InvokeDataForEachLoop)](./Actions/InvokeDataForEachLoop.md)
@@ -29,6 +32,9 @@
   * [Invoke For Loop (InvokeForLoop)](./Actions/InvokeForLoop.md)
   * [Invoke Script (InvokeScript)](./Actions/InvokeScript.md)
   * [Invoke Scroll (InvokeScroll)](./Actions/InvokeScroll.md)
+  * [Invoke Sql Server Non Query (InvokeSqlServerNonQuery)](./Actions/InvokeSqlServerNonQuery.md)
+  * [Invoke Sql Server Procedure (InvokeSqlServerProcedure)](./Actions/InvokeSqlServerProcedure.md)
+  * [Invoke Sql Server Script (InvokeSqlServerScript)](./Actions/InvokeSqlServerScript.md)
   * [Invoke User32 Click (InvokeUser32Click)](./Actions/InvokeUser32Click.md)
   * [Invoke User32 Context Click (InvokeUser32ContextClick)](./Actions/InvokeUser32ContextClick.md)
   * [Invoke User32 Double Click (InvokeUser32DoubleClick)](./Actions/InvokeUser32DoubleClick.md)
@@ -78,6 +84,7 @@
   * [Switch Keyboard Layout (SwitchKeyboardLayout)](./Actions/SwitchKeyboardLayout.md)
   * [Switch Parent Frame (SwitchParentFrame)](./Actions/SwitchParentFrame.md)
   * [Switch Window (SwitchWindow)](./Actions/SwitchWindow.md)
+  * [Test Sql Server Connection (TestSqlServerConnection)](./Actions/TestSqlServerConnection.md)
   * [Undo Navigation (UndoNavigation)](./Actions/UndoNavigation.md)
   * [Unprotect Data (UnprotectData)](./Actions/UnprotectData.md)
   * [Update Google Task (UpdateGoogleTask)](./Actions/UpdateGoogleTask.md)
@@ -126,6 +133,7 @@
   * [Csv Data Collector (CsvDataCollector)](./DataCollectors/CsvDataCollector.md)
   * [Json Data Collector (JsonDataCollector)](./DataCollectors/JsonDataCollector.md)
   * [Sq Lite Data Collector (SqLiteDataCollector)](./DataCollectors/SqLiteDataCollector.md)
+  * [Sql Server Data Collector (SqlServerDataCollector)](./DataCollectors/SqlServerDataCollector.md)
   * [Xml Data Collector (XmlDataCollector)](./DataCollectors/XmlDataCollector.md)
 
 * _**Extraction Scopes**_
@@ -191,3 +199,4 @@
 
 * _**Docs**_
   * [Google Plugins Setup](./google-plugins-setup.md)
+  * [SQL Server Plugins Setup](./sqlserver-plugins-setup.md)

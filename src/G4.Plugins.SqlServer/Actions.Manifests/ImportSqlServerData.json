@@ -1,0 +1,570 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"SqlServer"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ImportSqlServerData.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/ImportSqlServerData.cs"
+			},
+			"rag": {
+				"description": "Bulk-load an existing SQL Server table from CSV, JSON files, or inline JSON in one step. It validates the table name and connection inputs, accepts dynamic values from macros and data columns, and can commit all rows in one transaction, so imports stay complete, repeatable, and reliable across runs.",
+				"qa": [
+					{
+						"question": "What does the ImportSqlServerData plugin do?",
+						"answer": "It bulk copies rows from a CSV file, a JSON file, or an inline JSON array into an existing SQL Server table and reports how many rows were copied."
+					},
+					{
+						"question": "What are the key parameters of ImportSqlServerData?",
+						"answer": "Table is required; the rows come from Data (inline JSON) or DataFile (.csv or JSON), and BatchSize, CommandTimeout, Transaction, and NoEntity tune the copy. The connection comes from Credentials, ConnectionString, or individual values such as Server, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, Port, and Token."
+					},
+					{
+						"question": "How does ImportSqlServerData fit into a workflow designer?",
+						"answer": "It appears as a task step of type Action that uses the ActionRuleModel and the database icon, labeled Import SQL Server Data."
+					},
+					{
+						"question": "What are best practices for using ImportSqlServerData?",
+						"answer": "Use a stored credentials record instead of inline passwords, add Transaction when a partial load is unacceptable, and use DataFile for large data or JSON that contains \" --\" or \"}}\"."
+					},
+					{
+						"question": "How is an ImportSqlServerData rule structured?",
+						"answer": "Use $type Action with pluginName ImportSqlServerData and an argument such as {{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\\data\\customers.csv --Transaction}}; the copied row count is then read from the Base64 session parameter ImportSqlServerData:RowsCopied or, unless NoEntity is set, from RowsCopied in the entity."
+					},
+					{
+						"question": "What is the manifest key of this plugin?",
+						"answer": "The key is ImportSqlServerData."
+					},
+					{
+						"question": "What is the pluginType of ImportSqlServerData?",
+						"answer": "The pluginType is Action."
+					},
+					{
+						"question": "What manifest version does ImportSqlServerData use?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "Which namespace, category, and platforms apply to ImportSqlServerData?",
+						"answer": "The namespace is G4.Plugins.SqlServer, the category is SqlServer, and the supported platform is Any."
+					},
+					{
+						"question": "Who is the author of ImportSqlServerData?",
+						"answer": "The author is Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)."
+					},
+					{
+						"question": "Where are the documentation and source code for ImportSqlServerData?",
+						"answer": "The description covers bulk importing CSV or JSON rows into an existing table. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ImportSqlServerData.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/ImportSqlServerData.cs."
+					},
+					{
+						"question": "How does ImportSqlServerData handle errors?",
+						"answer": "The step fails when Table is empty, neither Data nor DataFile is set, no server is resolved, the table does not exist, or a value cannot be converted; with Transaction no rows are kept after a failure."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Import SQL Server Data",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"ImportSqlServerData loads rows into an existing SQL Server table during an automation run.",
+		"It reads the rows from a CSV file, a JSON file, or an inline JSON array and sends them with SQL Server bulk copy, which is much faster than inserting rows one by one.",
+		"It helps workflows seed test data, load exported records, and move files into a database without writing SQL.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Bulk copy import | Sends all rows to the destination table with SQL Server bulk copy, optionally in batches set by BatchSize. |",
+		"| Flexible data input | Accepts inline JSON through Data, or a file through DataFile: .csv files are read as RFC 4180 CSV with a header row, other files as JSON. |",
+		"| Column matching by name | Maps each data field to the table column with the same name, so the field order does not matter. |",
+		"| Type conversion | Sends values as text and converts them to the destination column types during the copy; empty unquoted CSV fields and JSON null become NULL. |",
+		"| Flexible connection | Resolves the connection from a stored credentials record, a connection string, or individual values such as Server, Database, and Authentication. |",
+		"| Optional transaction | The Transaction switch commits the import only after every row is copied and rolls everything back on failure. |",
+		"| Row count output | Stores the copied row count as the session parameter ImportSqlServerData:RowsCopied (Base64) and, unless NoEntity is set, in the response entity. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Load exported files | Imports CSV or JSON exports from other systems into a staging or reporting table. |",
+		"| Save collected records | Writes records gathered earlier in the run, passed as an inline JSON array, into a database table. |",
+		"| Scheduled data feeds | Loads a daily or hourly file into SQL Server as one all-or-nothing transaction. |",
+		"| Cross-system migration | Moves rows between systems by exporting them to a file and importing that file into SQL Server. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Seed test data | Loads known rows into tables before a test so the application under test starts from a predictable state. |",
+		"| Data-driven fixtures | Imports a CSV fixture per scenario, so testers change data without changing the automation. |",
+		"| Import volume checks | Compares ImportSqlServerData:RowsCopied with the expected row count to confirm a complete load. |",
+		"",
+		"### Requirements and Limitations",
+		"",
+		"| Item | Description |",
+		"| --- | --- |",
+		"| Existing table | The destination table must already exist; the import never creates tables or columns. |",
+		"| Matching column names | Every data field must match a column in the table, or the copy fails. |",
+		"| Flat rows | Nested JSON objects or arrays are stored as JSON text in the matching column. |",
+		"| Bulk copy defaults | Check and foreign key constraints are not checked, triggers do not fire, and values supplied for identity columns are replaced by new server-generated values. |",
+		"| Partial imports | Without Transaction, batches that were already sent stay in the table when a later batch fails. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Returns the number of rows copied into the table as plain text in the response entity.",
+				"Feeds ETL and direct data transfer without decoding, and is omitted when NoEntity is set."
+			],
+			"name": "RowsCopied",
+			"type": "Number"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSV file has no header row",
+						"CSV header names a column the table does not have",
+						"Credentials name matches no stored record",
+						"Destination table does not exist"
+					],
+					"expected_result": "Every row of customers.csv is copied into dbo.Customers in one committed transaction, and ImportSqlServerData:RowsCopied holds the row count.",
+					"notes": "The stored credentials record sql-production supplies the connection. The .csv extension selects the CSV reader, and a failure on any row rolls back the whole import.",
+					"use_case": "import_csv_file_in_transaction",
+					"version": "4"
+				},
+				"labels": [
+					"BulkImport",
+					"CsvImport",
+					"Database",
+					"SqlServer",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Import a CSV file into a table inside a transaction",
+				"",
+				"The parameter syntax binds `Credentials` to the stored record `sql-production`, `Table` to `dbo.Customers`, and `DataFile` to `C:\\data\\customers.csv`.",
+				"The `Transaction` switch commits the rows only after all of them are copied."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\\data\\customers.csv --Transaction}}",
+				"pluginName": "ImportSqlServerData"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Data is not a JSON array of objects",
+						"Inline JSON contains \" --\" or \"}}\"",
+						"Row objects use different property sets",
+						"Value cannot be converted to the column type"
+					],
+					"expected_result": "Two rows are copied into dbo.Customers, and the copied row count is returned in the entity and in ImportSqlServerData:RowsCopied.",
+					"notes": "Without Credentials, the ConnectionString value opens the connection, and the table name without a schema resolves to dbo. Fields missing from a row object are stored as NULL.",
+					"use_case": "import_inline_json_with_connection_string",
+					"version": "4"
+				},
+				"labels": [
+					"BulkImport",
+					"ConnectionString",
+					"Database",
+					"JsonImport",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Import inline JSON rows with a connection string",
+				"",
+				"The parameter syntax binds `ConnectionString` to a full ADO.NET connection string and `Table` to `Customers` in the default `dbo` schema.",
+				"The `Data` value is an inline JSON array, and each object becomes one row."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{\"Id\":1,\"Name\":\"Ada\"},{\"Id\":2,\"Name\":\"Grace\"}]}}",
+				"pluginName": "ImportSqlServerData"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A batch fails after earlier batches were sent",
+						"Bracketed table name contains a dot",
+						"Import exceeds the command timeout"
+					],
+					"expected_result": "All rows of leads.json are copied into [sales].[Leads] in batches of 5000 rows, and only the session parameter ImportSqlServerData:RowsCopied is set.",
+					"notes": "Any extension other than .csv selects the JSON reader. Without Transaction, batches already sent stay in the table when a later batch fails.",
+					"use_case": "import_large_json_file_in_batches_without_entity",
+					"version": "4"
+				},
+				"labels": [
+					"BatchProcessing",
+					"BulkImport",
+					"Database",
+					"JsonImport",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Import a large JSON file in batches without an entity",
+				"",
+				"The parameter syntax binds `Table` to the bracketed name `[sales].[Leads]`, `DataFile` to a JSON file, `BatchSize` to 5000 rows, and `CommandTimeout` to 300 seconds.",
+				"The `NoEntity` switch leaves the response entity empty."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\\data\\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}",
+				"pluginName": "ImportSqlServerData"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Authentication value is not supported by the provider",
+						"No Server value and no other connection input",
+						"Server certificate fails Strict validation"
+					],
+					"expected_result": "Every row of orders.csv is copied into dbo.Orders on the named server, signed in with the default Microsoft Entra identity.",
+					"notes": "Individual connection values build the connection when no Credentials or ConnectionString is set. Strict encryption requires SQL Server 2022 or Azure SQL.",
+					"use_case": "import_csv_with_discrete_connection_values",
+					"version": "4"
+				},
+				"labels": [
+					"BulkImport",
+					"CsvImport",
+					"Database",
+					"EntraAuthentication",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Import a CSV file with individual connection values",
+				"",
+				"The parameter syntax binds `Server`, `Database`, `Authentication`, and `Encrypt` instead of a stored record or connection string.",
+				"The rows from `C:\\data\\orders.csv` are copied into `dbo.Orders`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Server:sales-db.database.windows.net --Database:Sales --Authentication:Active Directory Default --Encrypt:Strict --Table:dbo.Orders --DataFile:C:\\data\\orders.csv}}",
+				"pluginName": "ImportSqlServerData"
+			}
+		}
+	],
+	"key": "ImportSqlServerData",
+	"namespace": "G4.Plugins.SqlServer",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the number of rows copied into the table as a Base64-encoded session parameter.",
+				"Later steps decode the value to confirm the import size or drive reporting."
+			],
+			"name": "ImportSqlServerData:RowsCopied",
+			"type": "Number"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Selects the sign-in method used for the connection, such as a SQL login or a Microsoft Entra identity.",
+				"Replaces the method from the stored credentials or the connection string for this step only.",
+				"Integrated signs in with the Windows identity that runs the automation."
+			],
+			"mandatory": false,
+			"name": "Authentication",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with the first Microsoft Entra identity found on the machine, such as an Azure CLI login or a managed identity.",
+						"Suits automation hosts that already carry a signed-in identity."
+					],
+					"name": "Active Directory Default"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra identity of the current Windows user.",
+						"Works on domain-joined machines that are federated with Microsoft Entra ID."
+					],
+					"name": "Active Directory Integrated"
+				},
+				{
+					"description": [
+						"Opens an interactive Microsoft Entra sign-in prompt.",
+						"Fits attended runs where a person can complete the sign-in."
+					],
+					"name": "Active Directory Interactive"
+				},
+				{
+					"description": [
+						"Signs in with the managed identity assigned to the Azure host.",
+						"Keeps secrets out of the automation on Azure-hosted runners."
+					],
+					"name": "Active Directory Managed Identity"
+				},
+				{
+					"description": [
+						"Signs in with a Microsoft Entra user name and password.",
+						"Requires the Username and Password values."
+					],
+					"name": "Active Directory Password"
+				},
+				{
+					"description": [
+						"Signs in as a Microsoft Entra application, using the client id as Username and the client secret as Password.",
+						"Suits unattended service accounts."
+					],
+					"name": "Active Directory Service Principal"
+				},
+				{
+					"description": [
+						"Signs in with the Windows identity that runs the automation.",
+						"Turns on integrated security instead of sending a user name and password."
+					],
+					"name": "Integrated"
+				},
+				{
+					"description": [
+						"Signs in with a SQL Server login name and password.",
+						"Requires the Username and Password values."
+					],
+					"name": "Sql Password"
+				}
+			]
+		},
+		{
+			"default": "0",
+			"description": [
+				"Sets how many rows are sent to SQL Server in each batch.",
+				"Smaller batches keep memory and log use low when importing very large files.",
+				"Leaving the value at 0 sends all rows in a single batch."
+			],
+			"mandatory": false,
+			"name": "BatchSize",
+			"type": "Number"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets how many seconds the bulk copy may run before it is stopped.",
+				"A longer limit helps large imports finish on slow or busy servers.",
+				"The value 0 removes the time limit, and a missing or invalid value falls back to 30 seconds."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Provides a complete ADO.NET connection string for the target SQL Server database.",
+				"Used only when Credentials is not set, so a stored record always takes priority.",
+				"Individual values such as Server or Database can still replace parts of it."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored SQL Server credentials record by its name or id, so the login stays out of the automation definition.",
+				"When no record matches, a value that contains an equals sign is used as a raw connection string.",
+				"Any other unmatched value is used as a raw Microsoft Entra access token, which still needs a Server value."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies the rows to import inline as a JSON array of flat objects, such as [{\"Id\":1,\"Name\":\"Ada\"}].",
+				"Each object becomes one row, and object properties are matched to table columns by name.",
+				"Takes priority over DataFile when both are set.",
+				"Use DataFile instead when the JSON contains the text \" --\" or \"}}\", because those end an inline value."
+			],
+			"mandatory": false,
+			"name": "Data",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Points to a file that holds the rows to import.",
+				"A .csv file is read as RFC 4180 CSV with a header row, and any other extension is read as a JSON array of objects.",
+				"Keeps large or complex data out of the rule argument."
+			],
+			"mandatory": false,
+			"name": "DataFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects the database that the connection opens.",
+				"Lets one stored login import into several databases by changing only this value."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Controls whether the connection to SQL Server is encrypted.",
+				"Replaces the encryption mode from the stored credentials or the connection string for this step only."
+			],
+			"mandatory": false,
+			"name": "Encrypt",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
+						"Matches the default of current SQL Server client libraries."
+					],
+					"name": "Mandatory"
+				},
+				{
+					"description": [
+						"Encrypts the connection only when the server requires it.",
+						"Fits older servers that do not support encryption."
+					],
+					"name": "Optional"
+				},
+				{
+					"description": [
+						"Uses TDS 8.0 strict encryption and always validates the server certificate.",
+						"Requires SQL Server 2022 or Azure SQL."
+					],
+					"name": "Strict"
+				}
+			]
+		},
+		{
+			"description": [
+				"Leaves the response entity empty so the plugin returns only session parameters.",
+				"Keeps responses small when no later step reads the entity."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Supplies the password for password-based sign-in methods.",
+				"Replaces the stored password for this step only.",
+				"Prefer a stored credentials record so secrets do not appear in the automation definition."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the SQL Server instance.",
+				"Is appended to the Server value as server,port and is needed only when the instance does not use the default port 1433."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Names the SQL Server host or instance, such as sql01.contoso.local or sql01\\SQLEXPRESS.",
+				"Replaces the server from the stored credentials or the connection string for this step only.",
+				"The step fails with a clear message when no server is resolved from any connection input."
+			],
+			"mandatory": false,
+			"name": "Server",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names the existing destination table, as table, schema.table, or a bracketed name such as [sales].[Order Lines].",
+				"A name without a schema uses the dbo schema.",
+				"The table must already exist, because the import never creates or changes tables."
+			],
+			"mandatory": true,
+			"name": "Table",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies a raw Microsoft Entra access token that authenticates the connection.",
+				"Useful when another step already obtained a token for the database.",
+				"Do not combine it with a password or an Authentication value, because SQL Server rejects that combination."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Wraps the whole import in one transaction that is committed only after every row is copied.",
+				"Rolls back all rows when any row fails, so the table never keeps a partial import."
+			],
+			"mandatory": false,
+			"name": "Transaction",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Accepts the server certificate without validating it.",
+				"Helps with development servers that use self-signed certificates.",
+				"Avoid it in production, because it weakens protection against impersonated servers."
+			],
+			"mandatory": false,
+			"name": "TrustServerCertificate",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Supplies the login name, or the client id for service principal sign-in.",
+				"Replaces the stored login name for this step only."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Carries every input of the import, such as Table, Data or DataFile, and the connection values, in the G4 parameter syntax {{$ --Name:Value --Switch}}.",
+				"Values can come from macros or data columns, so one rule can import different files or target different tables on each run."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Imports rows into an existing SQL Server table from a CSV file, a JSON file, or an inline JSON array using fast bulk copy.",
+		"Maps data fields to table columns by name and converts text values to the column types during the copy, so files load without column-by-column setup.",
+		"Connects through stored credentials, a connection string, or individual server values, with an optional all-or-nothing transaction.",
+		"Saves the copied row count for later steps, so workflows can verify that every expected row was loaded."
+	],
+	"version": "4"
+}

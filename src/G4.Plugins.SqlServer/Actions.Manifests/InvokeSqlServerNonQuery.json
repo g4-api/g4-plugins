@@ -1,0 +1,616 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"SqlServer"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeSqlServerNonQuery.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/InvokeSqlServerNonQuery.cs"
+			},
+			"rag": {
+				"description": "Run an INSERT, UPDATE, DELETE, MERGE, or DDL statement against Microsoft SQL Server and get the number of affected rows back. Values are bound as typed parameters, an optional transaction rolls back failed work, and the row count lands in a session parameter so later steps can check the change and keep the workflow reliable.",
+				"qa": [
+					{
+						"answer": "It runs one SQL statement that changes data or schema on Microsoft SQL Server and returns how many rows the statement affected.",
+						"question": "What does the InvokeSqlServerNonQuery plugin do?"
+					},
+					{
+						"answer": "CommandText or CommandFile supplies the SQL, the Base64 switch decodes a Base64-encoded CommandText, Parameters binds named values as a JSON object, CommandTimeout limits run time, and the Transaction and NoEntity switches control rollback and the response entity.",
+						"question": "What are the key parameters of InvokeSqlServerNonQuery?"
+					},
+					{
+						"answer": "Credentials is read first, then ConnectionString, and Server, Port, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, and Token override the parts they set.",
+						"question": "How does InvokeSqlServerNonQuery choose the SQL Server connection?"
+					},
+					{
+						"answer": "It is an Action task step with the database icon, deserialized as ActionRuleModel, and later steps read its result from the InvokeSqlServerNonQuery:RowsAffected session parameter.",
+						"question": "How does InvokeSqlServerNonQuery fit into a sequential workflow?"
+					},
+					{
+						"answer": "Pass every value through Parameters instead of writing it into the SQL, add Transaction for changes that must be all or nothing, and use CommandFile or a Base64-encoded CommandText with the Base64 switch for SQL that contains ' --' or '}}'.",
+						"question": "What are best practices for using InvokeSqlServerNonQuery?"
+					},
+					{
+						"answer": "Encode the SQL as UTF-8 Base64, pass it as CommandText, and add the Base64 switch, or put the SQL in a CommandFile. Only CommandText is decoded, so CommandFile content is read as plain text and the Parameters JSON stays plain.",
+						"question": "How does InvokeSqlServerNonQuery run inline SQL that contains ' --' or '}}'?"
+					},
+					{
+						"answer": "Use $type Action with pluginName InvokeSqlServerNonQuery and pass the inputs in the argument as --Name:Value flags and bare switches, such as --Credentials:sql-production --Transaction.",
+						"question": "What rule shape does InvokeSqlServerNonQuery use?"
+					},
+					{
+						"answer": "RowsAffected is stored as the Base64-encoded session parameter InvokeSqlServerNonQuery:RowsAffected and, unless NoEntity is set, as plain text in the response entity.",
+						"question": "How is the RowsAffected output stored and read?"
+					},
+					{
+						"answer": "SQL Server reported no row count, which happens for DDL statements such as CREATE TABLE or when SET NOCOUNT ON is active.",
+						"question": "What does a RowsAffected value of -1 mean?"
+					},
+					{
+						"answer": "The manifest key is InvokeSqlServerNonQuery.",
+						"question": "What is the manifest key of this plugin?"
+					},
+					{
+						"answer": "The manifest version is 4.",
+						"question": "What manifest version does this plugin use?"
+					},
+					{
+						"answer": "The pluginType is Action.",
+						"question": "What is the pluginType of InvokeSqlServerNonQuery?"
+					},
+					{
+						"answer": "The namespace is G4.Plugins.SqlServer.",
+						"question": "Which namespace does InvokeSqlServerNonQuery belong to?"
+					},
+					{
+						"answer": "The plugin supports the Any platform.",
+						"question": "Which platforms does InvokeSqlServerNonQuery support?"
+					},
+					{
+						"answer": "The plugin is listed under the SqlServer category.",
+						"question": "Which category is InvokeSqlServerNonQuery listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag, https://www.linkedin.com/in/roei-sabag-247aa18/.",
+						"question": "Who is the author of the InvokeSqlServerNonQuery manifest?"
+					},
+					{
+						"answer": "It runs a data-changing SQL statement with bound parameters, optionally inside a transaction, and stores the affected row count for later steps.",
+						"question": "What is the summary of InvokeSqlServerNonQuery?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeSqlServerNonQuery.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/InvokeSqlServerNonQuery.cs.",
+						"question": "Where are the documentation and source code of InvokeSqlServerNonQuery?"
+					},
+					{
+						"answer": "The step fails when no server is resolved, no SQL is supplied, CommandFile is missing, CommandText is not valid Base64 while the Base64 switch is set, Parameters is not a JSON object, or SQL Server rejects the statement, and with Transaction the failed work is rolled back.",
+						"question": "How does InvokeSqlServerNonQuery handle errors?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Invoke SQL Server Non-Query",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Runs one SQL statement that changes data or schema on Microsoft SQL Server, such as INSERT, UPDATE, DELETE, MERGE, or CREATE TABLE.",
+		"Returns the number of affected rows so later steps can confirm that the change happened.",
+		"Binds every input value as a typed SQL parameter, which keeps the statement safe from SQL injection.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Data and schema changes | Runs INSERT, UPDATE, DELETE, MERGE, and DDL statements and returns the affected row count. |",
+		"| Flexible connection | Connects through a stored credentials record, a raw connection string, a raw Microsoft Entra access token, or discrete Server, Port, and Database values. |",
+		"| Connection overrides | Server, Port, Database, Authentication, Username, Password, Encrypt, and TrustServerCertificate replace the parts of the base connection they set. |",
+		"| Parameter binding | Binds the properties of a Parameters JSON object to named placeholders such as @Id, keeping strings, numbers, booleans, and null typed. |",
+		"| Inline or file SQL | Reads the statement from CommandText, a Base64-encoded CommandText with the Base64 switch, or a UTF-8 CommandFile, for SQL that contains ' --' or '}}'. |",
+		"| Transaction | Wraps the statement in one transaction that commits on success and rolls back on failure. |",
+		"| Command timeout | Limits the statement run time in seconds, with 30 as the default and 0 for no limit. |",
+		"| Session and entity output | Stores RowsAffected as the Base64-encoded session parameter InvokeSqlServerNonQuery:RowsAffected and as plain text in the response entity unless NoEntity is set. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Update record status | Marks orders, tickets, or invoices as processed after a bot finishes its work. |",
+		"| Clean staging tables | Deletes or archives staging rows before or after a data load. |",
+		"| Write audit entries | Inserts a log or audit row for every handled business case. |",
+		"| Run maintenance scripts | Runs a stored SQL file, such as an archive or purge job, inside a transaction. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Seed test data | Inserts known rows before a UI or API test runs. |",
+		"| Reset state | Deletes or restores test rows after a test so the next run starts clean. |",
+		"| Verify change size | Compares RowsAffected with the expected count to confirm that a change touched the right rows. |",
+		"| Prepare schema | Creates or alters test tables before an integration test suite. |",
+		"",
+		"### Outputs",
+		"",
+		"RowsAffected holds the total number of rows changed by the statement as text, such as 1.",
+		"The value -1 means that SQL Server reported no row count, which happens for DDL statements or when SET NOCOUNT ON is active.",
+		"Session parameters are Base64-encoded, so decode InvokeSqlServerNonQuery:RowsAffected before comparing it."
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the number of rows the statement changed, as plain text in the response entity.",
+				"Lets data pipelines and later steps read the result directly without decoding.",
+				"The value -1 means that SQL Server reported no row count, such as for DDL statements."
+			],
+			"mandatory": false,
+			"name": "RowsAffected",
+			"type": "Number"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials value matches no stored record and is treated as an access token",
+						"No row matches the WHERE clause, so RowsAffected is 0",
+						"Statement fails and the transaction rolls back"
+					],
+					"expected_result": "Order 42 is set to Closed in one committed transaction and InvokeSqlServerNonQuery:RowsAffected holds 1.",
+					"notes": "The Credentials value sql-production resolves a stored SQL Server credentials record by name or id. The Parameters JSON binds Status as a string and Id as a bigint to the @Status and @Id placeholders. Parameters is placed before another flag so its closing brace never touches the closing }} of the argument.",
+					"use_case": "update_rows_with_credentials_in_transaction",
+					"version": "4"
+				},
+				"labels": [
+					"Credentials",
+					"Database",
+					"DataUpdate",
+					"ParameterBinding",
+					"SqlServer",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Update rows with stored credentials in a transaction",
+				"",
+				"The argument uses parameter syntax that binds Credentials, CommandText, Parameters, and the Transaction switch.",
+				"The UPDATE runs with @Status and @Id bound from the Parameters JSON and commits only when it succeeds."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction}}",
+				"pluginName": "InvokeSqlServerNonQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CommandTimeout of 0 waits without limit",
+						"Connection string has no server, so the step fails before connecting",
+						"Self-signed server certificate without TrustServerCertificate=True"
+					],
+					"expected_result": "Staging rows of the given batch are deleted and InvokeSqlServerNonQuery:RowsAffected holds the number of deleted rows.",
+					"notes": "No credentials record is used, so the raw ConnectionString with Integrated Security signs in as the Windows runner account. CommandTimeout raises the limit to 120 seconds for a large delete.",
+					"use_case": "delete_rows_with_connection_string",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"DataCleanup",
+					"ParameterBinding",
+					"SqlServer",
+					"Timeout"
+				]
+			},
+			"description": [
+				"### Delete rows with a raw connection string",
+				"",
+				"The argument uses parameter syntax that binds a full ADO.NET ConnectionString, the DELETE statement, its @BatchId value, and a 120-second CommandTimeout.",
+				"The statement runs without a transaction and reports how many staging rows it removed."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{\"BatchId\":\"2026-11-09\"} --CommandTimeout:120}}",
+				"pluginName": "InvokeSqlServerNonQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Encrypt Mandatory with an untrusted certificate fails without TrustServerCertificate",
+						"Parameters value that is not a JSON object fails the step",
+						"Port without Server is ignored"
+					],
+					"expected_result": "One audit row is inserted into dbo.AuditLog and InvokeSqlServerNonQuery:RowsAffected holds 1.",
+					"notes": "Server, Port, Database, and Authentication build the connection without Credentials or ConnectionString. Authentication Integrated signs in with the Windows identity, and TrustServerCertificate accepts a self-signed certificate on a local server.",
+					"use_case": "insert_row_with_discrete_connection_parts",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionOverrides",
+					"Database",
+					"DataInsert",
+					"IntegratedSecurity",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Insert a row with discrete connection parts",
+				"",
+				"The argument uses parameter syntax that binds Server, Port, Database, Authentication, the TrustServerCertificate switch, the INSERT statement, and its Parameters.",
+				"The connection is composed from those parts, and the bound @Event and @Success values become one new audit row."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Server:localhost --Port:1433 --Database:Sales --Authentication:Integrated --TrustServerCertificate --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success) --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --Encrypt:Mandatory}}",
+				"pluginName": "InvokeSqlServerNonQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CommandFile path does not exist",
+						"CommandText is also set and wins over CommandFile",
+						"File with GO separator lines fails, because only InvokeSqlServerScript splits batches"
+					],
+					"expected_result": "The SQL in archive-closed-orders.sql runs in one committed transaction, InvokeSqlServerNonQuery:RowsAffected holds the changed row count, and the response entity stays empty.",
+					"notes": "CommandFile carries SQL that cannot travel as plain inline text, such as -- comments or }} sequences. The file is read as UTF-8 without Base64 decoding and sent as one batch. NoEntity keeps the result out of the response while the session parameter is still written.",
+					"use_case": "run_sql_file_without_entity",
+					"version": "4"
+				},
+				"labels": [
+					"CommandFile",
+					"Database",
+					"DataMaintenance",
+					"SqlServer",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Run a SQL file without a response entity",
+				"",
+				"The argument uses parameter syntax that binds Credentials, a CommandFile path, and the Transaction and NoEntity switches.",
+				"The file content runs as one statement batch inside a transaction, and only the session parameter receives the row count."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandFile:C:\\automation\\sql\\archive-closed-orders.sql --Transaction --NoEntity}}",
+				"pluginName": "InvokeSqlServerNonQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the encoded text is sent as SQL and the step fails",
+						"CommandText is not valid Base64, so the step fails before connecting",
+						"No order is closed, so RowsAffected is 0 and the transaction still commits"
+					],
+					"expected_result": "Closed orders are set to Archived in one committed transaction, and InvokeSqlServerNonQuery:RowsAffected holds the number of archived orders.",
+					"notes": "The Base64 switch decodes CommandText from UTF-8 Base64 before the statement runs, so the ' --' comment travels inline without ending the argument value. Transaction commits the update on success and rolls it back when SQL Server rejects it.",
+					"use_case": "update_rows_from_base64_statement_with_comment",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"Credentials",
+					"DataMaintenance",
+					"Database",
+					"SqlServer",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Archive closed orders with a Base64-encoded statement",
+				"",
+				"The argument uses parameter syntax that binds Credentials, a Base64 CommandText, and the Base64 and Transaction switches.",
+				"The decoded SQL is `UPDATE dbo.Orders SET Status = 'Archived' -- archive closed orders` followed by a `WHERE Status = 'Closed'` line."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFN0YXR1cyA9ICdBcmNoaXZlZCcgLS0gYXJjaGl2ZSBjbG9zZWQgb3JkZXJzCldIRVJFIFN0YXR1cyA9ICdDbG9zZWQn --Base64 --Transaction}}",
+				"pluginName": "InvokeSqlServerNonQuery"
+			}
+		}
+	],
+	"key": "InvokeSqlServerNonQuery",
+	"namespace": "G4.Plugins.SqlServer",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the number of rows the statement changed as a Base64-encoded session parameter.",
+				"Lets later steps confirm or branch on the size of the change after decoding the value.",
+				"The value -1 means that SQL Server reported no row count, such as for DDL statements."
+			],
+			"mandatory": false,
+			"name": "InvokeSqlServerNonQuery:RowsAffected",
+			"type": "Number"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Chooses how the connection signs in to SQL Server, such as a SQL login, the Windows identity, or a Microsoft Entra method.",
+				"Overrides the sign-in method of the stored credentials or connection string, so one target can be reached with a different identity.",
+				"Leave it empty to keep the method that the credentials or connection string already define."
+			],
+			"mandatory": false,
+			"name": "Authentication",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with the first Microsoft Entra identity found in the environment, such as a managed identity or a developer login.",
+						"Suits pipelines that run under different identities without code changes."
+					],
+					"name": "Active Directory Default"
+				},
+				{
+					"description": [
+						"Signs in with the Microsoft Entra identity of the signed-in Windows user.",
+						"Suits domain-joined machines that are federated with Microsoft Entra ID."
+					],
+					"name": "Active Directory Integrated"
+				},
+				{
+					"description": [
+						"Opens an interactive Microsoft Entra sign-in prompt for the user named in Username.",
+						"Suits attended runs where a person can complete multi-factor sign-in."
+					],
+					"name": "Active Directory Interactive"
+				},
+				{
+					"description": [
+						"Signs in with the Azure managed identity of the host; Username can carry a user-assigned identity client id.",
+						"Suits unattended runs on Azure hosts without any stored secret."
+					],
+					"name": "Active Directory Managed Identity"
+				},
+				{
+					"description": [
+						"Signs in with a Microsoft Entra user name and password taken from Username and Password.",
+						"Suits accounts that do not require multi-factor sign-in."
+					],
+					"name": "Active Directory Password"
+				},
+				{
+					"description": [
+						"Signs in as a Microsoft Entra application, with the client id in Username and the client secret in Password.",
+						"Suits unattended service runs that use an app registration."
+					],
+					"name": "Active Directory Service Principal"
+				},
+				{
+					"description": [
+						"Signs in with the Windows identity that runs the automation (Integrated Security).",
+						"Avoids storing any password when the runner account has database access."
+					],
+					"name": "Integrated"
+				},
+				{
+					"description": [
+						"Signs in with a SQL Server login taken from Username and Password.",
+						"Suits servers that use SQL Server authentication."
+					],
+					"name": "Sql Password"
+				}
+			]
+		},
+		{
+			"description": [
+				"Decodes the CommandText value from UTF-8 Base64 before the statement runs.",
+				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
+				"Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.",
+				"Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Gives the path of a UTF-8 text file whose content is the SQL statement to run.",
+				"Use it for SQL that contains a space followed by two dashes or a double closing brace, because those sequences end an inline argument value.",
+				"CommandText wins when both are set, and the step fails when the file does not exist."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Holds the SQL statement to run, written inline in the step argument.",
+				"Reference input values as named placeholders such as @Id and supply them through Parameters instead of joining them into the text.",
+				"Either CommandText or CommandFile is required, and CommandText wins when both are set.",
+				"For SQL that contains a space followed by two dashes or a double closing brace, use CommandFile or pass the text as UTF-8 Base64 together with the Base64 switch."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets how many seconds the statement may run before SQL Server cancels it.",
+				"Raise it for long statements so they finish, or keep it low to fail fast on blocked queries.",
+				"The value 0 waits without limit, and a missing or invalid value falls back to 30 seconds."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Holds a full ADO.NET connection string, such as Server=localhost,1433;Database=Sales;Integrated Security=True.",
+				"Use it when no stored credentials record is set, because Credentials takes priority over it.",
+				"Server, Database, and the other connection parameters still override the parts they set."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names a stored SQL Server credentials record by name or id, so the login never appears in the automation definition.",
+				"A value that matches no record and contains an equals sign is used as a raw connection string.",
+				"Any other unmatched value is used as a raw Microsoft Entra access token, and Credentials takes priority over ConnectionString."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets the database the statement runs in, overriding the database of the credentials or connection string.",
+				"Lets one stored login reach several databases on the same server."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets how the connection encrypts traffic to SQL Server.",
+				"Overrides the encryption mode of the credentials or connection string, so security rules can be met per step."
+			],
+			"mandatory": false,
+			"name": "Encrypt",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
+						"Matches the provider default for new connections."
+					],
+					"name": "Mandatory"
+				},
+				{
+					"description": [
+						"Encrypts only when the server requires it.",
+						"Suits older servers on trusted networks."
+					],
+					"name": "Optional"
+				},
+				{
+					"description": [
+						"Uses TDS 8.0 strict encryption, where the connection is encrypted before any sign-in data is sent.",
+						"Requires SQL Server 2022 or Azure SQL and always validates the server certificate."
+					],
+					"name": "Strict"
+				}
+			]
+		},
+		{
+			"description": [
+				"Leaves the response entity empty while the session parameters are still written.",
+				"Use it for large results or sensitive data that should not travel in the response payload."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Holds a JSON object whose properties are bound to the named placeholders of the statement, such as {\"Id\":42} for @Id.",
+				"Values are sent as typed SQL parameters and never joined into the SQL text, which blocks SQL injection.",
+				"Strings, booleans, numbers, and null keep their type, and nested objects or arrays are sent as JSON text."
+			],
+			"mandatory": false,
+			"name": "Parameters",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets the password or client secret used with Username, overriding the value of the credentials or connection string.",
+				"Prefer a stored credentials record so the secret stays out of the automation definition."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Sets the TCP port of SQL Server, such as 1433.",
+				"Applies together with Server, which receives the port as server,port."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the SQL Server host name or address, such as localhost or db01.contoso.local\\SQLEXPRESS.",
+				"Overrides the server of the credentials or connection string, so one stored login can target another server.",
+				"The step fails when no server results from Credentials, ConnectionString, or Server."
+			],
+			"mandatory": false,
+			"name": "Server",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Supplies a raw Microsoft Entra access token that signs in the connection.",
+				"Do not combine it with a password or an Authentication method, because SQL Server rejects that combination."
+			],
+			"mandatory": false,
+			"name": "Token",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Runs the statement inside one transaction that commits on success and rolls back on failure.",
+				"Keeps the data unchanged when the statement fails partway, so a failed step leaves no partial update."
+			],
+			"mandatory": false,
+			"name": "Transaction",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Accepts the server certificate without validating it against a trusted authority.",
+				"Use it only for local or test servers with self-signed certificates, because it weakens protection against impersonation."
+			],
+			"mandatory": false,
+			"name": "TrustServerCertificate",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name, Microsoft Entra user, or application client id used to sign in.",
+				"Overrides the user of the credentials or connection string."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Runs an INSERT, UPDATE, DELETE, MERGE, or DDL statement on Microsoft SQL Server and returns the affected row count.",
+		"Binds input values as typed parameters and can wrap the change in a transaction that rolls back on failure.",
+		"Connects through stored credentials, a connection string, an access token, or discrete server settings.",
+		"Stores RowsAffected in a session parameter so later steps can verify the change."
+	],
+	"version": "4"
+}
