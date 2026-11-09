@@ -33,7 +33,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="G4.Abstraction.Logging" Version="2026.11.8.25" />
-		<PackageReference Include="G4.Api" Version="2026.11.6.65" />
+		<PackageReference Include="G4.Api" Version="2026.11.9.66" />
 		<PackageReference Include="G4.Converters" Version="2026.11.9.98" />
 		<PackageReference Include="G4.Plugins" Version="2026.11.9.98" />
 		<PackageReference Include="G4.Extensions" Version="2026.11.9.98" />
