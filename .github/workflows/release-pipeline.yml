@@ -124,8 +124,7 @@ jobs:
   InvokeTests:
     name: Invoke Tests & Publish Results
     runs-on: windows-latest
-    # TEMPORARY (one-time SQL Server release): revert this change after the release
-    if: ${{ false }}
+    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
     needs: 
       - NewBuild
       - NewVersion
@@ -369,9 +368,9 @@ jobs:
   PublishNugetPackages:
     name: Publish & Push NuGet Packages v${{ needs.NewVersion.outputs.buildVersion }}
     runs-on: ubuntu-latest
-    # TEMPORARY (one-time SQL Server release): revert this change after the release
-    if: ${{ needs.InvokeSqlServerTests.result == 'success' }}
+    if: ${{ needs.InvokeTests.result == 'success' && needs.InvokeSqlServerTests.result == 'success' }}
     needs: 
+      - InvokeTests
       - InvokeSqlServerTests
       - NewVersion
 
@@ -504,10 +503,10 @@ jobs:
   NewRelease:
     name: New GitHub Release Version ${{ needs.NewVersion.outputs.buildVersion }}
     runs-on: ubuntu-latest
-    # TEMPORARY (one-time SQL Server release): revert this change after the release
-    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' && needs.PublishNugetPackages.result == 'success'  && needs.PublishTools.result == 'success' }}
+    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' && needs.InvokeTests.result == 'success' && needs.PublishNugetPackages.result == 'success'  && needs.PublishTools.result == 'success' }}
     needs:
       - NewVersion
+      - InvokeTests
       - PublishNugetPackages
       - PublishTools
 
