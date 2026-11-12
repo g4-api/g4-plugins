@@ -1,7 +1,7 @@
+using G4.Credentials.Models;
 using G4.Models;
 using G4.Plugins.MongoDb.Clients;
 using G4.Plugins.MongoDb.Extensions;
-using G4.Plugins.MongoDb.Models;
 using G4.UnitTests.Framework;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

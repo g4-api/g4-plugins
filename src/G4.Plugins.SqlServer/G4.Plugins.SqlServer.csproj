@@ -25,8 +25,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.11.11.100" />
-		<PackageReference Include="G4.Extensions" Version="2026.11.11.100" />
+		<PackageReference Include="G4.Converters" Version="2026.11.12.102" />
+		<PackageReference Include="G4.Extensions" Version="2026.11.12.102" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="7.1.1" />
 
 		<!-- Pin: Microsoft.Data.SqlClient 7.1.1 floors this at vulnerable 9.0.18 (GHSA-846f-f764-76mx, GHSA-2fmv-rv2c-59x7) -->

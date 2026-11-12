@@ -51,10 +51,6 @@ A record carries either a complete URI or the discrete parts, and the plugins re
 engine credentials cache. The stored `Password` and `ConnectionString` are persisted in protected form and restored on
 read. Source: `G4.Credentials` in the engine repository.
 
-> The engine package that carries the MongoDB credential type is not released yet. Until it ships,
-> `src/G4.Plugins.MongoDb/Models/MongoDbCredentialModels.cs` stands in for it, member for member, and the file header
-> lists the two steps that replace it.
-
 ### Resolution order
 
 1. `Credentials` names a stored record. Its URI is the baseline, and its own discrete parts override it.

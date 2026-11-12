@@ -1,4 +1,5 @@
 using G4.Cache;
+using G4.Credentials.Models;
 using G4.Extensions;
 using G4.Models;
 using G4.Plugins.MongoDb.Clients;
@@ -496,7 +497,7 @@ namespace G4.Plugins.MongoDb.Extensions
 
             // Read the MongoDB partition; a missing partition means no MongoDB record is cached.
             var isCached = CacheManager.Instance.CredentialsCache.TryGetValue(
-                key: MongoDbCredentialTypes.MongoDb,
+                key: CredentialTypes.MongoDb,
                 value: out var partition);
 
             if (!isCached)
