@@ -1,0 +1,611 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbAggregate.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbAggregate.cs"
+			},
+			"rag": {
+				"description": "Group, join, reshape, or write MongoDB data from an automation by running an aggregation pipeline. The pipeline stages bind as BSON, the result is stored as relaxed Extended JSON, and a writing pipeline that ends in $merge or $out can run inside a transaction.",
+				"qa": [
+					{
+						"answer": "It runs an aggregation pipeline on a MongoDB collection and stores the produced documents as minified relaxed Extended JSON, together with their field names and counts.",
+						"question": "What does the InvokeMongoDbAggregate plugin do?"
+					},
+					{
+						"answer": "Collection is required and CommandText, CommandFile, or Base64 carries the pipeline; AllowDiskUse and Transaction change the behavior. Outputs are Columns, DocumentCount, Result, and StageCount.",
+						"question": "What are the key parameters and outputs of InvokeMongoDbAggregate?"
+					},
+					{
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, and takes the place a stored procedure would hold in a relational flow.",
+						"question": "How does InvokeMongoDbAggregate fit into an automation workflow?"
+					},
+					{
+						"answer": "Put a $match stage first so the server filters early, keep long pipelines in a file, set AllowDiskUse for large group or sort stages, and run a $merge or $out pipeline without the Transaction switch, which the server rejects for those stages.",
+						"question": "What are best practices for using InvokeMongoDbAggregate?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “InvokeMongoDbAggregate” and pass inputs in the argument, such as {{$ --Credentials:mongo-production --Collection:orders --CommandText:[{\"$count\":\"all\"}]}}.",
+						"question": "How is an InvokeMongoDbAggregate rule configured?"
+					},
+					{
+						"answer": "An empty or malformed pipeline, an unresolved database, a memory-limit error without AllowDiskUse, or a server rejection fails the step, and an open transaction rolls back.",
+						"question": "How does InvokeMongoDbAggregate handle errors?"
+					},
+					{
+						"answer": "Yes. MongoDB has no stored procedures, so an aggregation pipeline is the closest equivalent, and a $merge or $out stage lets it write its result like a procedure would.",
+						"question": "Does InvokeMongoDbAggregate replace stored procedures?"
+					},
+					{
+						"answer": "Those stages return no documents of their own, so the driver reads the written collection once the pipeline completed and the step reports those documents in Result and DocumentCount.",
+						"question": "What does InvokeMongoDbAggregate report for a $merge or $out pipeline?"
+					},
+					{
+						"answer": "No. MongoDB rejects the $merge and $out stages inside a transaction, so a writing pipeline runs without the Transaction switch; the switch remains useful for a read pipeline that needs one consistent snapshot.",
+						"question": "Can InvokeMongoDbAggregate run a writing pipeline inside a transaction?"
+					},
+					{
+						"answer": "The manifest key is “InvokeMongoDbAggregate”.",
+						"question": "What is the manifest key of InvokeMongoDbAggregate?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by InvokeMongoDbAggregate?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of InvokeMongoDbAggregate?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does InvokeMongoDbAggregate support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is InvokeMongoDbAggregate listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the InvokeMongoDbAggregate manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the InvokeMongoDbAggregate manifest?"
+					},
+					{
+						"answer": "Runs a MongoDB aggregation pipeline and stores the documents it produced as relaxed Extended JSON. Carries the pipeline inline, Base64-encoded, or in a file, and binds its stages as BSON. Stores the field names, the documents, the document count, and the stage count as session parameters, so grouped and joined results reach later steps.",
+						"question": "What is the summary of InvokeMongoDbAggregate?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbAggregate.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbAggregate.cs.",
+						"question": "Where are the InvokeMongoDbAggregate documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Invoke MongoDB Aggregate",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Runs an aggregation pipeline on a MongoDB collection.",
+		"Covers the work a relational flow would give to a stored procedure or a grouped query: grouping, joining, reshaping, and writing results into another collection.",
+		"Stores the produced documents as relaxed Extended JSON, which keeps the BSON types plain JSON cannot express.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                        |",
+		"|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Pipeline as data           | Reads the stages from CommandText, CommandFile, or Base64-encoded text and binds them as BSON.                                                     |",
+		"| One or many stages         | Accepts a JSON array of stages, or a single stage object with no array wrapper.                                                                     |",
+		"| Writing pipelines          | A pipeline that ends in `$merge` or `$out` writes its result and then reports the documents of the written collection.                             |",
+		"| Large pipelines            | The AllowDiskUse switch lets a stage spill to disk when it exceeds the server memory limit.                                                          |",
+		"| Field names                | Reports the union of the top-level field names of the produced documents, in first-seen order.                                                       |",
+		"| Session and entity outputs | Stores outputs as Base64 session parameters named `InvokeMongoDbAggregate:<Name>` and returns them in the response entity unless `NoEntity` is set.  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case             | Description                                                                               |",
+		"|----------------------|-------------------------------------------------------------------------------------------|",
+		"| Daily rollup         | Group the documents of a day into totals and write them into a summary collection.        |",
+		"| Joined extract       | Join two collections with `$lookup` and export the joined documents a bot processes.      |",
+		"| Deduplication        | Group by a business key to find and report duplicate documents.                           |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case            | Description                                                                          |",
+		"|---------------------|--------------------------------------------------------------------------------------|",
+		"| Aggregate assertion | Compare a grouped total with the value the system under test displays.               |",
+		"| Fixture shaping     | Reshape stored fixtures into the document shape a test needs.                         |",
+		"| Data audit          | Group the documents a test wrote to confirm the expected distribution.                |",
+		"",
+		"### Notes",
+		"",
+		"An empty pipeline fails the step, because an aggregation without stages has nothing to run.",
+		"A pipeline that ends in `$merge` or `$out` returns no documents of its own, so the driver reads the written collection instead and the step reports those documents.",
+		"The server rejects `$merge` and `$out` inside a transaction, so a writing pipeline runs without the Transaction switch and is not rolled back.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the union of the top-level field names of the produced documents, as a JSON array.",
+				"Reports the field names in the order they were first seen, which follows the last projecting stage.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Columns",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of documents the pipeline produced.",
+				"A writing pipeline that ends in `$merge` or `$out` reports the documents of the written collection, because the driver reads it once the pipeline completed.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "DocumentCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the produced documents as a minified relaxed Extended JSON array.",
+				"Keeps the BSON types plain JSON cannot express, such as `{\"$date\":\"...\"}` for a date.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Result",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of pipeline stages the step ran.",
+				"Confirms that a Base64-encoded or file-based pipeline was parsed as expected.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "StageCount",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Pipeline matches no document",
+						"Group stage exceeds the memory limit without AllowDiskUse",
+						"Pipeline passed as a single object instead of an array"
+					],
+					"expected_result": "The step stores the grouped documents in `InvokeMongoDbAggregate:Result` and the stage count in `InvokeMongoDbAggregate:StageCount`.",
+					"notes": "The stages bind as BSON, so their values never become part of a composed command. An empty result is reported as an empty array with a count of 0.",
+					"use_case": "aggregate_group_totals",
+					"version": "4"
+				},
+				"labels": [
+					"Aggregate",
+					"Database",
+					"Grouping",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Group documents into totals",
+				"",
+				"The argument names the collection and passes a two-stage pipeline that matches and groups.",
+				"The pipeline is Base64-encoded, because its nested stages contain `}}`, which would end the inline argument value; the decoded text is `[{\"$match\":{\"status\":\"open\"}},{\"$group\":{\"_id\":\"$sku\",\"total\":{\"$sum\":\"$total\"}}}]`.",
+				"The step stores the grouped documents as relaxed Extended JSON."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7InN0YXR1cyI6Im9wZW4ifX0seyIkZ3JvdXAiOnsiX2lkIjoiJHNrdSIsInRvdGFsIjp7IiRzdW0iOiIkdG90YWwifX19XQ== --Base64}}",
+				"pluginName": "InvokeMongoDbAggregate"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Transaction switch set together with $merge, which the server rejects",
+						"Merge target holds conflicting documents",
+						"Pipeline ends in $out instead of $merge"
+					],
+					"expected_result": "The step writes the rollup into the target collection and then reports the documents of that collection, so DocumentCount matches the number of merged documents.",
+					"notes": "MongoDB rejects $merge and $out inside a transaction, so a writing pipeline runs without the Transaction switch. Use $merge with an explicit whenMatched rule when the target already holds documents.",
+					"use_case": "aggregate_write_with_merge",
+					"version": "4"
+				},
+				"labels": [
+					"Aggregate",
+					"Database",
+					"MongoDb",
+					"Transaction",
+					"Write"
+				]
+			},
+			"description": [
+				"### Write a rollup into another collection",
+				"",
+				"The argument passes a pipeline that groups and then merges the result into a summary collection.",
+				"The pipeline is Base64-encoded, because its nested stages contain `}}`; the decoded text is `[{\"$group\":{\"_id\":\"$sku\",\"total\":{\"$sum\":\"$total\"}}},{\"$merge\":{\"into\":\"sku-totals\"}}]`.",
+				"The step runs without the `Transaction` switch, because MongoDB rejects `$merge` inside a transaction.",
+				"After the merge, the driver reads the written collection, so the step reports the merged documents instead of an empty result."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:W3siJGdyb3VwIjp7Il9pZCI6IiRza3UiLCJ0b3RhbCI6eyIkc3VtIjoiJHRvdGFsIn19fSx7IiRtZXJnZSI6eyJpbnRvIjoic2t1LXRvdGFscyJ9fV0= --Base64 --CommandTimeout:300}}",
+				"pluginName": "InvokeMongoDbAggregate"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CommandFile points to a missing file",
+						"File holds an object that is not a stage",
+						"Pipeline needs more time than CommandTimeout allows"
+					],
+					"expected_result": "The step reads the pipeline from the file and stores the produced documents in `InvokeMongoDbAggregate:Result`.",
+					"notes": "A long pipeline belongs in a file, which also keeps it reviewable. Raise CommandTimeout and set AllowDiskUse for a heavy pipeline.",
+					"use_case": "aggregate_pipeline_from_file",
+					"version": "4"
+				},
+				"labels": [
+					"Aggregate",
+					"Database",
+					"File",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Run a pipeline from a file",
+				"",
+				"The argument reads the stages from a UTF-8 file, raises the time budget, and allows disk use.",
+				"The file content is always read as plain text, so the Base64 switch never applies to it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}",
+				"pluginName": "InvokeMongoDbAggregate"
+			}
+		}
+	],
+	"key": "InvokeMongoDbAggregate",
+	"namespace": "G4.Plugins.MongoDb",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the union of the top-level field names of the produced documents, as a JSON array.",
+				"Reports the field names in the order they were first seen, which follows the last projecting stage.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbAggregate:Columns",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of documents the pipeline produced.",
+				"A writing pipeline that ends in `$merge` or `$out` reports the documents of the written collection, because the driver reads it once the pipeline completed.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbAggregate:DocumentCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the produced documents as a minified relaxed Extended JSON array.",
+				"Keeps the BSON types plain JSON cannot express, such as `{\"$date\":\"...\"}` for a date.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbAggregate:Result",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of pipeline stages the step ran.",
+				"Confirms that a Base64-encoded or file-based pipeline was parsed as expected.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbAggregate:StageCount",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Lets a pipeline stage write temporary files when it exceeds the server memory limit.",
+				"Set it for a large group or sort stage, which otherwise fails with a memory-limit error."
+			],
+			"mandatory": false,
+			"name": "AllowDiskUse",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Accepts the server certificate without validating its trust chain.",
+				"Intended for development servers and containers that use a self-signed certificate.",
+				"Leave it unset for any deployment that holds real data."
+			],
+			"mandatory": false,
+			"name": "AllowInvalidCertificates",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the database that holds the user record, such as `admin`.",
+				"Overrides the authentication source from the credentials or the connection URI for this step only.",
+				"Set it when the login lives in a different database than the data."
+			],
+			"mandatory": false,
+			"name": "AuthenticationDatabase",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects how the driver proves the identity of the login.",
+				"Overrides the mechanism from the credentials or the connection URI for this step only.",
+				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
+			],
+			"mandatory": false,
+			"name": "AuthenticationMechanism",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-256.",
+						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
+					],
+					"name": "SCRAM-SHA-256"
+				},
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-1.",
+						"Use it for servers older than 4.0, which do not offer SHA-256."
+					],
+					"name": "SCRAM-SHA-1"
+				},
+				{
+					"description": [
+						"Signs in with the client TLS certificate instead of a password.",
+						"Set Username to the certificate subject, or leave it unset to let the server read it."
+					],
+					"name": "MONGODB-X509"
+				},
+				{
+					"description": [
+						"Signs in with AWS Identity and Access Management credentials.",
+						"Use it for an Atlas cluster that trusts an AWS role."
+					],
+					"name": "MONGODB-AWS"
+				},
+				{
+					"description": [
+						"Signs in with an OpenID Connect access token, such as a workload identity token.",
+						"Use it for a deployment that federates its logins to an identity provider."
+					],
+					"name": "MONGODB-OIDC"
+				},
+				{
+					"description": [
+						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
+						"Set Tls to Enabled, because the password travels unhashed."
+					],
+					"name": "PLAIN"
+				},
+				{
+					"description": [
+						"Signs in with a Kerberos principal.",
+						"Use it for an enterprise deployment that authenticates through Kerberos."
+					],
+					"name": "GSSAPI"
+				}
+			]
+		},
+		{
+			"description": [
+				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
+				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the collection the step operates on, such as `orders` or `shop.orders`.",
+				"A name qualified as `database.collection` selects its own database and overrides the Database parameter.",
+				"The name is split on its first dot only, so `shop.price.history` addresses the collection `price.history`."
+			],
+			"mandatory": true,
+			"name": "Collection",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Reads the payload from a UTF-8 file, such as `C:\\flows\\filter.json`.",
+				"Applies only when CommandText is not set, so an inline payload always takes priority.",
+				"The Base64 switch never applies here; file content is always read as plain text."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies the pipeline as a JSON array of stage objects, such as `[{\"$match\":{\"status\":\"open\"}},{\"$count\":\"open\"}]`.",
+				"A single stage object is accepted too, so a one-stage pipeline needs no array wrapper.",
+				"Required, because an aggregation without stages has nothing to run."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String|Expression"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets the time budget, in seconds, for connecting, selecting a server, and running the operation.",
+				"The value 0 means no operation timeout, so the step waits until the server answers.",
+				"Raise it for a long aggregation and lower it for a health check that must fail fast."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the step operates on, such as `shop`.",
+				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"A collection named as `database.collection` overrides this parameter in turn."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Connects to the named host directly instead of discovering the deployment topology.",
+				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
+				"A direct connection cannot run multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "DirectConnection",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the MongoDB host or network address, such as `localhost`.",
+				"Overrides the host from the credentials or the connection URI for this step only.",
+				"A multi-host seed list travels in ConnectionString instead."
+			],
+			"mandatory": false,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Omits the response entity, so the step reports its outputs only as session parameters.",
+				"Use it when a later step reads the outputs by name and no data transfer is needed."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password used with a password-based mechanism.",
+				"Overrides the password from the credentials or the connection URI for this step.",
+				"Prefer a stored credentials record, so the secret never appears in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the MongoDB instance, such as `27017`.",
+				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
+				"An unset port keeps the resolved port, which is 27017 for a plain URI."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Requires the client to join the named replica set, such as `rs0`.",
+				"Overrides the replica set from the credentials or the connection URI for this step.",
+				"A replica set is required for multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "ReplicaSet",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
+			],
+			"mandatory": false,
+			"name": "Tls",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires TLS encryption for the connection.",
+						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
+					],
+					"name": "Enabled"
+				},
+				{
+					"description": [
+						"Connects without TLS.",
+						"Use it for a loopback or private-network deployment that serves plain connections."
+					],
+					"name": "Disabled"
+				}
+			]
+		},
+		{
+			"description": [
+				"Runs the pipeline inside a multi-document transaction, so it reads one consistent snapshot.",
+				"MongoDB rejects the `$merge` and `$out` stages inside a transaction, so a writing pipeline runs without this switch.",
+				"MongoDB supports transactions only on a replica set or a sharded cluster; a standalone server fails the step."
+			],
+			"mandatory": false,
+			"name": "Transaction",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a database user or a certificate subject.",
+				"Overrides the user name from the credentials or the connection URI for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Runs a MongoDB aggregation pipeline and stores the documents it produced as relaxed Extended JSON.",
+		"Carries the pipeline inline, Base64-encoded, or in a file, and binds its stages as BSON.",
+		"Stores the field names, the documents, the document count, and the stage count as session parameters, so grouped and joined results reach later steps."
+	],
+	"version": "4"
+}

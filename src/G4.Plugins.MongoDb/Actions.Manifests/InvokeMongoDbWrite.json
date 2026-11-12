@@ -1,0 +1,760 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbWrite.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbWrite.cs"
+			},
+			"rag": {
+				"description": "Change documents in MongoDB from an automation: insert, update, replace, or delete through one step. The operation is named by an argument, the filter and the document bind as BSON, and the step reports every write count, so a flow can verify what it changed and roll back through a transaction when needed.",
+				"qa": [
+					{
+						"answer": "It inserts, updates, replaces, or deletes documents in a MongoDB collection, selected by the Operation argument, and reports every write count.",
+						"question": "What does the InvokeMongoDbWrite plugin do?"
+					},
+					{
+						"answer": "Collection and Operation are required; CommandText carries the filter, Document carries the written document, and Upsert and Transaction change the behavior. Outputs are DeletedCount, InsertedCount, InsertedIds, MatchedCount, ModifiedCount, and UpsertedIds.",
+						"question": "What are the key parameters and outputs of InvokeMongoDbWrite?"
+					},
+					{
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, usually after the step that produced the data or before a verification step.",
+						"question": "How does InvokeMongoDbWrite fit into an automation workflow?"
+					},
+					{
+						"answer": "Always pass a filter that states the scope, verify ModifiedCount or DeletedCount instead of assuming success, use Transaction for a multi-document change, and keep secrets in a stored credentials record.",
+						"question": "What are best practices for using InvokeMongoDbWrite?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “InvokeMongoDbWrite” and pass inputs in the argument, such as {{$ --Credentials:mongo-production --Collection:orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:{\"$set\":{\"status\":\"processed\"}}}}.",
+						"question": "How is an InvokeMongoDbWrite rule configured?"
+					},
+					{
+						"answer": "An unknown operation, an empty filter on an update, replace, or delete, a missing Document where one is required, or a server rejection fails the step, and an open transaction rolls back.",
+						"question": "How does InvokeMongoDbWrite handle errors?"
+					},
+					{
+						"answer": "An update document such as {\"$set\":{...}} ends in two closing braces, which end an inline argument value, so it travels Base64-encoded in Document with the DocumentBase64 switch set, or in the file named by DocumentFile.",
+						"question": "How does InvokeMongoDbWrite carry a nested update document?"
+					},
+					{
+						"answer": "InsertOne, InsertMany, UpdateOne, UpdateMany, ReplaceOne, DeleteOne, and DeleteMany, compared case-insensitively.",
+						"question": "Which operations does InvokeMongoDbWrite accept?"
+					},
+					{
+						"answer": "The manifest key is “InvokeMongoDbWrite”.",
+						"question": "What is the manifest key of InvokeMongoDbWrite?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by InvokeMongoDbWrite?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of InvokeMongoDbWrite?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does InvokeMongoDbWrite support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is InvokeMongoDbWrite listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the InvokeMongoDbWrite manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the InvokeMongoDbWrite manifest?"
+					},
+					{
+						"answer": "Inserts, updates, replaces, or deletes documents in a MongoDB collection through one Operation argument. Binds the filter and the document as BSON, so no value is ever composed into a command. Stores the matched, modified, inserted, deleted, and upserted counts as session parameters, so a flow reads one output shape for every operation.",
+						"question": "What is the summary of InvokeMongoDbWrite?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbWrite.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbWrite.cs.",
+						"question": "Where are the InvokeMongoDbWrite documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Invoke MongoDB Write",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Changes the documents of a MongoDB collection.",
+		"One Operation argument selects the write, so a flow uses one step for inserts, updates, replacements, and deletes.",
+		"Reports every write count, so a later step can verify the change without reading the collection again.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                    |",
+		"|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Seven operations           | InsertOne, InsertMany, UpdateOne, UpdateMany, ReplaceOne, DeleteOne, and DeleteMany, named case-insensitively.                                  |",
+		"| Values as data             | The filter comes from CommandText and the document from Document, both bound as BSON rather than composed text.                                 |",
+		"| Deliberate scope           | An update, replace, or delete without a filter fails, so a step always states which documents it changes.                                       |",
+		"| Upsert                     | The Upsert switch inserts a document when an update or a replace matches nothing, and reports its identifier.                                   |",
+		"| Transactions               | The Transaction switch wraps the write and commits only on success, on a replica set or a sharded cluster.                                       |",
+		"| Session and entity outputs | Stores outputs as Base64 session parameters named `InvokeMongoDbWrite:<Name>` and returns them in the response entity unless `NoEntity` is set.  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case          | Description                                                                              |",
+		"|-------------------|------------------------------------------------------------------------------------------|",
+		"| Status update     | Mark the documents a bot processed, and verify the modified count before continuing.     |",
+		"| Result write-back | Insert the documents a bot produced, in one call.                                        |",
+		"| Cleanup           | Delete the documents of a finished run inside a transaction.                             |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case         | Description                                                                       |",
+		"|------------------|-----------------------------------------------------------------------------------|",
+		"| Test data setup  | Insert the fixtures a test needs before it runs.                                  |",
+		"| State mutation   | Update one document to put the system under test into a known state.              |",
+		"| Teardown         | Delete the documents a test created, addressed by a run identifier.               |",
+		"",
+		"### Notes",
+		"",
+		"An update document must carry update operators, such as `{\"$set\":{...}}`; a replacement must not.",
+		"Pass `{\"_id\":{\"$exists\":true}}` to address every document on purpose, which the empty-filter guard rejects.",
+		"InsertOne and InsertMany share one path, so the Document argument decides how many documents are inserted.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the number of deleted documents, and `0` for every other operation.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "DeletedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of inserted documents, and `0` for every other operation.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "InsertedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the identifiers of the inserted documents as a JSON array, including the ones the driver generated.",
+				"Stays an empty array for every other operation.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "InsertedIds",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of documents the filter matched in an update or a replace.",
+				"Differs from ModifiedCount when a matched document already held the new values.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "MatchedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of documents an update or a replace actually changed.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "ModifiedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the identifier of an upserted document as a one-item JSON array.",
+				"Stays an empty array when nothing was upserted, so the output shape never changes.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "UpsertedIds",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Document argument omitted",
+						"Duplicate key rejected by a unique index",
+						"Array of documents passed to InsertOne"
+					],
+					"expected_result": "The step stores the inserted count in `InvokeMongoDbWrite:InsertedCount` and the new identifiers in `InvokeMongoDbWrite:InsertedIds`.",
+					"notes": "InsertOne and InsertMany share one path, so the Document argument decides how many documents are inserted. The driver generates an identifier for a document that carries none.",
+					"use_case": "insert_documents",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Insert",
+					"MongoDb",
+					"Write"
+				]
+			},
+			"description": [
+				"### Insert documents",
+				"",
+				"The argument names the collection, selects InsertMany, and passes the documents as a JSON array.",
+				"The step reports the inserted count and the generated identifiers."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{\"sku\":\"A-1\",\"total\":10},{\"sku\":\"B-2\",\"total\":20}]}}",
+				"pluginName": "InvokeMongoDbWrite"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Filter matches nothing without Upsert",
+						"Document passed without update operators",
+						"Matched documents already hold the new values"
+					],
+					"expected_result": "The step stores the matched and modified counts, and the upserted identifier when nothing matched and Upsert is set.",
+					"notes": "An update document must carry operators such as $set. MatchedCount and ModifiedCount differ when a matched document already held the new values.",
+					"use_case": "update_documents_with_upsert",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"MongoDb",
+					"Update",
+					"Upsert",
+					"Write"
+				]
+			},
+			"description": [
+				"### Update documents, inserting when none match",
+				"",
+				"The argument selects UpdateMany, passes the filter and the update operators, and sets `Upsert`.",
+				"The update document is Base64-encoded, because a nested JSON object ends in `}}`, which would end the inline argument value; the decoded text is `{\"$set\":{\"status\":\"processed\"}}`.",
+				"The step reports what it matched, modified, and upserted."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}",
+				"pluginName": "InvokeMongoDbWrite"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty filter rejected before the delete runs",
+						"Standalone server rejects the transaction",
+						"Filter matches no document"
+					],
+					"expected_result": "The step stores the deleted count in `InvokeMongoDbWrite:DeletedCount`, or rolls back and fails when the delete does.",
+					"notes": "The empty-filter guard keeps a delete from clearing a collection by an omitted argument. A transaction needs a replica set or a sharded cluster.",
+					"use_case": "delete_documents_in_transaction",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Delete",
+					"MongoDb",
+					"Transaction",
+					"Write"
+				]
+			},
+			"description": [
+				"### Delete documents inside a transaction",
+				"",
+				"The argument selects DeleteMany, passes the filter, and sets `Transaction`.",
+				"The transaction commits only after the delete succeeded."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{\"runId\":\"2026-11-12-001\"} --Transaction}}",
+				"pluginName": "InvokeMongoDbWrite"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Replacement carries update operators",
+						"Filter matches several documents",
+						"Document argument omitted"
+					],
+					"expected_result": "The step stores a matched count of 1 and a modified count of 1 when the replacement differed from the stored document.",
+					"notes": "A replacement rewrites the whole document except its identifier, so every field the new document omits is removed.",
+					"use_case": "replace_one_document",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"MongoDb",
+					"Replace",
+					"Write"
+				]
+			},
+			"description": [
+				"### Replace one document",
+				"",
+				"The argument selects ReplaceOne, addresses the document by its object identifier, and passes the replacement.",
+				"The filter is Base64-encoded, because its nested `$oid` object ends in `}}`, which would end the inline argument value; the decoded text is `{\"_id\":{\"$oid\":\"6553f1c2a1b2c3d4e5f60718\"}}`.",
+				"The Extended JSON `$oid` form addresses the identifier as an object identifier, not as text."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{\"sku\":\"A-1\",\"total\":12,\"status\":\"processed\"}}}",
+				"pluginName": "InvokeMongoDbWrite"
+			}
+		}
+	],
+	"key": "InvokeMongoDbWrite",
+	"namespace": "G4.Plugins.MongoDb",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the number of deleted documents, and `0` for every other operation.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbWrite:DeletedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of inserted documents, and `0` for every other operation.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbWrite:InsertedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the identifiers of the inserted documents as a JSON array, including the ones the driver generated.",
+				"Stays an empty array for every other operation.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbWrite:InsertedIds",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of documents the filter matched in an update or a replace.",
+				"Differs from ModifiedCount when a matched document already held the new values.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbWrite:MatchedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of documents an update or a replace actually changed.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbWrite:ModifiedCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the identifier of an upserted document as a one-item JSON array.",
+				"Stays an empty array when nothing was upserted, so the output shape never changes.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbWrite:UpsertedIds",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Accepts the server certificate without validating its trust chain.",
+				"Intended for development servers and containers that use a self-signed certificate.",
+				"Leave it unset for any deployment that holds real data."
+			],
+			"mandatory": false,
+			"name": "AllowInvalidCertificates",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the database that holds the user record, such as `admin`.",
+				"Overrides the authentication source from the credentials or the connection URI for this step only.",
+				"Set it when the login lives in a different database than the data."
+			],
+			"mandatory": false,
+			"name": "AuthenticationDatabase",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects how the driver proves the identity of the login.",
+				"Overrides the mechanism from the credentials or the connection URI for this step only.",
+				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
+			],
+			"mandatory": false,
+			"name": "AuthenticationMechanism",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-256.",
+						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
+					],
+					"name": "SCRAM-SHA-256"
+				},
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-1.",
+						"Use it for servers older than 4.0, which do not offer SHA-256."
+					],
+					"name": "SCRAM-SHA-1"
+				},
+				{
+					"description": [
+						"Signs in with the client TLS certificate instead of a password.",
+						"Set Username to the certificate subject, or leave it unset to let the server read it."
+					],
+					"name": "MONGODB-X509"
+				},
+				{
+					"description": [
+						"Signs in with AWS Identity and Access Management credentials.",
+						"Use it for an Atlas cluster that trusts an AWS role."
+					],
+					"name": "MONGODB-AWS"
+				},
+				{
+					"description": [
+						"Signs in with an OpenID Connect access token, such as a workload identity token.",
+						"Use it for a deployment that federates its logins to an identity provider."
+					],
+					"name": "MONGODB-OIDC"
+				},
+				{
+					"description": [
+						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
+						"Set Tls to Enabled, because the password travels unhashed."
+					],
+					"name": "PLAIN"
+				},
+				{
+					"description": [
+						"Signs in with a Kerberos principal.",
+						"Use it for an enterprise deployment that authenticates through Kerberos."
+					],
+					"name": "GSSAPI"
+				}
+			]
+		},
+		{
+			"description": [
+				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
+				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the collection the step operates on, such as `orders` or `shop.orders`.",
+				"A name qualified as `database.collection` selects its own database and overrides the Database parameter.",
+				"The name is split on its first dot only, so `shop.price.history` addresses the collection `price.history`."
+			],
+			"mandatory": true,
+			"name": "Collection",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Reads the payload from a UTF-8 file, such as `C:\\flows\\filter.json`.",
+				"Applies only when CommandText is not set, so an inline payload always takes priority.",
+				"The Base64 switch never applies here; file content is always read as plain text."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies the filter as a JSON object, such as `{\"status\":\"open\"}`.",
+				"Required for UpdateOne, UpdateMany, ReplaceOne, DeleteOne, and DeleteMany, and ignored by the insert operations.",
+				"An empty filter is rejected, so pass `{\"_id\":{\"$exists\":true}}` to address every document on purpose."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String|Expression"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets the time budget, in seconds, for connecting, selecting a server, and running the operation.",
+				"The value 0 means no operation timeout, so the step waits until the server answers.",
+				"Raise it for a long aggregation and lower it for a health check that must fail fast."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the step operates on, such as `shop`.",
+				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"A collection named as `database.collection` overrides this parameter in turn."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Connects to the named host directly instead of discovering the deployment topology.",
+				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
+				"A direct connection cannot run multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "DirectConnection",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Supplies the document the operation writes: the documents to insert, the update operators to apply, or the replacement.",
+				"An insert accepts a single object or an array of objects; an update must carry operators such as `{\"$set\":{...}}`.",
+				"Required for every operation except a delete, and encodable through DocumentBase64 because a nested update document ends in two closing braces."
+			],
+			"mandatory": false,
+			"name": "Document",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Reads Document as UTF-8 Base64 and decodes it before use.",
+				"An update document such as `{\"$set\":{...}}` ends in two closing braces, which end an inline argument value, so it travels encoded or through DocumentFile.",
+				"Invalid Base64 fails the step, so an encoded document never reaches the server as text."
+			],
+			"mandatory": false,
+			"name": "DocumentBase64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Reads the written document from a UTF-8 file, such as `C:\\flows\\update.json`.",
+				"Applies only when Document is not set, so an inline document always takes priority.",
+				"The DocumentBase64 switch never applies here; file content is always read as plain text."
+			],
+			"mandatory": false,
+			"name": "DocumentFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the MongoDB host or network address, such as `localhost`.",
+				"Overrides the host from the credentials or the connection URI for this step only.",
+				"A multi-host seed list travels in ConnectionString instead."
+			],
+			"mandatory": false,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Omits the response entity, so the step reports its outputs only as session parameters.",
+				"Use it when a later step reads the outputs by name and no data transfer is needed."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Selects the write the step performs.",
+				"Compared case-insensitively, like every other argument value."
+			],
+			"mandatory": true,
+			"name": "Operation",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Inserts the single document of the Document argument.",
+						"The driver generates an `_id` when the document carries none, and reports it in InsertedIds."
+					],
+					"name": "InsertOne"
+				},
+				{
+					"description": [
+						"Inserts every document of the Document array, in order.",
+						"A rejected document stops the ones after it, so the insert is ordered."
+					],
+					"name": "InsertMany"
+				},
+				{
+					"description": [
+						"Applies the update operators to the first matching document.",
+						"Requires a filter in CommandText and operators in Document."
+					],
+					"name": "UpdateOne"
+				},
+				{
+					"description": [
+						"Applies the update operators to every matching document.",
+						"Requires a filter in CommandText and operators in Document."
+					],
+					"name": "UpdateMany"
+				},
+				{
+					"description": [
+						"Replaces the first matching document with the Document argument.",
+						"The replacement must not carry update operators."
+					],
+					"name": "ReplaceOne"
+				},
+				{
+					"description": [
+						"Deletes the first matching document.",
+						"Requires a filter in CommandText."
+					],
+					"name": "DeleteOne"
+				},
+				{
+					"description": [
+						"Deletes every matching document.",
+						"Requires a filter in CommandText, so a delete never clears a collection by an omission."
+					],
+					"name": "DeleteMany"
+				}
+			]
+		},
+		{
+			"description": [
+				"Sets the password used with a password-based mechanism.",
+				"Overrides the password from the credentials or the connection URI for this step.",
+				"Prefer a stored credentials record, so the secret never appears in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the MongoDB instance, such as `27017`.",
+				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
+				"An unset port keeps the resolved port, which is 27017 for a plain URI."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Requires the client to join the named replica set, such as `rs0`.",
+				"Overrides the replica set from the credentials or the connection URI for this step.",
+				"A replica set is required for multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "ReplicaSet",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
+			],
+			"mandatory": false,
+			"name": "Tls",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires TLS encryption for the connection.",
+						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
+					],
+					"name": "Enabled"
+				},
+				{
+					"description": [
+						"Connects without TLS.",
+						"Use it for a loopback or private-network deployment that serves plain connections."
+					],
+					"name": "Disabled"
+				}
+			]
+		},
+		{
+			"description": [
+				"Runs the operation inside a multi-document transaction and commits it only on success.",
+				"A failure rolls back every change the step made.",
+				"MongoDB supports transactions only on a replica set or a sharded cluster; a standalone server fails the step."
+			],
+			"mandatory": false,
+			"name": "Transaction",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Inserts a document when an update or a replace matches nothing.",
+				"The identifier of the inserted document is reported in UpsertedIds.",
+				"Ignored by the insert and delete operations."
+			],
+			"mandatory": false,
+			"name": "Upsert",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a database user or a certificate subject.",
+				"Overrides the user name from the credentials or the connection URI for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Inserts, updates, replaces, or deletes documents in a MongoDB collection through one Operation argument.",
+		"Binds the filter and the document as BSON, so no value is ever composed into a command.",
+		"Stores the matched, modified, inserted, deleted, and upserted counts as session parameters, so a flow reads one output shape for every operation."
+	],
+	"version": "4"
+}

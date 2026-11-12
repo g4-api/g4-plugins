@@ -1,0 +1,552 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbCommand.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbCommand.cs"
+			},
+			"rag": {
+				"description": "Run a MongoDB database command from an automation, for the work the typed plugins do not cover: creating indexes, reading collection statistics, validating a collection, or any other administrative command. The command document binds as BSON and the whole response is stored for the flow to read.",
+				"qa": [
+					{
+						"answer": "It runs any MongoDB database command the connected login may run and stores the whole server response as minified relaxed Extended JSON.",
+						"question": "What does the InvokeMongoDbCommand plugin do?"
+					},
+					{
+						"answer": "CommandText, CommandFile, or Base64 carries the command document and Database selects the target database. Outputs are Database, Ok, and Result.",
+						"question": "What are the key parameters and outputs of InvokeMongoDbCommand?"
+					},
+					{
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, and covers the administrative work the typed MongoDB plugins do not model.",
+						"question": "How does InvokeMongoDbCommand fit into an automation workflow?"
+					},
+					{
+						"answer": "Prefer a typed plugin when one covers the operation, restrict the rights of the connected login rather than trusting the command text, name the Database explicitly, and keep long commands in a file.",
+						"question": "What are best practices for using InvokeMongoDbCommand?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “InvokeMongoDbCommand” and pass inputs in the argument, such as {{$ --Credentials:mongo-production --Database:shop --CommandText:{\"collStats\":\"orders\"}}}.",
+						"question": "How is an InvokeMongoDbCommand rule configured?"
+					},
+					{
+						"answer": "A malformed or empty command document, an unresolved database, or a server rejection fails the step; a command that answered without success stores Ok as false.",
+						"question": "How does InvokeMongoDbCommand handle errors?"
+					},
+					{
+						"answer": "It runs whatever the connected login is authorized for, including a drop, exactly like the script plugin of the SQL Server suite, so the login should carry only the rights the flow needs.",
+						"question": "Is InvokeMongoDbCommand safe to expose?"
+					},
+					{
+						"answer": "The manifest key is “InvokeMongoDbCommand”.",
+						"question": "What is the manifest key of InvokeMongoDbCommand?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by InvokeMongoDbCommand?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of InvokeMongoDbCommand?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does InvokeMongoDbCommand support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is InvokeMongoDbCommand listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the InvokeMongoDbCommand manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the InvokeMongoDbCommand manifest?"
+					},
+					{
+						"answer": "Runs any MongoDB database command and stores the whole server response as relaxed Extended JSON. Carries the command document inline, Base64-encoded, or in a file, and binds it as BSON. Stores the response, its ok flag, and the database as session parameters, so index, statistics, and administrative commands reach a flow.",
+						"question": "What is the summary of InvokeMongoDbCommand?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbCommand.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbCommand.cs.",
+						"question": "Where are the InvokeMongoDbCommand documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Invoke MongoDB Command",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Runs a raw MongoDB database command, which is the escape hatch of the suite.",
+		"Covers the administrative and diagnostic work the typed plugins do not model, such as creating an index, reading collection statistics, or validating a collection.",
+		"Stores the whole server response, so a flow reads exactly what the server returned.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                      |",
+		"|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Any database command       | Runs the command the first field of the command document names, such as `createIndexes` or `collStats`.                                          |",
+		"| Command as data            | Reads the command from CommandText, CommandFile, or Base64-encoded text and binds it as BSON.                                                    |",
+		"| Database selection         | Runs on the Database argument, then on the database the connection resolved, so the command never guesses its target.                             |",
+		"| Whole response             | Stores the complete response document, not a selected field, so nothing the server reports is lost.                                               |",
+		"| Branchable result          | Reports the `ok` flag separately, so a flow can branch without parsing the response.                                                             |",
+		"| Session and entity outputs | Stores outputs as Base64 session parameters named `InvokeMongoDbCommand:<Name>` and returns them in the response entity unless `NoEntity` is set.  |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case            | Description                                                                             |",
+		"|---------------------|-----------------------------------------------------------------------------------------|",
+		"| Index provisioning  | Create the indexes a later extraction needs, before the data arrives.                   |",
+		"| Capacity reporting  | Read collection statistics and report the stored size of a warehouse.                   |",
+		"| Maintenance         | Run a validation or a compaction command on a maintenance schedule.                     |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case             | Description                                                                        |",
+		"|----------------------|------------------------------------------------------------------------------------|",
+		"| Environment setup    | Create the collections and indexes a suite expects before it runs.                 |",
+		"| Server capability    | Read the server parameters a test depends on and skip the test when they differ.   |",
+		"| Teardown             | Drop a test collection in one call after the suite finished.                       |",
+		"",
+		"### Notes",
+		"",
+		"The command runs with the rights of the connected login, so it can also drop data; restrict the login instead of the command.",
+		"A command document with no field fails the step, because nothing names the command to run.",
+		"A server that rejects the command fails the step, so `Ok` reports `false` only for a command that answered without success.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the name of the database the command ran on.",
+				"Confirms whether the Database argument or the resolved connection selected the target.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores `true` when the server reported the command as successful and `false` otherwise.",
+				"Lets a flow branch without parsing the response document.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Ok",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the whole response document as minified relaxed Extended JSON.",
+				"Keeps every field the server reported, including the ones a typed plugin would drop.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Result",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Index already exists with different options",
+						"Login lacks the right to create an index",
+						"Command document names no command"
+					],
+					"expected_result": "The step stores the server response in `InvokeMongoDbCommand:Result` and `true` in `InvokeMongoDbCommand:Ok`.",
+					"notes": "Creating an index again with the same options succeeds and reports that nothing changed. The command runs with the rights of the connected login.",
+					"use_case": "create_index",
+					"version": "4"
+				},
+				"labels": [
+					"Command",
+					"Database",
+					"Index",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Create an index",
+				"",
+				"The argument passes a `createIndexes` command that indexes the status field.",
+				"The step stores the whole response, which reports how many indexes the collection now has."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}",
+				"pluginName": "InvokeMongoDbCommand"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Collection does not exist",
+						"Database argument omitted and none resolved",
+						"Response larger than the session parameter a later step expects"
+					],
+					"expected_result": "The step stores the statistics document in `InvokeMongoDbCommand:Result`.",
+					"notes": "Database selects the target explicitly, which matters when the connection resolved another database. A step with no resolvable database fails instead of guessing.",
+					"use_case": "read_collection_statistics",
+					"version": "4"
+				},
+				"labels": [
+					"Command",
+					"Database",
+					"MongoDb",
+					"Statistics"
+				]
+			},
+			"description": [
+				"### Read collection statistics",
+				"",
+				"The argument passes a `collStats` command and names the database explicitly.",
+				"The step stores the whole statistics document for a report to read."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"collStats\":\"orders\"}}}",
+				"pluginName": "InvokeMongoDbCommand"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CommandFile points to a missing file",
+						"File holds an array instead of an object",
+						"Command needs more time than CommandTimeout allows"
+					],
+					"expected_result": "The step reads the command from the file, runs it, and stores the response in `InvokeMongoDbCommand:Result`.",
+					"notes": "A long administrative command belongs in a file, which also keeps it reviewable. The Base64 switch never applies to file content.",
+					"use_case": "run_command_from_file",
+					"version": "4"
+				},
+				"labels": [
+					"Command",
+					"Database",
+					"File",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Run a command from a file",
+				"",
+				"The argument reads the command document from a UTF-8 file and raises the time budget.",
+				"NoEntity keeps the response in session parameters only."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\\flows\\commands\\validate-orders.json --CommandTimeout:600 --NoEntity}}",
+				"pluginName": "InvokeMongoDbCommand"
+			}
+		}
+	],
+	"key": "InvokeMongoDbCommand",
+	"namespace": "G4.Plugins.MongoDb",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the name of the database the command ran on.",
+				"Confirms whether the Database argument or the resolved connection selected the target.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbCommand:Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores `true` when the server reported the command as successful and `false` otherwise.",
+				"Lets a flow branch without parsing the response document.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbCommand:Ok",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the whole response document as minified relaxed Extended JSON.",
+				"Keeps every field the server reported, including the ones a typed plugin would drop.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "InvokeMongoDbCommand:Result",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Accepts the server certificate without validating its trust chain.",
+				"Intended for development servers and containers that use a self-signed certificate.",
+				"Leave it unset for any deployment that holds real data."
+			],
+			"mandatory": false,
+			"name": "AllowInvalidCertificates",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the database that holds the user record, such as `admin`.",
+				"Overrides the authentication source from the credentials or the connection URI for this step only.",
+				"Set it when the login lives in a different database than the data."
+			],
+			"mandatory": false,
+			"name": "AuthenticationDatabase",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects how the driver proves the identity of the login.",
+				"Overrides the mechanism from the credentials or the connection URI for this step only.",
+				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
+			],
+			"mandatory": false,
+			"name": "AuthenticationMechanism",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-256.",
+						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
+					],
+					"name": "SCRAM-SHA-256"
+				},
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-1.",
+						"Use it for servers older than 4.0, which do not offer SHA-256."
+					],
+					"name": "SCRAM-SHA-1"
+				},
+				{
+					"description": [
+						"Signs in with the client TLS certificate instead of a password.",
+						"Set Username to the certificate subject, or leave it unset to let the server read it."
+					],
+					"name": "MONGODB-X509"
+				},
+				{
+					"description": [
+						"Signs in with AWS Identity and Access Management credentials.",
+						"Use it for an Atlas cluster that trusts an AWS role."
+					],
+					"name": "MONGODB-AWS"
+				},
+				{
+					"description": [
+						"Signs in with an OpenID Connect access token, such as a workload identity token.",
+						"Use it for a deployment that federates its logins to an identity provider."
+					],
+					"name": "MONGODB-OIDC"
+				},
+				{
+					"description": [
+						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
+						"Set Tls to Enabled, because the password travels unhashed."
+					],
+					"name": "PLAIN"
+				},
+				{
+					"description": [
+						"Signs in with a Kerberos principal.",
+						"Use it for an enterprise deployment that authenticates through Kerberos."
+					],
+					"name": "GSSAPI"
+				}
+			]
+		},
+		{
+			"description": [
+				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
+				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Reads the payload from a UTF-8 file, such as `C:\\flows\\filter.json`.",
+				"Applies only when CommandText is not set, so an inline payload always takes priority.",
+				"The Base64 switch never applies here; file content is always read as plain text."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies the command as a JSON object whose first field names the command, such as `{\"collStats\":\"orders\"}`.",
+				"Required, because a step without a command has nothing to run.",
+				"Both Extended JSON forms are accepted, so declared BSON types survive the parse."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String|Expression"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets the time budget, in seconds, for connecting, selecting a server, and running the operation.",
+				"The value 0 means no operation timeout, so the step waits until the server answers.",
+				"Raise it for a long aggregation and lower it for a health check that must fail fast."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the step operates on, such as `shop`.",
+				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"A collection named as `database.collection` overrides this parameter in turn."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Connects to the named host directly instead of discovering the deployment topology.",
+				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
+				"A direct connection cannot run multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "DirectConnection",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the MongoDB host or network address, such as `localhost`.",
+				"Overrides the host from the credentials or the connection URI for this step only.",
+				"A multi-host seed list travels in ConnectionString instead."
+			],
+			"mandatory": false,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Omits the response entity, so the step reports its outputs only as session parameters.",
+				"Use it when a later step reads the outputs by name and no data transfer is needed."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password used with a password-based mechanism.",
+				"Overrides the password from the credentials or the connection URI for this step.",
+				"Prefer a stored credentials record, so the secret never appears in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the MongoDB instance, such as `27017`.",
+				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
+				"An unset port keeps the resolved port, which is 27017 for a plain URI."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Requires the client to join the named replica set, such as `rs0`.",
+				"Overrides the replica set from the credentials or the connection URI for this step.",
+				"A replica set is required for multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "ReplicaSet",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
+			],
+			"mandatory": false,
+			"name": "Tls",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires TLS encryption for the connection.",
+						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
+					],
+					"name": "Enabled"
+				},
+				{
+					"description": [
+						"Connects without TLS.",
+						"Use it for a loopback or private-network deployment that serves plain connections."
+					],
+					"name": "Disabled"
+				}
+			]
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a database user or a certificate subject.",
+				"Overrides the user name from the credentials or the connection URI for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Runs any MongoDB database command and stores the whole server response as relaxed Extended JSON.",
+		"Carries the command document inline, Base64-encoded, or in a file, and binds it as BSON.",
+		"Stores the response, its ok flag, and the database as session parameters, so index, statistics, and administrative commands reach a flow."
+	],
+	"version": "4"
+}

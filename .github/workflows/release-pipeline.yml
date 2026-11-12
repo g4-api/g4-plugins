@@ -141,7 +141,7 @@ jobs:
         test-project:
           - name                  : 'G4.UnitTests'
             type                  : 'csproj'
-            filter                : 'TestCategory!=SqlServerLive'
+            filter                : 'TestCategory!=SqlServerLive&TestCategory!=MongoDbLive'
             prefix                : 'unit-tests'
             artifact              : 'unit-tests-drop-v${{ needs.NewVersion.outputs.buildVersion }}'
             report                : 'unit-tests-results-v${{ needs.NewVersion.outputs.buildVersion }}.xml'
@@ -365,13 +365,69 @@ jobs:
           name: sqlserver-tests-drop-v${{ env.BUILD_VERSION }}
           path: ${{ env.STAGE_DIRECTORY }}/sqlserver-tests*.*
 
+  # Linux is required for the MongoDB tests, which run MongoDB in a Linux Docker container as a single-member
+  # replica set, because MongoDB rejects multi-document transactions on a standalone server
+  InvokeMongoDbTests:
+    name: Invoke MongoDB Tests & Publish Results
+    runs-on: ubuntu-latest
+    if: ${{ needs.NewVersion.result == 'success' && needs.NewVersion.outputs.validVersion == 'True' }}
+    needs:
+      - NewBuild
+      - NewVersion
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+
+    env:
+      BUILD_VERSION: ${{ needs.NewVersion.outputs.buildVersion }}
+      G4_MONGODB_REQUIRED: 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "${{ env.DOTNET_VERSION }}"
+
+      - name: Pull MongoDB Image
+        shell: bash
+        run: docker pull mongo:8
+
+      - name: Invoke MongoDB Tests
+        shell: pwsh
+        run: |
+          $projectFilePath    = (Get-ChildItem -Path . -Filter 'G4.UnitTests.csproj' -Recurse).FullName
+          $testReportFilePath = "${{ env.STAGE_DIRECTORY }}/mongodb-tests-results-v${{ env.BUILD_VERSION }}.trx"
+
+          # The assembly setup reads every test run parameter and signs in to G4, so the run needs the default
+          # settings file with the G4 API key
+          $runSettingsFilePath = (Get-ChildItem -Path . -Filter '${{ env.RUN_SETTINGS_FILE }}' -Recurse).FullName
+          [xml]$runSettings    = Get-Content -Path $runSettingsFilePath
+          $g4Username          = $runSettings.SelectSingleNode("//Parameter[@name='G4.Username']")
+          $g4Username.Value    = '${{ env.G4_API_KEY }}'
+          $runSettings.Save($runSettingsFilePath)
+
+          dotnet test $projectFilePath --settings $runSettingsFilePath --filter "TestCategory=MongoDbLive" -l:"trx;LogFileName=$testReportFilePath"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Publish MongoDB Tests Artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: mongodb-tests-drop-v${{ env.BUILD_VERSION }}
+          path: ${{ env.STAGE_DIRECTORY }}/mongodb-tests*.*
+
   PublishNugetPackages:
     name: Publish & Push NuGet Packages v${{ needs.NewVersion.outputs.buildVersion }}
     runs-on: ubuntu-latest
-    if: ${{ needs.InvokeTests.result == 'success' && needs.InvokeSqlServerTests.result == 'success' }}
-    needs: 
+    if: ${{ needs.InvokeTests.result == 'success' && needs.InvokeSqlServerTests.result == 'success' && needs.InvokeMongoDbTests.result == 'success' }}
+    needs:
       - InvokeTests
       - InvokeSqlServerTests
+      - InvokeMongoDbTests
       - NewVersion
 
     defaults:

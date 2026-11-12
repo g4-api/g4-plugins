@@ -1,0 +1,546 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ImportMongoDbData.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/ImportMongoDbData.cs"
+			},
+			"rag": {
+				"description": "Load documents into MongoDB from an automation: inline JSON, a JSON file, or a CSV file with a header row. The step parses the payload before it connects, inserts in batches, and reports the inserted count so a flow can verify the load.",
+				"qa": [
+					{
+						"answer": "It inserts documents from inline JSON, a JSON file, or a CSV file into a MongoDB collection, in batches, and reports the inserted count.",
+						"question": "What does the ImportMongoDbData plugin do?"
+					},
+					{
+						"answer": "Collection is required and Data or DataFile carries the payload; BatchSize, Ordered, and Transaction change the behavior. The output is DocumentsInserted.",
+						"question": "What are the key parameters and outputs of ImportMongoDbData?"
+					},
+					{
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, usually after a step that produced or downloaded the payload.",
+						"question": "How does ImportMongoDbData fit into an automation workflow?"
+					},
+					{
+						"answer": "Batch large payloads, keep the insert unordered unless order matters, use Transaction when the import must be all-or-nothing, and compare DocumentsInserted with the expected count.",
+						"question": "What are best practices for using ImportMongoDbData?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “ImportMongoDbData” and pass inputs in the argument, such as {{$ --Credentials:mongo-production --Collection:customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}.",
+						"question": "How is an ImportMongoDbData rule configured?"
+					},
+					{
+						"answer": "A missing payload, a malformed JSON or CSV payload, a missing file, or a document the server rejects fails the step; an unordered insert still lands the documents the server accepted, and a transaction rolls everything back.",
+						"question": "How does ImportMongoDbData handle errors?"
+					},
+					{
+						"answer": "Every cell is inserted as a string, quoted fields keep commas, line breaks, and doubled quotes, and an empty unquoted field is omitted from its document.",
+						"question": "How does ImportMongoDbData treat CSV values?"
+					},
+					{
+						"answer": "The manifest key is “ImportMongoDbData”.",
+						"question": "What is the manifest key of ImportMongoDbData?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by ImportMongoDbData?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of ImportMongoDbData?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does ImportMongoDbData support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is ImportMongoDbData listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the ImportMongoDbData manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the ImportMongoDbData manifest?"
+					},
+					{
+						"answer": "Inserts documents from an inline JSON payload, a JSON file, or a CSV file into a MongoDB collection. Splits the payload into batches and inserts unordered by default, so one rejected document does not stop the rest. Stores the inserted document count as a session parameter, so a flow can verify the import.",
+						"question": "What is the summary of ImportMongoDbData?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ImportMongoDbData.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/ImportMongoDbData.cs.",
+						"question": "Where are the ImportMongoDbData documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Import MongoDB Data",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Loads documents into a MongoDB collection from a payload the flow already holds.",
+		"Accepts inline JSON, a JSON file, and a CSV file with a header row, so an import needs no conversion step.",
+		"Parses the payload before it connects, so a malformed payload fails without touching the server.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                 |",
+		"|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Three payload forms        | Inline JSON in Data, a JSON file in DataFile, or a CSV file in DataFile, selected by the `.csv` extension.                                   |",
+		"| CSV as text                | Every CSV cell is inserted as a string, and an empty unquoted field is omitted from its document.                                            |",
+		"| Batching                   | BatchSize splits the payload into fixed-size inserts, so one oversized payload never travels as a single command.                            |",
+		"| Unordered by default       | An insert continues past a rejected document unless the `Ordered` switch is set.                                                             |",
+		"| Transactions               | The Transaction switch wraps every batch and commits only on success, on a replica set or a sharded cluster.                                  |",
+		"| Session and entity outputs | Stores the count as the Base64 session parameter `ImportMongoDbData:DocumentsInserted` and returns it in the entity unless `NoEntity` is set. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case          | Description                                                                             |",
+		"|-------------------|-----------------------------------------------------------------------------------------|",
+		"| File intake       | Load a CSV a partner delivered into a staging collection for later processing.          |",
+		"| Result write-back | Insert the documents a bot produced, in one step, after the run.                        |",
+		"| Seed data         | Load reference documents a flow needs before its first step.                            |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case         | Description                                                                        |",
+		"|------------------|------------------------------------------------------------------------------------|",
+		"| Fixture loading  | Load the documents a data-driven suite iterates.                                   |",
+		"| Bulk setup       | Load a large payload in batches to build a realistic test collection.              |",
+		"| Negative tests   | Load a payload with duplicates to confirm the unordered insert reports partial work. |",
+		"",
+		"### Notes",
+		"",
+		"Data wins over DataFile, and a DataFile extension other than `.csv` is parsed as JSON.",
+		"A BatchSize of 0 sends every document in one call and lets the driver split it.",
+		"An unordered insert that rejects a document still fails the step, after the other documents landed.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the number of documents the step sent to the collection.",
+				"Lets a flow compare the loaded count with the expected payload size.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "DocumentsInserted",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Data holds a JSON array of non-objects",
+						"Duplicate key rejected by a unique index",
+						"Neither Data nor DataFile set"
+					],
+					"expected_result": "The step stores the inserted count in `ImportMongoDbData:DocumentsInserted`.",
+					"notes": "The payload is parsed before the client opens, so a malformed payload fails without touching the server.",
+					"use_case": "import_inline_json",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Import",
+					"Json",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Import inline JSON documents",
+				"",
+				"The argument names the collection and passes the documents as a JSON array.",
+				"The step reports how many documents it sent."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:customers --Data:[{\"name\":\"Ada\",\"tier\":\"gold\"},{\"name\":\"Linus\",\"tier\":\"silver\"}]}}",
+				"pluginName": "ImportMongoDbData"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CSV without a header row",
+						"CSV with fewer cells than header columns",
+						"Payload larger than the server document limit per batch"
+					],
+					"expected_result": "The step inserts the CSV records in batches of 1000 and stores the total in `ImportMongoDbData:DocumentsInserted`.",
+					"notes": "Every CSV cell is inserted as a string, and an empty unquoted field is omitted from its document, so a later query can tell a missing value from an empty one.",
+					"use_case": "import_csv_file_in_batches",
+					"version": "4"
+				},
+				"labels": [
+					"Batching",
+					"Csv",
+					"Database",
+					"Import",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Import a CSV file in batches",
+				"",
+				"The argument reads a CSV file, whose first record holds the field names, and batches the insert.",
+				"Batching keeps each command small for a large file."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}",
+				"pluginName": "ImportMongoDbData"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Standalone server rejects the transaction",
+						"One document rejected mid-import",
+						"DataFile points to a missing file"
+					],
+					"expected_result": "The step inserts every document and commits, or rolls back the whole import on a failure.",
+					"notes": "A transaction makes an import all-or-nothing, which needs a replica set or a sharded cluster. The `Ordered` switch makes the insert stop at the first rejected document.",
+					"use_case": "import_json_file_in_transaction",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Import",
+					"Json",
+					"MongoDb",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Import a JSON file as one transaction",
+				"",
+				"The argument reads a JSON file, inserts in payload order, and wraps the import in a transaction.",
+				"Nothing lands when any document is rejected."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\\data\\orders.json --Ordered --Transaction}}",
+				"pluginName": "ImportMongoDbData"
+			}
+		}
+	],
+	"key": "ImportMongoDbData",
+	"namespace": "G4.Plugins.MongoDb",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the number of documents the step sent to the collection.",
+				"Lets a flow compare the loaded count with the expected payload size.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "ImportMongoDbData:DocumentsInserted",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Accepts the server certificate without validating its trust chain.",
+				"Intended for development servers and containers that use a self-signed certificate.",
+				"Leave it unset for any deployment that holds real data."
+			],
+			"mandatory": false,
+			"name": "AllowInvalidCertificates",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the database that holds the user record, such as `admin`.",
+				"Overrides the authentication source from the credentials or the connection URI for this step only.",
+				"Set it when the login lives in a different database than the data."
+			],
+			"mandatory": false,
+			"name": "AuthenticationDatabase",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects how the driver proves the identity of the login.",
+				"Overrides the mechanism from the credentials or the connection URI for this step only.",
+				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
+			],
+			"mandatory": false,
+			"name": "AuthenticationMechanism",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-256.",
+						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
+					],
+					"name": "SCRAM-SHA-256"
+				},
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-1.",
+						"Use it for servers older than 4.0, which do not offer SHA-256."
+					],
+					"name": "SCRAM-SHA-1"
+				},
+				{
+					"description": [
+						"Signs in with the client TLS certificate instead of a password.",
+						"Set Username to the certificate subject, or leave it unset to let the server read it."
+					],
+					"name": "MONGODB-X509"
+				},
+				{
+					"description": [
+						"Signs in with AWS Identity and Access Management credentials.",
+						"Use it for an Atlas cluster that trusts an AWS role."
+					],
+					"name": "MONGODB-AWS"
+				},
+				{
+					"description": [
+						"Signs in with an OpenID Connect access token, such as a workload identity token.",
+						"Use it for a deployment that federates its logins to an identity provider."
+					],
+					"name": "MONGODB-OIDC"
+				},
+				{
+					"description": [
+						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
+						"Set Tls to Enabled, because the password travels unhashed."
+					],
+					"name": "PLAIN"
+				},
+				{
+					"description": [
+						"Signs in with a Kerberos principal.",
+						"Use it for an enterprise deployment that authenticates through Kerberos."
+					],
+					"name": "GSSAPI"
+				}
+			]
+		},
+		{
+			"default": "0",
+			"description": [
+				"Splits the payload into inserts of this many documents, such as `1000`.",
+				"The value 0 sends every document in one call and lets the driver split it."
+			],
+			"mandatory": false,
+			"name": "BatchSize",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Names the collection the step operates on, such as `orders` or `shop.orders`.",
+				"A name qualified as `database.collection` selects its own database and overrides the Database parameter.",
+				"The name is split on its first dot only, so `shop.price.history` addresses the collection `price.history`."
+			],
+			"mandatory": true,
+			"name": "Collection",
+			"type": "String|Expression"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets the time budget, in seconds, for connecting, selecting a server, and running the operation.",
+				"The value 0 means no operation timeout, so the step waits until the server answers.",
+				"Raise it for a long aggregation and lower it for a health check that must fail fast."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies the documents inline, as a JSON array of objects or a single JSON object.",
+				"Takes priority over DataFile, so a step can override a shared data file."
+			],
+			"mandatory": false,
+			"name": "Data",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Reads the documents from a file, such as `C:\\data\\customers.csv`.",
+				"A `.csv` extension is parsed as RFC 4180 CSV with a header row; every other extension is parsed as JSON.",
+				"Applies only when Data is not set."
+			],
+			"mandatory": false,
+			"name": "DataFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the step operates on, such as `shop`.",
+				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"A collection named as `database.collection` overrides this parameter in turn."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Connects to the named host directly instead of discovering the deployment topology.",
+				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
+				"A direct connection cannot run multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "DirectConnection",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the MongoDB host or network address, such as `localhost`.",
+				"Overrides the host from the credentials or the connection URI for this step only.",
+				"A multi-host seed list travels in ConnectionString instead."
+			],
+			"mandatory": false,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Omits the response entity, so the step reports its outputs only as session parameters.",
+				"Use it when a later step reads the outputs by name and no data transfer is needed."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Inserts the documents in payload order and stops at the first rejected document.",
+				"Leave it unset to insert unordered, so one rejected document does not stop the rest."
+			],
+			"mandatory": false,
+			"name": "Ordered",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password used with a password-based mechanism.",
+				"Overrides the password from the credentials or the connection URI for this step.",
+				"Prefer a stored credentials record, so the secret never appears in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the MongoDB instance, such as `27017`.",
+				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
+				"An unset port keeps the resolved port, which is 27017 for a plain URI."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Requires the client to join the named replica set, such as `rs0`.",
+				"Overrides the replica set from the credentials or the connection URI for this step.",
+				"A replica set is required for multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "ReplicaSet",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
+			],
+			"mandatory": false,
+			"name": "Tls",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires TLS encryption for the connection.",
+						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
+					],
+					"name": "Enabled"
+				},
+				{
+					"description": [
+						"Connects without TLS.",
+						"Use it for a loopback or private-network deployment that serves plain connections."
+					],
+					"name": "Disabled"
+				}
+			]
+		},
+		{
+			"description": [
+				"Runs the operation inside a multi-document transaction and commits it only on success.",
+				"A failure rolls back every change the step made.",
+				"MongoDB supports transactions only on a replica set or a sharded cluster; a standalone server fails the step."
+			],
+			"mandatory": false,
+			"name": "Transaction",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a database user or a certificate subject.",
+				"Overrides the user name from the credentials or the connection URI for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Inserts documents from an inline JSON payload, a JSON file, or a CSV file into a MongoDB collection.",
+		"Splits the payload into batches and inserts unordered by default, so one rejected document does not stop the rest.",
+		"Stores the inserted document count as a session parameter, so a flow can verify the import."
+	],
+	"version": "4"
+}

@@ -1,0 +1,573 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/GetMongoDbScalar.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/GetMongoDbScalar.cs"
+			},
+			"rag": {
+				"description": "Read one value from MongoDB into an automation: a document count, the distinct values of a field, or one field of the first matching document. The step keeps flows simple by storing a single value a later step can compare, branch on, or display without parsing documents.",
+				"qa": [
+					{
+						"answer": "It reads one value from a MongoDB collection: the number of matching documents, the distinct values of one field, or one field of the first matching document.",
+						"question": "What does the GetMongoDbScalar plugin do?"
+					},
+					{
+						"answer": "Collection is required; Mode selects Count, Distinct, or Field; Field names the field for Distinct and Field; CommandText carries the filter; Sort decides the first document in Field mode. The output is Value.",
+						"question": "What are the key parameters and outputs of GetMongoDbScalar?"
+					},
+					{
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, usually before a condition that branches on the stored value.",
+						"question": "How does GetMongoDbScalar fit into an automation workflow?"
+					},
+					{
+						"answer": "Use Count instead of exporting documents only to count them, index the fields a filter or a distinct reads, and always pair Field mode with a Sort so the chosen document is deterministic.",
+						"question": "What are best practices for using GetMongoDbScalar?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “GetMongoDbScalar” and pass inputs in the argument, such as {{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}.",
+						"question": "How is a GetMongoDbScalar rule configured?"
+					},
+					{
+						"answer": "An unknown Mode, a missing Field in Distinct or Field mode, a malformed filter, or an unresolved database fails the step, while a filter that matches nothing stores an empty value or a count of 0.",
+						"question": "How does GetMongoDbScalar handle errors?"
+					},
+					{
+						"answer": "The manifest key is “GetMongoDbScalar”.",
+						"question": "What is the manifest key of GetMongoDbScalar?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by GetMongoDbScalar?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of GetMongoDbScalar?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does GetMongoDbScalar support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is GetMongoDbScalar listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the GetMongoDbScalar manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the GetMongoDbScalar manifest?"
+					},
+					{
+						"answer": "Reads a single value from MongoDB: the number of matching documents, the distinct values of one field, or one field of the first matching document. Binds the filter as BSON, so no value is ever composed into a query. Stores the value as a session parameter, so a later step can compare or branch on it without parsing a document.",
+						"question": "What is the summary of GetMongoDbScalar?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/GetMongoDbScalar.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/GetMongoDbScalar.cs.",
+						"question": "Where are the GetMongoDbScalar documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Get MongoDB Scalar",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Reads a single value from a MongoDB collection instead of a document set.",
+		"Counts the matching documents, collects the distinct values of one field, or reads one field of the first matching document.",
+		"Stores the value as text, so a condition or a report can use it directly.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                |",
+		"|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Three modes                | Count counts the matching documents, Distinct collects the values of one field, and Field reads one field of the first match.               |",
+		"| Filter as data             | Reads the filter from CommandText, CommandFile, or Base64-encoded text and binds it as BSON.                                               |",
+		"| Dot paths                  | Field follows a dot path, so `address.city` reads the city of the address subdocument.                                                      |",
+		"| Missing values             | A mode that finds no document or no field stores an empty value instead of failing.                                                         |",
+		"| Raw text for strings       | A string value is stored unquoted, while every other value uses its relaxed Extended JSON form.                                            |",
+		"| Session and entity outputs | Stores the value as the Base64 session parameter `GetMongoDbScalar:Value` and returns it in the response entity unless `NoEntity` is set.    |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case           | Description                                                                             |",
+		"|--------------------|-----------------------------------------------------------------------------------------|",
+		"| Queue depth check  | Count the pending documents and skip a run when the queue is empty.                     |",
+		"| Lookup value       | Read one field, such as a customer tier, and bind it into a later step.                 |",
+		"| Category discovery | Collect the distinct values of a field to drive a loop over categories.                 |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case          | Description                                                                        |",
+		"|-------------------|------------------------------------------------------------------------------------|",
+		"| Row-count assert  | Count the documents a flow wrote and compare the count with the expected number.   |",
+		"| Field assert      | Read one field of a written document and compare it with the expected value.       |",
+		"| Uniqueness check  | Collect the distinct values of a key and confirm the expected set.                  |",
+		"",
+		"### Notes",
+		"",
+		"Mode accepts Count, Distinct, and Field, case-insensitively, and defaults to Count.",
+		"Distinct and Field require the Field parameter; Count ignores it.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the value the selected mode read: a count, a JSON array of distinct values, or one field value.",
+				"A string value is stored unquoted, a missing value as an empty string, and every other value in its relaxed Extended JSON form.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Value",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Filter matches no document",
+						"Collection does not exist",
+						"Count over a large collection without an index"
+					],
+					"expected_result": "The step stores the number of matching documents in `GetMongoDbScalar:Value`.",
+					"notes": "Count is the default mode, so the Mode parameter can be omitted. A collection that does not exist counts as 0 instead of failing.",
+					"use_case": "count_matching_documents",
+					"version": "4"
+				},
+				"labels": [
+					"Count",
+					"Database",
+					"MongoDb",
+					"Query"
+				]
+			},
+			"description": [
+				"### Count the documents a filter matches",
+				"",
+				"The argument names the collection and passes the filter as a JSON object.",
+				"The step stores the count, which a later condition can compare with a threshold."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}",
+				"pluginName": "GetMongoDbScalar"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Filter matches no document",
+						"Field missing from the matched document",
+						"Several documents match without a sort"
+					],
+					"expected_result": "The step stores the `address.city` value of the newest matching document in `GetMongoDbScalar:Value`.",
+					"notes": "Field mode follows a dot path, and a missing document or field stores an empty value. Sort decides which document counts as the first one.",
+					"use_case": "read_one_field_value",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Field",
+					"MongoDb",
+					"Query"
+				]
+			},
+			"description": [
+				"### Read one field of the first match",
+				"",
+				"The argument selects Field mode, names the dot path, and sorts so the newest document is first.",
+				"A string value is stored unquoted, so a later step can use it directly."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{\"tier\":\"gold\"} --Sort:{\"createdAt\":-1}}}",
+				"pluginName": "GetMongoDbScalar"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Field holds mixed types across documents",
+						"Field parameter omitted in Distinct mode",
+						"Distinct over a large collection without an index"
+					],
+					"expected_result": "The step stores the distinct `category` values as a JSON array in `GetMongoDbScalar:Value`.",
+					"notes": "Distinct requires the Field parameter. The values are read as raw BSON, so mixed types survive in the stored array.",
+					"use_case": "collect_distinct_values",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Distinct",
+					"MongoDb",
+					"Query"
+				]
+			},
+			"description": [
+				"### Collect the distinct values of a field",
+				"",
+				"The argument selects Distinct mode and names the field.",
+				"The step stores the values as a JSON array, which a later loop can iterate."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:products --Mode:Distinct --Field:category}}",
+				"pluginName": "GetMongoDbScalar"
+			}
+		}
+	],
+	"key": "GetMongoDbScalar",
+	"namespace": "G4.Plugins.MongoDb",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the value the selected mode read: a count, a JSON array of distinct values, or one field value.",
+				"A string value is stored unquoted, a missing value as an empty string, and every other value in its relaxed Extended JSON form.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "GetMongoDbScalar:Value",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Accepts the server certificate without validating its trust chain.",
+				"Intended for development servers and containers that use a self-signed certificate.",
+				"Leave it unset for any deployment that holds real data."
+			],
+			"mandatory": false,
+			"name": "AllowInvalidCertificates",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the database that holds the user record, such as `admin`.",
+				"Overrides the authentication source from the credentials or the connection URI for this step only.",
+				"Set it when the login lives in a different database than the data."
+			],
+			"mandatory": false,
+			"name": "AuthenticationDatabase",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects how the driver proves the identity of the login.",
+				"Overrides the mechanism from the credentials or the connection URI for this step only.",
+				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
+			],
+			"mandatory": false,
+			"name": "AuthenticationMechanism",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-256.",
+						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
+					],
+					"name": "SCRAM-SHA-256"
+				},
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-1.",
+						"Use it for servers older than 4.0, which do not offer SHA-256."
+					],
+					"name": "SCRAM-SHA-1"
+				},
+				{
+					"description": [
+						"Signs in with the client TLS certificate instead of a password.",
+						"Set Username to the certificate subject, or leave it unset to let the server read it."
+					],
+					"name": "MONGODB-X509"
+				},
+				{
+					"description": [
+						"Signs in with AWS Identity and Access Management credentials.",
+						"Use it for an Atlas cluster that trusts an AWS role."
+					],
+					"name": "MONGODB-AWS"
+				},
+				{
+					"description": [
+						"Signs in with an OpenID Connect access token, such as a workload identity token.",
+						"Use it for a deployment that federates its logins to an identity provider."
+					],
+					"name": "MONGODB-OIDC"
+				},
+				{
+					"description": [
+						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
+						"Set Tls to Enabled, because the password travels unhashed."
+					],
+					"name": "PLAIN"
+				},
+				{
+					"description": [
+						"Signs in with a Kerberos principal.",
+						"Use it for an enterprise deployment that authenticates through Kerberos."
+					],
+					"name": "GSSAPI"
+				}
+			]
+		},
+		{
+			"description": [
+				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
+				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the collection the step operates on, such as `orders` or `shop.orders`.",
+				"A name qualified as `database.collection` selects its own database and overrides the Database parameter.",
+				"The name is split on its first dot only, so `shop.price.history` addresses the collection `price.history`."
+			],
+			"mandatory": true,
+			"name": "Collection",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Reads the payload from a UTF-8 file, such as `C:\\flows\\filter.json`.",
+				"Applies only when CommandText is not set, so an inline payload always takes priority.",
+				"The Base64 switch never applies here; file content is always read as plain text."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies the filter as a JSON object, such as `{\"status\":\"open\"}`.",
+				"An omitted filter matches every document, which counts the whole collection in Count mode.",
+				"Both Extended JSON forms are accepted, so `{\"_id\":{\"$oid\":\"...\"}}` addresses an object identifier."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String|Expression"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets the time budget, in seconds, for connecting, selecting a server, and running the operation.",
+				"The value 0 means no operation timeout, so the step waits until the server answers.",
+				"Raise it for a long aggregation and lower it for a health check that must fail fast."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the step operates on, such as `shop`.",
+				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"A collection named as `database.collection` overrides this parameter in turn."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Connects to the named host directly instead of discovering the deployment topology.",
+				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
+				"A direct connection cannot run multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "DirectConnection",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the field the step reads, such as `status` or `address.city`.",
+				"Required for the Distinct and Field modes and ignored by the Count mode.",
+				"A dot path reads into subdocuments, and a missing segment yields an empty value."
+			],
+			"mandatory": false,
+			"name": "Field",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the MongoDB host or network address, such as `localhost`.",
+				"Overrides the host from the credentials or the connection URI for this step only.",
+				"A multi-host seed list travels in ConnectionString instead."
+			],
+			"mandatory": false,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Count",
+			"description": [
+				"Selects which single value the step reads.",
+				"Defaults to Count, which needs no Field parameter."
+			],
+			"mandatory": false,
+			"name": "Mode",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Counts the documents the filter matches, which the server evaluates without returning them.",
+						"Use it for queue depth checks and row-count assertions."
+					],
+					"name": "Count"
+				},
+				{
+					"description": [
+						"Collects the distinct values of the named field across the matching documents, as an array.",
+						"Mixed types are preserved, because the values are read as raw BSON."
+					],
+					"name": "Distinct"
+				},
+				{
+					"description": [
+						"Reads the named field of the first matching document, following a dot path into subdocuments.",
+						"Pair it with Sort, which decides which document is first."
+					],
+					"name": "Field"
+				}
+			]
+		},
+		{
+			"description": [
+				"Omits the response entity, so the step reports its outputs only as session parameters.",
+				"Use it when a later step reads the outputs by name and no data transfer is needed."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password used with a password-based mechanism.",
+				"Overrides the password from the credentials or the connection URI for this step.",
+				"Prefer a stored credentials record, so the secret never appears in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the MongoDB instance, such as `27017`.",
+				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
+				"An unset port keeps the resolved port, which is 27017 for a plain URI."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Requires the client to join the named replica set, such as `rs0`.",
+				"Overrides the replica set from the credentials or the connection URI for this step.",
+				"A replica set is required for multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "ReplicaSet",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Orders the documents before the Field mode reads the first one, as a JSON object such as `{\"createdAt\":-1}`.",
+				"Applies to the Field mode only; Count and Distinct ignore it."
+			],
+			"mandatory": false,
+			"name": "Sort",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
+			],
+			"mandatory": false,
+			"name": "Tls",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires TLS encryption for the connection.",
+						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
+					],
+					"name": "Enabled"
+				},
+				{
+					"description": [
+						"Connects without TLS.",
+						"Use it for a loopback or private-network deployment that serves plain connections."
+					],
+					"name": "Disabled"
+				}
+			]
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a database user or a certificate subject.",
+				"Overrides the user name from the credentials or the connection URI for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Reads a single value from MongoDB: the number of matching documents, the distinct values of one field, or one field of the first matching document.",
+		"Binds the filter as BSON, so no value is ever composed into a query.",
+		"Stores the value as a session parameter, so a later step can compare or branch on it without parsing a document."
+	],
+	"version": "4"
+}

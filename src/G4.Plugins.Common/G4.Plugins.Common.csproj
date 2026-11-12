@@ -25,11 +25,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.11.9.99" />
-		<PackageReference Include="G4.Extensions" Version="2026.11.9.99" />
-		<PackageReference Include="G4.Plugins" Version="2026.11.9.99" />
+		<PackageReference Include="G4.Converters" Version="2026.11.12.102" />
+		<PackageReference Include="G4.Extensions" Version="2026.11.12.102" />
+		<PackageReference Include="G4.Plugins" Version="2026.11.12.102" />
 		<PackageReference Include="PdfPig" Version="0.1.16" />
-		<PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.14" />
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>
