@@ -54,6 +54,7 @@
 		<ProjectReference Include="..\G4.Plugins.Common\G4.Plugins.Common.csproj" />
 		<ProjectReference Include="..\G4.Plugins.Google\G4.Plugins.Google.csproj" />
 		<ProjectReference Include="..\G4.Plugins.Ui\G4.Plugins.Ui.csproj" />
+		<ProjectReference Include="..\G4.Plugins.MongoDb\G4.Plugins.MongoDb.csproj" />
 		<ProjectReference Include="..\G4.Plugins.SqlServer\G4.Plugins.SqlServer.csproj" />
 	</ItemGroup>
 

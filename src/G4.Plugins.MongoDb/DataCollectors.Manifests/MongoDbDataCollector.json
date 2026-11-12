@@ -1,0 +1,316 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataManagement",
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/MongoDbDataCollector.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/DataCollectors/MongoDbDataCollector.cs"
+			},
+			"rag": {
+				"description": "Collect scraped or extracted data straight into MongoDB. The collector maps every extracted entity to one document, keeps nested content as real subdocuments instead of JSON text, and needs no schema step, because MongoDB creates the database and the collection on the first insert.",
+				"qa": [
+					{
+						"answer": "It writes the entities of an ExportData extraction into a MongoDB collection, one document per entity, creating the database and the collection on the first insert.",
+						"question": "What does the MongoDbDataCollector plugin do?"
+					},
+					{
+						"answer": "Type must be MongoDbDataCollector, Source names the stored credentials record or carries a connection URI, Repository names the destination as collection or database.collection, and ForEntity decides whether entities are written one by one or together at the end.",
+						"question": "What are the key properties of MongoDbDataCollector?"
+					},
+					{
+						"answer": "It is attached to an ExportData extraction rule as its dataCollector, so every extracted entity lands in MongoDB instead of a file or SQLite.",
+						"question": "How does MongoDbDataCollector fit into an automation workflow?"
+					},
+					{
+						"answer": "Use a stored credentials record instead of a URI with a password, qualify the Repository as database.collection so the target is explicit, and create the indexes a later query needs with InvokeMongoDbCommand.",
+						"question": "What are best practices for using MongoDbDataCollector?"
+					},
+					{
+						"answer": "Set the dataCollector of an ExportData rule to {\"type\": \"MongoDbDataCollector\", \"source\": \"mongo-production\", \"repository\": \"shop.leads\", \"forEntity\": false}.",
+						"question": "How is a MongoDbDataCollector rule configured?"
+					},
+					{
+						"answer": "An empty content key, a key that starts with a dollar sign, a key that contains a dot, an unresolved target, or a server rejection fails the collector, and an extraction without entities writes nothing.",
+						"question": "How does MongoDbDataCollector handle errors?"
+					},
+					{
+						"answer": "No. MongoDB creates the database and the collection on the first insert and declares no schema, so the collector has no schema step at all, unlike the SQL Server collector.",
+						"question": "Does MongoDbDataCollector need a schema or a table definition?"
+					},
+					{
+						"answer": "As real BSON subdocuments and arrays, so nested content stays queryable by dot path and by aggregation, rather than as the JSON text the SQL Server collector stores.",
+						"question": "How does MongoDbDataCollector store nested extracted content?"
+					},
+					{
+						"answer": "The manifest key is “MongoDbDataCollector”.",
+						"question": "What is the manifest key of MongoDbDataCollector?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by MongoDbDataCollector?"
+					},
+					{
+						"answer": "The pluginType is “DataCollector”.",
+						"question": "What is the pluginType of MongoDbDataCollector?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does MongoDbDataCollector support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is MongoDbDataCollector listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the MongoDbDataCollector manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the MongoDbDataCollector manifest?"
+					},
+					{
+						"answer": "Writes the entities of an ExportData extraction into a MongoDB collection, creating the database and the collection on the first insert. Stores nested extracted content as real subdocuments and arrays, so it stays queryable by dot path and by aggregation. Resolves its target from a stored MongoDB credentials record or a connection URI named by the rule Source.",
+						"question": "What is the summary of MongoDbDataCollector?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/DataCollectors/MongoDbDataCollector.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/DataCollectors/MongoDbDataCollector.cs.",
+						"question": "Where are the MongoDbDataCollector documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "DataCollector",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "MongoDB Data Collector",
+				"model": "DataCollectorRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Writes the entities of an ExportData extraction into a MongoDB collection.",
+		"Each entity becomes one document, and nested extracted content becomes real subdocuments and arrays.",
+		"MongoDB creates the database and the collection on the first insert, so the collector needs no schema step.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                                                                                   |",
+		"|---------------------|-------------------------------------------------------------------------------------------------------------------------------|",
+		"| No schema step      | The database and the collection are created by the first insert, so nothing has to be declared in advance.                     |",
+		"| Nested content      | Dictionaries become subdocuments and sequences become arrays, so nested content stays queryable by dot path.                   |",
+		"| Qualified target    | Repository names the destination as `collection` or `database.collection`, split on the first dot only.                        |",
+		"| Default destination | An empty Repository writes to the `default-warehouse` collection, matching the SQLite collector default.                       |",
+		"| Unordered insert    | Entities are inserted unordered, so one rejected document still lets the rest of the extraction land.                           |",
+		"| Key validation      | An empty content key, a key that starts with `$`, or a key that contains `.` fails the collector by name.                      |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case            | Description                                                                              |",
+		"|---------------------|------------------------------------------------------------------------------------------|",
+		"| Web scraping sink   | Collect scraped rows into a collection a later aggregation reports on.                   |",
+		"| Document harvesting | Collect nested content, such as a product with its variants, as one queryable document.  |",
+		"| Daily data feed     | Append the entities of each run to a warehouse collection without any schema migration.  |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case          | Description                                                                         |",
+		"|-------------------|-------------------------------------------------------------------------------------|",
+		"| Extraction assert | Collect extracted entities and assert on them with ExportMongoDbQuery.              |",
+		"| Shape regression  | Compare the field names of a collected run with the expected extraction shape.      |",
+		"| Evidence store    | Keep the entities of each test run for later inspection, addressed by a run field.   |",
+		"",
+		"### Notes",
+		"",
+		"The collector rule carries no discrete connection overrides, so the whole target comes from Source and Repository.",
+		"Nested content is stored as BSON rather than as JSON text, which is the deliberate difference from the SQL Server collector.",
+		"Create the indexes a later query needs with InvokeMongoDbCommand, because an inserted collection has only its default index."
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Extraction produces no entity",
+						"Content key starts with a dollar sign",
+						"Credentials record named by Source does not exist"
+					],
+					"expected_result": "The extracted entities are inserted into the `shop.leads` collection, one document per extracted element.",
+					"notes": "The credentials record supplies the host, database, and login, so no secret appears in the rule. The collection is created by the first insert.",
+					"use_case": "collect_extracted_rows_into_mongodb",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"DataManagement",
+					"Extraction",
+					"MongoDb",
+					"Scraping"
+				]
+			},
+			"description": [
+				"### Collect extracted rows into MongoDB",
+				"",
+				"The ExportData rule extracts one entity per table row and names the MongoDB collector as its `dataCollector`.",
+				"Repository is qualified as `shop.leads`, so the database is explicit, and `forEntity` is false, so every entity is written together at the end."
+			],
+			"rule": {
+				"$type": "Extraction",
+				"argument": "{{$ --Scope:Elements}}",
+				"dataCollector": {
+					"forEntity": false,
+					"repository": "shop.leads",
+					"source": "mongo-production",
+					"type": "MongoDbDataCollector"
+				},
+				"locator": "Xpath",
+				"onElement": "//table[@id='leads']//tr[td]",
+				"pluginName": "ExportData",
+				"rules": [
+					{
+						"$type": "Content",
+						"key": "Name",
+						"locator": "Xpath",
+						"onElement": "./td[1]"
+					},
+					{
+						"$type": "Content",
+						"key": "Email",
+						"locator": "Xpath",
+						"onElement": "./td[2]"
+					},
+					{
+						"$type": "Content",
+						"key": "Company",
+						"locator": "Xpath",
+						"onElement": "./td[3]"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection URI names an unreachable host",
+						"Repository left empty",
+						"Long extraction interrupted mid-run"
+					],
+					"expected_result": "Each extracted entity is inserted as soon as it is extracted, into the `default-warehouse` collection of the database the URI names.",
+					"notes": "An empty Repository selects the `default-warehouse` collection. Writing per entity keeps documents flowing during a long extraction, at the cost of more round trips.",
+					"use_case": "collect_per_entity_with_connection_uri",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"DataManagement",
+					"Extraction",
+					"MongoDb",
+					"Streaming"
+				]
+			},
+			"description": [
+				"### Collect each entity as it is extracted",
+				"",
+				"The rule passes a connection URI as its `source`, which suits a local or containerized deployment.",
+				"`forEntity` is true, so each entity is inserted as soon as it is extracted."
+			],
+			"rule": {
+				"$type": "Extraction",
+				"argument": "{{$ --Scope:Elements}}",
+				"dataCollector": {
+					"forEntity": true,
+					"source": "mongodb://localhost:27017/warehouse",
+					"type": "MongoDbDataCollector"
+				},
+				"locator": "Xpath",
+				"onElement": "//div[@class='product']",
+				"pluginName": "ExportData",
+				"rules": [
+					{
+						"$type": "Content",
+						"key": "Sku",
+						"locator": "Xpath",
+						"onElement": ".//span[@class='sku']"
+					},
+					{
+						"$type": "Content",
+						"key": "Price",
+						"locator": "Xpath",
+						"onElement": ".//span[@class='price']"
+					}
+				]
+			}
+		}
+	],
+	"key": "MongoDbDataCollector",
+	"namespace": "G4.Plugins.MongoDb",
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "DataCollector",
+	"properties": [
+		{
+			"description": [
+				"Set to true to write each extracted entity to the collection as soon as it is extracted.",
+				"Set to false to write all extracted entities together after the extraction finishes, in one insert.",
+				"Writing per entity keeps documents flowing during long extractions, while writing at the end needs fewer round trips."
+			],
+			"mandatory": false,
+			"name": "ForEntity",
+			"type": "Boolean"
+		},
+		{
+			"default": "default-warehouse",
+			"description": [
+				"Names the destination as collection or database.collection, such as `shop.leads`.",
+				"A name without a database uses the database the Source resolved, and an empty value uses the collection default-warehouse.",
+				"The database and the collection are created automatically on the first insert."
+			],
+			"mandatory": false,
+			"name": "Repository",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by its name or id, so the login stays out of the automation definition.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record is rejected, so a typed record name never reads as a host name."
+			],
+			"mandatory": true,
+			"name": "Source",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Enter MongoDbDataCollector so the extracted data is written to MongoDB by this collector.",
+				"A different value sends the data to another collector, such as a file, SQLite, or SQL Server collector."
+			],
+			"mandatory": true,
+			"name": "Type",
+			"type": "DataCollector"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Writes the entities of an ExportData extraction into a MongoDB collection, creating the database and the collection on the first insert.",
+		"Stores nested extracted content as real subdocuments and arrays, so it stays queryable by dot path and by aggregation.",
+		"Resolves its target from a stored MongoDB credentials record or a connection URI named by the rule Source."
+	],
+	"version": "4"
+}

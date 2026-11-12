@@ -1,0 +1,634 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportMongoDbQuery.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/ExportMongoDbQuery.cs"
+			},
+			"rag": {
+				"description": "Read documents from a MongoDB collection into an automation. The step binds the filter as BSON instead of composing text, shapes the result with a projection, sort, limit, and skip, and stores the documents as relaxed Extended JSON so object identifiers and dates survive the round trip.",
+				"qa": [
+					{
+						"answer": "It reads the documents a filter matches from a MongoDB collection and stores them as minified relaxed Extended JSON, together with their field names and their count.",
+						"question": "What does the ExportMongoDbQuery plugin do?"
+					},
+					{
+						"answer": "Collection is required; CommandText, CommandFile, and Base64 carry the filter; Projection, Sort, Limit, and Skip shape the result; the connection comes from Credentials, ConnectionString, or the discrete host and login parameters. Outputs are Columns, DocumentCount, and Result.",
+						"question": "What are the key parameters and outputs of ExportMongoDbQuery?"
+					},
+					{
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, usually before steps that iterate or assert on the exported documents.",
+						"question": "How does ExportMongoDbQuery fit into an automation workflow?"
+					},
+					{
+						"answer": "Project only the fields a flow needs, always pair Skip with a Sort, limit large collections, and read the decoded ExportMongoDbQuery:Result instead of re-querying.",
+						"question": "What are best practices for using ExportMongoDbQuery?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “ExportMongoDbQuery” and pass inputs in the argument, such as {{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}.",
+						"question": "How is an ExportMongoDbQuery rule configured?"
+					},
+					{
+						"answer": "A malformed filter, an unresolved database, an invalid Base64 payload, or a missing CommandFile fails the step, while a filter that matches nothing stores an empty array with a DocumentCount of 0.",
+						"question": "How does ExportMongoDbQuery handle errors?"
+					},
+					{
+						"answer": "Columns holds the union of the top-level field names of the exported documents, in the order they were first seen, because MongoDB documents declare no schema.",
+						"question": "How does ExportMongoDbQuery report field names for schemaless documents?"
+					},
+					{
+						"answer": "The manifest key is “ExportMongoDbQuery”.",
+						"question": "What is the manifest key of ExportMongoDbQuery?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by ExportMongoDbQuery?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of ExportMongoDbQuery?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does ExportMongoDbQuery support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is ExportMongoDbQuery listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the ExportMongoDbQuery manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the ExportMongoDbQuery manifest?"
+					},
+					{
+						"answer": "Reads the documents a MongoDB filter matches and stores them as relaxed Extended JSON. Shapes the result with a projection, a sort, a limit, and a skip, so a step returns only the documents and fields a flow needs. Stores the field names, the documents, and the document count as session parameters for later steps and for data transfer.",
+						"question": "What is the summary of ExportMongoDbQuery?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportMongoDbQuery.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/ExportMongoDbQuery.cs.",
+						"question": "Where are the ExportMongoDbQuery documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Export MongoDB Query",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Reads the documents of a MongoDB collection into an automation.",
+		"The filter, the projection, and the sort travel as BSON, so no value is ever composed into a query.",
+		"Stores the documents as relaxed Extended JSON, which keeps the BSON types that plain JSON cannot express.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                  |",
+		"|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Filter as data             | Reads the filter from CommandText, CommandFile, or Base64-encoded text and binds it as BSON.                                                 |",
+		"| Match-all default          | An omitted filter matches every document, so a step can export a whole collection.                                                           |",
+		"| Result shaping             | Applies Projection, Sort, Limit, and Skip only when the step sets them, so unset options keep the server default.                             |",
+		"| Field names                | Reports the union of the top-level field names, in first-seen order, because documents are schemaless.                                        |",
+		"| Extended JSON              | Serializes object identifiers, dates, and decimals through their Extended JSON type form, so a later step can address them.                   |",
+		"| Session and entity outputs | Stores outputs as Base64 session parameters named `ExportMongoDbQuery:<Name>` and returns them in the response entity unless `NoEntity` is set. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case             | Description                                                                              |",
+		"|----------------------|------------------------------------------------------------------------------------------|",
+		"| Work queue intake    | Read the pending documents a bot must process, sorted by priority and limited per run.   |",
+		"| Reporting extract    | Export the documents of a date range, projected to the fields a report needs.            |",
+		"| Reference lookup     | Read the configuration documents a later step binds into its own arguments.               |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case          | Description                                                                         |",
+		"|-------------------|-------------------------------------------------------------------------------------|",
+		"| Data-driven tests | Read the test cases of a collection and iterate the exported documents.             |",
+		"| Result assertion  | Read the documents a flow wrote and compare them with the expected content.         |",
+		"| State inspection  | Read one document by its identifier to confirm a prior step changed it as expected.  |",
+		"",
+		"### Notes",
+		"",
+		"CommandText wins over CommandFile, and the Base64 switch decodes only CommandText.",
+		"A limit of 0 and a skip of 0 mean the option is not set, which matches the server default.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the union of the top-level field names of the exported documents, as a JSON array.",
+				"Reports the field names in the order they were first seen, which follows the projection order.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Columns",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of exported documents.",
+				"Lets a flow branch on an empty result without parsing the documents.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "DocumentCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the exported documents as a minified relaxed Extended JSON array.",
+				"Keeps the BSON types plain JSON cannot express, such as `{\"$oid\":\"...\"}` for an object identifier.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Result",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Filter matches no document",
+						"Collection does not exist",
+						"Result larger than the session parameter a later step expects"
+					],
+					"expected_result": "The step stores the matching documents in `ExportMongoDbQuery:Result`, their field names in `ExportMongoDbQuery:Columns`, and their count in `ExportMongoDbQuery:DocumentCount`.",
+					"notes": "The filter binds as BSON, so its values never become part of a composed query. An empty result is reported as an empty array with a count of 0.",
+					"use_case": "export_documents_with_filter",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Export",
+					"MongoDb",
+					"Query"
+				]
+			},
+			"description": [
+				"### Export the documents a filter matches",
+				"",
+				"The argument names the collection and passes the filter as a JSON object.",
+				"The step stores the documents as relaxed Extended JSON."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}",
+				"pluginName": "ExportMongoDbQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Projection excludes every field of interest",
+						"Skip without a sort returns unstable pages",
+						"Limit smaller than the number of matching documents"
+					],
+					"expected_result": "The step stores at most 100 projected documents, ordered by the newest first, in `ExportMongoDbQuery:Result`.",
+					"notes": "Projection, Sort, Limit, and Skip apply only when set, so an unset option keeps the server default. Page with a sort, so the pages stay stable between runs.",
+					"use_case": "export_documents_with_projection_and_sort",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Export",
+					"MongoDb",
+					"Paging",
+					"Query"
+				]
+			},
+			"description": [
+				"### Export a projected, sorted page",
+				"",
+				"The argument shapes the result with a projection, a sort, a limit, and a skip.",
+				"The projection keeps the exported documents small, which matters for a session parameter."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"createdAt\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100 --Skip:0}}",
+				"pluginName": "ExportMongoDbQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Filter contains ` --` or `}}`, which end an inline argument",
+						"CommandText is not valid Base64",
+						"Base64 switch set without CommandText"
+					],
+					"expected_result": "The step decodes the filter and stores the matching documents in `ExportMongoDbQuery:Result`.",
+					"notes": "Encode a filter that carries inline-argument terminators, or pass it through CommandFile instead. Invalid Base64 fails the step before any query runs.",
+					"use_case": "export_documents_with_base64_filter",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"Database",
+					"Export",
+					"MongoDb",
+					"Query"
+				]
+			},
+			"description": [
+				"### Export with a Base64-encoded filter",
+				"",
+				"The `Base64` switch marks CommandText as UTF-8 Base64, so a filter with special sequences survives the inline argument.",
+				"The decoded filter is `{\"name\":{\"$regex\":\"^A\"}}`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandText:eyJuYW1lIjp7IiRyZWdleCI6Il5BIn19 --Base64}}",
+				"pluginName": "ExportMongoDbQuery"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CommandFile points to a missing file",
+						"File holds a JSON array instead of an object",
+						"CommandText set together with CommandFile"
+					],
+					"expected_result": "The step reads the filter from the file and stores the matching documents in `ExportMongoDbQuery:Result`.",
+					"notes": "CommandText wins over CommandFile, and file content is always read as plain text, so the Base64 switch never applies to it.",
+					"use_case": "export_documents_from_file",
+					"version": "4"
+				},
+				"labels": [
+					"Database",
+					"Export",
+					"File",
+					"MongoDb",
+					"Query"
+				]
+			},
+			"description": [
+				"### Export with a filter from a file",
+				"",
+				"The argument reads the filter from a UTF-8 file, which suits a long or reused filter.",
+				"NoEntity keeps the outputs in session parameters only."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\\flows\\filters\\active-customers.json --NoEntity}}",
+				"pluginName": "ExportMongoDbQuery"
+			}
+		}
+	],
+	"key": "ExportMongoDbQuery",
+	"namespace": "G4.Plugins.MongoDb",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the union of the top-level field names of the exported documents, as a JSON array.",
+				"Reports the field names in the order they were first seen, which follows the projection order.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "ExportMongoDbQuery:Columns",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of exported documents.",
+				"Lets a flow branch on an empty result without parsing the documents.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "ExportMongoDbQuery:DocumentCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the exported documents as a minified relaxed Extended JSON array.",
+				"Keeps the BSON types plain JSON cannot express, such as `{\"$oid\":\"...\"}` for an object identifier.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "ExportMongoDbQuery:Result",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Accepts the server certificate without validating its trust chain.",
+				"Intended for development servers and containers that use a self-signed certificate.",
+				"Leave it unset for any deployment that holds real data."
+			],
+			"mandatory": false,
+			"name": "AllowInvalidCertificates",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the database that holds the user record, such as `admin`.",
+				"Overrides the authentication source from the credentials or the connection URI for this step only.",
+				"Set it when the login lives in a different database than the data."
+			],
+			"mandatory": false,
+			"name": "AuthenticationDatabase",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects how the driver proves the identity of the login.",
+				"Overrides the mechanism from the credentials or the connection URI for this step only.",
+				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
+			],
+			"mandatory": false,
+			"name": "AuthenticationMechanism",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-256.",
+						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
+					],
+					"name": "SCRAM-SHA-256"
+				},
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-1.",
+						"Use it for servers older than 4.0, which do not offer SHA-256."
+					],
+					"name": "SCRAM-SHA-1"
+				},
+				{
+					"description": [
+						"Signs in with the client TLS certificate instead of a password.",
+						"Set Username to the certificate subject, or leave it unset to let the server read it."
+					],
+					"name": "MONGODB-X509"
+				},
+				{
+					"description": [
+						"Signs in with AWS Identity and Access Management credentials.",
+						"Use it for an Atlas cluster that trusts an AWS role."
+					],
+					"name": "MONGODB-AWS"
+				},
+				{
+					"description": [
+						"Signs in with an OpenID Connect access token, such as a workload identity token.",
+						"Use it for a deployment that federates its logins to an identity provider."
+					],
+					"name": "MONGODB-OIDC"
+				},
+				{
+					"description": [
+						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
+						"Set Tls to Enabled, because the password travels unhashed."
+					],
+					"name": "PLAIN"
+				},
+				{
+					"description": [
+						"Signs in with a Kerberos principal.",
+						"Use it for an enterprise deployment that authenticates through Kerberos."
+					],
+					"name": "GSSAPI"
+				}
+			]
+		},
+		{
+			"description": [
+				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
+				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
+			],
+			"mandatory": false,
+			"name": "Base64",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the collection the step operates on, such as `orders` or `shop.orders`.",
+				"A name qualified as `database.collection` selects its own database and overrides the Database parameter.",
+				"The name is split on its first dot only, so `shop.price.history` addresses the collection `price.history`."
+			],
+			"mandatory": true,
+			"name": "Collection",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Reads the payload from a UTF-8 file, such as `C:\\flows\\filter.json`.",
+				"Applies only when CommandText is not set, so an inline payload always takes priority.",
+				"The Base64 switch never applies here; file content is always read as plain text."
+			],
+			"mandatory": false,
+			"name": "CommandFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Supplies the query filter as a JSON object, such as `{\"status\":\"open\"}`.",
+				"An omitted filter matches every document, so the step exports the whole collection.",
+				"Both Extended JSON forms are accepted, so `{\"_id\":{\"$oid\":\"...\"}}` addresses an object identifier."
+			],
+			"mandatory": false,
+			"name": "CommandText",
+			"type": "String|Expression"
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets the time budget, in seconds, for connecting, selecting a server, and running the operation.",
+				"The value 0 means no operation timeout, so the step waits until the server answers.",
+				"Raise it for a long aggregation and lower it for a health check that must fail fast."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the step operates on, such as `shop`.",
+				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"A collection named as `database.collection` overrides this parameter in turn."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Connects to the named host directly instead of discovering the deployment topology.",
+				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
+				"A direct connection cannot run multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "DirectConnection",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the MongoDB host or network address, such as `localhost`.",
+				"Overrides the host from the credentials or the connection URI for this step only.",
+				"A multi-host seed list travels in ConnectionString instead."
+			],
+			"mandatory": false,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Limits the number of exported documents, such as `100`.",
+				"The value 0 means no limit, so the step exports every matching document."
+			],
+			"mandatory": false,
+			"name": "Limit",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Omits the response entity, so the step reports its outputs only as session parameters.",
+				"Use it when a later step reads the outputs by name and no data transfer is needed."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password used with a password-based mechanism.",
+				"Overrides the password from the credentials or the connection URI for this step.",
+				"Prefer a stored credentials record, so the secret never appears in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the MongoDB instance, such as `27017`.",
+				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
+				"An unset port keeps the resolved port, which is 27017 for a plain URI."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Selects the fields the server returns, as a JSON object such as `{\"name\":1,\"_id\":0}`.",
+				"An omitted projection returns the whole document."
+			],
+			"mandatory": false,
+			"name": "Projection",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Requires the client to join the named replica set, such as `rs0`.",
+				"Overrides the replica set from the credentials or the connection URI for this step.",
+				"A replica set is required for multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "ReplicaSet",
+			"type": "String|Expression"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Skips the first documents of the result, such as `50` for the second page of fifty.",
+				"The value 0 means no skip, and a skip without a sort has no stable meaning."
+			],
+			"mandatory": false,
+			"name": "Skip",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Orders the documents before the limit and the skip apply, as a JSON object such as `{\"createdAt\":-1}`.",
+				"An omitted sort leaves the order to the server, which is not stable across runs."
+			],
+			"mandatory": false,
+			"name": "Sort",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
+			],
+			"mandatory": false,
+			"name": "Tls",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires TLS encryption for the connection.",
+						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
+					],
+					"name": "Enabled"
+				},
+				{
+					"description": [
+						"Connects without TLS.",
+						"Use it for a loopback or private-network deployment that serves plain connections."
+					],
+					"name": "Disabled"
+				}
+			]
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a database user or a certificate subject.",
+				"Overrides the user name from the credentials or the connection URI for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Reads the documents a MongoDB filter matches and stores them as relaxed Extended JSON.",
+		"Shapes the result with a projection, a sort, a limit, and a skip, so a step returns only the documents and fields a flow needs.",
+		"Stores the field names, the documents, and the document count as session parameters for later steps and for data transfer."
+	],
+	"version": "4"
+}

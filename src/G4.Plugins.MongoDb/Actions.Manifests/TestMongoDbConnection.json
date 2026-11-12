@@ -1,0 +1,536 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"MongoDb"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/TestMongoDbConnection.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/TestMongoDbConnection.cs"
+			},
+			"rag": {
+				"description": "Check that a MongoDB deployment is reachable before an automation reads or writes documents. The step reports success or the exact failure reason instead of stopping the flow, accepts stored credentials, connection URIs, or discrete settings, and keeps workflows reliable by letting them branch on the result.",
+				"qa": [
+					{
+						"answer": "It opens a client, sends the ping command, and reports whether the deployment answered, without failing the flow on a rejected login or an unreachable server.",
+						"question": "What does the TestMongoDbConnection plugin do?"
+					},
+					{
+						"answer": "Credentials, ConnectionString, or Host select the target, with optional Port, Database, ReplicaSet, Username, Password, AuthenticationDatabase, AuthenticationMechanism, Tls, AllowInvalidCertificates, DirectConnection, CommandTimeout, and NoEntity. Outputs are Connected, Database, ServerVersion, and Error.",
+						"question": "What are the key parameters and outputs of TestMongoDbConnection?"
+					},
+					{
+						"answer": "It runs as an Action task step with the database icon and the ActionRuleModel, usually before steps that read or write documents.",
+						"question": "How does TestMongoDbConnection fit into an automation workflow?"
+					},
+					{
+						"answer": "Use a stored Credentials name instead of a plain password, lower CommandTimeout so an unreachable deployment fails fast, and branch on the decoded TestMongoDbConnection:Connected value before running data steps.",
+						"question": "What are best practices for using TestMongoDbConnection?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “TestMongoDbConnection” and pass inputs in the argument, such as {{$ --Credentials:mongo-production}}.",
+						"question": "How is a TestMongoDbConnection rule configured?"
+					},
+					{
+						"answer": "A rejected login or unreachable deployment sets Connected to false and stores the driver message in Error, while a step with no resolvable host fails immediately.",
+						"question": "How does TestMongoDbConnection handle errors?"
+					},
+					{
+						"answer": "The manifest key is “TestMongoDbConnection”.",
+						"question": "What is the manifest key of TestMongoDbConnection?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by TestMongoDbConnection?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of TestMongoDbConnection?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does TestMongoDbConnection support?"
+					},
+					{
+						"answer": "It is listed under the “MongoDb” category.",
+						"question": "Which category is TestMongoDbConnection listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the TestMongoDbConnection manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the TestMongoDbConnection manifest?"
+					},
+					{
+						"answer": "Tests a MongoDB connection and reports whether it answered, without failing the flow when the deployment rejects the login or cannot be reached. Connects with a stored credentials name, a connection URI, or discrete host, database, and sign-in settings. Stores the connection result, database name, server version, and error message as session parameters for health checks and conditional branching.",
+						"question": "What is the summary of TestMongoDbConnection?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/TestMongoDbConnection.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/TestMongoDbConnection.cs.",
+						"question": "Where are the TestMongoDbConnection documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "database",
+					"svg": null
+				},
+				"label": "Test MongoDB Connection",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Tests whether an automation can reach a MongoDB deployment.",
+		"Reports the result as data instead of failing the step, so a flow can check availability before it reads or writes documents.",
+		"Supports stored credentials, full connection URIs, and discrete host, database, and sign-in settings.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                    | Description                                                                                                                                       |",
+		"|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|",
+		"| Connection check           | Sends the `ping` command and reports whether the deployment answered this client.                                                                 |",
+		"| Non-failing result         | Reports `Connected` as `false` with the driver message when MongoDB rejects the login or cannot be reached.                                        |",
+		"| Flexible connection input  | Resolves the target from a credentials name or id, or from a raw connection URI.                                                                   |",
+		"| Discrete overrides         | Applies Host, Port, Database, ReplicaSet, Username, Password, authentication, and TLS settings on top of the resolved connection.                  |",
+		"| Server details             | Returns the reached database and the server version reported by `buildInfo`.                                                                       |",
+		"| Session and entity outputs | Stores outputs as Base64 session parameters named `TestMongoDbConnection:<Name>` and returns them in the response entity unless `NoEntity` is set. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                 | Description                                                                                   |",
+		"|--------------------------|-----------------------------------------------------------------------------------------------|",
+		"| Pre-run health check     | Confirm that the warehouse cluster is reachable before a bot starts a long collection job.    |",
+		"| Conditional fallback     | Branch to a retry, a notification, or a secondary cluster when `Connected` is `false`.        |",
+		"| Environment verification | Confirm that a credentials record reaches the expected database before deployment steps run.  |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case                   | Description                                                                  |",
+		"|----------------------------|------------------------------------------------------------------------------|",
+		"| Test environment readiness | Verify that the test cluster is up before data-driven test suites run.       |",
+		"| Credentials validation     | Check that stored test credentials still sign in after a password rotation.  |",
+		"| Version gating             | Skip or adapt tests based on the reported MongoDB version.                   |",
+		"",
+		"### Notes",
+		"",
+		"A step that resolves no host from Credentials, ConnectionString, or Host fails instead of reporting `Connected` as `false`.",
+		"The probe runs on the resolved database, or on `admin` when none is resolved, because every deployment carries it.",
+		"A deployment that withholds `buildInfo` from the login still reports as connected, with an empty `ServerVersion`.",
+		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores `true` when the deployment answered the ping and `false` when it rejected the login or could not be reached.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Connected",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the name of the database the probe ran on.",
+				"Confirms which database the login reached, including the `admin` fallback when none was requested.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the driver message when the connection fails, such as an authentication failure or a server selection timeout.",
+				"Stays empty when the connection succeeds.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "Error",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the MongoDB version reported by the server, such as `8.0.4`.",
+				"Helps checks confirm that a deployment meets a version requirement.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"name": "ServerVersion",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Credentials name does not match a stored record",
+						"Login rejected by MongoDB",
+						"Deployment unreachable or server selection timeout"
+					],
+					"expected_result": "The step stores `TestMongoDbConnection:Connected` as `true` with the database name and server version, or `false` with the driver message in `TestMongoDbConnection:Error`.",
+					"notes": "The credentials record supplies the host, database, and login, so no secret appears in the rule. A rejected login or unreachable deployment is reported through the outputs instead of failing the step.",
+					"use_case": "test_connection_with_credentials_name",
+					"version": "4"
+				},
+				"labels": [
+					"Connectivity",
+					"Credentials",
+					"Database",
+					"HealthCheck",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Test a connection with a credentials name",
+				"",
+				"The `{{$ --Credentials:mongo-production}}` argument binds the stored credentials record named `mongo-production` at runtime.",
+				"The step reports whether the deployment answered and stores the result in session parameters and the response entity."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production}}",
+				"pluginName": "TestMongoDbConnection"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection URI names an unreachable host",
+						"Connection URI omits the database",
+						"Credentials parameter set together with ConnectionString"
+					],
+					"expected_result": "The step stores `TestMongoDbConnection:Connected` as `true` and the reached database in `TestMongoDbConnection:Database`.",
+					"notes": "ConnectionString applies only when Credentials is not set. A URI without a database makes the probe run on `admin`.",
+					"use_case": "test_connection_with_connection_uri",
+					"version": "4"
+				},
+				"labels": [
+					"Connectivity",
+					"Database",
+					"HealthCheck",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Test a connection with a connection URI",
+				"",
+				"The argument passes a complete MongoDB connection URI, which suits a local or containerized deployment.",
+				"A short CommandTimeout makes an unreachable deployment fail fast instead of waiting for the driver default."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandTimeout:5}}",
+				"pluginName": "TestMongoDbConnection"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Host resolves but the port is closed",
+						"TLS required by the deployment but left Disabled",
+						"Self-signed certificate rejected without AllowInvalidCertificates"
+					],
+					"expected_result": "The step stores `TestMongoDbConnection:Connected` as `true`, or `false` with the TLS or network message in `TestMongoDbConnection:Error`.",
+					"notes": "The discrete parameters compose the connection without a URI, so a flow can build the target from its own parameters.",
+					"use_case": "test_connection_with_discrete_settings",
+					"version": "4"
+				},
+				"labels": [
+					"Connectivity",
+					"Database",
+					"HealthCheck",
+					"MongoDb",
+					"Tls"
+				]
+			},
+			"description": [
+				"### Test a connection with discrete settings",
+				"",
+				"The argument binds Host, Port, Database, and the login, plus the TLS mode and the `AllowInvalidCertificates` switch.",
+				"The step signs in with the named user and reports the result."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:mongo.internal --Port:27017 --Database:shop --Username:reporter --Password:P@ssw0rd --Tls:Enabled --AllowInvalidCertificates}}",
+				"pluginName": "TestMongoDbConnection"
+			}
+		}
+	],
+	"key": "TestMongoDbConnection",
+	"namespace": "G4.Plugins.MongoDb",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores `true` when the deployment answered the ping and `false` when it rejected the login or could not be reached.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestMongoDbConnection:Connected",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the name of the database the probe ran on.",
+				"Confirms which database the login reached, including the `admin` fallback when none was requested.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestMongoDbConnection:Database",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the driver message when the connection fails, such as an authentication failure or a server selection timeout.",
+				"Stays empty when the connection succeeds.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestMongoDbConnection:Error",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the MongoDB version reported by the server, such as `8.0.4`.",
+				"Helps checks confirm that a deployment meets a version requirement.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"name": "TestMongoDbConnection:ServerVersion",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Accepts the server certificate without validating its trust chain.",
+				"Intended for development servers and containers that use a self-signed certificate.",
+				"Leave it unset for any deployment that holds real data."
+			],
+			"mandatory": false,
+			"name": "AllowInvalidCertificates",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Names the database that holds the user record, such as `admin`.",
+				"Overrides the authentication source from the credentials or the connection URI for this step only.",
+				"Set it when the login lives in a different database than the data."
+			],
+			"mandatory": false,
+			"name": "AuthenticationDatabase",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Selects how the driver proves the identity of the login.",
+				"Overrides the mechanism from the credentials or the connection URI for this step only.",
+				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
+			],
+			"mandatory": false,
+			"name": "AuthenticationMechanism",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-256.",
+						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
+					],
+					"name": "SCRAM-SHA-256"
+				},
+				{
+					"description": [
+						"Signs in with a user name and password over SCRAM using SHA-1.",
+						"Use it for servers older than 4.0, which do not offer SHA-256."
+					],
+					"name": "SCRAM-SHA-1"
+				},
+				{
+					"description": [
+						"Signs in with the client TLS certificate instead of a password.",
+						"Set Username to the certificate subject, or leave it unset to let the server read it."
+					],
+					"name": "MONGODB-X509"
+				},
+				{
+					"description": [
+						"Signs in with AWS Identity and Access Management credentials.",
+						"Use it for an Atlas cluster that trusts an AWS role."
+					],
+					"name": "MONGODB-AWS"
+				},
+				{
+					"description": [
+						"Signs in with an OpenID Connect access token, such as a workload identity token.",
+						"Use it for a deployment that federates its logins to an identity provider."
+					],
+					"name": "MONGODB-OIDC"
+				},
+				{
+					"description": [
+						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
+						"Set Tls to Enabled, because the password travels unhashed."
+					],
+					"name": "PLAIN"
+				},
+				{
+					"description": [
+						"Signs in with a Kerberos principal.",
+						"Use it for an enterprise deployment that authenticates through Kerberos."
+					],
+					"name": "GSSAPI"
+				}
+			]
+		},
+		{
+			"default": "30",
+			"description": [
+				"Sets the time budget, in seconds, for connecting, selecting a server, and running the operation.",
+				"The value 0 means no operation timeout, so the step waits until the server answers.",
+				"Raise it for a long aggregation and lower it for a health check that must fail fast."
+			],
+			"mandatory": false,
+			"name": "CommandTimeout",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+			],
+			"mandatory": false,
+			"name": "ConnectionString",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
+				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+			],
+			"mandatory": false,
+			"name": "Credentials",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the database the step operates on, such as `shop`.",
+				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"A collection named as `database.collection` overrides this parameter in turn."
+			],
+			"mandatory": false,
+			"name": "Database",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Connects to the named host directly instead of discovering the deployment topology.",
+				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
+				"A direct connection cannot run multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "DirectConnection",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the MongoDB host or network address, such as `localhost`.",
+				"Overrides the host from the credentials or the connection URI for this step only.",
+				"A multi-host seed list travels in ConnectionString instead."
+			],
+			"mandatory": false,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Omits the response entity, so the step reports its outputs only as session parameters.",
+				"Use it when a later step reads the outputs by name and no data transfer is needed."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the password used with a password-based mechanism.",
+				"Overrides the password from the credentials or the connection URI for this step.",
+				"Prefer a stored credentials record, so the secret never appears in the rule."
+			],
+			"mandatory": false,
+			"name": "Password",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the TCP port of the MongoDB instance, such as `27017`.",
+				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
+				"An unset port keeps the resolved port, which is 27017 for a plain URI."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Requires the client to join the named replica set, such as `rs0`.",
+				"Overrides the replica set from the credentials or the connection URI for this step.",
+				"A replica set is required for multi-document transactions."
+			],
+			"mandatory": false,
+			"name": "ReplicaSet",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Sets the transport encryption mode of the connection.",
+				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
+			],
+			"mandatory": false,
+			"name": "Tls",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Requires TLS encryption for the connection.",
+						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
+					],
+					"name": "Enabled"
+				},
+				{
+					"description": [
+						"Connects without TLS.",
+						"Use it for a loopback or private-network deployment that serves plain connections."
+					],
+					"name": "Disabled"
+				}
+			]
+		},
+		{
+			"description": [
+				"Sets the login name used with Password, such as a database user or a certificate subject.",
+				"Overrides the user name from the credentials or the connection URI for this step."
+			],
+			"mandatory": false,
+			"name": "Username",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"summary": [
+		"Tests a MongoDB connection and reports whether it answered, without failing the flow when the deployment rejects the login or cannot be reached.",
+		"Connects with a stored credentials name, a connection URI, or discrete host, database, and sign-in settings.",
+		"Stores the connection result, database name, server version, and error message as session parameters for health checks and conditional branching."
+	],
+	"version": "4"
+}
