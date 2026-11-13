@@ -25,9 +25,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="G4.Converters" Version="2026.11.12.102" />
-		<PackageReference Include="G4.Extensions" Version="2026.11.12.102" />
-		<PackageReference Include="MongoDB.Driver" Version="3.13.0" />
+		<PackageReference Include="G4.Converters" Version="2026.11.13.103" />
+		<PackageReference Include="G4.Extensions" Version="2026.11.13.103" />
+		<PackageReference Include="MongoDB.Driver" Version="3.14.0" />
 	</ItemGroup>
 
 	<ItemGroup>
