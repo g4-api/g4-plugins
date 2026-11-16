@@ -41,7 +41,7 @@ MongoDB creates the database and the collection on the first insert, so the coll
 
 ### Notes
 
-The collector rule carries no discrete connection overrides, so the whole target comes from Source and Repository.
+The collector rule carries no other connection input, so the whole target comes from Source and Repository.
 Nested content is stored as BSON rather than as JSON text, which is the deliberate difference from the SQL Server collector.
 Create the indexes a later query needs with InvokeMongoDbCommand, because an inserted collection has only its default index.
 

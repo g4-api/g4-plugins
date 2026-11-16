@@ -45,11 +45,13 @@ namespace G4.Plugins.MongoDb.DataCollectors
             // Convert the entities before connecting so an unaddressable content key fails without a client.
             var documents = entities.Select(NewDocument).ToList();
 
-            // Resolve the connection from the rule Source alone; the collector rule carries no discrete overrides.
+            // Resolve the connection from the rule Source alone; the collector rule carries no other connection
+            // input, so the database comes from the Source and the timeout stays at the default.
             var connectionModel = LocalExtensions.ResolveConnection(
                 credentials: rule.Source,
                 connectionString: string.Empty,
-                overrides: null);
+                database: string.Empty,
+                commandTimeoutSeconds: MongoDbClient.DefaultCommandTimeoutSeconds);
 
             // Open a client owned by this collector run so no session state leaks into later runs.
             using var client = MongoDbClient.OpenClient(connectionModel);

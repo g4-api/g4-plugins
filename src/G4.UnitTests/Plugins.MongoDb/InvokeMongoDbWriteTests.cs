@@ -216,8 +216,9 @@ namespace G4.UnitTests.Plugins.MongoDb
         public void InvokeMongoDbWriteUnknownOperationTest()
         {
             // Arrange: request an operation the plugin does not offer; the target is never contacted.
-            var rule = NewRule(arguments: "--Host:127.0.0.1 --Database:G4Tests --Collection:x " +
-                "--Operation:Upsert --Document:{\"a\":1}");
+            var rule = NewRule(
+                arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --Database:G4Tests --Collection:x " +
+                    "--Operation:Upsert --Document:{\"a\":1}");
 
             // Act and Assert: the failure names the operations a step may request.
             var exception = Assert.ThrowsExactly<InvalidOperationException>(() => Invoke<InvokeMongoDbWrite>(rule));

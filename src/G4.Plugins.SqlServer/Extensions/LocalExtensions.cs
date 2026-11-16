@@ -101,18 +101,20 @@ namespace G4.Plugins.SqlServer.Extensions
             /// Resolves the connection settings from the step arguments.
             /// </summary>
             /// <remarks>
-            /// See <see cref="ResolveConnection(string, string, IDictionary{string, string})"/> for the resolution
-            /// order.
+            /// See <see cref="ResolveConnection(string, string, string)"/> for the resolution order. The step names its
+            /// target through <c>Credentials</c> or <c>ConnectionString</c> only; every discrete connection part, such
+            /// as the server or the login, is stored on the credentials record instead of being repeated per step.
             /// </remarks>
             /// <returns>The resolved connection settings.</returns>
             public SqlServerConnectionModel ResolveConnection()
             {
-                // Read the two baseline inputs and pass every argument as a potential override.
+                // Read the two target inputs and the optional access token; nothing else addresses the server.
                 var credentials = pluginData.Parameters.Get(key: "Credentials", defaultValue: string.Empty);
                 var connectionString = pluginData.Parameters.Get(key: "ConnectionString", defaultValue: string.Empty);
+                var accessToken = pluginData.Parameters.Get(key: "Token", defaultValue: string.Empty);
 
                 // Route through the shared resolver so the plugin path and the collector path use one order.
-                return ResolveConnection(credentials, connectionString, overrides: pluginData.Parameters);
+                return ResolveConnection(credentials, connectionString, accessToken);
             }
 
             /// <summary>
@@ -255,44 +257,47 @@ namespace G4.Plugins.SqlServer.Extensions
         }
 
         /// <summary>
-        /// Resolves the connection settings from a credentials value, a connection string, and discrete overrides.
+        /// Resolves the connection settings from a credentials value, a connection string, and an access token.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// The baseline comes from <paramref name="credentials"/> first: a matching SQL Server credentials record
-        /// supplies its connection; an unmatched value that contains <c>=</c> is a raw connection string; any other
-        /// unmatched value is a raw Microsoft Entra access token. Without credentials, the baseline is
-        /// <paramref name="connectionString"/>. The <c>Token</c> override sets the access token explicitly.
+        /// The connection comes from <paramref name="credentials"/> first: a matching SQL Server credentials record
+        /// supplies its connection, and an unmatched value that contains <c>=</c> is a raw connection string. Any
+        /// other unmatched value is a raw Microsoft Entra access token, which names no server, so
+        /// <paramref name="connectionString"/> still supplies the connection; it also supplies the connection when no
+        /// credentials are set. The <paramref name="accessToken"/> value sets the token explicitly and a raw token in
+        /// <paramref name="credentials"/> replaces it.
         /// </para>
         /// <para>
-        /// The discrete overrides (<c>Server</c>, <c>Port</c>, <c>Database</c>, <c>Authentication</c>, <c>Username</c>,
-        /// <c>Password</c>, <c>Encrypt</c>, and the <c>TrustServerCertificate</c> switch) replace the baseline values
-        /// they set, so one stored login can target several databases.
+        /// A step names its target through those inputs alone. Every discrete connection part, such as the server, the
+        /// port, the database, the login, or the encryption mode, is stored once on the credentials record, or written
+        /// into the connection string, instead of being repeated as a step argument.
         /// </para>
         /// </remarks>
         /// <param name="credentials">
         /// The credentials name, identifier, raw connection string, or raw access token.
         /// </param>
         /// <param name="connectionString">The connection string used when no credentials are set.</param>
-        /// <param name="overrides">The step arguments that hold the discrete overrides.</param>
+        /// <param name="accessToken">
+        /// The explicit Microsoft Entra access token; empty when the connection itself carries the authentication.
+        /// </param>
         /// <returns>The resolved connection settings.</returns>
         /// <exception cref="InvalidOperationException">Thrown when no server is resolved.</exception>
         public static SqlServerConnectionModel ResolveConnection(
             string credentials,
             string connectionString,
-            IDictionary<string, string> overrides)
+            string accessToken)
         {
-            // Normalize the overrides so the collector path, which has no step arguments, shares this resolver.
-            overrides ??= new Dictionary<string, string>();
+            // Normalize the token so the collector path, which carries no token input, shares this resolver.
+            accessToken ??= string.Empty;
 
             // Look up the credentials value as a stored record first, so a record name never reaches the provider.
             var builder = new SqlConnectionStringBuilder();
-            var accessToken = overrides.Get(key: "Token", defaultValue: string.Empty);
             var credential = FindCredential(idOrName: credentials);
             var hasCredentials = !string.IsNullOrWhiteSpace(credentials);
             var isRawConnectionString = hasCredentials && credentials.Contains('=');
 
-            // Resolve the baseline: record, raw connection string, raw access token, then the plain connection string.
+            // Resolve the connection: a stored record or a raw connection string in the credentials value wins.
             if (credential is not null)
             {
                 builder = NewConnectionBuilder(credential);
@@ -301,36 +306,18 @@ namespace G4.Plugins.SqlServer.Extensions
             {
                 builder.ConnectionString = credentials;
             }
-            else if (hasCredentials)
+            else
             {
-                accessToken = credentials;
+                // An unmatched credentials value is a raw access token, which names no server of its own, so the
+                // connection string still supplies the connection.
+                accessToken = hasCredentials ? credentials : accessToken;
+                builder.ConnectionString = connectionString ?? string.Empty;
             }
-            else if (!string.IsNullOrWhiteSpace(connectionString))
-            {
-                builder.ConnectionString = connectionString;
-            }
-
-            // Apply the discrete overrides on top of the baseline; unset overrides leave the baseline untouched.
-            var options = new ConnectionPartsOptions
-            {
-                Authentication = overrides.Get(key: "Authentication", defaultValue: string.Empty),
-                Database = overrides.Get(key: "Database", defaultValue: string.Empty),
-                Encrypt = overrides.Get(key: "Encrypt", defaultValue: string.Empty),
-                Password = overrides.Get(key: "Password", defaultValue: string.Empty),
-                Port = ConvertToNonNegativeInteger(
-                    value: overrides.Get(key: "Port", defaultValue: string.Empty),
-                    defaultValue: 0),
-                Server = overrides.Get(key: "Server", defaultValue: string.Empty),
-                TrustServerCertificate = overrides.ContainsKey(key: "TrustServerCertificate"),
-                Username = overrides.Get(key: "Username", defaultValue: string.Empty)
-            };
-
-            SetConnectionParts(builder, options);
 
             // Require a server so the failure names the missing input instead of a provider network error.
             if (string.IsNullOrWhiteSpace(builder.DataSource))
             {
-                var message = "No SQL Server target was resolved. Set 'Credentials', 'ConnectionString', or 'Server'.";
+                var message = "No SQL Server target was resolved. Set 'Credentials' or 'ConnectionString'.";
                 throw new InvalidOperationException(message);
             }
 
@@ -418,9 +405,10 @@ namespace G4.Plugins.SqlServer.Extensions
             return builder;
         }
 
-        // Applies the discrete connection parts that are set to the builder, leaving unset parts untouched so they
-        // never erase baseline values. Mutates only the caller-owned builder. The Integrated authentication value maps
-        // to Integrated Security, and the TrustServerCertificate flag can only turn certificate trust on.
+        // Applies the discrete connection parts of a credentials record to the builder, leaving unset parts untouched
+        // so they never erase the values of the stored connection string. Mutates only the caller-owned builder. The
+        // Integrated authentication value maps to Integrated Security, and the TrustServerCertificate flag can only
+        // turn certificate trust on.
         private static void SetConnectionParts(SqlConnectionStringBuilder builder, ConnectionPartsOptions options)
         {
             // Compose the data source from the server and the optional port. A port without a server re-targets the
@@ -481,8 +469,8 @@ namespace G4.Plugins.SqlServer.Extensions
         #endregion
 
         #region *** Nested Types ***
-        // Carries the discrete connection parts applied on top of a connection baseline, either from the step
-        // arguments or from a stored credentials record. Empty strings, a zero port, and a false flag mean "not set".
+        // Carries the discrete connection parts of a credentials record, applied on top of the stored connection
+        // string. Empty strings, a zero port, and a false flag mean "not set".
         private sealed class ConnectionPartsOptions
         {
             /// <summary>

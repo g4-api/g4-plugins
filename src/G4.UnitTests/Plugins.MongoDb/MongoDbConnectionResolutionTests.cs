@@ -31,7 +31,8 @@ namespace G4.UnitTests.Plugins.MongoDb
             var connectionModel = LocalExtensions.ResolveConnection(
                 credentials: BaselineUri,
                 connectionString: string.Empty,
-                overrides: null);
+                database: string.Empty,
+                commandTimeoutSeconds: MongoDbClient.DefaultCommandTimeoutSeconds);
 
             // Assert: the URI parts reach the client settings and the model database.
             var server = connectionModel.ClientSettings.Server;
@@ -40,88 +41,58 @@ namespace G4.UnitTests.Plugins.MongoDb
             Assert.AreEqual(expected: "BaselineDatabase", actual: connectionModel.Database);
         }
 
-        [TestMethod(DisplayName = "Verify that ResolveConnection applies the discrete overrides on top of the " +
-            "baseline connection URI and leaves unset parts untouched.")]
-        public void ResolveConnectionOverridesTest()
+        [TestMethod(DisplayName = "Verify that ResolveConnection ignores step arguments that name discrete " +
+            "connection parts, so a removed argument never changes the connection.")]
+        public void ResolveConnectionDiscreteArgumentsIgnoredTest()
         {
-            // Arrange: override the host, the database, the login, and the transport options.
-            var overrides = new Dictionary<string, string>
+            // Arrange: pass the connection URI next to arguments that were discrete connection parts before.
+            var pluginData = NewPluginData(new Dictionary<string, string>
             {
                 ["AllowInvalidCertificates"] = string.Empty,
                 ["AuthenticationDatabase"] = "admin",
                 ["AuthenticationMechanism"] = MongoDbAuthenticationMechanisms.ScramSha256,
-                ["Database"] = "Overridden",
+                ["ConnectionString"] = BaselineUri,
+                ["DirectConnection"] = string.Empty,
                 ["Host"] = "override-host",
                 ["Password"] = "secret",
+                ["Port"] = "27019",
                 ["ReplicaSet"] = "rs0",
                 ["Tls"] = MongoDbTlsModes.Enabled,
                 ["Username"] = "reporter"
-            };
+            });
 
-            // Act: resolve the connection from the baseline and the overrides.
-            var connectionModel = LocalExtensions.ResolveConnection(
-                credentials: string.Empty,
-                connectionString: BaselineUri,
-                overrides: overrides);
+            // Act: resolve the connection from the step arguments.
+            var connectionModel = pluginData.ResolveConnection();
 
-            // Assert: the host is overridden while the baseline port survives, because no port override was set.
+            // Assert: the host and the port come from the URI, so no ignored argument re-targets the deployment.
             var settings = connectionModel.ClientSettings;
-            Assert.AreEqual(expected: "override-host", actual: settings.Server.Host);
+            Assert.AreEqual(expected: "baseline-host", actual: settings.Server.Host);
             Assert.AreEqual(expected: 27018, actual: settings.Server.Port);
 
-            // Assert: the database, the login, and the transport options follow the overrides.
-            Assert.AreEqual(expected: "Overridden", actual: connectionModel.Database);
-            Assert.AreEqual(expected: "reporter", actual: settings.Credential.Username);
-            Assert.AreEqual(expected: "admin", actual: settings.Credential.Source);
-            Assert.AreEqual(expected: "rs0", actual: settings.ReplicaSetName);
-            Assert.IsTrue(condition: settings.UseTls);
-            Assert.IsTrue(condition: settings.AllowInsecureTls);
+            // Assert: no login, replica set, or transport option reaches the driver from the step arguments.
+            Assert.IsNull(value: settings.Credential);
+            Assert.IsNull(value: settings.ReplicaSetName);
+            Assert.IsFalse(condition: settings.UseTls);
+            Assert.IsFalse(condition: settings.AllowInsecureTls);
+            Assert.IsFalse(condition: settings.DirectConnection);
         }
 
-        [TestMethod(DisplayName = "Verify that ResolveConnection re-targets the baseline host port when only the " +
-            "Port override is set.")]
-        public void ResolveConnectionPortOnlyOverrideTest()
+        [TestMethod(DisplayName = "Verify that ResolveConnection selects the operation database from the Database " +
+            "argument and keeps the database of the connection URI when the argument is not set.")]
+        public void ResolveConnectionDatabaseArgumentTest()
         {
-            // Arrange: override the port alone, which keeps the baseline host.
-            var overrides = new Dictionary<string, string>
+            // Arrange: resolve the same URI once with the Database argument and once without it.
+            var selected = NewPluginData(new Dictionary<string, string>
             {
-                ["Port"] = "27019"
-            };
+                ["ConnectionString"] = BaselineUri,
+                ["Database"] = "  StepDatabase  "
+            });
 
-            // Act: resolve the connection from the baseline and the port override.
-            var connectionModel = LocalExtensions.ResolveConnection(
-                credentials: string.Empty,
-                connectionString: BaselineUri,
-                overrides: overrides);
+            var inherited = NewPluginData(new Dictionary<string, string> { ["ConnectionString"] = BaselineUri });
 
-            // Assert: the baseline host keeps its name and receives the overridden port.
-            Assert.AreEqual(expected: "baseline-host", actual: connectionModel.ClientSettings.Server.Host);
-            Assert.AreEqual(expected: 27019, actual: connectionModel.ClientSettings.Server.Port);
-        }
-
-        [TestMethod(DisplayName = "Verify that ResolveConnection composes a connection from the discrete " +
-            "parameters alone, using the default port when none is set.")]
-        public void ResolveConnectionDiscreteOnlyTest()
-        {
-            // Arrange: set only the host and the database, with no baseline at all.
-            var overrides = new Dictionary<string, string>
-            {
-                ["Database"] = "shop",
-                ["DirectConnection"] = string.Empty,
-                ["Host"] = "mongo.internal"
-            };
-
-            // Act: resolve the connection from the overrides alone.
-            var connectionModel = LocalExtensions.ResolveConnection(
-                credentials: string.Empty,
-                connectionString: string.Empty,
-                overrides: overrides);
-
-            // Assert: the host is addressed on the driver default port and the direct connection is requested.
-            Assert.AreEqual(expected: "mongo.internal", actual: connectionModel.ClientSettings.Server.Host);
-            Assert.AreEqual(expected: MongoDbClient.DefaultPort, actual: connectionModel.ClientSettings.Server.Port);
-            Assert.AreEqual(expected: "shop", actual: connectionModel.Database);
-            Assert.IsTrue(condition: connectionModel.ClientSettings.DirectConnection);
+            // Act and Assert: the argument is trimmed and replaces the database the URI carries.
+            Assert.AreEqual(expected: "StepDatabase", actual: selected.ResolveConnection().Database);
+            Assert.AreEqual(expected: "BaselineDatabase", actual: inherited.ResolveConnection().Database);
         }
 
         [TestMethod(DisplayName = "Verify that ResolveConnection bounds connecting and server selection by the " +
@@ -130,27 +101,21 @@ namespace G4.UnitTests.Plugins.MongoDb
         {
             // Arrange: resolve the same target once with a timeout and once without one, through the arguments the
             // resolver reads.
-            var boundedOverrides = new Dictionary<string, string>
+            var boundedData = NewPluginData(new Dictionary<string, string>
             {
                 ["CommandTimeout"] = "5",
-                ["Host"] = "mongo.internal"
-            };
+                ["ConnectionString"] = BaselineUri
+            });
 
-            var unboundedOverrides = new Dictionary<string, string>
+            var unboundedData = NewPluginData(new Dictionary<string, string>
             {
                 ["CommandTimeout"] = "0",
-                ["Host"] = "mongo.internal"
-            };
+                ["ConnectionString"] = BaselineUri
+            });
 
             // Act: resolve both connections.
-            var bounded = LocalExtensions.ResolveConnection(
-                credentials: string.Empty,
-                connectionString: string.Empty,
-                overrides: boundedOverrides);
-            var unbounded = LocalExtensions.ResolveConnection(
-                credentials: string.Empty,
-                connectionString: string.Empty,
-                overrides: unboundedOverrides);
+            var bounded = boundedData.ResolveConnection();
+            var unbounded = unboundedData.ResolveConnection();
 
             // Assert: the bounded connection carries the timeout and reports it on the model.
             Assert.AreEqual(expected: TimeSpan.FromSeconds(5), actual: bounded.ClientSettings.ConnectTimeout);
@@ -186,7 +151,8 @@ namespace G4.UnitTests.Plugins.MongoDb
                 var connectionModel = LocalExtensions.ResolveConnection(
                     credentials: CredentialName,
                     connectionString: string.Empty,
-                    overrides: null);
+                    database: string.Empty,
+                    commandTimeoutSeconds: MongoDbClient.DefaultCommandTimeoutSeconds);
 
                 // Assert: the record parts win over its stored URI.
                 var settings = connectionModel.ClientSettings;
@@ -203,11 +169,11 @@ namespace G4.UnitTests.Plugins.MongoDb
             }
         }
 
-        [TestMethod(DisplayName = "Verify that ResolveConnection lets the step arguments override a resolved " +
+        [TestMethod(DisplayName = "Verify that the Database argument selects another database of a resolved " +
             "credentials record.")]
-        public void ResolveConnectionCredentialsWithOverridesTest()
+        public void ResolveConnectionCredentialsWithDatabaseTest()
         {
-            // Arrange: seed a record and override its database per step.
+            // Arrange: seed a record whose database the step replaces.
             var credential = MongoDbTestCredentials.AddCredential(credential: new MongoDbCredentialModel
             {
                 Name = $"{CredentialName}-overridden",
@@ -217,13 +183,12 @@ namespace G4.UnitTests.Plugins.MongoDb
 
             try
             {
-                // Act: resolve the record and override the database only.
-                var overrides = new Dictionary<string, string> { ["Database"] = "StepDatabase" };
-
+                // Act: resolve the record and select another database.
                 var connectionModel = LocalExtensions.ResolveConnection(
                     credentials: credential.Name,
                     connectionString: string.Empty,
-                    overrides: overrides);
+                    database: "StepDatabase",
+                    commandTimeoutSeconds: MongoDbClient.DefaultCommandTimeoutSeconds);
 
                 // Assert: the step argument wins over the record, while the record host survives.
                 Assert.AreEqual(expected: "record-host", actual: connectionModel.ClientSettings.Server.Host);
@@ -244,24 +209,27 @@ namespace G4.UnitTests.Plugins.MongoDb
             var exception = Assert.ThrowsExactly<InvalidOperationException>(() => LocalExtensions.ResolveConnection(
                 credentials: "mongodb-record-that-does-not-exist",
                 connectionString: string.Empty,
-                overrides: null));
+                database: string.Empty,
+                commandTimeoutSeconds: MongoDbClient.DefaultCommandTimeoutSeconds));
 
             // Assert: the message names the unmatched value, so a typo never reads as a host name.
             Assert.Contains(substring: "mongodb-record-that-does-not-exist", value: exception.Message);
         }
 
-        [TestMethod(DisplayName = "Verify that ResolveConnection fails when neither credentials, a connection URI, " +
-            "nor a host is set.")]
+        [TestMethod(DisplayName = "Verify that ResolveConnection fails when neither credentials nor a connection URI " +
+            "is set, even when a database is named.")]
         public void ResolveConnectionMissingTargetTest()
         {
-            // Act: resolve with no inputs at all and capture the rejection.
+            // Act: resolve with a database only, so no input names a deployment, and capture the rejection.
             var exception = Assert.ThrowsExactly<InvalidOperationException>(() => LocalExtensions.ResolveConnection(
                 credentials: string.Empty,
                 connectionString: string.Empty,
-                overrides: null));
+                database: "shop",
+                commandTimeoutSeconds: MongoDbClient.DefaultCommandTimeoutSeconds));
 
             // Assert: the message names the inputs a flow can set.
             Assert.Contains(substring: "No MongoDB target was resolved", value: exception.Message);
+            Assert.Contains(substring: "Set 'Credentials' or 'ConnectionString'", value: exception.Message);
         }
 
         [TestMethod(DisplayName = "Verify that ResolveCommandTimeout reads a non-negative CommandTimeout and falls " +

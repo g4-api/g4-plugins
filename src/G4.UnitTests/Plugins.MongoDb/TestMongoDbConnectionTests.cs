@@ -116,7 +116,8 @@ namespace G4.UnitTests.Plugins.MongoDb
             // Arrange: target a loopback port with no listener (port 1 is reserved and closed on test machines) and
             // bound the attempt so the probe fails fast.
             var rule = NewRule(
-                arguments: "--Host:127.0.0.1 --Port:1 --Database:G4Tests --DirectConnection --CommandTimeout:2");
+                arguments: "--ConnectionString:mongodb://127.0.0.1:1/?directConnection=true " +
+                    "--Database:G4Tests --CommandTimeout:2");
 
             // Act: probe the unreachable deployment through the plugin.
             var result = Invoke<TestMongoDbConnection>(rule);

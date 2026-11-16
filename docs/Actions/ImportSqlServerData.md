@@ -20,7 +20,7 @@ It helps workflows seed test data, load exported records, and move files into a 
 | Flexible data input | Accepts inline JSON through Data, or a file through DataFile: .csv files are read as RFC 4180 CSV with a header row, other files as JSON. |
 | Column matching by name | Maps each data field to the table column with the same name, so the field order does not matter. |
 | Type conversion | Sends values as text and converts them to the destination column types during the copy; empty unquoted CSV fields and JSON null become NULL. |
-| Flexible connection | Resolves the connection from a stored credentials record, a connection string, or individual values such as Server, Database, and Authentication. |
+| Flexible connection | Resolves the connection from a stored credentials record, a raw connection string, or a raw Microsoft Entra access token. |
 | Optional transaction | The Transaction switch commits the import only after every row is copied and rolls everything back on failure. |
 | Row count output | Stores the copied row count as the session parameter ImportSqlServerData:RowsCopied (Base64) and, unless NoEntity is set, in the response entity. |
 
@@ -211,9 +211,9 @@ action_rule = {
 
 ### Example No.4
 
-### Import a CSV file with individual connection values
+### Import a CSV file with a connection string
 
-The parameter syntax binds `Server`, `Database`, `Authentication`, and `Encrypt` instead of a stored record or connection string.
+The parameter syntax binds a `ConnectionString` that names the server, the database, the Microsoft Entra sign-in method, and the encryption mode, instead of a stored record.
 The rows from `C:\data\orders.csv` are copied into `dbo.Orders`.
 
 **CSharp:**
@@ -222,7 +222,7 @@ The rows from `C:\data\orders.csv` are copied into `dbo.Orders`.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportSqlServerData",
-    Argument = "{{$ --Server:sales-db.database.windows.net --Database:Sales --Authentication:Active Directory Default --Encrypt:Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    Argument = "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
 };
 ```
 
@@ -231,7 +231,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportSqlServerData")
-    .setArgument("{{$ --Server:sales-db.database.windows.net --Database:Sales --Authentication:Active Directory Default --Encrypt:Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}");
+    .setArgument("{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}");
 ```
 
 **Javascript:**
@@ -239,7 +239,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportSqlServerData",
-    argument: "{{$ --Server:sales-db.database.windows.net --Database:Sales --Authentication:Active Directory Default --Encrypt:Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    argument: "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
 };
 ```
 
@@ -248,7 +248,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --Server:sales-db.database.windows.net --Database:Sales --Authentication:Active Directory Default --Encrypt:Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    "argument": "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
 }
 ```
 
@@ -257,7 +257,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --Server:sales-db.database.windows.net --Database:Sales --Authentication:Active Directory Default --Encrypt:Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    "argument": "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
 }
 ```
 
@@ -292,62 +292,6 @@ Carries every input of the import, such as Table, Data or DataFile, and the conn
 Values can come from macros or data columns, so one rule can import different files or target different tables on each run.
 
 ## Parameters
-
-### Authentication (Authentication)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Selects the sign-in method used for the connection, such as a SQL login or a Microsoft Entra identity.
-Replaces the method from the stored credentials or the connection string for this step only.
-Integrated signs in with the Windows identity that runs the automation.
-
-#### Values
-
-##### Active Directory Default
-
-Signs in with the first Microsoft Entra identity found on the machine, such as an Azure CLI login or a managed identity.
-Suits automation hosts that already carry a signed-in identity.
-
-##### Active Directory Integrated
-
-Signs in with the Microsoft Entra identity of the current Windows user.
-Works on domain-joined machines that are federated with Microsoft Entra ID.
-
-##### Active Directory Interactive
-
-Opens an interactive Microsoft Entra sign-in prompt.
-Fits attended runs where a person can complete the sign-in.
-
-##### Active Directory Managed Identity
-
-Signs in with the managed identity assigned to the Azure host.
-Keeps secrets out of the automation on Azure-hosted runners.
-
-##### Active Directory Password
-
-Signs in with a Microsoft Entra user name and password.
-Requires the Username and Password values.
-
-##### Active Directory Service Principal
-
-Signs in as a Microsoft Entra application, using the client id as Username and the client secret as Password.
-Suits unattended service accounts.
-
-##### Integrated
-
-Signs in with the Windows identity that runs the automation.
-Turns on integrated security instead of sending a user name and password.
-
-##### Sql Password
-
-Signs in with a SQL Server login name and password.
-Requires the Username and Password values.
 
 ### Batch Size (BatchSize)
 
@@ -387,9 +331,9 @@ The value 0 removes the time limit, and a missing or invalid value falls back to
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Provides a complete ADO.NET connection string for the target SQL Server database.
-Used only when Credentials is not set, so a stored record always takes priority.
-Individual values such as Server or Database can still replace parts of it.
+Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.
+Applies only when Credentials is not set, so a stored credentials reference always takes priority.
+Every connection setting, such as the server, the database, the login, and the encryption mode, is written into the string itself.
 
 ### Credentials (Credentials)
 
@@ -401,9 +345,9 @@ Individual values such as Server or Database can still replace parts of it.
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Names a stored SQL Server credentials record by its name or id, so the login stays out of the automation definition.
-When no record matches, a value that contains an equals sign is used as a raw connection string.
-Any other unmatched value is used as a raw Microsoft Entra access token, which still needs a Server value.
+Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.
+The record carries the server, port, database, login, and encryption settings, so the step never repeats them.
+When no record matches, a value that contains `=` is used as a raw connection string and any other value is used as a raw Microsoft Entra access token.
 
 ### Data (Data)
 
@@ -434,49 +378,6 @@ Points to a file that holds the rows to import.
 A .csv file is read as RFC 4180 CSV with a header row, and any other extension is read as a JSON array of objects.
 Keeps large or complex data out of the rule argument.
 
-### Database (Database)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Selects the database that the connection opens.
-Lets one stored login import into several databases by changing only this value.
-
-### Encrypt (Encrypt)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Controls whether the connection to SQL Server is encrypted.
-Replaces the encryption mode from the stored credentials or the connection string for this step only.
-
-#### Values
-
-##### Mandatory
-
-Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.
-Matches the default of current SQL Server client libraries.
-
-##### Optional
-
-Encrypts the connection only when the server requires it.
-Fits older servers that do not support encryption.
-
-##### Strict
-
-Uses TDS 8.0 strict encryption and always validates the server certificate.
-Requires SQL Server 2022 or Azure SQL.
-
 ### No Entity (NoEntity)
 
 | Attribute         | Value             |
@@ -489,47 +390,6 @@ Requires SQL Server 2022 or Azure SQL.
 
 Leaves the response entity empty so the plugin returns only session parameters.
 Keeps responses small when no later step reads the entity.
-
-### Password (Password)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Supplies the password for password-based sign-in methods.
-Replaces the stored password for this step only.
-Prefer a stored credentials record so secrets do not appear in the automation definition.
-
-### Port (Port)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Number            |
-
-Sets the TCP port of the SQL Server instance.
-Is appended to the Server value as server,port and is needed only when the instance does not use the default port 1433.
-
-### Server (Server)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Names the SQL Server host or instance, such as sql01.contoso.local or sql01\SQLEXPRESS.
-Replaces the server from the stored credentials or the connection string for this step only.
-The step fails with a clear message when no server is resolved from any connection input.
 
 ### Table (Table)
 
@@ -555,9 +415,9 @@ The table must already exist, because the import never creates or changes tables
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Supplies a raw Microsoft Entra access token that authenticates the connection.
-Useful when another step already obtained a token for the database.
-Do not combine it with a password or an Authentication value, because SQL Server rejects that combination.
+Supplies a raw Microsoft Entra access token that signs in the connection.
+Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.
+Do not combine it with a connection string that carries a password or an Authentication keyword, because the SQL Server client rejects that mix when the connection opens.
 
 ### Transaction (Transaction)
 
@@ -571,33 +431,6 @@ Do not combine it with a password or an Authentication value, because SQL Server
 
 Wraps the whole import in one transaction that is committed only after every row is copied.
 Rolls back all rows when any row fails, so the table never keeps a partial import.
-
-### Trust Server Certificate (TrustServerCertificate)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Switch            |
-
-Accepts the server certificate without validating it.
-Helps with development servers that use self-signed certificates.
-Avoid it in production, because it weakens protection against impersonated servers.
-
-### Username (Username)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Supplies the login name, or the client id for service principal sign-in.
-Replaces the stored login name for this step only.
 
 ## Scope
 
