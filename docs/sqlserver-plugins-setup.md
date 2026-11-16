@@ -33,15 +33,19 @@ manifests.
 4. Nothing else to install. `Microsoft.Data.SqlClient` is the only database dependency, and it comes in as a package
    dependency of the plugins.
 
-## Three ways to connect
+## Two ways to connect
 
-Every plugin takes the connection inputs below. All of them are optional, but together they must name a server.
+Every plugin takes the connection inputs below. All of them are optional, but together they must name a server. A step
+never passes the server, the port, the database, the login, or the encryption mode on its own: those belong to the
+stored credentials record, or to the connection string.
 
 | Input | What you pass | When to use it |
 | --- | --- | --- |
 | `Credentials` | The name or id of a stored SQL Server credentials record | Shared logins. The login stays out of the automation definition. |
 | `ConnectionString` | A full ADO.NET connection string | Quick tests and servers with special connection keywords. |
-| Discrete overrides | `Server`, `Port`, `Database`, `Authentication`, `Username`, `Password`, `Encrypt`, `TrustServerCertificate`, `Token` | Changing one part of a stored login, such as the database, for one step. |
+| `Token` | A raw Microsoft Entra access token | Token sign-in, next to a connection that carries no password and no `Authentication` keyword. |
+
+To reach a second database with the same login, store a second credentials record, or pass a connection string.
 
 ### Stored credentials records
 
@@ -58,7 +62,7 @@ A SQL Server credentials record holds these fields.
 | `Password` | The password or secret for password-based methods. |
 | `Encrypt` | One of the `Encrypt` values listed below. Empty keeps the provider default. |
 | `TrustServerCertificate` | `true` accepts the server certificate without validating its trust chain. |
-| `ConnectionString` | An optional baseline connection string. The fields above that are set override it. |
+| `ConnectionString` | An optional connection string. The fields above that are set override it. |
 
 The engine stores the secrets of a record in its protected form: signed and Base64URL encoded. This form is not
 encryption, so treat the credentials database as sensitive.
@@ -75,7 +79,7 @@ The plugins accept raw values when you do not use a stored record.
 
 1. A `Credentials` value that matches no record and contains `=` is used as a raw connection string.
 2. A `Credentials` value that matches no record and contains no `=` is used as a raw Microsoft Entra access token.
-3. `ConnectionString` is used as the connection string when `Credentials` is empty.
+3. `ConnectionString` is used as the connection string when `Credentials` is empty or holds a raw access token.
 4. `Token` sets a Microsoft Entra access token explicitly. A raw token in `Credentials` replaces it.
 
 When an access token is set, the connection string must not carry a password or an `Authentication` keyword. Source:
@@ -85,18 +89,16 @@ When an access token is set, the connection string must not carry a password or 
 
 The plugins build the connection in this order. Source: `Extensions/LocalExtensions.cs` (`ResolveConnection`).
 
-1. A stored record that matches `Credentials` by id or name supplies the baseline.
-2. Otherwise, a `Credentials` value with `=` is the baseline connection string.
-3. Otherwise, a non-empty `Credentials` value becomes the access token, and the baseline stays empty.
-4. Otherwise, `ConnectionString` is the baseline.
-5. The discrete overrides that are set replace the matching baseline values. Unset overrides never erase a baseline
-   value.
-6. The `TrustServerCertificate` switch turns certificate trust on.
-7. The step fails with "No SQL Server target was resolved. Set 'Credentials', 'ConnectionString', or 'Server'." when no
-   server results.
+1. A stored record that matches `Credentials` by id or name supplies the connection.
+2. Otherwise, a `Credentials` value with `=` is used as the connection string.
+3. Otherwise, a non-empty `Credentials` value becomes the access token. A token names no server, so
+   `ConnectionString` still supplies the connection.
+4. Otherwise, `ConnectionString` supplies the connection.
+5. The step fails with "No SQL Server target was resolved. Set 'Credentials' or 'ConnectionString'." when no server
+   results.
 
-`Server` and `Port` combine into `server,port`. One stored login can therefore target several databases through the
-`Database` override.
+Inside a credentials record, the stored `Server` and `Port` fields combine into `server,port`, and the stored fields
+that are set override the matching parts of the stored connection string.
 
 ### Authentication values
 
@@ -217,13 +219,13 @@ Inside an automation, the [DecodeBase64](./Transformers/DecodeBase64.md) transfo
 }
 ```
 
-### Change one database inside a transaction
+### Change rows inside a transaction
 
 ```json
 {
     "$type": "Action",
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --Credentials:sql-production --Database:Sales --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction --NoEntity }}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction --NoEntity }}"
 }
 ```
 
@@ -320,8 +322,8 @@ test job excludes them with `TestCategory!=SqlServerLive`.
 | Symptom | Likely cause | What to do |
 | --- | --- | --- |
 | "Login failed for user" | Wrong user name or password, or the login has no access to the database | Check the login with `TestSqlServerConnection`, and read its `Error` output. |
-| "The certificate chain was issued by an authority that is not trusted" | The server uses a self-signed or private certificate | Add the `TrustServerCertificate` switch for test servers, or install the issuing certificate. `--Encrypt:Optional` also avoids the check when the server allows it. |
-| "No SQL Server target was resolved" | No `Credentials`, `ConnectionString` or `Server` named a server, or a misspelled record name was used as a token | Pass one of the three inputs, and check the record name. |
+| "The certificate chain was issued by an authority that is not trusted" | The server uses a self-signed or private certificate | Set `TrustServerCertificate=True` in the connection string, or `TrustServerCertificate` on the credentials record, for test servers, or install the issuing certificate. `Encrypt=Optional` also avoids the check when the server allows it. |
+| "No SQL Server target was resolved" | Neither `Credentials` nor `ConnectionString` named a server, or a misspelled record name was used as a token | Pass one of the two inputs, and check the record name. |
 | "The procedure has no input parameter named '@Name'" | A `Parameters` property matches no procedure input | Use the input names from the procedure signature. |
 | "Incorrect syntax near ..." on SQL that runs elsewhere | The inline SQL was cut by ` --` or `}}` | Encode the SQL as UTF-8 Base64 and add the `Base64` switch, or move it to a `CommandFile`. |
 | "'CommandText' is not valid Base64." | The `Base64` switch is set, but `CommandText` is plain SQL or damaged Base64 | Encode the SQL as UTF-8 Base64, or remove the `Base64` switch. |

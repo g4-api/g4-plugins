@@ -64,30 +64,35 @@ namespace G4.UnitTests.Plugins.SqlServer
         }
 
         [TestMethod(DisplayName = "Verify that ExportSqlServerQuery resolves the connection from a stored SQL Server " +
-            "credentials record name and applies the Database override.")]
+            "credentials record name, whose Database field wins over its stored connection string.")]
         [TestCategory("SqlServerLive")]
         public void ExportSqlServerQueryCredentialsNameTest()
         {
-            // Arrange: store the test server login as a named credentials record that targets master.
-            var builder = new SqlConnectionStringBuilder(connectionString: SqlServerTestContainer.ConnectionString);
+            // Arrange: store the test server login as a named record whose connection string targets master and
+            // whose Database field targets the test database, so the record alone selects the database.
+            var builder = new SqlConnectionStringBuilder(connectionString: SqlServerTestContainer.ConnectionString)
+            {
+                InitialCatalog = "master"
+            };
+
             var credential = SqlServerTestCredentials.AddCredential(credential: new SqlServerCredentialModel
             {
                 Name = "export-query-tests",
                 ConnectionString = builder.ConnectionString,
-                Database = "master"
+                Database = SqlServerTestContainer.DatabaseName
             });
 
             try
             {
-                // Arrange: reference the record by name and override its database per step.
-                var arguments = $"--Database:{SqlServerTestContainer.DatabaseName} " +
-                    "--CommandText:SELECT DB_NAME() AS Name";
-                var rule = NewRule(connectionArguments: "--Credentials:export-query-tests", arguments);
+                // Arrange: reference the record by name; the step passes no connection part of its own.
+                var rule = NewRule(
+                    connectionArguments: "--Credentials:export-query-tests",
+                    arguments: "--CommandText:SELECT DB_NAME() AS Name");
 
                 // Act: run the query through the plugin.
                 var entity = Invoke<ExportSqlServerQuery>(rule).Response.Entity;
 
-                // Assert: the override wins over the database stored in the record.
+                // Assert: the record Database field wins over the database of its stored connection string.
                 Assert.AreEqual(
                     expected: $"[{{\"Name\":\"{SqlServerTestContainer.DatabaseName}\"}}]",
                     actual: entity["Result"]);

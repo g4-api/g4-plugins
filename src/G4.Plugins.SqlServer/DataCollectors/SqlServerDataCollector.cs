@@ -94,11 +94,11 @@ namespace G4.Plugins.SqlServer.DataCollectors
             // Convert the entities before connecting so an unaddressable content key fails without a connection.
             using var data = NewDataTable(columns, entities);
 
-            // Resolve the connection from the rule Source alone; the collector rule carries no discrete overrides.
+            // Resolve the connection from the rule Source alone; the collector rule carries no other connection input.
             var connectionModel = LocalExtensions.ResolveConnection(
                 credentials: rule.Source,
                 connectionString: string.Empty,
-                overrides: null);
+                accessToken: string.Empty);
 
             // Open a connection owned by this collector run so no session state leaks into later runs.
             using var connection = SqlServerClient.OpenConnection(connectionModel);

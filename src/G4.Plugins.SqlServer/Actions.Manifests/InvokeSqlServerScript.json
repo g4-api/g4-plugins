@@ -24,7 +24,7 @@
 					},
 					{
 						"question": "Which parameters does InvokeSqlServerScript support?",
-						"answer": "CommandText or CommandFile supplies the script, the Base64 switch decodes a Base64-encoded CommandText, and CommandTimeout, Transaction, and NoEntity tune the run. Credentials, ConnectionString, or discrete values such as Server and Database select the connection."
+						"answer": "CommandText or CommandFile supplies the script, the Base64 switch decodes a Base64-encoded CommandText, and CommandTimeout, Transaction, and NoEntity tune the run. Credentials or ConnectionString selects the connection, and Token supplies a Microsoft Entra access token."
 					},
 					{
 						"question": "How does InvokeSqlServerScript integrate with G4 workflows?",
@@ -86,7 +86,7 @@
 		"| Optional transaction | Commits after the last batch or rolls back every batch on failure when `Transaction` is present.      |",
 		"| Per-batch timeout    | Applies `CommandTimeout` to each batch separately.                                                   |",
 		"| Run totals           | Returns `BatchCount` and the summed `RowsAffected`.                                                  |",
-		"| Flexible connection  | Connects through a credentials record, a connection string, discrete values, or a Microsoft Entra token. |",
+		"| Flexible connection  | Connects through a credentials record, a connection string, or a Microsoft Entra access token.       |",
 		"| Entity control       | Omits the response entity when `NoEntity` is present while still writing session parameters.         |",
 		"",
 		"### Usages in RPA",
@@ -120,8 +120,8 @@
 		"",
 		"1. `Credentials` selects a stored SQL Server credentials record by name or id.",
 		"2. When no record matches, a `Credentials` value that contains `=` is used as a raw connection string, and any other value is used as a raw Microsoft Entra access token.",
-		"3. Without `Credentials`, `ConnectionString` supplies the baseline connection.",
-		"4. `Server`, `Port`, `Database`, `Authentication`, `Username`, `Password`, `Encrypt`, `TrustServerCertificate`, and `Token` override the baseline values they set.",
+		"3. Without `Credentials`, `ConnectionString` supplies the connection.",
+		"4. `Token` supplies a raw Microsoft Entra access token, for a connection that carries no password or `Authentication` keyword.",
 		"5. The step fails when no server is resolved.",
 		"",
 		"Session parameters are named `InvokeSqlServerScript:<Name>` and are Base64-encoded, so decode them before use."
@@ -275,74 +275,6 @@
 	"parameters": [
 		{
 			"description": [
-				"Selects the sign-in method used to connect to SQL Server.",
-				"Overrides the method from the credentials record or the connection string, so one target can switch between SQL logins, Windows sign-in, and Microsoft Entra sign-in.",
-				"Leave it empty to keep the method the baseline connection already defines."
-			],
-			"mandatory": false,
-			"name": "Authentication",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Signs in with a SQL Server login name and password.",
-						"Supply the login through Username and Password or through the credentials record."
-					],
-					"name": "Sql Password"
-				},
-				{
-					"description": [
-						"Signs in with the Windows account that runs the automation.",
-						"No user name or password is sent to the server."
-					],
-					"name": "Integrated"
-				},
-				{
-					"description": [
-						"Signs in with the Microsoft Entra default credential chain, such as environment settings, a managed identity, or a developer tool sign-in.",
-						"Fits services that already carry a Microsoft Entra identity."
-					],
-					"name": "Active Directory Default"
-				},
-				{
-					"description": [
-						"Signs in with the Microsoft Entra identity of the current domain-joined Windows user.",
-						"No password is passed in the step."
-					],
-					"name": "Active Directory Integrated"
-				},
-				{
-					"description": [
-						"Signs in through an interactive Microsoft Entra prompt.",
-						"Fits attended runs where a person can complete multi-factor sign-in."
-					],
-					"name": "Active Directory Interactive"
-				},
-				{
-					"description": [
-						"Signs in with the managed identity of the Azure host that runs the automation.",
-						"Username can carry the client id of a user-assigned identity."
-					],
-					"name": "Active Directory Managed Identity"
-				},
-				{
-					"description": [
-						"Signs in with a Microsoft Entra user name and password.",
-						"Accounts that require multi-factor authentication cannot use this method."
-					],
-					"name": "Active Directory Password"
-				},
-				{
-					"description": [
-						"Signs in as a Microsoft Entra application.",
-						"Username carries the application client id and Password carries the client secret."
-					],
-					"name": "Active Directory Service Principal"
-				}
-			]
-		},
-		{
-			"description": [
 				"Decodes the CommandText value from UTF-8 Base64 before the script is split into batches.",
 				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
 				"Only CommandText is decoded, so CommandFile content is always read as plain text.",
@@ -385,8 +317,9 @@
 		},
 		{
 			"description": [
-				"Supplies a full ADO.NET connection string, such as Server=localhost,1433;Database=Sales;Integrated Security=true.",
-				"Used only when Credentials is not set, and discrete values such as Server or Database still override its parts."
+				"Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Every connection setting, such as the server, the database, the login, and the encryption mode, is written into the string itself."
 			],
 			"mandatory": false,
 			"name": "ConnectionString",
@@ -394,55 +327,13 @@
 		},
 		{
 			"description": [
-				"Names a stored SQL Server credentials record by its name or id, such as sql-production.",
-				"Keeps server addresses, logins, and secrets out of the flow because the record supplies the connection at runtime.",
-				"When no record matches, a value that contains an equals sign is used as a raw connection string and any other value is used as a raw Microsoft Entra access token.",
-				"Takes priority over ConnectionString when both are set."
+				"Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.",
+				"The record carries the server, port, database, login, and encryption settings, so the step never repeats them.",
+				"When no record matches, a value that contains `=` is used as a raw connection string and any other value is used as a raw Microsoft Entra access token."
 			],
 			"mandatory": false,
 			"name": "Credentials",
 			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets the database the connection opens, overriding the database from the credentials record or the connection string.",
-				"Lets one stored login reach several databases on the same server."
-			],
-			"mandatory": false,
-			"name": "Database",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets how the connection encrypts traffic between the automation and SQL Server.",
-				"Overrides the encryption mode from the credentials record or the connection string."
-			],
-			"mandatory": false,
-			"name": "Encrypt",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
-						"Matches the default of the Microsoft SQL Server data provider."
-					],
-					"name": "Mandatory"
-				},
-				{
-					"description": [
-						"Encrypts traffic only when the server asks for it.",
-						"Suits older or internal servers that do not offer encryption."
-					],
-					"name": "Optional"
-				},
-				{
-					"description": [
-						"Uses TDS 8.0 strict encryption, where the secure handshake happens before any login data is sent.",
-						"Requires SQL Server 2022 or Azure SQL and always validates the server certificate."
-					],
-					"name": "Strict"
-				}
-			]
 		},
 		{
 			"description": [
@@ -456,37 +347,9 @@
 		},
 		{
 			"description": [
-				"Sets the password for the SQL Server or Microsoft Entra login, overriding the password from the credentials record or the connection string.",
-				"Prefer Credentials over an inline password so secrets stay out of the flow definition."
-			],
-			"mandatory": false,
-			"name": "Password",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets the TCP port added to Server, such as 1433 for a default SQL Server instance.",
-				"Applies only when Server is set in the same step, and values of 0 or less are ignored."
-			],
-			"mandatory": false,
-			"name": "Port",
-			"type": "Number"
-		},
-		{
-			"description": [
-				"Sets the SQL Server host name, address, or named instance, such as localhost or db01\\SQLEXPRESS.",
-				"Overrides the server from the credentials record or the connection string and is required when neither supplies one.",
-				"Combine it with Port to reach a specific TCP port."
-			],
-			"mandatory": false,
-			"name": "Server",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Supplies a raw Microsoft Entra access token that authenticates the connection.",
-				"Fits pipelines that already hold a token for the database resource, and needs Server or a connection string because a token carries no server address.",
-				"Do not combine it with Password or an Authentication value, because the data provider rejects a connection that sets both."
+				"Supplies a raw Microsoft Entra access token that signs in the connection.",
+				"Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.",
+				"Do not combine it with a connection string that carries a password or an Authentication keyword, because the SQL Server client rejects that mix when the connection opens."
 			],
 			"mandatory": false,
 			"name": "Token",
@@ -501,25 +364,6 @@
 			"mandatory": false,
 			"name": "Transaction",
 			"type": "Switch"
-		},
-		{
-			"description": [
-				"Accepts the server certificate without checking it against a trusted certificate authority.",
-				"Needed for local or test servers that use a self-signed certificate, such as a developer instance on localhost,1433.",
-				"Avoid it on production servers because it removes protection against impersonated servers."
-			],
-			"mandatory": false,
-			"name": "TrustServerCertificate",
-			"type": "Switch"
-		},
-		{
-			"description": [
-				"Sets the login name used with Password, overriding the user from the credentials record or the connection string.",
-				"For a Microsoft Entra service principal, the value carries the application client id."
-			],
-			"mandatory": false,
-			"name": "Username",
-			"type": "String|Expression"
 		}
 	],
 	"platforms": [

@@ -24,7 +24,7 @@
 						"question": "What are the key parameters of InvokeSqlServerNonQuery?"
 					},
 					{
-						"answer": "Credentials is read first, then ConnectionString, and Server, Port, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, and Token override the parts they set.",
+						"answer": "Credentials is read first and ConnectionString is used when no credentials are set, while Token supplies a Microsoft Entra access token; the server, the database, and the login come from the credentials record or the connection string.",
 						"question": "How does InvokeSqlServerNonQuery choose the SQL Server connection?"
 					},
 					{
@@ -117,8 +117,8 @@
 		"| Feature | Description |",
 		"| --- | --- |",
 		"| Data and schema changes | Runs INSERT, UPDATE, DELETE, MERGE, and DDL statements and returns the affected row count. |",
-		"| Flexible connection | Connects through a stored credentials record, a raw connection string, a raw Microsoft Entra access token, or discrete Server, Port, and Database values. |",
-		"| Connection overrides | Server, Port, Database, Authentication, Username, Password, Encrypt, and TrustServerCertificate replace the parts of the base connection they set. |",
+		"| Flexible connection | Connects through a stored credentials record, a raw connection string, or a raw Microsoft Entra access token. |",
+		"| Entra token sign-in | Signs in with the raw access token from Token, next to a connection that carries no password or Authentication keyword. |",
 		"| Parameter binding | Binds the properties of a Parameters JSON object to named placeholders such as @Id, keeping strings, numbers, booleans, and null typed. |",
 		"| Inline or file SQL | Reads the statement from CommandText, a Base64-encoded CommandText with the Base64 switch, or a UTF-8 CommandFile, for SQL that contains ' --' or '}}'. |",
 		"| Transaction | Wraps the statement in one transaction that commits on success and rolls back on failure. |",
@@ -236,15 +236,15 @@
 					"edge_cases": [
 						"Encrypt Mandatory with an untrusted certificate fails without TrustServerCertificate",
 						"Parameters value that is not a JSON object fails the step",
-						"Port without Server is ignored"
+						"Connection string names no server"
 					],
 					"expected_result": "One audit row is inserted into dbo.AuditLog and InvokeSqlServerNonQuery:RowsAffected holds 1.",
-					"notes": "Server, Port, Database, and Authentication build the connection without Credentials or ConnectionString. Authentication Integrated signs in with the Windows identity, and TrustServerCertificate accepts a self-signed certificate on a local server.",
-					"use_case": "insert_row_with_discrete_connection_parts",
+					"notes": "The connection string builds the connection when no Credentials is set, and carries every connection setting as its own keyword. Integrated Security signs in with the Windows identity, and TrustServerCertificate accepts a self-signed certificate on a local server.",
+					"use_case": "insert_row_with_connection_string",
 					"version": "4"
 				},
 				"labels": [
-					"ConnectionOverrides",
+					"ConnectionString",
 					"Database",
 					"DataInsert",
 					"IntegratedSecurity",
@@ -252,14 +252,14 @@
 				]
 			},
 			"description": [
-				"### Insert a row with discrete connection parts",
+				"### Insert a row with a connection string",
 				"",
-				"The argument uses parameter syntax that binds Server, Port, Database, Authentication, the TrustServerCertificate switch, the INSERT statement, and its Parameters.",
-				"The connection is composed from those parts, and the bound @Event and @Success values become one new audit row."
+				"The argument uses parameter syntax that binds a `ConnectionString`, the Parameters JSON object, and the INSERT statement.",
+				"The connection comes from that string, and the bound @Event and @Success values become one new audit row."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Server:localhost --Port:1433 --Database:Sales --Authentication:Integrated --TrustServerCertificate --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success) --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --Encrypt:Mandatory}}",
+				"argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}",
 				"pluginName": "InvokeSqlServerNonQuery"
 			}
 		},
@@ -348,74 +348,6 @@
 	"parameters": [
 		{
 			"description": [
-				"Chooses how the connection signs in to SQL Server, such as a SQL login, the Windows identity, or a Microsoft Entra method.",
-				"Overrides the sign-in method of the stored credentials or connection string, so one target can be reached with a different identity.",
-				"Leave it empty to keep the method that the credentials or connection string already define."
-			],
-			"mandatory": false,
-			"name": "Authentication",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Signs in with the first Microsoft Entra identity found in the environment, such as a managed identity or a developer login.",
-						"Suits pipelines that run under different identities without code changes."
-					],
-					"name": "Active Directory Default"
-				},
-				{
-					"description": [
-						"Signs in with the Microsoft Entra identity of the signed-in Windows user.",
-						"Suits domain-joined machines that are federated with Microsoft Entra ID."
-					],
-					"name": "Active Directory Integrated"
-				},
-				{
-					"description": [
-						"Opens an interactive Microsoft Entra sign-in prompt for the user named in Username.",
-						"Suits attended runs where a person can complete multi-factor sign-in."
-					],
-					"name": "Active Directory Interactive"
-				},
-				{
-					"description": [
-						"Signs in with the Azure managed identity of the host; Username can carry a user-assigned identity client id.",
-						"Suits unattended runs on Azure hosts without any stored secret."
-					],
-					"name": "Active Directory Managed Identity"
-				},
-				{
-					"description": [
-						"Signs in with a Microsoft Entra user name and password taken from Username and Password.",
-						"Suits accounts that do not require multi-factor sign-in."
-					],
-					"name": "Active Directory Password"
-				},
-				{
-					"description": [
-						"Signs in as a Microsoft Entra application, with the client id in Username and the client secret in Password.",
-						"Suits unattended service runs that use an app registration."
-					],
-					"name": "Active Directory Service Principal"
-				},
-				{
-					"description": [
-						"Signs in with the Windows identity that runs the automation (Integrated Security).",
-						"Avoids storing any password when the runner account has database access."
-					],
-					"name": "Integrated"
-				},
-				{
-					"description": [
-						"Signs in with a SQL Server login taken from Username and Password.",
-						"Suits servers that use SQL Server authentication."
-					],
-					"name": "Sql Password"
-				}
-			]
-		},
-		{
-			"description": [
 				"Decodes the CommandText value from UTF-8 Base64 before the statement runs.",
 				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
 				"Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.",
@@ -459,9 +391,9 @@
 		},
 		{
 			"description": [
-				"Holds a full ADO.NET connection string, such as Server=localhost,1433;Database=Sales;Integrated Security=True.",
-				"Use it when no stored credentials record is set, because Credentials takes priority over it.",
-				"Server, Database, and the other connection parameters still override the parts they set."
+				"Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.",
+				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
+				"Every connection setting, such as the server, the database, the login, and the encryption mode, is written into the string itself."
 			],
 			"mandatory": false,
 			"name": "ConnectionString",
@@ -469,54 +401,13 @@
 		},
 		{
 			"description": [
-				"Names a stored SQL Server credentials record by name or id, so the login never appears in the automation definition.",
-				"A value that matches no record and contains an equals sign is used as a raw connection string.",
-				"Any other unmatched value is used as a raw Microsoft Entra access token, and Credentials takes priority over ConnectionString."
+				"Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.",
+				"The record carries the server, port, database, login, and encryption settings, so the step never repeats them.",
+				"When no record matches, a value that contains `=` is used as a raw connection string and any other value is used as a raw Microsoft Entra access token."
 			],
 			"mandatory": false,
 			"name": "Credentials",
 			"type": "String"
-		},
-		{
-			"description": [
-				"Sets the database the statement runs in, overriding the database of the credentials or connection string.",
-				"Lets one stored login reach several databases on the same server."
-			],
-			"mandatory": false,
-			"name": "Database",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Sets how the connection encrypts traffic to SQL Server.",
-				"Overrides the encryption mode of the credentials or connection string, so security rules can be met per step."
-			],
-			"mandatory": false,
-			"name": "Encrypt",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
-						"Matches the provider default for new connections."
-					],
-					"name": "Mandatory"
-				},
-				{
-					"description": [
-						"Encrypts only when the server requires it.",
-						"Suits older servers on trusted networks."
-					],
-					"name": "Optional"
-				},
-				{
-					"description": [
-						"Uses TDS 8.0 strict encryption, where the connection is encrypted before any sign-in data is sent.",
-						"Requires SQL Server 2022 or Azure SQL and always validates the server certificate."
-					],
-					"name": "Strict"
-				}
-			]
 		},
 		{
 			"description": [
@@ -539,36 +430,9 @@
 		},
 		{
 			"description": [
-				"Sets the password or client secret used with Username, overriding the value of the credentials or connection string.",
-				"Prefer a stored credentials record so the secret stays out of the automation definition."
-			],
-			"mandatory": false,
-			"name": "Password",
-			"type": "String"
-		},
-		{
-			"description": [
-				"Sets the TCP port of SQL Server, such as 1433.",
-				"Applies together with Server, which receives the port as server,port."
-			],
-			"mandatory": false,
-			"name": "Port",
-			"type": "Number"
-		},
-		{
-			"description": [
-				"Sets the SQL Server host name or address, such as localhost or db01.contoso.local\\SQLEXPRESS.",
-				"Overrides the server of the credentials or connection string, so one stored login can target another server.",
-				"The step fails when no server results from Credentials, ConnectionString, or Server."
-			],
-			"mandatory": false,
-			"name": "Server",
-			"type": "String"
-		},
-		{
-			"description": [
 				"Supplies a raw Microsoft Entra access token that signs in the connection.",
-				"Do not combine it with a password or an Authentication method, because SQL Server rejects that combination."
+				"Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.",
+				"Do not combine it with a connection string that carries a password or an Authentication keyword, because the SQL Server client rejects that mix when the connection opens."
 			],
 			"mandatory": false,
 			"name": "Token",
@@ -582,24 +446,6 @@
 			"mandatory": false,
 			"name": "Transaction",
 			"type": "Switch"
-		},
-		{
-			"description": [
-				"Accepts the server certificate without validating it against a trusted authority.",
-				"Use it only for local or test servers with self-signed certificates, because it weakens protection against impersonation."
-			],
-			"mandatory": false,
-			"name": "TrustServerCertificate",
-			"type": "Switch"
-		},
-		{
-			"description": [
-				"Sets the login name, Microsoft Entra user, or application client id used to sign in.",
-				"Overrides the user of the credentials or connection string."
-			],
-			"mandatory": false,
-			"name": "Username",
-			"type": "String"
 		}
 	],
 	"platforms": [
@@ -609,7 +455,7 @@
 	"summary": [
 		"Runs an INSERT, UPDATE, DELETE, MERGE, or DDL statement on Microsoft SQL Server and returns the affected row count.",
 		"Binds input values as typed parameters and can wrap the change in a transaction that rolls back on failure.",
-		"Connects through stored credentials, a connection string, an access token, or discrete server settings.",
+		"Connects through stored credentials, a connection string, or a Microsoft Entra access token.",
 		"Stores RowsAffected in a session parameter so later steps can verify the change."
 	],
 	"version": "4"

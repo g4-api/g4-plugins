@@ -13,7 +13,7 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.SqlServer/Actions/TestSqlServerConnection.cs"
 			},
 			"rag": {
-				"description": "Check that a SQL Server database is reachable before an automation reads or writes data. The step reports success or the exact failure reason instead of stopping the flow, accepts stored credentials, connection strings, or discrete settings, and keeps workflows reliable by letting them branch on the result.",
+				"description": "Check that a SQL Server database is reachable before an automation reads or writes data. The step reports success or the exact failure reason instead of stopping the flow, accepts a stored credentials record or a connection string, and keeps workflows reliable by letting them branch on the result.",
 				"qa": [
 					{
 						"question": "What does the TestSqlServerConnection plugin do?",
@@ -21,7 +21,7 @@
 					},
 					{
 						"question": "What are the key parameters and outputs of TestSqlServerConnection?",
-						"answer": "Credentials, ConnectionString, or Server select the target, with optional Port, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, Token, and NoEntity. Outputs are Connected, Database, ServerVersion, and Error."
+						"answer": "Credentials or ConnectionString selects the target, with optional Token and NoEntity. Outputs are Connected, Database, ServerVersion, and Error."
 					},
 					{
 						"question": "How does TestSqlServerConnection fit into an automation workflow?",
@@ -65,7 +65,7 @@
 					},
 					{
 						"question": "What is the summary of TestSqlServerConnection?",
-						"answer": "Tests a SQL Server connection and reports whether it opened, without failing the flow when the server rejects the login or cannot be reached. Connects with a stored credentials name, a connection string, or discrete server, database, and sign-in settings. Stores the connection result, database name, server version, and error message as session parameters for health checks and conditional branching."
+						"answer": "Tests a SQL Server connection and reports whether it opened, without failing the flow when the server rejects the login or cannot be reached. Connects with a stored credentials name or a full ADO.NET connection string, optionally signing in with a Microsoft Entra access token. Stores the connection result, database name, server version, and error message as session parameters for health checks and conditional branching."
 					},
 					{
 						"question": "Where are the TestSqlServerConnection documentation and source code?",
@@ -94,7 +94,7 @@
 		"",
 		"Tests whether an automation can open a connection to a SQL Server database.",
 		"Reports the result as data instead of failing the step, so a flow can check database availability before it reads or writes data.",
-		"Supports stored credentials, full connection strings, and discrete server, database, and sign-in settings.",
+		"Supports a stored credentials record or a full connection string, so every connection detail stays in one place.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -103,7 +103,7 @@
 		"| Connection check           | Opens and immediately closes a connection to confirm that the server accepts the login.                                                              |",
 		"| Non-failing result         | Reports `Connected` as `false` with the client error message when SQL Server rejects the login or cannot be reached.                                 |",
 		"| Flexible connection input  | Resolves the target from a credentials name or id, a raw connection string, or a raw Microsoft Entra access token.                                   |",
-		"| Discrete overrides         | Applies Server, Port, Database, Authentication, Username, Password, Encrypt, TrustServerCertificate, and Token on top of the resolved connection.    |",
+		"| Entra token sign-in        | Signs in with a raw Microsoft Entra access token from `Token`, next to a connection that carries no password.                                        |",
 		"| Server details             | Returns the database name and server version reported by the opened connection.                                                                      |",
 		"| Session and entity outputs | Stores outputs as Base64 session parameters named `TestSqlServerConnection:<Name>` and returns them in the response entity unless `NoEntity` is set. |",
 		"",
@@ -125,7 +125,7 @@
 		"",
 		"### Notes",
 		"",
-		"A step that resolves no server from Credentials, ConnectionString, or Server fails instead of reporting `Connected` as `false`.",
+		"A step that resolves no server from Credentials or ConnectionString fails instead of reporting `Connected` as `false`.",
 		"Outputs are plain text in the response entity and Base64-encoded in the session parameters."
 	],
 	"entity": [
@@ -236,32 +236,32 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Self-signed certificate rejected without TrustServerCertificate",
-						"Windows identity has no access to the Sales database",
-						"Windows identity has no login on the server"
+						"Access token expired or issued for another audience",
+						"Connection string also carries a password or an Authentication keyword",
+						"Microsoft Entra identity has no login on the server"
 					],
-					"expected_result": "The step stores `TestSqlServerConnection:Connected` as `true` when the Windows identity can open the `Sales` database on `localhost,1433`.",
-					"notes": "The server, port, database, and sign-in method are passed as separate parameters without a credentials record. The `TrustServerCertificate` switch accepts a self-signed certificate on a development server.",
-					"use_case": "test_connection_with_discrete_settings",
+					"expected_result": "The step stores `TestSqlServerConnection:Connected` as `true` when the access token opens the `Sales` database on `sql01.database.windows.net`.",
+					"notes": "The connection string names the server and the database only, and carries no password and no Authentication keyword, because the SQL Server client rejects that mix when a token is set.",
+					"use_case": "test_connection_with_entra_access_token",
 					"version": "4"
 				},
 				"labels": [
 					"Connectivity",
 					"Database",
-					"Encryption",
+					"Entra",
 					"HealthCheck",
 					"SqlServer"
 				]
 			},
 			"description": [
-				"### Test a connection with discrete settings",
+				"### Test a connection with a Microsoft Entra access token",
 				"",
-				"The argument binds Server, Port, Database, Authentication, and Encrypt values plus the `TrustServerCertificate` switch.",
-				"The step signs in with the Windows identity and reports the result."
+				"The argument binds a connection string that names the server and the database only, plus the `Token` value that signs in the connection.",
+				"The step signs in with the access token and reports the result."
 			],
 			"rule": {
 				"$type": "Action",
-				"argument": "{{$ --Server:localhost --Port:1433 --Database:Sales --Authentication:Integrated --Encrypt:Mandatory --TrustServerCertificate}}",
+				"argument": "{{$ --ConnectionString:Server=sql01.database.windows.net;Database=Sales;Encrypt=Mandatory --Token:eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9}}",
 				"pluginName": "TestSqlServerConnection"
 			}
 		}
@@ -312,77 +312,9 @@
 	"parameters": [
 		{
 			"description": [
-				"Selects how the connection signs in to SQL Server, such as a SQL login, the Windows identity, or a Microsoft Entra method.",
-				"Overrides the authentication method from the credentials or the connection string for this step only.",
-				"Choosing the right method avoids login failures on servers that accept only certain sign-in types."
-			],
-			"mandatory": false,
-			"name": "Authentication",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Signs in with a SQL Server login name and password.",
-						"Use it together with the Username and Password parameters."
-					],
-					"name": "Sql Password"
-				},
-				{
-					"description": [
-						"Signs in with the Windows identity of the account that runs the automation.",
-						"No user name or password is sent with the connection."
-					],
-					"name": "Integrated"
-				},
-				{
-					"description": [
-						"Signs in with the first available Microsoft Entra identity on the machine, such as a managed identity or developer tool sign-in.",
-						"Suits automation that moves between local machines and cloud hosts."
-					],
-					"name": "Active Directory Default"
-				},
-				{
-					"description": [
-						"Signs in with the Microsoft Entra identity of the signed-in Windows user.",
-						"Works on domain-joined or Entra-joined machines without a password."
-					],
-					"name": "Active Directory Integrated"
-				},
-				{
-					"description": [
-						"Opens a Microsoft Entra sign-in prompt for the user.",
-						"Fits attended runs where a person can complete the sign-in, including multi-factor prompts."
-					],
-					"name": "Active Directory Interactive"
-				},
-				{
-					"description": [
-						"Signs in with the managed identity of the Azure resource that runs the automation.",
-						"Keeps stored secrets out of cloud-hosted runs."
-					],
-					"name": "Active Directory Managed Identity"
-				},
-				{
-					"description": [
-						"Signs in with a Microsoft Entra user name and password.",
-						"Use it together with the Username and Password parameters."
-					],
-					"name": "Active Directory Password"
-				},
-				{
-					"description": [
-						"Signs in as a Microsoft Entra application.",
-						"Pass the application id as Username and the client secret as Password."
-					],
-					"name": "Active Directory Service Principal"
-				}
-			]
-		},
-		{
-			"description": [
 				"Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.",
 				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
-				"Discrete parameters such as Server or Database still override the matching parts of the string."
+				"Every connection setting, such as the server, the database, the login, and the encryption mode, is written into the string itself."
 			],
 			"mandatory": false,
 			"name": "ConnectionString",
@@ -391,53 +323,12 @@
 		{
 			"description": [
 				"Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.",
-				"When no record matches, a value that contains `=` is used as a raw connection string and any other value is used as a raw Microsoft Entra access token.",
-				"Takes priority over ConnectionString, while discrete parameters such as Database still override the resolved values."
+				"The record carries the server, port, database, login, and encryption settings, so the step never repeats them.",
+				"When no record matches, a value that contains `=` is used as a raw connection string and any other value is used as a raw Microsoft Entra access token."
 			],
 			"mandatory": false,
 			"name": "Credentials",
 			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets the database the connection opens in, such as `Sales`.",
-				"Overrides the database from the credentials or connection string, so one stored login can reach several databases."
-			],
-			"mandatory": false,
-			"name": "Database",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets the transport encryption mode of the connection.",
-				"Overrides the encryption setting from the credentials or connection string when a server requires a specific mode."
-			],
-			"mandatory": false,
-			"name": "Encrypt",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Requires an encrypted connection and validates the server certificate unless TrustServerCertificate is set.",
-						"Fits most production servers."
-					],
-					"name": "Mandatory"
-				},
-				{
-					"description": [
-						"Encrypts the connection only when the server requires it.",
-						"Suits local development servers without a trusted certificate."
-					],
-					"name": "Optional"
-				},
-				{
-					"description": [
-						"Encrypts the connection before login and always validates the server certificate.",
-						"Requires a server that supports TDS 8.0, such as SQL Server 2022 or Azure SQL Database."
-					],
-					"name": "Strict"
-				}
-			]
 		},
 		{
 			"description": [
@@ -450,60 +341,12 @@
 		},
 		{
 			"description": [
-				"Sets the password used with the Username login.",
-				"Overrides the password from the credentials or connection string for this step.",
-				"Prefer Credentials over a plain password so secrets are not stored in the rule."
-			],
-			"mandatory": false,
-			"name": "Password",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets the TCP port of the server, such as `1433`, and joins it to Server as `server,port`.",
-				"Applies only when Server is set in the same step, because the port is combined with that server name."
-			],
-			"mandatory": false,
-			"name": "Port",
-			"type": "Number"
-		},
-		{
-			"description": [
-				"Sets the SQL Server host name or address, such as `localhost` or `db01\\SQLEXPRESS`.",
-				"Overrides the server from the credentials or connection string.",
-				"The step fails when no server is resolved from Credentials, ConnectionString, or Server."
-			],
-			"mandatory": false,
-			"name": "Server",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
 				"Supplies a raw Microsoft Entra access token that signs in the connection.",
-				"Enables token sign-in without a stored password.",
-				"Do not combine it with Password or Authentication, because the SQL Server client rejects that mix when the connection opens."
+				"Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.",
+				"Do not combine it with a connection string that carries a password or an Authentication keyword, because the SQL Server client rejects that mix when the connection opens."
 			],
 			"mandatory": false,
 			"name": "Token",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Accepts the server certificate without validating it against a trusted authority.",
-				"Helps connect to development servers that use a self-signed certificate.",
-				"Avoid it in production, because it removes protection against a spoofed server."
-			],
-			"mandatory": false,
-			"name": "TrustServerCertificate",
-			"type": "Switch"
-		},
-		{
-			"description": [
-				"Sets the login name used with Password, such as a SQL login or a Microsoft Entra user or application id.",
-				"Overrides the user name from the credentials or connection string for this step."
-			],
-			"mandatory": false,
-			"name": "Username",
 			"type": "String|Expression"
 		}
 	],
@@ -513,7 +356,7 @@
 	"pluginType": "Action",
 	"summary": [
 		"Tests a SQL Server connection and reports whether it opened, without failing the flow when the server rejects the login or cannot be reached.",
-		"Connects with a stored credentials name, a connection string, or discrete server, database, and sign-in settings.",
+		"Connects with a stored credentials name or a full ADO.NET connection string, optionally signing in with a Microsoft Entra access token.",
 		"Stores the connection result, database name, server version, and error message as session parameters for health checks and conditional branching."
 	],
 	"version": "4"
