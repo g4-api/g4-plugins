@@ -167,7 +167,8 @@ namespace G4.UnitTests.Plugins.MongoDb
         public void ImportMongoDbDataMissingPayloadTest()
         {
             // Arrange: name a collection but pass no payload; the target is never contacted.
-            var rule = NewRule(arguments: "--Host:127.0.0.1 --Database:G4Tests --Collection:x");
+            var rule = NewRule(
+                arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --Database:G4Tests --Collection:x");
 
             // Act and Assert: the failure names both payload arguments.
             var exception = Assert.ThrowsExactly<InvalidOperationException>(() => Invoke<ImportMongoDbData>(rule));

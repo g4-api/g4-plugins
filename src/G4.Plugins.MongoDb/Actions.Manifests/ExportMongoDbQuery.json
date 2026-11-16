@@ -20,7 +20,7 @@
 						"question": "What does the ExportMongoDbQuery plugin do?"
 					},
 					{
-						"answer": "Collection is required; CommandText, CommandFile, and Base64 carry the filter; Projection, Sort, Limit, and Skip shape the result; the connection comes from Credentials, ConnectionString, or the discrete host and login parameters. Outputs are Columns, DocumentCount, and Result.",
+						"answer": "Collection is required; CommandText, CommandFile, and Base64 carry the filter; Projection, Sort, Limit, and Skip shape the result; the connection comes from Credentials or ConnectionString, and Database selects the database. Outputs are Columns, DocumentCount, and Result.",
 						"question": "What are the key parameters and outputs of ExportMongoDbQuery?"
 					},
 					{
@@ -329,87 +329,6 @@
 	"parameters": [
 		{
 			"description": [
-				"Accepts the server certificate without validating its trust chain.",
-				"Intended for development servers and containers that use a self-signed certificate.",
-				"Leave it unset for any deployment that holds real data."
-			],
-			"mandatory": false,
-			"name": "AllowInvalidCertificates",
-			"type": "Switch"
-		},
-		{
-			"description": [
-				"Names the database that holds the user record, such as `admin`.",
-				"Overrides the authentication source from the credentials or the connection URI for this step only.",
-				"Set it when the login lives in a different database than the data."
-			],
-			"mandatory": false,
-			"name": "AuthenticationDatabase",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Selects how the driver proves the identity of the login.",
-				"Overrides the mechanism from the credentials or the connection URI for this step only.",
-				"Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256."
-			],
-			"mandatory": false,
-			"name": "AuthenticationMechanism",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Signs in with a user name and password over SCRAM using SHA-256.",
-						"This is the modern default, so leave the parameter unset unless a server needs another mechanism."
-					],
-					"name": "SCRAM-SHA-256"
-				},
-				{
-					"description": [
-						"Signs in with a user name and password over SCRAM using SHA-1.",
-						"Use it for servers older than 4.0, which do not offer SHA-256."
-					],
-					"name": "SCRAM-SHA-1"
-				},
-				{
-					"description": [
-						"Signs in with the client TLS certificate instead of a password.",
-						"Set Username to the certificate subject, or leave it unset to let the server read it."
-					],
-					"name": "MONGODB-X509"
-				},
-				{
-					"description": [
-						"Signs in with AWS Identity and Access Management credentials.",
-						"Use it for an Atlas cluster that trusts an AWS role."
-					],
-					"name": "MONGODB-AWS"
-				},
-				{
-					"description": [
-						"Signs in with an OpenID Connect access token, such as a workload identity token.",
-						"Use it for a deployment that federates its logins to an identity provider."
-					],
-					"name": "MONGODB-OIDC"
-				},
-				{
-					"description": [
-						"Signs in through an external LDAP or operating-system directory in plain text over TLS.",
-						"Set Tls to Enabled, because the password travels unhashed."
-					],
-					"name": "PLAIN"
-				},
-				{
-					"description": [
-						"Signs in with a Kerberos principal.",
-						"Use it for an enterprise deployment that authenticates through Kerberos."
-					],
-					"name": "GSSAPI"
-				}
-			]
-		},
-		{
-			"description": [
 				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
 				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
 				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
@@ -463,7 +382,7 @@
 			"description": [
 				"Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.",
 				"Applies only when Credentials is not set, so a stored credentials reference always takes priority.",
-				"Discrete parameters such as Host or Database still override the matching parts of the URI."
+				"Every connection setting, such as the host, the login, the replica set, and the TLS mode, is written into the URI itself."
 			],
 			"mandatory": false,
 			"name": "ConnectionString",
@@ -472,8 +391,8 @@
 		{
 			"description": [
 				"Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.",
-				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.",
-				"Any other value that matches no record fails the step, so a typed record name never reads as a host."
+				"The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.",
+				"A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead, and any other value that matches no record fails the step."
 			],
 			"mandatory": false,
 			"name": "Credentials",
@@ -481,32 +400,12 @@
 		},
 		{
 			"description": [
-				"Sets the database the step operates on, such as `shop`.",
-				"Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.",
+				"Names the database the step operates on, such as `shop`.",
+				"Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.",
 				"A collection named as `database.collection` overrides this parameter in turn."
 			],
 			"mandatory": false,
 			"name": "Database",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Connects to the named host directly instead of discovering the deployment topology.",
-				"Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.",
-				"A direct connection cannot run multi-document transactions."
-			],
-			"mandatory": false,
-			"name": "DirectConnection",
-			"type": "Switch"
-		},
-		{
-			"description": [
-				"Sets the MongoDB host or network address, such as `localhost`.",
-				"Overrides the host from the credentials or the connection URI for this step only.",
-				"A multi-host seed list travels in ConnectionString instead."
-			],
-			"mandatory": false,
-			"name": "Host",
 			"type": "String|Expression"
 		},
 		{
@@ -530,41 +429,11 @@
 		},
 		{
 			"description": [
-				"Sets the password used with a password-based mechanism.",
-				"Overrides the password from the credentials or the connection URI for this step.",
-				"Prefer a stored credentials record, so the secret never appears in the rule."
-			],
-			"mandatory": false,
-			"name": "Password",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets the TCP port of the MongoDB instance, such as `27017`.",
-				"Overrides the port from the credentials or the connection URI, and keeps the resolved host.",
-				"An unset port keeps the resolved port, which is 27017 for a plain URI."
-			],
-			"mandatory": false,
-			"name": "Port",
-			"type": "Number"
-		},
-		{
-			"description": [
 				"Selects the fields the server returns, as a JSON object such as `{\"name\":1,\"_id\":0}`.",
 				"An omitted projection returns the whole document."
 			],
 			"mandatory": false,
 			"name": "Projection",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Requires the client to join the named replica set, such as `rs0`.",
-				"Overrides the replica set from the credentials or the connection URI for this step.",
-				"A replica set is required for multi-document transactions."
-			],
-			"mandatory": false,
-			"name": "ReplicaSet",
 			"type": "String|Expression"
 		},
 		{
@@ -584,40 +453,6 @@
 			],
 			"mandatory": false,
 			"name": "Sort",
-			"type": "String|Expression"
-		},
-		{
-			"description": [
-				"Sets the transport encryption mode of the connection.",
-				"Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly."
-			],
-			"mandatory": false,
-			"name": "Tls",
-			"type": "String",
-			"values": [
-				{
-					"description": [
-						"Requires TLS encryption for the connection.",
-						"Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas."
-					],
-					"name": "Enabled"
-				},
-				{
-					"description": [
-						"Connects without TLS.",
-						"Use it for a loopback or private-network deployment that serves plain connections."
-					],
-					"name": "Disabled"
-				}
-			]
-		},
-		{
-			"description": [
-				"Sets the login name used with Password, such as a database user or a certificate subject.",
-				"Overrides the user name from the credentials or the connection URI for this step."
-			],
-			"mandatory": false,
-			"name": "Username",
 			"type": "String|Expression"
 		}
 	],

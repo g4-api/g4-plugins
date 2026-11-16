@@ -43,38 +43,48 @@ Every plugin takes the connection inputs below. All of them are optional, but to
 | `Credentials` | A stored MongoDB credentials record, by name or id | Production, because the secret stays out of the rule |
 | `Credentials` | A connection URI, which the plugin recognizes by its `://` scheme | A one-off target that no record describes |
 | `ConnectionString` | A connection URI | The usual way to pass a URI, used when `Credentials` is not set |
-| Discrete inputs | `Host`, `Port`, `Database`, `ReplicaSet`, `Username`, `Password`, `AuthenticationDatabase`, `AuthenticationMechanism`, `Tls`, `AllowInvalidCertificates`, `DirectConnection` | Composing a target from flow parameters, or overriding part of a record |
+
+A step never passes the host, the port, the login, the replica set, or the TLS settings on its own: those belong to the
+stored credentials record, or to the connection URI. `Database` is not a connection input at all. It is an operation
+input, like `Collection`, so one record or URI serves every database of a deployment.
 
 ### Stored credentials records
 
-A record carries either a complete URI or the discrete parts, and the plugins read it from the MongoDB partition of the
-engine credentials cache. The stored `Password` and `ConnectionString` are persisted in protected form and restored on
-read. Source: `G4.Credentials` in the engine repository.
+A record carries either a complete URI or the discrete parts (`Host`, `Port`, `Database`, `ReplicaSet`, `Username`,
+`Password`, `AuthenticationDatabase`, `AuthenticationMechanism`, `Tls`, `AllowInvalidCertificates`,
+`DirectConnection`), and the plugins read it from the MongoDB partition of the engine credentials cache. The stored
+`Password` and `ConnectionString` are persisted in protected form and restored on read. Source: `G4.Credentials` in the
+engine repository.
 
 ### Resolution order
 
-1. `Credentials` names a stored record. Its URI is the baseline, and its own discrete parts override it.
-2. `Credentials` carries `://`. The value is the baseline URI.
+1. `Credentials` names a stored record. Its URI is the starting point, and its own discrete parts override it: a stored
+   `Port` without a stored `Host` re-targets the host of the URI, and a stored `Host` without a stored `Port` keeps the
+   port of the URI.
+2. `Credentials` carries `://`. The value is used as the connection URI.
 3. `Credentials` matches no record and carries no scheme. The step fails and names the value, so a typed record name
    never reads as a host name.
-4. Without `Credentials`, `ConnectionString` is the baseline.
-5. The discrete step inputs override whatever the baseline resolved. A `Port` without a `Host` re-targets the baseline
-   host, and a `Host` without a `Port` keeps the baseline port.
+4. Without `Credentials`, `ConnectionString` supplies the connection.
+5. The `Database` step input selects the operation database, replacing the one the record or the URI carries. A
+   collection named as `database.collection` overrides it in turn.
+6. The step fails with "No MongoDB target was resolved. Set 'Credentials' or 'ConnectionString'." when neither input
+   names a deployment, because the driver would otherwise default to localhost.
 
 Source: `Extensions/LocalExtensions.cs`.
 
 ### Authentication values
 
-`AuthenticationMechanism` takes the `authMechanism` values of the drivers: `SCRAM-SHA-256`, `SCRAM-SHA-1`,
+The record field `AuthenticationMechanism` takes the `authMechanism` values of the drivers: `SCRAM-SHA-256`, `SCRAM-SHA-1`,
 `MONGODB-X509`, `MONGODB-AWS`, `MONGODB-OIDC`, `PLAIN` and `GSSAPI`. Leave it unset to let the server and the driver
 negotiate, which selects `SCRAM-SHA-256` on a modern deployment. `AuthenticationDatabase` names the database that holds
 the user record, which is usually `admin`.
 
 ### TLS values
 
-`Tls` takes `Enabled` or `Disabled`, so a record states the mode instead of leaving it to the URI scheme. The
-`AllowInvalidCertificates` switch accepts a certificate without validating its trust chain, which suits a development
-container and nothing else.
+The record field `Tls` takes `Enabled` or `Disabled`, so a record states the mode instead of leaving it to the URI
+scheme. The record flag `AllowInvalidCertificates` accepts a certificate without validating its trust chain, which
+suits a development container and nothing else. In a URI, the matching options are `tls=true` and
+`tlsAllowInvalidCertificates=true`.
 
 ## Send payloads to the server
 
@@ -136,9 +146,9 @@ documents, in the order they were first seen.
 
 ```json
 {
-  "$type": "Action",
-  "pluginName": "TestMongoDbConnection",
-  "argument": "{{$ --Credentials:mongo-production --CommandTimeout:5}}"
+    "$type": "Action",
+    "pluginName": "TestMongoDbConnection",
+    "argument": "{{$ --Credentials:mongo-production --CommandTimeout:5}}"
 }
 ```
 
@@ -146,9 +156,9 @@ documents, in the order they were first seen.
 
 ```json
 {
-  "$type": "Action",
-  "pluginName": "ExportMongoDbQuery",
-  "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100}}"
+    "$type": "Action",
+    "pluginName": "ExportMongoDbQuery",
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100}}"
 }
 ```
 
@@ -156,9 +166,9 @@ documents, in the order they were first seen.
 
 ```json
 {
-  "$type": "Action",
-  "pluginName": "GetMongoDbScalar",
-  "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
+    "$type": "Action",
+    "pluginName": "GetMongoDbScalar",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 }
 ```
 
@@ -168,9 +178,9 @@ The decoded `Document` is `{"$set":{"status":"processed"}}`, which cannot travel
 
 ```json
 {
-  "$type": "Action",
-  "pluginName": "InvokeMongoDbWrite",
-  "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64}}"
+    "$type": "Action",
+    "pluginName": "InvokeMongoDbWrite",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64}}"
 }
 ```
 
@@ -180,9 +190,9 @@ The decoded `CommandText` is `[{"$match":{"status":"open"}},{"$group":{"_id":"$s
 
 ```json
 {
-  "$type": "Action",
-  "pluginName": "InvokeMongoDbAggregate",
-  "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7InN0YXR1cyI6Im9wZW4ifX0seyIkZ3JvdXAiOnsiX2lkIjoiJHNrdSIsInRvdGFsIjp7IiRzdW0iOiIkdG90YWwifX19XQ== --Base64}}"
+    "$type": "Action",
+    "pluginName": "InvokeMongoDbAggregate",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7InN0YXR1cyI6Im9wZW4ifX0seyIkZ3JvdXAiOnsiX2lkIjoiJHNrdSIsInRvdGFsIjp7IiRzdW0iOiIkdG90YWwifX19XQ== --Base64}}"
 }
 ```
 
@@ -190,9 +200,9 @@ The decoded `CommandText` is `[{"$match":{"status":"open"}},{"$group":{"_id":"$s
 
 ```json
 {
-  "$type": "Action",
-  "pluginName": "InvokeMongoDbCommand",
-  "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}"
+    "$type": "Action",
+    "pluginName": "InvokeMongoDbCommand",
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}"
 }
 ```
 
@@ -200,9 +210,9 @@ The decoded `CommandText` is `[{"$match":{"status":"open"}},{"$group":{"_id":"$s
 
 ```json
 {
-  "$type": "Action",
-  "pluginName": "ImportMongoDbData",
-  "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}"
+    "$type": "Action",
+    "pluginName": "ImportMongoDbData",
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}"
 }
 ```
 
@@ -210,21 +220,21 @@ The decoded `CommandText` is `[{"$match":{"status":"open"}},{"$group":{"_id":"$s
 
 ```json
 {
-  "$type": "Extraction",
-  "pluginName": "ExportData",
-  "argument": "{{$ --Scope:Elements}}",
-  "locator": "Xpath",
-  "onElement": "//table[@id='leads']//tr[td]",
-  "dataCollector": {
-    "type": "MongoDbDataCollector",
-    "source": "mongo-production",
-    "repository": "shop.leads",
-    "forEntity": false
-  },
-  "rules": [
-    { "$type": "Content", "key": "Name", "locator": "Xpath", "onElement": "./td[1]" },
-    { "$type": "Content", "key": "Email", "locator": "Xpath", "onElement": "./td[2]" }
-  ]
+    "$type": "Extraction",
+    "pluginName": "ExportData",
+    "argument": "{{$ --Scope:Elements}}",
+    "locator": "Xpath",
+    "onElement": "//table[@id='leads']//tr[td]",
+    "dataCollector": {
+        "type": "MongoDbDataCollector",
+        "source": "mongo-production",
+        "repository": "shop.leads",
+        "forEntity": false
+    },
+    "rules": [
+        { "$type": "Content", "key": "Name", "locator": "Xpath", "onElement": "./td[1]" },
+        { "$type": "Content", "key": "Email", "locator": "Xpath", "onElement": "./td[2]" }
+    ]
 }
 ```
 
@@ -266,7 +276,7 @@ test job excludes them with `TestCategory!=MongoDbLive`.
 | --- | --- | --- |
 | "Authentication failed" | Wrong user name or password, or the user lives in another database | Check the login with `TestMongoDbConnection` and read its `Error` output, then set `AuthenticationDatabase`. |
 | "A timeout occurred after 30000ms selecting a server" | The host, the port or the topology is wrong, or the deployment is down | Probe with `TestMongoDbConnection` and a low `CommandTimeout`. For a single member behind a forwarded port, add `DirectConnection`. |
-| "No MongoDB target was resolved" | No `Credentials`, `ConnectionString` or `Host` named a deployment | Pass one of the three inputs. |
+| "No MongoDB target was resolved" | Neither `Credentials` nor `ConnectionString` named a deployment | Pass one of the two inputs. |
 | "No MongoDB credentials record matches '...'" | A misspelled record name, or a record that is not cached | Check the record name, and remember that the cache is rebuilt on synchronization. |
 | "No MongoDB database was resolved" | Neither the connection, the `Database` input nor a qualified collection named a database | Set `Database`, or name the collection as `database.collection`. |
 | "The 'CommandText' argument must be a JSON object" | The payload was cut by ` --` or `}}`, or it is not an object | Encode it as UTF-8 Base64 and add the matching switch, or move it to the file argument. |

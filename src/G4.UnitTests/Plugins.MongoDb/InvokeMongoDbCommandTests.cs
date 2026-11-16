@@ -113,8 +113,9 @@ namespace G4.UnitTests.Plugins.MongoDb
         public void InvokeMongoDbCommandMissingCommandTest()
         {
             // Arrange: pass no command and then an empty command document; the target is never contacted.
-            var missing = NewRule(arguments: "--Host:127.0.0.1 --Database:G4Tests");
-            var empty = NewRule(arguments: "--Host:127.0.0.1 --Database:G4Tests --CommandText:{}");
+            var missing = NewRule(arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --Database:G4Tests");
+            var empty = NewRule(
+                arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --Database:G4Tests --CommandText:{}");
 
             // Act and Assert: both failures name what the step must carry.
             var missingException = Assert.ThrowsExactly<InvalidOperationException>(
@@ -130,7 +131,7 @@ namespace G4.UnitTests.Plugins.MongoDb
         public void InvokeMongoDbCommandMissingDatabaseTest()
         {
             // Arrange: resolve a host without a database, so the command has no target.
-            var rule = NewRule(arguments: "--Host:127.0.0.1 --CommandText:{\"ping\":1}");
+            var rule = NewRule(arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --CommandText:{\"ping\":1}");
 
             // Act and Assert: the failure names the inputs a flow can set.
             var exception = Assert.ThrowsExactly<InvalidOperationException>(

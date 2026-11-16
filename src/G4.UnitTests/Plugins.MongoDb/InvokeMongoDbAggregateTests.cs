@@ -156,7 +156,8 @@ namespace G4.UnitTests.Plugins.MongoDb
         public void InvokeMongoDbAggregateMissingPipelineTest()
         {
             // Arrange: name a collection but pass no pipeline; the target is never contacted.
-            var rule = NewRule(arguments: "--Host:127.0.0.1 --Database:G4Tests --Collection:x");
+            var rule = NewRule(
+                arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --Database:G4Tests --Collection:x");
 
             // Act and Assert: the missing payload is named in the failure.
             var exception = Assert.ThrowsExactly<InvalidOperationException>(

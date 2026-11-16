@@ -142,18 +142,23 @@ namespace G4.Plugins.MongoDb.Extensions
             /// Resolves the connection settings from the step arguments.
             /// </summary>
             /// <remarks>
-            /// See <see cref="ResolveConnection(string, string, IDictionary{string, string})"/> for the
-            /// resolution order.
+            /// See <see cref="ResolveConnection(string, string, string, int)"/> for the resolution order. The step
+            /// names its deployment through <c>Credentials</c> or <c>ConnectionString</c> only; every discrete
+            /// connection part, such as the host or the login, is stored on the credentials record instead of being
+            /// repeated per step. <c>Database</c> is an operation input, like <c>Collection</c>, and selects the
+            /// database the step runs on.
             /// </remarks>
             /// <returns>The resolved connection settings.</returns>
             public MongoDbConnectionModel ResolveConnection()
             {
-                // Read the two baseline inputs and pass every argument as a potential override.
+                // Read the two deployment inputs, the operation database, and the timeout that also bounds connecting.
                 var credentials = pluginData.Parameters.Get(key: "Credentials", defaultValue: string.Empty);
                 var connectionString = pluginData.Parameters.Get(key: "ConnectionString", defaultValue: string.Empty);
+                var database = pluginData.Parameters.Get(key: "Database", defaultValue: string.Empty);
+                var commandTimeoutSeconds = pluginData.ResolveCommandTimeout();
 
                 // Route through the shared resolver so the plugin path and the collector path use one order.
-                return ResolveConnection(credentials, connectionString, overrides: pluginData.Parameters);
+                return ResolveConnection(credentials, connectionString, database, commandTimeoutSeconds);
             }
 
             /// <summary>
@@ -177,7 +182,9 @@ namespace G4.Plugins.MongoDb.Extensions
             /// Resolves a non-negative integer argument, such as <c>Limit</c>, <c>Skip</c>, or <c>BatchSize</c>.
             /// </summary>
             /// <param name="name">The argument name.</param>
-            /// <param name="defaultValue">The value used when the argument is missing or not a non-negative number.</param>
+            /// <param name="defaultValue">
+            /// The value used when the argument is missing or not a non-negative number.
+            /// </param>
             /// <returns>The resolved value.</returns>
             public int ResolveInteger(string name, int defaultValue)
             {
@@ -342,27 +349,32 @@ namespace G4.Plugins.MongoDb.Extensions
         }
 
         /// <summary>
-        /// Resolves the connection settings from a credentials value, a connection string, and discrete overrides.
+        /// Resolves the connection settings from a credentials value, a connection URI, and the operation database.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// The baseline comes from <paramref name="credentials"/> first: a matching MongoDB credentials record
+        /// The connection comes from <paramref name="credentials"/> first: a matching MongoDB credentials record
         /// supplies its connection; an unmatched value that carries a URI scheme is a raw connection URI, and any
         /// other unmatched value fails the step, because it names a record that does not exist. Without credentials,
-        /// the baseline is <paramref name="connectionString"/>.
+        /// the connection is <paramref name="connectionString"/>.
         /// </para>
         /// <para>
-        /// The discrete overrides (<c>Host</c>, <c>Port</c>, <c>Database</c>, <c>ReplicaSet</c>, <c>Username</c>,
-        /// <c>Password</c>, <c>AuthenticationDatabase</c>, <c>AuthenticationMechanism</c>, <c>Tls</c>, and the
-        /// <c>AllowInvalidCertificates</c> and <c>DirectConnection</c> switches) replace the baseline values they set,
-        /// so one stored login can target several databases.
+        /// A step names its deployment through those two inputs alone. Every discrete connection part, such as the
+        /// host, the port, the login, the replica set, or the TLS mode, is stored once on the credentials record, or
+        /// written into the connection URI, instead of being repeated as a step argument.
+        /// </para>
+        /// <para>
+        /// <paramref name="database"/> is an operation input, like the collection: it selects the database the step
+        /// runs on and replaces the one the connection carries. An empty value keeps the connection database, which
+        /// the step can still override by qualifying its collection as <c>database.collection</c>.
         /// </para>
         /// </remarks>
         /// <param name="credentials">The credentials name, identifier, or raw connection URI.</param>
         /// <param name="connectionString">The connection URI used when no credentials are set.</param>
-        /// <param name="overrides">
-        /// The step arguments that hold the discrete overrides and the <c>CommandTimeout</c> value; <c>null</c> for
-        /// the collector path, which carries no step arguments and therefore uses the default timeout.
+        /// <param name="database">The operation database; empty keeps the database the connection carries.</param>
+        /// <param name="commandTimeoutSeconds">
+        /// The command timeout, in seconds, which also bounds connecting and server selection; <c>0</c> means no
+        /// timeout.
         /// </param>
         /// <returns>The resolved connection settings.</returns>
         /// <exception cref="InvalidOperationException">
@@ -371,22 +383,15 @@ namespace G4.Plugins.MongoDb.Extensions
         public static MongoDbConnectionModel ResolveConnection(
             string credentials,
             string connectionString,
-            IDictionary<string, string> overrides)
+            string database,
+            int commandTimeoutSeconds)
         {
-            // Normalize the overrides so the collector path, which has no step arguments, shares this resolver.
-            overrides ??= new Dictionary<string, string>();
-
-            // Read the timeout from the same arguments, so the resolver keeps one input for every step value.
-            var commandTimeoutSeconds = ConvertToNonNegativeInteger(
-                value: overrides.Get(key: "CommandTimeout", defaultValue: string.Empty),
-                defaultValue: MongoDbClient.DefaultCommandTimeoutSeconds);
-
             // Look up the credentials value as a stored record first, so a record name never reaches the driver.
             var credential = FindCredential(idOrName: credentials);
             var hasCredentials = !string.IsNullOrWhiteSpace(credentials);
             var isRawUri = hasCredentials && credentials.Contains("://", StringComparison.Ordinal);
 
-            // Resolve the baseline: record, raw URI, then the plain connection string.
+            // Resolve the connection: record, raw URI, then the plain connection URI.
             MongoUrlBuilder builder;
 
             if (credential is not null)
@@ -411,36 +416,19 @@ namespace G4.Plugins.MongoDb.Extensions
                     : new MongoUrlBuilder(connectionString);
             }
 
-            // Apply the discrete overrides on top of the baseline; unset overrides leave the baseline untouched.
-            var options = new ConnectionPartsOptions
+            // Select the operation database, which replaces the one the connection carries; an empty value keeps it.
+            if (!string.IsNullOrWhiteSpace(database))
             {
-                AllowInvalidCertificates = overrides.ContainsKey(key: "AllowInvalidCertificates"),
-                AuthenticationDatabase = overrides.Get(key: "AuthenticationDatabase", defaultValue: string.Empty),
-                AuthenticationMechanism = overrides.Get(key: "AuthenticationMechanism", defaultValue: string.Empty),
-                Database = overrides.Get(key: "Database", defaultValue: string.Empty),
-                DirectConnection = overrides.ContainsKey(key: "DirectConnection"),
-                Host = overrides.Get(key: "Host", defaultValue: string.Empty),
-                Password = overrides.Get(key: "Password", defaultValue: string.Empty),
-                Port = ConvertToNonNegativeInteger(
-                    value: overrides.Get(key: "Port", defaultValue: string.Empty),
-                    defaultValue: 0),
-                ReplicaSet = overrides.Get(key: "ReplicaSet", defaultValue: string.Empty),
-                Tls = overrides.Get(key: "Tls", defaultValue: string.Empty),
-                Username = overrides.Get(key: "Username", defaultValue: string.Empty)
-            };
-
-            SetConnectionParts(builder, options);
+                builder.DatabaseName = database.Trim();
+            }
 
             // Require an explicit target, because the driver defaults an empty builder to localhost. A step that
             // names no deployment is a configuration error, not a connection to the test machine.
-            var hasTarget = credential is not null
-                || isRawUri
-                || !string.IsNullOrWhiteSpace(connectionString)
-                || !string.IsNullOrWhiteSpace(options.Host);
+            var hasTarget = credential is not null || isRawUri || !string.IsNullOrWhiteSpace(connectionString);
 
             if (!hasTarget)
             {
-                var message = "No MongoDB target was resolved. Set 'Credentials', 'ConnectionString', or 'Host'.";
+                var message = "No MongoDB target was resolved. Set 'Credentials' or 'ConnectionString'.";
                 throw new InvalidOperationException(message);
             }
 
@@ -512,9 +500,9 @@ namespace G4.Plugins.MongoDb.Extensions
                 ?? credentials.FirstOrDefault(i => string.Equals(i.Name, idOrName, StringComparison.OrdinalIgnoreCase));
         }
 
-        // Creates a URL builder from a credentials record: the record connection URI is the baseline and the record
-        // discrete parts that are set override it. Compute-only: the record is read, never mutated, and the returned
-        // builder is owned by the caller.
+        // Creates a URL builder from a credentials record: the record connection URI is the starting point and the
+        // record discrete parts that are set override it. Compute-only: the record is read, never mutated, and the
+        // returned builder is owned by the caller.
         private static MongoUrlBuilder NewUrlBuilder(MongoDbCredentialModel credential)
         {
             // Start from the stored URI when present so complex options survive.
@@ -545,9 +533,9 @@ namespace G4.Plugins.MongoDb.Extensions
             return builder;
         }
 
-        // Applies the discrete connection parts that are set to the builder, leaving unset parts untouched so they
-        // never erase baseline values. Mutates only the caller-owned builder. The TLS flags can only turn their
-        // option on, matching the switch arguments that carry them.
+        // Applies the discrete connection parts of a credentials record to the builder, leaving unset parts untouched
+        // so they never erase the values of the stored connection URI. Mutates only the caller-owned builder. The TLS
+        // flags can only turn their option on, matching the flags the record carries.
         private static void SetConnectionParts(MongoUrlBuilder builder, ConnectionPartsOptions options)
         {
             // Compose the server address from the host and the optional port. A port without a host re-targets the
@@ -629,8 +617,8 @@ namespace G4.Plugins.MongoDb.Extensions
         #endregion
 
         #region *** Nested Types ***
-        // Carries the discrete connection parts applied on top of a connection baseline, either from the step
-        // arguments or from a stored credentials record. Empty strings, a zero port, and a false flag mean "not set".
+        // Carries the discrete connection parts of a credentials record, applied on top of the stored connection URI.
+        // Empty strings, a zero port, and a false flag mean "not set".
         private sealed class ConnectionPartsOptions
         {
             /// <summary>

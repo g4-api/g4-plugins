@@ -301,85 +301,6 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 
 ## Parameters
 
-### Allow Invalid Certificates (AllowInvalidCertificates)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Switch            |
-
-Accepts the server certificate without validating its trust chain.
-Intended for development servers and containers that use a self-signed certificate.
-Leave it unset for any deployment that holds real data.
-
-### Authentication Database (AuthenticationDatabase)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Names the database that holds the user record, such as `admin`.
-Overrides the authentication source from the credentials or the connection URI for this step only.
-Set it when the login lives in a different database than the data.
-
-### Authentication Mechanism (AuthenticationMechanism)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Selects how the driver proves the identity of the login.
-Overrides the mechanism from the credentials or the connection URI for this step only.
-Leave it unset to let the server and the driver negotiate, which selects SCRAM-SHA-256.
-
-#### Values
-
-##### Scramsha256
-
-Signs in with a user name and password over SCRAM using SHA-256.
-This is the modern default, so leave the parameter unset unless a server needs another mechanism.
-
-##### Scramsha1
-
-Signs in with a user name and password over SCRAM using SHA-1.
-Use it for servers older than 4.0, which do not offer SHA-256.
-
-##### Mongodbx509
-
-Signs in with the client TLS certificate instead of a password.
-Set Username to the certificate subject, or leave it unset to let the server read it.
-
-##### Mongodbaws
-
-Signs in with AWS Identity and Access Management credentials.
-Use it for an Atlas cluster that trusts an AWS role.
-
-##### Mongodboidc
-
-Signs in with an OpenID Connect access token, such as a workload identity token.
-Use it for a deployment that federates its logins to an identity provider.
-
-##### Plain
-
-Signs in through an external LDAP or operating-system directory in plain text over TLS.
-Set Tls to Enabled, because the password travels unhashed.
-
-##### Gssapi
-
-Signs in with a Kerberos principal.
-Use it for an enterprise deployment that authenticates through Kerberos.
-
 ### Base64 (Base64)
 
 | Attribute         | Value             |
@@ -462,7 +383,7 @@ Raise it for a long aggregation and lower it for a health check that must fail f
 
 Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
-Discrete parameters such as Host or Database still override the matching parts of the URI.
+Every connection setting, such as the host, the login, the replica set, and the TLS mode, is written into the URI itself.
 
 ### Credentials (Credentials)
 
@@ -475,8 +396,8 @@ Discrete parameters such as Host or Database still override the matching parts o
 | **Value Type**    | String|Expression |
 
 Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.
-A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead.
-Any other value that matches no record fails the step, so a typed record name never reads as a host.
+The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.
+A value that carries a URI scheme, such as `mongodb://`, is used as a raw connection URI instead, and any other value that matches no record fails the step.
 
 ### Database (Database)
 
@@ -488,37 +409,9 @@ Any other value that matches no record fails the step, so a typed record name ne
 | **Multiple**      | No                |
 | **Value Type**    | String|Expression |
 
-Sets the database the step operates on, such as `shop`.
-Overrides the database from the credentials or the connection URI, so one stored login can reach several databases.
+Names the database the step operates on, such as `shop`.
+Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.
 A collection named as `database.collection` overrides this parameter in turn.
-
-### Direct Connection (DirectConnection)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Switch            |
-
-Connects to the named host directly instead of discovering the deployment topology.
-Set it when a replica-set member is reached through a forwarded port, where the advertised host name is unreachable.
-A direct connection cannot run multi-document transactions.
-
-### Host (Host)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Sets the MongoDB host or network address, such as `localhost`.
-Overrides the host from the credentials or the connection URI for this step only.
-A multi-host seed list travels in ConnectionString instead.
 
 ### Limit (Limit)
 
@@ -546,34 +439,6 @@ The value 0 means no limit, so the step exports every matching document.
 Omits the response entity, so the step reports its outputs only as session parameters.
 Use it when a later step reads the outputs by name and no data transfer is needed.
 
-### Password (Password)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Sets the password used with a password-based mechanism.
-Overrides the password from the credentials or the connection URI for this step.
-Prefer a stored credentials record, so the secret never appears in the rule.
-
-### Port (Port)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Number            |
-
-Sets the TCP port of the MongoDB instance, such as `27017`.
-Overrides the port from the credentials or the connection URI, and keeps the resolved host.
-An unset port keeps the resolved port, which is 27017 for a plain URI.
-
 ### Projection (Projection)
 
 | Attribute         | Value             |
@@ -586,20 +451,6 @@ An unset port keeps the resolved port, which is 27017 for a plain URI.
 
 Selects the fields the server returns, as a JSON object such as `{"name":1,"_id":0}`.
 An omitted projection returns the whole document.
-
-### Replica Set (ReplicaSet)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Requires the client to join the named replica set, such as `rs0`.
-Overrides the replica set from the credentials or the connection URI for this step.
-A replica set is required for multi-document transactions.
 
 ### Skip (Skip)
 
@@ -626,44 +477,6 @@ The value 0 means no skip, and a skip without a sort has no stable meaning.
 
 Orders the documents before the limit and the skip apply, as a JSON object such as `{"createdAt":-1}`.
 An omitted sort leaves the order to the server, which is not stable across runs.
-
-### Tls (Tls)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String            |
-
-Sets the transport encryption mode of the connection.
-Overrides the mode from the credentials or the connection URI, which a URI scheme otherwise decides implicitly.
-
-#### Values
-
-##### Enabled
-
-Requires TLS encryption for the connection.
-Use it for a deployment that accepts only encrypted clients, such as MongoDB Atlas.
-
-##### Disabled
-
-Connects without TLS.
-Use it for a loopback or private-network deployment that serves plain connections.
-
-### Username (Username)
-
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
-
-Sets the login name used with Password, such as a database user or a certificate subject.
-Overrides the user name from the credentials or the connection URI for this step.
 
 ## Scope
 
