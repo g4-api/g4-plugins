@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~17 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -204,6 +204,58 @@ var actionRule = {
 action_rule = {
     "pluginName": "InvokeMongoDbAggregate",
     "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
+}
+```
+
+### Example No.4
+
+### Aggregate with a replica-set connection URI
+
+The argument passes a complete MongoDB connection URI that names both replica-set members and the set itself, which a transaction requires.
+The pipeline is read from a UTF-8 file, so its nested stage documents never pass through the inline argument value.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeMongoDbAggregate",
+    Argument = "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeMongoDbAggregate")
+    .setArgument("{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeMongoDbAggregate",
+    argument: "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeMongoDbAggregate",
+    "argument": "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeMongoDbAggregate",
+    "argument": "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
 }
 ```
 

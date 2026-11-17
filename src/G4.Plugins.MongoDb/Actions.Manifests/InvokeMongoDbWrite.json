@@ -323,6 +323,38 @@
 				"argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{\"sku\":\"A-1\",\"total\":12,\"status\":\"processed\"}}}",
 				"pluginName": "InvokeMongoDbWrite"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection URI names an unreachable host",
+						"Deployment rejects the URI login or its authentication database",
+						"Credentials parameter set together with ConnectionString"
+					],
+					"expected_result": "The step inserts one document into shop.orders and stores `1` in `InvokeMongoDbWrite:InsertedCount` with the generated identifier in `InvokeMongoDbWrite:InsertedIds`.",
+					"notes": "ConnectionString applies only when Credentials is not set. A URI carries its login in plain text, so a stored credentials record is the way to keep a password out of the flow.",
+					"use_case": "insert_document_with_connection_uri",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"MongoDb",
+					"Write"
+				]
+			},
+			"description": [
+				"### Insert a document with an authenticated connection URI",
+				"",
+				"The argument passes a complete MongoDB connection URI whose login replaces the one a stored credentials record would hold.",
+				"The database comes from the URI path, so the step names only the collection, the operation, and the document to insert."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{\"sku\":\"A-1\",\"total\":10}}}",
+				"pluginName": "InvokeMongoDbWrite"
+			}
 		}
 	],
 	"key": "InvokeMongoDbWrite",

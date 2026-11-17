@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace G4.UnitTests.Plugins.MongoDb
@@ -22,6 +23,12 @@ namespace G4.UnitTests.Plugins.MongoDb
 
         // Names the credentials record seeded by the record-lookup scenario; unique so parallel tests never collide.
         private const string CredentialName = "mongodb-connection-resolution-tests";
+
+        // The command document the file form holds; it is plain text, so the Base64 switch must leave it unchanged.
+        private const string FileCommandText = "{\"ping\":1}";
+
+        // The command document the inline form holds; it is also the invalid Base64 the decode scenario rejects.
+        private const string InlineCommandText = "{\"collStats\":\"orders\"}";
 
         [TestMethod(DisplayName = "Verify that ResolveConnection reads the host, port, and database of a raw " +
             "connection URI passed through Credentials.")]
@@ -294,6 +301,53 @@ namespace G4.UnitTests.Plugins.MongoDb
             var exception = Assert.ThrowsExactly<InvalidOperationException>(() => invalid.ResolveDocumentText());
             Assert.Contains(substring: "Document", value: exception.Message);
             Assert.Contains(substring: "DocumentBase64", value: exception.Message);
+        }
+
+        [TestMethod(DisplayName = "Verify that ResolveCommandText prefers the inline value, decodes it when the " +
+            "Base64 switch is set, and reads the file content as plain text.")]
+        public void ResolveCommandTextFormsTest()
+        {
+            // Arrange: write the file form to a real UTF-8 file, which the file path argument then names.
+            var commandFile = Path.Combine(Path.GetTempPath(), $"g4-command-{Guid.NewGuid():N}.json");
+            File.WriteAllText(path: commandFile, contents: FileCommandText);
+
+            try
+            {
+                // Arrange: build the command arguments of each documented path.
+                var inline = NewPluginData(new Dictionary<string, string> { ["CommandText"] = InlineCommandText });
+                var encoded = NewPluginData(new Dictionary<string, string>
+                {
+                    ["Base64"] = string.Empty,
+                    ["CommandText"] = "eyJkcm9wIjoib3JkZXJzIn0="
+                });
+                var invalid = NewPluginData(new Dictionary<string, string>
+                {
+                    ["Base64"] = string.Empty,
+                    ["CommandText"] = InlineCommandText
+                });
+                var fromFile = NewPluginData(new Dictionary<string, string>
+                {
+                    ["Base64"] = string.Empty,
+                    ["CommandFile"] = commandFile
+                });
+
+                // Act and Assert: the inline value is read as-is and an encoded value is decoded as UTF-8.
+                Assert.AreEqual(expected: InlineCommandText, actual: inline.ResolveCommandText());
+                Assert.AreEqual(expected: "{\"drop\":\"orders\"}", actual: encoded.ResolveCommandText());
+
+                // Assert: the file content is read as plain text, so the Base64 switch never decodes it.
+                Assert.AreEqual(expected: FileCommandText, actual: fromFile.ResolveCommandText());
+
+                // Assert: invalid Base64 names the argument and the switch that caused the decode.
+                var exception = Assert.ThrowsExactly<InvalidOperationException>(() => invalid.ResolveCommandText());
+                Assert.Contains(substring: "CommandText", value: exception.Message);
+                Assert.Contains(substring: "Base64", value: exception.Message);
+            }
+            finally
+            {
+                // Cleanup: remove the file this scenario wrote, so no temporary file outlives the run.
+                File.Delete(path: commandFile);
+            }
         }
 
         [TestMethod(DisplayName = "Verify that ResolveRequired reads a set argument and names a missing one.")]

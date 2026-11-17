@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~17 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -201,6 +201,110 @@ var actionRule = {
 action_rule = {
     "pluginName": "InvokeMongoDbCommand",
     "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\flows\commands\validate-orders.json --CommandTimeout:600 --NoEntity}}"
+}
+```
+
+### Example No.4
+
+### Drop a collection with a connection URI
+
+The argument passes a complete MongoDB connection URI instead of a stored credentials record, which suits a local or containerized deployment.
+The `drop` command removes the orders collection with its documents and indexes, so a teardown step can reset a test deployment.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeMongoDbCommand",
+    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeMongoDbCommand")
+    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeMongoDbCommand",
+    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeMongoDbCommand",
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeMongoDbCommand",
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+}
+```
+
+### Example No.5
+
+### Set a validator with a Base64-encoded command
+
+The `collMod` command nests a JSON schema, so the document ends in several closing braces that would end the inline argument value.
+The command is encoded as UTF-8 Base64 and the `Base64` switch marks it, which also keeps a command with a space followed by two dashes intact.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeMongoDbCommand",
+    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb2xsTW9kIjoib3JkZXJzIiwidmFsaWRhdG9yIjp7IiRqc29uU2NoZW1hIjp7ImJzb25UeXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsic2t1Il19fX0= --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeMongoDbCommand")
+    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb2xsTW9kIjoib3JkZXJzIiwidmFsaWRhdG9yIjp7IiRqc29uU2NoZW1hIjp7ImJzb25UeXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsic2t1Il19fX0= --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeMongoDbCommand",
+    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb2xsTW9kIjoib3JkZXJzIiwidmFsaWRhdG9yIjp7IiRqc29uU2NoZW1hIjp7ImJzb25UeXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsic2t1Il19fX0= --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeMongoDbCommand",
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb2xsTW9kIjoib3JkZXJzIiwidmFsaWRhdG9yIjp7IiRqc29uU2NoZW1hIjp7ImJzb25UeXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsic2t1Il19fX0= --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeMongoDbCommand",
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb2xsTW9kIjoib3JkZXJzIiwidmFsaWRhdG9yIjp7IiRqc29uU2NoZW1hIjp7ImJzb25UeXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsic2t1Il19fX0= --Base64}}"
 }
 ```
 

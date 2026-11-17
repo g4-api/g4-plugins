@@ -161,6 +161,41 @@ namespace G4.UnitTests.Plugins.MongoDb
             Assert.Contains(substring: "Field", value: exception.Message);
         }
 
+        [TestMethod(DisplayName = "Verify that GetMongoDbScalar decodes a Base64-encoded filter and counts the " +
+            "documents it matches, so a filter that cannot travel inline still reaches the server.")]
+        [TestCategory("MongoDbLive")]
+        [DoNotParallelize]
+        public void GetMongoDbScalarBase64FilterTest()
+        {
+            // Arrange: seed the documents and build a filter whose text holds a space followed by two dashes, which
+            // would end the inline argument value.
+            SeedDocuments();
+            var filter = "{\"status\":\"open\",\"sku\":{\"$ne\":\"A-1 -- legacy\"}}";
+
+            var rule = NewRule(arguments: $"{NewConnectionArgument()} --Collection:{Collection} " +
+                $"--CommandText:{filter.ConvertToBase64()} --Base64");
+
+            // Act: read the count through the plugin.
+            var result = Invoke<GetMongoDbScalar>(rule);
+
+            // Assert: both open documents matched, so the decoded filter reached the server intact.
+            Assert.AreEqual(expected: "2", actual: $"{result.Response.Entity["Value"]}");
+        }
+
+        [TestMethod(DisplayName = "Verify that GetMongoDbScalar fails when the Base64 switch is set and the filter " +
+            "is not valid Base64.")]
+        public void GetMongoDbScalarInvalidBase64Test()
+        {
+            // Arrange: mark a plain filter as encoded; the target is never contacted.
+            var rule = NewRule(arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --Database:G4Tests " +
+                $"--Collection:{Collection} --CommandText:{{\"status\":\"open\"}} --Base64");
+
+            // Act and Assert: the failure names the argument and the switch that caused the decode.
+            var exception = Assert.ThrowsExactly<InvalidOperationException>(() => Invoke<GetMongoDbScalar>(rule));
+            Assert.Contains(substring: "CommandText", value: exception.Message);
+            Assert.Contains(substring: "Base64", value: exception.Message);
+        }
+
         // Composes the connection argument of the shared test deployment.
         private static string NewConnectionArgument()
         {

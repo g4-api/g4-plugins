@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~18 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -459,6 +459,106 @@ action_rule = {
     ]
 }
 ```
+
+### Example No.5
+
+### Click The Button Of A Different Row Each Iteration
+
+Runs a loop 3 times and performs a Click action on the button of the row whose `data-index` attribute matches the index of the running iteration.
+The index is published as the session parameter `InvokeForLoop:Iteration` before each iteration starts, and the inner rule reads it with `{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}`. The index is zero-based, so the loop addresses the rows `0`, `1` and `2`.
+When loops are nested, the inner loop overwrites the parameter while it runs and gives the enclosing index back when it ends, so a step placed after a nested loop reads the index of its own loop. The parameter is published only while a loop runs and is removed once the outermost loop ends.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeForLoop",
+    Argument = "3",
+    Rules = new[]
+    {
+        new ActionRuleModel
+        {
+            PluginName = "Click",
+            OnElement = "//tr[@data-index='{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}']//button"
+        }
+    }
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeForLoop")
+    .setArgument("3")
+    .setActions()
+        new ActionRuleModel()        
+            .setPluginName("Click")
+            .setOnElement("//tr[@data-index='{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}']//button");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeForLoop",
+    argument: "3",
+    rules: [
+        {
+            pluginName: "Click",
+            onElement: "//tr[@data-index='{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}']//button"
+        }
+    ]
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeForLoop",
+    "argument": "3",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "onElement": "//tr[@data-index='{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}']//button"
+        }
+    ]
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeForLoop",
+    "argument": "3",
+    "rules": [
+        {
+            "pluginName": "Click",
+            "onElement": "//tr[@data-index='{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}']//button"
+        }
+    ]
+}
+```
+
+## Output Parameter
+
+### Invoke For Loop Iteration (InvokeForLoop:Iteration)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Stores the zero-based index of the iteration the loop is currently running, published before each iteration starts.
+Lets steps inside the loop address a different target, file or record on every pass without a counter of their own.
+A nested loop overwrites the value while it runs and restores the enclosing index when it ends, and the parameter is removed once the outermost loop ends.
+The session value is Base64-encoded, which the Get-Parameter macro decodes by default.
 
 ## Properties
 
