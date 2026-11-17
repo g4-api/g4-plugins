@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -252,6 +252,58 @@ var actionRule = {
 action_rule = {
     "pluginName": "ExportMongoDbQuery",
     "argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\flows\filters\active-customers.json --NoEntity}}"
+}
+```
+
+### Example No.5
+
+### Export documents with a connection URI
+
+The argument passes a complete MongoDB connection URI instead of a stored credentials record, which suits a local or containerized deployment.
+The URI names the shop database, and the Database argument selects archive instead, so the step reads `archive.orders`.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "ExportMongoDbQuery",
+    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("ExportMongoDbQuery")
+    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "ExportMongoDbQuery",
+    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "ExportMongoDbQuery",
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "ExportMongoDbQuery",
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
 }
 ```
 

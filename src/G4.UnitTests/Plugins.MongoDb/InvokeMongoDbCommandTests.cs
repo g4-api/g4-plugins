@@ -6,8 +6,11 @@ using G4.UnitTests.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using MongoDB.Bson;
+using MongoDB.Driver;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace G4.UnitTests.Plugins.MongoDb
 {
@@ -137,6 +140,78 @@ namespace G4.UnitTests.Plugins.MongoDb
             var exception = Assert.ThrowsExactly<InvalidOperationException>(
                 () => Invoke<InvokeMongoDbCommand>(rule));
             Assert.Contains(substring: "No MongoDB database was resolved", value: exception.Message);
+        }
+
+        [TestMethod(DisplayName = "Verify that InvokeMongoDbCommand drops a collection addressed through a raw " +
+            "connection URI and that the collection is gone afterwards.")]
+        [TestCategory("MongoDbLive")]
+        [DoNotParallelize]
+        public void InvokeMongoDbCommandDropCollectionTest()
+        {
+            // Arrange: start from a collection that holds one document, so it exists before the drop.
+            MongoDbTestContainer.Drop(Collection);
+            MongoDbTestContainer.Insert(Collection, [new BsonDocument { ["status"] = "open" }]);
+
+            var rule = NewRule(arguments: $"{NewConnectionArgument()} --CommandText:{{\"drop\":\"{Collection}\"}}");
+
+            // Act: drop the collection through the plugin.
+            var result = Invoke<InvokeMongoDbCommand>(rule);
+
+            // Assert: the server reported the command as successful.
+            Assert.AreEqual(expected: "true", actual: $"{result.Response.Entity["Ok"]}");
+
+            // Assert: the collection is gone, so the command dropped it instead of only removing its documents.
+            Assert.DoesNotContain(Collection, GetCollectionNames());
+        }
+
+        [TestMethod(DisplayName = "Verify that InvokeMongoDbCommand decodes a Base64-encoded command document and " +
+            "runs the command it carries.")]
+        [TestCategory("MongoDbLive")]
+        [DoNotParallelize]
+        public void InvokeMongoDbCommandBase64Test()
+        {
+            // Arrange: start from a collection that holds one document, so the index has something to index.
+            MongoDbTestContainer.Drop(Collection);
+            MongoDbTestContainer.Insert(Collection, [new BsonDocument { ["priority"] = 1 }]);
+
+            // Arrange: encode a command whose nested documents end in braces that would end an inline value.
+            var command = $"{{\"createIndexes\":\"{Collection}\",\"indexes\":" +
+                "[{\"key\":{\"priority\":1},\"name\":\"priority_1\"}]}";
+            var rule = NewRule(arguments: $"{NewConnectionArgument()} --CommandText:{command.ConvertToBase64()} " +
+                "--Base64");
+
+            // Act: run the encoded command through the plugin.
+            var result = Invoke<InvokeMongoDbCommand>(rule);
+
+            // Assert: the server reported the command as successful.
+            Assert.AreEqual(expected: "true", actual: $"{result.Response.Entity["Ok"]}");
+
+            // Assert: the index the decoded command names exists, so the switch decoded the payload.
+            Assert.Contains("priority_1", MongoDbTestContainer.GetIndexNames(Collection));
+        }
+
+        [TestMethod(DisplayName = "Verify that InvokeMongoDbCommand fails when the Base64 switch is set and the " +
+            "command document is not valid Base64.")]
+        public void InvokeMongoDbCommandInvalidBase64Test()
+        {
+            // Arrange: mark a plain command document as encoded; the target is never contacted.
+            var rule = NewRule(arguments: "--ConnectionString:mongodb://127.0.0.1:27017 --Database:G4Tests " +
+                "--CommandText:{\"ping\":1} --Base64");
+
+            // Act and Assert: the failure names the argument and the switch that caused the decode.
+            var exception = Assert.ThrowsExactly<InvalidOperationException>(
+                () => Invoke<InvokeMongoDbCommand>(rule));
+            Assert.Contains(substring: "CommandText", value: exception.Message);
+            Assert.Contains(substring: "Base64", value: exception.Message);
+        }
+
+        // Lists the collection names of the test database through a separate client, so a drop is observable.
+        private static List<string> GetCollectionNames()
+        {
+            // Act: read the names the deployment reports, which no longer include a dropped collection.
+            using var client = MongoDbTestContainer.NewClient();
+
+            return client.GetDatabase(MongoDbTestContainer.DatabaseName).ListCollectionNames().ToList();
         }
 
         // Composes the connection argument of the shared test deployment.

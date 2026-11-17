@@ -236,6 +236,70 @@
 				"argument": "{{$ --Credentials:mongo-production --Collection:products --Mode:Distinct --Field:category}}",
 				"pluginName": "GetMongoDbScalar"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection URI names an unreachable host",
+						"Connection URI omits the database and no Database argument names one",
+						"Credentials parameter set together with ConnectionString"
+					],
+					"expected_result": "The step stores the number of open orders in `GetMongoDbScalar:Value` and `Count` in `GetMongoDbScalar:Mode`.",
+					"notes": "ConnectionString applies only when Credentials is not set. The URI carries the database in its path, so no Database argument is needed.",
+					"use_case": "count_documents_with_connection_uri",
+					"version": "4"
+				},
+				"labels": [
+					"Aggregation",
+					"ConnectionString",
+					"Database",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Count documents with a connection URI",
+				"",
+				"The argument passes a complete MongoDB connection URI instead of a stored credentials record, which suits a local or containerized deployment.",
+				"The database comes from the URI path, so the step names only the collection and the filter to count."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{\"status\":\"open\"}}}",
+				"pluginName": "GetMongoDbScalar"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"CommandText is not valid Base64, which fails the step",
+						"Base64 switch set without CommandText, so the filter comes from CommandFile as plain text",
+						"Decoded text is not a JSON object"
+					],
+					"expected_result": "The step counts the open orders whose note is not the legacy draft marker and stores the number in `GetMongoDbScalar:Value`.",
+					"notes": "The filter contains a space followed by two dashes, which ends an inline argument value, so it travels Base64-encoded with the Base64 switch set. The switch decodes only CommandText, as UTF-8, and invalid Base64 fails the step.",
+					"use_case": "count_documents_with_base64_filter",
+					"version": "4"
+				},
+				"labels": [
+					"Aggregation",
+					"Base64",
+					"Database",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Count documents with a Base64-encoded filter",
+				"",
+				"The filter holds a space followed by two dashes, which would end the inline argument value, so it is encoded as UTF-8 Base64 and the `Base64` switch marks it.",
+				"The decoded filter is `{\"status\":\"open\",\"note\":{\"$ne\":\"draft -- legacy\"}}`, and the step counts the documents it matches."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJzdGF0dXMiOiJvcGVuIiwibm90ZSI6eyIkbmUiOiJkcmFmdCAtLSBsZWdhY3kifX0= --Base64}}",
+				"pluginName": "GetMongoDbScalar"
+			}
 		}
 	],
 	"key": "GetMongoDbScalar",

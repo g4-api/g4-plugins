@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~17 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -200,6 +200,110 @@ var actionRule = {
 action_rule = {
     "pluginName": "GetMongoDbScalar",
     "argument": "{{$ --Credentials:mongo-production --Collection:products --Mode:Distinct --Field:category}}"
+}
+```
+
+### Example No.4
+
+### Count documents with a connection URI
+
+The argument passes a complete MongoDB connection URI instead of a stored credentials record, which suits a local or containerized deployment.
+The database comes from the URI path, so the step names only the collection and the filter to count.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "GetMongoDbScalar",
+    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("GetMongoDbScalar")
+    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "GetMongoDbScalar",
+    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "GetMongoDbScalar",
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "GetMongoDbScalar",
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+}
+```
+
+### Example No.5
+
+### Count documents with a Base64-encoded filter
+
+The filter holds a space followed by two dashes, which would end the inline argument value, so it is encoded as UTF-8 Base64 and the `Base64` switch marks it.
+The decoded filter is `{"status":"open","note":{"$ne":"draft -- legacy"}}`, and the step counts the documents it matches.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "GetMongoDbScalar",
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJzdGF0dXMiOiJvcGVuIiwibm90ZSI6eyIkbmUiOiJkcmFmdCAtLSBsZWdhY3kifX0= --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("GetMongoDbScalar")
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJzdGF0dXMiOiJvcGVuIiwibm90ZSI6eyIkbmUiOiJkcmFmdCAtLSBsZWdhY3kifX0= --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "GetMongoDbScalar",
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJzdGF0dXMiOiJvcGVuIiwibm90ZSI6eyIkbmUiOiJkcmFmdCAtLSBsZWdhY3kifX0= --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "GetMongoDbScalar",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJzdGF0dXMiOiJvcGVuIiwibm90ZSI6eyIkbmUiOiJkcmFmdCAtLSBsZWdhY3kifX0= --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "GetMongoDbScalar",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJzdGF0dXMiOiJvcGVuIiwibm90ZSI6eyIkbmUiOiJkcmFmdCAtLSBsZWdhY3kifX0= --Base64}}"
 }
 ```
 

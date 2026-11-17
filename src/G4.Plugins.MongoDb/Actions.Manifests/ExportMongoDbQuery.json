@@ -293,6 +293,38 @@
 				"argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\\flows\\filters\\active-customers.json --NoEntity}}",
 				"pluginName": "ExportMongoDbQuery"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection URI names an unreachable host",
+						"Database argument names a database the login cannot read",
+						"Credentials parameter set together with ConnectionString"
+					],
+					"expected_result": "The step exports up to 50 closed orders of archive.orders into `ExportMongoDbQuery:Documents` and reports their number in `ExportMongoDbQuery:Count`.",
+					"notes": "ConnectionString applies only when Credentials is not set. The Database argument replaces the database the URI carries, so one stored URI serves several databases.",
+					"use_case": "export_documents_with_connection_uri",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"Export",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Export documents with a connection URI",
+				"",
+				"The argument passes a complete MongoDB connection URI instead of a stored credentials record, which suits a local or containerized deployment.",
+				"The URI names the shop database, and the Database argument selects archive instead, so the step reads `archive.orders`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{\"status\":\"closed\"} --Limit:50}}",
+				"pluginName": "ExportMongoDbQuery"
+			}
 		}
 	],
 	"key": "ExportMongoDbQuery",

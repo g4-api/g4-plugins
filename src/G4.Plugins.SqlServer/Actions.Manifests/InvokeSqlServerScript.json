@@ -191,7 +191,7 @@
 					],
 					"expected_result": "The table batch runs once and the insert batch runs five times, so InvokeSqlServerScript:BatchCount is 6 and InvokeSqlServerScript:RowsAffected is 5, and the response has no entity.",
 					"notes": "The Credentials value contains equals signs and matches no stored record, so it is used as a raw connection string. The inline script uses line breaks, a GO line, and a final GO 5 line. NoEntity keeps the results only in session parameters.",
-					"use_case": "repeat_inline_batch_with_raw_connection_string",
+					"use_case": "repeat_inline_batch_with_connection_string_in_credentials",
 					"version": "4"
 				},
 				"labels": [
@@ -203,10 +203,10 @@
 				]
 			},
 			"description": [
-				"### Repeat an inline batch with a raw connection string",
+				"### Repeat an inline batch with a connection string in Credentials",
 				"",
 				"Creates dbo.LoadProbe when missing, then repeats a single-row insert five times with a `GO 5` separator.",
-				"The Credentials value is a raw connection string to localhost,1433, and NoEntity omits the response entity."
+				"The Credentials value is a raw connection string to localhost,1433, which the step accepts because it contains equals signs, and NoEntity omits the response entity."
 			],
 			"rule": {
 				"$type": "Action",
@@ -245,6 +245,39 @@
 			"rule": {
 				"$type": "Action",
 				"argument": "{{$ --Credentials:sql-production --CommandText:SUYgT0JKRUNUX0lEKE4nZGJvLkRlcGxveUxvZycpIElTIE5VTEwgQ1JFQVRFIFRBQkxFIGRiby5EZXBsb3lMb2cgKElkIElOVCBJREVOVElUWSBQUklNQVJZIEtFWSwgTm90ZSBOVkFSQ0hBUigxMDApIE5PVCBOVUxMKTsgLS0gZmlyc3QgYmF0Y2ggY3JlYXRlcyB0aGUgdGFibGUKR08KSU5TRVJUIElOVE8gZGJvLkRlcGxveUxvZyAoTm90ZSkgVkFMVUVTIChOJ1NjcmlwdCBhcHBsaWVkJyk7IC0tIHNlY29uZCBiYXRjaCByZWNvcmRzIHRoZSBydW4KR08= --Base64 --Transaction}}",
+				"pluginName": "InvokeSqlServerScript"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection string names an unreachable server",
+						"Script file is missing or empty",
+						"Credentials parameter set together with ConnectionString"
+					],
+					"expected_result": "The step runs every batch of the file in one transaction and stores the batch count in `InvokeSqlServerScript:BatchCount` and the affected rows in `InvokeSqlServerScript:RowsAffected`.",
+					"notes": "ConnectionString applies only when Credentials is not set. Transaction commits the whole script or rolls all of it back, and the file is read as plain text, so its GO lines separate the batches.",
+					"use_case": "run_script_file_with_connection_string",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"SqlScript",
+					"SqlServer",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Run a script file with a connection string",
+				"",
+				"The argument passes a complete connection string through the ConnectionString parameter instead of a stored credentials record.",
+				"The nightly load script runs in one transaction with a five-minute timeout, so a failing batch leaves the database unchanged."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\\Scripts\\nightly-load.sql --Transaction --CommandTimeout:300}}",
 				"pluginName": "InvokeSqlServerScript"
 			}
 		}

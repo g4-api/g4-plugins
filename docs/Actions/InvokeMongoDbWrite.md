@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -255,6 +255,58 @@ var actionRule = {
 action_rule = {
     "pluginName": "InvokeMongoDbWrite",
     "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{"sku":"A-1","total":12,"status":"processed"}}}"
+}
+```
+
+### Example No.5
+
+### Insert a document with an authenticated connection URI
+
+The argument passes a complete MongoDB connection URI whose login replaces the one a stored credentials record would hold.
+The database comes from the URI path, so the step names only the collection, the operation, and the document to insert.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeMongoDbWrite",
+    Argument = "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeMongoDbWrite")
+    .setArgument("{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeMongoDbWrite",
+    argument: "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeMongoDbWrite",
+    "argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeMongoDbWrite",
+    "argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
 }
 ```
 

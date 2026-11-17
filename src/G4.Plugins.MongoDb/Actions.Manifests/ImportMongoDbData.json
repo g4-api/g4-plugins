@@ -243,6 +243,39 @@
 				"argument": "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\\data\\orders.json --Ordered --Transaction}}",
 				"pluginName": "ImportMongoDbData"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection URI names an unreachable host",
+						"Deployment rejects the URI login or its authentication database",
+						"Credentials parameter set together with ConnectionString"
+					],
+					"expected_result": "The step imports every CSV row into shop.customers in batches of 500 and reports the number in `ImportMongoDbData:InsertedCount`.",
+					"notes": "ConnectionString applies only when Credentials is not set. A URI carries its login and its TLS option in plain text, so a stored credentials record is the way to keep a password out of the flow.",
+					"use_case": "import_file_with_connection_uri",
+					"version": "4"
+				},
+				"labels": [
+					"ConnectionString",
+					"Database",
+					"Import",
+					"MongoDb",
+					"Tls"
+				]
+			},
+			"description": [
+				"### Import a file with a TLS connection URI",
+				"",
+				"The argument passes a complete MongoDB connection URI, whose login and `tls=true` option replace what a stored credentials record would hold.",
+				"The CSV file is read in batches of 500 documents, which bounds the size of each insert the driver sends."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\\data\\customers.csv --BatchSize:500}}",
+				"pluginName": "ImportMongoDbData"
+			}
 		}
 	],
 	"key": "ImportMongoDbData",

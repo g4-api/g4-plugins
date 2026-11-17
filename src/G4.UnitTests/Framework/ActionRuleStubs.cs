@@ -402,6 +402,89 @@
             "    ]" +
             "}";
 
+        // Reads the index of the iteration InvokeForLoop is currently running, which the loop publishes as a
+        // session parameter before each iteration starts.
+        public const string OnIterationMacro =
+            "{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}";
+
+        public const string RuleJsonInvokeForLoopWithIteration =
+            "{" +
+            "    \"$type\": \"Action\"," +
+            "    \"pluginName\": \"InvokeForLoop\"," +
+            "    \"argument\": \"3\"," +
+            "    \"rules\": [" +
+            "        {" +
+            "            \"$type\": \"Action\"," +
+            "            \"pluginName\": \"RegisterParameter\"," +
+            "            \"argument\": \"{{$ --Name:TestParameter --Value:" + OnIterationMacro + "}}\"" +
+            "        }" +
+            "    ]" +
+            "}";
+
+        public const string RuleJsonInvokeForLoopNestedWithIteration =
+            "{" +
+            "    \"$type\": \"Action\"," +
+            "    \"pluginName\": \"InvokeForLoop\"," +
+            "    \"argument\": \"2\"," +
+            "    \"rules\": [" +
+            "       {" +
+            "           \"$type\": \"Action\"," +
+            "           \"pluginName\": \"InvokeForLoop\"," +
+            "           \"argument\": \"3\"," +
+            "           \"rules\": [" +
+            "               {" +
+            "                   \"$type\": \"Action\"," +
+            "                   \"pluginName\": \"RegisterParameter\"," +
+            "                   \"argument\": \"{{$ --Name:InnerParameter --Value:" + OnIterationMacro + "}}\"" +
+            "               }" +
+            "           ]" +
+            "       }," +
+            "       {" +
+            "           \"$type\": \"Action\"," +
+            "           \"pluginName\": \"RegisterParameter\"," +
+            "           \"argument\": \"{{$ --Name:OuterParameter --Value:" + OnIterationMacro + "}}\"" +
+            "       }" +
+            "    ]" +
+            "}";
+
+        public const string RuleJsonInvokeForLoopTripleWithIteration =
+            "{" +
+            "    \"$type\": \"Action\"," +
+            "    \"pluginName\": \"InvokeForLoop\"," +
+            "    \"argument\": \"2\"," +
+            "    \"rules\": [" +
+            "       {" +
+            "           \"$type\": \"Action\"," +
+            "           \"pluginName\": \"InvokeForLoop\"," +
+            "           \"argument\": \"3\"," +
+            "           \"rules\": [" +
+            "               {" +
+            "                  \"$type\": \"Action\"," +
+            "                  \"pluginName\": \"InvokeForLoop\"," +
+            "                  \"argument\": \"4\"," +
+            "                  \"rules\": [" +
+            "                      {" +
+            "                          \"$type\": \"Action\"," +
+            "                          \"pluginName\": \"RegisterParameter\"," +
+            "                          \"argument\": \"{{$ --Name:InnerParameter --Value:" + OnIterationMacro + "}}\"" +
+            "                      }" +
+            "                  ]" +
+            "               }," +
+            "               {" +
+            "                   \"$type\": \"Action\"," +
+            "                   \"pluginName\": \"RegisterParameter\"," +
+            "                   \"argument\": \"{{$ --Name:MiddleParameter --Value:" + OnIterationMacro + "}}\"" +
+            "               }" +
+            "           ]" +
+            "       }," +
+            "       {" +
+            "           \"$type\": \"Action\"," +
+            "           \"pluginName\": \"RegisterParameter\"," +
+            "           \"argument\": \"{{$ --Name:OuterParameter --Value:" + OnIterationMacro + "}}\"" +
+            "       }" +
+            "    ]" +
+            "}";
+
         public const string RuleJsonInvokeWhileLoop =
             "{" +
             "    \"$type\": \"Action\"," +

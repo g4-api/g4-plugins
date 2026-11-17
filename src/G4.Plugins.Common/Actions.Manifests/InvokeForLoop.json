@@ -56,6 +56,14 @@
 						"answer": "Each loop independently runs its own iteration count and rules; inner loops do not inherit the outer loop's context."
 					},
 					{
+						"question": "How do you read the index of the running iteration?",
+						"answer": "The loop publishes the zero-based index as the session parameter InvokeForLoop:Iteration, read with {{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}."
+					},
+					{
+						"question": "Which index does a step read when loops are nested?",
+						"answer": "The index of the loop the step belongs to: a nested loop overwrites InvokeForLoop:Iteration while it runs and gives the enclosing index back when it ends, so a step placed after the nested loop reads the outer index again."
+					},
+					{
 						"question": "How can you configure the loop to stop on error?",
 						"answer": "Enable the stop-on-error flag in the parent workflow or action settings, since the plugin itself does not halt by default."
 					},
@@ -311,10 +319,62 @@
 					}
 				]
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Click action throws exception",
+						"Invalid iteration count (zero or negative)",
+						"No row carries the index of the current iteration",
+						"The session parameter is read outside the loop, where it is no longer published"
+					],
+					"expected_result": "The Click action runs 3 times, each time on the button of the row whose data-index is 0, then 1, then 2.",
+					"notes": "InvokeForLoop publishes the zero-based index of the running iteration as the session parameter InvokeForLoop:Iteration, which the inner rule reads through the Get-Parameter macro to address a different row each time.",
+					"use_case": "invoke_for_loop_3_click_row_by_iteration_index",
+					"version": "1.0"
+				},
+				"labels": [
+					"InvokeForLoop",
+					"Loop"
+				]
+			},
+			"description": [
+				"### Click The Button Of A Different Row Each Iteration",
+				"",
+				"Runs a loop 3 times and performs a Click action on the button of the row whose `data-index` attribute matches the index of the running iteration.",
+				"The index is published as the session parameter `InvokeForLoop:Iteration` before each iteration starts, and the inner rule reads it with `{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}`. The index is zero-based, so the loop addresses the rows `0`, `1` and `2`.",
+				"When loops are nested, the inner loop overwrites the parameter while it runs and gives the enclosing index back when it ends, so a step placed after a nested loop reads the index of its own loop. The parameter is published only while a loop runs and is removed once the outermost loop ends."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "3",
+				"pluginName": "InvokeForLoop",
+				"rules": [
+					{
+						"$type": "Action",
+						"onElement": "//tr[@data-index='{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}']//button",
+						"pluginName": "Click"
+					}
+				]
+			}
 		}
 	],
 	"key": "InvokeForLoop",
 	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the zero-based index of the iteration the loop is currently running, published before each iteration starts.",
+				"Lets steps inside the loop address a different target, file or record on every pass without a counter of their own.",
+				"A nested loop overwrites the value while it runs and restores the enclosing index when it ends, and the parameter is removed once the outermost loop ends.",
+				"The session value is Base64-encoded, which the Get-Parameter macro decodes by default."
+			],
+			"name": "InvokeForLoop:Iteration",
+			"scope": "Session",
+			"type": "String"
+		}
+	],
 	"platforms": [
 		"Any"
 	],

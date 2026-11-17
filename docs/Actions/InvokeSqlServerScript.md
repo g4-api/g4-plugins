@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -119,10 +119,10 @@ action_rule = {
 
 ### Example No.2
 
-### Repeat an inline batch with a raw connection string
+### Repeat an inline batch with a connection string in Credentials
 
 Creates dbo.LoadProbe when missing, then repeats a single-row insert five times with a `GO 5` separator.
-The Credentials value is a raw connection string to localhost,1433, and NoEntity omits the response entity.
+The Credentials value is a raw connection string to localhost,1433, which the step accepts because it contains equals signs, and NoEntity omits the response entity.
 
 **CSharp:**
 
@@ -233,6 +233,58 @@ var actionRule = {
 action_rule = {
     "pluginName": "InvokeSqlServerScript",
     "argument": "{{$ --Credentials:sql-production --CommandText:SUYgT0JKRUNUX0lEKE4nZGJvLkRlcGxveUxvZycpIElTIE5VTEwgQ1JFQVRFIFRBQkxFIGRiby5EZXBsb3lMb2cgKElkIElOVCBJREVOVElUWSBQUklNQVJZIEtFWSwgTm90ZSBOVkFSQ0hBUigxMDApIE5PVCBOVUxMKTsgLS0gZmlyc3QgYmF0Y2ggY3JlYXRlcyB0aGUgdGFibGUKR08KSU5TRVJUIElOVE8gZGJvLkRlcGxveUxvZyAoTm90ZSkgVkFMVUVTIChOJ1NjcmlwdCBhcHBsaWVkJyk7IC0tIHNlY29uZCBiYXRjaCByZWNvcmRzIHRoZSBydW4KR08= --Base64 --Transaction}}"
+}
+```
+
+### Example No.4
+
+### Run a script file with a connection string
+
+The argument passes a complete connection string through the ConnectionString parameter instead of a stored credentials record.
+The nightly load script runs in one transaction with a five-minute timeout, so a failing batch leaves the database unchanged.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeSqlServerScript",
+    Argument = "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeSqlServerScript")
+    .setArgument("{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeSqlServerScript",
+    argument: "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeSqlServerScript",
+    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeSqlServerScript",
+    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
 }
 ```
 

@@ -280,6 +280,39 @@
 				"argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}",
 				"pluginName": "InvokeMongoDbAggregate"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Connection URI names hosts that form no replica set, so the transaction fails",
+						"Pipeline file is missing or holds no JSON array",
+						"Credentials parameter set together with ConnectionString"
+					],
+					"expected_result": "The step runs the pipeline of the file inside a transaction and stores its documents in `InvokeMongoDbAggregate:Documents`.",
+					"notes": "ConnectionString applies only when Credentials is not set. A transaction needs a replica set or a sharded cluster, which the replicaSet option of the URI names. The pipeline comes from a file because an inline pipeline ends in two closing braces.",
+					"use_case": "aggregate_with_replica_set_connection_uri",
+					"version": "4"
+				},
+				"labels": [
+					"Aggregation",
+					"ConnectionString",
+					"Database",
+					"MongoDb",
+					"Transaction"
+				]
+			},
+			"description": [
+				"### Aggregate with a replica-set connection URI",
+				"",
+				"The argument passes a complete MongoDB connection URI that names both replica-set members and the set itself, which a transaction requires.",
+				"The pipeline is read from a UTF-8 file, so its nested stage documents never pass through the inline argument value."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --Transaction --CommandTimeout:300}}",
+				"pluginName": "InvokeMongoDbAggregate"
+			}
 		}
 	],
 	"key": "InvokeMongoDbAggregate",

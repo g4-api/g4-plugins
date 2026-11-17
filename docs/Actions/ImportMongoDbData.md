@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~17 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -201,6 +201,58 @@ var actionRule = {
 action_rule = {
     "pluginName": "ImportMongoDbData",
     "argument": "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\data\orders.json --Ordered --Transaction}}"
+}
+```
+
+### Example No.4
+
+### Import a file with a TLS connection URI
+
+The argument passes a complete MongoDB connection URI, whose login and `tls=true` option replace what a stored credentials record would hold.
+The CSV file is read in batches of 500 documents, which bounds the size of each insert the driver sends.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "ImportMongoDbData",
+    Argument = "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("ImportMongoDbData")
+    .setArgument("{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "ImportMongoDbData",
+    argument: "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "ImportMongoDbData",
+    "argument": "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "ImportMongoDbData",
+    "argument": "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
 }
 ```
 
