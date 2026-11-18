@@ -223,18 +223,18 @@
 				},
 				"labels": [
 					"Credentials",
-					"Database",
-					"DataExport",
-					"ParameterBinding",
 					"Query",
-					"SqlServer"
+					"Read",
+					"Select",
+					"SqlServer",
+					"Table"
 				]
 			},
 			"description": [
-				"### Export filtered rows with stored credentials",
+				"### Read filtered rows from a table with stored credentials",
 				"",
 				"The argument uses parameter syntax that binds Credentials, the SELECT statement, its @Country value, and a 60-second CommandTimeout.",
-				"The matching customer rows are exported as JSON together with the column names and row count."
+				"The matching rows of the Customers table are returned as JSON together with the column names and row count."
 			],
 			"rule": {
 				"$type": "Action",
@@ -258,13 +258,13 @@
 				"labels": [
 					"ConnectionString",
 					"Database",
-					"DataExport",
+					"Get",
 					"MultipleResultSets",
 					"SqlServer"
 				]
 			},
 			"description": [
-				"### Export several result sets with a raw connection string",
+				"### Get several result sets with a raw connection string",
 				"",
 				"The argument uses parameter syntax that binds a full ADO.NET ConnectionString and a CommandText with two SELECT statements.",
 				"Both result sets are kept in ResultSets, while Result keeps the first one."
@@ -291,7 +291,7 @@
 				"labels": [
 					"CommandFile",
 					"Database",
-					"DataExport",
+					"Export",
 					"Reporting",
 					"SqlServer"
 				]
@@ -324,14 +324,14 @@
 				"labels": [
 					"Base64",
 					"Credentials",
-					"DataExport",
 					"Database",
 					"ParameterBinding",
+					"Rows",
 					"SqlServer"
 				]
 			},
 			"description": [
-				"### Export rows from a Base64-encoded query with a comment",
+				"### Select rows with a Base64-encoded query that has a comment",
 				"",
 				"The argument uses parameter syntax that binds Credentials, a Base64 CommandText, its @Country value, and the Base64 switch.",
 				"The decoded SQL is `SELECT Id, Name FROM dbo.Customers -- customers in the requested country` followed by a `WHERE Country = @Country ORDER BY Name` line."
@@ -398,8 +398,9 @@
 		{
 			"description": [
 				"Gives the path of a UTF-8 text file whose content is the SQL statement to run.",
-				"Use it for SQL that contains a space followed by two dashes or a double closing brace, because those sequences end an inline argument value.",
-				"CommandText wins when both are set, and the step fails when the file does not exist."
+				"Use it for SQL with comments, `--` sequences, or `}}`, because file content never passes through the inline argument parser.",
+				"CommandText wins when both are set, and the step fails when the file does not exist.",
+				"Sends the whole file as one batch, so a `GO` separator line fails with a syntax error; use InvokeSqlServerScript for files that contain `GO`."
 			],
 			"mandatory": false,
 			"name": "CommandFile",
@@ -407,10 +408,10 @@
 		},
 		{
 			"description": [
-				"Holds the SQL statement to run, written inline in the step argument.",
+				"Holds the SQL statement to run inline; CommandText or CommandFile is required, and CommandText wins when both are set.",
 				"Reference input values as named placeholders such as @Id and supply them through Parameters instead of joining them into the text.",
-				"Either CommandText or CommandFile is required, and CommandText wins when both are set.",
-				"For SQL that contains a space followed by two dashes or a double closing brace, use CommandFile or pass the text as UTF-8 Base64 together with the Base64 switch."
+				"Sends the text to SQL Server as one batch, so a `GO` separator line fails with a syntax error; use InvokeSqlServerScript for scripts that contain `GO`.",
+				"For SQL with `}}`, or with a space or line break followed directly by two dashes and a letter, digit, or one of `, / . $ *` (such as `--note`), use CommandFile or pass the text as UTF-8 Base64 with the Base64 switch, because those sequences can end the inline argument early so the rest of the SQL never runs."
 			],
 			"mandatory": false,
 			"name": "CommandText",
@@ -482,7 +483,7 @@
 	],
 	"pluginType": "Action",
 	"summary": [
-		"Runs a query on Microsoft SQL Server and exports the returned rows as JSON for later steps.",
+		"Reads rows from SQL Server tables or views with a SELECT query and returns them as JSON records for later steps.",
 		"Keeps every result set, the column names, and the row count, even when the query returns no rows.",
 		"Binds input values as typed parameters and connects through stored credentials, a connection string, or a Microsoft Entra access token.",
 		"Stores Result, ResultSets, Columns, and RowCount in session parameters for lookups, checks, and data handoffs."

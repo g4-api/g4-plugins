@@ -49,7 +49,7 @@ Outputs are plain text in the response entity and Base64-encoded in the session 
 
 ### Example No.1
 
-### Export the documents a filter matches
+### Read the documents a filter matches
 
 The argument names the collection and passes the filter as a JSON object.
 The step stores the documents as relaxed Extended JSON.
