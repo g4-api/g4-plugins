@@ -1,0 +1,333 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"DataExtraction"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/AddFile.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/AddFile.cs"
+			},
+			"rag": {
+				"description": "Add a file to the automation response as Base64 to attach, embed, upload, or keep it as evidence. Text files can be filtered with a regular expression to return only a matched value, while binary files such as images, PDF files, and archives keep their exact bytes. Nothing is written to disk, and every value is collected in a session list for later steps.",
+				"qa": [
+					{
+						"question": "What does the AddFile plugin do?",
+						"answer": "It reads the file at the path in the rule argument and returns its content as Base64 in the `File` response entity key, without writing anything to disk."
+					},
+					{
+						"question": "What are the key properties and outputs of AddFile?",
+						"answer": "The Argument property holds the file path and the RegularExpression property filters text files. The value is returned in the `File` entity key and appended to the `AddFile:Files` session parameter."
+					},
+					{
+						"question": "How does AddFile handle text files and binary files?",
+						"answer": "Text files are decoded, filtered with the regular expression, and the match is encoded as UTF-8 Base64. Binary files ignore the regular expression and return their exact bytes as Base64."
+					},
+					{
+						"question": "How does AddFile decide whether a file is text?",
+						"answer": "A UTF-8 or UTF-16 byte order mark means text. Without one, the file is text when it has no zero byte and the whole file is valid UTF-8; anything else is binary."
+					},
+					{
+						"question": "How does AddFile fit into an automation workflow?",
+						"answer": "It runs as an Action task step with the file-import icon and the ActionRuleModel, and its Base64 value feeds mail attachments, HTTP uploads, assertions, or report evidence."
+					},
+					{
+						"question": "What are best practices for using AddFile?",
+						"answer": "Use a regular expression when only part of a text file is needed, keep large files out of the flow when possible, and decode the value with a Base64 step before comparing text."
+					},
+					{
+						"question": "How is an AddFile rule configured?",
+						"answer": "Use $type “Action” with pluginName “AddFile”, an argument such as C:\\Data\\invoice.txt, and an optional regularExpression such as (?<=Invoice: )\\d+."
+					},
+					{
+						"question": "How does AddFile handle errors and empty results?",
+						"answer": "An empty argument or a missing file fails the step. A regular expression that does not match a text file returns an empty string, and an empty file returns an empty string."
+					},
+					{
+						"question": "What is the manifest key of AddFile?",
+						"answer": "The manifest key is “AddFile”."
+					},
+					{
+						"question": "What manifestVersion is used by AddFile?",
+						"answer": "The manifestVersion is 4."
+					},
+					{
+						"question": "What is the pluginType of AddFile?",
+						"answer": "The pluginType is “Action”."
+					},
+					{
+						"question": "Which platforms does AddFile support?",
+						"answer": "It supports the platform “Any”."
+					},
+					{
+						"question": "Which category is AddFile listed under?",
+						"answer": "It is listed under the “DataExtraction” category."
+					},
+					{
+						"question": "Who is the author of the AddFile manifest?",
+						"answer": "The author is Roei Sabag."
+					},
+					{
+						"question": "What author link is provided in the AddFile manifest?",
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/"
+					},
+					{
+						"question": "What is the summary of AddFile?",
+						"answer": "Adds a file to the response as Base64 so later steps can attach, embed, or send its content without a second file read. Text files go through the rule regular expression, so the step can return the whole text or only a matched part, such as an invoice number. Binary files such as images, PDF files, or archives ignore the regular expression and return their exact bytes as Base64. Nothing is written to disk, and every value is appended to the AddFile:Files session parameter."
+					},
+					{
+						"question": "Where are the AddFile documentation and source code?",
+						"answer": "It is documented as a file-to-Base64 response step. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/AddFile.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/AddFile.cs."
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "file-import",
+					"svg": null
+				},
+				"label": "Add File",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Reads a file from the path in the rule argument and returns its content as Base64 in the response.",
+		"Lets an automation carry a file inside the flow, for example to attach it to a mail, post it to an API, or store it with test evidence.",
+		"Treats text and binary files differently, so text can be filtered with a regular expression while binary bytes stay exact.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                 | Description                                                                                                                   |",
+		"|-------------------------|-------------------------------------------------------------------------------------------------------------------------------|",
+		"| Base64 response         | Returns the file content as Base64 in the `File` response entity key.                                                         |",
+		"| Text regex filter       | Applies the rule regular expression to text files and returns only the matched text, or an empty string when nothing matches. |",
+		"| Whole text by default   | Uses the `(?s).*` pattern when no regular expression is set, so the whole text is returned.                                   |",
+		"| Exact binary bytes      | Ignores the regular expression for binary files and returns the raw bytes, so images and archives stay valid.                 |",
+		"| Content-based detection | Treats a file as text when it starts with a UTF-8 or UTF-16 byte order mark, or when it has no zero byte and is valid UTF-8.  |",
+		"| No disk write           | Only reads the file; the result lives in the response and the session.                                                        |",
+		"| Session list            | Appends every value to the `AddFile:Files` session parameter, so several files can be collected in one session.               |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case         | Description                                                                                       |",
+		"|------------------|---------------------------------------------------------------------------------------------------|",
+		"| Mail attachments | Add a report or invoice file so a later step can send it as a mail attachment.                    |",
+		"| API uploads      | Embed a document as Base64 in the body of an HTTP request to a service that accepts Base64 files. |",
+		"| Value extraction | Pull one value, such as an order number, out of a text export with a regular expression.          |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case              | Description                                                                        |",
+		"|-----------------------|------------------------------------------------------------------------------------|",
+		"| Evidence capture      | Add log files or downloaded files to the response so the test report carries them. |",
+		"| Content checks        | Extract a line from a generated text file and assert on the decoded value.         |",
+		"| Download verification | Return a downloaded binary file as Base64 to compare it with an expected file.     |",
+		"",
+		"### Notes",
+		"",
+		"Text in a legacy code page, such as Windows-1252 with accented characters, is not valid UTF-8 and is returned as exact bytes without the regular expression.",
+		"The whole file is loaded into memory, so very large files increase memory use and response size."
+	],
+	"entity": [
+		{
+			"description": [
+				"Holds the Base64 value of the most recent AddFile call.",
+				"For a text file it is the UTF-8 Base64 of the regular expression match, or an empty string when nothing matches; for a binary file it is the Base64 of the exact bytes.",
+				"Lets a later step read the file directly from the response, without the `AddFile:Files` session list."
+			],
+			"name": "File",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File does not exist, so the step fails with a file-not-found error",
+						"File is empty, so the value is an empty string",
+						"File starts with a UTF-8 byte order mark, which is removed before encoding"
+					],
+					"expected_result": "The full content of `orders.csv` is returned as Base64 in the `File` entity key and appended to `AddFile:Files`.",
+					"notes": "Without a regular expression the default `(?s).*` pattern matches the whole text, including line breaks.",
+					"use_case": "add_whole_text_file_as_base64",
+					"version": "4"
+				},
+				"labels": [
+					"Add",
+					"Base64",
+					"File",
+					"Response",
+					"Text"
+				]
+			},
+			"description": [
+				"### Add a whole text file to the response as Base64",
+				"",
+				"The argument is the path of a CSV export, and no regular expression is set.",
+				"The whole text is encoded as UTF-8 Base64 and returned in the `File` entity key."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "C:\\Data\\orders.csv",
+				"pluginName": "AddFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Pattern does not match, so the value is an empty string",
+						"Pattern matches several times, so only the first match is returned",
+						"File uses a legacy code page, so it is treated as binary and the pattern is ignored"
+					],
+					"expected_result": "The invoice number, such as `10452`, is returned as Base64 in the `File` entity key and appended to `AddFile:Files`.",
+					"notes": "The regular expression runs on the decoded text, and only the first match is returned.",
+					"use_case": "extract_value_from_text_file_with_regex",
+					"version": "4"
+				},
+				"labels": [
+					"Extract",
+					"File",
+					"Regex",
+					"Text",
+					"Value"
+				]
+			},
+			"description": [
+				"### Extract an invoice number from a text file with a regex",
+				"",
+				"The argument is the path of a text invoice, and the regular expression keeps only the digits after `Invoice: `.",
+				"Only the matched number is encoded as Base64, so a later step gets the value without parsing the file."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "C:\\Data\\invoice.txt",
+				"regularExpression": "(?<=Invoice: )\\d+",
+				"pluginName": "AddFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"A regular expression is set, but it is ignored for binary content",
+						"File is locked by another process, so the read fails",
+						"File is very large, so the response grows by about one third of the file size"
+					],
+					"expected_result": "The exact bytes of `chart.png` are returned as Base64 in the `File` entity key and appended to `AddFile:Files`.",
+					"notes": "Binary files never go through the regular expression, so the decoded bytes always equal the original file.",
+					"use_case": "attach_binary_file_as_base64",
+					"version": "4"
+				},
+				"labels": [
+					"Attach",
+					"Base64",
+					"Binary",
+					"Embed",
+					"File",
+					"Image"
+				]
+			},
+			"description": [
+				"### Attach an image file as Base64 for a later step",
+				"",
+				"The argument is the path of a PNG chart, which is a binary file.",
+				"The exact bytes are returned as Base64, ready to attach to a mail or embed in an HTTP request."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "C:\\Reports\\chart.png",
+				"pluginName": "AddFile"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Working directory differs between runs, so the relative path points to another file",
+						"Earlier AddFile steps already added values, so the new value is appended at the end"
+					],
+					"expected_result": "The content of `settings.json` is returned as Base64 and added after any earlier values in `AddFile:Files`.",
+					"notes": "Relative paths are resolved with the process working directory, so the same rule can run on different machines.",
+					"use_case": "read_relative_path_file_into_session_list",
+					"version": "4"
+				},
+				"labels": [
+					"File",
+					"Read",
+					"RelativePath",
+					"SessionParameters",
+					"Text"
+				]
+			},
+			"description": [
+				"### Read a file from a relative path into the session list",
+				"",
+				"The argument is a relative path, which is resolved against the working directory of the run.",
+				"The value is appended to `AddFile:Files`, so several AddFile steps build one list of files."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Resources/settings.json",
+				"pluginName": "AddFile"
+			}
+		}
+	],
+	"key": "AddFile",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"A JSON array with the Base64 value of every AddFile call in the session, in call order.",
+				"Each call appends its value, so several files can be collected and handed to one later step.",
+				"The session value itself is Base64-encoded, so decode it before reading the array."
+			],
+			"name": "AddFile:Files",
+			"type": "Array"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"The path of the file to add, such as `C:\\Data\\invoice.txt` or `Resources/settings.json`.",
+				"A relative path is resolved against the working directory, and a missing file fails the step.",
+				"The path is the whole argument, so it needs no `--` switch and may contain spaces."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "(?si).*",
+			"description": [
+				"Filters the decoded text of a text file and returns only the first match, such as `(?<=Invoice: )\\d+` for an invoice number.",
+				"Defaults to a pattern that matches the whole text, and a pattern that does not match returns an empty string.",
+				"Binary files ignore this property and always return their exact bytes."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"summary": [
+		"Adds a file to the response as Base64 so later steps can attach, embed, or send its content without a second file read.",
+		"Text files go through the rule regular expression, so the step can return the whole text or only a matched part, such as an invoice number.",
+		"Binary files such as images, PDF files, or archives ignore the regular expression and return their exact bytes as Base64.",
+		"Nothing is written to disk, and every value is appended to the `AddFile:Files` session parameter."
+	],
+	"version": "4"
+}

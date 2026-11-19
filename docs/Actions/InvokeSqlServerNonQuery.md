@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~26 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -48,6 +48,19 @@ Binds every input value as a typed SQL parameter, which keeps the statement safe
 RowsAffected holds the total number of rows changed by the statement as text, such as 1.
 The value -1 means that SQL Server reported no row count, which happens for DDL statements or when SET NOCOUNT ON is active.
 Session parameters are Base64-encoded, so decode InvokeSqlServerNonQuery:RowsAffected before comparing it.
+
+### Choosing InvokeSqlServerNonQuery or InvokeSqlServerScript
+
+| Need | Use |
+| --- | --- |
+| Insert or change rows with values from earlier steps or macros | InvokeSqlServerNonQuery, because Parameters binds the values as typed SQL parameters. |
+| Run a script with `GO` lines, such as a file from SSMS or sqlcmd | InvokeSqlServerScript, because only it splits the text into batches on `GO`. |
+| Keep `USE` or `SET` options across batches | InvokeSqlServerScript, because every batch runs on one shared connection. |
+| Get the exact row count of one statement | InvokeSqlServerNonQuery, because it reports the server count, including -1 for DDL. |
+| Insert explicit IDENTITY values with a bound value | InvokeSqlServerNonQuery, with `SET IDENTITY_INSERT ... ON`, the INSERT, and `SET IDENTITY_INSERT ... OFF` in one batch separated by semicolons. |
+
+InvokeSqlServerNonQuery sends its text as one batch, so SQL Server rejects a `GO` line with a syntax error.
+InvokeSqlServerScript takes no Parameters, because SQL Server runs a parameterized command in its own scope and undoes `USE` and most `SET` options when that scope ends.
 
 ## Examples
 
@@ -355,8 +368,9 @@ Invalid Base64 fails the step before anything is sent to SQL Server, so encoded 
 | **Value Type**    | String            |
 
 Gives the path of a UTF-8 text file whose content is the SQL statement to run.
-Use it for SQL that contains a space followed by two dashes or a double closing brace, because those sequences end an inline argument value.
+Use it for SQL with comments, `--` sequences, or `}}`, because file content never passes through the inline argument parser.
 CommandText wins when both are set, and the step fails when the file does not exist.
+Sends the whole file as one batch, so a `GO` separator line fails with a syntax error; use InvokeSqlServerScript for files that contain `GO`.
 
 ### Command Text (CommandText)
 
@@ -368,10 +382,10 @@ CommandText wins when both are set, and the step fails when the file does not ex
 | **Multiple**      | No                |
 | **Value Type**    | String            |
 
-Holds the SQL statement to run, written inline in the step argument.
+Holds the SQL statement to run inline; CommandText or CommandFile is required, and CommandText wins when both are set.
 Reference input values as named placeholders such as @Id and supply them through Parameters instead of joining them into the text.
-Either CommandText or CommandFile is required, and CommandText wins when both are set.
-For SQL that contains a space followed by two dashes or a double closing brace, use CommandFile or pass the text as UTF-8 Base64 together with the Base64 switch.
+Sends the text to SQL Server as one batch, so a `GO` separator line fails with a syntax error; use InvokeSqlServerScript for scripts that contain `GO`.
+For SQL with `}}`, or with a space or line break followed directly by two dashes and a letter, digit, or one of `, / . $ *` (such as `--note`), use CommandFile or pass the text as UTF-8 Base64 with the Base64 switch, because those sequences can end the inline argument early so the rest of the SQL never runs.
 
 ### Command Timeout (CommandTimeout)
 

@@ -303,6 +303,7 @@ Invalid Base64 fails the step before anything is sent to SQL Server, so encoded 
 Points to a UTF-8 `.sql` file that holds the query, such as `C:\Sql\stock-level.sql`.
 Applies when CommandText is empty, and the step fails when the file does not exist.
 Lets queries that contain comments or braces run without breaking the inline argument.
+Sends the whole file as one batch, so a `GO` separator line fails with a syntax error; use InvokeSqlServerScript for files that contain `GO`.
 
 ### Command Text (CommandText)
 
@@ -316,7 +317,8 @@ Lets queries that contain comments or braces run without breaking the inline arg
 
 Holds the SQL query to run, such as `SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status`.
 Takes priority over CommandFile, and the step fails when neither one is set.
-When the SQL contains ` --` or `}}`, use CommandFile or pass the text as UTF-8 Base64 with the Base64 switch, because those sequences end an inline argument value.
+Sends the text to SQL Server as one batch, so a `GO` separator line fails with a syntax error; use InvokeSqlServerScript for scripts that contain `GO`.
+For SQL with `}}`, or with a space or line break followed directly by two dashes and a letter, digit, or one of `, / . $ *` (such as `--note`), use CommandFile or pass the text as UTF-8 Base64 with the Base64 switch, because those sequences can end the inline argument early so the rest of the SQL never runs.
 
 ### Command Timeout (CommandTimeout)
 

@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~25 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -62,6 +62,19 @@ Reports how many batches ran and how many rows changed so later steps can confir
 5. The step fails when no server is resolved.
 
 Session parameters are named `InvokeSqlServerScript:<Name>` and are Base64-encoded, so decode them before use.
+
+### Choosing InvokeSqlServerNonQuery or InvokeSqlServerScript
+
+| Need | Use |
+| --- | --- |
+| Insert or change rows with values from earlier steps or macros | InvokeSqlServerNonQuery, because Parameters binds the values as typed SQL parameters. |
+| Run a script with `GO` lines, such as a file from SSMS or sqlcmd | InvokeSqlServerScript, because only it splits the text into batches on `GO`. |
+| Keep `USE` or `SET` options across batches | InvokeSqlServerScript, because every batch runs on one shared connection. |
+| Get the exact row count of one statement | InvokeSqlServerNonQuery, because it reports the server count, including -1 for DDL. |
+| Insert explicit IDENTITY values with a bound value | InvokeSqlServerNonQuery, with `SET IDENTITY_INSERT ... ON`, the INSERT, and `SET IDENTITY_INSERT ... OFF` in one batch separated by semicolons. |
+
+InvokeSqlServerNonQuery sends its text as one batch, so SQL Server rejects a `GO` line with a syntax error.
+InvokeSqlServerScript takes no Parameters, because SQL Server runs a parameterized command in its own scope and undoes `USE` and most `SET` options when that scope ends.
 
 ## Examples
 
@@ -349,6 +362,7 @@ Invalid Base64 fails the step before anything is sent to SQL Server, so encoded 
 Points to a UTF-8 .sql file that holds the script, such as C:\Scripts\deploy.sql.
 Supports long multi-line scripts, SQL comments, and characters that cannot travel inside an inline argument.
 Used only when CommandText is empty, and a missing file fails the step.
+Macros inside the file are not resolved, because the file is read only when the step runs.
 
 ### Command Text (CommandText)
 
@@ -362,7 +376,8 @@ Used only when CommandText is empty, and a missing file fails the step.
 
 Provides the script inline, with batches separated by lines that hold only GO or GO followed by a repeat count.
 Takes priority over CommandFile, and one of the two is required.
-When the SQL contains a space followed by two dashes or two closing braces, use CommandFile or pass the script as UTF-8 Base64 with the Base64 switch, because those characters end an inline argument value.
+For SQL with `}}`, or with a space or line break followed directly by two dashes and a letter, digit, or one of `, / . $ *` (such as `--note`), use CommandFile or pass the text as UTF-8 Base64 with the Base64 switch, because those sequences can end the inline argument early so the rest of the SQL never runs.
+The script takes no Parameters, and macros resolve only in plain CommandText because Base64 text is decoded after macro resolution, so use InvokeSqlServerNonQuery to bind values from earlier steps.
 
 ### Command Timeout (CommandTimeout)
 

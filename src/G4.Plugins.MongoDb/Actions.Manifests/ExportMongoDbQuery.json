@@ -177,14 +177,16 @@
 					"version": "4"
 				},
 				"labels": [
+					"Collection",
 					"Database",
-					"Export",
+					"Documents",
 					"MongoDb",
-					"Query"
+					"Query",
+					"Read"
 				]
 			},
 			"description": [
-				"### Export the documents a filter matches",
+				"### Read the documents a filter matches",
 				"",
 				"The argument names the collection and passes the filter as a JSON object.",
 				"The step stores the documents as relaxed Extended JSON."
