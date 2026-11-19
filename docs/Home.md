@@ -5,6 +5,7 @@
 ## Plugins
 
 * _**Actions**_
+  * [Add File (AddFile)](./Actions/AddFile.md)
   * [Assert (Assert)](./Actions/Assert.md)
   * [Clear Element Content (ClearElementContent)](./Actions/ClearElementContent.md)
   * [Close Browser (CloseBrowser)](./Actions/CloseBrowser.md)
