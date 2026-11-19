@@ -50,9 +50,18 @@ namespace G4.Plugins.Common.Actions
             // AddFile call in the session stays available to later steps.
             var files = Invoker.Context.SessionParameters.Get(key: $"{NameReference}:Files", defaultValue: "[]");
             var list = JsonSerializer.Deserialize<List<string>>(files.ConvertFromBase64()) ?? [];
+
+            // Append the latest value to the list and store
+            // it back in the session so later steps can read it.
             list.Add(value);
 
-            this.AddSessionParameter(@namespace: NameReference, name: "Files", value: JsonSerializer.Serialize(list));
+            // Store the updated list in the session so later
+            // steps can read it without the response entity.
+            this.AddSessionParameter(
+                @namespace: NameReference,
+                name: "Files",
+                value: JsonSerializer.Serialize(list)
+            );
 
             // Expose the latest value on the response entity so a later step can read it without the session list.
             var response = this.NewPluginResponse();
@@ -77,6 +86,8 @@ namespace G4.Plugins.Common.Actions
             var isUtf16LittleEndianBom = span.StartsWith(stackalloc byte[] { 0xFF, 0xFE });
             var isUtf16BigEndianBom = span.StartsWith(stackalloc byte[] { 0xFE, 0xFF });
 
+            // Return true for any byte order mark,
+            // because the encoding is known and the content is text.
             if (isUtf8Bom || isUtf16LittleEndianBom || isUtf16BigEndianBom)
             {
                 return true;
@@ -96,8 +107,15 @@ namespace G4.Plugins.Common.Actions
             var text = reader.ReadToEnd();
 
             // Return an empty value for no match so later steps can tell "nothing matched" from encoded content.
-            var match = Regex.Match(input: text, pattern);
+            var match = Regex.Match(
+                input: text,
+                pattern,
+                options: RegexOptions.None,
+                matchTimeout: TimeSpan.FromSeconds(30)
+            );
 
+            // Convert the matched text to UTF-8 bytes and then to
+            // Base64 so the engine can safely store it in JSON.
             return match.Success
                 ? match.Value.ConvertToBase64()
                 : string.Empty;
