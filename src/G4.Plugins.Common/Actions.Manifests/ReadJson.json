@@ -297,6 +297,7 @@
 			"type": "String"
 		},
 		{
+			"default": "(?s).*",
 			"description": [
 				"Specifies an optional regular expression applied to the extracted JSON content.",
 				"The expression is used to match and isolate a specific portion of the selected JSON.",
