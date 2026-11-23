@@ -4,7 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 
-namespace G4.Plugins.Common.Udp
+namespace G4.Plugins.Common.Utilities.Udp
 {
     /// <summary>
     /// Keeps the named UDP listeners of every running automation, so one step can start a listener and later steps

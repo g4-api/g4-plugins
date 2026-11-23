@@ -1,6 +1,6 @@
 using System;
 
-namespace G4.Plugins.Common.Udp
+namespace G4.Plugins.Common.Utilities.Udp
 {
     /// <summary>
     /// Represents one datagram a UDP listener received, with the sender and arrival details a flow reports.
