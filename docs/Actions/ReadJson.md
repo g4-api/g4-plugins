@@ -52,7 +52,7 @@ Provide inline JSON content through the `argument` property.
 Select a single value using a JSONPath expression defined in `OnElement`.
 The selected value is serialized as JSON before further processing.
 A regular expression `"[^"]+"` is applied to the value attribute to extract the inner string.
-The extracted value is converted to Base64 and stored in the session parameter `ReadJson:ReadJsonResult`.
+The extracted value is converted to Base64 and stored in the session parameter `ReadJson:Result`.
 
 **CSharp:**
 
@@ -117,7 +117,7 @@ Load JSON content from a file path provided in the `argument` property.
 Use a JSONPath expression in `OnElement` to select multiple values.
 The selected tokens are serialized into a JSON array.
 A regular expression `\d+` is applied to the value attribute to extract numeric content.
-The matched value is converted to Base64 and written to the session parameter `ReadJson:ReadJsonResult`.
+The matched value is converted to Base64 and written to the session parameter `ReadJson:Result`.
 
 **CSharp:**
 
@@ -182,7 +182,7 @@ Supply inline JSON using the `argument` property.
 Select a nested object using the JSONPath expression defined in `OnElement`.
 The selected result is serialized as JSON.
 No filtering is applied because no regular expression is provided.
-The serialized JSON is converted to Base64 and saved in the session parameter `ReadJson:ReadJsonResult`.
+The serialized JSON is converted to Base64 and saved in the session parameter `ReadJson:Result`.
 
 **CSharp:**
 
@@ -236,7 +236,7 @@ action_rule = {
 
 ## Output Parameter
 
-### Read Json Read Json Result (ReadJson:ReadJsonResult)
+### Read Json Read Json Result (ReadJson:Result)
 
 | Attribute         | Value             |
 | ----------------- | ----------------- |

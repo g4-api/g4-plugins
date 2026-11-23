@@ -3,7 +3,9 @@ using G4.Extensions;
 using G4.Models;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace G4.Plugins.Common.Actions
@@ -13,6 +15,10 @@ namespace G4.Plugins.Common.Actions
         manifest: $"G4.Plugins.Common.Actions.Manifests.{nameof(InvokeWhileLoop)}.json")]
     public class InvokeWhileLoop(G4PluginSetupModel pluginSetup) : PluginBase(pluginSetup)
     {
+        // The type name of the exception a driver raises when a search finds no element. The engine records an
+        // exception by the type name of its root cause, so the loop recognizes it by this name.
+        private const string MissingElementExceptionType = "NoSuchElementException";
+
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
             // Disable the invocation of child rules initially to prevent redundant executions.
@@ -89,14 +95,31 @@ namespace G4.Plugins.Common.Actions
         // Asserts a condition based on the given <see cref="PluginBase"/> instance and PluginDataModel.
         private static bool AssertPluginCondition(PluginBase plugin, PluginDataModel pluginData)
         {
+            // Remember the exceptions the loop already holds, so the ones this check adds can be told apart.
+            var knownExceptions = (plugin.Exceptions ?? []).ToArray();
+
             // Perform the assertion using the plugin, disabling the addition of extractions.
             var assertionResult = plugin.Assert(pluginData, addExtractions: false);
 
             // Retrieve the evaluation result from the assertion result.
             var evaluation = assertionResult.Entity[AssertionProperties.Evaluation];
+            var isConditionMet = evaluation is bool isTrue && isTrue;
 
-            // Return true if the evaluation result is a boolean and is true; otherwise, return false.
-            return evaluation is bool isTrue && isTrue;
+            // A loop ends when its condition is false. With a condition such as ElementExists that is the moment
+            // the element is gone, and the failed search is then the expected end of the loop, not a failure of
+            // the flow. Drop the element-not-found exceptions this check added, so a loop that ended correctly
+            // does not report an error. This is done here only: the shared assertion still reports the missing
+            // element to every other plugin, and every other kind of exception of the check is kept.
+            if (!isConditionMet)
+            {
+                var keptExceptions = (plugin.Exceptions ?? [])
+                    .Where(i => knownExceptions.Contains(i) || i.Type != MissingElementExceptionType);
+
+                plugin.Exceptions = new ConcurrentBag<G4ExceptionModel>(keptExceptions);
+            }
+
+            // Return true when the condition is met, so the loop runs another pass.
+            return isConditionMet;
         }
 
         // Retrieves the timeout value specified in the PluginDataModel.

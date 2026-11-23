@@ -48,8 +48,9 @@ namespace G4.Plugins.Common.Actions
                 .Value
                 .ConvertToBase64() ?? string.Empty;
 
-            // Store the result in the session context for downstream plugins.
-            Invoker.Context.SessionParameters["ReadJsonResult"] = jsonResult;
+            // Store the result in the session context for downstream plugins. The name is the one the manifest
+            // publishes as the output parameter of the plugin, so a flow reads what the documentation names.
+            Invoker.Context.SessionParameters["ReadJson:Result"] = jsonResult;
 
             // Create a new plugin response.
             var pluginResponse = this.NewPluginResponse();

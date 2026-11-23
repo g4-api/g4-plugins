@@ -6,6 +6,7 @@ using G4.UnitTests.Framework;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using System.Linq;
 using System.Text.Json;
 
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
@@ -30,6 +31,52 @@ namespace G4.UnitTests.Plugins.Common
         public override void ManifestComplianceTest()
         {
             AssertManifest<SetSwitchCase>();
+        }
+
+        [TestMethod(DisplayName = "Verify that the SetSwitchCase plugin runs the Default branch, without an " +
+            "exception, when the attribute it reads does not exist on the element.")]
+        public void SetSwitchCaseMissingAttributeTest()
+        {
+            // Arrange: the simulator answers null for an attribute named "value" that the element does not hold,
+            // as a W3C driver does for an attribute that is not written in the markup.
+            const string ruleJson =
+                "{" +
+                "    \"$type\": \"Switch\"," +
+                "    \"pluginName\": \"SetSwitchCase\"," +
+                "    \"argument\": \"\"," +
+                "    \"locator\": \"Id\"," +
+                "    \"onElement\": \"//positive\"," +
+                "    \"onAttribute\": \"value\"," +
+                "    \"regularExpression\": \".*\"," +
+                "    \"branches\": {" +
+                "        \"Other\": [" +
+                "             {" +
+                "                 \"$type\": \"Action\"," +
+                "                 \"pluginName\": \"RegisterParameter\"," +
+                "                 \"argument\": \"{{$ --Name:TestParameter --Value:Other}}\"" +
+                "             }" +
+                "         ]," +
+                "        \"Default\": [" +
+                "             {" +
+                "                 \"$type\": \"Action\"," +
+                "                 \"pluginName\": \"RegisterParameter\"," +
+                "                 \"argument\": \"{{$ --Name:TestParameter --Value:Default}}\"" +
+                "             }" +
+                "         ]" +
+                "    }" +
+                "}";
+            var ruleModel = JsonSerializer.Deserialize<G4RuleModelBase>(ruleJson, JsonOptions);
+
+            // Act: invoke the rule and read the parameter the branch that ran has registered.
+            var responseModel = Invoke([ruleModel]);
+            var actual = responseModel
+                .GetParameterValue(parameterName: "TestParameter", scope: "Session")
+                .ConvertFromBase64();
+            var exceptionTypes = responseModel.GetExceptions().Select(i => i.Type).ToArray();
+
+            // Assert: the missing attribute is read as an empty key, which selects the Default branch.
+            Assert.AreEqual(expected: "Default", actual);
+            Assert.IsEmpty(exceptionTypes);
         }
 
         [TestMethod(DisplayName = "Verify that the SetSwitchCase plugin evaluates conditions " +
