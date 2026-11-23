@@ -34,6 +34,35 @@ namespace G4.UnitTests.Plugins.Common
             AssertPlugin<InvokeWhileLoop>();
         }
 
+        [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin ends without an exception when its " +
+            "condition is false because the element it checks does not exist.")]
+        public void InvokeWhileLoopMissingElementTest()
+        {
+            // Arrange: a loop that runs while an element exists, on the simulator locator that finds no element
+            // and raises the driver's no-such-element error.
+            var ruleModel = new ActionRuleModel
+            {
+                PluginName = "InvokeWhileLoop",
+                Argument = "{{$ --Condition:ElementExists}}",
+                OnElement = "//none",
+                Rules =
+                [
+                    new ActionRuleModel
+                    {
+                        PluginName = "WriteLog",
+                        Argument = "The loop must not run this rule."
+                    }
+                ]
+            };
+
+            // Act: invoke the loop; its first condition check already ends it.
+            var responseModel = Invoke([ruleModel]);
+            var exceptionTypes = responseModel.GetExceptions().Select(i => i.Type).ToArray();
+
+            // Assert: the missing element ended the loop and was not reported as an exception.
+            Assert.IsEmpty(exceptionTypes);
+        }
+
         // This test may produce inconsistent results due to its reliance on random object generation.
         // Running it in a loop helps mitigate this inconsistency.
         [TestMethod(DisplayName = "Verify that the InvokeWhileLoop plugin performs correctly " +

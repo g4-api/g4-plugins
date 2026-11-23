@@ -1,0 +1,376 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Network"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/StartUdpListener.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/StartUdpListener.cs"
+			},
+			"rag": {
+				"description": "Start a UDP listener in an automation to capture datagrams while other steps run. The listener checks nothing by itself; it keeps what arrives under a name, on a fixed or a free port, so later steps assert network output without losing datagrams sent during a click or a wait.",
+				"qa": [
+					{
+						"answer": "It binds a UDP port and buffers the datagrams that arrive, up to BufferSize, under a name later steps use to read, send, or stop.",
+						"question": "What does the StartUdpListener plugin do?"
+					},
+					{
+						"answer": "Name identifies the listener, Port selects the port or 0 for a free one, LocalAddress and MulticastGroup set where it listens, and BufferSize caps the unread datagrams. The outputs are Name and Port.",
+						"question": "What are the key parameters and outputs of StartUdpListener?"
+					},
+					{
+						"answer": "It runs as an Action task step with the play icon and the ActionRuleModel, before the action that makes a sender emit and before ReceiveUdpMessage.",
+						"question": "How does StartUdpListener fit into an automation workflow?"
+					},
+					{
+						"answer": "Start the listener before the triggering action, give each concurrent capture its own Name, and stop it when the scenario ends to free the port.",
+						"question": "What are best practices for using StartUdpListener?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “StartUdpListener” and pass inputs in the argument, such as {{$ --Name:Telemetry --Port:9100}}.",
+						"question": "How is a StartUdpListener rule configured?"
+					},
+					{
+						"answer": "A name already started in the same automation, a held port without MulticastGroup, a port above 65535, or an address that is not an IP address fails the step, and no socket stays open.",
+						"question": "How does StartUdpListener handle errors?"
+					},
+					{
+						"answer": "The manifest key is “StartUdpListener”.",
+						"question": "What is the manifest key of StartUdpListener?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by StartUdpListener?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of StartUdpListener?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does StartUdpListener support?"
+					},
+					{
+						"answer": "It is listed under the “Network” category.",
+						"question": "Which category is StartUdpListener listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the StartUdpListener manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the StartUdpListener manifest?"
+					},
+					{
+						"answer": "It opens a named UDP listener that buffers incoming datagrams, up to BufferSize, while later steps run.",
+						"question": "What is the summary of StartUdpListener?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/StartUdpListener.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/StartUdpListener.cs.",
+						"question": "Where are the StartUdpListener documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "play",
+					"svg": null
+				},
+				"label": "Start UDP Listener",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"StartUdpListener opens a UDP port and keeps the datagrams (single network messages) that arrive on it, up to the BufferSize limit.",
+		"UDP drops a datagram that arrives while no socket is bound, so place this step before the action that makes a sender emit.",
+		"Later steps read the buffered datagrams with ReceiveUdpMessage or send through the same socket with SendUdpMessage.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Background capture | Buffers datagrams in memory while the following steps run. |",
+		"| Named listeners | Runs several listeners in one flow, each reached by its name. |",
+		"| System-assigned port | Binds port 0 to get a free port and publishes the port that was assigned. |",
+		"| Multicast | Joins a multicast group for the lifetime of the listener. |",
+		"| Bounded buffer | Keeps a set number of datagrams and drops the oldest when the buffer is full. |",
+		"| Automatic cleanup | Closes the socket when the automation ends, even without a stop step. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Device monitoring | Collect readings a device sends while the flow operates another system. |",
+		"| Event capture | Record the notifications of a service during a long process. |",
+		"| Mock servers | Take requests from a client and answer them from the same port. |",
+		"| Parallel lanes | Share one listener between lanes that run at the same time. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Emission checks | Capture what the application under test sends when a UI action runs. |",
+		"| Traffic recording | Keep the datagrams of a scenario, up to BufferSize, for later assertions. |",
+		"| Dynamic ports | Start on a free port and pass the published port to the application under test. |",
+		"| Isolation | Give each test its own named listener and port so captures do not mix. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the name of the started listener.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"mandatory": false,
+			"name": "Name",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the port the listener is bound to.",
+				"Returned as plain text in the response entity, holding the system-assigned port when the step asked for port 0."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Default listener is already started"
+					],
+					"expected_result": "The step starts the `Default` listener and stores the assigned port in `StartUdpListener:Port`.",
+					"notes": "Read the published port to tell the sender where to send. ReceiveUdpMessage and SendUdpMessage still name it with `--Listener:Default`; only StopUdpListener stops it without a name.",
+					"use_case": "start_default_listener",
+					"version": "4"
+				},
+				"labels": [
+					"Listener",
+					"Network",
+					"Start",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Start the default listener on a free port",
+				"",
+				"The rule has no argument, so the listener takes the name `Default`.",
+				"The system assigns a free port."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "StartUdpListener"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Name differs only in case from a started listener",
+						"Name is already started",
+						"Port is in use"
+					],
+					"expected_result": "The step starts the `Telemetry` listener on port 9100.",
+					"notes": "Place the step before the action that makes the application send. Stop the listener, or let the end of the automation close it.",
+					"use_case": "start_named_listener",
+					"version": "4"
+				},
+				"labels": [
+					"Capture",
+					"Listener",
+					"Network",
+					"Start",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Start a named listener on a fixed port",
+				"",
+				"The argument names the listener `Telemetry` and binds port 9100.",
+				"Datagrams that arrive from now on are buffered for later steps."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Name:Telemetry --Port:9100}}",
+				"pluginName": "StartUdpListener"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Address does not belong to the machine",
+						"Address is not an IP address"
+					],
+					"expected_result": "The step starts the `Lab` listener on 192.168.1.10 port 9100 with room for 5000 datagrams.",
+					"notes": "Datagrams sent to other interfaces of the machine are not received. The oldest datagram is dropped when the buffer is full.",
+					"use_case": "start_listener_on_interface",
+					"version": "4"
+				},
+				"labels": [
+					"Capture",
+					"Listener",
+					"Network",
+					"Start",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Listen on one interface with a larger buffer",
+				"",
+				"The LocalAddress parameter binds one network interface.",
+				"The BufferSize parameter keeps up to five thousand datagrams."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Name:Lab --Port:9100 --LocalAddress:192.168.1.10 --BufferSize:5000}}",
+				"pluginName": "StartUdpListener"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Group address is not a multicast address",
+						"Group address is not an IP address"
+					],
+					"expected_result": "The step starts the `Discovery` listener and joins the multicast group.",
+					"notes": "Closing the listener also ends its group membership. Other receivers on the machine share the port only when they also allow address reuse.",
+					"use_case": "start_multicast_listener",
+					"version": "4"
+				},
+				"labels": [
+					"Listener",
+					"Multicast",
+					"Network",
+					"Start",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Listen to a multicast group",
+				"",
+				"The MulticastGroup parameter joins the group 239.255.0.1 on port 5000.",
+				"Datagrams sent to the group are buffered under the name `Discovery`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Name:Discovery --Port:5000 --MulticastGroup:239.255.0.1}}",
+				"pluginName": "StartUdpListener"
+			}
+		}
+	],
+	"key": "StartUdpListener",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the name of the started listener.",
+				"Pass it to the Listener parameter of ReceiveUdpMessage, SendUdpMessage, or the Name of StopUdpListener.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "StartUdpListener:Name",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the port the listener is bound to.",
+				"Holds the system-assigned port when the step asked for port 0, so the sender can be pointed at it after decoding.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "StartUdpListener:Port",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"default": "1000",
+			"description": [
+				"Sets how many unread datagrams the listener keeps before it drops the oldest.",
+				"Defaults to 1000, which 0 also selects; raise it for a long scenario with a busy sender.",
+				"A value that is not a whole number fails the step."
+			],
+			"mandatory": false,
+			"name": "BufferSize",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Binds one local IP address, which selects the network interface on a machine with several; a host name or other text fails the step.",
+				"Defaults to every IPv4 interface, and an IPv6 address makes the listener an IPv6 socket.",
+				"With an IPv4 MulticastGroup the listener binds every interface and the address selects the interface that joins the group."
+			],
+			"mandatory": false,
+			"name": "LocalAddress",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Joins a multicast group, such as `239.255.0.1`, so datagrams sent to the group reach the listener.",
+				"Opens the port for sharing with other multicast receivers that also allow it.",
+				"A value that is not an IP address, or not a multicast address, fails the step."
+			],
+			"mandatory": false,
+			"name": "MulticastGroup",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Default",
+			"description": [
+				"Names the listener, so later steps reach it through the Listener parameter of ReceiveUdpMessage and SendUdpMessage, or the Name parameter of StopUdpListener.",
+				"Defaults to `Default`, also for an empty value, and case does not matter, so `telemetry` and `Telemetry` are the same listener.",
+				"A name already started in the same automation fails the step."
+			],
+			"mandatory": false,
+			"name": "Name",
+			"type": "String|Expression"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Binds a local port, from 0 to 65535.",
+				"Defaults to 0, which lets the system pick a free port that the step then publishes.",
+				"Without MulticastGroup, a port another socket holds fails the step."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Holds the arguments of the step, such as `{{$ --Name:Telemetry --Port:9100}}`.",
+				"Every argument is optional; a rule without an argument starts the `Default` listener on a free port."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"summary": [
+		"Binds a UDP port and keeps the messages (datagrams) that arrive on it, up to a set limit, under a name later steps refer to.",
+		"Keeps receiving while other steps run, so a datagram sent during a click or a wait is not lost.",
+		"Closes with StopUdpListener or when the automation ends, and reports the bound port for the sender to target."
+	],
+	"version": "4"
+}

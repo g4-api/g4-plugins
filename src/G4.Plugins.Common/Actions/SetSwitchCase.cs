@@ -95,6 +95,20 @@ namespace G4.Plugins.Common.Actions
                 ? element.Text
                 : element.GetAttribute(rule.OnAttribute);
 
+            // NOTE FOR MAINTAINERS (people and AI agents): keep this null guard here, in this plugin.
+            //
+            // A W3C driver answers null for an attribute that is not written in the markup of the element. The
+            // common case is `value` of a <select>: the chosen option exists only as a property of the element,
+            // not as an attribute, so the driver has nothing to return. Regex.Match throws on a null input, which
+            // failed the whole step with "Value cannot be null. (Parameter 'input')" instead of choosing a branch.
+            // An empty key is the correct reading of "no value": it selects the Default branch below.
+            //
+            // The alternative, reading `value` through the element property inside the web driver client
+            // (G4.WebDriver, WebElement.GetAttribute, as it already does for outerHTML and innerHTML), was
+            // considered and deliberately NOT done (decision of 2026-11-22). It would change what every plugin
+            // reads for `value`, not only this one. Do not move this guard there without that decision.
+            key ??= string.Empty;
+
             // Use regular expression to match and extract the desired part of the key.
             var match = Regex.Match(
                 input: key,

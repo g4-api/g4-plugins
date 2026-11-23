@@ -50,7 +50,7 @@ namespace G4.UnitTests.Plugins.Common
             var actual = responseModel
                 .GetEnvironment()
                 .SessionParameters
-                .Get(key: "ReadJsonResult", defaultValue: string.Empty);
+                .Get(key: "ReadJson:Result", defaultValue: string.Empty);
 
             // Assert: Verify the decoded result matches the expected JSON array.
             Assert.AreEqual(expected: @"[""a"",""b"",""c""]", actual: actual.ConvertFromBase64());
@@ -74,7 +74,7 @@ namespace G4.UnitTests.Plugins.Common
             var actual = responseModel
                 .GetEnvironment()
                 .SessionParameters
-                .Get(key: "ReadJsonResult", defaultValue: string.Empty);
+                .Get(key: "ReadJson:Result", defaultValue: string.Empty);
 
             // Assert: Verify the extracted value matches the expected field.
             Assert.AreEqual(expected: "demo", actual: actual.ConvertFromBase64());
@@ -99,7 +99,7 @@ namespace G4.UnitTests.Plugins.Common
             var actual = responseModel
                 .GetEnvironment()
                 .SessionParameters
-                .Get(key: "ReadJsonResult", defaultValue: string.Empty);
+                .Get(key: "ReadJson:Result", defaultValue: string.Empty);
 
             // Assert: Verify that only the filtered values are returned.
             Assert.AreEqual(expected: "[1,2]", actual: actual.ConvertFromBase64());
@@ -124,7 +124,7 @@ namespace G4.UnitTests.Plugins.Common
             var actual = responseModel
                 .GetEnvironment()
                 .SessionParameters
-                .Get(key: "ReadJsonResult", defaultValue: string.Empty);
+                .Get(key: "ReadJson:Result", defaultValue: string.Empty);
 
             // Assert: Verify the extracted value matches the expected result.
             Assert.AreEqual(expected: "demo", actual: actual.ConvertFromBase64());

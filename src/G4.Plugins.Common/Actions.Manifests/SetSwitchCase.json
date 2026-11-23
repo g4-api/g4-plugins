@@ -603,6 +603,7 @@
 			"type": "String"
 		},
 		{
+			"default": "(?s).*",
 			"description": [
 				"Pattern used to pull out the key from the element’s text or attribute.",
 				"Only the matching portion is kept for use as the switch key.",

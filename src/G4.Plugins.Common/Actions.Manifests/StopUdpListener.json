@@ -1,0 +1,267 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Network"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/StopUdpListener.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/StopUdpListener.cs"
+			},
+			"rag": {
+				"description": "Stop a UDP listener in an automation to end a capture and free its port. The step checks whether a listener was open, takes an optional name, and passes when nothing is left to stop, so cleanup steps run safely at the end of every flow.",
+				"qa": [
+					{
+						"answer": "It closes a UDP listener by name, frees its port, and discards the datagrams no step read.",
+						"question": "What does the StopUdpListener plugin do?"
+					},
+					{
+						"answer": "Name selects the listener and defaults to Default. The outputs are Name and Stopped.",
+						"question": "What are the key parameters and outputs of StopUdpListener?"
+					},
+					{
+						"answer": "It runs as an Action task step with the stop icon and the ActionRuleModel, after the last ReceiveUdpMessage of a capture.",
+						"question": "How does StopUdpListener fit into an automation workflow?"
+					},
+					{
+						"answer": "Read every datagram you need first, stop listeners in a final step, and branch on Stopped only when a repeated stop matters.",
+						"question": "What are best practices for using StopUdpListener?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “StopUdpListener” and pass the name in the argument, such as {{$ --Name:Telemetry}}.",
+						"question": "How is a StopUdpListener rule configured?"
+					},
+					{
+						"answer": "A name that is not started is not an error, so the step passes and stores false in Stopped. Stopping releases any ReceiveUdpMessage still waiting on the listener, and that step fails, saying the listener was stopped.",
+						"question": "How does StopUdpListener handle errors?"
+					},
+					{
+						"answer": "The manifest key is “StopUdpListener”.",
+						"question": "What is the manifest key of StopUdpListener?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by StopUdpListener?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of StopUdpListener?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does StopUdpListener support?"
+					},
+					{
+						"answer": "It is listed under the “Network” category.",
+						"question": "Which category is StopUdpListener listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the StopUdpListener manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the StopUdpListener manifest?"
+					},
+					{
+						"answer": "It closes a named UDP listener, frees its port, and reports whether one was open.",
+						"question": "What is the summary of StopUdpListener?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/StopUdpListener.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/StopUdpListener.cs.",
+						"question": "Where are the StopUdpListener documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "stop",
+					"svg": null
+				},
+				"label": "Stop UDP Listener",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"StopUdpListener closes a listener that StartUdpListener opened.",
+		"The port becomes free when the step returns, and datagrams (network messages) no step read are discarded.",
+		"Flows use it to end a capture, to reuse a port within one run, and to clean up in a final step.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Stop by name | Closes the listener with the given name, or the `Default` listener. |",
+		"| Port release | Frees the port so a later step can bind it again. |",
+		"| Repeat-safe | Passes when no listener has the name and reports that nothing was stopped. |",
+		"| Multicast leave | Closing the socket ends the group membership the listener joined. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Scenario cleanup | Close the capture at the end of a process step. |",
+		"| Port reuse | Free a port before another tool or flow step binds it. |",
+		"| Loop iterations | Stop and start a listener inside a loop so each iteration begins with an empty buffer. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Test teardown | Close listeners in a final step so the next test starts clean. |",
+		"| Capture windows | End a capture at a known point, so later traffic is not counted. |",
+		"| Negative checks | Close the port so later steps can check how the application behaves when nothing listens. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the name of the listener the step addressed.",
+				"Returned as plain text in the response entity for direct data transfer."
+			],
+			"mandatory": false,
+			"name": "Name",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores `true` when a listener was open and is now closed, and `false` when none had the name.",
+				"Returned as the plain text `true` or `false` in the response entity."
+			],
+			"mandatory": false,
+			"name": "Stopped",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Default listener is not started"
+					],
+					"expected_result": "The step closes the `Default` listener and stores `true` in `StopUdpListener:Stopped`.",
+					"notes": "Unread datagrams are discarded. A ReceiveUdpMessage still waiting on this listener is released and fails with a message that says the listener was stopped.",
+					"use_case": "stop_default_listener",
+					"version": "4"
+				},
+				"labels": [
+					"Cleanup",
+					"Listener",
+					"Network",
+					"Stop",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Stop the default listener",
+				"",
+				"The rule has no argument, so it stops the listener named `Default`.",
+				"The port is free when the step returns."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "StopUdpListener"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Name differs only in case from the started listener",
+						"Name is not started",
+						"Unread datagrams remain in the buffer"
+					],
+					"expected_result": "The step closes the `Telemetry` listener and frees its port.",
+					"notes": "Read the datagrams you need before this step, because the buffer is discarded. A listener left open closes when the automation ends.",
+					"use_case": "stop_named_listener",
+					"version": "4"
+				},
+				"labels": [
+					"Cleanup",
+					"Listener",
+					"Network",
+					"Stop",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Stop a named listener",
+				"",
+				"The Name parameter selects the listener named `Telemetry`.",
+				"Other listeners of the flow keep running."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Name:Telemetry}}",
+				"pluginName": "StopUdpListener"
+			}
+		}
+	],
+	"key": "StopUdpListener",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the name of the listener the step addressed.",
+				"Use it in a log line to show which capture ended.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "StopUdpListener:Name",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores `true` when a listener was open and is now closed, and `false` when none had the name.",
+				"Branch on it to tell a real stop from a repeated cleanup.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "StopUdpListener:Stopped",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"default": "Default",
+			"description": [
+				"Names the listener to stop, among the listeners of the same automation.",
+				"Defaults to `Default`, also for an empty value, and case does not matter, so `telemetry` stops `Telemetry`.",
+				"When no listener has the name, the step still passes and stores `false` in Stopped."
+			],
+			"mandatory": false,
+			"name": "Name",
+			"type": "String|Expression"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Holds the arguments of the step, such as `{{$ --Name:Telemetry}}`.",
+				"A rule without an argument stops the `Default` listener."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"summary": [
+		"Stops a UDP listener started by StartUdpListener and frees its port.",
+		"Discards the datagrams no step read, and passes even when the listener is already stopped.",
+		"Reports whether a listener was open, so a flow can tell a real stop from a repeated cleanup."
+	],
+	"version": "4"
+}
