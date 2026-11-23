@@ -1,0 +1,740 @@
+{
+	"aliases": [
+		"ConvertNumber",
+		"cvtnum"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Utilities"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Convert-Number.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/ConvertNumber.cs"
+			},
+			"rag": {
+				"description": "Convert-Number converts whole numbers between binary, octal, decimal, and hexadecimal bases (radix 2, 8, 10, 16) at runtime. It detects the source base from prefixes, supports any number length, optional prefixes, letter case, zero padding, and two's complement output, and returns the original number for invalid input.",
+				"qa": [
+					{
+						"question": "What does the Convert-Number macro do?",
+						"answer": "Converts a whole number between binary (Bin), octal (Oct), decimal (Dec), and hexadecimal (Hex) bases at runtime and returns the result as text."
+					},
+					{
+						"question": "Which parameters does the Convert-Number macro support?",
+						"answer": "Number (mandatory), From (Auto, Bin, Oct, Dec, Hex; default Auto), To (Bin, Oct, Dec, Hex; default Dec), Case (Upper or Lower), the Prefix switch, Width for zero padding, and BitWidth (8, 16, 32, 64) for two's complement output."
+					},
+					{
+						"question": "How does Convert-Number detect the source base?",
+						"answer": "With From set to Auto, the prefix decides: 0x or # is hexadecimal, 0b is binary, 0o or a leading zero is octal, and anything else is decimal."
+					},
+					{
+						"question": "How does Convert-Number handle negative numbers?",
+						"answer": "Without BitWidth the minus sign is kept, for example -255 becomes -FF. With BitWidth the value is written as its two's complement bit pattern, for example -1 with BitWidth 16 becomes FFFF."
+					},
+					{
+						"question": "What happens when the input is invalid?",
+						"answer": "The macro returns the original Number unchanged when a digit does not exist in the source base, a base or Case name is unknown, Width is not a non-negative whole number, or the value does not fit BitWidth."
+					},
+					{
+						"question": "Does Convert-Number support fractions or large numbers?",
+						"answer": "Fractions are not supported. Whole numbers of any length are supported, because the conversion uses arbitrary-precision integers."
+					},
+					{
+						"question": "How is Convert-Number used in workflows?",
+						"answer": "The macro token is replaced by the converted value wherever a literal is accepted, for example in SendKeys, WriteLog, RegisterParameter, or a Text assertion."
+					},
+					{
+						"question": "How is Convert-Number different from Format-Number?",
+						"answer": "Format-Number formats decimal input with .NET format strings; Convert-Number reads binary, octal, decimal, or hexadecimal input and writes any of those bases, including octal."
+					},
+					{
+						"question": "Who authored the Convert-Number plugin?",
+						"answer": "Roei Sabag (https://www.linkedin.com/in/roei-sabag-247aa18/)"
+					},
+					{
+						"question": "What categories and platforms does the Convert-Number plugin belong to?",
+						"answer": "Category: Utilities. Platform: Any. Plugin type: Macro."
+					},
+					{
+						"question": "Where can I find the source and documentation for the Convert-Number plugin?",
+						"answer": "Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Macros/ConvertNumber.cs • Docs: https://github.com/g4-api/g4-plugins/blob/main/docs/Macros/Convert-Number.md"
+					}
+				]
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Converts a whole number from one base to another at runtime: binary (`Bin`), octal (`Oct`), decimal (`Dec`), and hexadecimal (`Hex`).",
+		"The source base is detected from the number prefix or named explicitly, and the result is returned as text.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                  | Description                                                                              |",
+		"|--------------------------|------------------------------------------------------------------------------------------|",
+		"| Base Conversion          | Converts between binary, octal, decimal, and hexadecimal in any direction.               |",
+		"| Automatic Base Detection | Reads `0x` or `#` as hexadecimal, `0b` as binary, and `0o` or a leading zero as octal.   |",
+		"| Output Formatting        | Adds an optional base prefix, sets the letter case, and pads the digits with zeros.      |",
+		"| Two's Complement         | Writes negative numbers as 8, 16, 32, or 64-bit two's complement values with `BitWidth`. |",
+		"| Unlimited Length         | Converts whole numbers of any length without overflow.                                   |",
+		"| Safe Fallback            | Returns the original number unchanged when the input or an argument is invalid.          |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case            | Description                                                                 |",
+		"|---------------------|-----------------------------------------------------------------------------|",
+		"| Data Transformation | Converts hexadecimal codes, color values, or bit masks between systems.     |",
+		"| Device Integration  | Prepares register and address values for devices that expect another base.  |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case          | Description                                                                |",
+		"|-------------------|----------------------------------------------------------------------------|",
+		"| Data Validation   | Compares values shown in one base with expected values in another base.    |",
+		"| Test Data Entry   | Types numbers into fields that expect binary, octal, or hexadecimal input. |",
+		"",
+		"### Additional Resources",
+		"",
+		"- [Radix](https://en.wikipedia.org/wiki/Radix)",
+		"- [Two's Complement](https://en.wikipedia.org/wiki/Two%27s_complement)"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Empty number",
+						"Non-numeric input"
+					],
+					"expected_result": "The Convert-Number macro evaluates to FF, and the SendKeys plugin types FF into #inputField.",
+					"notes": "The source base is detected automatically (no prefix means decimal) and the target base is Hex.",
+					"use_case": "convert_decimal_to_hexadecimal_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Convert-Number",
+					"Decimal",
+					"Hexadecimal",
+					"Macro",
+					"SendKeys"
+				]
+			},
+			"description": [
+				"### Convert a decimal number to hexadecimal",
+				"",
+				"The `Convert-Number` macro reads `255` as a decimal number, because it has no base prefix, and writes it in hexadecimal as `FF`.",
+				"The `SendKeys` plugin then types `FF` into the element selected by the CSS selector `#inputField`.",
+				"Macros do not perform actions; they only generate values. The result replaces the macro token and can be used wherever a literal value is accepted."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:255 --To:Hex}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Invalid hexadecimal digit",
+						"Prefix without digits"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 11111111, and the SendKeys plugin types it into #inputField.",
+					"notes": "The 0x prefix makes the automatic source detection read the number as hexadecimal.",
+					"use_case": "convert_hexadecimal_prefix_to_binary_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Binary",
+					"Convert-Number",
+					"Hexadecimal",
+					"Macro",
+					"SendKeys"
+				]
+			},
+			"description": [
+				"### Convert a hexadecimal number to binary",
+				"",
+				"The `Convert-Number` macro detects the `0x` prefix of `0xFF`, reads the number as hexadecimal, and writes it in binary as `11111111`.",
+				"The `SendKeys` plugin then types the binary digits into the element selected by `#inputField`.",
+				"Macros do not perform actions; they only generate values. The result replaces the macro token and can be used wherever a literal value is accepted."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:0xFF --To:Bin}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Digit 8 or 9 in octal input",
+						"Element not found",
+						"Unknown base name"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 1FF, and the SendKeys plugin types it into #inputField.",
+					"notes": "From names the source base explicitly, so the number needs no prefix.",
+					"use_case": "convert_octal_to_hexadecimal_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Convert-Number",
+					"Hexadecimal",
+					"Macro",
+					"Octal",
+					"SendKeys"
+				]
+			},
+			"description": [
+				"### Convert an octal number to hexadecimal",
+				"",
+				"The `Convert-Number` macro reads `777` as an octal number because `From` is `Oct`, and writes it in hexadecimal as `1FF`.",
+				"Neither the source nor the target base is decimal, so the conversion runs directly between two non-decimal bases.",
+				"The `SendKeys` plugin then types `1FF` into the element selected by `#inputField`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:777 --From:Oct --To:Hex}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Digit 2 in binary input",
+						"Element not found",
+						"Only separators"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 172, and the SendKeys plugin types it into #inputField.",
+					"notes": "Underscores and spaces are digit separators and are removed before the digits are read. To defaults to Dec.",
+					"use_case": "convert_grouped_binary_to_decimal_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Binary",
+					"Convert-Number",
+					"Decimal",
+					"DigitSeparators",
+					"Macro",
+					"SendKeys"
+				]
+			},
+			"description": [
+				"### Convert a grouped binary number to decimal",
+				"",
+				"The `Convert-Number` macro removes the `_` separator from `1010_1100`, reads the digits as binary because `From` is `Bin`, and writes the decimal value `172`.",
+				"`To` is omitted, so the result is written in decimal, which is the default target base.",
+				"The `SendKeys` plugin then types `172` into the element selected by `#inputField`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:1010_1100 --From:Bin}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Invalid Case value",
+						"Negative Width value",
+						"Width smaller than the digit count"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 0x00ff, and the SendKeys plugin types it into #inputField.",
+					"notes": "Width pads the digits only; the prefix is written in front of the padded digits.",
+					"use_case": "convert_with_prefix_lowercase_and_width_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Case",
+					"Convert-Number",
+					"Hexadecimal",
+					"Macro",
+					"Prefix",
+					"SendKeys",
+					"Width"
+				]
+			},
+			"description": [
+				"### Write a padded lowercase hexadecimal value with a prefix",
+				"",
+				"The `Convert-Number` macro writes `255` in hexadecimal with lowercase letter digits (`Case` is `Lower`).",
+				"`Width` pads the digits with zeros to four characters, and the `Prefix` switch adds `0x` in front, so the result is `0x00ff`.",
+				"The `SendKeys` plugin then types `0x00ff` into the element selected by `#inputField`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:255 --To:Hex --Prefix --Case:Lower --Width:4}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Unsupported BitWidth value",
+						"Value outside the register range"
+					],
+					"expected_result": "The Convert-Number macro evaluates to FFFF, and the SendKeys plugin types it into #inputField.",
+					"notes": "BitWidth accepts 8, 16, 32, or 64; a value outside the register range returns the original number.",
+					"use_case": "convert_negative_number_twos_complement_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"BitWidth",
+					"Convert-Number",
+					"Hexadecimal",
+					"Macro",
+					"SendKeys",
+					"TwosComplement"
+				]
+			},
+			"description": [
+				"### Write a negative number as a 16-bit two's complement value",
+				"",
+				"The `Convert-Number` macro reads `-1` as a decimal number and, because `BitWidth` is `16`, writes its 16-bit two's complement bit pattern in hexadecimal as `FFFF`.",
+				"A 16-bit register accepts values from `-32768` to `65535`; any other value returns the original number unchanged.",
+				"The `SendKeys` plugin then types `FFFF` into the element selected by `#inputField`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:-1 --To:Hex --BitWidth:16}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Negative zero",
+						"Plus sign input"
+					],
+					"expected_result": "The Convert-Number macro evaluates to -FF, and the SendKeys plugin types it into #inputField.",
+					"notes": "Without BitWidth a negative number keeps its minus sign in front of the converted digits.",
+					"use_case": "convert_negative_number_signed_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Convert-Number",
+					"Hexadecimal",
+					"Macro",
+					"NegativeNumber",
+					"SendKeys"
+				]
+			},
+			"description": [
+				"### Convert a negative number and keep its sign",
+				"",
+				"The `Convert-Number` macro reads `-255` as a decimal number and writes it in hexadecimal as `-FF`.",
+				"`BitWidth` is not set, so the minus sign is kept in front of the digits instead of writing a two's complement value.",
+				"The `SendKeys` plugin then types `-FF` into the element selected by `#inputField`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:-255 --To:Hex}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Invalid hexadecimal digit",
+						"Short color code"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 2003199, and the SendKeys plugin types it into #inputField.",
+					"notes": "The # prefix is read as hexadecimal by the automatic source detection, as in CSS color codes.",
+					"use_case": "convert_color_code_to_decimal_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"ColorCode",
+					"Convert-Number",
+					"Decimal",
+					"Hexadecimal",
+					"Macro",
+					"SendKeys"
+				]
+			},
+			"description": [
+				"### Convert a color code to decimal",
+				"",
+				"The `Convert-Number` macro detects the `#` prefix of `#1E90FF`, reads the number as hexadecimal, and writes the decimal value `2003199`.",
+				"The `SendKeys` plugin then types `2003199` into the element selected by `#inputField`.",
+				"Macros do not perform actions; they only generate values. The result replaces the macro token and can be used wherever a literal value is accepted."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:#1E90FF}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Digit 8 or 9 in octal input",
+						"Existing parameter name",
+						"Invalid scope"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 111101101, and RegisterParameter stores it in the session parameter PermissionBits.",
+					"notes": "Combines Convert-Number with RegisterParameter so later rules read the converted value with Get-Parameter.",
+					"use_case": "register_octal_permissions_as_binary",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Binary",
+					"Convert-Number",
+					"Macro",
+					"Octal",
+					"RegisterParameter",
+					"SessionParameter"
+				]
+			},
+			"description": [
+				"### Store octal permissions as binary bits",
+				"",
+				"The `Convert-Number` macro detects the `0o` prefix of `0o755`, reads the number as octal, and writes it in binary as `111101101`.",
+				"The `RegisterParameter` plugin stores the result in the session parameter `PermissionBits`, so later rules read it with `{{$Get-Parameter --Name:PermissionBits --Scope:Session}}`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Name:PermissionBits --Value:{{$Convert-Number --Number:0o755 --To:Bin}} --Scope:Session}}",
+				"pluginName": "RegisterParameter"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Different expected value",
+						"Invalid binary digit",
+						"Unknown operator"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 15, and the Text assertion passes because 15 equals the expected value.",
+					"notes": "When the input is invalid the macro returns the original number, so the assertion fails and reports the unconverted value.",
+					"use_case": "assert_binary_value_equals_decimal",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Assertion",
+					"Binary",
+					"Convert-Number",
+					"Decimal",
+					"Macro",
+					"Text"
+				]
+			},
+			"description": [
+				"### Assert the decimal value of a binary number",
+				"",
+				"The `Convert-Number` macro detects the `0b` prefix of `0b1111`, reads the number as binary, and writes the decimal value `15`.",
+				"The `Text` assertion compares the converted value with the expected value `15` using the `Equal` operator."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Operator:Equal --Expected:15}}",
+				"onElement": "{{$Convert-Number --Number:0b1111 --To:Dec}}",
+				"pluginName": "Text"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Empty number",
+						"Logging failure",
+						"Non-numeric input"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 0x194, and WriteLog writes 'Status code in hexadecimal: 0x194'.",
+					"notes": "The macro token is embedded in a longer text; only the token is replaced by the converted value.",
+					"use_case": "log_status_code_in_hexadecimal",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Convert-Number",
+					"Hexadecimal",
+					"Logging",
+					"Macro",
+					"Prefix",
+					"WriteLog"
+				]
+			},
+			"description": [
+				"### Log a number in hexadecimal",
+				"",
+				"The `Convert-Number` macro writes the decimal number `404` in hexadecimal, and the `Prefix` switch adds `0x`, so the result is `0x194`.",
+				"The `WriteLog` plugin writes the message with the macro token replaced by `0x194`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Status code in hexadecimal: {{$Convert-Number --Number:404 --To:Hex --Prefix}}",
+				"pluginName": "WriteLog"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element not found",
+						"Width smaller than the digit count",
+						"Zero value"
+					],
+					"expected_result": "The Convert-Number macro evaluates to 00000101, and the SendKeys plugin types it into #inputField.",
+					"notes": "A Width smaller than the digit count leaves the digits unchanged; digits are never cut.",
+					"use_case": "convert_to_padded_binary_sendkeys",
+					"version": "1.0.0"
+				},
+				"labels": [
+					"Binary",
+					"Convert-Number",
+					"Macro",
+					"SendKeys",
+					"Width"
+				]
+			},
+			"description": [
+				"### Write a number as an 8-digit binary value",
+				"",
+				"The `Convert-Number` macro writes the decimal number `5` in binary as `101`, and `Width` pads it with zeros to eight digits, so the result is `00000101`.",
+				"The `SendKeys` plugin then types `00000101` into the element selected by `#inputField`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$Convert-Number --Number:5 --To:Bin --Width:8}}",
+				"locator": "CssSelector",
+				"onElement": "#inputField",
+				"pluginName": "SendKeys"
+			}
+		}
+	],
+	"key": "Convert-Number",
+	"namespace": "G4.Plugins.Common",
+	"parameters": [
+		{
+			"description": [
+				"Number is the whole number to convert, written in the source base.",
+				"It accepts an optional leading `+` or `-` sign and an optional base prefix (`0x`, `#`, `0b`, `0o`).",
+				"Underscores and spaces are digit separators and are removed, so `1111_0000` reads as `11110000`.",
+				"Letter digits and prefixes are not case-sensitive. Fractions are not supported.",
+				"When the number is invalid for the source base, the macro returns it unchanged."
+			],
+			"mandatory": true,
+			"name": "Number",
+			"type": "String"
+		},
+		{
+			"default": "Auto",
+			"description": [
+				"From names the base the number is written in.",
+				"`Auto` detects the base from the prefix: `0x` or `#` is hexadecimal, `0b` is binary, `0o` or a leading zero is octal, and anything else is decimal.",
+				"A named base also accepts its own prefix, so `--Number:0xFF --From:Hex` and `--Number:FF --From:Hex` are the same.",
+				"Base names are not case-sensitive. An unknown name returns the original number."
+			],
+			"mandatory": false,
+			"name": "From",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Detects the source base from the number prefix.",
+						"A number without a prefix is read as decimal, and a number with a leading zero, such as `017`, is read as octal."
+					],
+					"name": "Auto"
+				},
+				{
+					"description": [
+						"Binary, base 2, written with the digits 0 and 1.",
+						"The optional prefix is `0b`, for example `0b1010`."
+					],
+					"name": "Bin"
+				},
+				{
+					"description": [
+						"Octal, base 8, written with the digits 0 to 7.",
+						"The optional prefix is `0o`, for example `0o755`."
+					],
+					"name": "Oct"
+				},
+				{
+					"description": [
+						"Decimal, base 10, written with the digits 0 to 9.",
+						"Decimal numbers have no prefix."
+					],
+					"name": "Dec"
+				},
+				{
+					"description": [
+						"Hexadecimal, base 16, written with the digits 0 to 9 and the letters A to F.",
+						"The optional prefix is `0x` or `#`, for example `0xFF` or `#FF`."
+					],
+					"name": "Hex"
+				}
+			]
+		},
+		{
+			"default": "Dec",
+			"description": [
+				"To names the base the result is written in.",
+				"Base names are not case-sensitive. An unknown name returns the original number."
+			],
+			"mandatory": false,
+			"name": "To",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Binary, base 2, written with the digits 0 and 1.",
+						"The optional prefix is `0b`, for example `0b1010`."
+					],
+					"name": "Bin"
+				},
+				{
+					"description": [
+						"Octal, base 8, written with the digits 0 to 7.",
+						"The optional prefix is `0o`, for example `0o755`."
+					],
+					"name": "Oct"
+				},
+				{
+					"description": [
+						"Decimal, base 10, written with the digits 0 to 9.",
+						"Decimal numbers have no prefix."
+					],
+					"name": "Dec"
+				},
+				{
+					"description": [
+						"Hexadecimal, base 16, written with the digits 0 to 9 and the letters A to F.",
+						"The optional prefix is `0x` or `#`, for example `0xFF` or `#FF`."
+					],
+					"name": "Hex"
+				}
+			]
+		},
+		{
+			"default": "Upper",
+			"description": [
+				"Case sets how hexadecimal letter digits are written.",
+				"It does not affect binary, octal, or decimal results, which have no letter digits."
+			],
+			"mandatory": false,
+			"name": "Case",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Writes the letter digits as lowercase characters, for example `ff`."
+					],
+					"name": "Lower"
+				},
+				{
+					"description": [
+						"Writes the letter digits as uppercase characters, for example `FF`."
+					],
+					"name": "Upper"
+				}
+			]
+		},
+		{
+			"description": [
+				"Prefix writes the base prefix in front of the result: `0b` for binary, `0o` for octal, and `0x` for hexadecimal.",
+				"Decimal results have no prefix. A minus sign is written before the prefix, for example `-0xFF`."
+			],
+			"mandatory": false,
+			"name": "Prefix",
+			"type": "Switch"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Width is the minimum number of digits in the result; shorter results are left-padded with zeros.",
+				"The padding applies to the digits only; the sign and prefix are written in front of it.",
+				"A width smaller than the digit count leaves the digits unchanged. A negative or non-numeric width returns the original number."
+			],
+			"mandatory": false,
+			"name": "Width",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"BitWidth is the register size, in bits, used to write negative numbers as two's complement values.",
+				"Without BitWidth a negative number keeps its minus sign, for example `-FF`.",
+				"With BitWidth the value must fit the register (from the signed minimum to the unsigned maximum); otherwise the original number is returned."
+			],
+			"mandatory": false,
+			"name": "BitWidth",
+			"type": "Number",
+			"values": [
+				{
+					"description": [
+						"8-bit register, values from -128 to 255. `-1` is written as `FF` in hexadecimal."
+					],
+					"name": "8"
+				},
+				{
+					"description": [
+						"16-bit register, values from -32768 to 65535. `-1` is written as `FFFF` in hexadecimal."
+					],
+					"name": "16"
+				},
+				{
+					"description": [
+						"32-bit register, values from -2147483648 to 4294967295."
+					],
+					"name": "32"
+				},
+				{
+					"description": [
+						"64-bit register, values from -9223372036854775808 to 18446744073709551615."
+					],
+					"name": "64"
+				}
+			]
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Macro",
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Converts whole numbers between binary, octal, decimal, and hexadecimal bases (radix 2, 8, 10, and 16).",
+		"Detects the source base from prefixes such as 0x, #, 0b, and 0o, or reads the base named by From.",
+		"Writes the result with an optional prefix, letter case, zero padding, and two's complement for negative numbers.",
+		"Returns the original number unchanged when the input or an argument is invalid."
+	],
+	"version": "1"
+}

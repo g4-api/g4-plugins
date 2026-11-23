@@ -169,6 +169,7 @@
   * [Put (Put)](./HttpMethods/Put.md)
 
 * _**Macros**_
+  * [Convert Number (Convert-Number)](./Macros/Convert-Number.md)
   * [Format Number (Format-Number)](./Macros/Format-Number.md)
   * [Get Alert Text (Get-AlertText)](./Macros/Get-AlertText.md)
   * [Get Driver Type Name (Get-DriverTypeName)](./Macros/Get-DriverTypeName.md)
