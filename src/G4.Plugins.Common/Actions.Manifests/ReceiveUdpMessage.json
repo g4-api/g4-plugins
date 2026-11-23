@@ -1,0 +1,763 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Network"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReceiveUdpMessage.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ReceiveUdpMessage.cs"
+			},
+			"rag": {
+				"description": "Receive UDP datagrams in an automation to verify what an application or a device emitted. The step waits for a set number of datagrams, filters them by sender or content, and fails on a timeout, so a flow asserts network output as reliably as it asserts a screen.",
+				"qa": [
+					{
+						"answer": "It waits for UDP datagrams on a port or reads them from a started listener, and stores the message, its sender, and the full list.",
+						"question": "What does the ReceiveUdpMessage plugin do?"
+					},
+					{
+						"answer": "Listener or Port selects the source; Count and Timeout set how many datagrams to wait for and how long; RemoteHost, RemotePort, and Pattern filter them, and a datagram must match every filter set. The outputs are Message, MessageCount, Messages, RemoteAddress, and RemotePort.",
+						"question": "What are the key parameters and outputs of ReceiveUdpMessage?"
+					},
+					{
+						"answer": "It runs as an Action task step with the download icon and the ActionRuleModel, usually after StartUdpListener and the action that makes the sender emit.",
+						"question": "How does ReceiveUdpMessage fit into an automation workflow?"
+					},
+					{
+						"answer": "Start a listener before the triggering action instead of binding a Port afterwards, filter by sender on a busy port, and set a Timeout that covers the slowest expected sender.",
+						"question": "What are best practices for using ReceiveUdpMessage?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “ReceiveUdpMessage” and pass inputs in the argument, such as {{$ --Listener:Telemetry --Count:3 --Timeout:15000}}.",
+						"question": "How is a ReceiveUdpMessage rule configured?"
+					},
+					{
+						"answer": "The step fails with a timeout when fewer than Count matching datagrams arrive; a missing source, an unknown listener, port 0 or a port in use, an unknown format or encoding, an invalid Pattern, or an unresolved RemoteHost fails it before waiting; a listener another step stops before Count datagrams arrive, or a Pattern match longer than 30 seconds, fails it at once.",
+						"question": "How does ReceiveUdpMessage handle errors?"
+					},
+					{
+						"answer": "The manifest key is “ReceiveUdpMessage”.",
+						"question": "What is the manifest key of ReceiveUdpMessage?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by ReceiveUdpMessage?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of ReceiveUdpMessage?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does ReceiveUdpMessage support?"
+					},
+					{
+						"answer": "It is listed under the “Network” category.",
+						"question": "Which category is ReceiveUdpMessage listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the ReceiveUdpMessage manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the ReceiveUdpMessage manifest?"
+					},
+					{
+						"answer": "It waits for UDP datagrams on a port or a listener, filters them, and stores the message and its sender for later steps.",
+						"question": "What is the summary of ReceiveUdpMessage?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ReceiveUdpMessage.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/ReceiveUdpMessage.cs.",
+						"question": "Where are the ReceiveUdpMessage documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "download",
+					"svg": null
+				},
+				"label": "Receive UDP Message",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"ReceiveUdpMessage waits for UDP datagrams, single network messages, and stores what arrived.",
+		"It binds a port for the length of its own wait, or reads the buffer of a listener that was started earlier.",
+		"Flows use it to verify that an application or a device emitted the expected datagram, and to read its content.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Direct receive | Binds a port and waits for datagrams that arrive during the step. |",
+		"| Listener receive | Reads datagrams a started listener buffered while earlier steps ran. |",
+		"| Count and timeout | Waits for a set number of datagrams and fails the step when too few arrive in time. |",
+		"| Sender and content filters | Counts only datagrams that pass every filter set: sender host, sender port, and a text pattern. |",
+		"| Multicast | Joins a multicast group, an address many receivers share, for the length of a direct receive. |",
+		"| Text and binary output | Publishes datagrams as plain, hexadecimal, or Base64 text. |",
+		"| Message refinement | Reads one field of a JSON message, or one element or attribute of an XML message, and keeps a regular-expression match. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Device readings | Read a measurement a scale, sensor, or scanner sends over UDP. |",
+		"| Event triggers | Hold a flow, up to the timeout, until a system announces that a job finished. |",
+		"| Heartbeat monitoring | Confirm that a service still emits its periodic heartbeat. |",
+		"| Mock servers | Take a request on a listener and reply through the same listener with SendUdpMessage. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Emission checks | Assert that a UI action made the application send a telemetry or syslog datagram. |",
+		"| Content checks | Compare the fields of a received datagram with expected values. |",
+		"| Negative checks | Treat the timeout failure as the pass condition to prove that no matching datagram arrived. |",
+		"| Throughput checks | Require a number of datagrams within a time window. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the text of the first datagram, after OnElement, OnAttribute, and RegularExpression refined it.",
+				"The ResponseFormat argument selects plain, hexadecimal, or Base64 text."
+			],
+			"mandatory": false,
+			"name": "Message",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of datagrams the step collected.",
+				"Compare it with the expected number to tell a partial result from a full one."
+			],
+			"mandatory": false,
+			"name": "MessageCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores every collected datagram as a JSON array, oldest first.",
+				"Each item holds `Data`, `Length`, `ReceivedAt`, `RemoteAddress`, and `RemotePort`."
+			],
+			"mandatory": false,
+			"name": "Messages",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the IP address of the sender of the first datagram.",
+				"Use it as the Host of a reply."
+			],
+			"mandatory": false,
+			"name": "RemoteAddress",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the port of the sender of the first datagram.",
+				"Use it as the Port of a reply."
+			],
+			"mandatory": false,
+			"name": "RemotePort",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Datagram arrives before the step starts",
+						"No datagram within the timeout",
+						"Port is in use"
+					],
+					"expected_result": "The step stores the datagram text in `ReceiveUdpMessage:Message` and its sender in `ReceiveUdpMessage:RemoteAddress` and `ReceiveUdpMessage:RemotePort`.",
+					"notes": "A datagram that arrives before the step starts is lost, because no socket is bound yet. Use it for senders that repeat, such as a heartbeat.",
+					"use_case": "receive_on_port",
+					"version": "4"
+				},
+				"labels": [
+					"Network",
+					"Receive",
+					"Udp",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Receive one datagram on a port",
+				"",
+				"The step binds port 9100 and waits up to ten seconds for one datagram.",
+				"The socket closes when the step ends."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Port:9100 --Timeout:10000}}",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Listener name is not started",
+						"No datagram within the timeout"
+					],
+					"expected_result": "The step stores the oldest buffered datagram and removes it from the listener buffer.",
+					"notes": "Start the listener before the action that makes the application send. The listener keeps what arrives while the steps in between run. Datagrams an earlier step took are no longer in the buffer.",
+					"use_case": "receive_from_listener",
+					"version": "4"
+				},
+				"labels": [
+					"Listener",
+					"Network",
+					"Receive",
+					"Udp",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Read a datagram a listener buffered",
+				"",
+				"The Listener parameter reads from the listener named `Telemetry`.",
+				"The step returns at once when a datagram is already buffered, and waits up to five seconds otherwise."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Listener:Telemetry --Timeout:5000}}",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Fewer datagrams than Count",
+						"Listener buffer dropped old datagrams"
+					],
+					"expected_result": "The step stores the first datagram in `ReceiveUdpMessage:Message` and all three in `ReceiveUdpMessage:Messages`.",
+					"notes": "The step fails when fewer than three arrive in time. The ones that did arrive stay in the buffer for a later read. A full buffer drops the oldest datagram first.",
+					"use_case": "receive_several_datagrams",
+					"version": "4"
+				},
+				"labels": [
+					"Batch",
+					"Listener",
+					"Network",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Wait for several datagrams",
+				"",
+				"The Count parameter requires three datagrams within fifteen seconds.",
+				"The step returns as soon as the third one arrives."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Listener:Telemetry --Count:3 --Timeout:15000}}",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Datagram from the host but another source port",
+						"Matching datagram never arrives",
+						"Pattern is not a valid expression"
+					],
+					"expected_result": "The step stores the first datagram from 192.168.1.50 port 5005 whose text starts with `ALARM`.",
+					"notes": "Datagrams that do not match stay buffered. Another step can read them with its own filter.",
+					"use_case": "receive_filtered_datagram",
+					"version": "4"
+				},
+				"labels": [
+					"Filter",
+					"Listener",
+					"Network",
+					"Udp",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Receive only a matching datagram from one sender",
+				"",
+				"The RemoteHost and RemotePort parameters accept datagrams from one device and source port only.",
+				"The Pattern parameter accepts only text that starts with `ALARM`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Listener:Telemetry --RemoteHost:192.168.1.50 --RemotePort:5005 --Pattern:^ALARM}}",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Group address is not an IP address",
+						"Network blocks multicast traffic"
+					],
+					"expected_result": "The step stores the first datagram sent to the group on port 5000.",
+					"notes": "The group is left when the step ends. Other receivers on the machine can share the port.",
+					"use_case": "receive_multicast",
+					"version": "4"
+				},
+				"labels": [
+					"Multicast",
+					"Network",
+					"Receive",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Receive a multicast datagram",
+				"",
+				"The step binds port 5000 and joins the multicast group 239.255.0.1 on the interface 192.168.1.10.",
+				"It waits up to ten seconds for one datagram sent to the group."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Port:5000 --MulticastGroup:239.255.0.1 --LocalAddress:192.168.1.10 --Timeout:10000}}",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No datagram within the timeout",
+						"Unknown ResponseFormat value"
+					],
+					"expected_result": "The step stores the datagram as upper-case hexadecimal text without separators.",
+					"notes": "Hexadecimal output keeps every byte of a binary packet visible for comparison. The default timeout of five seconds applies.",
+					"use_case": "receive_binary_as_hex",
+					"version": "4"
+				},
+				"labels": [
+					"Binary",
+					"Hex",
+					"Network",
+					"Receive",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Receive a binary datagram as hexadecimal text",
+				"",
+				"The ResponseFormat parameter publishes the bytes as hexadecimal text.",
+				"The step binds port 9100 and waits for one datagram."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Port:9100 --ResponseFormat:Hex}}",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No datagram within the timeout",
+						"Unknown Encoding name"
+					],
+					"expected_result": "The step stores the Latin1 text of the oldest buffered datagram in the session and leaves the response entity empty.",
+					"notes": "Use the encoding of the sender, or accented letters are published as wrong characters. The session parameters stay available to later steps.",
+					"use_case": "receive_encoded_text_without_entity",
+					"version": "4"
+				},
+				"labels": [
+					"Encoding",
+					"Listener",
+					"Network",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Read text in a legacy encoding and keep it out of the entity",
+				"",
+				"The Encoding parameter reads the datagram bytes as Latin1 text.",
+				"The NoEntity switch publishes the outputs as session parameters only."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Listener:Telemetry --Encoding:Latin1 --NoEntity}}",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Datagram is not JSON",
+						"Field is missing from the datagram"
+					],
+					"expected_result": "The step stores the value of `reading.value` in `ReceiveUdpMessage:Message`.",
+					"notes": "Only the first datagram is refined. A datagram that is neither JSON nor XML keeps its whole text, and a missing field stores an empty value.",
+					"use_case": "read_json_message_field",
+					"version": "4"
+				},
+				"labels": [
+					"Extraction",
+					"Json",
+					"Listener",
+					"Network",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Read one field of a JSON datagram",
+				"",
+				"The step reads a buffered JSON datagram and selects the `reading.value` field through the JSONPath in `onElement`.",
+				"The full datagram stays available in `ReceiveUdpMessage:Messages`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Listener:Telemetry}}",
+				"onElement": "$.reading.value",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Datagram has no T= field",
+						"No datagram within the timeout",
+						"Pattern is not a valid expression"
+					],
+					"expected_result": "The step stores `21` in `ReceiveUdpMessage:Message` for the datagram `T=21;H=40`.",
+					"notes": "The pattern runs on the whole text when onElement is not set. A pattern that does not match stores an empty value, and `ReceiveUdpMessage:Messages` keeps the full text.",
+					"use_case": "read_value_with_pattern",
+					"version": "4"
+				},
+				"labels": [
+					"Extraction",
+					"Listener",
+					"Network",
+					"RegularExpression",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Keep one value of a text datagram",
+				"",
+				"The step reads the oldest buffered datagram, such as `T=21;H=40`.",
+				"A regular expression `(?<=T=)\\d+` is applied to the value attribute and keeps the digits after `T=`."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Listener:Telemetry --Timeout:5000}}",
+				"pluginName": "ReceiveUdpMessage",
+				"regularExpression": "(?<=T=)\\d+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute is missing from the element",
+						"Datagram is not XML",
+						"XPath selects no element"
+					],
+					"expected_result": "The step stores the value of the `code` attribute in `ReceiveUdpMessage:Message`.",
+					"notes": "Without onAttribute the step stores the markup of the whole element. A missing element or attribute stores an empty value.",
+					"use_case": "read_xml_message_attribute",
+					"version": "4"
+				},
+				"labels": [
+					"Extraction",
+					"Listener",
+					"Network",
+					"Udp",
+					"Xml"
+				]
+			},
+			"description": [
+				"### Read one attribute of an XML datagram",
+				"",
+				"The step reads the oldest buffered XML datagram and selects the `status` element through the XPath in `onElement`.",
+				"The `onAttribute` property keeps the value of its `code` attribute."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Listener:Telemetry}}",
+				"onAttribute": "code",
+				"onElement": "//status",
+				"pluginName": "ReceiveUdpMessage"
+			}
+		}
+	],
+	"key": "ReceiveUdpMessage",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the text of the first datagram, after OnElement, OnAttribute, and RegularExpression refined it.",
+				"The ResponseFormat argument selects plain, hexadecimal, or Base64 text. The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "ReceiveUdpMessage:Message",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of datagrams the step collected.",
+				"Compare it with the expected number to tell a partial result from a full one.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "ReceiveUdpMessage:MessageCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores every collected datagram as a JSON array, oldest first.",
+				"Each item holds `Data`, `Length`, `ReceivedAt`, `RemoteAddress`, and `RemotePort`.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "ReceiveUdpMessage:Messages",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the IP address of the sender of the first datagram.",
+				"Use it as the Host of a reply.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "ReceiveUdpMessage:RemoteAddress",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the port of the sender of the first datagram.",
+				"Use it as the Port of a reply.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "ReceiveUdpMessage:RemotePort",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"default": "1",
+			"description": [
+				"Sets the number of matching datagrams the step waits for.",
+				"Defaults to 1, and the step fails when fewer arrive within Timeout, or sooner when another step stops the listener.",
+				"With a Listener, datagrams leave the buffer only when the full count arrived."
+			],
+			"mandatory": false,
+			"name": "Count",
+			"type": "Number"
+		},
+		{
+			"default": "UTF8",
+			"description": [
+				"Names the text encoding, such as `UTF8`, `ASCII`, `Unicode`, `UTF32`, `Latin1`, or a code page such as `windows-1252`.",
+				"Applies to datagrams published as text and to the Pattern filter.",
+				"Defaults to UTF-8, and a name the runtime does not know fails the step."
+			],
+			"mandatory": false,
+			"name": "Encoding",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names a listener started by StartUdpListener and reads from its buffer.",
+				"Datagrams that arrived since the listener started and that no earlier step took are available, oldest first; a full buffer drops the oldest.",
+				"A name that is not started fails the step, and a listener another step stops during the wait fails it at once instead of with a timeout."
+			],
+			"mandatory": false,
+			"name": "Listener",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Binds one local IP address, which selects the network interface on a machine with several.",
+				"With MulticastGroup the step binds every interface and the address selects where the group is joined.",
+				"Defaults to every IPv4 interface, and is ignored when Listener is set."
+			],
+			"mandatory": false,
+			"name": "LocalAddress",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Joins a multicast group, such as `239.255.0.1`, for a step that binds its own Port.",
+				"Ignored when Listener is set, because a listener joins its own group, if any, when StartUdpListener starts it."
+			],
+			"mandatory": false,
+			"name": "MulticastGroup",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Leaves the response entity empty and publishes the outputs as session parameters only.",
+				"Use it when the datagram content must stay out of the extracted data of the flow."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Counts only datagrams whose text matches a regular expression, such as `^ALARM`.",
+				"The payload is read as text in the encoding of the step before matching.",
+				"Datagrams that do not match stay in the listener buffer for another step.",
+				"Combines with RemoteHost and RemotePort; an invalid expression fails the step before it waits, and a match that runs longer than 30 seconds fails it."
+			],
+			"mandatory": false,
+			"name": "Pattern",
+			"type": "Regex"
+		},
+		{
+			"description": [
+				"Binds a local port, from 1 to 65535, for the length of the step; 0 fails the step, because no sender can know the port the system picks.",
+				"Only datagrams that arrive while the step waits are received, so use a Listener when the sender acts earlier.",
+				"Listener or Port is required, and Listener wins when both are set."
+			],
+			"mandatory": false,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Counts only datagrams sent from one host name or IP address.",
+				"Datagrams from other senders stay in the listener buffer for another step.",
+				"A host name is resolved once before waiting, and a name that does not resolve fails the step."
+			],
+			"mandatory": false,
+			"name": "RemoteHost",
+			"type": "String|Expression"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Counts only datagrams sent from one source port, from 1 to 65535.",
+				"Defaults to 0, which accepts every source port."
+			],
+			"mandatory": false,
+			"name": "RemotePort",
+			"type": "Number"
+		},
+		{
+			"default": "Text",
+			"description": [
+				"Selects how the bytes of each datagram are published.",
+				"Defaults to Text, and any other value than Text, Hex, or Base64 fails the step."
+			],
+			"mandatory": false,
+			"name": "ResponseFormat",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Publishes each datagram as plain text in the encoding of the step.",
+						"Use it for text protocols and for JSON or XML payloads."
+					],
+					"name": "Text"
+				},
+				{
+					"description": [
+						"Publishes each datagram as upper-case hexadecimal text without separators.",
+						"Use it to compare a binary packet byte by byte."
+					],
+					"name": "Hex"
+				},
+				{
+					"description": [
+						"Publishes each datagram as Base64 text.",
+						"Use it to pass a binary packet to a later step without loss."
+					],
+					"name": "Base64"
+				}
+			]
+		},
+		{
+			"default": "5000",
+			"description": [
+				"Sets how long to wait for the requested number of datagrams.",
+				"Accepts a number of milliseconds, such as `2000`, or a time span, such as `00:00:02`.",
+				"Defaults to 5000 milliseconds, which also replaces a value that is neither a number nor a time span."
+			],
+			"mandatory": false,
+			"name": "Timeout",
+			"type": "Number|Time"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Holds the arguments of the step, such as `{{$ --Listener:Telemetry --Timeout:5000}}`.",
+				"Listener or Port is required."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Names the locator type of the rule and stays at its default for this action.",
+				"The path in OnElement is read as JSONPath for JSON text and as XPath for XML text, whatever the value is."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names one attribute of the XML element that OnElement selects.",
+				"The attribute value replaces the element as the published text, and a missing attribute publishes an empty value.",
+				"Ignored for JSON text and when OnElement is empty."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Selects one part of the first datagram: a JSONPath such as `$.status` for JSON text, or an XPath such as `//status` for XML text.",
+				"The first result is kept: an XML element is published as its markup, and an attribute or a text node, such as `//status/@code`, as its value.",
+				"Text that is neither JSON nor XML skips the path, a path that finds nothing publishes an empty value, and a malformed path fails the step."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"default": "(?si).*",
+			"description": [
+				"Keeps the first match of the pattern in the first datagram, after OnElement was applied.",
+				"Defaults to a pattern that keeps the whole text, and a pattern that does not match publishes an empty value."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"summary": [
+		"Waits for UDP datagrams, single network messages, on a port or reads them from a started listener, until a count or a timeout is reached.",
+		"Filters datagrams by sender address, sender port, or a text pattern, and fails the step when too few arrive.",
+		"Stores the message, its sender, and the full list, so a later step can assert what an application or device emitted."
+	],
+	"version": "4"
+}

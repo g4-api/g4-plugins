@@ -1,0 +1,887 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"Network"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendUdpMessage.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendUdpMessage.cs"
+			},
+			"rag": {
+				"description": "Send a UDP datagram from an automation to command a device, post a metric or a log line, or query a service. The step can wait for the reply, retry on silence, and collect broadcast answers, so a flow gets proof of delivery and a value it can assert or branch on.",
+				"qa": [
+					{
+						"answer": "It sends one UDP datagram to a host and port, and on request waits for the reply and stores it.",
+						"question": "What does the SendUdpMessage plugin do?"
+					},
+					{
+						"answer": "Host, Port, and Message or MessageFile are required; Format selects Text, Hex, or Base64; WaitForResponse, Timeout, Retries, MaxResponses, and AnySender control replies. The outputs are BytesSent, Response, ResponseCount, Responses, RemoteAddress, and RemotePort.",
+						"question": "What are the key parameters and outputs of SendUdpMessage?"
+					},
+					{
+						"answer": "It runs as an Action task step with the upload icon and the ActionRuleModel, alone or beside StartUdpListener and ReceiveUdpMessage.",
+						"question": "How does SendUdpMessage fit into an automation workflow?"
+					},
+					{
+						"answer": "Set WaitForResponse when the flow needs a reply, add Retries on a lossy network, add AnySender for a device that answers from another address, and send through a Listener without WaitForResponse when replies arrive late or more than once.",
+						"question": "What are best practices for using SendUdpMessage?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “SendUdpMessage” and pass inputs in the argument, such as {{$ --Host:192.168.1.50 --Port:5005 --Message:PING --WaitForResponse}}.",
+						"question": "How is a SendUdpMessage rule configured?"
+					},
+					{
+						"answer": "A missing payload, a bad port, an unknown format or encoding, an unknown listener, a local port in use, or an unresolved host fails the step before sending; with WaitForResponse, silence after every attempt fails it with a timeout.",
+						"question": "How does SendUdpMessage handle errors?"
+					},
+					{
+						"answer": "The manifest key is “SendUdpMessage”.",
+						"question": "What is the manifest key of SendUdpMessage?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by SendUdpMessage?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of SendUdpMessage?"
+					},
+					{
+						"answer": "It supports the platform “Any”.",
+						"question": "Which platforms does SendUdpMessage support?"
+					},
+					{
+						"answer": "It is listed under the “Network” category.",
+						"question": "Which category is SendUdpMessage listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the SendUdpMessage manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the SendUdpMessage manifest?"
+					},
+					{
+						"answer": "It sends one UDP datagram, can wait for replies and retry, and stores the reply and its sender for later steps.",
+						"question": "What is the summary of SendUdpMessage?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SendUdpMessage.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Common/Actions/SendUdpMessage.cs.",
+						"question": "Where are the SendUdpMessage documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "upload",
+					"svg": null
+				},
+				"label": "Send UDP Message",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"SendUdpMessage sends one UDP datagram, a single network message, to a host and port.",
+		"It can wait for the reply, send again when none arrives, and collect several replies to a broadcast.",
+		"Flows use it to command devices, post metrics or log lines, and query services that answer over UDP.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Text and binary payloads | Sends plain text, hexadecimal bytes, Base64 bytes, or the unchanged bytes of a file. |",
+		"| Request and reply | Waits for a reply from the destination address, or from any sender with AnySender, and fails the step when none arrives within the timeout. |",
+		"| Retries | Sends the datagram again while no reply arrives, up to a set number of times. |",
+		"| Broadcast discovery | Sends to a broadcast address and collects replies until MaxResponses arrive or the timeout ends. |",
+		"| Fixed source endpoint | Binds a local port or address for devices that reply to a fixed port. |",
+		"| Shared listener socket | Sends through a started listener, so replies the step does not wait for stay buffered for later steps. |",
+		"| Reply refinement | Reads one field of a JSON reply, or one element or attribute of an XML reply, and keeps a regular-expression match. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Device control | Send a command packet to a printer, a scale, an industrial controller (PLC), or a lab instrument. |",
+		"| Metrics and logs | Post a metric counter (StatsD) or a log line (syslog) from a running process. |",
+		"| Device discovery | Broadcast a discovery request and list the devices that answer. |",
+		"| Service triggers | Notify a UDP service that a batch or a file is ready. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Protocol checks | Send a request and assert the reply of a UDP service. |",
+		"| Negative checks | Treat the timeout failure as the pass condition to prove a closed or filtered port sent no reply. |",
+		"| Test stimulus | Inject datagrams into the application under test while another step watches the UI. |",
+		"| Mock servers | Reply through the same listener to the sender a ReceiveUdpMessage step captured. |"
+	],
+	"entity": [
+		{
+			"description": [
+				"Stores the number of payload bytes the datagram carried.",
+				"Returned in the response entity for direct data transfer."
+			],
+			"mandatory": false,
+			"name": "BytesSent",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the IP address of the sender of the first reply.",
+				"When the step does not wait for a reply it holds the resolved destination address, which shows how the host name resolved."
+			],
+			"mandatory": false,
+			"name": "RemoteAddress",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the port of the sender of the first reply.",
+				"When the step does not wait for a reply it holds the destination port."
+			],
+			"mandatory": false,
+			"name": "RemotePort",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the text of the first reply, after OnElement, OnAttribute, and RegularExpression refined it.",
+				"The ResponseFormat argument selects plain, hexadecimal, or Base64 text."
+			],
+			"mandatory": false,
+			"name": "Response",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of replies the step collected.",
+				"Compare it with the expected number to tell a partial result from a full one."
+			],
+			"mandatory": false,
+			"name": "ResponseCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores every collected reply as a JSON array, oldest first.",
+				"Each item holds `Data`, `Length`, `ReceivedAt`, `RemoteAddress`, and `RemotePort`."
+			],
+			"mandatory": false,
+			"name": "Responses",
+			"type": "String"
+		}
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Host name does not resolve",
+						"Nothing listens on the destination port",
+						"Payload larger than 65507 bytes"
+					],
+					"expected_result": "The step sends the UTF-8 bytes of `PING` to 192.168.1.50 on port 5005.",
+					"notes": "UDP confirms no delivery, so the step passes even when nothing listens on the port. Add WaitForResponse when the flow needs proof.",
+					"use_case": "send_text_datagram",
+					"version": "4"
+				},
+				"labels": [
+					"DeviceControl",
+					"Network",
+					"Send",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Send a text datagram",
+				"",
+				"The argument names the destination and the text to send.",
+				"The step sends one datagram and returns without waiting for a reply."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:PING}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Odd number of hexadecimal digits",
+						"Text that is not hexadecimal",
+						"Unknown Format value"
+					],
+					"expected_result": "The step sends the four bytes AA 55 01 00 as one datagram.",
+					"notes": "Commas, colons, hyphens, and `0x` prefixes are accepted between bytes. An odd number of digits fails the step before anything is sent.",
+					"use_case": "send_hex_packet",
+					"version": "4"
+				},
+				"labels": [
+					"Binary",
+					"DeviceControl",
+					"Hex",
+					"Network",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Send a binary packet written as hexadecimal",
+				"",
+				"The Format parameter reads the message as hexadecimal bytes.",
+				"The spaces between the bytes are ignored, so the packet reads the way a protocol document prints it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Format:Hex --Message:AA 55 01 00}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Destination port is closed",
+						"No reply within every attempt",
+						"Reply arrives from another address"
+					],
+					"expected_result": "The step stores the reply text in `SendUdpMessage:Response` and the sender in `SendUdpMessage:RemoteAddress` and `SendUdpMessage:RemotePort`.",
+					"notes": "The step fails with a timeout when all three attempts end without a reply. Each attempt waits the full timeout, so the longest wait here is six seconds. A datagram from another address does not count as the reply.",
+					"use_case": "send_and_wait_for_reply",
+					"version": "4"
+				},
+				"labels": [
+					"Network",
+					"RequestReply",
+					"Retry",
+					"Udp",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Send a request and wait for the reply",
+				"",
+				"The WaitForResponse switch keeps the step waiting for a reply.",
+				"The step sends the request again up to two times when no reply arrives within two seconds."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:STATUS? --WaitForResponse --Timeout:2000 --Retries:2}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Fewer replies than MaxResponses",
+						"No device answers",
+						"Subnet broadcast address without the Broadcast switch"
+					],
+					"expected_result": "The step stores every reply in `SendUdpMessage:Responses` and the number of replies in `SendUdpMessage:ResponseCount`.",
+					"notes": "One reply is enough for the step to pass. Each item of the list carries the address and port of the device that answered.",
+					"use_case": "broadcast_discovery",
+					"version": "4"
+				},
+				"labels": [
+					"Broadcast",
+					"Discovery",
+					"Network",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Discover devices with a broadcast",
+				"",
+				"The Broadcast switch allows the subnet broadcast address 192.168.1.255, which the system rejects without it.",
+				"The step collects up to ten replies and returns after three seconds or after the tenth reply."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.255 --Port:3702 --Message:DISCOVER --Broadcast --WaitForResponse --MaxResponses:10 --Timeout:3000}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Listener name is not started",
+						"Listener was stopped by an earlier step"
+					],
+					"expected_result": "The step sends `START` from the port the `Telemetry` listener is bound to.",
+					"notes": "Use it when a device replies later or more than once. LocalPort and LocalAddress are ignored, because the listener is already bound.",
+					"use_case": "send_through_listener",
+					"version": "4"
+				},
+				"labels": [
+					"Listener",
+					"Network",
+					"Send",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Send through a started listener",
+				"",
+				"The Listener parameter sends the datagram from the socket of the listener named `Telemetry`.",
+				"Replies arrive on the listener port and stay buffered for a later ReceiveUdpMessage step."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:START --Listener:Telemetry}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Local port is in use",
+						"Message is not valid Base64",
+						"No reply within the timeout"
+					],
+					"expected_result": "The step sends the decoded bytes from 192.168.1.10 port 5006 and stores the reply as hexadecimal text.",
+					"notes": "A fixed source port serves devices that reply to one known port, and a local address selects the network interface. The step fails when another socket already holds the port.",
+					"use_case": "send_base64_from_fixed_port",
+					"version": "4"
+				},
+				"labels": [
+					"Base64",
+					"Binary",
+					"Network",
+					"RequestReply",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Send Base64 bytes from a fixed source port",
+				"",
+				"The message holds Base64 bytes and leaves from port 5006 of the interface 192.168.1.10.",
+				"The reply is published as hexadecimal text."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Format:Base64 --Message:qlUBAA== --LocalAddress:192.168.1.10 --LocalPort:5006 --WaitForResponse --ResponseFormat:Hex}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Character is not part of the encoding",
+						"Unknown Encoding name"
+					],
+					"expected_result": "The step sends the text as Latin1 bytes and leaves the response entity empty.",
+					"notes": "Use the encoding the device expects, because UTF-8 writes an accented letter as two bytes. The session parameters stay available to later steps.",
+					"use_case": "send_encoded_text_without_entity",
+					"version": "4"
+				},
+				"labels": [
+					"Encoding",
+					"Network",
+					"Send",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Send text in a legacy encoding and keep it out of the entity",
+				"",
+				"The Encoding parameter writes the accented text as Latin1 bytes.",
+				"The NoEntity switch publishes the outputs as session parameters only."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:TEMPÉRATURE? --Encoding:Latin1 --NoEntity}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"File does not exist",
+						"File larger than 65507 bytes"
+					],
+					"expected_result": "The step sends the content of `wake.bin` to 10.0.0.20 on port 9000.",
+					"notes": "Format does not apply to a file, and Encoding never changes the file bytes. Use it for a packet kept beside the flow.",
+					"use_case": "send_file_bytes",
+					"version": "4"
+				},
+				"labels": [
+					"Binary",
+					"File",
+					"Network",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Send the bytes of a file",
+				"",
+				"The MessageFile parameter names a file.",
+				"The step sends its bytes unchanged as one datagram."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\\Packets\\wake.bin}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Field is missing from the reply",
+						"Pattern does not match",
+						"Reply is not JSON"
+					],
+					"expected_result": "The step stores the digits of the `temperature` field in `SendUdpMessage:Response`.",
+					"notes": "Only the first reply is refined; `Responses` keeps the full JSON text. A path or a pattern that finds nothing stores an empty value.",
+					"use_case": "read_json_reply_field",
+					"version": "4"
+				},
+				"labels": [
+					"Extraction",
+					"Json",
+					"Network",
+					"RequestReply",
+					"Udp"
+				]
+			},
+			"description": [
+				"### Read one field of a JSON reply",
+				"",
+				"The step waits for a JSON reply and reads the `temperature` field through the JSONPath in `onElement`.",
+				"A regular expression `\\d+` is applied to the value attribute of the selected field and keeps its first run of digits, so 21.5 becomes 21."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:READ --WaitForResponse}}",
+				"onElement": "$.temperature",
+				"pluginName": "SendUdpMessage",
+				"regularExpression": "\\d+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No reply within the timeout",
+						"Unrelated datagram reaches the socket first"
+					],
+					"expected_result": "The step stores the first reply from any sender in `SendUdpMessage:Response` and its real sender in `SendUdpMessage:RemoteAddress`.",
+					"notes": "Without AnySender a reply from another address is ignored and the step times out. With it, the first datagram that reaches the socket after the send counts, so check SendUdpMessage:RemoteAddress when unrelated traffic is possible.",
+					"use_case": "accept_reply_from_any_sender",
+					"version": "4"
+				},
+				"labels": [
+					"Network",
+					"RequestReply",
+					"Udp",
+					"Validation"
+				]
+			},
+			"description": [
+				"### Accept a reply from another address",
+				"",
+				"The AnySender switch counts a reply from any address, not only from 192.168.1.50.",
+				"The step waits up to two seconds for the reply of a device that answers from a second network card."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:STATUS? --WaitForResponse --AnySender --Timeout:2000}}",
+				"pluginName": "SendUdpMessage"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Attribute is missing from the element",
+						"Reply is not XML",
+						"XPath selects no element"
+					],
+					"expected_result": "The step stores the value of the `code` attribute in `SendUdpMessage:Response`.",
+					"notes": "Without onAttribute the step stores the markup of the whole element. A missing element or attribute stores an empty value.",
+					"use_case": "read_xml_reply_attribute",
+					"version": "4"
+				},
+				"labels": [
+					"Extraction",
+					"Network",
+					"RequestReply",
+					"Udp",
+					"Xml"
+				]
+			},
+			"description": [
+				"### Read one attribute of an XML reply",
+				"",
+				"The step waits for an XML reply and selects the `status` element through the XPath in `onElement`.",
+				"The `onAttribute` property keeps the value of its `code` attribute."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:STATUS? --WaitForResponse}}",
+				"onAttribute": "code",
+				"onElement": "//status",
+				"pluginName": "SendUdpMessage"
+			}
+		}
+	],
+	"key": "SendUdpMessage",
+	"namespace": "G4.Plugins.Common",
+	"outputParameters": [
+		{
+			"description": [
+				"Stores the number of payload bytes the datagram carried.",
+				"Compare it with the expected packet length to confirm the payload was read as intended.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "SendUdpMessage:BytesSent",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the IP address of the sender of the first reply.",
+				"When the step does not wait for a reply it holds the resolved destination address, which shows how the host name resolved.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "SendUdpMessage:RemoteAddress",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the port of the sender of the first reply.",
+				"When the step does not wait for a reply it holds the destination port.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "SendUdpMessage:RemotePort",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the text of the first reply, after OnElement, OnAttribute, and RegularExpression refined it.",
+				"The ResponseFormat argument selects plain, hexadecimal, or Base64 text. The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "SendUdpMessage:Response",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores the number of replies the step collected.",
+				"Compare it with the expected number to tell a partial result from a full one.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "SendUdpMessage:ResponseCount",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Stores every collected reply as a JSON array, oldest first.",
+				"Each item holds `Data`, `Length`, `ReceivedAt`, `RemoteAddress`, and `RemotePort`.",
+				"The session value is Base64-encoded, so decode it before comparing or displaying it."
+			],
+			"mandatory": false,
+			"name": "SendUdpMessage:Responses",
+			"type": "String"
+		}
+	],
+	"parameters": [
+		{
+			"description": [
+				"Counts a datagram from any sender as a reply, not only one from the destination address.",
+				"Use it for a device that answers from another address, such as a host with several network cards.",
+				"Applies only when WaitForResponse is set."
+			],
+			"mandatory": false,
+			"name": "AnySender",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Allows the destination to be a broadcast address, such as `192.168.1.255`.",
+				"The operating system rejects a subnet broadcast address without it.",
+				"The limited broadcast address `255.255.255.255` is accepted with or without the switch."
+			],
+			"mandatory": false,
+			"name": "Broadcast",
+			"type": "Switch"
+		},
+		{
+			"default": "UTF8",
+			"description": [
+				"Names the text encoding, such as `UTF8`, `ASCII`, `Unicode`, `UTF32`, `Latin1`, or a code page such as `windows-1252`.",
+				"Applies to a Text message and to replies published as text.",
+				"Defaults to UTF-8, and a name the runtime does not know fails the step."
+			],
+			"mandatory": false,
+			"name": "Encoding",
+			"type": "String"
+		},
+		{
+			"default": "Text",
+			"description": [
+				"Selects how the Message value becomes bytes.",
+				"Defaults to Text, applies only to Message, and any other value than Text, Hex, or Base64 fails the step."
+			],
+			"mandatory": false,
+			"name": "Format",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Reads the value as plain text in the encoding of the step.",
+						"Use it for line protocols such as syslog, StatsD, or a device command."
+					],
+					"name": "Text"
+				},
+				{
+					"description": [
+						"Reads the value as hexadecimal bytes, such as `AA 55 01 00`.",
+						"Spaces, commas, colons, hyphens, and `0x` prefixes between bytes are ignored."
+					],
+					"name": "Hex"
+				},
+				{
+					"description": [
+						"Reads the value as Base64 bytes.",
+						"Use it for a binary payload, or for text that contains ` --` or `}}`, which end an inline argument value."
+					],
+					"name": "Base64"
+				}
+			]
+		},
+		{
+			"description": [
+				"Names the destination as a host name or an IP address, such as `192.168.1.50`.",
+				"A host name is resolved before sending, and a name that does not resolve, or has no address of the socket family, fails the step."
+			],
+			"mandatory": true,
+			"name": "Host",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a listener started by StartUdpListener and sends through its socket.",
+				"Without WaitForResponse, replies stay in the listener buffer for ReceiveUdpMessage; with it, the replies the step collects are taken from the buffer, and datagrams from other senders stay unless AnySender is set or the destination is a broadcast or multicast address.",
+				"A name that is not started fails the step."
+			],
+			"mandatory": false,
+			"name": "Listener",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Binds the source IP address, which selects the network interface on a machine with several.",
+				"Defaults to every IPv4 interface, and an IPv6 address makes the socket an IPv6 socket.",
+				"Ignored when Listener is set."
+			],
+			"mandatory": false,
+			"name": "LocalAddress",
+			"type": "String|Expression"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Binds the source port of the datagram, from 0 to 65535.",
+				"Defaults to 0, which lets the system pick a free port; set it for a device that replies to a fixed port.",
+				"Ignored when Listener is set."
+			],
+			"mandatory": false,
+			"name": "LocalPort",
+			"type": "Number"
+		},
+		{
+			"default": "1",
+			"description": [
+				"Sets the number of replies that ends the wait before the timeout.",
+				"Defaults to 1; a higher value collects the answers of several devices to one broadcast.",
+				"One reply is enough for the step to pass."
+			],
+			"mandatory": false,
+			"name": "MaxResponses",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Holds the payload of the datagram, read according to Format.",
+				"Wins over MessageFile when both are set, and one of the two is required.",
+				"A value that contains ` --` or `}}` travels as Hex or Base64, because those sequences end an inline argument value."
+			],
+			"mandatory": false,
+			"name": "Message",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Names a file whose bytes are sent unchanged as the payload.",
+				"Use it for a binary packet kept beside the flow, and a missing file fails the step."
+			],
+			"mandatory": false,
+			"name": "MessageFile",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Leaves the response entity empty and publishes the outputs as session parameters only.",
+				"Use it when the datagram content must stay out of the extracted data of the flow."
+			],
+			"mandatory": false,
+			"name": "NoEntity",
+			"type": "Switch"
+		},
+		{
+			"description": [
+				"Sets the destination port, from 1 to 65535.",
+				"Any other value fails the step before a datagram is sent."
+			],
+			"mandatory": true,
+			"name": "Port",
+			"type": "Number"
+		},
+		{
+			"default": "Text",
+			"description": [
+				"Selects how the bytes of each reply are published.",
+				"Defaults to Text, and any other value than Text, Hex, or Base64 fails the step."
+			],
+			"mandatory": false,
+			"name": "ResponseFormat",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Publishes each datagram as plain text in the encoding of the step.",
+						"Use it for text protocols and for JSON or XML payloads."
+					],
+					"name": "Text"
+				},
+				{
+					"description": [
+						"Publishes each datagram as upper-case hexadecimal text without separators.",
+						"Use it to compare a binary packet byte by byte."
+					],
+					"name": "Hex"
+				},
+				{
+					"description": [
+						"Publishes each datagram as Base64 text.",
+						"Use it to pass a binary packet to a later step without loss."
+					],
+					"name": "Base64"
+				}
+			]
+		},
+		{
+			"default": "0",
+			"description": [
+				"Sets how many times the datagram is sent again while no reply arrives.",
+				"Defaults to 0, and applies only when WaitForResponse is set.",
+				"Each attempt waits the full Timeout."
+			],
+			"mandatory": false,
+			"name": "Retries",
+			"type": "Number"
+		},
+		{
+			"default": "5000",
+			"description": [
+				"Sets how long to wait for replies after each send when WaitForResponse is set.",
+				"Accepts a number of milliseconds, such as `2000`, or a time span, such as `00:00:02`.",
+				"Defaults to 5000 milliseconds, which also replaces a value that is neither a number nor a time span."
+			],
+			"mandatory": false,
+			"name": "Timeout",
+			"type": "Number|Time"
+		},
+		{
+			"description": [
+				"Waits for a reply after sending and fails the step when none arrives within Timeout.",
+				"Without it the step sends the datagram and returns at once.",
+				"Only datagrams from the destination address count as replies, unless the destination is a broadcast address, meaning any IPv4 address that ends in .255, or a multicast address, or AnySender is set, where every sender counts."
+			],
+			"mandatory": false,
+			"name": "WaitForResponse",
+			"type": "Switch"
+		}
+	],
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Holds the arguments of the step, such as `{{$ --Host:192.168.1.50 --Port:5005 --Message:PING}}`.",
+				"Host and Port are required, together with Message or MessageFile."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Names the locator type of the rule and stays at its default for this action.",
+				"The path in OnElement is read as JSONPath for JSON text and as XPath for XML text, whatever the value is."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names one attribute of the XML element that OnElement selects.",
+				"The attribute value replaces the element as the published text, and a missing attribute publishes an empty value.",
+				"Ignored for JSON text and when OnElement is empty."
+			],
+			"mandatory": false,
+			"name": "OnAttribute",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Selects one part of the first reply: a JSONPath such as `$.status` for JSON text, or an XPath such as `//status` for XML text.",
+				"The first result is kept: an XML element is published as its markup, and an attribute or a text node, such as `//status/@code`, as its value.",
+				"Text that is neither JSON nor XML skips the path, a path that finds nothing publishes an empty value, and a malformed path fails the step."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		},
+		{
+			"default": "(?si).*",
+			"description": [
+				"Keeps the first match of the pattern in the first reply, after OnElement was applied.",
+				"Defaults to a pattern that keeps the whole text, and a pattern that does not match publishes an empty value."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
+		}
+	],
+	"summary": [
+		"Sends one UDP datagram, a single network message, to a host and port as text, hexadecimal bytes, Base64 bytes, or the bytes of a file.",
+		"Waits for one or more replies on request, sends again when no reply arrives, and fails the step on silence.",
+		"Stores the reply, its sender, and the reply count, so a later step can assert or branch on a device answer."
+	],
+	"version": "4"
+}
