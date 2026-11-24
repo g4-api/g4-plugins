@@ -1,0 +1,460 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeInputActions.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeInputActions.cs"
+			},
+			"mcp": {
+				"title": "Invoke Input Actions"
+			},
+			"rag": {
+				"description": "Perform a custom gesture in an automation by grouping single input actions: key presses, pointer moves, button presses, pauses, and wheel scrolls. The group checks every step before sending, sends all actions as one sequence, and releases pressed keys on failure, so drags, shortcuts, and multi-selection run reliably.",
+				"qa": [
+					{
+						"answer": "It sends the input actions added by the steps inside it, such as key presses, pointer moves, and wheel scrolls, to the driver as one sequence.",
+						"question": "What does the InvokeInputActions plugin do?"
+					},
+					{
+						"answer": "It takes no parameters and stores no outputs; Rules lists the input action steps, and an optional Argument names or comments the gesture. The steps are AddKeyDown, AddKeyUp, AddPointerDown, AddPointerUp, AddPointerMove, AddPause, and AddScroll.",
+						"question": "What are the key parameters and outputs of InvokeInputActions?"
+					},
+					{
+						"answer": "It runs as an Action container step with the layer-group icon and the ActionRuleModel, and holds input action steps as its child rules. Place it where a flow needs a gesture that ready-made steps such as Click or SendKeys cannot express.",
+						"question": "How does InvokeInputActions fit into an automation workflow?"
+					},
+					{
+						"answer": "Release every key and button the group presses, build a drag from several pointer moves, and keep ordinary steps outside the group.",
+						"question": "What are best practices for using InvokeInputActions?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “InvokeInputActions” and list the input action steps in rules, in the order they run.",
+						"question": "How is an InvokeInputActions rule configured?"
+					},
+					{
+						"answer": "An empty group, a step that is not an input action, or a step that fails stops the group, and nothing is sent. When the driver rejects the sequence, pressed keys and buttons are released and the step fails with the driver error.",
+						"question": "How does InvokeInputActions handle errors?"
+					},
+					{
+						"answer": "The manifest key is “InvokeInputActions”.",
+						"question": "What is the manifest key of InvokeInputActions?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by InvokeInputActions?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of InvokeInputActions?"
+					},
+					{
+						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"question": "Which platforms does InvokeInputActions support?"
+					},
+					{
+						"answer": "It is listed under the “WebDriver” category.",
+						"question": "Which category is InvokeInputActions listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the InvokeInputActions manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the InvokeInputActions manifest?"
+					},
+					{
+						"answer": "It sends the input actions of its steps to the driver as one sequence and sends nothing when a step fails.",
+						"question": "What is the summary of InvokeInputActions?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeInputActions.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeInputActions.cs.",
+						"question": "Where are the InvokeInputActions documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "container",
+				"iconProvider": {
+					"name": "layer-group",
+					"svg": null
+				},
+				"label": "Invoke Input Actions",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"InvokeInputActions performs a custom gesture built from single input actions.",
+		"The steps placed inside it form one group, and each step adds one action, such as a key press, a pointer move, a button release, a pause, or a wheel scroll.",
+		"The container sends all of them together, so the application receives one continuous gesture such as a drag, a Ctrl+click, or a keyboard shortcut.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| One sequence | Sends every action of the group in a single request, in the order the steps appear. |",
+		"| Named gesture | Takes an optional name or comment in its argument, which the container does not act on. |",
+		"| Keys, pointer, and wheel together | Mixes key, pointer, pause, and wheel actions in one gesture. |",
+		"| All or nothing | Sends nothing when a step fails to add its action, so a broken group never starts its gesture. |",
+		"| Elements found first | Finds the element of every step before the sequence is sent, so each element must already be in the page. |",
+		"| Release on failure | Releases pressed keys and buttons when the driver rejects the sequence part way through the gesture. |",
+		"| State kept between groups | Leaves a key or a button pressed after a successful send, so a later group can continue the gesture. |",
+		"| Guarded content | Accepts input action steps only and fails with a clear message for any other step. |",
+		"| Loop support | Runs once per iteration inside a loop and passes the current element of a for-each loop to its steps. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Drag and drop | Move a card, a file, or a slider handle by pressing, moving, and releasing the pointer. |",
+		"| Multi-selection | Hold Control or Shift while clicking several rows or files. |",
+		"| Keyboard shortcuts | Press a key combination such as Ctrl+Shift+S that an application reads as one chord. |",
+		"| Hover menus | Move over a menu and wait for it to open, then click an item the menu creates in a following container. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Gesture checks | Verify that a drag, a long press, or a wheel scroll changes the page as expected. |",
+		"| Shortcut checks | Verify that a key combination triggers the expected command. |",
+		"| Hover state checks | Open a tooltip or a hover menu and assert its content in the next step. |",
+		"| Canvas and map checks | Drive a canvas, a chart, or a map with exact pointer positions. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Application ignores synthetic modifier keys",
+						"Row element is not found",
+						"Step other than an input action inside the group"
+					],
+					"expected_result": "Both rows are selected, as when a person holds Control and clicks each one.",
+					"notes": "The steps only add actions, and the container sends them after the last step. When a row is missing, nothing is sent and the container reports the step that failed.",
+					"use_case": "ctrl_click_multi_select",
+					"version": "4"
+				},
+				"labels": [
+					"Keyboard",
+					"Modifier",
+					"MultiSelect",
+					"Pointer",
+					"Sequence"
+				]
+			},
+			"description": [
+				"### Hold Control and click two rows",
+				"",
+				"The group presses Control, clicks two table rows, and releases Control.",
+				"All eight actions travel in one request, so the key stays down for both clicks."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Ctrl+click rows 1 and 3",
+				"pluginName": "InvokeInputActions",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "Control",
+						"pluginName": "AddKeyDown"
+					},
+					{
+						"$type": "Action",
+						"onElement": "//tr[@data-id='1']",
+						"pluginName": "AddPointerMove"
+					},
+					{
+						"$type": "Action",
+						"pluginName": "AddPointerDown"
+					},
+					{
+						"$type": "Action",
+						"pluginName": "AddPointerUp"
+					},
+					{
+						"$type": "Action",
+						"onElement": "//tr[@data-id='3']",
+						"pluginName": "AddPointerMove"
+					},
+					{
+						"$type": "Action",
+						"pluginName": "AddPointerDown"
+					},
+					{
+						"$type": "Action",
+						"pluginName": "AddPointerUp"
+					},
+					{
+						"$type": "Action",
+						"argument": "Control",
+						"pluginName": "AddKeyUp"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Drop target is outside the viewport",
+						"Page re-renders the drop target when the drag starts",
+						"Page uses native HTML drag events that ignore pointer input",
+						"Source element is not found"
+					],
+					"expected_result": "The card moves from its column to the target column.",
+					"notes": "Some drivers send one move event at the end of a timed move, so use several move steps when a page needs more than one. Raise the pause when the drop target needs time to highlight.",
+					"use_case": "drag_and_drop",
+					"version": "4"
+				},
+				"labels": [
+					"DragAndDrop",
+					"Gesture",
+					"Pointer",
+					"Sequence"
+				]
+			},
+			"description": [
+				"### Drag an item and drop it on a target",
+				"",
+				"The group moves to a card, presses the left button, moves a short distance, moves on to the target column, waits, and releases.",
+				"The short first move starts the drag, because many pages begin a drag only after the pointer moved while the button is down."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Drag card 7 to the done column",
+				"pluginName": "InvokeInputActions",
+				"rules": [
+					{
+						"$type": "Action",
+						"locator": "CssSelector",
+						"onElement": "#card-7",
+						"pluginName": "AddPointerMove"
+					},
+					{
+						"$type": "Action",
+						"pluginName": "AddPointerDown"
+					},
+					{
+						"$type": "Action",
+						"argument": "{{$ --X:20 --Y:0 --Duration:100}}",
+						"pluginName": "AddPointerMove"
+					},
+					{
+						"$type": "Action",
+						"argument": "{{$ --Duration:400}}",
+						"locator": "CssSelector",
+						"onElement": "#done-column",
+						"pluginName": "AddPointerMove"
+					},
+					{
+						"$type": "Action",
+						"argument": "200",
+						"pluginName": "AddPause"
+					},
+					{
+						"$type": "Action",
+						"pluginName": "AddPointerUp"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Browser reserves the shortcut",
+						"Focus is on another element",
+						"Key is left pressed after the group"
+					],
+					"expected_result": "The application runs the command bound to Ctrl+Shift+S.",
+					"notes": "The keys go to the element that has the focus, so focus the target first. Release every key the group pressed, or the key stays down for later steps.",
+					"use_case": "keyboard_shortcut",
+					"version": "4"
+				},
+				"labels": [
+					"Chord",
+					"Keyboard",
+					"Sequence",
+					"Shortcut"
+				]
+			},
+			"description": [
+				"### Press a three-key shortcut",
+				"",
+				"The group presses Control, Shift, and S in order and releases them in reverse order.",
+				"The application receives the three keys as one chord."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Press Ctrl+Shift+S",
+				"pluginName": "InvokeInputActions",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "Control",
+						"pluginName": "AddKeyDown"
+					},
+					{
+						"$type": "Action",
+						"argument": "Shift",
+						"pluginName": "AddKeyDown"
+					},
+					{
+						"$type": "Action",
+						"argument": "s",
+						"pluginName": "AddKeyDown"
+					},
+					{
+						"$type": "Action",
+						"argument": "s",
+						"pluginName": "AddKeyUp"
+					},
+					{
+						"$type": "Action",
+						"argument": "Shift",
+						"pluginName": "AddKeyUp"
+					},
+					{
+						"$type": "Action",
+						"argument": "Control",
+						"pluginName": "AddKeyUp"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Driver without wheel support",
+						"List element is not found",
+						"List is already at its end"
+					],
+					"expected_result": "The list scrolls down by 600 pixels and loads its next items.",
+					"notes": "The wheel turns over the center of the element, so the list scrolls and the page stays. Use it for lists that load more items on scroll.",
+					"use_case": "scroll_list_and_wait",
+					"version": "4"
+				},
+				"labels": [
+					"LazyLoading",
+					"Scroll",
+					"Sequence",
+					"Wheel"
+				]
+			},
+			"description": [
+				"### Scroll a list and wait for more items",
+				"",
+				"The group turns the wheel 600 pixels down over the center of a list.",
+				"A short pause lets the list load its next items before the following step runs."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Scroll the results list",
+				"pluginName": "InvokeInputActions",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "{{$ --DeltaY:600}}",
+						"onElement": "//div[@id='results']",
+						"pluginName": "AddScroll"
+					},
+					{
+						"$type": "Action",
+						"argument": "300",
+						"pluginName": "AddPause"
+					}
+				]
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Driver ignores the held key for ordinary steps",
+						"Flow ends before the key is released"
+					],
+					"expected_result": "Shift stays pressed until a later group sends AddKeyUp for it.",
+					"notes": "The driver keeps the keyboard state between requests. End the gesture with a second group that holds AddKeyUp, because whether an ordinary click step honors the held key depends on the driver.",
+					"use_case": "hold_key_for_later_steps",
+					"version": "4"
+				},
+				"labels": [
+					"Keyboard",
+					"Modifier",
+					"Sequence",
+					"State"
+				]
+			},
+			"description": [
+				"### Press a key and keep it down after the group",
+				"",
+				"The group sends one key press and no release.",
+				"The key stays down after the group until a later group releases it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Hold Shift for the next steps",
+				"pluginName": "InvokeInputActions",
+				"rules": [
+					{
+						"$type": "Action",
+						"argument": "Shift",
+						"pluginName": "AddKeyDown"
+					}
+				]
+			}
+		}
+	],
+	"key": "InvokeInputActions",
+	"namespace": "G4.Plugins.Ui",
+	"platforms": [
+		"MobileWeb",
+		"OsNative",
+		"Web"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Names or comments the gesture, such as `Ctrl+click rows 1 and 3`, so the flow reads clearly.",
+				"The container does not act on the text; macros in it are resolved like in any other rule."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"description": [
+				"Lists the input action steps of the gesture, in the order they are performed.",
+				"Each step adds one action, and the container sends them together after the last step.",
+				"Only input action steps are accepted, such as AddKeyDown, AddPointerMove, or AddScroll."
+			],
+			"mandatory": true,
+			"name": "Rules",
+			"type": "Array"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Sends a group of single input actions, such as key presses, pointer moves, button presses, pauses, and wheel scrolls, to the driver as one sequence.",
+		"Runs the input action steps placed inside it in order, takes one action from each, and performs them in a single request that keeps their order and timing.",
+		"Sends nothing when the group is empty, holds another kind of step, or has a step that fails.",
+		"Releases pressed keys and buttons when the driver rejects the sequence."
+	],
+	"version": "4"
+}

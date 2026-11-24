@@ -1,0 +1,303 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddPointerDown.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddPointerDown.cs"
+			},
+			"mcp": {
+				"title": "Add Pointer Down"
+			},
+			"rag": {
+				"description": "Press and hold a pointer button inside an InvokeInputActions gesture. The step checks the button name before anything is sent, supports five buttons from flow parameters, and keeps the button down for the following actions, so drags, long presses, and right clicks run reliably.",
+				"qa": [
+					{
+						"answer": "It adds one pointer button press to the input sequence of its InvokeInputActions container, and leaves the button down.",
+						"question": "What does the AddPointerDown plugin do?"
+					},
+					{
+						"answer": "Button names the button and defaults to Left; Middle, Right, Back, and Forward are accepted, and the plain argument works as well. It stores no outputs.",
+						"question": "What are the key parameters and outputs of AddPointerDown?"
+					},
+					{
+						"answer": "It runs as an InputAction task step with the arrow-pointer icon and the ActionRuleModel, only as a child rule of InvokeInputActions, after an AddPointerMove and before an AddPointerUp.",
+						"question": "How does AddPointerDown fit into an automation workflow?"
+					},
+					{
+						"answer": "Move the pointer before pressing, pair every press with a release of the same button, and add a pause between them for a long press.",
+						"question": "What are best practices for using AddPointerDown?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “AddPointerDown”, with no argument for the left button or with {{$ --Button:Right}}, inside the rules of InvokeInputActions.",
+						"question": "How is an AddPointerDown rule configured?"
+					},
+					{
+						"answer": "An unknown button name fails the step, and the container then sends nothing. Outside InvokeInputActions the step fails with a message that names the container.",
+						"question": "How does AddPointerDown handle errors?"
+					},
+					{
+						"answer": "The manifest key is “AddPointerDown”.",
+						"question": "What is the manifest key of AddPointerDown?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by AddPointerDown?"
+					},
+					{
+						"answer": "The pluginType is “InputAction”.",
+						"question": "What is the pluginType of AddPointerDown?"
+					},
+					{
+						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"question": "Which platforms does AddPointerDown support?"
+					},
+					{
+						"answer": "It is listed under the “WebDriver” category.",
+						"question": "Which category is AddPointerDown listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the AddPointerDown manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the AddPointerDown manifest?"
+					},
+					{
+						"answer": "It presses a pointer button, left by default, and keeps it down until AddPointerUp releases it.",
+						"question": "What is the summary of AddPointerDown?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddPointerDown.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddPointerDown.cs.",
+						"question": "Where are the AddPointerDown documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "InputAction",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "arrow-pointer",
+					"svg": null
+				},
+				"label": "Add Pointer Down",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"AddPointerDown presses one pointer button and keeps it down.",
+		"It runs only inside InvokeInputActions, and the press happens where the last AddPointerMove action left the pointer.",
+		"Flows use it to start a drag, a long press, or a click that needs a held key or an exact position.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Five buttons | Presses the left, middle, right, back, or forward button. |",
+		"| Held state | Keeps the button down until an AddPointerUp action releases it. |",
+		"| Position from the last move | Presses at the place the pointer was last moved to. |",
+		"| Checked before sending | Fails on an unknown button name, and the container then sends nothing. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Drag and drop | Press on an item before moving it to its target. |",
+		"| Long press | Press, pause, and release to open a menu that needs a held button. |",
+		"| Selection by dragging | Press at the start of a text range or a canvas area before moving to its end. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Drag handlers | Verify that an item follows the pointer while the button is down. |",
+		"| Press states | Verify the pressed style of a button before it is released. |",
+		"| Context menus | Verify that the right button opens the expected menu. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Button is never released",
+						"Pointer was never moved",
+						"Step is placed outside InvokeInputActions"
+					],
+					"expected_result": "The left button is down until an AddPointerUp action releases it.",
+					"notes": "The step runs only inside InvokeInputActions. Add AddPointerMove before it, or the press happens wherever the pointer already is.",
+					"use_case": "press_left_button",
+					"version": "4"
+				},
+				"labels": [
+					"Button",
+					"InputAction",
+					"Pointer",
+					"PointerDown"
+				]
+			},
+			"description": [
+				"### Press the left button",
+				"",
+				"A rule without an argument presses the left button.",
+				"The press happens where the last pointer move left the pointer, and the button stays down."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "AddPointerDown"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Release names another button",
+						"Unknown button name"
+					],
+					"expected_result": "The right button is down until an AddPointerUp action releases the same button.",
+					"notes": "Release the same button that was pressed. Button names ignore letter case.",
+					"use_case": "press_right_button_by_parameter",
+					"version": "4"
+				},
+				"labels": [
+					"Button",
+					"ContextMenu",
+					"InputAction",
+					"Pointer",
+					"PointerDown"
+				]
+			},
+			"description": [
+				"### Press the right button through the Button parameter",
+				"",
+				"The Button parameter names the secondary button.",
+				"Together with a release it forms a right click at the current pointer position."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Button:Right}}",
+				"pluginName": "AddPointerDown"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Driver does not support the button",
+						"Unknown button name"
+					],
+					"expected_result": "The middle button is down until an AddPointerUp action releases it.",
+					"notes": "Both forms of the argument give the same action. A driver that does not know the button rejects the whole sequence.",
+					"use_case": "press_middle_button_plain",
+					"version": "4"
+				},
+				"labels": [
+					"Button",
+					"InputAction",
+					"Middle",
+					"Pointer",
+					"PointerDown"
+				]
+			},
+			"description": [
+				"### Press the middle button with a plain argument",
+				"",
+				"The plain argument names the button without the parameter form.",
+				"A middle press and release on a link opens it in a new tab in most browsers."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Middle",
+				"pluginName": "AddPointerDown"
+			}
+		}
+	],
+	"key": "AddPointerDown",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"default": "Left",
+			"description": [
+				"Names the pointer button to press.",
+				"The plain argument of the rule is read as the button when no parameter is used.",
+				"Defaults to Left, and any name other than the listed ones fails the step."
+			],
+			"mandatory": false,
+			"name": "Button",
+			"type": "String|Expression",
+			"values": [
+				{
+					"description": [
+						"Presses the main button, which a normal click uses.",
+						"It is the default when the rule names no button."
+					],
+					"name": "Left"
+				},
+				{
+					"description": [
+						"Presses the wheel button.",
+						"Browsers use it to open a link in a new tab."
+					],
+					"name": "Middle"
+				},
+				{
+					"description": [
+						"Presses the secondary button.",
+						"Applications use it to open a context menu."
+					],
+					"name": "Right"
+				},
+				{
+					"description": [
+						"Presses the fourth button, found on the side of some mice.",
+						"Browsers use it to go back one page."
+					],
+					"name": "Back"
+				},
+				{
+					"description": [
+						"Presses the fifth button, found on the side of some mice.",
+						"Browsers use it to go forward one page."
+					],
+					"name": "Forward"
+				}
+			]
+		}
+	],
+	"platforms": [
+		"MobileWeb",
+		"OsNative",
+		"Web"
+	],
+	"pluginType": "InputAction",
+	"properties": [
+		{
+			"description": [
+				"Holds the button, as plain text such as `Right` or as `{{$ --Button:Right}}`.",
+				"A rule without an argument uses the left button."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Adds a pointer button press to the sequence of its InvokeInputActions container.",
+		"Presses the left button by default, or the middle, right, back, or forward button on request.",
+		"Leaves the button down at the current pointer position until an AddPointerUp action releases it, which is how drags and long presses are built."
+	],
+	"version": "4"
+}

@@ -1,0 +1,715 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddKeyDown.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddKeyDown.cs"
+			},
+			"mcp": {
+				"title": "Add Key Down"
+			},
+			"rag": {
+				"description": "Press and hold a keyboard key inside an InvokeInputActions gesture. The step checks the key name before anything is sent, accepts named keys or single characters from flow parameters, and keeps the key down for the following actions, so shortcuts and modifier clicks run reliably.",
+				"qa": [
+					{
+						"answer": "It adds one key press to the input sequence of its InvokeInputActions container, and leaves the key down.",
+						"question": "What does the AddKeyDown plugin do?"
+					},
+					{
+						"answer": "Key names the key, as a key name such as Control or as a single character; the plain argument works as well. It stores no outputs.",
+						"question": "What are the key parameters and outputs of AddKeyDown?"
+					},
+					{
+						"answer": "It runs as an InputAction task step with the keyboard icon and the ActionRuleModel, only as a child rule of InvokeInputActions, usually before pointer actions and a matching AddKeyUp.",
+						"question": "How does AddKeyDown fit into an automation workflow?"
+					},
+					{
+						"answer": "Pair every AddKeyDown with an AddKeyUp for the same key, press modifier keys before the keys or clicks they modify, and focus the target element first.",
+						"question": "What are best practices for using AddKeyDown?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “AddKeyDown” and set the key in the argument, as Control or as {{$ --Key:Control}}, inside the rules of InvokeInputActions.",
+						"question": "How is an AddKeyDown rule configured?"
+					},
+					{
+						"answer": "A missing key or an unknown key name fails the step, and the container then sends nothing. Outside InvokeInputActions the step fails with a message that names the container.",
+						"question": "How does AddKeyDown handle errors?"
+					},
+					{
+						"answer": "The manifest key is “AddKeyDown”.",
+						"question": "What is the manifest key of AddKeyDown?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by AddKeyDown?"
+					},
+					{
+						"answer": "The pluginType is “InputAction”.",
+						"question": "What is the pluginType of AddKeyDown?"
+					},
+					{
+						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"question": "Which platforms does AddKeyDown support?"
+					},
+					{
+						"answer": "It is listed under the “WebDriver” category.",
+						"question": "Which category is AddKeyDown listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the AddKeyDown manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the AddKeyDown manifest?"
+					},
+					{
+						"answer": "It presses one key inside InvokeInputActions and keeps it down until AddKeyUp releases it.",
+						"question": "What is the summary of AddKeyDown?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddKeyDown.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddKeyDown.cs.",
+						"question": "Where are the AddKeyDown documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "InputAction",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "keyboard",
+					"svg": null
+				},
+				"label": "Add Key Down",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"AddKeyDown presses one keyboard key and keeps it down.",
+		"It runs only inside InvokeInputActions, which sends the press together with the other actions of the gesture.",
+		"Flows use it to hold Control or Shift during clicks and to build keyboard shortcuts key by key.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Named keys | Accepts key names such as Control, Shift, Alt, Enter, Tab, Escape, and ArrowDown. |",
+		"| Single characters | Accepts one character, such as `a` or `5`, as the key. |",
+		"| Held state | Keeps the key down until an AddKeyUp action releases it. |",
+		"| Checked before sending | Fails on an unknown key name, and the container then sends nothing. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Multi-selection | Hold Control or Shift while later actions click several items. |",
+		"| Keyboard shortcuts | Start a shortcut such as Ctrl+S by pressing its modifier key first. |",
+		"| Modified drags | Hold Alt or Shift while a drag gesture runs. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Shortcut checks | Verify that a key combination triggers the expected command. |",
+		"| Key-hold behavior | Verify how a page reacts while a key stays down. |",
+		"| Modifier checks | Verify that a click with a modifier key extends a selection or opens a link in a new tab. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Key is never released",
+						"Step is placed outside InvokeInputActions"
+					],
+					"expected_result": "Control is down from this action until an AddKeyUp action releases it.",
+					"notes": "The step runs only inside InvokeInputActions. Add AddKeyUp for the same key later, or the key stays down after the group.",
+					"use_case": "press_modifier_key",
+					"version": "4"
+				},
+				"labels": [
+					"InputAction",
+					"KeyDown",
+					"Keyboard",
+					"Modifier"
+				]
+			},
+			"description": [
+				"### Press and hold the Control key",
+				"",
+				"The plain argument names the key.",
+				"The press is added to the sequence of the group, and the key stays down for the actions that follow."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "Control",
+				"pluginName": "AddKeyDown"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Step is placed outside InvokeInputActions",
+						"Unknown key name"
+					],
+					"expected_result": "Shift is down for the actions that follow.",
+					"notes": "Both forms of the argument give the same action. Key names ignore letter case, so `shift` and `Shift` are the same key.",
+					"use_case": "press_key_by_parameter",
+					"version": "4"
+				},
+				"labels": [
+					"InputAction",
+					"KeyDown",
+					"Keyboard",
+					"Parameter"
+				]
+			},
+			"description": [
+				"### Press Shift through the Key parameter",
+				"",
+				"The Key parameter names the key in the parameter form of the argument.",
+				"Use this form when the key comes from a flow parameter or a macro."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Key:Shift}}",
+				"pluginName": "AddKeyDown"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Focus is on another element",
+						"Text longer than one character"
+					],
+					"expected_result": "The `a` key is down until an AddKeyUp action releases it.",
+					"notes": "The key goes to the element that has the focus. Text longer than one character that is not a key name fails the step.",
+					"use_case": "press_character_key",
+					"version": "4"
+				},
+				"labels": [
+					"Character",
+					"InputAction",
+					"KeyDown",
+					"Keyboard",
+					"Shortcut"
+				]
+			},
+			"description": [
+				"### Press a character key",
+				"",
+				"A single character is used as the key itself.",
+				"Together with a held Control key it forms a shortcut such as Ctrl+A."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "a",
+				"pluginName": "AddKeyDown"
+			}
+		}
+	],
+	"key": "AddKeyDown",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"description": [
+				"Names the key to press: one of the listed key names, such as `Control`, `Shift`, or `Enter`, or a single character such as `a`.",
+				"The listed names are the key constants of the WebDriver client, and letter case is ignored.",
+				"The plain argument of the rule is read as the key when no parameter is used.",
+				"Text that is neither a listed name nor a single character, such as `Ctrl`, fails the step."
+			],
+			"mandatory": false,
+			"name": "Key",
+			"type": "String|Expression",
+			"values": [
+				{
+					"description": [
+						"The NUL key value of the WebDriver key table.",
+						"In an input action it does not release other keys; release each held key with AddKeyUp."
+					],
+					"name": "Null"
+				},
+				{
+					"description": [
+						"The Cancel key.",
+						"Few applications react to it."
+					],
+					"name": "Cancel"
+				},
+				{
+					"description": [
+						"The Help key.",
+						"Some applications open their help with it."
+					],
+					"name": "Help"
+				},
+				{
+					"description": [
+						"The Backspace key.",
+						"Deletes the character before the caret in a text field."
+					],
+					"name": "Backspace"
+				},
+				{
+					"description": [
+						"The Tab key.",
+						"Moves the focus to the next element."
+					],
+					"name": "Tab"
+				},
+				{
+					"description": [
+						"The Clear key.",
+						"Found on some numeric keypads."
+					],
+					"name": "Clear"
+				},
+				{
+					"description": [
+						"The Return key.",
+						"A separate key from Enter in the WebDriver key table."
+					],
+					"name": "Return"
+				},
+				{
+					"description": [
+						"The Enter key.",
+						"Submits a form or confirms a dialog."
+					],
+					"name": "Enter"
+				},
+				{
+					"description": [
+						"The Shift key.",
+						"A modifier key for capital letters, range selection, and shortcuts."
+					],
+					"name": "Shift"
+				},
+				{
+					"description": [
+						"The same key as `Shift`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "LeftShift"
+				},
+				{
+					"description": [
+						"The Control key.",
+						"A modifier key for shortcuts and for adding items to a selection."
+					],
+					"name": "Control"
+				},
+				{
+					"description": [
+						"The same key as `Control`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "LeftControl"
+				},
+				{
+					"description": [
+						"The Alt key.",
+						"A modifier key for alternate characters and for shortcuts a page defines."
+					],
+					"name": "Alt"
+				},
+				{
+					"description": [
+						"The same key as `Alt`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "LeftAlt"
+				},
+				{
+					"description": [
+						"The Pause key.",
+						"Few applications react to it."
+					],
+					"name": "Pause"
+				},
+				{
+					"description": [
+						"The Escape key.",
+						"Closes a dialog, a menu, or a popup."
+					],
+					"name": "Escape"
+				},
+				{
+					"description": [
+						"The Space key.",
+						"Types a space, toggles a focused checkbox, or presses a focused button."
+					],
+					"name": "Space"
+				},
+				{
+					"description": [
+						"The Page Up key.",
+						"Scrolls up by one page."
+					],
+					"name": "PageUp"
+				},
+				{
+					"description": [
+						"The Page Down key.",
+						"Scrolls down by one page."
+					],
+					"name": "PageDown"
+				},
+				{
+					"description": [
+						"The End key.",
+						"Moves the caret to the end of the line, or scrolls to the end of the page."
+					],
+					"name": "End"
+				},
+				{
+					"description": [
+						"The Home key.",
+						"Moves the caret to the start of the line, or scrolls to the top of the page."
+					],
+					"name": "Home"
+				},
+				{
+					"description": [
+						"The Left Arrow key.",
+						"Moves the caret or the selection one step left."
+					],
+					"name": "Left"
+				},
+				{
+					"description": [
+						"The same key as `Left`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "ArrowLeft"
+				},
+				{
+					"description": [
+						"The Up Arrow key.",
+						"Moves the caret or the selection one step up."
+					],
+					"name": "Up"
+				},
+				{
+					"description": [
+						"The same key as `Up`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "ArrowUp"
+				},
+				{
+					"description": [
+						"The Right Arrow key.",
+						"Moves the caret or the selection one step right."
+					],
+					"name": "Right"
+				},
+				{
+					"description": [
+						"The same key as `Right`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "ArrowRight"
+				},
+				{
+					"description": [
+						"The Down Arrow key.",
+						"Moves the caret or the selection one step down."
+					],
+					"name": "Down"
+				},
+				{
+					"description": [
+						"The same key as `Down`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "ArrowDown"
+				},
+				{
+					"description": [
+						"The Insert key.",
+						"Switches between insert and overwrite mode in some editors."
+					],
+					"name": "Insert"
+				},
+				{
+					"description": [
+						"The Delete key.",
+						"Deletes the character after the caret, or the selected item."
+					],
+					"name": "Delete"
+				},
+				{
+					"description": [
+						"The Semicolon key.",
+						"Types a semicolon."
+					],
+					"name": "Semicolon"
+				},
+				{
+					"description": [
+						"The Equal key.",
+						"Types an equal sign."
+					],
+					"name": "Equal"
+				},
+				{
+					"description": [
+						"The 0 key of the numeric keypad.",
+						"Types 0 from the keypad."
+					],
+					"name": "NumberPad0"
+				},
+				{
+					"description": [
+						"The 1 key of the numeric keypad.",
+						"Types 1 from the keypad."
+					],
+					"name": "NumberPad1"
+				},
+				{
+					"description": [
+						"The 2 key of the numeric keypad.",
+						"Types 2 from the keypad."
+					],
+					"name": "NumberPad2"
+				},
+				{
+					"description": [
+						"The 3 key of the numeric keypad.",
+						"Types 3 from the keypad."
+					],
+					"name": "NumberPad3"
+				},
+				{
+					"description": [
+						"The 4 key of the numeric keypad.",
+						"Types 4 from the keypad."
+					],
+					"name": "NumberPad4"
+				},
+				{
+					"description": [
+						"The 5 key of the numeric keypad.",
+						"Types 5 from the keypad."
+					],
+					"name": "NumberPad5"
+				},
+				{
+					"description": [
+						"The 6 key of the numeric keypad.",
+						"Types 6 from the keypad."
+					],
+					"name": "NumberPad6"
+				},
+				{
+					"description": [
+						"The 7 key of the numeric keypad.",
+						"Types 7 from the keypad."
+					],
+					"name": "NumberPad7"
+				},
+				{
+					"description": [
+						"The 8 key of the numeric keypad.",
+						"Types 8 from the keypad."
+					],
+					"name": "NumberPad8"
+				},
+				{
+					"description": [
+						"The 9 key of the numeric keypad.",
+						"Types 9 from the keypad."
+					],
+					"name": "NumberPad9"
+				},
+				{
+					"description": [
+						"The Multiply key of the numeric keypad.",
+						"Types an asterisk from the keypad."
+					],
+					"name": "Multiply"
+				},
+				{
+					"description": [
+						"The Add key of the numeric keypad.",
+						"Types a plus sign from the keypad."
+					],
+					"name": "Add"
+				},
+				{
+					"description": [
+						"The Separator key of the numeric keypad.",
+						"Found on some keypads only."
+					],
+					"name": "Separator"
+				},
+				{
+					"description": [
+						"The Subtract key of the numeric keypad.",
+						"Types a minus sign from the keypad."
+					],
+					"name": "Subtract"
+				},
+				{
+					"description": [
+						"The Decimal key of the numeric keypad.",
+						"Types a period from the keypad."
+					],
+					"name": "Decimal"
+				},
+				{
+					"description": [
+						"The Divide key of the numeric keypad.",
+						"Types a slash from the keypad."
+					],
+					"name": "Divide"
+				},
+				{
+					"description": [
+						"The F1 function key.",
+						"Pages receive it as a key event; whether the browser opens its help depends on the driver."
+					],
+					"name": "F1"
+				},
+				{
+					"description": [
+						"The F2 function key.",
+						"Many applications start renaming the selected item with it."
+					],
+					"name": "F2"
+				},
+				{
+					"description": [
+						"The F3 function key.",
+						"Pages receive it as a key event; whether the browser finds the next match depends on the driver."
+					],
+					"name": "F3"
+				},
+				{
+					"description": [
+						"The F4 function key.",
+						"Its meaning depends on the application."
+					],
+					"name": "F4"
+				},
+				{
+					"description": [
+						"The F5 function key.",
+						"Pages receive it as a key event; whether the browser reloads depends on the driver."
+					],
+					"name": "F5"
+				},
+				{
+					"description": [
+						"The F6 function key.",
+						"Its meaning depends on the application."
+					],
+					"name": "F6"
+				},
+				{
+					"description": [
+						"The F7 function key.",
+						"Its meaning depends on the application."
+					],
+					"name": "F7"
+				},
+				{
+					"description": [
+						"The F8 function key.",
+						"Its meaning depends on the application."
+					],
+					"name": "F8"
+				},
+				{
+					"description": [
+						"The F9 function key.",
+						"Its meaning depends on the application."
+					],
+					"name": "F9"
+				},
+				{
+					"description": [
+						"The F10 function key.",
+						"Its meaning depends on the application."
+					],
+					"name": "F10"
+				},
+				{
+					"description": [
+						"The F11 function key.",
+						"Pages receive it as a key event; whether the browser switches to full screen depends on the driver."
+					],
+					"name": "F11"
+				},
+				{
+					"description": [
+						"The F12 function key.",
+						"Pages receive it as a key event; whether the browser opens its developer tools depends on the driver."
+					],
+					"name": "F12"
+				},
+				{
+					"description": [
+						"The Meta key: the Windows key, or Command on macOS.",
+						"A modifier key for shortcuts a page or an application defines."
+					],
+					"name": "Meta"
+				},
+				{
+					"description": [
+						"The same key as `Meta`, with the same key value.",
+						"Use either name; both resolve to one key."
+					],
+					"name": "Command"
+				},
+				{
+					"description": [
+						"The Zenkaku/Hankaku key of Japanese keyboards.",
+						"Switches between full-width and half-width input."
+					],
+					"name": "ZenkakuHankaku"
+				}
+			]
+		}
+	],
+	"platforms": [
+		"MobileWeb",
+		"OsNative",
+		"Web"
+	],
+	"pluginType": "InputAction",
+	"properties": [
+		{
+			"description": [
+				"Holds the key, as plain text such as `Control` or as `{{$ --Key:Control}}`.",
+				"A rule without an argument fails, because a key action needs a key."
+			],
+			"mandatory": true,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Adds a key press to the sequence of its InvokeInputActions container.",
+		"Accepts a key name such as Control, Shift, or Enter, or a single character.",
+		"Leaves the key down until an AddKeyUp action releases it, which is how modifier keys and shortcuts are built."
+	],
+	"version": "4"
+}

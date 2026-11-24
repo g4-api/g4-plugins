@@ -34,6 +34,7 @@
   * [Invoke Double Click (InvokeDoubleClick)](./Actions/InvokeDoubleClick.md)
   * [Invoke For Each Loop (InvokeForEachLoop)](./Actions/InvokeForEachLoop.md)
   * [Invoke For Loop (InvokeForLoop)](./Actions/InvokeForLoop.md)
+  * [Invoke Input Actions (InvokeInputActions)](./Actions/InvokeInputActions.md)
   * [Invoke Script (InvokeScript)](./Actions/InvokeScript.md)
   * [Invoke Scroll (InvokeScroll)](./Actions/InvokeScroll.md)
   * [Invoke Mongo Db Aggregate (InvokeMongoDbAggregate)](./Actions/InvokeMongoDbAggregate.md)
@@ -167,6 +168,15 @@
   * [Patch (Patch)](./HttpMethods/Patch.md)
   * [Post (Post)](./HttpMethods/Post.md)
   * [Put (Put)](./HttpMethods/Put.md)
+
+* _**Input Actions**_
+  * [Add Key Down (AddKeyDown)](./InputActions/AddKeyDown.md)
+  * [Add Key Up (AddKeyUp)](./InputActions/AddKeyUp.md)
+  * [Add Pause (AddPause)](./InputActions/AddPause.md)
+  * [Add Pointer Down (AddPointerDown)](./InputActions/AddPointerDown.md)
+  * [Add Pointer Move (AddPointerMove)](./InputActions/AddPointerMove.md)
+  * [Add Pointer Up (AddPointerUp)](./InputActions/AddPointerUp.md)
+  * [Add Scroll (AddScroll)](./InputActions/AddScroll.md)
 
 * _**Macros**_
   * [Convert Number (Convert-Number)](./Macros/Convert-Number.md)

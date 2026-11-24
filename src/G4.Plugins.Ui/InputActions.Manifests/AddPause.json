@@ -1,0 +1,262 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddPause.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddPause.cs"
+			},
+			"mcp": {
+				"title": "Add Pause"
+			},
+			"rag": {
+				"description": "Add a wait inside an InvokeInputActions gesture, between two of its actions. The step checks the duration before anything is sent, accepts milliseconds or a time span from flow parameters, and keeps keys and buttons held while waiting, so long presses and hover menus run reliably.",
+				"qa": [
+					{
+						"answer": "It adds one pause to the input sequence of its InvokeInputActions container, so the driver waits between two actions.",
+						"question": "What does the AddPause plugin do?"
+					},
+					{
+						"answer": "Duration sets the wait as milliseconds or as a time span and defaults to 0; the plain argument works as well. It stores no outputs.",
+						"question": "What are the key parameters and outputs of AddPause?"
+					},
+					{
+						"answer": "It runs as an InputAction task step with the stopwatch icon and the ActionRuleModel, only as a child rule of InvokeInputActions, between the two actions it separates.",
+						"question": "How does AddPause fit into an automation workflow?"
+					},
+					{
+						"answer": "Use it for waits inside a gesture only, keep the total time under the driver timeout, and use an ordinary wait step between gestures.",
+						"question": "What are best practices for using AddPause?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “AddPause” and set the wait in the argument, as 500 or as {{$ --Duration:00:00:02}}, inside the rules of InvokeInputActions.",
+						"question": "How is an AddPause rule configured?"
+					},
+					{
+						"answer": "Text that is not a duration, or a negative value, fails the step, and the container then sends nothing. Outside InvokeInputActions the step fails with a message that names the container.",
+						"question": "How does AddPause handle errors?"
+					},
+					{
+						"answer": "The manifest key is “AddPause”.",
+						"question": "What is the manifest key of AddPause?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by AddPause?"
+					},
+					{
+						"answer": "The pluginType is “InputAction”.",
+						"question": "What is the pluginType of AddPause?"
+					},
+					{
+						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"question": "Which platforms does AddPause support?"
+					},
+					{
+						"answer": "It is listed under the “WebDriver” category.",
+						"question": "Which category is AddPause listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the AddPause manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the AddPause manifest?"
+					},
+					{
+						"answer": "It makes the driver wait between two actions of a gesture while keys and buttons stay as they are.",
+						"question": "What is the summary of AddPause?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddPause.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddPause.cs.",
+						"question": "Where are the AddPause documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "InputAction",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "stopwatch",
+					"svg": null
+				},
+				"label": "Add Pause",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"AddPause makes the driver wait in the middle of a gesture.",
+		"It runs only inside InvokeInputActions, and the wait happens on the driver side, between two actions of the same sequence.",
+		"Flows use it to hold a press, to let a hover menu open, and to give a page time to react during a drag.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Timed wait | Waits a whole number of milliseconds, such as `500`, or a time span, such as `00:00:02`. |",
+		"| State kept | Leaves pressed keys and buttons down during the wait. |",
+		"| Inside the sequence | Waits between two actions of one request, which a separate wait step cannot do. |",
+		"| Checked before sending | Fails on text that is not a duration, and the container then sends nothing. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Long press | Hold a button for a second to open a menu that needs a held press. |",
+		"| Hover menus | Wait for a menu to open before the pointer moves to an item that is already in the page. |",
+		"| Paced drags | Wait over a drop target until it highlights. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Timing checks | Verify that a long press and a short press give different results. |",
+		"| Animation checks | Wait for an animation that starts on hover before the next action. |",
+		"| Debounce checks | Verify that a page ignores input that arrives faster than its debounce time. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duration is not a number",
+						"Step is placed outside InvokeInputActions"
+					],
+					"expected_result": "The driver waits 500 milliseconds before the next action of the sequence.",
+					"notes": "The step runs only inside InvokeInputActions. Between a press and a release it turns a click into a long press.",
+					"use_case": "pause_milliseconds",
+					"version": "4"
+				},
+				"labels": [
+					"InputAction",
+					"LongPress",
+					"Pause",
+					"Timing"
+				]
+			},
+			"description": [
+				"### Wait half a second",
+				"",
+				"The plain argument sets the wait in milliseconds.",
+				"Keys and buttons that are down stay down during the wait."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "500",
+				"pluginName": "AddPause"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Sequence exceeds the driver timeout",
+						"Time span is malformed"
+					],
+					"expected_result": "The driver waits two seconds before the next action of the sequence.",
+					"notes": "A time span is written as hours, minutes, and seconds. The whole sequence must still finish within the command timeout of the driver.",
+					"use_case": "pause_time_span",
+					"version": "4"
+				},
+				"labels": [
+					"InputAction",
+					"Parameter",
+					"Pause",
+					"Timing"
+				]
+			},
+			"description": [
+				"### Wait two seconds through the Duration parameter",
+				"",
+				"The Duration parameter sets the wait as a time span.",
+				"Use this form when the value comes from a flow parameter or a macro."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Duration:00:00:02}}",
+				"pluginName": "AddPause"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Pause has no visible effect"
+					],
+					"expected_result": "The sequence gains one empty step, and the next action runs right after the previous one.",
+					"notes": "A zero pause is rarely needed. Set a duration whenever the page needs time between two actions.",
+					"use_case": "pause_no_duration",
+					"version": "4"
+				},
+				"labels": [
+					"InputAction",
+					"Ordering",
+					"Pause",
+					"Timing"
+				]
+			},
+			"description": [
+				"### Add an empty step without waiting",
+				"",
+				"A rule without an argument adds a pause of zero milliseconds.",
+				"It adds one empty step to the sequence and changes no key or button."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "AddPause"
+			}
+		}
+	],
+	"key": "AddPause",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"default": "0",
+			"description": [
+				"Sets how long the driver waits before the next action.",
+				"Accepts a whole number of milliseconds, such as `500`, or a time span, such as `00:00:02`.",
+				"Defaults to 0, and a negative value or text that is not a duration fails the step."
+			],
+			"mandatory": false,
+			"name": "Duration",
+			"type": "Number|Time"
+		}
+	],
+	"platforms": [
+		"MobileWeb",
+		"OsNative",
+		"Web"
+	],
+	"pluginType": "InputAction",
+	"properties": [
+		{
+			"description": [
+				"Holds the wait, as plain text such as `500` or as `{{$ --Duration:500}}`.",
+				"A rule without an argument adds a pause of zero milliseconds."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Adds a pause to the sequence of its InvokeInputActions container.",
+		"Waits a whole number of milliseconds or a time span between the action before it and the action after it.",
+		"Keeps every key and button as it is during the wait, which is how long presses and paced gestures are built."
+	],
+	"version": "4"
+}

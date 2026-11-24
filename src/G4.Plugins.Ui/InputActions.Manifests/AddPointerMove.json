@@ -1,0 +1,377 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddPointerMove.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddPointerMove.cs"
+			},
+			"mcp": {
+				"title": "Add Pointer Move"
+			},
+			"rag": {
+				"description": "Move the pointer inside an InvokeInputActions gesture, to an element, an offset, a viewport position, or a distance from where it is. The step checks its element and numbers before anything is sent, takes flexible parameters for target and duration, and keeps hovers and drags reliable.",
+				"qa": [
+					{
+						"answer": "It adds one pointer move to the input sequence of its InvokeInputActions container, without pressing or releasing a button.",
+						"question": "What does the AddPointerMove plugin do?"
+					},
+					{
+						"answer": "OnElement and Locator name an element to move to, X and Y set an offset or a position, Origin selects Pointer or Viewport, and Duration sets the time of the move. It stores no outputs.",
+						"question": "What are the key parameters and outputs of AddPointerMove?"
+					},
+					{
+						"answer": "It runs as an InputAction task step with the arrow-pointer icon and the ActionRuleModel, only as a child rule of InvokeInputActions, before the presses, releases, and scrolls it positions.",
+						"question": "How does AddPointerMove fit into an automation workflow?"
+					},
+					{
+						"answer": "Move to an element instead of a fixed position where possible, build a drag from several moves when a page needs more than one move event, and start a relative move from a known place.",
+						"question": "What are best practices for using AddPointerMove?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “AddPointerMove”, with onElement for an element or with {{$ --X:200 --Y:150 --Origin:Viewport}} for a position, inside the rules of InvokeInputActions.",
+						"question": "How is an AddPointerMove rule configured?"
+					},
+					{
+						"answer": "A missing element, an unknown origin, or a value that is not a number fails the step, and the container then sends nothing. Outside InvokeInputActions the step fails with a message that names the container.",
+						"question": "How does AddPointerMove handle errors?"
+					},
+					{
+						"answer": "The manifest key is “AddPointerMove”.",
+						"question": "What is the manifest key of AddPointerMove?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by AddPointerMove?"
+					},
+					{
+						"answer": "The pluginType is “InputAction”.",
+						"question": "What is the pluginType of AddPointerMove?"
+					},
+					{
+						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"question": "Which platforms does AddPointerMove support?"
+					},
+					{
+						"answer": "It is listed under the “WebDriver” category.",
+						"question": "Which category is AddPointerMove listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the AddPointerMove manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the AddPointerMove manifest?"
+					},
+					{
+						"answer": "It moves the pointer to an element, an offset, a viewport position, or a relative distance, over 250 milliseconds by default.",
+						"question": "What is the summary of AddPointerMove?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/InputActions/AddPointerMove.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/InputActions/AddPointerMove.cs.",
+						"question": "Where are the AddPointerMove documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "InputAction",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "arrow-pointer",
+					"svg": null
+				},
+				"label": "Add Pointer Move",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"AddPointerMove moves the pointer without pressing or releasing a button.",
+		"It runs only inside InvokeInputActions, where it sets the place of the presses, releases, and scrolls that follow it.",
+		"Flows use it to hover over a menu, to aim a click at an exact point, and to carry a pressed item to its drop target.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Element target | Moves to the center of the element named by OnElement. |",
+		"| Offsets | Shifts the target by X and Y pixels from the element center. |",
+		"| Viewport position | Moves to an X and Y position measured from the top-left corner of the viewport. |",
+		"| Relative move | Moves by X and Y pixels from the current pointer position. |",
+		"| Timed move | Sets how long the driver spends on the move; whether it sends move events along the way depends on the driver, and ChromeDriver sends one at the end. |",
+		"| Loop element | Moves to the current element of a for-each loop when the rule names none. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Hover menus | Move over a menu so its items appear, then click an item the menu creates in a following container. |",
+		"| Drag and drop | Carry a pressed item from its source to its target. |",
+		"| Sliders | Drag a slider handle by an exact number of pixels. |",
+		"| Canvas work | Aim at a point of a canvas, a chart, or a map. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Hover states | Verify the tooltip or the style an element shows under the pointer. |",
+		"| Drag paths | Verify how a page reacts when an item is moved onto other elements, one AddPointerMove per element. |",
+		"| Position accuracy | Verify that a click at an exact offset hits the intended part of an element. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is covered by another element",
+						"Element is not found",
+						"Step is placed outside InvokeInputActions"
+					],
+					"expected_result": "The pointer rests on the center of the menu button, which shows its hover state.",
+					"notes": "The step runs only inside InvokeInputActions. An element that is not found fails the step, and the container sends nothing.",
+					"use_case": "move_to_element",
+					"version": "4"
+				},
+				"labels": [
+					"Hover",
+					"InputAction",
+					"Pointer",
+					"PointerMove"
+				]
+			},
+			"description": [
+				"### Move to the center of an element",
+				"",
+				"The `onElement` value names the element with an XPath.",
+				"The pointer moves to its center over the default 250 milliseconds."
+			],
+			"rule": {
+				"$type": "Action",
+				"onElement": "//button[@id='menu']",
+				"pluginName": "AddPointerMove"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is not found",
+						"Offset points outside the viewport"
+					],
+					"expected_result": "The pointer rests 40 pixels right of and 10 pixels above the center of the slider track.",
+					"notes": "Offsets are measured from the center of the element, not from its corner. An offset that leaves the viewport makes the driver reject the sequence.",
+					"use_case": "move_to_element_offset",
+					"version": "4"
+				},
+				"labels": [
+					"InputAction",
+					"Offset",
+					"Pointer",
+					"PointerMove",
+					"Slider"
+				]
+			},
+			"description": [
+				"### Move to an offset from an element center",
+				"",
+				"The element is found with a CSS selector, and X and Y shift the target from its center.",
+				"The move takes 400 milliseconds."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --X:40 --Y:-10 --Duration:400}}",
+				"locator": "CssSelector",
+				"onElement": "#slider-track",
+				"pluginName": "AddPointerMove"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Position is outside the viewport",
+						"Window size differs between runs"
+					],
+					"expected_result": "The pointer rests 200 pixels from the left edge and 150 pixels from the top edge of the viewport.",
+					"notes": "Viewport positions depend on the window size and the scroll position. Set the window size first when a flow relies on fixed positions.",
+					"use_case": "move_to_viewport_position",
+					"version": "4"
+				},
+				"labels": [
+					"Canvas",
+					"InputAction",
+					"Pointer",
+					"PointerMove",
+					"Viewport"
+				]
+			},
+			"description": [
+				"### Move to a position in the viewport",
+				"",
+				"The Origin parameter measures X and Y from the top-left corner of the visible page.",
+				"The pointer moves to that point whatever element lies under it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --X:200 --Y:150 --Origin:Viewport}}",
+				"pluginName": "AddPointerMove"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Move leaves the viewport",
+						"Pointer start position is unknown"
+					],
+					"expected_result": "The pointer ends 120 pixels right of where it was, after a move of one second.",
+					"notes": "A relative move needs a known start, so move to an element first. The duration accepts a whole number of milliseconds or a time span.",
+					"use_case": "move_relative_to_pointer",
+					"version": "4"
+				},
+				"labels": [
+					"DragAndDrop",
+					"InputAction",
+					"Pointer",
+					"PointerMove",
+					"Relative"
+				]
+			},
+			"description": [
+				"### Move by a distance from the current position",
+				"",
+				"X and Y are measured from the current pointer position, which is the default origin.",
+				"With a button held by an earlier AddPointerDown, it drags a slider handle 120 pixels to the right."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --X:120 --Y:0 --Duration:00:00:01}}",
+				"pluginName": "AddPointerMove"
+			}
+		}
+	],
+	"key": "AddPointerMove",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"default": "250",
+			"description": [
+				"Sets how long the move takes.",
+				"Accepts a whole number of milliseconds, such as `600`, or a time span, such as `00:00:01`.",
+				"Whether a longer duration adds move events depends on the driver; ChromeDriver sends one move at the end, so build a path from several AddPointerMove steps.",
+				"Defaults to 250 milliseconds, and a negative value or text that is not a duration fails the step."
+			],
+			"mandatory": false,
+			"name": "Duration",
+			"type": "Number|Time"
+		},
+		{
+			"default": "Pointer",
+			"description": [
+				"Selects where X and Y are measured from when the rule names no element and inherits none from a for-each loop.",
+				"Defaults to Pointer, and any value other than Pointer or Viewport fails the step.",
+				"Ignored when the rule names or inherits an element."
+			],
+			"mandatory": false,
+			"name": "Origin",
+			"type": "String|Expression",
+			"values": [
+				{
+					"description": [
+						"Measures X and Y from the current pointer position.",
+						"Use it for a relative move, such as dragging a slider 120 pixels to the right."
+					],
+					"name": "Pointer"
+				},
+				{
+					"description": [
+						"Measures X and Y from the top-left corner of the visible page.",
+						"Use it for an absolute position, such as a point on a full-page canvas."
+					],
+					"name": "Viewport"
+				}
+			]
+		},
+		{
+			"default": "0",
+			"description": [
+				"Sets the horizontal distance in pixels, where a positive value points right.",
+				"With a named or inherited element it is an offset from the element center; otherwise it is measured from Origin.",
+				"Defaults to 0, and text that is not a whole number fails the step."
+			],
+			"mandatory": false,
+			"name": "X",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Sets the vertical distance in pixels, where a positive value points down.",
+				"With a named or inherited element it is an offset from the element center; otherwise it is measured from Origin.",
+				"Defaults to 0, and text that is not a whole number fails the step."
+			],
+			"mandatory": false,
+			"name": "Y",
+			"type": "Number"
+		}
+	],
+	"platforms": [
+		"MobileWeb",
+		"OsNative",
+		"Web"
+	],
+	"pluginType": "InputAction",
+	"properties": [
+		{
+			"description": [
+				"Holds the parameters of the move, such as `{{$ --X:200 --Y:150 --Origin:Viewport}}`.",
+				"A rule without an argument moves to the center of its element over 250 milliseconds.",
+				"A plain value such as `500` is ignored; set the time with `--Duration`."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Selects how the OnElement value finds the element to move to.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"Defaults to Xpath, and is read only when OnElement is set."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names the element to move to, in the form the Locator selects.",
+				"The pointer goes to the center of the element, shifted by X and Y when they are set.",
+				"An element that is not found fails the step, and the container then sends nothing.",
+				"The element is found before the sequence is sent, so it must already be in the page; inside a for-each loop the search starts from the loop element."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Adds a pointer move to the sequence of its InvokeInputActions container.",
+		"Moves to the center of an element, to an offset from that center, to a position in the viewport, or by a distance from the current pointer position.",
+		"Takes 250 milliseconds by default, and the Duration parameter sets how long the driver spends on the move."
+	],
+	"version": "4"
+}
