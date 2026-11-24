@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~25 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~28 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -414,6 +414,63 @@ action_rule = {
 }
 ```
 
+### Example No.7
+
+### Keep part of the script result with a regular expression
+
+Runs a script that returns the page URL and keeps only the host name with the RegularExpression property.
+The first match is stored in the ScriptResult session parameter instead of the whole URL.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeScript",
+    Argument = "return document.location.href;",
+    RegularExpression = "(?<=://)[^/]+"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeScript")
+    .setArgument("return document.location.href;")
+    .setRegularExpression("(?<=://)[^/]+");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeScript",
+    argument: "return document.location.href;",
+    regularExpression: "(?<=://)[^/]+"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeScript",
+    "argument": "return document.location.href;",
+    "regularExpression": "(?<=://)[^/]+"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeScript",
+    "argument": "return document.location.href;",
+    "regularExpression": "(?<=://)[^/]+"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Script Script Result (InvokeScript:ScriptResult)
@@ -429,6 +486,7 @@ action_rule = {
 InvokeScript:ScriptResult holds the return value produced by the executed script.
 It is written to session parameters after the script completes and is immediately available to any downstream rule that needs to read or assert the script output.
 The stored value type matches whatever the script returns — a string, number, boolean, object, or null when the script returns undefined.
+When the rule sets a RegularExpression the stored value is the first match as a string, or an empty string when the pattern does not match.
 
 ## Properties
 
@@ -475,6 +533,21 @@ OnElement provides the locator expression that identifies the element to inject 
 It is evaluated using the strategy defined by the Locator property, relative to the context element when the rule runs inside a loop or an extraction scope.
 When absent or empty no element is prepended to the arguments array, even inside a loop or an extraction scope, so the script runs on the driver only.
 Use `.` to inject the context element of the enclosing loop or extraction scope as is; outside such a context `.` fails with a NoSuchElementException.
+
+### Regular Expression (RegularExpression)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Regex             |
+
+RegularExpression keeps the first match of the pattern in the script result and stores that match as ScriptResult.
+A string result is matched as is, a null result is matched as an empty string, and any other result, such as a number, a boolean, an array or an object, is written as JSON before the match.
+When a pattern is set the stored ScriptResult is always a string, and a pattern that does not match stores an empty string.
+When absent the whole script result is stored unchanged.
 
 ## Parameters
 

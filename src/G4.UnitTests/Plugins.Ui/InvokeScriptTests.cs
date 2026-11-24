@@ -362,6 +362,63 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.IsInstanceOfType<IWebElement>(arguments[0], "The explicitly located element was not injected.");
         }
 
+        [TestMethod(DisplayName = "Verify the InvokeScript method stores the first regular expression match " +
+            "of a string script result.")]
+        public void InvokeScriptRegularExpressionTest()
+        {
+            // Arrange: a script that returns a ready state and a pattern that keeps its first part.
+            const string ruleJson = @"{""argument"":""return document.readyState;"",""regularExpression"":""^comp""}";
+
+            // Act: invoke the plugin on a driver that returns the ready state.
+            var scriptResult = InvokeScriptResult(testBase: this, ruleJson, scriptResult: "complete");
+
+            // Assert: only the matched part of the result was stored.
+            Assert.AreEqual(expected: "comp", actual: scriptResult);
+        }
+
+        [TestMethod(DisplayName = "Verify the InvokeScript method writes a non-string script result as JSON " +
+            "before it applies the regular expression.")]
+        public void InvokeScriptRegularExpressionJsonTest()
+        {
+            // Arrange: a script that returns an object and a pattern that reads one of its values.
+            const string ruleJson = @"{""argument"":""return { count: 42 };"",""regularExpression"":""(?<=\""count\"":)\\d+""}";
+            var objectResult = new Dictionary<string, object> { ["count"] = 42L };
+
+            // Act: invoke the plugin on a driver that returns the object.
+            var scriptResult = InvokeScriptResult(testBase: this, ruleJson, scriptResult: objectResult);
+
+            // Assert: the pattern reached the value inside the JSON text of the object.
+            Assert.AreEqual(expected: "42", actual: scriptResult);
+        }
+
+        [TestMethod(DisplayName = "Verify the InvokeScript method stores an empty string when the regular " +
+            "expression does not match the script result.")]
+        public void InvokeScriptRegularExpressionNoMatchTest()
+        {
+            // Arrange: a pattern that the returned ready state does not contain.
+            const string ruleJson = @"{""argument"":""return document.readyState;"",""regularExpression"":""\\d+""}";
+
+            // Act: invoke the plugin on a driver that returns the ready state.
+            var scriptResult = InvokeScriptResult(testBase: this, ruleJson, scriptResult: "complete");
+
+            // Assert: no match stores an empty value instead of the unrefined result.
+            Assert.AreEqual(expected: string.Empty, actual: scriptResult);
+        }
+
+        [TestMethod(DisplayName = "Verify the InvokeScript method stores the whole script result when the rule " +
+            "has no regular expression.")]
+        public void InvokeScriptNoRegularExpressionTest()
+        {
+            // Arrange: a script that returns a ready state and a rule without a pattern.
+            const string ruleJson = @"{""argument"":""return document.readyState;""}";
+
+            // Act: invoke the plugin on a driver that returns the ready state.
+            var scriptResult = InvokeScriptResult(testBase: this, ruleJson, scriptResult: "complete");
+
+            // Assert: the stored value is the unrefined result, as before the regular expression support.
+            Assert.AreEqual(expected: "complete", actual: $"{scriptResult}");
+        }
+
         // Invokes the plugin with a context element on a recording driver and returns the script arguments.
         private static object[] InvokeRecordedScript(TestBase testBase, string ruleJson)
         {
@@ -373,6 +430,23 @@ namespace G4.UnitTests.Plugins.Ui
 
             // Return the arguments of the script call.
             return driver.ScriptArguments;
+        }
+
+        // Invokes the plugin on a recording driver that returns the given result, and returns the value the plugin
+        // stored as the ScriptResult session parameter.
+        private static object InvokeScriptResult(TestBase testBase, string ruleJson, object scriptResult)
+        {
+            // Create a driver whose script calls return the given result.
+            var driver = new RecordingSimulatorDriver
+            {
+                ScriptResult = scriptResult
+            };
+
+            // Invoke the plugin on that driver.
+            var responseModel = testBase.Invoke<InvokeScript>(driver, ruleJson).Response;
+
+            // Return the stored value as is, so each test decides how to compare it.
+            return responseModel.SessionParameters["InvokeScript:ScriptResult"];
         }
 
         // Invokes the script block test with the specified test base and action rule.
@@ -404,12 +478,16 @@ namespace G4.UnitTests.Plugins.Ui
             // Gets the arguments of the last script call.
             public object[] ScriptArguments { get; private set; } = [];
 
-            // Records the script arguments and returns a fixed ready state. The simulator resolves its script
+            // Gets or sets the value every script call returns; a ready state by default, so the element tests
+            // keep their result.
+            public object ScriptResult { get; set; } = "complete";
+
+            // Records the script arguments and returns the configured result. The simulator resolves its script
             // handlers from the runtime type, so a derived driver cannot delegate the call to the base driver.
             public new object InvokeScript(string script, params object[] args)
             {
                 ScriptArguments = args ?? [];
-                return "complete";
+                return ScriptResult;
             }
 
             // Creates an empty simulator session.

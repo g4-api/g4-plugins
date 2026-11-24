@@ -53,6 +53,10 @@
 					{
 						"question": "How is a Base64-encoded script provided?",
 						"answer": "Add the Base64 switch and pass the script as a Base64 value through ScriptBlock or the Argument property. The action decodes the value with ConvertFromBase64 before execution, and invalid Base64 input is used as-is without raising an error."
+					},
+					{
+						"question": "How is only part of the script result kept?",
+						"answer": "Set the RegularExpression property. The action keeps the first match of the pattern in the script result and stores it as ScriptResult; a result that is not a string is written as JSON before the match, and no match stores an empty string."
 					}
 				]
 			},
@@ -341,6 +345,39 @@
 					}
 				]
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Pattern does not match — ScriptResult is an empty string",
+						"Script returns an object or an array — the result is written as JSON before the pattern runs",
+						"Script returns undefined — the pattern runs on an empty string"
+					],
+					"expected_result": "The script returns the page URL and ScriptResult holds only its host name, for example 'www.example.com'.",
+					"notes": "RegularExpression runs on the script result after the script completes and keeps the first match. Without RegularExpression the whole result is stored unchanged.",
+					"use_case": "script_result_regular_expression",
+					"version": "6"
+				},
+				"labels": [
+					"JavaScript",
+					"NoElement",
+					"RegularExpression",
+					"ScriptResult"
+				]
+			},
+			"description": [
+				"### Keep part of the script result with a regular expression",
+				"",
+				"Runs a script that returns the page URL and keeps only the host name with the RegularExpression property.",
+				"The first match is stored in the ScriptResult session parameter instead of the whole URL."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "return document.location.href;",
+				"pluginName": "InvokeScript",
+				"regularExpression": "(?<=://)[^/]+"
+			}
 		}
 	],
 	"key": "InvokeScript",
@@ -384,7 +421,8 @@
 			"description": [
 				"InvokeScript:ScriptResult holds the return value produced by the executed script.",
 				"It is written to session parameters after the script completes and is immediately available to any downstream rule that needs to read or assert the script output.",
-				"The stored value type matches whatever the script returns — a string, number, boolean, object, or null when the script returns undefined."
+				"The stored value type matches whatever the script returns — a string, number, boolean, object, or null when the script returns undefined.",
+				"When the rule sets a RegularExpression the stored value is the first match as a string, or an empty string when the pattern does not match."
 			],
 			"mandatory": false,
 			"name": "InvokeScript:ScriptResult",
@@ -428,6 +466,17 @@
 			"mandatory": false,
 			"name": "OnElement",
 			"type": "String"
+		},
+		{
+			"description": [
+				"RegularExpression keeps the first match of the pattern in the script result and stores that match as ScriptResult.",
+				"A string result is matched as is, a null result is matched as an empty string, and any other result, such as a number, a boolean, an array or an object, is written as JSON before the match.",
+				"When a pattern is set the stored ScriptResult is always a string, and a pattern that does not match stores an empty string.",
+				"When absent the whole script result is stored unchanged."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
 		}
 	],
 	"protocol": {
@@ -440,5 +489,5 @@
 		"In RPA it enables DOM manipulation, data extraction, dynamic interactions, and JavaScript utility execution; in automation testing it supports DOM state validation, pre-condition setup, script return value assertions, and custom event simulation.",
 		"The script return value is stored in the session parameter ScriptResult and is immediately available to downstream rules."
 	],
-	"version": "5"
+	"version": "6"
 }
