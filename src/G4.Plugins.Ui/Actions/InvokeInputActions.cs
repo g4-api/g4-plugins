@@ -124,9 +124,9 @@ namespace G4.Plugins.Ui.Actions
             throw new InvalidOperationException(foreignMessage);
         }
 
-        // Releases the input state of the driver after a failed send. A failure of the release itself is ignored,
+        // Clears the input state of the driver after a failed send. A failure of the clearing itself is ignored,
         // because the rule already fails with the error of the send, which is the one the flow author needs.
-        private static void ReleaseInputState(ActionSequence sequence)
+        private static void ClearInputState(ActionSequence sequence)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace G4.Plugins.Ui.Actions
             catch (Exception)
             {
                 // Release the keys and buttons the driver may hold after a sequence that stopped half way.
-                ReleaseInputState(sequence);
+                ClearInputState(sequence);
                 throw;
             }
         }

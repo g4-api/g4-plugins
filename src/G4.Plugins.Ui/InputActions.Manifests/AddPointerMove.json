@@ -55,7 +55,7 @@
 						"question": "What is the pluginType of AddPointerMove?"
 					},
 					{
-						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"answer": "It supports the platform “Web” only.",
 						"question": "Which platforms does AddPointerMove support?"
 					},
 					{
@@ -125,7 +125,12 @@
 		"| --- | --- |",
 		"| Hover states | Verify the tooltip or the style an element shows under the pointer. |",
 		"| Drag paths | Verify how a page reacts when an item is moved onto other elements, one AddPointerMove per element. |",
-		"| Position accuracy | Verify that a click at an exact offset hits the intended part of an element. |"
+		"| Position accuracy | Verify that a click at an exact offset hits the intended part of an element. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin currently supports **Web** only.",
+		"Desktop and mobile drivers are not supported yet."
 	],
 	"examples": [
 		{
@@ -325,8 +330,6 @@
 		}
 	],
 	"platforms": [
-		"MobileWeb",
-		"OsNative",
 		"Web"
 	],
 	"pluginType": "InputAction",

@@ -55,7 +55,7 @@
 						"question": "What is the pluginType of AddPause?"
 					},
 					{
-						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"answer": "It supports the platform “Web” only.",
 						"question": "Which platforms does AddPause support?"
 					},
 					{
@@ -122,7 +122,12 @@
 		"| --- | --- |",
 		"| Timing checks | Verify that a long press and a short press give different results. |",
 		"| Animation checks | Wait for an animation that starts on hover before the next action. |",
-		"| Debounce checks | Verify that a page ignores input that arrives faster than its debounce time. |"
+		"| Debounce checks | Verify that a page ignores input that arrives faster than its debounce time. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin currently supports **Web** only.",
+		"Desktop and mobile drivers are not supported yet."
 	],
 	"examples": [
 		{
@@ -233,8 +238,6 @@
 		}
 	],
 	"platforms": [
-		"MobileWeb",
-		"OsNative",
 		"Web"
 	],
 	"pluginType": "InputAction",

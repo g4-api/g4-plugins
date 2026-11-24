@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~19 min · InputAction Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~20 min · InputAction Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -39,6 +39,11 @@ Flows use it to hover over a menu, to aim a click at an exact point, and to carr
 | Hover states | Verify the tooltip or the style an element shows under the pointer. |
 | Drag paths | Verify how a page reacts when an item is moved onto other elements, one AddPointerMove per element. |
 | Position accuracy | Verify that a click at an exact offset hits the intended part of an element. |
+
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
 
 ## Examples
 
@@ -378,8 +383,6 @@ Defaults to 0, and text that is not a whole number fails the step.
 
 ## Scope
 
-* Mobile Web
-* Os Native
 * Web
 
 ## See Also

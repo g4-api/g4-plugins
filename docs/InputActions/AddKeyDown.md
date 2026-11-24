@@ -37,6 +37,11 @@ Flows use it to hold Control or Shift during clicks and to build keyboard shortc
 | Key-hold behavior | Verify how a page reacts while a key stays down. |
 | Modifier checks | Verify that a click with a modifier key extends a selection or opens a link in a new tab. |
 
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
+
 ## Examples
 
 ### Example No.1
@@ -551,8 +556,6 @@ Switches between full-width and half-width input.
 
 ## Scope
 
-* Mobile Web
-* Os Native
 * Web
 
 ## See Also

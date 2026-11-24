@@ -1,0 +1,380 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeDragAndDrop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeDragAndDrop.cs"
+			},
+			"mcp": {
+				"title": "Invoke Drag And Drop"
+			},
+			"rag": {
+				"description": "Drag an element on a web page onto another element, or by an offset, with the left mouse button. The step checks the drag end and its numbers before anything is pressed, paces the path in short steps, works with native HTML and pointer-driven drags, and releases the button when the driver refuses the drag.",
+				"qa": [
+					{
+						"answer": "It drags an element with the left mouse button and drops it on a target element, or moves it by a pixel offset, in one request to the driver.",
+						"question": "What does the InvokeDragAndDrop plugin do?"
+					},
+					{
+						"answer": "OnElement and Locator name the element to drag, Target and TargetLocator name the element to drop on, DeltaX and DeltaY set an offset instead, and Steps and Duration set the path. It stores no outputs.",
+						"question": "What are the key parameters and outputs of InvokeDragAndDrop?"
+					},
+					{
+						"answer": "It runs as an Action task step with the arrow-pointer icon and the ActionRuleModel, after the page shows both elements.",
+						"question": "How does InvokeDragAndDrop fit into an automation workflow?"
+					},
+					{
+						"answer": "Scroll both elements into view first, prefer a Target element to a fixed offset, and raise Steps for pages that follow the pointer closely.",
+						"question": "What are best practices for using InvokeDragAndDrop?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “InvokeDragAndDrop”, onElement for the dragged element, and {{$ --Target://div[@id='done']}} or {{$ --DeltaX:120 --DeltaY:0}} as the argument.",
+						"question": "How is an InvokeDragAndDrop rule configured?"
+					},
+					{
+						"answer": "Setting both Target and an offset, or neither, a missing element, or a bad Steps or Duration value fails the step before anything is pressed. When the driver refuses the drag, the button is released and the step fails with the driver error.",
+						"question": "How does InvokeDragAndDrop handle errors?"
+					},
+					{
+						"answer": "The manifest key is “InvokeDragAndDrop”.",
+						"question": "What is the manifest key of InvokeDragAndDrop?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by InvokeDragAndDrop?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of InvokeDragAndDrop?"
+					},
+					{
+						"answer": "It supports the platforms “Web”.",
+						"question": "Which platforms does InvokeDragAndDrop support?"
+					},
+					{
+						"answer": "It is listed under the “WebDriver” category.",
+						"question": "Which category is InvokeDragAndDrop listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the InvokeDragAndDrop manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the InvokeDragAndDrop manifest?"
+					},
+					{
+						"answer": "It drags an element to a target element or by an offset, in short steps, with the left mouse button.",
+						"question": "What is the summary of InvokeDragAndDrop?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeDragAndDrop.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeDragAndDrop.cs.",
+						"question": "Where are the InvokeDragAndDrop documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "arrow-pointer",
+					"svg": null
+				},
+				"label": "Invoke Drag And Drop",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"InvokeDragAndDrop drags one element and drops it on another element, or moves it by a number of pixels.",
+		"It presses the left button on the center of the source, moves in short steps, and releases over the center of the target or at the end of the offset, the way a user drags with a mouse.",
+		"Flows use it to move cards between columns, to reorder lists, and to move slider handles.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Target element | Drops on the center of the element named by Target, found with TargetLocator. |",
+		"| Drag by offset | Moves the element by DeltaX and DeltaY pixels when the rule names no target. |",
+		"| Stepped path | Moves in short steps, 10 by default, so pages that wait for the pointer to pass a drag threshold start the drag. |",
+		"| Paced moves | Spreads the moves over Duration, 300 milliseconds by default. |",
+		"| Native and pointer drags | Works with native HTML drag events and with drag libraries that follow pointer events. |",
+		"| One request | Sends the press, the moves, and the release together, and releases the button when the driver rejects the drag. |",
+		"| Loop element | Drags the current element of a for-each loop when the rule names none. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Task boards | Move a card to another column of a task board. |",
+		"| List order | Reorder rows or items by dragging them into place. |",
+		"| Sliders | Move a slider handle by an exact number of pixels. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Drop checks | Verify that a dropped item appears in its new place. |",
+		"| Order checks | Verify that a list keeps the order a drag sets. |",
+		"| Drop zone rules | Verify that a page refuses a drop on a zone that does not accept the item. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin currently supports **Web** only.",
+		"Desktop and mobile drivers are not supported yet; use InvokeUser32DragAndDrop for Windows desktop applications."
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Card or column is not found",
+						"Column is outside the viewport",
+						"Page refuses the drop"
+					],
+					"expected_result": "Card 7 is shown in the done column.",
+					"notes": "Both elements are found before anything is pressed. They must be in view, so scroll first when the column is off screen.",
+					"use_case": "drop_card_on_column",
+					"version": "4"
+				},
+				"labels": [
+					"DragAndDrop",
+					"DropTarget",
+					"Pointer",
+					"TaskBoard"
+				]
+			},
+			"description": [
+				"### Drop a card on another column",
+				"",
+				"The `onElement` value names the card with an XPath, and Target names the column with another XPath.",
+				"The card moves in 10 steps over 300 milliseconds and is released over the center of the column."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Target://div[@id='done-column']}}",
+				"onElement": "//div[@id='card-7']",
+				"pluginName": "InvokeDragAndDrop"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Item is not found",
+						"Trash zone is not found"
+					],
+					"expected_result": "Item 3 is removed from the list after the drop on the trash zone.",
+					"notes": "Locator selects how OnElement is read, and TargetLocator selects how Target is read. Each one defaults to Xpath.",
+					"use_case": "drop_with_css_selectors",
+					"version": "4"
+				},
+				"labels": [
+					"CssSelector",
+					"DragAndDrop",
+					"Locator",
+					"Pointer"
+				]
+			},
+			"description": [
+				"### Drop an item found with CSS selectors",
+				"",
+				"The Locator and TargetLocator values switch both searches to CSS selectors.",
+				"The item is dropped on the trash zone."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Target:#trash --TargetLocator:CssSelector}}",
+				"locator": "CssSelector",
+				"onElement": "#item-3",
+				"pluginName": "InvokeDragAndDrop"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Handle is not found",
+						"Offset points outside the viewport"
+					],
+					"expected_result": "The slider handle rests 120 pixels right of where it started.",
+					"notes": "The offset is measured from the center of the handle. A drag that leaves the viewport makes the driver refuse the sequence.",
+					"use_case": "drag_slider_by_offset",
+					"version": "4"
+				},
+				"labels": [
+					"DragAndDrop",
+					"Offset",
+					"Pointer",
+					"Slider"
+				]
+			},
+			"description": [
+				"### Move a slider handle by an offset",
+				"",
+				"DeltaX and DeltaY move the handle by pixels instead of onto an element.",
+				"The handle moves 120 pixels to the right."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --DeltaX:120 --DeltaY:0}}",
+				"onElement": "//div[@role='slider']",
+				"pluginName": "InvokeDragAndDrop"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duration is not a valid time",
+						"Steps is outside 1 to 100"
+					],
+					"expected_result": "Row 8 is placed in slot 3 of the list.",
+					"notes": "Use more steps when a page reacts only after the pointer passes over other items. Steps accepts 1 to 100.",
+					"use_case": "slow_drag_for_strict_pages",
+					"version": "4"
+				},
+				"labels": [
+					"DragAndDrop",
+					"Pointer",
+					"Reorder",
+					"Timing"
+				]
+			},
+			"description": [
+				"### Drag slowly for a page that follows the pointer",
+				"",
+				"Steps and Duration make the path longer and slower.",
+				"The row moves in 25 steps over one second, written as a time span."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Target://li[@data-slot='3'] --Steps:25 --Duration:00:00:01}}",
+				"onElement": "//li[@data-row='8']",
+				"pluginName": "InvokeDragAndDrop"
+			}
+		}
+	],
+	"key": "InvokeDragAndDrop",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"description": [
+				"Sets the horizontal distance of a drag by offset, in pixels, where a positive value points right.",
+				"It is measured from the center of the element being dragged.",
+				"Use it instead of Target; setting both, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "DeltaX",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the vertical distance of a drag by offset, in pixels, where a positive value points down.",
+				"It is measured from the center of the element being dragged.",
+				"Use it instead of Target; setting both, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "DeltaY",
+			"type": "Number"
+		},
+		{
+			"default": "300",
+			"description": [
+				"Sets the total time of the moves between the press and the release.",
+				"Accepts a whole number of milliseconds, such as `600`, or a time span, such as `00:00:01`.",
+				"Defaults to 300 milliseconds, and a negative value or text that is not a duration fails the step."
+			],
+			"mandatory": false,
+			"name": "Duration",
+			"type": "Number|Time"
+		},
+		{
+			"default": "10",
+			"description": [
+				"Sets how many moves carry the element from the source to the end point.",
+				"More steps give a smoother path for applications that follow the pointer closely.",
+				"Defaults to 10, and a value outside 1 to 100 fails the step."
+			],
+			"mandatory": false,
+			"name": "Steps",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Names the element to drop on, in the form TargetLocator selects.",
+				"The drag ends on the center of this element, which is searched in the whole page and waited for like any other element.",
+				"Use it instead of DeltaX and DeltaY; setting both, or neither, fails the step."
+			],
+			"mandatory": false,
+			"name": "Target",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Selects how the Target value finds the element to drop on.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"Defaults to Xpath, and is read only when Target is set."
+			],
+			"mandatory": false,
+			"name": "TargetLocator",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"Web"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Holds the parameters of the drag, such as `{{$ --Target://div[@id='done']}}`.",
+				"A rule sets either Target or DeltaX and DeltaY, and may add Steps and Duration."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Selects how the OnElement value finds the element to drag.",
+				"Accepted values include Xpath, CssSelector, Id, LinkText, and PartialLinkText.",
+				"Defaults to Xpath, and is read only when OnElement is set."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names the element to drag, in the form the Locator selects.",
+				"The drag starts on the center of this element; inside a for-each loop a rule without it drags the loop element.",
+				"An element that is not found fails the step before anything is pressed."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Drags an element with the left mouse button and drops it on a target element, or moves it by a pixel offset.",
+		"Presses on the center of the source, moves in short steps over a set time, and releases over the center of the target or at the end of the offset, in one request to the driver.",
+		"Works with native HTML drag and drop and with drag libraries that follow pointer events."
+	],
+	"version": "4"
+}

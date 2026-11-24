@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~19 min · InputAction Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~20 min · InputAction Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -38,6 +38,11 @@ Flows use it to scroll a list inside a page, to load more items, and to zoom a m
 | Wheel handlers | Verify that a page reacts to wheel events, such as a zoom or a sticky header. |
 | Infinite scroll | Verify that more items load when a list reaches its end. |
 | Scroll containers | Verify that the wheel scrolls the element it turns over and not the page. |
+
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
 
 ## Examples
 
@@ -368,7 +373,6 @@ Defaults to 0, and text that is not a whole number fails the step.
 
 ## Scope
 
-* Mobile Web
 * Web
 
 ## See Also

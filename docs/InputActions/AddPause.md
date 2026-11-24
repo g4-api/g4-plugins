@@ -37,6 +37,11 @@ Flows use it to hold a press, to let a hover menu open, and to give a page time 
 | Animation checks | Wait for an animation that starts on hover before the next action. |
 | Debounce checks | Verify that a page ignores input that arrives faster than its debounce time. |
 
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
+
 ## Examples
 
 ### Example No.1
@@ -223,8 +228,6 @@ Defaults to 0, and a negative value or text that is not a duration fails the ste
 
 ## Scope
 
-* Mobile Web
-* Os Native
 * Web
 
 ## See Also
