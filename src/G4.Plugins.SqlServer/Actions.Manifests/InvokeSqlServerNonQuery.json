@@ -94,6 +94,10 @@
 					{
 						"answer": "The step fails when no server is resolved, no SQL is supplied, CommandFile is missing, CommandText is not valid Base64 while the Base64 switch is set, Parameters is not a JSON object, or SQL Server rejects the statement, and with Transaction the failed work is rolled back.",
 						"question": "How does InvokeSqlServerNonQuery handle errors?"
+					},
+					{
+						"question": "Are macros resolved inside Base64-encoded CommandText?",
+						"answer": "Yes. With the Base64 switch set, the action decodes CommandText and then resolves its macros, because the engine cannot see macros while the value is encoded. CommandFile content keeps its macros as written, and values from outside the automation belong in Parameters."
 					}
 				]
 			},
@@ -346,6 +350,40 @@
 				"argument": "{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFN0YXR1cyA9ICdBcmNoaXZlZCcgLS0gYXJjaGl2ZSBjbG9zZWQgb3JkZXJzCldIRVJFIFN0YXR1cyA9ICdDbG9zZWQn --Base64 --Transaction}}",
 				"pluginName": "InvokeSqlServerNonQuery"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"The SQL comes from CommandFile, so its macros are kept as written"
+					],
+					"expected_result": "Every open order carries the current date in ReviewedOn, and the affected row count is stored.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded CommandText itself. The date comes from the automation, so composing it into the SQL text is safe; values from outside the automation belong in Parameters.",
+					"use_case": "non_query_base64_with_macro",
+					"version": "5"
+				},
+				"labels": [
+					"Base64",
+					"Credentials",
+					"DataMaintenance",
+					"Database",
+					"Macro",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Stamp open orders with a Base64 update that holds a macro",
+				"",
+				"The argument binds the `sql-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.",
+				"The decoded SQL holds a ` --` comment and a New-Date macro; the macro is resolved after decoding, so the server receives the current date: `UPDATE dbo.Orders SET ReviewedOn = '{{$New-Date --Format:yyyy-MM-dd}}' -- stamp the review date` and the lines after it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFJldmlld2VkT24gPSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyAtLSBzdGFtcCB0aGUgcmV2aWV3IGRhdGUKV0hFUkUgU3RhdHVzID0gJ09wZW4n --Base64}}",
+				"pluginName": "InvokeSqlServerNonQuery"
+			}
 		}
 	],
 	"key": "InvokeSqlServerNonQuery",
@@ -366,6 +404,8 @@
 		{
 			"description": [
 				"Decodes the CommandText value from UTF-8 Base64 before the statement runs.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
+				"A macro result becomes part of the SQL text, so values that come from outside the automation belong in the Parameters argument instead.",
 				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
 				"Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.",
 				"Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL."
@@ -476,5 +516,5 @@
 		"Connects through stored credentials, a connection string, or a Microsoft Entra access token.",
 		"Stores RowsAffected in a session parameter so later steps can verify the change."
 	],
-	"version": "4"
+	"version": "5"
 }

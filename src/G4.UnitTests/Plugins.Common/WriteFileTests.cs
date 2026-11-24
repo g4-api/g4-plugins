@@ -108,6 +108,30 @@ namespace G4.UnitTests.Plugins.Common
             }
         }
 
+        [TestMethod(DisplayName = "Verify that WriteFile resolves the macros of Base64 content after decoding it.")]
+        public void WriteFileBase64MacroTest()
+        {
+            // Arrange: encode content whose macro the engine cannot see while it is encoded.
+            const string content = "value --flag {{$Convert-Number --Number:255 --To:Hex --Case:Upper}} }}";
+            var directoryPath = NewTestDirectory();
+            var filePath = Path.Combine(directoryPath, "base64-macro.txt");
+            var encodedContent = content.ConvertToBase64();
+
+            try
+            {
+                // Act: execute with Base64-encoded content.
+                var responseModel = Invoke([NewRule(filePath, encodedContent, " --Base64")]);
+
+                // Assert: the decoded content is written with the macro replaced by its result.
+                Assert.IsEmpty(responseModel.GetExceptions());
+                Assert.AreEqual(expected: "value --flag FF }}", actual: File.ReadAllText(filePath));
+            }
+            finally
+            {
+                DeleteTestDirectory(directoryPath);
+            }
+        }
+
         [TestMethod(DisplayName = "Verify that WriteFile encrypts the final content before writing it.")]
         public void WriteFileEncryptedContentTest()
         {

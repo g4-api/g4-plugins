@@ -90,6 +90,23 @@ namespace G4.UnitTests.Plugins.SqlServer
             Assert.AreEqual(expected: "2", actual: entity["Value"]);
         }
 
+        [TestMethod(DisplayName = "Verify that GetSqlServerScalar resolves the macros of Base64 CommandText after " +
+            "decoding it, so the server runs the macro result.")]
+        [TestCategory("SqlServerLive")]
+        public void GetSqlServerScalarBase64MacroTest()
+        {
+            // Arrange: encode a query whose macro and comment the engine cannot see while the query is encoded.
+            var commandText = "-- The macro below resolves after the decode; }} travels safely inside Base64.\n" +
+                "SELECT '{{$Convert-Number --Number:255 --To:Hex --Case:Upper}}'\n";
+            var rule = NewRule(arguments: $"--CommandText:{commandText.ConvertToBase64()} --Base64");
+
+            // Act: run the encoded query through the plugin.
+            var entity = Invoke<GetSqlServerScalar>(rule).Response.Entity;
+
+            // Assert: the server returned the macro result, so the macro was resolved before the query ran.
+            Assert.AreEqual(expected: "FF", actual: entity["Value"]);
+        }
+
         [TestMethod(DisplayName = "Verify that GetSqlServerScalar reads a script from CommandFile, including SQL " +
             "comments that cannot travel inside an inline argument.")]
         [TestCategory("SqlServerLive")]

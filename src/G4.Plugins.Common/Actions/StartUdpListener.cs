@@ -1,7 +1,7 @@
 using G4.Attributes;
 using G4.Extensions;
 using G4.Models;
-using G4.Plugins.Common.Udp;
+using G4.Plugins.Common.Utilities.Udp;
 
 using System;
 using System.Collections.Generic;

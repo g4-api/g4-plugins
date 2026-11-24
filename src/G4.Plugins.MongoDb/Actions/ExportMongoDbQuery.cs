@@ -24,7 +24,7 @@ namespace G4.Plugins.MongoDb.Actions
             var connectionModel = pluginData.ResolveConnection();
             var collectionName = pluginData.ResolveRequired(name: "Collection");
             var filter = MongoDbClient.ConvertToDocument(
-                json: pluginData.ResolveCommandText(),
+                json: pluginData.ResolveCommandText(plugin: this),
                 argumentName: "CommandText");
             var noEntity = pluginData.TestSwitch(name: "NoEntity");
 

@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace G4.Plugins.Common.Udp
+namespace G4.Plugins.Common.Utilities.Udp
 {
     /// <summary>
     /// Owns one bound UDP socket, buffers every datagram that arrives on it, and sends datagrams from it.

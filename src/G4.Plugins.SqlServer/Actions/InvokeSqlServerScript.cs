@@ -19,7 +19,7 @@ namespace G4.Plugins.SqlServer.Actions
         {
             // Resolve the connection, the script batches, and the switches before opening resources.
             var connectionModel = pluginData.ResolveConnection();
-            var batches = SqlServerClient.ConvertToBatches(script: pluginData.ResolveCommandText());
+            var batches = SqlServerClient.ConvertToBatches(script: pluginData.ResolveCommandText(plugin: this));
             var commandTimeout = pluginData.ResolveCommandTimeout();
             var noEntity = pluginData.TestSwitch(name: "NoEntity");
             var isTransaction = pluginData.TestSwitch(name: "Transaction");

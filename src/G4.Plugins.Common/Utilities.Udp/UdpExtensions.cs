@@ -17,7 +17,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace G4.Plugins.Common.Udp
+namespace G4.Plugins.Common.Utilities.Udp
 {
     /// <summary>
     /// Provides the argument resolution, payload conversion, and response shaping shared by the UDP plugins.

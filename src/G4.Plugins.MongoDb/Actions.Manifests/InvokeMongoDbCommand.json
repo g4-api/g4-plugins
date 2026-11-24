@@ -78,6 +78,10 @@
 					{
 						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbCommand.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbCommand.cs.",
 						"question": "Where are the InvokeMongoDbCommand documentation and source code?"
+					},
+					{
+						"question": "Are macros resolved inside a Base64-encoded CommandText?",
+						"answer": "Yes. With the Base64 switch set, the action decodes CommandText and then resolves its macros, because the engine cannot see macros while the value is encoded. CommandFile content keeps its macros as written."
 					}
 				]
 			},
@@ -325,6 +329,39 @@
 				"argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb2xsTW9kIjoib3JkZXJzIiwidmFsaWRhdG9yIjp7IiRqc29uU2NoZW1hIjp7ImJzb25UeXBlIjoib2JqZWN0IiwicmVxdWlyZWQiOlsic2t1Il19fX0= --Base64}}",
 				"pluginName": "InvokeMongoDbCommand"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"The payload comes from CommandFile, so its macros are kept as written"
+					],
+					"expected_result": "The server counts the orders created today and the command reply is stored.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps the closing braces of the JSON from ending the inline argument value.",
+					"use_case": "command_base64_with_macro",
+					"version": "5"
+				},
+				"labels": [
+					"Base64",
+					"Command",
+					"Database",
+					"Macro",
+					"MongoDb"
+				]
+			},
+			"description": [
+				"### Count today's orders with a Base64 command that holds a macro",
+				"",
+				"The argument binds the `mongo-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.",
+				"The decoded payload is `{\"count\":\"orders\",\"query\":{\"createdOn\":{\"$gte\":\"{{$New-Date --Format:yyyy-MM-dd}}\"}}}`; the New-Date macro is resolved after decoding, so the server receives the current date."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb3VudCI6Im9yZGVycyIsInF1ZXJ5Ijp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fQ== --Base64}}",
+				"pluginName": "InvokeMongoDbCommand"
+			}
 		}
 	],
 	"key": "InvokeMongoDbCommand",
@@ -362,6 +399,7 @@
 		{
 			"description": [
 				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
 				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
 				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
 			],
@@ -449,5 +487,5 @@
 		"Carries the command document inline, Base64-encoded, or in a file, and binds it as BSON.",
 		"Stores the response, its ok flag, and the database as session parameters, so index, statistics, and administrative commands reach a flow."
 	],
-	"version": "4"
+	"version": "5"
 }

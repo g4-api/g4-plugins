@@ -37,7 +37,7 @@ namespace G4.Plugins.MongoDb.Actions
             var collectionName = pluginData.ResolveRequired(name: "Collection");
             var mode = pluginData.Parameters.Get(key: "Mode", defaultValue: CountMode);
             var filter = MongoDbClient.ConvertToDocument(
-                json: pluginData.ResolveCommandText(),
+                json: pluginData.ResolveCommandText(plugin: this),
                 argumentName: "CommandText");
             var noEntity = pluginData.TestSwitch(name: "NoEntity");
 

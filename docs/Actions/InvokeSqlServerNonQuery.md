@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~26 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~29 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -324,6 +324,58 @@ action_rule = {
 }
 ```
 
+### Example No.6
+
+### Stamp open orders with a Base64 update that holds a macro
+
+The argument binds the `sql-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.
+The decoded SQL holds a ` --` comment and a New-Date macro; the macro is resolved after decoding, so the server receives the current date: `UPDATE dbo.Orders SET ReviewedOn = '{{$New-Date --Format:yyyy-MM-dd}}' -- stamp the review date` and the lines after it.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeSqlServerNonQuery",
+    Argument = "{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFJldmlld2VkT24gPSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyAtLSBzdGFtcCB0aGUgcmV2aWV3IGRhdGUKV0hFUkUgU3RhdHVzID0gJ09wZW4n --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeSqlServerNonQuery")
+    .setArgument("{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFJldmlld2VkT24gPSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyAtLSBzdGFtcCB0aGUgcmV2aWV3IGRhdGUKV0hFUkUgU3RhdHVzID0gJ09wZW4n --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeSqlServerNonQuery",
+    argument: "{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFJldmlld2VkT24gPSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyAtLSBzdGFtcCB0aGUgcmV2aWV3IGRhdGUKV0hFUkUgU3RhdHVzID0gJ09wZW4n --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeSqlServerNonQuery",
+    "argument": "{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFJldmlld2VkT24gPSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyAtLSBzdGFtcCB0aGUgcmV2aWV3IGRhdGUKV0hFUkUgU3RhdHVzID0gJ09wZW4n --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeSqlServerNonQuery",
+    "argument": "{{$ --Credentials:sql-production --CommandText:VVBEQVRFIGRiby5PcmRlcnMgU0VUIFJldmlld2VkT24gPSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyAtLSBzdGFtcCB0aGUgcmV2aWV3IGRhdGUKV0hFUkUgU3RhdHVzID0gJ09wZW4n --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Sql Server Non Query Rows Affected (InvokeSqlServerNonQuery:RowsAffected)
@@ -353,6 +405,8 @@ The value -1 means that SQL Server reported no row count, such as for DDL statem
 | **Value Type**    | Switch            |
 
 Decodes the CommandText value from UTF-8 Base64 before the statement runs.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
+A macro result becomes part of the SQL text, so values that come from outside the automation belong in the Parameters argument instead.
 Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.
 Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.
 Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL.

@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -259,6 +259,58 @@ action_rule = {
 }
 ```
 
+### Example No.5
+
+### Total today's orders with a Base64 pipeline that holds a macro
+
+The argument binds the `mongo-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.
+The decoded payload is `[{"$match":{"createdOn":{"$gte":"{{$New-Date --Format:yyyy-MM-dd}}"}}},{"$group":{"_id":"$sku","total":{"$sum":"$total"}}}]`; the New-Date macro is resolved after decoding, so the server receives the current date.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeMongoDbAggregate",
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fSx7IiRncm91cCI6eyJfaWQiOiIkc2t1IiwidG90YWwiOnsiJHN1bSI6IiR0b3RhbCJ9fX1d --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeMongoDbAggregate")
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fSx7IiRncm91cCI6eyJfaWQiOiIkc2t1IiwidG90YWwiOnsiJHN1bSI6IiR0b3RhbCJ9fX1d --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeMongoDbAggregate",
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fSx7IiRncm91cCI6eyJfaWQiOiIkc2t1IiwidG90YWwiOnsiJHN1bSI6IiR0b3RhbCJ9fX1d --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeMongoDbAggregate",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fSx7IiRncm91cCI6eyJfaWQiOiIkc2t1IiwidG90YWwiOnsiJHN1bSI6IiR0b3RhbCJ9fX1d --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeMongoDbAggregate",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:W3siJG1hdGNoIjp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fSx7IiRncm91cCI6eyJfaWQiOiIkc2t1IiwidG90YWwiOnsiJHN1bSI6IiR0b3RhbCJ9fX1d --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Mongo Db Aggregate Columns (InvokeMongoDbAggregate:Columns)
@@ -343,6 +395,7 @@ Set it for a large group or sort stage, which otherwise fails with a memory-limi
 | **Value Type**    | Switch            |
 
 Reads CommandText as UTF-8 Base64 and decodes it before use.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 Use it for a payload that contains ` --` or `}}`, which end an inline argument value.
 Invalid Base64 fails the step, so an encoded payload never reaches the server as text.
 

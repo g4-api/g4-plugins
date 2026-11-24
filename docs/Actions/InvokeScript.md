@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~25 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~31 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -414,6 +414,115 @@ action_rule = {
 }
 ```
 
+### Example No.7
+
+### Keep part of the script result with a regular expression
+
+Runs a script that returns the page URL and keeps only the host name with the RegularExpression property.
+The first match is stored in the ScriptResult session parameter instead of the whole URL.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeScript",
+    Argument = "return document.location.href;",
+    RegularExpression = "(?<=://)[^/]+"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeScript")
+    .setArgument("return document.location.href;")
+    .setRegularExpression("(?<=://)[^/]+");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeScript",
+    argument: "return document.location.href;",
+    regularExpression: "(?<=://)[^/]+"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeScript",
+    "argument": "return document.location.href;",
+    "regularExpression": "(?<=://)[^/]+"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeScript",
+    "argument": "return document.location.href;",
+    "regularExpression": "(?<=://)[^/]+"
+}
+```
+
+### Example No.8
+
+### Resolve a macro inside a Base64-encoded script block
+
+Passes a Base64 script whose decoded text holds a Get-Parameter macro and a `--` comment, and enables the Base64 switch.
+The decoded script is `document.querySelector('#InputEnabled').value = '{{$Get-Parameter --Name:CustomerName}}'; // -- set from the session`; the macro is resolved after decoding, so the input receives the CustomerName session parameter.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeScript",
+    Argument = "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeScript")
+    .setArgument("{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeScript",
+    argument: "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeScript",
+    "argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeScript",
+    "argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Script Script Result (InvokeScript:ScriptResult)
@@ -429,6 +538,7 @@ action_rule = {
 InvokeScript:ScriptResult holds the return value produced by the executed script.
 It is written to session parameters after the script completes and is immediately available to any downstream rule that needs to read or assert the script output.
 The stored value type matches whatever the script returns — a string, number, boolean, object, or null when the script returns undefined.
+When the rule sets a RegularExpression the stored value is the first match as a string, or an empty string when the pattern does not match.
 
 ## Properties
 
@@ -476,6 +586,21 @@ It is evaluated using the strategy defined by the Locator property, relative to 
 When absent or empty no element is prepended to the arguments array, even inside a loop or an extraction scope, so the script runs on the driver only.
 Use `.` to inject the context element of the enclosing loop or extraction scope as is; outside such a context `.` fails with a NoSuchElementException.
 
+### Regular Expression (RegularExpression)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Regex             |
+
+RegularExpression keeps the first match of the pattern in the script result and stores that match as ScriptResult.
+A string result is matched as is, a null result is matched as an empty string, and any other result, such as a number, a boolean, an array or an object, is written as JSON before the match.
+When a pattern is set the stored ScriptResult is always a string, and a pattern that does not match stores an empty string.
+When absent the whole script result is stored unchanged.
+
 ## Parameters
 
 ### Arguments (Arguments)
@@ -504,6 +629,7 @@ When Arguments is absent or not valid JSON an empty array is used and no custom 
 | **Value Type**    | Switch            |
 
 Base64 decodes the ScriptBlock value from Base64 before the script runs.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 Encoding the script as Base64 matters because it can carry characters that the command-line parser would otherwise split or misread.
 When the switch is absent the script value runs exactly as provided.
 Invalid Base64 input is left unchanged and runs as-is, so a malformed value raises no error.

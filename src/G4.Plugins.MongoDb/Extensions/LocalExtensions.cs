@@ -77,6 +77,32 @@ namespace G4.Plugins.MongoDb.Extensions
             }
 
             /// <summary>
+            /// Resolves the primary JSON payload of the step, then resolves the macros of a decoded inline value.
+            /// </summary>
+            /// <remarks>
+            /// Follows the contract of <see cref="ResolveCommandText()"/>. The engine resolves the macros of a rule
+            /// before the plugin runs, when a Base64 value still hides them, so the macros of decoded
+            /// <c>CommandText</c> are resolved here. Plain <c>CommandText</c> is returned as is, because its macros are
+            /// already resolved, and <c>CommandFile</c> content keeps its macros as written.
+            /// </remarks>
+            /// <param name="plugin">The plugin that runs the step; its invoker resolves the decoded macros.</param>
+            /// <returns>The payload text; empty when the step sets neither argument.</returns>
+            public string ResolveCommandText(PluginBase plugin)
+            {
+                // Read the payload through the decoding contract, so the inline, file, and Base64 rules stay in one
+                // place.
+                var payload = pluginData.ResolveCommandText();
+
+                // Resolve the macros the engine could not see while the inline value was encoded.
+                return ResolveDecodedMacros(
+                    plugin,
+                    pluginData,
+                    payload,
+                    inlineName: "CommandText",
+                    switchName: "Base64");
+            }
+
+            /// <summary>
             /// Resolves the secondary JSON payload of the step from <c>Document</c> or <c>DocumentFile</c>.
             /// </summary>
             /// <remarks>
@@ -91,6 +117,30 @@ namespace G4.Plugins.MongoDb.Extensions
                 return pluginData.ResolvePayload(
                     inlineName: "Document",
                     fileName: "DocumentFile",
+                    switchName: "DocumentBase64");
+            }
+
+            /// <summary>
+            /// Resolves the secondary JSON payload of the step, then resolves the macros of a decoded inline value.
+            /// </summary>
+            /// <remarks>
+            /// Follows the contract of <see cref="ResolveCommandText(PluginBase)"/>, with <c>Document</c>,
+            /// <c>DocumentFile</c>, and the <c>DocumentBase64</c> switch in place of the command arguments.
+            /// </remarks>
+            /// <param name="plugin">The plugin that runs the step; its invoker resolves the decoded macros.</param>
+            /// <returns>The payload text; empty when the step sets neither argument.</returns>
+            public string ResolveDocumentText(PluginBase plugin)
+            {
+                // Read the payload through the decoding contract, so the inline, file, and Base64 rules stay in one
+                // place.
+                var payload = pluginData.ResolveDocumentText();
+
+                // Resolve the macros the engine could not see while the inline value was encoded.
+                return ResolveDecodedMacros(
+                    plugin,
+                    pluginData,
+                    payload,
+                    inlineName: "Document",
                     switchName: "DocumentBase64");
             }
 
@@ -531,6 +581,31 @@ namespace G4.Plugins.MongoDb.Extensions
             SetConnectionParts(builder, options);
 
             return builder;
+        }
+
+        // Resolves the macros of a payload that came from a decoded inline value, which the engine macro pass could not
+        // read while the value was encoded. A plain inline value and file content are returned as is: the engine
+        // already resolved the macros of a plain value, and resolving it again would also resolve a macro result that
+        // itself holds a macro. A failing macro reaches the caller and fails the step.
+        private static string ResolveDecodedMacros(
+            PluginBase plugin,
+            PluginDataModel pluginData,
+            string payload,
+            string inlineName,
+            string switchName)
+        {
+            // Detect a decoded payload: the switch is set and the inline value, which wins over the file, is present.
+            var inlineValue = pluginData.Parameters.Get(key: inlineName, defaultValue: string.Empty);
+            var isDecoded = !string.IsNullOrWhiteSpace(inlineValue) && pluginData.TestSwitch(name: switchName);
+
+            // Return a plain value or file content as is, because its macros are already resolved or kept as written.
+            if (!isDecoded)
+            {
+                return payload;
+            }
+
+            // Resolve the decoded macros through the invoker, so each macro is reported like the rule-level pass.
+            return plugin.Invoker.ResolveMacros(plugin, pluginData.Rule, input: payload);
         }
 
         // Applies the discrete connection parts of a credentials record to the builder, leaving unset parts untouched

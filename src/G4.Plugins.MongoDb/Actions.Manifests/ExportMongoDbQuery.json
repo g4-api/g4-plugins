@@ -78,6 +78,10 @@
 					{
 						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/ExportMongoDbQuery.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/ExportMongoDbQuery.cs.",
 						"question": "Where are the ExportMongoDbQuery documentation and source code?"
+					},
+					{
+						"question": "Are macros resolved inside a Base64-encoded CommandText?",
+						"answer": "Yes. With the Base64 switch set, the action decodes CommandText and then resolves its macros, because the engine cannot see macros while the value is encoded. CommandFile content keeps its macros as written."
 					}
 				]
 			},
@@ -327,6 +331,40 @@
 				"argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{\"status\":\"closed\"} --Limit:50}}",
 				"pluginName": "ExportMongoDbQuery"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"The payload comes from CommandFile, so its macros are kept as written"
+					],
+					"expected_result": "The step stores the orders created today in `ExportMongoDbQuery:Result`.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps the closing braces of the JSON from ending the inline argument value.",
+					"use_case": "export_base64_filter_with_macro",
+					"version": "5"
+				},
+				"labels": [
+					"Base64",
+					"Database",
+					"Export",
+					"Macro",
+					"MongoDb",
+					"Query"
+				]
+			},
+			"description": [
+				"### Export today's orders with a Base64 filter that holds a macro",
+				"",
+				"The argument binds the `mongo-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.",
+				"The decoded payload is `{\"createdOn\":{\"$gte\":\"{{$New-Date --Format:yyyy-MM-dd}}\"}}`; the New-Date macro is resolved after decoding, so the server receives the current date."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJjcmVhdGVkT24iOnsiJGd0ZSI6Int7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSJ9fQ== --Base64}}",
+				"pluginName": "ExportMongoDbQuery"
+			}
 		}
 	],
 	"key": "ExportMongoDbQuery",
@@ -364,6 +402,7 @@
 		{
 			"description": [
 				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
 				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
 				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
 			],
@@ -499,5 +538,5 @@
 		"Shapes the result with a projection, a sort, a limit, and a skip, so a step returns only the documents and fields a flow needs.",
 		"Stores the field names, the documents, and the document count as session parameters for later steps and for data transfer."
 	],
-	"version": "4"
+	"version": "5"
 }

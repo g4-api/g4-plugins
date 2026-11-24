@@ -53,6 +53,14 @@
 					{
 						"question": "How is a Base64-encoded script provided?",
 						"answer": "Add the Base64 switch and pass the script as a Base64 value through ScriptBlock or the Argument property. The action decodes the value with ConvertFromBase64 before execution, and invalid Base64 input is used as-is without raising an error."
+					},
+					{
+						"question": "How is only part of the script result kept?",
+						"answer": "Set the RegularExpression property. The action keeps the first match of the pattern in the script result and stores it as ScriptResult; a result that is not a string is written as JSON before the match, and no match stores an empty string."
+					},
+					{
+						"question": "Are macros resolved inside a Base64-encoded script block?",
+						"answer": "Yes. With the Base64 switch set, the action decodes the ScriptBlock value and then resolves the macros in the decoded script, because the engine resolves the macros of a rule before the action runs and cannot see them while the value is encoded."
 					}
 				]
 			},
@@ -341,6 +349,72 @@
 					}
 				]
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Pattern does not match — ScriptResult is an empty string",
+						"Script returns an object or an array — the result is written as JSON before the pattern runs",
+						"Script returns undefined — the pattern runs on an empty string"
+					],
+					"expected_result": "The script returns the page URL and ScriptResult holds only its host name, for example 'www.example.com'.",
+					"notes": "RegularExpression runs on the script result after the script completes and keeps the first match. Without RegularExpression the whole result is stored unchanged.",
+					"use_case": "script_result_regular_expression",
+					"version": "6"
+				},
+				"labels": [
+					"JavaScript",
+					"NoElement",
+					"RegularExpression",
+					"ScriptResult"
+				]
+			},
+			"description": [
+				"### Keep part of the script result with a regular expression",
+				"",
+				"Runs a script that returns the page URL and keeps only the host name with the RegularExpression property.",
+				"The first match is stored in the ScriptResult session parameter instead of the whole URL."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "return document.location.href;",
+				"pluginName": "InvokeScript",
+				"regularExpression": "(?<=://)[^/]+"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"CustomerName is not set, so the macro resolves to an empty value"
+					],
+					"expected_result": "The input element #InputEnabled receives the value of the CustomerName session parameter.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so InvokeScript resolves the macros of the decoded script itself. Encoding keeps the ` --` comment from ending the inline argument value.",
+					"use_case": "base64_script_block_with_macro",
+					"version": "7"
+				},
+				"labels": [
+					"Base64",
+					"JavaScript",
+					"Macro",
+					"NoElement",
+					"ScriptBlock"
+				]
+			},
+			"description": [
+				"### Resolve a macro inside a Base64-encoded script block",
+				"",
+				"Passes a Base64 script whose decoded text holds a Get-Parameter macro and a `--` comment, and enables the Base64 switch.",
+				"The decoded script is `document.querySelector('#InputEnabled').value = '{{$Get-Parameter --Name:CustomerName}}'; // -- set from the session`; the macro is resolved after decoding, so the input receives the CustomerName session parameter."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}",
+				"pluginName": "InvokeScript"
+			}
 		}
 	],
 	"key": "InvokeScript",
@@ -360,6 +434,7 @@
 		{
 			"description": [
 				"Base64 decodes the ScriptBlock value from Base64 before the script runs.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
 				"Encoding the script as Base64 matters because it can carry characters that the command-line parser would otherwise split or misread.",
 				"When the switch is absent the script value runs exactly as provided.",
 				"Invalid Base64 input is left unchanged and runs as-is, so a malformed value raises no error."
@@ -384,7 +459,8 @@
 			"description": [
 				"InvokeScript:ScriptResult holds the return value produced by the executed script.",
 				"It is written to session parameters after the script completes and is immediately available to any downstream rule that needs to read or assert the script output.",
-				"The stored value type matches whatever the script returns — a string, number, boolean, object, or null when the script returns undefined."
+				"The stored value type matches whatever the script returns — a string, number, boolean, object, or null when the script returns undefined.",
+				"When the rule sets a RegularExpression the stored value is the first match as a string, or an empty string when the pattern does not match."
 			],
 			"mandatory": false,
 			"name": "InvokeScript:ScriptResult",
@@ -428,6 +504,17 @@
 			"mandatory": false,
 			"name": "OnElement",
 			"type": "String"
+		},
+		{
+			"description": [
+				"RegularExpression keeps the first match of the pattern in the script result and stores that match as ScriptResult.",
+				"A string result is matched as is, a null result is matched as an empty string, and any other result, such as a number, a boolean, an array or an object, is written as JSON before the match.",
+				"When a pattern is set the stored ScriptResult is always a string, and a pattern that does not match stores an empty string.",
+				"When absent the whole script result is stored unchanged."
+			],
+			"mandatory": false,
+			"name": "RegularExpression",
+			"type": "Regex"
 		}
 	],
 	"protocol": {
@@ -440,5 +527,5 @@
 		"In RPA it enables DOM manipulation, data extraction, dynamic interactions, and JavaScript utility execution; in automation testing it supports DOM state validation, pre-condition setup, script return value assertions, and custom event simulation.",
 		"The script return value is stored in the session parameter ScriptResult and is immediately available to downstream rules."
 	],
-	"version": "5"
+	"version": "7"
 }

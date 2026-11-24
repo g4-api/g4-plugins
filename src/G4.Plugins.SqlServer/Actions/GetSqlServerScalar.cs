@@ -19,7 +19,7 @@ namespace G4.Plugins.SqlServer.Actions
         {
             // Resolve the connection, the query, and its bound parameters before opening any resource.
             var connectionModel = pluginData.ResolveConnection();
-            var commandText = pluginData.ResolveCommandText();
+            var commandText = pluginData.ResolveCommandText(plugin: this);
             var parameters = pluginData.ResolveSqlParameters();
             var noEntity = pluginData.TestSwitch(name: "NoEntity");
 
