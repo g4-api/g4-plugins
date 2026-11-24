@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -30,8 +30,8 @@ The container sends all of them together, so the application receives one contin
 
 | Use Case | Description |
 | --- | --- |
-| Drag and drop | Move a card, a file, or a slider handle by pressing, moving, and releasing the pointer. |
-| Multi-selection | Hold Control or Shift while clicking several rows or files. |
+| Drag and drop | Move a card or a slider handle by pressing, moving, and releasing the pointer. |
+| Multi-selection | Hold Control or Shift while clicking several rows or list items. |
 | Keyboard shortcuts | Press a key combination such as Ctrl+Shift+S that an application reads as one chord. |
 | Hover menus | Move over a menu and wait for it to open, then click an item the menu creates in a following container. |
 
@@ -43,6 +43,11 @@ The container sends all of them together, so the application receives one contin
 | Shortcut checks | Verify that a key combination triggers the expected command. |
 | Hover state checks | Open a tooltip or a hover menu and assert its content in the next step. |
 | Canvas and map checks | Drive a canvas, a chart, or a map with exact pointer positions. |
+
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
 
 ## Examples
 
@@ -855,8 +860,6 @@ Only input action steps are accepted, such as AddKeyDown, AddPointerMove, or Add
 
 ## Scope
 
-* Mobile Web
-* Os Native
 * Web
 
 ## See Also

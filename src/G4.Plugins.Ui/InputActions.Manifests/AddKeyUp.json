@@ -55,7 +55,7 @@
 						"question": "What is the pluginType of AddKeyUp?"
 					},
 					{
-						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"answer": "It supports the platform “Web” only.",
 						"question": "Which platforms does AddKeyUp support?"
 					},
 					{
@@ -122,7 +122,12 @@
 		"| --- | --- |",
 		"| Shortcut checks | Verify that a shortcut runs its command and leaves no key held. |",
 		"| Key-release behavior | Verify how a page reacts when a held key is released. |",
-		"| State reset | Return the keyboard to a clean state between test cases. |"
+		"| State reset | Return the keyboard to a clean state between test cases. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin currently supports **Web** only.",
+		"Desktop and mobile drivers are not supported yet."
 	],
 	"examples": [
 		{
@@ -686,8 +691,6 @@
 		}
 	],
 	"platforms": [
-		"MobileWeb",
-		"OsNative",
 		"Web"
 	],
 	"pluginType": "InputAction",

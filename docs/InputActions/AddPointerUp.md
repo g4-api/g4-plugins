@@ -37,6 +37,11 @@ Flows use it to drop a dragged item, to end a long press, and to complete a clic
 | Release states | Verify that a pressed style is removed when the button is released. |
 | State reset | Return the pointer to a clean state between test cases. |
 
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
+
 ## Examples
 
 ### Example No.1
@@ -250,8 +255,6 @@ Browsers use it to go forward one page.
 
 ## Scope
 
-* Mobile Web
-* Os Native
 * Web
 
 ## See Also

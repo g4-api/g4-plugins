@@ -55,7 +55,7 @@
 						"question": "What is the pluginType of AddScroll?"
 					},
 					{
-						"answer": "It supports the platforms “MobileWeb”, “Web”.",
+						"answer": "It supports the platform “Web” only.",
 						"question": "Which platforms does AddScroll support?"
 					},
 					{
@@ -124,7 +124,12 @@
 		"| --- | --- |",
 		"| Wheel handlers | Verify that a page reacts to wheel events, such as a zoom or a sticky header. |",
 		"| Infinite scroll | Verify that more items load when a list reaches its end. |",
-		"| Scroll containers | Verify that the wheel scrolls the element it turns over and not the page. |"
+		"| Scroll containers | Verify that the wheel scrolls the element it turns over and not the page. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin currently supports **Web** only.",
+		"Desktop and mobile drivers are not supported yet."
 	],
 	"examples": [
 		{
@@ -308,7 +313,6 @@
 		}
 	],
 	"platforms": [
-		"MobileWeb",
 		"Web"
 	],
 	"pluginType": "InputAction",

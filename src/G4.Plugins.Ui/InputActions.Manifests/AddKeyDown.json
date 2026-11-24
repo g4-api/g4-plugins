@@ -55,7 +55,7 @@
 						"question": "What is the pluginType of AddKeyDown?"
 					},
 					{
-						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"answer": "It supports the platform “Web” only.",
 						"question": "Which platforms does AddKeyDown support?"
 					},
 					{
@@ -122,7 +122,12 @@
 		"| --- | --- |",
 		"| Shortcut checks | Verify that a key combination triggers the expected command. |",
 		"| Key-hold behavior | Verify how a page reacts while a key stays down. |",
-		"| Modifier checks | Verify that a click with a modifier key extends a selection or opens a link in a new tab. |"
+		"| Modifier checks | Verify that a click with a modifier key extends a selection or opens a link in a new tab. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin currently supports **Web** only.",
+		"Desktop and mobile drivers are not supported yet."
 	],
 	"examples": [
 		{
@@ -686,8 +691,6 @@
 		}
 	],
 	"platforms": [
-		"MobileWeb",
-		"OsNative",
 		"Web"
 	],
 	"pluginType": "InputAction",

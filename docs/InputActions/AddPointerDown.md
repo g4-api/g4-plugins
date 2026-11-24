@@ -37,6 +37,11 @@ Flows use it to start a drag, a long press, or a click that needs a held key or 
 | Press states | Verify the pressed style of a button before it is released. |
 | Context menus | Verify that the right button opens the expected menu. |
 
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
+
 ## Examples
 
 ### Example No.1
@@ -250,8 +255,6 @@ Browsers use it to go forward one page.
 
 ## Scope
 
-* Mobile Web
-* Os Native
 * Web
 
 ## See Also

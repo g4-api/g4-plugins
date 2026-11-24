@@ -1,0 +1,565 @@
+{
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"User32"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeUser32DragAndDrop.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/InvokeUser32DragAndDrop.cs"
+			},
+			"mcp": {
+				"title": "Invoke User32 Drag And Drop"
+			},
+			"rag": {
+				"description": "Drag a Windows desktop element onto another element, or by an offset, with the left mouse button through the UIA driver. The step checks the driver, the drag end, and its numbers before anything is pressed, grabs and drops at alignment points, paces the cursor in short steps, and releases the button when the driver refuses the drag.",
+				"qa": [
+					{
+						"answer": "It drags an element of a Windows desktop application with the left mouse button and drops it on a target element, or moves it by a pixel offset, through the UIA driver.",
+						"question": "What does the InvokeUser32DragAndDrop plugin do?"
+					},
+					{
+						"answer": "OnElement names the element to drag, Alignment, OffsetX, and OffsetY select the grab point, Target with TargetAlignment, TargetOffsetX, and TargetOffsetY selects the drop point, DeltaX and DeltaY set an offset instead, and Steps and Duration set the path. It stores no outputs.",
+						"question": "What are the key parameters and outputs of InvokeUser32DragAndDrop?"
+					},
+					{
+						"answer": "It runs as an Action task step with the arrow-pointer icon and the ActionRuleModel, in a flow driven by the UIA driver, after the application shows both elements.",
+						"question": "How does InvokeUser32DragAndDrop fit into an automation workflow?"
+					},
+					{
+						"answer": "Keep the application window visible and unobstructed, drop on element points rather than fixed offsets where possible, and raise Steps for applications that redraw while they follow the cursor.",
+						"question": "What are best practices for using InvokeUser32DragAndDrop?"
+					},
+					{
+						"answer": "Use $type “Action” with pluginName “InvokeUser32DragAndDrop”, onElement for the dragged element as an XPath, and {{$ --Target://List[@AutomationId='DoneList']}} or {{$ --DeltaX:150 --DeltaY:0}} as the argument.",
+						"question": "How is an InvokeUser32DragAndDrop rule configured?"
+					},
+					{
+						"answer": "Any driver other than the UIA driver, setting both Target and an offset or neither, a missing element, or a bad Steps, Duration, or offset value fails the step before anything is pressed. When the driver refuses the drag, the left button is released and the step fails with the driver error.",
+						"question": "How does InvokeUser32DragAndDrop handle errors?"
+					},
+					{
+						"answer": "The manifest key is “InvokeUser32DragAndDrop”.",
+						"question": "What is the manifest key of InvokeUser32DragAndDrop?"
+					},
+					{
+						"answer": "The manifestVersion is 4.",
+						"question": "What manifestVersion is used by InvokeUser32DragAndDrop?"
+					},
+					{
+						"answer": "The pluginType is “Action”.",
+						"question": "What is the pluginType of InvokeUser32DragAndDrop?"
+					},
+					{
+						"answer": "It supports the platforms “WindowsNative”.",
+						"question": "Which platforms does InvokeUser32DragAndDrop support?"
+					},
+					{
+						"answer": "It is listed under the “User32” category.",
+						"question": "Which category is InvokeUser32DragAndDrop listed under?"
+					},
+					{
+						"answer": "The author is Roei Sabag.",
+						"question": "Who is the author of the InvokeUser32DragAndDrop manifest?"
+					},
+					{
+						"answer": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+						"question": "What author link is provided in the InvokeUser32DragAndDrop manifest?"
+					},
+					{
+						"answer": "It drags a desktop element to a target element or by an offset, in short steps, through the UIA driver.",
+						"question": "What is the summary of InvokeUser32DragAndDrop?"
+					},
+					{
+						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeUser32DragAndDrop.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/InvokeUser32DragAndDrop.cs.",
+						"question": "Where are the InvokeUser32DragAndDrop documentation and source code?"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "arrow-pointer",
+					"svg": null
+				},
+				"label": "Invoke User32 Drag And Drop",
+				"model": "ActionRuleModel"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"InvokeUser32DragAndDrop drags one element of a Windows desktop application and drops it on another element, or moves it by a number of pixels.",
+		"It asks the UIA driver for the screen point of the source, and of the target when one is set, presses the left button on the source, moves the cursor in short steps, and releases over the target or at the end of the offset.",
+		"Flows use it to move items between lists, to reorder rows, and to move splitters and slider handles.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature | Description |",
+		"| --- | --- |",
+		"| Target element | Drops on a point of the element named by the Target XPath. |",
+		"| Alignment points | Grabs and drops at the center, an edge, or a corner of each element, shifted by pixel offsets. |",
+		"| Drag by offset | Moves the element by DeltaX and DeltaY screen pixels when the rule names no target. |",
+		"| Stepped path | Moves the cursor in short steps, 10 by default, so applications that wait for the Windows drag threshold start the drag. |",
+		"| Paced moves | Spreads the moves over Duration, 300 milliseconds by default. |",
+		"| Release on failure | Releases the left button when the driver refuses the drag, so it does not stay pressed on the desktop. |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| List transfers | Move an item from one list or tree to another in a desktop application. |",
+		"| Row order | Reorder rows of a grid that supports dragging. |",
+		"| Layout handles | Move a splitter or a slider handle by an exact number of pixels. |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case | Description |",
+		"| --- | --- |",
+		"| Drop checks | Verify that a dropped item appears in its new list. |",
+		"| Order checks | Verify that a grid keeps the order a drag sets. |",
+		"| Handle limits | Verify that a splitter or a slider stops at its allowed range. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin works on **Windows** only, with the UIA driver.",
+		"It moves the real cursor, so the application window must be visible, and it drags with the left button without modifier keys."
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Application window is covered",
+						"Item or list is not found",
+						"List refuses the drop"
+					],
+					"expected_result": "Invoice 7 is shown in the done list.",
+					"notes": "The application window must be visible, because the drag moves the real Windows cursor. Both elements are found before the button is pressed.",
+					"use_case": "move_item_between_lists",
+					"version": "4"
+				},
+				"labels": [
+					"DesktopAutomation",
+					"DragAndDrop",
+					"User32",
+					"WindowsNative"
+				]
+			},
+			"description": [
+				"### Move an item to another list",
+				"",
+				"The `onElement` value names the list item, and Target names the list to drop on.",
+				"Both points are element centers, and the cursor moves in 10 steps over 300 milliseconds."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Target://List[@AutomationId='DoneList']}}",
+				"onElement": "//ListItem[@Name='Invoice 7']",
+				"pluginName": "InvokeUser32DragAndDrop"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Offset points outside the target",
+						"Target row is not found"
+					],
+					"expected_result": "Row 5 is inserted above row 2.",
+					"notes": "Offsets are measured from the point the alignment selects, in screen pixels. TargetOffsetX shifts the drop point sideways in the same way.",
+					"use_case": "drop_at_aligned_point",
+					"version": "4"
+				},
+				"labels": [
+					"Alignment",
+					"DragAndDrop",
+					"Reorder",
+					"User32",
+					"WindowsNative"
+				]
+			},
+			"description": [
+				"### Drop at the top of a target",
+				"",
+				"TargetAlignment and TargetOffsetY place the drop point 4 pixels below the top center of the target row.",
+				"Use it when an application inserts above or below a row depending on where the item is dropped."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Target://DataItem[@Name='Row 2'] --TargetAlignment:TopCenter --TargetOffsetX:0 --TargetOffsetY:4}}",
+				"onElement": "//DataItem[@Name='Row 5']",
+				"pluginName": "InvokeUser32DragAndDrop"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Offset leaves the screen",
+						"Splitter is not found"
+					],
+					"expected_result": "The left pane is 150 pixels wider.",
+					"notes": "A drag by offset needs no target and ends at the grab point plus the offset. The offset is in screen pixels, so it does not follow display scaling.",
+					"use_case": "move_splitter_by_offset",
+					"version": "4"
+				},
+				"labels": [
+					"DesktopAutomation",
+					"DragAndDrop",
+					"Offset",
+					"User32",
+					"WindowsNative"
+				]
+			},
+			"description": [
+				"### Move a splitter by an offset",
+				"",
+				"DeltaX moves the splitter 150 screen pixels to the right.",
+				"Steps and Duration slow the move for an application that redraws while it follows the cursor."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --DeltaX:150 --DeltaY:0 --Steps:20 --Duration:600}}",
+				"onElement": "//Thumb[@AutomationId='Splitter']",
+				"pluginName": "InvokeUser32DragAndDrop"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Grab point is not on the title strip",
+						"Panel is not found"
+					],
+					"expected_result": "The tools panel is docked on the right side of the window.",
+					"notes": "Grab a panel where the application starts a drag, which is often its title strip and not its center. Offsets are in screen pixels from the corner the alignment selects.",
+					"use_case": "grab_by_title_strip",
+					"version": "4"
+				},
+				"labels": [
+					"Alignment",
+					"DesktopAutomation",
+					"DragAndDrop",
+					"User32",
+					"WindowsNative"
+				]
+			},
+			"description": [
+				"### Grab a panel by its title strip",
+				"",
+				"Alignment, OffsetX, and OffsetY grab the panel 20 pixels right of and 8 pixels below its top-left corner, where its title strip is.",
+				"The panel is dropped on the center of the right dock area."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Target://Pane[@AutomationId='RightDock'] --Alignment:TopLeft --OffsetX:20 --OffsetY:8}}",
+				"onElement": "//Pane[@AutomationId='ToolsPanel']",
+				"pluginName": "InvokeUser32DragAndDrop"
+			}
+		}
+	],
+	"key": "InvokeUser32DragAndDrop",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"default": "MiddleCenter",
+			"description": [
+				"Selects the point of the dragged element where the drag starts.",
+				"The point is a corner, an edge center, or the center of the element bounding box, shifted by the matching offsets.",
+				"Defaults to MiddleCenter; an unknown value makes the UIA driver refuse the request."
+			],
+			"mandatory": false,
+			"name": "Alignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Places the point at the bottom center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the lower middle edge of the element."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"Places the point at the bottom left corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the lower left boundary of the element."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"Places the point at the bottom right corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the lower right boundary of the element."
+					],
+					"name": "BottomRight"
+				},
+				{
+					"description": [
+						"Places the point at the horizontal and vertical center of the element bounding box.",
+						"It is the default alignment and suits most drags."
+					],
+					"name": "MiddleCenter"
+				},
+				{
+					"description": [
+						"Places the point at the left edge and vertical center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the left side of the element."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"Places the point at the right edge and vertical center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the right side of the element."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"Places the point at the top center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the upper middle edge of the element."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"Places the point at the top left corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the upper left boundary of the element."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"Places the point at the top right corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the upper right boundary of the element."
+					],
+					"name": "TopRight"
+				}
+			]
+		},
+		{
+			"description": [
+				"Sets the horizontal distance of a drag by offset, in screen pixels, where a positive value points right.",
+				"It is measured from the grab point that Alignment, OffsetX, and OffsetY select.",
+				"Use it instead of Target; setting both, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "DeltaX",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the vertical distance of a drag by offset, in screen pixels, where a positive value points down.",
+				"It is measured from the grab point that Alignment, OffsetX, and OffsetY select.",
+				"Use it instead of Target; setting both, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "DeltaY",
+			"type": "Number"
+		},
+		{
+			"default": "300",
+			"description": [
+				"Sets the total time of the moves between the press and the release.",
+				"Accepts a whole number of milliseconds, such as `600`, or a time span, such as `00:00:01`.",
+				"Defaults to 300 milliseconds, and a negative value or text that is not a duration fails the step."
+			],
+			"mandatory": false,
+			"name": "Duration",
+			"type": "Number|Time"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Shifts the grab point by this many pixels on the horizontal axis.",
+				"A positive value moves the point right, measured from the point the matching alignment selects.",
+				"Defaults to 0, and text that is not a whole number fails the step."
+			],
+			"mandatory": false,
+			"name": "OffsetX",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Shifts the grab point by this many pixels on the vertical axis.",
+				"A positive value moves the point down, measured from the point the matching alignment selects.",
+				"Defaults to 0, and text that is not a whole number fails the step."
+			],
+			"mandatory": false,
+			"name": "OffsetY",
+			"type": "Number"
+		},
+		{
+			"default": "10",
+			"description": [
+				"Sets how many moves carry the element from the source to the end point.",
+				"More steps give a smoother path for applications that follow the pointer closely.",
+				"Defaults to 10, and a value outside 1 to 100 fails the step."
+			],
+			"mandatory": false,
+			"name": "Steps",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Names the element to drop on, as an XPath, the locator the User32 elements support.",
+				"The search starts from the root of the session and waits for the element like any other element.",
+				"Use it instead of DeltaX and DeltaY; setting both, or neither, fails the step."
+			],
+			"mandatory": false,
+			"name": "Target",
+			"type": "String|Expression"
+		},
+		{
+			"default": "MiddleCenter",
+			"description": [
+				"Selects the point of the target element where the drag ends.",
+				"The point is a corner, an edge center, or the center of the element bounding box, shifted by the matching offsets.",
+				"Defaults to MiddleCenter, and is read only when Target is set."
+			],
+			"mandatory": false,
+			"name": "TargetAlignment",
+			"type": "String",
+			"values": [
+				{
+					"description": [
+						"Places the point at the bottom center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the lower middle edge of the element."
+					],
+					"name": "BottomCenter"
+				},
+				{
+					"description": [
+						"Places the point at the bottom left corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the lower left boundary of the element."
+					],
+					"name": "BottomLeft"
+				},
+				{
+					"description": [
+						"Places the point at the bottom right corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the lower right boundary of the element."
+					],
+					"name": "BottomRight"
+				},
+				{
+					"description": [
+						"Places the point at the horizontal and vertical center of the element bounding box.",
+						"It is the default alignment and suits most drags."
+					],
+					"name": "MiddleCenter"
+				},
+				{
+					"description": [
+						"Places the point at the left edge and vertical center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the left side of the element."
+					],
+					"name": "MiddleLeft"
+				},
+				{
+					"description": [
+						"Places the point at the right edge and vertical center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the right side of the element."
+					],
+					"name": "MiddleRight"
+				},
+				{
+					"description": [
+						"Places the point at the top center of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the upper middle edge of the element."
+					],
+					"name": "TopCenter"
+				},
+				{
+					"description": [
+						"Places the point at the top left corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the upper left boundary of the element."
+					],
+					"name": "TopLeft"
+				},
+				{
+					"description": [
+						"Places the point at the top right corner of the element bounding box.",
+						"Use this alignment when the grab or drop point is near the upper right boundary of the element."
+					],
+					"name": "TopRight"
+				}
+			]
+		},
+		{
+			"default": "0",
+			"description": [
+				"Shifts the drop point by this many pixels on the horizontal axis.",
+				"A positive value moves the point right, measured from the point the matching alignment selects.",
+				"Defaults to 0, and text that is not a whole number fails the step."
+			],
+			"mandatory": false,
+			"name": "TargetOffsetX",
+			"type": "Number"
+		},
+		{
+			"default": "0",
+			"description": [
+				"Shifts the drop point by this many pixels on the vertical axis.",
+				"A positive value moves the point down, measured from the point the matching alignment selects.",
+				"Defaults to 0, and text that is not a whole number fails the step."
+			],
+			"mandatory": false,
+			"name": "TargetOffsetY",
+			"type": "Number"
+		}
+	],
+	"platforms": [
+		"WindowsNative"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"description": [
+				"Holds the parameters of the drag, such as `{{$ --Target://ListItem[@Name='Archive']}}`.",
+				"A rule sets either Target or DeltaX and DeltaY, and may add alignments, offsets, Steps, and Duration."
+			],
+			"mandatory": false,
+			"name": "Argument",
+			"type": "String|Expression"
+		},
+		{
+			"default": "Xpath",
+			"description": [
+				"Selects how the OnElement value finds the element to drag.",
+				"Xpath is the locator the User32 elements support, and it is the default."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Names the element to drag, as an XPath.",
+				"The drag starts on the point of this element that Alignment, OffsetX, and OffsetY select.",
+				"A rule without it, or an element that is not found, fails the step before anything is pressed."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "None",
+		"w3c": "None"
+	},
+	"summary": [
+		"Drags a Windows desktop element with the left mouse button and drops it on a target element, or moves it by a pixel offset.",
+		"Grabs at an alignment point of the element, drops at an alignment point of the target or at the end of the offset, moves the cursor in short steps over a set time, and sends the whole drag in one request to the UIA driver.",
+		"Runs only on the UIA driver and fails with a clear message on any other driver."
+	],
+	"version": "4"
+}

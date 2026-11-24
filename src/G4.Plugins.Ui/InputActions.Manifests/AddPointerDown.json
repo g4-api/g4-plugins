@@ -55,7 +55,7 @@
 						"question": "What is the pluginType of AddPointerDown?"
 					},
 					{
-						"answer": "It supports the platforms “MobileWeb”, “OsNative”, “Web”.",
+						"answer": "It supports the platform “Web” only.",
 						"question": "Which platforms does AddPointerDown support?"
 					},
 					{
@@ -122,7 +122,12 @@
 		"| --- | --- |",
 		"| Drag handlers | Verify that an item follows the pointer while the button is down. |",
 		"| Press states | Verify the pressed style of a button before it is released. |",
-		"| Context menus | Verify that the right button opens the expected menu. |"
+		"| Context menus | Verify that the right button opens the expected menu. |",
+		"",
+		"### Platform",
+		"",
+		"This plugin currently supports **Web** only.",
+		"Desktop and mobile drivers are not supported yet."
 	],
 	"examples": [
 		{
@@ -274,8 +279,6 @@
 		}
 	],
 	"platforms": [
-		"MobileWeb",
-		"OsNative",
 		"Web"
 	],
 	"pluginType": "InputAction",

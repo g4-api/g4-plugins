@@ -37,6 +37,11 @@ Flows use it to end a held modifier key and to complete a keyboard shortcut.
 | Key-release behavior | Verify how a page reacts when a held key is released. |
 | State reset | Return the keyboard to a clean state between test cases. |
 
+### Platform
+
+This plugin currently supports **Web** only.
+Desktop and mobile drivers are not supported yet.
+
 ## Examples
 
 ### Example No.1
@@ -551,8 +556,6 @@ Switches between full-width and half-width input.
 
 ## Scope
 
-* Mobile Web
-* Os Native
 * Web
 
 ## See Also
