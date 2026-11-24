@@ -117,6 +117,32 @@ namespace G4.UnitTests.Plugins.MongoDb
             Assert.AreEqual(expected: 2, actual: processed);
         }
 
+        [TestMethod(DisplayName = "Verify that InvokeMongoDbWrite resolves the macros of a Base64-encoded update " +
+            "document after decoding it, so the stored documents carry the macro result.")]
+        [TestCategory("MongoDbLive")]
+        [DoNotParallelize]
+        public void InvokeMongoDbWriteDocumentBase64MacroTest()
+        {
+            // Arrange: seed two open documents and encode an update whose value is a macro.
+            SeedDocuments();
+            var update = NewBase64(payload: "{\"$set\":{\"status\":\"{{$Convert-Number --Number:255 --To:Hex " +
+                "--Case:Upper}}\"}}");
+
+            var rule = NewRule(arguments: $"{NewConnectionArgument()} --Collection:{Collection} " +
+                $"--Operation:UpdateMany --CommandText:{{\"status\":\"open\"}} --Document:{update} " +
+                "--DocumentBase64");
+
+            // Act: update the matching documents through the plugin.
+            var result = Invoke<InvokeMongoDbWrite>(rule);
+
+            // Assert: both open documents were changed.
+            Assert.AreEqual(expected: "2", actual: $"{result.Response.Entity["ModifiedCount"]}");
+
+            // Assert: the stored documents carry the macro result, so the macro was resolved after the decode.
+            var resolved = MongoDbTestContainer.Count(Collection, filter: new BsonDocument { ["status"] = "FF" });
+            Assert.AreEqual(expected: 2, actual: resolved);
+        }
+
         [TestMethod(DisplayName = "Verify that InvokeMongoDbWrite inserts a document and reports its identifier " +
             "when an update with the Upsert switch matches nothing.")]
         [TestCategory("MongoDbLive")]

@@ -68,6 +68,7 @@ namespace G4.Plugins.MongoDb.Actions
                     ["ModifiedCount"] = "0",
                     ["UpsertedIds"] = "[]"
                 },
+                Plugin = this,
                 PluginData = pluginData,
                 Session = session
             };
@@ -111,7 +112,7 @@ namespace G4.Plugins.MongoDb.Actions
         private static void Delete(WriteOptions options, bool isMany)
         {
             // Require a filter, so a delete never removes the whole collection by an omitted argument.
-            var filter = ResolveFilter(options.PluginData);
+            var filter = ResolveFilter(options.Plugin, options.PluginData);
             var collection = options.Collection;
             var session = options.Session;
 
@@ -145,7 +146,7 @@ namespace G4.Plugins.MongoDb.Actions
         {
             // Require the documents so an insert never runs empty.
             var documents = MongoDbClient.ConvertToDocuments(
-                json: options.PluginData.ResolveDocumentText(),
+                json: options.PluginData.ResolveDocumentText(options.Plugin),
                 argumentName: "Document");
 
             // Keep the insert order so a failing document stops the ones after it, matching the server default.
@@ -183,9 +184,9 @@ namespace G4.Plugins.MongoDb.Actions
         private static void Replace(WriteOptions options)
         {
             // Require the filter and the replacement, which together address and rewrite exactly one document.
-            var filter = ResolveFilter(options.PluginData);
+            var filter = ResolveFilter(options.Plugin, options.PluginData);
             var replacement = MongoDbClient.ConvertToDocument(
-                json: options.PluginData.ResolveDocumentText(),
+                json: options.PluginData.ResolveDocumentText(options.Plugin),
                 argumentName: "Document");
 
             if (replacement.ElementCount == 0)
@@ -216,11 +217,11 @@ namespace G4.Plugins.MongoDb.Actions
 
         // Resolves the filter of a write, rejecting an empty one so a write never addresses every document by an
         // omitted argument. An explicit empty document in CommandText is still empty, so the guard is deliberate.
-        private static BsonDocument ResolveFilter(PluginDataModel pluginData)
+        private static BsonDocument ResolveFilter(PluginBase plugin, PluginDataModel pluginData)
         {
             // Read the primary payload, which carries the filter for every write except an insert.
             var filter = MongoDbClient.ConvertToDocument(
-                json: pluginData.ResolveCommandText(),
+                json: pluginData.ResolveCommandText(plugin),
                 argumentName: "CommandText");
 
             // Reject an empty filter so the step states which documents it changes.
@@ -254,9 +255,9 @@ namespace G4.Plugins.MongoDb.Actions
         private static void Update(WriteOptions options, bool isMany)
         {
             // Require the filter and the update document, which must carry update operators such as $set.
-            var filter = ResolveFilter(options.PluginData);
+            var filter = ResolveFilter(options.Plugin, options.PluginData);
             var update = MongoDbClient.ConvertToDocument(
-                json: options.PluginData.ResolveDocumentText(),
+                json: options.PluginData.ResolveDocumentText(options.Plugin),
                 argumentName: "Document");
 
             if (update.ElementCount == 0)
@@ -327,6 +328,11 @@ namespace G4.Plugins.MongoDb.Actions
             /// Gets or sets the outputs the operation records its counts into.
             /// </summary>
             public Dictionary<string, string> Outputs { get; set; }
+
+            /// <summary>
+            /// Gets or sets the plugin that runs the step, whose invoker resolves the macros of decoded payloads.
+            /// </summary>
+            public PluginBase Plugin { get; set; }
 
             /// <summary>
             /// Gets or sets the step arguments the operation reads its payloads and switches from.

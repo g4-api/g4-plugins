@@ -25,7 +25,7 @@ namespace G4.Plugins.MongoDb.Actions
             // Resolve the connection, the collection, and the pipeline before opening any resource.
             var connectionModel = pluginData.ResolveConnection();
             var collectionName = pluginData.ResolveRequired(name: "Collection");
-            var stages = ResolveStages(pluginData);
+            var stages = ResolveStages(plugin: this, pluginData);
             var noEntity = pluginData.TestSwitch(name: "NoEntity");
             var isTransaction = pluginData.TestSwitch(name: "Transaction");
 
@@ -73,10 +73,10 @@ namespace G4.Plugins.MongoDb.Actions
 
         // Resolves the pipeline stages from the primary payload, requiring a JSON array of stage documents. A single
         // stage object is accepted too, so a one-stage pipeline needs no array wrapper.
-        private static BsonDocument[] ResolveStages(PluginDataModel pluginData)
+        private static BsonDocument[] ResolveStages(PluginBase plugin, PluginDataModel pluginData)
         {
             // Read the payload and reject an empty one, because an aggregation without stages has nothing to run.
-            var json = pluginData.ResolveCommandText();
+            var json = pluginData.ResolveCommandText(plugin);
 
             if (string.IsNullOrWhiteSpace(json))
             {

@@ -49,6 +49,10 @@
 					{
 						"question": "What errors can stop WriteFile?",
 						"answer": "Execution fails when Path is empty or relative without Relative. Invalid Base64, encryption failures, and file-system errors also stop the write."
+					},
+					{
+						"question": "Are macros resolved inside Base64 content?",
+						"answer": "Yes. With the Base64 switch set, the action decodes the Content value and then resolves the macros in the decoded text, before the optional encryption, because the engine cannot see macros while the value is encoded."
 					}
 				]
 			},
@@ -253,6 +257,38 @@
 				"argument": "{{$ --Path:C:\\Automation\\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}",
 				"pluginName": "WriteFile"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"EncryptionKey is set, so the resolved content is encrypted before it is written"
+					],
+					"expected_result": "C:\\Automation\\report.txt holds `Daily report -- generated on ` followed by the current date in yyyy-MM-dd format.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so WriteFile resolves the macros of the decoded content itself, before the optional encryption.",
+					"use_case": "write_base64_content_with_macro",
+					"version": "5"
+				},
+				"labels": [
+					"Base64",
+					"FileSystem",
+					"Macro",
+					"Text"
+				]
+			},
+			"description": [
+				"### Write Base64 content that holds a macro",
+				"",
+				"Passes the content as Base64 because it holds a `--` sequence that would end the inline argument value, and enables the Base64 switch.",
+				"The decoded content is `Daily report -- generated on {{$New-Date --Format:yyyy-MM-dd}}`; the New-Date macro is resolved after decoding, so the file holds the current date."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Path:C:\\Automation\\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}",
+				"pluginName": "WriteFile"
+			}
 		}
 	],
 	"key": "WriteFile",
@@ -286,7 +322,8 @@
 		},
 		{
 			"description": [
-				"Decodes `Content` with `ConvertFromBase64()` before any encryption and file writing."
+				"Decodes `Content` with `ConvertFromBase64()` before any encryption and file writing.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded."
 			],
 			"mandatory": false,
 			"name": "Base64",
@@ -325,5 +362,5 @@
 		"Optionally decodes Base64 content and encrypts the resulting value before writing.",
 		"Creates missing parent directories and overwrites files with the same name."
 	],
-	"version": "4"
+	"version": "5"
 }

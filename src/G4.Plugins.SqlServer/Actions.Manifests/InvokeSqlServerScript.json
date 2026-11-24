@@ -57,6 +57,10 @@
 					{
 						"question": "What errors can stop InvokeSqlServerScript?",
 						"answer": "The step fails when neither CommandText nor CommandFile is set, the file is missing, CommandText is not valid Base64 while the Base64 switch is set, no server is resolved, or a batch fails. Batches after the failing one do not run, and Transaction rolls back the earlier ones."
+					},
+					{
+						"question": "Are macros resolved inside Base64-encoded CommandText?",
+						"answer": "Yes. With the Base64 switch set, the action decodes CommandText and then resolves its macros, because the engine cannot see macros while the value is encoded. CommandFile content keeps its macros as written, and values from outside the automation belong in Parameters."
 					}
 				]
 			},
@@ -297,6 +301,40 @@
 				"argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\\Scripts\\nightly-load.sql --Transaction --CommandTimeout:300}}",
 				"pluginName": "InvokeSqlServerScript"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"The SQL comes from CommandFile, so its macros are kept as written"
+					],
+					"expected_result": "The script adds a RunLog row for the current date, then removes rows older than 30 days.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded CommandText itself. The date comes from the automation, so composing it into the SQL text is safe; values from outside the automation belong in Parameters.",
+					"use_case": "script_base64_with_macro",
+					"version": "5"
+				},
+				"labels": [
+					"Base64",
+					"Credentials",
+					"Database",
+					"Macro",
+					"SqlScript",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Log a run with a Base64 script that holds a macro",
+				"",
+				"The argument binds the `sql-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.",
+				"The decoded SQL holds a ` --` comment and a New-Date macro; the macro is resolved after decoding, so the server receives the current date: `INSERT INTO dbo.RunLog (RunDate) VALUES ('{{$New-Date --Format:yyyy-MM-dd}}'); -- one row per run` and the lines after it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:SU5TRVJUIElOVE8gZGJvLlJ1bkxvZyAoUnVuRGF0ZSkgVkFMVUVTICgne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19Jyk7IC0tIG9uZSByb3cgcGVyIHJ1bgpHTwpERUxFVEUgRlJPTSBkYm8uUnVuTG9nIFdIRVJFIFJ1bkRhdGUgPCBEQVRFQUREKGRheSwgLTMwLCBHRVREQVRFKCkpOw== --Base64}}",
+				"pluginName": "InvokeSqlServerScript"
+			}
 		}
 	],
 	"key": "InvokeSqlServerScript",
@@ -326,6 +364,8 @@
 		{
 			"description": [
 				"Decodes the CommandText value from UTF-8 Base64 before the script is split into batches.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
+				"A macro result becomes part of the SQL text, so values that come from outside the automation belong in the Parameters argument instead.",
 				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
 				"Only CommandText is decoded, so CommandFile content is always read as plain text.",
 				"Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL."
@@ -427,5 +467,5 @@
 		"Applies deployments, migrations, and seed data in order, with an optional transaction that rolls back every batch on failure.",
 		"Reports the batch count and changed rows as session parameters so later steps can verify the run."
 	],
-	"version": "4"
+	"version": "5"
 }

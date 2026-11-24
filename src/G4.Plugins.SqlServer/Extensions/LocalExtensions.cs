@@ -81,6 +81,40 @@ namespace G4.Plugins.SqlServer.Extensions
             }
 
             /// <summary>
+            /// Resolves the command text of the step, then resolves the macros of decoded <c>CommandText</c>.
+            /// </summary>
+            /// <remarks>
+            /// Follows the contract of <see cref="ResolveCommandText()"/>. The engine resolves the macros of a rule
+            /// before the plugin runs, when a Base64 value still hides them, so the macros of decoded
+            /// <c>CommandText</c> are resolved here. Plain <c>CommandText</c> is returned as is, because its macros are
+            /// already resolved, and <c>CommandFile</c> content keeps its macros as written. A macro result becomes
+            /// part of the SQL text; values that come from outside the automation belong in the <c>Parameters</c>
+            /// argument instead.
+            /// </remarks>
+            /// <param name="plugin">The plugin that runs the step; its invoker resolves the decoded macros.</param>
+            /// <returns>The command text.</returns>
+            public string ResolveCommandText(PluginBase plugin)
+            {
+                // Read the command text through the decoding contract, so the inline, file, and Base64 rules stay in
+                // one place.
+                var commandText = pluginData.ResolveCommandText();
+
+                // Detect decoded text: the Base64 switch is set and the inline text, which wins over the file, is
+                // present.
+                var inlineText = pluginData.Parameters.Get(key: "CommandText", defaultValue: string.Empty);
+                var isDecoded = !string.IsNullOrWhiteSpace(inlineText) && pluginData.TestSwitch(name: "Base64");
+
+                // Return plain text or file content as is, because its macros are already resolved or kept as written.
+                if (!isDecoded)
+                {
+                    return commandText;
+                }
+
+                // Resolve the decoded macros through the invoker, so each macro is reported like the rule-level pass.
+                return plugin.Invoker.ResolveMacros(plugin, pluginData.Rule, input: commandText);
+            }
+
+            /// <summary>
             /// Resolves the command timeout, in seconds, from the <c>CommandTimeout</c> argument.
             /// </summary>
             /// <remarks>

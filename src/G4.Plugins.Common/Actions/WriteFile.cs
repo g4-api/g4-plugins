@@ -35,9 +35,11 @@ namespace G4.Plugins.Common.Actions
                 ? Path.GetFullPath(path, Directory.GetCurrentDirectory())
                 : Path.GetFullPath(path);
 
-            // Decode Base64 content before applying optional encryption.
+            // Decode Base64 content before applying optional encryption. The engine resolved the macros of the rule
+            // before the content was decoded, so the macros of the decoded content are resolved here; plain content
+            // is left as is, because its macros are already resolved.
             var value = isBase64
-                ? content.ConvertFromBase64()
+                ? Invoker.ResolveMacros(plugin: this, pluginData.Rule, input: content.ConvertFromBase64())
                 : content;
 
             if (!string.IsNullOrEmpty(encryptionKey))

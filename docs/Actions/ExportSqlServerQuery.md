@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~22 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~25 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -269,6 +269,58 @@ action_rule = {
 }
 ```
 
+### Example No.5
+
+### Export today's orders with a Base64 query that holds a macro
+
+The argument binds the `sql-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.
+The decoded SQL holds a ` --` comment and a New-Date macro; the macro is resolved after decoding, so the server receives the current date: `SELECT Id, Status FROM dbo.Orders -- orders created today` and the lines after it.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "ExportSqlServerQuery",
+    Argument = "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBTdGF0dXMgRlJPTSBkYm8uT3JkZXJzIC0tIG9yZGVycyBjcmVhdGVkIHRvZGF5CldIRVJFIENyZWF0ZWRPbiA+PSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyBPUkRFUiBCWSBJZA== --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("ExportSqlServerQuery")
+    .setArgument("{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBTdGF0dXMgRlJPTSBkYm8uT3JkZXJzIC0tIG9yZGVycyBjcmVhdGVkIHRvZGF5CldIRVJFIENyZWF0ZWRPbiA+PSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyBPUkRFUiBCWSBJZA== --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "ExportSqlServerQuery",
+    argument: "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBTdGF0dXMgRlJPTSBkYm8uT3JkZXJzIC0tIG9yZGVycyBjcmVhdGVkIHRvZGF5CldIRVJFIENyZWF0ZWRPbiA+PSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyBPUkRFUiBCWSBJZA== --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "ExportSqlServerQuery",
+    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBTdGF0dXMgRlJPTSBkYm8uT3JkZXJzIC0tIG9yZGVycyBjcmVhdGVkIHRvZGF5CldIRVJFIENyZWF0ZWRPbiA+PSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyBPUkRFUiBCWSBJZA== --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "ExportSqlServerQuery",
+    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBTdGF0dXMgRlJPTSBkYm8uT3JkZXJzIC0tIG9yZGVycyBjcmVhdGVkIHRvZGF5CldIRVJFIENyZWF0ZWRPbiA+PSAne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19JyBPUkRFUiBCWSBJZA== --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Export Sql Server Query Columns (ExportSqlServerQuery:Columns)
@@ -336,6 +388,8 @@ Lets later steps check for an empty result or an expected size without parsing t
 | **Value Type**    | Switch            |
 
 Decodes the CommandText value from UTF-8 Base64 before the query runs.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
+A macro result becomes part of the SQL text, so values that come from outside the automation belong in the Parameters argument instead.
 Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.
 Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.
 Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL.

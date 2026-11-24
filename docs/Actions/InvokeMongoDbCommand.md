@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~26 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -308,6 +308,58 @@ action_rule = {
 }
 ```
 
+### Example No.6
+
+### Count today's orders with a Base64 command that holds a macro
+
+The argument binds the `mongo-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.
+The decoded payload is `{"count":"orders","query":{"createdOn":{"$gte":"{{$New-Date --Format:yyyy-MM-dd}}"}}}`; the New-Date macro is resolved after decoding, so the server receives the current date.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeMongoDbCommand",
+    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb3VudCI6Im9yZGVycyIsInF1ZXJ5Ijp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fQ== --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeMongoDbCommand")
+    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb3VudCI6Im9yZGVycyIsInF1ZXJ5Ijp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fQ== --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeMongoDbCommand",
+    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb3VudCI6Im9yZGVycyIsInF1ZXJ5Ijp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fQ== --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeMongoDbCommand",
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb3VudCI6Im9yZGVycyIsInF1ZXJ5Ijp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fQ== --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeMongoDbCommand",
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:eyJjb3VudCI6Im9yZGVycyIsInF1ZXJ5Ijp7ImNyZWF0ZWRPbiI6eyIkZ3RlIjoie3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19In19fQ== --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Mongo Db Command Database (InvokeMongoDbCommand:Database)
@@ -365,6 +417,7 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 | **Value Type**    | Switch            |
 
 Reads CommandText as UTF-8 Base64 and decodes it before use.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 Use it for a payload that contains ` --` or `}}`, which end an inline argument value.
 Invalid Base64 fails the step, so an encoded payload never reaches the server as text.
 

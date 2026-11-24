@@ -78,6 +78,10 @@
 					{
 						"question": "How does GetSqlServerScalar handle errors and empty results?",
 						"answer": "A query that returns no row or NULL stores an empty value, while SQL errors, timeouts, a missing query, a CommandText that is not valid Base64 while the Base64 switch is set, or invalid Parameters JSON fail the step."
+					},
+					{
+						"question": "Are macros resolved inside Base64-encoded CommandText?",
+						"answer": "Yes. With the Base64 switch set, the action decodes CommandText and then resolves its macros, because the engine cannot see macros while the value is encoded. CommandFile content keeps its macros as written, and values from outside the automation belong in Parameters."
 					}
 				]
 			},
@@ -280,6 +284,40 @@
 				"argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIENPVU5UKCopIEZST00gZGJvLk9yZGVycyAtLSBvcGVuIG9yZGVycyBvbmx5CldIRVJFIFN0YXR1cyA9ICdPcGVuJw== --Base64}}",
 				"pluginName": "GetSqlServerScalar"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"The SQL comes from CommandFile, so its macros are kept as written"
+					],
+					"expected_result": "The step stores the number of orders created today in `GetSqlServerScalar:Value`.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded CommandText itself. The date comes from the automation, so composing it into the SQL text is safe; values from outside the automation belong in Parameters.",
+					"use_case": "get_scalar_from_base64_query_with_macro",
+					"version": "5"
+				},
+				"labels": [
+					"Base64",
+					"Credentials",
+					"Database",
+					"Macro",
+					"Query",
+					"SqlServer"
+				]
+			},
+			"description": [
+				"### Count today's orders with a Base64 query that holds a macro",
+				"",
+				"The argument binds the `sql-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.",
+				"The decoded SQL holds a ` --` comment and a New-Date macro; the macro is resolved after decoding, so the server receives the current date: `SELECT COUNT(*) FROM dbo.Orders -- orders created today` and the lines after it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIENPVU5UKCopIEZST00gZGJvLk9yZGVycyAtLSBvcmRlcnMgY3JlYXRlZCB0b2RheQpXSEVSRSBDcmVhdGVkT24gPj0gJ3t7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSc= --Base64}}",
+				"pluginName": "GetSqlServerScalar"
+			}
 		}
 	],
 	"key": "GetSqlServerScalar",
@@ -300,6 +338,8 @@
 		{
 			"description": [
 				"Decodes the CommandText value from UTF-8 Base64 before the query runs.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
+				"A macro result becomes part of the SQL text, so values that come from outside the automation belong in the Parameters argument instead.",
 				"Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.",
 				"Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.",
 				"Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL."
@@ -399,5 +439,5 @@
 		"Binds input values through a JSON parameters object, so they never become part of the SQL text.",
 		"Connects with a stored credentials name or a full ADO.NET connection string, and stores the value as a session parameter for later steps."
 	],
-	"version": "4"
+	"version": "5"
 }

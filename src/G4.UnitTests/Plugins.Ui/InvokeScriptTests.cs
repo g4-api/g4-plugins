@@ -306,6 +306,22 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.Throws<WebDriverException>(() => Invoke<InvokeScript>(ruleModel));
         }
 
+        [TestMethod(DisplayName = "Verify the InvokeScript method resolves the macros of a Base64 script block " +
+            "after decoding it, keeping the rest of the script as is.")]
+        public void InvokeScriptBase64MacroTest()
+        {
+            // Arrange: encode a script whose macro and inline flags the engine cannot see while it is encoded.
+            const string script = "run('--myParam', '{{$Convert-Number --Number:255 --To:Hex --Case:Upper}}');";
+            var ruleJson = @"{""argument"":""{{$ --ScriptBlock:" + script.ConvertToBase64() + @" --Base64}}""}";
+            var driver = new RecordingSimulatorDriver();
+
+            // Act: invoke the plugin on a driver that records the script it receives.
+            Invoke<InvokeScript>(driver, ruleJson);
+
+            // Assert: the driver received the decoded script with the macro replaced by its result.
+            Assert.AreEqual(expected: "run('--myParam', 'FF');", actual: driver.Script);
+        }
+
         [TestMethod(DisplayName = "Verify the InvokeScript method injects the context element as " +
             "arguments[0] when OnElement is '.'.")]
         public void InvokeScriptContextElementTest()
@@ -475,6 +491,9 @@ namespace G4.UnitTests.Plugins.Ui
         // interface so the plugin's calls through IWebDriver reach the recording method.
         private sealed class RecordingSimulatorDriver() : SimulatorDriver(NewSession()), IJavaScriptInvoker
         {
+            // Gets the script text of the last script call.
+            public string Script { get; private set; } = string.Empty;
+
             // Gets the arguments of the last script call.
             public object[] ScriptArguments { get; private set; } = [];
 
@@ -482,10 +501,11 @@ namespace G4.UnitTests.Plugins.Ui
             // keep their result.
             public object ScriptResult { get; set; } = "complete";
 
-            // Records the script arguments and returns the configured result. The simulator resolves its script
-            // handlers from the runtime type, so a derived driver cannot delegate the call to the base driver.
+            // Records the script and its arguments and returns the configured result. The simulator resolves its
+            // script handlers from the runtime type, so a derived driver cannot delegate the call to the base driver.
             public new object InvokeScript(string script, params object[] args)
             {
+                Script = script;
                 ScriptArguments = args ?? [];
                 return ScriptResult;
             }

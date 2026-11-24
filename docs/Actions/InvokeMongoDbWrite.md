@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~26 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -310,6 +310,58 @@ action_rule = {
 }
 ```
 
+### Example No.6
+
+### Stamp open orders with a Base64 update document that holds a macro
+
+The argument binds the `mongo-production` credentials, a plain filter, a Base64 update document, and the DocumentBase64 switch at runtime.
+The decoded document is `{"$set":{"reviewedOn":"{{$New-Date --Format:yyyy-MM-dd}}"}}`; the New-Date macro is resolved after decoding, so every open order carries the current date.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeMongoDbWrite",
+    Argument = "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeMongoDbWrite")
+    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeMongoDbWrite",
+    argument: "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeMongoDbWrite",
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeMongoDbWrite",
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Mongo Db Write Deleted Count (InvokeMongoDbWrite:DeletedCount)
@@ -406,6 +458,7 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 | **Value Type**    | Switch            |
 
 Reads CommandText as UTF-8 Base64 and decodes it before use.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 Use it for a payload that contains ` --` or `}}`, which end an inline argument value.
 Invalid Base64 fails the step, so an encoded payload never reaches the server as text.
 
@@ -532,6 +585,7 @@ Required for every operation except a delete, and encodable through DocumentBase
 | **Value Type**    | Switch            |
 
 Reads Document as UTF-8 Base64 and decodes it before use.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 An update document such as `{"$set":{...}}` ends in two closing braces, which end an inline argument value, so it travels encoded or through DocumentFile.
 Invalid Base64 fails the step, so an encoded document never reaches the server as text.
 

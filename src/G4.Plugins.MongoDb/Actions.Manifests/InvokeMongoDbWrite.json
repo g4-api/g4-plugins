@@ -82,6 +82,10 @@
 					{
 						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMongoDbWrite.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.MongoDb/Actions/InvokeMongoDbWrite.cs.",
 						"question": "Where are the InvokeMongoDbWrite documentation and source code?"
+					},
+					{
+						"question": "Are macros resolved inside a Base64-encoded update document?",
+						"answer": "Yes. With the DocumentBase64 switch set, the action decodes Document and then resolves its macros; the Base64 switch does the same for CommandText. File content keeps its macros as written."
 					}
 				]
 			},
@@ -355,6 +359,40 @@
 				"argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{\"sku\":\"A-1\",\"total\":10}}}",
 				"pluginName": "InvokeMongoDbWrite"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"DocumentBase64 switch is absent, so the macro inside the encoded document stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"The document comes from DocumentFile, so its macros are kept as written"
+					],
+					"expected_result": "Every open order carries the current date in reviewedOn, and the matched and modified counts are stored.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps the closing braces of the JSON from ending the inline argument value. The plain CommandText filter had its macros resolved by the engine already.",
+					"use_case": "update_base64_document_with_macro",
+					"version": "5"
+				},
+				"labels": [
+					"Base64",
+					"Database",
+					"Macro",
+					"MongoDb",
+					"Update",
+					"Write"
+				]
+			},
+			"description": [
+				"### Stamp open orders with a Base64 update document that holds a macro",
+				"",
+				"The argument binds the `mongo-production` credentials, a plain filter, a Base64 update document, and the DocumentBase64 switch at runtime.",
+				"The decoded document is `{\"$set\":{\"reviewedOn\":\"{{$New-Date --Format:yyyy-MM-dd}}\"}}`; the New-Date macro is resolved after decoding, so every open order carries the current date."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}",
+				"pluginName": "InvokeMongoDbWrite"
+			}
 		}
 	],
 	"key": "InvokeMongoDbWrite",
@@ -416,6 +454,7 @@
 		{
 			"description": [
 				"Reads CommandText as UTF-8 Base64 and decodes it before use.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
 				"Use it for a payload that contains ` --` or `}}`, which end an inline argument value.",
 				"Invalid Base64 fails the step, so an encoded payload never reaches the server as text."
 			],
@@ -507,6 +546,7 @@
 		{
 			"description": [
 				"Reads Document as UTF-8 Base64 and decodes it before use.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
 				"An update document such as `{\"$set\":{...}}` ends in two closing braces, which end an inline argument value, so it travels encoded or through DocumentFile.",
 				"Invalid Base64 fails the step, so an encoded document never reaches the server as text."
 			],
@@ -623,5 +663,5 @@
 		"Binds the filter and the document as BSON, so no value is ever composed into a command.",
 		"Stores the matched, modified, inserted, deleted, and upserted counts as session parameters, so a flow reads one output shape for every operation."
 	],
-	"version": "4"
+	"version": "5"
 }

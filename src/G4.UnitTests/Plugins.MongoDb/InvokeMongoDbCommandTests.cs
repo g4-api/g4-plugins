@@ -190,6 +190,32 @@ namespace G4.UnitTests.Plugins.MongoDb
             Assert.Contains("priority_1", MongoDbTestContainer.GetIndexNames(Collection));
         }
 
+        [TestMethod(DisplayName = "Verify that InvokeMongoDbCommand resolves the macros of a Base64-encoded command " +
+            "document after decoding it, so the server runs the macro result.")]
+        [TestCategory("MongoDbLive")]
+        [DoNotParallelize]
+        public void InvokeMongoDbCommandBase64MacroTest()
+        {
+            // Arrange: start from a collection that holds one document, so the index has something to index.
+            MongoDbTestContainer.Drop(Collection);
+            MongoDbTestContainer.Insert(Collection, [new BsonDocument { ["priority"] = 1 }]);
+
+            // Arrange: encode a command whose index name is a macro the engine cannot see while it is encoded.
+            var command = $"{{\"createIndexes\":\"{Collection}\",\"indexes\":[{{\"key\":{{\"priority\":1}}," +
+                "\"name\":\"{{$Convert-Number --Number:255 --To:Hex --Case:Upper}}\"}]}";
+            var rule = NewRule(arguments: $"{NewConnectionArgument()} --CommandText:{command.ConvertToBase64()} " +
+                "--Base64");
+
+            // Act: run the encoded command through the plugin.
+            var result = Invoke<InvokeMongoDbCommand>(rule);
+
+            // Assert: the server reported the command as successful.
+            Assert.AreEqual(expected: "true", actual: $"{result.Response.Entity["Ok"]}");
+
+            // Assert: the index carries the macro result as its name, so the macro was resolved after the decode.
+            Assert.Contains("FF", MongoDbTestContainer.GetIndexNames(Collection));
+        }
+
         [TestMethod(DisplayName = "Verify that InvokeMongoDbCommand fails when the Base64 switch is set and the " +
             "command document is not valid Base64.")]
         public void InvokeMongoDbCommandInvalidBase64Test()

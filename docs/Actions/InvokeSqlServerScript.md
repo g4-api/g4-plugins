@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~25 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~28 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -301,6 +301,58 @@ action_rule = {
 }
 ```
 
+### Example No.5
+
+### Log a run with a Base64 script that holds a macro
+
+The argument binds the `sql-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.
+The decoded SQL holds a ` --` comment and a New-Date macro; the macro is resolved after decoding, so the server receives the current date: `INSERT INTO dbo.RunLog (RunDate) VALUES ('{{$New-Date --Format:yyyy-MM-dd}}'); -- one row per run` and the lines after it.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeSqlServerScript",
+    Argument = "{{$ --Credentials:sql-production --CommandText:SU5TRVJUIElOVE8gZGJvLlJ1bkxvZyAoUnVuRGF0ZSkgVkFMVUVTICgne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19Jyk7IC0tIG9uZSByb3cgcGVyIHJ1bgpHTwpERUxFVEUgRlJPTSBkYm8uUnVuTG9nIFdIRVJFIFJ1bkRhdGUgPCBEQVRFQUREKGRheSwgLTMwLCBHRVREQVRFKCkpOw== --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeSqlServerScript")
+    .setArgument("{{$ --Credentials:sql-production --CommandText:SU5TRVJUIElOVE8gZGJvLlJ1bkxvZyAoUnVuRGF0ZSkgVkFMVUVTICgne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19Jyk7IC0tIG9uZSByb3cgcGVyIHJ1bgpHTwpERUxFVEUgRlJPTSBkYm8uUnVuTG9nIFdIRVJFIFJ1bkRhdGUgPCBEQVRFQUREKGRheSwgLTMwLCBHRVREQVRFKCkpOw== --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeSqlServerScript",
+    argument: "{{$ --Credentials:sql-production --CommandText:SU5TRVJUIElOVE8gZGJvLlJ1bkxvZyAoUnVuRGF0ZSkgVkFMVUVTICgne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19Jyk7IC0tIG9uZSByb3cgcGVyIHJ1bgpHTwpERUxFVEUgRlJPTSBkYm8uUnVuTG9nIFdIRVJFIFJ1bkRhdGUgPCBEQVRFQUREKGRheSwgLTMwLCBHRVREQVRFKCkpOw== --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeSqlServerScript",
+    "argument": "{{$ --Credentials:sql-production --CommandText:SU5TRVJUIElOVE8gZGJvLlJ1bkxvZyAoUnVuRGF0ZSkgVkFMVUVTICgne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19Jyk7IC0tIG9uZSByb3cgcGVyIHJ1bgpHTwpERUxFVEUgRlJPTSBkYm8uUnVuTG9nIFdIRVJFIFJ1bkRhdGUgPCBEQVRFQUREKGRheSwgLTMwLCBHRVREQVRFKCkpOw== --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeSqlServerScript",
+    "argument": "{{$ --Credentials:sql-production --CommandText:SU5TRVJUIElOVE8gZGJvLlJ1bkxvZyAoUnVuRGF0ZSkgVkFMVUVTICgne3skTmV3LURhdGUgLS1Gb3JtYXQ6eXl5eS1NTS1kZH19Jyk7IC0tIG9uZSByb3cgcGVyIHJ1bgpHTwpERUxFVEUgRlJPTSBkYm8uUnVuTG9nIFdIRVJFIFJ1bkRhdGUgPCBEQVRFQUREKGRheSwgLTMwLCBHRVREQVRFKCkpOw== --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Sql Server Script Batch Count (InvokeSqlServerScript:BatchCount)
@@ -345,6 +397,8 @@ Stored as a Base64-encoded session parameter, so decode it before use.
 | **Value Type**    | Switch            |
 
 Decodes the CommandText value from UTF-8 Base64 before the script is split into batches.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
+A macro result becomes part of the SQL text, so values that come from outside the automation belong in the Parameters argument instead.
 Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.
 Only CommandText is decoded, so CommandFile content is always read as plain text.
 Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL.

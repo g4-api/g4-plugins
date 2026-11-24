@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~28 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~31 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -471,6 +471,58 @@ action_rule = {
 }
 ```
 
+### Example No.8
+
+### Resolve a macro inside a Base64-encoded script block
+
+Passes a Base64 script whose decoded text holds a Get-Parameter macro and a `--` comment, and enables the Base64 switch.
+The decoded script is `document.querySelector('#InputEnabled').value = '{{$Get-Parameter --Name:CustomerName}}'; // -- set from the session`; the macro is resolved after decoding, so the input receives the CustomerName session parameter.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeScript",
+    Argument = "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeScript")
+    .setArgument("{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeScript",
+    argument: "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeScript",
+    "argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeScript",
+    "argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Invoke Script Script Result (InvokeScript:ScriptResult)
@@ -577,6 +629,7 @@ When Arguments is absent or not valid JSON an empty array is used and no custom 
 | **Value Type**    | Switch            |
 
 Base64 decodes the ScriptBlock value from Base64 before the script runs.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 Encoding the script as Base64 matters because it can carry characters that the command-line parser would otherwise split or misread.
 When the switch is absent the script value runs exactly as provided.
 Invalid Base64 input is left unchanged and runs as-is, so a malformed value raises no error.

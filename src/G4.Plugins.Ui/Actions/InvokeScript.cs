@@ -51,8 +51,10 @@ namespace G4.Plugins.Ui.Actions
             // Decode the script from Base64 when the Base64 switch is provided so a script carrying characters
             // the CLI parser would otherwise split can be supplied safely as a single encoded value.
             // ConvertFromBase64 returns the original text on a decoding failure, leaving invalid input untouched.
+            // The engine resolved the macros of the rule before the script was decoded, so the macros of the decoded
+            // script are resolved here; a plain script is left as is, because its macros are already resolved.
             script = pluginData.Parameters.ContainsKey(key: "Base64")
-                ? script.ConvertFromBase64()
+                ? Invoker.ResolveMacros(plugin: this, pluginData.Rule, input: script.ConvertFromBase64())
                 : script;
 
             // Resolve the element to inject as arguments[0]; the context element is passed only on request

@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~21 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~24 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -294,6 +294,58 @@ action_rule = {
 }
 ```
 
+### Example No.6
+
+### Write Base64 content that holds a macro
+
+Passes the content as Base64 because it holds a `--` sequence that would end the inline argument value, and enables the Base64 switch.
+The decoded content is `Daily report -- generated on {{$New-Date --Format:yyyy-MM-dd}}`; the New-Date macro is resolved after decoding, so the file holds the current date.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "WriteFile",
+    Argument = "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("WriteFile")
+    .setArgument("{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "WriteFile",
+    argument: "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "WriteFile",
+    "argument": "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "WriteFile",
+    "argument": "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+}
+```
+
 ## Properties
 
 ### Argument (Argument)
@@ -359,6 +411,7 @@ Treats `Path` as relative to the process working directory when present.
 | **Value Type**    | Switch            |
 
 Decodes `Content` with `ConvertFromBase64()` before any encryption and file writing.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 
 ### Encryption Key (EncryptionKey)
 

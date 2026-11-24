@@ -57,6 +57,10 @@
 					{
 						"question": "How is only part of the script result kept?",
 						"answer": "Set the RegularExpression property. The action keeps the first match of the pattern in the script result and stores it as ScriptResult; a result that is not a string is written as JSON before the match, and no match stores an empty string."
+					},
+					{
+						"question": "Are macros resolved inside a Base64-encoded script block?",
+						"answer": "Yes. With the Base64 switch set, the action decodes the ScriptBlock value and then resolves the macros in the decoded script, because the engine resolves the macros of a rule before the action runs and cannot see them while the value is encoded."
 					}
 				]
 			},
@@ -378,6 +382,39 @@
 				"pluginName": "InvokeScript",
 				"regularExpression": "(?<=://)[^/]+"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Base64 switch is absent, so the macro inside the encoded text stays hidden and is not resolved",
+						"Value is passed plain, so the engine resolves its macros before the plugin runs",
+						"CustomerName is not set, so the macro resolves to an empty value"
+					],
+					"expected_result": "The input element #InputEnabled receives the value of the CustomerName session parameter.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so InvokeScript resolves the macros of the decoded script itself. Encoding keeps the ` --` comment from ending the inline argument value.",
+					"use_case": "base64_script_block_with_macro",
+					"version": "7"
+				},
+				"labels": [
+					"Base64",
+					"JavaScript",
+					"Macro",
+					"NoElement",
+					"ScriptBlock"
+				]
+			},
+			"description": [
+				"### Resolve a macro inside a Base64-encoded script block",
+				"",
+				"Passes a Base64 script whose decoded text holds a Get-Parameter macro and a `--` comment, and enables the Base64 switch.",
+				"The decoded script is `document.querySelector('#InputEnabled').value = '{{$Get-Parameter --Name:CustomerName}}'; // -- set from the session`; the macro is resolved after decoding, so the input receives the CustomerName session parameter."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --ScriptBlock:ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignI0lucHV0RW5hYmxlZCcpLnZhbHVlID0gJ3t7JEdldC1QYXJhbWV0ZXIgLS1OYW1lOkN1c3RvbWVyTmFtZX19JzsgLy8gLS0gc2V0IGZyb20gdGhlIHNlc3Npb24= --Base64}}",
+				"pluginName": "InvokeScript"
+			}
 		}
 	],
 	"key": "InvokeScript",
@@ -397,6 +434,7 @@
 		{
 			"description": [
 				"Base64 decodes the ScriptBlock value from Base64 before the script runs.",
+				"After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.",
 				"Encoding the script as Base64 matters because it can carry characters that the command-line parser would otherwise split or misread.",
 				"When the switch is absent the script value runs exactly as provided.",
 				"Invalid Base64 input is left unchanged and runs as-is, so a malformed value raises no error."
@@ -489,5 +527,5 @@
 		"In RPA it enables DOM manipulation, data extraction, dynamic interactions, and JavaScript utility execution; in automation testing it supports DOM state validation, pre-condition setup, script return value assertions, and custom event simulation.",
 		"The script return value is stored in the session parameter ScriptResult and is immediately available to downstream rules."
 	],
-	"version": "6"
+	"version": "7"
 }

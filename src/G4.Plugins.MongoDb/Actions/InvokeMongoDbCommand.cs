@@ -23,7 +23,7 @@ namespace G4.Plugins.MongoDb.Actions
         {
             // Resolve the connection and the command document before opening any resource.
             var connectionModel = pluginData.ResolveConnection();
-            var json = pluginData.ResolveCommandText();
+            var json = pluginData.ResolveCommandText(plugin: this);
             var noEntity = pluginData.TestSwitch(name: "NoEntity");
 
             // Reject a step without a command so the failure names the missing argument.

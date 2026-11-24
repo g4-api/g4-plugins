@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -256,6 +256,58 @@ action_rule = {
 }
 ```
 
+### Example No.5
+
+### Count today's orders with a Base64 query that holds a macro
+
+The argument binds the `sql-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.
+The decoded SQL holds a ` --` comment and a New-Date macro; the macro is resolved after decoding, so the server receives the current date: `SELECT COUNT(*) FROM dbo.Orders -- orders created today` and the lines after it.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "GetSqlServerScalar",
+    Argument = "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIENPVU5UKCopIEZST00gZGJvLk9yZGVycyAtLSBvcmRlcnMgY3JlYXRlZCB0b2RheQpXSEVSRSBDcmVhdGVkT24gPj0gJ3t7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSc= --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("GetSqlServerScalar")
+    .setArgument("{{$ --Credentials:sql-production --CommandText:U0VMRUNUIENPVU5UKCopIEZST00gZGJvLk9yZGVycyAtLSBvcmRlcnMgY3JlYXRlZCB0b2RheQpXSEVSRSBDcmVhdGVkT24gPj0gJ3t7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSc= --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "GetSqlServerScalar",
+    argument: "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIENPVU5UKCopIEZST00gZGJvLk9yZGVycyAtLSBvcmRlcnMgY3JlYXRlZCB0b2RheQpXSEVSRSBDcmVhdGVkT24gPj0gJ3t7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSc= --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "GetSqlServerScalar",
+    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIENPVU5UKCopIEZST00gZGJvLk9yZGVycyAtLSBvcmRlcnMgY3JlYXRlZCB0b2RheQpXSEVSRSBDcmVhdGVkT24gPj0gJ3t7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSc= --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "GetSqlServerScalar",
+    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIENPVU5UKCopIEZST00gZGJvLk9yZGVycyAtLSBvcmRlcnMgY3JlYXRlZCB0b2RheQpXSEVSRSBDcmVhdGVkT24gPj0gJ3t7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSc= --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Get Sql Server Scalar Value (GetSqlServerScalar:Value)
@@ -286,6 +338,8 @@ The session value is Base64-encoded, so decode it before use.
 | **Value Type**    | Switch            |
 
 Decodes the CommandText value from UTF-8 Base64 before the query runs.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
+A macro result becomes part of the SQL text, so values that come from outside the automation belong in the Parameters argument instead.
 Encoding the SQL as Base64 lets inline text that contains a space followed by two dashes or a double closing brace travel safely, because those sequences otherwise end an inline argument value.
 Only CommandText is decoded, so CommandFile content is always read as plain text and the Parameters JSON stays plain.
 Invalid Base64 fails the step before anything is sent to SQL Server, so encoded text never runs as SQL.

@@ -2,7 +2,7 @@
 
 [Table of Content](../Home.md)
 
-~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~26 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
@@ -307,6 +307,58 @@ action_rule = {
 }
 ```
 
+### Example No.6
+
+### Export today's orders with a Base64 filter that holds a macro
+
+The argument binds the `mongo-production` credentials, a Base64 CommandText, and the Base64 switch at runtime.
+The decoded payload is `{"createdOn":{"$gte":"{{$New-Date --Format:yyyy-MM-dd}}"}}`; the New-Date macro is resolved after decoding, so the server receives the current date.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "ExportMongoDbQuery",
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJjcmVhdGVkT24iOnsiJGd0ZSI6Int7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSJ9fQ== --Base64}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("ExportMongoDbQuery")
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJjcmVhdGVkT24iOnsiJGd0ZSI6Int7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSJ9fQ== --Base64}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "ExportMongoDbQuery",
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJjcmVhdGVkT24iOnsiJGd0ZSI6Int7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSJ9fQ== --Base64}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "ExportMongoDbQuery",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJjcmVhdGVkT24iOnsiJGd0ZSI6Int7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSJ9fQ== --Base64}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "ExportMongoDbQuery",
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:eyJjcmVhdGVkT24iOnsiJGd0ZSI6Int7JE5ldy1EYXRlIC0tRm9ybWF0Onl5eXktTU0tZGR9fSJ9fQ== --Base64}}"
+}
+```
+
 ## Output Parameter
 
 ### Export Mongo Db Query Columns (ExportMongoDbQuery:Columns)
@@ -364,6 +416,7 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 | **Value Type**    | Switch            |
 
 Reads CommandText as UTF-8 Base64 and decodes it before use.
+After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
 Use it for a payload that contains ` --` or `}}`, which end an inline argument value.
 Invalid Base64 fails the step, so an encoded payload never reaches the server as text.
 
