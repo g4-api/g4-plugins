@@ -91,7 +91,7 @@ Transaction commits after the last batch succeeds and rolls back every batch whe
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerScript",
-    Argument = "{{$ --CommandFile:C:\Scripts\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
+    Argument = "{{$ --CommandFile:C:\\Scripts\\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
 };
 ```
 
@@ -100,7 +100,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerScript")
-    .setArgument("{{$ --CommandFile:C:\Scripts\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}");
+    .setArgument("{{$ --CommandFile:C:\\Scripts\\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}");
 ```
 
 **Javascript:**
@@ -108,7 +108,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerScript",
-    argument: "{{$ --CommandFile:C:\Scripts\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
+    argument: "{{$ --CommandFile:C:\\Scripts\\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
 };
 ```
 
@@ -117,7 +117,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerScript",
-    "argument": "{{$ --CommandFile:C:\Scripts\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
+    "argument": "{{$ --CommandFile:C:\\Scripts\\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
 }
 ```
 
@@ -126,7 +126,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerScript",
-    "argument": "{{$ --CommandFile:C:\Scripts\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
+    "argument": "{{$ --CommandFile:C:\\Scripts\\deploy.sql --Credentials:sql-production --Transaction --CommandTimeout:120}}"
 }
 ```
 
@@ -143,10 +143,7 @@ The Credentials value is a raw connection string to localhost,1433, which the st
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerScript",
-    Argument = "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);
-GO
-INSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());
-GO 5 --NoEntity}}"
+    Argument = "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);\nGO\nINSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());\nGO 5 --NoEntity}}"
 };
 ```
 
@@ -155,10 +152,7 @@ GO 5 --NoEntity}}"
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerScript")
-    .setArgument("{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);
-GO
-INSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());
-GO 5 --NoEntity}}");
+    .setArgument("{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);\nGO\nINSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());\nGO 5 --NoEntity}}");
 ```
 
 **Javascript:**
@@ -166,10 +160,7 @@ GO 5 --NoEntity}}");
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerScript",
-    argument: "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);
-GO
-INSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());
-GO 5 --NoEntity}}"
+    argument: "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);\nGO\nINSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());\nGO 5 --NoEntity}}"
 };
 ```
 
@@ -178,10 +169,7 @@ GO 5 --NoEntity}}"
 ```js
 {
     "pluginName": "InvokeSqlServerScript",
-    "argument": "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);
-GO
-INSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());
-GO 5 --NoEntity}}"
+    "argument": "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);\nGO\nINSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());\nGO 5 --NoEntity}}"
 }
 ```
 
@@ -190,10 +178,7 @@ GO 5 --NoEntity}}"
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerScript",
-    "argument": "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);
-GO
-INSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());
-GO 5 --NoEntity}}"
+    "argument": "{{$ --Credentials:Server=localhost,1433;Database=QaSandbox;Integrated Security=true;TrustServerCertificate=true --CommandText:IF OBJECT_ID(N'dbo.LoadProbe') IS NULL CREATE TABLE dbo.LoadProbe (Id INT IDENTITY PRIMARY KEY, CreatedAt DATETIME2 NOT NULL);\nGO\nINSERT INTO dbo.LoadProbe (CreatedAt) VALUES (SYSUTCDATETIME());\nGO 5 --NoEntity}}"
 }
 ```
 
@@ -262,7 +247,7 @@ The nightly load script runs in one transaction with a five-minute timeout, so a
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerScript",
-    Argument = "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
+    Argument = "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\\Scripts\\nightly-load.sql --Transaction --CommandTimeout:300}}"
 };
 ```
 
@@ -271,7 +256,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerScript")
-    .setArgument("{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}");
+    .setArgument("{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\\Scripts\\nightly-load.sql --Transaction --CommandTimeout:300}}");
 ```
 
 **Javascript:**
@@ -279,7 +264,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerScript",
-    argument: "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
+    argument: "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\\Scripts\\nightly-load.sql --Transaction --CommandTimeout:300}}"
 };
 ```
 
@@ -288,7 +273,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerScript",
-    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
+    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\\Scripts\\nightly-load.sql --Transaction --CommandTimeout:300}}"
 }
 ```
 
@@ -297,7 +282,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerScript",
-    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\Scripts\nightly-load.sql --Transaction --CommandTimeout:300}}"
+    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Warehouse;Integrated Security=true;TrustServerCertificate=true --CommandFile:C:\\Scripts\\nightly-load.sql --Transaction --CommandTimeout:300}}"
 }
 ```
 
@@ -405,13 +390,13 @@ Invalid Base64 fails the step before anything is sent to SQL Server, so encoded 
 
 ### Command File (CommandFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Points to a UTF-8 .sql file that holds the script, such as C:\Scripts\deploy.sql.
 Supports long multi-line scripts, SQL comments, and characters that cannot travel inside an inline argument.
@@ -420,13 +405,13 @@ Macros inside the file are not resolved, because the file is read only when the 
 
 ### Command Text (CommandText)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the script inline, with batches separated by lines that hold only GO or GO followed by a repeat count.
 Takes priority over CommandFile, and one of the two is required.
@@ -449,13 +434,13 @@ Missing, negative, or non-numeric values fall back to the 30-second default.
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -463,13 +448,13 @@ Every connection setting, such as the server, the database, the login, and the e
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.
 The record carries the server, port, database, login, and encryption settings, so the step never repeats them.
@@ -491,13 +476,13 @@ Session parameters such as InvokeSqlServerScript:BatchCount are still written.
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a raw Microsoft Entra access token that signs in the connection.
 Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.

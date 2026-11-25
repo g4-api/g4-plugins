@@ -49,7 +49,7 @@ var actionRule = new ActionRuleModel
     PluginName = "Assert",
     Argument = "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     OnElement = "//*[@id='numericTextElement']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -60,7 +60,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:ElementText --Operator:Equal --Expected:123}}")
     .setOnElement("//*[@id='numericTextElement']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -70,7 +70,7 @@ var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     onElement: "//*[@id='numericTextElement']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -81,7 +81,7 @@ var actionRule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     "onElement": "//*[@id='numericTextElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -92,7 +92,7 @@ action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:Equal --Expected:123}}",
     "onElement": "//*[@id='numericTextElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -165,7 +165,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:Greater --Expected:100}}",
     Locator = "CssSelector",
     OnElement = ".price",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -177,7 +177,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:Greater --Expected:100}}")
     .setLocator("CssSelector")
     .setOnElement(".price")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -188,7 +188,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:Greater --Expected:100}}",
     locator: "CssSelector",
     onElement: ".price",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -200,7 +200,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:100}}",
     "locator": "CssSelector",
     "onElement": ".price",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -212,7 +212,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:100}}",
     "locator": "CssSelector",
     "onElement": ".price",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -390,7 +390,7 @@ Check that the text content of an element matches the regular expression '\d+\.\
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementText --Operator:Match --Expected:\d+\.\d{2}}}",
+    Argument = "{{$ --Condition:ElementText --Operator:Match --Expected:\\d+\\.\\d{2}}}",
     OnElement = "//*[@id='decimalTextElement']"
 };
 ```
@@ -400,7 +400,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementText --Operator:Match --Expected:\d+\.\d{2}}}")
+    .setArgument("{{$ --Condition:ElementText --Operator:Match --Expected:\\d+\\.\\d{2}}}")
     .setOnElement("//*[@id='decimalTextElement']");
 ```
 
@@ -409,7 +409,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementText --Operator:Match --Expected:\d+\.\d{2}}}",
+    argument: "{{$ --Condition:ElementText --Operator:Match --Expected:\\d+\\.\\d{2}}}",
     onElement: "//*[@id='decimalTextElement']"
 };
 ```
@@ -419,7 +419,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementText --Operator:Match --Expected:\d+\.\d{2}}}",
+    "argument": "{{$ --Condition:ElementText --Operator:Match --Expected:\\d+\\.\\d{2}}}",
     "onElement": "//*[@id='decimalTextElement']"
 }
 ```
@@ -429,7 +429,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementText --Operator:Match --Expected:\d+\.\d{2}}}",
+    "argument": "{{$ --Condition:ElementText --Operator:Match --Expected:\\d+\\.\\d{2}}}",
     "onElement": "//*[@id='decimalTextElement']"
 }
 ```
@@ -548,26 +548,26 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the text content.
 
 ### On Element (OnElement)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the web element whose text content will be validated. This can be defined using a locator strategy, such as Xpath, CSS Selector, etc.
 

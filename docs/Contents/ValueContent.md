@@ -157,7 +157,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "ValueContent",
     Argument = "Order-12345",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -167,7 +167,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ValueContent")
     .setArgument("Order-12345")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -176,7 +176,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "ValueContent",
     argument: "Order-12345",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -186,7 +186,7 @@ var actionRule = {
 {
     "pluginName": "ValueContent",
     "argument": "Order-12345",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -196,7 +196,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "ValueContent",
     "argument": "Order-12345",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -204,13 +204,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the value to store.
 Accepts a fixed text or an expression that the engine resolves before the plugin runs.

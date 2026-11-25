@@ -145,13 +145,13 @@ action_rule = {
 
 ### Id (Id)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the unique identifier of the Google Tasks list to delete.
 Targets the exact list that will be removed from the user account.
@@ -159,13 +159,13 @@ Ensures the correct resource is affected and prevents accidental deletion of oth
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies an OAuth Bearer access token used to call the Google Tasks API.
 Enables direct API access without relying on a stored credential record.
@@ -173,13 +173,13 @@ Is ignored when the Credentials parameter is provided, allowing stored credentia
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Identifies a stored credential record by id or name.
 Triggers a runtime exchange to obtain a fresh OAuth access token before calling the Google Tasks API.

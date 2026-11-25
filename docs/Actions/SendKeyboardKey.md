@@ -229,13 +229,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Argument supplies the key name or the macro expression containing the Key, Delay, Clear, and NativeClear parameters.
 A plain string is used as the single key name when no --Key parameter is present in the macro.
@@ -293,7 +293,7 @@ Use Clear for standard input elements that respond to the WebDriver clear comman
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Time|Number       |
+| **Value Type**    | Time\|Number      |
 
 Delay sets the duration to pause after each individual key send within the sequence.
 It accepts a number of milliseconds (e.g., 500) or a TimeSpan string (e.g., 00:00:00.500) to emulate human typing pacing.

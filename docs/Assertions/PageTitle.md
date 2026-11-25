@@ -148,8 +148,8 @@ This is useful for scenarios where the script needs to ensure that the title is 
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:PageTitle --Operator:Match --Expected:\w+}}",
-    RegularExpression = "\w+"
+    Argument = "{{$ --Condition:PageTitle --Operator:Match --Expected:\\w+}}",
+    RegularExpression = "\\w+"
 };
 ```
 
@@ -158,8 +158,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:PageTitle --Operator:Match --Expected:\w+}}")
-    .setRegularExpression("\w+");
+    .setArgument("{{$ --Condition:PageTitle --Operator:Match --Expected:\\w+}}")
+    .setRegularExpression("\\w+");
 ```
 
 **Javascript:**
@@ -167,8 +167,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:PageTitle --Operator:Match --Expected:\w+}}",
-    regularExpression: "\w+"
+    argument: "{{$ --Condition:PageTitle --Operator:Match --Expected:\\w+}}",
+    regularExpression: "\\w+"
 };
 ```
 
@@ -177,8 +177,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:\w+}}",
-    "regularExpression": "\w+"
+    "argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:\\w+}}",
+    "regularExpression": "\\w+"
 }
 ```
 
@@ -187,8 +187,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:\w+}}",
-    "regularExpression": "\w+"
+    "argument": "{{$ --Condition:PageTitle --Operator:Match --Expected:\\w+}}",
+    "regularExpression": "\\w+"
 }
 ```
 
@@ -252,7 +252,7 @@ Check that the title of the current web page does not match the regular expressi
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\d+}}"
+    Argument = "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\\d+}}"
 };
 ```
 
@@ -261,7 +261,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\d+}}");
+    .setArgument("{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\\d+}}");
 ```
 
 **Javascript:**
@@ -269,7 +269,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\d+}}"
+    argument: "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\\d+}}"
 };
 ```
 
@@ -278,7 +278,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\d+}}"
+    "argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\\d+}}"
 }
 ```
 
@@ -287,7 +287,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\d+}}"
+    "argument": "{{$ --Condition:PageTitle --Operator:NotMatch --Expected:\\d+}}"
 }
 ```
 
@@ -295,13 +295,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the page title.

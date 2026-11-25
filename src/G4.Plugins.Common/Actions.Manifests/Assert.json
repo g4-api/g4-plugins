@@ -4979,8 +4979,7 @@
 				"locator": "Xpath",
 				"onAttribute": "value",
 				"onElement": "//textarea[@id='content']",
-				"pluginName": "Assert",
-				"regularExpression": null
+				"pluginName": "Assert"
 			}
 		},
 		{

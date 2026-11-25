@@ -135,13 +135,13 @@ Helps workflows link the sent message to its related thread context.
 
 ### Bcc (Bcc)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides an optional blind carbon copy recipient list for the email being sent.
 Ensures recipients in this list receive the message without being visible to other recipients.
@@ -149,13 +149,13 @@ Normalizes semicolon-separated addresses into comma-separated addresses before s
 
 ### Body (Body)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the body content for the email message being sent.
 Supplies the main message text that recipients will read in the email client.
@@ -163,13 +163,13 @@ Supports dynamic content by allowing expressions when building automated message
 
 ### Cc (Cc)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides an optional carbon copy recipient list for the email being sent.
 Ensures recipients in this list receive the message and are visible to other recipients.
@@ -177,13 +177,13 @@ Normalizes semicolon-separated addresses into comma-separated addresses before s
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.
 Avoids hardcoding short-lived tokens by exchanging stored credentials for a valid access token when needed.
@@ -191,13 +191,13 @@ Takes precedence over the token parameter so authentication stays consistent and
 
 ### From (From)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides an optional From header value to include in the RFC 2822 message headers.
 Controls what sender value is written into the raw email payload when a custom From is needed.
@@ -205,13 +205,13 @@ Helps ensure the outgoing message headers match the intended sender identity.
 
 ### Subject (Subject)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the subject line for the email message being sent.
 Helps recipients understand the message purpose and supports search and filtering.
@@ -219,13 +219,13 @@ Supports dynamic subject generation by allowing expressions at runtime.
 
 ### To (To)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the primary recipient email address list for the email being sent.
 Determines who receives the message as direct recipients and supports multiple addresses.
@@ -233,13 +233,13 @@ Normalizes semicolon-separated addresses into comma-separated addresses before s
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies an OAuth Bearer access token used to call the Gmail API.
 Enables direct API access when a stored credential reference is not used.

@@ -24,11 +24,6 @@ namespace G4.UnitTests.Plugins.Ui
     [TestCategory("UnitTest")]
     public class InvokeUser32DragAndDropTests : TestBase
     {
-        // The reason every live test is skipped: it drives a real Windows desktop through a running UIA driver
-        // server, and the CI/CD environment has neither. Remove the Ignore attribute to run one on a workstation.
-        private const string LiveIgnoreMessage = "Requires a running UIA driver server and a Windows desktop " +
-            "session with the drag-and-drop test application, which the CI/CD environment does not have.";
-
         [TestMethod(DisplayName = "Verify that the InvokeUser32DragAndDrop plugin manifest complies " +
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
@@ -182,7 +177,7 @@ namespace G4.UnitTests.Plugins.Ui
             "another list through Windows drag and drop.")]
         [TestCategory("UiaDriver")]
         [DoNotParallelize]
-        [Ignore(IgnoreMessage = LiveIgnoreMessage)]
+        [TestCategory("LocalOnly")]
         public void InvokeUser32DragAndDropLiveListTest()
         {
             // Arrange: drag the Beta item onto the target list, then focus Beta inside the target list. The focus
@@ -207,7 +202,7 @@ namespace G4.UnitTests.Plugins.Ui
             "follows the captured mouse by an offset.")]
         [TestCategory("UiaDriver")]
         [DoNotParallelize]
-        [Ignore(IgnoreMessage = LiveIgnoreMessage)]
+        [TestCategory("LocalOnly")]
         public void InvokeUser32DragAndDropLiveOffsetTest()
         {
             // Arrange: drag the thumb 200 screen pixels to the right; the application names its status text

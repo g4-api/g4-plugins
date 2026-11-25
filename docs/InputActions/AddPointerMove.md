@@ -269,13 +269,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the parameters of the move, such as `{{$ --X:200 --Y:150 --Origin:Viewport}}`.
 A rule without an argument moves to the center of its element over 250 milliseconds.
@@ -320,7 +320,7 @@ The element is found before the sequence is sent, so it must already be in the p
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Sets how long the move takes.
 Accepts a whole number of milliseconds, such as `600`, or a time span, such as `00:00:01`.
@@ -329,13 +329,13 @@ Defaults to 250 milliseconds, and a negative value or text that is not a duratio
 
 ### Origin (Origin)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Pointer           |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Pointer            |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Selects where X and Y are measured from when the rule names no element and inherits none from a for-each loop.
 Defaults to Pointer, and any value other than Pointer or Viewport fails the step.

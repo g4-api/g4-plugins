@@ -74,7 +74,7 @@ The matching rows of the Customers table are returned as JSON together with the 
 var actionRule = new ActionRuleModel
 {
     PluginName = "ExportSqlServerQuery",
-    Argument = "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{"Country":"Germany"} --CommandTimeout:60}}"
+    Argument = "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{\"Country\":\"Germany\"} --CommandTimeout:60}}"
 };
 ```
 
@@ -83,7 +83,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportSqlServerQuery")
-    .setArgument("{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{"Country":"Germany"} --CommandTimeout:60}}");
+    .setArgument("{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{\"Country\":\"Germany\"} --CommandTimeout:60}}");
 ```
 
 **Javascript:**
@@ -91,7 +91,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ExportSqlServerQuery",
-    argument: "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{"Country":"Germany"} --CommandTimeout:60}}"
+    argument: "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{\"Country\":\"Germany\"} --CommandTimeout:60}}"
 };
 ```
 
@@ -100,7 +100,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ExportSqlServerQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{"Country":"Germany"} --CommandTimeout:60}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{\"Country\":\"Germany\"} --CommandTimeout:60}}"
 }
 ```
 
@@ -109,7 +109,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ExportSqlServerQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{"Country":"Germany"} --CommandTimeout:60}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT Id, Name FROM dbo.Customers WHERE Country = @Country --Parameters:{\"Country\":\"Germany\"} --CommandTimeout:60}}"
 }
 ```
 
@@ -178,7 +178,7 @@ The query from the file runs in the Reporting database, and only the session par
 var actionRule = new ActionRuleModel
 {
     PluginName = "ExportSqlServerQuery",
-    Argument = "{{$ --Credentials:sql-reporting --CommandFile:C:\automation\sql\monthly-sales.sql --NoEntity}}"
+    Argument = "{{$ --Credentials:sql-reporting --CommandFile:C:\\automation\\sql\\monthly-sales.sql --NoEntity}}"
 };
 ```
 
@@ -187,7 +187,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportSqlServerQuery")
-    .setArgument("{{$ --Credentials:sql-reporting --CommandFile:C:\automation\sql\monthly-sales.sql --NoEntity}}");
+    .setArgument("{{$ --Credentials:sql-reporting --CommandFile:C:\\automation\\sql\\monthly-sales.sql --NoEntity}}");
 ```
 
 **Javascript:**
@@ -195,7 +195,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ExportSqlServerQuery",
-    argument: "{{$ --Credentials:sql-reporting --CommandFile:C:\automation\sql\monthly-sales.sql --NoEntity}}"
+    argument: "{{$ --Credentials:sql-reporting --CommandFile:C:\\automation\\sql\\monthly-sales.sql --NoEntity}}"
 };
 ```
 
@@ -204,7 +204,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ExportSqlServerQuery",
-    "argument": "{{$ --Credentials:sql-reporting --CommandFile:C:\automation\sql\monthly-sales.sql --NoEntity}}"
+    "argument": "{{$ --Credentials:sql-reporting --CommandFile:C:\\automation\\sql\\monthly-sales.sql --NoEntity}}"
 }
 ```
 
@@ -213,7 +213,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ExportSqlServerQuery",
-    "argument": "{{$ --Credentials:sql-reporting --CommandFile:C:\automation\sql\monthly-sales.sql --NoEntity}}"
+    "argument": "{{$ --Credentials:sql-reporting --CommandFile:C:\\automation\\sql\\monthly-sales.sql --NoEntity}}"
 }
 ```
 
@@ -230,7 +230,7 @@ The decoded SQL is `SELECT Id, Name FROM dbo.Customers -- customers in the reque
 var actionRule = new ActionRuleModel
 {
     PluginName = "ExportSqlServerQuery",
-    Argument = "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{"Country":"Germany"} --Base64}}"
+    Argument = "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{\"Country\":\"Germany\"} --Base64}}"
 };
 ```
 
@@ -239,7 +239,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportSqlServerQuery")
-    .setArgument("{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{"Country":"Germany"} --Base64}}");
+    .setArgument("{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{\"Country\":\"Germany\"} --Base64}}");
 ```
 
 **Javascript:**
@@ -247,7 +247,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ExportSqlServerQuery",
-    argument: "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{"Country":"Germany"} --Base64}}"
+    argument: "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{\"Country\":\"Germany\"} --Base64}}"
 };
 ```
 
@@ -256,7 +256,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ExportSqlServerQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{"Country":"Germany"} --Base64}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{\"Country\":\"Germany\"} --Base64}}"
 }
 ```
 
@@ -265,7 +265,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ExportSqlServerQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{"Country":"Germany"} --Base64}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:U0VMRUNUIElkLCBOYW1lIEZST00gZGJvLkN1c3RvbWVycyAtLSBjdXN0b21lcnMgaW4gdGhlIHJlcXVlc3RlZCBjb3VudHJ5CldIRVJFIENvdW50cnkgPSBAQ291bnRyeSBPUkRFUiBCWSBOYW1l --Parameters:{\"Country\":\"Germany\"} --Base64}}"
 }
 ```
 

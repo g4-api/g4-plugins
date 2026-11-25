@@ -97,14 +97,14 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//table[@id='leads']//tr[td]")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("")
             .setOnElement("./td[1]"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("")
             .setOnElement("./td[2]"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("")
             .setOnElement("./td[3]");
 ```
@@ -221,10 +221,10 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//div[@class='product']")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("")
             .setOnElement(".//span[@class='price']"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("")
             .setOnElement(".//h2");
 ```

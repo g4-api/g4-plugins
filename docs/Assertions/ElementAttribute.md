@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Operator:Equal --Expected:123}}",
     OnAttribute = "data-value",
     OnElement = "//*[@id='numericElement']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -65,7 +65,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Operator:Equal --Expected:123}}")
     .setOnAttribute("data-value")
     .setOnElement("//*[@id='numericElement']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -76,7 +76,7 @@ var actionRule = {
     argument: "{{$ --Operator:Equal --Expected:123}}",
     onAttribute: "data-value",
     onElement: "//*[@id='numericElement']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -88,7 +88,7 @@ var actionRule = {
     "argument": "{{$ --Operator:Equal --Expected:123}}",
     "onAttribute": "data-value",
     "onElement": "//*[@id='numericElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -100,7 +100,7 @@ action_rule = {
     "argument": "{{$ --Operator:Equal --Expected:123}}",
     "onAttribute": "data-value",
     "onElement": "//*[@id='numericElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -178,7 +178,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:50}}",
     OnAttribute = "data-percentage",
     OnElement = "//*[@id='percentageElement']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -190,7 +190,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementAttribute --Operator:Greater --Expected:50}}")
     .setOnAttribute("data-percentage")
     .setOnElement("//*[@id='percentageElement']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -201,7 +201,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:50}}",
     onAttribute: "data-percentage",
     onElement: "//*[@id='percentageElement']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -213,7 +213,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:50}}",
     "onAttribute": "data-percentage",
     "onElement": "//*[@id='percentageElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -225,7 +225,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:Greater --Expected:50}}",
     "onAttribute": "data-percentage",
     "onElement": "//*[@id='percentageElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -243,7 +243,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:100.00}}",
     OnAttribute = "data-price",
     OnElement = "//*[@id='priceElement']",
-    RegularExpression = "\d+\.\d{2}"
+    RegularExpression = "\\d+\\.\\d{2}"
 };
 ```
 
@@ -255,7 +255,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementAttribute --Operator:Lower --Expected:100.00}}")
     .setOnAttribute("data-price")
     .setOnElement("//*[@id='priceElement']")
-    .setRegularExpression("\d+\.\d{2}");
+    .setRegularExpression("\\d+\\.\\d{2}");
 ```
 
 **Javascript:**
@@ -266,7 +266,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:100.00}}",
     onAttribute: "data-price",
     onElement: "//*[@id='priceElement']",
-    regularExpression: "\d+\.\d{2}"
+    regularExpression: "\\d+\\.\\d{2}"
 };
 ```
 
@@ -278,7 +278,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:100.00}}",
     "onAttribute": "data-price",
     "onElement": "//*[@id='priceElement']",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 
@@ -290,7 +290,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:Lower --Expected:100.00}}",
     "onAttribute": "data-price",
     "onElement": "//*[@id='priceElement']",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 
@@ -308,7 +308,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:2}}",
     OnAttribute = "version",
     OnElement = "//*[@id='versionElement']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -320,7 +320,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:2}}")
     .setOnAttribute("version")
     .setOnElement("//*[@id='versionElement']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -331,7 +331,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:2}}",
     onAttribute: "version",
     onElement: "//*[@id='versionElement']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -343,7 +343,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:2}}",
     "onAttribute": "version",
     "onElement": "//*[@id='versionElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -355,7 +355,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:GreaterEqual --Expected:2}}",
     "onAttribute": "version",
     "onElement": "//*[@id='versionElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -373,7 +373,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:50}}",
     OnAttribute = "data-length",
     OnElement = "//*[@id='lengthElement']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -385,7 +385,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:50}}")
     .setOnAttribute("data-length")
     .setOnElement("//*[@id='lengthElement']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -396,7 +396,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:50}}",
     onAttribute: "data-length",
     onElement: "//*[@id='lengthElement']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -408,7 +408,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:50}}",
     "onAttribute": "data-length",
     "onElement": "//*[@id='lengthElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -420,7 +420,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementAttribute --Operator:LowerEqual --Expected:50}}",
     "onAttribute": "data-length",
     "onElement": "//*[@id='lengthElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -547,13 +547,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the attribute.
@@ -572,13 +572,13 @@ Specifies the web element's attribute to be validated. This attribute will be ch
 
 ### On Element (OnElement)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the web element to be validated. This can be defined using a locator strategy, such as Xpath, CSS Selector, etc.
 

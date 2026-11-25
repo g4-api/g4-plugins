@@ -72,7 +72,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForEachLoop")
     .setOnElement("//ul[@id='Pagination1']/li/button")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement(".");
 ```
@@ -159,7 +159,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnElement("#Pagination1 > li > button")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement(".");
 ```
@@ -247,7 +247,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForEachLoop")
     .setOnElement("//ul[@class='pagination']/li")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement("./button");
 ```
@@ -333,7 +333,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForEachLoop")
     .setOnElement("//ul[@class='pagination']/li")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("button");
@@ -424,7 +424,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnElement(".pagination > li")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement("./button");
 ```
@@ -515,7 +515,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnElement(".pagination > li")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("button");
@@ -615,11 +615,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForEachLoop")
     .setOnElement("//ul[@class='pagination']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("InvokeForEachLoop")
             .setOnElement("./li/button")
             .setActions()
-                new ActionRuleModel()                
+                new ActionRuleModel()
                     .setPluginName("Click");
 ```
 
@@ -727,12 +727,12 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForEachLoop")
     .setOnElement("//ul[@class='pagination']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("InvokeForEachLoop")
             .setLocator("CssSelector")
             .setOnElement("li > button")
             .setActions()
-                new ActionRuleModel()                
+                new ActionRuleModel()
                     .setPluginName("Click");
 ```
 
@@ -844,11 +844,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnElement(".pagination")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("InvokeForEachLoop")
             .setOnElement("./li/button")
             .setActions()
-                new ActionRuleModel()                
+                new ActionRuleModel()
                     .setPluginName("Click");
 ```
 
@@ -961,12 +961,12 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnElement(".pagination")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("InvokeForEachLoop")
             .setLocator("CssSelector")
             .setOnElement("li > button")
             .setActions()
-                new ActionRuleModel()                
+                new ActionRuleModel()
                     .setPluginName("Click");
 ```
 

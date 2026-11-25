@@ -213,13 +213,13 @@ Supports consistent logging, display, and verification in later workflow steps.
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.
 Avoids hardcoding tokens by exchanging the stored refresh token for a new access token when needed.
@@ -227,13 +227,13 @@ Improves reliability for long-running automations where short-lived access token
 
 ### Due (Due)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides an optional due date and time for the task being created.
 Helps schedule the task and enables reminders or sorting in Google Tasks clients.
@@ -241,13 +241,13 @@ Converts the provided value to an ISO 8601 UTC format before sending it to the G
 
 ### Notes (Notes)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides optional notes that are saved as the task description in Google Tasks.
 Adds extra context such as details, links, or instructions that help complete the task.
@@ -255,13 +255,13 @@ Improves task clarity without changing the task title or destination list.
 
 ### Task List (TaskList)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies which Google Tasks list will receive the new task by providing a list id or a list title.
 Determines the exact destination for the task so it is created in the intended list.
@@ -269,13 +269,13 @@ Supports reliable targeting by resolving the list id from the provided value bef
 
 ### Title (Title)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Sets the title for the task that will be created in the target Google Tasks list.
 Controls how the task appears to users and helps keep tasks easy to find and understand.
@@ -283,13 +283,13 @@ Uses a timestamped default title when no value is provided to avoid creating unn
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies an OAuth Bearer access token used to call the Google Tasks API.
 Enables direct authentication for the request when no stored credential record is used.

@@ -168,7 +168,7 @@ The file content is always read as plain text, so the Base64 switch never applie
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbAggregate",
-    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
 };
 ```
 
@@ -177,7 +177,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbAggregate")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}");
 ```
 
 **Javascript:**
@@ -185,7 +185,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbAggregate",
-    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
 };
 ```
 
@@ -194,7 +194,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbAggregate",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
 }
 ```
 
@@ -203,7 +203,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbAggregate",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --CommandTimeout:300 --AllowDiskUse}}"
 }
 ```
 
@@ -220,7 +220,7 @@ The pipeline is read from a UTF-8 file, so its nested stage documents never pass
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbAggregate",
-    Argument = "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
+    Argument = "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --Transaction --CommandTimeout:300}}"
 };
 ```
 
@@ -229,7 +229,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbAggregate")
-    .setArgument("{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}");
+    .setArgument("{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --Transaction --CommandTimeout:300}}");
 ```
 
 **Javascript:**
@@ -237,7 +237,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbAggregate",
-    argument: "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
+    argument: "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --Transaction --CommandTimeout:300}}"
 };
 ```
 
@@ -246,7 +246,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbAggregate",
-    "argument": "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
+    "argument": "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --Transaction --CommandTimeout:300}}"
 }
 ```
 
@@ -255,7 +255,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbAggregate",
-    "argument": "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\flows\pipelines\daily-rollup.json --Transaction --CommandTimeout:300}}"
+    "argument": "{{$ --ConnectionString:mongodb://mongo01:27017,mongo02:27017/shop?replicaSet=rs0 --Collection:orders --CommandFile:C:\\flows\\pipelines\\daily-rollup.json --Transaction --CommandTimeout:300}}"
 }
 ```
 
@@ -401,13 +401,13 @@ Invalid Base64 fails the step, so an encoded payload never reaches the server as
 
 ### Collection (Collection)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the collection the step operates on, such as `orders` or `shop.orders`.
 A name qualified as `database.collection` selects its own database and overrides the Database parameter.
@@ -415,13 +415,13 @@ The name is split on its first dot only, so `shop.price.history` addresses the c
 
 ### Command File (CommandFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Reads the payload from a UTF-8 file, such as `C:\flows\filter.json`.
 Applies only when CommandText is not set, so an inline payload always takes priority.
@@ -429,13 +429,13 @@ The Base64 switch never applies here; file content is always read as plain text.
 
 ### Command Text (CommandText)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the pipeline as a JSON array of stage objects, such as `[{"$match":{"status":"open"}},{"$count":"open"}]`.
 A single stage object is accepted too, so a one-stage pipeline needs no array wrapper.
@@ -457,13 +457,13 @@ Raise it for a long aggregation and lower it for a health check that must fail f
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -471,13 +471,13 @@ Every connection setting, such as the host, the login, the replica set, and the 
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.
 The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.
@@ -485,13 +485,13 @@ A value that carries a URI scheme, such as `mongodb://`, is used as a raw connec
 
 ### Database (Database)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the database the step operates on, such as `shop`.
 Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.

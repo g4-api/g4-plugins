@@ -50,9 +50,7 @@ If line breaks are present, they are removed; otherwise, the text remains unchan
 var actionRule = new ActionRuleModel
 {
     PluginName = "ClearLines",
-    OnElement = "This is a sample text.
-It contains multiple lines.
-Some lines end with different line breaks."
+    OnElement = "This is a sample text.\nIt contains multiple lines.\r\nSome lines end with different line breaks."
 };
 ```
 
@@ -61,9 +59,7 @@ Some lines end with different line breaks."
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ClearLines")
-    .setOnElement("This is a sample text.
-It contains multiple lines.
-Some lines end with different line breaks.");
+    .setOnElement("This is a sample text.\nIt contains multiple lines.\r\nSome lines end with different line breaks.");
 ```
 
 **Javascript:**
@@ -71,9 +67,7 @@ Some lines end with different line breaks.");
 ```js
 var actionRule = {
     pluginName: "ClearLines",
-    onElement: "This is a sample text.
-It contains multiple lines.
-Some lines end with different line breaks."
+    onElement: "This is a sample text.\nIt contains multiple lines.\r\nSome lines end with different line breaks."
 };
 ```
 
@@ -82,9 +76,7 @@ Some lines end with different line breaks."
 ```js
 {
     "pluginName": "ClearLines",
-    "onElement": "This is a sample text.
-It contains multiple lines.
-Some lines end with different line breaks."
+    "onElement": "This is a sample text.\nIt contains multiple lines.\r\nSome lines end with different line breaks."
 }
 ```
 
@@ -93,9 +85,7 @@ Some lines end with different line breaks."
 ```python
 action_rule = {
     "pluginName": "ClearLines",
-    "onElement": "This is a sample text.
-It contains multiple lines.
-Some lines end with different line breaks."
+    "onElement": "This is a sample text.\nIt contains multiple lines.\r\nSome lines end with different line breaks."
 }
 ```
 
@@ -114,7 +104,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "contentType",
     OnElement = ".//p[starts-with(.,'Location:')]",
-    RegularExpression = "(?<=\w+:).*"
+    RegularExpression = "(?<=\\w+:).*"
 };
 ```
 
@@ -124,7 +114,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("contentType")
     .setOnElement(".//p[starts-with(.,'Location:')]")
-    .setRegularExpression("(?<=\w+:).*");
+    .setRegularExpression("(?<=\\w+:).*");
 ```
 
 **Javascript:**
@@ -133,7 +123,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "contentType",
     onElement: ".//p[starts-with(.,'Location:')]",
-    regularExpression: "(?<=\w+:).*"
+    regularExpression: "(?<=\\w+:).*"
 };
 ```
 
@@ -143,7 +133,7 @@ var actionRule = {
 {
     "pluginName": "contentType",
     "onElement": ".//p[starts-with(.,'Location:')]",
-    "regularExpression": "(?<=\w+:).*"
+    "regularExpression": "(?<=\\w+:).*"
 }
 ```
 
@@ -153,7 +143,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "contentType",
     "onElement": ".//p[starts-with(.,'Location:')]",
-    "regularExpression": "(?<=\w+:).*"
+    "regularExpression": "(?<=\\w+:).*"
 }
 ```
 

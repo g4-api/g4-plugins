@@ -51,7 +51,7 @@ You can optionally use the `--Pattern` parameter to match a specific pattern in 
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteLog",
-    Argument = "The window handle is {{$Get-WindowHandle --Pattern:".*"}}"
+    Argument = "The window handle is {{$Get-WindowHandle --Pattern:\".*\"}}"
 };
 ```
 
@@ -60,7 +60,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteLog")
-    .setArgument("The window handle is {{$Get-WindowHandle --Pattern:".*"}}");
+    .setArgument("The window handle is {{$Get-WindowHandle --Pattern:\".*\"}}");
 ```
 
 **Javascript:**
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteLog",
-    argument: "The window handle is {{$Get-WindowHandle --Pattern:".*"}}"
+    argument: "The window handle is {{$Get-WindowHandle --Pattern:\".*\"}}"
 };
 ```
 
@@ -77,7 +77,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteLog",
-    "argument": "The window handle is {{$Get-WindowHandle --Pattern:".*"}}"
+    "argument": "The window handle is {{$Get-WindowHandle --Pattern:\".*\"}}"
 }
 ```
 
@@ -86,7 +86,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteLog",
-    "argument": "The window handle is {{$Get-WindowHandle --Pattern:".*"}}"
+    "argument": "The window handle is {{$Get-WindowHandle --Pattern:\".*\"}}"
 }
 ```
 
@@ -102,7 +102,7 @@ The `--Pattern` parameter can be used to match a specific portion of the window 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SwitchWindow",
-    Argument = "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:".*"}}"
+    Argument = "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:\".*\"}}"
 };
 ```
 
@@ -111,7 +111,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SwitchWindow")
-    .setArgument("Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:".*"}}");
+    .setArgument("Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:\".*\"}}");
 ```
 
 **Javascript:**
@@ -119,7 +119,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SwitchWindow",
-    argument: "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:".*"}}"
+    argument: "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:\".*\"}}"
 };
 ```
 
@@ -128,7 +128,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SwitchWindow",
-    "argument": "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:".*"}}"
+    "argument": "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:\".*\"}}"
 }
 ```
 
@@ -137,7 +137,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SwitchWindow",
-    "argument": "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:".*"}}"
+    "argument": "Switching to the window with handle {{$Get-WindowHandle --Index:1 --Pattern:\".*\"}}"
 }
 ```
 

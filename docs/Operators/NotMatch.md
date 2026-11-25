@@ -49,7 +49,7 @@ This example demonstrates the usage of the `NotMatch` plugin to compare a string
 var actionRule = new ActionRuleModel
 {
     PluginName = "NotMatch",
-    Argument = "{{$ --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    Argument = "{{$ --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 };
 ```
 
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("NotMatch")
-    .setArgument("{{$ --LeftHand:"value1" --RightHand:"regex_pattern"}}");
+    .setArgument("{{$ --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}");
 ```
 
 **Javascript:**
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "NotMatch",
-    argument: "{{$ --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    argument: "{{$ --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 };
 ```
 
@@ -75,7 +75,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "NotMatch",
-    "argument": "{{$ --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    "argument": "{{$ --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 }
 ```
 
@@ -84,7 +84,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "NotMatch",
-    "argument": "{{$ --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    "argument": "{{$ --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 }
 ```
 
@@ -104,7 +104,7 @@ This example demonstrates the usage of the `NotMatchOperator` plugin within anot
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:NotMatch --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    Argument = "{{$ --Condition:NotMatch --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 };
 ```
 
@@ -113,7 +113,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:NotMatch --LeftHand:"value1" --RightHand:"regex_pattern"}}");
+    .setArgument("{{$ --Condition:NotMatch --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}");
 ```
 
 **Javascript:**
@@ -121,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:NotMatch --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    argument: "{{$ --Condition:NotMatch --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 };
 ```
 
@@ -130,7 +130,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:NotMatch --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    "argument": "{{$ --Condition:NotMatch --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 }
 ```
 
@@ -139,7 +139,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:NotMatch --LeftHand:"value1" --RightHand:"regex_pattern"}}"
+    "argument": "{{$ --Condition:NotMatch --LeftHand:\"value1\" --RightHand:\"regex_pattern\"}}"
 }
 ```
 

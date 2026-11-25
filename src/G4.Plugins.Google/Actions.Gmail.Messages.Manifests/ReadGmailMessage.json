@@ -94,6 +94,7 @@
 	},
 	"description": [
 		"### Purpose",
+		"",
 		"The ReadGmailMessage plugin reads a Gmail message from the authenticated mailbox during an automation run.",
 		"It helps workflows pull email details so bots can route messages, extract information, or trigger follow-up actions.",
 		"It first fetches a message id from the mailbox and then retrieves the full message details for that message.",

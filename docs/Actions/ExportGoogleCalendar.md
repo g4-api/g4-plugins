@@ -216,13 +216,13 @@ Allows later workflow steps to reference the calendar identifier without repeati
 
 ### Calendar Id (CalendarId)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the unique identifier of the calendar to retrieve from the Google Calendar API.
 Defaults to 'primary' when not provided, which resolves to the authenticated user's primary calendar.
@@ -230,13 +230,13 @@ Accepts any valid calendar identifier, including secondary calendar IDs in email
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the identifier or name of a stored credential record used to obtain an OAuth access token at runtime.
 Avoids hard-coding short-lived access tokens by exchanging stored credentials for a fresh token when needed.
@@ -244,13 +244,13 @@ Takes precedence over the Token parameter when both are provided so authenticati
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies an OAuth Bearer access token used to authenticate requests to the Google Calendar API.
 Allows direct API access without retrieving credentials from a stored record.

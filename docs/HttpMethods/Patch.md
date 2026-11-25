@@ -54,7 +54,7 @@ Set the content type header with the `--ContentType` option.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}"
 };
 ```
 
@@ -63,7 +63,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}");
 ```
 
 **Javascript:**
@@ -71,7 +71,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}"
 };
 ```
 
@@ -80,7 +80,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}"
 }
 ```
 
@@ -89,7 +89,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}"
 }
 ```
 
@@ -109,7 +109,7 @@ Set the request encoding using the `--Encoding` option.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json --Encoding:UTF8}}"
 };
 ```
 
@@ -118,7 +118,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json --Encoding:UTF8}}");
 ```
 
 **Javascript:**
@@ -126,7 +126,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json --Encoding:UTF8}}"
 };
 ```
 
@@ -135,7 +135,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json --Encoding:UTF8}}"
 }
 ```
 
@@ -144,7 +144,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json --Encoding:UTF8}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json --Encoding:UTF8}}"
 }
 ```
 
@@ -218,7 +218,7 @@ Extract the attribute by setting `onElement` to the target element path and `onA
 var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
-    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    Argument = "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}",
     OnAttribute = "status",
     OnElement = "//response"
 };
@@ -229,7 +229,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
-    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}")
+    .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}")
     .setOnAttribute("status")
     .setOnElement("//response");
 ```
@@ -239,7 +239,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Patch",
-    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    argument: "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}",
     onAttribute: "status",
     onElement: "//response"
 };
@@ -250,7 +250,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}",
     "onAttribute": "status",
     "onElement": "//response"
 }
@@ -261,7 +261,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Patch",
-    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{"status":"updated"} --ContentType:application/json}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/12345 --Body:{\"status\":\"updated\"} --ContentType:application/json}}",
     "onAttribute": "status",
     "onElement": "//response"
 }
@@ -394,7 +394,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Patch",
     Argument = "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
-    RegularExpression = "\"id\":\s*\"(\d+)\""
+    RegularExpression = "\\\"id\\\":\\s*\\\"(\\d+)\\\""
 };
 ```
 
@@ -404,7 +404,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Patch")
     .setArgument("{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}")
-    .setRegularExpression("\"id\":\s*\"(\d+)\"");
+    .setRegularExpression("\\\"id\\\":\\s*\\\"(\\d+)\\\"");
 ```
 
 **Javascript:**
@@ -413,7 +413,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Patch",
     argument: "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
-    regularExpression: "\"id\":\s*\"(\d+)\""
+    regularExpression: "\\\"id\\\":\\s*\\\"(\\d+)\\\""
 };
 ```
 
@@ -423,7 +423,7 @@ var actionRule = {
 {
     "pluginName": "Patch",
     "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
-    "regularExpression": "\"id\":\s*\"(\d+)\""
+    "regularExpression": "\\\"id\\\":\\s*\\\"(\\d+)\\\""
 }
 ```
 
@@ -433,7 +433,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Patch",
     "argument": "{{$ --Url:http://api.example.com/v1/12345 --Field:status=updated}}",
-    "regularExpression": "\"id\":\s*\"(\d+)\""
+    "regularExpression": "\\\"id\\\":\\s*\\\"(\\d+)\\\""
 }
 ```
 
@@ -492,7 +492,7 @@ Supports error handling in workflows based on the status code value.
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
-| **Value Type**    | Uri|Expression    |
+| **Value Type**    | Uri\|Expression   |
 
 Specifies where to send the HTTP PATH request and what data to include.
 Allows dynamic values through templates or variable placeholders in the format {{$...}}.
@@ -734,7 +734,7 @@ Custom headers let you send extra information like authentication tokens or trac
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Uri|String        |
+| **Value Type**    | Uri\|String       |
 
 Defines the web address where the delete request is sent.
 Tells the server which resource should be removed.

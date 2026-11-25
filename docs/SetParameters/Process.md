@@ -252,7 +252,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:APIKey --Scope:Process}}",
     Locator = "CssSelector",
     OnElement = "#apiElement",
-    RegularExpression = "^.*(?=\sAPIKey$)"
+    RegularExpression = "^.*(?=\\sAPIKey$)"
 };
 ```
 
@@ -264,7 +264,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:APIKey --Scope:Process}}")
     .setLocator("CssSelector")
     .setOnElement("#apiElement")
-    .setRegularExpression("^.*(?=\sAPIKey$)");
+    .setRegularExpression("^.*(?=\\sAPIKey$)");
 ```
 
 **Javascript:**
@@ -275,7 +275,7 @@ var actionRule = {
     argument: "{{$ --Name:APIKey --Scope:Process}}",
     locator: "CssSelector",
     onElement: "#apiElement",
-    regularExpression: "^.*(?=\sAPIKey$)"
+    regularExpression: "^.*(?=\\sAPIKey$)"
 };
 ```
 
@@ -287,7 +287,7 @@ var actionRule = {
     "argument": "{{$ --Name:APIKey --Scope:Process}}",
     "locator": "CssSelector",
     "onElement": "#apiElement",
-    "regularExpression": "^.*(?=\sAPIKey$)"
+    "regularExpression": "^.*(?=\\sAPIKey$)"
 }
 ```
 
@@ -299,7 +299,7 @@ action_rule = {
     "argument": "{{$ --Name:APIKey --Scope:Process}}",
     "locator": "CssSelector",
     "onElement": "#apiElement",
-    "regularExpression": "^.*(?=\sAPIKey$)"
+    "regularExpression": "^.*(?=\\sAPIKey$)"
 }
 ```
 

@@ -49,7 +49,7 @@ This example demonstrates the usage of the `Match` plugin to compare a string va
 var actionRule = new ActionRuleModel
 {
     PluginName = "Match",
-    Argument = "{{$ --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    Argument = "{{$ --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 };
 ```
 
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Match")
-    .setArgument("{{$ --LeftHand:"hello123" --RightHand:"^hello\d+$"}}");
+    .setArgument("{{$ --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}");
 ```
 
 **Javascript:**
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Match",
-    argument: "{{$ --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    argument: "{{$ --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 };
 ```
 
@@ -75,7 +75,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Match",
-    "argument": "{{$ --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    "argument": "{{$ --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 }
 ```
 
@@ -84,7 +84,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Match",
-    "argument": "{{$ --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    "argument": "{{$ --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 }
 ```
 
@@ -104,7 +104,7 @@ This example demonstrates the usage of the `MatchOperator` plugin within another
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:Match --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    Argument = "{{$ --Condition:Match --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 };
 ```
 
@@ -113,7 +113,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:Match --LeftHand:"hello123" --RightHand:"^hello\d+$"}}");
+    .setArgument("{{$ --Condition:Match --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}");
 ```
 
 **Javascript:**
@@ -121,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:Match --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    argument: "{{$ --Condition:Match --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 };
 ```
 
@@ -130,7 +130,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:Match --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    "argument": "{{$ --Condition:Match --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 }
 ```
 
@@ -139,7 +139,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:Match --LeftHand:"hello123" --RightHand:"^hello\d+$"}}"
+    "argument": "{{$ --Condition:Match --LeftHand:\"hello123\" --RightHand:\"^hello\\d+$\"}}"
 }
 ```
 

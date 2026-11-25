@@ -80,7 +80,7 @@ The orders, the TotalCount output parameter, and the return value are written to
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerProcedure",
-    Argument = "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{"CustomerId":7} --Credentials:sql-production}}"
+    Argument = "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{\"CustomerId\":7} --Credentials:sql-production}}"
 };
 ```
 
@@ -89,7 +89,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerProcedure")
-    .setArgument("{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{"CustomerId":7} --Credentials:sql-production}}");
+    .setArgument("{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{\"CustomerId\":7} --Credentials:sql-production}}");
 ```
 
 **Javascript:**
@@ -97,7 +97,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerProcedure",
-    argument: "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{"CustomerId":7} --Credentials:sql-production}}"
+    argument: "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{\"CustomerId\":7} --Credentials:sql-production}}"
 };
 ```
 
@@ -106,7 +106,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerProcedure",
-    "argument": "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{"CustomerId":7} --Credentials:sql-production}}"
+    "argument": "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{\"CustomerId\":7} --Credentials:sql-production}}"
 }
 ```
 
@@ -115,7 +115,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerProcedure",
-    "argument": "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{"CustomerId":7} --Credentials:sql-production}}"
+    "argument": "{{$ --Procedure:dbo.GetCustomerOrders --Parameters:{\"CustomerId\":7} --Credentials:sql-production}}"
 }
 ```
 
@@ -132,7 +132,7 @@ Transaction commits the work only on success, and NoEntity returns the results o
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerProcedure",
-    Argument = "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{"BeforeDate":"2026-01-01","BatchSize":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
+    Argument = "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{\"BeforeDate\":\"2026-01-01\",\"BatchSize\":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
 };
 ```
 
@@ -141,7 +141,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerProcedure")
-    .setArgument("{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{"BeforeDate":"2026-01-01","BatchSize":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}");
+    .setArgument("{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{\"BeforeDate\":\"2026-01-01\",\"BatchSize\":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}");
 ```
 
 **Javascript:**
@@ -149,7 +149,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerProcedure",
-    argument: "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{"BeforeDate":"2026-01-01","BatchSize":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
+    argument: "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{\"BeforeDate\":\"2026-01-01\",\"BatchSize\":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
 };
 ```
 
@@ -158,7 +158,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerProcedure",
-    "argument": "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{"BeforeDate":"2026-01-01","BatchSize":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
+    "argument": "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{\"BeforeDate\":\"2026-01-01\",\"BatchSize\":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
 }
 ```
 
@@ -167,7 +167,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerProcedure",
-    "argument": "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{"BeforeDate":"2026-01-01","BatchSize":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
+    "argument": "{{$ --Procedure:dbo.ArchiveClosedOrders --Parameters:{\"BeforeDate\":\"2026-01-01\",\"BatchSize\":500} --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Transaction --NoEntity}}"
 }
 ```
 
@@ -302,13 +302,13 @@ Missing, negative, or non-numeric values fall back to the 30-second default.
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -316,13 +316,13 @@ Every connection setting, such as the server, the database, the login, and the e
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.
 The record carries the server, port, database, login, and encryption settings, so the step never repeats them.
@@ -344,13 +344,13 @@ Session parameters such as InvokeSqlServerProcedure:Result are still written.
 
 ### Parameters (Parameters)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides input values as a JSON object whose property names match procedure parameter names, such as {"CustomerId":7}.
 Names match without regard to case and with or without the @ prefix, and a name the procedure does not declare fails the step before anything runs.
@@ -359,13 +359,13 @@ Values are bound as typed parameters and are never joined into SQL text.
 
 ### Procedure (Procedure)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the stored procedure to run, optionally with its schema, such as dbo.GetCustomerOrders.
 The parameter list, output parameters, and return value are read from the server, so no parameter types need to be declared.
@@ -373,13 +373,13 @@ The step fails before connecting when the name is empty.
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a raw Microsoft Entra access token that signs in the connection.
 Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.

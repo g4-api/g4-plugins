@@ -60,7 +60,7 @@ The step stores the count, which a later condition can compare with a threshold.
 var actionRule = new ActionRuleModel
 {
     PluginName = "GetMongoDbScalar",
-    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 };
 ```
 
@@ -69,7 +69,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("GetMongoDbScalar")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}");
 ```
 
 **Javascript:**
@@ -77,7 +77,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "GetMongoDbScalar",
-    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 };
 ```
 
@@ -86,7 +86,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "GetMongoDbScalar",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 }
 ```
 
@@ -95,7 +95,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "GetMongoDbScalar",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 }
 ```
 
@@ -112,7 +112,7 @@ A string value is stored unquoted, so a later step can use it directly.
 var actionRule = new ActionRuleModel
 {
     PluginName = "GetMongoDbScalar",
-    Argument = "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{"tier":"gold"} --Sort:{"createdAt":-1}}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{\"tier\":\"gold\"} --Sort:{\"createdAt\":-1}}}"
 };
 ```
 
@@ -121,7 +121,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("GetMongoDbScalar")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{"tier":"gold"} --Sort:{"createdAt":-1}}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{\"tier\":\"gold\"} --Sort:{\"createdAt\":-1}}}");
 ```
 
 **Javascript:**
@@ -129,7 +129,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "GetMongoDbScalar",
-    argument: "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{"tier":"gold"} --Sort:{"createdAt":-1}}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{\"tier\":\"gold\"} --Sort:{\"createdAt\":-1}}}"
 };
 ```
 
@@ -138,7 +138,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "GetMongoDbScalar",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{"tier":"gold"} --Sort:{"createdAt":-1}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{\"tier\":\"gold\"} --Sort:{\"createdAt\":-1}}}"
 }
 ```
 
@@ -147,7 +147,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "GetMongoDbScalar",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{"tier":"gold"} --Sort:{"createdAt":-1}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --Mode:Field --Field:address.city --CommandText:{\"tier\":\"gold\"} --Sort:{\"createdAt\":-1}}}"
 }
 ```
 
@@ -216,7 +216,7 @@ The database comes from the URI path, so the step names only the collection and 
 var actionRule = new ActionRuleModel
 {
     PluginName = "GetMongoDbScalar",
-    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 };
 ```
 
@@ -225,7 +225,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("GetMongoDbScalar")
-    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}");
+    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{\"status\":\"open\"}}}");
 ```
 
 **Javascript:**
@@ -233,7 +233,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "GetMongoDbScalar",
-    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 };
 ```
 
@@ -242,7 +242,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "GetMongoDbScalar",
-    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 }
 ```
 
@@ -251,7 +251,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "GetMongoDbScalar",
-    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{"status":"open"}}}"
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 }
 ```
 
@@ -394,13 +394,13 @@ Invalid Base64 fails the step, so an encoded payload never reaches the server as
 
 ### Collection (Collection)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the collection the step operates on, such as `orders` or `shop.orders`.
 A name qualified as `database.collection` selects its own database and overrides the Database parameter.
@@ -408,13 +408,13 @@ The name is split on its first dot only, so `shop.price.history` addresses the c
 
 ### Command File (CommandFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Reads the payload from a UTF-8 file, such as `C:\flows\filter.json`.
 Applies only when CommandText is not set, so an inline payload always takes priority.
@@ -422,13 +422,13 @@ The Base64 switch never applies here; file content is always read as plain text.
 
 ### Command Text (CommandText)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the filter as a JSON object, such as `{"status":"open"}`.
 An omitted filter matches every document, which counts the whole collection in Count mode.
@@ -450,13 +450,13 @@ Raise it for a long aggregation and lower it for a health check that must fail f
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -464,13 +464,13 @@ Every connection setting, such as the host, the login, the replica set, and the 
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.
 The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.
@@ -478,13 +478,13 @@ A value that carries a URI scheme, such as `mongodb://`, is used as a raw connec
 
 ### Database (Database)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the database the step operates on, such as `shop`.
 Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.
@@ -492,13 +492,13 @@ A collection named as `database.collection` overrides this parameter in turn.
 
 ### Field (Field)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the field the step reads, such as `status` or `address.city`.
 Required for the Distinct and Field modes and ignored by the Count mode.
@@ -549,13 +549,13 @@ Use it when a later step reads the outputs by name and no data transfer is neede
 
 ### Sort (Sort)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Orders the documents before the Field mode reads the first one, as a JSON object such as `{"createdAt":-1}`.
 Applies to the Field mode only; Count and Distinct ignore it.

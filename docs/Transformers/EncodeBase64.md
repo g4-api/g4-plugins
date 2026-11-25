@@ -102,7 +102,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "contentType",
     OnElement = ".//span[@id='Username']",
-    RegularExpression = "(?<=\w+:).*"
+    RegularExpression = "(?<=\\w+:).*"
 };
 ```
 
@@ -112,7 +112,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("contentType")
     .setOnElement(".//span[@id='Username']")
-    .setRegularExpression("(?<=\w+:).*");
+    .setRegularExpression("(?<=\\w+:).*");
 ```
 
 **Javascript:**
@@ -121,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "contentType",
     onElement: ".//span[@id='Username']",
-    regularExpression: "(?<=\w+:).*"
+    regularExpression: "(?<=\\w+:).*"
 };
 ```
 
@@ -131,7 +131,7 @@ var actionRule = {
 {
     "pluginName": "contentType",
     "onElement": ".//span[@id='Username']",
-    "regularExpression": "(?<=\w+:).*"
+    "regularExpression": "(?<=\\w+:).*"
 }
 ```
 
@@ -141,7 +141,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "contentType",
     "onElement": ".//span[@id='Username']",
-    "regularExpression": "(?<=\w+:).*"
+    "regularExpression": "(?<=\\w+:).*"
 }
 ```
 

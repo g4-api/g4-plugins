@@ -60,7 +60,7 @@ The step stores the documents as relaxed Extended JSON.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ExportMongoDbQuery",
-    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 };
 ```
 
@@ -69,7 +69,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportMongoDbQuery")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}");
 ```
 
 **Javascript:**
@@ -77,7 +77,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ExportMongoDbQuery",
-    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 };
 ```
 
@@ -86,7 +86,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 }
 ```
 
@@ -95,7 +95,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{"status":"open"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --CommandText:{\"status\":\"open\"}}}"
 }
 ```
 
@@ -112,7 +112,7 @@ The projection keeps the exported documents small, which matters for a session p
 var actionRule = new ActionRuleModel
 {
     PluginName = "ExportMongoDbQuery",
-    Argument = "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{"status":"open"} --Projection:{"total":1,"createdAt":1,"_id":0} --Sort:{"createdAt":-1} --Limit:100 --Skip:0}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"createdAt\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100 --Skip:0}}"
 };
 ```
 
@@ -121,7 +121,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportMongoDbQuery")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{"status":"open"} --Projection:{"total":1,"createdAt":1,"_id":0} --Sort:{"createdAt":-1} --Limit:100 --Skip:0}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"createdAt\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100 --Skip:0}}");
 ```
 
 **Javascript:**
@@ -129,7 +129,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ExportMongoDbQuery",
-    argument: "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{"status":"open"} --Projection:{"total":1,"createdAt":1,"_id":0} --Sort:{"createdAt":-1} --Limit:100 --Skip:0}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"createdAt\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100 --Skip:0}}"
 };
 ```
 
@@ -138,7 +138,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{"status":"open"} --Projection:{"total":1,"createdAt":1,"_id":0} --Sort:{"createdAt":-1} --Limit:100 --Skip:0}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"createdAt\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100 --Skip:0}}"
 }
 ```
 
@@ -147,7 +147,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{"status":"open"} --Projection:{"total":1,"createdAt":1,"_id":0} --Sort:{"createdAt":-1} --Limit:100 --Skip:0}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --CommandText:{\"status\":\"open\"} --Projection:{\"total\":1,\"createdAt\":1,\"_id\":0} --Sort:{\"createdAt\":-1} --Limit:100 --Skip:0}}"
 }
 ```
 
@@ -216,7 +216,7 @@ NoEntity keeps the outputs in session parameters only.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ExportMongoDbQuery",
-    Argument = "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\flows\filters\active-customers.json --NoEntity}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\\flows\\filters\\active-customers.json --NoEntity}}"
 };
 ```
 
@@ -225,7 +225,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportMongoDbQuery")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\flows\filters\active-customers.json --NoEntity}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\\flows\\filters\\active-customers.json --NoEntity}}");
 ```
 
 **Javascript:**
@@ -233,7 +233,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ExportMongoDbQuery",
-    argument: "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\flows\filters\active-customers.json --NoEntity}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\\flows\\filters\\active-customers.json --NoEntity}}"
 };
 ```
 
@@ -242,7 +242,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\flows\filters\active-customers.json --NoEntity}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\\flows\\filters\\active-customers.json --NoEntity}}"
 }
 ```
 
@@ -251,7 +251,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\flows\filters\active-customers.json --NoEntity}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:customers --CommandFile:C:\\flows\\filters\\active-customers.json --NoEntity}}"
 }
 ```
 
@@ -268,7 +268,7 @@ The URI names the shop database, and the Database argument selects archive inste
 var actionRule = new ActionRuleModel
 {
     PluginName = "ExportMongoDbQuery",
-    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
+    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{\"status\":\"closed\"} --Limit:50}}"
 };
 ```
 
@@ -277,7 +277,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportMongoDbQuery")
-    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}");
+    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{\"status\":\"closed\"} --Limit:50}}");
 ```
 
 **Javascript:**
@@ -285,7 +285,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ExportMongoDbQuery",
-    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
+    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{\"status\":\"closed\"} --Limit:50}}"
 };
 ```
 
@@ -294,7 +294,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{\"status\":\"closed\"} --Limit:50}}"
 }
 ```
 
@@ -303,7 +303,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ExportMongoDbQuery",
-    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{"status":"closed"} --Limit:50}}"
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --Database:archive --Collection:orders --CommandText:{\"status\":\"closed\"} --Limit:50}}"
 }
 ```
 
@@ -422,13 +422,13 @@ Invalid Base64 fails the step, so an encoded payload never reaches the server as
 
 ### Collection (Collection)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the collection the step operates on, such as `orders` or `shop.orders`.
 A name qualified as `database.collection` selects its own database and overrides the Database parameter.
@@ -436,13 +436,13 @@ The name is split on its first dot only, so `shop.price.history` addresses the c
 
 ### Command File (CommandFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Reads the payload from a UTF-8 file, such as `C:\flows\filter.json`.
 Applies only when CommandText is not set, so an inline payload always takes priority.
@@ -450,13 +450,13 @@ The Base64 switch never applies here; file content is always read as plain text.
 
 ### Command Text (CommandText)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the query filter as a JSON object, such as `{"status":"open"}`.
 An omitted filter matches every document, so the step exports the whole collection.
@@ -478,13 +478,13 @@ Raise it for a long aggregation and lower it for a health check that must fail f
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -492,13 +492,13 @@ Every connection setting, such as the host, the login, the replica set, and the 
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.
 The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.
@@ -506,13 +506,13 @@ A value that carries a URI scheme, such as `mongodb://`, is used as a raw connec
 
 ### Database (Database)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the database the step operates on, such as `shop`.
 Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.
@@ -546,13 +546,13 @@ Use it when a later step reads the outputs by name and no data transfer is neede
 
 ### Projection (Projection)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Selects the fields the server returns, as a JSON object such as `{"name":1,"_id":0}`.
 An omitted projection returns the whole document.
@@ -572,13 +572,13 @@ The value 0 means no skip, and a skip without a sort has no stable meaning.
 
 ### Sort (Sort)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Orders the documents before the limit and the skip apply, as a JSON object such as `{"createdAt":-1}`.
 An omitted sort leaves the order to the server, which is not stable across runs.

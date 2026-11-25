@@ -1766,7 +1766,7 @@ Automation then passes this string to the `SendKeys` plugin, which types it into
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$Format-Number --Number:987654 --Format:\###00\#}}",
+    Argument = "{{$Format-Number --Number:987654 --Format:\\###00\\#}}",
     Locator = "CssSelector",
     OnElement = "#inputField"
 };
@@ -1777,7 +1777,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$Format-Number --Number:987654 --Format:\###00\#}}")
+    .setArgument("{{$Format-Number --Number:987654 --Format:\\###00\\#}}")
     .setLocator("CssSelector")
     .setOnElement("#inputField");
 ```
@@ -1787,7 +1787,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$Format-Number --Number:987654 --Format:\###00\#}}",
+    argument: "{{$Format-Number --Number:987654 --Format:\\###00\\#}}",
     locator: "CssSelector",
     onElement: "#inputField"
 };
@@ -1798,7 +1798,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$Format-Number --Number:987654 --Format:\###00\#}}",
+    "argument": "{{$Format-Number --Number:987654 --Format:\\###00\\#}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -1809,7 +1809,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$Format-Number --Number:987654 --Format:\###00\#}}",
+    "argument": "{{$Format-Number --Number:987654 --Format:\\###00\\#}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }

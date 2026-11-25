@@ -61,7 +61,7 @@ The step reports the inserted count and the generated identifiers.
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbWrite",
-    Argument = "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{"sku":"A-1","total":10},{"sku":"B-2","total":20}]}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{\"sku\":\"A-1\",\"total\":10},{\"sku\":\"B-2\",\"total\":20}]}}"
 };
 ```
 
@@ -70,7 +70,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbWrite")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{"sku":"A-1","total":10},{"sku":"B-2","total":20}]}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{\"sku\":\"A-1\",\"total\":10},{\"sku\":\"B-2\",\"total\":20}]}}");
 ```
 
 **Javascript:**
@@ -78,7 +78,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbWrite",
-    argument: "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{"sku":"A-1","total":10},{"sku":"B-2","total":20}]}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{\"sku\":\"A-1\",\"total\":10},{\"sku\":\"B-2\",\"total\":20}]}}"
 };
 ```
 
@@ -87,7 +87,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{"sku":"A-1","total":10},{"sku":"B-2","total":20}]}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{\"sku\":\"A-1\",\"total\":10},{\"sku\":\"B-2\",\"total\":20}]}}"
 }
 ```
 
@@ -96,7 +96,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{"sku":"A-1","total":10},{"sku":"B-2","total":20}]}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:InsertMany --Document:[{\"sku\":\"A-1\",\"total\":10},{\"sku\":\"B-2\",\"total\":20}]}}"
 }
 ```
 
@@ -114,7 +114,7 @@ The step reports what it matched, modified, and upserted.
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbWrite",
-    Argument = "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
 };
 ```
 
@@ -123,7 +123,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbWrite")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}");
 ```
 
 **Javascript:**
@@ -131,7 +131,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbWrite",
-    argument: "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
 };
 ```
 
@@ -140,7 +140,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
 }
 ```
 
@@ -149,7 +149,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InN0YXR1cyI6InByb2Nlc3NlZCJ9fQ== --DocumentBase64 --Upsert}}"
 }
 ```
 
@@ -166,7 +166,7 @@ The transaction commits only after the delete succeeded.
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbWrite",
-    Argument = "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{"runId":"2026-11-12-001"} --Transaction}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{\"runId\":\"2026-11-12-001\"} --Transaction}}"
 };
 ```
 
@@ -175,7 +175,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbWrite")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{"runId":"2026-11-12-001"} --Transaction}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{\"runId\":\"2026-11-12-001\"} --Transaction}}");
 ```
 
 **Javascript:**
@@ -183,7 +183,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbWrite",
-    argument: "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{"runId":"2026-11-12-001"} --Transaction}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{\"runId\":\"2026-11-12-001\"} --Transaction}}"
 };
 ```
 
@@ -192,7 +192,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{"runId":"2026-11-12-001"} --Transaction}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{\"runId\":\"2026-11-12-001\"} --Transaction}}"
 }
 ```
 
@@ -201,7 +201,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{"runId":"2026-11-12-001"} --Transaction}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:DeleteMany --CommandText:{\"runId\":\"2026-11-12-001\"} --Transaction}}"
 }
 ```
 
@@ -219,7 +219,7 @@ The Extended JSON `$oid` form addresses the identifier as an object identifier, 
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbWrite",
-    Argument = "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{"sku":"A-1","total":12,"status":"processed"}}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{\"sku\":\"A-1\",\"total\":12,\"status\":\"processed\"}}}"
 };
 ```
 
@@ -228,7 +228,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbWrite")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{"sku":"A-1","total":12,"status":"processed"}}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{\"sku\":\"A-1\",\"total\":12,\"status\":\"processed\"}}}");
 ```
 
 **Javascript:**
@@ -236,7 +236,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbWrite",
-    argument: "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{"sku":"A-1","total":12,"status":"processed"}}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{\"sku\":\"A-1\",\"total\":12,\"status\":\"processed\"}}}"
 };
 ```
 
@@ -245,7 +245,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{"sku":"A-1","total":12,"status":"processed"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{\"sku\":\"A-1\",\"total\":12,\"status\":\"processed\"}}}"
 }
 ```
 
@@ -254,7 +254,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{"sku":"A-1","total":12,"status":"processed"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --Operation:ReplaceOne --CommandText:eyJfaWQiOnsiJG9pZCI6IjY1NTNmMWMyYTFiMmMzZDRlNWY2MDcxOCJ9fQ== --Base64 --Document:{\"sku\":\"A-1\",\"total\":12,\"status\":\"processed\"}}}"
 }
 ```
 
@@ -271,7 +271,7 @@ The database comes from the URI path, so the step names only the collection, the
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbWrite",
-    Argument = "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
+    Argument = "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{\"sku\":\"A-1\",\"total\":10}}}"
 };
 ```
 
@@ -280,7 +280,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbWrite")
-    .setArgument("{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}");
+    .setArgument("{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{\"sku\":\"A-1\",\"total\":10}}}");
 ```
 
 **Javascript:**
@@ -288,7 +288,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbWrite",
-    argument: "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
+    argument: "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{\"sku\":\"A-1\",\"total\":10}}}"
 };
 ```
 
@@ -297,7 +297,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
+    "argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{\"sku\":\"A-1\",\"total\":10}}}"
 }
 ```
 
@@ -306,7 +306,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{"sku":"A-1","total":10}}}"
+    "argument": "{{$ --ConnectionString:mongodb://writer:secret@mongo01.contoso.local:27017/shop --Collection:orders --Operation:InsertOne --Document:{\"sku\":\"A-1\",\"total\":10}}}"
 }
 ```
 
@@ -323,7 +323,7 @@ The decoded document is `{"$set":{"reviewedOn":"{{$New-Date --Format:yyyy-MM-dd}
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbWrite",
-    Argument = "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
 };
 ```
 
@@ -332,7 +332,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbWrite")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}");
 ```
 
 **Javascript:**
@@ -340,7 +340,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbWrite",
-    argument: "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
 };
 ```
 
@@ -349,7 +349,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
 }
 ```
 
@@ -358,7 +358,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbWrite",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{"status":"open"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.orders --Operation:UpdateMany --CommandText:{\"status\":\"open\"} --Document:eyIkc2V0Ijp7InJldmlld2VkT24iOiJ7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0ifX0= --DocumentBase64}}"
 }
 ```
 
@@ -464,13 +464,13 @@ Invalid Base64 fails the step, so an encoded payload never reaches the server as
 
 ### Collection (Collection)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the collection the step operates on, such as `orders` or `shop.orders`.
 A name qualified as `database.collection` selects its own database and overrides the Database parameter.
@@ -478,13 +478,13 @@ The name is split on its first dot only, so `shop.price.history` addresses the c
 
 ### Command File (CommandFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Reads the payload from a UTF-8 file, such as `C:\flows\filter.json`.
 Applies only when CommandText is not set, so an inline payload always takes priority.
@@ -492,13 +492,13 @@ The Base64 switch never applies here; file content is always read as plain text.
 
 ### Command Text (CommandText)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the filter as a JSON object, such as `{"status":"open"}`.
 Required for UpdateOne, UpdateMany, ReplaceOne, DeleteOne, and DeleteMany, and ignored by the insert operations.
@@ -520,13 +520,13 @@ Raise it for a long aggregation and lower it for a health check that must fail f
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -534,13 +534,13 @@ Every connection setting, such as the host, the login, the replica set, and the 
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.
 The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.
@@ -548,13 +548,13 @@ A value that carries a URI scheme, such as `mongodb://`, is used as a raw connec
 
 ### Database (Database)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the database the step operates on, such as `shop`.
 Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.
@@ -562,13 +562,13 @@ A collection named as `database.collection` overrides this parameter in turn.
 
 ### Document (Document)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the document the operation writes: the documents to insert, the update operators to apply, or the replacement.
 An insert accepts a single object or an array of objects; an update must carry operators such as `{"$set":{...}}`.
@@ -591,13 +591,13 @@ Invalid Base64 fails the step, so an encoded document never reaches the server a
 
 ### Document File (DocumentFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Reads the written document from a UTF-8 file, such as `C:\flows\update.json`.
 Applies only when Document is not set, so an inline document always takes priority.

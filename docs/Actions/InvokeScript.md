@@ -111,7 +111,7 @@ Use this form when the script body and its input values need to vary independent
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeScript",
-    Argument = "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:["Foo Bar"]}}"
+    Argument = "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:[\"Foo Bar\"]}}"
 };
 ```
 
@@ -120,7 +120,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeScript")
-    .setArgument("{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:["Foo Bar"]}}");
+    .setArgument("{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:[\"Foo Bar\"]}}");
 ```
 
 **Javascript:**
@@ -128,7 +128,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeScript",
-    argument: "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:["Foo Bar"]}}"
+    argument: "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:[\"Foo Bar\"]}}"
 };
 ```
 
@@ -137,7 +137,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeScript",
-    "argument": "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:["Foo Bar"]}}"
+    "argument": "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:[\"Foo Bar\"]}}"
 }
 ```
 
@@ -146,7 +146,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeScript",
-    "argument": "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:["Foo Bar"]}}"
+    "argument": "{{$ --ScriptBlock:document.querySelector('#InputEnabled').value=arguments[0]; --Arguments:[\"Foo Bar\"]}}"
 }
 ```
 
@@ -226,7 +226,7 @@ Use this form when the script needs both a DOM element reference and separate da
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeScript",
-    Argument = "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:["Foo Bar"]}}",
+    Argument = "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:[\"Foo Bar\"]}}",
     Locator = "CssSelector",
     OnElement = "#InputEnabled"
 };
@@ -237,7 +237,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeScript")
-    .setArgument("{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:["Foo Bar"]}}")
+    .setArgument("{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:[\"Foo Bar\"]}}")
     .setLocator("CssSelector")
     .setOnElement("#InputEnabled");
 ```
@@ -247,7 +247,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeScript",
-    argument: "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:["Foo Bar"]}}",
+    argument: "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:[\"Foo Bar\"]}}",
     locator: "CssSelector",
     onElement: "#InputEnabled"
 };
@@ -258,7 +258,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeScript",
-    "argument": "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:["Foo Bar"]}}",
+    "argument": "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:[\"Foo Bar\"]}}",
     "locator": "CssSelector",
     "onElement": "#InputEnabled"
 }
@@ -269,7 +269,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeScript",
-    "argument": "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:["Foo Bar"]}}",
+    "argument": "{{$ --ScriptBlock:arguments[0].value=arguments[1]; --Arguments:[\"Foo Bar\"]}}",
     "locator": "CssSelector",
     "onElement": "#InputEnabled"
 }
@@ -360,7 +360,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForEachLoop")
     .setOnElement("//div[@class='product']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("InvokeScript")
             .setArgument("{{$ --ScriptBlock:arguments[0].style.border='2px solid red';}}")
             .setOnElement(".");
@@ -544,13 +544,13 @@ When the rule sets a RegularExpression the stored value is the first match as a 
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Argument provides the script to execute or a macro expression that carries the ScriptBlock and Arguments parameters.
 When passed as a plain string it is used directly as the script code.
@@ -611,7 +611,7 @@ When absent the whole script result is stored unchanged.
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | String|Json       |
+| **Value Type**    | String\|Json      |
 
 Arguments specifies the values to pass to the script as a JSON array string.
 The array is deserialized and each entry is appended to the script's arguments list.

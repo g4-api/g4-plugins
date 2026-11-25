@@ -53,7 +53,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PathExists}}",
-    OnElement = "C:\Automation\Exports\report.csv"
+    OnElement = "C:\\Automation\\Exports\\report.csv"
 };
 ```
 
@@ -63,7 +63,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PathExists}}")
-    .setOnElement("C:\Automation\Exports\report.csv");
+    .setOnElement("C:\\Automation\\Exports\\report.csv");
 ```
 
 **Javascript:**
@@ -72,7 +72,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PathExists}}",
-    onElement: "C:\Automation\Exports\report.csv"
+    onElement: "C:\\Automation\\Exports\\report.csv"
 };
 ```
 
@@ -82,7 +82,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathExists}}",
-    "onElement": "C:\Automation\Exports\report.csv"
+    "onElement": "C:\\Automation\\Exports\\report.csv"
 }
 ```
 
@@ -92,7 +92,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathExists}}",
-    "onElement": "C:\Automation\Exports\report.csv"
+    "onElement": "C:\\Automation\\Exports\\report.csv"
 }
 ```
 
@@ -110,7 +110,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PathExists}}",
-    OnElement = "\\fileserver\share\Results"
+    OnElement = "\\\\fileserver\\share\\Results"
 };
 ```
 
@@ -120,7 +120,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PathExists}}")
-    .setOnElement("\\fileserver\share\Results");
+    .setOnElement("\\\\fileserver\\share\\Results");
 ```
 
 **Javascript:**
@@ -129,7 +129,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PathExists}}",
-    onElement: "\\fileserver\share\Results"
+    onElement: "\\\\fileserver\\share\\Results"
 };
 ```
 
@@ -139,7 +139,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathExists}}",
-    "onElement": "\\fileserver\share\Results"
+    "onElement": "\\\\fileserver\\share\\Results"
 }
 ```
 
@@ -149,7 +149,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathExists}}",
-    "onElement": "\\fileserver\share\Results"
+    "onElement": "\\\\fileserver\\share\\Results"
 }
 ```
 
@@ -214,13 +214,13 @@ action_rule = {
 
 ### On Element (OnElement)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 The file or directory path to check.
 Absolute, UNC, and relative paths are accepted; relative paths resolve from the process working directory.

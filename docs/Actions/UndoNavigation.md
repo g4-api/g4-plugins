@@ -191,13 +191,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | 1                 |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Number|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | 1                  |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | Number\|Expression |
 
 Provides the primary input for the backward navigation action.
 Accepts either a plain integer as the repeat count or a parameter expression such as `{{$ --Repeat:3 --Delay:1000}}` for combined repeat and delay control.
@@ -213,7 +213,7 @@ When a plain integer is supplied and no `Repeat` parameter is present, the integ
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Controls the pause between each backward navigation step.
 Accepts a value in milliseconds or a time span string such as `00:00:01` for one second.

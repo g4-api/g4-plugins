@@ -111,7 +111,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "ReadPdfFile",
     Argument = "C:/Reports/document.pdf",
-    RegularExpression = "Invoice\s+#\d+"
+    RegularExpression = "Invoice\\s+#\\d+"
 };
 ```
 
@@ -121,7 +121,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ReadPdfFile")
     .setArgument("C:/Reports/document.pdf")
-    .setRegularExpression("Invoice\s+#\d+");
+    .setRegularExpression("Invoice\\s+#\\d+");
 ```
 
 **Javascript:**
@@ -130,7 +130,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "ReadPdfFile",
     argument: "C:/Reports/document.pdf",
-    regularExpression: "Invoice\s+#\d+"
+    regularExpression: "Invoice\\s+#\\d+"
 };
 ```
 
@@ -140,7 +140,7 @@ var actionRule = {
 {
     "pluginName": "ReadPdfFile",
     "argument": "C:/Reports/document.pdf",
-    "regularExpression": "Invoice\s+#\d+"
+    "regularExpression": "Invoice\\s+#\\d+"
 }
 ```
 
@@ -150,7 +150,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "ReadPdfFile",
     "argument": "C:/Reports/document.pdf",
-    "regularExpression": "Invoice\s+#\d+"
+    "regularExpression": "Invoice\\s+#\\d+"
 }
 ```
 
@@ -174,13 +174,13 @@ Set every time the plugin runs, regardless of the regular expression configured.
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the path to the file to read.
 PDF files are processed with PdfPig to extract text from every page.

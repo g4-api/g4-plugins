@@ -224,7 +224,7 @@ var actionRule = new ActionRuleModel
     PluginName = "StartJenkinsJob",
     Argument = "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}",
     OnElement = "$.displayName",
-    RegularExpression = "build-(\d+)"
+    RegularExpression = "build-(\\d+)"
 };
 ```
 
@@ -235,7 +235,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("StartJenkinsJob")
     .setArgument("{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}")
     .setOnElement("$.displayName")
-    .setRegularExpression("build-(\d+)");
+    .setRegularExpression("build-(\\d+)");
 ```
 
 **Javascript:**
@@ -245,7 +245,7 @@ var actionRule = {
     pluginName: "StartJenkinsJob",
     argument: "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}",
     onElement: "$.displayName",
-    regularExpression: "build-(\d+)"
+    regularExpression: "build-(\\d+)"
 };
 ```
 
@@ -256,7 +256,7 @@ var actionRule = {
     "pluginName": "StartJenkinsJob",
     "argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}",
     "onElement": "$.displayName",
-    "regularExpression": "build-(\d+)"
+    "regularExpression": "build-(\\d+)"
 }
 ```
 
@@ -267,7 +267,7 @@ action_rule = {
     "pluginName": "StartJenkinsJob",
     "argument": "{{$ --Url:https://jenkins.example.com --JobPath:my-job --Username:admin --Token:apitoken --Wait}}",
     "onElement": "$.displayName",
-    "regularExpression": "build-(\d+)"
+    "regularExpression": "build-(\\d+)"
 }
 ```
 
@@ -443,7 +443,7 @@ The value allows the automation to target the correct pipeline or build definiti
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Polling interval defines how often the plugin checks Jenkins for job status updates.
 The default value of 5000 milliseconds balances timely feedback with reduced load on the Jenkins server.
@@ -456,7 +456,7 @@ The default value of 5000 milliseconds balances timely feedback with reduced loa
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Timeout sets the maximum time to wait for the Jenkins job to finish before giving up.
 The default value of 600000 milliseconds (10 minutes) prevents workflows from hanging indefinitely if a job stalls.

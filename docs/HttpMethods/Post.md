@@ -158,7 +158,7 @@ This example does not include additional custom headers.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Post",
-    Argument = "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --ContentType:application/json}}"
+    Argument = "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}"
 };
 ```
 
@@ -167,7 +167,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Post")
-    .setArgument("{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --ContentType:application/json}}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}");
 ```
 
 **Javascript:**
@@ -175,7 +175,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Post",
-    argument: "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --ContentType:application/json}}"
+    argument: "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}"
 };
 ```
 
@@ -184,7 +184,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --ContentType:application/json}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}"
 }
 ```
 
@@ -193,7 +193,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --ContentType:application/json}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --ContentType:application/json}}"
 }
 ```
 
@@ -211,7 +211,7 @@ This example sets the encoding to UTF8 and does not include custom headers.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Post",
-    Argument = "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --Encoding:UTF8}}"
+    Argument = "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Encoding:UTF8}}"
 };
 ```
 
@@ -220,7 +220,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Post")
-    .setArgument("{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --Encoding:UTF8}}");
+    .setArgument("{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Encoding:UTF8}}");
 ```
 
 **Javascript:**
@@ -228,7 +228,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Post",
-    argument: "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --Encoding:UTF8}}"
+    argument: "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Encoding:UTF8}}"
 };
 ```
 
@@ -237,7 +237,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --Encoding:UTF8}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Encoding:UTF8}}"
 }
 ```
 
@@ -246,7 +246,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"} --Encoding:UTF8}}"
+    "argument": "{{$ --Url:http://api.example.com/v1/book --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"} --Encoding:UTF8}}"
 }
 ```
 
@@ -318,7 +318,7 @@ This example uses no custom headers or content type flags.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Post",
-    Argument = "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    Argument = "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     OnAttribute = "status",
     OnElement = "//response"
 };
@@ -329,7 +329,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Post")
-    .setArgument("{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}")
+    .setArgument("{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}")
     .setOnAttribute("status")
     .setOnElement("//response");
 ```
@@ -339,7 +339,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Post",
-    argument: "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    argument: "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     onAttribute: "status",
     onElement: "//response"
 };
@@ -350,7 +350,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     "onAttribute": "status",
     "onElement": "//response"
 }
@@ -361,7 +361,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     "onAttribute": "status",
     "onElement": "//response"
 }
@@ -381,7 +381,7 @@ This example uses no custom headers or content type flags.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Post",
-    Argument = "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    Argument = "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     OnElement = "//response/HotelName"
 };
 ```
@@ -391,7 +391,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Post")
-    .setArgument("{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}")
+    .setArgument("{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}")
     .setOnElement("//response/HotelName");
 ```
 
@@ -400,7 +400,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Post",
-    argument: "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    argument: "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     onElement: "//response/HotelName"
 };
 ```
@@ -410,7 +410,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     "onElement": "//response/HotelName"
 }
 ```
@@ -420,7 +420,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     "onElement": "//response/HotelName"
 }
 ```
@@ -439,7 +439,7 @@ This example does not include custom headers or content type flags.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Post",
-    Argument = "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    Argument = "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     RegularExpression = "<bookingReference>([A-Z0-9]{6})</bookingReference>"
 };
 ```
@@ -449,7 +449,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Post")
-    .setArgument("{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}")
+    .setArgument("{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}")
     .setRegularExpression("<bookingReference>([A-Z0-9]{6})</bookingReference>");
 ```
 
@@ -458,7 +458,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Post",
-    argument: "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    argument: "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     regularExpression: "<bookingReference>([A-Z0-9]{6})</bookingReference>"
 };
 ```
@@ -468,7 +468,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     "regularExpression": "<bookingReference>([A-Z0-9]{6})</bookingReference>"
 }
 ```
@@ -478,7 +478,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Post",
-    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{"hotelName":"Luxury Hotel","roomType":"Suite"}}}",
+    "argument": "{{$ --Url:http://api.example.com/v1/book/encoded --Body:{\"hotelName\":\"Luxury Hotel\",\"roomType\":\"Suite\"}}}",
     "regularExpression": "<bookingReference>([A-Z0-9]{6})</bookingReference>"
 }
 ```
@@ -538,7 +538,7 @@ Supports error handling in workflows based on the status code value.
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
-| **Value Type**    | Uri|Expression    |
+| **Value Type**    | Uri\|Expression   |
 
 Specifies where to send the HTTP POST request and what data to include.
 Allows dynamic values through templates or variable placeholders in the format {{$...}}.
@@ -780,7 +780,7 @@ Custom headers let you send extra information like authentication tokens or trac
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Uri|String        |
+| **Value Type**    | Uri\|String       |
 
 Defines the web address where the delete request is sent.
 Tells the server which resource should be removed.

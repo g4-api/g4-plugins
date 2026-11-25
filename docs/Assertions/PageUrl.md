@@ -48,7 +48,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "PageUrl",
     Argument = "{{$ --Operator:Greater --Expected:100}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("PageUrl")
     .setArgument("{{$ --Operator:Greater --Expected:100}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -67,7 +67,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "PageUrl",
     argument: "{{$ --Operator:Greater --Expected:100}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -77,7 +77,7 @@ var actionRule = {
 {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:Greater --Expected:100}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -87,7 +87,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:Greater --Expected:100}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -103,7 +103,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "PageUrl",
     Argument = "{{$ --Operator:Lower --Expected:50}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -113,7 +113,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("PageUrl")
     .setArgument("{{$ --Operator:Lower --Expected:50}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -122,7 +122,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "PageUrl",
     argument: "{{$ --Operator:Lower --Expected:50}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -132,7 +132,7 @@ var actionRule = {
 {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:Lower --Expected:50}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -142,7 +142,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:Lower --Expected:50}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -158,7 +158,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "PageUrl",
     Argument = "{{$ --Operator:GreaterEqual --Expected:200}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -168,7 +168,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("PageUrl")
     .setArgument("{{$ --Operator:GreaterEqual --Expected:200}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -177,7 +177,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "PageUrl",
     argument: "{{$ --Operator:GreaterEqual --Expected:200}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -187,7 +187,7 @@ var actionRule = {
 {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:GreaterEqual --Expected:200}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -197,7 +197,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:GreaterEqual --Expected:200}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -213,7 +213,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "PageUrl",
     Argument = "{{$ --Operator:LowerEqual --Expected:300}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -223,7 +223,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("PageUrl")
     .setArgument("{{$ --Operator:LowerEqual --Expected:300}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -232,7 +232,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "PageUrl",
     argument: "{{$ --Operator:LowerEqual --Expected:300}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -242,7 +242,7 @@ var actionRule = {
 {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:LowerEqual --Expected:300}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -252,7 +252,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "PageUrl",
     "argument": "{{$ --Operator:LowerEqual --Expected:300}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 

@@ -222,13 +222,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute             | Value                 |
-| --------------------- | --------------------- |
-| **Default Value**     | Null                  |
-| **Depends On**        | None                  |
-| **Mandatory**         | No                    |
-| **Multiple**          | No                    |
-| **Value Type**        | String|Uri|Expression |
+| Attribute               | Value                   |
+| ----------------------- | ----------------------- |
+| **Default Value**       | Null                    |
+| **Depends On**          | None                    |
+| **Mandatory**           | No                      |
+| **Multiple**            | No                      |
+| **Value Type**          | String\|Uri\|Expression |
 
 Argument specifies the URL to navigate to when no element is provided.
 This value is used directly as the navigation URL without any regex processing when OnElement is absent or the element cannot be resolved.
