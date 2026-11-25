@@ -175,7 +175,7 @@ var actionRule = new ActionRuleModel
     PluginName = "WebElementContent",
     Locator = "WindowsLocator",
     OnElement = "AutomationId:priceLabel",
-    RegularExpression = "\d+\.\d{2}"
+    RegularExpression = "\\d+\\.\\d{2}"
 };
 ```
 
@@ -186,7 +186,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WebElementContent")
     .setLocator("WindowsLocator")
     .setOnElement("AutomationId:priceLabel")
-    .setRegularExpression("\d+\.\d{2}");
+    .setRegularExpression("\\d+\\.\\d{2}");
 ```
 
 **Javascript:**
@@ -196,7 +196,7 @@ var actionRule = {
     pluginName: "WebElementContent",
     locator: "WindowsLocator",
     onElement: "AutomationId:priceLabel",
-    regularExpression: "\d+\.\d{2}"
+    regularExpression: "\\d+\\.\\d{2}"
 };
 ```
 
@@ -207,7 +207,7 @@ var actionRule = {
     "pluginName": "WebElementContent",
     "locator": "WindowsLocator",
     "onElement": "AutomationId:priceLabel",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 
@@ -218,7 +218,7 @@ action_rule = {
     "pluginName": "WebElementContent",
     "locator": "WindowsLocator",
     "onElement": "AutomationId:priceLabel",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 

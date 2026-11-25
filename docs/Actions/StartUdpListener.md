@@ -280,13 +280,13 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the arguments of the step, such as `{{$ --Name:Telemetry --Port:9100}}`.
 Every argument is optional; a rule without an argument starts the `Default` listener on a free port.
@@ -309,13 +309,13 @@ A value that is not a whole number fails the step.
 
 ### Local Address (LocalAddress)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Binds one local IP address, which selects the network interface on a machine with several; a host name or other text fails the step.
 Defaults to every IPv4 interface, and an IPv6 address makes the listener an IPv6 socket.
@@ -323,13 +323,13 @@ With an IPv4 MulticastGroup the listener binds every interface and the address s
 
 ### Multicast Group (MulticastGroup)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Joins a multicast group, such as `239.255.0.1`, so datagrams sent to the group reach the listener.
 Opens the port for sharing with other multicast receivers that also allow it.
@@ -337,13 +337,13 @@ A value that is not an IP address, or not a multicast address, fails the step.
 
 ### Name (Name)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Default           |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Default            |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the listener, so later steps reach it through the Listener parameter of ReceiveUdpMessage and SendUdpMessage, or the Name parameter of StopUdpListener.
 Defaults to `Default`, also for an empty value, and case does not matter, so `telemetry` and `Telemetry` are the same listener.

@@ -95,7 +95,7 @@ This example shows how to use the `Get-DriverTypeName` plugin with a custom rege
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteLog",
-    Argument = "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:"^Open"}}"
+    Argument = "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:\"^Open\"}}"
 };
 ```
 
@@ -104,7 +104,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteLog")
-    .setArgument("The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:"^Open"}}");
+    .setArgument("The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:\"^Open\"}}");
 ```
 
 **Javascript:**
@@ -112,7 +112,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteLog",
-    argument: "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:"^Open"}}"
+    argument: "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:\"^Open\"}}"
 };
 ```
 
@@ -121,7 +121,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteLog",
-    "argument": "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:"^Open"}}"
+    "argument": "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:\"^Open\"}}"
 }
 ```
 
@@ -130,7 +130,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteLog",
-    "argument": "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:"^Open"}}"
+    "argument": "The matched pattern of the WebDriver type name is {{$Get-DriverTypeName --Pattern:\"^Open\"}}"
 }
 ```
 

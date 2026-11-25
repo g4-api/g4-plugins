@@ -99,7 +99,7 @@ This example demonstrates how to use the `Get-PageUrl` plugin with the `WriteLog
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteLog",
-    Argument = "The matched pattern of the URL is {{$Get-PageUrl --Pattern:"^https:\/\/example.com"}}"
+    Argument = "The matched pattern of the URL is {{$Get-PageUrl --Pattern:\"^https:\\/\\/example.com\"}}"
 };
 ```
 
@@ -108,7 +108,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteLog")
-    .setArgument("The matched pattern of the URL is {{$Get-PageUrl --Pattern:"^https:\/\/example.com"}}");
+    .setArgument("The matched pattern of the URL is {{$Get-PageUrl --Pattern:\"^https:\\/\\/example.com\"}}");
 ```
 
 **Javascript:**
@@ -116,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteLog",
-    argument: "The matched pattern of the URL is {{$Get-PageUrl --Pattern:"^https:\/\/example.com"}}"
+    argument: "The matched pattern of the URL is {{$Get-PageUrl --Pattern:\"^https:\\/\\/example.com\"}}"
 };
 ```
 
@@ -125,7 +125,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteLog",
-    "argument": "The matched pattern of the URL is {{$Get-PageUrl --Pattern:"^https:\/\/example.com"}}"
+    "argument": "The matched pattern of the URL is {{$Get-PageUrl --Pattern:\"^https:\\/\\/example.com\"}}"
 }
 ```
 
@@ -134,7 +134,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteLog",
-    "argument": "The matched pattern of the URL is {{$Get-PageUrl --Pattern:"^https:\/\/example.com"}}"
+    "argument": "The matched pattern of the URL is {{$Get-PageUrl --Pattern:\"^https:\\/\\/example.com\"}}"
 }
 ```
 

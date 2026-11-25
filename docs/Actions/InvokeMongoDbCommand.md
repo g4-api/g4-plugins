@@ -61,7 +61,7 @@ The step stores the whole response, which reports how many indexes the collectio
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbCommand",
-    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"createIndexes":"orders","indexes":[{"key":{"status":1},"name":"status_1"}]}}}"
+    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}"
 };
 ```
 
@@ -70,7 +70,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbCommand")
-    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandText:{"createIndexes":"orders","indexes":[{"key":{"status":1},"name":"status_1"}]}}}");
+    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}");
 ```
 
 **Javascript:**
@@ -78,7 +78,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbCommand",
-    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"createIndexes":"orders","indexes":[{"key":{"status":1},"name":"status_1"}]}}}"
+    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}"
 };
 ```
 
@@ -87,7 +87,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"createIndexes":"orders","indexes":[{"key":{"status":1},"name":"status_1"}]}}}"
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}"
 }
 ```
 
@@ -96,7 +96,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"createIndexes":"orders","indexes":[{"key":{"status":1},"name":"status_1"}]}}}"
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"createIndexes\":\"orders\",\"indexes\":[{\"key\":{\"status\":1},\"name\":\"status_1\"}]}}}"
 }
 ```
 
@@ -113,7 +113,7 @@ The step stores the whole statistics document for a report to read.
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbCommand",
-    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"collStats":"orders"}}}"
+    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"collStats\":\"orders\"}}}"
 };
 ```
 
@@ -122,7 +122,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbCommand")
-    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandText:{"collStats":"orders"}}}");
+    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"collStats\":\"orders\"}}}");
 ```
 
 **Javascript:**
@@ -130,7 +130,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbCommand",
-    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"collStats":"orders"}}}"
+    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"collStats\":\"orders\"}}}"
 };
 ```
 
@@ -139,7 +139,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"collStats":"orders"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"collStats\":\"orders\"}}}"
 }
 ```
 
@@ -148,7 +148,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{"collStats":"orders"}}}"
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandText:{\"collStats\":\"orders\"}}}"
 }
 ```
 
@@ -165,7 +165,7 @@ NoEntity keeps the response in session parameters only.
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbCommand",
-    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\flows\commands\validate-orders.json --CommandTimeout:600 --NoEntity}}"
+    Argument = "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\\flows\\commands\\validate-orders.json --CommandTimeout:600 --NoEntity}}"
 };
 ```
 
@@ -174,7 +174,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbCommand")
-    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\flows\commands\validate-orders.json --CommandTimeout:600 --NoEntity}}");
+    .setArgument("{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\\flows\\commands\\validate-orders.json --CommandTimeout:600 --NoEntity}}");
 ```
 
 **Javascript:**
@@ -182,7 +182,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbCommand",
-    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\flows\commands\validate-orders.json --CommandTimeout:600 --NoEntity}}"
+    argument: "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\\flows\\commands\\validate-orders.json --CommandTimeout:600 --NoEntity}}"
 };
 ```
 
@@ -191,7 +191,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\flows\commands\validate-orders.json --CommandTimeout:600 --NoEntity}}"
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\\flows\\commands\\validate-orders.json --CommandTimeout:600 --NoEntity}}"
 }
 ```
 
@@ -200,7 +200,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\flows\commands\validate-orders.json --CommandTimeout:600 --NoEntity}}"
+    "argument": "{{$ --Credentials:mongo-production --Database:shop --CommandFile:C:\\flows\\commands\\validate-orders.json --CommandTimeout:600 --NoEntity}}"
 }
 ```
 
@@ -217,7 +217,7 @@ The `drop` command removes the orders collection with its documents and indexes,
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeMongoDbCommand",
-    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+    Argument = "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{\"drop\":\"orders\"}}}"
 };
 ```
 
@@ -226,7 +226,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeMongoDbCommand")
-    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}");
+    .setArgument("{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{\"drop\":\"orders\"}}}");
 ```
 
 **Javascript:**
@@ -234,7 +234,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeMongoDbCommand",
-    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+    argument: "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{\"drop\":\"orders\"}}}"
 };
 ```
 
@@ -243,7 +243,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{\"drop\":\"orders\"}}}"
 }
 ```
 
@@ -252,7 +252,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeMongoDbCommand",
-    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{"drop":"orders"}}}"
+    "argument": "{{$ --ConnectionString:mongodb://localhost:27017/shop --CommandText:{\"drop\":\"orders\"}}}"
 }
 ```
 
@@ -423,13 +423,13 @@ Invalid Base64 fails the step, so an encoded payload never reaches the server as
 
 ### Command File (CommandFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Reads the payload from a UTF-8 file, such as `C:\flows\filter.json`.
 Applies only when CommandText is not set, so an inline payload always takes priority.
@@ -437,13 +437,13 @@ The Base64 switch never applies here; file content is always read as plain text.
 
 ### Command Text (CommandText)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the command as a JSON object whose first field names the command, such as `{"collStats":"orders"}`.
 Required, because a step without a command has nothing to run.
@@ -465,13 +465,13 @@ Raise it for a long aggregation and lower it for a health check that must fail f
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -479,13 +479,13 @@ Every connection setting, such as the host, the login, the replica set, and the 
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.
 The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.
@@ -493,13 +493,13 @@ A value that carries a URI scheme, such as `mongodb://`, is used as a raw connec
 
 ### Database (Database)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the database the step operates on, such as `shop`.
 Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.

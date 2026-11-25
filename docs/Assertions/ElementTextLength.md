@@ -49,7 +49,7 @@ var actionRule = new ActionRuleModel
     PluginName = "ElementTextLength",
     Argument = "{{$ --Operator:Equal --Expected:3}}",
     OnElement = "//*[@id='numericTextElement']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -60,7 +60,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ElementTextLength")
     .setArgument("{{$ --Operator:Equal --Expected:3}}")
     .setOnElement("//*[@id='numericTextElement']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -70,7 +70,7 @@ var actionRule = {
     pluginName: "ElementTextLength",
     argument: "{{$ --Operator:Equal --Expected:3}}",
     onElement: "//*[@id='numericTextElement']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -81,7 +81,7 @@ var actionRule = {
     "pluginName": "ElementTextLength",
     "argument": "{{$ --Operator:Equal --Expected:3}}",
     "onElement": "//*[@id='numericTextElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -92,7 +92,7 @@ action_rule = {
     "pluginName": "ElementTextLength",
     "argument": "{{$ --Operator:Equal --Expected:3}}",
     "onElement": "//*[@id='numericTextElement']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -165,7 +165,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:2}}",
     Locator = "CssSelector",
     OnElement = ".price",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -177,7 +177,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementTextLength --Operator:Greater --Expected:2}}")
     .setLocator("CssSelector")
     .setOnElement(".price")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -188,7 +188,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:2}}",
     locator: "CssSelector",
     onElement: ".price",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -200,7 +200,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:2}}",
     "locator": "CssSelector",
     "onElement": ".price",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -212,7 +212,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementTextLength --Operator:Greater --Expected:2}}",
     "locator": "CssSelector",
     "onElement": ".price",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -281,7 +281,7 @@ Check that the length of the text content of an element matches the regular expr
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\d{2}}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\\d{2}}}",
     OnElement = "//*[@id='twoDigitTextElement']"
 };
 ```
@@ -291,7 +291,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:\d{2}}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:\\d{2}}}")
     .setOnElement("//*[@id='twoDigitTextElement']");
 ```
 
@@ -300,7 +300,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\d{2}}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\\d{2}}}",
     onElement: "//*[@id='twoDigitTextElement']"
 };
 ```
@@ -310,7 +310,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\d{2}}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\\d{2}}}",
     "onElement": "//*[@id='twoDigitTextElement']"
 }
 ```
@@ -320,7 +320,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\d{2}}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:\\d{2}}}",
     "onElement": "//*[@id='twoDigitTextElement']"
 }
 ```
@@ -384,26 +384,26 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected length for the text content.
 
 ### On Element (OnElement)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the web element whose text content length will be validated. This can be defined using a locator strategy, such as Xpath, CSS Selector, etc.
 

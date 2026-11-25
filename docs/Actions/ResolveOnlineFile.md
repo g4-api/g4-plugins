@@ -217,7 +217,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "ResolveOnlineFile",
     OnElement = "//a[contains(.,'g4.pdf')]",
-    RegularExpression = "https?://[^\s"']+?/g4\.pdf"
+    RegularExpression = "https?://[^\\s\"']+?/g4\\.pdf"
 };
 ```
 
@@ -227,7 +227,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ResolveOnlineFile")
     .setOnElement("//a[contains(.,'g4.pdf')]")
-    .setRegularExpression("https?://[^\s"']+?/g4\.pdf");
+    .setRegularExpression("https?://[^\\s\"']+?/g4\\.pdf");
 ```
 
 **Javascript:**
@@ -236,7 +236,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "ResolveOnlineFile",
     onElement: "//a[contains(.,'g4.pdf')]",
-    regularExpression: "https?://[^\s"']+?/g4\.pdf"
+    regularExpression: "https?://[^\\s\"']+?/g4\\.pdf"
 };
 ```
 
@@ -246,7 +246,7 @@ var actionRule = {
 {
     "pluginName": "ResolveOnlineFile",
     "onElement": "//a[contains(.,'g4.pdf')]",
-    "regularExpression": "https?://[^\s"']+?/g4\.pdf"
+    "regularExpression": "https?://[^\\s\"']+?/g4\\.pdf"
 }
 ```
 
@@ -256,7 +256,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "ResolveOnlineFile",
     "onElement": "//a[contains(.,'g4.pdf')]",
-    "regularExpression": "https?://[^\s"']+?/g4\.pdf"
+    "regularExpression": "https?://[^\\s\"']+?/g4\\.pdf"
 }
 ```
 
@@ -332,7 +332,7 @@ var actionRule = new ActionRuleModel
     PluginName = "ResolveOnlineFile",
     OnAttribute = "href",
     OnElement = "//a[contains(.,'g4.pdf')]",
-    RegularExpression = "[^?\"]+\.pdf"
+    RegularExpression = "[^?\\\"]+\\.pdf"
 };
 ```
 
@@ -343,7 +343,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ResolveOnlineFile")
     .setOnAttribute("href")
     .setOnElement("//a[contains(.,'g4.pdf')]")
-    .setRegularExpression("[^?\"]+\.pdf");
+    .setRegularExpression("[^?\\\"]+\\.pdf");
 ```
 
 **Javascript:**
@@ -353,7 +353,7 @@ var actionRule = {
     pluginName: "ResolveOnlineFile",
     onAttribute: "href",
     onElement: "//a[contains(.,'g4.pdf')]",
-    regularExpression: "[^?\"]+\.pdf"
+    regularExpression: "[^?\\\"]+\\.pdf"
 };
 ```
 
@@ -364,7 +364,7 @@ var actionRule = {
     "pluginName": "ResolveOnlineFile",
     "onAttribute": "href",
     "onElement": "//a[contains(.,'g4.pdf')]",
-    "regularExpression": "[^?\"]+\.pdf"
+    "regularExpression": "[^?\\\"]+\\.pdf"
 }
 ```
 
@@ -375,7 +375,7 @@ action_rule = {
     "pluginName": "ResolveOnlineFile",
     "onAttribute": "href",
     "onElement": "//a[contains(.,'g4.pdf')]",
-    "regularExpression": "[^?\"]+\.pdf"
+    "regularExpression": "[^?\\\"]+\\.pdf"
 }
 ```
 
@@ -483,13 +483,13 @@ Using the URI makes auditing and debugging more reliable.
 
 ### Argument (Argument)
 
-| Attribute             | Value                 |
-| --------------------- | --------------------- |
-| **Default Value**     | Null                  |
-| **Depends On**        | None                  |
-| **Mandatory**         | No                    |
-| **Multiple**          | No                    |
-| **Value Type**        | String|Uri|Expression |
+| Attribute               | Value                   |
+| ----------------------- | ----------------------- |
+| **Default Value**       | Null                    |
+| **Depends On**          | None                    |
+| **Mandatory**           | No                      |
+| **Multiple**            | No                      |
+| **Value Type**          | String\|Uri\|Expression |
 
 Defines the address used to download the file, which can be text, a web link, or a dynamic expression.
 Explicit URLs make file downloads more reliable.

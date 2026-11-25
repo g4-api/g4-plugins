@@ -330,13 +330,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the parameters of the drag, such as `{{$ --Target://ListItem[@Name='Archive']}}`.
 A rule sets one start, OnElement or X and Y, and one end, Target, TargetX and TargetY, or DeltaX and DeltaY, and may add alignments, offsets, Steps, and Duration.
@@ -467,7 +467,7 @@ Use it instead of Target or TargetX and TargetY; setting more than one end, or t
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Sets the total time of the moves between the press and the release.
 Accepts a whole number of milliseconds, such as `600`, or a time span, such as `00:00:01`.
@@ -517,13 +517,13 @@ Defaults to 10, and a value outside 1 to 100 fails the step.
 
 ### Target (Target)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the element to drop on, as an XPath, the locator the User32 elements support.
 The search starts from the root of the session and waits for the element like any other element.

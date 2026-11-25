@@ -7,6 +7,35 @@ All notable changes to G4 Plugins are documented in this file. The format is bas
 
 ### Added
 
+- `InvokeLongClick` long-presses an element, or the current touch position, with a W3C touch pointer for
+  `--Duration` milliseconds (1000 by default). The G4 Android recorder records long clicks as this action.
+- `SwitchActivity` starts an Android activity from `--Package` and `--Activity` through the Appium UiAutomator2
+  `mobile: startActivity` command. The G4 Android recorder records activity changes as this action.
+- A live UIA test checks that `InvokeUser32MiddleClick` and `InvokeUser32ContextClick` press the middle and the right
+  button on an element.
+
+### Changed
+
+- The release pipeline fails when a unit or integration test fails, and publishes only after the tests pass. Before,
+  it ignored the test exit code.
+- Tests that need administrator rights or a live UIA driver carry the `LocalOnly` category, which the release
+  pipeline excludes. The Machine-scope parameter cases are split into their own test methods, and `CopyParameter`
+  cleanup no longer fails in a session without administrator rights, so the other parameter tests pass there. The
+  live drag-and-drop tests use the category instead of `[Ignore]`, so they can run on a workstation.
+- Every generated plugin page in `docs/` is regenerated with the current engine generator.
+- The plugins use the engine packages and `G4.Abstraction.WebDriver` 2026.11.25.113 (the WebDriver abstraction now
+  ships from the engine), `G4.Abstraction.Cli` and `G4.Abstraction.Logging` 2026.11.25.27, and the test projects use
+  `G4.Api` 2026.11.25.78.
+
+### Fixed
+
+- An `Assert` manifest example no longer sets `regularExpression` to `null`, so every manifest validates against the
+  plugin manifest schema.
+
+## 2026.11.25.177
+
+### Added
+
 - `InvokeMiddleClick` middle-clicks an element, or the current pointer position, through the WebDriver Actions API.
 - `InvokeUser32MiddleClick` sends a native Windows middle click at viewport coordinates or on a UI Automation element.
 - `InvokeScroll` accepts the `--Relative` switch to scroll by the `Left` and `Top` offsets from the current position.

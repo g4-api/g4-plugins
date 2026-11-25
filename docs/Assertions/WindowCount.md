@@ -198,7 +198,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:0}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -208,7 +208,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:WindowCount --Operator:NotEqual --Expected:0}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -217,7 +217,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:0}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -227,7 +227,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:0}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -237,7 +237,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:WindowCount --Operator:NotEqual --Expected:0}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -351,7 +351,7 @@ Check that the count of open browser windows matches the regular expression '\d+
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:WindowCount --Operator:Match --Expected:\d+}}"
+    Argument = "{{$ --Condition:WindowCount --Operator:Match --Expected:\\d+}}"
 };
 ```
 
@@ -360,7 +360,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:WindowCount --Operator:Match --Expected:\d+}}");
+    .setArgument("{{$ --Condition:WindowCount --Operator:Match --Expected:\\d+}}");
 ```
 
 **Javascript:**
@@ -368,7 +368,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:WindowCount --Operator:Match --Expected:\d+}}"
+    argument: "{{$ --Condition:WindowCount --Operator:Match --Expected:\\d+}}"
 };
 ```
 
@@ -377,7 +377,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:\d+}}"
+    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:\\d+}}"
 }
 ```
 
@@ -386,7 +386,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:\d+}}"
+    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:\\d+}}"
 }
 ```
 
@@ -444,13 +444,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the window count.

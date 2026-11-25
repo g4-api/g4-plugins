@@ -165,7 +165,7 @@ The assertion passes only if the session parameter value, when compared as a str
 var actionRule = new ActionRuleModel
 {
     PluginName = "Text",
-    Argument = "{{$ --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    Argument = "{{$ --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     OnElement = "{{$Get-Parameter --Name:UserSSN --Scope:Session}}"
 };
 ```
@@ -175,7 +175,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Text")
-    .setArgument("{{$ --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}")
+    .setArgument("{{$ --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}")
     .setOnElement("{{$Get-Parameter --Name:UserSSN --Scope:Session}}");
 ```
 
@@ -184,7 +184,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Text",
-    argument: "{{$ --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    argument: "{{$ --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     onElement: "{{$Get-Parameter --Name:UserSSN --Scope:Session}}"
 };
 ```
@@ -194,7 +194,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Text",
-    "argument": "{{$ --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "{{$Get-Parameter --Name:UserSSN --Scope:Session}}"
 }
 ```
@@ -204,7 +204,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Text",
-    "argument": "{{$ --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "{{$Get-Parameter --Name:UserSSN --Scope:Session}}"
 }
 ```
@@ -224,7 +224,7 @@ The assertion passes only if the value, when compared as a string, does not matc
 var actionRule = new ActionRuleModel
 {
     PluginName = "Text",
-    Argument = "{{$ --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    Argument = "{{$ --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     OnElement = "000-00-0000"
 };
 ```
@@ -234,7 +234,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Text")
-    .setArgument("{{$ --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}")
+    .setArgument("{{$ --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}")
     .setOnElement("000-00-0000");
 ```
 
@@ -243,7 +243,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Text",
-    argument: "{{$ --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    argument: "{{$ --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     onElement: "000-00-0000"
 };
 ```
@@ -253,7 +253,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Text",
-    "argument": "{{$ --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "000-00-0000"
 }
 ```
@@ -263,7 +263,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Text",
-    "argument": "{{$ --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "000-00-0000"
 }
 ```
@@ -516,7 +516,7 @@ var actionRule = new ActionRuleModel
     PluginName = "Text",
     Argument = "{{$ --Operator:Equal --Expected:1000}}",
     OnElement = "$1,000.00",
-    RegularExpression = "\d+(?:,\d{3})*"
+    RegularExpression = "\\d+(?:,\\d{3})*"
 };
 ```
 
@@ -527,7 +527,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Text")
     .setArgument("{{$ --Operator:Equal --Expected:1000}}")
     .setOnElement("$1,000.00")
-    .setRegularExpression("\d+(?:,\d{3})*");
+    .setRegularExpression("\\d+(?:,\\d{3})*");
 ```
 
 **Javascript:**
@@ -537,7 +537,7 @@ var actionRule = {
     pluginName: "Text",
     argument: "{{$ --Operator:Equal --Expected:1000}}",
     onElement: "$1,000.00",
-    regularExpression: "\d+(?:,\d{3})*"
+    regularExpression: "\\d+(?:,\\d{3})*"
 };
 ```
 
@@ -548,7 +548,7 @@ var actionRule = {
     "pluginName": "Text",
     "argument": "{{$ --Operator:Equal --Expected:1000}}",
     "onElement": "$1,000.00",
-    "regularExpression": "\d+(?:,\d{3})*"
+    "regularExpression": "\\d+(?:,\\d{3})*"
 }
 ```
 
@@ -559,7 +559,7 @@ action_rule = {
     "pluginName": "Text",
     "argument": "{{$ --Operator:Equal --Expected:1000}}",
     "onElement": "$1,000.00",
-    "regularExpression": "\d+(?:,\d{3})*"
+    "regularExpression": "\\d+(?:,\\d{3})*"
 }
 ```
 
@@ -567,13 +567,13 @@ action_rule = {
 
 ### On Element (OnElement)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Text value that will be compared to the expected result.
 It can be a fixed phrase or a value provided by an expression at runtime.

@@ -54,7 +54,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PathNotExists}}",
-    OnElement = "C:\Automation\Temp\session.lock"
+    OnElement = "C:\\Automation\\Temp\\session.lock"
 };
 ```
 
@@ -64,7 +64,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PathNotExists}}")
-    .setOnElement("C:\Automation\Temp\session.lock");
+    .setOnElement("C:\\Automation\\Temp\\session.lock");
 ```
 
 **Javascript:**
@@ -73,7 +73,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PathNotExists}}",
-    onElement: "C:\Automation\Temp\session.lock"
+    onElement: "C:\\Automation\\Temp\\session.lock"
 };
 ```
 
@@ -83,7 +83,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathNotExists}}",
-    "onElement": "C:\Automation\Temp\session.lock"
+    "onElement": "C:\\Automation\\Temp\\session.lock"
 }
 ```
 
@@ -93,7 +93,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathNotExists}}",
-    "onElement": "C:\Automation\Temp\session.lock"
+    "onElement": "C:\\Automation\\Temp\\session.lock"
 }
 ```
 
@@ -111,7 +111,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PathNotExists}}",
-    OnElement = ".\output"
+    OnElement = ".\\output"
 };
 ```
 
@@ -121,7 +121,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PathNotExists}}")
-    .setOnElement(".\output");
+    .setOnElement(".\\output");
 ```
 
 **Javascript:**
@@ -130,7 +130,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PathNotExists}}",
-    onElement: ".\output"
+    onElement: ".\\output"
 };
 ```
 
@@ -140,7 +140,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathNotExists}}",
-    "onElement": ".\output"
+    "onElement": ".\\output"
 }
 ```
 
@@ -150,7 +150,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PathNotExists}}",
-    "onElement": ".\output"
+    "onElement": ".\\output"
 }
 ```
 
@@ -158,13 +158,13 @@ action_rule = {
 
 ### On Element (OnElement)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 The file or directory path to check.
 Absolute, UNC, and relative paths are accepted; relative paths resolve from the process working directory.

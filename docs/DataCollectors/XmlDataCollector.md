@@ -57,7 +57,7 @@ var actionRule = new ActionRuleModel
         {
             PluginName = "",
             OnElement = ".//p[starts-with(.,'Location:')]",
-            RegularExpression = "(?<=\\w+:).*"
+            RegularExpression = "(?<=\\\\w+:).*"
         }
     }
 };
@@ -70,10 +70,10 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("")
             .setOnElement(".//p[starts-with(.,'Location:')]")
-            .setRegularExpression("(?<=\\w+:).*");
+            .setRegularExpression("(?<=\\\\w+:).*");
 ```
 
 **Javascript:**
@@ -86,7 +86,7 @@ var actionRule = {
         {
             pluginName: "",
             onElement: ".//p[starts-with(.,'Location:')]",
-            regularExpression: "(?<=\\w+:).*"
+            regularExpression: "(?<=\\\\w+:).*"
         }
     ]
 };
@@ -102,7 +102,7 @@ var actionRule = {
         {
             "pluginName": "",
             "onElement": ".//p[starts-with(.,'Location:')]",
-            "regularExpression": "(?<=\\w+:).*"
+            "regularExpression": "(?<=\\\\w+:).*"
         }
     ]
 }
@@ -118,7 +118,7 @@ action_rule = {
         {
             "pluginName": "",
             "onElement": ".//p[starts-with(.,'Location:')]",
-            "regularExpression": "(?<=\\w+:).*"
+            "regularExpression": "(?<=\\\\w+:).*"
         }
     ]
 }
@@ -146,7 +146,7 @@ var actionRule = new ActionRuleModel
         {
             PluginName = "",
             OnElement = ".//p[starts-with(.,'Location:')]",
-            RegularExpression = "(?<=\\w+:).*"
+            RegularExpression = "(?<=\\\\w+:).*"
         }
     }
 };
@@ -159,10 +159,10 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ExportData")
     .setOnElement("//div[@class='hotel']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("")
             .setOnElement(".//p[starts-with(.,'Location:')]")
-            .setRegularExpression("(?<=\\w+:).*");
+            .setRegularExpression("(?<=\\\\w+:).*");
 ```
 
 **Javascript:**
@@ -175,7 +175,7 @@ var actionRule = {
         {
             pluginName: "",
             onElement: ".//p[starts-with(.,'Location:')]",
-            regularExpression: "(?<=\\w+:).*"
+            regularExpression: "(?<=\\\\w+:).*"
         }
     ]
 };
@@ -191,7 +191,7 @@ var actionRule = {
         {
             "pluginName": "",
             "onElement": ".//p[starts-with(.,'Location:')]",
-            "regularExpression": "(?<=\\w+:).*"
+            "regularExpression": "(?<=\\\\w+:).*"
         }
     ]
 }
@@ -207,7 +207,7 @@ action_rule = {
         {
             "pluginName": "",
             "onElement": ".//p[starts-with(.,'Location:')]",
-            "regularExpression": "(?<=\\w+:).*"
+            "regularExpression": "(?<=\\\\w+:).*"
         }
     ]
 }

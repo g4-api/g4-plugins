@@ -51,7 +51,7 @@ If tab characters are present, they are removed; otherwise, the text remains unc
 var actionRule = new ActionRuleModel
 {
     PluginName = "ClearTabs",
-    OnElement = "This is a	sample text	with tabs."
+    OnElement = "This is a\tsample text\twith tabs."
 };
 ```
 
@@ -60,7 +60,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ClearTabs")
-    .setOnElement("This is a	sample text	with tabs.");
+    .setOnElement("This is a\tsample text\twith tabs.");
 ```
 
 **Javascript:**
@@ -68,7 +68,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ClearTabs",
-    onElement: "This is a	sample text	with tabs."
+    onElement: "This is a\tsample text\twith tabs."
 };
 ```
 
@@ -77,7 +77,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ClearTabs",
-    "onElement": "This is a	sample text	with tabs."
+    "onElement": "This is a\tsample text\twith tabs."
 }
 ```
 
@@ -86,7 +86,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ClearTabs",
-    "onElement": "This is a	sample text	with tabs."
+    "onElement": "This is a\tsample text\twith tabs."
 }
 ```
 

@@ -103,7 +103,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
-    RegularExpression = "(?<=\"resultCount\":)\d+"
+    RegularExpression = "(?<=\\\"resultCount\\\":)\\d+"
 };
 ```
 
@@ -113,7 +113,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}")
-    .setRegularExpression("(?<=\"resultCount\":)\d+");
+    .setRegularExpression("(?<=\\\"resultCount\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -122,7 +122,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
-    regularExpression: "(?<=\"resultCount\":)\d+"
+    regularExpression: "(?<=\\\"resultCount\\\":)\\d+"
 };
 ```
 
@@ -132,7 +132,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
-    "regularExpression": "(?<=\"resultCount\":)\d+"
+    "regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 }
 ```
 
@@ -142,7 +142,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
-    "regularExpression": "(?<=\"resultCount\":)\d+"
+    "regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 }
 ```
 
@@ -218,7 +218,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     OnElement = "(//Item[@stockAvailable='true'])[1]",
-    RegularExpression = "(?<=name=")[^"]+"
+    RegularExpression = "(?<=name=\")[^\"]+"
 };
 ```
 
@@ -229,7 +229,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}")
     .setOnElement("(//Item[@stockAvailable='true'])[1]")
-    .setRegularExpression("(?<=name=")[^"]+");
+    .setRegularExpression("(?<=name=\")[^\"]+");
 ```
 
 **Javascript:**
@@ -239,7 +239,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     onElement: "(//Item[@stockAvailable='true'])[1]",
-    regularExpression: "(?<=name=")[^"]+"
+    regularExpression: "(?<=name=\")[^\"]+"
 };
 ```
 
@@ -250,7 +250,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "(?<=name=")[^"]+"
+    "regularExpression": "(?<=name=\")[^\"]+"
 }
 ```
 
@@ -261,7 +261,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "(?<=name=")[^"]+"
+    "regularExpression": "(?<=name=\")[^\"]+"
 }
 ```
 
@@ -457,7 +457,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     OnAttribute = "id",
     OnElement = "(//Item[@stockAvailable='true'])[1]",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -469,7 +469,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}")
     .setOnAttribute("id")
     .setOnElement("(//Item[@stockAvailable='true'])[1]")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -480,7 +480,7 @@ var actionRule = {
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     onAttribute: "id",
     onElement: "(//Item[@stockAvailable='true'])[1]",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -492,7 +492,7 @@ var actionRule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     "onAttribute": "id",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -504,7 +504,7 @@ action_rule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Method:Get}}",
     "onAttribute": "id",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -574,7 +574,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
-    RegularExpression = "(?<=\"resultCount\":)\d+"
+    RegularExpression = "(?<=\\\"resultCount\\\":)\\d+"
 };
 ```
 
@@ -584,7 +584,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}")
-    .setRegularExpression("(?<=\"resultCount\":)\d+");
+    .setRegularExpression("(?<=\\\"resultCount\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -593,7 +593,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
-    regularExpression: "(?<=\"resultCount\":)\d+"
+    regularExpression: "(?<=\\\"resultCount\\\":)\\d+"
 };
 ```
 
@@ -603,7 +603,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
-    "regularExpression": "(?<=\"resultCount\":)\d+"
+    "regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 }
 ```
 
@@ -613,7 +613,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
-    "regularExpression": "(?<=\"resultCount\":)\d+"
+    "regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 }
 ```
 
@@ -689,7 +689,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     OnElement = "(//Item[@stockAvailable='true'])[1]",
-    RegularExpression = "(?<=name=")[^"]+"
+    RegularExpression = "(?<=name=\")[^\"]+"
 };
 ```
 
@@ -700,7 +700,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}")
     .setOnElement("(//Item[@stockAvailable='true'])[1]")
-    .setRegularExpression("(?<=name=")[^"]+");
+    .setRegularExpression("(?<=name=\")[^\"]+");
 ```
 
 **Javascript:**
@@ -710,7 +710,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     onElement: "(//Item[@stockAvailable='true'])[1]",
-    regularExpression: "(?<=name=")[^"]+"
+    regularExpression: "(?<=name=\")[^\"]+"
 };
 ```
 
@@ -721,7 +721,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "(?<=name=")[^"]+"
+    "regularExpression": "(?<=name=\")[^\"]+"
 }
 ```
 
@@ -732,7 +732,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "(?<=name=")[^"]+"
+    "regularExpression": "(?<=name=\")[^\"]+"
 }
 ```
 
@@ -928,7 +928,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     OnAttribute = "id",
     OnElement = "(//Item[@stockAvailable='true'])[1]",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -940,7 +940,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}")
     .setOnAttribute("id")
     .setOnElement("(//Item[@stockAvailable='true'])[1]")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -951,7 +951,7 @@ var actionRule = {
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     onAttribute: "id",
     onElement: "(//Item[@stockAvailable='true'])[1]",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -963,7 +963,7 @@ var actionRule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     "onAttribute": "id",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -975,7 +975,7 @@ action_rule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Basic username:password --Method:Get}}",
     "onAttribute": "id",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -1045,7 +1045,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
-    RegularExpression = "(?<=\"resultCount\":)\d+"
+    RegularExpression = "(?<=\\\"resultCount\\\":)\\d+"
 };
 ```
 
@@ -1055,7 +1055,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}")
-    .setRegularExpression("(?<=\"resultCount\":)\d+");
+    .setRegularExpression("(?<=\\\"resultCount\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -1064,7 +1064,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
-    regularExpression: "(?<=\"resultCount\":)\d+"
+    regularExpression: "(?<=\\\"resultCount\\\":)\\d+"
 };
 ```
 
@@ -1074,7 +1074,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
-    "regularExpression": "(?<=\"resultCount\":)\d+"
+    "regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 }
 ```
 
@@ -1084,7 +1084,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
-    "regularExpression": "(?<=\"resultCount\":)\d+"
+    "regularExpression": "(?<=\\\"resultCount\\\":)\\d+"
 }
 ```
 
@@ -1160,7 +1160,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     OnElement = "(//Item[@stockAvailable='true'])[1]",
-    RegularExpression = "(?<=name=")[^"]+"
+    RegularExpression = "(?<=name=\")[^\"]+"
 };
 ```
 
@@ -1171,7 +1171,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}")
     .setOnElement("(//Item[@stockAvailable='true'])[1]")
-    .setRegularExpression("(?<=name=")[^"]+");
+    .setRegularExpression("(?<=name=\")[^\"]+");
 ```
 
 **Javascript:**
@@ -1181,7 +1181,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     onElement: "(//Item[@stockAvailable='true'])[1]",
-    regularExpression: "(?<=name=")[^"]+"
+    regularExpression: "(?<=name=\")[^\"]+"
 };
 ```
 
@@ -1192,7 +1192,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "(?<=name=")[^"]+"
+    "regularExpression": "(?<=name=\")[^\"]+"
 }
 ```
 
@@ -1203,7 +1203,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "(?<=name=")[^"]+"
+    "regularExpression": "(?<=name=\")[^\"]+"
 }
 ```
 
@@ -1399,7 +1399,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     OnAttribute = "id",
     OnElement = "(//Item[@stockAvailable='true'])[1]",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -1411,7 +1411,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}")
     .setOnAttribute("id")
     .setOnElement("(//Item[@stockAvailable='true'])[1]")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -1422,7 +1422,7 @@ var actionRule = {
     argument: "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     onAttribute: "id",
     onElement: "(//Item[@stockAvailable='true'])[1]",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -1434,7 +1434,7 @@ var actionRule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     "onAttribute": "id",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -1446,7 +1446,7 @@ action_rule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/search?category=Electronics --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method:Get}}",
     "onAttribute": "id",
     "onElement": "(//Item[@stockAvailable='true'])[1]",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -1463,7 +1463,7 @@ After execution, the entire JSON payload is available for subsequent extraction 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}"
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}"
 };
 ```
 
@@ -1472,7 +1472,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}");
 ```
 
 **Javascript:**
@@ -1480,7 +1480,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}"
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}"
 };
 ```
 
@@ -1489,7 +1489,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}"
 }
 ```
 
@@ -1498,7 +1498,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}"
 }
 ```
 
@@ -1515,8 +1515,8 @@ After execution, the extracted message is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
-    RegularExpression = "(?<="message":")[^"]+"
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+    RegularExpression = "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -1525,8 +1525,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}")
-    .setRegularExpression("(?<="message":")[^"]+");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}")
+    .setRegularExpression("(?<=\"message\":\")[^\"]+");
 ```
 
 **Javascript:**
@@ -1534,8 +1534,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
-    regularExpression: "(?<="message":")[^"]+"
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+    regularExpression: "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -1544,8 +1544,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -1554,8 +1554,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -1572,7 +1572,7 @@ After execution, that object is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -1582,7 +1582,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -1591,7 +1591,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -1601,7 +1601,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -1611,7 +1611,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -1629,9 +1629,9 @@ After execution, the extracted ID is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<="id":)\d+"
+    RegularExpression = "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -1640,9 +1640,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<="id":)\d+");
+    .setRegularExpression("(?<=\"id\":)\\d+");
 ```
 
 **Javascript:**
@@ -1650,9 +1650,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<="id":)\d+"
+    regularExpression: "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -1661,9 +1661,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -1672,9 +1672,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -1691,7 +1691,7 @@ After execution, that text is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     OnElement = "//Status"
 };
 ```
@@ -1701,7 +1701,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}")
     .setOnElement("//Status");
 ```
 
@@ -1710,7 +1710,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     onElement: "//Status"
 };
 ```
@@ -1720,7 +1720,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "//Status"
 }
 ```
@@ -1730,7 +1730,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "//Status"
 }
 ```
@@ -1748,7 +1748,7 @@ After execution, the extracted text is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -1759,7 +1759,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -1769,7 +1769,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -1780,7 +1780,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -1791,7 +1791,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -1810,7 +1810,7 @@ After execution, the attribute value is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -1821,7 +1821,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -1831,7 +1831,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -1842,7 +1842,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -1853,7 +1853,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -1872,7 +1872,7 @@ After execution, the extracted status is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -1884,7 +1884,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -1895,7 +1895,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -1907,7 +1907,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -1919,7 +1919,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -1939,7 +1939,7 @@ After execution, the entire JSON payload is available for subsequent extraction 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
 };
 ```
 
@@ -1948,7 +1948,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}");
 ```
 
 **Javascript:**
@@ -1956,7 +1956,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
 };
 ```
 
@@ -1965,7 +1965,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
 }
 ```
 
@@ -1974,7 +1974,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}"
 }
 ```
 
@@ -1991,8 +1991,8 @@ After execution, the extracted message is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
-    RegularExpression = "(?<="message":")[^"]+"
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    RegularExpression = "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -2001,8 +2001,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
-    .setRegularExpression("(?<="message":")[^"]+");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
+    .setRegularExpression("(?<=\"message\":\")[^\"]+");
 ```
 
 **Javascript:**
@@ -2010,8 +2010,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
-    regularExpression: "(?<="message":")[^"]+"
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    regularExpression: "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -2020,8 +2020,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -2030,8 +2030,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -2048,7 +2048,7 @@ After execution, that object is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -2058,7 +2058,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -2067,7 +2067,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -2077,7 +2077,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -2087,7 +2087,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -2105,9 +2105,9 @@ After execution, the extracted ID is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<="id":)\d+"
+    RegularExpression = "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -2116,9 +2116,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<="id":)\d+");
+    .setRegularExpression("(?<=\"id\":)\\d+");
 ```
 
 **Javascript:**
@@ -2126,9 +2126,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<="id":)\d+"
+    regularExpression: "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -2137,9 +2137,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -2148,9 +2148,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -2167,7 +2167,7 @@ After execution, that text is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     OnElement = "//Status"
 };
 ```
@@ -2177,7 +2177,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
     .setOnElement("//Status");
 ```
 
@@ -2186,7 +2186,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     onElement: "//Status"
 };
 ```
@@ -2196,7 +2196,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "//Status"
 }
 ```
@@ -2206,7 +2206,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "//Status"
 }
 ```
@@ -2224,7 +2224,7 @@ After execution, the extracted text is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -2235,7 +2235,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -2245,7 +2245,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -2256,7 +2256,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -2267,7 +2267,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -2286,7 +2286,7 @@ After execution, the attribute value is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -2297,7 +2297,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -2307,7 +2307,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -2318,7 +2318,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -2329,7 +2329,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -2348,7 +2348,7 @@ After execution, the extracted status is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -2360,7 +2360,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -2371,7 +2371,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -2383,7 +2383,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -2395,7 +2395,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -2415,7 +2415,7 @@ After execution, the entire JSON payload is available for subsequent extraction 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
 };
 ```
 
@@ -2424,7 +2424,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}");
 ```
 
 **Javascript:**
@@ -2432,7 +2432,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
 };
 ```
 
@@ -2441,7 +2441,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
 }
 ```
 
@@ -2450,7 +2450,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}"
 }
 ```
 
@@ -2467,8 +2467,8 @@ After execution, the extracted message is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    RegularExpression = "(?<="message":")[^"]+"
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    RegularExpression = "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -2477,8 +2477,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
-    .setRegularExpression("(?<="message":")[^"]+");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
+    .setRegularExpression("(?<=\"message\":\")[^\"]+");
 ```
 
 **Javascript:**
@@ -2486,8 +2486,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    regularExpression: "(?<="message":")[^"]+"
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    regularExpression: "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -2496,8 +2496,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -2506,8 +2506,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -2524,7 +2524,7 @@ After execution, that object is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -2534,7 +2534,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -2543,7 +2543,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -2553,7 +2553,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -2563,7 +2563,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -2581,9 +2581,9 @@ After execution, the extracted ID is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<="id":)\d+"
+    RegularExpression = "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -2592,9 +2592,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<="id":)\d+");
+    .setRegularExpression("(?<=\"id\":)\\d+");
 ```
 
 **Javascript:**
@@ -2602,9 +2602,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<="id":)\d+"
+    regularExpression: "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -2613,9 +2613,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -2624,9 +2624,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -2643,7 +2643,7 @@ After execution, that text is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     OnElement = "//Status"
 };
 ```
@@ -2653,7 +2653,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
     .setOnElement("//Status");
 ```
 
@@ -2662,7 +2662,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     onElement: "//Status"
 };
 ```
@@ -2672,7 +2672,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "//Status"
 }
 ```
@@ -2682,7 +2682,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "//Status"
 }
 ```
@@ -2700,7 +2700,7 @@ After execution, the extracted text is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -2711,7 +2711,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -2721,7 +2721,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -2732,7 +2732,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -2743,7 +2743,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -2762,7 +2762,7 @@ After execution, the attribute value is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -2773,7 +2773,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -2783,7 +2783,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -2794,7 +2794,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -2805,7 +2805,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -2824,7 +2824,7 @@ After execution, the extracted status is available for subsequent actions.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -2836,7 +2836,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -2847,7 +2847,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -2859,7 +2859,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -2871,7 +2871,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -2944,7 +2944,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -2954,7 +2954,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -2963,7 +2963,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -2973,7 +2973,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -2983,7 +2983,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -3059,7 +3059,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -3070,7 +3070,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -3080,7 +3080,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -3091,7 +3091,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -3102,7 +3102,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -3420,7 +3420,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -3430,7 +3430,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -3439,7 +3439,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -3449,7 +3449,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -3459,7 +3459,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -3535,7 +3535,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -3546,7 +3546,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -3556,7 +3556,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -3567,7 +3567,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -3578,7 +3578,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -3896,7 +3896,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -3906,7 +3906,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -3915,7 +3915,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -3925,7 +3925,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -3935,7 +3935,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -4011,7 +4011,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -4022,7 +4022,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -4032,7 +4032,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -4043,7 +4043,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -4054,7 +4054,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -4372,7 +4372,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -4382,7 +4382,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -4391,7 +4391,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -4401,7 +4401,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -4411,7 +4411,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -4487,7 +4487,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -4498,7 +4498,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -4508,7 +4508,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -4519,7 +4519,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -4530,7 +4530,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -4848,7 +4848,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -4858,7 +4858,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -4867,7 +4867,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -4877,7 +4877,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -4887,7 +4887,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -4963,7 +4963,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -4974,7 +4974,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -4984,7 +4984,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -4995,7 +4995,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -5006,7 +5006,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -5324,7 +5324,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -5334,7 +5334,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -5343,7 +5343,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -5353,7 +5353,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -5363,7 +5363,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -5439,7 +5439,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -5450,7 +5450,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -5460,7 +5460,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -5471,7 +5471,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -5482,7 +5482,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -5800,7 +5800,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -5810,7 +5810,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -5819,7 +5819,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -5829,7 +5829,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -5839,7 +5839,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -5915,7 +5915,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -5926,7 +5926,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -5936,7 +5936,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -5947,7 +5947,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -5958,7 +5958,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Field:Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -6276,7 +6276,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -6286,7 +6286,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -6295,7 +6295,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -6305,7 +6305,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -6315,7 +6315,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -6391,7 +6391,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -6402,7 +6402,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -6412,7 +6412,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -6423,7 +6423,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -6434,7 +6434,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Encoding:ASCII --Method:Post}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -6752,7 +6752,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-    RegularExpression = "(?<="message":")[^"]+"
+    RegularExpression = "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -6762,7 +6762,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}")
-    .setRegularExpression("(?<="message":")[^"]+");
+    .setRegularExpression("(?<=\"message\":\")[^\"]+");
 ```
 
 **Javascript:**
@@ -6771,7 +6771,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-    regularExpression: "(?<="message":")[^"]+"
+    regularExpression: "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -6781,7 +6781,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -6791,7 +6791,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -6986,7 +6986,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     OnElement = "$.results[0]",
-    RegularExpression = "(?<="id":)\d+"
+    RegularExpression = "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -6997,7 +6997,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}")
     .setOnElement("$.results[0]")
-    .setRegularExpression("(?<="id":)\d+");
+    .setRegularExpression("(?<=\"id\":)\\d+");
 ```
 
 **Javascript:**
@@ -7007,7 +7007,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     onElement: "$.results[0]",
-    regularExpression: "(?<="id":)\d+"
+    regularExpression: "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -7018,7 +7018,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     "onElement": "$.results[0]",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -7029,7 +7029,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     "onElement": "$.results[0]",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -7111,7 +7111,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     OnAttribute = "id",
     OnElement = "//Item",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7123,7 +7123,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}")
     .setOnAttribute("id")
     .setOnElement("//Item")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7134,7 +7134,7 @@ var actionRule = {
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     onAttribute: "id",
     onElement: "//Item",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7146,7 +7146,7 @@ var actionRule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     "onAttribute": "id",
     "onElement": "//Item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7158,7 +7158,7 @@ action_rule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Method:Delete}}",
     "onAttribute": "id",
     "onElement": "//Item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7228,7 +7228,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-    RegularExpression = "(?<="message":")[^"]+"
+    RegularExpression = "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -7238,7 +7238,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}")
-    .setRegularExpression("(?<="message":")[^"]+");
+    .setRegularExpression("(?<=\"message\":\")[^\"]+");
 ```
 
 **Javascript:**
@@ -7247,7 +7247,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-    regularExpression: "(?<="message":")[^"]+"
+    regularExpression: "(?<=\"message\":\")[^\"]+"
 };
 ```
 
@@ -7257,7 +7257,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -7267,7 +7267,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
-    "regularExpression": "(?<="message":")[^"]+"
+    "regularExpression": "(?<=\"message\":\")[^\"]+"
 }
 ```
 
@@ -7462,7 +7462,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     OnElement = "$.results[0]",
-    RegularExpression = "(?<="id":)\d+"
+    RegularExpression = "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -7473,7 +7473,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}")
     .setOnElement("$.results[0]")
-    .setRegularExpression("(?<="id":)\d+");
+    .setRegularExpression("(?<=\"id\":)\\d+");
 ```
 
 **Javascript:**
@@ -7483,7 +7483,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     onElement: "$.results[0]",
-    regularExpression: "(?<="id":)\d+"
+    regularExpression: "(?<=\"id\":)\\d+"
 };
 ```
 
@@ -7494,7 +7494,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     "onElement": "$.results[0]",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -7505,7 +7505,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     "onElement": "$.results[0]",
-    "regularExpression": "(?<="id":)\d+"
+    "regularExpression": "(?<=\"id\":)\\d+"
 }
 ```
 
@@ -7587,7 +7587,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     OnAttribute = "id",
     OnElement = "//Item",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7599,7 +7599,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}")
     .setOnAttribute("id")
     .setOnElement("//Item")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7610,7 +7610,7 @@ var actionRule = {
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     onAttribute: "id",
     onElement: "//Item",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7622,7 +7622,7 @@ var actionRule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     "onAttribute": "id",
     "onElement": "//Item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7634,7 +7634,7 @@ action_rule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Basic username:password --Method:Delete}}",
     "onAttribute": "id",
     "onElement": "//Item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7710,7 +7710,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     OnElement = "responseBody",
-    RegularExpression = "(?<=\"message\":\")[^\"]+"
+    RegularExpression = "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -7721,7 +7721,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}")
     .setOnElement("responseBody")
-    .setRegularExpression("(?<=\"message\":\")[^\"]+");
+    .setRegularExpression("(?<=\\\"message\\\":\\\")[^\\\"]+");
 ```
 
 **Javascript:**
@@ -7731,7 +7731,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     onElement: "responseBody",
-    regularExpression: "(?<=\"message\":\")[^\"]+"
+    regularExpression: "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -7742,7 +7742,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -7753,7 +7753,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -7948,7 +7948,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     OnElement = "$.results[0]",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -7959,7 +7959,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}")
     .setOnElement("$.results[0]")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -7969,7 +7969,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     onElement: "$.results[0]",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -7980,7 +7980,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     "onElement": "$.results[0]",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -7991,7 +7991,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     "onElement": "$.results[0]",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -8073,7 +8073,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     OnAttribute = "id",
     OnElement = "//Item",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -8085,7 +8085,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}")
     .setOnAttribute("id")
     .setOnElement("//Item")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -8096,7 +8096,7 @@ var actionRule = {
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     onAttribute: "id",
     onElement: "//Item",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -8108,7 +8108,7 @@ var actionRule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     "onAttribute": "id",
     "onElement": "//Item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -8120,7 +8120,7 @@ action_rule = {
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Header:Authorization=Bearer YourAccessToken --Header:UserAgent=MyCustomUserAgent --Method=DELETE}}",
     "onAttribute": "id",
     "onElement": "//Item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -8136,7 +8136,7 @@ This example returns the complete response body of an HTTP PUT request to `https
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnElement = "responseBody"
 };
 ```
@@ -8146,7 +8146,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnElement("responseBody");
 ```
 
@@ -8155,7 +8155,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onElement: "responseBody"
 };
 ```
@@ -8165,7 +8165,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "responseBody"
 }
 ```
@@ -8175,7 +8175,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "responseBody"
 }
 ```
@@ -8192,9 +8192,9 @@ This example applies the regular expression `(?<=\"message\":\")[^\"]+` to the f
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnElement = "responseBody",
-    RegularExpression = "(?<=\"message\":\")[^\"]+"
+    RegularExpression = "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -8203,9 +8203,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnElement("responseBody")
-    .setRegularExpression("(?<=\"message\":\")[^\"]+");
+    .setRegularExpression("(?<=\\\"message\\\":\\\")[^\\\"]+");
 ```
 
 **Javascript:**
@@ -8213,9 +8213,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onElement: "responseBody",
-    regularExpression: "(?<=\"message\":\")[^\"]+"
+    regularExpression: "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -8224,9 +8224,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -8235,9 +8235,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -8253,7 +8253,7 @@ This example locates the `updatedItem` object in the JSON response using JSONPat
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -8263,7 +8263,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -8272,7 +8272,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -8282,7 +8282,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -8292,7 +8292,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -8309,9 +8309,9 @@ This example selects `updatedItem` using JSONPath locator `$.updatedItem` with `
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -8320,9 +8320,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -8330,9 +8330,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -8341,9 +8341,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -8352,9 +8352,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -8370,7 +8370,7 @@ This example retrieves the text content of the `<Status>` element from an XML re
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnElement = "//Status"
 };
 ```
@@ -8380,7 +8380,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnElement("//Status");
 ```
 
@@ -8389,7 +8389,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onElement: "//Status"
 };
 ```
@@ -8399,7 +8399,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "//Status"
 }
 ```
@@ -8409,7 +8409,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "//Status"
 }
 ```
@@ -8426,7 +8426,7 @@ This example selects the `<Status>` element using XPath locator `//Status` with 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -8437,7 +8437,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -8447,7 +8447,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -8458,7 +8458,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -8469,7 +8469,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -8487,7 +8487,7 @@ This example retrieves the `status` attribute from each `<Response>` element in 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -8498,7 +8498,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -8508,7 +8508,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -8519,7 +8519,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -8530,7 +8530,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -8548,7 +8548,7 @@ This example locates the `status` attribute on `<Response>` elements using XPath
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -8560,7 +8560,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -8571,7 +8571,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -8583,7 +8583,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -8595,7 +8595,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -8614,7 +8614,7 @@ This example returns the complete response body of an HTTP PUT request to `https
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "responseBody"
 };
 ```
@@ -8624,7 +8624,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("responseBody");
 ```
 
@@ -8633,7 +8633,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "responseBody"
 };
 ```
@@ -8643,7 +8643,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "responseBody"
 }
 ```
@@ -8653,7 +8653,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "responseBody"
 }
 ```
@@ -8670,9 +8670,9 @@ This example applies the regular expression `(?<=\"message\":\")[^\"]+` to the f
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "responseBody",
-    RegularExpression = "(?<=\"message\":\")[^\"]+"
+    RegularExpression = "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -8681,9 +8681,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("responseBody")
-    .setRegularExpression("(?<=\"message\":\")[^\"]+");
+    .setRegularExpression("(?<=\\\"message\\\":\\\")[^\\\"]+");
 ```
 
 **Javascript:**
@@ -8691,9 +8691,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "responseBody",
-    regularExpression: "(?<=\"message\":\")[^\"]+"
+    regularExpression: "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -8702,9 +8702,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -8713,9 +8713,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -8731,7 +8731,7 @@ This example locates the `updatedItem` object in the JSON response using JSONPat
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -8741,7 +8741,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -8750,7 +8750,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -8760,7 +8760,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -8770,7 +8770,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -8787,9 +8787,9 @@ This example selects `updatedItem` using JSONPath locator `$.updatedItem` with `
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -8798,9 +8798,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -8808,9 +8808,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -8819,9 +8819,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -8830,9 +8830,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -8848,7 +8848,7 @@ This example retrieves the text content of the `<Status>` element from an XML re
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "//Status"
 };
 ```
@@ -8858,7 +8858,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("//Status");
 ```
 
@@ -8867,7 +8867,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "//Status"
 };
 ```
@@ -8877,7 +8877,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "//Status"
 }
 ```
@@ -8887,7 +8887,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "//Status"
 }
 ```
@@ -8904,7 +8904,7 @@ This example selects the `<Status>` element using XPath locator `//Status` with 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -8915,7 +8915,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -8925,7 +8925,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -8936,7 +8936,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -8947,7 +8947,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -8965,7 +8965,7 @@ This example retrieves the `status` attribute from each `<Response>` element in 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -8976,7 +8976,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -8986,7 +8986,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -8997,7 +8997,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -9008,7 +9008,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -9026,7 +9026,7 @@ This example locates the `status` attribute on `<Response>` elements using XPath
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -9038,7 +9038,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -9049,7 +9049,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -9061,7 +9061,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -9073,7 +9073,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -9092,7 +9092,7 @@ This example returns the complete response body of an HTTP PUT request to `https
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "responseBody"
 };
 ```
@@ -9102,7 +9102,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("responseBody");
 ```
 
@@ -9111,7 +9111,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "responseBody"
 };
 ```
@@ -9121,7 +9121,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "responseBody"
 }
 ```
@@ -9131,7 +9131,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "responseBody"
 }
 ```
@@ -9148,9 +9148,9 @@ This example applies the regular expression `(?<=\"message\":\")[^\"]+` to the f
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "responseBody",
-    RegularExpression = "(?<=\"message\":\")[^\"]+"
+    RegularExpression = "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -9159,9 +9159,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("responseBody")
-    .setRegularExpression("(?<=\"message\":\")[^\"]+");
+    .setRegularExpression("(?<=\\\"message\\\":\\\")[^\\\"]+");
 ```
 
 **Javascript:**
@@ -9169,9 +9169,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "responseBody",
-    regularExpression: "(?<=\"message\":\")[^\"]+"
+    regularExpression: "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -9180,9 +9180,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -9191,9 +9191,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -9209,7 +9209,7 @@ This example locates the `updatedItem` object in the JSON response using JSONPat
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -9219,7 +9219,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -9228,7 +9228,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -9238,7 +9238,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -9248,7 +9248,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -9265,9 +9265,9 @@ This example locates the `updatedItem` object using JSONPath locator `$.updatedI
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -9276,9 +9276,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -9286,9 +9286,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -9297,9 +9297,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -9308,9 +9308,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -9326,7 +9326,7 @@ This example retrieves the text content of the `<Status>` element from an XML re
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "//Status"
 };
 ```
@@ -9336,7 +9336,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("//Status");
 ```
 
@@ -9345,7 +9345,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "//Status"
 };
 ```
@@ -9355,7 +9355,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "//Status"
 }
 ```
@@ -9365,7 +9365,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "//Status"
 }
 ```
@@ -9382,7 +9382,7 @@ This example locates the `<Status>` element using XPath locator `//Status` with 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -9393,7 +9393,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -9403,7 +9403,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -9414,7 +9414,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -9425,7 +9425,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -9443,7 +9443,7 @@ This example retrieves the `status` attribute from each `<Response>` element in 
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -9454,7 +9454,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -9464,7 +9464,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -9475,7 +9475,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -9486,7 +9486,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -9504,7 +9504,7 @@ This example locates the `status` attribute on `<Response>` elements using XPath
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -9516,7 +9516,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -9527,7 +9527,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -9539,7 +9539,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -9551,7 +9551,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -9628,7 +9628,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "responseBody",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -9639,7 +9639,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("responseBody")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -9649,7 +9649,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "responseBody",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -9660,7 +9660,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -9671,7 +9671,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -9745,7 +9745,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -9756,7 +9756,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -9766,7 +9766,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -9777,7 +9777,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -9788,7 +9788,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -10106,7 +10106,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "responseBody",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -10117,7 +10117,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("responseBody")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -10127,7 +10127,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "responseBody",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -10138,7 +10138,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -10149,7 +10149,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "responseBody",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -10223,7 +10223,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -10234,7 +10234,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -10244,7 +10244,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -10255,7 +10255,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -10266,7 +10266,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Method=PUT}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -10582,7 +10582,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -10592,7 +10592,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -10601,7 +10601,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -10611,7 +10611,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -10621,7 +10621,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -10699,7 +10699,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -10710,7 +10710,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -10720,7 +10720,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -10731,7 +10731,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -10742,7 +10742,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Header:UserAgent=MyCustomUserAgent --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -11066,7 +11066,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Put}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -11076,7 +11076,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Put}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -11085,7 +11085,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Put}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -11095,7 +11095,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -11105,7 +11105,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -11183,7 +11183,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -11194,7 +11194,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -11204,7 +11204,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -11215,7 +11215,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -11226,7 +11226,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -11549,7 +11549,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -11559,7 +11559,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -11568,7 +11568,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -11578,7 +11578,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -11588,7 +11588,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -11666,7 +11666,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -11677,7 +11677,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -11687,7 +11687,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -11698,7 +11698,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -11709,7 +11709,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization=Basic username:password --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -12032,7 +12032,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -12042,7 +12042,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -12051,7 +12051,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -12061,7 +12061,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -12071,7 +12071,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -12149,7 +12149,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -12160,7 +12160,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -12170,7 +12170,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -12181,7 +12181,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -12192,7 +12192,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -12515,7 +12515,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -12525,7 +12525,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -12534,7 +12534,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -12544,7 +12544,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -12554,7 +12554,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -12632,7 +12632,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -12643,7 +12643,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -12653,7 +12653,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -12664,7 +12664,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -12675,7 +12675,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -12999,7 +12999,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -13009,7 +13009,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -13018,7 +13018,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -13028,7 +13028,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -13038,7 +13038,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -13116,7 +13116,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -13127,7 +13127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -13137,7 +13137,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -13148,7 +13148,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -13159,7 +13159,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/xml --Body:<Item><Name>PremiumWidget</Name><Price>99.99</Price></Item> --Header:Authorization=Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Put}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -13429,7 +13429,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}"
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}"
 };
 ```
 
@@ -13438,7 +13438,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}");
 ```
 
 **Javascript:**
@@ -13446,7 +13446,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}"
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}"
 };
 ```
 
@@ -13455,7 +13455,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}"
 }
 ```
 
@@ -13464,7 +13464,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}"
 }
 ```
 
@@ -13482,8 +13482,8 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
-    RegularExpression = "(?<=\"message\":\")[^\"]+"
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+    RegularExpression = "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -13492,8 +13492,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
-    .setRegularExpression("(?<=\"message\":\")[^\"]+");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
+    .setRegularExpression("(?<=\\\"message\\\":\\\")[^\\\"]+");
 ```
 
 **Javascript:**
@@ -13501,8 +13501,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
-    regularExpression: "(?<=\"message\":\")[^\"]+"
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+    regularExpression: "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -13511,8 +13511,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -13521,8 +13521,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -13540,7 +13540,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -13550,7 +13550,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -13559,7 +13559,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -13569,7 +13569,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -13579,7 +13579,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -13598,9 +13598,9 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -13609,9 +13609,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -13619,9 +13619,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -13630,9 +13630,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -13641,9 +13641,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -13661,7 +13661,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnElement = "//Status"
 };
 ```
@@ -13671,7 +13671,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnElement("//Status");
 ```
 
@@ -13680,7 +13680,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onElement: "//Status"
 };
 ```
@@ -13690,7 +13690,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -13700,7 +13700,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -13719,7 +13719,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -13730,7 +13730,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -13740,7 +13740,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -13751,7 +13751,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -13762,7 +13762,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -13782,7 +13782,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -13793,7 +13793,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -13803,7 +13803,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -13814,7 +13814,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -13825,7 +13825,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -13845,7 +13845,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -13857,7 +13857,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -13868,7 +13868,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -13880,7 +13880,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -13892,7 +13892,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -13913,7 +13913,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnElement = "//Status"
 };
 ```
@@ -13923,7 +13923,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnElement("//Status");
 ```
 
@@ -13932,7 +13932,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onElement: "//Status"
 };
 ```
@@ -13942,7 +13942,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -13952,7 +13952,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -13971,7 +13971,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -13982,7 +13982,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -13992,7 +13992,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -14003,7 +14003,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -14014,7 +14014,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -14034,7 +14034,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -14045,7 +14045,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -14055,7 +14055,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -14066,7 +14066,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -14077,7 +14077,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -14097,7 +14097,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -14109,7 +14109,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -14120,7 +14120,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -14132,7 +14132,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -14144,7 +14144,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -14165,7 +14165,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     OnElement = "//Status"
 };
 ```
@@ -14175,7 +14175,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
     .setOnElement("//Status");
 ```
 
@@ -14184,7 +14184,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     onElement: "//Status"
 };
 ```
@@ -14194,7 +14194,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -14204,7 +14204,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -14223,7 +14223,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -14234,7 +14234,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -14244,7 +14244,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -14255,7 +14255,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -14266,7 +14266,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -14286,7 +14286,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -14297,7 +14297,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -14307,7 +14307,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -14318,7 +14318,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -14329,7 +14329,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -14349,7 +14349,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -14361,7 +14361,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -14372,7 +14372,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -14384,7 +14384,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -14396,7 +14396,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -14417,7 +14417,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
 };
 ```
 
@@ -14426,7 +14426,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}");
 ```
 
 **Javascript:**
@@ -14434,7 +14434,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
 };
 ```
 
@@ -14443,7 +14443,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
 }
 ```
 
@@ -14452,7 +14452,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}"
 }
 ```
 
@@ -14470,8 +14470,8 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    RegularExpression = "(?<=\"message\":\")[^\"]+"
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    RegularExpression = "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -14480,8 +14480,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}")
-    .setRegularExpression("(?<=\"message\":\")[^\"]+");
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}")
+    .setRegularExpression("(?<=\\\"message\\\":\\\")[^\\\"]+");
 ```
 
 **Javascript:**
@@ -14489,8 +14489,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    regularExpression: "(?<=\"message\":\")[^\"]+"
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    regularExpression: "(?<=\\\"message\\\":\\\")[^\\\"]+"
 };
 ```
 
@@ -14499,8 +14499,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -14509,8 +14509,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    "regularExpression": "(?<=\"message\":\")[^\"]+"
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    "regularExpression": "(?<=\\\"message\\\":\\\")[^\\\"]+"
 }
 ```
 
@@ -14528,7 +14528,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     OnElement = "$.updatedItem"
 };
 ```
@@ -14538,7 +14538,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}")
     .setOnElement("$.updatedItem");
 ```
 
@@ -14547,7 +14547,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     onElement: "$.updatedItem"
 };
 ```
@@ -14557,7 +14557,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -14567,7 +14567,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     "onElement": "$.updatedItem"
 }
 ```
@@ -14586,9 +14586,9 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -14597,9 +14597,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -14607,9 +14607,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -14618,9 +14618,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -14629,9 +14629,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -14649,7 +14649,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     OnElement = "//Status"
 };
 ```
@@ -14659,7 +14659,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
     .setOnElement("//Status");
 ```
 
@@ -14668,7 +14668,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     onElement: "//Status"
 };
 ```
@@ -14678,7 +14678,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -14688,7 +14688,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status"
 }
 ```
@@ -14707,7 +14707,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     OnElement = "//Status",
     RegularExpression = "(?<=<Status>).*?(?=</Status>)"
 };
@@ -14718,7 +14718,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
     .setOnElement("//Status")
     .setRegularExpression("(?<=<Status>).*?(?=</Status>)");
 ```
@@ -14728,7 +14728,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     onElement: "//Status",
     regularExpression: "(?<=<Status>).*?(?=</Status>)"
 };
@@ -14739,7 +14739,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -14750,7 +14750,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onElement": "//Status",
     "regularExpression": "(?<=<Status>).*?(?=</Status>)"
 }
@@ -14770,7 +14770,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response"
 };
@@ -14781,7 +14781,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response");
 ```
@@ -14791,7 +14791,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response"
 };
@@ -14802,7 +14802,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -14813,7 +14813,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response"
 }
@@ -14833,7 +14833,7 @@ Values are converted to strings to ensure consistent downstream processing.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
-    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     OnAttribute = "status",
     OnElement = "//Response",
     RegularExpression = "success|failure"
@@ -14845,7 +14845,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
-    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
+    .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}")
     .setOnAttribute("status")
     .setOnElement("//Response")
     .setRegularExpression("success|failure");
@@ -14856,7 +14856,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendHttpRequest",
-    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     onAttribute: "status",
     onElement: "//Response",
     regularExpression: "success|failure"
@@ -14868,7 +14868,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -14880,7 +14880,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendHttpRequest",
-    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{"name":"Premium Widget","price":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
+    "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/json --Body:{\"name\":\"Premium Widget\",\"price\":99.99} --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/xml --Method:Patch}}",
     "onAttribute": "status",
     "onElement": "//Response",
     "regularExpression": "success|failure"
@@ -14955,7 +14955,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Patch}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -14965,7 +14965,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Patch}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -14974,7 +14974,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Patch}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -14984,7 +14984,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -14994,7 +14994,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -15072,7 +15072,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Accept:application/json --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -15083,7 +15083,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Accept:application/json --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -15093,7 +15093,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Accept:application/json --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -15104,7 +15104,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -15115,7 +15115,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -15439,7 +15439,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Method:Patch}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -15449,7 +15449,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Method:Patch}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -15458,7 +15458,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Method:Patch}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -15468,7 +15468,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -15478,7 +15478,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -15556,7 +15556,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:Accept:application/json --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -15567,7 +15567,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:Accept:application/json --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -15577,7 +15577,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:Accept:application/json --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -15588,7 +15588,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -15599,7 +15599,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -15923,7 +15923,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -15933,7 +15933,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -15942,7 +15942,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -15952,7 +15952,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -15962,7 +15962,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -16040,7 +16040,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/json --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -16051,7 +16051,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/json --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -16061,7 +16061,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/json --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -16072,7 +16072,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -16083,7 +16083,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -16407,7 +16407,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Patch}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -16417,7 +16417,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Patch}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -16426,7 +16426,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Patch}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -16436,7 +16436,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -16446,7 +16446,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Encoding:ASCII --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -16524,7 +16524,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -16535,7 +16535,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -16545,7 +16545,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -16556,7 +16556,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -16567,7 +16567,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url=https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -16891,7 +16891,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Encoding:ASCII --Method:Patch}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -16901,7 +16901,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Encoding:ASCII --Method:Patch}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -16910,7 +16910,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Encoding:ASCII --Method:Patch}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -16920,7 +16920,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Encoding:ASCII --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -16930,7 +16930,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99 --Header:Authorization:Basic username:password --Encoding:ASCII --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -17008,7 +17008,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -17019,7 +17019,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -17029,7 +17029,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -17040,7 +17040,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -17051,7 +17051,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -17502,7 +17502,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -17513,7 +17513,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -17523,7 +17523,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -17534,7 +17534,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -17545,7 +17545,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:text/plain --Body:Name=PremiumWidget;Price=99.99;Stock=150 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -17869,7 +17869,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
-    RegularExpression = "(?<=Status: )\d{3}"
+    RegularExpression = "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -17879,7 +17879,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Patch}}")
-    .setRegularExpression("(?<=Status: )\d{3}");
+    .setRegularExpression("(?<=Status: )\\d{3}");
 ```
 
 **Javascript:**
@@ -17888,7 +17888,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
-    regularExpression: "(?<=Status: )\d{3}"
+    regularExpression: "(?<=Status: )\\d{3}"
 };
 ```
 
@@ -17898,7 +17898,7 @@ var actionRule = {
 {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -17908,7 +17908,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Method:Patch}}",
-    "regularExpression": "(?<=Status: )\d{3}"
+    "regularExpression": "(?<=Status: )\\d{3}"
 }
 ```
 
@@ -17986,7 +17986,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendHttpRequest",
     Argument = "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     OnElement = "$.updatedItem",
-    RegularExpression = "(?<=\"id\":)\d+"
+    RegularExpression = "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -17997,7 +17997,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendHttpRequest")
     .setArgument("{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}")
     .setOnElement("$.updatedItem")
-    .setRegularExpression("(?<=\"id\":)\d+");
+    .setRegularExpression("(?<=\\\"id\\\":)\\d+");
 ```
 
 **Javascript:**
@@ -18007,7 +18007,7 @@ var actionRule = {
     pluginName: "SendHttpRequest",
     argument: "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     onElement: "$.updatedItem",
-    regularExpression: "(?<=\"id\":)\d+"
+    regularExpression: "(?<=\\\"id\\\":)\\d+"
 };
 ```
 
@@ -18018,7 +18018,7 @@ var actionRule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -18029,7 +18029,7 @@ action_rule = {
     "pluginName": "SendHttpRequest",
     "argument": "{{$ --Url:https://api.example.com/v1/items/567 --ContentType:application/x-www-form-urlencoded --Field:Name=PremiumWidget --Field:Price=99.99 --Header:Authorization:Basic username:password --Header:UserAgent:MyCustomUserAgent --Encoding:ASCII --Header:Accept:application/json --Method:Patch}}",
     "onElement": "$.updatedItem",
-    "regularExpression": "(?<=\"id\":)\d+"
+    "regularExpression": "(?<=\\\"id\\\":)\\d+"
 }
 ```
 
@@ -18837,13 +18837,13 @@ Status code values guide decision flow based on request outcome.
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 A single string or expression that covers address, method, headers, body, and other settings for a web request.
 It can be a fixed string or an expression that runs at execution time.

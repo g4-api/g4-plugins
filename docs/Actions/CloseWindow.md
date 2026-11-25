@@ -200,7 +200,7 @@ action_rule = {
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | String|Number     |
+| **Value Type**    | String\|Number    |
 
 Argument specifies which browser window to close.
 When omitted or empty the currently active window is closed via WebDriver.Close().

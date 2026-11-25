@@ -159,13 +159,13 @@ Allows later workflow steps to safely decode and reuse the exported lists withou
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides an OAuth Bearer access token used to authenticate requests to the Google Tasks API.
 Allows an automation workflow to call the API directly without retrieving credentials from a stored record.
@@ -173,13 +173,13 @@ Is ignored when the Credentials parameter is supplied because stored credentials
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the identifier or name of a stored credential record used to obtain an OAuth access token.
 Triggers a runtime exchange that generates a fresh access token using GooglePlugin.NewAccessToken.

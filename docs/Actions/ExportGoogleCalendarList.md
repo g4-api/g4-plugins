@@ -219,13 +219,13 @@ Allows later workflow steps to extract specific calendar ids, enumerate availabl
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the identifier or name of a stored credential record used to obtain an OAuth access token at runtime.
 Avoids hard-coding short-lived access tokens by exchanging stored credentials for a fresh token when needed.
@@ -233,13 +233,13 @@ Takes precedence over the Token parameter when both are provided so authenticati
 
 ### Max Results (MaxResults)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | Number|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | Number\|Expression |
 
 Sets the maximum number of calendar list entries returned on a single result page.
 Accepts integer values from 1 to 250; the default is 100 when the parameter is not specified.
@@ -247,13 +247,13 @@ Helps control API response size and memory usage when a user has many calendars.
 
 ### Min Access Role (MinAccessRole)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Filters the calendar list to entries where the authenticated user holds at least the specified access role.
 Accepted values are freeBusyReader, owner, reader, and writer.
@@ -261,13 +261,13 @@ Cannot be combined with SyncToken; the Google Calendar API will return an error 
 
 ### Page Token (PageToken)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies a token returned by a previous calendar list request that identifies the next page of results.
 Enables pagination through large calendar lists by continuing from where the previous request left off.
@@ -303,13 +303,13 @@ Required alongside ShowDeleted when using SyncToken so that hidden entries chang
 
 ### Sync Token (SyncToken)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the nextSyncToken value returned by a previous calendar list response to enable incremental synchronization.
 When supplied, the API returns only entries that changed since the token was issued, reducing data volume and API load.
@@ -317,13 +317,13 @@ Cannot be combined with MinAccessRole. If the token has expired, the API returns
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies an OAuth Bearer access token used to authenticate requests to the Google Calendar API.
 Allows direct API access without retrieving credentials from a stored record.

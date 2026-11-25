@@ -421,7 +421,7 @@ The step sends its bytes unchanged as one datagram.
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendUdpMessage",
-    Argument = "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\Packets\wake.bin}}"
+    Argument = "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\\Packets\\wake.bin}}"
 };
 ```
 
@@ -430,7 +430,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendUdpMessage")
-    .setArgument("{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\Packets\wake.bin}}");
+    .setArgument("{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\\Packets\\wake.bin}}");
 ```
 
 **Javascript:**
@@ -438,7 +438,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendUdpMessage",
-    argument: "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\Packets\wake.bin}}"
+    argument: "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\\Packets\\wake.bin}}"
 };
 ```
 
@@ -447,7 +447,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendUdpMessage",
-    "argument": "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\Packets\wake.bin}}"
+    "argument": "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\\Packets\\wake.bin}}"
 }
 ```
 
@@ -456,7 +456,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendUdpMessage",
-    "argument": "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\Packets\wake.bin}}"
+    "argument": "{{$ --Host:10.0.0.20 --Port:9000 --MessageFile:C:\\Packets\\wake.bin}}"
 }
 ```
 
@@ -475,7 +475,7 @@ var actionRule = new ActionRuleModel
     PluginName = "SendUdpMessage",
     Argument = "{{$ --Host:192.168.1.50 --Port:5005 --Message:READ --WaitForResponse}}",
     OnElement = "$.temperature",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -486,7 +486,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendUdpMessage")
     .setArgument("{{$ --Host:192.168.1.50 --Port:5005 --Message:READ --WaitForResponse}}")
     .setOnElement("$.temperature")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -496,7 +496,7 @@ var actionRule = {
     pluginName: "SendUdpMessage",
     argument: "{{$ --Host:192.168.1.50 --Port:5005 --Message:READ --WaitForResponse}}",
     onElement: "$.temperature",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -507,7 +507,7 @@ var actionRule = {
     "pluginName": "SendUdpMessage",
     "argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:READ --WaitForResponse}}",
     "onElement": "$.temperature",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -518,7 +518,7 @@ action_rule = {
     "pluginName": "SendUdpMessage",
     "argument": "{{$ --Host:192.168.1.50 --Port:5005 --Message:READ --WaitForResponse}}",
     "onElement": "$.temperature",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -725,13 +725,13 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the arguments of the step, such as `{{$ --Host:192.168.1.50 --Port:5005 --Message:PING}}`.
 Host and Port are required, together with Message or MessageFile.
@@ -866,26 +866,26 @@ Use it for a binary payload, or for text that contains ` --` or `}}`, which end 
 
 ### Host (Host)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the destination as a host name or an IP address, such as `192.168.1.50`.
 A host name is resolved before sending, and a name that does not resolve, or has no address of the socket family, fails the step.
 
 ### Listener (Listener)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a listener started by StartUdpListener and sends through its socket.
 Without WaitForResponse, replies stay in the listener buffer for ReceiveUdpMessage; with it, the replies the step collects are taken from the buffer, and datagrams from other senders stay unless AnySender is set or the destination is a broadcast or multicast address.
@@ -893,13 +893,13 @@ A name that is not started fails the step.
 
 ### Local Address (LocalAddress)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Binds the source IP address, which selects the network interface on a machine with several.
 Defaults to every IPv4 interface, and an IPv6 address makes the socket an IPv6 socket.
@@ -935,13 +935,13 @@ One reply is enough for the step to pass.
 
 ### Message (Message)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the payload of the datagram, read according to Format.
 Wins over MessageFile when both are set, and one of the two is required.
@@ -949,13 +949,13 @@ A value that contains ` --` or `}}` travels as Hex or Base64, because those sequ
 
 ### Message File (MessageFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a file whose bytes are sent unchanged as the payload.
 Use it for a binary packet kept beside the flow, and a missing file fails the step.
@@ -1038,7 +1038,7 @@ Each attempt waits the full Timeout.
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Sets how long to wait for replies after each send when WaitForResponse is set.
 Accepts a number of milliseconds, such as `2000`, or a time span, such as `00:00:02`.

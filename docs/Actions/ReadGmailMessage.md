@@ -7,6 +7,7 @@
 ## Description
 
 ### Purpose
+
 The ReadGmailMessage plugin reads a Gmail message from the authenticated mailbox during an automation run.
 It helps workflows pull email details so bots can route messages, extract information, or trigger follow-up actions.
 It first fetches a message id from the mailbox and then retrieves the full message details for that message.
@@ -282,13 +283,13 @@ Helps downstream steps determine whether the message was addressed to the expect
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Identifies a stored credential record by id or name so a fresh access token can be obtained at runtime.
 Avoids hardcoding short-lived tokens by exchanging stored credentials for a valid access token when needed.
@@ -296,13 +297,13 @@ Takes precedence over the token parameter so authentication stays consistent and
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies an OAuth Bearer access token used to call the Gmail API.
 Enables direct API access when a stored credential reference is not used.

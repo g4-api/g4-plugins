@@ -172,13 +172,13 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the arguments of the step, such as `{{$ --Name:Telemetry}}`.
 A rule without an argument stops the `Default` listener.
@@ -187,13 +187,13 @@ A rule without an argument stops the `Default` listener.
 
 ### Name (Name)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Default           |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Default            |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the listener to stop, among the listeners of the same automation.
 Defaults to `Default`, also for an empty value, and case does not matter, so `telemetry` stops `Telemetry`.

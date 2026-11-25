@@ -354,13 +354,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Dismiss           |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Dismiss            |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the alert action or provides named parameters for the `SwitchAlert` plugin.
 Accepts a plain action value (`Accept`, `Dismiss`, `Ignore`) or a parameterized expression such as `{{$ --Keys:text --AlertAction:Accept}}`.

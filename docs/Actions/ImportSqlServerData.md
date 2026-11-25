@@ -66,7 +66,7 @@ The `Transaction` switch commits the rows only after all of them are copied.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportSqlServerData",
-    Argument = "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\data\customers.csv --Transaction}}"
+    Argument = "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\\data\\customers.csv --Transaction}}"
 };
 ```
 
@@ -75,7 +75,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportSqlServerData")
-    .setArgument("{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\data\customers.csv --Transaction}}");
+    .setArgument("{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\\data\\customers.csv --Transaction}}");
 ```
 
 **Javascript:**
@@ -83,7 +83,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportSqlServerData",
-    argument: "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\data\customers.csv --Transaction}}"
+    argument: "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\\data\\customers.csv --Transaction}}"
 };
 ```
 
@@ -92,7 +92,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\data\customers.csv --Transaction}}"
+    "argument": "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\\data\\customers.csv --Transaction}}"
 }
 ```
 
@@ -101,7 +101,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\data\customers.csv --Transaction}}"
+    "argument": "{{$ --Credentials:sql-production --Table:dbo.Customers --DataFile:C:\\data\\customers.csv --Transaction}}"
 }
 ```
 
@@ -118,7 +118,7 @@ The `Data` value is an inline JSON array, and each object becomes one row.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportSqlServerData",
-    Argument = "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{"Id":1,"Name":"Ada"},{"Id":2,"Name":"Grace"}]}}"
+    Argument = "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{\"Id\":1,\"Name\":\"Ada\"},{\"Id\":2,\"Name\":\"Grace\"}]}}"
 };
 ```
 
@@ -127,7 +127,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportSqlServerData")
-    .setArgument("{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{"Id":1,"Name":"Ada"},{"Id":2,"Name":"Grace"}]}}");
+    .setArgument("{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{\"Id\":1,\"Name\":\"Ada\"},{\"Id\":2,\"Name\":\"Grace\"}]}}");
 ```
 
 **Javascript:**
@@ -135,7 +135,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportSqlServerData",
-    argument: "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{"Id":1,"Name":"Ada"},{"Id":2,"Name":"Grace"}]}}"
+    argument: "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{\"Id\":1,\"Name\":\"Ada\"},{\"Id\":2,\"Name\":\"Grace\"}]}}"
 };
 ```
 
@@ -144,7 +144,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{"Id":1,"Name":"Ada"},{"Id":2,"Name":"Grace"}]}}"
+    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{\"Id\":1,\"Name\":\"Ada\"},{\"Id\":2,\"Name\":\"Grace\"}]}}"
 }
 ```
 
@@ -153,7 +153,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{"Id":1,"Name":"Ada"},{"Id":2,"Name":"Grace"}]}}"
+    "argument": "{{$ --ConnectionString:Server=sql01.contoso.local;Database=Sales;Integrated Security=true;TrustServerCertificate=true --Table:Customers --Data:[{\"Id\":1,\"Name\":\"Ada\"},{\"Id\":2,\"Name\":\"Grace\"}]}}"
 }
 ```
 
@@ -170,7 +170,7 @@ The `NoEntity` switch leaves the response entity empty.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportSqlServerData",
-    Argument = "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\data\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
+    Argument = "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\\data\\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
 };
 ```
 
@@ -179,7 +179,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportSqlServerData")
-    .setArgument("{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\data\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}");
+    .setArgument("{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\\data\\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}");
 ```
 
 **Javascript:**
@@ -187,7 +187,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportSqlServerData",
-    argument: "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\data\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
+    argument: "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\\data\\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
 };
 ```
 
@@ -196,7 +196,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\data\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
+    "argument": "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\\data\\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
 }
 ```
 
@@ -205,7 +205,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\data\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
+    "argument": "{{$ --Credentials:sql-production --Table:[sales].[Leads] --DataFile:C:\\data\\leads.json --BatchSize:5000 --CommandTimeout:300 --NoEntity}}"
 }
 ```
 
@@ -222,7 +222,7 @@ The rows from `C:\data\orders.csv` are copied into `dbo.Orders`.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportSqlServerData",
-    Argument = "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    Argument = "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\\data\\orders.csv}}"
 };
 ```
 
@@ -231,7 +231,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportSqlServerData")
-    .setArgument("{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}");
+    .setArgument("{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\\data\\orders.csv}}");
 ```
 
 **Javascript:**
@@ -239,7 +239,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportSqlServerData",
-    argument: "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    argument: "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\\data\\orders.csv}}"
 };
 ```
 
@@ -248,7 +248,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    "argument": "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\\data\\orders.csv}}"
 }
 ```
 
@@ -257,7 +257,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportSqlServerData",
-    "argument": "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\data\orders.csv}}"
+    "argument": "{{$ --ConnectionString:Server=sales-db.database.windows.net;Database=Sales;Authentication=Active Directory Default;Encrypt=Strict --Table:dbo.Orders --DataFile:C:\\data\\orders.csv}}"
 }
 ```
 
@@ -280,13 +280,13 @@ Later steps decode the value to confirm the import size or drive reporting.
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Carries every input of the import, such as Table, Data or DataFile, and the connection values, in the G4 parameter syntax {{$ --Name:Value --Switch}}.
 Values can come from macros or data columns, so one rule can import different files or target different tables on each run.
@@ -323,13 +323,13 @@ The value 0 removes the time limit, and a missing or invalid value falls back to
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -337,13 +337,13 @@ Every connection setting, such as the server, the database, the login, and the e
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.
 The record carries the server, port, database, login, and encryption settings, so the step never repeats them.
@@ -351,13 +351,13 @@ When no record matches, a value that contains `=` is used as a raw connection st
 
 ### Data (Data)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the rows to import inline as a JSON array of flat objects, such as [{"Id":1,"Name":"Ada"}].
 Each object becomes one row, and object properties are matched to table columns by name.
@@ -366,13 +366,13 @@ Use DataFile instead when the JSON contains the text " --" or "}}", because thos
 
 ### Data File (DataFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Points to a file that holds the rows to import.
 A .csv file is read as RFC 4180 CSV with a header row, and any other extension is read as a JSON array of objects.
@@ -393,13 +393,13 @@ Keeps responses small when no later step reads the entity.
 
 ### Table (Table)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the existing destination table, as table, schema.table, or a bracketed name such as [sales].[Order Lines].
 A name without a schema uses the dbo schema.
@@ -407,13 +407,13 @@ The table must already exist, because the import never creates or changes tables
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a raw Microsoft Entra access token that signs in the connection.
 Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.

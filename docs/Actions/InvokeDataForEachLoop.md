@@ -51,7 +51,7 @@ If a record is missing the `firstName` field, the token is kept as-is for the ch
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeDataForEachLoop",
-    Argument = "[{"firstName":"Alice","role":"Admin"},{"firstName":"Bob","role":"User"}]",
+    Argument = "[{\"firstName\":\"Alice\",\"role\":\"Admin\"},{\"firstName\":\"Bob\",\"role\":\"User\"}]",
     Rules = new[]
     {
         new ActionRuleModel
@@ -68,9 +68,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeDataForEachLoop")
-    .setArgument("[{"firstName":"Alice","role":"Admin"},{"firstName":"Bob","role":"User"}]")
+    .setArgument("[{\"firstName\":\"Alice\",\"role\":\"Admin\"},{\"firstName\":\"Bob\",\"role\":\"User\"}]")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("RegisterParameter")
             .setArgument("{{$ --Name:CurrentUser --Value:{{$ --Field:firstName}}}}");
 ```
@@ -80,7 +80,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeDataForEachLoop",
-    argument: "[{"firstName":"Alice","role":"Admin"},{"firstName":"Bob","role":"User"}]",
+    argument: "[{\"firstName\":\"Alice\",\"role\":\"Admin\"},{\"firstName\":\"Bob\",\"role\":\"User\"}]",
     rules: [
         {
             pluginName: "RegisterParameter",
@@ -95,7 +95,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "[{"firstName":"Alice","role":"Admin"},{"firstName":"Bob","role":"User"}]",
+    "argument": "[{\"firstName\":\"Alice\",\"role\":\"Admin\"},{\"firstName\":\"Bob\",\"role\":\"User\"}]",
     "rules": [
         {
             "pluginName": "RegisterParameter",
@@ -110,7 +110,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "[{"firstName":"Alice","role":"Admin"},{"firstName":"Bob","role":"User"}]",
+    "argument": "[{\"firstName\":\"Alice\",\"role\":\"Admin\"},{\"firstName\":\"Bob\",\"role\":\"User\"}]",
     "rules": [
         {
             "pluginName": "RegisterParameter",
@@ -134,7 +134,7 @@ If the path matches no node, the token is kept as-is so a nested data loop can r
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeDataForEachLoop",
-    Argument = "[{"user":{"email":"alice@example.com"}},{"user":{"email":"bob@example.com"}}]",
+    Argument = "[{\"user\":{\"email\":\"alice@example.com\"}},{\"user\":{\"email\":\"bob@example.com\"}}]",
     Rules = new[]
     {
         new ActionRuleModel
@@ -151,9 +151,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeDataForEachLoop")
-    .setArgument("[{"user":{"email":"alice@example.com"}},{"user":{"email":"bob@example.com"}}]")
+    .setArgument("[{\"user\":{\"email\":\"alice@example.com\"}},{\"user\":{\"email\":\"bob@example.com\"}}]")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("RegisterParameter")
             .setArgument("{{$ --Name:Email --Value:{{$ --Path:$.user.email}}}}");
 ```
@@ -163,7 +163,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeDataForEachLoop",
-    argument: "[{"user":{"email":"alice@example.com"}},{"user":{"email":"bob@example.com"}}]",
+    argument: "[{\"user\":{\"email\":\"alice@example.com\"}},{\"user\":{\"email\":\"bob@example.com\"}}]",
     rules: [
         {
             pluginName: "RegisterParameter",
@@ -178,7 +178,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "[{"user":{"email":"alice@example.com"}},{"user":{"email":"bob@example.com"}}]",
+    "argument": "[{\"user\":{\"email\":\"alice@example.com\"}},{\"user\":{\"email\":\"bob@example.com\"}}]",
     "rules": [
         {
             "pluginName": "RegisterParameter",
@@ -193,7 +193,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "[{"user":{"email":"alice@example.com"}},{"user":{"email":"bob@example.com"}}]",
+    "argument": "[{\"user\":{\"email\":\"alice@example.com\"}},{\"user\":{\"email\":\"bob@example.com\"}}]",
     "rules": [
         {
             "pluginName": "RegisterParameter",
@@ -217,7 +217,7 @@ Complex records injected through `{{$ --Item}}` are emitted as minified JSON or 
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeDataForEachLoop",
-    Argument = "["apple","banana","cherry"]",
+    Argument = "[\"apple\",\"banana\",\"cherry\"]",
     Rules = new[]
     {
         new ActionRuleModel
@@ -234,9 +234,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeDataForEachLoop")
-    .setArgument("["apple","banana","cherry"]")
+    .setArgument("[\"apple\",\"banana\",\"cherry\"]")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("WriteLog")
             .setArgument("{{$ --Item}}");
 ```
@@ -246,7 +246,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeDataForEachLoop",
-    argument: "["apple","banana","cherry"]",
+    argument: "[\"apple\",\"banana\",\"cherry\"]",
     rules: [
         {
             pluginName: "WriteLog",
@@ -261,7 +261,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "["apple","banana","cherry"]",
+    "argument": "[\"apple\",\"banana\",\"cherry\"]",
     "rules": [
         {
             "pluginName": "WriteLog",
@@ -276,7 +276,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "["apple","banana","cherry"]",
+    "argument": "[\"apple\",\"banana\",\"cherry\"]",
     "rules": [
         {
             "pluginName": "WriteLog",
@@ -319,7 +319,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeDataForEachLoop")
     .setArgument("<users><user><name>Alice</name></user><user><name>Bob</name></user></users>")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("RegisterParameter")
             .setArgument("{{$ --Name:UserName --Value:{{$ --Field:name}}}}");
 ```
@@ -402,7 +402,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeDataForEachLoop")
     .setArgument("{{$ --DataSource:W3sibmFtZSI6IkFsaWNlIn0seyJuYW1lIjoiQm9iIn1d --Base64}}")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("RegisterParameter")
             .setArgument("{{$ --Name:UserName --Value:{{$ --Field:name}}}}");
 ```
@@ -466,7 +466,7 @@ This tolerance keeps passing a lone object simple when data comes from a script 
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeDataForEachLoop",
-    Argument = "{"name":"Solo"}",
+    Argument = "{\"name\":\"Solo\"}",
     Rules = new[]
     {
         new ActionRuleModel
@@ -483,9 +483,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeDataForEachLoop")
-    .setArgument("{"name":"Solo"}")
+    .setArgument("{\"name\":\"Solo\"}")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("WriteLog")
             .setArgument("{{$ --Field:name}}");
 ```
@@ -495,7 +495,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeDataForEachLoop",
-    argument: "{"name":"Solo"}",
+    argument: "{\"name\":\"Solo\"}",
     rules: [
         {
             pluginName: "WriteLog",
@@ -510,7 +510,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "{"name":"Solo"}",
+    "argument": "{\"name\":\"Solo\"}",
     "rules": [
         {
             "pluginName": "WriteLog",
@@ -525,7 +525,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeDataForEachLoop",
-    "argument": "{"name":"Solo"}",
+    "argument": "{\"name\":\"Solo\"}",
     "rules": [
         {
             "pluginName": "WriteLog",
@@ -539,13 +539,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the JSON or XML payload to iterate when the `Base64` switch is absent, as raw content or a file path.
 Supersedes `DataSource`, which is only used in Base64 mode.

@@ -20,8 +20,16 @@ namespace G4.UnitTests.Plugins.Common
         [ClassCleanup(InheritanceBehavior.BeforeEachDerivedClass)]
         public static void ClearEnvironments()
         {
-            // Remove the environment variable "MyParam" from the Machine target.
-            Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.Machine);
+            // Remove the environment variable "MyParam" from the Machine target. Writing Machine variables needs
+            // administrator rights; a run without them skipped the LocalOnly Machine tests and has nothing to remove.
+            try
+            {
+                Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.Machine);
+            }
+            catch (System.Security.SecurityException)
+            {
+                // Not elevated: no Machine variable exists from this run.
+            }
 
             // Remove the environment variable "MyParam" from the User target.
             Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.User);
@@ -107,6 +115,7 @@ namespace G4.UnitTests.Plugins.Common
         }
 
         [TestMethod(DisplayName = "Verify that the machine parameter is registered correctly.")]
+        [TestCategory("LocalOnly")]
         public void RegisterMachineParameterTest()
         {
             Invoke(testBase: this, scope: "Machine");

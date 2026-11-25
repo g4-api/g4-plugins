@@ -5207,7 +5207,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5219,7 +5219,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5230,7 +5230,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5242,7 +5242,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5254,7 +5254,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5275,7 +5275,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5287,7 +5287,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5298,7 +5298,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5310,7 +5310,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5322,7 +5322,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5342,7 +5342,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Application}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5353,7 +5353,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Application}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5363,7 +5363,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Application}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5374,7 +5374,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5385,7 +5385,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5405,7 +5405,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5416,7 +5416,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5426,7 +5426,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5437,7 +5437,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5448,7 +5448,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5469,7 +5469,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5481,7 +5481,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5492,7 +5492,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5504,7 +5504,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5516,7 +5516,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5537,7 +5537,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5549,7 +5549,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5560,7 +5560,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5572,7 +5572,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5584,7 +5584,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5605,7 +5605,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5617,7 +5617,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application --Environment:Development}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5628,7 +5628,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5640,7 +5640,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5652,7 +5652,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5673,7 +5673,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5685,7 +5685,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5696,7 +5696,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5708,7 +5708,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5720,7 +5720,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5740,7 +5740,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5751,7 +5751,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Application --Environment:Development}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5761,7 +5761,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5772,7 +5772,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5783,7 +5783,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5803,7 +5803,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5814,7 +5814,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5824,7 +5824,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5835,7 +5835,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5846,7 +5846,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5867,7 +5867,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5879,7 +5879,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application --Environment:Development}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5890,7 +5890,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5902,7 +5902,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5914,7 +5914,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5935,7 +5935,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -5947,7 +5947,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -5958,7 +5958,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -5970,7 +5970,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -5982,7 +5982,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Application --Environment:Development --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6003,7 +6003,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Machine}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6015,7 +6015,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Machine}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6026,7 +6026,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Machine}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6038,7 +6038,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6050,7 +6050,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6071,7 +6071,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6083,7 +6083,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6094,7 +6094,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6106,7 +6106,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6118,7 +6118,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6138,7 +6138,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Machine}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6149,7 +6149,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Machine}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6159,7 +6159,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Machine}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6170,7 +6170,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Machine}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6181,7 +6181,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Machine}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6201,7 +6201,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6212,7 +6212,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6222,7 +6222,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6233,7 +6233,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6244,7 +6244,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6265,7 +6265,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Machine}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6277,7 +6277,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Machine}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6288,7 +6288,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Machine}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6300,7 +6300,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6312,7 +6312,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6333,7 +6333,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6345,7 +6345,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6356,7 +6356,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6368,7 +6368,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6380,7 +6380,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Machine --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6401,7 +6401,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Process}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6413,7 +6413,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Process}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6424,7 +6424,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Process}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6436,7 +6436,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Process}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6448,7 +6448,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Process}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6469,7 +6469,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6481,7 +6481,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6492,7 +6492,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6504,7 +6504,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6516,7 +6516,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6536,7 +6536,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Process}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6547,7 +6547,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Process}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6557,7 +6557,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Process}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6568,7 +6568,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Process}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6579,7 +6579,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Process}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6599,7 +6599,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6610,7 +6610,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6620,7 +6620,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6631,7 +6631,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6642,7 +6642,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6663,7 +6663,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Process}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6675,7 +6675,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Process}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6686,7 +6686,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Process}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6698,7 +6698,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Process}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6710,7 +6710,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Process}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6731,7 +6731,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6743,7 +6743,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6754,7 +6754,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6766,7 +6766,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6778,7 +6778,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Process --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6799,7 +6799,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Session}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6811,7 +6811,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Session}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6822,7 +6822,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Session}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6834,7 +6834,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Session}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6846,7 +6846,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Session}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6867,7 +6867,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6879,7 +6879,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6890,7 +6890,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6902,7 +6902,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6914,7 +6914,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6934,7 +6934,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Session}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -6945,7 +6945,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Session}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -6955,7 +6955,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Session}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -6966,7 +6966,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Session}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6977,7 +6977,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Session}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -6997,7 +6997,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7008,7 +7008,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7018,7 +7018,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7029,7 +7029,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7040,7 +7040,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7061,7 +7061,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Session}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7073,7 +7073,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Session}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7084,7 +7084,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Session}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7096,7 +7096,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Session}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7108,7 +7108,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Session}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7129,7 +7129,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7141,7 +7141,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7152,7 +7152,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7164,7 +7164,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7176,7 +7176,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:Session --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7196,7 +7196,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:User}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7208,7 +7208,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:User}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7219,7 +7219,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:User}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7231,7 +7231,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:User}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7243,7 +7243,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:User}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7263,7 +7263,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     Locator = "CssSelector",
     OnElement = "#elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7275,7 +7275,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}")
     .setLocator("CssSelector")
     .setOnElement("#elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7286,7 +7286,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     locator: "CssSelector",
     onElement: "#elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7298,7 +7298,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7310,7 +7310,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     "locator": "CssSelector",
     "onElement": "#elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7329,7 +7329,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:User}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7340,7 +7340,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:User}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7350,7 +7350,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:User}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7361,7 +7361,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:User}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7372,7 +7372,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:User}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7391,7 +7391,7 @@ var actionRule = new ActionRuleModel
     PluginName = "RegisterParameter",
     Argument = "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     OnElement = "//a[@id='elementId']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7402,7 +7402,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
     .setArgument("{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}")
     .setOnElement("//a[@id='elementId']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7412,7 +7412,7 @@ var actionRule = {
     pluginName: "RegisterParameter",
     argument: "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     onElement: "//a[@id='elementId']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7423,7 +7423,7 @@ var actionRule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7434,7 +7434,7 @@ action_rule = {
     "pluginName": "RegisterParameter",
     "argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     "onElement": "//a[@id='elementId']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7454,7 +7454,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:User}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7466,7 +7466,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:User}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7477,7 +7477,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:User}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7489,7 +7489,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:User}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7501,7 +7501,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:User}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7521,7 +7521,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     Locator = "Id",
     OnElement = "elementId",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -7533,7 +7533,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}")
     .setLocator("Id")
     .setOnElement("elementId")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -7544,7 +7544,7 @@ var actionRule = {
     argument: "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     locator: "Id",
     onElement: "elementId",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -7556,7 +7556,7 @@ var actionRule = {
     "argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7568,7 +7568,7 @@ action_rule = {
     "argument": "{{$ --Name:parameterName --Scope:User --EncryptionKey:myEncryptionKey}}",
     "locator": "Id",
     "onElement": "elementId",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -7576,13 +7576,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Use this value to name the data that gets saved.
 The name can be a fixed term or a dynamic expression.

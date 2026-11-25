@@ -17,8 +17,16 @@ namespace G4.UnitTests.Plugins.Common.Macros
         [ClassCleanup(InheritanceBehavior.BeforeEachDerivedClass)]
         public static void ClearEnvironments()
         {
-            // Remove the environment variable "MyParam" from the Machine target.
-            Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.Machine);
+            // Remove the environment variable "MyParam" from the Machine target. Writing Machine variables needs
+            // administrator rights; a run without them skipped the LocalOnly Machine tests and has nothing to remove.
+            try
+            {
+                Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.Machine);
+            }
+            catch (System.Security.SecurityException)
+            {
+                // Not elevated: no Machine variable exists from this run.
+            }
 
             // Remove the environment variable "MyParam" from the User target.
             Environment.SetEnvironmentVariable("MyParam", null, EnvironmentVariableTarget.User);
@@ -46,7 +54,6 @@ namespace G4.UnitTests.Plugins.Common.Macros
         [DataRow("Session")]
         [DataRow("Application")]
         [DataRow("Process")]
-        [DataRow("Machine")]
         [DataRow("User")]
         #endregion
         public void GetParameterPositiveTest(string scope)
@@ -84,7 +91,6 @@ namespace G4.UnitTests.Plugins.Common.Macros
         [DataRow("Session")]
         [DataRow("Application")]
         [DataRow("Process")]
-        [DataRow("Machine")]
         [DataRow("User")]
         #endregion
         public void GetParameterNegativeTest(string scope)
@@ -115,5 +121,34 @@ namespace G4.UnitTests.Plugins.Common.Macros
             // Assert that the actual value (Base64 encoded) matches the expected value.
             Assert.AreEqual(expected: "Rm9vIEJhcg==", actual);
         }
+
+        [TestMethod(DisplayName = "Verify that the GetParameter plugin retrieves the correct " +
+            "parameter value for different scopes. " +
+            "Machine scope, administrator rights required.")]
+        [TestCategory("LocalOnly")]
+        #region *** Data Set ***
+        [DataRow("Machine")]
+        #endregion
+        public void GetParameterPositiveTestMachineScope(string scope)
+        {
+            // Act and Assert: run the same scenario for the Machine scope, which writes the machine
+            // registry and so needs an elevated local session; CI excludes this LocalOnly case.
+            GetParameterPositiveTest(scope);
+        }
+
+        [TestMethod(DisplayName = "Verify that the GetParameter plugin retrieves the correct " +
+            "parameter value for different scopes with encryption. " +
+            "Machine scope, administrator rights required.")]
+        [TestCategory("LocalOnly")]
+        #region *** Data Set ***
+        [DataRow("Machine")]
+        #endregion
+        public void GetParameterNegativeTestMachineScope(string scope)
+        {
+            // Act and Assert: run the same scenario for the Machine scope, which writes the machine
+            // registry and so needs an elevated local session; CI excludes this LocalOnly case.
+            GetParameterNegativeTest(scope);
+        }
+
     }
 }

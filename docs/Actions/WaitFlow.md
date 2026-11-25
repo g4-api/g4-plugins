@@ -398,13 +398,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | Number|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | Number\|Expression |
 
 A value that sets how long to pause or what condition to check before continuing.
 Fixed waits use a time span format to define the pause duration.
@@ -504,7 +504,7 @@ Picking the right comparison type makes sure decisions are correct.
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 The longest time the script waits for a condition before moving on.
 It prevents the process from hanging indefinitely.

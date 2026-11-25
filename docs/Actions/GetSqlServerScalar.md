@@ -61,7 +61,7 @@ The `@Status` placeholder receives `Open` as a typed value, and the count become
 var actionRule = new ActionRuleModel
 {
     PluginName = "GetSqlServerScalar",
-    Argument = "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{"Status":"Open"} --CommandTimeout:60}}"
+    Argument = "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{\"Status\":\"Open\"} --CommandTimeout:60}}"
 };
 ```
 
@@ -70,7 +70,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("GetSqlServerScalar")
-    .setArgument("{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{"Status":"Open"} --CommandTimeout:60}}");
+    .setArgument("{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{\"Status\":\"Open\"} --CommandTimeout:60}}");
 ```
 
 **Javascript:**
@@ -78,7 +78,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "GetSqlServerScalar",
-    argument: "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{"Status":"Open"} --CommandTimeout:60}}"
+    argument: "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{\"Status\":\"Open\"} --CommandTimeout:60}}"
 };
 ```
 
@@ -87,7 +87,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "GetSqlServerScalar",
-    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{"Status":"Open"} --CommandTimeout:60}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{\"Status\":\"Open\"} --CommandTimeout:60}}"
 }
 ```
 
@@ -96,7 +96,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "GetSqlServerScalar",
-    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{"Status":"Open"} --CommandTimeout:60}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status --Parameters:{\"Status\":\"Open\"} --CommandTimeout:60}}"
 }
 ```
 
@@ -165,7 +165,7 @@ The query in the file uses the `@Sku` placeholder, and its first value becomes t
 var actionRule = new ActionRuleModel
 {
     PluginName = "GetSqlServerScalar",
-    Argument = "{{$ --Credentials:sql-inventory --Parameters:{"Sku":"SKU-1042"} --CommandFile:C:\Sql\stock-level.sql}}"
+    Argument = "{{$ --Credentials:sql-inventory --Parameters:{\"Sku\":\"SKU-1042\"} --CommandFile:C:\\Sql\\stock-level.sql}}"
 };
 ```
 
@@ -174,7 +174,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("GetSqlServerScalar")
-    .setArgument("{{$ --Credentials:sql-inventory --Parameters:{"Sku":"SKU-1042"} --CommandFile:C:\Sql\stock-level.sql}}");
+    .setArgument("{{$ --Credentials:sql-inventory --Parameters:{\"Sku\":\"SKU-1042\"} --CommandFile:C:\\Sql\\stock-level.sql}}");
 ```
 
 **Javascript:**
@@ -182,7 +182,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "GetSqlServerScalar",
-    argument: "{{$ --Credentials:sql-inventory --Parameters:{"Sku":"SKU-1042"} --CommandFile:C:\Sql\stock-level.sql}}"
+    argument: "{{$ --Credentials:sql-inventory --Parameters:{\"Sku\":\"SKU-1042\"} --CommandFile:C:\\Sql\\stock-level.sql}}"
 };
 ```
 
@@ -191,7 +191,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "GetSqlServerScalar",
-    "argument": "{{$ --Credentials:sql-inventory --Parameters:{"Sku":"SKU-1042"} --CommandFile:C:\Sql\stock-level.sql}}"
+    "argument": "{{$ --Credentials:sql-inventory --Parameters:{\"Sku\":\"SKU-1042\"} --CommandFile:C:\\Sql\\stock-level.sql}}"
 }
 ```
 
@@ -200,7 +200,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "GetSqlServerScalar",
-    "argument": "{{$ --Credentials:sql-inventory --Parameters:{"Sku":"SKU-1042"} --CommandFile:C:\Sql\stock-level.sql}}"
+    "argument": "{{$ --Credentials:sql-inventory --Parameters:{\"Sku\":\"SKU-1042\"} --CommandFile:C:\\Sql\\stock-level.sql}}"
 }
 ```
 
@@ -346,13 +346,13 @@ Invalid Base64 fails the step before anything is sent to SQL Server, so encoded 
 
 ### Command File (CommandFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Points to a UTF-8 `.sql` file that holds the query, such as `C:\Sql\stock-level.sql`.
 Applies when CommandText is empty, and the step fails when the file does not exist.
@@ -361,13 +361,13 @@ Sends the whole file as one batch, so a `GO` separator line fails with a syntax 
 
 ### Command Text (CommandText)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the SQL query to run, such as `SELECT COUNT(*) FROM dbo.Orders WHERE Status = @Status`.
 Takes priority over CommandFile, and the step fails when neither one is set.
@@ -389,13 +389,13 @@ A value of 0 waits without a time limit, and an invalid or negative value falls 
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full ADO.NET connection string, such as `Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -403,13 +403,13 @@ Every connection setting, such as the server, the database, the login, and the e
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored SQL Server credentials record by name or id, such as `sql-production`, so secrets stay out of the rule.
 The record carries the server, port, database, login, and encryption settings, so the step never repeats them.
@@ -430,13 +430,13 @@ Keeps responses small when later steps read only the session parameters.
 
 ### Parameters (Parameters)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies query parameter values as a JSON object, such as `{"Status":"Open"}`, where each property binds to the matching `@` placeholder.
 Values are sent as typed SQL parameters and never joined into the query text, which protects against SQL injection.
@@ -445,13 +445,13 @@ The `@` prefix is added automatically when a property name omits it.
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a raw Microsoft Entra access token that signs in the connection.
 Enables token sign-in without a stored password, next to a Credentials record or a ConnectionString that carries no password.

@@ -47,7 +47,7 @@ WriteFile creates missing parent directories and overwrites an existing file at 
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteFile",
-    Argument = "{{$ --Path:C:\Automation\output.txt --Content:Hello from G4}}"
+    Argument = "{{$ --Path:C:\\Automation\\output.txt --Content:Hello from G4}}"
 };
 ```
 
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteFile")
-    .setArgument("{{$ --Path:C:\Automation\output.txt --Content:Hello from G4}}");
+    .setArgument("{{$ --Path:C:\\Automation\\output.txt --Content:Hello from G4}}");
 ```
 
 **Javascript:**
@@ -64,7 +64,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteFile",
-    argument: "{{$ --Path:C:\Automation\output.txt --Content:Hello from G4}}"
+    argument: "{{$ --Path:C:\\Automation\\output.txt --Content:Hello from G4}}"
 };
 ```
 
@@ -73,7 +73,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\output.txt --Content:Hello from G4}}"
+    "argument": "{{$ --Path:C:\\Automation\\output.txt --Content:Hello from G4}}"
 }
 ```
 
@@ -82,7 +82,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\output.txt --Content:Hello from G4}}"
+    "argument": "{{$ --Path:C:\\Automation\\output.txt --Content:Hello from G4}}"
 }
 ```
 
@@ -99,7 +99,7 @@ WriteFile normalizes the resulting path and creates missing parent directories.
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteFile",
-    Argument = "{{$ --Path:..\..\docs\output.txt --Content:Hello from G4 --Relative}}"
+    Argument = "{{$ --Path:..\\..\\docs\\output.txt --Content:Hello from G4 --Relative}}"
 };
 ```
 
@@ -108,7 +108,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteFile")
-    .setArgument("{{$ --Path:..\..\docs\output.txt --Content:Hello from G4 --Relative}}");
+    .setArgument("{{$ --Path:..\\..\\docs\\output.txt --Content:Hello from G4 --Relative}}");
 ```
 
 **Javascript:**
@@ -116,7 +116,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteFile",
-    argument: "{{$ --Path:..\..\docs\output.txt --Content:Hello from G4 --Relative}}"
+    argument: "{{$ --Path:..\\..\\docs\\output.txt --Content:Hello from G4 --Relative}}"
 };
 ```
 
@@ -125,7 +125,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:..\..\docs\output.txt --Content:Hello from G4 --Relative}}"
+    "argument": "{{$ --Path:..\\..\\docs\\output.txt --Content:Hello from G4 --Relative}}"
 }
 ```
 
@@ -134,7 +134,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:..\..\docs\output.txt --Content:Hello from G4 --Relative}}"
+    "argument": "{{$ --Path:..\\..\\docs\\output.txt --Content:Hello from G4 --Relative}}"
 }
 ```
 
@@ -151,7 +151,7 @@ WriteFile writes the decoded value as UTF-8 text.
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteFile",
-    Argument = "{{$ --Path:C:\Automation\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
+    Argument = "{{$ --Path:C:\\Automation\\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
 };
 ```
 
@@ -160,7 +160,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteFile")
-    .setArgument("{{$ --Path:C:\Automation\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}");
+    .setArgument("{{$ --Path:C:\\Automation\\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}");
 ```
 
 **Javascript:**
@@ -168,7 +168,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteFile",
-    argument: "{{$ --Path:C:\Automation\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
+    argument: "{{$ --Path:C:\\Automation\\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
 };
 ```
 
@@ -177,7 +177,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
+    "argument": "{{$ --Path:C:\\Automation\\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
 }
 ```
 
@@ -186,7 +186,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
+    "argument": "{{$ --Path:C:\\Automation\\decoded.txt --Content:SGVsbG8gZnJvbSBHNA== --Base64}}"
 }
 ```
 
@@ -203,7 +203,7 @@ WriteFile stores the encryption result directly without another Base64 conversio
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteFile",
-    Argument = "{{$ --Path:C:\Automation\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
+    Argument = "{{$ --Path:C:\\Automation\\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
 };
 ```
 
@@ -212,7 +212,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteFile")
-    .setArgument("{{$ --Path:C:\Automation\secret.txt --Content:Sensitive text --EncryptionKey:g4}}");
+    .setArgument("{{$ --Path:C:\\Automation\\secret.txt --Content:Sensitive text --EncryptionKey:g4}}");
 ```
 
 **Javascript:**
@@ -220,7 +220,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteFile",
-    argument: "{{$ --Path:C:\Automation\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
+    argument: "{{$ --Path:C:\\Automation\\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
 };
 ```
 
@@ -229,7 +229,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
+    "argument": "{{$ --Path:C:\\Automation\\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
 }
 ```
 
@@ -238,7 +238,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
+    "argument": "{{$ --Path:C:\\Automation\\secret.txt --Content:Sensitive text --EncryptionKey:g4}}"
 }
 ```
 
@@ -255,7 +255,7 @@ WriteFile decodes the value, encrypts the decoded text, and writes the encryptio
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteFile",
-    Argument = "{{$ --Path:C:\Automation\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
+    Argument = "{{$ --Path:C:\\Automation\\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
 };
 ```
 
@@ -264,7 +264,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteFile")
-    .setArgument("{{$ --Path:C:\Automation\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}");
+    .setArgument("{{$ --Path:C:\\Automation\\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}");
 ```
 
 **Javascript:**
@@ -272,7 +272,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteFile",
-    argument: "{{$ --Path:C:\Automation\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
+    argument: "{{$ --Path:C:\\Automation\\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
 };
 ```
 
@@ -281,7 +281,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
+    "argument": "{{$ --Path:C:\\Automation\\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
 }
 ```
 
@@ -290,7 +290,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
+    "argument": "{{$ --Path:C:\\Automation\\decoded-secret.txt --Content:RGVjb2RlIGJlZm9yZSBlbmNyeXB0aW9u --Base64 --EncryptionKey:g4}}"
 }
 ```
 
@@ -307,7 +307,7 @@ The decoded content is `Daily report -- generated on {{$New-Date --Format:yyyy-M
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteFile",
-    Argument = "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+    Argument = "{{$ --Path:C:\\Automation\\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
 };
 ```
 
@@ -316,7 +316,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteFile")
-    .setArgument("{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}");
+    .setArgument("{{$ --Path:C:\\Automation\\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}");
 ```
 
 **Javascript:**
@@ -324,7 +324,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteFile",
-    argument: "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+    argument: "{{$ --Path:C:\\Automation\\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
 };
 ```
 
@@ -333,7 +333,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+    "argument": "{{$ --Path:C:\\Automation\\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
 }
 ```
 
@@ -342,7 +342,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteFile",
-    "argument": "{{$ --Path:C:\Automation\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
+    "argument": "{{$ --Path:C:\\Automation\\report.txt --Content:RGFpbHkgcmVwb3J0IC0tIGdlbmVyYXRlZCBvbiB7eyROZXctRGF0ZSAtLUZvcm1hdDp5eXl5LU1NLWRkfX0= --Base64}}"
 }
 ```
 
@@ -350,13 +350,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the `Path`, `Content`, `Relative`, `Base64`, and `EncryptionKey` parameters through a G4 parameter expression.
 

@@ -96,7 +96,7 @@ This example shows how to use the `Get-AlertText` plugin with a regex pattern to
 var actionRule = new ActionRuleModel
 {
     PluginName = "RegisterParameter",
-    Argument = "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\d+}} --Scope:Session}}"
+    Argument = "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\\d+}} --Scope:Session}}"
 };
 ```
 
@@ -105,7 +105,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("RegisterParameter")
-    .setArgument("{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\d+}} --Scope:Session}}");
+    .setArgument("{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\\d+}} --Scope:Session}}");
 ```
 
 **Javascript:**
@@ -113,7 +113,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "RegisterParameter",
-    argument: "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\d+}} --Scope:Session}}"
+    argument: "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\\d+}} --Scope:Session}}"
 };
 ```
 
@@ -122,7 +122,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "RegisterParameter",
-    "argument": "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\d+}} --Scope:Session}}"
+    "argument": "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\\d+}} --Scope:Session}}"
 }
 ```
 
@@ -131,7 +131,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "RegisterParameter",
-    "argument": "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\d+}} --Scope:Session}}"
+    "argument": "{{$ --Name:ExtractedInfo --Value:{{$Get-AlertText --Pattern:\\d+}} --Scope:Session}}"
 }
 ```
 

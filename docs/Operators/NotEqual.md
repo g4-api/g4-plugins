@@ -49,7 +49,7 @@ This example demonstrates the usage of the `NotEqual` plugin to compare two stri
 var actionRule = new ActionRuleModel
 {
     PluginName = "NotEqual",
-    Argument = "{{$ --LeftHand:"value1" --RightHand:"value2"}}"
+    Argument = "{{$ --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 };
 ```
 
@@ -58,7 +58,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("NotEqual")
-    .setArgument("{{$ --LeftHand:"value1" --RightHand:"value2"}}");
+    .setArgument("{{$ --LeftHand:\"value1\" --RightHand:\"value2\"}}");
 ```
 
 **Javascript:**
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "NotEqual",
-    argument: "{{$ --LeftHand:"value1" --RightHand:"value2"}}"
+    argument: "{{$ --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 };
 ```
 
@@ -75,7 +75,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "NotEqual",
-    "argument": "{{$ --LeftHand:"value1" --RightHand:"value2"}}"
+    "argument": "{{$ --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 }
 ```
 
@@ -84,7 +84,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "NotEqual",
-    "argument": "{{$ --LeftHand:"value1" --RightHand:"value2"}}"
+    "argument": "{{$ --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 }
 ```
 
@@ -104,7 +104,7 @@ This example demonstrates the usage of the `NotEqualOperator` plugin within anot
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:NotEqual --LeftHand:"value1" --RightHand:"value2"}}"
+    Argument = "{{$ --Condition:NotEqual --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 };
 ```
 
@@ -113,7 +113,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:NotEqual --LeftHand:"value1" --RightHand:"value2"}}");
+    .setArgument("{{$ --Condition:NotEqual --LeftHand:\"value1\" --RightHand:\"value2\"}}");
 ```
 
 **Javascript:**
@@ -121,7 +121,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:NotEqual --LeftHand:"value1" --RightHand:"value2"}}"
+    argument: "{{$ --Condition:NotEqual --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 };
 ```
 
@@ -130,7 +130,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:NotEqual --LeftHand:"value1" --RightHand:"value2"}}"
+    "argument": "{{$ --Condition:NotEqual --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 }
 ```
 
@@ -139,7 +139,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:NotEqual --LeftHand:"value1" --RightHand:"value2"}}"
+    "argument": "{{$ --Condition:NotEqual --LeftHand:\"value1\" --RightHand:\"value2\"}}"
 }
 ```
 

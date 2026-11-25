@@ -479,7 +479,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "ReceiveUdpMessage",
     Argument = "{{$ --Listener:Telemetry --Timeout:5000}}",
-    RegularExpression = "(?<=T=)\d+"
+    RegularExpression = "(?<=T=)\\d+"
 };
 ```
 
@@ -489,7 +489,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ReceiveUdpMessage")
     .setArgument("{{$ --Listener:Telemetry --Timeout:5000}}")
-    .setRegularExpression("(?<=T=)\d+");
+    .setRegularExpression("(?<=T=)\\d+");
 ```
 
 **Javascript:**
@@ -498,7 +498,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "ReceiveUdpMessage",
     argument: "{{$ --Listener:Telemetry --Timeout:5000}}",
-    regularExpression: "(?<=T=)\d+"
+    regularExpression: "(?<=T=)\\d+"
 };
 ```
 
@@ -508,7 +508,7 @@ var actionRule = {
 {
     "pluginName": "ReceiveUdpMessage",
     "argument": "{{$ --Listener:Telemetry --Timeout:5000}}",
-    "regularExpression": "(?<=T=)\d+"
+    "regularExpression": "(?<=T=)\\d+"
 }
 ```
 
@@ -518,7 +518,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "ReceiveUdpMessage",
     "argument": "{{$ --Listener:Telemetry --Timeout:5000}}",
-    "regularExpression": "(?<=T=)\d+"
+    "regularExpression": "(?<=T=)\\d+"
 }
 ```
 
@@ -659,13 +659,13 @@ The session value is Base64-encoded, so decode it before comparing or displaying
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the arguments of the step, such as `{{$ --Listener:Telemetry --Timeout:5000}}`.
 Listener or Port is required.
@@ -756,13 +756,13 @@ Defaults to UTF-8, and a name the runtime does not know fails the step.
 
 ### Listener (Listener)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a listener started by StartUdpListener and reads from its buffer.
 Datagrams that arrived since the listener started and that no earlier step took are available, oldest first; a full buffer drops the oldest.
@@ -770,13 +770,13 @@ A name that is not started fails the step, and a listener another step stops dur
 
 ### Local Address (LocalAddress)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Binds one local IP address, which selects the network interface on a machine with several.
 With MulticastGroup the step binds every interface and the address selects where the group is joined.
@@ -784,13 +784,13 @@ Defaults to every IPv4 interface, and is ignored when Listener is set.
 
 ### Multicast Group (MulticastGroup)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Joins a multicast group, such as `239.255.0.1`, for a step that binds its own Port.
 Ignored when Listener is set, because a listener joins its own group, if any, when StartUdpListener starts it.
@@ -839,13 +839,13 @@ Listener or Port is required, and Listener wins when both are set.
 
 ### Remote Host (RemoteHost)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Counts only datagrams sent from one host name or IP address.
 Datagrams from other senders stay in the listener buffer for another step.
@@ -902,7 +902,7 @@ Use it to pass a binary packet to a later step without loss.
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Sets how long to wait for the requested number of datagrams.
 Accepts a number of milliseconds, such as `2000`, or a time span, such as `00:00:02`.

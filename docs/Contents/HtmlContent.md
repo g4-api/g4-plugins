@@ -169,7 +169,7 @@ var actionRule = new ActionRuleModel
     PluginName = "HtmlContent",
     Argument = "{{$}}",
     OnElement = "//span[@id='price']",
-    RegularExpression = "\d+\.\d{2}"
+    RegularExpression = "\\d+\\.\\d{2}"
 };
 ```
 
@@ -180,7 +180,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("HtmlContent")
     .setArgument("{{$}}")
     .setOnElement("//span[@id='price']")
-    .setRegularExpression("\d+\.\d{2}");
+    .setRegularExpression("\\d+\\.\\d{2}");
 ```
 
 **Javascript:**
@@ -190,7 +190,7 @@ var actionRule = {
     pluginName: "HtmlContent",
     argument: "{{$}}",
     onElement: "//span[@id='price']",
-    regularExpression: "\d+\.\d{2}"
+    regularExpression: "\\d+\\.\\d{2}"
 };
 ```
 
@@ -201,7 +201,7 @@ var actionRule = {
     "pluginName": "HtmlContent",
     "argument": "{{$}}",
     "onElement": "//span[@id='price']",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 
@@ -212,7 +212,7 @@ action_rule = {
     "pluginName": "HtmlContent",
     "argument": "{{$}}",
     "onElement": "//span[@id='price']",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 
