@@ -105,7 +105,7 @@ action_rule = {
 ### Update documents, inserting when none match
 
 The argument selects UpdateMany, passes the filter and the update operators, and sets `Upsert`.
-The update document is Base64-encoded, because a nested JSON object ends in `}}`, which would end the inline argument value; the decoded text is `{"$set":{"status":"processed"}}`.
+The update document is Base64-encoded through the DocumentBase64 switch, which decodes only Document; the decoded text is `{"$set":{"status":"processed"}}`.
 The step reports what it matched, modified, and upserted.
 
 **CSharp:**
@@ -210,7 +210,7 @@ action_rule = {
 ### Replace one document
 
 The argument selects ReplaceOne, addresses the document by its object identifier, and passes the replacement.
-The filter is Base64-encoded, because its nested `$oid` object ends in `}}`, which would end the inline argument value; the decoded text is `{"_id":{"$oid":"6553f1c2a1b2c3d4e5f60718"}}`.
+The filter is Base64-encoded through the Base64 switch, which decodes only CommandText; the decoded text is `{"_id":{"$oid":"6553f1c2a1b2c3d4e5f60718"}}`.
 The Extended JSON `$oid` form addresses the identifier as an object identifier, not as text.
 
 **CSharp:**
@@ -572,7 +572,7 @@ A collection named as `database.collection` overrides this parameter in turn.
 
 Supplies the document the operation writes: the documents to insert, the update operators to apply, or the replacement.
 An insert accepts a single object or an array of objects; an update must carry operators such as `{"$set":{...}}`.
-Required for every operation except a delete, and encodable through DocumentBase64 because a nested update document ends in two closing braces.
+Required for every operation except a delete, and encodable through DocumentBase64 when the document contains text that an inline argument value cannot carry.
 
 ### Document Base64 (DocumentBase64)
 
@@ -586,7 +586,7 @@ Required for every operation except a delete, and encodable through DocumentBase
 
 Reads Document as UTF-8 Base64 and decodes it before use.
 After decoding, the macros in the decoded value are resolved, because the engine resolves the macros of a rule before the plugin runs and cannot see them while the value is encoded.
-An update document such as `{"$set":{...}}` ends in two closing braces, which end an inline argument value, so it travels encoded or through DocumentFile.
+An inline value ends where a space is followed by `--` and a word, so a document that contains such text travels encoded or through DocumentFile.
 Invalid Base64 fails the step, so an encoded document never reaches the server as text.
 
 ### Document File (DocumentFile)

@@ -315,7 +315,7 @@
 						"The payload comes from CommandFile, so its macros are kept as written"
 					],
 					"expected_result": "The step stores the number of orders created today in `GetMongoDbScalar:Value`.",
-					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps the closing braces of the JSON from ending the inline argument value.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps any space followed by -- inside the JSON from being read as the start of another argument.",
 					"use_case": "get_scalar_base64_filter_with_macro",
 					"version": "5"
 				},
@@ -507,5 +507,5 @@
 		"Binds the filter as BSON, so no value is ever composed into a query.",
 		"Stores the value as a session parameter, so a later step can compare or branch on it without parsing a document."
 	],
-	"version": "5"
+	"version": "6"
 }

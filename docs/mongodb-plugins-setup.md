@@ -100,9 +100,9 @@ suits a development container and nothing else. In a URI, the matching options a
 | `DocumentBase64` | Marks `Document` as UTF-8 Base64 |
 | `Data` and `DataFile` | The payload of `ImportMongoDbData`, as inline JSON, a JSON file or a `.csv` file |
 
-An inline argument value ends at ` --` and at `}}`, so a nested JSON object such as `{"$set":{"status":"open"}}` cannot
-travel inline: it ends in two closing braces. Pass it Base64-encoded with the matching switch, or through the file
-argument. Invalid Base64 fails the step, so an encoded payload never reaches the server as text. Source:
+An inline argument value ends where a space is followed by `--` and a word character, so a JSON payload that contains
+such text is cut short. Pass it Base64-encoded with the matching switch, or through the file argument. A nested JSON
+object such as `{"$set":{"status":"open"}}` travels inline as long as it has no such text. Invalid Base64 fails the step, so an encoded payload never reaches the server as text. Source:
 `Extensions/LocalExtensions.cs`.
 
 Both Extended JSON forms are accepted, so `{"_id":{"$oid":"6553f1c2a1b2c3d4e5f60718"}}` addresses an object identifier

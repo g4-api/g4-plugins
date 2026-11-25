@@ -107,8 +107,8 @@ namespace G4.Plugins.MongoDb.Extensions
             /// </summary>
             /// <remarks>
             /// Follows the same contract as <see cref="ResolveCommandText()"/>, with the <c>DocumentBase64</c>
-            /// switch in place of <c>Base64</c>. The document argument needs its own switch because an update
-            /// document always ends in two closing braces, which end an inline argument value.
+            /// switch in place of <c>Base64</c>. The document argument needs its own switch because a step carries
+            /// two inline payloads and each one is encoded, or left as plain text, on its own.
             /// </remarks>
             /// <returns>The payload text; empty when the step sets neither argument.</returns>
             public string ResolveDocumentText()

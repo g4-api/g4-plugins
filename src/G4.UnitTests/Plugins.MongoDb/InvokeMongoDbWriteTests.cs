@@ -94,7 +94,7 @@ namespace G4.UnitTests.Plugins.MongoDb
         [DoNotParallelize]
         public void InvokeMongoDbWriteUpdateManyTest()
         {
-            // Arrange: seed two open documents and encode the update, which ends in two closing braces.
+            // Arrange: seed two open documents and encode the update through the DocumentBase64 switch.
             SeedDocuments();
             var update = NewBase64(payload: "{\"$set\":{\"status\":\"processed\"}}");
 
