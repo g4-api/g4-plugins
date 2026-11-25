@@ -16,14 +16,14 @@
 				"title": "Invoke User32 Drag And Drop"
 			},
 			"rag": {
-				"description": "Drag a Windows desktop element onto another element, or by an offset, with the left mouse button through the UIA driver. The step checks the driver, the drag end, and its numbers before anything is pressed, grabs and drops at alignment points, paces the cursor in short steps, and releases the button when the driver refuses the drag.",
+				"description": "Drag with the left mouse button on a Windows desktop through the UIA driver: from an element or a screen point, to an element, a screen point, or by an offset. The step checks the driver, both ends, and its numbers before anything is pressed, grabs and drops at alignment points of elements, paces the cursor in short steps, and releases the button when the driver refuses the drag.",
 				"qa": [
 					{
-						"answer": "It drags an element of a Windows desktop application with the left mouse button and drops it on a target element, or moves it by a pixel offset, through the UIA driver.",
+						"answer": "It drags with the left mouse button in a Windows desktop application through the UIA driver, from an element or a screen point, and drops on a target element, at a screen point, or a pixel offset away.",
 						"question": "What does the InvokeUser32DragAndDrop plugin do?"
 					},
 					{
-						"answer": "OnElement names the element to drag, Alignment, OffsetX, and OffsetY select the grab point, Target with TargetAlignment, TargetOffsetX, and TargetOffsetY selects the drop point, DeltaX and DeltaY set an offset instead, and Steps and Duration set the path. It stores no outputs.",
+						"answer": "OnElement, or X and Y, sets the start; Alignment, OffsetX, and OffsetY select the grab point on an element. Target with TargetAlignment, TargetOffsetX, and TargetOffsetY, or TargetX and TargetY, or DeltaX and DeltaY sets the end. Steps and Duration set the path. It stores no outputs.",
 						"question": "What are the key parameters and outputs of InvokeUser32DragAndDrop?"
 					},
 					{
@@ -35,11 +35,11 @@
 						"question": "What are best practices for using InvokeUser32DragAndDrop?"
 					},
 					{
-						"answer": "Use $type “Action” with pluginName “InvokeUser32DragAndDrop”, onElement for the dragged element as an XPath, and {{$ --Target://List[@AutomationId='DoneList']}} or {{$ --DeltaX:150 --DeltaY:0}} as the argument.",
+						"answer": "Use $type “Action” with pluginName “InvokeUser32DragAndDrop”, onElement for the dragged element as an XPath, and {{$ --Target://List[@AutomationId='DoneList']}} or {{$ --DeltaX:150 --DeltaY:0}} as the argument; without onElement, use {{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}.",
 						"question": "How is an InvokeUser32DragAndDrop rule configured?"
 					},
 					{
-						"answer": "Any driver other than the UIA driver, setting both Target and an offset or neither, a missing element, or a bad Steps, Duration, or offset value fails the step before anything is pressed. When the driver refuses the drag, the left button is released and the step fails with the driver error.",
+						"answer": "Any driver other than the UIA driver, a rule with no start, no end, or two forms of one end, a missing element, or a bad Steps, Duration, coordinate, or offset value fails the step before anything is pressed. When the driver refuses the drag, the left button is released and the step fails with the driver error.",
 						"question": "How does InvokeUser32DragAndDrop handle errors?"
 					},
 					{
@@ -77,6 +77,10 @@
 					{
 						"answer": "Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeUser32DragAndDrop.md. Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.User32/InvokeUser32DragAndDrop.cs.",
 						"question": "Where are the InvokeUser32DragAndDrop documentation and source code?"
+					},
+					{
+						"answer": "Use X and Y for the start and TargetX and TargetY for the end, in screen pixels, without onElement. The drag then needs no element, as for a drag recorded in coordinate mode; it replays correctly only when the screen layout matches the recording.",
+						"question": "How does InvokeUser32DragAndDrop drag between two screen points?"
 					}
 				]
 			},
@@ -95,7 +99,7 @@
 	"description": [
 		"### Purpose",
 		"",
-		"InvokeUser32DragAndDrop drags one element of a Windows desktop application and drops it on another element, or moves it by a number of pixels.",
+		"InvokeUser32DragAndDrop drags with the left mouse button in a Windows desktop application. The drag starts on an element or at a screen point, and ends on another element, at a screen point, or a number of pixels away.",
 		"It asks the UIA driver for the screen point of the source, and of the target when one is set, presses the left button on the source, moves the cursor in short steps, and releases over the target or at the end of the offset.",
 		"Flows use it to move items between lists, to reorder rows, and to move splitters and slider handles.",
 		"",
@@ -263,6 +267,39 @@
 				"onElement": "//Pane[@AutomationId='ToolsPanel']",
 				"pluginName": "InvokeUser32DragAndDrop"
 			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"The window moved or the screen layout changed since the points were taken, so the drag misses its target",
+						"A point is outside every screen, so the cursor stops at the nearest screen edge",
+						"OnElement is also set, which names two starts and fails the step"
+					],
+					"expected_result": "The left button is pressed at (300, 200), the cursor moves in steps to (640, 420), and the button is released there.",
+					"notes": "Screen points need no element and no locator. Prefer elements where the application exposes them, because element points follow the window when it moves.",
+					"use_case": "drag_between_screen_points",
+					"version": "1.0"
+				},
+				"labels": [
+					"Coordinates",
+					"DragAndDrop",
+					"InvokeUser32DragAndDrop",
+					"ScreenPoint",
+					"User32"
+				]
+			},
+			"description": [
+				"### Drag between two screen points",
+				"",
+				"Presses at the screen point (300, 200), moves to (640, 420), and releases there, without an element.",
+				"Use this form for a drag recorded in coordinate mode, or for a canvas that exposes no elements."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}",
+				"pluginName": "InvokeUser32DragAndDrop"
+			}
 		}
 	],
 	"key": "InvokeUser32DragAndDrop",
@@ -347,8 +384,8 @@
 		{
 			"description": [
 				"Sets the horizontal distance of a drag by offset, in screen pixels, where a positive value points right.",
-				"It is measured from the grab point that Alignment, OffsetX, and OffsetY select.",
-				"Use it instead of Target; setting both, or text that is not a whole number, fails the step."
+				"It is measured from the grab point: the point of the OnElement element that Alignment, OffsetX, and OffsetY select, or the X and Y screen point.",
+				"Use it instead of Target or TargetX and TargetY; setting more than one end, or text that is not a whole number, fails the step."
 			],
 			"mandatory": false,
 			"name": "DeltaX",
@@ -357,8 +394,8 @@
 		{
 			"description": [
 				"Sets the vertical distance of a drag by offset, in screen pixels, where a positive value points down.",
-				"It is measured from the grab point that Alignment, OffsetX, and OffsetY select.",
-				"Use it instead of Target; setting both, or text that is not a whole number, fails the step."
+				"It is measured from the grab point: the point of the OnElement element that Alignment, OffsetX, and OffsetY select, or the X and Y screen point.",
+				"Use it instead of Target or TargetX and TargetY; setting more than one end, or text that is not a whole number, fails the step."
 			],
 			"mandatory": false,
 			"name": "DeltaY",
@@ -412,7 +449,7 @@
 			"description": [
 				"Names the element to drop on, as an XPath, the locator the User32 elements support.",
 				"The search starts from the root of the session and waits for the element like any other element.",
-				"Use it instead of DeltaX and DeltaY; setting both, or neither, fails the step."
+				"Use it instead of TargetX and TargetY or DeltaX and DeltaY; setting more than one end, or none, fails the step."
 			],
 			"mandatory": false,
 			"name": "Target",
@@ -515,6 +552,46 @@
 			"mandatory": false,
 			"name": "TargetOffsetY",
 			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the horizontal screen coordinate, in pixels, where the drag ends and the button is released.",
+				"Use it with TargetY instead of Target or DeltaX and DeltaY; a missing TargetY counts as zero.",
+				"Setting more than one end, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "TargetX",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the vertical screen coordinate, in pixels, where the drag ends and the button is released.",
+				"Use it with TargetX instead of Target or DeltaX and DeltaY; a missing TargetX counts as zero.",
+				"Setting more than one end, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "TargetY",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the horizontal screen coordinate, in pixels, where the drag starts when the rule names no OnElement element.",
+				"Use it with Y instead of OnElement, for a drag recorded or written as screen points; a missing Y counts as zero.",
+				"Setting it together with OnElement, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "X",
+			"type": "Number"
+		},
+		{
+			"description": [
+				"Sets the vertical screen coordinate, in pixels, where the drag starts when the rule names no OnElement element.",
+				"Use it with X instead of OnElement, for a drag recorded or written as screen points; a missing X counts as zero.",
+				"Setting it together with OnElement, or text that is not a whole number, fails the step."
+			],
+			"mandatory": false,
+			"name": "Y",
+			"type": "Number"
 		}
 	],
 	"platforms": [
@@ -525,7 +602,7 @@
 		{
 			"description": [
 				"Holds the parameters of the drag, such as `{{$ --Target://ListItem[@Name='Archive']}}`.",
-				"A rule sets either Target or DeltaX and DeltaY, and may add alignments, offsets, Steps, and Duration."
+				"A rule sets one start, OnElement or X and Y, and one end, Target, TargetX and TargetY, or DeltaX and DeltaY, and may add alignments, offsets, Steps, and Duration."
 			],
 			"mandatory": false,
 			"name": "Argument",
@@ -545,7 +622,7 @@
 			"description": [
 				"Names the element to drag, as an XPath.",
 				"The drag starts on the point of this element that Alignment, OffsetX, and OffsetY select.",
-				"A rule without it, or an element that is not found, fails the step before anything is pressed."
+				"Leave it out to start at the X and Y screen point instead; setting both, or neither, fails the step, and an element that is not found fails it before anything is pressed."
 			],
 			"mandatory": false,
 			"name": "OnElement",
@@ -557,7 +634,7 @@
 		"w3c": "None"
 	},
 	"summary": [
-		"Drags a Windows desktop element with the left mouse button and drops it on a target element, or moves it by a pixel offset.",
+		"Drags with the left mouse button on a Windows desktop: from an element or a screen point, to an element, a screen point, or by a pixel offset.",
 		"Grabs at an alignment point of the element, drops at an alignment point of the target or at the end of the offset, moves the cursor in short steps over a set time, and sends the whole drag in one request to the UIA driver.",
 		"Runs only on the UIA driver and fails with a clear message on any other driver."
 	],

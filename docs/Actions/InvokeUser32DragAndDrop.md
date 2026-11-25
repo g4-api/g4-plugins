@@ -2,13 +2,13 @@
 
 [Table of Content](../Home.md)
 
-~20 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-InvokeUser32DragAndDrop drags one element of a Windows desktop application and drops it on another element, or moves it by a number of pixels.
+InvokeUser32DragAndDrop drags with the left mouse button in a Windows desktop application. The drag starts on an element or at a screen point, and ends on another element, at a screen point, or a number of pixels away.
 It asks the UIA driver for the screen point of the source, and of the target when one is set, presses the left button on the source, moves the cursor in short steps, and releases over the target or at the end of the offset.
 Flows use it to move items between lists, to reorder rows, and to move splitters and slider handles.
 
@@ -274,6 +274,58 @@ action_rule = {
 }
 ```
 
+### Example No.5
+
+### Drag between two screen points
+
+Presses at the screen point (300, 200), moves to (640, 420), and releases there, without an element.
+Use this form for a drag recorded in coordinate mode, or for a canvas that exposes no elements.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeUser32DragAndDrop",
+    Argument = "{{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeUser32DragAndDrop")
+    .setArgument("{{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeUser32DragAndDrop",
+    argument: "{{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeUser32DragAndDrop",
+    "argument": "{{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeUser32DragAndDrop",
+    "argument": "{{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}"
+}
+```
+
 ## Properties
 
 ### Argument (Argument)
@@ -287,7 +339,7 @@ action_rule = {
 | **Value Type**    | String|Expression |
 
 Holds the parameters of the drag, such as `{{$ --Target://ListItem[@Name='Archive']}}`.
-A rule sets either Target or DeltaX and DeltaY, and may add alignments, offsets, Steps, and Duration.
+A rule sets one start, OnElement or X and Y, and one end, Target, TargetX and TargetY, or DeltaX and DeltaY, and may add alignments, offsets, Steps, and Duration.
 
 ### Locator (Locator)
 
@@ -314,7 +366,7 @@ Xpath is the locator the User32 elements support, and it is the default.
 
 Names the element to drag, as an XPath.
 The drag starts on the point of this element that Alignment, OffsetX, and OffsetY select.
-A rule without it, or an element that is not found, fails the step before anything is pressed.
+Leave it out to start at the X and Y screen point instead; setting both, or neither, fails the step, and an element that is not found fails it before anything is pressed.
 
 ## Parameters
 
@@ -390,8 +442,8 @@ Use this alignment when the grab or drop point is near the upper right boundary 
 | **Value Type**    | Number            |
 
 Sets the horizontal distance of a drag by offset, in screen pixels, where a positive value points right.
-It is measured from the grab point that Alignment, OffsetX, and OffsetY select.
-Use it instead of Target; setting both, or text that is not a whole number, fails the step.
+It is measured from the grab point: the point of the OnElement element that Alignment, OffsetX, and OffsetY select, or the X and Y screen point.
+Use it instead of Target or TargetX and TargetY; setting more than one end, or text that is not a whole number, fails the step.
 
 ### Delta Y (DeltaY)
 
@@ -404,8 +456,8 @@ Use it instead of Target; setting both, or text that is not a whole number, fail
 | **Value Type**    | Number            |
 
 Sets the vertical distance of a drag by offset, in screen pixels, where a positive value points down.
-It is measured from the grab point that Alignment, OffsetX, and OffsetY select.
-Use it instead of Target; setting both, or text that is not a whole number, fails the step.
+It is measured from the grab point: the point of the OnElement element that Alignment, OffsetX, and OffsetY select, or the X and Y screen point.
+Use it instead of Target or TargetX and TargetY; setting more than one end, or text that is not a whole number, fails the step.
 
 ### Duration (Duration)
 
@@ -475,7 +527,7 @@ Defaults to 10, and a value outside 1 to 100 fails the step.
 
 Names the element to drop on, as an XPath, the locator the User32 elements support.
 The search starts from the root of the session and waits for the element like any other element.
-Use it instead of DeltaX and DeltaY; setting both, or neither, fails the step.
+Use it instead of TargetX and TargetY or DeltaX and DeltaY; setting more than one end, or none, fails the step.
 
 ### Target Alignment (TargetAlignment)
 
@@ -565,6 +617,62 @@ Defaults to 0, and text that is not a whole number fails the step.
 Shifts the drop point by this many pixels on the vertical axis.
 A positive value moves the point down, measured from the point the matching alignment selects.
 Defaults to 0, and text that is not a whole number fails the step.
+
+### Target X (TargetX)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+Sets the horizontal screen coordinate, in pixels, where the drag ends and the button is released.
+Use it with TargetY instead of Target or DeltaX and DeltaY; a missing TargetY counts as zero.
+Setting more than one end, or text that is not a whole number, fails the step.
+
+### Target Y (TargetY)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+Sets the vertical screen coordinate, in pixels, where the drag ends and the button is released.
+Use it with TargetX instead of Target or DeltaX and DeltaY; a missing TargetX counts as zero.
+Setting more than one end, or text that is not a whole number, fails the step.
+
+### X (X)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+Sets the horizontal screen coordinate, in pixels, where the drag starts when the rule names no OnElement element.
+Use it with Y instead of OnElement, for a drag recorded or written as screen points; a missing Y counts as zero.
+Setting it together with OnElement, or text that is not a whole number, fails the step.
+
+### Y (Y)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+Sets the vertical screen coordinate, in pixels, where the drag starts when the rule names no OnElement element.
+Use it with X instead of OnElement, for a drag recorded or written as screen points; a missing X counts as zero.
+Setting it together with OnElement, or text that is not a whole number, fails the step.
 
 ## Scope
 
