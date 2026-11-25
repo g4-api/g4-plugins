@@ -306,13 +306,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Carries the `{{$ --Key:Name}}` parameter expression or a single key name to send through the User32 API.
 When no parameter expression is used, the raw Argument value is sent as one key name.
@@ -328,7 +328,7 @@ Use the expression form to send several keys or to set `Sticky`, `Delay`, or `Ke
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Time|Number       |
+| **Value Type**    | Time\|Number      |
 
 Sets the pause between keys in milliseconds, given as a number or a time string such as `00:00:00.300`.
 A value of `0`, the default, uses the driver minimum of 100 milliseconds between keys.
@@ -690,6 +690,11 @@ Use it to move the cursor or selection left.
 Represents the Left Shift key.
 Hold it with `Sticky` to combine it with another key.
 
+##### L Win
+
+Represents the left Windows key.
+Hold it with `Sticky` for shortcuts such as `LWin+E` or `LWin+R`.
+
 ##### Num
 
 Represents the Num Lock key.
@@ -720,6 +725,11 @@ Use it to move the cursor or selection right.
 Represents the Right Shift key.
 Hold it with `Sticky` to combine it with another key.
 
+##### R Win
+
+Represents the right Windows key.
+Hold it with `Sticky` to combine it with another key.
+
 ##### Scroll
 
 Represents the Scroll Lock key.
@@ -739,6 +749,11 @@ Use it to move focus to the next field or control.
 
 Represents the Up arrow key.
 Use it to move the cursor or selection up.
+
+##### Win
+
+Represents the Windows key and is sent as the left Windows key (`LWin`).
+Hold it with `Sticky` for shortcuts such as `Win+D` or `Win+E`.
 
 ### Sticky (Sticky)
 

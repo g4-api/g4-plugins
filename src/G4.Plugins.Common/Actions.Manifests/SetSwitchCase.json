@@ -151,10 +151,10 @@
 		"",
 		"### Usages in Automation Testing",
 		"",
-		"| Use Case             | Description                                                          |",
-		"|----------------------|----------------------------------------------------------------------|",
-		"| Scenario-Based Tests | Run different checks based on a value taken from the app under test. |",
-		"| Fallback Verification| Use a default test path if no specific case matches.                 |"
+		"| Use Case              | Description                                                          |",
+		"|-----------------------|----------------------------------------------------------------------|",
+		"| Scenario-Based Tests  | Run different checks based on a value taken from the app under test. |",
+		"| Fallback Verification | Use a default test path if no specific case matches.                 |"
 	],
 	"examples": [
 		{

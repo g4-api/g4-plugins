@@ -1,0 +1,212 @@
+{
+	"aliases": [
+		"MiddleClick",
+		"MiddleMouseClick",
+		"WheelClick"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMiddleClick.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeMiddleClick.cs"
+			},
+			"rag": {
+				"description": "Middle-clicks an element or the current pointer position, for example to open a link in a new tab. The element is located and brought into view before the click, a missing element fails the step, and the optional element target keeps scripted pointer workflows reliable.",
+				"qa": [
+					{
+						"question": "What does the InvokeMiddleClick action do?",
+						"answer": "It presses and releases the middle mouse button (the wheel button) on an element, or at the current pointer position when no element is given."
+					},
+					{
+						"question": "Which inputs does InvokeMiddleClick use?",
+						"answer": "It takes no parameters; the optional OnElement and Locator properties choose the element to middle-click."
+					},
+					{
+						"question": "Where does InvokeMiddleClick fit in an automation workflow?",
+						"answer": "It runs as a WebDriver task step labeled Invoke Middle Click; place it where a flow must open a link in a new tab, close a tab with a middle click, or trigger middle-button behavior."
+					},
+					{
+						"question": "What is a good practice when using InvokeMiddleClick without an element?",
+						"answer": "Place a pointer move step such as MoveMouseCursor first, because without OnElement the click lands wherever the pointer already is."
+					},
+					{
+						"question": "How is an InvokeMiddleClick rule defined?",
+						"answer": "Use $type Action with pluginName InvokeMiddleClick, and add onElement with a locator such as Xpath or CssSelector to target an element."
+					},
+					{
+						"question": "What is the manifest version of InvokeMiddleClick?",
+						"answer": "The manifest version is 4."
+					},
+					{
+						"question": "How do the InvokeMiddleClick description and summary explain it?",
+						"answer": "They describe a middle-button click that opens links in new tabs and triggers wheel-button behavior on an element or at the current pointer position."
+					},
+					{
+						"question": "What happens when the InvokeMiddleClick element cannot be found?",
+						"answer": "The step fails with an element lookup or timeout error and no click is sent. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeMiddleClick.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeMiddleClick.cs"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "arrow-pointer",
+					"svg": null
+				},
+				"label": "Invoke Middle Click",
+				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Invoke Middle Click"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Performs a middle-click, a press and release of the middle mouse button, on an element or at the current pointer position.",
+		"When an element is given, the action brings it into view and moves the pointer to its center before clicking.",
+		"Use it to open a link in a new tab, close a tab, or trigger any behavior bound to the middle mouse button.",
+		"For left-clicks use InvokeClick, and for right-clicks use InvokeContextClick.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature             | Description                                                                     |",
+		"|---------------------|---------------------------------------------------------------------------------|",
+		"| Middle Click        | Presses and releases the middle mouse button through the WebDriver Actions API. |",
+		"| Auto Scroll         | Brings the element into view before the pointer moves to it.                    |",
+		"| Element Centering   | Moves the pointer to the center of the element, then clicks there.              |",
+		"| Positional Click    | Middle-clicks at the current pointer position when no element is given.         |",
+		"| Locator Flexibility | Finds the element with Xpath, CssSelector, Id, LinkText, or PartialLinkText.    |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case                | Description                                                                         |",
+		"|-------------------------|-------------------------------------------------------------------------------------|",
+		"| Open Links in New Tabs  | Opens several result or report links in background tabs to process them one by one. |",
+		"| Close Browser Tabs      | Closes a tab by middle-clicking its tab header in applications that support it.     |",
+		"| Positional Middle Click | Middle-clicks at a position set by an earlier pointer move step.                    |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case               | Description                                                                    |",
+		"|------------------------|--------------------------------------------------------------------------------|",
+		"| New Tab Link Testing   | Verifies that middle-clicking a link opens it in a new tab and keeps the page. |",
+		"| Middle Button Handlers | Confirms that elements react correctly to middle-button events.                |",
+		"| Regression Testing     | Checks that middle-click behavior stays the same after application updates.    |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Element is covered by another element, so the middle-click may land on the covering element",
+						"Element is inside an iframe, so the driver must switch to that frame first",
+						"Page ignores middle-button events, so nothing visible happens"
+					],
+					"expected_result": "The link matched by the CSS selector #ReportLink receives a middle-click and opens in a new browser tab.",
+					"notes": "The element is brought into view and the pointer moves to its center before the middle button is pressed and released. CssSelector is used because onElement is a CSS selector.",
+					"use_case": "middle_click_element_by_css_selector",
+					"version": "4"
+				},
+				"labels": [
+					"CssSelector",
+					"ElementInteraction",
+					"MiddleClick",
+					"NewTab",
+					"WheelButton"
+				]
+			},
+			"description": [
+				"### Middle-click an element located by a CSS selector",
+				"",
+				"Finds the element matching `#ReportLink` with the CssSelector strategy, moves the pointer to its center, and middle-clicks it.",
+				"On a link, the browser usually opens the target in a new tab."
+			],
+			"rule": {
+				"$type": "Action",
+				"locator": "CssSelector",
+				"onElement": "#ReportLink",
+				"pluginName": "InvokeMiddleClick"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Content moved after the pointer was positioned, so the click may hit a different element",
+						"Focus is on another window, so the click may not reach the intended page",
+						"No earlier pointer move happened, so the click lands at the default pointer position"
+					],
+					"expected_result": "A middle-click is performed at the current pointer position without locating any element.",
+					"notes": "Without onElement the middle button is pressed and released wherever the pointer already is. Place a pointer move step, such as MoveMouseCursor, before this step.",
+					"use_case": "middle_click_current_pointer_position",
+					"version": "4"
+				},
+				"labels": [
+					"MiddleClick",
+					"NoElement",
+					"PointerPosition",
+					"PositionalClick"
+				]
+			},
+			"description": [
+				"### Middle-click at the current pointer position",
+				"",
+				"Presses and releases the middle mouse button at the current pointer position without locating an element.",
+				"Use it after a step that already moved the pointer to the target."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeMiddleClick"
+			}
+		}
+	],
+	"key": "InvokeMiddleClick",
+	"namespace": "G4.Plugins.Ui",
+	"platforms": [
+		"Any"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Xpath",
+			"description": [
+				"Locator selects the strategy used to find the element named by OnElement.",
+				"Accepted values are Xpath, CssSelector, Id, LinkText, and PartialLinkText, and Xpath is used when it is absent.",
+				"Locator has an effect only when OnElement is also provided."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"OnElement holds the locator expression of the element to middle-click.",
+				"It is read with the strategy set by the Locator property.",
+				"When it is absent, the middle-click happens at the current pointer position instead."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Middle-clicks an element or the current pointer position by pressing and releasing the middle mouse button.",
+		"Brings the element into view and clicks its center, so links open in a new tab and wheel-button handlers fire.",
+		"Helps RPA flows open links in background tabs and helps tests verify middle-click behavior."
+	],
+	"version": "4"
+}
