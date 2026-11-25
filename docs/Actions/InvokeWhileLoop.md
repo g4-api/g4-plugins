@@ -76,7 +76,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnAttribute("class")
     .setOnElement("//ul[@id='Pagination1']/li/button[.='6']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("#NextBtn1");
@@ -174,7 +174,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnAttribute("class")
     .setOnElement("//ul[@id='Pagination1']/li/button[.='6']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement("//button[@id='NextBtn1']");
 ```
@@ -269,7 +269,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnAttribute("class")
     .setOnElement("#Pagination1 > li:nth-child(6) > button")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("#NextBtn1");
@@ -367,7 +367,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnAttribute("class")
     .setOnElement("#Pagination1 > li:nth-child(6) > button")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement("//button[@id='NextBtn1']");
 ```
@@ -486,22 +486,22 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnElement("//ul[@id='Pagination1']/li/button[.='3']")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("InvokeWhileLoop")
             .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:(?i)active}}")
             .setOnAttribute("class")
             .setOnElement("//ul[@id='Pagination2']/li/button[.='3']")
             .setActions()
-                new ActionRuleModel()                
+                new ActionRuleModel()
                     .setPluginName("Click")
                     .setLocator("CssSelector")
                     .setOnElement("#NextBtn2"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("#FirstBtn2"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("#NextBtn1");
@@ -654,7 +654,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setOnAttribute("class")
     .setOnElement("//ul[@id='Pagination1']/li/button[.='6']")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("#NextBtn1");
@@ -776,7 +776,7 @@ The assertion then runs on that element.
 
 | Attribute         | Value             |
 | ----------------- | ----------------- |
-| **Default Value** | Null              |
+| **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
@@ -855,7 +855,7 @@ No manual updates are needed to keep the list current.
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Controls how long the system waits for an assertion to be false before stopping the loop.
 Once time runs out, the system gracefully breaks the loop.

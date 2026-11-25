@@ -16,39 +16,39 @@
 				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeScroll.cs"
 			},
 			"rag": {
-				"description": "The InvokeScroll action scrolls a web page or a specific overflow element using JavaScript. When OnElement is provided and at least one offset is specified, the action calls element.scroll() on the located element; otherwise it calls window.scroll() to scroll the entire page. If neither Left nor Top is provided the action takes no effect.",
+				"description": "Scrolls a web page or an overflow element with JavaScript, either to fixed Left and Top offsets or by those offsets with the Relative switch. Behavior sets instant, auto, or smooth animation, and a guard skips the step when no offset is given, so long pages and lazy-loaded lists are reached reliably. It works on web pages only.",
 				"qa": [
 					{
 						"question": "What does the InvokeScroll action do?",
-						"answer": "InvokeScroll scrolls a web page or a specific overflow element to the given Left and Top pixel offsets using JavaScript. It targets the full page via window.scroll() when no element is specified, or a specific element via element.scroll() when OnElement is provided."
+						"answer": "InvokeScroll runs JavaScript to scroll a web page or an overflow element to the given Left and Top pixel offsets, or by those offsets when the Relative switch is set."
 					},
 					{
-						"question": "What determines whether the page or a specific element is scrolled?",
-						"answer": "When OnElement is provided and at least one of Left or Top is specified, InvokeScroll calls element.scroll() on the located element. When OnElement is absent (or when both Left and Top are omitted), it calls window.scroll() to scroll the whole page."
+						"question": "Which parameters does InvokeScroll support?",
+						"answer": "Left and Top set the horizontal and vertical offsets, Relative scrolls by them instead of to them, and Behavior selects auto, instant, or smooth animation."
 					},
 					{
-						"question": "What happens when neither Left nor Top is provided?",
-						"answer": "When both Left and Top are absent, the internal invalid flag is set to true and neither scroll method is called — the action takes no effect."
+						"question": "Where does InvokeScroll work and what does it scroll?",
+						"answer": "It works on web pages only, not native Android apps, because it runs JavaScript; it scrolls the element named by OnElement, or the whole page when OnElement is absent."
 					},
 					{
-						"question": "What are the valid values for the Behavior parameter?",
-						"answer": "The Behavior parameter accepts auto (default — determined by the CSS scroll-behavior property), instant (single-jump scroll), and smooth (animated scroll)."
+						"question": "How do I scroll step by step through a long page or feed with InvokeScroll?",
+						"answer": "Add the Relative switch, for example {{$ --Top:240 --Relative}}, so each run scrolls 240 pixels further down; negative values scroll up or left."
 					},
 					{
-						"question": "What is the default scrolling behavior when Behavior is omitted?",
-						"answer": "When Behavior is omitted it defaults to auto, which delegates the animation decision to the computed CSS scroll-behavior property of the target."
+						"question": "How is an InvokeScroll rule defined?",
+						"answer": "Use $type Action with pluginName InvokeScroll and pass the parameters in argument, such as {{$ --Top:500}}; add onElement and locator to scroll an overflow element."
 					},
 					{
-						"question": "Can InvokeScroll scroll horizontally only?",
-						"answer": "Yes. Providing only the Left parameter scrolls horizontally to the specified pixel offset without changing the vertical position."
+						"question": "What is the manifest version of InvokeScroll?",
+						"answer": "The manifest version is 5."
 					},
 					{
-						"question": "What JavaScript API does InvokeScroll use under the hood?",
-						"answer": "InvokeScroll executes window.scroll({behavior, top, left}) for page scrolling and arguments[0].scroll({behavior, top, left}) for element scrolling via the WebDriver ExecuteScript endpoint."
+						"question": "How do the InvokeScroll description and summary explain it?",
+						"answer": "They describe JavaScript scrolling of a page or an overflow element to or by pixel offsets, with selectable animation. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeScroll.md Source: https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeScroll.cs"
 					},
 					{
-						"question": "Where is the source code for InvokeScroll?",
-						"answer": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions/InvokeScroll.cs"
+						"question": "What happens when InvokeScroll gets no offset or a missing element?",
+						"answer": "Without Left and Top the step does nothing, and a missing or stale element fails the step before any script runs."
 					}
 				]
 			},
@@ -70,9 +70,10 @@
 	"description": [
 		"### Purpose",
 		"",
-		"Scrolls a web page or a specific overflow element to a given pixel position using JavaScript.",
-		"When an element is specified via OnElement, the action targets that element with `element.scroll()`; otherwise it scrolls the entire page via `window.scroll()`.",
-		"This makes it the primary way to programmatically position the viewport or scroll within overflow containers in automation workflows and test scripts.",
+		"Scrolls a web page or a specific overflow element to a given pixel position, or by a given distance, using JavaScript.",
+		"When an element is specified via OnElement, the action scrolls that element; otherwise it scrolls the entire page.",
+		"With the Relative switch, the offsets are added to the current scroll position through `scrollBy()`, so repeated steps keep scrolling further.",
+		"Because the action runs JavaScript, it works on web pages only and not on native Android apps.",
 		"",
 		"### Key Features and Functionality",
 		"",
@@ -81,17 +82,20 @@
 		"| Page Scroll       | Scrolls the entire page to the specified Left and Top pixel offsets using `window.scroll()`.                          |",
 		"| Element Scroll    | Scrolls within a specific overflow element using `element.scroll()`, targeting it via any supported locator strategy. |",
 		"| Behavior Control  | Accepts `auto`, `instant`, and `smooth` scroll behaviors to control animation.                                        |",
+		"| Relative Scroll   | With the Relative switch, scrolls by Left and Top from the current position using `scrollBy()`.                       |",
 		"| Axis Independence | Left and Top offsets are independently optional — supply one or both depending on the scroll direction required.      |",
 		"| No-Op Guard       | When neither Left nor Top is provided the action takes no effect, preventing unintended scroll resets.                |",
+		"| Web Pages Only    | Runs JavaScript in the page, so native Android apps and other non-web views are not supported.                        |",
 		"",
 		"### Usages in RPA",
 		"",
-		"| Use Case             | Description                                                                                                    |",
-		"|----------------------|----------------------------------------------------------------------------------------------------------------|",
-		"| Data Extraction      | Scroll through paginated tables or lazy-loaded lists to expose additional rows before data collection.         |",
-		"| Form Navigation      | Scroll to a specific section of a long form to bring off-screen fields into view before interaction.           |",
-		"| Overflow Navigation  | Scroll within a fixed-height panel, textarea, or scrollable container to reach content below the visible fold. |",
-		"| Multi-Step Workflows | Position the viewport as part of a broader workflow that chains scroll with click or extract actions.          |",
+		"| Use Case               | Description                                                                                                    |",
+		"|------------------------|----------------------------------------------------------------------------------------------------------------|",
+		"| Data Extraction        | Scroll through paginated tables or lazy-loaded lists to expose additional rows before data collection.         |",
+		"| Step-by-Step Scrolling | Scroll a feed or list one screen at a time with the Relative switch to load more content.                      |",
+		"| Form Navigation        | Scroll to a specific section of a long form to bring off-screen fields into view before interaction.           |",
+		"| Overflow Navigation    | Scroll within a fixed-height panel, textarea, or scrollable container to reach content below the visible fold. |",
+		"| Multi-Step Workflows   | Position the viewport as part of a broader workflow that chains scroll with click or extract actions.          |",
 		"",
 		"### Usages in Automation Testing",
 		"",
@@ -108,23 +112,20 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Top value exceeds document height — the browser clamps the scroll position to the maximum scrollable offset",
+						"Calling without Left causes only vertical scrolling; horizontal position is unchanged",
 						"Page has overflow:hidden on the body — window.scroll() may have no visible effect",
-						"Top is provided but the page has no vertical scroll space — scroll position stays at 0",
-						"Behavior:auto and CSS scroll-behavior:smooth are both set — the CSS property controls the animation",
-						"Calling without Left causes only vertical scrolling; horizontal position is unchanged"
+						"Top value exceeds document height — the browser clamps the scroll position to the maximum scrollable offset"
 					],
 					"expected_result": "The page scrolls vertically so that the top of the viewport is 500 pixels from the top of the document.",
-					"notes": "window.scroll() is called with {behavior: 'auto', top: 500}. Left is omitted from the script because isLeft is false. The horizontal scroll position is not affected.",
+					"notes": "window.scroll() is called with {behavior: 'auto', top: 500}. Left is not supplied, so the horizontal scroll position is not affected.",
 					"use_case": "page_scroll_vertical",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"PageScroll",
-					"VerticalScroll",
 					"TopOffset",
-					"WindowScroll",
-					"AutoBehavior"
+					"VerticalScroll",
+					"WindowScroll"
 				]
 			},
 			"description": [
@@ -143,24 +144,55 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
-						"Left or Top exceeds the scrollable document dimensions — browser silently clamps to the max scrollable offset",
+						"Negative Top scrolls up, and the browser stops at the top of the document",
+						"Page is already at the bottom, so the scroll position does not change",
+						"Repeated steps add up, so each run scrolls 240 pixels further down"
+					],
+					"expected_result": "The page scrolls down by 240 pixels from its current vertical position.",
+					"notes": "The Relative switch makes the action call window.scrollBy() with {behavior: 'auto', top: 240} instead of window.scroll(). Use it to page through long or lazy-loaded content without tracking the absolute position.",
+					"use_case": "page_scroll_relative_vertical",
+					"version": "4"
+				},
+				"labels": [
+					"PageScroll",
+					"RelativeScroll",
+					"TopOffset",
+					"VerticalScroll",
+					"WindowScrollBy"
+				]
+			},
+			"description": [
+				"### Scroll the page down by a relative distance",
+				"",
+				"Scrolls the entire page 240 pixels down from where it is now instead of to a fixed position.",
+				"The `{{$ --Top:240 --Relative}}` parameter binding sets the Top offset and the Relative switch."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Top:240 --Relative}}",
+				"pluginName": "InvokeScroll"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
 						"Browser or OS has smooth-scroll accessibility settings disabled — smooth behavior may be overridden",
-						"Page is not yet fully loaded — scroll may complete before dynamic content extends the document height",
-						"Calling on a single-screen page with no overflow — scroll call succeeds but position stays at 0,0"
+						"Calling on a single-screen page with no overflow — scroll call succeeds but position stays at 0,0",
+						"Left or Top exceeds the scrollable document dimensions — browser silently clamps to the max scrollable offset",
+						"Page is not yet fully loaded — scroll may complete before dynamic content extends the document height"
 					],
 					"expected_result": "The page scrolls smoothly both vertically (300 px) and horizontally (100 px) in a single animated motion.",
 					"notes": "window.scroll() is called with {behavior: 'smooth', top: 300, left: 100}. Smooth behavior triggers a CSS-driven animation rather than an instant jump.",
 					"use_case": "page_scroll_both_axes_smooth",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"BothAxes",
-					"HorizontalScroll",
 					"LeftOffset",
 					"PageScroll",
 					"SmoothBehavior",
 					"TopOffset",
-					"VerticalScroll",
 					"WindowScroll"
 				]
 			},
@@ -180,16 +212,15 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"CssSelector matches multiple elements — the action targets the first match",
 						"Element does not have overflow:auto or overflow:scroll — element.scroll() call succeeds but the visual position does not change",
-						"Element is not in the DOM at the time of the call — a StaleElementReferenceException may be thrown",
-						"Top offset exceeds the element's scrollable height — browser clamps scroll to the maximum offset",
 						"Element is inside an iframe — the driver must be switched to the correct frame before locating the element",
-						"CssSelector matches multiple elements — the action targets the first match"
+						"Element is not in the DOM at the time of the call — a StaleElementReferenceException may be thrown"
 					],
 					"expected_result": "The overflow container matched by #ScrollablePanel scrolls vertically so that its internal content is 150 pixels from the top of the container.",
 					"notes": "element.scroll() is called with {behavior: 'auto', top: 150}. The element must have a scrollable overflow axis for the call to produce a visible result.",
 					"use_case": "element_scroll_vertical",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"CssSelector",
@@ -217,27 +248,23 @@
 			"context": {
 				"annotations": {
 					"edge_cases": [
+						"CssSelector selects an element with nested scrollable children — only the matched element's own scroll position changes",
 						"Element lacks both vertical and horizontal overflow — neither axis scrolls despite valid arguments",
-						"Smooth scroll is interrupted by a page navigation before the animation completes — final position may be partial",
 						"Left offset exceeds the element's scrollable width — browser clamps to the maximum horizontal offset",
-						"Element becomes stale mid-animation — a StaleElementReferenceException is raised after the script is dispatched",
-						"CssSelector selects an element with nested scrollable children — only the matched element's own scroll position changes"
+						"Smooth scroll is interrupted by a page navigation before the animation completes — final position may be partial"
 					],
 					"expected_result": "The overflow container matched by #TextAreaEnabled scrolls 10 pixels from the top and 10 pixels from the left with a smooth animated transition.",
 					"notes": "element.scroll() is called with {behavior: 'smooth', top: 10, left: 10}. Both axes and the animation style are controlled explicitly. The element must support overflow on both axes for both offsets to take effect.",
 					"use_case": "element_scroll_both_axes_smooth",
-					"version": "1.0"
+					"version": "4"
 				},
 				"labels": [
 					"BothAxes",
 					"CssSelector",
 					"ElementScroll",
-					"HorizontalScroll",
 					"LeftOffset",
 					"OverflowContainer",
-					"SmoothBehavior",
-					"TopOffset",
-					"VerticalScroll"
+					"SmoothBehavior"
 				]
 			},
 			"description": [
@@ -291,6 +318,7 @@
 		{
 			"description": [
 				"Specifies the horizontal pixel offset from the left edge of the scroll container (the page or the target element) to scroll to.",
+				"With the Relative switch, the value is the distance to scroll from the current position, and negative values scroll left.",
 				"When absent the horizontal position is not changed."
 			],
 			"mandatory": false,
@@ -299,7 +327,18 @@
 		},
 		{
 			"description": [
+				"Scrolls by the Left and Top offsets from the current scroll position when present, using `scrollBy()`.",
+				"Use it to page through long or lazy-loaded content step by step without tracking the absolute position.",
+				"Without the switch, Left and Top are absolute positions and the action uses `scroll()`."
+			],
+			"mandatory": false,
+			"name": "Relative",
+			"type": "Switch"
+		},
+		{
+			"description": [
 				"Specifies the vertical pixel offset from the top of the scroll container (the page or the target element) to scroll to.",
+				"With the Relative switch, the value is the distance to scroll from the current position, and negative values scroll up.",
 				"When absent the vertical position is not changed."
 			],
 			"mandatory": false,
@@ -315,8 +354,8 @@
 	"properties": [
 		{
 			"description": [
-				"Argument passes the scroll parameters using the `{{$ --Name:Value}}` macro format.",
-				"It accepts the Behavior, Left, and Top parameters that control the scroll target and animation.",
+				"Argument passes the scroll parameters using the `{{$ --Name:Value}}` parameter format.",
+				"It accepts the Behavior, Left, Top, and Relative parameters that control the scroll target, direction, and animation.",
 				"When neither Left nor Top is supplied via Argument the action takes no effect."
 			],
 			"mandatory": false,
@@ -351,9 +390,10 @@
 		"w3c": "POST /session/{session id}/execute/sync"
 	},
 	"summary": [
-		"InvokeScroll scrolls a web page or a specific overflow element to given Left and Top pixel offsets using JavaScript, making it the primary way to programmatically control scroll position in an automation workflow.",
-		"When OnElement is provided the action calls `element.scroll()` on the located element; otherwise it calls `window.scroll()` to scroll the entire page. The Behavior parameter controls whether the scroll is instant, auto, or smooth.",
-		"In RPA it positions the viewport for data extraction, form navigation, and overflow panel traversal; in automation testing it drives infinite-scroll validation, responsive layout checks, and visual regression captures."
+		"Scrolls a web page or an overflow element to Left and Top pixel offsets, or by those offsets with the Relative switch.",
+		"Scrolls the located element when OnElement is set, otherwise the whole page, with instant, auto, or smooth animation.",
+		"Runs JavaScript, so it works on web pages only and not on native Android apps.",
+		"Helps RPA flows load more content and reach off-screen fields, and helps tests check infinite scroll and layout."
 	],
-	"version": "4"
+	"version": "5"
 }
