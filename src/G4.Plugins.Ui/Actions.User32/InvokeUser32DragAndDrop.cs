@@ -9,6 +9,7 @@ using G4.WebDriver.Remote.Uia;
 
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -116,13 +117,19 @@ namespace G4.Plugins.Ui.Actions.User32
             // Refuse any driver other than the UIA driver, because only it moves the Windows cursor to an element.
             AssertDriver(driver: WebDriver);
 
-            // Read where the drag ends: a target element found by its locator, or an offset from the source.
+            // Read where the drag starts: the element the rule names, or a screen point.
+            var isSourceElement = !string.IsNullOrEmpty(pluginData.Rule.OnElement);
+            var isStartPoint = TestPoint(pluginData, xName: "X", yName: "Y");
+
+            // Read where the drag ends: a target element, a screen point, or an offset from the start.
             var target = pluginData.Parameters.Get(key: "Target", defaultValue: string.Empty);
             var isTarget = !string.IsNullOrEmpty(target);
-            var isOffset = TestOffset(pluginData);
+            var isEndPoint = TestPoint(pluginData, xName: "TargetX", yName: "TargetY");
+            var isOffset = TestPoint(pluginData, xName: "DeltaX", yName: "DeltaY");
 
-            // Reject a rule that names both ends or neither, before any element is searched.
-            AssertEnd(isTarget, isOffset);
+            // Reject a rule that names no start or no end, or one end twice, before any element is searched.
+            AssertStart(isSourceElement, isStartPoint);
+            AssertEnd(isTarget, isEndPoint, isOffset);
 
             // Read the movement settings and both positions, so a bad value fails before the cursor moves.
             var steps = GetSteps(pluginData);
@@ -131,24 +138,38 @@ namespace G4.Plugins.Ui.Actions.User32
             var sourcePosition = NewPosition(pluginData, alignmentName: "Alignment", prefix: string.Empty);
             var targetPosition = NewPosition(pluginData, alignmentName: "TargetAlignment", prefix: "Target");
 
-            // Find the element to drag; a missing element throws the driver exception and fails the rule.
-            var source = GetSource(plugin: this, pluginData);
+            // Read every coordinate pair now, so a value that is not a whole number fails before the cursor moves;
+            // a pair the rule does not set reads as zero and is not used.
+            var startPoint = GetPoint(pluginData, xName: "X", yName: "Y");
+            var endPoint = GetPoint(pluginData, xName: "TargetX", yName: "TargetY");
+            var offset = GetPoint(pluginData, xName: "DeltaX", yName: "DeltaY");
+
+            // Find the element to drag when the rule names one; a missing element throws the driver exception and
+            // fails the rule. A drag from a screen point needs no element.
+            var source = isSourceElement
+                ? GetSource(plugin: this, pluginData)
+                : null;
 
             // Ask the driver for the end point first. The call moves the cursor, which is harmless while no button
-            // is down; a drag by offset needs no call.
+            // is down; a drag to a screen point or by offset needs no call.
             var end = isTarget
                 ? GetTargetPoint(plugin: this, target, position: targetPosition)
                 : default;
 
             // Ask the driver for the grab point last, which leaves the cursor on the source, where the drag starts.
-            var start = MoveToElement(driver: WebDriver, elementId: source.Id, position: sourcePosition);
+            // A drag from a screen point starts there as written.
+            var start = source != null
+                ? MoveToElement(driver: WebDriver, elementId: source.Id, position: sourcePosition)
+                : startPoint;
 
-            // Place the end of a drag by offset relative to the grab point, in screen pixels.
-            if (!isTarget)
+            // Place an end that is not an element: a screen point as written, or an offset from the grab point.
+            if (isEndPoint)
             {
-                var endX = start.X + GetInteger(pluginData, name: "DeltaX");
-                var endY = start.Y + GetInteger(pluginData, name: "DeltaY");
-                end = (endX, endY);
+                end = endPoint;
+            }
+            else if (isOffset)
+            {
+                end = (start.X + offset.X, start.Y + offset.Y);
             }
 
             // Build the whole drag as one sequence of screen points and send it in one request.
@@ -216,21 +237,43 @@ namespace G4.Plugins.Ui.Actions.User32
             throw new InvalidOperationException(message);
         }
 
-        // Asserts that the rule names exactly one end for the drag: a target element or an offset.
-        private static void AssertEnd(bool isTarget, bool isOffset)
+        // Asserts that the rule names exactly one end for the drag: a target element, a screen point, or an offset.
+        private static void AssertEnd(bool isTarget, bool isEndPoint, bool isOffset)
         {
-            // A rule with both ends is ambiguous, so neither is guessed.
-            if (isTarget && isOffset)
+            // Count the ways the rule names the end; more than one is ambiguous, so none is guessed.
+            var endCount = new[] { isTarget, isEndPoint, isOffset }.Count(isSet => isSet);
+
+            if (endCount > 1)
             {
-                var message = "Set either 'Target' or 'DeltaX' and 'DeltaY', not both.";
+                var message = "Set only one end for the drag: 'Target', 'TargetX' and 'TargetY', " +
+                    "or 'DeltaX' and 'DeltaY'.";
                 throw new InvalidOperationException(message);
             }
 
             // A rule with no end has nowhere to drop the element.
-            if (!isTarget && !isOffset)
+            if (endCount == 0)
             {
-                var message = "Set where the drag ends: 'Target' for an element, " +
-                    "or 'DeltaX' and 'DeltaY' for an offset.";
+                var message = "Set where the drag ends: 'Target' for an element, 'TargetX' and 'TargetY' for a " +
+                    "screen point, or 'DeltaX' and 'DeltaY' for an offset.";
+                throw new InvalidOperationException(message);
+            }
+        }
+
+        // Asserts that the rule names exactly one start for the drag: the element in OnElement or a screen point.
+        private static void AssertStart(bool isSourceElement, bool isStartPoint)
+        {
+            // A rule with both starts is ambiguous, so neither is guessed.
+            if (isSourceElement && isStartPoint)
+            {
+                var message = "Set either 'OnElement' or 'X' and 'Y' for the start of the drag, not both.";
+                throw new InvalidOperationException(message);
+            }
+
+            // A rule with no start has nothing to press on.
+            if (!isSourceElement && !isStartPoint)
+            {
+                var message = "Set where the drag starts: 'OnElement' for an element, " +
+                    "or 'X' and 'Y' for a screen point.";
                 throw new InvalidOperationException(message);
             }
         }
@@ -324,6 +367,13 @@ namespace G4.Plugins.Ui.Actions.User32
             throw new InvalidOperationException(message);
         }
 
+        // Gets a pair of whole-number parameters, such as X and Y, as one point; a parameter the rule does not set
+        // reads as zero, and text that is not a whole number fails the rule with the parameter's name.
+        private static (int X, int Y) GetPoint(PluginDataModel pluginData, string xName, string yName)
+        {
+            return (GetInteger(pluginData, name: xName), GetInteger(pluginData, name: yName));
+        }
+
         // Gets the rounded part of a total that falls on the steps up to the given one. The part of the last step is
         // the total itself, so the path ends exactly on the end point. The product is computed in double precision,
         // because a long duration times the step count can exceed an int.
@@ -334,7 +384,8 @@ namespace G4.Plugins.Ui.Actions.User32
             return (int)Math.Round(part, MidpointRounding.AwayFromZero);
         }
 
-        // Gets the element to drag, which the rule names through OnElement and its locator.
+        // Gets the element to drag, which the rule names through OnElement and its locator. Called only when the rule
+        // names one; a drag from a screen point has no element.
         private static IWebElement GetSource(PluginBase plugin, PluginDataModel pluginData)
         {
             // Find the element through the UIA driver; a named element that is missing throws here.
@@ -480,14 +531,15 @@ namespace G4.Plugins.Ui.Actions.User32
             }
         }
 
-        // Tests whether the rule drags by an offset, which it does when it sets DeltaX, DeltaY, or both.
-        private static bool TestOffset(PluginDataModel pluginData)
+        // Tests whether the rule sets a pair of coordinates, such as X and Y or DeltaX and DeltaY. Either value
+        // alone marks the pair as set; the missing one counts as zero.
+        private static bool TestPoint(PluginDataModel pluginData, string xName, string yName)
         {
-            // Read both offset parameters; either one alone marks a drag by offset.
-            var deltaX = pluginData.Parameters.Get(key: "DeltaX", defaultValue: string.Empty);
-            var deltaY = pluginData.Parameters.Get(key: "DeltaY", defaultValue: string.Empty);
+            // Read both parameters of the pair as text, so a value of zero still counts as set.
+            var x = pluginData.Parameters.Get(key: xName, defaultValue: string.Empty);
+            var y = pluginData.Parameters.Get(key: yName, defaultValue: string.Empty);
 
-            return !string.IsNullOrEmpty(deltaX) || !string.IsNullOrEmpty(deltaY);
+            return !string.IsNullOrEmpty(x) || !string.IsNullOrEmpty(y);
         }
 
         /// <summary>

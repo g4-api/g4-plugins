@@ -65,11 +65,15 @@ namespace G4.UnitTests.Plugins.Ui
             Assert.Contains("InvokeDragAndDrop", exception.Message);
         }
 
-        [TestMethod(DisplayName = "Verify that InvokeUser32DragAndDrop rejects a rule with both ends or no end, a " +
+        [TestMethod(DisplayName = "Verify that InvokeUser32DragAndDrop rejects a rule with two ends or no end, a " +
             "bad step count, a bad duration, or an offset that is not a whole number, before the cursor moves.")]
         #region *** Data Set ***
-        [DataRow("{{$ --Target://positive --DeltaX:10}}", "not both")]
+        [DataRow("{{$ --Target://positive --DeltaX:10}}", "Set only one end")]
+        [DataRow("{{$ --Target://positive --TargetX:10}}", "Set only one end")]
+        [DataRow("{{$ --TargetX:10 --TargetY:20 --DeltaY:5}}", "Set only one end")]
         [DataRow("{{$ --Steps:5}}", "Set where the drag ends")]
+        [DataRow("{{$ --X:10 --Y:20 --DeltaX:10}}", "not both")]
+        [DataRow("{{$ --TargetX:left}}", "is not a whole number")]
         [DataRow("{{$ --DeltaX:10 --Steps:0}}", "from 1 to 100")]
         [DataRow("{{$ --DeltaX:10 --Steps:101}}", "from 1 to 100")]
         [DataRow("{{$ --DeltaX:10 --Duration:-1}}", "is not valid")]
@@ -91,17 +95,38 @@ namespace G4.UnitTests.Plugins.Ui
         }
 
         [TestMethod(DisplayName = "Verify that InvokeUser32DragAndDrop fails with a clear message when the rule " +
-            "names no element to drag.")]
+            "names neither an element nor a screen point to start from.")]
         public void InvokeUser32DragAndDropMissingSourceTest()
         {
-            // Arrange: a rule with an offset but without OnElement.
+            // Arrange: a rule with an offset but without OnElement and without X and Y.
             var ruleJson = JsonSerializer.Serialize(new { argument = "{{$ --DeltaX:10 --DeltaY:0}}" });
 
             // Act: run the plugin and capture the failure.
             var exception = Assert.Throws<InvalidOperationException>(() => Invoke<InvokeUser32DragAndDrop>(ruleJson));
 
-            // Assert: the message tells the flow author which property is missing.
+            // Assert: the message names both ways to set the start.
+            Assert.Contains("Set where the drag starts", exception.Message);
             Assert.Contains("OnElement", exception.Message);
+            Assert.Contains("'X' and 'Y'", exception.Message);
+        }
+
+        [TestMethod(DisplayName = "Verify that InvokeUser32DragAndDrop drags from a screen point without an element, " +
+            "to a screen point or by an offset.")]
+        #region *** Data Set ***
+        [DataRow("{{$ --X:300 --Y:200 --TargetX:640 --TargetY:420}}")]
+        [DataRow("{{$ --X:300 --Y:200 --DeltaX:150 --DeltaY:-20}}")]
+        [DataRow("{{$ --X:0 --TargetX:40}}")]
+        #endregion
+        public void InvokeUser32DragAndDropScreenPointTest(string argument)
+        {
+            // Arrange: a rule without OnElement, so no element is searched and no driver point is requested.
+            var ruleJson = JsonSerializer.Serialize(new { argument });
+
+            // Act: run the plugin on the simulator, which accepts the pointer sequence without acting on it.
+            var response = Invoke<InvokeUser32DragAndDrop>(ruleJson).Response;
+
+            // Assert: a drag between screen points completes without plugin or driver exceptions.
+            Assert.IsEmpty(response.Exceptions);
         }
 
         [TestMethod(DisplayName = "Verify that the UIA drag sequence moves through absolute screen points from the " +
