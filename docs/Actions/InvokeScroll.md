@@ -2,15 +2,16 @@
 
 [Table of Content](../Home.md)
 
-~19 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+~23 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
 
 ## Description
 
 ### Purpose
 
-Scrolls a web page or a specific overflow element to a given pixel position using JavaScript.
-When an element is specified via OnElement, the action targets that element with `element.scroll()`; otherwise it scrolls the entire page via `window.scroll()`.
-This makes it the primary way to programmatically position the viewport or scroll within overflow containers in automation workflows and test scripts.
+Scrolls a web page or a specific overflow element to a given pixel position, or by a given distance, using JavaScript.
+When an element is specified via OnElement, the action scrolls that element; otherwise it scrolls the entire page.
+With the Relative switch, the offsets are added to the current scroll position through `scrollBy()`, so repeated steps keep scrolling further.
+Because the action runs JavaScript, it works on web pages only and not on native Android apps.
 
 ### Key Features and Functionality
 
@@ -19,17 +20,20 @@ This makes it the primary way to programmatically position the viewport or scrol
 | Page Scroll       | Scrolls the entire page to the specified Left and Top pixel offsets using `window.scroll()`.                          |
 | Element Scroll    | Scrolls within a specific overflow element using `element.scroll()`, targeting it via any supported locator strategy. |
 | Behavior Control  | Accepts `auto`, `instant`, and `smooth` scroll behaviors to control animation.                                        |
+| Relative Scroll   | With the Relative switch, scrolls by Left and Top from the current position using `scrollBy()`.                       |
 | Axis Independence | Left and Top offsets are independently optional — supply one or both depending on the scroll direction required.      |
 | No-Op Guard       | When neither Left nor Top is provided the action takes no effect, preventing unintended scroll resets.                |
+| Web Pages Only    | Runs JavaScript in the page, so native Android apps and other non-web views are not supported.                        |
 
 ### Usages in RPA
 
-| Use Case             | Description                                                                                                    |
+| Use Case               | Description                                                                                                    |
 | --- | --- |
-| Data Extraction      | Scroll through paginated tables or lazy-loaded lists to expose additional rows before data collection.         |
-| Form Navigation      | Scroll to a specific section of a long form to bring off-screen fields into view before interaction.           |
-| Overflow Navigation  | Scroll within a fixed-height panel, textarea, or scrollable container to reach content below the visible fold. |
-| Multi-Step Workflows | Position the viewport as part of a broader workflow that chains scroll with click or extract actions.          |
+| Data Extraction        | Scroll through paginated tables or lazy-loaded lists to expose additional rows before data collection.         |
+| Step-by-Step Scrolling | Scroll a feed or list one screen at a time with the Relative switch to load more content.                      |
+| Form Navigation        | Scroll to a specific section of a long form to bring off-screen fields into view before interaction.           |
+| Overflow Navigation    | Scroll within a fixed-height panel, textarea, or scrollable container to reach content below the visible fold. |
+| Multi-Step Workflows   | Position the viewport as part of a broader workflow that chains scroll with click or extract actions.          |
 
 ### Usages in Automation Testing
 
@@ -97,6 +101,58 @@ action_rule = {
 
 ### Example No.2
 
+### Scroll the page down by a relative distance
+
+Scrolls the entire page 240 pixels down from where it is now instead of to a fixed position.
+The `{{$ --Top:240 --Relative}}` parameter binding sets the Top offset and the Relative switch.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeScroll",
+    Argument = "{{$ --Top:240 --Relative}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeScroll")
+    .setArgument("{{$ --Top:240 --Relative}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeScroll",
+    argument: "{{$ --Top:240 --Relative}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeScroll",
+    "argument": "{{$ --Top:240 --Relative}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeScroll",
+    "argument": "{{$ --Top:240 --Relative}}"
+}
+```
+
+### Example No.3
+
 ### Scroll the page on both axes with smooth animation
 
 Scrolls the entire page to 300 pixels from the top and 100 pixels from the left using a smooth animated transition.
@@ -147,7 +203,7 @@ action_rule = {
 }
 ```
 
-### Example No.3
+### Example No.4
 
 ### Scroll within a specific overflow element vertically
 
@@ -209,7 +265,7 @@ action_rule = {
 }
 ```
 
-### Example No.4
+### Example No.5
 
 ### Scroll within a specific overflow element on both axes with smooth animation
 
@@ -275,16 +331,16 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
-Argument passes the scroll parameters using the `{{$ --Name:Value}}` macro format.
-It accepts the Behavior, Left, and Top parameters that control the scroll target and animation.
+Argument passes the scroll parameters using the `{{$ --Name:Value}}` parameter format.
+It accepts the Behavior, Left, Top, and Relative parameters that control the scroll target, direction, and animation.
 When neither Left nor Top is supplied via Argument the action takes no effect.
 
 ### Locator (Locator)
@@ -357,7 +413,22 @@ Scrolling animates smoothly to the target offset.
 | **Value Type**    | Number            |
 
 Specifies the horizontal pixel offset from the left edge of the scroll container (the page or the target element) to scroll to.
+With the Relative switch, the value is the distance to scroll from the current position, and negative values scroll left.
 When absent the horizontal position is not changed.
+
+### Relative (Relative)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Switch            |
+
+Scrolls by the Left and Top offsets from the current scroll position when present, using `scrollBy()`.
+Use it to page through long or lazy-loaded content step by step without tracking the absolute position.
+Without the switch, Left and Top are absolute positions and the action uses `scroll()`.
 
 ### Top (Top)
 
@@ -370,6 +441,7 @@ When absent the horizontal position is not changed.
 | **Value Type**    | Number            |
 
 Specifies the vertical pixel offset from the top of the scroll container (the page or the target element) to scroll to.
+With the Relative switch, the value is the distance to scroll from the current position, and negative values scroll up.
 When absent the vertical position is not changed.
 
 ## Scope

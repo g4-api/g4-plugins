@@ -125,6 +125,7 @@
 				"The key name is passed directly as the Argument value without any parameter expression, making this the simplest form of the plugin."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "F5",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -158,6 +159,7 @@
 				"The `--Sticky` switch holds both keys down and then releases them in reverse order, which modifier-key combinations require."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Key:Ctrl --Key:C --Sticky}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -191,6 +193,7 @@
 				"In non-sticky mode each key is pressed and released individually in the order specified."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Key:Tab --Key:Tab --Key:Tab --Delay:300}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -223,6 +226,7 @@
 				"The driver switches to the Hebrew layout first, and Alt+Shift then toggles to the next installed input language."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Key:Alt --Key:Shift --Sticky --KeyboardLayout:he-IL}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -255,6 +259,7 @@
 				"All three keys are held down and then released in reverse order, which this system-level keyboard shortcut requires."
 			],
 			"rule": {
+				"$type": "Action",
 				"argument": "{{$ --Key:Ctrl --Key:Shift --Key:Esc --Sticky}}",
 				"pluginName": "SendUser32KeyboardKey"
 			}
@@ -791,6 +796,13 @@
 				},
 				{
 					"description": [
+						"Represents the left Windows key.",
+						"Hold it with `Sticky` for shortcuts such as `LWin+E` or `LWin+R`."
+					],
+					"name": "LWin"
+				},
+				{
+					"description": [
 						"Represents the Num Lock key.",
 						"Also accepted as `NumLock` or `Num Lock`."
 					],
@@ -833,6 +845,13 @@
 				},
 				{
 					"description": [
+						"Represents the right Windows key.",
+						"Hold it with `Sticky` to combine it with another key."
+					],
+					"name": "RWin"
+				},
+				{
+					"description": [
 						"Represents the Scroll Lock key.",
 						"Also accepted as `ScrollLock` or `Scroll Lock`."
 					],
@@ -858,6 +877,13 @@
 						"Use it to move the cursor or selection up."
 					],
 					"name": "Up"
+				},
+				{
+					"description": [
+						"Represents the Windows key and is sent as the left Windows key (`LWin`).",
+						"Hold it with `Sticky` for shortcuts such as `Win+D` or `Win+E`."
+					],
+					"name": "Win"
 				}
 			]
 		},

@@ -236,7 +236,7 @@ action_rule = {
 
 ## Output Parameter
 
-### Read Json Read Json Result (ReadJson:Result)
+### Read Json Result (ReadJson:Result)
 
 | Attribute         | Value             |
 | ----------------- | ----------------- |
@@ -254,13 +254,13 @@ Its value can be referenced by other parameters or expressions in the workflow.
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the JSON input to be read and processed by the plugin.
 The value can be either a file path pointing to a JSON file or raw JSON content provided inline.
@@ -284,7 +284,7 @@ Using a precise path ensures only the relevant data is read and passed to later 
 
 | Attribute         | Value             |
 | ----------------- | ----------------- |
-| **Default Value** | Null              |
+| **Default Value** | (?s).*            |
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |

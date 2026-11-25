@@ -1,0 +1,317 @@
+# Invoke User32 Middle Click (InvokeUser32MiddleClick)
+
+[Table of Content](../Home.md)
+
+~13 min · Action Plugin · [Roei Sabag](https://www.linkedin.com/in/roei-sabag-247aa18/)
+
+## Description
+
+### Purpose
+
+Performs a native Windows middle click at viewport coordinates or on a UI Automation element.
+It presses and releases the middle mouse button, the wheel button, for actions such as opening links in new tabs or closing tabs in desktop applications.
+Element alignment and pixel offsets provide precise control over the click location.
+
+### Key Features and Functionality
+
+| Feature              | Description                                                                                |
+| --- | --- |
+| Native Middle Click  | Sends a Windows middle-button press and release through the User32-compatible driver.      |
+| Coordinate Targeting | Moves the pointer to absolute viewport coordinates before performing the middle click.     |
+| Element Targeting    | Locates a UI Automation element and moves to its selected alignment point before clicking. |
+| Position Adjustment  | Applies horizontal and vertical pixel offsets to an element alignment point.               |
+
+### Usages in RPA
+
+| Use Case                   | Description                                                                        |
+| --- | --- |
+| Open Links in New Tabs     | Opens links in new tabs of native or embedded browser windows with a middle click. |
+| Close Application Tabs     | Closes a tab in a desktop application by middle-clicking its tab header.           |
+| Coordinate-Only Interfaces | Middle-clicks a known screen location when no stable element locator is available. |
+
+### Usages in Automation Testing
+
+| Use Case                   | Description                                                                             |
+| --- | --- |
+| Middle Button Testing      | Verifies that a native element reacts correctly to a middle-button click.               |
+| Alignment Testing          | Confirms that different element alignment points trigger the intended interaction area. |
+| Desktop Regression Testing | Repeats native middle-click behavior after application changes.                         |
+
+## Examples
+
+### Example No.1
+
+### Middle-click at viewport coordinates
+
+Moves the system pointer to coordinates (120, 240) measured from the viewport origin and performs a native middle click.
+The `{{$ --X:120 --Y:240}}` expression binds the coordinate parameters before execution.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeUser32MiddleClick",
+    Argument = "{{$ --X:120 --Y:240}}"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeUser32MiddleClick")
+    .setArgument("{{$ --X:120 --Y:240}}");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeUser32MiddleClick",
+    argument: "{{$ --X:120 --Y:240}}"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeUser32MiddleClick",
+    "argument": "{{$ --X:120 --Y:240}}"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeUser32MiddleClick",
+    "argument": "{{$ --X:120 --Y:240}}"
+}
+```
+
+### Example No.2
+
+### Middle-click an aligned element position
+
+Locates the target tab item and moves the pointer to its top-left alignment point with horizontal and vertical offsets.
+The native middle click then lands at the adjusted element position, for example to close the tab.
+
+**CSharp:**
+
+```csharp
+var actionRule = new ActionRuleModel
+{
+    PluginName = "InvokeUser32MiddleClick",
+    Argument = "{{$ --Alignment:TopLeft --OffsetX:10 --OffsetY:20}}",
+    OnElement = "//TabItem[@Name='Report']"
+};
+```
+
+**Java:**
+
+```java
+ActionRuleModel actionRule = new ActionRuleModel()
+    .setPluginName("InvokeUser32MiddleClick")
+    .setArgument("{{$ --Alignment:TopLeft --OffsetX:10 --OffsetY:20}}")
+    .setOnElement("//TabItem[@Name='Report']");
+```
+
+**Javascript:**
+
+```js
+var actionRule = {
+    pluginName: "InvokeUser32MiddleClick",
+    argument: "{{$ --Alignment:TopLeft --OffsetX:10 --OffsetY:20}}",
+    onElement: "//TabItem[@Name='Report']"
+};
+```
+
+**JSON:**
+
+```js
+{
+    "pluginName": "InvokeUser32MiddleClick",
+    "argument": "{{$ --Alignment:TopLeft --OffsetX:10 --OffsetY:20}}",
+    "onElement": "//TabItem[@Name='Report']"
+}
+```
+
+**Python:**
+
+```python
+action_rule = {
+    "pluginName": "InvokeUser32MiddleClick",
+    "argument": "{{$ --Alignment:TopLeft --OffsetX:10 --OffsetY:20}}",
+    "onElement": "//TabItem[@Name='Report']"
+}
+```
+
+## Properties
+
+### Argument (Argument)
+
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
+
+Argument binds Alignment, OffsetX, OffsetY, X, and Y values into the runtime parameter dictionary.
+It matters because the action reads positioning values from that dictionary before selecting its target mode.
+
+### Locator (Locator)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Xpath             |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Locator selects the strategy used to resolve the native element named by OnElement.
+Xpath is the supported default for UI Automation element targeting.
+
+### On Element (OnElement)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | Null              |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+OnElement identifies the UI Automation element that receives the middle click.
+It matters because element mode applies alignment and offsets before sending the middle-button sequence.
+
+## Parameters
+
+### Alignment (Alignment)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | MiddleCenter      |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | String            |
+
+Alignment selects the reference point inside the target element before the middle click.
+It matters when the interaction must occur near a specific edge, corner, or center position.
+OffsetX and OffsetY adjust the final pointer location after alignment is applied.
+
+#### Values
+
+##### Bottom Center
+
+BottomCenter positions the pointer at the bottom edge and horizontal center of the element.
+It helps target controls located along the lower middle boundary.
+
+##### Bottom Left
+
+BottomLeft positions the pointer at the lower-left corner of the element.
+It helps target controls located near the lower-left boundary.
+
+##### Bottom Right
+
+BottomRight positions the pointer at the lower-right corner of the element.
+It helps target controls located near the lower-right boundary.
+
+##### Middle Center
+
+MiddleCenter positions the pointer at the horizontal and vertical center of the element.
+It provides the default location for standard middle-click interactions.
+
+##### Middle Left
+
+MiddleLeft positions the pointer at the left edge and vertical center of the element.
+It helps target controls located along the middle-left boundary.
+
+##### Middle Right
+
+MiddleRight positions the pointer at the right edge and vertical center of the element.
+It helps target controls located along the middle-right boundary.
+
+##### Top Center
+
+TopCenter positions the pointer at the top edge and horizontal center of the element.
+It helps target controls located along the upper middle boundary.
+
+##### Top Left
+
+TopLeft positions the pointer at the upper-left corner of the element.
+It helps target controls located near the upper-left boundary.
+
+##### Top Right
+
+TopRight positions the pointer at the upper-right corner of the element.
+It helps target controls located near the upper-right boundary.
+
+### Offset X (OffsetX)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | 0                 |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+OffsetX shifts the middle-click position horizontally from the selected alignment point.
+Positive values move right and negative values move left.
+It matters when the active area is not centered on the alignment point.
+
+### Offset Y (OffsetY)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | 0                 |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+OffsetY shifts the middle-click position vertically from the selected alignment point.
+Positive values move down and negative values move up.
+It matters when the active area is above or below the alignment point.
+
+### X (X)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | 0                 |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+X sets the horizontal viewport coordinate used when no element is targeted.
+It is measured in pixels from the left edge of the viewport.
+A non-zero X value activates coordinate mode when OnElement is absent.
+
+### Y (Y)
+
+| Attribute         | Value             |
+| ----------------- | ----------------- |
+| **Default Value** | 0                 |
+| **Depends On**    | None              |
+| **Mandatory**     | No                |
+| **Multiple**      | No                |
+| **Value Type**    | Number            |
+
+Y sets the vertical viewport coordinate used when no element is targeted.
+It is measured in pixels from the top edge of the viewport.
+A non-zero Y value activates coordinate mode when OnElement is absent.
+
+## Scope
+
+* Windows Native
+
+## See Also
+
+apiDocumentation: [https://www.w3.org/TR/webdriver/#actions](https://www.w3.org/TR/webdriver/#actions)

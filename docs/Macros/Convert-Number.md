@@ -27,7 +27,7 @@ The source base is detected from the number prefix or named explicitly, and the 
 | Use Case            | Description                                                                 |
 | --- | --- |
 | Data Transformation | Converts hexadecimal codes, color values, or bit masks between systems.     |
-| Device Integration  | Prepares register and address values for devices that expect another base. |
+| Device Integration  | Prepares register and address values for devices that expect another base.  |
 
 ### Usages in Automation Testing
 

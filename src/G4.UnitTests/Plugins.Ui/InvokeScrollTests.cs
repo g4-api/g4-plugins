@@ -6,8 +6,6 @@ using G4.WebDriver.Models;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using System.Linq;
-
 namespace G4.UnitTests.Plugins.Ui
 {
     [TestClass]
@@ -19,7 +17,7 @@ namespace G4.UnitTests.Plugins.Ui
             "with the expected structure and content.")]
         public override void ManifestComplianceTest()
         {
-            // Assert that the manifest documentation of the InvokeScroll plugin is correct
+            // Assert: the embedded manifest resolves through the Actions resource namespace and satisfies G4 validation.
             AssertManifest<InvokeScroll>();
         }
 
@@ -27,7 +25,7 @@ namespace G4.UnitTests.Plugins.Ui
             "successfully created.")]
         public override void NewPluginTest()
         {
-            // Assert that the InvokeScroll plugin can be created successfully
+            // Assert: plugin discovery can instantiate the action from its setup-model constructor.
             AssertPlugin<InvokeScroll>();
         }
 
@@ -37,9 +35,9 @@ namespace G4.UnitTests.Plugins.Ui
         #endregion
         public void ScrollWithExceptionElementTest(string ruleJson)
         {
-            // Invoke the scroll test with the specified rule JSON
+            // Act and Assert: a parent element that fails in the driver surfaces the WebDriver failure before any script runs.
             Assert.Throws<WebDriverException>(()
-                => InvokeScrollTest(this, ruleJson, onElement: true));
+                => InvokeScrollTest(testBase: this, ruleJson, onElement: true));
         }
 
         [TestMethod(DisplayName = "Verify that the InvokeScroll method with invalid elements throws a WebDriverTimeoutException.")]
@@ -51,9 +49,9 @@ namespace G4.UnitTests.Plugins.Ui
         #endregion
         public void ScrollWithInvalidElementTest(string ruleJson)
         {
-            // Invoke the scroll test with the specified rule JSON
+            // Act and Assert: a page-level element that never becomes available ends the element wait with a timeout.
             Assert.Throws<WebDriverTimeoutException>(()
-                => InvokeScrollTest(this, ruleJson, onElement: false));
+                => InvokeScrollTest(testBase: this, ruleJson, onElement: false));
         }
 
         [TestMethod(DisplayName = "Verify that the InvokeScroll method with nested valid elements works as expected.")]
@@ -73,8 +71,8 @@ namespace G4.UnitTests.Plugins.Ui
         #endregion
         public void ScrollNestedPositiveTest(string ruleJson)
         {
-            // Invoke the scroll test with the specified rule JSON
-            InvokeScrollTest(this, ruleJson, onElement: true);
+            // Act and Assert: absolute element scrolling inside a resolved parent completes without exceptions.
+            InvokeScrollTest(testBase: this, ruleJson, onElement: true);
         }
 
         [TestMethod(DisplayName = "Verify that the InvokeScroll method with no elements throws a NoSuchElementException.")]
@@ -83,9 +81,9 @@ namespace G4.UnitTests.Plugins.Ui
         #endregion
         public void ScrollWithNoElementTest(string ruleJson)
         {
-            // Invoke the scroll test with the specified rule JSON
+            // Act and Assert: a missing child element surfaces the driver lookup failure before any script runs.
             Assert.Throws<NoSuchElementException>(()
-                => InvokeScrollTest(this, ruleJson, onElement: true));
+                => InvokeScrollTest(testBase: this, ruleJson, onElement: true));
         }
 
         [TestMethod(DisplayName = "Verify that the InvokeScroll method with null elements throws a WebDriverException.")]
@@ -94,9 +92,9 @@ namespace G4.UnitTests.Plugins.Ui
         #endregion
         public void ScrollWithNullElementTest(string ruleJson)
         {
-            // Invoke the scroll test with the specified rule JSON
+            // Act and Assert: a null child element surfaces the WebDriver failure before any script runs.
             Assert.Throws<WebDriverException>(()
-                => InvokeScrollTest(this, ruleJson, onElement: true));
+                => InvokeScrollTest(testBase: this, ruleJson, onElement: true));
         }
 
         [TestMethod(DisplayName = "Verify that the InvokeScroll method with stale elements throws a StaleElementReferenceException.")]
@@ -105,9 +103,9 @@ namespace G4.UnitTests.Plugins.Ui
         #endregion
         public void ScrollWithStaleElementTest(string ruleJson)
         {
-            // Invoke the scroll test with the specified rule JSON
+            // Act and Assert: a stale child element surfaces the stale-reference failure before any script runs.
             Assert.Throws<StaleElementReferenceException>(()
-                => InvokeScrollTest(this, ruleJson, onElement: true));
+                => InvokeScrollTest(testBase: this, ruleJson, onElement: true));
         }
 
         [TestMethod(DisplayName = "Verify that the InvokeScroll method works with valid arguments.")]
@@ -127,20 +125,58 @@ namespace G4.UnitTests.Plugins.Ui
         #endregion
         public void ScrollPositiveTest(string ruleJson)
         {
-            // Invoke the scroll test with the specified rule JSON
-            InvokeScrollTest(this, ruleJson, onElement: false);
+            // Act and Assert: absolute page scrolling completes without exceptions for every axis and behavior combination.
+            InvokeScrollTest(testBase: this, ruleJson, onElement: false);
         }
 
-        // Invokes the Scroll test with the specified test base and action rule.
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method scrolls the page by relative offsets.")]
+        #region *** Data Set ***
+        [DataRow(@"{""argument"":""{{$ --Top:240 --Relative}}""}")]
+        [DataRow(@"{""argument"":""{{$ --Top:-240 --Relative}}""}")]
+        [DataRow(@"{""argument"":""{{$ --Left:100 --Relative}}""}")]
+        [DataRow(@"{""argument"":""{{$ --Top:240 --Left:100 --Relative --Behavior:smooth}}""}")]
+        [DataRow(@"{""argument"":""{{$ --Relative}}""}")]
+        #endregion
+        public void ScrollRelativePositiveTest(string ruleJson)
+        {
+            // Act and Assert: relative page scrolling completes without exceptions, including the no-offset case that does nothing.
+            InvokeScrollTest(testBase: this, ruleJson, onElement: false);
+        }
+
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method scrolls nested elements by relative offsets.")]
+        #region *** Data Set ***
+        [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --Top:240 --Relative}}""}")]
+        [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --Left:-10 --Relative}}""}")]
+        [DataRow(@"{""onElement"":""//positive"",""argument"":""{{$ --Top:10 --Left:10 --Relative --Behavior:instant}}""}")]
+        #endregion
+        public void ScrollRelativeNestedPositiveTest(string ruleJson)
+        {
+            // Act and Assert: relative element scrolling inside a resolved parent completes without exceptions.
+            InvokeScrollTest(testBase: this, ruleJson, onElement: true);
+        }
+
+        [TestMethod(DisplayName = "Verify that the InvokeScroll method in relative mode with stale elements " +
+            "throws a StaleElementReferenceException.")]
+        #region *** Data Set ***
+        [DataRow(@"{""onElement"":""..//stale"",""argument"":""{{$ --Top:10 --Relative}}""}")]
+        #endregion
+        public void ScrollRelativeWithStaleElementTest(string ruleJson)
+        {
+            // Act and Assert: element resolution still runs first in relative mode, so a stale element fails the step.
+            Assert.Throws<StaleElementReferenceException>(()
+                => InvokeScrollTest(testBase: this, ruleJson, onElement: true));
+        }
+
+        // Invokes InvokeScroll with or without a custom parent element and asserts that the response has no exceptions.
         private static void InvokeScrollTest(TestBase testBase, string ruleJson, bool onElement)
         {
-            // Invoke the action based on whether it's on an element or not
+            // Act: resolve the rule inside the custom positive parent for element scenarios, or against the page otherwise.
             var responseModel = onElement
-                ? testBase.Invoke<InvokeScroll>(ruleJson, By.Custom.Positive()).Response
+                ? testBase.Invoke<InvokeScroll>(ruleJson, by: By.Custom.Positive()).Response
                 : testBase.Invoke<InvokeScroll>(ruleJson).Response;
 
-            // Ensure there are no exceptions in the response model
-            Assert.IsFalse(responseModel.Exceptions.Any());
+            // Assert: a successful scroll records no plugin or WebDriver exceptions in the response.
+            Assert.IsEmpty(responseModel.Exceptions);
         }
     }
 }

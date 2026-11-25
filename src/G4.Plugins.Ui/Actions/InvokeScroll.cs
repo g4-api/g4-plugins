@@ -1,7 +1,9 @@
 ﻿/*
  * RESOURCES
  * https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
+ * https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy
  * https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
+ * https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy
  */
 using G4.Attributes;
 using G4.Extensions;
@@ -18,103 +20,105 @@ namespace G4.Plugins.Ui.Actions
     {
         protected override PluginResponseModel OnSend(PluginDataModel pluginData)
         {
-            // Retrieve behavior argument, defaulting to "auto" if not provided
-            var behavior = pluginData.Parameters.Get("Behavior", "auto");
+            // Read the scroll animation style; "auto" defers the animation choice to the CSS scroll-behavior property.
+            var behavior = pluginData.Parameters.Get(key: "Behavior", defaultValue: "auto");
 
-            // Try to parse "Left" argument to integer, defaulting to 0 if parsing fails
+            // Track which axes were supplied, because an absent axis is omitted from the script and keeps its position.
             var isLeft = pluginData.Parameters.ContainsKey("Left");
-            var left = int.Parse(pluginData.Parameters.Get("Left", "0"));
-
-            // Try to parse "Top" argument to integer, defaulting to 0 if parsing fails
-            var top = int.Parse(pluginData.Parameters.Get("Top", "0"));
             var isTop = pluginData.Parameters.ContainsKey("Top");
+            var left = int.Parse(s: pluginData.Parameters.Get(key: "Left", defaultValue: "0"));
+            var top = int.Parse(s: pluginData.Parameters.Get(key: "Top", defaultValue: "0"));
 
-            // Create options object with parsed arguments
-            var options = new Options(behavior, isLeft ? left : null, isTop ? top : null);
+            // Scroll by the offsets from the current position when the Relative switch is present;
+            // otherwise scroll to the offsets as absolute positions.
+            var isRelative = pluginData.Parameters.ContainsKey("Relative");
 
-            // Check if both "Left" and "Top" arguments failed to parse
-            var invalid = !isLeft && !isTop;
+            // Skip the step entirely when no axis was supplied, so an empty rule never resets the scroll position.
+            var hasNoOffset = !isLeft && !isTop;
 
-            // Check if there's a rule defined for the element and arguments are valid
-            if (!string.IsNullOrEmpty(pluginData.Rule.OnElement) && !invalid)
+            if (hasNoOffset)
             {
-                // Scroll to specific element
+                return this.NewPluginResponse();
+            }
+
+            // Carry only the supplied axes into the script options; a null axis is left out of the options object.
+            var options = new Options(behavior, left: isLeft ? left : null, top: isTop ? top : null, relative: isRelative);
+
+            // Scroll the located overflow element when the rule names one; otherwise scroll the whole page.
+            if (!string.IsNullOrEmpty(pluginData.Rule.OnElement))
+            {
                 ScrollElement(pluginBase: this, pluginData, options);
             }
-            else if (!invalid)
+            else
             {
-                // Scroll the whole page
                 ScrollPage(pluginBase: this, options);
             }
 
-            // Return a new plugin response
+            // Return an empty successful response because the action exposes no entity or session outputs.
             return this.NewPluginResponse();
         }
 
-        #region *** Methods      ***
-        // Scrolls to a specific element based on provided options.
+        // Scrolls the element resolved from the rule (inside the parent element when one exists) with the given options.
         private static void ScrollElement(PluginBase pluginBase, PluginDataModel pluginData, Options options)
         {
-            // Get the element to scroll to
-            var element = pluginBase.GetElement(pluginData.Rule, pluginData.Element);
+            // Resolve the target element first, so a missing or stale element fails the step before any script runs.
+            var element = pluginBase.GetElement(rule: pluginData.Rule, element: pluginData.Element);
 
-            // Construct the script options string
+            // Build element.scroll() or element.scrollBy() with the shared options object for the selected mode.
             var scriptOptions = GetScriptOptions(options);
+            var script = "arguments[0]." + GetScrollMethod(options) + "({" + scriptOptions + "});";
 
-            // Construct the full script to scroll the element
-            var script = "arguments[0].scroll({" + scriptOptions + "});";
-
-            // Invoke the JavaScript code to scroll the element
+            // Run the script with the element as its first argument through the WebDriver execute-script endpoint.
             pluginBase.WebDriver.InvokeScript(script, element);
         }
 
-        // Scrolls the entire page based on provided options.
+        // Scrolls the whole page with the given options.
         private static void ScrollPage(PluginBase pluginBase, Options options)
         {
-            // Construct the script options string
+            // Build window.scroll() or window.scrollBy() with the shared options object for the selected mode.
             var scriptOptions = GetScriptOptions(options);
+            var script = "window." + GetScrollMethod(options) + "({" + scriptOptions + "});";
 
-            // Construct the full script to scroll the page
-            var script = "window.scroll({" + scriptOptions + "});";
-
-            // Invoke the JavaScript code to scroll the page
+            // Run the script in the current browsing context through the WebDriver execute-script endpoint.
             pluginBase.WebDriver.InvokeScript(script);
         }
 
-        // Constructs the script options string based on the provided Options object.
+        // Builds the JavaScript ScrollToOptions body: behavior always, top and left only for the supplied axes.
         private static string GetScriptOptions(Options options)
         {
-            // Initialize a StringBuilder to build the script options string
+            // Start with the animation style, which every scroll call carries.
             var scriptBuilder = new StringBuilder();
-
-            // Append behavior option
             scriptBuilder.Append("behavior: \"" + options.Behavior + "\"");
 
-            // Append top option if it's not null
+            // Add the vertical offset only when it was supplied, so the vertical position is otherwise kept.
             if (options.Top != null)
             {
                 scriptBuilder.Append(",top: " + $"{options.Top}");
             }
 
-            // Append left option if it's not null
+            // Add the horizontal offset only when it was supplied, so the horizontal position is otherwise kept.
             if (options.Left != null)
             {
                 scriptBuilder.Append(",left: " + $"{options.Left}");
             }
 
-            // Return the constructed script options string
+            // Return the options body that the scroll script wraps in braces.
             return scriptBuilder.ToString();
         }
-        #endregion
 
-        #region *** Nested Types ***
+        // Selects scrollBy for a relative scroll and scroll for an absolute one; both accept the same options object.
+        private static string GetScrollMethod(Options options) => options.Relative
+            ? "scrollBy"
+            : "scroll";
+
         /// <summary>
         /// Represents options for scrolling.
         /// </summary>
         /// <param name="behavior">The behavior of scrolling.</param>
         /// <param name="left">The left offset for scrolling.</param>
         /// <param name="top">The top offset for scrolling.</param>
-        private sealed class Options(string behavior, int? left, int? top)
+        /// <param name="relative">A value indicating whether the offsets are added to the current scroll position.</param>
+        private sealed class Options(string behavior, int? left, int? top, bool relative)
         {
             /// <summary>
             /// Gets or sets the behavior of scrolling.
@@ -130,7 +134,12 @@ namespace G4.Plugins.Ui.Actions
             /// Gets or sets the top offset for scrolling.
             /// </summary>
             public int? Top { get; set; } = top;
+
+            /// <summary>
+            /// Gets or sets a value indicating whether the offsets are added to the current scroll position
+            /// instead of being used as the absolute scroll position.
+            /// </summary>
+            public bool Relative { get; set; } = relative;
         }
-        #endregion
     }
 }

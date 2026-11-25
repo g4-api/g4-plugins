@@ -27,7 +27,7 @@
 						"question": "What are the key parameters and outputs of InvokeInputActions?"
 					},
 					{
-						"answer": "It runs as an Action container step with the layer-group icon and the ActionRuleModel, and holds input action steps as its child rules. Place it where a flow needs a gesture that ready-made steps such as Click or SendKeys cannot express.",
+						"answer": "It runs as an Action container step with the boxes-packing icon and the ActionRuleModel, and holds input action steps as its child rules. Place it where a flow needs a gesture that ready-made steps such as Click or SendKeys cannot express.",
 						"question": "How does InvokeInputActions fit into an automation workflow?"
 					},
 					{
@@ -59,7 +59,7 @@
 						"question": "Which platforms does InvokeInputActions support?"
 					},
 					{
-						"answer": "It is listed under the “WebDriver” category.",
+						"answer": "It is listed under the “Containers” category.",
 						"question": "Which category is InvokeInputActions listed under?"
 					},
 					{

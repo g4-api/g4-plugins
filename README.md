@@ -127,4 +127,6 @@ G4 Plugins is available under the [Apache License 2.0](./LICENSE).
 
 ## Contributing and builds
 
-Build tools, test commands, version numbers, Docker images and development ports are in the [build, test and release guide](../g4-github-actions/docs/build-test-release.md).
+Build and test the solution from the `src/` folder with the .NET 10 SDK. The unit tests need the settings file:
+`dotnet test --settings test/Settings/Local.runsettings`. The release pipeline publishes the NuGet packages from the
+`main` branch. Notable changes are listed in the [changelog](./docs/CHANGELOG.md).
