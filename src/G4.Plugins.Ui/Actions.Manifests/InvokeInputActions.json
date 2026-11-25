@@ -4,7 +4,7 @@
 		"name": "Roei Sabag"
 	},
 	"categories": [
-		"WebDriver"
+		"Containers"
 	],
 	"context": {
 		"integration": {
@@ -84,10 +84,10 @@
 				"$type": "Action",
 				"componentType": "container",
 				"iconProvider": {
-					"name": "layer-group",
+					"name": "boxes-packing",
 					"svg": null
 				},
-				"label": "Invoke Input Actions",
+				"label": "Input Actions Group",
 				"model": "ActionRuleModel"
 			}
 		}
