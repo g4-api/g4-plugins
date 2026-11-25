@@ -341,7 +341,7 @@
 						"The payload comes from CommandFile, so its macros are kept as written"
 					],
 					"expected_result": "The step stores the orders created today in `ExportMongoDbQuery:Result`.",
-					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps the closing braces of the JSON from ending the inline argument value.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps any space followed by -- inside the JSON from being read as the start of another argument.",
 					"use_case": "export_base64_filter_with_macro",
 					"version": "5"
 				},
@@ -538,5 +538,5 @@
 		"Shapes the result with a projection, a sort, a limit, and a skip, so a step returns only the documents and fields a flow needs.",
 		"Stores the field names, the documents, and the document count as session parameters for later steps and for data transfer."
 	],
-	"version": "5"
+	"version": "6"
 }

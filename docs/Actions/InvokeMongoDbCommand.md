@@ -260,7 +260,7 @@ action_rule = {
 
 ### Set a validator with a Base64-encoded command
 
-The `collMod` command nests a JSON schema, so the document ends in several closing braces that would end the inline argument value.
+The `collMod` command nests a JSON schema, and the Base64 encoding keeps the whole document as one argument value.
 The command is encoded as UTF-8 Base64 and the `Base64` switch marks it, which also keeps a command with a space followed by two dashes intact.
 
 **CSharp:**

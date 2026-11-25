@@ -53,7 +53,7 @@ Outputs are plain text in the response entity and Base64-encoded in the session 
 ### Group documents into totals
 
 The argument names the collection and passes a two-stage pipeline that matches and groups.
-The pipeline is Base64-encoded, because its nested stages contain `}}`, which would end the inline argument value; the decoded text is `[{"$match":{"status":"open"}},{"$group":{"_id":"$sku","total":{"$sum":"$total"}}}]`.
+The pipeline is Base64-encoded through the Base64 switch, which decodes only CommandText; the decoded text is `[{"$match":{"status":"open"}},{"$group":{"_id":"$sku","total":{"$sum":"$total"}}}]`.
 The step stores the grouped documents as relaxed Extended JSON.
 
 **CSharp:**

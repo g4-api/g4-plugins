@@ -306,7 +306,7 @@
 						"Decoded text names no command in its first field"
 					],
 					"expected_result": "The step applies the validator to shop.orders and stores the server response in `InvokeMongoDbCommand:Result`.",
-					"notes": "The command document nests objects and so ends in several closing braces, which end an inline argument value, so it travels Base64-encoded with the Base64 switch set. The switch decodes only CommandText; CommandFile content is always read as plain text.",
+					"notes": "The command document travels Base64-encoded with the Base64 switch set, so no text inside its JSON schema can be read as another argument. The switch decodes only CommandText; CommandFile content is always read as plain text.",
 					"use_case": "set_validator_with_base64_command",
 					"version": "4"
 				},
@@ -321,7 +321,7 @@
 			"description": [
 				"### Set a validator with a Base64-encoded command",
 				"",
-				"The `collMod` command nests a JSON schema, so the document ends in several closing braces that would end the inline argument value.",
+				"The `collMod` command nests a JSON schema, and the Base64 encoding keeps the whole document as one argument value.",
 				"The command is encoded as UTF-8 Base64 and the `Base64` switch marks it, which also keeps a command with a space followed by two dashes intact."
 			],
 			"rule": {
@@ -339,7 +339,7 @@
 						"The payload comes from CommandFile, so its macros are kept as written"
 					],
 					"expected_result": "The server counts the orders created today and the command reply is stored.",
-					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps the closing braces of the JSON from ending the inline argument value.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps any space followed by -- inside the JSON from being read as the start of another argument.",
 					"use_case": "command_base64_with_macro",
 					"version": "5"
 				},
@@ -487,5 +487,5 @@
 		"Carries the command document inline, Base64-encoded, or in a file, and binds it as BSON.",
 		"Stores the response, its ok flag, and the database as session parameters, so index, statistics, and administrative commands reach a flow."
 	],
-	"version": "5"
+	"version": "6"
 }

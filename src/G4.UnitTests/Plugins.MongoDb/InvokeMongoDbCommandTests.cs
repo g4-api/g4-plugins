@@ -174,7 +174,7 @@ namespace G4.UnitTests.Plugins.MongoDb
             MongoDbTestContainer.Drop(Collection);
             MongoDbTestContainer.Insert(Collection, [new BsonDocument { ["priority"] = 1 }]);
 
-            // Arrange: encode a command whose nested documents end in braces that would end an inline value.
+            // Arrange: encode a command with nested documents and mark it with the Base64 switch.
             var command = $"{{\"createIndexes\":\"{Collection}\",\"indexes\":" +
                 "[{\"key\":{\"priority\":1},\"name\":\"priority_1\"}]}";
             var rule = NewRule(arguments: $"{NewConnectionArgument()} --CommandText:{command.ConvertToBase64()} " +

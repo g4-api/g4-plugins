@@ -209,7 +209,7 @@
 				"### Group documents into totals",
 				"",
 				"The argument names the collection and passes a two-stage pipeline that matches and groups.",
-				"The pipeline is Base64-encoded, because its nested stages contain `}}`, which would end the inline argument value; the decoded text is `[{\"$match\":{\"status\":\"open\"}},{\"$group\":{\"_id\":\"$sku\",\"total\":{\"$sum\":\"$total\"}}}]`.",
+				"The pipeline is Base64-encoded through the Base64 switch, which decodes only CommandText; the decoded text is `[{\"$match\":{\"status\":\"open\"}},{\"$group\":{\"_id\":\"$sku\",\"total\":{\"$sum\":\"$total\"}}}]`.",
 				"The step stores the grouped documents as relaxed Extended JSON."
 			],
 			"rule": {
@@ -294,7 +294,7 @@
 						"Credentials parameter set together with ConnectionString"
 					],
 					"expected_result": "The step runs the pipeline of the file inside a transaction and stores its documents in `InvokeMongoDbAggregate:Documents`.",
-					"notes": "ConnectionString applies only when Credentials is not set. A transaction needs a replica set or a sharded cluster, which the replicaSet option of the URI names. The pipeline comes from a file because an inline pipeline ends in two closing braces.",
+					"notes": "ConnectionString applies only when Credentials is not set. A transaction needs a replica set or a sharded cluster, which the replicaSet option of the URI names. The pipeline comes from a file, which keeps a long pipeline out of the rule and is always read as plain text.",
 					"use_case": "aggregate_with_replica_set_connection_uri",
 					"version": "4"
 				},
@@ -327,7 +327,7 @@
 						"The payload comes from CommandFile, so its macros are kept as written"
 					],
 					"expected_result": "The step stores the per-SKU totals of the orders created today in `InvokeMongoDbAggregate:Result`.",
-					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps the closing braces of the JSON from ending the inline argument value.",
+					"notes": "The engine resolves the macros of a rule before the plugin runs, when the Base64 value still hides them, so the plugin resolves the macros of the decoded payload itself. Encoding also keeps any space followed by -- inside the JSON from being read as the start of another argument.",
 					"use_case": "aggregate_base64_pipeline_with_macro",
 					"version": "5"
 				},
@@ -513,5 +513,5 @@
 		"Carries the pipeline inline, Base64-encoded, or in a file, and binds its stages as BSON.",
 		"Stores the field names, the documents, the document count, and the stage count as session parameters, so grouped and joined results reach later steps."
 	],
-	"version": "5"
+	"version": "6"
 }
