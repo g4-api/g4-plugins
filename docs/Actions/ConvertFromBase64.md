@@ -108,7 +108,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "ConvertFromBase64",
     Argument = "T3JkZXItMTIzNDUtRGV0YWlscw==",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -118,7 +118,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ConvertFromBase64")
     .setArgument("T3JkZXItMTIzNDUtRGV0YWlscw==")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -127,7 +127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "ConvertFromBase64",
     argument: "T3JkZXItMTIzNDUtRGV0YWlscw==",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -137,7 +137,7 @@ var actionRule = {
 {
     "pluginName": "ConvertFromBase64",
     "argument": "T3JkZXItMTIzNDUtRGV0YWlscw==",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -147,7 +147,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "ConvertFromBase64",
     "argument": "T3JkZXItMTIzNDUtRGV0YWlscw==",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -225,13 +225,13 @@ Its value can be referenced by other parameters or expressions in downstream wor
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 The Base64-encoded value to decode.
 Accepts a fixed Base64 string or a G4 expression that resolves to one at runtime.

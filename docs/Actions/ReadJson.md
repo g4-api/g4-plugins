@@ -60,9 +60,9 @@ The extracted value is converted to Base64 and stored in the session parameter `
 var actionRule = new ActionRuleModel
 {
     PluginName = "ReadJson",
-    Argument = "{"name":"alpha","count":3}",
+    Argument = "{\"name\":\"alpha\",\"count\":3}",
     OnElement = "$.name",
-    RegularExpression = ""[^"]+""
+    RegularExpression = "\"[^\"]+\""
 };
 ```
 
@@ -71,9 +71,9 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ReadJson")
-    .setArgument("{"name":"alpha","count":3}")
+    .setArgument("{\"name\":\"alpha\",\"count\":3}")
     .setOnElement("$.name")
-    .setRegularExpression(""[^"]+"");
+    .setRegularExpression("\"[^\"]+\"");
 ```
 
 **Javascript:**
@@ -81,9 +81,9 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ReadJson",
-    argument: "{"name":"alpha","count":3}",
+    argument: "{\"name\":\"alpha\",\"count\":3}",
     onElement: "$.name",
-    regularExpression: ""[^"]+""
+    regularExpression: "\"[^\"]+\""
 };
 ```
 
@@ -92,9 +92,9 @@ var actionRule = {
 ```js
 {
     "pluginName": "ReadJson",
-    "argument": "{"name":"alpha","count":3}",
+    "argument": "{\"name\":\"alpha\",\"count\":3}",
     "onElement": "$.name",
-    "regularExpression": ""[^"]+""
+    "regularExpression": "\"[^\"]+\""
 }
 ```
 
@@ -103,9 +103,9 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ReadJson",
-    "argument": "{"name":"alpha","count":3}",
+    "argument": "{\"name\":\"alpha\",\"count\":3}",
     "onElement": "$.name",
-    "regularExpression": ""[^"]+""
+    "regularExpression": "\"[^\"]+\""
 }
 ```
 
@@ -127,7 +127,7 @@ var actionRule = new ActionRuleModel
     PluginName = "ReadJson",
     Argument = "data.json",
     OnElement = "$.items[*].id",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -138,7 +138,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ReadJson")
     .setArgument("data.json")
     .setOnElement("$.items[*].id")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -148,7 +148,7 @@ var actionRule = {
     pluginName: "ReadJson",
     argument: "data.json",
     onElement: "$.items[*].id",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -159,7 +159,7 @@ var actionRule = {
     "pluginName": "ReadJson",
     "argument": "data.json",
     "onElement": "$.items[*].id",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -170,7 +170,7 @@ action_rule = {
     "pluginName": "ReadJson",
     "argument": "data.json",
     "onElement": "$.items[*].id",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -190,7 +190,7 @@ The serialized JSON is converted to Base64 and saved in the session parameter `R
 var actionRule = new ActionRuleModel
 {
     PluginName = "ReadJson",
-    Argument = "{"config":{"enabled":true,"level":"high"}}",
+    Argument = "{\"config\":{\"enabled\":true,\"level\":\"high\"}}",
     OnElement = "$.config"
 };
 ```
@@ -200,7 +200,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ReadJson")
-    .setArgument("{"config":{"enabled":true,"level":"high"}}")
+    .setArgument("{\"config\":{\"enabled\":true,\"level\":\"high\"}}")
     .setOnElement("$.config");
 ```
 
@@ -209,7 +209,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ReadJson",
-    argument: "{"config":{"enabled":true,"level":"high"}}",
+    argument: "{\"config\":{\"enabled\":true,\"level\":\"high\"}}",
     onElement: "$.config"
 };
 ```
@@ -219,7 +219,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ReadJson",
-    "argument": "{"config":{"enabled":true,"level":"high"}}",
+    "argument": "{\"config\":{\"enabled\":true,\"level\":\"high\"}}",
     "onElement": "$.config"
 }
 ```
@@ -229,7 +229,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ReadJson",
-    "argument": "{"config":{"enabled":true,"level":"high"}}",
+    "argument": "{\"config\":{\"enabled\":true,\"level\":\"high\"}}",
     "onElement": "$.config"
 }
 ```

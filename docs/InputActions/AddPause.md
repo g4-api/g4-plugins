@@ -199,13 +199,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Holds the wait, as plain text such as `500` or as `{{$ --Duration:500}}`.
 A rule without an argument adds a pause of zero milliseconds.
@@ -220,7 +220,7 @@ A rule without an argument adds a pause of zero milliseconds.
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Number|Time       |
+| **Value Type**    | Number\|Time      |
 
 Sets how long the driver waits before the next action.
 Accepts a whole number of milliseconds, such as `500`, or a time span, such as `00:00:02`.

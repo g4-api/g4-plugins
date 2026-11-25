@@ -164,13 +164,13 @@ It can be referenced by other parameters or expressions in downstream workflow s
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the `Value` and `Key` parameters using the G4 parameter expression syntax.
 Use `--Value` to provide the plaintext to encrypt and `--Key` to provide the encryption key.

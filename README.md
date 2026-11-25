@@ -106,7 +106,21 @@ experiment with changes, or run the test suites yourself. You will need Git and 
     ```
 
 The automated [release pipeline](./.github/workflows/release-pipeline.yml) builds the solution and runs unit and
-Microsoft Edge integration tests before publishing the NuGet packages.
+Microsoft Edge integration tests before publishing the NuGet packages. A failed test stops the release.
+
+### Local-only tests
+
+Tests that need something a hosted runner does not have carry `[TestCategory("LocalOnly")]`. The release pipeline
+excludes them with `TestCategory!=LocalOnly`; run them on your workstation.
+
+| Tests | What they need |
+| --- | --- |
+| Machine-scope cases of `CopyParameter`, `GetParameter` and `RegisterParameter` | An elevated (administrator) prompt, because they write Machine environment variables. |
+| Live UIA tests (`UiaDriver` category) | A running UIA driver server and a Windows desktop. Set `Uia.DriverServer`, and the test application path `Uia.DragAndDropApplication` or `Uia.ClickApplication`, in the run settings. Without them the tests report Inconclusive. |
+
+```powershell
+dotnet test ./src/G4.UnitTests/G4.UnitTests.csproj --settings ./test/Settings/Local.runsettings --filter "TestCategory=LocalOnly"
+```
 
 ## G4 ecosystem
 

@@ -45,7 +45,7 @@ Use the `New-ScriptResult` macro plugin to execute a custom script that retrieve
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:"^\d+"}}",
+    Argument = "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:\"^\\d+\"}}",
     Locator = "CssSelector",
     OnElement = "#inputField"
 };
@@ -56,7 +56,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:"^\d+"}}")
+    .setArgument("{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:\"^\\d+\"}}")
     .setLocator("CssSelector")
     .setOnElement("#inputField");
 ```
@@ -66,7 +66,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:"^\d+"}}",
+    argument: "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:\"^\\d+\"}}",
     locator: "CssSelector",
     onElement: "#inputField"
 };
@@ -77,7 +77,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -88,7 +88,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:return document.getElementById('ScriptData').innerText.trim(); --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -104,7 +104,7 @@ Use the `New-ScriptResult` macro plugin to execute a custom script that multipli
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:"^\d+"}}",
+    Argument = "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:\"^\\d+\"}}",
     Locator = "CssSelector",
     OnElement = "#inputField"
 };
@@ -115,7 +115,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:"^\d+"}}")
+    .setArgument("{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:\"^\\d+\"}}")
     .setLocator("CssSelector")
     .setOnElement("#inputField");
 ```
@@ -125,7 +125,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:"^\d+"}}",
+    argument: "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:\"^\\d+\"}}",
     locator: "CssSelector",
     onElement: "#inputField"
 };
@@ -136,7 +136,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -147,7 +147,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:function multiply(num){return parseInt(document.getElementById('ScriptDataNumber').value)*num}return multiply(arguments[0]); --Arg:5 --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -163,7 +163,7 @@ Use the `New-ScriptResult` macro plugin to execute a custom script that multipli
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:"^\d+"}}",
+    Argument = "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:\"^\\d+\"}}",
     Locator = "CssSelector",
     OnElement = "#inputField"
 };
@@ -174,7 +174,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:"^\d+"}}")
+    .setArgument("{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:\"^\\d+\"}}")
     .setLocator("CssSelector")
     .setOnElement("#inputField");
 ```
@@ -184,7 +184,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:"^\d+"}}",
+    argument: "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:\"^\\d+\"}}",
     locator: "CssSelector",
     onElement: "#inputField"
 };
@@ -195,7 +195,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -206,7 +206,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:function multiply(num1,num2){return parseInt(document.getElementById('ScriptDataNumber').value)*num1*num2}return multiply(arguments[0],arguments[1]); --Arg:5 --Arg:2 --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -222,7 +222,7 @@ Use the `New-ScriptResult` macro plugin to execute a custom script that multipli
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{"num1":5,"num2":2} --Pattern:"^\d+"}}",
+    Argument = "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{\"num1\":5,\"num2\":2} --Pattern:\"^\\d+\"}}",
     Locator = "CssSelector",
     OnElement = "#inputField"
 };
@@ -233,7 +233,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{"num1":5,"num2":2} --Pattern:"^\d+"}}")
+    .setArgument("{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{\"num1\":5,\"num2\":2} --Pattern:\"^\\d+\"}}")
     .setLocator("CssSelector")
     .setOnElement("#inputField");
 ```
@@ -243,7 +243,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{"num1":5,"num2":2} --Pattern:"^\d+"}}",
+    argument: "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{\"num1\":5,\"num2\":2} --Pattern:\"^\\d+\"}}",
     locator: "CssSelector",
     onElement: "#inputField"
 };
@@ -254,7 +254,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{"num1":5,"num2":2} --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{\"num1\":5,\"num2\":2} --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }
@@ -265,7 +265,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{"num1":5,"num2":2} --Pattern:"^\d+"}}",
+    "argument": "{{$New-ScriptResult --Src:function multiply(nums){return parseInt(document.getElementById('ScriptDataNumber').value)*nums.num1*nums.num2}return multiply(arguments[0]); --Arg:{\"num1\":5,\"num2\":2} --Pattern:\"^\\d+\"}}",
     "locator": "CssSelector",
     "onElement": "#inputField"
 }

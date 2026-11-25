@@ -363,7 +363,7 @@ Log the extracted GUID prefix using the `WriteLog` plugin.
 var actionRule = new ActionRuleModel
 {
     PluginName = "WriteLog",
-    Argument = "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\w{8}}}"
+    Argument = "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\\w{8}}}"
 };
 ```
 
@@ -372,7 +372,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("WriteLog")
-    .setArgument("The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\w{8}}}");
+    .setArgument("The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\\w{8}}}");
 ```
 
 **Javascript:**
@@ -380,7 +380,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "WriteLog",
-    argument: "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\w{8}}}"
+    argument: "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\\w{8}}}"
 };
 ```
 
@@ -389,7 +389,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "WriteLog",
-    "argument": "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\w{8}}}"
+    "argument": "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\\w{8}}}"
 }
 ```
 
@@ -398,7 +398,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "WriteLog",
-    "argument": "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\w{8}}}"
+    "argument": "The first 8 alphanumeric characters of the GUID are {{$New-Guid --Pattern:^\\w{8}}}"
 }
 ```
 

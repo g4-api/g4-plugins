@@ -1,0 +1,208 @@
+{
+	"aliases": [
+		"LongClick",
+		"LongPress",
+		"PressAndHold"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeLongClick.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.Mobile/InvokeLongClick.cs"
+			},
+			"rag": {
+				"description": "Long-presses an element or the current touch position on a mobile device by pressing a touch pointer, holding it for a duration and releasing it. Android recordings produce this action for a long click, and it opens context menus, starts selection mode or triggers press-and-hold handlers.",
+				"qa": [
+					{
+						"question": "What does the InvokeLongClick action do?",
+						"answer": "It presses a touch pointer on an element, or at the current touch position when no element is given, holds it for the Duration in milliseconds and releases it, as one W3C pointer action sequence."
+					},
+					{
+						"question": "Which inputs does InvokeLongClick use?",
+						"answer": "The optional Duration parameter sets the hold time in milliseconds and defaults to 1000; a missing, zero, negative or non-numeric value uses the default. The optional OnElement and Locator properties choose the element to press."
+					},
+					{
+						"question": "Where does InvokeLongClick come from in a recorded flow?",
+						"answer": "The G4 Android recorder records a long click as InvokeLongClick with the recorded hold time, and the Hub writes it as {{$ --Duration:<milliseconds>}} on the element rule."
+					},
+					{
+						"question": "What happens when the InvokeLongClick element cannot be found?",
+						"answer": "The step fails with an element lookup or timeout error and no touch is sent."
+					},
+					{
+						"question": "How is an InvokeLongClick rule defined?",
+						"answer": "Use $type Action with pluginName InvokeLongClick, add onElement with a locator to target an element, and add an argument such as {{$ --Duration:1500}} to change the hold time."
+					},
+					{
+						"question": "What is the manifest version of InvokeLongClick?",
+						"answer": "The manifest version is 4. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/InvokeLongClick.md"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "mobile-task",
+					"svg": null
+				},
+				"label": "Invoke Long Click",
+				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Invoke Long Click"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Long-presses an element or the current touch position on a mobile device.",
+		"The action presses a touch pointer, holds it for the given duration, then releases it, as one W3C pointer action sequence.",
+		"Use it to open context menus, start selection mode or trigger any press-and-hold behavior.",
+		"The G4 Android recorder records a long click as this action, with the recorded hold time.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature               | Description                                                                  |",
+		"|-----------------------|------------------------------------------------------------------------------|",
+		"| Press and Hold        | Presses a touch pointer, pauses for the duration, then releases it.          |",
+		"| Configurable Duration | Duration sets the hold time in milliseconds; 1000 is used when it is absent. |",
+		"| Element Targeting     | Moves the touch pointer to the element center before the press.              |",
+		"| Positional Press      | Long-presses at the current touch position when no element is given.         |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case             | Description                                                           |",
+		"|----------------------|-----------------------------------------------------------------------|",
+		"| Open Context Menus   | Opens the long-press menu of a list item to copy, share or delete it. |",
+		"| Start Selection Mode | Starts multi-select in lists that enter selection on a long press.    |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case             | Description                                                  |",
+		"|----------------------|--------------------------------------------------------------|",
+		"| Long Press Handlers  | Verifies that an element reacts to a press-and-hold gesture. |",
+		"| Recorded Flow Replay | Replays a long click captured by the G4 Android recorder.    |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"Duration is shorter than the device long-press timeout, so Android reports a normal click",
+						"Element is covered by a keyboard or dialog, so the press lands on the covering view"
+					],
+					"expected_result": "The list item matched by the XPath receives a 1500 millisecond long press and its context menu opens.",
+					"notes": "The touch pointer moves to the element center, presses, holds for 1500 milliseconds and releases.",
+					"use_case": "long_click_element_with_duration",
+					"version": "4"
+				},
+				"labels": [
+					"ElementInteraction",
+					"LongClick",
+					"Mobile",
+					"Touch"
+				]
+			},
+			"description": [
+				"### Long-press a list item for 1.5 seconds",
+				"",
+				"Finds the first list item, presses it with a touch pointer for 1500 milliseconds and releases it."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Duration:1500}}",
+				"onElement": "(//android.widget.TextView)[1]",
+				"pluginName": "InvokeLongClick"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"No earlier step placed the touch pointer, so the press lands at the default position"
+					],
+					"expected_result": "A one second long press is performed at the current touch position.",
+					"notes": "Without onElement and argument the press uses the current position and the 1000 millisecond default.",
+					"use_case": "long_click_current_position_default_duration",
+					"version": "4"
+				},
+				"labels": [
+					"LongClick",
+					"NoElement",
+					"PointerPosition"
+				]
+			},
+			"description": [
+				"### Long-press at the current position",
+				"",
+				"Presses and holds the touch pointer for the default 1000 milliseconds without locating an element."
+			],
+			"rule": {
+				"$type": "Action",
+				"pluginName": "InvokeLongClick"
+			}
+		}
+	],
+	"key": "InvokeLongClick",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"default": "1000",
+			"description": [
+				"Duration sets how long the touch pointer stays pressed, in milliseconds.",
+				"A missing, zero, negative or non-numeric value uses the 1000 millisecond default.",
+				"Android reports a long click once the hold passes the device long-press timeout, usually about 500 milliseconds."
+			],
+			"mandatory": false,
+			"name": "Duration",
+			"type": "Number"
+		}
+	],
+	"platforms": [
+		"MobileNative",
+		"MobileWeb"
+	],
+	"pluginType": "Action",
+	"properties": [
+		{
+			"default": "Xpath",
+			"description": [
+				"Locator selects the strategy used to find the element named by OnElement.",
+				"Xpath is used when it is absent.",
+				"Locator has an effect only when OnElement is also provided."
+			],
+			"mandatory": false,
+			"name": "Locator",
+			"type": "String"
+		},
+		{
+			"description": [
+				"OnElement holds the locator expression of the element to long-press.",
+				"It is read with the strategy set by the Locator property.",
+				"When it is absent, the long press happens at the current touch position instead."
+			],
+			"mandatory": false,
+			"name": "OnElement",
+			"type": "String"
+		}
+	],
+	"protocol": {
+		"apiDocumentation": "https://www.w3.org/TR/webdriver/#actions",
+		"w3c": "POST /session/{session id}/actions"
+	},
+	"summary": [
+		"Long-presses an element or the current touch position for a duration in milliseconds.",
+		"Uses one W3C touch pointer sequence: press, hold, release.",
+		"Replays the long clicks recorded by the G4 Android recorder."
+	],
+	"version": "4"
+}

@@ -229,7 +229,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --IgnoreCase}}",
     OnAttribute = "onclick",
     OnElement = "//button[@id='cartActionButton']",
-    RegularExpression = "([A-Z])\w+"
+    RegularExpression = "([A-Z])\\w+"
 };
 ```
 
@@ -241,7 +241,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --IgnoreCase}}")
     .setOnAttribute("onclick")
     .setOnElement("//button[@id='cartActionButton']")
-    .setRegularExpression("([A-Z])\w+");
+    .setRegularExpression("([A-Z])\\w+");
 ```
 
 **Javascript:**
@@ -252,7 +252,7 @@ var actionRule = {
     argument: "{{$ --IgnoreCase}}",
     onAttribute: "onclick",
     onElement: "//button[@id='cartActionButton']",
-    regularExpression: "([A-Z])\w+"
+    regularExpression: "([A-Z])\\w+"
 };
 ```
 
@@ -264,7 +264,7 @@ var actionRule = {
     "argument": "{{$ --IgnoreCase}}",
     "onAttribute": "onclick",
     "onElement": "//button[@id='cartActionButton']",
-    "regularExpression": "([A-Z])\w+"
+    "regularExpression": "([A-Z])\\w+"
 }
 ```
 
@@ -276,7 +276,7 @@ action_rule = {
     "argument": "{{$ --IgnoreCase}}",
     "onAttribute": "onclick",
     "onElement": "//button[@id='cartActionButton']",
-    "regularExpression": "([A-Z])\w+"
+    "regularExpression": "([A-Z])\\w+"
 }
 ```
 

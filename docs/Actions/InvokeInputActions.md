@@ -115,30 +115,30 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Ctrl+click rows 1 and 3")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyDown")
             .setArgument("Control"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerMove")
             .setOnElement("//tr[@data-id='1']"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerDown"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerUp"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerMove")
             .setOnElement("//tr[@data-id='3']"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerDown"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerUp"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyUp")
             .setArgument("Control");
 ```
@@ -319,28 +319,28 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Drag card 7 to the done column")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerMove")
             .setLocator("CssSelector")
             .setOnElement("#card-7"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerDown"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerMove")
             .setArgument("{{$ --X:20 --Y:0 --Duration:100}}"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerMove")
             .setArgument("{{$ --Duration:400}}")
             .setLocator("CssSelector")
             .setOnElement("#done-column"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPause")
             .setArgument("200"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPointerUp");
 ```
 
@@ -510,26 +510,26 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Press Ctrl+Shift+S")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyDown")
             .setArgument("Control"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyDown")
             .setArgument("Shift"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyDown")
             .setArgument("s"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyUp")
             .setArgument("s"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyUp")
             .setArgument("Shift"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyUp")
             .setArgument("Control");
 ```
@@ -678,11 +678,11 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Scroll the results list")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddScroll")
             .setArgument("{{$ --DeltaY:600}}")
             .setOnElement("//div[@id='results']"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddPause")
             .setArgument("300");
 ```
@@ -779,7 +779,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeInputActions")
     .setArgument("Hold Shift for the next steps")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("AddKeyDown")
             .setArgument("Shift");
 ```
@@ -833,13 +833,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names or comments the gesture, such as `Ctrl+click rows 1 and 3`, so the flow reads clearly.
 The container does not act on the text; macros in it are resolved like in any other rule.

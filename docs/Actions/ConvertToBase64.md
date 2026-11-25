@@ -108,7 +108,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "ConvertToBase64",
     Argument = "Order-12345-Details",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -118,7 +118,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ConvertToBase64")
     .setArgument("Order-12345-Details")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -127,7 +127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "ConvertToBase64",
     argument: "Order-12345-Details",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -137,7 +137,7 @@ var actionRule = {
 {
     "pluginName": "ConvertToBase64",
     "argument": "Order-12345-Details",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -147,7 +147,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "ConvertToBase64",
     "argument": "Order-12345-Details",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -225,13 +225,13 @@ Its value can be referenced by other parameters or expressions in downstream wor
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 The value to encode to Base64.
 Accepts a fixed string or a G4 expression that resolves at runtime.

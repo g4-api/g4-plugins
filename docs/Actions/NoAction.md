@@ -193,18 +193,18 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("Login Steps")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("SendKeys")
             .setArgument("Username")
             .setLocator("CssSelector")
             .setOnElement("#username"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("SendKeys")
             .setArgument("Password")
             .setLocator("CssSelector")
             .setOnElement("#password"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("#loginButton");

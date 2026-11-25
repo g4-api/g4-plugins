@@ -380,7 +380,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Get",
     Argument = "{{$ --Url:http://api.example.com/v1/products/5678/details}}",
-    RegularExpression = "\d+\.\d{2}"
+    RegularExpression = "\\d+\\.\\d{2}"
 };
 ```
 
@@ -390,7 +390,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Get")
     .setArgument("{{$ --Url:http://api.example.com/v1/products/5678/details}}")
-    .setRegularExpression("\d+\.\d{2}");
+    .setRegularExpression("\\d+\\.\\d{2}");
 ```
 
 **Javascript:**
@@ -399,7 +399,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Get",
     argument: "{{$ --Url:http://api.example.com/v1/products/5678/details}}",
-    regularExpression: "\d+\.\d{2}"
+    regularExpression: "\\d+\\.\\d{2}"
 };
 ```
 
@@ -409,7 +409,7 @@ var actionRule = {
 {
     "pluginName": "Get",
     "argument": "{{$ --Url:http://api.example.com/v1/products/5678/details}}",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 
@@ -419,7 +419,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Get",
     "argument": "{{$ --Url:http://api.example.com/v1/products/5678/details}}",
-    "regularExpression": "\d+\.\d{2}"
+    "regularExpression": "\\d+\\.\\d{2}"
 }
 ```
 
@@ -478,7 +478,7 @@ Supports error handling in workflows based on the status code value.
 | **Depends On**    | None              |
 | **Mandatory**     | Yes               |
 | **Multiple**      | No                |
-| **Value Type**    | Uri|Expression    |
+| **Value Type**    | Uri\|Expression   |
 
 Specifies where to send the HTTP GET request and what data to include.
 Allows dynamic values through templates or variable placeholders in the format {{$...}}.
@@ -706,7 +706,7 @@ Custom headers let you send extra information like authentication tokens or trac
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Uri|String        |
+| **Value Type**    | Uri\|String       |
 
 Defines the web address where the delete request is sent.
 Tells the server which resource should be removed.

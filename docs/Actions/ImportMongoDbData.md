@@ -61,7 +61,7 @@ The step reports how many documents it sent.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportMongoDbData",
-    Argument = "{{$ --Credentials:mongo-production --Collection:customers --Data:[{"name":"Ada","tier":"gold"},{"name":"Linus","tier":"silver"}]}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:customers --Data:[{\"name\":\"Ada\",\"tier\":\"gold\"},{\"name\":\"Linus\",\"tier\":\"silver\"}]}}"
 };
 ```
 
@@ -70,7 +70,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportMongoDbData")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:customers --Data:[{"name":"Ada","tier":"gold"},{"name":"Linus","tier":"silver"}]}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:customers --Data:[{\"name\":\"Ada\",\"tier\":\"gold\"},{\"name\":\"Linus\",\"tier\":\"silver\"}]}}");
 ```
 
 **Javascript:**
@@ -78,7 +78,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportMongoDbData",
-    argument: "{{$ --Credentials:mongo-production --Collection:customers --Data:[{"name":"Ada","tier":"gold"},{"name":"Linus","tier":"silver"}]}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:customers --Data:[{\"name\":\"Ada\",\"tier\":\"gold\"},{\"name\":\"Linus\",\"tier\":\"silver\"}]}}"
 };
 ```
 
@@ -87,7 +87,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --Credentials:mongo-production --Collection:customers --Data:[{"name":"Ada","tier":"gold"},{"name":"Linus","tier":"silver"}]}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:customers --Data:[{\"name\":\"Ada\",\"tier\":\"gold\"},{\"name\":\"Linus\",\"tier\":\"silver\"}]}}"
 }
 ```
 
@@ -96,7 +96,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --Credentials:mongo-production --Collection:customers --Data:[{"name":"Ada","tier":"gold"},{"name":"Linus","tier":"silver"}]}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:customers --Data:[{\"name\":\"Ada\",\"tier\":\"gold\"},{\"name\":\"Linus\",\"tier\":\"silver\"}]}}"
 }
 ```
 
@@ -113,7 +113,7 @@ Batching keeps each command small for a large file.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportMongoDbData",
-    Argument = "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\data\customers.csv --BatchSize:1000}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}"
 };
 ```
 
@@ -122,7 +122,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportMongoDbData")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\data\customers.csv --BatchSize:1000}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}");
 ```
 
 **Javascript:**
@@ -130,7 +130,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportMongoDbData",
-    argument: "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\data\customers.csv --BatchSize:1000}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}"
 };
 ```
 
@@ -139,7 +139,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\data\customers.csv --BatchSize:1000}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}"
 }
 ```
 
@@ -148,7 +148,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\data\customers.csv --BatchSize:1000}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:shop.customers --DataFile:C:\\data\\customers.csv --BatchSize:1000}}"
 }
 ```
 
@@ -165,7 +165,7 @@ Nothing lands when any document is rejected.
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportMongoDbData",
-    Argument = "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\data\orders.json --Ordered --Transaction}}"
+    Argument = "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\\data\\orders.json --Ordered --Transaction}}"
 };
 ```
 
@@ -174,7 +174,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportMongoDbData")
-    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\data\orders.json --Ordered --Transaction}}");
+    .setArgument("{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\\data\\orders.json --Ordered --Transaction}}");
 ```
 
 **Javascript:**
@@ -182,7 +182,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportMongoDbData",
-    argument: "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\data\orders.json --Ordered --Transaction}}"
+    argument: "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\\data\\orders.json --Ordered --Transaction}}"
 };
 ```
 
@@ -191,7 +191,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\data\orders.json --Ordered --Transaction}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\\data\\orders.json --Ordered --Transaction}}"
 }
 ```
 
@@ -200,7 +200,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\data\orders.json --Ordered --Transaction}}"
+    "argument": "{{$ --Credentials:mongo-production --Collection:orders --DataFile:C:\\data\\orders.json --Ordered --Transaction}}"
 }
 ```
 
@@ -217,7 +217,7 @@ The CSV file is read in batches of 500 documents, which bounds the size of each 
 var actionRule = new ActionRuleModel
 {
     PluginName = "ImportMongoDbData",
-    Argument = "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
+    Argument = "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\\data\\customers.csv --BatchSize:500}}"
 };
 ```
 
@@ -226,7 +226,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("ImportMongoDbData")
-    .setArgument("{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}");
+    .setArgument("{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\\data\\customers.csv --BatchSize:500}}");
 ```
 
 **Javascript:**
@@ -234,7 +234,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "ImportMongoDbData",
-    argument: "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
+    argument: "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\\data\\customers.csv --BatchSize:500}}"
 };
 ```
 
@@ -243,7 +243,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
+    "argument": "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\\data\\customers.csv --BatchSize:500}}"
 }
 ```
 
@@ -252,7 +252,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "ImportMongoDbData",
-    "argument": "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\data\customers.csv --BatchSize:500}}"
+    "argument": "{{$ --ConnectionString:mongodb://reporter:secret@mongo01.contoso.local:27017/shop?tls=true --Collection:customers --DataFile:C:\\data\\customers.csv --BatchSize:500}}"
 }
 ```
 
@@ -289,13 +289,13 @@ The value 0 sends every document in one call and lets the driver split it.
 
 ### Collection (Collection)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the collection the step operates on, such as `orders` or `shop.orders`.
 A name qualified as `database.collection` selects its own database and overrides the Database parameter.
@@ -317,13 +317,13 @@ Raise it for a long aggregation and lower it for a health check that must fail f
 
 ### Connection String (ConnectionString)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies a full MongoDB connection URI, such as `mongodb://localhost:27017/shop`.
 Applies only when Credentials is not set, so a stored credentials reference always takes priority.
@@ -331,13 +331,13 @@ Every connection setting, such as the host, the login, the replica set, and the 
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names a stored MongoDB credentials record by name or id, such as `mongo-production`, so secrets stay out of the rule.
 The record carries the host, port, login, replica set, and TLS settings, so the step never repeats them.
@@ -345,26 +345,26 @@ A value that carries a URI scheme, such as `mongodb://`, is used as a raw connec
 
 ### Data (Data)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Supplies the documents inline, as a JSON array of objects or a single JSON object.
 Takes priority over DataFile, so a step can override a shared data file.
 
 ### Data File (DataFile)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Reads the documents from a file, such as `C:\data\customers.csv`.
 A `.csv` extension is parsed as RFC 4180 CSV with a header row; every other extension is parsed as JSON.
@@ -372,13 +372,13 @@ Applies only when Data is not set.
 
 ### Database (Database)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Names the database the step operates on, such as `shop`.
 Selects the database next to the collection, and replaces the database the credentials record or the connection URI carries.

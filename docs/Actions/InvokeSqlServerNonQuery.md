@@ -77,7 +77,7 @@ The UPDATE runs with @Status and @Id bound from the Parameters JSON and commits 
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerNonQuery",
-    Argument = "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{"Status":"Closed","Id":42} --Transaction}}"
+    Argument = "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction}}"
 };
 ```
 
@@ -86,7 +86,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerNonQuery")
-    .setArgument("{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{"Status":"Closed","Id":42} --Transaction}}");
+    .setArgument("{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction}}");
 ```
 
 **Javascript:**
@@ -94,7 +94,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerNonQuery",
-    argument: "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{"Status":"Closed","Id":42} --Transaction}}"
+    argument: "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction}}"
 };
 ```
 
@@ -103,7 +103,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{"Status":"Closed","Id":42} --Transaction}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction}}"
 }
 ```
 
@@ -112,7 +112,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{"Status":"Closed","Id":42} --Transaction}}"
+    "argument": "{{$ --Credentials:sql-production --CommandText:UPDATE dbo.Orders SET Status = @Status WHERE Id = @Id --Parameters:{\"Status\":\"Closed\",\"Id\":42} --Transaction}}"
 }
 ```
 
@@ -129,7 +129,7 @@ The statement runs without a transaction and reports how many staging rows it re
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerNonQuery",
-    Argument = "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{"BatchId":"2026-11-09"} --CommandTimeout:120}}"
+    Argument = "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{\"BatchId\":\"2026-11-09\"} --CommandTimeout:120}}"
 };
 ```
 
@@ -138,7 +138,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerNonQuery")
-    .setArgument("{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{"BatchId":"2026-11-09"} --CommandTimeout:120}}");
+    .setArgument("{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{\"BatchId\":\"2026-11-09\"} --CommandTimeout:120}}");
 ```
 
 **Javascript:**
@@ -146,7 +146,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerNonQuery",
-    argument: "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{"BatchId":"2026-11-09"} --CommandTimeout:120}}"
+    argument: "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{\"BatchId\":\"2026-11-09\"} --CommandTimeout:120}}"
 };
 ```
 
@@ -155,7 +155,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{"BatchId":"2026-11-09"} --CommandTimeout:120}}"
+    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{\"BatchId\":\"2026-11-09\"} --CommandTimeout:120}}"
 }
 ```
 
@@ -164,7 +164,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{"BatchId":"2026-11-09"} --CommandTimeout:120}}"
+    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;TrustServerCertificate=True --CommandText:DELETE FROM dbo.ImportStaging WHERE BatchId = @BatchId --Parameters:{\"BatchId\":\"2026-11-09\"} --CommandTimeout:120}}"
 }
 ```
 
@@ -181,7 +181,7 @@ The connection comes from that string, and the bound @Event and @Success values 
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerNonQuery",
-    Argument = "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{"Event":"InvoiceExported","Success":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
+    Argument = "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
 };
 ```
 
@@ -190,7 +190,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerNonQuery")
-    .setArgument("{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{"Event":"InvoiceExported","Success":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}");
+    .setArgument("{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}");
 ```
 
 **Javascript:**
@@ -198,7 +198,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerNonQuery",
-    argument: "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{"Event":"InvoiceExported","Success":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
+    argument: "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
 };
 ```
 
@@ -207,7 +207,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{"Event":"InvoiceExported","Success":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
+    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
 }
 ```
 
@@ -216,7 +216,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{"Event":"InvoiceExported","Success":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
+    "argument": "{{$ --ConnectionString:Server=localhost,1433;Database=Sales;Integrated Security=True;Encrypt=Mandatory;TrustServerCertificate=True --Parameters:{\"Event\":\"InvoiceExported\",\"Success\":true} --CommandText:INSERT INTO dbo.AuditLog (Event, Success) VALUES (@Event, @Success)}}"
 }
 ```
 
@@ -233,7 +233,7 @@ The file content runs as one statement batch inside a transaction, and only the 
 var actionRule = new ActionRuleModel
 {
     PluginName = "InvokeSqlServerNonQuery",
-    Argument = "{{$ --Credentials:sql-production --CommandFile:C:\automation\sql\archive-closed-orders.sql --Transaction --NoEntity}}"
+    Argument = "{{$ --Credentials:sql-production --CommandFile:C:\\automation\\sql\\archive-closed-orders.sql --Transaction --NoEntity}}"
 };
 ```
 
@@ -242,7 +242,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeSqlServerNonQuery")
-    .setArgument("{{$ --Credentials:sql-production --CommandFile:C:\automation\sql\archive-closed-orders.sql --Transaction --NoEntity}}");
+    .setArgument("{{$ --Credentials:sql-production --CommandFile:C:\\automation\\sql\\archive-closed-orders.sql --Transaction --NoEntity}}");
 ```
 
 **Javascript:**
@@ -250,7 +250,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "InvokeSqlServerNonQuery",
-    argument: "{{$ --Credentials:sql-production --CommandFile:C:\automation\sql\archive-closed-orders.sql --Transaction --NoEntity}}"
+    argument: "{{$ --Credentials:sql-production --CommandFile:C:\\automation\\sql\\archive-closed-orders.sql --Transaction --NoEntity}}"
 };
 ```
 
@@ -259,7 +259,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandFile:C:\automation\sql\archive-closed-orders.sql --Transaction --NoEntity}}"
+    "argument": "{{$ --Credentials:sql-production --CommandFile:C:\\automation\\sql\\archive-closed-orders.sql --Transaction --NoEntity}}"
 }
 ```
 
@@ -268,7 +268,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "InvokeSqlServerNonQuery",
-    "argument": "{{$ --Credentials:sql-production --CommandFile:C:\automation\sql\archive-closed-orders.sql --Transaction --NoEntity}}"
+    "argument": "{{$ --Credentials:sql-production --CommandFile:C:\\automation\\sql\\archive-closed-orders.sql --Transaction --NoEntity}}"
 }
 ```
 

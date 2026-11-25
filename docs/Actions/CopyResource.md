@@ -124,7 +124,7 @@ var actionRule = new ActionRuleModel
     Locator = "CssSelector",
     OnAttribute = "href",
     OnElement = "a[href$='.pdf']",
-    RegularExpression = "https?://[^\s]+"
+    RegularExpression = "https?://[^\\s]+"
 };
 ```
 
@@ -137,7 +137,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnAttribute("href")
     .setOnElement("a[href$='.pdf']")
-    .setRegularExpression("https?://[^\s]+");
+    .setRegularExpression("https?://[^\\s]+");
 ```
 
 **Javascript:**
@@ -149,7 +149,7 @@ var actionRule = {
     locator: "CssSelector",
     onAttribute: "href",
     onElement: "a[href$='.pdf']",
-    regularExpression: "https?://[^\s]+"
+    regularExpression: "https?://[^\\s]+"
 };
 ```
 
@@ -162,7 +162,7 @@ var actionRule = {
     "locator": "CssSelector",
     "onAttribute": "href",
     "onElement": "a[href$='.pdf']",
-    "regularExpression": "https?://[^\s]+"
+    "regularExpression": "https?://[^\\s]+"
 }
 ```
 
@@ -175,7 +175,7 @@ action_rule = {
     "locator": "CssSelector",
     "onAttribute": "href",
     "onElement": "a[href$='.pdf']",
-    "regularExpression": "https?://[^\s]+"
+    "regularExpression": "https?://[^\\s]+"
 }
 ```
 
@@ -195,7 +195,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Path:/home/user/resources}}",
     Locator = "CssSelector",
     OnElement = "div.resource-link",
-    RegularExpression = "https?://[^\s]+"
+    RegularExpression = "https?://[^\\s]+"
 };
 ```
 
@@ -207,7 +207,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Path:/home/user/resources}}")
     .setLocator("CssSelector")
     .setOnElement("div.resource-link")
-    .setRegularExpression("https?://[^\s]+");
+    .setRegularExpression("https?://[^\\s]+");
 ```
 
 **Javascript:**
@@ -218,7 +218,7 @@ var actionRule = {
     argument: "{{$ --Path:/home/user/resources}}",
     locator: "CssSelector",
     onElement: "div.resource-link",
-    regularExpression: "https?://[^\s]+"
+    regularExpression: "https?://[^\\s]+"
 };
 ```
 
@@ -230,7 +230,7 @@ var actionRule = {
     "argument": "{{$ --Path:/home/user/resources}}",
     "locator": "CssSelector",
     "onElement": "div.resource-link",
-    "regularExpression": "https?://[^\s]+"
+    "regularExpression": "https?://[^\\s]+"
 }
 ```
 
@@ -242,7 +242,7 @@ action_rule = {
     "argument": "{{$ --Path:/home/user/resources}}",
     "locator": "CssSelector",
     "onElement": "div.resource-link",
-    "regularExpression": "https?://[^\s]+"
+    "regularExpression": "https?://[^\\s]+"
 }
 ```
 
@@ -266,13 +266,13 @@ Use this parameter in downstream steps to validate, move, or further process the
 
 ### Argument (Argument)
 
-| Attribute             | Value                 |
-| --------------------- | --------------------- |
-| **Default Value**     | Null                  |
-| **Depends On**        | None                  |
-| **Mandatory**         | Yes                   |
-| **Multiple**          | No                    |
-| **Value Type**        | String|Uri|Expression |
+| Attribute               | Value                   |
+| ----------------------- | ----------------------- |
+| **Default Value**       | Null                    |
+| **Depends On**          | None                    |
+| **Mandatory**           | Yes                     |
+| **Multiple**            | No                      |
+| **Value Type**          | String\|Uri\|Expression |
 
 The save path used when the Path parameter is not supplied. Accepts a directory path, a file path, or a dynamic expression.
 When the Path parameter is present this value is ignored as a save target.

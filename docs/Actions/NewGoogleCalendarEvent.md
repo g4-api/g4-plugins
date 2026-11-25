@@ -257,13 +257,13 @@ Use it to branch on the initial event state.
 
 ### Attendees (Attendees)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Comma-separated list of email addresses added as attendees to the event.
 Each email address is mapped to an attendee entry in the event resource.
@@ -271,13 +271,13 @@ Use the SendUpdates parameter to control whether invitation emails are delivered
 
 ### Calendar Id (CalendarId)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Unique identifier of the calendar on which the event will be created.
 Defaults to 'primary' when not provided, targeting the authenticated user's primary calendar.
@@ -285,13 +285,13 @@ Any valid calendar identifier is accepted, including secondary calendar IDs in e
 
 ### Credentials (Credentials)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Stored credential record id or name used to obtain a fresh access token.
 Avoids hardcoding tokens by exchanging the stored refresh token for a new access token when needed.
@@ -300,13 +300,13 @@ Takes precedence over the Token parameter when both are provided.
 
 ### Description (Description)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Event description. HTML content is supported by the Google Calendar API.
 Adds context, agenda items, or instructions visible in the event details.
@@ -314,13 +314,13 @@ Omitted from the API request body when left empty.
 
 ### End (End)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 End date or date-time of the event.
 Use ISO 8601 format (e.g., 2026-05-01T11:00:00Z) for timed events.
@@ -328,13 +328,13 @@ Use YYYY-MM-DD format (e.g., 2026-05-02) for all-day events — the value must n
 
 ### End Time Zone (EndTimeZone)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 IANA time zone identifier applied to the End dateTime (e.g., 'America/New_York').
 When omitted, the calendar's default time zone is used.
@@ -342,13 +342,13 @@ Has no effect when End is a date-only value (all-day event).
 
 ### Location (Location)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Geographic location of the event as free-form text.
 Displayed in the event details and used by Google Calendar to show map links.
@@ -356,13 +356,13 @@ Omitted from the API request body when left empty.
 
 ### Send Updates (SendUpdates)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Controls whether notification emails are sent to attendees when the event is created.
 Accepted values: 'all' (notify all attendees), 'externalOnly' (notify only external attendees), 'none' (send no notifications).
@@ -370,13 +370,13 @@ Defaults to 'none' to avoid sending spurious emails during automated runs.
 
 ### Start (Start)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Start date or date-time of the event.
 Use ISO 8601 format (e.g., 2026-05-01T10:00:00Z) for timed events.
@@ -384,13 +384,13 @@ Use YYYY-MM-DD format (e.g., 2026-05-01) for all-day events — the value must n
 
 ### Start Time Zone (StartTimeZone)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 IANA time zone identifier applied to the Start dateTime (e.g., 'Europe/London').
 When omitted, the calendar's default time zone is used.
@@ -398,13 +398,13 @@ Has no effect when Start is a date-only value (all-day event).
 
 ### Summary (Summary)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 The event title.
 Controls how the event appears in the calendar UI.
@@ -412,13 +412,13 @@ Uses a timestamped default title when no value is provided to avoid creating unt
 
 ### Token (Token)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 OAuth Bearer access token used to call the Google Calendar API.
 Used when no stored credential record is available.

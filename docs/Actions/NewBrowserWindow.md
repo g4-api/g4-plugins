@@ -171,7 +171,7 @@ var actionRule = new ActionRuleModel
     Locator = "CssSelector",
     OnAttribute = "href",
     OnElement = "#OpenLink",
-    RegularExpression = "https?://[^\s]+"
+    RegularExpression = "https?://[^\\s]+"
 };
 ```
 
@@ -184,7 +184,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnAttribute("href")
     .setOnElement("#OpenLink")
-    .setRegularExpression("https?://[^\s]+");
+    .setRegularExpression("https?://[^\\s]+");
 ```
 
 **Javascript:**
@@ -196,7 +196,7 @@ var actionRule = {
     locator: "CssSelector",
     onAttribute: "href",
     onElement: "#OpenLink",
-    regularExpression: "https?://[^\s]+"
+    regularExpression: "https?://[^\\s]+"
 };
 ```
 
@@ -209,7 +209,7 @@ var actionRule = {
     "locator": "CssSelector",
     "onAttribute": "href",
     "onElement": "#OpenLink",
-    "regularExpression": "https?://[^\s]+"
+    "regularExpression": "https?://[^\\s]+"
 }
 ```
 
@@ -222,7 +222,7 @@ action_rule = {
     "locator": "CssSelector",
     "onAttribute": "href",
     "onElement": "#OpenLink",
-    "regularExpression": "https?://[^\s]+"
+    "regularExpression": "https?://[^\\s]+"
 }
 ```
 
@@ -230,13 +230,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | No                |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | No                 |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Argument carries the `--Amount` and `--Target` parameter values as a CLI macro expression.
 When absent both parameters take their default values: Amount = 1 and Target = _blank.

@@ -800,7 +800,7 @@ Finally, send that value as keystrokes into the element matching the `.result-fi
 var actionRule = new ActionRuleModel
 {
     PluginName = "SendKeys",
-    Argument = "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\d+}}",
+    Argument = "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\\d+}}",
     Locator = "CssSelector",
     OnElement = ".result-field"
 };
@@ -811,7 +811,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("SendKeys")
-    .setArgument("{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\d+}}")
+    .setArgument("{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\\d+}}")
     .setLocator("CssSelector")
     .setOnElement(".result-field");
 ```
@@ -821,7 +821,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "SendKeys",
-    argument: "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\d+}}",
+    argument: "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\\d+}}",
     locator: "CssSelector",
     onElement: ".result-field"
 };
@@ -832,7 +832,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "SendKeys",
-    "argument": "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\d+}}",
+    "argument": "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\\d+}}",
     "locator": "CssSelector",
     "onElement": ".result-field"
 }
@@ -843,7 +843,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "SendKeys",
-    "argument": "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\d+}}",
+    "argument": "{{$Resolve-MathExpression --X:5.5 --Y:2.5 --Operation:* --Pattern:\\d+}}",
     "locator": "CssSelector",
     "onElement": ".result-field"
 }

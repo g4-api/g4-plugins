@@ -58,13 +58,9 @@ namespace G4.UnitTests.Plugins.Common
         [TestMethod(DisplayName = "Verify the CopyParameter action behavior when a mandatory " +
             "argument is missing.")]
         #region *** Data Set ***
-        [DataRow("Application", "Machine")]
         [DataRow("Application", "Process")]
         [DataRow("Application", "Session")]
         [DataRow("Application", "User")]
-        [DataRow("Machine", "Process")]
-        [DataRow("Machine", "User")]
-        [DataRow("Session", "Machine")]
         [DataRow("Session", "Process")]
         [DataRow("Session", "Session")]
         [DataRow("Session", "User")]
@@ -105,13 +101,9 @@ namespace G4.UnitTests.Plugins.Common
         [TestMethod(DisplayName = "Verify the CopyParameter action behavior when a mandatory " +
             "argument is missing during parameter copying between scopes.")]
         #region *** Data Set ***
-        [DataRow("Application", "Machine")]
         [DataRow("Application", "Process")]
         [DataRow("Application", "Session")]
         [DataRow("Application", "User")]
-        [DataRow("Machine", "Process")]
-        [DataRow("Machine", "User")]
-        [DataRow("Session", "Machine")]
         [DataRow("Session", "Process")]
         [DataRow("Session", "Session")]
         [DataRow("Session", "User")]
@@ -154,13 +146,9 @@ namespace G4.UnitTests.Plugins.Common
         [TestMethod(DisplayName = "Verify the CopyParameter action behavior for successful " +
             "parameter copying between scopes.")]
         #region *** Data Set ***
-        [DataRow("Application", "Machine")]
         [DataRow("Application", "Process")]
         [DataRow("Application", "Session")]
         [DataRow("Application", "User")]
-        [DataRow("Machine", "Process")]
-        [DataRow("Machine", "User")]
-        [DataRow("Session", "Machine")]
         [DataRow("Session", "Process")]
         [DataRow("Session", "Session")]
         [DataRow("Session", "User")]
@@ -200,18 +188,84 @@ namespace G4.UnitTests.Plugins.Common
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod(DisplayName = "Verify the CopyParameter action behavior when a mandatory " +
+            "argument is missing. " +
+            "Machine scope, administrator rights required.")]
+        [TestCategory("LocalOnly")]
+        #region *** Data Set ***
+        [DataRow("Application", "Machine")]
+        [DataRow("Machine", "Process")]
+        [DataRow("Machine", "User")]
+        [DataRow("Session", "Machine")]
+        #endregion
+        public void CopyParameterMissingMandatoryArgumentTestMachineScope(string sourceScope, string targetScope)
+        {
+            // Act and Assert: run the same scenario for the Machine scope, which writes the machine
+            // registry and so needs an elevated local session; CI excludes this LocalOnly case.
+            CopyParameterMissingMandatoryArgumentTest(sourceScope, targetScope);
+        }
+
+        [TestMethod(DisplayName = "Verify the CopyParameter action behavior when a mandatory " +
+            "argument is missing during parameter copying between scopes. " +
+            "Machine scope, administrator rights required.")]
+        [TestCategory("LocalOnly")]
+        #region *** Data Set ***
+        [DataRow("Application", "Machine")]
+        [DataRow("Machine", "Process")]
+        [DataRow("Machine", "User")]
+        [DataRow("Session", "Machine")]
+        #endregion
+        public void CopyParameterMissingMandatoryPropertyTestMachineScope(string sourceScope, string targetScope)
+        {
+            // Act and Assert: run the same scenario for the Machine scope, which writes the machine
+            // registry and so needs an elevated local session; CI excludes this LocalOnly case.
+            CopyParameterMissingMandatoryPropertyTest(sourceScope, targetScope);
+        }
+
+        [TestMethod(DisplayName = "Verify the CopyParameter action behavior for successful " +
+            "parameter copying between scopes. " +
+            "Machine scope, administrator rights required.")]
+        [TestCategory("LocalOnly")]
+        #region *** Data Set ***
+        [DataRow("Application", "Machine")]
+        [DataRow("Machine", "Process")]
+        [DataRow("Machine", "User")]
+        [DataRow("Session", "Machine")]
+        #endregion
+        public void CopyParameterPositiveTestMachineScope(string sourceScope, string targetScope)
+        {
+            // Act and Assert: run the same scenario for the Machine scope, which writes the machine
+            // registry and so needs an elevated local session; CI excludes this LocalOnly case.
+            CopyParameterPositiveTest(sourceScope, targetScope);
+        }
+
         // Cleans up the test environment.
         private static void CleanEnvironment()
         {
             // Remove the "ParameterName" environment variable from different targets (Machine, Process, User)
-            Environment.SetEnvironmentVariable("ParameterName", null, EnvironmentVariableTarget.Machine);
+            RemoveMachineVariable("ParameterName");
             Environment.SetEnvironmentVariable("ParameterName", null, EnvironmentVariableTarget.Process);
             Environment.SetEnvironmentVariable("ParameterName", null, EnvironmentVariableTarget.User);
 
             // Remove the "CopiedParameterName" environment variable from different targets (Machine, Process, User)
-            Environment.SetEnvironmentVariable("CopiedParameterName", null, EnvironmentVariableTarget.Machine);
+            RemoveMachineVariable("CopiedParameterName");
             Environment.SetEnvironmentVariable("CopiedParameterName", null, EnvironmentVariableTarget.Process);
             Environment.SetEnvironmentVariable("CopiedParameterName", null, EnvironmentVariableTarget.User);
+        }
+
+        // Removes a Machine environment variable. Writing Machine variables needs administrator rights; a run
+        // without them cannot have created the variable, so it has nothing to clean and the non-Machine rows still run.
+        // The Machine rows carry the LocalOnly category and run only in an elevated local session.
+        private static void RemoveMachineVariable(string name)
+        {
+            try
+            {
+                Environment.SetEnvironmentVariable(name, null, EnvironmentVariableTarget.Machine);
+            }
+            catch (System.Security.SecurityException)
+            {
+                // Not elevated: no Machine variable exists from this run, so there is nothing to remove.
+            }
         }
     }
 }

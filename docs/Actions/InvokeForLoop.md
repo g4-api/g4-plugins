@@ -70,7 +70,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForLoop")
     .setArgument("5")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("CssSelector")
             .setOnElement("#NextBtn1");
@@ -157,7 +157,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForLoop")
     .setArgument("5")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement("//button[@id='NextBtn1']");
 ```
@@ -241,7 +241,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForLoop")
     .setArgument("5")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("Id")
             .setOnElement("NextBtn1");
@@ -349,19 +349,19 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("2")
     .setActions(,
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("InvokeForLoop")
             .setArgument("2")
             .setActions()
-                new ActionRuleModel()                
+                new ActionRuleModel()
                     .setPluginName("Click")
                     .setLocator("CssSelector")
                     .setOnElement("#NextBtn2"),
 
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement("//button[@Id='FirstBtn2']"))
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setLocator("Id")
             .setOnElement("NextBtn1");
@@ -493,7 +493,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("InvokeForLoop")
     .setArgument("3")
     .setActions()
-        new ActionRuleModel()        
+        new ActionRuleModel()
             .setPluginName("Click")
             .setOnElement("//tr[@data-index='{{$Get-Parameter --Name:InvokeForLoop:Iteration --Scope:Session}}']//button");
 ```
@@ -564,13 +564,13 @@ The session value is Base64-encoded, which the Get-Parameter macro decodes by de
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | Number|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | Number\|Expression |
 
 Sets how many times the loop repeats.
 Each step inside the loop runs that many times.

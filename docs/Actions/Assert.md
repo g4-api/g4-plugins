@@ -1745,7 +1745,7 @@ If the attribute value matches the regex pattern, the assert evaluates to `true`
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     Locator = "CssSelector",
     OnAttribute = "index",
     OnElement = "#elementId"
@@ -1757,7 +1757,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}")
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}")
     .setLocator("CssSelector")
     .setOnAttribute("index")
     .setOnElement("#elementId");
@@ -1768,7 +1768,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     locator: "CssSelector",
     onAttribute: "index",
     onElement: "#elementId"
@@ -1780,7 +1780,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "index",
     "onElement": "#elementId"
@@ -1792,7 +1792,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "index",
     "onElement": "#elementId"
@@ -1813,7 +1813,7 @@ If the attribute value matches the regex pattern, the assert evaluates to `true`
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     OnAttribute = "index",
     OnElement = "//*[@id='elementId']"
 };
@@ -1824,7 +1824,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}")
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}")
     .setOnAttribute("index")
     .setOnElement("//*[@id='elementId']");
 ```
@@ -1834,7 +1834,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     onAttribute: "index",
     onElement: "//*[@id='elementId']"
 };
@@ -1845,7 +1845,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     "onAttribute": "index",
     "onElement": "//*[@id='elementId']"
 }
@@ -1856,7 +1856,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     "onAttribute": "index",
     "onElement": "//*[@id='elementId']"
 }
@@ -1876,7 +1876,7 @@ If the attribute value matches the regex pattern, the assert evaluates to `true`
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    Argument = "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     Locator = "Id",
     OnAttribute = "index",
     OnElement = "elementId"
@@ -1888,7 +1888,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}")
+    .setArgument("{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}")
     .setLocator("Id")
     .setOnAttribute("index")
     .setOnElement("elementId");
@@ -1899,7 +1899,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    argument: "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     locator: "Id",
     onAttribute: "index",
     onElement: "elementId"
@@ -1911,7 +1911,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     "locator": "Id",
     "onAttribute": "index",
     "onElement": "elementId"
@@ -1923,7 +1923,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\d+$}}",
+    "argument": "{{$ --Condition:ElementAttribute --Operator:Match --Expected:^\\d+$}}",
     "locator": "Id",
     "onAttribute": "index",
     "onElement": "elementId"
@@ -10076,7 +10076,7 @@ The assertion passes only if the computed length exactly matches this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     Locator = "CssSelector",
     OnElement = "#content"
 };
@@ -10087,7 +10087,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}")
     .setLocator("CssSelector")
     .setOnElement("#content");
 ```
@@ -10097,7 +10097,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     locator: "CssSelector",
     onElement: "#content"
 };
@@ -10108,7 +10108,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     "locator": "CssSelector",
     "onElement": "#content"
 }
@@ -10119,7 +10119,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     "locator": "CssSelector",
     "onElement": "#content"
 }
@@ -10140,7 +10140,7 @@ The assertion passes only if the computed length exactly matches this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     OnElement = "//div[@id='content']"
 };
 ```
@@ -10150,7 +10150,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}")
     .setOnElement("//div[@id='content']");
 ```
 
@@ -10159,7 +10159,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     onElement: "//div[@id='content']"
 };
 ```
@@ -10169,7 +10169,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     "onElement": "//div[@id='content']"
 }
 ```
@@ -10179,7 +10179,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     "onElement": "//div[@id='content']"
 }
 ```
@@ -10199,7 +10199,7 @@ The assertion passes only if the computed length exactly matches this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     Locator = "Id",
     OnElement = "content"
 };
@@ -10210,7 +10210,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}")
     .setLocator("Id")
     .setOnElement("content");
 ```
@@ -10220,7 +10220,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     locator: "Id",
     onElement: "content"
 };
@@ -10231,7 +10231,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     "locator": "Id",
     "onElement": "content"
 }
@@ -10242,7 +10242,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^2\\d+$}}",
     "locator": "Id",
     "onElement": "content"
 }
@@ -10263,7 +10263,7 @@ Because the regex limits the extraction to 100 characters, the computed length w
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "input#content",
@@ -10276,7 +10276,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}")
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("input#content")
@@ -10288,7 +10288,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "input#content",
@@ -10301,7 +10301,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -10314,7 +10314,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -10337,7 +10337,7 @@ Because the regex restricts the capture to 100 characters, the computed length w
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     OnAttribute = "value",
     OnElement = "//input[@id='content']",
     RegularExpression = "(?s)^(.{0,100})"
@@ -10349,7 +10349,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}")
     .setOnAttribute("value")
     .setOnElement("//input[@id='content']")
     .setRegularExpression("(?s)^(.{0,100})");
@@ -10360,7 +10360,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     onAttribute: "value",
     onElement: "//input[@id='content']",
     regularExpression: "(?s)^(.{0,100})"
@@ -10372,7 +10372,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -10384,7 +10384,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -10406,7 +10406,7 @@ Given that the extraction is capped at 100 characters, the computed length will 
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
@@ -10419,7 +10419,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}")
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
@@ -10431,7 +10431,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
@@ -10444,7 +10444,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -10457,7 +10457,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -10480,7 +10480,7 @@ The assertion passes only if the computed length meets this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "input#content"
@@ -10492,7 +10492,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}")
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("input#content");
@@ -10503,7 +10503,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "input#content"
@@ -10515,7 +10515,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content"
@@ -10527,7 +10527,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content"
@@ -10549,7 +10549,7 @@ The assertion passes only if the computed length meets this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     OnAttribute = "value",
     OnElement = "//input[@id='content']"
 };
@@ -10560,7 +10560,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}")
     .setOnAttribute("value")
     .setOnElement("//input[@id='content']");
 ```
@@ -10570,7 +10570,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     onAttribute: "value",
     onElement: "//input[@id='content']"
 };
@@ -10581,7 +10581,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']"
 }
@@ -10592,7 +10592,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']"
 }
@@ -10613,7 +10613,7 @@ The assertion passes only if the computed length meets this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content"
@@ -10625,7 +10625,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}")
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content");
@@ -10636,7 +10636,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     locator: "Id",
     onAttribute: "value",
     onElement: "content"
@@ -10648,7 +10648,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content"
@@ -10660,7 +10660,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content"
@@ -10682,7 +10682,7 @@ The assertion passes only if the computed length matches this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "input#content",
@@ -10695,7 +10695,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}")
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("input#content")
@@ -10707,7 +10707,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "input#content",
@@ -10720,7 +10720,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -10733,7 +10733,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -10756,7 +10756,7 @@ The assertion passes only if the computed length matches this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     OnAttribute = "value",
     OnElement = "//input[@id='content']",
     RegularExpression = "(?s)^(.{0,100})"
@@ -10768,7 +10768,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}")
     .setOnAttribute("value")
     .setOnElement("//input[@id='content']")
     .setRegularExpression("(?s)^(.{0,100})");
@@ -10779,7 +10779,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     onAttribute: "value",
     onElement: "//input[@id='content']",
     regularExpression: "(?s)^(.{0,100})"
@@ -10791,7 +10791,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -10803,7 +10803,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -10825,7 +10825,7 @@ The assertion passes only if the computed length matches this pattern.
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
@@ -10838,7 +10838,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}")
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
@@ -10850,7 +10850,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
@@ -10863,7 +10863,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -10876,7 +10876,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:Match --Expected:^1\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -10898,7 +10898,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     Locator = "CssSelector",
     OnElement = "#content"
 };
@@ -10909,7 +10909,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}")
     .setLocator("CssSelector")
     .setOnElement("#content");
 ```
@@ -10919,7 +10919,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     locator: "CssSelector",
     onElement: "#content"
 };
@@ -10930,7 +10930,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     "locator": "CssSelector",
     "onElement": "#content"
 }
@@ -10941,7 +10941,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     "locator": "CssSelector",
     "onElement": "#content"
 }
@@ -10961,7 +10961,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     OnElement = "//div[@id='content']"
 };
 ```
@@ -10971,7 +10971,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}")
     .setOnElement("//div[@id='content']");
 ```
 
@@ -10980,7 +10980,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     onElement: "//div[@id='content']"
 };
 ```
@@ -10990,7 +10990,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     "onElement": "//div[@id='content']"
 }
 ```
@@ -11000,7 +11000,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     "onElement": "//div[@id='content']"
 }
 ```
@@ -11019,7 +11019,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     Locator = "Id",
     OnElement = "content"
 };
@@ -11030,7 +11030,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}")
     .setLocator("Id")
     .setOnElement("content");
 ```
@@ -11040,7 +11040,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     locator: "Id",
     onElement: "content"
 };
@@ -11051,7 +11051,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     "locator": "Id",
     "onElement": "content"
 }
@@ -11062,7 +11062,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^2\\d+$}}",
     "locator": "Id",
     "onElement": "content"
 }
@@ -11083,7 +11083,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "input#content",
@@ -11096,7 +11096,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}")
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("input#content")
@@ -11108,7 +11108,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "input#content",
@@ -11121,7 +11121,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -11134,7 +11134,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -11157,7 +11157,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     OnAttribute = "value",
     OnElement = "//input[@id='content']",
     RegularExpression = "(?s)^(.{0,100})"
@@ -11169,7 +11169,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}")
     .setOnAttribute("value")
     .setOnElement("//input[@id='content']")
     .setRegularExpression("(?s)^(.{0,100})");
@@ -11180,7 +11180,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     onAttribute: "value",
     onElement: "//input[@id='content']",
     regularExpression: "(?s)^(.{0,100})"
@@ -11192,7 +11192,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -11204,7 +11204,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -11226,7 +11226,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
@@ -11239,7 +11239,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}")
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
@@ -11251,7 +11251,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
@@ -11264,7 +11264,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -11277,7 +11277,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -11300,7 +11300,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "textarea#content"
@@ -11312,7 +11312,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}")
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("textarea#content");
@@ -11323,7 +11323,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "textarea#content"
@@ -11335,7 +11335,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content"
@@ -11347,7 +11347,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content"
@@ -11369,7 +11369,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     OnAttribute = "value",
     OnElement = "//textarea[@id='content']"
 };
@@ -11380,7 +11380,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}")
     .setOnAttribute("value")
     .setOnElement("//textarea[@id='content']");
 ```
@@ -11390,7 +11390,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     onAttribute: "value",
     onElement: "//textarea[@id='content']"
 };
@@ -11401,7 +11401,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']"
 }
@@ -11412,7 +11412,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']"
 }
@@ -11433,7 +11433,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content"
@@ -11445,7 +11445,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}")
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content");
@@ -11456,7 +11456,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     locator: "Id",
     onAttribute: "value",
     onElement: "content"
@@ -11468,7 +11468,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content"
@@ -11480,7 +11480,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^15\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content"
@@ -11502,7 +11502,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "input#content",
@@ -11515,7 +11515,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}")
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("input#content")
@@ -11527,7 +11527,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "input#content",
@@ -11540,7 +11540,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -11553,7 +11553,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "input#content",
@@ -11576,7 +11576,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     OnAttribute = "value",
     OnElement = "//input[@id='content']",
     RegularExpression = "(?s)^(.{0,100})"
@@ -11588,7 +11588,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}")
     .setOnAttribute("value")
     .setOnElement("//input[@id='content']")
     .setRegularExpression("(?s)^(.{0,100})");
@@ -11599,7 +11599,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     onAttribute: "value",
     onElement: "//input[@id='content']",
     regularExpression: "(?s)^(.{0,100})"
@@ -11611,7 +11611,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -11623,7 +11623,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     "onAttribute": "value",
     "onElement": "//input[@id='content']",
     "regularExpression": "(?s)^(.{0,100})"
@@ -11645,7 +11645,7 @@ The assertion passes only if the computed length, when converted to a string, do
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    Argument = "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
@@ -11658,7 +11658,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}")
+    .setArgument("{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}")
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
@@ -11670,7 +11670,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    argument: "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
@@ -11683,7 +11683,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -11696,7 +11696,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\d+$}}",
+    "argument": "{{$ --Condition:ElementTextLength --Operator:NotMatch --Expected:^1\\d+$}}",
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
@@ -13497,7 +13497,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     Locator = "CssSelector",
     OnElement = "div#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13509,7 +13509,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:Greater --Expected:42}}")
     .setLocator("CssSelector")
     .setOnElement("div#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -13520,7 +13520,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     locator: "CssSelector",
     onElement: "div#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -13532,7 +13532,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13544,7 +13544,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13564,7 +13564,7 @@ var actionRule = new ActionRuleModel
     PluginName = "Assert",
     Argument = "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     OnElement = "//div[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13575,7 +13575,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:ElementText --Operator:Greater --Expected:42}}")
     .setOnElement("//div[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -13585,7 +13585,7 @@ var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     onElement: "//div[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -13596,7 +13596,7 @@ var actionRule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13607,7 +13607,7 @@ action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13628,7 +13628,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     Locator = "Id",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13640,7 +13640,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:Greater --Expected:42}}")
     .setLocator("Id")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -13651,7 +13651,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     locator: "Id",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -13663,7 +13663,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13675,7 +13675,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13698,7 +13698,7 @@ var actionRule = new ActionRuleModel
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "textarea#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13711,7 +13711,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("textarea#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -13723,7 +13723,7 @@ var actionRule = {
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "textarea#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -13736,7 +13736,7 @@ var actionRule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13749,7 +13749,7 @@ action_rule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13771,7 +13771,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     OnAttribute = "value",
     OnElement = "//textarea[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13783,7 +13783,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:Greater --Expected:42}}")
     .setOnAttribute("value")
     .setOnElement("//textarea[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -13794,7 +13794,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     onAttribute: "value",
     onElement: "//textarea[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -13806,7 +13806,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13818,7 +13818,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:Greater --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13841,7 +13841,7 @@ var actionRule = new ActionRuleModel
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13854,7 +13854,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -13866,7 +13866,7 @@ var actionRule = {
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -13879,7 +13879,7 @@ var actionRule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13892,7 +13892,7 @@ action_rule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13913,7 +13913,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     Locator = "CssSelector",
     OnElement = "div#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13925,7 +13925,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}")
     .setLocator("CssSelector")
     .setOnElement("div#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -13936,7 +13936,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     locator: "CssSelector",
     onElement: "div#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -13948,7 +13948,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13960,7 +13960,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -13980,7 +13980,7 @@ var actionRule = new ActionRuleModel
     PluginName = "Assert",
     Argument = "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     OnElement = "//div[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -13991,7 +13991,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}")
     .setOnElement("//div[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14001,7 +14001,7 @@ var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     onElement: "//div[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14012,7 +14012,7 @@ var actionRule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14023,7 +14023,7 @@ action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14044,7 +14044,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     Locator = "Id",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14056,7 +14056,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}")
     .setLocator("Id")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14067,7 +14067,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     locator: "Id",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14079,7 +14079,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14091,7 +14091,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14114,7 +14114,7 @@ var actionRule = new ActionRuleModel
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "textarea#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14127,7 +14127,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("textarea#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14139,7 +14139,7 @@ var actionRule = {
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "textarea#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14152,7 +14152,7 @@ var actionRule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14165,7 +14165,7 @@ action_rule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14187,7 +14187,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     OnAttribute = "value",
     OnElement = "//textarea[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14199,7 +14199,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}")
     .setOnAttribute("value")
     .setOnElement("//textarea[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14210,7 +14210,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     onAttribute: "value",
     onElement: "//textarea[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14222,7 +14222,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14234,7 +14234,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:GreaterEqual --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14257,7 +14257,7 @@ var actionRule = new ActionRuleModel
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14270,7 +14270,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14282,7 +14282,7 @@ var actionRule = {
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14295,7 +14295,7 @@ var actionRule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14308,7 +14308,7 @@ action_rule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14329,7 +14329,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     Locator = "CssSelector",
     OnElement = "div#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14341,7 +14341,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:Lower --Expected:42}}")
     .setLocator("CssSelector")
     .setOnElement("div#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14352,7 +14352,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     locator: "CssSelector",
     onElement: "div#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14364,7 +14364,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14376,7 +14376,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14396,7 +14396,7 @@ var actionRule = new ActionRuleModel
     PluginName = "Assert",
     Argument = "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     OnElement = "//div[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14407,7 +14407,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:ElementText --Operator:Lower --Expected:42}}")
     .setOnElement("//div[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14417,7 +14417,7 @@ var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     onElement: "//div[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14428,7 +14428,7 @@ var actionRule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14439,7 +14439,7 @@ action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14460,7 +14460,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     Locator = "Id",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14472,7 +14472,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:Lower --Expected:42}}")
     .setLocator("Id")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14483,7 +14483,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     locator: "Id",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14495,7 +14495,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14507,7 +14507,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14530,7 +14530,7 @@ var actionRule = new ActionRuleModel
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "textarea#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14543,7 +14543,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("textarea#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14555,7 +14555,7 @@ var actionRule = {
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "textarea#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14568,7 +14568,7 @@ var actionRule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14581,7 +14581,7 @@ action_rule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14603,7 +14603,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     OnAttribute = "value",
     OnElement = "//textarea[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14615,7 +14615,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:Lower --Expected:42}}")
     .setOnAttribute("value")
     .setOnElement("//textarea[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14626,7 +14626,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     onAttribute: "value",
     onElement: "//textarea[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14638,7 +14638,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14650,7 +14650,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:Lower --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14673,7 +14673,7 @@ var actionRule = new ActionRuleModel
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14686,7 +14686,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14698,7 +14698,7 @@ var actionRule = {
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14711,7 +14711,7 @@ var actionRule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14724,7 +14724,7 @@ action_rule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14745,7 +14745,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     Locator = "CssSelector",
     OnElement = "div#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14757,7 +14757,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}")
     .setLocator("CssSelector")
     .setOnElement("div#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14768,7 +14768,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     locator: "CssSelector",
     onElement: "div#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14780,7 +14780,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14792,7 +14792,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "locator": "CssSelector",
     "onElement": "div#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14812,7 +14812,7 @@ var actionRule = new ActionRuleModel
     PluginName = "Assert",
     Argument = "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     OnElement = "//div[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14823,7 +14823,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}")
     .setOnElement("//div[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14833,7 +14833,7 @@ var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     onElement: "//div[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14844,7 +14844,7 @@ var actionRule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14855,7 +14855,7 @@ action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "onElement": "//div[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14876,7 +14876,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     Locator = "Id",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14888,7 +14888,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}")
     .setLocator("Id")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14899,7 +14899,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     locator: "Id",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14911,7 +14911,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14923,7 +14923,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "locator": "Id",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14946,7 +14946,7 @@ var actionRule = new ActionRuleModel
     Locator = "CssSelector",
     OnAttribute = "value",
     OnElement = "textarea#content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -14959,7 +14959,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("CssSelector")
     .setOnAttribute("value")
     .setOnElement("textarea#content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -14971,7 +14971,7 @@ var actionRule = {
     locator: "CssSelector",
     onAttribute: "value",
     onElement: "textarea#content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -14984,7 +14984,7 @@ var actionRule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -14997,7 +14997,7 @@ action_rule = {
     "locator": "CssSelector",
     "onAttribute": "value",
     "onElement": "textarea#content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -15019,7 +15019,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     OnAttribute = "value",
     OnElement = "//textarea[@id='content']",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -15031,7 +15031,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}")
     .setOnAttribute("value")
     .setOnElement("//textarea[@id='content']")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -15042,7 +15042,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     onAttribute: "value",
     onElement: "//textarea[@id='content']",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -15054,7 +15054,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -15066,7 +15066,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementText --Operator:LowerEqual --Expected:42}}",
     "onAttribute": "value",
     "onElement": "//textarea[@id='content']",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -15089,7 +15089,7 @@ var actionRule = new ActionRuleModel
     Locator = "Id",
     OnAttribute = "value",
     OnElement = "content",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -15102,7 +15102,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setLocator("Id")
     .setOnAttribute("value")
     .setOnElement("content")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -15114,7 +15114,7 @@ var actionRule = {
     locator: "Id",
     onAttribute: "value",
     onElement: "content",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -15127,7 +15127,7 @@ var actionRule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -15140,7 +15140,7 @@ action_rule = {
     "locator": "Id",
     "onAttribute": "value",
     "onElement": "content",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17012,7 +17012,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageTitle --Operator:Greater --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17022,7 +17022,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageTitle --Operator:Greater --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17031,7 +17031,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageTitle --Operator:Greater --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17041,7 +17041,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:Greater --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17051,7 +17051,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:Greater --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17071,7 +17071,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageTitle --Operator:GreaterEqual --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17081,7 +17081,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageTitle --Operator:GreaterEqual --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17090,7 +17090,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageTitle --Operator:GreaterEqual --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17100,7 +17100,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:GreaterEqual --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17110,7 +17110,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:GreaterEqual --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17130,7 +17130,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageTitle --Operator:Lower --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17140,7 +17140,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageTitle --Operator:Lower --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17149,7 +17149,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageTitle --Operator:Lower --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17159,7 +17159,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:Lower --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17169,7 +17169,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:Lower --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17189,7 +17189,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageTitle --Operator:LowerEqual --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17199,7 +17199,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageTitle --Operator:LowerEqual --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17208,7 +17208,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageTitle --Operator:LowerEqual --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17218,7 +17218,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:LowerEqual --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17228,7 +17228,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageTitle --Operator:LowerEqual --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17700,7 +17700,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17710,7 +17710,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17719,7 +17719,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17729,7 +17729,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17739,7 +17739,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17759,7 +17759,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17769,7 +17769,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17778,7 +17778,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17788,7 +17788,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17798,7 +17798,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:Greater --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17818,7 +17818,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageUrl --Operator:Lower --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17828,7 +17828,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageUrl --Operator:Lower --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17837,7 +17837,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageUrl --Operator:Lower --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17847,7 +17847,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:Lower --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17857,7 +17857,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:Lower --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17877,7 +17877,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
     Argument = "{{$ --Condition:PageUrl --Operator:LowerEqual --Expected:42}}",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -17887,7 +17887,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:PageUrl --Operator:LowerEqual --Expected:42}}")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -17896,7 +17896,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:PageUrl --Operator:LowerEqual --Expected:42}}",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -17906,7 +17906,7 @@ var actionRule = {
 {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:LowerEqual --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -17916,7 +17916,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:PageUrl --Operator:LowerEqual --Expected:42}}",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -18481,8 +18481,8 @@ The assertion passes only if the string representation of the window count match
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\d+?$}}",
-    RegularExpression = "^1\d+?$"
+    Argument = "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\\d+?$}}",
+    RegularExpression = "^1\\d+?$"
 };
 ```
 
@@ -18491,8 +18491,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:WindowCount --Operator:Match --Expected:^1\d+?$}}")
-    .setRegularExpression("^1\d+?$");
+    .setArgument("{{$ --Condition:WindowCount --Operator:Match --Expected:^1\\d+?$}}")
+    .setRegularExpression("^1\\d+?$");
 ```
 
 **Javascript:**
@@ -18500,8 +18500,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\d+?$}}",
-    regularExpression: "^1\d+?$"
+    argument: "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\\d+?$}}",
+    regularExpression: "^1\\d+?$"
 };
 ```
 
@@ -18510,8 +18510,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\d+?$}}",
-    "regularExpression": "^1\d+?$"
+    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\\d+?$}}",
+    "regularExpression": "^1\\d+?$"
 }
 ```
 
@@ -18520,8 +18520,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\d+?$}}",
-    "regularExpression": "^1\d+?$"
+    "argument": "{{$ --Condition:WindowCount --Operator:Match --Expected:^1\\d+?$}}",
+    "regularExpression": "^1\\d+?$"
 }
 ```
 
@@ -18540,7 +18540,7 @@ The assertion passes only if the string representation of the window count does 
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\d+?$}}"
+    Argument = "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\\d+?$}}"
 };
 ```
 
@@ -18549,7 +18549,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\d+?$}}");
+    .setArgument("{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\\d+?$}}");
 ```
 
 **Javascript:**
@@ -18557,7 +18557,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\d+?$}}"
+    argument: "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\\d+?$}}"
 };
 ```
 
@@ -18566,7 +18566,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\d+?$}}"
+    "argument": "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\\d+?$}}"
 }
 ```
 
@@ -18575,7 +18575,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\d+?$}}"
+    "argument": "{{$ --Condition:WindowCount --Operator:NotMatch --Expected:^1\\d+?$}}"
 }
 ```
 
@@ -18710,7 +18710,7 @@ The assertion passes only if the provided text value matches the pattern `\d{3}-
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:Text --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    Argument = "{{$ --Condition:Text --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     OnElement = "123-45-6789"
 };
 ```
@@ -18720,7 +18720,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:Text --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}")
+    .setArgument("{{$ --Condition:Text --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}")
     .setOnElement("123-45-6789");
 ```
 
@@ -18729,7 +18729,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:Text --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    argument: "{{$ --Condition:Text --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     onElement: "123-45-6789"
 };
 ```
@@ -18739,7 +18739,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:Text --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Condition:Text --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "123-45-6789"
 }
 ```
@@ -18749,7 +18749,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:Text --Operator:Match --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Condition:Text --Operator:Match --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "123-45-6789"
 }
 ```
@@ -18769,7 +18769,7 @@ The assertion passes only if the provided text value does not match the pattern 
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:Text --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    Argument = "{{$ --Condition:Text --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     OnElement = "123-45-6789"
 };
 ```
@@ -18779,7 +18779,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:Text --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}")
+    .setArgument("{{$ --Condition:Text --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}")
     .setOnElement("123-45-6789");
 ```
 
@@ -18788,7 +18788,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:Text --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    argument: "{{$ --Condition:Text --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     onElement: "123-45-6789"
 };
 ```
@@ -18798,7 +18798,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:Text --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Condition:Text --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "123-45-6789"
 }
 ```
@@ -18808,7 +18808,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:Text --Operator:NotMatch --Expected:\d{3}-\d{2}-\d{4}}}",
+    "argument": "{{$ --Condition:Text --Operator:NotMatch --Expected:\\d{3}-\\d{2}-\\d{4}}}",
     "onElement": "123-45-6789"
 }
 ```
@@ -19062,7 +19062,7 @@ var actionRule = new ActionRuleModel
     PluginName = "Assert",
     Argument = "{{$ --Condition:Text --Operator:Equal --Expected:100}}",
     OnElement = "1000",
-    RegularExpression = "\d{3}"
+    RegularExpression = "\\d{3}"
 };
 ```
 
@@ -19073,7 +19073,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
     .setArgument("{{$ --Condition:Text --Operator:Equal --Expected:100}}")
     .setOnElement("1000")
-    .setRegularExpression("\d{3}");
+    .setRegularExpression("\\d{3}");
 ```
 
 **Javascript:**
@@ -19083,7 +19083,7 @@ var actionRule = {
     pluginName: "Assert",
     argument: "{{$ --Condition:Text --Operator:Equal --Expected:100}}",
     onElement: "1000",
-    regularExpression: "\d{3}"
+    regularExpression: "\\d{3}"
 };
 ```
 
@@ -19094,7 +19094,7 @@ var actionRule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:Text --Operator:Equal --Expected:100}}",
     "onElement": "1000",
-    "regularExpression": "\d{3}"
+    "regularExpression": "\\d{3}"
 }
 ```
 
@@ -19105,7 +19105,7 @@ action_rule = {
     "pluginName": "Assert",
     "argument": "{{$ --Condition:Text --Operator:Equal --Expected:100}}",
     "onElement": "1000",
-    "regularExpression": "\d{3}"
+    "regularExpression": "\\d{3}"
 }
 ```
 

@@ -71,7 +71,7 @@ CopyFiles writes the file to that path and creates any missing parent folders.
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyFiles",
-    Argument = "{{$ --Source:C:\Reports\report.pdf --Destination:C:\Archive\report-copy.pdf}}"
+    Argument = "{{$ --Source:C:\\Reports\\report.pdf --Destination:C:\\Archive\\report-copy.pdf}}"
 };
 ```
 
@@ -80,7 +80,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyFiles")
-    .setArgument("{{$ --Source:C:\Reports\report.pdf --Destination:C:\Archive\report-copy.pdf}}");
+    .setArgument("{{$ --Source:C:\\Reports\\report.pdf --Destination:C:\\Archive\\report-copy.pdf}}");
 ```
 
 **Javascript:**
@@ -88,7 +88,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "CopyFiles",
-    argument: "{{$ --Source:C:\Reports\report.pdf --Destination:C:\Archive\report-copy.pdf}}"
+    argument: "{{$ --Source:C:\\Reports\\report.pdf --Destination:C:\\Archive\\report-copy.pdf}}"
 };
 ```
 
@@ -97,7 +97,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:C:\Reports\report.pdf --Destination:C:\Archive\report-copy.pdf}}"
+    "argument": "{{$ --Source:C:\\Reports\\report.pdf --Destination:C:\\Archive\\report-copy.pdf}}"
 }
 ```
 
@@ -106,7 +106,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:C:\Reports\report.pdf --Destination:C:\Archive\report-copy.pdf}}"
+    "argument": "{{$ --Source:C:\\Reports\\report.pdf --Destination:C:\\Archive\\report-copy.pdf}}"
 }
 ```
 
@@ -123,7 +123,7 @@ CopyFiles mirrors the tree, including empty folders, at the shared destination.
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyFiles",
-    Argument = "{{$ --Source:C:\Automation\Results --Destination:\\fileserver\share\Results --Recursive}}"
+    Argument = "{{$ --Source:C:\\Automation\\Results --Destination:\\\\fileserver\\share\\Results --Recursive}}"
 };
 ```
 
@@ -132,7 +132,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyFiles")
-    .setArgument("{{$ --Source:C:\Automation\Results --Destination:\\fileserver\share\Results --Recursive}}");
+    .setArgument("{{$ --Source:C:\\Automation\\Results --Destination:\\\\fileserver\\share\\Results --Recursive}}");
 ```
 
 **Javascript:**
@@ -140,7 +140,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "CopyFiles",
-    argument: "{{$ --Source:C:\Automation\Results --Destination:\\fileserver\share\Results --Recursive}}"
+    argument: "{{$ --Source:C:\\Automation\\Results --Destination:\\\\fileserver\\share\\Results --Recursive}}"
 };
 ```
 
@@ -149,7 +149,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:C:\Automation\Results --Destination:\\fileserver\share\Results --Recursive}}"
+    "argument": "{{$ --Source:C:\\Automation\\Results --Destination:\\\\fileserver\\share\\Results --Recursive}}"
 }
 ```
 
@@ -158,7 +158,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:C:\Automation\Results --Destination:\\fileserver\share\Results --Recursive}}"
+    "argument": "{{$ --Source:C:\\Automation\\Results --Destination:\\\\fileserver\\share\\Results --Recursive}}"
 }
 ```
 
@@ -175,7 +175,7 @@ Enable `NoClobber` so files that already exist at the destination are skipped an
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyFiles",
-    Argument = "{{$ --Source:C:\Logs\*.log --Destination:C:\Collected --Recursive --NoClobber}}"
+    Argument = "{{$ --Source:C:\\Logs\\*.log --Destination:C:\\Collected --Recursive --NoClobber}}"
 };
 ```
 
@@ -184,7 +184,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyFiles")
-    .setArgument("{{$ --Source:C:\Logs\*.log --Destination:C:\Collected --Recursive --NoClobber}}");
+    .setArgument("{{$ --Source:C:\\Logs\\*.log --Destination:C:\\Collected --Recursive --NoClobber}}");
 ```
 
 **Javascript:**
@@ -192,7 +192,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "CopyFiles",
-    argument: "{{$ --Source:C:\Logs\*.log --Destination:C:\Collected --Recursive --NoClobber}}"
+    argument: "{{$ --Source:C:\\Logs\\*.log --Destination:C:\\Collected --Recursive --NoClobber}}"
 };
 ```
 
@@ -201,7 +201,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:C:\Logs\*.log --Destination:C:\Collected --Recursive --NoClobber}}"
+    "argument": "{{$ --Source:C:\\Logs\\*.log --Destination:C:\\Collected --Recursive --NoClobber}}"
 }
 ```
 
@@ -210,7 +210,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:C:\Logs\*.log --Destination:C:\Collected --Recursive --NoClobber}}"
+    "argument": "{{$ --Source:C:\\Logs\\*.log --Destination:C:\\Collected --Recursive --NoClobber}}"
 }
 ```
 
@@ -227,7 +227,7 @@ Without `Recursive`, CopyFiles copies only the files at the top level of the sou
 var actionRule = new ActionRuleModel
 {
     PluginName = "CopyFiles",
-    Argument = "{{$ --Source:.\input --Destination:..\output}}"
+    Argument = "{{$ --Source:.\\input --Destination:..\\output}}"
 };
 ```
 
@@ -236,7 +236,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("CopyFiles")
-    .setArgument("{{$ --Source:.\input --Destination:..\output}}");
+    .setArgument("{{$ --Source:.\\input --Destination:..\\output}}");
 ```
 
 **Javascript:**
@@ -244,7 +244,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "CopyFiles",
-    argument: "{{$ --Source:.\input --Destination:..\output}}"
+    argument: "{{$ --Source:.\\input --Destination:..\\output}}"
 };
 ```
 
@@ -253,7 +253,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:.\input --Destination:..\output}}"
+    "argument": "{{$ --Source:.\\input --Destination:..\\output}}"
 }
 ```
 
@@ -262,7 +262,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "CopyFiles",
-    "argument": "{{$ --Source:.\input --Destination:..\output}}"
+    "argument": "{{$ --Source:.\\input --Destination:..\\output}}"
 }
 ```
 
@@ -298,13 +298,13 @@ It can be referenced by downstream rules, for example to assert or process each 
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Provides the `Source`, `Destination`, `Recursive`, and `NoClobber` parameters through a G4 parameter expression.
 Values can come from macros or data columns, so one rule can copy different paths in each run.

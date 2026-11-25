@@ -60,7 +60,7 @@ The whole text is encoded as UTF-8 Base64 and returned in the `File` entity key.
 var actionRule = new ActionRuleModel
 {
     PluginName = "AddFile",
-    Argument = "C:\Data\orders.csv"
+    Argument = "C:\\Data\\orders.csv"
 };
 ```
 
@@ -69,7 +69,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("AddFile")
-    .setArgument("C:\Data\orders.csv");
+    .setArgument("C:\\Data\\orders.csv");
 ```
 
 **Javascript:**
@@ -77,7 +77,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "AddFile",
-    argument: "C:\Data\orders.csv"
+    argument: "C:\\Data\\orders.csv"
 };
 ```
 
@@ -86,7 +86,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "AddFile",
-    "argument": "C:\Data\orders.csv"
+    "argument": "C:\\Data\\orders.csv"
 }
 ```
 
@@ -95,7 +95,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "AddFile",
-    "argument": "C:\Data\orders.csv"
+    "argument": "C:\\Data\\orders.csv"
 }
 ```
 
@@ -112,8 +112,8 @@ Only the matched number is encoded as Base64, so a later step gets the value wit
 var actionRule = new ActionRuleModel
 {
     PluginName = "AddFile",
-    Argument = "C:\Data\invoice.txt",
-    RegularExpression = "(?<=Invoice: )\d+"
+    Argument = "C:\\Data\\invoice.txt",
+    RegularExpression = "(?<=Invoice: )\\d+"
 };
 ```
 
@@ -122,8 +122,8 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("AddFile")
-    .setArgument("C:\Data\invoice.txt")
-    .setRegularExpression("(?<=Invoice: )\d+");
+    .setArgument("C:\\Data\\invoice.txt")
+    .setRegularExpression("(?<=Invoice: )\\d+");
 ```
 
 **Javascript:**
@@ -131,8 +131,8 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "AddFile",
-    argument: "C:\Data\invoice.txt",
-    regularExpression: "(?<=Invoice: )\d+"
+    argument: "C:\\Data\\invoice.txt",
+    regularExpression: "(?<=Invoice: )\\d+"
 };
 ```
 
@@ -141,8 +141,8 @@ var actionRule = {
 ```js
 {
     "pluginName": "AddFile",
-    "argument": "C:\Data\invoice.txt",
-    "regularExpression": "(?<=Invoice: )\d+"
+    "argument": "C:\\Data\\invoice.txt",
+    "regularExpression": "(?<=Invoice: )\\d+"
 }
 ```
 
@@ -151,8 +151,8 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "AddFile",
-    "argument": "C:\Data\invoice.txt",
-    "regularExpression": "(?<=Invoice: )\d+"
+    "argument": "C:\\Data\\invoice.txt",
+    "regularExpression": "(?<=Invoice: )\\d+"
 }
 ```
 
@@ -169,7 +169,7 @@ The exact bytes are returned as Base64, ready to attach to a mail or embed in an
 var actionRule = new ActionRuleModel
 {
     PluginName = "AddFile",
-    Argument = "C:\Reports\chart.png"
+    Argument = "C:\\Reports\\chart.png"
 };
 ```
 
@@ -178,7 +178,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("AddFile")
-    .setArgument("C:\Reports\chart.png");
+    .setArgument("C:\\Reports\\chart.png");
 ```
 
 **Javascript:**
@@ -186,7 +186,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "AddFile",
-    argument: "C:\Reports\chart.png"
+    argument: "C:\\Reports\\chart.png"
 };
 ```
 
@@ -195,7 +195,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "AddFile",
-    "argument": "C:\Reports\chart.png"
+    "argument": "C:\\Reports\\chart.png"
 }
 ```
 
@@ -204,7 +204,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "AddFile",
-    "argument": "C:\Reports\chart.png"
+    "argument": "C:\\Reports\\chart.png"
 }
 ```
 
@@ -280,13 +280,13 @@ The session value itself is Base64-encoded, so decode it before reading the arra
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 The path of the file to add, such as `C:\Data\invoice.txt` or `Resources/settings.json`.
 A relative path is resolved against the working directory, and a missing file fails the step.

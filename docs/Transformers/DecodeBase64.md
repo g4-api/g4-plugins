@@ -104,7 +104,7 @@ var actionRule = new ActionRuleModel
 {
     PluginName = "contentType",
     OnElement = ".//span[@id='Token']",
-    RegularExpression = "(?<=\w+:).*"
+    RegularExpression = "(?<=\\w+:).*"
 };
 ```
 
@@ -114,7 +114,7 @@ var actionRule = new ActionRuleModel
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("contentType")
     .setOnElement(".//span[@id='Token']")
-    .setRegularExpression("(?<=\w+:).*");
+    .setRegularExpression("(?<=\\w+:).*");
 ```
 
 **Javascript:**
@@ -123,7 +123,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 var actionRule = {
     pluginName: "contentType",
     onElement: ".//span[@id='Token']",
-    regularExpression: "(?<=\w+:).*"
+    regularExpression: "(?<=\\w+:).*"
 };
 ```
 
@@ -133,7 +133,7 @@ var actionRule = {
 {
     "pluginName": "contentType",
     "onElement": ".//span[@id='Token']",
-    "regularExpression": "(?<=\w+:).*"
+    "regularExpression": "(?<=\\w+:).*"
 }
 ```
 
@@ -143,7 +143,7 @@ var actionRule = {
 action_rule = {
     "pluginName": "contentType",
     "onElement": ".//span[@id='Token']",
-    "regularExpression": "(?<=\w+:).*"
+    "regularExpression": "(?<=\\w+:).*"
 }
 ```
 

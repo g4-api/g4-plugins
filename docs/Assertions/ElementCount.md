@@ -215,7 +215,7 @@ var actionRule = new ActionRuleModel
     Argument = "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:0}}",
     Locator = "CssSelector",
     OnElement = ".list-item",
-    RegularExpression = "\d+"
+    RegularExpression = "\\d+"
 };
 ```
 
@@ -227,7 +227,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
     .setArgument("{{$ --Condition:ElementCount --Operator:NotEqual --Expected:0}}")
     .setLocator("CssSelector")
     .setOnElement(".list-item")
-    .setRegularExpression("\d+");
+    .setRegularExpression("\\d+");
 ```
 
 **Javascript:**
@@ -238,7 +238,7 @@ var actionRule = {
     argument: "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:0}}",
     locator: "CssSelector",
     onElement: ".list-item",
-    regularExpression: "\d+"
+    regularExpression: "\\d+"
 };
 ```
 
@@ -250,7 +250,7 @@ var actionRule = {
     "argument": "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:0}}",
     "locator": "CssSelector",
     "onElement": ".list-item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -262,7 +262,7 @@ action_rule = {
     "argument": "{{$ --Condition:ElementCount --Operator:NotEqual --Expected:0}}",
     "locator": "CssSelector",
     "onElement": ".list-item",
-    "regularExpression": "\d+"
+    "regularExpression": "\\d+"
 }
 ```
 
@@ -386,7 +386,7 @@ Check that the count of elements matching the locator `//*[@id='section']//div` 
 var actionRule = new ActionRuleModel
 {
     PluginName = "Assert",
-    Argument = "{{$ --Condition:ElementCount --Operator:Match --Expected:\d+}}",
+    Argument = "{{$ --Condition:ElementCount --Operator:Match --Expected:\\d+}}",
     OnElement = "//*[@id='section']//div"
 };
 ```
@@ -396,7 +396,7 @@ var actionRule = new ActionRuleModel
 ```java
 ActionRuleModel actionRule = new ActionRuleModel()
     .setPluginName("Assert")
-    .setArgument("{{$ --Condition:ElementCount --Operator:Match --Expected:\d+}}")
+    .setArgument("{{$ --Condition:ElementCount --Operator:Match --Expected:\\d+}}")
     .setOnElement("//*[@id='section']//div");
 ```
 
@@ -405,7 +405,7 @@ ActionRuleModel actionRule = new ActionRuleModel()
 ```js
 var actionRule = {
     pluginName: "Assert",
-    argument: "{{$ --Condition:ElementCount --Operator:Match --Expected:\d+}}",
+    argument: "{{$ --Condition:ElementCount --Operator:Match --Expected:\\d+}}",
     onElement: "//*[@id='section']//div"
 };
 ```
@@ -415,7 +415,7 @@ var actionRule = {
 ```js
 {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:\d+}}",
+    "argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:\\d+}}",
     "onElement": "//*[@id='section']//div"
 }
 ```
@@ -425,7 +425,7 @@ var actionRule = {
 ```python
 action_rule = {
     "pluginName": "Assert",
-    "argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:\d+}}",
+    "argument": "{{$ --Condition:ElementCount --Operator:Match --Expected:\\d+}}",
     "onElement": "//*[@id='section']//div"
 }
 ```
@@ -489,13 +489,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the condition under which the assertion will pass or fail.
 This property allows users to define the operator of the condition (e.g., `Equal`, `Greater`, `Match`) and the expected value for the element count.
@@ -514,13 +514,13 @@ Specifies the locator strategy used to identify the target elements on the web p
 
 ### On Element (OnElement)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Specifies the web elements to be counted. This can be defined using a locator strategy, such as Xpath, CSS Selector, etc.
 

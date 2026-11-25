@@ -1,0 +1,192 @@
+{
+	"aliases": [
+		"StartActivity",
+		"OpenActivity"
+	],
+	"author": {
+		"link": "https://www.linkedin.com/in/roei-sabag-247aa18/",
+		"name": "Roei Sabag"
+	},
+	"categories": [
+		"WebDriver"
+	],
+	"context": {
+		"integration": {
+			"github": {
+				"document": "https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SwitchActivity.md",
+				"source": "https://github.com/g4-api/g4-plugins/blob/main/src/G4.Plugins.Ui/Actions.Mobile/SwitchActivity.cs"
+			},
+			"rag": {
+				"description": "Starts an Android activity by package and activity name through the Appium UiAutomator2 mobile: startActivity command, which brings that screen to the foreground. Android recordings produce this action when the app moves to another activity.",
+				"qa": [
+					{
+						"question": "What does the SwitchActivity action do?",
+						"answer": "It starts the Android activity named by Package and Activity through the Appium mobile: startActivity command, so that screen comes to the foreground."
+					},
+					{
+						"question": "Which inputs does SwitchActivity use?",
+						"answer": "Activity is mandatory; Package is optional. With both, the intent is package/activity. When Activity already contains a slash, it is used as the full intent and Package is ignored."
+					},
+					{
+						"question": "What happens when Activity is missing?",
+						"answer": "The step fails with an ArgumentException before any driver call, because Android cannot start an empty intent."
+					},
+					{
+						"question": "Which drivers support SwitchActivity?",
+						"answer": "Android sessions on the Appium UiAutomator2 driver, which implements mobile: startActivity. Other drivers reject the command."
+					},
+					{
+						"question": "Where does SwitchActivity come from in a recorded flow?",
+						"answer": "The G4 Android recorder records a window change to a new activity as SwitchActivity, and the Hub writes it as {{$ --Package:<package> --Activity:<activity>}}."
+					},
+					{
+						"question": "What is the manifest version of SwitchActivity?",
+						"answer": "The manifest version is 4. Documentation: https://github.com/g4-api/g4-plugins/blob/main/docs/Actions/SwitchActivity.md"
+					}
+				]
+			},
+			"sequentialWorkflow": {
+				"$type": "Action",
+				"componentType": "task",
+				"iconProvider": {
+					"name": "mobile-task",
+					"svg": null
+				},
+				"label": "Switch Activity",
+				"model": "ActionRuleModel"
+			},
+			"mcp": {
+				"title": "Switch Activity"
+			}
+		}
+	},
+	"description": [
+		"### Purpose",
+		"",
+		"Starts an Android activity by its package and activity name, which brings that screen to the foreground.",
+		"The action calls the Appium UiAutomator2 `mobile: startActivity` command with the intent `package/activity`.",
+		"Use it to open a screen directly, without navigating to it through the user interface.",
+		"The G4 Android recorder records a move to another activity as this action.",
+		"",
+		"### Key Features and Functionality",
+		"",
+		"| Feature                  | Description                                                        |",
+		"|--------------------------|--------------------------------------------------------------------|",
+		"| Direct Navigation        | Opens an activity by name instead of tapping through the app.      |",
+		"| Intent Building          | Joins Package and Activity as package/activity.                    |",
+		"| Full Intent Pass-Through | Uses Activity as the full intent when it already contains a slash. |",
+		"| Early Validation         | Fails before any driver call when Activity is missing.             |",
+		"",
+		"### Usages in RPA",
+		"",
+		"| Use Case         | Description                                                          |",
+		"|------------------|----------------------------------------------------------------------|",
+		"| Jump to a Screen | Opens a settings or report screen directly to save navigation steps. |",
+		"| Recover a Flow   | Returns the app to a known screen after an unexpected dialog.        |",
+		"",
+		"### Usages in Automation Testing",
+		"",
+		"| Use Case             | Description                                                  |",
+		"|----------------------|--------------------------------------------------------------|",
+		"| Screen Isolation     | Starts each test on the activity under test.                 |",
+		"| Recorded Flow Replay | Replays a screen change captured by the G4 Android recorder. |"
+	],
+	"examples": [
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"The activity is not exported, so Android refuses to start it from outside the app",
+						"The session is not on the UiAutomator2 driver, so the command is rejected"
+					],
+					"expected_result": "The com.example.app.SettingsActivity screen comes to the foreground.",
+					"notes": "Package and Activity are joined as com.example.app/com.example.app.SettingsActivity and passed to mobile: startActivity.",
+					"use_case": "switch_activity_by_package_and_activity",
+					"version": "4"
+				},
+				"labels": [
+					"Activity",
+					"Android",
+					"Mobile",
+					"Navigation"
+				]
+			},
+			"description": [
+				"### Open an activity by package and name",
+				"",
+				"Starts `com.example.app.SettingsActivity` in the `com.example.app` package."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Package:com.example.app --Activity:com.example.app.SettingsActivity}}",
+				"pluginName": "SwitchActivity"
+			}
+		},
+		{
+			"context": {
+				"annotations": {
+					"edge_cases": [
+						"The intent names a package that is not installed, so the driver reports an error"
+					],
+					"expected_result": "The activity named by the full intent comes to the foreground.",
+					"notes": "Activity already contains a slash, so it is used as the intent as it is.",
+					"use_case": "switch_activity_full_intent",
+					"version": "4"
+				},
+				"labels": [
+					"Activity",
+					"Android",
+					"Intent"
+				]
+			},
+			"description": [
+				"### Open an activity by its full intent",
+				"",
+				"Starts the activity from a full `package/activity` intent, without a separate Package argument."
+			],
+			"rule": {
+				"$type": "Action",
+				"argument": "{{$ --Activity:com.example.app/.MainActivity}}",
+				"pluginName": "SwitchActivity"
+			}
+		}
+	],
+	"key": "SwitchActivity",
+	"namespace": "G4.Plugins.Ui",
+	"parameters": [
+		{
+			"description": [
+				"Activity names the Android activity to start, such as com.example.app.MainActivity.",
+				"When it contains a slash it is used as the full package/activity intent and Package is ignored.",
+				"It is mandatory; a missing value fails the step before any driver call."
+			],
+			"mandatory": true,
+			"name": "Activity",
+			"type": "String"
+		},
+		{
+			"description": [
+				"Package names the Android package that owns the activity, such as com.example.app.",
+				"It is joined with Activity as package/activity.",
+				"It is ignored when Activity already holds a full intent."
+			],
+			"mandatory": false,
+			"name": "Package",
+			"type": "String"
+		}
+	],
+	"platforms": [
+		"MobileNative"
+	],
+	"pluginType": "Action",
+	"protocol": {
+		"apiDocumentation": "https://github.com/appium/appium-uiautomator2-driver#mobile-startactivity",
+		"w3c": "POST /session/{session id}/execute/sync"
+	},
+	"summary": [
+		"Starts an Android activity by package and activity name.",
+		"Calls the Appium UiAutomator2 mobile: startActivity command with the package/activity intent.",
+		"Replays the screen changes recorded by the G4 Android recorder."
+	],
+	"version": "4"
+}

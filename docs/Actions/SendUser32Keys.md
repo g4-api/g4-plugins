@@ -213,13 +213,13 @@ action_rule = {
 
 ### Argument (Argument)
 
-| Attribute         | Value             |
-| ----------------- | ----------------- |
-| **Default Value** | Null              |
-| **Depends On**    | None              |
-| **Mandatory**     | Yes               |
-| **Multiple**      | No                |
-| **Value Type**    | String|Expression |
+| Attribute          | Value              |
+| ------------------ | ------------------ |
+| **Default Value**  | Null               |
+| **Depends On**     | None               |
+| **Mandatory**      | Yes                |
+| **Multiple**       | No                 |
+| **Value Type**     | String\|Expression |
 
 Carries the text string to type or a `{{$ ...}}` parameter expression containing the `Keys`, `Delay`, and `KeyboardLayout` options.
 When used without a parameter expression, the raw Argument value is treated directly as the text to type.
@@ -266,7 +266,7 @@ Pair with the `Locator` property to select the appropriate element-finding strat
 | **Depends On**    | None              |
 | **Mandatory**     | No                |
 | **Multiple**      | No                |
-| **Value Type**    | Time|Number       |
+| **Value Type**    | Time\|Number      |
 
 Specifies the pause in milliseconds between typing each consecutive character.
 Accepts a time string (e.g., `00:00:00.500`) or a numeric value representing milliseconds.
