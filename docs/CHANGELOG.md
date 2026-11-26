@@ -7,6 +7,21 @@ All notable changes to G4 Plugins are documented in this file. The format is bas
 
 ### Added
 
+- The live UIA tests have their test applications in the repository: `test/Apps/UiaClickLab` for the click tests and
+  `test/Apps/UiaDragDropLab` for the drag-and-drop tests. The README shows how to build them and set
+  `Uia.ClickApplication` and `Uia.DragAndDropApplication`.
+
+### Changed
+
+- The live click test is split into `InvokeUser32MiddleClickLiveTest` and `InvokeUser32ContextClickLiveTest`, each
+  with its own application instance and session. They need UIA driver server 2026.11.26.46 or later, which brings a
+  new session's window to the front.
+- The test projects use `G4.Api` 2026.11.25.80, which resolves the same engine and plugin versions as the plugins.
+
+## 2026.11.25.178
+
+### Added
+
 - `InvokeLongClick` long-presses an element, or the current touch position, with a W3C touch pointer for
   `--Duration` milliseconds (1000 by default). The G4 Android recorder records long clicks as this action.
 - `SwitchActivity` starts an Android activity from `--Package` and `--Activity` through the Appium UiAutomator2

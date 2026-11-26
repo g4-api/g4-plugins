@@ -1,0 +1,53 @@
+<Window x:Class="UiaDragDropLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UIA Drag Drop Lab"
+        Width="700"
+        Height="420"
+        Left="300"
+        Top="200"
+        Topmost="True"
+        WindowStartupLocation="Manual">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="220" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Case 1: drag a list item into the other list through Windows drag and drop. -->
+        <StackPanel Orientation="Horizontal">
+            <ListBox x:Name="SourceList"
+                     Width="200"
+                     Margin="0,0,40,0"
+                     AutomationProperties.AutomationId="SourceList"
+                     PreviewMouseLeftButtonDown="OnSourceMouseDown"
+                     PreviewMouseMove="OnSourceMouseMove">
+                <ListBoxItem>Alpha</ListBoxItem>
+                <ListBoxItem>Beta</ListBoxItem>
+                <ListBoxItem>Gamma</ListBoxItem>
+            </ListBox>
+            <ListBox x:Name="TargetList"
+                     Width="200"
+                     AllowDrop="True"
+                     AutomationProperties.AutomationId="TargetList"
+                     Background="WhiteSmoke"
+                     DragOver="OnTargetDragOver"
+                     Drop="OnTargetDrop" />
+        </StackPanel>
+
+        <!-- Case 2: drag a thumb that follows the captured mouse by an offset. -->
+        <Canvas Grid.Row="1" Background="Lavender">
+            <Thumb x:Name="DragThumb"
+                   Canvas.Left="20"
+                   Canvas.Top="30"
+                   Width="40"
+                   Height="40"
+                   AutomationProperties.AutomationId="DragThumb"
+                   DragDelta="OnThumbDragDelta" />
+            <TextBlock x:Name="ThumbStatus"
+                       Canvas.Left="20"
+                       Canvas.Top="100"
+                       Text="Thumb idle" />
+        </Canvas>
+    </Grid>
+</Window>
