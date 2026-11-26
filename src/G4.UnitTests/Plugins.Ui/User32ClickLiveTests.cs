@@ -25,23 +25,35 @@ namespace G4.UnitTests.Plugins.Ui
         // The UIA name of the click target in the click lab application.
         private const string ClickTarget = "//Button[@Name='Click Target']";
 
-        [TestMethod(DisplayName = "Verify on a live UIA driver that InvokeUser32MiddleClick and " +
-            "InvokeUser32ContextClick press the middle and the right button on an element.")]
-        public void InvokeUser32ElementClicksLiveTest()
+        [TestMethod(DisplayName = "Verify on a live UIA driver that InvokeUser32ContextClick presses the right " +
+            "button on an element.")]
+        public void InvokeUser32ContextClickLiveTest()
         {
-            // Arrange: middle-click the target and wait for the status text of a middle press, then right-click it
-            // and wait for the status text of a right press. Each focus rule fails the flow when another button,
-            // or none, was pressed. Both clicks run in one flow, because a second session that mounts the
-            // application by name can attach to the instance an earlier test closed.
+            // Arrange: right-click the target, then wait for the status text of a right press; the focus rule fails
+            // the flow when another button, or none, was pressed.
             var rules = new[]
             {
-                NewLiveRule(pluginName: nameof(InvokeUser32MiddleClick), onElement: ClickTarget),
-                NewLiveRule(pluginName: "SetUser32Focus", onElement: "//Text[@Name='Last button: Middle']"),
                 NewLiveRule(pluginName: nameof(InvokeUser32ContextClick), onElement: ClickTarget),
                 NewLiveRule(pluginName: "SetUser32Focus", onElement: "//Text[@Name='Last button: Right']")
             };
 
-            // Act and Assert: the flow runs on the live application without an error.
+            // Act and Assert: the flow runs on its own application instance and session without an error.
+            AssertLiveFlow(rules);
+        }
+
+        [TestMethod(DisplayName = "Verify on a live UIA driver that InvokeUser32MiddleClick presses the middle " +
+            "button on an element.")]
+        public void InvokeUser32MiddleClickLiveTest()
+        {
+            // Arrange: middle-click the target, then wait for the status text of a middle press; the focus rule fails
+            // the flow when another button, or none, was pressed.
+            var rules = new[]
+            {
+                NewLiveRule(pluginName: nameof(InvokeUser32MiddleClick), onElement: ClickTarget),
+                NewLiveRule(pluginName: "SetUser32Focus", onElement: "//Text[@Name='Last button: Middle']")
+            };
+
+            // Act and Assert: the flow runs on its own application instance and session without an error.
             AssertLiveFlow(rules);
         }
 
@@ -129,7 +141,7 @@ namespace G4.UnitTests.Plugins.Ui
             finally
             {
                 // Cleanup: close the application and wait until it is gone, because the next live test mounts the
-                // application by process name and would otherwise attach to this dying instance.
+                // application by process name and must find only its own instance.
                 if (!process.HasExited)
                 {
                     process.Kill();
@@ -165,7 +177,6 @@ namespace G4.UnitTests.Plugins.Ui
             if (process.MainWindowHandle == IntPtr.Zero)
             {
                 Assert.Fail("The click lab application did not show its main window within thirty seconds.");
-            }
-        }
+            }        }
     }
 }

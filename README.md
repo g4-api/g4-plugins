@@ -116,7 +116,29 @@ excludes them with `TestCategory!=LocalOnly`; run them on your workstation.
 | Tests | What they need |
 | --- | --- |
 | Machine-scope cases of `CopyParameter`, `GetParameter` and `RegisterParameter` | An elevated (administrator) prompt, because they write Machine environment variables. |
-| Live UIA tests (`UiaDriver` category) | A running UIA driver server and a Windows desktop. Set `Uia.DriverServer`, and the test application path `Uia.DragAndDropApplication` or `Uia.ClickApplication`, in the run settings. Without them the tests report Inconclusive. |
+| Live UIA tests (`UiaDriver` category) | A running UIA driver server (2026.11.26.46 or later) and a Windows desktop. Set `Uia.DriverServer`, and the test application paths `Uia.ClickApplication` and `Uia.DragAndDropApplication`, in the run settings. Without them the tests report Inconclusive. |
+
+The live UIA tests drive two small test applications in `test/Apps`. Build them once and point the run settings at
+the executables:
+
+| Application | Run setting | Used by |
+| --- | --- | --- |
+| `test/Apps/UiaClickLab` (Windows Forms) | `Uia.ClickApplication` | `User32ClickLiveTests` |
+| `test/Apps/UiaDragDropLab` (WPF) | `Uia.DragAndDropApplication` | The live `InvokeUser32DragAndDrop` tests |
+
+```powershell
+dotnet build ./test/Apps/UiaClickLab/UiaClickLab.csproj
+dotnet build ./test/Apps/UiaDragDropLab/UiaDragDropLab.csproj
+```
+
+```xml
+<Parameter name="Uia.DriverServer" value="http://localhost:5555" />
+<Parameter name="Uia.ClickApplication" value="<repository>\test\Apps\UiaClickLab\bin\Debug\net10.0-windows\UiaClickLab.exe" />
+<Parameter name="Uia.DragAndDropApplication" value="<repository>\test\Apps\UiaDragDropLab\bin\Debug\net10.0-windows\UiaDragDropLab.exe" />
+```
+
+Each application writes what it received to a log next to its executable (`clicks.log`, `events.log`), which shows
+whether an input reached the window when a live test fails.
 
 ```powershell
 dotnet test ./src/G4.UnitTests/G4.UnitTests.csproj --settings ./test/Settings/Local.runsettings --filter "TestCategory=LocalOnly"
