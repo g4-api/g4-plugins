@@ -3,6 +3,14 @@
 All notable changes to G4 Plugins are documented in this file. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## Unreleased
+
+### Fixed
+
+- The live click and drag-and-drop tests end their flows with `CloseBrowser`, so the engine deletes each UIA driver
+  session, even when a rule fails. Before, every run left its session open until the driver reported that its session
+  stack was full (`ready: false`).
+
 ## 2026.11.26.179
 
 ### Added

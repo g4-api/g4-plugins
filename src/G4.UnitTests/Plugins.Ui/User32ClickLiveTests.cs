@@ -1,6 +1,7 @@
 using G4.Api;
 using G4.Extensions;
 using G4.Models;
+using G4.Plugins.Ui.Actions;
 using G4.Plugins.Ui.Actions.User32;
 using G4.UnitTests.Framework;
 using G4.WebDriver.Models;
@@ -108,6 +109,13 @@ namespace G4.UnitTests.Plugins.Ui
                     }
                 };
 
+                // Arrange: end the flow with CloseBrowser so the engine deletes the driver session; the engine runs
+                // every rule even after one fails, so a failed flow does not leave a session on the driver either.
+                var closeRule = new ActionRuleModel
+                {
+                    PluginName = nameof(CloseBrowser)
+                };
+
                 // Arrange: wrap the rules in a one-stage, one-job automation that targets the live UIA driver server.
                 var automation = new G4AutomationModel
                 {
@@ -124,7 +132,7 @@ namespace G4.UnitTests.Plugins.Ui
                         ["Driver"] = "UiaDriver",
                         ["DriverBinaries"] = server
                     },
-                    Stages = [new G4StageModel { Jobs = [new G4JobModel { Rules = rules }] }]
+                    Stages = [new G4StageModel { Jobs = [new G4JobModel { Rules = [.. rules, closeRule] }] }]
                 }.Initialize();
 
                 // Act: run the flow on the live desktop.
@@ -177,6 +185,7 @@ namespace G4.UnitTests.Plugins.Ui
             if (process.MainWindowHandle == IntPtr.Zero)
             {
                 Assert.Fail("The click lab application did not show its main window within thirty seconds.");
-            }        }
+            }
+        }
     }
 }
